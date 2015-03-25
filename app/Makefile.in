@@ -115,3 +115,11 @@ else
 	(cd $(LIBXUL_SDK)/bin && tar $(TAR_CREATE_FLAGS) - .) | (cd $(DIST)/bin/xulrunner && tar -xf -)
 endif #} cocoa
 endif #} LIBXUL_SDK
+
+libs::
+ifeq (cocoa,$(MOZ_WIDGET_TOOLKIT))
+	mkdir -p $(DIST)/$(MAC_APP_NAME).app/Contents/MacOS/extensions
+	$(INSTALL) $(srcdir)/../langpacks/*.xpi $(DIST)/$(MAC_APP_NAME).app/Contents/MacOS/extensions 
+else
+	$(INSTALL) $(srcdir)/../langpacks/*.xpi $(DIST)/bin/extensions 
+endif
