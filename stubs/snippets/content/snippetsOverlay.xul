@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://snippets/skin/snippetsOverlay.css" type="text/css"?>
+
+<!DOCTYPE overlay [
+  <!ENTITY % snippetsOverlayDTD SYSTEM "chrome://snippets/locale/snippetsOverlay.dtd">
+  %snippetsOverlayDTD;
+]>
+
+<overlay id="snippetsOverlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/x-javascript"  src="chrome://snippets/content/snippetsOverlay.js"/>
+
+  <stringbundleset id="otherBundles">
+    <stringbundle id="snippetsBundle" src="chrome://snippets/locale/snippetsOverlay.properties" />
+  </stringbundleset>
+
+  <menupopup id="insertMenuPopup">
+    <menuseparator/>
+    <menuitem label="&snippets.label;"
+              command="cmd_snippets"/>
+  </menupopup>
+
+  <commandset id="composerMenuItems">
+    <command id="cmd_snippets" oncommand="goDoCommand('cmd_snippets')"/>
+  </commandset>
+
+  <hbox id="editorBar">
+    <toolbarbutton id="snippetsSidebarButton"
+                   tooltiptext="&snippets.label;"
+                   command="cmd_snippets"/>
+  </hbox>
+
+</overlay>         
+

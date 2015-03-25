@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/bluegriffonDialogs.css" type="text/css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/insertVideo.css" type="text/css"?>
+
+
+<!DOCTYPE dialog SYSTEM "chrome://bluegriffon/locale/insertVideo.dtd">
+
+<dialog title="&window.title;"
+        id="insertVideoDialog"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        onload = "Startup()"
+        buttons="accept,cancel"
+        style="height: auto"
+        ondialogaccept="return onAccept();"
+        persist="screenX screenY">
+
+  <!-- Methods common to all editor dialogs -->
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/dgid.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/global.js"/>
+  <script type="application/javascript"   src="chrome://bluegriffon/content/txns/diNodeInsertionTxn.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/dialogs/insertVideo.js"/>
+
+  <stringbundle id="bundleString"         src="chrome://bluegriffon/locale/insertVideo.properties"/>
+
+    <tabbox id="tabbox">
+      <tabs>
+        <tab label="&source.label;"/>
+        <tab label="&poster.tab;" id="posterTab"/>
+      </tabs>
+      <tabpanels>
+        <vbox>
+          <label value="&videoFileLocation.label;"/>
+          <hbox align="center">
+            <textbox id="urlTextbox"
+                     flex="1"
+                     oninput="LoadVideoFile(); CheckURL('urlTextbox', 'relativeURLCheckbox')"/>
+            <filepickerbutton id="urlFilepickerbutton"
+                              control="urlTextbox"
+                              mode="0"
+                              filters="filterVideo"
+                              oncommand="LoadVideoFile(); CheckURL('urlTextbox', 'relativeURLCheckbox')"
+                              title="&selectFile.label;"/>
+          </hbox>
+          <hbox align="center">
+            <image src="chrome://bluegriffon/skin/throbber16.gif"
+                   id="throbber"
+                   cx="0"/>
+            <checkbox class="indent" id="relativeURLCheckbox"
+                      label="&relativeUrl.label;"
+                      oncommand="ToggleRelativeOrAbsolute('urlTextbox', 'relativeURLCheckbox')"/>
+          </hbox>
+          <vbox id="videoPreviewBox" hidden="true">
+            <grid>
+              <columns><column/><column/><column/><column/></columns>
+              <rows>
+                <row align="center">
+                  <label value="&width.label;"/>
+                  <textbox id="widthTextbox" oninput="CheckPixels(this)"/>
+                  <label value="&height.label;"/>
+                  <textbox id="heightTextbox" oninput="CheckPixels(this)"/>
+                </row>
+                <row align="center">
+                  <label value="&preload.label;"/>
+                  <menulist id="preloadMenulist">
+                    <menupopup>
+                      <menuitem label="&nonePreload.label;" value="none"/>
+                      <menuitem label="&metadataPreload.label;" value="metadata"/>
+                      <menuitem label="&autoPreload.label;" value="auto"/>
+                    </menupopup>
+                  </menulist>
+                </row>
+              </rows>
+            </grid>
+            <hbox align="center">
+              <spacer flex="1"/>
+              <checkbox label="&videoControls.label;" id="videoControlsCheckbox"/>
+              <checkbox label="&autoplay.label;"      id="autoplayCheckbox"/>
+              <checkbox label="&loop.label;"          id="loopCheckbox"/>
+              <spacer flex="1"/>
+            </hbox>
+            <hbox align="center">
+              <spacer flex="1"/>
+              <html:table>
+                <html:tbody>
+                  <html:tr>
+                    <html:td>
+                      <html:video id="preview" controls="controls"
+                                  onloadeddata="VideoLoaded()"
+                                  onloadstart="LoadStarts()"
+                                  onerror="CantLoadVideo()"/>
+                    </html:td>
+                  </html:tr>
+                </html:tbody>
+              </html:table>
+              <spacer flex="1"/>
+            </hbox>
+            <hbox align="center">
+              <spacer flex="1"/>
+              <button label="&useCurrentFrameAsPoster.label;"
+                      oncommand="UseCurrentFrameAsPoster()"/>
+            </hbox>
+          </vbox>
+        </vbox>
+
+        <vbox>
+          <label value="&posterFileLocation.label;"/>
+          <hbox align="center">
+            <textbox id="urlPosterTextbox" flex="1" oninput="LoadPosterFile(); CheckURL('urlPosterTextbox', 'relativeURLPosterCheckbox')"/>
+            <filepickerbutton id="urlPosterFilepickerbutton"
+                              control="urlPosterTextbox"
+                              mode="0"
+                              filters="filterImages"
+                              oncommand="LoadPosterFile(); CheckURL('urlPosterTextbox', 'relativeURLPosterCheckbox')"
+                              title="&selectFile.label;"/>
+          </hbox>
+          <checkbox class="indent" id="relativeURLPosterCheckbox"
+                    label="&relativeUrl.label;"
+                    oncommand="ToggleRelativeOrAbsolute('urlPosterTextbox', 'relativeURLPosterCheckbox')"/>
+          <vbox id="posterPreviewBox" hidden="true">
+            <hbox align="center">
+              <spacer flex="1"/>
+              <html:img id="previewPoster" onerror="CantLoadPoster()" onload="PosterLoaded()"/>
+              <spacer flex="1"/>
+            </hbox>
+            <hbox>
+              <spacer flex="1"/>
+              <button label="&saveAsFile.label;" oncommand="SavePosterAsFile()"
+                      id="savePosterAsFileButton"/>
+            </hbox>
+          </vbox>
+        </vbox>
+      </tabpanels>
+    </tabbox>
+</dialog>

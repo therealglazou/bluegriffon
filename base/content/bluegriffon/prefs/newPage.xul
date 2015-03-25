@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<!DOCTYPE overlay SYSTEM "chrome://bluegriffon/locale/prefs/newPage.dtd">
+
+<overlay
+  id     = "newPagePrefsOverlay"
+  xmlns  = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <prefpane id="newPagePrefPane">
+    <preferences>
+      <preference id="pref-author"              name="bluegriffon.author"                     type="unichar"/>
+      <preference id="pref-returnKey"           name="bluegriffon.returnKey.createsParagraph" type="bool"/>
+      <preference id="pref-show-comments"       name="bluegriffon.display.comments"           type="bool"/>
+      <preference id="pref-show-php"            name="bluegriffon.display.php"                type="bool"/>
+      <preference id="pref-show-pi"             name="bluegriffon.display.pi"                 type="bool"/>
+      <preference id="pref-absolute-links"      name="clipboard.absoluteLinks"                type="bool"/>
+      <preference id="pref-keep-backup"         name="bluegriffon.defaults.backups"           type="bool"/>
+    </preferences>
+
+    <groupbox>
+      <caption label="&author.caption;"/>
+      <hbox align="center">
+        <label value="&authorName.label;"/>
+        <textbox flex="1"
+                 preference="pref-author"/>
+      </hbox>
+    </groupbox>
+
+    <groupbox>
+      <caption label="&zoom.label;"/>
+      <hbox align="center">
+        <label value="&defaultZoomFactor.label;"/>
+        <scale id="zoomScale"
+               flex="1"
+               min="1" max="300" increment="1"
+               onchange="OnScaleChange(true)"/>
+        <textbox value="100%" id="zoomText"
+                 style="text-align: right"
+                 size="3" maxlength="3"
+                 oninput="OnZoomTextInput(this)"/>
+        <label value="%"/>
+      </hbox>
+    </groupbox>
+
+    <groupbox>
+      <caption label="&editingFeatures.label;"/>
+      <checkbox label="&keepBackup.label;" id="keepBackupP" preference="pref-keep-backup" />
+      <spacer style="height: 5px"/>
+      <checkbox label="&returnKey.label;" id="crInPCreatesNewP" preference="pref-returnKey" />
+      <spacer style="height: 5px"/>
+      <spacer style="height: 5px"/>
+
+      <checkbox id="showCommentsCheckbox" preference="pref-show-comments" label="&showComments.label;"/>
+      <checkbox id="showPHPCheckbox"      preference="pref-show-php"      label="&showPHP.label;"/>
+      <checkbox id="showPICheckbox"       preference="pref-show-pi"       label="&showPI.label;"/>
+      <spacer style="height: 5px"/>
+      <label value="&linksManagement.label;"/>
+      <radiogroup class="indent"
+                  orient="horizontal"
+                  id="linksManagementRadiogroup"
+                  preference="pref-absolute-links">
+        <radio label="&preserveRelative.label;" value="false"/>
+        <radio label="&makeAbsolute.label;"     value="true"/>
+      </radiogroup>
+    </groupbox>
+  </prefpane>
+
+</overlay>

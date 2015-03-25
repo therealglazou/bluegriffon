@@ -1,0 +1,90 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this file,
+   - You can obtain one at http://mozilla.org/MPL/2.0/.  -->
+
+<!-- LOCALIZATION NOTE (downloads.title):
+     Used by screen readers to describe the Downloads Panel.
+     -->
+<!ENTITY downloads.title                  "Pobieranie">
+
+<!-- LOCALIZATION NOTE (downloadDetails.width):
+     Width of details for a Downloads Panel item (which directly influences the
+     width of the Downloads Panel) expressed using a CSS unit. The longest
+     labels that should fit in the item width are usually those of in-progress
+     downloads and those of blocked downloads.
+
+     A good rule of thumb is to try to determine the longest string possible
+     that an in-progress download could display, and use that value in ch
+     units.
+
+     For example, in English, a long string would be:
+
+     59 minutes, 59 seconds remaining - 1022 of 1023 KB
+
+     That's 50 characters, so we set the width at 50ch.
+     -->
+<!ENTITY downloadDetails.width            "50ch">
+
+<!-- LOCALIZATION NOTE (downloadsSummary.minWidth2):
+     Minimum width for the main description of the downloads summary,
+     which is displayed at the bottom of the Downloads Panel if the
+     number of downloads exceeds the limit that the panel can display.
+
+     A good rule of thumb here is to look at the otherDownloads2 string
+     in downloads.properties, and make a reasonable estimate of its
+     maximum length. For English, this seems like a reasonable limit:
+
+     + 999 other downloads
+
+     that's 28 characters, so we set the minimum width to 21ch.
+     -->
+<!ENTITY downloadsSummary.minWidth2       "30ch">
+
+<!ENTITY cmd.pause.label                  "Wstrzymaj">
+<!ENTITY cmd.pause.accesskey              "W">
+<!ENTITY cmd.resume.label                 "Wznów">
+<!ENTITY cmd.resume.accesskey             "z">
+<!ENTITY cmd.cancel.label                 "Anuluj">
+<!ENTITY cmd.cancel.accesskey             "A">
+<!-- LOCALIZATION NOTE (cmd.show.label, cmd.show.accesskey, cmd.showMac.label,
+     cmd.showMac.accesskey):
+     The show and showMac commands are never shown together, thus they can share
+     the same access key (though the two access keys can also be different).
+     -->
+<!ENTITY cmd.show.label                   "Otwórz folder nadrzędny">
+<!ENTITY cmd.show.accesskey               "f">
+<!ENTITY cmd.showMac.label                "Pokaż w Finderze">
+<!ENTITY cmd.showMac.accesskey            "F">
+<!ENTITY cmd.retry.label                  "Spróbuj ponownie">
+<!ENTITY cmd.goToDownloadPage.label       "Przejdź do strony pobierania">
+<!ENTITY cmd.goToDownloadPage.accesskey   "P">
+<!ENTITY cmd.copyDownloadLink.label       "Kopiuj adres pobierania">
+<!ENTITY cmd.copyDownloadLink.accesskey   "K">
+<!ENTITY cmd.removeFromHistory.label      "Usuń z historii">
+<!ENTITY cmd.removeFromHistory.accesskey  "U">
+<!ENTITY cmd.clearList.label              "Wyczyść listę">
+<!ENTITY cmd.clearList.accesskey          "c">
+<!ENTITY cmd.clearDownloads.label         "Wyczyść pobrane">
+<!ENTITY cmd.clearDownloads.accesskey     "e">
+
+<!-- LOCALIZATION NOTE (downloadsHistory.label, downloadsHistory.accesskey):
+     This string is shown at the bottom of the Downloads Panel when all the
+     downloads fit in the available space, or when there are no downloads in
+     the panel at all.
+     -->
+<!ENTITY downloadsHistory.label           "Wyświetl wszystkie pobrania">
+<!ENTITY downloadsHistory.accesskey       "W">
+
+<!ENTITY clearDownloadsButton.label       "Wyczyść pobierania">
+<!ENTITY clearDownloadsButton.tooltip     "Usuwa zakończone, anulowane i nieudane pobierania">
+
+<!-- LOCALIZATION NOTE (downloadsListEmpty.label):
+     This string is shown when there are no items in the Downloads view.
+     -->
+<!ENTITY downloadsListEmpty.label         "Brak pobieranych.">
+
+<!-- LOCALIZATION NOTE (downloadsListNoMatch.label):
+     This string is shown when some search terms are specified, but there are no
+     results in the Downloads view.
+     -->
+<!ENTITY downloadsListNoMatch.label       "Nie znaleziono żadnych pasujących pobierań.">

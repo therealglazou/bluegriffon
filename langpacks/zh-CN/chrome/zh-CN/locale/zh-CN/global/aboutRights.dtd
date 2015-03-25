@@ -1,0 +1,88 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+<!-- rights.locale-direction instead of the usual local.dir entity, so RTL can skip translating page. -->
+<!ENTITY rights.locale-direction "ltr">
+<!ENTITY rights.pagetitle       "about:rights">
+<!ENTITY rights.intro-header    "关于您的权利">
+<!ENTITY rights.intro "&brandFullName; 是自由开放的软件，由来自世界各地成千上万的社区志愿者共同完成。如下信息是您需要了解的：">
+
+<!-- Note on pointa / pointb / pointc form:
+     These points each have an embedded link in the HTML, so each point is
+     split into chunks for text before the link, the link text, and the text
+     after the link. If a localized grammar doesn't need the before or after
+     chunk, it can be left blank.
+
+     Also note the leading/trailing whitespace in strings here, which is
+     deliberate for formatting around the embedded links. -->
+<!ENTITY rights.intro-point1a "&brandShortName; 提供给您时是基于">
+<!ENTITY rights.intro-point1b "Mozilla 公共许可证">
+<!ENTITY rights.intro-point1c "。这表示您可以使用、复制以及向他人分发 &brandShortName; 。我们也非常欢迎您按自己的需要修改 &brandShortName; 的源代码。 Mozilla 公共许可证也允许您分发自己修改过的软件。">
+
+<!ENTITY rights.intro-point2-a "您没有获得任何有关 Mozilla 基金会或任何其他组织的商标的权利或许可，这包括但不限于 Firefox 的名称或标志。有关商标的其他信息在：">
+<!ENTITY rights.intro-point2-b "这里">
+<!ENTITY rights.intro-point2-c "。">
+
+<!-- point 2.5 text for official branded builds -->
+<!ENTITY rights.intro-point2.5 "&brandShortName; 的一些功能，例如崩溃报告，使你可以向 &vendorShortName; 提供反馈。选择提交反馈后，你授权 &vendorShortName; 使用反馈信息改进产品，在他的网站上发布反馈信息，以及分发反馈内容。">
+
+<!-- point 3 text for official branded builds -->
+<!ENTITY rights2.intro-point3a "我们如何使用您已提交给 &vendorShortName; 的个人信息和反馈，&brandShortName; 已经描述在 ">
+<!ENTITY rights2.intro-point3b "&brandShortName; 隐私权政策">
+<!ENTITY rights.intro-point3c ".">
+
+<!-- point 3 text for unbranded builds -->
+<!ENTITY rights.intro-point3-unbranded "任何适用于此产品的隐私条款都列于此处。">
+
+<!-- point 4 text for official branded builds -->
+<!ENTITY rights2.intro-point4a "&brandShortName; 的一些功能使用基于网络的一些服务信息，然而，我们不能保证他们 100&#37; 正确或错误。更多详情，包括关于如何禁用，使用这些服务的功能，可以找到在 ">
+<!ENTITY rights.intro-point4b "服务条款">
+<!ENTITY rights.intro-point4c "。">
+
+<!-- point 4 text for unbranded builds -->
+<!ENTITY rights.intro-point4a-unbranded "如果此产品结合了网站服务，任何适用的服务条款都链接至">
+<!ENTITY rights.intro-point4b-unbranded "网站服务">
+<!ENTITY rights.intro-point4c-unbranded " 章节。">
+
+<!ENTITY rights2.webservices-header "&brandFullName; 基于网络的信息服务">
+
+<!-- Note that this paragraph references a couple of entities from
+     preferences/security.dtd, so that we can refer to text the user sees in
+     the UI, without this page being forgotten every time those strings are
+     updated.  -->
+<!-- intro paragraph for branded builds -->
+<!ENTITY rights2.webservices-a "&brandFullName; 在下述条款下，为该二进制版本 &brandShortName; 用户使用基于网络的信息服务提供某些功能。如果您不想使用一项或者多项服务，或者不接受下述条款，您可以停用相应功能或者服务。如何停用特定功能或者服务的说明信息可以在这里找到 ">
+<!ENTITY rights2.webservices-b "这里">
+<!ENTITY rights2.webservices-c "。">
+
+<!-- safe browsing points for branded builds -->
+<!ENTITY rights.safebrowsing-a "安全浏览：">
+<!ENTITY rights.safebrowsing-b "不推荐您禁用安全浏览功能，因为它可能会导致您到达不安全的网站。如果您确定想完全禁用该功能，请按照下列步骤：">
+<!ENTITY rights.safebrowsing-term1 "打开应用程序首选项">
+<!ENTITY rights.safebrowsing-term2 "选择安全选项">
+<!ENTITY rights.safebrowsing-term3 "取消选中 &quot;&blockAttackSites.label;&quot; 和 &quot;&blockWebForgeries.label;&quot; 的选项">
+<!ENTITY rights.safebrowsing-term4 "安全浏览就已禁用">
+
+<!-- location aware browsing points for branded builds -->
+<!ENTITY rights.locationawarebrowsing-a "位置感知浏览: ">
+<!ENTITY rights.locationawarebrowsing-b "总是选择。未经您的许可不会有位置信息被发送。如果您想完全禁用该功能，请按照下列步骤：">
+<!ENTITY rights.locationawarebrowsing-term1a "在网址栏中，输入 ">
+<!ENTITY rights.locationawarebrowsing-term1b "about:config">
+<!ENTITY rights.locationawarebrowsing-term2 "输入 geo.enabled">
+<!ENTITY rights.locationawarebrowsing-term3 "双击 geo.enabled 项目">
+<!ENTITY rights.locationawarebrowsing-term4 "位置感知就已禁用">
+
+<!-- intro paragraph for unbranded builds -->
+<!ENTITY rights.webservices-unbranded "与该产品结合的网站的服务的概述，如果适用的话，同时也应该包括如何禁用它们的说明。">
+
+<!-- point 1 text for unbranded builds -->
+<!ENTITY rights.webservices-term1-unbranded "任何适用于此产品的服务条款都列于此处。">
+
+<!-- points 1-7 text for branded builds -->
+<!ENTITY rights2.webservices-term1 "&vendorShortName; 和他的贡献者，许可人和合作伙伴一起致力于提供最精确和最新的服务。然而，我们不保证该信息是全面的和没有错误的。例如，安全浏览服务可能无法识别出某些危险网站，还可能误判一些安全的网站，由我们的服务提供商提供的位置感知服务仅仅是提供一个大致的位置，我们和我们的服务提供商都不为该位置信息的准确性提供保证。">
+<!ENTITY rights.webservices-term2 "&vendorShortName; 可以保留中止或修改服务的权利。">
+<!ENTITY rights2.webservices-term3 "欢迎使用各个版本 &brandShortName; 中附带的服务，&vendorShortName; 授权您使用他们。 &vendorShortName; 和他们的许可人保留这些服务的其他所有权利。这些条款无意限制开放源代码许可赋予 &brandShortName; 的任何权力，并且与 &brandShortName; 的源代码版本相适应。">
+<!ENTITY rights.webservices-term4 "服务是 &quot;依据&quot;  &vendorShortName;及其贡献者，授权者和分销商，拒绝所有担保，无论明示或暗示，包括但不限于保证该服务是可交易或适合您的特定目的的担保。您承担选择适合您目的、质量和性能要求之服务的全部风险。有些司法辖区不允许排除或限制隐含的保证，因此，这声明可能对您不适用。">
+<!ENTITY rights.webservices-term5 "除法律规定，&vendorShortName;、其贡献者、授权者和分销商将不承担以任何方式由使用 &brandShortName; 和服务而引起的任何间接的、特殊的、偶然、必然、惩罚、或象征性的损害造成的损失。集体责任相关的赔偿额度也不得超过500美元（500美元） 。有些司法辖区不允许排除或限制某些损害，所以此声明和限制可能对您不适用。">
+<!ENTITY rights.webservices-term6 "&vendorShortName; 可在必要时更新这些条款。不得在未得到　&vendorShortName;　书面协议的前提下修改或取消这些条款。">
+<!ENTITY rights.webservices-term7 "这些条款由美国的加利福尼亚州法律管辖，但排除与法律冲突的部分。即使这些条款的任何部分无效或不可执行，其余部分将保留其有效性。若其他与语言的翻译版本和英文版本发生冲突，以英文版本为准。">

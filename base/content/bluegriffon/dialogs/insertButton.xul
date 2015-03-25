@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/bluegriffonDialogs.css" type="text/css"?>
+
+<!DOCTYPE dialog SYSTEM "chrome://bluegriffon/locale/insertButton.dtd">
+
+<dialog title="&window.title;"
+        id="insertButtonDialog"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        onload = "Startup()"
+        buttons="accept,cancel"
+        ondialogaccept="return onAccept();"
+        persist="screenX screenY">
+
+  <!-- Methods common to all editor dialogs -->
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/dgid.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/global.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/dialogs/insertButton.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/dialogs/form-common.js"/>
+
+  <grid id="mainGrid">
+    <columns><column/><column flex="1"/><column/></columns>
+    <rows>
+      <row align="center" attribute="name">
+        <label value="&name.label;"/>
+        <textbox/>
+      </row>
+      <row align="center" attribute="value">
+        <label value="&value.label;"/>
+        <textbox/>
+      </row>
+      <row align="center" attribute="disabled">
+        <label value="&state.label;"/>
+        <checkbox label="&disabled.label;"/>
+      </row>
+      <row align="center" attribute="autofocus">
+        <label value="&autofocus.label;"/>
+        <checkbox label="&focusOnPageLoad.label;"/>
+      </row>
+      <row align="center" attribute="form">
+        <label value="&form.label;"/>
+        <textbox/>
+      </row>
+      <row align="center" attribute="type">
+        <label value="&type.label;"/>
+        <menulist>
+          <menupopup>
+            <menuitem label="&unspecified.label;" value=""/>
+            <menuseparator/>
+            <menuitem label="&submit.label;" value="submit"/>
+            <menuitem label="&reset.label;" value="reset"/>
+            <menuitem label="&button.label;" value="button"/>
+          </menupopup>
+        </menulist>
+      </row>
+      <row align="center" attribute="formaction">
+        <label value="&formaction.label;"/>
+        <textbox/>
+      </row>
+      <row align="center" attribute="formmethod">
+        <label value="&formmethod.label;"/>
+        <hbox align="center">
+          <toolbarbutton class="multibutton"
+                         type="checkbox"
+                         id="formmethodGetButton"
+                         label="&get.label;"
+                         value="get"
+                         oncommand="ToggleMultibuttons(this)"/>
+          <toolbarbutton class="multibutton"
+                         type="checkbox"
+                         id="formmethodPostButton"
+                         label="&post.label;"
+                         value="post"
+                         oncommand="ToggleMultibuttons(this)"/>
+        </hbox>
+      </row>
+      <row align="center" attribute="formenctype">
+        <label value="&formenctype.label;"/>
+        <menulist>
+          <menupopup>
+            <menuitem label="&unspecified.label;" value=""/>
+            <menuseparator/>
+            <menuitem label="application/x-www-form-urlencoded" value="application/x-www-form-urlencoded"/>
+            <menuitem label="multipart/form-data" value="multipart/form-data"/>
+            <menuitem label="text/plain" value="text/plain"/>
+          </menupopup>
+        </menulist>
+      </row>
+      <row align="center" attribute="formnovalidate">
+        <label value="&formnovalidate.label;"/>
+        <checkbox label="&novalidate.label;"/>
+      </row>
+      <row align="center" attribute="formtarget">
+        <label value="&target.label;"/>
+        <menulist id="formTargetMenulist"
+                  editable="true">
+          <menupopup>
+            <menuitem label="_blank"  value="_blank"/>
+            <menuitem label="_self"   value="_self"/>
+            <menuitem label="_parent" value="_parent"/>
+            <menuitem label="_top"    value="_top"/>
+          </menupopup>
+        </menulist> 
+      </row>
+    </rows>
+  </grid>
+</dialog>

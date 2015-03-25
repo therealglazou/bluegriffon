@@ -1,0 +1,234 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE overlay [
+  <!ENTITY % csspropertiesDTD SYSTEM "chrome://cssproperties/locale/cssproperties.dtd">
+  %csspropertiesDTD;
+  <!ENTITY % backgrounditemDTD SYSTEM "chrome://cssproperties/locale/backgrounditem.dtd" >
+  %backgrounditemDTD;
+]>
+
+<overlay id="flexboxOverlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/x-javascript"  src="chrome://cssproperties/content/flexbox.js" />
+
+  <vbox id="propertiesBox">
+      <hbox align="center"
+            class="csspropertiesHeader"
+            context="sectionHeaderContext"
+            id="flexboxSectionHeader"
+            onclick="ToggleSection(event, this)"
+            position="21">
+        <image />
+        <label value="&flexboxSectionHeader.label;"/>
+      </hbox>
+
+      <vbox class="section" id="flexboxSection" position="22">
+        <checkbox label="&enableFlexBox.label;" animatable="false"
+                  id="flexBoxEnabledCheckbox"
+                  oncommand="ToggleFlexBox()"/>
+        <checkbox label="&inlineBox.label;" class="indent" animatable="false"
+                  id="inlineBoxCheckbox"
+                  oncommand="ToggleFlexBox()"/>
+        <grid>
+          <columns><column/><column/></columns>
+          <rows>
+            <row align="center" animatable="false">
+              <label value="&boxAlign.label;"/>
+              <hbox align="center">
+                <hbox align="center">
+                  <toolbarbutton class="multibutton" tooltiptext="&startBoxAlign.label;" value="flex-start" property="align-items" type="checkbox"
+                                 image="chrome://cssproperties/skin/flexbox/alignItemsFlexStart.png"
+                                 id="startBoxAlignButton" group="align-items"
+                                 oncommand="ToggleProperty(this)"/>
+                  <toolbarbutton class="multibutton" tooltiptext="&centerBoxAlign.label;" value="center" property="align-items" type="checkbox"
+                                 image="chrome://cssproperties/skin/flexbox/alignItemsFlexCenter.png"
+                                 id="centerBoxAlignButton" group="align-items"
+                                 oncommand="ToggleProperty(this)"/>
+                  <toolbarbutton class="multibutton" tooltiptext="&endBoxAlign.label;" value="flex-end" property="align-items" type="checkbox"
+                                 image="chrome://cssproperties/skin/flexbox/alignItemsFlexEnd.png"
+                                 id="endBoxAlignButton" group="align-items"
+                                 oncommand="ToggleProperty(this)"/>
+                </hbox>
+                <hbox>
+                  <toolbarbutton class="multibutton" tooltiptext="&baselineBoxAlign.label;" value="baseline" property="align-items" type="checkbox"
+                                 image="chrome://cssproperties/skin/flexbox/alignItemsFlexBaseline.png"
+                                 id="baselineBoxAlignButton" group="align-items"
+                                 oncommand="ToggleProperty(this)"/>
+                </hbox>
+                <hbox>
+                  <toolbarbutton class="multibutton" tooltiptext="&stretchBoxAlign.label;" value="stretch" property="align-items" type="checkbox"
+                                 image="chrome://cssproperties/skin/flexbox/alignItemsFlexStretch.png"
+                                 id="stretchBoxAlignButton" group="align-items"
+                                 oncommand="ToggleProperty(this)"/>
+                </hbox>
+              </hbox>
+            </row>
+
+            <row align="center" animatable="false">
+              <label value="&selfAlign.label;"/>
+              <hbox align="center">
+                <hbox align="center">
+                  <toolbarbutton class="multibutton" tooltiptext="&startBoxAlign.label;" value="flex-start" property="align-self" type="checkbox"
+                                 image="chrome://cssproperties/skin/flexbox/alignItemsFlexStart.png"
+                                 id="startSelfAlignButton" group="align-self"
+                                 oncommand="ToggleProperty(this)"/>
+                  <toolbarbutton class="multibutton" tooltiptext="&centerBoxAlign.label;" value="center" property="align-self" type="checkbox"
+                                 image="chrome://cssproperties/skin/flexbox/alignItemsFlexCenter.png"
+                                 id="centerSelfAlignButton" group="align-self"
+                                 oncommand="ToggleProperty(this)"/>
+                  <toolbarbutton class="multibutton" tooltiptext="&endBoxAlign.label;" value="flex-end" property="align-self" type="checkbox"
+                                 image="chrome://cssproperties/skin/flexbox/alignItemsFlexEnd.png"
+                                 id="endSelfAlignButton" group="align-self"
+                                 oncommand="ToggleProperty(this)"/>
+                </hbox>
+                <hbox>
+                  <toolbarbutton class="multibutton" tooltiptext="&baselineBoxAlign.label;" value="baseline" property="align-self" type="checkbox"
+                                 image="chrome://cssproperties/skin/flexbox/alignItemsFlexBaseline.png"
+                                 id="baselineSelfAlignButton" group="align-self"
+                                 oncommand="ToggleProperty(this)"/>
+                </hbox>
+                <hbox>
+                  <toolbarbutton class="multibutton" tooltiptext="&stretchBoxAlign.label;" value="stretch" property="align-self" type="checkbox"
+                                 image="chrome://cssproperties/skin/flexbox/alignItemsFlexStretch.png"
+                                 id="stretchSelfAlignButton" group="align-self"
+                                 oncommand="ToggleProperty(this)"/>
+                </hbox>
+                <hbox>
+                  <toolbarbutton class="multibutton" label="&autoBoxAlign.label;" value="auto" property="align-self" type="checkbox"
+                                 id="autoSelfAlignButton" group="align-self"
+                                 oncommand="ToggleProperty(this)"/>
+                </hbox>
+              </hbox>
+            </row>
+
+            <!--row align="center" animatable="false">
+              <label value="&alignContent.label;"/>
+              <hbox align="center">
+                <hbox align="center">
+                  <toolbarbutton class="multibutton" label="&startBoxAlign.label;" value="flex-start" property="align-content" type="checkbox"
+                                 id="startAlignContentButton" group="align-content"
+                                 oncommand="ToggleProperty(this)"/>
+                  <toolbarbutton class="multibutton" label="&centerBoxAlign.label;" value="center" property="align-content" type="checkbox"
+                                 id="centerAlignContentButton" group="align-content"
+                                 oncommand="ToggleProperty(this)"/>
+                  <toolbarbutton class="multibutton" label="&endBoxAlign.label;" value="flex-end" property="align-content" type="checkbox"
+                                 id="endAlignContentButton" group="align-content"
+                                 oncommand="ToggleProperty(this)"/>
+                </hbox>
+                <hbox>
+                  <toolbarbutton class="multibutton" label="&stretchBoxAlign.label;" value="stretch" property="align-content" type="checkbox"
+                                 id="stretchAlignContentButton" group="align-content"
+                                 oncommand="ToggleProperty(this)"/>
+                </hbox>
+                <hbox>
+                  <toolbarbutton class="multibutton" label="space-around" value="space-around" property="align-content" type="checkbox"
+                                 id="spaceAroundAlignContentButton" group="align-content"
+                                 oncommand="ToggleProperty(this)"/>
+                  <toolbarbutton class="multibutton" label="space-between" value="space-between" property="align-content" type="checkbox"
+                                 id="spaceAroundAlignContentButton" group="align-content"
+                                 oncommand="ToggleProperty(this)"/>
+                </hbox>
+              </hbox>
+            </row-->
+
+            <row align="center" animatable="false">
+              <label value="&justifyContent.label;"/>
+              <hbox align="center">
+                <hbox align="center">
+                  <toolbarbutton class="multibutton" label="&startBoxAlign.label;" value="flex-start" property="justify-content" type="checkbox"
+                                 id="startJustifyContentButton" group="justify-content"
+                                 oncommand="ToggleProperty(this)"/>
+                  <toolbarbutton class="multibutton" label="&centerBoxAlign.label;" value="center" property="justify-content" type="checkbox"
+                                 id="centerJustifyContentButton" group="justify-content"
+                                 oncommand="ToggleProperty(this)"/>
+                  <toolbarbutton class="multibutton" label="&endBoxAlign.label;" value="flex-end" property="justify-content" type="checkbox"
+                                 id="endJustifyContentButton" group="justify-content"
+                                 oncommand="ToggleProperty(this)"/>
+                </hbox>
+                <hbox>
+                  <toolbarbutton class="multibutton" label="&stretchBoxAlign.label;" value="stretch" property="justify-content" type="checkbox"
+                                 id="stretchJustifyContentButton" group="justify-content"
+                                 oncommand="ToggleProperty(this)"/>
+                </hbox>
+                <hbox>
+                  <toolbarbutton class="multibutton" label="space-around" value="space-around" property="justify-content" type="checkbox"
+                                 id="spaceAroundJustifyContentButton" group="justify-content"
+                                 oncommand="ToggleProperty(this)"/>
+                  <toolbarbutton class="multibutton" label="space-between" value="space-between" property="justify-content" type="checkbox"
+                                 id="spaceAroundJustifyContentButton" group="justify-content"
+                                 oncommand="ToggleProperty(this)"/>
+                </hbox>
+              </hbox>
+            </row>
+
+            <row align="center" animatable="false">
+              <label value="&boxDirection.label;"/>
+              <hbox align="center">
+	              <toolbarbutton class="multibutton" label="&row.label;" value="row" type="checkbox" property="flex-direction"
+	                             id="rowBoxDirectionButton" group="flex-direction"
+	                             oncommand="ToggleProperty(this)"/>
+	              <toolbarbutton class="multibutton" label="&row.label; &reverseBoxDirection.label;" value="row-reverse" type="checkbox" property="flex-direction"
+	                             id="reversedRowBoxDirectionButton" group="flex-direction"
+	                             oncommand="ToggleProperty(this)"/>
+	              <toolbarbutton class="multibutton" label="&column.label;" value="column" type="checkbox" property="flex-direction"
+	                             id="columnBoxDirectionButton" group="flex-direction"
+	                             oncommand="ToggleProperty(this)"/>
+	              <toolbarbutton class="multibutton" label="&column.label; &reverseBoxDirection.label;" value="column-reverse" type="checkbox" property="flex-direction"
+	                             id="reversedColumnBoxDirectionButton" group="flex-direction"
+	                             oncommand="ToggleProperty(this)"/>
+              </hbox>
+            </row>
+
+            <row align="center">
+              <label value="&flexGrow.label;"/>
+              <hbox>
+                <textbox id="flexGrowTextbox" type="number" min="0" decimalplaces="2"
+                         property="flex-grow"
+                         oninput="ToggleProperty(this)"
+                         oncommand="ToggleProperty(this)"/>
+              </hbox>
+            </row>
+
+            <row align="center">
+              <label value="&flexShrink.label;"/>
+              <hbox>
+                <textbox id="flexShrinkTextbox" type="number" min="0" decimalplaces="2"
+                         property="flex-shrink"
+                         oninput="ToggleProperty(this)"
+                         oncommand="ToggleProperty(this)"/>
+              </hbox>
+            </row>
+
+            <row align="center" animatable="true">
+              <label value="&flexBasis.label;"/>
+              <hbox align="center">
+	              <menulist sizetopopup="none" editable="true" id="flexBasisMenulist" property="flex-basis"
+	                        checkimageratio="true"
+	                        oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'auto', false);"
+	                        oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'auto', false)">
+	                <menupopup id="widthMenupopup"
+	                           onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
+	                  <menuseparator/>
+	                  <menuitem label="&autoWidth.label;" value="auto"/>
+	                </menupopup>
+	              </menulist>
+	              <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
+	                           ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', false)"/>
+              </hbox>
+            </row>
+
+            <row align="center" animatable="false">
+              <label value="&boxOrdinalGroup.label;"/>
+              <hbox>
+                <textbox id="boxOrdinalGroupTextbox" type="number" min="0"
+                         property="order"
+                         oninput="ToggleProperty(this)"
+                         oncommand="ToggleProperty(this)"/>
+              </hbox>
+            </row>
+          </rows>
+        </grid>
+      </vbox>
+  </vbox>
+</overlay>

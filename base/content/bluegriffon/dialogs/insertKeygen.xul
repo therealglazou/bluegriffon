@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/bluegriffonDialogs.css" type="text/css"?>
+
+<!DOCTYPE dialog SYSTEM "chrome://bluegriffon/locale/insertKeygen.dtd">
+
+<dialog title="&window.title;"
+        id="insertKeygenDialog"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        onload = "Startup()"
+        buttons="accept,cancel"
+        ondialogaccept="return onAccept();"
+        persist="screenX screenY">
+
+  <!-- Methods common to all editor dialogs -->
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/dgid.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/global.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/dialogs/insertKeygen.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/dialogs/form-common.js"/>
+
+  <grid id="mainGrid">
+    <columns><column/><column flex="1"/><column/></columns>
+    <rows>
+      <row align="center" attribute="name">
+        <label value="&name.label;"/>
+        <textbox/>
+      </row>
+      <row align="center" attribute="keytype">
+        <label value="&keytype.label;"/>
+        <hbox align="center">
+          <toolbarbutton class="multibutton"
+                         type="checkbox"
+                         id="keytypeRsaButton"
+                         label="&rsa.label;"
+                         value="rsa"
+                         oncommand="ToggleMultibuttons(this)"/>
+          <toolbarbutton class="multibutton"
+                         type="checkbox"
+                         id="keytypeDsaButton"
+                         label="&dsa.label;"
+                         value="dsa"
+                         oncommand="ToggleMultibuttons(this)"/>
+          <toolbarbutton class="multibutton"
+                         type="checkbox"
+                         id="keytypeEcButton"
+                         label="&ec.label;"
+                         value="ec"
+                         oncommand="ToggleMultibuttons(this)"/>
+        </hbox>
+      </row>
+      <row align="center" attribute="keyparams">
+        <label value="&keyparams.label;"/>
+        <textbox/>
+      </row>
+      <row align="center" attribute="challenge">
+        <label value="&challenge.label;"/>
+        <textbox/>
+      </row>
+      <row align="center" attribute="disabled">
+        <label value="&state.label;"/>
+        <checkbox label="&disabled.label;"/>
+      </row>
+      <row align="center" attribute="form">
+        <label value="&form.label;"/>
+        <textbox/>
+      </row>
+      <row align="center" attribute="autofocus">
+        <label value="&autofocus.label;"/>
+        <checkbox label="&focusOnPageLoad.label;"/>
+      </row>
+    </rows>
+  </grid>
+</dialog>

@@ -1,0 +1,141 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE bindings [
+  <!ENTITY % textshadowitemDTD SYSTEM "chrome://cssproperties/locale/textshadowitem.dtd" >
+  %textshadowitemDTD;
+]>
+
+<bindings id="textshadowitemBindings"
+   xmlns="http://www.mozilla.org/xbl"
+   xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+   xmlns:xbl="http://www.mozilla.org/xbl">
+
+  <binding id="none"
+           extends="chrome://global/content/bindings/richlistbox.xml#richlistitem">
+
+    <content>
+      <xul:label value="&noTextShadow.label;"/>
+    </content>
+  </binding>
+
+  <binding id="shadow"
+           extends="chrome://global/content/bindings/richlistbox.xml#richlistitem">
+
+    <content>
+      <xul:grid oncommand="ReapplyTextShadows()" oninput="ReapplyTextShadows()">
+        <xul:columns><xul:column/><xul:column/><xul:column/><xul:column/></xul:columns>
+        <xul:rows>
+          <xul:row align="center">
+            <xul:label value="&colorTextShadow.label;"/>
+            <xul:hbox>
+              <xul:ecolorpicker anonid="color"
+                                color="black"
+                                colorObjectId="TextShadowColor"
+                                windowTitle="&colorTextShadow.title;"
+                                showTransparency="true"
+                                oncommand="ReapplyTextShadows()"/>
+            </xul:hbox>
+            <xul:label value="&blurRadiusTextShadow.label;"/>
+            <xul:hbox>
+              <xul:menulist editable="true" anonid="blurRadius"
+                            oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', false)"
+                            oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', false)">
+                <xul:menupopup
+                           onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')"/>
+              </xul:menulist>
+              <xul:spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
+                               ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', false)"/>
+            </xul:hbox>
+          </xul:row>
+          <xul:row align="center">
+            <xul:label value="&offsetXTextShadow.label;"/>
+            <xul:hbox>
+              <xul:menulist editable="true" anonid="offsetX"
+                            oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', true)"
+                            oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', true)">
+                <xul:menupopup
+                           onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')"/>
+              </xul:menulist>
+              <xul:spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
+                               ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true)"/>
+            </xul:hbox>
+            <xul:label value="&offsetYTextShadow.label;"/>
+            <xul:hbox>
+              <xul:menulist editable="true" anonid="offsetY"
+                            oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', true)"
+                            oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', true)">
+                <xul:menupopup
+                           onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')"/>
+              </xul:menulist>
+              <xul:spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
+                               ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true)"/>
+            </xul:hbox>
+          </xul:row>
+        </xul:rows>
+      </xul:grid>
+    </content>
+
+    <implementation>
+      <method name="getChild">
+        <parameter name="aChildName"/>
+        <body><![CDATA[
+          return document.getAnonymousElementByAttribute(this, "anonid", aChildName);
+        ]]></body>
+      </method>
+
+      <property name="color">
+        <getter>
+        <![CDATA[
+          return this.getChild("color").color;
+        ]]>
+        </getter>
+        <setter>
+        <![CDATA[
+          this.getChild("color").color = val;
+        ]]>
+        </setter>
+      </property>
+
+      <property name="blurRadius">
+        <getter>
+        <![CDATA[
+          return this.getChild("blurRadius").value;
+        ]]>
+        </getter>
+        <setter>
+        <![CDATA[
+          this.getChild("blurRadius").value = val;
+        ]]>
+        </setter>
+      </property>
+
+      <property name="offsetX">
+        <getter>
+        <![CDATA[
+          return this.getChild("offsetX").value;
+        ]]>
+        </getter>
+        <setter>
+        <![CDATA[
+          this.getChild("offsetX").value = val;
+        ]]>
+        </setter>
+      </property>
+
+      <property name="offsetY">
+        <getter>
+        <![CDATA[
+          return this.getChild("offsetY").value;
+        ]]>
+        </getter>
+        <setter>
+        <![CDATA[
+          this.getChild("offsetY").value = val;
+        ]]>
+        </setter>
+      </property>
+    </implementation>
+
+  </binding>
+
+</bindings>

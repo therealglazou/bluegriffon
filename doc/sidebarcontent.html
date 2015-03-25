@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+   <meta http-equiv="content-type"
+         content="text/html; charset=us-ascii" />
+
+   <title>Developing a sidebar for Composer</title>
+   <link rel="stylesheet"
+         href="doc.css"
+         type="text/css" />
+</head>
+
+<body>
+   <div class="header">
+      Composer: developers
+   </div>
+
+   <div id="navBar">
+      <a href="index.html">Index</a> &gt; <a href=
+      "sidebarcontent.html">Developing a sidebar for Composer</a>
+   </div>
+
+   <h1>Developing a sidebar for Composer</h1>
+
+   <p>To offer new sidebar content to Composer users, you have to
+   distribute your application as an installable extension to
+   Composer, a *.xpi file.</p>
+
+   <p>The application id for Composer is
+   <code>{8fa6f1b4-7ed3-4895-bac6-01f1cc206ab3}</code> .</p>
+
+   <ol class="readonly"
+       id="mozToc">
+      <!--mozToc h2 1 h3 2-->
+
+      <li><a href="#mozTocId287073">How to register a new
+      sidebar</a></li>
+
+      <li><a href="#mozTocId290755">Make your sidebar observe
+      editor events</a></li>
+   </ol>
+
+   <h2><a class="mozTocH2"
+      name="mozTocId287073"
+      id="mozTocId287073"></a>How to register a new sidebar</h2>
+
+   <p>Your extension should add elements to
+   chrome://bluegriffon/content/xul/bluegriffon.xul through a XUL overlay
+   :</p>
+
+   <ul>
+      <li>append a new <code>sidebaritem</code> element to
+      <code>&lt;sidebaritems id="sidebaritems"&gt;</code></li>
+
+      <li>that element must have an ID, unique in the ID name space
+      of bluegriffon.xul</li>
+
+      <li>that element must have a <code>name</code> attribute,
+      representing your sidebar content ; that sidebar should be a
+      NAME ; it is recommended that the ID and that attribute have
+      the same value</li>
+
+      <li>that element must have a <code>src</code> attribute,
+      containing the URL of the document to be shown in your
+      sidebar content; this is typically going to be a chrome URL
+      in your XPI</li>
+
+      <li>that element can have a&nbsp;<code>title</code>
+      containing a (possibly localized) string representing the
+      sidebar item. That string will be used in the sidebar to list
+      the available sidebar items or title the visible sidebar
+      items. If absent, the value of the <code>name</code>
+      attribute is used.</li>
+   </ul>
+
+   <h2><a class="mozTocH2"
+      name="mozTocId290755"
+      id="mozTocId290755"></a>Make your sidebar observe editor
+      events</h2>
+
+   <p>TBD</p>
+   <hr style="width: 100%; height: 2px;" />
+
+   <h4>History</h4>
+
+   <div class="section history">
+      <dl>
+         <dt>Last Update:</dt>
+
+         <dd>2007-oct-29, 10:18am CEST</dd>
+
+         <dt>2007-oct-29, 10:18am CEST</dt>
+
+         <dd>initial revision (dglazman)</dd>
+      </dl>
+   </div>
+</body>
+</html>

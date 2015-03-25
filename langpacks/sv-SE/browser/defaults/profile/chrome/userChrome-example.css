@@ -1,0 +1,50 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+/*
+ * Redigera denna fil och spara den som userChrome.css i mappen "chrome"
+ * i din profilmapp.
+ */
+
+/*
+ * Denna fil kan användas till att anpassa utseendet på Mozilla Firefox.
+ * Du bör använda tillägget "!important" på de regler du använder för att
+ * åsidosätta standardinställningarna.
+ */
+
+/*
+ * Ta inte bort raden @namespace -- den behövs för att filen ska fungera på rätt sätt.
+ */
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"); /* set default namespace to XUL */
+
+
+/*
+ * Några möjliga förbättringar:
+ */
+/*
+ * Ange standardstorleken på teckensnitt till 20 pt:
+ *
+ * * {
+ *   font-size: 20pt !important
+ * }
+ */
+/*
+ * Ändra storleken på menyposter till 15 pt istället för den vanliga storleken:
+ *
+ * menupopup > * {
+ *   font-size: 15pt !important
+ * }
+ */
+/*
+ * Använd ett teckensnitt med fast breddsteg i Adressfältet
+ *
+ * #urlbar {
+ *    font-family: monospace !important;
+ * }
+ */
+
+/*
+ * För fler exempel, se http://www.mozilla.org/unix/customizing.html
+ */
+ 

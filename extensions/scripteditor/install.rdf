@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+  
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+  <Description about="urn:mozilla:install-manifest">
+    <em:id>scripteditor@bluegriffon.com</em:id>
+    <em:version>1.1</em:version>
+  
+    <em:targetApplication>
+      <!-- BlueGriffon -->
+      <Description>
+        <em:id>bluegriffon@disruptive-innovations.com</em:id>
+        <em:minVersion>0.1pre</em:minVersion>
+        <em:maxVersion>*</em:maxVersion>
+      </Description>
+    </em:targetApplication>
+  
+    <!-- front-end metadata -->
+    <em:name>Script Inspector</em:name>
+    <em:description>Script Inspector for BlueGriffon</em:description>
+    <em:creator>Disruptive Innovations SARL</em:creator>
+    <em:homepageURL>http://www.disruptive-innovations.com/</em:homepageURL>
+    <em:iconURL>chrome://scripteditor/skin/scripteditor-icon.png</em:iconURL>
+
+    <em:file>
+      <Description about="scripteditor.jar">
+        <em:package>content/</em:package>
+        <em:locale>locale/en-US/</em:locale>
+      </Description>
+    </em:file>
+
+  </Description>
+</RDF>

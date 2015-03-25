@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/bluegriffonDialogs.css" type="text/css"?>
+
+
+<!DOCTYPE dialog SYSTEM "chrome://bluegriffon/locale/insertCommentOrPI.dtd">
+
+<dialog title="&window.title;"
+        id="insertCommentOrPIDialog"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        onload = "Startup()"
+        buttons="accept,cancel"
+        ondialogaccept="return onAccept();"
+        persist="screenX screenY width height">
+
+  <!-- Methods common to all editor dialogs -->
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/dgid.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/global.js"/>
+  <script type="application/javascript"   src="chrome://bluegriffon/content/txns/diCommentOrPIChangeTxn.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/dialogs/insertCommentOrPI.js"/>
+
+  <radiogroup id="typeRadiogroup" persist="value" orient="horizontal"
+              oncommand="Toggle()">
+    <radio label="&comment.label;"  id="commentRadio" value="comment" />
+    <radio label="&php.label;"      id="phpRadio"     value="php"/>
+    <radio label="&pi.label;"       id="piRadio"      value="pi" />
+  </radiogroup>
+  <hbox id="targetBox" align="center" style="visibility: hidden">
+    <label value="&target.label;"/>
+    <textbox id="targetTextbox" flex="1"/>
+  </hbox>
+  <label value="&data.label;" id="dataLabel"  hidden="true"/>
+  <textbox multiline="true" flex="1" id="dataTextbox"/>
+</dialog>

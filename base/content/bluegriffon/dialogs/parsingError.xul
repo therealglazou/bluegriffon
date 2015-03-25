@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+
+<!DOCTYPE dialog SYSTEM "chrome://bluegriffon/locale/parsingError.dtd">
+
+<dialog title="&window.title;"
+        id="parsingErrorWindow"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        buttons="accept"
+        onload = "Startup()"
+        ondialogaccept="window.close()"
+        style="height: auto; max-width: 300px"
+        persist="screenX screenY">
+
+  <!-- Methods common to all editor dialogs -->
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/dgid.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/global.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/dialogs/parsingError.js"/>
+
+  <hbox align="center">
+    <image src="chrome://global/skin/icons/warning-64.png"/>
+    <vbox>
+      <description style="font-weight: bold; font-size: larger">&cantSwitchBackToNormal.label;</description>
+      <label id="message" style="margin-top: 2em;"/>
+      <html:pre id="error" style="margin-left: 25px;margin-top: 2em;"/>
+    </vbox>
+  </hbox>
+</dialog>

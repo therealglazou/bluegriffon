@@ -1,0 +1,213 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/listboxBg.css" type="text/css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/bluegriffonDialogs.css" type="text/css"?>
+
+<!DOCTYPE dialog SYSTEM "chrome://bluegriffon/locale/insertSelect.dtd">
+
+<dialog title="&window.title;"
+        id="insertSelectDialog"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        onload = "Startup()"
+        buttons="accept,cancel"
+        ondialogaccept="return onAccept();"
+        persist="screenX screenY width height">
+
+  <!-- Methods common to all editor dialogs -->
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/dgid.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/global.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/dialogs/insertSelect.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/dialogs/form-common.js"/>
+
+  <panelset>
+    <panel id="optGroupPanel" onpopupshown="gDialog.optGroupLabelTextbox.focus()"
+           onkeypress="CheckCRInOptGroupPanel(event)">
+      <grid>
+        <columns><column/><column/></columns>
+        <rows>
+          <row align="center">
+            <label value="&label.label;"/>
+            <textbox id="optGroupLabelTextbox"/>
+          </row>
+          <row align="center">
+            <spacer/>
+            <checkbox id="optGroupDisabledCheckbox"
+                      label="&disabled.label;"/>
+          </row>
+        </rows>
+      </grid>
+      <hbox>
+        <spacer flex="1"/>
+        <button label="&update.label;" id="doUpdateOptGroupButton"
+                default="true"
+                oncommand="doUpdateOptGroup()"/>
+        <button label="&ok.label;" id="doAddOptGroupButton"
+                default="true"
+                oncommand="doAddOptGroup()"/>
+      </hbox>
+    </panel>
+    <panel id="optionPanel" onpopupshown="gDialog.optionLabelTextbox.focus()"
+           onkeypress="CheckCRInOptionPanel(event)">
+      <grid>
+        <columns><column/><column/></columns>
+        <rows>
+          <row align="center">
+            <label value="&label.label;"/>
+            <textbox id="optionLabelTextbox"/>
+          </row>
+          <row align="center">
+            <label value="&value.label;"/>
+            <textbox id="optionValueTextbox"/>
+          </row>
+          <row align="center">
+            <spacer/>
+            <checkbox id="optionDisabledCheckbox"
+                      label="&disabled.label;"/>
+          </row>
+          <row align="center">
+            <spacer/>
+            <checkbox id="optionSelectedCheckbox"
+                      label="&selected.label;"/>
+          </row>
+        </rows>
+      </grid>
+      <hbox>
+        <spacer flex="1"/>
+        <button label="&update.label;" id="doUpdateOptionButton"
+                default="true"
+                oncommand="doUpdateOption()"/>
+        <button label="&ok.label;" id="doAddOptionButton"
+                default="true"
+                oncommand="doAddOption()"/>
+      </hbox>
+    </panel>
+  </panelset>
+
+  <tabbox flex="1">
+    <tabs>
+      <tab label="&parameters.label;"/>
+      <tab label="&options.label;"/>
+    </tabs>
+    <tabpanels flex="1">
+      <grid id="mainGrid">
+        <columns><column/><column flex="1"/><column/></columns>
+        <rows>
+          <row align="center" attribute="name">
+            <label value="&name.label;"/>
+            <textbox/>
+          </row>
+          <row align="center" attribute="disabled">
+            <label value="&state.label;"/>
+            <checkbox label="&disabled.label;"/>
+          </row>
+          <row align="center" attribute="required">
+            <label value="&required.label;"/>
+            <checkbox label="&isRequired.label;"/>
+          </row>
+          <row align="center" attribute="form">
+            <label value="&form.label;"/>
+            <textbox/>
+          </row>
+          <row align="center" attribute="size">
+            <label value="&size.label;"/>
+            <textbox/>
+          </row>
+          <row align="center" attribute="multiple">
+            <label value="&choices.label;"/>
+            <checkbox label="&multiple.label;"/>
+          </row>
+          <row align="center" attribute="list">
+            <label value="&list.label;"/>
+            <textbox/>
+          </row>
+        </rows>
+      </grid>
+      <vbox>
+        <tree id="contentsTree" flex="1" style="margin: 0px; min-width: 200px"
+              treelines="true"
+              onselect="UpdateButtons()">
+          <treecols>
+            <treecol id="valueCol"    flex="1" label="&value.col;"
+                     primary="true"
+                     persist="width ordinal hidden"/>
+            <splitter class="tree-splitter"/>
+            <treecol id="labelCol"    flex="1" label="&label.col;"
+                     persist="width ordinal hidden"/>
+            <splitter class="tree-splitter"/>
+            <treecol id="disabledCol"          label="&disabled.col;"
+                     persist="width ordinal hidden"/>
+            <splitter class="tree-splitter"/>
+            <treecol id="selectedCol"          label="&selected.col;"
+                     persist="width ordinal hidden"/>
+          </treecols>
+        </tree>
+        <hbox id="UrlsToolbox" class="listboxBg">
+          <toolbarbutton class="listboxBgPlusButton"
+                         tooltiptext="&add.tooltip;"
+                         id="PlusButton"
+                         type="menu">
+            <menupopup onpopupshowing="UpdateOptions()">
+              <menu label="&before.label;"
+                    id="beforeMenu">
+                <menupopup>
+                  <menuitem label="&addOption.label;"
+                            id="addOptionBeforeMenuitem"
+                            oncommand="AddOption('before')"/>
+                  <menuitem label="&addOptgroup.label;"
+                            id="addOptgroupBeforeMenuitem"
+                            oncommand="AddOptgroup('before')"/>
+                </menupopup>
+              </menu>
+              <menu label="&inside.label;"
+                    id="insideMenu">
+                <menupopup>
+                  <menuitem label="&addOption.label;"
+                            id="addOptionInsideMenuitem"
+                            oncommand="AddOption('inside')"/>
+                  <menuitem label="&addOptgroup.label;"
+                            id="addOptgroupInsideMenuitem"
+                            oncommand="AddOptgroup('inside')"/>
+                </menupopup>
+              </menu>
+              <menu label="&after.label;"
+                    id="afterMenu">
+                <menupopup>
+                  <menuitem label="&addOption.label;"
+                            id="addOptionAfterMenuitem"
+                            oncommand="AddOption('after')"/>
+                  <menuitem label="&addOptgroup.label;"
+                            id="addOptgroupAfterMenuitem"
+                            oncommand="AddOptgroup('after')"/>
+                </menupopup>
+              </menu>
+            </menupopup>
+          </toolbarbutton>
+          <toolbarbutton class="listboxBgMinusButton"
+                         disabled="true"
+                         id="MinusButton"
+                         tooltiptext="&remove.tooltip;"
+                         oncommand="DeleteOpt()"/>
+          <toolbarbutton class="listboxBgConfigButton"
+                         tooltiptext="&modify.tooltip;"
+                         disabled="true"
+                         id="ConfigButton"
+                         oncommand="UpdateUrl()"/>
+          <spacer flex="1"/>
+          <toolbarbutton class="listboxBgDownButton"
+                         tooltiptext="&down.tooltip;"
+                         disabled="true"
+                         id="DownButton"
+                         oncommand="Down()"/>
+          <toolbarbutton class="listboxBgUpButton"
+                         tooltiptext="&up.tooltip;"
+                         disabled="true"
+                         id="UpButton"
+                         oncommand="Up()"/>
+        </hbox>
+  
+      </vbox>
+    </tabpanels>
+  </tabbox>
+</dialog>

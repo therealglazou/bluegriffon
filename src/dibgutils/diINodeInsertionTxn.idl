@@ -1,0 +1,16 @@
+
+
+#include "nsISupports.idl"
+#include "domstubs.idl"
+
+interface nsIDOMNode;
+
+/**
+ *
+ */
+[scriptable, uuid(F0211C63-861E-4E65-829B-D3D0F53489BA)]
+interface diINodeInsertionTxn: nsISupports
+{
+  nsIDOMNode getNode();
+};
+

@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/bluegriffonDialogs.css" type="text/css"?>
+
+<!DOCTYPE dialog SYSTEM "chrome://bluegriffon/locale/insertLabel.dtd">
+
+<dialog title="&window.title;"
+        id="insertLabelDialog"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        onload = "Startup()"
+        buttons="accept,cancel"
+        ondialogaccept="return onAccept();"
+        persist="screenX screenY">
+
+  <!-- Methods common to all editor dialogs -->
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/dgid.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/global.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/dialogs/insertLabel.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/dialogs/form-common.js"/>
+
+  <grid id="mainGrid">
+    <columns><column/><column flex="1"/><column/></columns>
+    <rows>
+      <row align="center" attribute="form">
+        <label value="&form.label;"/>
+        <textbox/>
+      </row>
+      <row align="center" attribute="for">
+        <label value="&for.label;"/>
+        <menulist id="forMenulist" editable="true">
+          <menupopup id="forMenupopup"/>
+        </menulist>
+      </row>
+    </rows>
+  </grid>
+</dialog>

@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://op1/skin/op1.css" type="text/css"?>
+
+<!DOCTYPE window SYSTEM "chrome://op1/locale/op1.dtd">
+
+<window id         = "op1"
+        windowtype = "Opquast:a11yFirstStep"
+        title      = "&window.title;"
+        xmlns      = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:html = "http://www.w3.org/1999/xhtml"
+        persist    = "screenX screenY width height"
+        buttons    = ","
+        width      = "730"
+        height     = "730"
+        onload     = "Startup()"
+        onfocus    = "onFocus()"
+        onunload   = "onClose()">
+
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/global.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/dgid.js"/>
+  <script type="application/x-javascript" src="chrome://op1/content/op1.js"/>
+  <script type="application/x-javascript" src="chrome://op1/content/a11yFirstStep.js"/>
+
+  <stringbundle id="a11yBundle" src="chrome://op1/locale/a11yFirstStep.properties" />
+
+  <hbox align="center">
+    <image src="chrome://op1/skin/opquast.png"
+           id="opquastLogo"
+           onclick="dontFocus=true; loadExternalURL('https://checklists.opquast.com/fr/accessibilityfirststep/')" />
+    <spacer flex="1" />
+    <hbox id="outerBox" tooltiptext="&filterAll.label;" onclick="Show(event, '')">
+        <hbox id="greens"  tooltiptext="&filterPassed.label;" onclick="Show(event, 'passed')"/>
+        <hbox id="reds" tooltiptext="&filterFailed.label;" onclick="Show(event, 'failed')" />
+    </hbox>
+    <spacer flex="1" />
+    <label value="&speed.label;"/>
+    <textbox id="speedBox" type="number" min="1" max="10" size="2" value="10"
+             oncommand="this.setAttribute('value', this.value); document.persist('speedBox', 'value')"
+             oninput="this.setAttribute('value', this.value); document.persist('speedBox', 'value')" />
+  </hbox>
+  <richlistbox flex="1" id="items"/>
+</window>

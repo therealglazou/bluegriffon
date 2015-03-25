@@ -1,0 +1,51 @@
+            <hbox id="bespinToolbox2" align="center" hidden="true">
+              <spacer flex="1"/>
+              <label value="&replaceAll.button;"
+                     class="findBarButton"
+                     onclick="BespinReplaceAll()"/>
+              <label value="&replace.button;"
+                     class="findBarButton"
+                     onclick="BespinReplace()"/>
+              <label value="&replaceAndFind.button;"
+                     class="findBarButton"
+                     onclick="BespinReplaceAndFind()"/>
+              <label value="&replace.label;"/>
+              <textbox id="bespinReplaceTextbox"
+                       onkeypress="BespinKeyPressCallback(event);"
+                       size="10"
+                       type="search"/>
+            </hbox>
+            <hbox id="bespinToolbox1" align="center" hidden="true">
+              <spacer style="width: 5px"/>
+              <image id="closeFindbarButton"
+                     onclick="CloseFindBar()"/>
+              <label value="&line.label;"
+                     id="bespinLineLabel"/>
+              <textbox id="bespinLineTextbox"
+                       size="5"
+                       onkeypress="BespinKeyPressCallback(event); onBespinLineKeypress(event, this)"
+                       onblur="onBespinLineBlur(this)"/>
+              <spacer flex="1"/>
+              <label  id="bespinFindPrevious"
+                      class="findBarButton"
+                      onclick="BespinFind(false, false)"
+                      hidden="true"
+                      value="&previous.label;"/>
+              <label  id="bespinFindNext"
+                      class="findBarButton"
+                      onclick="BespinFind(true, false)"
+                      hidden="true"
+                      value="&next.label;"/>
+              <checkbox label="&caseSensitive.checkbox;"
+                        hidden="true"
+                        id="bespinFindCaseSensitive"
+                        oncommand="ToggleBespinFindCaseSensitivity()"/>
+              <label value="&find.label;"/>
+              <textbox id="bespinFindTextbox"
+                       size="10"
+                       type="search"
+                       oncommand="onBespinFindClear(event, this)"
+                       onkeypress="BespinKeyPressCallback(event); onBespinFindKeypress(event)"
+                       onblur="onBespinFindClear(event, this)"
+                       oninput="BespinFind(true, true)"/>
+            </hbox>

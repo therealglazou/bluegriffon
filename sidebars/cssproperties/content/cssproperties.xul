@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1/GPL 2.0/LGPL 2.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is Composer.
+   -
+   - The Initial Developer of the Original Code is
+   - Disruptive Innovations SARL.
+   - Portions created by the Initial Developer are Copyright (C) 2006
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -   Daniel Glazman (daniel.glazman@disruptive-innovations.com), Original Author
+   -
+   - Alternatively, the contents of this file may be used under the terms of
+   - either the GNU General Public License Version 2 or later (the "GPL"), or
+   - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+   - in which case the provisions of the GPL or the LGPL are applicable instead
+   - of those above. If you wish to allow use of your version of this file only
+   - under the terms of either the GPL or the LGPL, and not to allow others to
+   - use your version of this file under the terms of the MPL, indicate your
+   - decision by deleting the provisions above and replace them with the notice
+   - and other provisions required by the LGPL or the GPL. If you do not delete
+   - the provisions above, a recipient may use your version of this file under
+   - the terms of any one of the MPL, the GPL or the LGPL.
+   -
+   - ***** END LICENSE BLOCK ***** -->
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://cssproperties/skin/cssproperties.css" type="text/css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/listboxBg.css" type="text/css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/bluegriffonDialogs.css" type="text/css"?>
+
+<?xul-overlay href="chrome://cssproperties/content/popups.xul"?>
+
+<?xul-overlay href="chrome://cssproperties/content/general.xul"?>
+<?xul-overlay href="chrome://cssproperties/content/fonts.xul"?>
+<?xul-overlay href="chrome://cssproperties/content/colors.xul"?>
+<?xul-overlay href="chrome://cssproperties/content/geometry.xul"?>
+<?xul-overlay href="chrome://cssproperties/content/position.xul"?>
+<?xul-overlay href="chrome://cssproperties/content/borders.xul"?>
+<?xul-overlay href="chrome://cssproperties/content/shadows.xul"?>
+<?xul-overlay href="chrome://cssproperties/content/lists.xul"?>
+<?xul-overlay href="chrome://cssproperties/content/transforms.xul"?>
+<?xul-overlay href="chrome://cssproperties/content/transitions.xul"?>
+<?xul-overlay href="chrome://cssproperties/content/flexbox.xul"?>
+<?xul-overlay href="chrome://cssproperties/content/columns.xul"?>
+<?xul-overlay href="chrome://cssproperties/content/tables.xul"?>
+<?xul-overlay href="chrome://cssproperties/content/misc.xul"?>
+
+<!DOCTYPE page [
+  <!ENTITY % csspropertiesDTD SYSTEM "chrome://cssproperties/locale/cssproperties.dtd">
+  %csspropertiesDTD;
+  <!ENTITY % backgrounditemDTD SYSTEM "chrome://cssproperties/locale/backgrounditem.dtd" >
+  %backgrounditemDTD;
+]>
+
+<page id         = "cssproperties"
+      windowtype = "BlueGriffon:CSSProperties"
+      title      = "&window.title;"
+      xmlns      = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+      xmlns:html = "http://www.w3.org/1999/xhtml"
+      onload     = "Startup()"
+      onunload   = "Shutdown()">
+
+  <script type="application/x-javascript"  src="chrome://bluegriffon/content/utils/dgid.js"/>
+  <script type="application/x-javascript"  src="chrome://bluegriffon/content/utils/global.js"/>
+  <script type="application/x-javascript"  src="chrome://bluegriffon/content/utils/prompter.js"/>
+  <script type="application/x-javascript"  src="chrome://bluegriffon/content/txns/diStyleAttrChangeTxn.js"/>
+  <script type="application/x-javascript"  src="chrome://bluegriffon/content/txns/diChangeFileStylesheetTxn.js"/>
+  <script type="application/x-javascript"  src="chrome://cssproperties/content/cssproperties.js"/>
+  <script type="application/x-javascript"  src="chrome://cssproperties/content/common.js"/>
+
+  <stringbundle id="csspropertiesBundle"   src="chrome://cssproperties/locale/cssproperties.properties"/>
+  <stringbundle id="backgrounditemBundle"  src="chrome://cssproperties/locale/backgrounditem.properties"/>
+  <stringbundle id="bluegriffonBundle"     src="chrome://cssproperties/locale/bluegriffon.properties"/>
+
+  <panelset id="csspropertiesPanelset" />
+
+  <vbox id="mainBox" flex="1" style="visibility: hidden">
+    <vbox id="mainBoxHeader">
+      <label id="currentElementBox"
+             crop="end"/>
+      <label value="&applyStyles.label;"/>
+      <hbox id="cssPolicyBox" align="center">
+        <menulist id="cssPolicyMenulist" oncommand="onCssPolicyChange(this)">
+          <menupopup>
+            <menuitem label="&modifyID.label;"        value="id"/>
+            <menuitem label="&modifyClass.label;"     value="class"/>
+            <menuitem label="&allOfType.label;"       value="type"/>
+            <menuseparator/>
+            <menuitem label="&useInlineStyles.label;" value="inline"/>
+          </menupopup>
+        </menulist>
+        <menulist id="classPicker" editable="true" hidden="true"
+                  oninput="CheckClass(this)">
+          <menupopup id="classPickerPopup"/>
+        </menulist>
+        <textbox id="IDPicker" hidden="true"/>
+        <textbox id="typePicker" disabled="true" hidden="true"/>
+      </hbox>
+      <hbox class="indent">
+        <checkbox label="&hoverState.label;"
+                  id="hoverStateCheckbox"
+                  oncommand="ToggleHover(this)"/>
+      </hbox>
+    </vbox>
+
+    <vbox flex="1" id="propertiesBox" />
+  </vbox>
+
+</page>

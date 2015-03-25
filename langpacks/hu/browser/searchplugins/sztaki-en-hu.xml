@@ -1,0 +1,21 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<SearchPlugin xmlns="http://www.mozilla.org/2006/browser/search/">
+<ShortName>SZTAKI angol-magyar</ShortName>
+<Description>Keresés a SZTAKI angol-magyar szótárában</Description>
+<InputEncoding>UTF-8</InputEncoding>
+<Image width="16" height="16">data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8%2F9hAAAABmJLR0QAYgDIAD5EbEUBAAAACXBIWXMAAAs2AAALEwFX%2BwidAAAAB3RJTUUH1AYWCwoqkkjHxwAAAg9JREFUeNp9k79PVEEUhb%2BBxwYQfLiEsJossaCgIVF2N%2FagyRoL6AitjY0JBk0oKY2JNpYmVhY0diTOErVbIiGb8EcYKIxURHZ5M%2FOOxe6%2B5feX3GbuPSeZM3ONJNHB%2B0AU9dNsNhlaWQGgubnJx89DAKy%2FhCTx5HJRV4LpGqTe8%2BFTRJrC2ovAz7sFnPM8%2B%2FuH%2FNQ63qd8%2FVLFGMOT%2BXn6BgYA6ANwLnDqHGvPW7x7%2B7rnTo%2Bjg%2FcA2OVl3hQKeB%2FaDUkKS0v6XixKklLnJEk2P66t22Pyp6cKIZW1VqVSKauHc4%2FknBeSdHJyopAkCs4p9V5pCPp2J6%2Bt4RG1jo4y8VUYLS5qe3eXsxggtFqE42N%2BjI5Sn56m0WgAsDY%2B3hkyGGOI2gKDEFywuSh%2BNTbG08HBbMK2Wm2Dvqi%2Fmwd0ahvdKO65WKsk8UrTtBegtSqXy9k9V%2BNYtcnJS1WemxPD8bxW41ircSxrray1qlQqmdhaq5AGheDlg5cLTolPsmCj2Zl%2F7DKDJH5tbGCMYW9vD4BarUa1Wr38KbopGdP%2BB1dhrZXS9NpeqVTS%2Fv6%2BTOqc7i8U8MGfc594cIvraB2I%2BLBIvV7v7IL3TC1Mkp8d5CZaB%2B2njg%2BL7OzsEEVRb5lwjqnHBUIIjE4MX2kw8vseURRRr9eJouj8NgIoSTC5HJVKhTPHGY1GA%2B99Jgb4D0dIogkEJm37AAAAAElFTkSuQmCC</Image>
+<Url type="text/html" method="GET" template="http://dict.sztaki.hu/dict_search.php">
+  <Param name="W" value="{searchTerms}"/>
+  <Param name="L" value="ENG:HUN:EngHunDict"/>
+  <Param name="O" value="HUN"/>
+  <Param name="C" value="1"/>
+  <Param name="A" value="1"/>
+  <Param name="E" value="1"/>
+  <Param name="P" value="0"/>
+  <Param name="M" value="2"/>
+</Url>
+<SearchForm>http://dict.sztaki.hu/</SearchForm>
+</SearchPlugin>

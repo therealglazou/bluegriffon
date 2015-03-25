@@ -1,0 +1,155 @@
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1/GPL 2.0/LGPL 2.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is BlueGriffon.
+   -
+   - The Initial Developer of the Original Code is
+   - Disruptive Innovations SARL.
+   - Portions created by the Initial Developer are Copyright (C) 2006
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -   Daniel Glazman (daniel.glazman@disruptive-innovations.com), Original Author
+   -
+   - Alternatively, the contents of this file may be used under the terms of
+   - either the GNU General Public License Version 2 or later (the "GPL"), or
+   - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+   - in which case the provisions of the GPL or the LGPL are applicable instead
+   - of those above. If you wish to allow use of your version of this file only
+   - under the terms of either the GPL or the LGPL, and not to allow others to
+   - use your version of this file under the terms of the MPL, indicate your
+   - decision by deleting the provisions above and replace them with the notice
+   - and other provisions required by the LGPL or the GPL. If you do not delete
+   - the provisions above, a recipient may use your version of this file under
+   - the terms of any one of the MPL, the GPL or the LGPL.
+   -
+   - ***** END LICENSE BLOCK ***** -->
+
+<!ENTITY window.title "新規文書ウィザード">
+
+<!ENTITY pageTitle.label "タイトル:">
+<!ENTITY pageAuthor.label "著者:">
+<!ENTITY pageDescription.label "説明:">
+<!ENTITY pageTitle.accesskey "T">
+<!ENTITY pageAuthor.accesskey "A">
+<!ENTITY pageDescription.accesskey "D">
+<!ENTITY pageKeywords.label "キーワード:">
+<!ENTITY pageKeywords.accesskey "K">
+<!ENTITY documentLanguage.label "言語:">
+<!ENTITY language.accesskey "L">
+<!ENTITY charset.label "文字セット:">
+<!ENTITY charset.accesskey "C">
+<!ENTITY direction.label "行の方向:">
+<!ENTITY direction.accesskey "x">
+<!ENTITY ltr.label "左から右">
+<!ENTITY rtl.label "右から左">
+<!ENTITY unspecified.label "指定なし">
+
+<!ENTITY selectLanguage.label "言語を選択">
+
+<!ENTITY backgroundImage.label "背景画像:">
+<!ENTITY backgroundImage.accesskey "B">
+
+<!ENTITY filepickerForBgImage.title "背景画像を選択">
+<!ENTITY pagePreview.label "プレビュー:">
+
+<!ENTITY useSystemColors.label "ブラウザーの規定の色 (ページに色を設定しないこと)">
+<!ENTITY userDefinedColors.label "色を指定する:">
+
+<!ENTITY backgroundColor.label "背景:">
+<!ENTITY backgroundColor.accesskey "B">
+<!ENTITY textColor.label "文字:">
+<!ENTITY textColor.accesskey "T">
+<!ENTITY linksColor.label "リンク:">
+<!ENTITY linksColor.accesskey "L">
+<!ENTITY activeLinksColor.label "アクティブなリンク:">
+<!ENTITY activeLinksColor.accesskey "A">
+<!ENTITY visitedLinksColor.label "表示済みのリンク:">
+<!ENTITY visitedLinksColor.accesskey "V">
+<!ENTITY underlineLinks.label "リンクに下線を引く">
+
+<!ENTITY relativeURLForBgImage.label "URL はページに対して相対">
+
+<!ENTITY generalTab.label "文書のプロパティ">
+<!ENTITY colorsTab.label "色と背景">
+<!ENTITY styleTab.label "スタイル">
+<!ENTITY advancedTab.label "詳細">
+
+<!ENTITY unsavedPage.label "[未保存の新規ページ]">
+<!ENTITY noPageLastModified.label "[情報なし]">
+
+<!ENTITY normalText.preview "通常の文字列">
+<!ENTITY links.preview "リンク">
+<!ENTITY activeLinks.preview "アクティブなリンク">
+<!ENTITY visitedLinks.preview "表示済みのリンク">
+
+<!ENTITY makeColorsDefault.label "これらを私の既定の設定にする">
+
+<!ENTITY bgTab.label "文書の背景">
+
+<!ENTITY layoutsTab.label "ページ レイアウト">
+<!ENTITY usePageLayout.checkbox "CSS レイアウトをパターンから選択する">
+<!ENTITY oneColumn100.label "1 列, 100&#37;">
+<!ENTITY twoColumns5050.label "2 列, 50&#37;/50&#37;">
+<!ENTITY twoColumns6633.label "2 列, 66&#37;/33&#37;">
+<!ENTITY twoColumns3366.label "2 列, 33&#37;/66&#37;">
+<!ENTITY twoColumns7525.label "2 列, 75&#37;/25&#37;">
+<!ENTITY twoColumns2575.label "2 列, 25&#37;/75&#37;">
+<!ENTITY threeColumns333333.label "3 列, 33&#37;/33&#37;/33&#37;">
+<!ENTITY threeColumns502525.label "3 列, 50&#37;/25&#37;/25&#37;">
+<!ENTITY threeColumns252550.label "3 列, 25&#37;/25&#37;/50&#37;">
+<!ENTITY fourColumns25252525.label "4 列, 25&#37;/25&#37;/25&#37;/25&#37;">
+
+<!ENTITY layoutType.label "幅:">
+<!ENTITY layoutType.accesskey "W">
+<!ENTITY layout100percent.label "ウィンドウ幅">
+<!ENTITY layout750px.label "750px">
+<!ENTITY layout950px.label "950px">
+<!ENTITY layout974px.label "974px">
+<!ENTITY layoutSubtype.label "サイド バー:">
+<!ENTITY layoutSubtype.accesskey "S">
+<!ENTITY noSidebar.label "なし">
+<!ENTITY left160Sidebar.label "左 160px">
+<!ENTITY left180Sidebar.label "左 180px">
+<!ENTITY left300Sidebar.label "左 300px">
+<!ENTITY right180Sidebar.label "右 180px">
+<!ENTITY right240Sidebar.label "右 240px">
+<!ENTITY right300Sidebar.label "右 300px">
+<!ENTITY loremIpsum.label "サンプル文を含める">
+<!ENTITY loremIpsum.accesskey "I">
+<!ENTITY newRow.label "追加">
+<!ENTITY removeRow.label "削除">
+
+<!ENTITY tile.label "タイトル:">
+<!ENTITY tile.accesskey "T">
+<!ENTITY scrolling.label "スクロール:">
+<!ENTITY scrolling.accesskey "S">
+<!ENTITY scrollWithPage.label "ページと共にスクロールする">
+<!ENTITY noScrolling.label "スクロールしない">
+<!ENTITY horizPosition.label "水平:">
+<!ENTITY vertPosition.label "垂直:">
+
+<!ENTITY documentType.label "文書の種類">
+<!ENTITY documentType.description "作成する文書の種類を指定してください">
+
+<!ENTITY language.label "文書の言語">
+<!ENTITY html.label "HTML 4">
+<!ENTITY xhtml.label "XHTML 1">
+<!ENTITY xhtml11.label "XHTML 1.1">
+<!ENTITY html5.label "HTML 5">
+<!ENTITY xhtml5.label "XHTML 5">
+
+<!ENTITY doctype.label "文書のタイプ">
+<!ENTITY transitional.label "Transitional">
+<!ENTITY strict.label "strict">
+

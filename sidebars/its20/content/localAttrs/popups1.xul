@@ -1,0 +1,182 @@
+<?xml version="1.0"?>
+
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1/GPL 2.0/LGPL 2.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is ITS 2.0 Panel for BlueGriffon.
+   -
+   - The Initial Developer of the Original Code is
+   - Disruptive Innovations SAS.
+   - Portions created by the Initial Developer are Copyright (C) 2013
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -   Daniel Glazman <daniel.glazman@disruptive-innovations.com>, Original author
+   -     on behalf of DFKI
+   -
+   - Alternatively, the contents of this file may be used under the terms of
+   - either the GNU General Public License Version 2 or later (the "GPL"), or
+   - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+   - in which case the provisions of the GPL or the LGPL are applicable instead
+   - of those above. If you wish to allow use of your version of this file only
+   - under the terms of either the GPL or the LGPL, and not to allow others to
+   - use your version of this file under the terms of the MPL, indicate your
+   - decision by deleting the provisions above and replace them with the notice
+   - and other provisions required by the GPL or the LGPL. If you do not delete
+   - the provisions above, a recipient may use your version of this file under
+   - the terms of any one of the MPL, the GPL or the LGPL.
+   -
+   - ***** END LICENSE BLOCK ***** -->
+
+<!DOCTYPE overlay [
+  <!ENTITY % its20DTD SYSTEM "chrome://its20/locale/its20.dtd">
+  %its20DTD;
+]>
+
+<overlay id="popups1Overlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <popupset id="popupset">
+    <menupopup id="sectionHeaderContext">
+      <menuitem label="&closeOtherSections.label;" oncommand="CloseAllSection(false)"/>
+      <menuitem label="&closeAllSections.label;" oncommand="CloseAllSection(true)"/>
+    </menupopup>
+
+    <panel id="addRulesetPanel"
+           noautohide="true"
+           level="floating"
+           orient="vertical"
+           type="arrow">
+      <groupbox>
+        <caption label="&rulesetType.label;"/>
+        <radiogroup id="newRulesetTypeRadiogroup"
+                    orient="horizontal"
+                    flex="1"
+                    oncommand="ToggleNewRulesetType()">
+          <radio value="external" label="&rulesetExternal.label;"/>
+          <spacer flex="1"/>
+          <radio value="inline"   label="&rulesetInline.label;"/>
+        </radiogroup>
+        <radiogroup id="itsFileRadiogroup" class="indent"
+                    oncommand="ToggleITSFileType()">
+	        <hbox align="center">
+	          <radio label="&existingITS.label;" id="existingITSRadio" value="existing"/>
+			      <textbox id="newRulesetUrlTextbox" flex="1"/>
+			      <filepickerbutton id="newRulesetUrlFilepickerbutton"
+			                        control="newRulesetUrlTextbox"
+			                        mode="0"
+			                        filters="*.xml"
+	                            oncommand="CheckURL('newRulesetUrlTextbox', 'relativeURLCheckbox'); gDialog.newRulesetUrlTextbox.focus()"
+	                            title="&newRulesetUrlFilepickerbutton.label;"/>
+	        </hbox>
+          <radio label="&newRulesetFile.label;" id="newRulesetFileRadio" value="new"/>
+		      <checkbox id="relativeURLCheckbox"
+		                label="&relativeUrl.label;"
+		                oncommand="ToggleRelativeOrAbsolute('newRulesetUrlTextbox', 'relativeURLCheckbox')"/>
+
+        </radiogroup>
+       </groupbox>
+      <groupbox>
+        <caption label="&rulesetQueryLanguage.label;"/>
+        <radiogroup id="newRulesetQueryLanguageRadiogroup"
+                    orient="horizontal"
+                    flex="1">
+          <radio value="xpath" label="&xpath.label;"/>
+          <spacer flex="1"/>
+          <radio value="css"   label="&css.label;"/>
+        </radiogroup>
+       </groupbox>
+       <hbox>
+        <spacer flex="1"/>
+        <button label="&addRulesetCancel.label;" oncommand="CloseAddRulesetPanel()"/>
+        <button label="&addRulesetOK.label;" default="true" oncommand="CreateNewRuleset()"/>
+       </hbox>
+    </panel>
+
+    <panel id="addParamPanel"
+           level="floating"
+           noautohide="true"
+           orient="vertical"
+           type="arrow">
+      <grid>
+        <columns>
+          <column/>
+          <column/>
+        </columns>
+        <rows>
+          <row align="center">
+            <label value="&parameterName.label;"/>
+            <textbox id="paramNameTextbox"
+                     oninput="CheckParamUnicity(this)"/>
+          </row>
+          <row align="center">
+            <label value="&parameterValue.label;"/>
+            <textbox id="paramValueTextbox"/>
+          </row>
+          <row align="center">
+            <spacer/>
+            <hbox>
+              <spacer/>
+              <button label="&addParamCancel.label;" oncommand="CloseAddParamPanel()"/>
+              <button id="addParamOKButton"
+                      disabled="true"
+                      default="true"
+                      oncommand="CreateNewParam()"
+                      label="&addParamOK.label;"/>
+            </hbox>
+          </row>
+        </rows>
+      </grid>
+    </panel>
+
+    <panel id="addAnnotatorsRefPanel"
+           level="floating"
+           noautohide="true"
+           orient="vertical"
+           type="arrow">
+      <grid>
+        <columns>
+          <column/>
+          <column/>
+        </columns>
+        <rows>
+          <row align="center">
+            <label value="&dataCategory.label;"/>
+            <menulist id="dataCategoryMenulist" style="min-width: 20em"
+                      oncommand="CheckAnnotatorsRefPanel()">
+              <menupopup onpopupshowing="ShowAnnotatorsRefDataCategories(this)"/>
+            </menulist>
+          </row>
+          <row align="center">
+            <label value="&processorIRI.label;"/>
+            <textbox id="processorIRITextbox"
+                     oninput="CheckAnnotatorsRefPanel()"/>
+          </row>
+          <row align="center">
+            <spacer/>
+            <hbox>
+              <spacer/>
+              <button label="&addAnnotatorsRefCancel.label;" oncommand="CloseAnnotatorsRefPanel();"/>
+              <button id="addAnnotatorsRefButton"
+                      disabled="true"
+                      default="true"
+                      oncommand="CreateNewAnnotatorsRef()"
+                      label="&addAnnotatorsRefOK.label;"/>
+            </hbox>
+          </row>
+        </rows>
+      </grid>
+                
+    </panel>
+  </popupset>
+</overlay>

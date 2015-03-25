@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+		<title></title>
+		<script type="text/javascript" src="https://www.google.com/jsapi">
+		</script>
+		<script type="text/javascript">
+	  	google.load("webfont", "1");
+
+	  	function BGLoadFont(aFont) {
+	  	  var preview = document.getElementById("preview");
+				preview.textContent = aFont;
+			  preview.style.fontFamily = aFont;
+
+		    WebFont.load({
+		      google: {
+		        families: [ aFont ]
+		      },
+		      loading: function() {
+		        document.getElementById("throbber").style.display = "block";
+		        document.getElementById("preview").style.display = "none";
+		      },
+		      active: function() {
+		        document.getElementById("throbber").style.display = "none";
+		        document.getElementById("preview").style.display = "block";
+		      }
+	      });
+	  	}
+	  </script>
+		<style>
+		  #preview {
+		    font-size: 32px;
+		    margin: 0px;
+		  }
+
+		  body { overflow: hidden }
+		</style>
+  </head>
+	<body>
+		<p style="text-align:center; display: none"
+		   id="throbber"><img src="chrome://bluegriffon/skin/throbber16.gif"></p>
+		<p style="text-align:center; display: none"
+		   id="preview"></p>
+	</body>
+</html>

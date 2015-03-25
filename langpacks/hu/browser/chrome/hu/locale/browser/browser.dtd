@@ -1,0 +1,713 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<!-- LOCALIZATION NOTE : FILE This file contains the browser main menu items -->
+<!-- LOCALIZATION NOTE : FILE Do not translate commandkeys --> 
+
+<!-- LOCALIZATION NOTE (mainWindow.title): DONT_TRANSLATE -->
+<!ENTITY mainWindow.title "&brandFullName;">
+<!-- LOCALIZATION NOTE (mainWindow.titlemodifier) : DONT_TRANSLATE -->
+<!ENTITY mainWindow.titlemodifier "&brandFullName;">
+<!-- LOCALIZATION NOTE (mainWindow.titlemodifiermenuseparator): DONT_TRANSLATE -->
+<!ENTITY mainWindow.titlemodifiermenuseparator " - ">
+<!-- LOCALIZATION NOTE (mainWindow.titlePrivateBrowsingSuffix): This will be appended to the window's title
+                                                                inside the private browsing mode -->
+<!ENTITY mainWindow.titlePrivateBrowsingSuffix "(Privát böngészés)">
+
+<!-- Tab context menu -->
+<!ENTITY  reloadTab.label                    "Lap frissítése">
+<!ENTITY reloadTab.accesskey                "r">
+<!ENTITY  reloadAllTabs.label                "Összes lap frissítése">
+<!ENTITY reloadAllTabs.accesskey            "s">
+<!ENTITY  closeOtherTabs.label               "Többi lap bezárása">
+<!ENTITY closeOtherTabs.accesskey           "T">
+
+<!-- LOCALIZATION NOTE (pinTab.label, unpinTab.label): "Pin" is being
+used as a metaphor for expressing the fact that these tabs are "pinned" to the
+left edge of the tabstrip. Really we just want the string to express the idea
+that this is a lightweight and reversible action that keeps your tab where you
+can reach it easily. -->
+<!ENTITY  pinTab.label                       "Lap rögzítése">
+<!ENTITY pinTab.accesskey                   "r">
+<!ENTITY  unpinTab.label                     "Lap feloldása">
+<!ENTITY unpinTab.accesskey                 "f">
+<!ENTITY  moveToGroup.label                  "Áthelyezés csoportba">
+<!ENTITY moveToGroup.accesskey              "c">
+<!ENTITY  moveToNewGroup.label               "Új csoport">
+<!ENTITY  moveToNewWindow.label              "Áthelyezés új ablakba">
+<!ENTITY moveToNewWindow.accesskey          "t">
+<!ENTITY  bookmarkAllTabs.label              "Minden lap egy könyvjelzőbe…">
+<!ENTITY bookmarkAllTabs.accesskey          "M">
+<!ENTITY  undoCloseTab.label                 "Lapbezárás visszavonása">
+<!ENTITY undoCloseTab.accesskey             "v">
+<!ENTITY  closeTab.label                     "Lap bezárása">
+<!ENTITY closeTab.accesskey                 "b">
+
+<!ENTITY  listAllTabs.label      "Minden lap felsorolása">
+
+<!ENTITY tabCmd.label "Új lap">
+<!ENTITY tabCmd.accesskey "l">
+<!ENTITY tabCmd.commandkey "t">
+<!ENTITY openLocationCmd.label "Hely megnyitása…">
+<!ENTITY openLocationCmd.accesskey "H">
+<!ENTITY openFileCmd.label "Fájl megnyitása…">
+<!ENTITY openFileCmd.accesskey "F">
+<!ENTITY openFileCmd.commandkey "o">
+<!ENTITY printSetupCmd.label "Oldalbeállítás…">
+<!ENTITY printSetupCmd.accesskey "O">
+<!ENTITY printPreviewCmd.label "Nyomtatási kép">
+<!ENTITY printPreviewCmd.accesskey "t">
+<!ENTITY printCmd.label "Nyomtatás…">
+<!ENTITY printCmd.accesskey "N">
+<!ENTITY printCmd.commandkey "p">
+
+<!ENTITY goOfflineCmd.label "Kapcsolat nélküli munka">
+<!ENTITY goOfflineCmd.accesskey "p">
+
+<!ENTITY menubarCmd.label "Menüsor">
+<!ENTITY menubarCmd.accesskey "M">
+<!ENTITY navbarCmd.label "Böngésző eszköztár">
+<!ENTITY navbarCmd.accesskey "B">
+<!ENTITY personalbarCmd.label "Könyvjelző eszköztár">
+<!ENTITY personalbarCmd.accesskey "K">
+<!ENTITY bookmarksToolbarItem.label "Könyvjelző eszköztár elemei">
+<!ENTITY addonBarCmd.label "Kiegészítősáv">
+<!ENTITY addonBarCmd.accesskey "K">
+
+<!ENTITY pageSourceCmd.label "Oldal forrása">
+<!ENTITY pageSourceCmd.accesskey "r">
+<!ENTITY pageSourceCmd.commandkey "u">
+<!ENTITY pageInfoCmd.label "Oldal adatai">
+<!ENTITY pageInfoCmd.accesskey "O">
+<!ENTITY pageInfoCmd.commandkey "i">
+<!-- LOCALIZATION NOTE (enterFullScreenCmd.label, exitFullScreenCmd.label):
+These should match what Safari and other Apple applications use on OS X Lion. -->
+<!ENTITY enterFullScreenCmd.label "Belépés a teljes képernyős módba">
+<!ENTITY enterFullScreenCmd.accesskey "B">
+<!ENTITY exitFullScreenCmd.label "Kilépés a teljes képernyős módból">
+<!ENTITY exitFullScreenCmd.accesskey "K">
+<!ENTITY fullScreenCmd.label "Teljes képernyős üzemmód">
+<!ENTITY fullScreenCmd.accesskey "T">
+<!ENTITY fullScreenCmd.macCommandKey "f">
+<!ENTITY showAllTabsCmd.label "Az összes böngészőlap megjelenítése">
+<!ENTITY showAllTabsCmd.accesskey "m">
+
+<!ENTITY fullScreenMinimize.tooltip "Kis méret">
+<!ENTITY fullScreenRestore.tooltip "Helyreállítás">
+<!ENTITY fullScreenClose.tooltip "Bezárás">
+<!ENTITY fullScreenAutohide.label "Eszköztárak elrejtése">
+<!ENTITY fullScreenAutohide.accesskey "E">
+<!ENTITY fullScreenExit.label "Kilépés a teljes képernyős módból">
+<!ENTITY fullScreenExit.accesskey "K">
+<!ENTITY fullscreenAllowButton.label "Engedélyezés">
+<!ENTITY fullscreenExitButton.label "Tiltás">
+<!ENTITY fullscreenApproval.value "Engedélyezi a teljes képernyőt?">
+
+<!ENTITY fullscreenExitHint.value "A teljes képernyős mód elhagyásához nyomja meg az ESC billentyűt.">
+<!ENTITY leaveDOMFullScreen.label "Kilépés a teljes képernyős módból">
+<!ENTITY leaveDOMFullScreen.accesskey "K">
+
+<!ENTITY closeWindow.label "Ablak bezárása">
+<!ENTITY closeWindow.accesskey "A">
+
+<!ENTITY bookmarksMenu.label "Könyvjelzők">
+<!ENTITY bookmarksMenu.accesskey "K">
+<!ENTITY bookmarkThisPageCmd.label "Oldal hozzáadása a könyvjelzőkhöz">
+<!ENTITY bookmarkThisPageCmd.commandkey "d">
+<!ENTITY sharePageCmd.commandkey "l">
+<!ENTITY subscribeToPageMenupopup.label "Feliratkozás erre az oldalra">
+<!ENTITY subscribeToPageMenuitem.label "Feliratkozás erre az oldalra…">
+<!ENTITY addCurPagesCmd.label "Minden lap egy könyvjelzőbe…">
+<!ENTITY showAllBookmarks2.label "Minden könyvjelző megjelenítése">
+<!ENTITY unsortedBookmarksCmd.label "Nem rendezett könyvjelzők">
+<!ENTITY bookmarksToolbarChevron.tooltip "További könyvjelzők megjelenítése">
+
+<!ENTITY backCmd.label                "Vissza">
+<!ENTITY backCmd.accesskey            "V">
+<!ENTITY backButton.tooltip           "Ugrás az előző oldalra">
+<!ENTITY forwardCmd.label             "Előre">
+<!ENTITY forwardCmd.accesskey         "E">
+<!ENTITY forwardButton.tooltip        "Ugrás a következő oldalra">
+<!ENTITY backForwardButtonMenu.tooltip "Jobb kattintás vagy lehúzás az előzményekhez">
+<!ENTITY backForwardButtonMenuMac.tooltip "Lehúzás az előzményekhez">
+<!ENTITY reloadCmd.label              "Frissítés">
+<!ENTITY reloadCmd.accesskey          "r">
+<!ENTITY reloadButton.tooltip         "Aktuális oldal újratöltése">
+<!ENTITY stopCmd.label                "Leállítás">
+<!ENTITY stopCmd.accesskey            "L">
+<!ENTITY stopCmd.macCommandKey        ".">
+<!ENTITY stopButton.tooltip           "Oldal letöltésének megszakítása">
+<!ENTITY goEndCap.tooltip             "Ugrás a címmezőben levő címre">
+<!ENTITY printButton.label            "Nyomtatás">
+<!ENTITY printButton.tooltip          "Oldal kinyomtatása">
+
+<!ENTITY backForwardItem.title        "Előre/Vissza">
+<!ENTITY locationItem.title           "Hely">
+<!ENTITY searchItem.title             "Keresés">
+<!ENTITY throbberItem.title           "Aktivitásjelző">
+<!ENTITY bookmarksItem.title          "Könyvjelzők">
+
+<!-- Toolbar items --> 
+<!ENTITY appMenuButton.label          "Menü">
+<!ENTITY appMenuButton.tooltip        "A &brandShortName; menü megnyitása">
+<!ENTITY homeButton.label             "Kezdőlap">
+
+<!ENTITY tabGroupsButton.label        "Lapcsoportok">
+<!ENTITY tabGroupsButton.tooltip      "Lapok csoportosítása">
+
+<!ENTITY feedButton.label             "Feliratkozás">
+<!ENTITY feedButton.tooltip           "Feliratkozás az oldalra…">
+
+<!ENTITY bookmarksButton.label          "Könyvjelzők">
+<!ENTITY bookmarksButton.tooltip        "Könyvjelzők megjelenítése">
+<!ENTITY bookmarksCmd.commandkey "b">
+
+<!ENTITY bookmarksMenuButton.label          "Könyvjelzők">
+<!ENTITY bookmarksMenuButton.tooltip        "Könyvjelzők megjelenítése">
+<!ENTITY bookmarksMenuButton.unsorted.label "Nem rendezett könyvjelzők">
+<!ENTITY viewBookmarksSidebar.label         "Megjelenítés az oldalsávon">
+<!ENTITY viewBookmarksToolbar.label         "Könyvjelző eszköztár megjelenítése">
+
+<!-- LOCALIZATION NOTE (bookmarksSidebarGtkCmd.commandkey): This command
+  -  key should not contain the letters A-F, since these are reserved
+  -  shortcut keys on Linux. -->
+<!ENTITY bookmarksGtkCmd.commandkey "o">
+<!ENTITY bookmarksWinCmd.commandkey "i">
+
+<!ENTITY historyButton.label            "Előzmények">
+<!ENTITY historyButton.tooltip          "A mostanában meglátogatott lapok megjelenítése">
+<!ENTITY historySidebarCmd.commandKey   "h">
+
+<!ENTITY toolsMenu.label              "Eszközök">
+<!ENTITY toolsMenu.accesskey          "E"> 
+
+<!ENTITY keywordfield.label           "Kulcsszó hozzáadása a kereséshez…">
+<!ENTITY keywordfield.accesskey       "u">
+<!ENTITY search.label                 "Keresés a weben">
+<!ENTITY search.accesskey             "K">
+<!ENTITY downloads.label              "Letöltések">
+<!ENTITY downloads.tooltip            "A folyamatban lévő letöltések állapotának megjelenítése">
+<!ENTITY downloads.accesskey          "e">
+<!ENTITY downloads.commandkey         "j">
+<!ENTITY downloadsUnix.commandkey     "y">
+<!ENTITY addons.label                 "Kiegészítők">
+<!ENTITY addons.accesskey             "T">
+<!ENTITY addons.commandkey            "A">
+
+<!ENTITY webDeveloperMenu.label       "Webfejlesztő">
+<!ENTITY webDeveloperMenu.accesskey   "W">
+
+<!ENTITY errorConsoleCmd.label        "Hibakonzol">
+<!ENTITY errorConsoleCmd.accesskey    "H">
+<!ENTITY errorConsoleCmd.commandkey   "j">
+
+<!ENTITY webConsoleCmd.label          "Webkonzol">
+<!ENTITY webConsoleCmd.accesskey      "W">
+<!ENTITY webConsoleCmd.commandkey     "k">
+<!ENTITY remoteWebConsoleCmd.label    "Távoli webkonzol">
+
+<!ENTITY inspectMenu.label            "Vizsgálat">
+<!ENTITY inspectMenu.accesskey        "V">
+<!ENTITY inspectMenu.commandkey       "I">
+
+<!ENTITY inspectContextMenu.label     "Elem vizsgálata">
+<!ENTITY inspectContextMenu.accesskey "E">
+
+<!ENTITY responsiveDesignTool.label   "Válaszkész terv nézet">
+<!ENTITY responsiveDesignTool.accesskey "V">
+<!ENTITY responsiveDesignTool.commandkey "M">
+
+<!-- LOCALIZATION NOTE (scratchpad.label): This menu item label appears
+  -  in the Tools menu. See bug 653093.
+  -  The Scratchpad is intended to provide a simple text editor for creating
+  -  and evaluating bits of JavaScript code for the purposes of function
+  -  prototyping, experimentation and convenient scripting.
+  -
+  -  It's quite possible that you won't have a good analogue for the word
+  -  "Scratchpad" in your locale. You should feel free to find a close
+  -  approximation to it or choose a word (or words) that means
+  -  "simple discardable text editor". -->
+<!ENTITY scratchpad.label             "Scratchpad">
+<!ENTITY scratchpad.accesskey         "s">
+<!ENTITY scratchpad.keycode           "VK_F4">
+<!ENTITY scratchpad.keytext           "F4">
+
+<!ENTITY inspectCloseButton.tooltiptext "Vizsgáló bezárása">
+<!ENTITY inspectSidebarCloseButton.tooltiptext "Oldalsáv bezárása">
+
+<!ENTITY devToolbarCloseButton.tooltiptext "Fejlesztői eszköztár bezárása">
+<!ENTITY devToolbarMenu.label              "Fejlesztői eszköztár">
+<!ENTITY devToolbarMenu.accesskey          "F">
+<!ENTITY devToolbar.keycode                "VK_F2">
+<!ENTITY devToolbar.keytext                "F2">
+<!ENTITY devToolbarOtherToolsButton.label  "További eszközök">
+
+<!ENTITY inspectorHTMLCopyInner.label       "Inner HTML másolása">
+<!ENTITY inspectorHTMLCopyInner.accesskey   "I">
+
+<!ENTITY inspectorHTMLCopyOuter.label       "Outer HTML másolása">
+<!ENTITY inspectorHTMLCopyOuter.accesskey   "O">
+
+<!ENTITY inspectorHTMLDelete.label          "Csomópont törlése">
+<!ENTITY inspectorHTMLDelete.accesskey      "C">
+
+<!-- LOCALIZATION NOTE (inspect3DViewButton.label): This button shows an
+  -  alternate view for the Inspector, creating a 3D visualization of the
+  -  webpage. -->
+<!ENTITY inspect3DViewButton.label     "3D-nézet">
+<!ENTITY inspect3DViewButton.accesskey "n">
+
+<!ENTITY inspectStyleButton.label     "Stílus">
+<!ENTITY inspectStyleButton.accesskey "t">
+
+<!-- LOCALIZATION NOTE (styleeditor.label): This menu item label appears
+  -  in the Tools menu. -->
+<!ENTITY styleeditor.label            "Stílusszerkesztő">
+<!ENTITY styleeditor.accesskey        "S">
+<!ENTITY styleeditor.keycode          "VK_F7">
+<!ENTITY styleeditor.keytext          "F7">
+
+<!ENTITY getMoreDevtoolsCmd.label        "További eszközök letöltése">
+<!ENTITY getMoreDevtoolsCmd.accesskey    "T">
+
+<!ENTITY fileMenu.label         "Fájl"> 
+<!ENTITY fileMenu.accesskey       "F">
+<!ENTITY newNavigatorCmd.label        "Új ablak">
+<!ENTITY newNavigatorCmd.key        "N">
+<!ENTITY newNavigatorCmd.accesskey      "a">
+<!ENTITY newPrivateWindow.label     "Új privát ablak">
+<!ENTITY newPrivateWindow.accesskey "v">
+
+<!ENTITY editMenu.label         "Szerkesztés"> 
+<!ENTITY editMenu.accesskey       "z"> 
+<!ENTITY undoCmd.label            "Visszavonás">  
+<!ENTITY undoCmd.key            "Z">  
+<!ENTITY undoCmd.accesskey          "V"> 
+<!ENTITY redoCmd.label            "Újra">  
+<!ENTITY redoCmd.key            "Y">  
+<!ENTITY redoCmd.accesskey          "R"> 
+<!ENTITY cutCmd.label           "Kivágás">  
+<!ENTITY cutCmd.key             "X">  
+<!ENTITY cutCmd.accesskey         "K"> 
+<!ENTITY copyCmd.label            "Másolás">  
+<!ENTITY copyCmd.key            "C">  
+<!ENTITY copyCmd.accesskey          "M"> 
+<!ENTITY pasteCmd.label           "Beillesztés">  
+<!ENTITY pasteCmd.key           "V">  
+<!ENTITY pasteCmd.accesskey         "B"> 
+<!ENTITY deleteCmd.label          "Törlés">  
+<!ENTITY deleteCmd.key            "D">  
+<!ENTITY deleteCmd.accesskey        "s"> 
+<!ENTITY selectAllCmd.label         "Minden kijelölése">  
+<!ENTITY selectAllCmd.key         "A">  
+<!ENTITY selectAllCmd.accesskey       "i"> 
+<!ENTITY preferencesCmd2.label       "Beállítások">
+<!ENTITY preferencesCmd2.accesskey     "B">
+<!ENTITY preferencesCmdUnix.label       "Beállítások">
+<!ENTITY preferencesCmdUnix.accesskey     "B"> 
+
+<!ENTITY clearRecentHistory.label               "Előzmények törlése…">
+<!ENTITY clearRecentHistory.accesskey           "E">
+
+<!-- LOCALIZATION NOTE : These two strings can share an access key because they never appear together on the menu -->
+<!ENTITY privateBrowsingCmd.start.label         "Privát böngészés indítása">
+<!ENTITY privateBrowsingCmd.start.accesskey     "P">
+<!ENTITY privateBrowsingCmd.stop.label          "Privát böngészés leállítása">
+<!ENTITY privateBrowsingCmd.stop.accesskey      "P">
+<!ENTITY privateBrowsingCmd.commandkey          "P">
+
+<!ENTITY viewMenu.label         "Nézet"> 
+<!ENTITY viewMenu.accesskey       "N"> 
+<!ENTITY viewTabGroups.label            "Lapcsoportok">
+<!ENTITY viewTabGroups.accesskey        "L">
+<!ENTITY viewToolbarsMenu.label       "Eszköztárak"> 
+<!ENTITY viewToolbarsMenu.accesskey     "E"> 
+<!ENTITY viewSidebarMenu.label "Oldalsáv">
+<!ENTITY viewSidebarMenu.accesskey "O">
+<!ENTITY viewCustomizeToolbar.label       "Testreszabás…"> 
+<!ENTITY viewCustomizeToolbar.accesskey     "T">
+<!ENTITY viewTabsOnTop.label            "Felül elhelyezett fülek">
+<!ENTITY viewTabsOnTop.accesskey        "F">
+
+<!ENTITY historyMenu.label "Előzmények">
+<!ENTITY historyMenu.accesskey "m">
+<!ENTITY historyUndoMenu.label "Nemrég bezárt lapok">
+<!-- LOCALIZATION NOTE (historyUndoWindowMenu): see bug 394759 -->
+<!ENTITY historyUndoWindowMenu.label "Nemrég bezárt ablakok">
+<!ENTITY historyRestoreLastSession.label "Előző munkamenet helyreállítása">
+
+<!ENTITY historyHomeCmd.label "Kezdőlap">
+<!ENTITY showAllHistoryCmd2.label "Minden előzmény megjelenítése">
+<!ENTITY showAllHistoryCmd.commandkey "H">
+
+<!ENTITY appMenuEdit.label "Szerkesztés">
+<!ENTITY appMenuCustomize.label "Testreszabás">
+<!ENTITY appMenuToolbarLayout.label "Eszköztár elrendezése…">
+<!ENTITY appMenuSidebars.label "Oldalsávok">
+<!ENTITY appMenuFind.label "Keresés…">
+<!ENTITY appMenuUnsorted.label "Nem rendezett könyvjelzők">
+<!ENTITY appMenuWebDeveloper.label "Webfejlesztő">
+<!ENTITY appMenuGettingStarted.label "Kezdő lépések">
+<!ENTITY appMenuSafeMode.label "Újraindítás letiltott kiegészítőkkel…">
+<!ENTITY appMenuSafeMode.accesskey "R">
+
+<!ENTITY openCmd.commandkey           "l">
+<!ENTITY urlbar.placeholder           "Ugrás egy webhelyre">
+<!ENTITY urlbar.accesskey             "d">
+<!ENTITY urlbar.switchToTab.label     "Váltás erre a lapra:">
+
+<!-- 
+  Comment duplicated from browser-sets.inc:
+
+  Search Command Key Logic works like this:
+
+  Unix: Ctrl+J (0.8, 0.9 support)
+        Ctrl+K (cross platform binding)
+  Mac:  Cmd+K (cross platform binding)
+        Cmd+Opt+F (platform convention)
+  Win:  Ctrl+K (cross platform binding)
+        Ctrl+E (IE compat)
+
+  We support Ctrl+K on all platforms now and advertise it in the menu since it is
+  our standard - it is a "safe" choice since it is near no harmful keys like "W" as
+  "E" is. People mourning the loss of Ctrl+K for emacs compat can switch their GTK
+  system setting to use emacs emulation, and we should respect it. Focus-Search-Box
+  is a fundamental keybinding and we are maintaining a XP binding so that it is easy
+  for people to switch to Linux.
+
+ -->
+<!ENTITY searchFocus.commandkey       "k">
+<!ENTITY searchFocus.commandkey2      "e">
+<!ENTITY searchFocusUnix.commandkey   "j">
+
+<!ENTITY tabView.commandkey           "e">
+
+<!ENTITY openLinkCmdInTab.label       "Megnyitás új lapon">
+<!ENTITY openLinkCmdInTab.accesskey   "l">
+<!ENTITY openLinkCmd.label            "Megnyitás új ablakban">
+<!ENTITY openLinkCmd.accesskey        "a">
+<!ENTITY openLinkCmdInCurrent.label     "Hivatkozás megnyitása">
+<!ENTITY openLinkCmdInCurrent.accesskey "H">
+<!ENTITY openFrameCmdInTab.label      "Keret megnyitása új lapon">
+<!ENTITY openFrameCmdInTab.accesskey  "l">
+<!ENTITY openFrameCmd.label           "Keret megnyitása új ablakban">
+<!ENTITY openFrameCmd.accesskey       "a">
+<!ENTITY showOnlyThisFrameCmd.label     "Csak az aktuális keret megjelenítése">
+<!ENTITY showOnlyThisFrameCmd.accesskey "C">
+<!ENTITY reloadCmd.commandkey         "r">
+<!ENTITY reloadFrameCmd.label         "Keret frissítése">
+<!ENTITY reloadFrameCmd.accesskey     "r">
+<!ENTITY viewPartialSourceForSelectionCmd.label "Kijelölés forrásának megtekintése">
+<!ENTITY viewPartialSourceForMathMLCmd.label    "MathML forrás megtekintése">
+<!-- LOCALIZATION NOTE (viewPartialSourceCmd.accesskey): This accesskey is used for both 
+         viewPartialSourceForSelectionCmd.label and viewPartialSourceForMathMLCmd.label -->
+<!ENTITY viewPartialSourceCmd.accesskey "f">
+<!ENTITY viewPageSourceCmd.label      "Oldal forrása">
+<!ENTITY viewPageSourceCmd.accesskey  "f">
+<!ENTITY viewFrameSourceCmd.label     "Keret forrása">
+<!ENTITY viewFrameSourceCmd.accesskey "f">
+<!ENTITY viewPageInfoCmd.label        "Oldal adatainak megjelenítése">
+<!ENTITY viewPageInfoCmd.accesskey    "d">
+<!ENTITY viewFrameInfoCmd.label       "Keret adatainak megjelenítése">
+<!ENTITY viewFrameInfoCmd.accesskey   "d">
+<!ENTITY reloadImageCmd.label         "Kép újrabetöltése">
+<!ENTITY reloadImageCmd.accesskey     "r">
+<!ENTITY viewImageCmd.label           "Kép megjelenítése">
+<!ENTITY viewImageCmd.accesskey       "s">
+<!ENTITY viewImageInfoCmd.label       "Képadatok megjelenítése">
+<!ENTITY viewImageInfoCmd.accesskey   "d">
+<!ENTITY viewVideoCmd.label           "Videó megtekintése">
+<!ENTITY viewVideoCmd.accesskey       "V">
+<!ENTITY viewBGImageCmd.label         "Háttérkép megjelenítése">
+<!ENTITY viewBGImageCmd.accesskey     "s">
+<!ENTITY setDesktopBackgroundCmd.label      "Beállítás háttérképként…">
+<!ENTITY setDesktopBackgroundCmd.accesskey  "B">
+<!ENTITY bookmarkPageCmd2.label       "Oldal hozzáadása a könyvjelzőkhöz">
+<!ENTITY bookmarkPageCmd2.accesskey   "o">
+<!ENTITY bookmarkThisLinkCmd.label      "Hivatkozás felvétele a könyvjelzők közé">
+<!ENTITY bookmarkThisLinkCmd.accesskey  "f">
+<!ENTITY bookmarkThisFrameCmd.label      "Keret hozzáadása a könyvjelzőkhöz">
+<!ENTITY bookmarkThisFrameCmd.accesskey  "h">
+<!ENTITY emailPageCmd.label           "Hivatkozás küldése e-mailben…">
+<!ENTITY emailPageCmd.accesskey       "d">
+<!ENTITY savePageCmd.label            "Oldal mentése…">
+<!ENTITY savePageCmd.accesskey        "m">
+<!-- alternate for content area context menu -->
+<!ENTITY savePageCmd.accesskey2       "m">
+<!ENTITY savePageCmd.commandkey       "s">
+<!ENTITY saveFrameCmd.label           "Keret mentése más néven…">
+<!ENTITY saveFrameCmd.accesskey       "K">
+<!ENTITY printFrameCmd.label          "Keret nyomtatása…">
+<!ENTITY printFrameCmd.accesskey      "n">
+<!ENTITY saveLinkCmd.label            "Hivatkozás mentése más néven…">
+<!ENTITY saveLinkCmd.accesskey        "n">
+<!ENTITY saveImageCmd.label           "Kép mentése más néven…">
+<!ENTITY saveImageCmd.accesskey       "m">
+<!ENTITY saveVideoCmd.label           "Videó mentése más néven…">
+<!ENTITY saveVideoCmd.accesskey       "v">
+<!ENTITY saveAudioCmd.label           "Hang mentése más néven…">
+<!ENTITY saveAudioCmd.accesskey       "H">
+<!ENTITY emailImageCmd.label          "Kép küldése e-mailben…">
+<!ENTITY emailImageCmd.accesskey      "p">
+<!ENTITY emailVideoCmd.label          "Videó küldése e-mailben…">
+<!ENTITY emailVideoCmd.accesskey      "i">
+<!ENTITY emailAudioCmd.label          "Hang küldése e-mailben…">
+<!ENTITY emailAudioCmd.accesskey      "a">
+<!ENTITY copyLinkCmd.label            "Hivatkozás címének másolása">
+<!ENTITY copyLinkCmd.accesskey        "v">
+<!ENTITY copyImageCmd.label           "Kép címének másolása">
+<!ENTITY copyImageCmd.accesskey       "c">
+<!ENTITY copyImageContentsCmd.label   "Kép másolása">
+<!ENTITY copyImageContentsCmd.accesskey  "o"> 
+<!ENTITY copyVideoURLCmd.label        "Videó címének másolása">
+<!ENTITY copyVideoURLCmd.accesskey    "d">
+<!ENTITY copyAudioURLCmd.label        "Hang címének másolása">
+<!ENTITY copyAudioURLCmd.accesskey    "s">
+<!ENTITY copyEmailCmd.label           "E-mail cím másolása">
+<!ENTITY copyEmailCmd.accesskey       "m">
+<!ENTITY thisFrameMenu.label              "Ez a keret">
+<!ENTITY thisFrameMenu.accesskey          "z">
+
+<!-- Media (video/audio) controls -->
+<!-- LOCALIZATION NOTE: The access keys for "Play" and
+"Pause" are the same because the two context-menu
+items are mutually exclusive. -->
+<!ENTITY mediaPlay.label             "Lejátszás">
+<!ENTITY mediaPlay.accesskey         "L">
+<!ENTITY mediaPause.label            "Szünet">
+<!ENTITY mediaPause.accesskey        "S">
+<!-- LOCALIZATION NOTE: The access keys for "Mute" and
+"Unmute" are the same because the two context-menu
+items are mutually exclusive. -->
+<!ENTITY mediaMute.label             "Némítás">
+<!ENTITY mediaMute.accesskey         "N">
+<!ENTITY mediaUnmute.label           "Hang be">
+<!ENTITY mediaUnmute.accesskey       "H">
+<!-- LOCALIZATION NOTE: The access keys for "Show Controls" and
+"Hide Controls" are the same because the two context-menu
+items are mutually exclusive. -->
+<!ENTITY mediaShowControls.label     "Vezérlők megjelenítése">
+<!ENTITY mediaShowControls.accesskey "V">
+<!ENTITY mediaHideControls.label     "Vezérlők elrejtése">
+<!ENTITY mediaHideControls.accesskey "V">
+<!ENTITY videoFullScreen.label       "Teljes képernyős üzemmód">
+<!ENTITY videoFullScreen.accesskey   "T">
+<!ENTITY videoSaveImage.label        "Pillanatkép mentése más néven…">
+<!ENTITY videoSaveImage.accesskey    "P">
+<!-- LOCALIZATION NOTE: The access keys for "Show Statistics" and
+"Hide Statistics" are the same because the two context-menu
+items are mutually exclusive. -->
+<!ENTITY videoShowStats.label        "Statisztika megjelenítése">
+<!ENTITY videoShowStats.accesskey    "S">
+<!ENTITY videoHideStats.label        "Statisztika elrejtése">
+<!ENTITY videoHideStats.accesskey    "t">
+
+<!-- LOCALIZATION NOTE :
+fullZoomEnlargeCmd.commandkey3, fullZoomReduceCmd.commandkey2 and
+fullZoomResetCmd.commandkey2 are alternative acceleration keys for zoom.
+If shift key is needed with your locale popular keyboard for them,
+you can use these alternative items. Otherwise, their values should be empty.  -->
+
+<!ENTITY fullZoomEnlargeCmd.label       "Nagyítás">
+<!ENTITY fullZoomEnlargeCmd.accesskey   "n">
+<!ENTITY fullZoomEnlargeCmd.commandkey  "+">
+<!ENTITY fullZoomEnlargeCmd.commandkey2 "="> <!-- + is above this key on many keyboards -->
+<!ENTITY fullZoomEnlargeCmd.commandkey3 "">
+
+<!ENTITY fullZoomReduceCmd.label        "Kicsinyítés">
+<!ENTITY fullZoomReduceCmd.accesskey    "K">
+<!ENTITY fullZoomReduceCmd.commandkey   "-">
+<!ENTITY fullZoomReduceCmd.commandkey2  "">
+
+<!ENTITY fullZoomResetCmd.label         "Visszaállítás">
+<!ENTITY fullZoomResetCmd.accesskey     "V">
+<!ENTITY fullZoomResetCmd.commandkey    "0">
+<!ENTITY fullZoomResetCmd.commandkey2   "">
+
+<!ENTITY fullZoomToggleCmd.label        "Csak a szöveg nagyítása">
+<!ENTITY fullZoomToggleCmd.accesskey    "C">
+<!ENTITY fullZoom.label                 "Nagyítás">
+<!ENTITY fullZoom.accesskey             "N">
+
+<!ENTITY newTabButton.tooltip           "Új lap megnyitása">
+<!ENTITY newWindowButton.tooltip        "Új ablak megnyitása">
+<!ENTITY sidebarCloseButton.tooltip     "Oldalsáv bezárása">
+
+<!ENTITY cutButton.tooltip              "Kivágás">
+<!ENTITY copyButton.tooltip             "Másolás">
+<!ENTITY pasteButton.tooltip            "Beillesztés">
+
+<!ENTITY fullScreenButton.tooltip       "Ablak megjelenítése teljes képernyős üzemmódban">
+
+<!ENTITY zoomOutButton.tooltip          "Kicsinyítés">
+<!ENTITY zoomInButton.tooltip           "Nagyítás">
+<!ENTITY zoomControls.label             "Nagyítás">
+
+<!ENTITY quitApplicationCmdWin.label       "Kilépés"> 
+<!ENTITY quitApplicationCmdWin.accesskey   "K">
+<!ENTITY goBackCmd.commandKey "[">
+<!ENTITY goForwardCmd.commandKey "]">
+<!ENTITY quitApplicationCmd.label       "Kilépés"> 
+<!ENTITY quitApplicationCmd.accesskey   "K">
+<!ENTITY quitApplicationCmdMac.label    "Kilépés a &brandShortName;ból">
+<!ENTITY quitApplicationCmdMac.key      "Q">
+
+<!ENTITY closeCmd.label                 "Bezárás">  
+<!ENTITY closeCmd.key                   "W">  
+<!ENTITY closeCmd.accesskey             "B">
+
+<!ENTITY pageStyleMenu.label "Oldalstílus">
+<!ENTITY pageStyleMenu.accesskey "s">
+<!ENTITY pageStyleNoStyle.label "Nincs stílus">
+<!ENTITY pageStyleNoStyle.accesskey "n">
+<!ENTITY pageStylePersistentOnly.label "Alap oldalstílus">
+<!ENTITY pageStylePersistentOnly.accesskey "A">
+
+<!ENTITY pageReportIcon.tooltip            "Felugró ablakok tiltási beállításainak módosítása ennél a webhelynél">
+
+<!ENTITY allowPopups.accesskey "f">
+<!-- On Windows we use the term "Options" to describe settings, but
+     on Linux and Mac OS X we use "Preferences" - carry that distinction
+     over into this string, which is used in the "popup blocked" info bar . -->
+<!ENTITY editPopupSettingsUnix.label "Felugró ablakok tiltásának beállításai…">
+<!ENTITY editPopupSettings.label "Felugró ablakok tiltásának beállításai…">
+<!ENTITY editPopupSettings.accesskey "F">
+<!ENTITY dontShowMessage.accesskey "N">
+
+<!ENTITY bidiSwitchPageDirectionItem.label        "Oldal irányának átváltása">
+<!ENTITY bidiSwitchPageDirectionItem.accesskey    "l">
+<!ENTITY bidiSwitchTextDirectionItem.label        "Szöveg irányának átváltása">
+<!ENTITY bidiSwitchTextDirectionItem.accesskey    "z">
+<!ENTITY bidiSwitchTextDirectionItem.commandkey   "X">
+
+<!ENTITY findOnCmd.label     "Keresés ezen az oldalon…">
+<!ENTITY findOnCmd.accesskey "e">
+<!ENTITY findOnCmd.commandkey "f">
+<!ENTITY findAgainCmd.label  "Következő keresése">
+<!ENTITY findAgainCmd.accesskey "z">
+<!ENTITY findAgainCmd.commandkey "g">
+<!ENTITY findAgainCmd.commandkey2 "VK_F3">
+
+<!ENTITY spellAddDictionaries.label "Szótárak hozzáadása…">
+<!ENTITY spellAddDictionaries.accesskey "S">
+
+<!ENTITY editBookmark.done.label                     "Kész">
+<!ENTITY editBookmark.cancel.label                   "Mégse">
+<!ENTITY editBookmark.removeBookmark.accessKey       "e">
+
+<!ENTITY identity.unverifiedsite2 "Ez a webhely nem szolgáltat magáról azonosító információkat.">
+<!ENTITY identity.connectedTo "A következőhöz csatlakozott:">
+<!-- Localization note (identity.runBy) : This string appears between a
+domain name (above) and an organization name (below). E.g.
+
+example.com
+which is run by
+Example Enterprises, Inc.
+
+The layout of the identity dialog prevents combining this into a single string with
+substitution variables.  If it is difficult to translate the sense of the string
+with that structure, consider a translation which ignores the preceding domain and
+just addresses the organization to follow, e.g. "This site is run by " -->
+<!ENTITY identity.runBy "Működtetője:">
+
+<!ENTITY identity.moreInfoLinkText "További információ…">
+
+<!ENTITY downloadMonitor2.tooltip "Kattintson a letöltési ablak megnyitásához">
+
+<!ENTITY allTabs.filter.emptyText "Keresés a lapokon">
+<!-- Name for the tabs toolbar as spoken by screen readers.
+     The word "toolbar" is appended automatically and should not be contained below! -->
+<!ENTITY tabsToolbar.label "Böngészőlapok">
+
+<!-- LOCALIZATION NOTE (syncTabsMenu2.label): This appears in the history menu -->
+<!ENTITY syncTabsMenu2.label     "Lapok más eszközökről">
+
+<!ENTITY syncBrand.shortName.label    "Sync">
+
+<!ENTITY syncSetup.label              "A &syncBrand.shortName.label; beállítása…">
+<!ENTITY syncSetup.accesskey          "Y">
+<!ENTITY syncSyncNowItem.label        "Szinkronizálás">
+<!ENTITY syncSyncNowItem.accesskey    "S">
+<!ENTITY syncToolbarButton.label      "Sync">
+
+<!ENTITY addonBarCloseButton.tooltip  "Kiegészítősáv bezárása">
+<!ENTITY toggleAddonBarCmd.key        "/">
+
+<!-- LOCALIZATION NOTE (markupButton.arialabel): The markup button is the button
+located in front of the breadcrumbs display in the inspector toolbar. The button
+doesn't display any label, but exposes a label to screen-readers with "aria-label".
+-->
+<!ENTITY markupButton.arialabel          "Jelölőnyelv">
+<!-- LOCALIZATION NOTE (markupButton.accesskey): The key bound to the Markup panel's
+toolbar button -->
+<!ENTITY markupButton.accesskey          "J">
+
+<!ENTITY socialToolbar.title        "Közösségi eszköztár gomb">
+<!ENTITY social.notLoggedIn.label   "Nincs bejelentkezve">
+
+<!ENTITY social.ok.label       "OK">
+<!ENTITY social.ok.accesskey   "O">
+
+<!ENTITY social.toggleSidebar.label "Oldalsáv megjelenítése">
+<!ENTITY social.toggleSidebar.accesskey "s">
+
+<!ENTITY social.toggleNotifications.label "Asztali értesítések megjelenítése">
+<!ENTITY social.toggleNotifications.accesskey "A">
+
+<!ENTITY social.activated.undobutton.label "Visszavonás">
+<!ENTITY social.activated.undobutton.accesskey "V">
+
+<!ENTITY social.chatBar.commandkey "c">
+
+
+<!ENTITY browserConsoleCmd.label      "Browser Console">
+
+<!ENTITY devToolbarToolsButton.tooltip     "Toggle developer tools">
+<!ENTITY devToolboxMenuItem.accesskey      "T">
+<!ENTITY devToolboxMenuItem.label          "Toggle Tools">
+<!ENTITY devtoolsConnect.accesskey    "e">
+
+<!ENTITY devtoolsConnect.label        "Connect…">
+<!ENTITY getUserMedia.selectCamera.accesskey "C">
+
+<!ENTITY getUserMedia.selectCamera.label "Camera to share:">
+<!ENTITY getUserMedia.selectMicrophone.accesskey "M">
+<!ENTITY getUserMedia.selectMicrophone.label "Microphone to share:">
+<!ENTITY hidePluginCmd.accesskey      "H">
+<!ENTITY hidePluginCmd.label          "Hide this plugin">
+<!ENTITY mediaPlaybackRate.accesskey "l">
+<!ENTITY mediaPlaybackRate.label     "Play Speed">
+<!ENTITY mediaPlaybackRate050x.accesskey "S">
+<!ENTITY mediaPlaybackRate050x.label "Slow Motion (0.5×)">
+<!ENTITY mediaPlaybackRate100x.accesskey "N">
+<!ENTITY mediaPlaybackRate100x.label "Normal Speed">
+<!ENTITY mediaPlaybackRate150x.accesskey "H">
+<!ENTITY mediaPlaybackRate150x.label "High Speed (1.5×)">
+<!ENTITY mediaPlaybackRate200x.accesskey "L">
+<!-- LOCALIZATION NOTE: "Ludicrous Speed" is a reference to the
+movie "Space Balls" and is meant to say that this speed is very
+fast. -->
+<!ENTITY mediaPlaybackRate200x.label "Ludicrous Speed (2×)">
+
+<!ENTITY mixedContentBlocked.helplink "Learn more">
+<!ENTITY mixedContentBlocked.moreinfo "Most websites will still work properly even when this content is blocked.">
+<!ENTITY openLinkInPrivateWindowCmd.accesskey "P">
+<!ENTITY openLinkInPrivateWindowCmd.label "Open Link in New Private Window">
+<!ENTITY playPluginCmd.accesskey      "c">
+<!ENTITY playPluginCmd.label          "Activate this plugin">
+
+<!ENTITY pointerLock.notification.message "Press ESC at any time to show it again.">
+
+<!ENTITY social.activated.description "Services from <label/> have been enabled. You can change your settings for services in the <label class='text-link'>Add-on Manager</label>.">
+
+<!ENTITY social.addons.label "Manage Services…">
+<!ENTITY social.chatBar.accesskey "c">
+<!ENTITY social.chatBar.label "Focus chats">
+<!ENTITY social.closeNotificationItem.label "Not Now">
+<!ENTITY social.learnMore.accesskey "l">
+<!ENTITY social.learnMore.label "Learn more...">
+<!ENTITY urlbar.placeholder2          "Search or enter address">
+
+<!ENTITY webrtcIndicatorButton.label "Camera / Microphone Access">
+<!ENTITY webrtcIndicatorButton.tooltip "Display sites you are currently sharing your camera or microphone with">

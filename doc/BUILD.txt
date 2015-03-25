@@ -1,0 +1,39 @@
+How to build BlueGriffon
+------------------------
+
+- Install all tools needed to build BlueGriffon. Read http://developer.mozilla.org/en/Build_Documentation
+
+- Get the sources of XulRunner (Mozilla trunk)
+
+  - download : http://developer.mozilla.org/en/Mozilla_Source_Code_(HTTP%2f%2fFTP)
+  - or with Mercurial : http://developer.mozilla.org/en/Mozilla_Source_Code_(Mercurial)
+
+  You should have a src/ directory which contains all files.
+
+
+- Get sources of BlueGriffon, and install it into a bluegriffon/ directory inside the src/ directory of mozilla
+
+   cd src/
+   svn checkout http://sources.disruptive-innovations.com/bluegriffon/trunk  bluegriffon
+
+- copy one of the bluegriffon/config/mozconfig.* file to the src/ directory, and rename it to .mozconfig
+
+  example, on Linux : cp bluegriffon/config/mozconfig.linux .mozconfig
+
+- edit the .mozconfig file: you may have to change some options, according to your configuration
+  See http://developer.mozilla.org/en/Configuring_Build_Options
+
+- In the src/ directory, run
+    make -f client.mk build
+
+- if you didn't touch MOZ_OBJDIR content in the .mozconfig file,
+  then you should have a binaries-opt directory. Go into it or go into the directory
+  you indicates into MOZ_OBJDIR variable.
+
+cd binaries-opt
+
+- then go into the dist/bin/ directory and launch 
+
+cd dist/bin/
+./bluegriffon
+

@@ -1,0 +1,511 @@
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1/GPL 2.0/LGPL 2.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is BlueGriffon.
+   -
+   - The Initial Developer of the Original Code is
+   - Disruptive Innovations SARL.
+   - Portions created by the Initial Developer are Copyright (C) 2006
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -   Daniel Glazman (daniel.glazman@disruptive-innovations.com), Original Author
+   -
+   - Alternatively, the contents of this file may be used under the terms of
+   - either the GNU General Public License Version 2 or later (the "GPL"), or
+   - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+   - in which case the provisions of the GPL or the LGPL are applicable instead
+   - of those above. If you wish to allow use of your version of this file only
+   - under the terms of either the GPL or the LGPL, and not to allow others to
+   - use your version of this file under the terms of the MPL, indicate your
+   - decision by deleting the provisions above and replace them with the notice
+   - and other provisions required by the LGPL or the GPL. If you do not delete
+   - the provisions above, a recipient may use your version of this file under
+   - the terms of any one of the MPL, the GPL or the LGPL.
+   -
+   - ***** END LICENSE BLOCK ***** -->
+
+<!ENTITY window.title           "BlueGriffon">
+
+<!ENTITY fileMenu.label         "ファイル">
+<!ENTITY fileMenu.accesskey     "f">
+<!ENTITY newMenu.label                    "新規作成">
+<!ENTITY newMenu.accesskey                "n">
+
+<!ENTITY newWizardMenu.label              "新規作成ウィザード">
+
+<!ENTITY editMenu.label                   "編集">
+<!ENTITY editMenu.accesskey               "e">
+
+<!ENTITY viewMenu.label                   "表示">
+<!ENTITY viewMenu.accesskey               "v">
+<!ENTITY customizeToolbar.label           "ユーザー設定">
+<!ENTITY customizeToolbar.accesskey       "c">
+
+<!ENTITY insertMenu.label                 "挿入">
+<!ENTITY insertMenu.accesskey             "i">
+
+<!ENTITY formatMenu.label                 "書式">
+<!ENTITY formatMenu.accesskey             "o">
+<!ENTITY spanCmd.label "Span">
+<!ENTITY spanCmd.accesskey "n">
+<!-- Font Style SubMenu -->
+<!ENTITY fontStyleMenu.label "文字スタイル">
+<!ENTITY formatstylemenu.accesskey "s">
+<!ENTITY styleBoldCmd.label "太字">
+<!ENTITY stylebold.accesskey "b">
+<!ENTITY stylebold.keybinding "b">
+<!ENTITY styleItalicCmd.label "斜体">
+<!ENTITY styleitalic.accesskey "I">
+<!ENTITY styleitalic.keybinding "i">
+<!ENTITY styleUnderlineCmd.label "下線">
+<!ENTITY styleunderline.accesskey "u">
+<!ENTITY styleUnderline.key "u">
+<!ENTITY styleStrikeThruCmd.label "取り消し線">
+<!ENTITY stylestrikethru.accesskey "k">
+<!ENTITY styleSuperscriptCmd.label "上付き">
+<!ENTITY stylesuperscript.accesskey "p">
+<!ENTITY styleSubscriptCmd.label "下付き">
+<!ENTITY stylesubscript.accesskey "S">
+<!ENTITY styleNonbreakingCmd.label "分割不可">
+<!ENTITY stylenonbreaking.accesskey "N">
+<!ENTITY styleEm.label "強調">
+<!ENTITY styleEm.accesskey "e">
+<!ENTITY styleEm.key "i">
+<!ENTITY styleStrong.label "強調太字">
+<!ENTITY styleStrong.accesskey "t">
+<!ENTITY styleStrong.key "b">
+<!ENTITY styleCite.label "引用">
+<!ENTITY styleCite.accesskey "c">
+<!ENTITY styleAbbr.label "略語">
+<!ENTITY styleAbbr.accesskey "A">
+<!ENTITY styleAcronym.label "頭字語">
+<!ENTITY styleAcronym.accesskey "r">
+<!ENTITY styleCode.label "コード">
+<!ENTITY styleCode.accesskey "o">
+<!ENTITY styleCode.key "c">
+<!ENTITY styleSamp.label "プレビュー">
+<!ENTITY styleSamp.accesskey "m">
+<!ENTITY styleVar.label "プロポーショナル">
+<!ENTITY styleVar.accesskey "v">
+<!ENTITY fontFixedWidth.label "固定幅">
+<!ENTITY fontfixedwidth.accesskey "x">
+
+<!ENTITY tableMenu.label                  "表">
+<!ENTITY tableMenu.accesskey              "b">
+
+<!ENTITY toolsMenu.label                  "ツール">
+<!ENTITY toolsMenu.accesskey              "t">
+<!ENTITY consoleMenu.label                "JavaScript コンソール">
+
+<!ENTITY panelsMenu.label                 "パネル">
+<!ENTITY panelsMenu.accesskey             "p">
+
+<!ENTITY alignPanels.label                "すべてのパネルを揃える">
+
+<!ENTITY helpMenu.label                   "ヘルプ">
+<!ENTITY helpMenu.accesskey               "h">
+<!ENTITY aboutComposer.label              "BlueGriffon について">
+
+<!ENTITY throbber.tooltip                 "BlueGriffon">
+
+<!ENTITY newMenu.label                    "新規作成">
+<!ENTITY newToolbarCmd.tooltip            "新しいページを作成する">
+<!ENTITY pageInNewTab.label                     "新しいタブでページを作成する">
+<!ENTITY pageInNewWindow.label                  "新しいウィンドウでページを作成する">
+<!ENTITY newOtherCmd.label                "新しいページのオプション...">
+
+<!ENTITY openMenu.label                   "開く">
+<!ENTITY openMenu.tooltip                 "既存のページを開く">
+<!ENTITY openTab.label                    "新しいタブで既存のページを開く">
+<!ENTITY openWindow.label                 "新しいウィンドウで既存のページを開く">
+<!ENTITY openPage.label                   "開く">
+<!ENTITY openPage.accesskey               "o">
+<!ENTITY openFileCmd.label                "ファイルを開く">
+
+<!ENTITY quit.label                       "終了">
+<!ENTITY quit.accesskey                   "q">
+
+<!ENTITY stopButton.label                 "停止">
+<!ENTITY stopButton.tooltip               "ページのロードを停止する">
+
+<!ENTITY boldToolbarCmd.tooltip           "太字">
+<!ENTITY boldToolbarCmd.label             "太字">
+<!ENTITY italicToolbarCmd.tooltip         "斜体">
+<!ENTITY italicToolbarCmd.label           "斜体">
+<!ENTITY underlineToolbarCmd.tooltip      "下線">
+<!ENTITY underlineToolbarCmd.label        "下線">
+<!ENTITY strongToolbarCmd.tooltip         "強調太字">
+<!ENTITY strongToolbarCmd.label           "強調太字">
+<!ENTITY emToolbarCmd.tooltip             "強調">
+<!ENTITY emToolbarCmd.label               "強調">
+<!ENTITY codeToolbarCmd.label             "コード">
+<!ENTITY codeToolbarCmd.tooltip           "コード">
+<!-- RTL -->                           
+<!ENTITY writingDirectionMenu.label          "書字方向">
+<!ENTITY writingdirectionmenu.accesskey      "w">
+<!ENTITY defaultDirectionMenu.label          "指定なし">
+<!ENTITY defaultdirectionmenu.accesskey      "u">
+<!ENTITY ltrDirectionMenu.label              "左から右">
+<!ENTITY ltrdirectionmenu.accesskey          "l">
+<!ENTITY rtlDirectionMenu.label              "右から左">
+<!ENTITY rtldirectionmenu.accesskey          "r">
+<!ENTITY dirLtr.tooltip                      "左から右">
+<!ENTITY dirRtl.tooltip                      "右から左">
+
+<!ENTITY ParagraphSelect.tooltip "段落書式を選択">
+<!-- Shared in Paragraph, and Toolbar menulist -->
+<!ENTITY bodyTextCmd.label "本文">
+<!ENTITY paragraphParagraphCmd.label "段落">  
+<!ENTITY heading1Cmd.label "見出し 1">
+<!ENTITY heading2Cmd.label "見出し 2">
+<!ENTITY heading3Cmd.label "見出し 3">
+<!ENTITY heading4Cmd.label "見出し 4">
+<!ENTITY heading5Cmd.label "見出し 5">
+<!ENTITY heading6Cmd.label "見出し 6">
+<!ENTITY paragraphAddressCmd.label "住所">
+<!ENTITY paragraphPreformatCmd.label "整形済み">
+<!ENTITY genericContainerCmd.label "汎用コンテナー (div)">
+
+<!ENTITY unorderedList.tooltip "記号付きリスト">
+<!ENTITY orderedList.tooltip "番号付きリスト">
+<!ENTITY unorderedList.label "記号付きリスト">
+<!ENTITY orderedList.label "番号付きリスト">
+
+<!ENTITY alignLeft.tooltip "左揃え">
+<!ENTITY alignCenter.tooltip "中央揃え">
+<!ENTITY alignRight.tooltip "右揃え">
+<!ENTITY alignJustify.tooltip "両端揃え">
+<!ENTITY alignLeft.label "左揃え">
+<!ENTITY alignCenter.label "中央揃え">
+<!ENTITY alignRight.label "右揃え">
+<!ENTITY alignJustify.label "両端揃え">
+
+<!ENTITY indentToolbarCmd.tooltip "インデントを増やす">
+<!ENTITY indentToolbarCmd.label "インデントを増やす">
+
+<!ENTITY outdentToolbarCmd.tooltip "インデントを減らす">
+<!ENTITY outdentToolbarCmd.label "インデントを減らす">
+
+<!ENTITY definitionDescription.tooltip "定義の説明">
+<!ENTITY definitionDescription.label "定義の説明">
+<!ENTITY definitionTitle.tooltip "定義のタイトル">
+<!ENTITY definitionTitle.label "定義のタイトル">
+
+<!ENTITY FontFaceSelect.tooltip "フォントの選択">
+<!ENTITY fontVarWidth.label "プロポーショナル">
+<!ENTITY fontFixedWidth.label "固定幅">
+<!ENTITY fontHelveticaFont.label "Helvetica, Arial">
+<!ENTITY fontTimes.label "Times">
+<!ENTITY fontCourier.label "Courier">
+
+<!ENTITY applyClassToSelectionCmd.tooltip "選択範囲に適用するクラスを選択">
+<!ENTITY noClass.label "(クラスなし)">
+
+<!ENTITY applyIdToSelectionCmd.tooltip "選択範囲に付ける ID を選択">
+<!ENTITY noId.label "(ID なし)">
+
+<!ENTITY tableToolbarCmd.label "表">
+<!ENTITY tableToolbarCmd.key "T">
+<!ENTITY tableToolbarCmd.tooltip "表を挿入、または表の設定を編集">
+
+<!ENTITY imageToolbarCmd.label "画像">
+<!ENTITY imageToolbarCmd.key "I">
+<!ENTITY imageToolbarCmd.tooltip "画像を挿入または編集">
+
+<!ENTITY anchorToolbarCmd.label "アンカー">
+<!ENTITY anchorToolbarCmd.key "A">
+<!ENTITY anchorToolbarCmd.tooltip "アンカーの挿入または編集">
+
+<!ENTITY linkToolbarCmd.label "リンク">
+<!ENTITY linkToolbarCmd.key "L">
+<!ENTITY linkToolbarCmd.tooltip "リンクの挿入または編集">
+
+<!ENTITY hrToolbarCmd.label "水平線">
+<!ENTITY hrToolbarCmd.key "b">
+
+<!ENTITY htmlToolbarCmd.label "HTML">
+<!ENTITY htmlToolbarCmd.key "H">
+
+<!ENTITY formToolbarCmd.label "フォーム">
+<!ENTITY formToolbarCmd.key "F">
+<!ENTITY formToolbarCmd.tooltip "フォームの挿入または編集">
+
+<!ENTITY fieldsetToolbarCmd.label "フィールドセット">
+<!ENTITY fieldsetToolbarCmd.key "d">
+
+<!ENTITY labelToolbarCmd.label "ラベル">
+<!ENTITY labelToolbarCmd.key "L">
+
+<!ENTITY buttonToolbarCmd.label "ボタン">
+<!ENTITY buttonToolbarCmd.key "B">
+
+<!ENTITY selectToolbarCmd.label "選択リスト">
+<!ENTITY selectToolbarCmd.key "S">
+
+<!ENTITY textareaToolbarCmd.label "文字入力">
+<!ENTITY textareaToolbarCmd.key "T">
+
+<!ENTITY keygenToolbarCmd.label "鍵ペア生成">
+<!ENTITY keygenToolbarCmd.key "K">
+
+<!ENTITY outputToolbarCmd.label "出力">
+<!ENTITY outputToolbarCmd.key "O">
+
+<!ENTITY progressToolbarCmd.label "進捗">
+<!ENTITY progressToolbarCmd.key "p">
+
+<!ENTITY meterToolbarCmd.label "メーター">
+<!ENTITY meterToolbarCmd.key "M">
+
+<!ENTITY datalistToolbarCmd.label "データ リスト">
+<!ENTITY datalistToolbarCmd.key "i">
+
+<!ENTITY stylesheetsToolbarCmd.label "スタイルシート">
+<!ENTITY stylesheetsToolbarCmd.key "S">
+
+<!ENTITY webfonts.label "Web フォント">
+
+<!ENTITY videoToolbarCmd.label "ビデオ">
+<!ENTITY videoToolbarCmd.tooltip "ビデオの挿入または編集">
+
+<!ENTITY audioToolbarCmd.label "オーディオ">
+<!ENTITY audioToolbarCmd.tooltip "オーディオの挿入または編集">
+
+<!ENTITY browseToolbarCmd.label "プレビュー">
+<!ENTITY browseToolbarCmd.tooltip "ブラウザーでプレビュー">
+
+<!ENTITY saveCmd.label "保存">
+<!ENTITY saveToolbarCmd.tooltip "ファイルを保存">
+<!ENTITY filesave.key "s">
+<!ENTITY saveAsCmd.label "名前を付けて保存...">
+<!ENTITY filesaveas.key "a">
+
+<!ENTITY undoCmd.label "元に戻す">
+<!ENTITY undoCmd.accesskey "U">
+<!ENTITY redoCmd.label "やり直し">
+<!ENTITY redoCmd.accesskey "R">
+
+<!ENTITY cutCmd.label "切り取り">
+<!ENTITY cutCmd.accesskey "t">
+<!ENTITY copyCmd.label "コピー">
+<!ENTITY copyCmd.accesskey "C">
+<!ENTITY pasteCmd.label "貼り付け">
+<!ENTITY pasteCmd.accesskey "P">
+<!ENTITY pasteNoFormatting.label "書式なし貼り付け">
+<!ENTITY pasteNoFormatting.accesskey "f">
+<!ENTITY deleteCmd.label "削除">
+<!ENTITY deleteCmd.accesskey "D">
+<!ENTITY selectAllCmd.label "すべて選択">
+<!ENTITY selectAllCmd.accesskey "A">
+<!ENTITY copyHTMLCodeCmd.label "選択した HTML をコピー">
+<!ENTITY copyHTMLCodeCmd.accesskey "H">
+<!ENTITY copyHTMLCode.label "この要素の HTML をコピー">
+
+<!ENTITY setZoomFactor.label "表示倍率を設定">
+
+<!ENTITY fileRecentMenu.label "最近使ったファイル">
+<!ENTITY filerecentmenu.accesskey "r">
+
+<!ENTITY markupCleanerCmd.label "HTML マークアップを整理">
+<!ENTITY markupcleaner.accesskey "m">
+
+<!ENTITY viewToolbars.label "ツール バー">
+<!ENTITY viewStatusbar.label "ステータス バー">
+
+<!ENTITY formatToolbar.name "書式 (主)">
+<!ENTITY formatToolbar2.name "書式 (副)">
+
+<!ENTITY wysiwygMode.label "プレビュー">
+<!ENTITY printMode.label "Print Preview">
+<!ENTITY sourceMode.label "ソース">
+
+<!ENTITY closeTabCmd.label "現在のタブを閉じる">
+
+<!ENTITY filesave.key "s">
+<!ENTITY quit.key "q">
+<!ENTITY closeWindow.key "w">
+<!ENTITY openPage.key "o">
+<!ENTITY undoCmd.key "z">
+<!ENTITY redoCmd.key "y">
+<!ENTITY cutCmd.key "x">
+<!ENTITY copyCmd.key "c">
+<!ENTITY pasteCmd.key "v">
+
+<!ENTITY formInputs.label "入力...">
+<!ENTITY hiddenInputForm.label "隠し文字列">
+<!ENTITY textInputForm.label "文字入力">
+<!ENTITY searchInputForm.label "検索">
+<!ENTITY telInputForm.label "電話番号">
+<!ENTITY urlInputForm.label "URL">
+<!ENTITY emailInputForm.label "メール アドレス">
+<!ENTITY passwordInputForm.label "パスワード">
+<!ENTITY datetimeInputForm.label "日付と時刻 (UTC)">
+<!ENTITY dateInputForm.label "日付">
+<!ENTITY monthInputForm.label "年と月">
+<!ENTITY weekInputForm.label "週">
+<!ENTITY timeInputForm.label "時刻">
+<!ENTITY datetimelocalInputForm.label "日付と時刻">
+<!ENTITY numberInputForm.label "数値">
+<!ENTITY rangeInputForm.label "数値範囲">
+<!ENTITY colorInputForm.label "色">
+<!ENTITY checkboxInputForm.label "チェック ボックス">
+<!ENTITY radioInputForm.label "ラジオ ボタン">
+<!ENTITY fileInputForm.label "ファイル">
+<!ENTITY submitInputForm.label "送信ボタン">
+<!ENTITY imageInputForm.label "送信ボタン (画像)">
+<!ENTITY resetInputForm.label "リセット ボタン">
+<!ENTITY buttonInputForm.label "ボタン">
+
+
+<!ENTITY allTagsMode.label "All Tags モード">
+
+<!ENTITY toggleViewMenu.label "表示モード切替">
+<!ENTITY toggleViewMenu.accesskey "T">
+
+<!ENTITY spellCheck.label "スペル チェック">
+<!ENTITY spellCheck.accesskey "S">
+<!ENTITY dictionary.label "辞書">
+<!ENTITY addToDictionary "辞書に追加">
+<!ENTITY ignoreWord.label "無視">
+
+<!ENTITY specialChars.label "文字と記号">
+
+<!-- Table Menu -->
+<!ENTITY tableMenu.label                     "表">
+<!ENTITY tablemenu.accesskey                 "b">
+<!-- Select Submenu -->
+<!ENTITY tableSelectMenu.label               "選択">
+<!ENTITY tableselectmenu.accesskey           "s">
+
+<!ENTITY tableSelectMenu2.label              "表を選択">
+<!ENTITY tableInsertMenu2.label              "表を挿入">
+<!ENTITY tableDeleteMenu2.label              "表を削除">
+
+<!-- Insert SubMenu -->
+<!ENTITY tableInsertMenu.label               "挿入">
+<!ENTITY tableinsertmenu.accesskey           "i">
+<!ENTITY tableTable.label                    "表">
+<!ENTITY tabletable.accesskey                "t">
+<!ENTITY tableRow.label                      "行">
+<!ENTITY tableRows.label                     "行">
+<!ENTITY tablerow.accesskey                  "r">
+<!ENTITY tableRowAbove.label                 "上に行を挿入">
+<!-- uses tablerow.accesskey -->
+<!ENTITY tableRowBelow.label                 "下に行を挿入">
+<!ENTITY tablerowbelow.accesskey             "b">
+<!ENTITY tableColumn.label                   "列">
+<!ENTITY tableColumns.label                  "列">
+<!ENTITY tablecolumn.accesskey               "o">
+<!ENTITY tableColumnBefore.label             "前に列を挿入">
+<!-- uses tablecolumn.accesskey -->
+<!ENTITY tableColumnAfter.label              "後に列を挿入">
+<!ENTITY tablecolumnafter.accesskey          "a">
+<!ENTITY tableCell.label                     "セル">
+<!ENTITY tableCells.label                    "セル">
+<!ENTITY tablecell.accesskey                 "c">
+<!ENTITY tableCellContents.label             "セルの内容">
+<!ENTITY tablecellcontents.accesskey         "n">
+<!ENTITY tableAllCells.label                 "すべてのセル">
+<!ENTITY tableCellBefore.label               "前にセルを挿入">
+<!ENTITY tableallcells.accesskey             "a">
+<!-- uses tablecell.accesskey -->
+<!ENTITY tableCellAfter.label                "後にセルを挿入">
+<!ENTITY tablecellafter.accesskey            "f">
+<!-- Delete SubMenu -->
+<!ENTITY tableDeleteMenu.label               "削除">
+<!ENTITY tabledeletemenu.accesskey           "D">
+
+<!ENTITY tableFix.label                      "表のレイアウトを固定">
+<!ENTITY tablefix.accesskey                  "f">
+<!-- text for "Join Cells" is in editor.properties 
+     ("JoinSelectedCells" and "JoinCellToRight")
+     the access key must exist in both of those strings
+     But value must be set here for accesskey to draw properly
+-->
+<!ENTITY tableJoinCells.label                "セルを結合">
+<!ENTITY tablejoincells.accesskey            "j">
+<!ENTITY tableSplitCell.label                "セルを分割">
+<!ENTITY tablesplitcell.accesskey            "c">
+<!ENTITY convertToTable.label                "選択範囲から表を作成">
+<!ENTITY converttotable.accesskey            "r">
+<!ENTITY tableProperties.label               "表のプロパティ...">
+<!ENTITY tableProperties.accesskey           "o">
+
+<!ENTITY forumsHelpMenu.label "ユーザー コミュニティ">
+<!ENTITY forums.url "http://groups.google.com/group/bluegriffon/">
+<!ENTITY qa.label "バグと提案">
+<!ENTITY homePage.label "ホーム ページ">
+<!ENTITY addons.label "アドオンを入手">
+
+<!ENTITY pageProperties.label "ページのプロパティ">
+
+
+<!ENTITY preferences.label "オプション">
+
+<!ENTITY gotoLink.label "リンク先を選択">
+<!ENTITY gotoLink.accesskey "l">
+
+<!ENTITY cMenu_insertLink.label "リンクを挿入または編集">
+<!ENTITY cMenu_insertLink.accesskey "l">
+
+<!ENTITY getAddOns.label "アドオンを入手!">
+
+<!ENTITY source.label "ソース表示">
+<!ENTITY theme.label "テーマ">
+
+<!ENTITY removeAllStyles.label "すべての文字スタイルを削除">
+<!ENTITY removeAllStyles.accesskey "y">
+<!ENTITY removeAllLinks.label "すべてのリンクを削除">
+<!ENTITY removeAllLinks.accesskey "l">
+
+<!ENTITY html5Element.label "HTML 5 Element">
+<!ENTITY addonsMenu.label "アドオン">
+
+<!ENTITY listProperties.label "リストのプロパティ">
+
+<!ENTITY tableOfContents.label "目次">
+
+<!ENTITY select.label "選択...">
+<!ENTITY parentElement.label "親要素">
+<!ENTITY firstChild.label "先頭の子要素">
+<!ENTITY nextSibling.label "次の兄弟要素">
+<!ENTITY previousSibling.label "前の兄弟要素">
+<!ENTITY tableCaption.label "表の説明文">
+
+<!ENTITY lookForUpdates.label "ソフトウェアの更新を確認">
+
+<!ENTITY color.label "前景色">
+<!ENTITY bgColor.label "背景色">
+
+<!ENTITY newWindow.label	"新しいウィンドウで開く">
+
+<!ENTITY editComment.label "HTML コメントを編集:">
+<!ENTITY editPHP.label "PHP コードを編集:">
+<!ENTITY editPI.label "処理命令を編集:">
+<!ENTITY targetPI.label "対象:">
+<!ENTITY dataPI.label "データ:">
+<!ENTITY commentOrPHPOrPI.label "コメント/PHP/処理命令">
+<!ENTITY openLinkCmdInTab.label		"リンクを新しいタブで開く">
+<!ENTITY blockquoteToolbarCmd.label "引用">
+<!ENTITY blockquoteToolbarCmd.tooltip "引用ブロック化">
+<!ENTITY deckMenu.label "Deck">
+<!ENTITY printSetupCmd.label		"ページ設定...">
+<!ENTITY printSetupCmd.accesskey	"u">
+<!ENTITY printCmd.label			"印刷...">
+<!ENTITY printCmd.accesskey		"P">
+<!ENTITY printCmd.commandkey		"p">
+<!ENTITY encapsulate.tooltip "Encapsulate selection into an inline element (default is span)">
+
+<!ENTITY deleteCmd.key			"D">
+<!ENTITY selectAllCmd.key		"A">

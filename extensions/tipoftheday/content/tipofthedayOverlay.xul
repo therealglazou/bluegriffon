@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE overlay [
+  <!ENTITY % tipofthedayOverlayDTD SYSTEM "chrome://tipoftheday/locale/tipofthedayOverlay.dtd">
+  %tipofthedayOverlayDTD;
+]>
+
+<overlay id="tipofthedayOverlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <window id="Bluegriffon">
+    <tipoftheday id="tipoftheday" src="chrome://tipoftheday/locale/tipoftheday.rdf" item="random"/>
+  </window>
+
+  <menupopup id="helpMenuPopup">
+    <menuseparator/>
+    <menuitem label="&tipofthedayMenu.label;"
+              oncommand="document.getElementById('tipoftheday').open(true);"/>
+  </menupopup>
+</overlay>         
+

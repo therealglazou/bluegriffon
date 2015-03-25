@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE bindings [
+  <!ENTITY % deckedPanelsTabsBindingsDTD SYSTEM "chrome://bluegriffon/locale/panels.dtd" >
+  %deckedPanelsTabsBindingsDTD;
+]>
+
+<bindings id="deckedPanelsTabsBindings"
+   xmlns="http://www.mozilla.org/xbl"
+   xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+   xmlns:xbl="http://www.mozilla.org/xbl">
+
+  <binding id="deckedPanelsTabs">
+
+    <resources>
+      <stylesheet src="chrome://bluegriffon/skin/panels/deckedPanelsTabs.css"/>
+    </resources>
+
+    <content>
+      <xul:popup id="deckedPanelsTabsContextMenu">
+        <xul:menuitem label="&switchToFloatingPanel.label;"
+                      oncommand="UnDock()"/>
+        <xul:menuseparator/>
+        <xul:menuitem label="&closePanel.label;"
+                      oncommand="CloseDeckedPanel()"/>
+      </xul:popup>
+    </content>
+
+    <implementation>
+
+      <method name="addPanel">
+        <parameter name="aLabel"/>
+        <parameter name="aURL"/>
+        <parameter name="aPanelId"/>
+        <body>
+        <![CDATA[
+          var tab = document.createElement("label");
+          tab.setAttribute("value", aLabel);
+          tab.setAttribute("url", aURL);
+          tab.setAttribute("panelid", aPanelId);
+          tab.setAttribute("context", "deckedPanelsTabsContextMenu");
+          this.appendChild(tab);
+          var _self = this;
+          tab.addEventListener("click", function(e) { _self.deckedPanelSelected(e); }, false);
+
+          var child = this.firstElementChild;
+          while (child) {
+            child.removeAttribute("selected");
+            child = child.nextElementSibling;
+          }
+          tab.setAttribute("selected", "true");
+
+          gDialog.deckPanelsIframe.setAttribute("src", aURL);
+        ]]>
+        </body>
+      </method>
+
+      <method name="deckedPanelSelected">
+        <parameter name="aEvent"/>
+        <body>
+        <![CDATA[
+          var tab = aEvent.target;
+          gDialog.deckPanelsIframe.setAttribute("src", tab.getAttribute("url"));
+
+          var child = this.firstElementChild;
+          while (child) {
+            child.removeAttribute("selected");
+            child = child.nextElementSibling;
+          }
+          tab.setAttribute("selected", "true");
+        ]]>
+        </body>
+      </method>
+
+      <method name="UnDock">
+        <body>
+        <![CDATA[
+          var tab = document.popupNode;
+          var panelid = tab.getAttribute("panelid");
+          var menuitem = document.querySelector("menuitem[panel='" + panelid + "'][url]");
+          var panel = document.getElementById(panelid);
+          this.CloseDeckedPanel();
+          menuitem.setAttribute("decked", "false");
+          document.persist(menuitem.id, "decked");
+          start_panel(menuitem);
+        ]]>
+        </body>
+      </method>
+
+      <method name="doCloseDeckedPanel">
+        <parameter name="tab"/>
+        <body>
+        <![CDATA[
+          var newTab = null;
+          if (tab.nextElementSibling)
+            newTab = tab.nextElementSibling;
+          else if (tab.previousElementSibling)
+            newTab = tab.previousElementSibling;
+
+          var panelid = tab.getAttribute("panelid");
+          var panel = document.getElementById(panelid);
+          tab.parentNode.removeChild(tab);
+
+          if (newTab) {
+            newTab.setAttribute("selected", "true");
+            gDialog.deckPanelsIframe.setAttribute("src", newTab.getAttribute("url"));
+          }
+          else
+            gDialog.deckPanelsIframe.setAttribute("src", "about:blank");
+
+          UpdatePanelsStatusInMenu();
+        ]]>
+        </body>
+      </method>
+
+      <method name="CloseDeckedPanel">
+        <body>
+        <![CDATA[
+          var tab = document.popupNode;
+          this.doCloseDeckedPanel(tab);
+        ]]>
+        </body>
+      </method>
+
+    </implementation>
+
+  </binding>
+
+</bindings>
+

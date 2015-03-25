@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<!DOCTYPE dialog [
+  <!ENTITY % newDocumentDTD SYSTEM "chrome://bluegriffon/locale/newDocument.dtd" >
+  <!ENTITY % polyglotDTD SYSTEM "chrome://bluegriffon/locale/polyglot.dtd" >
+  %newDocumentDTD;
+  %polyglotDTD;
+]>
+
+<dialog title="&window.title;"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        onload="Startup()"
+        onunload="Shutdown()"
+        buttons="accept,cancel,extra1"
+        buttonlabelextra1="&similarToCurrent.label;"
+        ondialogextra1="SimilarToCurrent()"
+        ondialogaccept="return onAccept();"
+        persist="screenX screenY">
+
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/dgid.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/global.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/editorUtils.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/dialogs/newDocument.js"/>
+
+  <stringbundle id="bundle" src="chrome://global/locale/charsetTitles.properties"/>
+
+  <description>&documentType.description;</description>
+
+  <groupbox>
+    <caption label="&doctype.label;"/>
+    <radiogroup id="languageRadiogroup"
+                value="HTML5"
+                oncommand="onDoctypeToggle(this)"
+                orient="horizontal">
+      <radio label="&html.label;"
+             value="HTML"/>
+      <radio label="&xhtml.label;"
+             value="XHTML"/>
+      <spacer flex="1"/>
+      <radio label="&xhtml11.label;"
+             value="XHTML11"/>
+      <spacer flex="1"/>
+      <radio label="&html5.label;"
+             value="HTML5"/>
+      <radio label="&xhtml5.label;"
+             value="XHTML5"/>
+    </radiogroup>
+    <radiogroup id="doctypeRadiogroup"
+                orient="horizontal"
+                style="margin-left: 15px; margin-right: 15px">
+      <radio label="&transitional.label;"
+             id="transitionalRadio"
+             value="TRANSITIONAL"/>
+      <radio label="&strict.label;"
+             id="strictRadio"
+             value="STRICT"/>
+      <spacer flex="1"/>
+      <checkbox id="polyglotCheckbox"
+                label="&polyglot.label;"
+                oncommand="onDoctypeToggle(gDialog.languageRadiogroup)"/>
+    </radiogroup>
+  </groupbox>
+
+  <groupbox>
+    <grid flex="1" style="overflow: hidden">
+      <columns><column/><column flex="1"/></columns>
+      <rows>
+        <row align="center">
+          <label value="&documentLanguage.label;"
+                 control="pageLanguage" />
+          <hbox align="center">
+            <textbox id="pageLanguage" flex="1"
+                     oninput="TextboxChanged(this.id);"/>
+            <button label="&selectLanguage.label;"
+                    oncommand="SelectLanguage(this)"/>
+         </hbox>
+        </row>
+        <row align="center">
+          <label value="&charset.label;"
+                 control="charsetMenulist" />
+          <menulist id="charsetMenulist" value="utf-8">
+            <menupopup id="charsetMenupopup"/>
+          </menulist>
+        </row>
+        <row align="center">
+          <label value="&direction.label;"
+                 control="directionRadio" />
+          <radiogroup id="directionRadio" orient="horizontal">
+            <radio label="&unspecified.label;" value=""/>
+            <radio label="&ltr.label;" value="ltr"/>
+            <radio label="&rtl.label;" value="rtl"/>
+          </radiogroup>
+        </row>
+      </rows>
+    </grid>
+  </groupbox>
+
+</dialog>

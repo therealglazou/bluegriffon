@@ -1,0 +1,511 @@
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1/GPL 2.0/LGPL 2.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is BlueGriffon.
+   -
+   - The Initial Developer of the Original Code is
+   - Disruptive Innovations SARL.
+   - Portions created by the Initial Developer are Copyright (C) 2006
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -   Daniel Glazman (daniel.glazman@disruptive-innovations.com), Original Author
+   -
+   - Alternatively, the contents of this file may be used under the terms of
+   - either the GNU General Public License Version 2 or later (the "GPL"), or
+   - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+   - in which case the provisions of the GPL or the LGPL are applicable instead
+   - of those above. If you wish to allow use of your version of this file only
+   - under the terms of either the GPL or the LGPL, and not to allow others to
+   - use your version of this file under the terms of the MPL, indicate your
+   - decision by deleting the provisions above and replace them with the notice
+   - and other provisions required by the LGPL or the GPL. If you do not delete
+   - the provisions above, a recipient may use your version of this file under
+   - the terms of any one of the MPL, the GPL or the LGPL.
+   -
+   - ***** END LICENSE BLOCK ***** -->
+
+<!ENTITY window.title           "BlueGriffon">
+
+<!ENTITY fileMenu.label         "檔案">
+<!ENTITY fileMenu.accesskey     "F">
+<!ENTITY newMenu.label                    "開新檔案">
+<!ENTITY newMenu.accesskey                "N">
+
+<!ENTITY newWizardMenu.label              "新增文件精靈">
+
+<!ENTITY editMenu.label                   "編輯">
+<!ENTITY editMenu.accesskey               "E">
+
+<!ENTITY viewMenu.label                   "檢視">
+<!ENTITY viewMenu.accesskey               "V">
+<!ENTITY customizeToolbar.label           "自訂">
+<!ENTITY customizeToolbar.accesskey       "C">
+
+<!ENTITY insertMenu.label                 "插入">
+<!ENTITY insertMenu.accesskey             "I">
+
+<!ENTITY formatMenu.label                 "格式">
+<!ENTITY formatMenu.accesskey             "O">
+<!ENTITY spanCmd.label "CSS樣式表">
+<!ENTITY spanCmd.accesskey "N">
+<!-- Font Style SubMenu -->
+<!ENTITY fontStyleMenu.label "文字樣式">
+<!ENTITY formatstylemenu.accesskey "S">
+<!ENTITY styleBoldCmd.label "粗體">
+<!ENTITY stylebold.accesskey "B">
+<!ENTITY stylebold.keybinding "b">
+<!ENTITY styleItalicCmd.label "斜體">
+<!ENTITY styleitalic.accesskey "I">
+<!ENTITY styleitalic.keybinding "i">
+<!ENTITY styleUnderlineCmd.label "底線">
+<!ENTITY styleunderline.accesskey "U">
+<!ENTITY styleUnderline.key "u">
+<!ENTITY styleStrikeThruCmd.label "刪除線">
+<!ENTITY stylestrikethru.accesskey "K">
+<!ENTITY styleSuperscriptCmd.label "上標題">
+<!ENTITY stylesuperscript.accesskey "P">
+<!ENTITY styleSubscriptCmd.label "下標題">
+<!ENTITY stylesubscript.accesskey "S">
+<!ENTITY styleNonbreakingCmd.label "不間斷">
+<!ENTITY stylenonbreaking.accesskey "N">
+<!ENTITY styleEm.label "強調">
+<!ENTITY styleEm.accesskey "E">
+<!ENTITY styleEm.key "i">
+<!ENTITY styleStrong.label "更加強調">
+<!ENTITY styleStrong.accesskey "T">
+<!ENTITY styleStrong.key "b">
+<!ENTITY styleCite.label "引用">
+<!ENTITY styleCite.accesskey "C">
+<!ENTITY styleAbbr.label "縮寫">
+<!ENTITY styleAbbr.accesskey "A">
+<!ENTITY styleAcronym.label "首位字母縮寫">
+<!ENTITY styleAcronym.accesskey "R">
+<!ENTITY styleCode.label "代碼">
+<!ENTITY styleCode.accesskey "O">
+<!ENTITY styleCode.key "c">
+<!ENTITY styleSamp.label "範例輸出">
+<!ENTITY styleSamp.accesskey "M">
+<!ENTITY styleVar.label "變數">
+<!ENTITY styleVar.accesskey "V">
+<!ENTITY fontFixedWidth.label "固定寬度">
+<!ENTITY fontfixedwidth.accesskey "X">
+
+<!ENTITY tableMenu.label                  "表格">
+<!ENTITY tableMenu.accesskey              "B">
+
+<!ENTITY toolsMenu.label                  "工具">
+<!ENTITY toolsMenu.accesskey              "T">
+<!ENTITY consoleMenu.label                "JavaScript控制器">
+
+<!ENTITY panelsMenu.label                 "面板">
+<!ENTITY panelsMenu.accesskey             "P">
+
+<!ENTITY alignPanels.label                "對齊所有面板">
+
+<!ENTITY helpMenu.label                   "說明">
+<!ENTITY helpMenu.accesskey               "H">
+<!ENTITY aboutComposer.label              "關於 BlueGriffon">
+
+<!ENTITY throbber.tooltip                 "BlueGriffon">
+
+<!ENTITY newMenu.label                    "新增">
+<!ENTITY newToolbarCmd.tooltip            "建立新頁面">
+<!ENTITY pageInNewTab.label                     "在新分頁建立">
+<!ENTITY pageInNewWindow.label                  "在新視窗建立">
+<!ENTITY newOtherCmd.label                "更多選項...">
+
+<!ENTITY openMenu.label                   "開啟">
+<!ENTITY openMenu.tooltip                 "開啟已存在的頁面">
+<!ENTITY openTab.label                    "在新分頁開啟">
+<!ENTITY openWindow.label                 "在新視窗開啟">
+<!ENTITY openPage.label                   "開啟">
+<!ENTITY openPage.accesskey               "O">
+<!ENTITY openFileCmd.label                "開啟檔案">
+
+<!ENTITY quit.label                       "離開">
+<!ENTITY quit.accesskey                   "Q">
+
+<!ENTITY stopButton.label                 "停止">
+<!ENTITY stopButton.tooltip               "停止載入此頁面">
+
+<!ENTITY boldToolbarCmd.tooltip           "粗體">
+<!ENTITY boldToolbarCmd.label             "粗體">
+<!ENTITY italicToolbarCmd.tooltip         "斜體">
+<!ENTITY italicToolbarCmd.label           "斜體">
+<!ENTITY underlineToolbarCmd.tooltip      "底線">
+<!ENTITY underlineToolbarCmd.label        "底線">
+<!ENTITY strongToolbarCmd.tooltip         "更加強調">
+<!ENTITY strongToolbarCmd.label           "更加強調">
+<!ENTITY emToolbarCmd.tooltip             "強調">
+<!ENTITY emToolbarCmd.label               "強調">
+<!ENTITY codeToolbarCmd.label             "代碼">
+<!ENTITY codeToolbarCmd.tooltip           "代碼">
+<!-- RTL -->                           
+<!ENTITY writingDirectionMenu.label          "輸入方向">
+<!ENTITY writingdirectionmenu.accesskey      "W">
+<!ENTITY defaultDirectionMenu.label          "未指定">
+<!ENTITY defaultdirectionmenu.accesskey      "U">
+<!ENTITY ltrDirectionMenu.label              "從左到右">
+<!ENTITY ltrdirectionmenu.accesskey          "L">
+<!ENTITY rtlDirectionMenu.label              "從右到左">
+<!ENTITY rtldirectionmenu.accesskey          "R">
+<!ENTITY dirLtr.tooltip                      "從左到右">
+<!ENTITY dirRtl.tooltip                      "從右到左">
+
+<!ENTITY ParagraphSelect.tooltip "選擇一項段落格式">
+<!-- Shared in Paragraph, and Toolbar menulist -->
+<!ENTITY bodyTextCmd.label "頁面文字">
+<!ENTITY paragraphParagraphCmd.label "段落">  
+<!ENTITY heading1Cmd.label "標題 1">
+<!ENTITY heading2Cmd.label "標題 2">
+<!ENTITY heading3Cmd.label "標題 3">
+<!ENTITY heading4Cmd.label "標題 4">
+<!ENTITY heading5Cmd.label "標題 5">
+<!ENTITY heading6Cmd.label "標題 6">
+<!ENTITY paragraphAddressCmd.label "地址">
+<!ENTITY paragraphPreformatCmd.label "預設格式化">
+<!ENTITY genericContainerCmd.label "Div標籤">
+
+<!ENTITY unorderedList.tooltip "無排序項列">
+<!ENTITY orderedList.tooltip "已排序項列">
+<!ENTITY unorderedList.label "無排序項列">
+<!ENTITY orderedList.label "已排序項列">
+
+<!ENTITY alignLeft.tooltip "靠左對齊">
+<!ENTITY alignCenter.tooltip "置中對齊">
+<!ENTITY alignRight.tooltip "靠右對齊">
+<!ENTITY alignJustify.tooltip "左右對齊">
+<!ENTITY alignLeft.label "靠左對齊">
+<!ENTITY alignCenter.label "置中對齊">
+<!ENTITY alignRight.label "靠右對齊">
+<!ENTITY alignJustify.label "左右對齊">
+
+<!ENTITY indentToolbarCmd.tooltip "文字內縮">
+<!ENTITY indentToolbarCmd.label "文字內縮">
+
+<!ENTITY outdentToolbarCmd.tooltip "文字外靠">
+<!ENTITY outdentToolbarCmd.label "文字外靠">
+
+<!ENTITY definitionDescription.tooltip "定義描述">
+<!ENTITY definitionDescription.label "定義描述">
+<!ENTITY definitionTitle.tooltip "定義標題">
+<!ENTITY definitionTitle.label "定義標題">
+
+<!ENTITY FontFaceSelect.tooltip "選擇一種字型">
+<!ENTITY fontVarWidth.label "可變寬度">
+<!ENTITY fontFixedWidth.label "固定寬度">
+<!ENTITY fontHelveticaFont.label "Helvetica, Arial">
+<!ENTITY fontTimes.label "Times">
+<!ENTITY fontCourier.label "Courier">
+
+<!ENTITY applyClassToSelectionCmd.tooltip "套用此類別至所選的範圍">
+<!ENTITY noClass.label "(無類別)">
+
+<!ENTITY applyIdToSelectionCmd.tooltip "賦予ID至所選的範圍">
+<!ENTITY noId.label "(無ID)">
+
+<!ENTITY tableToolbarCmd.label "表格">
+<!ENTITY tableToolbarCmd.key "T">
+<!ENTITY tableToolbarCmd.tooltip "插入新表格或編輯已選定的表格">
+
+<!ENTITY imageToolbarCmd.label "影像">
+<!ENTITY imageToolbarCmd.key "I">
+<!ENTITY imageToolbarCmd.tooltip "插入或編輯影像">
+
+<!ENTITY anchorToolbarCmd.label "錨點">
+<!ENTITY anchorToolbarCmd.key "A">
+<!ENTITY anchorToolbarCmd.tooltip "插入或編輯錨點">
+
+<!ENTITY linkToolbarCmd.label "超連結">
+<!ENTITY linkToolbarCmd.key "L">
+<!ENTITY linkToolbarCmd.tooltip "插入或編輯超連結">
+
+<!ENTITY hrToolbarCmd.label "水平線">
+<!ENTITY hrToolbarCmd.key "B">
+
+<!ENTITY htmlToolbarCmd.label "HTML 標記">
+<!ENTITY htmlToolbarCmd.key "H">
+
+<!ENTITY formToolbarCmd.label "表單">
+<!ENTITY formToolbarCmd.key "F">
+<!ENTITY formToolbarCmd.tooltip "插入或編輯表單">
+
+<!ENTITY fieldsetToolbarCmd.label "字段集">
+<!ENTITY fieldsetToolbarCmd.key "D">
+
+<!ENTITY labelToolbarCmd.label "標籤">
+<!ENTITY labelToolbarCmd.key "L">
+
+<!ENTITY buttonToolbarCmd.label "按鈕">
+<!ENTITY buttonToolbarCmd.key "B">
+
+<!ENTITY selectToolbarCmd.label "下拉式選單">
+<!ENTITY selectToolbarCmd.key "S">
+
+<!ENTITY textareaToolbarCmd.label "文字方塊">
+<!ENTITY textareaToolbarCmd.key "T">
+
+<!ENTITY keygenToolbarCmd.label "密鑰校對產生器">
+<!ENTITY keygenToolbarCmd.key "K">
+
+<!ENTITY outputToolbarCmd.label "輸出">
+<!ENTITY outputToolbarCmd.key "O">
+
+<!ENTITY progressToolbarCmd.label "進度列">
+<!ENTITY progressToolbarCmd.key "P">
+
+<!ENTITY meterToolbarCmd.label "度量">
+<!ENTITY meterToolbarCmd.key "M">
+
+<!ENTITY datalistToolbarCmd.label "資料表">
+<!ENTITY datalistToolbarCmd.key "I">
+
+<!ENTITY stylesheetsToolbarCmd.label "樣式表">
+<!ENTITY stylesheetsToolbarCmd.key "S">
+
+<!ENTITY webfonts.label "網路字型">
+
+<!ENTITY videoToolbarCmd.label "影片">
+<!ENTITY videoToolbarCmd.tooltip "插入或編輯影片">
+
+<!ENTITY audioToolbarCmd.label "音訊">
+<!ENTITY audioToolbarCmd.tooltip "插入或編輯音訊檔案">
+
+<!ENTITY browseToolbarCmd.label "預覽">
+<!ENTITY browseToolbarCmd.tooltip "在游覽器中預覽">
+
+<!ENTITY saveCmd.label "存檔">
+<!ENTITY saveToolbarCmd.tooltip "在本機儲存檔案">
+<!ENTITY filesave.key "S">
+<!ENTITY saveAsCmd.label "另存新檔...">
+<!ENTITY filesaveas.key "S">
+
+<!ENTITY undoCmd.label "復原">
+<!ENTITY undoCmd.accesskey "U">
+<!ENTITY redoCmd.label "重作">
+<!ENTITY redoCmd.accesskey "R">
+
+<!ENTITY cutCmd.label "剪下">
+<!ENTITY cutCmd.accesskey "T">
+<!ENTITY copyCmd.label "複製">
+<!ENTITY copyCmd.accesskey "C">
+<!ENTITY pasteCmd.label "貼上">
+<!ENTITY pasteCmd.accesskey "P">
+<!ENTITY pasteNoFormatting.label "非格式化貼上">
+<!ENTITY pasteNoFormatting.accesskey "F">
+<!ENTITY deleteCmd.label "刪除">
+<!ENTITY deleteCmd.accesskey "D">
+<!ENTITY selectAllCmd.label "全選">
+<!ENTITY selectAllCmd.accesskey "A">
+<!ENTITY copyHTMLCodeCmd.label "複製已選定的HTML標記">
+<!ENTITY copyHTMLCodeCmd.accesskey "H">
+<!ENTITY copyHTMLCode.label "複製此元素的HTML標記">
+
+<!ENTITY setZoomFactor.label "設定縮放系數">
+
+<!ENTITY fileRecentMenu.label "最近開啟的檔案">
+<!ENTITY filerecentmenu.accesskey "R">
+
+<!ENTITY markupCleanerCmd.label "標記清除器">
+<!ENTITY markupcleaner.accesskey "M">
+
+<!ENTITY viewToolbars.label "工具列">
+<!ENTITY viewStatusbar.label "狀態列">
+
+<!ENTITY formatToolbar.name "格式 (主要)">
+<!ENTITY formatToolbar2.name "格式 (次要)">
+
+<!ENTITY wysiwygMode.label "設計模式">
+<!ENTITY printMode.label "Print Preview">
+<!ENTITY sourceMode.label "原始碼模式">
+
+<!ENTITY closeTabCmd.label "關閉目前的分頁">
+
+<!ENTITY filesave.key "s">
+<!ENTITY quit.key "q">
+<!ENTITY closeWindow.key "w">
+<!ENTITY openPage.key "o">
+<!ENTITY undoCmd.key "z">
+<!ENTITY redoCmd.key "y">
+<!ENTITY cutCmd.key "x">
+<!ENTITY copyCmd.key "c">
+<!ENTITY pasteCmd.key "v">
+
+<!ENTITY formInputs.label "匯入元素...">
+<!ENTITY hiddenInputForm.label "隱藏的字串">
+<!ENTITY textInputForm.label "文字匯入區塊">
+<!ENTITY searchInputForm.label "搜尋區塊">
+<!ENTITY telInputForm.label "電話號碼區塊">
+<!ENTITY urlInputForm.label "網址區塊">
+<!ENTITY emailInputForm.label "E-mail 區塊">
+<!ENTITY passwordInputForm.label "密碼區塊">
+<!ENTITY datetimeInputForm.label "在 UTC 時區選取時間和日期..">
+<!ENTITY dateInputForm.label "日期選取">
+<!ENTITY monthInputForm.label "選取年和月..">
+<!ENTITY weekInputForm.label "選取週年和週..">
+<!ENTITY timeInputForm.label "無時區的時間選取器">
+<!ENTITY datetimelocalInputForm.label "無時區和日期的時間選取器">
+<!ENTITY numberInputForm.label "數值區塊">
+<!ENTITY rangeInputForm.label "數值範圍選取器">
+<!ENTITY colorInputForm.label "顏色選取器">
+<!ENTITY checkboxInputForm.label "核取方塊">
+<!ENTITY radioInputForm.label "頻道按鈕">
+<!ENTITY fileInputForm.label "檔案選取器">
+<!ENTITY submitInputForm.label "表單提交按鈕">
+<!ENTITY imageInputForm.label "圖案式表單提交按鈕">
+<!ENTITY resetInputForm.label "表單重設按鈕">
+<!ENTITY buttonInputForm.label "按鈕">
+
+
+<!ENTITY allTagsMode.label "全標籤模式">
+
+<!ENTITY toggleViewMenu.label "Toggle view">
+<!ENTITY toggleViewMenu.accesskey "T">
+
+<!ENTITY spellCheck.label "拼字檢查">
+<!ENTITY spellCheck.accesskey "S">
+<!ENTITY dictionary.label "字典檔">
+<!ENTITY addToDictionary "新增字典檔">
+<!ENTITY ignoreWord.label "忽略單字">
+
+<!ENTITY specialChars.label "字元和象徵">
+
+<!-- Table Menu -->
+<!ENTITY tableMenu.label                     "表格">
+<!ENTITY tablemenu.accesskey                 "B">
+<!-- Select Submenu -->
+<!ENTITY tableSelectMenu.label               "選取">
+<!ENTITY tableselectmenu.accesskey           "S">
+
+<!ENTITY tableSelectMenu2.label              "表格選取">
+<!ENTITY tableInsertMenu2.label              "插入表格">
+<!ENTITY tableDeleteMenu2.label              "刪除表格">
+
+<!-- Insert SubMenu -->
+<!ENTITY tableInsertMenu.label               "插入">
+<!ENTITY tableinsertmenu.accesskey           "I">
+<!ENTITY tableTable.label                    "表格">
+<!ENTITY tabletable.accesskey                "T">
+<!ENTITY tableRow.label                      "欄">
+<!ENTITY tableRows.label                     "多行欄">
+<!ENTITY tablerow.accesskey                  "R">
+<!ENTITY tableRowAbove.label                 "欄(上方插入)">
+<!-- uses tablerow.accesskey -->
+<!ENTITY tableRowBelow.label                 "欄(下方插入)">
+<!ENTITY tablerowbelow.accesskey             "B">
+<!ENTITY tableColumn.label                   "列">
+<!ENTITY tableColumns.label                  "多行列">
+<!ENTITY tablecolumn.accesskey               "O">
+<!ENTITY tableColumnBefore.label             "列(前方插入)">
+<!-- uses tablecolumn.accesskey -->
+<!ENTITY tableColumnAfter.label              "列(後方插入)">
+<!ENTITY tablecolumnafter.accesskey          "A">
+<!ENTITY tableCell.label                     "儲存格">
+<!ENTITY tableCells.label                    "多格儲存格">
+<!ENTITY tablecell.accesskey                 "C">
+<!ENTITY tableCellContents.label             "儲存格內容">
+<!ENTITY tablecellcontents.accesskey         "N">
+<!ENTITY tableAllCells.label                 "所有儲存格">
+<!ENTITY tableCellBefore.label               "儲存格(前方插入)">
+<!ENTITY tableallcells.accesskey             "A">
+<!-- uses tablecell.accesskey -->
+<!ENTITY tableCellAfter.label                "儲存格(後方插入)">
+<!ENTITY tablecellafter.accesskey            "F">
+<!-- Delete SubMenu -->
+<!ENTITY tableDeleteMenu.label               "刪除">
+<!ENTITY tabledeletemenu.accesskey           "D">
+
+<!ENTITY tableFix.label                      "修復表格樣式">
+<!ENTITY tablefix.accesskey                  "F">
+<!-- text for "Join Cells" is in editor.properties 
+     ("JoinSelectedCells" and "JoinCellToRight")
+     the access key must exist in both of those strings
+     But value must be set here for accesskey to draw properly
+-->
+<!ENTITY tableJoinCells.label                "合併儲存格">
+<!ENTITY tablejoincells.accesskey            "J">
+<!ENTITY tableSplitCell.label                "分割儲存格">
+<!ENTITY tablesplitcell.accesskey            "C">
+<!ENTITY convertToTable.label                "在選擇區域新增表格">
+<!ENTITY converttotable.accesskey            "R">
+<!ENTITY tableProperties.label               "表格設定...">
+<!ENTITY tableProperties.accesskey           "O">
+
+<!ENTITY forumsHelpMenu.label "使用者社群">
+<!ENTITY forums.url "http://groups.google.com/group/bluegriffon/">
+<!ENTITY qa.label "錯誤和建議回報">
+<!ENTITY homePage.label "官方網站">
+<!ENTITY addons.label "取得附加元件">
+
+<!ENTITY pageProperties.label "頁面設定">
+
+
+<!ENTITY preferences.label "選項">
+
+<!ENTITY gotoLink.label "選擇此連結的目標">
+<!ENTITY gotoLink.accesskey "L">
+
+<!ENTITY cMenu_insertLink.label "插入或編輯此項連結">
+<!ENTITY cMenu_insertLink.accesskey "L">
+
+<!ENTITY getAddOns.label "取得附加元件!">
+
+<!ENTITY source.label "原始碼檢視">
+<!ENTITY theme.label "主題">
+
+<!ENTITY removeAllStyles.label "移除所有文字樣式">
+<!ENTITY removeAllStyles.accesskey "(Y)">
+<!ENTITY removeAllLinks.label "移除所有連結">
+<!ENTITY removeAllLinks.accesskey "(L)">
+
+<!ENTITY html5Element.label "HTML 5 元素">
+<!ENTITY addonsMenu.label "附加元件">
+
+<!ENTITY listProperties.label "屬性排列">
+
+<!ENTITY tableOfContents.label "表格內容">
+
+<!ENTITY select.label "選擇...">
+<!ENTITY parentElement.label "父元素">
+<!ENTITY firstChild.label "第一項子元素">
+<!ENTITY nextSibling.label "後一項親緣元素">
+<!ENTITY previousSibling.label "前一項親緣元素">
+<!ENTITY tableCaption.label "表格說明文字">
+
+<!ENTITY lookForUpdates.label "檢查更新">
+
+<!ENTITY color.label "前景色">
+<!ENTITY bgColor.label "背景色">
+
+<!ENTITY newWindow.label "開新視窗">
+
+<!ENTITY editComment.label "編輯HTML註解:">
+<!ENTITY editPHP.label "編輯PHP區段:">
+<!ENTITY editPI.label "編輯PI區段:">
+<!ENTITY targetPI.label "目標:">
+<!ENTITY dataPI.label "日期:">
+<!ENTITY commentOrPHPOrPI.label "註解/PHP/PI">
+<!ENTITY openLinkCmdInTab.label       "用新分頁開啟鏈結">
+<!ENTITY blockquoteToolbarCmd.label "引用">
+<!ENTITY blockquoteToolbarCmd.tooltip "封裝至引用">
+<!ENTITY deckMenu.label "覆蓋">
+<!ENTITY printSetupCmd.label "頁面設定…">
+<!ENTITY printSetupCmd.accesskey "u">
+<!ENTITY printCmd.label "列印…">
+<!ENTITY printCmd.accesskey "P">
+<!ENTITY printCmd.commandkey "p">
+<!ENTITY encapsulate.tooltip "封裝已選擇項目為行內元素(預設為span)">
+
+<!ENTITY deleteCmd.key            "D">  
+<!ENTITY selectAllCmd.key         "A">  

@@ -1,0 +1,481 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE overlay [
+  <!ENTITY % csspropertiesDTD SYSTEM "chrome://cssproperties/locale/cssproperties.dtd">
+  %csspropertiesDTD;
+  <!ENTITY % backgrounditemDTD SYSTEM "chrome://cssproperties/locale/backgrounditem.dtd" >
+  %backgrounditemDTD;
+]>
+
+<overlay id="bordersOverlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/x-javascript"  src="chrome://cssproperties/content/borders.js" />
+
+  <vbox id="propertiesBox">
+      <hbox align="center"
+            class="csspropertiesHeader"
+            context="sectionHeaderContext"
+            id="bordersSectionHeader"
+            onclick="ToggleSection(event, this)"
+            position="11">
+        <image />
+        <label value="&bordersSectionHeader.label;"/>
+      </hbox>
+
+      <vbox class="section" id="bordersSection" position="12">
+        <checkbox label="&sameBorderOnFourEdges.label;"
+                  id="sameBorderOnFourEdgesCheckbox"
+                  oncommand="ToggleSameBorderOnFourEdges(this)"/>
+        <grid>
+          <columns><column/><column/><column style="margin-right: 1em"/><column/></columns>
+          <rows>
+            <row align="center">
+              <label value="&topBorder.label;"/>
+              <ecolorpicker id="borderTopColorpicker"
+                            color="black"
+                            colorObjectId="BorderColor"
+                            windowTitle="Border color"
+                            showTransparency="true"
+                            property="border-top-color"
+                            oncommand="SetColor(this)"/>
+              <hbox align="center">
+                <menulist editable="true" id="borderTopWidthMenulist" property="border-top-width"
+                          oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'thin medium thick', false)"
+                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'thin medium thick', false)">
+                  <menupopup id="borderTopWidthMenupopup"
+                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
+                    <menuseparator/>
+                    <menuitem label="&thinBorderWidth.label;" value="thin"/>
+                    <menuitem label="&mediumBorderWidth.label;" value="medium"/>
+                    <menuitem label="&thickBorderWidth.label;" value="thick"/>
+                  </menupopup>
+                </menulist>
+                <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
+                             ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', false)"/>
+              </hbox>
+              <menulist id="borderTopStyleMenulist" property="border-top-style"
+                        oncommand="ApplyPropertyFromMenulist(this)">
+                <menupopup>
+                  <menuitem label="&noneBorderStyleStyle.label;" value="none"/>
+                  <menuitem label="&hiddenBorderStyleStyle.label;" value="hidden"/>
+                  <menuseparator/>
+                  <menuitem label="&solidBorderStyleStyle.label;" value="solid"/>
+                  <menuitem label="&doubleBorderStyleStyle.label;" value="double"/>
+                  <menuitem label="&dottedBorderStyleStyle.label;" value="dotted"/>
+                  <menuitem label="&dashedBorderStyleStyle.label;" value="dashed"/>
+                  <menuitem label="&grooveBorderStyleStyle.label;" value="groove"/>
+                  <menuitem label="&ridgeBorderStyleStyle.label;" value="ridge"/>
+                  <menuitem label="&insetBorderStyleStyle.label;" value="inset"/>
+                  <menuitem label="&outsetBorderStyleStyle.label;" value="outset"/>
+                </menupopup>
+              </menulist>
+            </row>
+
+            <row align="center">
+              <label value="&leftBorder.label;"/>
+              <ecolorpicker id="borderLeftColorpicker"
+                            color="black"
+                            colorObjectId="BorderColor"
+                            windowTitle="Border color"
+                            showTransparency="true"
+                            property="border-left-color"
+                            oncommand="SetColor(this)"/>
+              <hbox align="center">
+                <menulist editable="true" id="borderLeftWidthMenulist" property="border-left-width"
+                          oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'thin medium thick', false)"
+                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'thin medium thick', false)">
+                  <menupopup id="borderLeftWidthMenupopup"
+                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
+                    <menuseparator/>
+                    <menuitem label="&thinBorderWidth.label;" value="thin"/>
+                    <menuitem label="&mediumBorderWidth.label;" value="medium"/>
+                    <menuitem label="&thickBorderWidth.label;" value="thick"/>
+                  </menupopup>
+                </menulist>
+                <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
+                             ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', false)"/>
+              </hbox>
+              <menulist id="borderLeftStyleMenulist" property="border-left-style"
+                        oncommand="ApplyPropertyFromMenulist(this)">
+                <menupopup>
+                  <menuitem label="&noneBorderStyleStyle.label;" value="none"/>
+                  <menuitem label="&hiddenBorderStyleStyle.label;" value="hidden"/>
+                  <menuseparator/>
+                  <menuitem label="&solidBorderStyleStyle.label;" value="solid"/>
+                  <menuitem label="&doubleBorderStyleStyle.label;" value="double"/>
+                  <menuitem label="&dottedBorderStyleStyle.label;" value="dotted"/>
+                  <menuitem label="&dashedBorderStyleStyle.label;" value="dashed"/>
+                  <menuitem label="&grooveBorderStyleStyle.label;" value="groove"/>
+                  <menuitem label="&ridgeBorderStyleStyle.label;" value="ridge"/>
+                  <menuitem label="&insetBorderStyleStyle.label;" value="inset"/>
+                  <menuitem label="&outsetBorderStyleStyle.label;" value="outset"/>
+                </menupopup>
+              </menulist>
+            </row>
+
+            <row align="center">
+              <label value="&rightBorder.label;"/>
+              <ecolorpicker id="borderRightColorpicker"
+                            color="black"
+                            colorObjectId="BorderColor"
+                            windowTitle="Border color"
+                            showTransparency="true"
+                            property="border-right-color"
+                            oncommand="SetColor(this)"/>
+              <hbox align="center">
+                <menulist editable="true" id="borderRightWidthMenulist" property="border-right-width"
+                          oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'thin medium thick', false)"
+                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'thin medium thick', false)">
+                  <menupopup id="borderRightWidthMenupopup"
+                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
+                    <menuseparator/>
+                    <menuitem label="&thinBorderWidth.label;" value="thin"/>
+                    <menuitem label="&mediumBorderWidth.label;" value="medium"/>
+                    <menuitem label="&thickBorderWidth.label;" value="thick"/>
+                  </menupopup>
+                </menulist>
+                <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
+                             ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', false)"/>
+              </hbox>
+              <menulist id="borderRightStyleMenulist" property="border-right-style"
+                        oncommand="ApplyPropertyFromMenulist(this)">
+                <menupopup>
+                  <menuitem label="&noneBorderStyleStyle.label;" value="none"/>
+                  <menuitem label="&hiddenBorderStyleStyle.label;" value="hidden"/>
+                  <menuseparator/>
+                  <menuitem label="&solidBorderStyleStyle.label;" value="solid"/>
+                  <menuitem label="&doubleBorderStyleStyle.label;" value="double"/>
+                  <menuitem label="&dottedBorderStyleStyle.label;" value="dotted"/>
+                  <menuitem label="&dashedBorderStyleStyle.label;" value="dashed"/>
+                  <menuitem label="&grooveBorderStyleStyle.label;" value="groove"/>
+                  <menuitem label="&ridgeBorderStyleStyle.label;" value="ridge"/>
+                  <menuitem label="&insetBorderStyleStyle.label;" value="inset"/>
+                  <menuitem label="&outsetBorderStyleStyle.label;" value="outset"/>
+                </menupopup>
+              </menulist>
+            </row>
+
+            <row align="center">
+              <label value="&bottomBorder.label;" id="borderBottomLabel"/>
+              <ecolorpicker id="borderBottomColorpicker"
+                            color="black"
+                            colorObjectId="BorderColor"
+                            windowTitle="Border color"
+                            showTransparency="true"
+                            property="border-bottom-color"
+                            fouredges="border-top-color,border-right-color,border-left-color"
+                            fouredgescontrol="sameBorderOnFourEdgesCheckbox"
+                            oncommand="SetColor(this)"/>
+              <hbox align="center">
+                <menulist editable="true" id="borderBottomWidthMenulist" property="border-bottom-width"
+                          fouredges="border-top-width,border-right-width,border-left-width"
+                          fouredgescontrol="sameBorderOnFourEdgesCheckbox"
+                          oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'thin medium thick', false)"
+                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'thin medium thick', false)">
+                  <menupopup id="borderBottomWidthMenupopup"
+                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
+                    <menuseparator/>
+                    <menuitem label="&thinBorderWidth.label;" value="thin"/>
+                    <menuitem label="&mediumBorderWidth.label;" value="medium"/>
+                    <menuitem label="&thickBorderWidth.label;" value="thick"/>
+                  </menupopup>
+                </menulist>
+                <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
+                             ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', false)"/>
+              </hbox>
+              <menulist id="borderBottomStyleMenulist" property="border-bottom-style"
+                        fouredgescontrol="sameBorderOnFourEdgesCheckbox"
+                        fouredges="border-top-style,border-right-style,border-left-style"
+                        oncommand="ApplyPropertyFromMenulist(this)">
+                <menupopup>
+                  <menuitem label="&noneBorderStyleStyle.label;" value="none"/>
+                  <menuitem label="&hiddenBorderStyleStyle.label;" value="hidden"/>
+                  <menuseparator/>
+                  <menuitem label="&solidBorderStyleStyle.label;" value="solid"/>
+                  <menuitem label="&doubleBorderStyleStyle.label;" value="double"/>
+                  <menuitem label="&dottedBorderStyleStyle.label;" value="dotted"/>
+                  <menuitem label="&dashedBorderStyleStyle.label;" value="dashed"/>
+                  <menuitem label="&grooveBorderStyleStyle.label;" value="groove"/>
+                  <menuitem label="&ridgeBorderStyleStyle.label;" value="ridge"/>
+                  <menuitem label="&insetBorderStyleStyle.label;" value="inset"/>
+                  <menuitem label="&outsetBorderStyleStyle.label;" value="outset"/>
+                </menupopup>
+              </menulist>
+            </row>
+          </rows>
+        </grid>
+
+        <checkbox label="&sameFourCorners.label;" id="sameFourCornersCheckbox"
+                  oncommand="ToggleSameFourCorners(this)"/>
+        <grid>
+          <columns><column/><column/><column/></columns>
+          <rows>
+            <row align="center">
+              <label value="&topLeftCorner.label;"/>
+              <hbox align="center">
+                <menulist editable="true" id="topLeftBorderRadiusXMenulist"
+                          oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'thin medium thick', false, ApplyBorderRadius)"
+                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'thin medium thick', false, ApplyBorderRadius)">
+                  <menupopup id="topLeftBorderRadiusXMenupopup"
+                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
+                  </menupopup>
+                </menulist>
+                <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch', ApplyBorderRadius)"
+                             ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', false, ApplyBorderRadius)"/>
+              </hbox>
+              <hbox align="center">
+                <menulist editable="true" id="topLeftBorderRadiusYMenulist"
+                          oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'thin medium thick', false, ApplyBorderRadius)"
+                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'thin medium thick', false, ApplyBorderRadius)">
+                  <menupopup id="topLeftBorderRadiusYMenupopup"
+                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
+                  </menupopup>
+                </menulist>
+                <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch', ApplyBorderRadius)"
+                             ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', false, ApplyBorderRadius)"/>
+              </hbox>
+            </row>
+
+            <row align="center">
+              <label value="&topRightCorner.label;"/>
+              <hbox align="center">
+                <menulist editable="true" id="topRightBorderRadiusXMenulist"
+                          oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'thin medium thick', false, ApplyBorderRadius)"
+                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'thin medium thick', false, ApplyBorderRadius)">
+                  <menupopup id="topRightBorderRadiusXMenupopup"
+                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
+                  </menupopup>
+                </menulist>
+                <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch', ApplyBorderRadius)"
+                             ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', false, ApplyBorderRadius)"/>
+              </hbox>
+              <hbox align="center">
+                <menulist editable="true" id="topRightBorderRadiusYMenulist"
+                          oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'thin medium thick', false, ApplyBorderRadius)"
+                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'thin medium thick', false, ApplyBorderRadius)">
+                  <menupopup id="topRightBorderRadiusYMenupopup"
+                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
+                  </menupopup>
+                </menulist>
+                <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch', ApplyBorderRadius)"
+                             ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', false, ApplyBorderRadius)"/>
+              </hbox>
+            </row>
+
+            <row align="center">
+              <label value="&bottomLeftCorner.label;"/>
+              <hbox align="center">
+                <menulist editable="true" id="bottomLeftBorderRadiusXMenulist"
+                          oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'thin medium thick', false, ApplyBorderRadius)"
+                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'thin medium thick', false, ApplyBorderRadius)">
+                  <menupopup id="bottomLeftBorderRadiusXMenupopup"
+                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
+                  </menupopup>
+                </menulist>
+                <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch', ApplyBorderRadius)"
+                             ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', false, ApplyBorderRadius)"/>
+              </hbox>
+              <hbox align="center">
+                <menulist editable="true" id="bottomLeftBorderRadiusYMenulist"
+                          oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'thin medium thick', false, ApplyBorderRadius)"
+                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'thin medium thick', false, ApplyBorderRadius)">
+                  <menupopup id="bottomLeftBorderRadiusYMenupopup"
+                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
+                  </menupopup>
+                </menulist>
+                <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch', ApplyBorderRadius)"
+                             ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', false, ApplyBorderRadius)"/>
+              </hbox>
+            </row>
+
+            <row align="center">
+              <label value="&bottomRightCorner.label;" id="bottomRightCornerLabel"/>
+              <hbox align="center">
+                <menulist editable="true" id="bottomRightBorderRadiusXMenulist"
+                          oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'thin medium thick', false, ApplyBorderRadius)"
+                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'thin medium thick', false, ApplyBorderRadius)">
+                  <menupopup id="bottomRightBorderRadiusXMenupopup"
+                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
+                  </menupopup>
+                </menulist>
+                <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch', ApplyBorderRadius)"
+                             ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', false, ApplyBorderRadius)"/>
+              </hbox>
+              <hbox align="center">
+                <menulist editable="true" id="bottomRightBorderRadiusYMenulist"
+                          oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'thin medium thick', false, ApplyBorderRadius)"
+                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'thin medium thick', false, ApplyBorderRadius)">
+                  <menupopup id="bottomRightBorderRadiusYMenupopup"
+                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
+                  </menupopup>
+                </menulist>
+                <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch', ApplyBorderRadius)"
+                             ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', false, ApplyBorderRadius)"/>
+              </hbox>
+            </row>
+
+          </rows>
+        </grid>
+
+        <checkbox label="&useImageAsBorder.label;" id="useImageAsBorderCheckbox"
+                  oncommand="ToggleImageAsBorder(this)"/>
+        <vbox class="indent" id="useImageAsBorderVbox">
+          <label value="&enterImageUrl.label;"/>
+          <hbox align="center">
+            <textbox flex="1" id="borderImageURLTextbox"
+                     oninput="LoadBorderImage();ApplyBorderImage(false)"/>
+            <filepickerbutton id="borderImageURLFilepicker"
+                              control="borderImageURLTextbox"
+                              mode="0"
+                              filters="filterImages"
+                              oncommand="LoadBorderImage();MakeRelativeUrl();ApplyBorderImage(false)"
+                              title="&borderImageURLButton.label;"/>
+          </hbox>
+          <vbox align="center" id="borderImagePreviewBox" >
+            <hbox align="center">
+              <spacer flex="1"/>
+              <stack>
+                <image id="borderImagePreview" top="0" left="0" style="margin: 15px"
+                       onload="SizeBorderImageRulers(this)"
+                       onerror="ErrorLoadingBorderImage()"/>
+
+                <box id="borderImageFromTop" top="15" left="0"
+                     onmousedown="StartMovingBorderImageSliceEdge(event, this, 'top')"
+                     onmousemove="MoveBorderImageSliceEdge(event, this, 'top')"
+                     onmouseup="StopMovingBorderImageSliceEdge(event, this, 'top')"/>
+                <box id="borderImageFromRight" right="15" top="0"
+                     onmousedown="StartMovingBorderImageSliceEdge(event, this, 'right')"
+                     onmousemove="MoveBorderImageSliceEdge(event, this, 'right')"
+                     onmouseup="StopMovingBorderImageSliceEdge(event, this, 'right')"/>
+                <box id="borderImageFromLeft" left="15" top="0"
+                     onmousedown="StartMovingBorderImageSliceEdge(event, this, 'left')"
+                     onmousemove="MoveBorderImageSliceEdge(event, this, 'left')"
+                     onmouseup="StopMovingBorderImageSliceEdge(event, this, 'left')"/>
+                <box id="borderImageFromBottom" bottom="15" left="0"
+                     onmousedown="StartMovingBorderImageSliceEdge(event, this, 'bottom')"
+                     onmousemove="MoveBorderImageSliceEdge(event, this, 'bottom')"
+                     onmouseup="StopMovingBorderImageSliceEdge(event, this, 'bottom')"/>
+              </stack>
+              <spacer flex="1"/>
+            </hbox>
+            <grid id="borderImageSubpropertiesGrid">
+              <columns>
+                <column style="border-right: thin solid gray"/>
+                <column style="border-right: thin solid gray"/>
+                <column style="border-right: thin solid gray"/>
+                <column style="border-right: thin solid gray"/>
+                <column/>
+              </columns>
+              <rows>
+                <row align="center">
+                  <spacer/>
+                  <label value="&topBorderImageProps.label;"/>
+                  <label value="&rightBBorderImageProps.label;"/>
+                  <label value="&bottomBorderImageProps.label;"/>
+                  <label value="&leftBorderImageProps.label;"/>
+                </row>
+                <row align="center" style="border-top: thin solid gray">
+                  <label value="&slicingBorderImageProps.label;"/>
+                  <textbox type="number" size="5" id="topEdgeSlicingTextbox"
+                         oncommand="ApplyBorderImageSliceChangeFromTextbox(this)"
+                         oninput="ApplyBorderImageSliceChangeFromTextbox(this)"/>
+                  <textbox type="number" size="5" id="rightEdgeSlicingTextbox"
+                           oncommand="ApplyBorderImageSliceChangeFromTextbox(this)"
+                           oninput="ApplyBorderImageSliceChangeFromTextbox(this)"/>
+                  <textbox type="number" size="5" id="bottomEdgeSlicingTextbox"
+                           oncommand="ApplyBorderImageSliceChangeFromTextbox(this)"
+                           oninput="ApplyBorderImageSliceChangeFromTextbox(this)"/>
+                  <textbox type="number" size="5" id="leftEdgeSlicingTextbox"
+                           oncommand="ApplyBorderImageSliceChangeFromTextbox(this)"
+                           oninput="ApplyBorderImageSliceChangeFromTextbox(this)"/>
+                </row>
+                <row align="center" style="border-top: thin solid gray">
+                  <label value="&widthBorderImageProps.label;"/>
+                  <hbox align="center">
+                    <menulist editable="true" id="borderSliceTopWidthMenulist"
+                              oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'thin medium thick', false, function() { ApplyBorderImage(true) })"
+                              oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'thin medium thick', false, function() { ApplyBorderImage(true) })">
+                      <menupopup id="borderSliceTopWidthMenupopup"
+                                 onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
+                        <menuseparator/>
+                        <menuitem label="&thinBorderWidth.label;" value="thin"/>
+                        <menuitem label="&mediumBorderWidth.label;" value="medium"/>
+                        <menuitem label="&thickBorderWidth.label;" value="thick"/>
+                      </menupopup>
+                    </menulist>
+                    <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch', function() { ApplyBorderImage(true) })"
+                                 ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', false, function() { ApplyBorderImage(true) })"/>
+                  </hbox>
+                  <hbox align="center">
+                    <menulist editable="true" id="borderSliceRightWidthMenulist"
+                              oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'thin medium thick', false, function() { ApplyBorderImage(true) })"
+                              oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'thin medium thick', false, function() { ApplyBorderImage(true) })">
+                      <menupopup id="borderSliceRightWidthMenupopup"
+                                 onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
+                        <menuseparator/>
+                        <menuitem label="&thinBorderWidth.label;" value="thin"/>
+                        <menuitem label="&mediumBorderWidth.label;" value="medium"/>
+                        <menuitem label="&thickBorderWidth.label;" value="thick"/>
+                      </menupopup>
+                    </menulist>
+                    <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch', function() { ApplyBorderImage(true) })"
+                                 ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', false, function() { ApplyBorderImage(true) })"/>
+                  </hbox>
+                  <hbox align="center">
+                    <menulist editable="true" id="borderSliceBottomWidthMenulist"
+                              oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'thin medium thick', false, function() { ApplyBorderImage(true) })"
+                              oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'thin medium thick', false, function() { ApplyBorderImage(true) })">
+                      <menupopup id="borderSliceBottomWidthMenupopup"
+                                 onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
+                        <menuseparator/>
+                        <menuitem label="&thinBorderWidth.label;" value="thin"/>
+                        <menuitem label="&mediumBorderWidth.label;" value="medium"/>
+                        <menuitem label="&thickBorderWidth.label;" value="thick"/>
+                      </menupopup>
+                    </menulist>
+                    <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch', function() { ApplyBorderImage(true) })"
+                                 ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', false, function() { ApplyBorderImage(true) })"/>
+                  </hbox>
+                  <hbox align="center">
+                    <menulist editable="true" id="borderSliceLeftWidthMenulist"
+                              oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'thin medium thick', false, function() { ApplyBorderImage(true) })"
+                              oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'thin medium thick', false, function() { ApplyBorderImage(true) })">
+                      <menupopup id="borderSliceLeftWidthMenupopup"
+                                 onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
+                        <menuseparator/>
+                        <menuitem label="&thinBorderWidth.label;" value="thin"/>
+                        <menuitem label="&mediumBorderWidth.label;" value="medium"/>
+                        <menuitem label="&thickBorderWidth.label;" value="thick"/>
+                      </menupopup>
+                    </menulist>
+                    <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch', function() { ApplyBorderImage(true) })"
+                                 ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', false, function() { ApplyBorderImage(true) })"/>
+                  </hbox>
+                </row>
+                <row align="center" style="border-top: thin solid gray">
+                  <label value="&repeatBorderImageProps.label;"/>
+                  <menulist id="horizontalBorderImageRepeatMenulist"
+                            oncommand="ApplyBorderImage(false)">
+                    <menupopup>
+                      <menuitem label="&stretchBorderImageRepeat.label;" value="stretch"/>
+                      <menuitem label="&repeatBorderImageRepeat.label;"  value="repeat"/>
+                      <menuitem label="&roundBorderImageRepeat.label;"   value="round"/>
+                    </menupopup>
+                  </menulist>
+                  <menulist id="VerticalBorderImageRepeatMenulist"
+                            oncommand="ApplyBorderImage(false)">
+                    <menupopup>
+                      <menuitem label="&stretchBorderImageRepeat.label;" value="stretch"/>
+                      <menuitem label="&repeatBorderImageRepeat.label;"  value="repeat"/>
+                      <menuitem label="&roundBorderImageRepeat.label;"   value="round"/>
+                    </menupopup>
+                  </menulist>
+                </row>
+              </rows>
+            </grid>
+          </vbox>
+        </vbox>
+      </vbox>
+  </vbox>
+</overlay>

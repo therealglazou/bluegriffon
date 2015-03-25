@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+  
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+  <Description about="urn:mozilla:install-manifest">
+    <em:id>mathml@bluegriffon.com</em:id>
+    <em:version>0.1.7.3</em:version>
+  
+    <em:targetApplication>
+      <!-- BlueGriffon -->
+      <Description>
+        <em:id>bluegriffon@disruptive-innovations.com</em:id>
+        <em:minVersion>0.1pre</em:minVersion>
+        <em:maxVersion>*</em:maxVersion>
+      </Description>
+    </em:targetApplication>
+  
+    <!-- front-end metadata -->
+    <em:name>MathML</em:name>
+    <em:description>STUB for MathML for BlueGriffon</em:description>
+    <em:creator>Disruptive Innovations SARL</em:creator>
+    <em:homepageURL>http://www.disruptive-innovations.com/</em:homepageURL>
+    <em:iconURL>chrome://mathml/skin/mathml-icon.png</em:iconURL>
+
+    <em:file>
+      <Description about="wordcount.jar">
+        <em:package>content/</em:package>
+        <em:locale>locale/en-US/</em:locale>
+      </Description>
+    </em:file>
+
+  </Description>
+</RDF>

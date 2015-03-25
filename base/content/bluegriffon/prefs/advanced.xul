@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<!DOCTYPE overlay SYSTEM "chrome://bluegriffon/locale/prefs/advanced.dtd">
+
+<overlay
+  id     = "advancedPrefsOverlay"
+  xmlns  = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <prefpane id="advancedPrefPane">
+    <preferences>
+      <preference id="pref-matchOS" name="intl.locale.matchOS" type="bool"/>
+    </preferences>
+
+    <groupbox>
+      <caption label="&network.caption;"/>
+      <hbox align="center">
+        <label value="&configureNetwork.label;"/>
+        <spacer flex="1"/>
+        <button label="&parameters.label;"
+                oncommand="OpenNetworkParams()"/>
+      </hbox>
+    </groupbox>
+    <groupbox>
+      <caption label="&ui.caption;"/>
+      <radiogroup id="matchOSRadiogroup"
+                  preference="pref-matchOS"
+                  oncommand="SwitchToSystemLocale(this)">
+        <radio label="&useSystemLocale.radio;" value="true"/>
+        <radio label="&useInstalledLocale.radio;" value="false"/>
+      </radiogroup>
+      <listbox id="locale-listbox" rows="4" class="indent"/>
+      <hbox>
+        <spacer flex="1"/>
+        <button label="&switchLocale.button;" oncommand="changeLocale()"/>
+      </hbox>
+    </groupbox>
+
+    <groupbox>
+      <caption label="&preview.caption;"/>
+      <hbox align="center">
+        <spacer flex="1"/>
+        <button label="&resetPreviewers.label;"
+                oncommand="ResetPreviewers()"/>
+      </hbox>
+    </groupbox>
+
+    <groupbox>
+      <caption label="&advancedConfig.caption;"/>
+      <hbox align="center">
+        <spacer flex="1"/>
+        <button label="&configEditor.label;"
+                oncommand='document.documentElement.openWindow("Preferences:ConfigManager", "chrome://global/content/config.xul", "", null);'/>
+      </hbox>
+    </groupbox>
+  </prefpane>
+
+</overlay>

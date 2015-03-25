@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1/GPL 2.0/LGPL 2.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is ITS 2.0 Panel for BlueGriffon.
+   -
+   - The Initial Developer of the Original Code is
+   - Disruptive Innovations SAS.
+   - Portions created by the Initial Developer are Copyright (C) 2013
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -   Daniel Glazman <daniel.glazman@disruptive-innovations.com>, Original author
+   -     on behalf of DFKI
+   -
+   - Alternatively, the contents of this file may be used under the terms of
+   - either the GNU General Public License Version 2 or later (the "GPL"), or
+   - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+   - in which case the provisions of the GPL or the LGPL are applicable instead
+   - of those above. If you wish to allow use of your version of this file only
+   - under the terms of either the GPL or the LGPL, and not to allow others to
+   - use your version of this file under the terms of the MPL, indicate your
+   - decision by deleting the provisions above and replace them with the notice
+   - and other provisions required by the GPL or the LGPL. If you do not delete
+   - the provisions above, a recipient may use your version of this file under
+   - the terms of any one of the MPL, the GPL or the LGPL.
+   -
+   - ***** END LICENSE BLOCK ***** -->
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/listboxBg.css" type="text/css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/bluegriffonDialogs.css" type="text/css"?>
+
+<?xul-overlay href="chrome://its20/content/ruleDialogs/selector.xul"?>
+
+<!DOCTYPE page [
+  <!ENTITY % termRuleDTD SYSTEM "chrome://its20/locale/termRule.dtd">
+  %termRuleDTD;
+]>
+
+<dialog id         = "termRuleDialog"
+        windowtype = "BlueGriffon:its20:termRule"
+        title      = "&window.title;"
+        xmlns      = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        persist    = "screenX screenY width height"
+        ondialogaccept = "Accept()"
+        onload     = "Startup()"
+        onunload   = "Shutdown()">
+
+  <script type="application/x-javascript"  src="chrome://bluegriffon/content/utils/dgid.js"/>
+  <script type="application/x-javascript"  src="chrome://bluegriffon/content/utils/global.js"/>
+  <script type="application/x-javascript"  src="chrome://bluegriffon/content/utils/prompter.js"/>
+  <script type="application/x-javascript"  src="chrome://its20/content/implemented.js"/>
+  <script type="application/x-javascript"  src="chrome://its20/content/ruleDialogs/common.js"/>
+  <script type="application/x-javascript"  src="chrome://its20/content/ruleDialogs/termRule.js"/>
+
+  <groupbox id="selectorGroupbox"/>
+
+  <groupbox>
+    <hbox>
+      <spacer flex="1"/>
+      <hbox>
+        <toolbarbutton class="multibutton" label="&yesTerm.label;" value="yes" type="checkbox"
+                       id="yesTermButton" group="term" checked="true"
+                       oncommand="Toggle(this)"/>
+        <toolbarbutton class="multibutton" label="&noTerm.label;" value="no" type="checkbox"
+                       id="noTermButton" group="term"
+                       oncommand="Toggle(this)"/>
+      </hbox>
+      <spacer flex="1"/>
+    </hbox>
+    <radiogroup id="termInfoSwitchRadiogroup"
+                oncommand="ToggleTermInfoSwitchRadiogroup(event)">
+      <radio value="none"
+             label="&noTermInfo.label;"
+             id="noTermInfoRadio"/>
+ 
+      <radio value="termInfoPointer"
+             label="&termInfoPointer.label;"
+             id="termInfoPointerRadio"/>
+        <textbox id="termInfoPointerTextbox"
+                 class="indent"/>
+
+      <radio value="termInfoRef"
+             label="&termInfoRef.label;"
+             id="termInfoRefRadio"/>
+        <menulist id="termInfoRefMenulist"
+                  editable="true"
+                  class="indent">
+          <menupopup id="termInfoRefMenupopup"
+                     onpopupshowing="ListAllIDrefs(this)"/>
+        </menulist>
+      <radio value="termInfoRefPointer"
+             label="&termInfoRefPointer.label;"
+             id="termInfoRefPointerRadio"/>
+        <textbox id="termInfoRefPointerTextbox"
+                 class="indent"/>
+    </radiogroup>
+  </groupbox>
+</dialog>

@@ -1,0 +1,155 @@
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1/GPL 2.0/LGPL 2.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is BlueGriffon.
+   -
+   - The Initial Developer of the Original Code is
+   - Disruptive Innovations SARL.
+   - Portions created by the Initial Developer are Copyright (C) 2006
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -   Daniel Glazman (daniel.glazman@disruptive-innovations.com), Original Author
+   -
+   - Alternatively, the contents of this file may be used under the terms of
+   - either the GNU General Public License Version 2 or later (the "GPL"), or
+   - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+   - in which case the provisions of the GPL or the LGPL are applicable instead
+   - of those above. If you wish to allow use of your version of this file only
+   - under the terms of either the GPL or the LGPL, and not to allow others to
+   - use your version of this file under the terms of the MPL, indicate your
+   - decision by deleting the provisions above and replace them with the notice
+   - and other provisions required by the LGPL or the GPL. If you do not delete
+   - the provisions above, a recipient may use your version of this file under
+   - the terms of any one of the MPL, the GPL or the LGPL.
+   -
+   - ***** END LICENSE BLOCK ***** -->
+
+<!ENTITY window.title "Průvodce novým dokumentem">
+
+<!ENTITY pageTitle.label "Název:">
+<!ENTITY pageAuthor.label "Autor:">
+<!ENTITY pageDescription.label "Popis:">
+<!ENTITY pageTitle.accesskey "N">
+<!ENTITY pageAuthor.accesskey "A">
+<!ENTITY pageDescription.accesskey "P">
+<!ENTITY pageKeywords.label "Klíčová slova:">
+<!ENTITY pageKeywords.accesskey "K">
+<!ENTITY documentLanguage.label "Jazyk:">
+<!ENTITY language.accesskey "J">
+<!ENTITY charset.label "Znaková sada:">
+<!ENTITY charset.accesskey "Z">
+<!ENTITY direction.label "Směr textu:">
+<!ENTITY direction.accesskey "x">
+<!ENTITY ltr.label "Zleva doprava">
+<!ENTITY rtl.label "Zprava doleva">
+<!ENTITY unspecified.label "Nespecifikováno">
+
+<!ENTITY selectLanguage.label "Vyberte jazyk">
+
+<!ENTITY backgroundImage.label "Obrázek pozadí:">
+<!ENTITY backgroundImage.accesskey "p">
+
+<!ENTITY filepickerForBgImage.title "Vyberte obrázek pozadí">
+<!ENTITY pagePreview.label "Náhled:">
+
+<!ENTITY useSystemColors.label "Výchozí barvy čtenáře (Nenastavovat na stránce)">
+<!ENTITY userDefinedColors.label "Použít vlastní barvy:">
+
+<!ENTITY backgroundColor.label "Pozadí:">
+<!ENTITY backgroundColor.accesskey "P">
+<!ENTITY textColor.label "Text:">
+<!ENTITY textColor.accesskey "T">
+<!ENTITY linksColor.label "Odkazy:">
+<!ENTITY linksColor.accesskey "L">
+<!ENTITY activeLinksColor.label "Aktivní odkazy:">
+<!ENTITY activeLinksColor.accesskey "A">
+<!ENTITY visitedLinksColor.label "Navštívené odkazy:">
+<!ENTITY visitedLinksColor.accesskey "N">
+<!ENTITY underlineLinks.label "Podtrhávat odkazy">
+
+<!ENTITY relativeURLForBgImage.label "URL adresa je relativní vůči stránce">
+
+<!ENTITY generalTab.label "Obecné vlastnosti dokumentu">
+<!ENTITY colorsTab.label "Barvy a pozadí">
+<!ENTITY styleTab.label "Styl">
+<!ENTITY advancedTab.label "Rozšířené">
+
+<!ENTITY unsavedPage.label "[Nové stránka, zatím neuloženo]">
+<!ENTITY noPageLastModified.label "[Žádné informace]">
+
+<!ENTITY normalText.preview "Normální text">
+<!ENTITY links.preview "Odkazy">
+<!ENTITY activeLinks.preview "Aktivní odkazy">
+<!ENTITY visitedLinks.preview "Navštívené odkazy">
+
+<!ENTITY makeColorsDefault.label "Zvolit toto nastavení jako výchozí">
+
+<!ENTITY bgTab.label "Pozadí dokumentu">
+
+<!ENTITY layoutsTab.label "Layout stránka">
+<!ENTITY usePageLayout.checkbox "Použít předdefinovaný CSS layout">
+<!ENTITY oneColumn100.label "1 sloupec, 100&#37;">
+<!ENTITY twoColumns5050.label "2 sloupce, 50&#37;/50&#37;">
+<!ENTITY twoColumns6633.label "2 sloupce, 66&#37;/33&#37;">
+<!ENTITY twoColumns3366.label "2 sloupce, 33&#37;/66&#37;">
+<!ENTITY twoColumns7525.label "2 sloupce, 75&#37;/25&#37;">
+<!ENTITY twoColumns2575.label "2 sloupce, 25&#37;/75&#37;">
+<!ENTITY threeColumns333333.label "3 sloupce, 33&#37;/33&#37;/33&#37;">
+<!ENTITY threeColumns502525.label "3 sloupce, 50&#37;/25&#37;/25&#37;">
+<!ENTITY threeColumns252550.label "3 sloupce, 25&#37;/25&#37;/50&#37;">
+<!ENTITY fourColumns25252525.label "4 sloupce, 25&#37;/25&#37;/25&#37;/25&#37;">
+
+<!ENTITY layoutType.label "Šířka:">
+<!ENTITY layoutType.accesskey "k">
+<!ENTITY layout100percent.label "Plná šířka">
+<!ENTITY layout750px.label "750px">
+<!ENTITY layout950px.label "950px">
+<!ENTITY layout974px.label "974px">
+<!ENTITY layoutSubtype.label "Postranní panel:">
+<!ENTITY layoutSubtype.accesskey "P">
+<!ENTITY noSidebar.label "Žádný">
+<!ENTITY left160Sidebar.label "Vlevo 160px">
+<!ENTITY left180Sidebar.label "Vlevo 180px">
+<!ENTITY left300Sidebar.label "Vlevo 300px">
+<!ENTITY right180Sidebar.label "Vpravo 180px">
+<!ENTITY right240Sidebar.label "Vpravo 240px">
+<!ENTITY right300Sidebar.label "Vpravo 300px">
+<!ENTITY loremIpsum.label "Vložit 'lorem ipsum' obsah">
+<!ENTITY loremIpsum.accesskey "l">
+<!ENTITY newRow.label "Nový řádek">
+<!ENTITY removeRow.label "Odebrat">
+
+<!ENTITY tile.label "Dlaždice:">
+<!ENTITY tile.accesskey "D">
+<!ENTITY scrolling.label "Rolování:">
+<!ENTITY scrolling.accesskey "R">
+<!ENTITY scrollWithPage.label "Se stránkou">
+<!ENTITY noScrolling.label "Žádné">
+<!ENTITY horizPosition.label "Horiz:">
+<!ENTITY vertPosition.label "Vert:">
+
+<!ENTITY documentType.label "Typ dokumentu">
+<!ENTITY documentType.description "Jaký typ dokumentu chcete vytvořit?">
+
+<!ENTITY language.label "Jazyk dokumentu">
+<!ENTITY html.label "HTML 4">
+<!ENTITY xhtml.label "XHTML 1">
+<!ENTITY xhtml11.label "XHTML 1.1">
+<!ENTITY html5.label "HTML 5">
+<!ENTITY xhtml5.label "XHTML 5">
+
+<!ENTITY doctype.label "Typ dokumentu">
+<!ENTITY transitional.label "Transitional">
+<!ENTITY strict.label "strict">
+

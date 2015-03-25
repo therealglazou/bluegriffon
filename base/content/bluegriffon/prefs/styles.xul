@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<!DOCTYPE overlay SYSTEM "chrome://bluegriffon/locale/prefs/styles.dtd">
+
+<overlay
+  id     = "stylesPrefsOverlay"
+  xmlns  = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <prefpane id="stylesPrefPane">
+    <preferences>
+      <preference id="pref-csspolicy"        name="bluegriffon.css.policy" type="string"/>
+      <preference id="pref-cssprefix"        name="bluegriffon.css.prefix" type="string"/>
+
+      <preference id="pref-css-output-names" name="bluegriffon.css.colors.names.enabled" type="bool"/>
+      <preference id="pref-css-output-type"  name="bluegriffon.css.colors.type" type="string"/>
+
+      <preference id="pref-support-gecko"    name="bluegriffon.css.support.gecko" type="bool"/>
+      <preference id="pref-support-webkit"   name="bluegriffon.css.support.webkit" type="bool"/>
+      <preference id="pref-support-presto"   name="bluegriffon.css.support.presto" type="bool"/>
+      <preference id="pref-support-trident"  name="bluegriffon.css.support.trident" type="bool"/>
+    </preferences>
+    <groupbox>
+      <caption label="&cssPolicy.caption;"/>
+      <radiogroup orient="vertical" preference="pref-csspolicy"
+                  id="cssPolicyRadiogroup"
+                  onselect="TogglePolicyRadiogroup(this)">
+        <radio label="&bgDecidesAll.radio;"
+               id="automaticRadio"
+               value="automatic"
+               tooltiptext="&bgDecidesAll.desc;"/>
+        <hbox align="center" class="indent">
+          <label value="&prefixPrompt.label;" id="cssPrefixLabel"
+                 control="cssPrefixTextbox"/>
+          <textbox preference="pref-cssprefix"
+                   size="4"
+                   id="cssPrefixTextbox"/>
+        </hbox>
+        <radio label="&iDecide.radio;"
+               id="manualRadio"
+               value="manual"
+               tooltiptext="&iDecide.desc;"/>
+      </radiogroup>
+    </groupbox>
+    <groupbox>
+      <caption label="&cssColors.captions;"/>
+      <checkbox id="outputCssColorNamesCheckbox"
+                label="&outputCssColorNames.label;"
+                preference="pref-css-output-names"/>
+      <radiogroup id="cssColorTypeRadiogroup"
+                  orient="horizontal"
+                  preference="pref-css-output-type">
+        <radio label="&rgbColors.label;" value="rgb"/>
+        <radio label="&hexColors.label;" value="hex"/>
+      </radiogroup>
+    </groupbox>
+    <groupbox>
+      <caption label="&browserSupport.caption;"/>
+      <checkbox label="&gecko.label;" id="geckoBrowsers" disabled="true" preference="pref-support-gecko" oncommand="CleanPrefixes()"/>
+      <checkbox label="&webkit.label;" id="webkitBrowsers" preference="pref-support-webkit" oncommand="CleanPrefixes()"/>
+      <checkbox label="&presto.label;" id="prestoBrowsers" preference="pref-support-presto" oncommand="CleanPrefixes()"/>
+      <checkbox label="&trident.label;" id="tridentBrowsers" preference="pref-support-trident" oncommand="CleanPrefixes()"/>
+    </groupbox>
+  </prefpane>
+
+</overlay>

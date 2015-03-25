@@ -1,0 +1,53 @@
+@charset "utf-8";
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+/*
+ * このファイルを編集して userChrome.css という名前で
+ *   [プロファイルディレクトリ]/chrome/
+ * ディレクトリにコピーしてください。
+ */
+
+/*
+ * このファイルを使って Mozilla のユーザインターフェイスの見た目をカスタマイズ
+ * できます。デフォルト設定を上書きする場合は !important 宣言を使ってください。
+ */
+
+/*
+ * 次の @namespace 規則ではデフォルト名前空間を XUL にしています。
+ * 削除すると正常に動作しなくなるので、削除しないでください。
+ */
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+
+/*
+ * 操作性を向上させる例:
+ */
+/*
+ * デフォルトフォントサイズをすべて 20 ポイントにする:
+ *
+ * * {
+ *   font-size: 20pt !important
+ * }
+ */
+/*
+ * メニュー項目についてはデフォルトサイズではなく 15 ポイントにする:
+ *
+ * menupopup > * {
+ *   font-size: 15pt !important
+ * }
+ */
+/*
+ * ロケーション (URL) バーを固定幅フォントで表示する:
+ *
+ * #urlbar {
+ *    font-family: monospace !important;
+ * }
+ */
+
+/*
+ * その他の例は次のページを参照してください:
+ * http://www.mozilla-japan.org/unix/customizing.html
+ */
+ 

@@ -1,0 +1,832 @@
+<?xml version="1.0"?>
+
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1/GPL 2.0/LGPL 2.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is BlueGriffon.
+   -
+   - The Initial Developer of the Original Code is
+   - Disruptive Innovations SARL.
+   - Portions created by the Initial Developer are Copyright (C) 2006
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -   Daniel Glazman (daniel.glazman@disruptive-innovations.com), Original Author
+   -
+   - Alternatively, the contents of this file may be used under the terms of
+   - either the GNU General Public License Version 2 or later (the "GPL"), or
+   - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+   - in which case the provisions of the GPL or the LGPL are applicable instead
+   - of those above. If you wish to allow use of your version of this file only
+   - under the terms of either the GPL or the LGPL, and not to allow others to
+   - use your version of this file under the terms of the MPL, indicate your
+   - decision by deleting the provisions above and replace them with the notice
+   - and other provisions required by the LGPL or the GPL. If you do not delete
+   - the provisions above, a recipient may use your version of this file under
+   - the terms of any one of the MPL, the GPL or the LGPL.
+   -
+   - ***** END LICENSE BLOCK ***** -->
+
+
+<bindings id="rulersBindings"
+          xmlns="http://www.mozilla.org/xbl"
+          xmlns:html="http://www.w3.org/1999/xhtml"
+          xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+          xmlns:xbl="http://www.mozilla.org/xbl"
+          xmlns:svg="http://www.w3.org/2000/svg">
+
+  <binding id="ruler-base">
+
+    <implementation>
+
+      <constructor>
+        <![CDATA[
+          NotifierUtils.addNotifierCallback("selection",      this.selectionChanged, this);
+          NotifierUtils.addNotifierCallback("resizeEvent",    this.onResizeEvent, this);
+          NotifierUtils.addNotifierCallback("editorScrolled", this.onEditorScrolled, this);
+        ]]>
+      </constructor>
+
+      <field name="kSVG_NS">"http://www.w3.org/2000/svg"</field>
+
+      <field name="mRulerSeparatorPosition">null</field>
+      <field name="mResizing">false</field>
+      <field name="mRuleSeparator">null</field>
+
+      <method name="onEditorScrolled">
+        <body>
+        <![CDATA[
+          var elt = EditorUtils.getSelectionContainer().node;
+          this.selectionChanged(null, elt, true);
+        ]]>
+        </body>
+      </method>
+
+      <method name="onResizeEvent">
+        <body>
+        <![CDATA[
+          var elt = EditorUtils.getSelectionContainer().node;
+          this.selectionChanged(null, elt, true);
+        ]]>
+        </body>
+      </method>
+
+      <method name="getComputedStyle">
+        <parameter name="aElt"/>
+        <body>
+        <![CDATA[
+          return aElt.ownerDocument.defaultView.getComputedStyle(aElt, "");
+        ]]>
+        </body>
+      </method>
+
+      <property name="mSVGGroup">
+        <getter>
+        <![CDATA[
+          return document.getAnonymousElementByAttribute(this, "anonid", "SVGGroup");
+        ]]>
+        </getter>
+      </property>
+
+      <method name="clean">
+        <body>
+        <![CDATA[
+          var svgGroup = this.mSVGGroup;
+          var child = svgGroup.firstChild;
+          while (child)
+          {
+            var tmp = child.nextSibling;
+            svgGroup.removeChild(child);
+            child = tmp;
+          }
+        ]]>
+        </body>
+      </method>
+
+      <method name="notifyEditor">
+        <parameter name="aIsCell"/>
+        <body>
+        <![CDATA[
+          var editor = EditorUtils.getCurrentEditor();
+          editor instanceof Components.interfaces.nsIHTMLObjectResizer;
+          if (editor.objectResizingEnabled && editor.resizedObject)
+            editor.refreshResizers();
+          editor instanceof Components.interfaces.nsIHTMLAbsPosEditor;
+          if (editor.absolutePositioningEnabled && editor.positionedElement)
+            editor.refreshGrabber();
+          editor instanceof Components.interfaces.nsIHTMLInlineTableEditor;
+          if (aIsCell && editor.inlineTableEditingEnabled)
+            editor.refreshInlineTableEditingUI();
+        ]]>
+        </body>
+      </method>
+
+
+    </implementation>
+  </binding>
+
+  <binding id="hruler" extends="chrome://bluegriffon/content/bindings/rulers.xml#ruler-base">
+    <content>
+      <svg:svg style="width: 100% ! important; height: 16px;" height="16"
+               preserveAspectRatio="xMidYMid meet">
+        <svg:g anonid="SVGGroup"/>
+      </svg:svg>
+    </content>
+
+    <implementation>
+
+      <field name="mOriginalX">0</field>
+
+      <method name="selectionChanged">
+        <parameter name="aArguments"/>
+        <parameter name="aNode"/>
+        <parameter name="aOneElementSelected"/>
+        <body>
+        <![CDATA[
+          var node = aNode;
+          var display = this.getComputedStyle(aNode).getPropertyValue("display");
+          while (node &&
+                 display != "block" &&
+                 display != "inline-block" &&
+                 display != "table" &&
+                 display != "table-cell" &&
+                 display != "list-item" &&
+                 node.nodeName.toLowerCase() != "img")
+          {
+            node = node.parentNode;
+            display = this.getComputedStyle(node).getPropertyValue("display");
+          }
+          this.clean();
+          if (node instanceof Components.interfaces.nsIDOMHTMLTableCellElement)
+          {
+            var child = node;
+            while (child.previousSibling)
+              child = child.previousSibling;
+            while (child)
+            {
+              if (child.nodeType == Node.ELEMENT_NODE)
+                this._showElementRuler(child);
+              child = child.nextSibling;
+            }
+          }
+          else
+            this._showElementRuler(node);
+        ]]>
+        </body>
+      </method>
+
+      <method name="_showElementRuler">
+        <parameter name="aElt"/>
+        <body>
+        <![CDATA[
+          var w = aElt.clientWidth;
+          var x = 0;
+          var o = aElt;
+          if (!o.offsetParent)
+            x = parseFloat(o.ownerDocument.defaultView.getComputedStyle(o, "").getPropertyValue("margin-left"));
+          else while (o)
+          {
+            x += o.offsetLeft;
+            o = o.offsetParent;
+          }
+          if (aElt instanceof Components.interfaces.nsIDOMHTMLTableCellElement)
+          {
+            var cs = this.getComputedStyle(aElt);
+            var pl = cs.getPropertyCSSValue("padding-left");
+            var pr = cs.getPropertyCSSValue("padding-right");
+
+            if (pl.primitiveType == CSSPrimitiveValue.CSS_PX)
+            {
+              var plv = pl.getFloatValue(CSSPrimitiveValue.CSS_PX);
+              x += plv;
+              w -= plv;
+            }
+            if (pr.primitiveType == CSSPrimitiveValue.CSS_PX)
+            {
+              var prv = pr.getFloatValue(CSSPrimitiveValue.CSS_PX);
+              w -= prv;
+            }
+          }
+          this.addObject("hruler", x, w, aElt);
+        ]]>
+        </body>
+      </method>
+
+      <property name="mScrollX">
+        <getter>
+        <![CDATA[
+          return EditorUtils.getCurrentEditorElement() ?
+                   EditorUtils.getCurrentEditorElement().contentWindow.scrollX :
+                   0;
+        ]]>
+        </getter>
+      </property>
+
+      <method name="addObject">
+        <parameter name="aName"/>
+        <parameter name="aPos"/>
+        <parameter name="aSize"/>
+        <parameter name="aSource"/>
+        <body>
+        <![CDATA[
+          if (!aSource)
+            return;
+          var svgGroup = this.mSVGGroup;
+          var g = document.createElementNS(this.kSVG_NS, "g");
+
+          var zoom = 1;
+          if (EditorUtils.getCurrentEditorElement())
+            zoom = BGZoomManager.getCurrentZoom();
+
+          var cs = this.getComputedStyle(aSource);
+          var positionProperty = cs.getPropertyValue("position");
+          if (positionProperty != "static")
+          {
+            var leftProperty = aSource.style.left;
+            if (leftProperty && leftProperty.indexOf("%") == -1)
+            {
+              var leftReal = aSource.offsetParent.clientWidth * parseFloat(leftProperty) / 100;
+              var lSpring = document.createElementNS(this.kSVG_NS, "rect");
+              lSpring.setAttribute("x", (aPos-this.mScrollX-leftReal)*zoom + "px");
+              lSpring.setAttribute("y", "7");
+              lSpring.setAttribute("width", leftReal*zoom + "px");
+              lSpring.setAttribute("height", "1");
+              lSpring.setAttribute("style", "fill: gray;stroke-width:1px; stroke:gray");
+              g.appendChild(lSpring);
+            }
+            var rightProperty = aSource.style.right;
+            if (rightProperty && rightProperty.indexOf("%") == -1)
+            {
+              var rightReal = aSource.offsetParent.clientWidth * parseFloat(rightProperty) / 100;
+              var rSpring = document.createElementNS(this.kSVG_NS, "rect");
+              rSpring.setAttribute("x", (aPos-this.mScrollX+aSize)*zoom + "px");
+              rSpring.setAttribute("y", "7");
+              rSpring.setAttribute("width", rightReal*zoom + "px");
+              rSpring.setAttribute("height", "1");
+              rSpring.setAttribute("style", "fill: gray;stroke-width:1px; stroke:gray");
+              g.appendChild(rSpring);
+            }
+          }
+
+          var r = document.createElementNS(this.kSVG_NS, "rect")
+          r.setAttribute("x", (aPos-this.mScrollX)*zoom + "px");
+          r.setAttribute("y", "0");
+          r.setAttribute("width", aSize*zoom + "px");
+          r.setAttribute("height", "16");
+          r.setAttribute("anonid", "ruler");
+          r.setAttribute("tooltiptext", "ruler");
+          r.setAttribute("style", "fill: white; stroke-width: 1px; stroke: gray");
+          g.appendChild(r);
+
+          var t = document.createElementNS(this.kSVG_NS, "text");
+          t.setAttribute("x", (aPos-this.mScrollX+aSize/2)*zoom + "px");
+          t.setAttribute("y", "50%");
+          g.appendChild(t);
+
+          var text = document.createTextNode(aSize + "px");
+          t.appendChild(text);
+
+          var lH = document.createElementNS(this.kSVG_NS, "rect")
+          lH.setAttribute("x", (aPos-this.mScrollX)*zoom-3 + "px");
+          lH.setAttribute("y", "0");
+          lH.setAttribute("width", "3px");
+          lH.setAttribute("height", "16");
+          lH.setAttribute("style", "fill: gray; cursor: w-resize");
+          lH.setAttribute("class", "hruler-separator");
+          lH.setAttribute("pos", aPos);
+          lH.setAttribute("size", aSize);
+          lH.setAttribute("ruler-separator-position", "left");
+          lH.setUserData("source", aSource, null);
+          g.appendChild(lH);
+
+          var rH = document.createElementNS(this.kSVG_NS, "rect")
+          rH.setAttribute("x", (aPos+aSize-this.mScrollX)*zoom + "px");
+          rH.setAttribute("y", "0");
+          rH.setAttribute("width", "3px");
+          rH.setAttribute("height", "16");
+          rH.setAttribute("style", "fill: gray; cursor: e-resize");
+          rH.setAttribute("class", "hruler-separator");
+          rH.setAttribute("pos", aPos);
+          rH.setAttribute("size", aSize);
+          rH.setAttribute("ruler-separator-position", "right");
+          rH.setUserData("source", aSource, null);
+          g.appendChild(rH);
+
+          svgGroup.appendChild(g);
+        ]]>
+        </body>
+      </method>
+
+    </implementation>
+
+    <resources>
+      <stylesheet src="chrome://bluegriffon/skin/rulers.css"/>
+    </resources>
+
+    <handlers>
+      <handler event="mousedown">
+        <![CDATA[
+          var elt = event.originalTarget;
+          if (elt.getAttribute("class") != "hruler-separator")
+            return; 
+
+          this.mRulerSeparatorPosition = elt.getAttribute("ruler-separator-position");
+
+          this.mOriginalX = event.clientX; 
+          this.mRuleSeparator = elt;
+
+          this.mResizing = true;
+
+          var g = elt.parentNode;
+          g.parentNode.appendChild(g);          
+          elt.setCapture(true);
+        ]]>
+      </handler>
+
+      <handler event="mousemove">
+        <![CDATA[
+          if (!this.mResizing)
+            return;
+
+          var x = event.clientX;
+          var zoom = BGZoomManager.getCurrentZoom();
+          var pos = parseFloat(this.mRuleSeparator.getAttribute("pos"));
+          var size = parseFloat(this.mRuleSeparator.getAttribute("size"));
+          switch (this.mRulerSeparatorPosition)
+          {
+            case "left":
+              this.mRuleSeparator.setAttribute("x",
+                 ((pos-this.mScrollX)*zoom - 3 - this.mOriginalX + x) + "px");
+              // update main ruler element
+              this.mRuleSeparator.previousSibling.previousSibling
+                .setAttribute("x", ((pos- this.mScrollX)*zoom - this.mOriginalX + x) + "px");
+              this.mRuleSeparator.previousSibling.previousSibling
+                .setAttribute("width", (size*zoom + this.mOriginalX - x) + "px");
+              // update text
+              this.mRuleSeparator.previousSibling
+                .setAttribute("x", ((pos-this.mScrollX+size/2)*zoom + (-this.mOriginalX + x)/2) + "px");
+              this.mRuleSeparator.previousSibling.textContent =
+                Math.floor(size + (this.mOriginalX - x)/zoom) + "px";
+              break;
+            case "right":
+              this.mRuleSeparator.setAttribute("x",
+                 ((pos+size-this.mScrollX)*zoom - this.mOriginalX + x) + "px");
+              // update main ruler element
+              this.mRuleSeparator.previousSibling.previousSibling.previousSibling
+                .setAttribute("width", (size*zoom - this.mOriginalX + x) + "px");
+              // update text
+              this.mRuleSeparator.previousSibling.previousSibling
+                .setAttribute("x", ((pos-this.mScrollX+size/2)*zoom + (-this.mOriginalX + x)/2) + "px");
+              this.mRuleSeparator.previousSibling.previousSibling.textContent =
+                Math.floor(size - (this.mOriginalX - x)/zoom) + "px";
+              break;
+            default: break;
+          }
+        ]]>
+      </handler>
+
+      <handler event="mouseup">
+        <![CDATA[
+          if (!this.mResizing)
+            return;
+
+          var elt = event.originalTarget;
+          elt.releaseCapture();
+          this.mResizing = false;
+          var source = this.mRuleSeparator.getUserData("source");
+          var marginLeft = parseFloat(this.getComputedStyle(source).getPropertyValue("margin-left"));
+          var width = source.clientWidth;
+          if (!marginLeft) marginLeft = 0;
+          this.mRuleSeparator = null;
+
+          var x = event.clientX;
+          var styleAttrValue = source.getAttribute("style");
+          if (styleAttrValue)
+            styleAttrValue += ";"
+          else
+            styleAttrValue = "";
+          var zoom = BGZoomManager.getCurrentZoom();
+          var editor = EditorUtils.getCurrentEditor();
+          editor.beginTransaction();
+          switch (this.mRulerSeparatorPosition)
+          {
+            case "left":
+              {
+                var txn = new diStyleAttrChangeTxn(source,
+                                                   "margin-left",
+                                                   (marginLeft - (this.mOriginalX - x)/zoom) + "px",
+                                                   "");
+                EditorUtils.getCurrentEditor().transactionManager.doTransaction(txn);  
+                EditorUtils.getCurrentEditor().incrementModificationCount(1);  
+                if(source.style.getPropertyValue("width")) {
+                  txn = new diStyleAttrChangeTxn(source,
+                                                 "width",
+                                                 (width  + (this.mOriginalX - x)/zoom) + "px",
+                                                 "");
+                  EditorUtils.getCurrentEditor().transactionManager.doTransaction(txn);  
+                  EditorUtils.getCurrentEditor().incrementModificationCount(1);  
+                }
+              }
+               break;
+            case "right":
+              {
+                var txn = new diStyleAttrChangeTxn(source,
+                                                   "width",
+                                                   (width  - (this.mOriginalX - x)/zoom) + "px",
+                                                   "");
+                EditorUtils.getCurrentEditor().transactionManager.doTransaction(txn);
+                EditorUtils.getCurrentEditor().incrementModificationCount(1);  
+              }
+              break;
+            default: break;
+          }
+          editor.endTransaction();
+          NotifierUtils.notify("selection", source, false);
+        ]]>
+      </handler>
+
+    </handlers>
+
+  </binding>
+
+   <binding id="vruler" extends="chrome://bluegriffon/content/bindings/rulers.xml#ruler-base">
+    <content>
+          <svg:svg style="width: 16px ! important; height: 100% ! important; "
+                   preserveAspectRatio="xMidYMid meet">
+            <svg:g anonid="SVGGroup"/>
+          </svg:svg>
+    </content>
+
+    <implementation>
+
+      <field name="mOriginalY">0</field>
+
+      <method name="selectionChanged">
+        <parameter name="aArguments"/>
+        <parameter name="aNode"/>
+        <parameter name="aOneElementSelected"/>
+        <body>
+        <![CDATA[
+          var node = aNode;
+          var display = this.getComputedStyle(aNode).getPropertyValue("display");
+          while (node &&
+                 display != "block" &&
+                 display != "inline-block" &&
+                 display != "table" &&
+                 display != "table-cell" &&
+                 display != "list-item" &&
+                 node.nodeName.toLowerCase() != "img")
+          {
+            node = node.parentNode;
+            display = this.getComputedStyle(node).getPropertyValue("display");
+          }
+          this.clean();
+          if (node instanceof Components.interfaces.nsIDOMHTMLTableCellElement)
+          {
+            var editor = EditorUtils.getCurrentEditor();
+            editor instanceof Components.interfaces.nsITableEditor;
+            var tableElt = editor.getElementOrParentByTagName("table", null);
+            var rowCount = { value: 0 };
+            var colCount = { value: 0 };
+            editor.getTableSize(tableElt, rowCount, colCount);
+
+            var rowObj = { value: 0 };
+            var colObj = { value: 0 };
+            editor.getCellIndexes(cell, rowObj, colObj);
+
+            var columnIndex = colObj.value;
+            for (var i = 0; i < rowCount.value; i++)
+            {
+              var cell = editor.getCellAt(tableElt, i, columnIndex);
+              this._showElementRuler(cell);
+            }
+          }
+          else
+            this._showElementRuler(node);
+        ]]>
+        </body>
+      </method>
+
+      <method name="_showElementRuler">
+        <parameter name="aElt"/>
+        <body>
+        <![CDATA[
+          var h = aElt.clientHeight;
+          var y = 0;
+          var o = aElt;
+          if (!o.offsetParent)
+            y = parseFloat(o.ownerDocument.defaultView.getComputedStyle(o, "").getPropertyValue("margin-top"));
+          else while (o)
+          {
+            y += o.offsetTop;
+            o = o.offsetParent;
+          }
+          if (aElt instanceof Components.interfaces.nsIDOMHTMLTableCellElement)
+          {
+            var cs = this.getComputedStyle(aElt);
+            var pl = cs.getPropertyCSSValue("padding-top");
+            var pr = cs.getPropertyCSSValue("padding-bottom");
+
+            if (pl.primitiveType == CSSPrimitiveValue.CSS_PX)
+            {
+              var plv = pl.getFloatValue(CSSPrimitiveValue.CSS_PX);
+              y += plv;
+              h -= plv;
+            }
+            if (pr.primitiveType == CSSPrimitiveValue.CSS_PX)
+            {
+              var prv = pr.getFloatValue(CSSPrimitiveValue.CSS_PX);
+              h -= prv;
+            }
+          }
+          this.addObject("vruler", y, h, aElt);
+        ]]>
+        </body>
+      </method>
+
+      <property name="mScrollY">
+        <getter>
+        <![CDATA[
+          return EditorUtils.getCurrentEditorElement() ?
+                   EditorUtils.getCurrentEditorElement().contentWindow.scrollY :
+                   0;
+        ]]>
+        </getter>
+      </property>
+
+      <method name="addObject">
+        <parameter name="aName"/>
+        <parameter name="aPos"/>
+        <parameter name="aSize"/>
+        <parameter name="aSource"/>
+        <body>
+        <![CDATA[        
+          var svgGroup = this.mSVGGroup;
+          var g = document.createElementNS(this.kSVG_NS, "g");
+
+          var zoom = 1;
+          if (EditorUtils.getCurrentEditorElement())
+            zoom = BGZoomManager.getCurrentZoom();
+
+          var cs = this.getComputedStyle(aSource);
+          var positionProperty = cs.getPropertyValue("position");
+          if (positionProperty != "static")
+          {
+            var topProperty = aSource.style.top;
+            if (topProperty && topProperty.indexOf("%") == -1)
+            {
+              var topReal = aSource.offsetParent.clientWidth * parseFloat(topProperty) / 100;
+              var tSpring = document.createElementNS(this.kSVG_NS, "rect");
+              tSpring.setAttribute("y", (aPos-this.mScrollY-topReal)*zoom + "px");
+              tSpring.setAttribute("x", "7");
+              tSpring.setAttribute("height", topReal*zoom + "px");
+              tSpring.setAttribute("width", "1");
+              tSpring.setAttribute("style", "fill: gray;stroke-width:1px; stroke:gray");
+              g.appendChild(tSpring);
+            }
+            var bottomProperty = aSource.style.bottom;
+            if (bottomProperty && bottomProperty.indexOf("%") == -1)
+            {
+              var bottomReal = aSource.offsetParent.clientWidth * parseFloat(bottomProperty) / 100;
+              var bSpring = document.createElementNS(this.kSVG_NS, "rect");
+              bSpring.setAttribute("y", (aPos-this.mScrollY+aSize)*zoom + "px");
+              bSpring.setAttribute("x", "7");
+              bSpring.setAttribute("height", bottomReal*zoom + "px");
+              bSpring.setAttribute("width", "1");
+              bSpring.setAttribute("style", "fill: gray;stroke-width:1px; stroke:gray");
+              g.appendChild(bSpring);
+            }
+          }
+
+          var r = document.createElementNS(this.kSVG_NS, "rect")
+          r.setAttribute("y", (aPos-this.mScrollY)*zoom + "px");
+          r.setAttribute("x", "0");
+          r.setAttribute("height", aSize*zoom + "px");
+          r.setAttribute("width", "16");
+          r.setAttribute("anonid", "ruler");
+          r.setAttribute("tooltiptext", "ruler");
+          r.setAttribute("style", "fill: white; stroke-width: 1px; stroke: gray");
+          g.appendChild(r);
+
+          var t = document.createElementNS(this.kSVG_NS, "text");
+          t.setAttribute("y", (aPos-this.mScrollY+aSize/2)*zoom + "px");
+          t.setAttribute("x", "50%");
+          t.setAttribute("transform", "rotate(-90,8," + (aPos-this.mScrollY+aSize/2)*zoom + ")");
+          g.appendChild(t);
+
+          var text = document.createTextNode(aSize + "px");
+          t.appendChild(text);
+
+          var lH = document.createElementNS(this.kSVG_NS, "rect")
+          lH.setAttribute("y", (aPos-this.mScrollY)*zoom-3 + "px");
+          lH.setAttribute("x", "0");
+          lH.setAttribute("height", "3px");
+          lH.setAttribute("width", "16");
+          lH.setAttribute("style", "fill: gray; cursor: n-resize");
+          lH.setAttribute("class", "hruler-separator");
+          lH.setAttribute("pos", aPos);
+          lH.setAttribute("size", aSize);
+          lH.setAttribute("ruler-separator-position", "top");
+          lH.setUserData("source", aSource, null);
+          g.appendChild(lH);
+
+          var rH = document.createElementNS(this.kSVG_NS, "rect")
+          rH.setAttribute("y", (aPos+aSize-this.mScrollY)*zoom + "px");
+          rH.setAttribute("x", "0");
+          rH.setAttribute("height", "3px");
+          rH.setAttribute("width", "16");
+          rH.setAttribute("style", "fill: gray; cursor: s-resize");
+          rH.setAttribute("class", "hruler-separator");
+          rH.setAttribute("pos", aPos);
+          rH.setAttribute("size", aSize);
+          rH.setAttribute("ruler-separator-position", "bottom");
+          rH.setUserData("source", aSource, null);
+          g.appendChild(rH);
+
+          svgGroup.appendChild(g);
+        ]]>
+        </body>
+      </method>
+
+    </implementation>
+
+    <resources>
+      <stylesheet src="chrome://bluegriffon/skin/rulers.css"/>
+    </resources>
+
+    <handlers>
+      <handler event="mousedown">
+        <![CDATA[
+          var elt = event.originalTarget;
+          if (elt.getAttribute("class") != "hruler-separator")
+            return; 
+
+          this.mRulerSeparatorPosition = elt.getAttribute("ruler-separator-position");
+
+          this.mOriginalY = event.clientY;
+          this.mRuleSeparator = elt;
+
+          this.mResizing = true;
+          var g = elt.parentNode;
+          g.parentNode.appendChild(g);          
+          elt.setCapture(true);
+        ]]>
+      </handler>
+
+      <handler event="mousemove">
+        <![CDATA[
+          if (!this.mResizing)
+            return;
+
+          var y = event.clientY;
+          var zoom = BGZoomManager.getCurrentZoom();
+          var pos = parseFloat(this.mRuleSeparator.getAttribute("pos"));
+          var size = parseFloat(this.mRuleSeparator.getAttribute("size"));
+          switch (this.mRulerSeparatorPosition)
+          {
+            case "top":
+              this.mRuleSeparator.setAttribute("y",
+                 ((pos-this.mScrollY)*zoom - 3 - this.mOriginalY + y) + "px");
+              // update main ruler element
+              this.mRuleSeparator.previousSibling.previousSibling
+                .setAttribute("y", ((pos- this.mScrollY)*zoom - this.mOriginalY + y) + "px");
+              this.mRuleSeparator.previousSibling.previousSibling
+                .setAttribute("height", (size*zoom + this.mOriginalY - y) + "px");
+              // update text
+              this.mRuleSeparator.previousSibling
+                .setAttribute("y", ((pos-this.mScrollY+size/2)*zoom + (-this.mOriginalY + y)/2) + "px");
+              this.mRuleSeparator.previousSibling.textContent =
+                Math.floor(size + (this.mOriginalY - y)/zoom) + "px";
+              this.mRuleSeparator.previousSibling
+                .setAttribute("transform", "rotate(-90,8," + ((pos-this.mScrollY+size/2)*zoom + (-this.mOriginalY + y)/2) + ")");
+              break;
+            case "bottom":
+              this.mRuleSeparator.setAttribute("y",
+                 ((pos+size-this.mScrollY)*zoom - this.mOriginalY + y) + "px");
+              // update main ruler element
+              this.mRuleSeparator.previousSibling.previousSibling.previousSibling
+                .setAttribute("height", (size*zoom - this.mOriginalY + y) + "px");
+              // update text
+              this.mRuleSeparator.previousSibling.previousSibling
+                .setAttribute("transform", "rotate(-90,8," + ((pos-this.mScrollY+size/2)*zoom + (-this.mOriginalY + y)/2) + ")");
+              this.mRuleSeparator.previousSibling.previousSibling
+                .setAttribute("y", ((pos-this.mScrollY+size/2)*zoom + (-this.mOriginalY + y)/2) + "px");
+              this.mRuleSeparator.previousSibling.previousSibling.textContent =
+                Math.floor(size - (this.mOriginalY - y)/zoom) + "px";
+              break;
+            default: break;
+          }
+        ]]>
+      </handler>
+
+      <handler event="mouseup">
+        <![CDATA[
+          if (!this.mResizing)
+            return;
+
+          var y = event.clientY;
+          var elt = event.originalTarget;
+          elt.releaseCapture();
+
+          this.mResizing = false;
+          
+          var source = this.mRuleSeparator.getUserData("source");
+          this.mRuleSeparator = null;
+
+          function changeHeight(aElt, aY, aHeight, aSelf, aIsCell)
+          {
+            var styleAttrValue = aElt.getAttribute("style");
+            if (styleAttrValue)
+              styleAttrValue += ";"
+            else
+              styleAttrValue = "";
+            var zoom = BGZoomManager.getCurrentZoom();
+            var marginTop = parseFloat(aSelf.getComputedStyle(aElt).getPropertyValue("margin-top"));
+            if (!marginTop) marginTop = 0;
+            var editor = EditorUtils.getCurrentEditor();
+            switch (aSelf.mRulerSeparatorPosition)
+            {
+              case "top":
+                if (aIsCell) {
+                  var txn = new diStyleAttrChangeTxn(aElt,
+                                                     "height",
+                                                     (aHeight  + (aSelf.mOriginalY - aY)/zoom) + "px",
+                                                     "");
+                  editor.transactionManager.doTransaction(txn);
+                  editor.incrementModificationCount(1);  
+                }
+                else {
+                  var txn = new diStyleAttrChangeTxn(aElt,
+                                                     "margin-top",
+                                                     (marginTop - (aSelf.mOriginalY - aY)/zoom) + "px",
+                                                     "");
+                  editor.transactionManager.doTransaction(txn);
+                  editor.incrementModificationCount(1);  
+                  if(aElt.style.getPropertyValue("height")) {
+                    txn = new diStyleAttrChangeTxn(aElt,
+                                                   "height",
+                                                   (aHeight  + (aSelf.mOriginalY - aY)/zoom) + "px",
+                                                   "");
+                    editor.transactionManager.doTransaction(txn);  
+                    editor.incrementModificationCount(1);  
+                  }
+                }
+                break;
+              case "bottom":
+                {
+                  var txn = new diStyleAttrChangeTxn(aElt,
+                                                     "height",
+                                                     (aHeight  - (aSelf.mOriginalY - aY)/zoom) + "px",
+                                                     "");
+                  editor.transactionManager.doTransaction(txn);  
+                  editor.incrementModificationCount(1);  
+                }
+                break;
+              default: break;
+            }
+          }
+
+          var height = source.clientHeight;
+          var editor = EditorUtils.getCurrentEditor();
+          if (source instanceof Components.interfaces.nsIDOMHTMLTableCellElement)
+          {
+            var elt = source.parentNode.firstChild;
+            editor.beginTransaction();
+            while (elt)
+            {
+              if (elt.nodeType == Node.ELEMENT_NODE &&
+                  (elt instanceof Components.interfaces.nsIDOMHTMLTableCellElement))
+                changeHeight(elt, y, height, this, true);
+              elt = elt.nextSibling;
+            }
+            editor.endTransaction();
+            NotifierUtils.notify("selection", source, false);
+            this.notifyEditor(true);
+          }
+          else
+          {
+            editor.beginTransaction();
+            changeHeight(source, y, height, this, false);
+            editor.endTransaction();
+            NotifierUtils.notify("selection", source, false);
+            this.notifyEditor(false);
+          }
+          
+        ]]>
+      </handler>
+
+    </handlers>
+
+  </binding>
+
+</bindings>

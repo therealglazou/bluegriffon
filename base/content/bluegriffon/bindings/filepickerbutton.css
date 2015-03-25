@@ -1,0 +1,25 @@
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+filepickerbutton  {
+  margin: 0px;
+  padding: 0px;
+  list-style-image: url('chrome://bluegriffon/skin/icons/filePicking.png');
+}
+
+filepickerbutton:not([disabled]):hover  {
+  list-style-image: url('chrome://bluegriffon/skin/icons/filePicking-hover.png');
+}
+
+filepickerbutton[disabled="true"]  {
+  list-style-image: url('chrome://bluegriffon/skin/icons/filePicking-disabled.png');
+}
+
+.toolbarbutton-icon {
+  min-width: 0px;
+  padding: 0px;
+  margin: 2px ! important;
+}
+
+.toolbarbutton-text {
+  display: none;
+}

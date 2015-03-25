@@ -1,0 +1,160 @@
+; Package file for the Firefox build. 
+;
+; File format:
+;
+; [] designates a toplevel component. Example: [xpcom]
+; - in front of a file specifies it to be removed from the destination
+; * wildcard support to recursively copy the entire directory
+; ; file comment
+;
+
+#filter substitution
+
+#ifdef XP_MACOSX
+; Mac bundle stuff
+/@APPNAME@/Contents/Info.plist
+/@APPNAME@/Contents/PkgInfo
+/@APPNAME@/Contents/Resources/
+#endif
+
+[@AB_CD@]
+@BINPATH@/chrome/bluegriffon-@AB_CD@
+@BINPATH@/chrome/bluegriffon-@AB_CD@.manifest
+
+[xpcom]
+#ifdef XP_UNIX
+#ifdef XP_MACOSX
+@BINPATH@/libfreebl3.dylib
+@BINPATH@/libmozalloc.dylib
+@BINPATH@/libmozglue.dylib
+@BINPATH@/libmozsqlite3.dylib
+@BINPATH@/libnspr4.dylib
+@BINPATH@/libnss3.dylib
+@BINPATH@/libnssckbi.dylib
+@BINPATH@/libnssdbm3.dylib
+@BINPATH@/libnssutil3.dylib
+@BINPATH@/libplc4.dylib
+@BINPATH@/libplds4.dylib
+@BINPATH@/libplugin_child_interpose.dylib
+@BINPATH@/libsmime3.dylib
+@BINPATH@/libsoftokn3.dylib
+@BINPATH@/libssl3.dylib
+#else
+@BINPATH@/libxul.so
+@BINPATH@/libplds4.so
+@BINPATH@/libmozsqlite3.so
+@BINPATH@/libnssdbm3.so
+@BINPATH@/libplc4.so
+@BINPATH@/libnssutil3.so
+@BINPATH@/libnss3.so
+@BINPATH@/libfreebl3.so
+@BINPATH@/libsmime3.so
+@BINPATH@/libsoftokn3.so
+@BINPATH@/libnspr4.so
+@BINPATH@/libmozalloc.so
+@BINPATH@/libssl3.so
+#endif
+#else
+#ifdef XP_WIN32
+@BINPATH@/AccessibleMarshal.dll
+@BINPATH@/D3DCompiler_43.dll
+@BINPATH@/IA2Marshal.dll
+@BINPATH@/freebl3.dll
+@BINPATH@/gkmedias.dll
+@BINPATH@/libEGL.dll
+@BINPATH@/libGLESv2.dll
+@BINPATH@/mozalloc.dll
+@BINPATH@/mozglue.dll
+@BINPATH@/mozjs.dll
+@BINPATH@/mozsqlite3.dll
+@BINPATH@/nspr4.dll
+@BINPATH@/nss3.dll
+@BINPATH@/nssckbi.dll
+@BINPATH@/nssutil3.dll
+@BINPATH@/plc4.dll
+@BINPATH@/plds4.dll
+@BINPATH@/smime3.dll
+@BINPATH@/softokn3.dll
+@BINPATH@/ssl3.dll
+@BINPATH@/xul.dll
+#endif
+#endif
+
+[bluegriffon]
+#ifdef XP_UNIX
+#ifdef XP_MACOSX
+@BINPATH@/application.ini
+@BINPATH@/bluegriffon
+@BINPATH@/bluegriffon-bin
+@BINPATH@/chrome/
+@BINPATH@/chrome.manifest
+@BINPATH@/components/
+@BINPATH@/defaults/
+@BINPATH@/dependentlibs.list
+@BINPATH@/dictionaries/en-US.aff
+@BINPATH@/dictionaries/en-US.dic
+@BINPATH@/distribution/
+@BINPATH@/greprefs.js
+@BINPATH@/hyphenation/
+@BINPATH@/js
+@BINPATH@/js-gdb.py
+@BINPATH@/mangle
+@BINPATH@/modules/
+@BINPATH@/nsinstall
+@BINPATH@/platform.ini
+@BINPATH@/res/
+@BINPATH@/run-mozilla.sh
+@BINPATH@/shlibsign
+@BINPATH@/xpcshell
+@BINPATH@/XUL
+#else
+@BINPATH@/modules/
+@BINPATH@/distribution/
+@BINPATH@/js-gdb.py
+@BINPATH@/defaults/pref/bluegriffon-prefs.js
+@BINPATH@/defaults/pref/services-common.js
+@BINPATH@/defaults/profile/bluegriffon-prefs.js
+@BINPATH@/defaults/autoconfig/platform.js
+@BINPATH@/defaults/autoconfig/prefcalls.js
+@BINPATH@/chrome/
+@BINPATH@/chrome.manifest
+@BINPATH@/bluegriffon
+@BINPATH@/dictionaries/
+@BINPATH@/dependentlibs.list
+@BINPATH@/run-mozilla.sh
+@BINPATH@/platform.ini
+@BINPATH@/res/
+@BINPATH@/xpcshell
+@BINPATH@/mozilla-xremote-client
+@BINPATH@/hyphenation/
+@BINPATH@/application.ini
+@BINPATH@/greprefs.js
+@BINPATH@/plugin-container
+@BINPATH@/components/
+@BINPATH@/bluegriffon-bin
+#endif
+#else
+#ifdef XP_WIN32
+@BINPATH@/application.ini
+@BINPATH@/bluegriffon.exe
+@BINPATH@/boxcutter-fs.exe
+@BINPATH@/chrome/
+@BINPATH@/chrome.manifest
+@BINPATH@/components/
+@BINPATH@/defaults/
+@BINPATH@/dependentlibs.list
+@BINPATH@/dictionaries/
+@BINPATH@/distribution/
+@BINPATH@/extensions/
+@BINPATH@/greprefs.js
+@BINPATH@/hyphenation/
+@BINPATH@/js-gdb.py
+@BINPATH@/js.exe
+@BINPATH@/modules/
+@BINPATH@/platform.ini
+@BINPATH@/plugin-container.exe
+@BINPATH@/plugin-hang-ui.exe
+@BINPATH@/res/
+@BINPATH@/xpcshell.exe
+#endif
+#endif

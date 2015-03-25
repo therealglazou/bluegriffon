@@ -1,0 +1,17 @@
+<SearchPlugin xmlns="http://www.mozilla.org/2006/browser/search/">
+  <ShortName>Википедија (sr)</ShortName>
+  <Description>Претрага Википедије на српском језику</Description>
+  <InputEncoding>UTF-8</InputEncoding>
+  <Image width="16" height="16">data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAEAgQAhIOEAMjHyABIR0gA6ejpAGlqaQCpqKkAKCgoAPz9/AAZGBkAmJiYANjZ2ABXWFcAent6ALm6uQA8OjwAiIiIiIiIiIiIiI4oiL6IiIiIgzuIV4iIiIhndo53KIiIiB/WvXoYiIiIfEZfWBSIiIEGi/foqoiIgzuL84i9iIjpGIoMiEHoiMkos3FojmiLlUipYliEWIF+iDe0GoRa7D6GPbjcu1yIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</Image>
+  <SearchForm>http://sr.wikipedia.org/wiki/%D0%9F%D0%BE%D1%81%D0%B5%D0%B1%D0%BD%D0%BE:Search</SearchForm>
+  <Url type="text/html" method="GET" 
+       template="http://sr.wikipedia.org/wiki/%D0%9F%D0%BE%D1%81%D0%B5%D0%B1%D0%BD%D0%BE:Search">
+    <Param name="search" value="{searchTerms}" />
+    <Param name="sourceid" value="mozilla-search" />
+  </Url>
+  <Url type="application/x-suggestions+json" method="GET" 
+       template="http://sr.wikipedia.org/w/api.php">
+    <Param name="action" value="opensearch"/>
+    <Param name="search" value="{searchTerms}"/>
+  </Url>
+</SearchPlugin>

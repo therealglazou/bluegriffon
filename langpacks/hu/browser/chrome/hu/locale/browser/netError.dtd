@@ -1,0 +1,195 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<!ENTITY % brandDTD SYSTEM "chrome://branding/locale/brand.dtd">
+%brandDTD;
+
+<!ENTITY loadError.label "Probléma az oldal betöltése közben">
+<!ENTITY retry.label "Próbálja újra">
+
+<!-- Specific error messages -->
+
+<!ENTITY connectionFailure.title "A kapcsolódás sikertelen">
+<!ENTITY connectionFailure.longDesc "&sharedLongDesc;">
+
+<!ENTITY deniedPortAccess.title "Ez a cím tiltva van">
+<!ENTITY deniedPortAccess.longDesc "">
+
+<!ENTITY dnsNotFound.title "A kiszolgáló nem található">
+<!ENTITY dnsNotFound.longDesc "
+<ul>
+  <li>Ellenőrizze a címet, nem gépelte-e el. Például nem írt-e
+    <strong>ww</strong>.valami.hu-t a
+    <strong>www</strong>.valami.hu helyett.</li>
+  <li>Ha semmilyen oldalt nem tud letölteni, ellenőrizze a számítógépe hálózati
+    kapcsolatát.</li>
+  <li>Ha a számítógépet vagy a hálózatot tűzfal vagy proxy védi, ellenőrizze, hogy a
+    &brandShortName; számára engedélyezett-e a webhozzáférés.</li>
+</ul>
+">
+
+<!ENTITY fileNotFound.title "A fájl nem található">
+<!ENTITY fileNotFound.longDesc "
+<ul>
+  <li>Ellenőrizze a fájlnevet, hogy jól írta-e.</li>
+  <li>Ellenőrizze, hogy a fájlt áthelyezték-e, átnevezték-e vagy eltávolították-e.</li>
+</ul>
+">
+
+
+<!ENTITY generic.title "Hoppá!">
+<!ENTITY generic.longDesc "
+<p> A &brandShortName; nem tudja betölteni az oldalt valamilyen okból.</p>
+">
+
+<!ENTITY malformedURI.title "A cím érvénytelen">
+<!ENTITY malformedURI.longDesc "
+<ul>
+  <li>A webcímeket általában
+    <strong>http://www.example.com/</strong> formában írják.</li>
+  <li>Ellenőrizze, hogy előre dőlő perjeleket használ-e (azaz:
+    <strong>/</strong>).</li>
+</ul>
+">
+
+<!ENTITY netInterrupt.title "A kapcsolat megszakadt">
+<!ENTITY netInterrupt.longDesc "&sharedLongDesc;">
+
+<!ENTITY notCached.title "A dokumentum lejárt">
+<!ENTITY notCached.longDesc "<p>A kért dokumentum nem érhető el a &brandShortName; gyorsítótárában.</p><ul><li>Biztonsági okokból a &brandShortName; nem kéri le automatikusan az érzékeny adatokat tartalmazó dokumentumokat.</li><li>Kattintson a „Próbálja újra” gombra, hogy újra lekérje a dokumentumot a webhelyről.</li></ul>">
+
+<!ENTITY netOffline.title "Kapcsolat nélküli mód">
+<!ENTITY netOffline.longDesc2 "
+<ul>
+  <li>Nyomja meg a „Próbálja újra” gombot az online módhoz és az oldal újratöltéséhez.</li> </ul>
+">
+
+<!ENTITY contentEncodingError.title "Tartalomkódolási hiba">
+<!ENTITY contentEncodingError.longDesc "
+<ul>
+  <li>Értesítse a webhely tulajdonosait erről a problémáról.</li>
+</ul>
+">
+
+<!ENTITY unsafeContentType.title "Nem biztonságos fájltípus">
+<!ENTITY unsafeContentType.longDesc "
+<ul>
+  <li>Értesítse a webhely tulajdonosait erről a problémáról.</li>
+</ul>
+">
+
+<!ENTITY netReset.title "A kapcsolat alaphelyzetbe állt">
+<!ENTITY netReset.longDesc "&sharedLongDesc;">
+
+<!ENTITY netTimeout.title "A kapcsolat időtúllépés miatt megszakadt">
+<!ENTITY netTimeout.longDesc "&sharedLongDesc;">
+
+<!ENTITY protocolNotFound.title "A cím nem volt érthető">
+<!ENTITY protocolNotFound.longDesc "
+<ul>
+  <li>Lehet, hogy egyéb szoftvert kell telepítenie a cím megnyitásához.</li>
+</ul>
+">
+
+<!ENTITY proxyConnectFailure.title "A proxykiszolgáló visszautasította a kapcsolatokat">
+<!ENTITY proxyConnectFailure.longDesc "
+<ul>
+  <li>Ellenőrizze a proxybeállításokat, hogy helyesek-e.</li>
+  <li>Kérdezze meg a hálózati rendszergazdától, hogy a proxykiszolgáló
+    működik-e.</li>
+</ul>
+">
+
+<!ENTITY proxyResolveFailure.title " Nem található a proxykiszolgáló">
+<!ENTITY proxyResolveFailure.longDesc "
+<ul>
+  <li>Ellenőrizze a proxybeállításokat, hogy helyesek-e.</li>
+  <li>Ellenőrizze, hogy a számítógép hálózati kapcsolata működik-e.</li>
+  <li>Ha a számítógépet vagy a hálózatot tűzfal vagy proxy védi, ellenőrizze, hogy a
+    &brandShortName; számára engedélyezett-e a webhozzáférés.</li>
+</ul>
+">
+
+<!ENTITY redirectLoop.title "Az oldal nem megfelelően van átirányítva">
+<!ENTITY redirectLoop.longDesc "
+<ul>
+  <li>Ez a probléma sokszor a letiltott vagy visszautasított sütik miatt jelentkezik.</li>
+</ul>
+">
+
+<!ENTITY unknownSocketType.title "Váratlan válasz a kiszolgálótól">
+<!ENTITY unknownSocketType.longDesc "
+<ul>
+  <li>Ellenőrizze, hogy a rendszerre telepítve van-e a Personal Security Manager
+    modul.</li>
+  <li>A hibát okozhatja a kiszolgáló nem szabványos beállítása is.</li>
+</ul>
+">
+
+<!ENTITY nssFailure2.title "A biztonságos kapcsolat sikertelen">
+<!ENTITY nssFailure2.longDesc "
+<ul>
+  <li>A megtekinteni kívánt oldal nem jeleníthető meg, mert a kapott adatok hitelessége nem ellenőrizhető.</li>
+  <li>Lépjen kapcsolatba a webhely üzemeltetőjével, és értesítse a problémáról.
+A másik lehetőség, hogy a Súgó menü megfelelő menüpontjának segítségével jelentse be ezt a hibás webhelyet.</li>
+</ul>
+">
+
+<!ENTITY nssBadCert.title "A biztonságos kapcsolat sikertelen">
+<!ENTITY nssBadCert.longDesc2 "
+<ul>
+  <li>Ezt okozhatja akár a kiszolgáló konfigurációja, akár az, hogy valaki
+megpróbálja átvenni a kiszolgáló személyiségét.</li>
+  <li>Ha a múltban már sikerrel csatlakozott ehhez a kiszolgálóhoz, akkor lehet, hogy a hiba
+ideiglenes, és később újra megpróbálhatja.</li>
+</ul>
+">
+
+<!ENTITY sharedLongDesc "
+<ul>
+  <li>A webhely ideiglenesen nem érhető el vagy túlterhelt. Próbálja újra pár
+    perc múlva.</li>
+  <li>Ha semmilyen oldalt nem tud letölteni, ellenőrizze a számítógépe hálózati
+    kapcsolatát.</li>
+  <li>Ha a számítógépet vagy a hálózatot tűzfal vagy proxy védi, ellenőrizze, hogy a
+    &brandShortName; számára engedélyezett-e a webhozzáférés.</li>
+</ul>
+">
+
+<!ENTITY malwareBlocked.title "Valószínűleg támadó webhely!">
+<!ENTITY malwareBlocked.longDesc "
+<p>A támadó webhelyek megpróbálnak olyan programokat telepíteni, amelyek személyes adatokat lopnak el, a számítógépet mások megtámadására használják, vagy károsítják a rendszert.</p>
+<p>Azok a webhelytulajdonosok, akik szerint a webhelyüket tévedésből azonosították támadó webhelyként, <a href='http://www.stopbadware.org/home/reviewinfo' >felülvizsgálatot kérhetnek</a>.</p>
+">
+
+<!ENTITY phishingBlocked.title "Valószínűleg hamisított webhely!">
+<!ENTITY phishingBlocked.longDesc "
+<p>Ha személyes adatot ad meg ezen az oldalon, az a személyazonosságának ellopásához vagy más csaláshoz vezethet.</p>
+<p>Az ilyen típusú hamisított weboldalakat az adathalászat nevű csaláshoz szokták felhasználni, amely során megbízhatónak tűnő weboldalakkal vagy e-mailekkel próbálják a felhasználó becsapni.</p>
+">
+
+<!ENTITY cspFrameAncestorBlocked.title "Blokkolva a tartalombiztonsági irányelv szerint">
+<!ENTITY cspFrameAncestorBlocked.longDesc "<p>A &brandShortName; nem engedte meg, hogy az oldalt ezen a módon betöltse, mert az oldal tartalombiztonsági irányelve ezt tiltja.</p>">
+
+<!ENTITY corruptedContentError.title "Sérült tartalom hiba">
+<!ENTITY corruptedContentError.longDesc "<p>A megtekinteni kívánt oldal nem jeleníthető meg, mert az adatátvitel közben hiba történt.</p><ul><li>Lépjen kapcsolatba a webhely üzemeltetőjével, és értesítse a problémáról.</li></ul>">
+
+
+<!ENTITY securityOverride.linkText "Vagy hozzáadhat egy kivételt…">
+<!ENTITY securityOverride.getMeOutOfHereButton "Oldal elhagyása">
+<!ENTITY securityOverride.exceptionButtonLabel "Kivétel hozzáadása…">
+
+<!-- LOCALIZATION NOTE (securityOverride.warningContent) - Do not translate the
+contents of the <button> tags. It uses strings already defined above. The
+button is included here (instead of netError.xhtml) because it exposes
+functionality specific to firefox. -->
+
+<!ENTITY securityOverride.warningContent "
+<p>Ne adjon hozzá kivételt, ha nem teljesen megbízható internetkapcsolatot használ, vagy ha nem szokta látni ezt a figyelmeztetést ennél a kiszolgálónál.</p>
+<button id='getMeOutOfHereButton'>&securityOverride.getMeOutOfHereButton;</button>
+<button id='exceptionDialogButton'>&securityOverride.exceptionButtonLabel;</button>
+">
+
+<!ENTITY remoteXUL.title "Távoli XUL">
+<!ENTITY remoteXUL.longDesc "<p><ul><li>Értesítse a webhely tulajdonosait erről a problémáról.</li></ul></p>">

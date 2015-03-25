@@ -1,0 +1,20 @@
+
+
+#include "nsISupports.idl"
+#include "domstubs.idl"
+
+interface nsIDOMNode;
+
+/**
+ *
+ */
+[scriptable, uuid(19971632-1063-4ee9-add3-908c570a33a9)]
+interface diITextNodeChangedTxn: nsISupports
+{
+
+
+  nsIDOMNode getNode();
+  wstring getOldData();
+  wstring getNewData();
+};
+

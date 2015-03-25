@@ -1,0 +1,104 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+
+<!-- Values for changepassword.xul -->
+<!ENTITY setPassword.title  "Définir le mot de passe principal">
+<!ENTITY setPassword.tokenName.label "Périphérique de sécurité ">
+<!ENTITY setPassword.oldPassword.label "Ancien mot de passe">
+<!ENTITY setPassword.newPassword.label "Saisissez le nouveau mot de passe">
+<!ENTITY setPassword.reenterPassword.label "Saisissez-le à nouveau">
+<!ENTITY setPassword.meter.label "Mesure de la qualité du mot de passe :">
+<!ENTITY setPassword.meter.loading "Chargement">
+
+<!-- Values for resetpassword.xul -->
+<!ENTITY resetPasswordButtonLabel "Effacer">
+<!ENTITY resetPassword.title  "Effacer le mot de passe principal">
+<!ENTITY resetPassword.text  "Si vous effacez votre mot de passe principal, tous vos mots de passe web et courrier, vos données de formulaires, vos certificats personnels et vos clés privées seront oubliés. Voulez-vous vraiment supprimer le mot de passe principal ?">
+
+<!-- Values for getpassword.xul -->
+<!ENTITY getPassword.title  "Saisie du mot de passe principal">
+<!ENTITY getPassword.tokenName2.label "Périphérique de sécurité :">
+<!ENTITY getPassword.password.label "Mot de passe :">
+
+<!-- These should be common -->
+
+<!ENTITY piperror.title "Erreur">
+<!ENTITY pipalert.title "Erreur - impossible de récupérer">
+
+<!-- Prefs panel strings -->
+<!ENTITY pref.security.general.lHeader "Sécurité">
+<!ENTITY pref.security.general.rHeader "Paramètres généraux de sécurité">
+<!ENTITY pref.security.general.header "Paramètres généraux de sécurité">
+<!ENTITY pref.security.general.level.title "Niveau de sécurité">
+<!ENTITY pref.security.general.paranoid.label "Utiliser le niveau de sécurité paranoïaque">
+<!ENTITY pref.security.general.certificates.title "Certificats">
+<!ENTITY pref.security.general.manageCert.label "Gérer les certificats">
+
+<!-- Downloading a cert -->
+<!ENTITY downloadCert.title "Téléchargement du certificat">
+<!ENTITY downloadCert.message1 "On vous a demandé de confirmer une nouvelle autorité de certification (AC).">
+<!ENTITY downloadCert.trustSSL "Confirmer cette AC pour identifier des sites web.">
+<!ENTITY downloadCert.trustEmail "Confirmer cette AC pour identifier les utilisateurs de courrier.">
+<!ENTITY downloadCert.trustObjSign "Confirmer cette AC pour identifier les développeurs de logiciels.">
+<!ENTITY downloadCert.message3 "Avant de confirmer cette AC pour quelque raison que ce soit, vous devriez l'examiner elle, ses méthodes et ses procédures (si possible).">
+<!ENTITY downloadCert.viewCert.label "Voir">
+<!ENTITY downloadCert.viewPolicy.label "Politique">
+<!ENTITY downloadCert.viewCert.text "Examiner le certificat d'AC">
+<!ENTITY downloadCert.viewPolicy.text "Examiner la politique d'AC et ses procédures">
+
+<!-- Certificate Exists in database -->
+<!ENTITY caCertExists.title "Un certificat existe">
+<!ENTITY caCertExists.message "Le certificat existe déjà.">
+
+<!-- Strings for the SSL client auth ask dialog -->
+<!ENTITY clientAuthAsk.title "Requête d'identification d'utilisateur">
+<!ENTITY clientAuthAsk.message1 "Ce site vous demande de vous identifier avec un certificat de sécurité :">
+<!ENTITY clientAuthAsk.message2 "Choisir un certificat à présenter comme identification :">
+<!ENTITY clientAuthAsk.message3 "Détails du certificat sélectionné :">
+
+<!-- Strings for the cert picker dialog -->
+<!ENTITY certPicker.title "Sélectionner un certificat">
+<!ENTITY certPicker.info  "Certificat :">
+<!ENTITY certPicker.detailsLabel "Détails du certificat sélectionné :">
+
+<!ENTITY pkcs12.setpassword.title  "Choisir un mot de passe de sauvegarde du certificat">
+<!ENTITY pkcs12.setpassword.message  "Le mot de passe de sauvegarde du certificat que vous venez de définir protège le fichier de sauvegarde que vous allez créer. Vous devez donner le mot de passe pour commencer cette sauvegarde.">
+<!ENTITY pkcs12.setpassword.label1 "Mot de passe de sauvegarde du certificat :">
+<!ENTITY pkcs12.setpassword.label2 "Mot de passe de sauvegarde du certificat (encore) :">
+<!ENTITY pkcs12.setpassword.reminder "Important : si vous avez oublié votre mot de passe de sécurité, vous ne pourrez plus importer cette sauvegarde plus tard. Veuillez le conserver en un lieu sûr.">
+
+<!ENTITY pkcs12.getpassword.title  "Fenêtre de saisie du mot de passe">
+<!ENTITY pkcs12.getpassword.message  "Veuillez saisir le mot de passe portable de sécurité protégeant ce certificat de sécurité et la clé privée.">
+
+<!ENTITY chooseToken.title  "Choix d'un jeton">
+<!ENTITY chooseToken.message1 "Veuillez choisir un jeton.">
+
+<!ENTITY escrowWarn.title "Copie de la clé de chiffrement">
+<!ENTITY escrowWarn.message1 "Important : cette autorité de certificat a demandé à faire une sauvegarde de votre clé privée de chiffrement.">
+<!ENTITY escrowWarn.benefit1 "L'intérêt est que si vous perdez l'accès à votre clé de chiffrement privée, vous pourrez en demander une copie à cette autorité de certificat.">
+<!ENTITY escrowWarn.message2 "Cependant, votre clé de chiffrement privée sera stockée par l'autorité de certificat, et pourra être utilisée pour lire le courrier ou des documents chiffrés sans votre permission.">
+<!ENTITY examineCert.label "Voir le certificat">
+<!ENTITY examineCert.accesskey "V">
+
+<!ENTITY serverCrlNextupdate.message "Veuillez demander de l'aide à votre administrateur">
+
+<!-- Strings for the CreateCertInfo dialog  -->
+<!ENTITY createCertInfo.title "Génération d'une clé privée">
+<!ENTITY createCertInfo.msg1 "Génération de la clé en cours… Cette opération peut prendre plusieurs minutes…">
+<!ENTITY createCertInfo.msg2 "Veuillez attendre…">
+
+<!-- Form Signing confirmation prompt -->
+<!ENTITY formSigning.title "Requête de signature de texte">
+<!ENTITY formSigning.cert "Certificat de signature">
+<!ENTITY formSigning.confirmPassword "Pour confirmer que vous acceptez de signer ce message avec le certificat sélectionné, veuillez saisir le mot de passe principal :">
+
+<!-- Strings for protectedAuth dialog -->
+<!ENTITY protectedAuth.title "Authentification protégée par jeton">
+<!ENTITY protectedAuth.msg "Veuillez vous authentifier au jeton. La méthode d'authentification dépend du type de votre jeton.">
+<!ENTITY protectedAuth.tokenName.label "Jeton :">
+
+<!ENTITY certErrorDlg.title "La connexion sécurisée a échoué">
+<!ENTITY certErrorDlg.info1 "Il peut s'agir d'un problème de configuration du serveur ou d'une tentative d'usurpation de son identité par un tiers.">
+<!ENTITY certErrorDlg.info2 "Si vous avez déjà pu vous connecter avec succès à ce serveur auparavant, l'erreur peut être temporaire et vous pouvez essayer de vous reconnecter plus tard.">

@@ -1,0 +1,185 @@
+/* ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1/GPL 2.0/LGPL 2.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is Mozilla Communicator client code, released
+ * March 31, 1998.
+ *
+ * The Initial Developer of the Original Code is
+ * Netscape Communications Corporation.
+ * Portions created by the Initial Developer are Copyright (C) 1998-1999
+ * the Initial Developer. All Rights Reserved.
+ *
+ * Contributor(s):
+ *   Daniel Glazman <glazman@netscape.com>
+ *   Daniel Glazman <daniel.glazman@disruptive-innovations.com>, on behalf of Linspire Inc.
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either of the GNU General Public License Version 2 or later (the "GPL"),
+ * or the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+ * in which case the provisions of the GPL or the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of either the GPL or the LGPL, and not to allow others to
+ * use your version of this file under the terms of the MPL, indicate your
+ * decision by deleting the provisions above and replace them with the notice
+ * and other provisions required by the GPL or the LGPL. If you do not delete
+ * the provisions above, a recipient may use your version of this file under
+ * the terms of any one of the MPL, the GPL or the LGPL.
+ *
+ * ***** END LICENSE BLOCK ***** */
+ 
+ /* Styles to alter look of things in the Editor content window 
+ *  for the "Normal Edit Mode" These settings will be removed
+ *  when we display in completely WYSIWYG "Edit Preview" mode
+ *  Anything that should never change, like cursors, should be 
+ *  place in EditorOverride.css, instead of here.
+*/
+
+@namespace bluegriffon url("http://disruptive-innovations.com/zoo/bluegriffon");
+@namespace svg url("http://www.w3.org/2000/svg");
+
+
+a[name], a[id] {
+  min-height: 17px; margin-left: 2px; margin-top: 2px;
+  padding-left: 20px; 
+  background-image: url("chrome://bluegriffon/skin/tags/tag-anchor.gif");
+  background-repeat: no-repeat; 
+  background-position: top left;
+}
+
+/* Force border display for empty cells 
+   and tables with 0 border
+*/
+table {
+  empty-cells: show;
+}
+
+/* give a red dotted border to tables and cells with no border
+   otherwise they are invisible
+*/
+table[empty-cells],
+  table[border="0"],
+  /* next two selectors on line below for the case where tbody is omitted */
+  table[border="0"] > tr > td, table[border="0"] > tr > th,
+  table[border="0"] > thead > tr > td, table[border="0"] > tbody > tr > td, table[border="0"] > tfoot > tr > td,
+  table[border="0"] > thead > tr > th, table[border="0"] > tbody > tr > th, table[border="0"] > tfoot > tr > th,
+  /* next two selectors on line below for the case where tbody is omitted */
+  table:not([border]) > tr > td, table:not([border]) > tr >  th,
+  table:not([border]) > thead > tr > td, table:not([border]) > tbody > tr > td, table:not([border]) > tfoot > tr > td,
+  table:not([border]) > thead > tr > th, table:not([border]) > tbody > tr > th, table:not([border]) > tfoot > tr > th
+{
+  outline: 1px dotted;
+}
+
+/* give a green dashed border to forms otherwise they are invisible
+*/
+form
+{
+  outline: 1px dashed #66cccc;
+  min-height: 1em;
+}
+
+/* give a green dotted border to labels otherwise they are invisible
+*/
+label
+{
+  outline: 1px dotted green;
+}
+
+
+
+
+img {
+  -moz-force-broken-image-icon: 1;
+}
+
+bluegriffon|comment,
+bluegriffon|php,
+bluegriffon|pi {
+  font-family: monospace;
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  color: #050505;
+  padding: 0px 5px;
+  background: -moz-linear-gradient(
+    top,
+    #f7ff00 0%,
+    #ffbf00);
+  border-radius: 30px;
+  border: 1px solid #918491;
+  box-shadow:
+    0px 1px 3px rgba(000,000,000,0.5),
+    inset 0px 0px 1px rgba(255,255,255,0.7);
+  text-shadow:
+    0px -1px 0px rgba(000,000,000,0.2),
+    0px 0px 0px rgba(255,255,255,0);
+ -moz-margin-end: 5px;
+ -moz-margin-start: 5px;
+ -moz-user-select: all;
+ -moz-user-focus: normal;
+ -moz-user-input: disabled;
+ -moz-user-modify: read-only;
+ display: inline;
+}
+
+bluegriffon|comment::before { content: "<!--" attr(title); }
+bluegriffon|comment::after { content: "-->"; }
+
+bluegriffon|php::before { content: "<?php " attr(title); }
+bluegriffon|php::after { content: "?>"; }
+
+bluegriffon|pi::before { content: "<?" attr(title); }
+bluegriffon|pi::after { content: "?>"; }
+
+html[\_moz_hide*="comment"] bluegriffon|comment,
+html[\_moz_hide*="php"] bluegriffon|php,
+html[\_moz_hide*="pi"] bluegriffon|pi
+ {
+  display: none;
+}
+
+table > bluegriffon|*,
+tbody > bluegriffon|*,
+thead > bluegriffon|*,
+tfoot > bluegriffon|*,
+tr > bluegriffon|* {
+  display: none ! important}
+
+
+svg|svg:hover,
+video:hover,
+audio:hover {
+  outline: black dashed thin;
+}
+
+audio {
+  min-height: 40px;
+  background-color: silver;
+  background-image: url("chrome://bluegriffon/skin/icons/audio.png");
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+audio:not([controls]) {
+  display: inline-block !important;
+}
+
+output, progress, meter {
+  outline: thin red dotted;
+}
+
+output:empty, progress:empty, meter:empty {
+  display: inline-block;
+  width: 1em;
+  height: 16px;
+}

@@ -1,0 +1,202 @@
+/* ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1/GPL 2.0/LGPL 2.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is BlueGriffon.
+ *
+ * The Initial Developer of the Original Code is
+ * Disruptive Innovations SARL.
+ * Portions created by the Initial Developer are Copyright (C) 2006
+ * the Initial Developer. All Rights Reserved.
+ *
+ * Contributor(s):
+ *   Daniel Glazman <daniel.glazman@disruptive-innovations.com>, Original author
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU General Public License Version 2 or later (the "GPL"), or
+ * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+ * in which case the provisions of the GPL or the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of either the GPL or the LGPL, and not to allow others to
+ * use your version of this file under the terms of the MPL, indicate your
+ * decision by deleting the provisions above and replace them with the notice
+ * and other provisions required by the GPL or the LGPL. If you do not delete
+ * the provisions above, a recipient may use your version of this file under
+ * the terms of any one of the MPL, the GPL or the LGPL.
+ *
+ * ***** END LICENSE BLOCK ***** */
+
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+@namespace html url("http://www.w3.org/1999/xhtml");
+
+richlistbox:focus > richlistitem[selected="true"] {
+  background-color: -moz-Dialog;
+  color: -moz-DialogText;
+}
+
+.transformationitem-title {
+  font-size: larger;
+  border-bottom: gray thin solid;
+  margin: 0px ! important;
+  padding: 0.25em;
+  font-weight: bold;
+  background-color: silver;
+}
+
+richlistbox:focus > richlistitem[selected="true"] .transformationitem-title {
+  background-color: Highlight;
+  color: HighlightText;
+}
+
+richlistitem.rotateTransform > hbox,
+richlistitem.skewTransform > hbox {
+}
+
+/********** 3D Rotations *************/
+html|*[anonid="container"], html|*[anonid="container"] html|* {
+  padding: 0px;
+  margin: 0px;
+}
+
+html|*[anonid="container"] {
+  font-family: sans-serif;
+  font-size: small;
+  width: 100px;
+  height: 100px;
+  position: relative;
+}
+html|*[anonid="circle"] {
+  width: 70px;
+  height: 70px;
+  border-top-width: thin;
+  border-right-width: thin;
+  border-bottom-width: thin;
+  border-left-width: thin;
+  border-top-style: solid;
+  border-right-style: solid;
+  border-bottom-style: solid;
+  border-left-style: solid;
+  border-top-color: rgb(153, 153, 153);
+  border-right-color: rgb(153, 153, 153);
+  border-bottom-color: rgb(153, 153, 153);
+  border-left-color: rgb(153, 153, 153);
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  border-radius: 35px 35px 35px 35px;
+  background-color: rgb(255, 153, 0);
+  background-image: -moz-radial-gradient(left top , circle farthest-side, rgb(192, 192, 192) 20px, rgb(255, 255, 255), rgb(192, 192, 192));
+  background-position: left top;
+}
+html|*[anonid="circle2"] {
+  width: 70px;
+  height: 70px;
+  border-top-width: thin;
+  border-right-width: thin;
+  border-bottom-width: thin;
+  border-left-width: thin;
+  border-top-style: solid;
+  border-right-style: solid;
+  border-bottom-style: solid;
+  border-left-style: solid;
+  border-top-color: rgb(153, 153, 153);
+  border-right-color: rgb(153, 153, 153);
+  border-bottom-color: rgb(153, 153, 153);
+  border-left-color: rgb(153, 153, 153);
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  border-radius: 35px 35px 35px 35px;
+  background-color: rgb(255, 153, 0);
+  background-image: -moz-radial-gradient(circle farthest-side, rgb(192, 192, 192) 20px, rgb(255, 255, 255));
+  background-position: left top;
+}
+html|*[anonid="xaxis"] {
+  width: 90px;
+  height: 1px;
+  position: absolute;
+  left: 5px;
+  top: 50px;
+  border-top-width: thin;
+  border-top-style: solid;
+  border-top-color: gray;
+
+}
+html|*[anonid="yaxis"] {
+  padding-left: 10px;
+  height: 90px;
+  width: 1px;
+  position: absolute;
+  top: 5px;
+  left: 50px;
+  border-left-width: thin;
+  border-left-style: solid;
+  border-left-color: gray;
+}
+html|*[anonid="xarrow1"] {
+  width: 5px;
+  height: 1px;
+  position: absolute;
+  right: 5px;
+  top: 50px;
+  border-top-width: thin;
+  border-top-style: solid;
+  border-top-color: gray;
+  -moz-transform-origin: right top;
+  -moz-transform: rotate(30deg);
+}
+html|*[anonid="xarrow2"] {
+  width: 5px;
+  height: 1px;
+  position: absolute;
+  right: 5px;
+  top: 50px;
+  border-top-width: thin;
+  border-top-style: solid;
+  border-top-color: gray;
+  -moz-transform-origin: right top;
+  -moz-transform: rotate(-30deg);
+}
+html|*[anonid="yarrow1"] {
+  height: 5px;
+  width: 1px;
+  position: absolute;
+  top: 90px;
+  left: 50px;
+  border-left-width: thin;
+  border-left-style: solid;
+  border-left-color: gray;
+  -moz-transform-origin: left bottom;
+  -moz-transform: rotate(30deg);
+}
+html|*[anonid="yarrow2"] {
+  height: 5px;
+  width: 1px;
+  position: absolute;
+  top: 90px;
+  left: 50px;
+  border-left-width: thin;
+  border-left-style: solid;
+  border-left-color: gray;
+  -moz-transform-origin: left bottom;
+  -moz-transform: rotate(-30deg);
+}
+html|*[anonid="pointer1"], html|*[anonid="pointer2"] {
+  visibility: hidden;
+  height: 1px;
+  width: 20px;
+  position: absolute;
+  left: 50px;
+  top: 50px;
+  border-top: red thin solid;
+  -moz-transform-origin: left top;
+}

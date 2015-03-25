@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/listboxBg.css" type="text/css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/bluegriffonDialogs.css" type="text/css"?>
+<?xml-stylesheet href="chrome://fs/skin/fs.css" type="text/css"?>
+
+<!DOCTYPE dialog SYSTEM "chrome://fs/locale/fs.dtd">
+
+<dialog title="&window.title;"
+        id="bluegriffonFs"
+        windowtype="BlueGriffon:Fs"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        buttons="accept,cancel"
+        onload="Startup()"
+        style="height: auto"
+        ondialogaccept="return onAccept()"
+        buttonlabelaccept="&addToDocument.label;"
+        persist="screenX screenY width height"
+        width="660"
+        height="300"
+        screenX="24" screenY="24"
+        onresize="UpdatePreviewOnResize()">
+
+  <!-- Methods common to all editor dialogs -->
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/dgid.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/global.js"/>
+
+  <script type="application/x-javascript"  src="chrome://fs/content/fontsquirrel.js"/>
+  <script type="application/x-javascript"  src="chrome://fs/content/fs.js"/>
+
+  <keyset>
+    <key keycode="VK_ESCAPE" oncommand="window.close()"/>
+  </keyset>
+
+  <stringbundle id="stringBundle"   src="chrome://fs/locale/fs.properties"/>
+
+  <hbox flex="1">
+    <listbox id="classificationsBox"
+             onselect="onClassificationSelected(this)">
+      <listhead>
+         <listheader label="&classifications.label;" />
+      </listhead>
+      <listcols>
+        <listcol flex="1"/>
+      </listcols>
+    </listbox>
+    <listbox id="fontListBox"
+                 flex="1"
+                 onselect="onFontSelected(this)">
+      <listhead>
+         <listheader label="&fontList.label;"/>
+      </listhead>
+      <listcols>
+        <listcol flex="1"/>
+      </listcols> 
+    </listbox>
+  </hbox>
+  <hbox id="Toolbox" class="listboxBg">
+    <label value=" " />
+    <label value="&loading.label;" hidden="true" id="loadingLabel"/>
+    <spacer flex="1"/>
+    <image class="listboxBgThrobberButton"
+           tooltiptext="&networkActivity.tooltip;"
+           id="ThrobberButton"
+           hidden="true"/>
+  </hbox>
+  <groupbox style="min-height: 120px;">
+    <caption label="Preview"/>
+    <hbox align="center">
+      <label value="&previewText.label;"/>
+      <textbox value="&prose.label;"
+               flex="1"
+               type="timed"
+               timeout="500"
+               id="previewTextbox"
+               oncommand="UpdatePreview()"/>
+    </hbox>
+    <hbox align="center"
+          style=" background-color: white; border-radius: 5px; margin-bottom: 4px"
+          flex="1"
+          id="previewBox">
+      <spacer flex="1"/>
+      <image id="preview" onload="gDialog.ThrobberButton.hidden = true" />
+      <spacer flex="1"/>
+    </hbox>
+  </groupbox>
+</dialog>

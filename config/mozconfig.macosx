@@ -1,0 +1,77 @@
+# sh
+# Build configuration script for WIN32
+#
+# See http://www.mozilla.org/build/unix.html for build instructions.
+#
+
+# Mandatory if you use VC7 (see Windows build instructions
+# in http://mozilla.org/build/win32.html
+# you may have to edit the lines according to your directory settings
+
+CC=clang
+CXX=clang++
+
+##############################
+# Assuming you're using 1.06 and want a universal build
+##############################
+. $topsrcdir/build/macosx/universal/mozconfig
+
+ac_add_options --with-macos-sdk=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk
+ac_add_options --enable-macos-target=10.8
+
+##############################
+# tweak the following line according to your wishes
+# warning, the directory must exist in the filesystem
+##############################
+mk_add_options MOZ_OBJDIR=/Users/glazou/bin/opt/dolomites
+#mk_add_options MOZ_OBJDIR=/Users/glazou/bin/debug/dolomites
+#mk_add_options MOZ_OMNIJAR=
+
+#mk_add_options AUTOCONF=/opt/local/bin/autoconf213
+#mk_add_options MOZ_UPDATER=1
+
+##############################
+# tweak the following according to your wishes
+##############################
+ac_add_options --disable-debug
+ac_add_options --enable-optimize
+ac_add_options --enable-strip
+#ac_add_options --enable-debug
+#ac_add_options --disable-optimize
+
+ac_add_options --without-ccache
+
+##############################
+# build mar                  #
+##############################
+ac_add_options --enable-installer
+#ac_add_options --enable-update-packaging
+#ac_add_options --enable-updater
+
+##############################
+# I build on a 8-cpu machine ; comment out or adapt to your own case
+##############################
+mk_add_options MOZ_MAKE_FLAGS="-j8"
+
+##############################
+# DO NOT MODIFY BELOW THIS LINE
+##############################
+ac_add_options --enable-application=bluegriffon
+mk_add_options MOZ_TOOLKIT_SEARCH=
+
+ac_add_options --disable-javaxpcom
+ac_add_options --disable-activex
+ac_add_options --disable-activex-scripting
+ac_add_options --disable-tests
+ac_add_options --disable-airbag
+ac_add_options --enable-places
+ac_add_options --enable-storage
+ac_add_options --disable-crashreporter
+ac_add_options --enable-webm
+
+ac_add_options --disable-vista-sdk-requirements
+
+ac_add_options --enable-chrome-format=jar
+
+#ac_add_options --disable-dbm
+ac_add_options --disable-webrtc

@@ -1,0 +1,28 @@
+body, html { height: 100%; max-width: 1000px; margin: 0 auto; }
+header { height: 10% }
+.main { height: 85%; overflow: hidden;}
+.css, .html { float: left; width: 48%; height: 100%; }
+.css { margin-left: 2%; }
+.html { margin-right: 2%; }
+.editor { border: 1px solid #eee; }
+footer { height: 5% }
+
+#cm-suggestions {
+  position: absolute;
+  display: none;
+  z-index: 999;
+  margin: 20px 0;
+  font-size: 12px;
+  font-weight: normal;
+  padding: 5px;
+  min-width: 10em;
+  background: rgba(0,0,0,0.86);
+  color: #aaa;
+  border: 1px solid #dbdbdb;
+  border-radius: 5px;
+}
+
+#cm-suggestions option[selected] {
+  background: #efefef;
+  color: #333;
+}

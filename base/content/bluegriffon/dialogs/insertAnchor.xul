@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/bluegriffonDialogs.css" type="text/css"?>
+
+
+<!DOCTYPE dialog SYSTEM "chrome://bluegriffon/locale/insertAnchor.dtd">
+
+<dialog title="&window.title;"
+        id="insertAnchorDialog"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        onload = "Startup()"
+        buttons="accept,cancel"
+        style="height: auto"
+        ondialogaccept="return onAccept();"
+        persist="screenX screenY">
+
+  <!-- Methods common to all editor dialogs -->
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/dgid.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/global.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/dialogs/insertAnchor.js"/>
+
+  <label value="&anchorName.label;"/>
+  <menulist id="anchorNameMenulist"
+            onselect="UpdateButtons()"
+            oninput="UpdateButtons()"
+            editable="true">
+    <menupopup id="anchorNameMenupopup"/>
+  </menulist>
+</dialog>

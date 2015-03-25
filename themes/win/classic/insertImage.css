@@ -1,0 +1,58 @@
+tabpanels {
+  /*font-size: smaller;*/
+}
+
+#previewImage {
+  height: 100px;
+  max-height: 100px;
+  width: auto;
+}
+
+#relativeURLCheckboxWarning {
+  font-style: italic;
+}
+
+#preserveRatioButton {
+  list-style-image: url("chrome://bluegriffon/skin/icons/unconstraint-size.png");
+}
+
+#preserveRatioButton[preserveRatio="true"] {
+  list-style-image: url("chrome://bluegriffon/skin/icons/constraint-size.png");
+}
+
+#preserveRatioButton[disabled="true"] {
+  opacity: 0.5;
+}
+
+rotator {
+  margin-left: 1em;
+  -moz-binding: url("chrome://bluegriffon/content/bindings/rotator.xml#rotator");
+}
+
+#centerPicker[disabled="true"]  {
+  background-color: #d0d0d0;
+}
+
+#backgroundPositionBox {
+  width: 99px;
+  height: 99px;
+  background-image: url('chrome://bluegriffon/skin/backgroundPosition.png');
+  background-position: 50% 50%;
+  background-color: transparent;
+  -moz-appearance: none;
+}
+
+#backgroundImageBox {
+  width: 99px;
+  height: 99px;
+  /*background-image: url('chrome://bluegriffon/skin/backgroundImage.png');*/
+  background-repeat: no-repeat;
+  /*background-color: white;*/
+  background-position: 50% 50%;
+}
+
+stack {
+  border: 1px ridge #888;
+}
+
+

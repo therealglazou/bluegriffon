@@ -1,0 +1,635 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE bindings [
+  <!ENTITY % transformationitemDTD SYSTEM "chrome://cssproperties/locale/transformationitem.dtd" >
+  %transformationitemDTD;
+]>
+
+<bindings id="transformationitemBindings"
+   xmlns="http://www.mozilla.org/xbl"
+   xmlns:html="http://www.w3.org/1999/xhtml"
+   xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+   xmlns:xbl="http://www.mozilla.org/xbl">
+
+  <binding id="rotate"
+           extends="chrome://global/content/bindings/richlistbox.xml#richlistitem">
+
+    <resources>
+      <stylesheet src="chrome://cssproperties/skin/transformationitem.css"/>
+    </resources>
+
+    <content>
+      <xul:label class="transformationitem-title" value="&rotation.label;"/>
+      <xul:hbox align="center">
+        <xul:rotator anonid="rotator" onlyonrelease="true"
+                     onchange="ReapplyTransforms()"/>
+      </xul:hbox>
+    </content>
+
+    <implementation>
+      <method name="getChild">
+        <parameter name="aChildName"/>
+        <body><![CDATA[
+          return document.getAnonymousElementByAttribute(this, "anonid", aChildName);
+        ]]></body>
+      </method>
+
+      <property name="value">
+        <getter>
+        <![CDATA[
+          return this.getChild("rotator").value;
+        ]]>
+        </getter>
+        <setter>
+        <![CDATA[
+          this.getChild("rotator").value = val;
+        ]]>
+        </setter>
+      </property>
+    </implementation>
+  </binding>
+
+  <binding id="translate3d"
+           extends="chrome://global/content/bindings/richlistbox.xml#richlistitem">
+
+    <resources>
+      <stylesheet src="chrome://cssproperties/skin/transformationitem.css"/>
+    </resources>
+
+    <content>
+      <xul:label class="transformationitem-title" value="&translation3d.label;"/>
+      <xul:hbox align="center">
+        <xul:label value="&x.label;"/>
+        <xul:menulist anonid="Htextbox" editable="true"
+                      oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', true, ReapplyTransforms)"
+                      oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', true, ReapplyTransforms)">
+          <xul:menupopup anonid="horizontalTranslationMenupopup"
+                         onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')"/>
+        </xul:menulist>
+        <xul:spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch', ReapplyTransforms)"
+                         ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true, ReapplyTransforms)"/>
+        <xul:label value="&y.label;"/>
+        <xul:menulist anonid="Vtextbox" editable="true"
+                      oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', true, ReapplyTransforms)"
+                      oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', true, ReapplyTransforms)">
+          <xul:menupopup anonid="verticalTranslationMenupopup"
+                         onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch', ReapplyTransforms)"/>
+        </xul:menulist>
+        <xul:spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch', ReapplyTransforms)"
+                         ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true, ReapplyTransforms)"/>
+        <xul:label value="&z.label;"/>
+        <xul:menulist anonid="Ztextbox" editable="true"
+                      oncommand="onLengthMenulistCommand(this, 'px pt cm in mm pc em ex rem ch', '', true, ReapplyTransforms)"
+                      oninput="onLengthMenulistCommand(this, 'px pt cm in mm pc em ex rem ch', '', true, ReapplyTransforms)">
+          <xul:menupopup anonid="verticalTranslationMenupopup"
+                         onpopupshowing="PopulateLengths(this, 'px pt cm in mm pc em ex rem ch', ReapplyTransforms)"/>
+        </xul:menulist>
+        <xul:spinbuttons onup="IncreaseLength(this, 'px pt cm in mm pc em ex rem ch', ReapplyTransforms)"
+                         ondown="DecreaseLength(this, 'px pt cm in mm pc em ex rem ch', true, ReapplyTransforms)"/>
+      </xul:hbox>
+    </content>
+
+    <implementation>
+      <method name="getChild">
+        <parameter name="aChildName"/>
+        <body><![CDATA[
+          return document.getAnonymousElementByAttribute(this, "anonid", aChildName);
+        ]]></body>
+      </method>
+
+      <property name="horizontally">
+        <getter>
+        <![CDATA[
+          return this.getChild("Htextbox").value;
+        ]]>
+        </getter>
+        <setter>
+        <![CDATA[
+          this.getChild("Htextbox").value = val;
+        ]]>
+        </setter>
+      </property>
+
+      <property name="vertically">
+        <getter>
+        <![CDATA[
+          return this.getChild("Vtextbox").value;
+        ]]>
+        </getter>
+        <setter>
+        <![CDATA[
+          this.getChild("Vtextbox").value = val;
+        ]]>
+        </setter>
+      </property>
+
+      <property name="zindexally">
+        <getter>
+        <![CDATA[
+          return this.getChild("Ztextbox").value;
+        ]]>
+        </getter>
+        <setter>
+        <![CDATA[
+          this.getChild("Ztextbox").value = val;
+        ]]>
+        </setter>
+      </property>
+    </implementation>
+  </binding>
+
+  <binding id="perspective"
+           extends="chrome://global/content/bindings/richlistbox.xml#richlistitem">
+
+    <resources>
+      <stylesheet src="chrome://cssproperties/skin/transformationitem.css"/>
+    </resources>
+
+    <content>
+      <xul:label class="transformationitem-title" value="&perspective.label;"/>
+      <xul:hbox align="center">
+        <xul:label value="&depth.label;"/>
+        <xul:menulist anonid="depthTextbox" editable="true"
+                      oncommand="onLengthMenulistCommand(this, 'px pt cm in mm pc em ex rem ch', '', true, ReapplyTransforms)"
+                      oninput="onLengthMenulistCommand(this, 'px pt cm in mm pc em ex rem ch', '', true, ReapplyTransforms)">
+          <xul:menupopup anonid="verticalTranslationMenupopup"
+                         onpopupshowing="PopulateLengths(this, 'px pt cm in mm pc em ex rem ch', ReapplyTransforms)"/>
+        </xul:menulist>
+        <xul:spinbuttons onup="IncreaseLength(this, 'px pt cm in mm pc em ex rem ch', ReapplyTransforms)"
+                         ondown="DecreaseLength(this, 'px pt cm in mm pc em ex rem ch', true, ReapplyTransforms)"/>
+      </xul:hbox>
+    </content>
+
+    <implementation>
+      <method name="getChild">
+        <parameter name="aChildName"/>
+        <body><![CDATA[
+          return document.getAnonymousElementByAttribute(this, "anonid", aChildName);
+        ]]></body>
+      </method>
+
+      <property name="depth">
+        <getter>
+        <![CDATA[
+          return this.getChild("depthTextbox").value;
+        ]]>
+        </getter>
+        <setter>
+        <![CDATA[
+          this.getChild("depthTextbox").value = val;
+        ]]>
+        </setter>
+      </property>
+    </implementation>
+  </binding>
+
+  <binding id="skew"
+           extends="chrome://global/content/bindings/richlistbox.xml#richlistitem">
+
+    <resources>
+      <stylesheet src="chrome://cssproperties/skin/transformationitem.css"/>
+    </resources>
+
+    <content>
+      <xul:label class="transformationitem-title" value="&skew.label;"/>
+      <xul:hbox align="center">
+        <xul:label value="&x.label;"/>
+        <xul:rotator anonid="rotatorX" onlyonrelease="true"
+                     onchange="ReapplyTransforms()"/>
+        <xul:label value="&y.label;"/>
+        <xul:rotator anonid="rotatorY" onlyonrelease="true"
+                     onchange="ReapplyTransforms()"/>
+      </xul:hbox>
+    </content>
+
+    <implementation>
+      <method name="getChild">
+        <parameter name="aChildName"/>
+        <body><![CDATA[
+          return document.getAnonymousElementByAttribute(this, "anonid", aChildName);
+        ]]></body>
+      </method>
+
+      <property name="valueX">
+        <getter>
+        <![CDATA[
+          return this.getChild("rotatorX").value;
+        ]]>
+        </getter>
+        <setter>
+        <![CDATA[
+          this.getChild("rotatorX").value = val;
+          if ("" == val) {
+            this.getChild("rotatorX").disabled = true;
+          }
+        ]]>
+        </setter>
+      </property>
+
+      <property name="valueY">
+        <getter>
+        <![CDATA[
+          return this.getChild("rotatorY").value;
+        ]]>
+        </getter>
+        <setter>
+        <![CDATA[
+          this.getChild("rotatorY").value = val;
+          if ("" == val) {
+            this.getChild("rotatorY").disabled = true;
+          }
+        ]]>
+        </setter>
+      </property>
+    </implementation>
+  </binding>
+
+  <binding id="scale3d"
+           extends="chrome://global/content/bindings/richlistbox.xml#richlistitem">
+
+    <resources>
+      <stylesheet src="chrome://cssproperties/skin/transformationitem.css"/>
+    </resources>
+
+    <content>
+      <xul:label class="transformationitem-title" value="&scale.label;"/>
+      <xul:hbox align="center">
+        <xul:label value="&x.label;"/>
+        <xul:textbox anonid="Htextbox" oninput="this.parentNode.parentNode.checkNumber(this); ReapplyTransforms()"/>
+        <xul:label value="&y.label;"/>
+        <xul:textbox anonid="Vtextbox" oninput="this.parentNode.parentNode.checkNumber(this); ReapplyTransforms()"/>
+        <xul:label value="&z.label;"/>
+        <xul:textbox anonid="Ztextbox" oninput="this.parentNode.parentNode.checkNumber(this); ReapplyTransforms()"/>
+      </xul:hbox>
+    </content>
+
+    <implementation>
+      <method name="getChild">
+        <parameter name="aChildName"/>
+        <body><![CDATA[
+          return document.getAnonymousElementByAttribute(this, "anonid", aChildName);
+        ]]></body>
+      </method>
+
+      <property name="horizontally">
+        <getter>
+        <![CDATA[
+          return this.getChild("Htextbox").value;
+        ]]>
+        </getter>
+        <setter>
+        <![CDATA[
+          this.getChild("Htextbox").value = val;
+        ]]>
+        </setter>
+      </property>
+
+      <property name="vertically">
+        <getter>
+        <![CDATA[
+          return this.getChild("Vtextbox").value;
+        ]]>
+        </getter>
+        <setter>
+        <![CDATA[
+          this.getChild("Vtextbox").value = val;
+        ]]>
+        </setter>
+      </property>
+
+      <property name="zindexally">
+        <getter>
+        <![CDATA[
+          return this.getChild("Ztextbox").value;
+        ]]>
+        </getter>
+        <setter>
+        <![CDATA[
+          this.getChild("Ztextbox").value = val;
+        ]]>
+        </setter>
+      </property>
+
+      <method name="checkNumber">
+        <parameter name="aElt"/>
+        <body>
+          <![CDATA[
+            aElt.value = aElt.value.replace( /[^0-9\.]/g , "");
+          ]]>
+        </body>
+      </method>
+
+    </implementation>
+  </binding>
+
+  <binding id="rotate3d"
+           extends="chrome://global/content/bindings/richlistbox.xml#richlistitem">
+
+    <resources>
+      <stylesheet src="chrome://cssproperties/skin/transformationitem.css"/>
+    </resources>
+
+    <content>
+      <xul:label class="transformationitem-title" value="&rotation3d.label;"/>
+      <xul:grid>
+        <xul:columns>
+          <xul:column/>
+          <xul:column flex="1"/>
+        </xul:columns>
+        <xul:rows>
+          <xul:row align="center">
+            <xul:label value="&axis.label;"/>
+            <xul:hbox align="center">
+              <html:div anonid="container"
+                        onmousemove='this.parentNode.parentNode.parentNode.parentNode.parentNode.onMouseMove(event)'
+                        onclick='this.parentNode.parentNode.parentNode.parentNode.parentNode.onClick(event)'>
+                <html:div anonid="circle" />
+                <html:div anonid="xaxis">x</html:div>
+                <html:div anonid="xarrow1"> </html:div>
+                <html:div anonid="xarrow2"> </html:div>
+                <html:div anonid="yaxis">y</html:div>
+                <html:div anonid="yarrow1"> </html:div>
+                <html:div anonid="yarrow2"> </html:div>
+                <html:div anonid="pointer1" />
+              </html:div>
+              <html:div anonid="container">
+                <html:div anonid="circle2" />
+                <html:div anonid="xaxis">x</html:div>
+                <html:div anonid="xarrow1"> </html:div>
+                <html:div anonid="xarrow2"> </html:div>
+                <html:div anonid="yaxis">z</html:div>
+                <html:div anonid="yarrow1"> </html:div>
+                <html:div anonid="yarrow2"> </html:div>
+                <html:div anonid="pointer2" />
+              </html:div>
+              <xul:vbox>
+                <xul:hbox align="center">
+                  <xul:label value="&x.label;"/>
+                  <xul:textbox anonid="Xvalue"
+                               oninput="this.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.checkNumber(this); "/>
+                </xul:hbox>
+                <xul:hbox align="center">
+                  <xul:label value="&y.label;"/>
+                  <xul:textbox anonid="Yvalue"
+                               oninput="this.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.checkNumber(this); "/>
+                </xul:hbox>
+                <xul:hbox align="center">
+                  <xul:label value="&z.label;"/>
+                  <xul:textbox anonid="Zvalue"
+                               oninput="this.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.checkNumber(this); "/>
+                </xul:hbox>
+                <xul:button label="&normalize.label;"
+                            oncommand="this.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.normalizeCoordinates()"/>
+              </xul:vbox>
+            </xul:hbox>
+          </xul:row>
+          <xul:row align="center">
+            <xul:spacer/>
+            <xul:radiogroup orient="horizontal">
+              <xul:radio anonid="plusbox"  label="&screenToUser.label;"  selected="true"/>
+              <xul:radio anonid="minusbox" label="&userToScreen.label;"/>
+            </xul:radiogroup>
+          </xul:row>
+          <xul:row align="center">
+            <xul:label value="&angle.label;"/>
+            <xul:rotator anonid="rotator" onlyonrelease="true"
+                         onchange="ReapplyTransforms()"/>
+          </xul:row>
+        </xul:rows>
+      </xul:grid>
+    </content>
+
+    <implementation>
+      <field name="xval">null</field>
+      <field name="yval">null</field>
+      <field name="zval">null</field>
+      <field name="wval">null</field>
+      <field name="hval">null</field>
+
+      <method name="getChild">
+        <parameter name="aChildName"/>
+        <body><![CDATA[
+          return document.getAnonymousElementByAttribute(this, "anonid", aChildName);
+        ]]></body>
+      </method>
+
+      <method name="setValues">
+        <parameter name="x"/>
+        <parameter name="y"/>
+        <parameter name="z"/>
+        <body><![CDATA[
+            this.getChild("Xvalue").value = x;
+            this.getChild("Yvalue").value = y;
+            this.getChild("Zvalue").value = z;
+            this.xval = x;
+            this.yval = y;
+            this.zval = z;
+            var dx = x * 36 / Math.sqrt(x*x + y*y +z*z);
+            var dy = y * 36 / Math.sqrt(x*x + y*y +z*z);
+            var dz = z * 36 / Math.sqrt(x*x + y*y +z*z);
+
+            this.wval = dx;
+            this.hval = dy;
+            this.showPointer(this.getChild("pointer1"), dx, dy);
+            this.showPointer(this.getChild("pointer2"), dx, dz);
+        ]]></body>
+      </method>
+
+      <method name="onClick">
+        <parameter name="aEvent"/>
+        <body><![CDATA[
+          var c = this.getChild("container");
+          var x = 0, y = 0;
+          while (c) {
+              x += c.offsetLeft;
+              y += c.offsetTop;
+              c = c.offsetParent;
+          }
+          var w = Math.round(aEvent.clientX - this.getChild("container").getBoundingClientRect().left - 50);
+          var h = Math.round(aEvent.clientY - this.getChild("container").getBoundingClientRect().top - 50);
+          if (Math.sqrt(w*w + h*h) <= 36) {
+            this.wval = w;
+            this.hval = h;
+            this.xval = this.getChild("Xvalue").value;
+            this.yval = this.getChild("Yvalue").value;
+            this.zval = this.getChild("Zvalue").value;
+
+            this.getChild("Xvalue").setAttribute("focused", "true");
+            this.getChild("Yvalue").setAttribute("focused", "true");
+            this.getChild("Zvalue").setAttribute("focused", "true");
+            var _self = this;
+            setTimeout(function() { _self.unblink() }, 500);
+            ReapplyTransforms();
+          }
+        ]]></body>
+      </method>
+
+      <method name="unblink">
+        <body><![CDATA[
+          this.getChild("Xvalue").removeAttribute("focused");
+          this.getChild("Yvalue").removeAttribute("focused");
+          this.getChild("Zvalue").removeAttribute("focused");
+        ]]></body>
+      </method>
+
+      <method name="onMouseMove">
+        <parameter name="aEvent"/>
+        <body><![CDATA[
+          var c = this.getChild("container");
+          var x = 0, y = 0;
+          while (c) {
+              x += c.offsetLeft;
+              y += c.offsetTop;
+              c = c.offsetParent;
+          }
+          var w = Math.round(aEvent.clientX - this.getChild("container").getBoundingClientRect().left - 50);
+          var h = Math.round(aEvent.clientY - this.getChild("container").getBoundingClientRect().top - 50);
+          this.showValues(w, h);
+        ]]></body>
+      </method>
+
+      <method name="showPointer">
+        <parameter name="aPointer"/>
+        <parameter name="w"/>
+        <parameter name="h"/>
+        <body><![CDATA[
+            var angle;
+            if (!h)
+              angle = (w < 0) ? 180 : 0;
+            else if (h < 0) {
+              if (w < 0)
+                angle = -180 + (Math.atan(h/w) * 180 / Math.PI);
+              else if (!w)
+                angle = -90;
+              else
+                angle = Math.atan(h/w) * 180 / Math.PI;
+            
+            }
+            else {
+              if (w < 0)
+                angle = 180 + (Math.atan(h/w) * 180 / Math.PI);
+              else if (!w)
+                angle = 90;
+              else
+                angle = Math.atan(h/w) * 180 / Math.PI;
+            }
+            aPointer
+              .setAttribute("style", "visibility: visible;" +
+                "top: " + (w < 0 ? 51 : 50) + "px;" +
+                "width: " + Math.sqrt(w*w + h*h) + "px; " +
+                "-moz-transform: rotate(" + angle +"deg)");
+        ]]></body>
+      </method>
+
+      <method name="showValues">
+        <parameter name="w"/>
+        <parameter name="h"/>
+        <body><![CDATA[
+          var c = this.getChild("container");
+          if (Math.sqrt(w*w + h*h) <= 36) {
+            c.setAttribute("style", "cursor: crosshair");
+            this.xval = this.getChild("Xvalue").value = w / 36;
+            this.yval = this.getChild("Yvalue").value = h / 36;
+            this.zval = this.getChild("Zvalue").value = 
+              (this.getChild("minusbox").selected ? -1 : 1)
+              * Math.sqrt(1 -(w/36)*(w/36) - (h/36)*(h/36));
+            this.showPointer(this.getChild("pointer1"), w, h);
+            this.showPointer(this.getChild("pointer2"), w, this.zval * 36);
+          }
+          else {
+            c.setAttribute("style", "cursor: default");
+            if (this.xval)
+              this.getChild("Xvalue").value = this.xval;
+            else
+              this.getChild("Xvalue").value = "";
+            if (this.yval)
+              this.getChild("Yvalue").value = this.yval;
+            else
+              this.getChild("Yvalue").value = "";
+            if (this.zval)
+              this.getChild("Zvalue").value = this.zval;
+            else
+              this.getChild("Zvalue").value = "";
+            if (this.xval || this.yval || this.zval) {
+              this.showValues(this.wval, this.hval);
+            }
+            else {
+              this.getChild("pointer1").style.visibility = "hidden";
+              this.getChild("pointer2").style.visibility = "hidden";
+            }
+          }
+        ]]></body>
+      </method>
+
+      <method name="checkNumber">
+        <parameter name="aElt"/>
+        <body>
+          <![CDATA[
+            aElt.value = aElt.value.replace( /[^\-0-9\.]/g , "");
+            if (this.getChild("Xvalue").value == "")
+              this.getChild("Xvalue").value = "0";
+            if (this.getChild("Yvalue").value == "")
+              this.getChild("Yvalue").value = "0";
+            if (this.getChild("Zvalue").value == "")
+              this.getChild("Zvalue").value = "0";
+            if (this.getChild("Xvalue").value == "0"
+                && this.getChild("Yvalue").value == "0"
+                && this.getChild("Zvalue").value == "0") {
+              this.getChild("pointer1").style.visibility = "hidden";
+              this.getChild("pointer2").style.visibility = "hidden";
+              return;
+            }
+            var x = parseFloat(this.getChild("Xvalue").value);
+            var y = parseFloat(this.getChild("Yvalue").value);
+            var z = parseFloat(this.getChild("Zvalue").value);
+            // normalize
+            x = x * 36 / Math.sqrt(x*x + y*y +z*z);
+            y = y * 36 / Math.sqrt(x*x + y*y +z*z);
+            z = z * 36 / Math.sqrt(x*x + y*y +z*z);
+
+            var c = this.getChild("container");
+            c.setAttribute("style", "cursor: crosshair");
+            this.wval = x;
+            this.xval = x / 36;
+            this.hval = y;
+            this.yval = y / 36;
+            this.zval = z / 36;
+            this.showPointer(this.getChild("pointer1"), x, y);
+            this.showPointer(this.getChild("pointer2"), x, z);
+            ReapplyTransforms();
+          ]]>
+        </body>
+      </method>
+
+      <method name="normalizeCoordinates">
+        <body>
+          <![CDATA[
+            var x = parseFloat(this.getChild("Xvalue").value);
+            var y = parseFloat(this.getChild("Yvalue").value);
+            var z = parseFloat(this.getChild("Zvalue").value);
+            // normalize
+            this.getChild("Xvalue").value = x / Math.sqrt(x*x + y*y +z*z);
+            this.getChild("Yvalue").value = y / Math.sqrt(x*x + y*y +z*z);
+            this.getChild("Zvalue").value = z / Math.sqrt(x*x + y*y +z*z);
+            ReapplyTransforms();
+          ]]>
+        </body>
+      </method>
+
+      <property name="angle">
+        <getter>
+        <![CDATA[
+          return this.getChild("rotator").value;
+        ]]>
+        </getter>
+        <setter>
+        <![CDATA[
+          this.getChild("rotator").value = val;
+        ]]>
+        </setter>
+      </property>
+
+    </implementation>
+  </binding>
+
+</bindings>

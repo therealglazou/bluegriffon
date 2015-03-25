@@ -1,0 +1,214 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/bluegriffonDialogs.css" type="text/css"?>
+
+<!DOCTYPE dialog SYSTEM "chrome://bluegriffon/locale/insertFormInput.dtd">
+
+<dialog title="&window.title;"
+        id="insertFormInputDialog"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        onload = "Startup()"
+        buttons="accept,cancel"
+        ondialogaccept="return onAccept();"
+        persist="screenX screenY">
+
+  <!-- Methods common to all editor dialogs -->
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/dgid.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/global.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/dialogs/insertFormInput.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/dialogs/form-common.js"/>
+
+  <hbox align="center">
+    <spacer flex="1"/>
+    <menulist id="typeMenulist"
+              onselect="AdaptDialog()">
+      <menupopup>
+        <menuitem label="&hidden.label;" value="hidden"/>
+        <menuitem label="&text.label;" value="text"/>
+        <menuitem label="&search.label;" value="search"/>
+        <menuitem label="&tel.label;" value="tel"/>
+        <menuitem label="&url.label;" value="url"/>
+        <menuitem label="&email.label;" value="email"/>
+        <menuitem label="&password.label;" value="password"/>
+        <menuitem label="&datetime.label;" value="datetime"/>
+        <menuitem label="&date.label;" value="date"/>
+        <menuitem label="&month.label;" value="month"/>
+        <menuitem label="&week.label;" value="week"/>
+        <menuitem label="&time.label;" value="time"/>
+        <menuitem label="&datetimelocal.label;" value="datetime-local"/>
+        <menuitem label="&number.label;" value="number"/>
+        <menuitem label="&range.label;" value="range"/>
+        <menuitem label="&color.label;" value="color"/>
+        <menuitem label="&checkbox.label;" value="checkbox"/>
+        <menuitem label="&radio.label;" value="radio"/>
+        <menuitem label="&file.label;" value="file"/>
+        <menuitem label="&submit.label;" value="submit"/>
+        <menuitem label="&image.label;" value="image"/>
+        <menuitem label="&reset.label;" value="reset"/>
+        <menuitem label="&button.label;" value="button"/>
+      </menupopup>
+    </menulist>
+    <spacer flex="1"/>
+  </hbox>
+    <grid id="mainGrid">
+      <columns><column/><column flex="1"/><column/></columns>
+      <rows>
+        <row align="center" attribute="name">
+          <label value="&name.label;"/>
+          <textbox/>
+        </row>
+        <row align="center" attribute="value">
+          <label value="&value.label;"/>
+          <textbox/>
+        </row>
+        <row align="center" attribute="disabled">
+          <label value="&state.label;"/>
+          <checkbox label="&disabled.label;"/>
+        </row>
+        <row align="center" attribute="form">
+          <label value="&form.label;"/>
+          <textbox/>
+        </row>
+        <row align="center" attribute="checked">
+          <spacer/>
+          <checkbox label="&checked.label;"/>
+        </row>
+        <row align="center" attribute="src">
+          <label value="&src.label;"/>
+          <textbox id="srcTextbox"/>
+          <filepickerbutton control="srcTextbox"
+                            mode="0"
+                            filters="filterImages"
+                            title="&selectFile.label;"/>
+        </row>
+        <row align="center" attribute="alt">
+          <label value="&alt.label;"/>
+          <textbox/>
+        </row>
+        <row align="center" attribute="placeholder">
+          <label value="&placeholder.label;"/>
+          <textbox/>
+        </row>
+        <row align="center" attribute="readonly">
+          <label value="&mutability.label;"/>
+          <checkbox label="&readonly.label;"/>
+        </row>
+        <row align="center" attribute="required">
+          <label value="&required.label;"/>
+          <checkbox label="&isRequired.label;"/>
+        </row>
+        <row align="center" attribute="size">
+          <label value="&size.label;"/>
+          <textbox/>
+        </row>
+        <row align="center" attribute="maxlength">
+          <label value="&maxlength.label;"/>
+          <textbox/>
+        </row>
+        <row align="center" attribute="min">
+          <label value="&min.label;"/>
+          <textbox/>
+        </row>
+        <row align="center" attribute="max">
+          <label value="&max.label;"/>
+          <textbox/>
+        </row>
+        <row align="center" attribute="step">
+          <label value="&step.label;"/>
+          <textbox/>
+        </row>
+        <row align="center" attribute="width">
+          <label value="&width.label;"/>
+          <textbox/>
+        </row>
+        <row align="center" attribute="height">
+          <label value="&height.label;"/>
+          <textbox/>
+        </row>
+        <row align="center" attribute="multiple">
+          <label value="&choices.label;"/>
+          <checkbox label="&multiple.label;"/>
+        </row>
+        <row align="center" attribute="list">
+          <label value="&list.label;"/>
+          <textbox/>
+        </row>
+        <row align="center" attribute="pattern">
+          <label value="&pattern.label;"/>
+          <textbox/>
+        </row>
+        <row align="center" attribute="autocomplete">
+          <label value="&autocomplete.label;"/>
+          <hbox align="center">
+            <toolbarbutton class="multibutton"
+                           type="checkbox"
+                           id="autocompleteOnButton"
+                           label="&on.label;"
+                           value="on"
+                           oncommand="ToggleMultibuttons(this)"/>
+            <toolbarbutton class="multibutton"
+                           type="checkbox"
+                           id="autocompleteOffButton"
+                           label="&off.label;"
+                           value="off"
+                           oncommand="ToggleMultibuttons(this)"/>
+          </hbox>
+        </row>
+        <row align="center" attribute="accept">
+          <label value="&accept.label;"/>
+          <textbox/>
+        </row>
+        <row align="center" attribute="formaction">
+          <label value="&formaction.label;"/>
+          <textbox/>
+        </row>
+        <row align="center" attribute="formmethod">
+          <label value="&formmethod.label;"/>
+          <hbox align="center">
+            <toolbarbutton class="multibutton"
+                           type="checkbox"
+                           id="formmethodGetButton"
+                           label="&get.label;"
+                           value="get"
+                           oncommand="ToggleMultibuttons(this)"/>
+            <toolbarbutton class="multibutton"
+                           type="checkbox"
+                           id="formmethodPostButton"
+                           label="&post.label;"
+                           value="post"
+                           oncommand="ToggleMultibuttons(this)"/>
+          </hbox>
+        </row>
+        <row align="center" attribute="formenctype">
+          <label value="&formenctype.label;"/>
+          <menulist>
+            <menupopup>
+              <menuitem label="&unspecified.label;" value=""/>
+              <menuseparator/>
+              <menuitem label="application/x-www-form-urlencoded" value="application/x-www-form-urlencoded"/>
+              <menuitem label="multipart/form-data" value="multipart/form-data"/>
+              <menuitem label="text/plain" value="text/plain"/>
+            </menupopup>
+          </menulist>
+        </row>
+        <row align="center" attribute="formnovalidate">
+          <label value="&formnovalidate.label;"/>
+          <checkbox label="&novalidate.label;"/>
+        </row>
+        <row align="center" attribute="formtarget">
+          <label value="&target.label;"/>
+          <menulist id="formTargetMenulist"
+                    editable="true">
+            <menupopup>
+              <menuitem label="_blank"  value="_blank"/>
+              <menuitem label="_self"   value="_self"/>
+              <menuitem label="_parent" value="_parent"/>
+              <menuitem label="_top"    value="_top"/>
+            </menupopup>
+          </menulist> 
+        </row>
+      </rows>
+    </grid>
+</dialog>

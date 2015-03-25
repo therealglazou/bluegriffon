@@ -1,0 +1,18 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<SearchPlugin xmlns="http://www.mozilla.org/2006/browser/search/">
+<ShortName>Federacja Bibliotek Cyfrowych</ShortName>
+<Description>Federacja Bibliotek Cyfrowych</Description>
+<InputEncoding>UTF-8</InputEncoding>
+<Image width="16" height="16">data:image/x-icon;base64,/9j/4AAQSkZJRgABAQEASABIAAD/4QAWRXhpZgAATU0AKgAAAAgAAAAAAAD//gAXQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q/9sAQwAFAwQEBAMFBAQEBQUFBgcMCAcHBwcPCwsJDBEPEhIRDxERExYcFxMUGhURERghGBodHR8fHxMXIiQiHiQcHh8e/9sAQwEFBQUHBgcOCAgOHhQRFB4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4e/8AAEQgAEAAQAwEiAAIRAQMRAf/EABYAAQEBAAAAAAAAAAAAAAAAAAYEB//EACIQAAEEAgIDAAMAAAAAAAAAAAECAwUGBBEAIQcSMRMiQf/EABUBAQEAAAAAAAAAAAAAAAAAAAUG/8QAIxEAAQMDAgcAAAAAAAAAAAAAAQIDEQASIQRBBQYiIzGRwf/aAAwDAQACEQMRAD8A0OPsk/5ItlikVTwhKpAOKQV9+oSkn9iARtRCSe/m9Di3NzMqvMR7qZhMlHybftiZTZKfbYBHWz/CCDvkdGtOI9R7xIseKX4heC64Ho0oO5MaOyB+Mfex8PClZZuvlK1QruTWF1SpwxBaxlJKdgEbA2AVE6A+AAcB47yq2+CFI7gUOqcgyD5BiI2+1XMa9nW3KXa2ylJFsjZOABFxUVZJ91//2Q==</Image>
+<Url type="text/html" method="GET" template="http://fbc.pionier.net.pl/owoc/results">
+    <Param name="query" value="{searchTerms}" />
+    <Param name="action" value="DistributedSearchAction" />
+</Url>
+<Url type="application/x-suggestions+json" method="GET" template="http://fbc.pionier.net.pl/owoc/gossip">
+    <Param name="query" value="{searchTerms}" />
+    <Param name="action" value="GossipAction" />
+</Url>
+</SearchPlugin>

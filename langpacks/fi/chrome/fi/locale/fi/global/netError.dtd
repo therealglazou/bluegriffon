@@ -1,0 +1,102 @@
+<!ENTITY loadError.label  "Sivun lataamisvirhe">
+<!ENTITY retry.label  "Yritä uudestaan">
+
+<!-- Specific error messages -->
+
+<!ENTITY connectionFailure.title  "Yhteyden muodostus epäonnistui">
+<!ENTITY connectionFailure.longDesc  "<p>Selain ei onnistunut muodostamaan yhteyttä, vaikka sivusto vaikuttaakin olevan oikea.</p><ul><li>Sivusto voi olla väliaikaisesti pois toiminnasta. Yritä myöhemmin uudelleen.</li><li>Jos muutkaan sivustot eivät toimi, tarkista tietokoneen verkkoasetukset.</li><li>Onko tietokone tai verkko suojattu palomuurilla tai käytetäänkö välityspalvelinta? Virheelliset asetukset voivat haitata selaamista.</li></ul>">
+
+<!ENTITY deniedPortAccess.title "Portti estetty turvallisuussyistä">
+<!ENTITY deniedPortAccess.longDesc "<p>Pyydetty osoite sisältää käytettävän portin (esim. <q>mozilla.org:80</q> ottaa yhteyden mozilla.orgin porttiin 80), joka ei normaalisti ole tarpeen selatessa verkkosivuja. Selain on perunut verkkopyynnön turvallisuussyistä.</p>">
+
+<!ENTITY dnsNotFound.title  "Osoitetta ei löytynyt">
+<!ENTITY dnsNotFound.longDesc "<p>Selain ei löytänyt osoitteessa annettua palvelinta.</p><ul><li>Tarkista osoite kirjoitusvirheiden varalta. (esim. <q><strong>ww</strong>.mozilla.org</q> oikean muodon sijaan: <q><strong>www</strong>.mozilla.org</q>)</li><li>Onko palvelinosoite varmasti olemassa? Palvelinosoitteen rekisteröinti on voinut raueta.</li><li>Jos muutkaan sivustot eivät toimi, tarkista tietokoneen verkkoasetukset ja nimipalvelinasetukset.</li><li>Onko tietokone tai verkko suojattu palomuurilla tai käytetäänkö välityspalvelinta? Virheelliset asetukset voivat haitata selaamista.</li></ul>">
+
+<!ENTITY fileNotFound.title  "Tiedostoa ei löytynyt">
+<!ENTITY fileNotFound.longDesc "<ul><li>Tiedosto voi olla poistettu, siirretty tai nimetty uudelleen.</li><li>Onko tiedoston nimi ja sijainti kirjoitettu virheettömästi ja oikealla kirjainkoolla?</li><li>Onko käyttäjällä lukuoikeudet tiedostoon?</li></ul>">
+
+<!ENTITY generic.title "Verkkopyyntöä ei kyetä toteuttamaan">
+<!ENTITY generic.longDesc "<p>Tästä ongelmasta tai virheestä ei ole saatavilla lisätietoja.</p>">
+
+<!ENTITY malformedURI.title  "Virheellinen osoite">
+<!ENTITY malformedURI.longDesc  "<p>Annettu osoite ei ole tunnetussa muodossa. Tarkista osoitteen muoto sijaintipalkista ja yritä uudelleen.</p>">
+
+<!ENTITY netInterrupt.title "Tiedonsiirto keskeytyi">
+<!ENTITY netInterrupt.longDesc "<p>Selain muodosti yhteyden onnistuneesti, mutta yhteys katkesi siirrettäessä tietoa. Yritä myöhemmin uudestaan.</p><ul><li>Jos muutkaan sivustot eivät toimi, tarkista tietokoneen verkkoasetukset.</li><li>Jos ongelmat jatkuvat, ota yhteyttä verkon ylläpitoon tai verkkoyhteyden palveluntarjoajaan.</li></ul>">
+
+<!ENTITY netOffline.title  "Yhteydettömässä tilassa">
+<!ENTITY netOffline.longDesc "<p>Selain on verkkoyhteydettömässä tilassa eikä voi muodostaa yhteyttä pyydettyyn kohteeseen.</p><ul><li>Onko tietokoneen verkkoyhteys toiminnassa?</li><li>Aseta selain yhteystilaan ja yritä uudelleen.</li></ul>">
+<!ENTITY netOffline.overrideLongDesc "<p>Selain on verkkoyhteydettömässä tilassa eikä voi muodostaa yhteyttä pyydettyyn kohteeseen.</p><ul><li>Onko tietokoneen verkkoyhteys toiminnassa?</li><li>Aseta selain yhteystilaan ja yritä uudelleen.</li></ul>">
+
+<!ENTITY contentEncodingError.title "Sisällön koodausvirhe">
+<!ENTITY contentEncodingError.longDesc "<p>Avattavaa sivua ei voida näyttää, koska se on pakattu virheellisesti tai muodossa, joka ei ole tuettu.</p><ul><li>Ilmoitathan sivuston omistajalle tästä ongelmasta.</li></ul>">
+
+<!ENTITY unsafeContentType.title "Ei turvallinen tiedostotyyppi">
+<!ENTITY unsafeContentType.longDesc "
+<ul>
+  <li>Osoitteen avaaminen voi vaatia uuden ohjelman asentamista.</li>
+</ul>
+">
+
+<!ENTITY netReset.title "Yhteys keskeytyi">
+<!ENTITY netReset.longDesc "<p>Verkkoyhteys katkesi muodostettaessa yhteyttä. Yritä uudestaan.</p>">
+
+<!ENTITY netTimeout.title  "Yhteyden aikakatkaisu">
+<!ENTITY netTimeout.longDesc "<p>Palvelin ei vastannut yhteyspyyntöön, ja selain lopetti vastauksen odottamisen.</p><ul><li>Palvelin voi olla kovan rasituksen alainen tai väliaikaisesti huollettavana. Yritä myöhemmin uudestaan.</li><li>Jos muutkaan sivustot eivät toimi, tarkista tietokoneen verkkoasetukset.</li><li>Onko tietokone tai verkko suojattu palomuurilla tai käytetäänkö välityspalvelinta?  Virheelliset asetukset voivat haitata selaamista.</li><li>Jos ongelmat jatkuvat, ota yhteyttä verkon ylläpitoon tai verkkoyhteyden palveluntarjoajaan.</li></ul>">
+
+<!ENTITY protocolNotFound.title  "Tuntematon yhteyskäytäntö">
+<!ENTITY protocolNotFound.longDesc  "<p>Selain ei tunnistanut osoitteessa käytettyä yhteyskäytäntöä (esim. <q>wxyz://</q>), jonka takia yhteyttä palvelimeen ei voida muodostaa.</p><ul><li>Jos yhteyttä muodostetaan multimediaa tai jotain muuta kuin tekstiä tarjoavaan palveluun, tarkista palvelimen lisävaatimukset asiakasohjelmille.</li><li>Toimiakseen selaimessa jotkin yhteyskäytännöt vaativat kolmannen osapuolen tekemän ohjelman tai liitännäisen.</li></ul>">
+
+<!ENTITY proxyConnectFailure.title "Välityspalvelin kieltäytyi yhteydestä">
+<!ENTITY proxyConnectFailure.longDesc "<p>Selain on asetettu käyttämään välityspalvelinta, mutta välityspalvelin ei hyväksynyt yhteyttä.</p><ul><li>Ovatko selaimen välityspalvelinasetukset oikeat? Tarkista asetukset ja yritä uudelleen.</li><li>Tulisiko välityspalvelimen hyväksyä yhteydet tästä verkkoyhteydestä?</li><li>Jos ongelmat jatkuvat, ota yhteyttä verkon ylläpitoon tai verkkoyhteyden palveluntarjoajaan.</li></ul>">
+
+<!ENTITY proxyResolveFailure.title "Välityspalvelinta ei löytynyt">
+<!ENTITY proxyResolveFailure.longDesc "<p>Selain on asetettu käyttämään välityspalvelinta, mutta siihen ei saatu yhteyttä.</p><ul><li>Ovatko selaimen välityspalvelinasetukset oikeat? Tarkista asetukset ja yritä uudelleen.</li><li>Onko tietokoneen verkkoyhteys toimintakykyinen?</li><li>Jos ongelmat jatkuvat, ota yhteyttä verkon ylläpitoon tai verkkoyhteyden palveluntarjoajaan.</li></ul>">
+
+<!ENTITY redirectLoop.title  "Uudelleenohjaussilmukka">
+<!ENTITY redirectLoop.longDesc  "<p>Selain on lopettanut pyydetyn kohteen lataamisen. Palvelin uudelleenohjaa yhteyspyyntöjä loputtomasti.</p><ul><li>Onko kaikki tai sivuston tarvitsemat evästeet estetty?</li><li><em>HUOM</em>: Jos sivuston evästeiden salliminen ei korjaa ongelmaa, vika on luultavasti palvelimen asetuksissa, eikä tässä tietokoneessa.</li></ul>">
+
+<!ENTITY unknownSocketType.title  "Virheellinen vastaus">
+<!ENTITY unknownSocketType.longDesc  "<p>Palvelin vastasi verkkopyyntöön odottamattomalla tavalla ja selain joutui keskeyttämään toiminnon.</p>">
+
+<!ENTITY nssFailure2.title "Suojatun yhteyden muodostaminen epäonnistui">
+<!ENTITY nssFailure2.longDesc "<p>Avattavaa sivua ei voida näyttää, koska vastaanotetun datan alkuperää ei kyetty varmentamaan.</p><ul><li>Ilmoitathan ongelmasta sivuston omistajalle.</li></ul>">
+
+<!ENTITY nssBadCert.title "Suojatun yhteyden muodostaminen epäonnistui">
+<!ENTITY nssBadCert.longDesc2 "<ul>
+<li>Ongelma voi johtua palvelimen asetuksista tai jonkin toisen palvelimen vilpillisestä yrityksestä tekeytyä palvelimeksi.</li>
+<li>Jos yhteyden muodostuminen palvelimeen on aiemmin onnistunut, vika voi olla väliaikainen. Yritä tällöin myöhemmin uudestaan.</li>
+</ul>
+">
+
+<!ENTITY malwareBlocked.title "Epäilty hyökkäyssivusto!">
+<!ENTITY malwareBlocked.longDesc "
+<p>Hyökkäyssivustot yrittävät asentaa tietokoneellesi ohjelmia, jotka keräävät henkilötietoja, käyttävät tietokonettasi toisiin tietokoneisiin kohdistuviin hyökkäyksiin tai muuten vahingoittavat tietokonettasi.</p>
+<p>Sivuston omistajat, joiden sivusto on virheellisesti ilmoitettu hyökkäyssivustoksi, voivat <a href='http://www.stopbadware.org/home/reviewinfo' >anoa sivuston tilan tarkistamista</a>.</p>
+">
+
+<!ENTITY phishingBlocked.title "Epäilty huijaussivusto!">
+<!ENTITY phishingBlocked.longDesc "
+<p>Henkilötietojen kirjoittaminen tälle sivulle voi johtaa identiteettivarkauteen tai johonkin muuhun petokseen.</p>
+<p>Tämän tyyppiset verkkohuijaukset ovat osa phishing- tai khalastushuijauksia, joissa sivuilla tai sähköposteilla yritetään jäljitellä mahdollisesti luottamiesi toimijoiden viestintää.</p>
+">
+
+<!ENTITY cspFrameAncestorBlocked.title "Sisällön tietosuojakäytännön estämä">
+<!ENTITY cspFrameAncestorBlocked.longDesc "<p>Selain esti tämän sivun latautumisen tässä yhteydessä, koska sivun sisällön tietosuojakäytäntö kieltää sen.</p>">
+
+<!-- Include app-specific error messages - do not change this in localization!
+     Some applications might override netErrorApp.dtd with their specific version,
+     this inclusion needs to be intact for that approach to work correctly. -->
+<!ENTITY % netErrorAppDTD SYSTEM "chrome://global/locale/netErrorApp.dtd">
+%netErrorAppDTD;
+
+<!ENTITY corruptedContentError.longDesc "<p>The page you are trying to view cannot be shown because an error in the data transmission was detected.</p><ul><li>Please contact the website owners to inform them of this problem.</li></ul>">
+
+<!ENTITY corruptedContentError.title "Corrupted Content Error">
+<!ENTITY netOffline.longDesc2 "<p>The browser is operating in its offline mode and cannot connect to the requested item.</p><ul><li>Is the computer connected to an active network?</li><li>Press &quot;Try Again&quot; to switch to online mode and reload the page.</li></ul>">
+<!ENTITY notCached.longDesc "<p>The requested document is not available in the browser's cache.</p><ul><li>As a security precaution, the browser does not automatically re-request sensitive documents.</li><li>Click Try Again to re-request the document from the website.</li></ul>">
+
+<!ENTITY notCached.title "Document Expired">
+<!ENTITY remoteXUL.longDesc "<p><ul><li>Please contact the website owners to inform them of this problem.</li></ul></p>">
+
+<!ENTITY remoteXUL.title "Remote XUL">

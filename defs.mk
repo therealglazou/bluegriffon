@@ -1,0 +1,2 @@
+#DIST_SUBDIR=bluegriffon
+#XPI_ROOT_APPID=$(MOZ_APP_ID)

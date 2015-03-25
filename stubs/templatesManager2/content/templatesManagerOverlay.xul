@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+
+<!-- Templates Manager extension for BlueGriffon
+   - Copyright (c) Disruptive Innovations SARL 2008
+   - All rights reserved.
+   -->
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<!DOCTYPE overlay SYSTEM "chrome://templatesmanager/locale/templatesManagerOverlay.dtd">
+
+<overlay
+  id     = "templatesManagerOverlay"
+  xmlns  = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/x-javascript" src="chrome://templatesmanager/content/templatesManagerOverlay.js"/>
+
+  <popup id="fileMenu_popup">
+    <menuitem label="&templatesManager.label;"
+              id="templatesManagerItem"
+              insertafter="menu_RecentFiles"
+              oncommand="com.bluegriffon.templatesManager.open()"/>
+  </popup>
+</overlay>

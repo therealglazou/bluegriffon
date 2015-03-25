@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://gfd/skin/gfdOverlay.css" type="text/css"?>
+
+<!DOCTYPE overlay [
+  <!ENTITY % gfdOverlayDTD SYSTEM "chrome://gfd/locale/gfdOverlay.dtd">
+  %gfdOverlayDTD;
+]>
+
+<overlay id="gfdOverlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/x-javascript"  src="chrome://gfd/content/gfdOverlay.js"/>
+
+  <menupopup id="webfontsMenupopup">
+    <menuitem label="&gfdWindow.label;"
+              command="cmd_gfdManager"/>
+  </menupopup>
+
+  <commandset id="composerMenuItems">
+    <command id="cmd_gfdManager" oncommand="goDoCommand('cmd_gfdManager')"/>
+  </commandset>
+
+</overlay>         
+

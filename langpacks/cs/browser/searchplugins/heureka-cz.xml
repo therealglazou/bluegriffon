@@ -1,0 +1,18 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<SearchPlugin xmlns="http://www.mozilla.org/2006/browser/search/">
+<ShortName>Heuréka</ShortName>
+<Description>Vyhledávání na Heuréka.cz</Description>
+<InputEncoding>UTF-8</InputEncoding>
+<Image width="16" height="16">data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJWfyLCVn8oElZ/G1JWfy2SVm8e8lZ/L/JWfy/yVn8v8lZ/L/JGfy7SVn8tclZ/K1JWfygSVm8ioAAAAAJWbyLCVn8vklZ/L/JWfy/yVn8v8lZ/L/JWfy/yVn8v8lZ/L/JWfy/yVn8v8lZ/L/JWfy/yVn8v8lZvL5JWbyKiVn8oclZ/L/Jmfy/yVn8v8lZ/L/JWfy/yVn8v8lZ/L/JWfy/yVn8v8lZ/L/JWfy/yVn8v8lZ/L/JWfy/yVn8n6Eqfe7Rn7z/6rE+v81cvP/Pnjz/3Cb9v8pafL/JWfy/yVn8v8ubfL/d6D2/zt28/83c/P/p8H5/0R98/+EqfexNnPz3SVn8v/A0/v/TIL0/16P9f/5+/7/1+P8/zFv8v8/efP/6e/9//j6/v9cjfX/UIX0/7vP+v8lZ/L/N3Tz1ai+8PV1nvb/r8f6/yVn8v8lZ/L/1+P8/63G+v8naPL/LWzy/8vb+//N3Pz/JWfy/yVn8v+4zvr/cp32/6zD9OvZp1T/3rNr/9zLsf9fj/X/bZn2/+zw+P83dPP/JWfy/yVn8v9Uh/T/8vHy/2mW9f9jkvX/49O8/96za//aqFb71Jo6/9SaOv/VnT//471//+K8ff/hzKr/NXLy/yVn8v8lZ/L/UYb0/+nLmv/iunr/476B/9WdQf/Umjr/1Jo6/9SaOv/Umjr/1Jo6/9SaOv/Umjr/26tb/6W87f86dfP/QXrz/8HN6P/ZplH/1Jo6/9SaOv/Umjr/1Jo6/9SaOv/Umjr/1Jo6/9SaOv/Umjr/1Jo6/9SaOv/bq1z/4sqj/+TLoP/Zp1X/1Jo6/9SaOv/Umjr/1Jo6/9SaOv/Umjr/1Jo589SaOv/Umjr/1Jo6/9SaOv/Umjr/1Jo7/9SbPf/Umz3/1Jo7/9SaOv/Umjr/1Jo6/9SaOv/Umjr/1Jo679SaOt3Umjr/1Jo6/9SaOv/Wq2PP2b2Qm9rIqYPby7F+28uxgdvKr5XaxKC/2LV8+dSaOv/Umjr/1Jo6/9SaOtnUmjq71Jo6/9SaOv/Umjrt1Jo6CgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANzVymjUnkT/1Jo6/9SaOv/Umjq71Jo6idSaOv/Umjr/1Jo6/9SaOjjTmjkCAAAAAAAAAAAAAAAAAAAAANSaOgLYuYZ61Jo6/9SaOv/Umjr/1Jo6idSaOjjUmTn/1Jo6/9SaOv/Umjrz1Jo5v9SaOp/UmjqX1Jo6l9SaOqHUmjrD1Jo599SaOv/Umjr/1Jo6/9SaOjgAAAAA1Jo6RtSaOqHUmTrT1Jo69dSaOv/Umjr/1Jo6/9SaOv/Umjr/1Jo6/9SaOvPUmjrR1Jo6n9SaOkgAAAAAwAMAAIABAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAD/AAAA/wAACAAQAAwAMAAA==</Image>
+<Url type="application/x-suggestions+json" method="GET" template="http://www.heureka.cz/direct/firefox/autocompleter.php">
+	<Param name="query" value="{searchTerms}"/>
+</Url>
+<Url type="text/html" method="GET" template="http://www.heureka.cz/">
+	<Param name="h[fraze]" value="{searchTerms}"/>
+	<Param name="utm_source" value="firefox-search"/>
+</Url>
+<SearchForm>http://www.heureka.cz/</SearchForm>
+</SearchPlugin>

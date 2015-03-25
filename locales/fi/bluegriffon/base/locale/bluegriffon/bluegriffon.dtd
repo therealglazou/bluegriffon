@@ -1,0 +1,512 @@
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1/GPL 2.0/LGPL 2.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is BlueGriffon.
+   -
+   - The Initial Developer of the Original Code is
+   - Disruptive Innovations SARL.
+   - Portions created by the Initial Developer are Copyright (C) 2006
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -   Daniel Glazman (daniel.glazman@disruptive-innovations.com), Original Author
+   -
+   - Alternatively, the contents of this file may be used under the terms of
+   - either the GNU General Public License Version 2 or later (the "GPL"), or
+   - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+   - in which case the provisions of the GPL or the LGPL are applicable instead
+   - of those above. If you wish to allow use of your version of this file only
+   - under the terms of either the GPL or the LGPL, and not to allow others to
+   - use your version of this file under the terms of the MPL, indicate your
+   - decision by deleting the provisions above and replace them with the notice
+   - and other provisions required by the LGPL or the GPL. If you do not delete
+   - the provisions above, a recipient may use your version of this file under
+   - the terms of any one of the MPL, the GPL or the LGPL.
+   -
+   - ***** END LICENSE BLOCK ***** -->
+
+<!ENTITY window.title           "BlueGriffon">
+
+<!ENTITY fileMenu.label         "Tiedosto">
+<!ENTITY fileMenu.accesskey     "T">
+<!ENTITY newMenu.label                    "Uusi">
+<!ENTITY newMenu.accesskey                "U">
+
+<!ENTITY newWizardMenu.label              "Uusi velholla">
+
+<!ENTITY editMenu.label                   "Muokkaa">
+<!ENTITY editMenu.accesskey               "M">
+
+<!ENTITY viewMenu.label                   "Näytä">
+<!ENTITY viewMenu.accesskey               "N">
+<!ENTITY customizeToolbar.label           "Muokkaa">
+<!ENTITY customizeToolbar.accesskey       "M">
+
+<!ENTITY insertMenu.label                 "Lisää">
+<!ENTITY insertMenu.accesskey             "L">
+
+<!ENTITY formatMenu.label                 "Muotoilu">
+<!ENTITY formatMenu.accesskey             "u">
+<!ENTITY spanCmd.label "Säätöalue">
+<!ENTITY spanCmd.accesskey "ö">
+<!-- Font Style SubMenu -->
+<!ENTITY fontStyleMenu.label "Tekstin tyyli">
+<!ENTITY formatstylemenu.accesskey "T">
+<!ENTITY styleBoldCmd.label "Lihavoitu">
+<!ENTITY stylebold.accesskey "L">
+<!ENTITY stylebold.keybinding "b">
+<!ENTITY styleItalicCmd.label "Kursivoitu">
+<!ENTITY styleitalic.accesskey "u">
+<!ENTITY styleitalic.keybinding "i">
+<!ENTITY styleUnderlineCmd.label "Alleviivattu">
+<!ENTITY styleunderline.accesskey "A">
+<!ENTITY styleUnderline.key "u">
+<!ENTITY styleStrikeThruCmd.label "Yliviivattu">
+<!ENTITY stylestrikethru.accesskey "Y">
+<!ENTITY styleSuperscriptCmd.label "Yläindeksi">
+<!ENTITY stylesuperscript.accesskey "n">
+<!ENTITY styleSubscriptCmd.label "Alaindeksi">
+<!ENTITY stylesubscript.accesskey "d">
+<!ENTITY styleNonbreakingCmd.label "Katkeamaton">
+<!ENTITY stylenonbreaking.accesskey "e">
+<!ENTITY styleEm.label "Korostus">
+<!ENTITY styleEm.accesskey "K">
+<!ENTITY styleEm.key "i">
+<!ENTITY styleStrong.label "Vahvempi korostus">
+<!ENTITY styleStrong.accesskey "V">
+<!ENTITY styleStrong.key "b">
+<!ENTITY styleCite.label "Sitaatti">
+<!ENTITY styleCite.accesskey "S">
+<!ENTITY styleAbbr.label "Lyhenne">
+<!ENTITY styleAbbr.accesskey "h">
+<!ENTITY styleAcronym.label "Akronyymi">
+<!ENTITY styleAcronym.accesskey "r">
+<!ENTITY styleCode.label "Koodi">
+<!ENTITY styleCode.accesskey "o">
+<!ENTITY styleCode.key "c">
+<!ENTITY styleSamp.label "Näytetuloste">
+<!ENTITY styleSamp.accesskey "ä">
+<!ENTITY styleVar.label "Muuttuja">
+<!ENTITY styleVar.accesskey "M">
+<!ENTITY fontFixedWidth.label "Tasavälinen">
+<!ENTITY fontfixedwidth.accesskey "T">
+
+<!ENTITY tableMenu.label                  "Taulukko">
+<!ENTITY tableMenu.accesskey              "a">
+
+<!ENTITY toolsMenu.label                  "Työkalut">
+<!ENTITY toolsMenu.accesskey              "y">
+<!ENTITY consoleMenu.label                "JavaScript-konsoli">
+
+<!ENTITY panelsMenu.label                 "Paneelit">
+<!ENTITY panelsMenu.accesskey             "P">
+
+<!ENTITY alignPanels.label                "Tasaa kaikki paneelit">
+
+<!ENTITY helpMenu.label                   "Ohje">
+<!ENTITY helpMenu.accesskey               "O">
+<!ENTITY aboutComposer.label              "Tietoja BlueGriffonista">
+
+<!ENTITY throbber.tooltip                 "BlueGriffon">
+
+<!ENTITY newMenu.label                    "Uusi">
+<!ENTITY newToolbarCmd.tooltip            "Luo uusi sivu">
+<!ENTITY pageInNewTab.label                     "Sivu uudessa välilehdessä">
+<!ENTITY pageInNewWindow.label                  "Sivu uudessa ikkunassa">
+<!ENTITY newOtherCmd.label                "Lisävalinnat...">
+
+<!ENTITY openMenu.label                   "Avaa">
+<!ENTITY openMenu.tooltip                 "Avaa aiemmin luotu sivu">
+<!ENTITY openTab.label                    "Avaa uuteen välilehteen">
+<!ENTITY openWindow.label                 "Avaa uuteen ikkunaan">
+<!ENTITY openPage.label                   "Avaa">
+<!ENTITY openPage.accesskey               "A">
+<!ENTITY openFileCmd.label                "Avaa tiedosto…">
+
+<!ENTITY quit.label                       "Lopeta">
+<!ENTITY quit.accesskey                   "L">
+
+<!ENTITY stopButton.label                 "Pysäytä">
+<!ENTITY stopButton.tooltip               "Lopeta sivun lataaminen">
+
+<!ENTITY boldToolbarCmd.tooltip           "Lihavointi">
+<!ENTITY boldToolbarCmd.label             "Lihavoi">
+<!ENTITY italicToolbarCmd.tooltip         "Kursivointi">
+<!ENTITY italicToolbarCmd.label           "Kursivoi">
+<!ENTITY underlineToolbarCmd.tooltip      "Alleviivaus">
+<!ENTITY underlineToolbarCmd.label        "Alleviivaa">
+<!ENTITY strongToolbarCmd.tooltip         "Vahvempi korostus">
+<!ENTITY strongToolbarCmd.label           "Vahvempi korostus">
+<!ENTITY emToolbarCmd.tooltip             "Korostus">
+<!ENTITY emToolbarCmd.label               "Korostus">
+<!ENTITY codeToolbarCmd.label             "Koodi">
+<!ENTITY codeToolbarCmd.tooltip           "Koodi">
+<!-- RTL -->                           
+<!ENTITY writingDirectionMenu.label          "Kirjoitussuunta">
+<!ENTITY writingdirectionmenu.accesskey      "K">
+<!ENTITY defaultDirectionMenu.label          "Ei määritetty">
+<!ENTITY defaultdirectionmenu.accesskey      "E">
+<!ENTITY ltrDirectionMenu.label              "Vasemmalta oikealle">
+<!ENTITY ltrdirectionmenu.accesskey          "V">
+<!ENTITY rtlDirectionMenu.label              "Oikealta vasemmalle">
+<!ENTITY rtldirectionmenu.accesskey          "O">
+<!ENTITY dirLtr.tooltip                      "Vasemmalta oikealle">
+<!ENTITY dirRtl.tooltip                      "Oikealta vasemmalle">
+
+<!ENTITY ParagraphSelect.tooltip "Valitse kappaleen muotoilu">
+<!-- Shared in Paragraph, and Toolbar menulist -->
+<!ENTITY bodyTextCmd.label "Leipäteksti">
+<!ENTITY paragraphParagraphCmd.label "Kappale">  
+<!ENTITY heading1Cmd.label "Otsikko 1">
+<!ENTITY heading2Cmd.label "Otsikko 2">
+<!ENTITY heading3Cmd.label "Otsikko 3">
+<!ENTITY heading4Cmd.label "Otsikko 4">
+<!ENTITY heading5Cmd.label "Otsikko 5">
+<!ENTITY heading6Cmd.label "Otsikko 6">
+<!ENTITY paragraphAddressCmd.label "Osoite">
+<!ENTITY paragraphPreformatCmd.label "Esimuotoiltu">
+<!ENTITY genericContainerCmd.label "Geneerinen kääre (div)">
+
+<!ENTITY unorderedList.tooltip "Numeroimaton luettelo">
+<!ENTITY orderedList.tooltip "Numeroitu luettelo">
+<!ENTITY unorderedList.label "Numeroimaton luettelo">
+<!ENTITY orderedList.label "Numeroitu luettelo">
+
+<!ENTITY alignLeft.tooltip "Tasaa vasemmalle">
+<!ENTITY alignCenter.tooltip "Keskitä">
+<!ENTITY alignRight.tooltip "Tasaa oikealle">
+<!ENTITY alignJustify.tooltip "Tasaa keskelle">
+<!ENTITY alignLeft.label "Tasaa vasemmalle">
+<!ENTITY alignCenter.label "Keskitä">
+<!ENTITY alignRight.label "Tasaa oikealle">
+<!ENTITY alignJustify.label "Tasaa keskelle">
+
+<!ENTITY indentToolbarCmd.tooltip "Sisennä tekstiä">
+<!ENTITY indentToolbarCmd.label "Sisennä">
+
+<!ENTITY outdentToolbarCmd.tooltip "Ulonna tekstiä">
+<!ENTITY outdentToolbarCmd.label "Ulonna">
+
+<!ENTITY definitionDescription.tooltip "Määritelmän kuvaus">
+<!ENTITY definitionDescription.label "Määritelmän kuvaus">
+<!ENTITY definitionTitle.tooltip "Määritelmän otsikko">
+<!ENTITY definitionTitle.label "Määritelmän otsikko">
+
+<!ENTITY FontFaceSelect.tooltip "Valitse kirjasinlaji">
+<!ENTITY fontVarWidth.label "Vaihtuvavälinen">
+<!ENTITY fontFixedWidth.label "Tasavälinen">
+<!ENTITY fontHelveticaFont.label "Helvetica, Arial">
+<!ENTITY fontTimes.label "Times">
+<!ENTITY fontCourier.label "Courier">
+
+<!ENTITY applyClassToSelectionCmd.tooltip "Sovella luokkaa valinnan kääreeseen">
+<!ENTITY noClass.label "(ei luokkaa)">
+
+<!ENTITY applyIdToSelectionCmd.tooltip "Anna ID valinnan kääreelle">
+<!ENTITY noId.label "(ei ID:tä)">
+
+<!ENTITY tableToolbarCmd.label "Taulukko">
+<!ENTITY tableToolbarCmd.key "T">
+<!ENTITY tableToolbarCmd.tooltip "Lisää uusi taulukko tai muokkaa valitun taulukon ominaisuuksia">
+
+<!ENTITY imageToolbarCmd.label "Kuva">
+<!ENTITY imageToolbarCmd.key "K">
+<!ENTITY imageToolbarCmd.tooltip "Lisää kuva tai muokkaa kuvaa">
+
+<!ENTITY anchorToolbarCmd.label "Ankkuri">
+<!ENTITY anchorToolbarCmd.key "A">
+<!ENTITY anchorToolbarCmd.tooltip "Lisää ankkuri tai muokkaa ankkuria">
+
+<!ENTITY linkToolbarCmd.label "Linkki">
+<!ENTITY linkToolbarCmd.key "L">
+<!ENTITY linkToolbarCmd.tooltip "Lisää linkki tai muokkaa linkkiä">
+
+<!ENTITY hrToolbarCmd.label "Vaakapalkki">
+<!ENTITY hrToolbarCmd.key "V">
+
+<!ENTITY htmlToolbarCmd.label "HTML-merkkaus">
+<!ENTITY htmlToolbarCmd.key "H">
+
+<!ENTITY formToolbarCmd.label "Lomake">
+<!ENTITY formToolbarCmd.key "o">
+<!ENTITY formToolbarCmd.tooltip "Lisää lomake tai muokkaa lomaketta">
+
+<!ENTITY fieldsetToolbarCmd.label "Kenttäjoukko">
+<!ENTITY fieldsetToolbarCmd.key "K">
+
+<!ENTITY labelToolbarCmd.label "Etiketti">
+<!ENTITY labelToolbarCmd.key "E">
+
+<!ENTITY buttonToolbarCmd.label "Painike">
+<!ENTITY buttonToolbarCmd.key "P">
+
+<!ENTITY selectToolbarCmd.label "Valintaluettelo">
+<!ENTITY selectToolbarCmd.key "V">
+
+<!ENTITY textareaToolbarCmd.label "Tekstikenttä">
+<!ENTITY textareaToolbarCmd.key "T">
+
+<!ENTITY keygenToolbarCmd.label "Avainparigeneraattori">
+<!ENTITY keygenToolbarCmd.key "A">
+
+<!ENTITY outputToolbarCmd.label "Tuloste">
+<!ENTITY outputToolbarCmd.key "u">
+
+<!ENTITY progressToolbarCmd.label "Edistyminen">
+<!ENTITY progressToolbarCmd.key "d">
+
+<!ENTITY meterToolbarCmd.label "Mittari">
+<!ENTITY meterToolbarCmd.key "M">
+
+<!ENTITY datalistToolbarCmd.label "Dataluettelo">
+<!ENTITY datalistToolbarCmd.key "l">
+
+<!ENTITY stylesheetsToolbarCmd.label "Tyyliarkit">
+<!ENTITY stylesheetsToolbarCmd.key "y">
+
+<!ENTITY webfonts.label "Web-kirjasinlajit">
+
+<!ENTITY videoToolbarCmd.label "Video">
+<!ENTITY videoToolbarCmd.tooltip "Lisää video tai muokkaa videota">
+
+<!ENTITY audioToolbarCmd.label "Ääni">
+<!ENTITY audioToolbarCmd.tooltip "Lisää äänitiedosto tai muokkaa äänitiedostoa">
+
+<!ENTITY browseToolbarCmd.label "Esikatselu">
+<!ENTITY browseToolbarCmd.tooltip "Esikatsele selaimessa">
+
+<!ENTITY saveCmd.label "Tallenna">
+<!ENTITY saveToolbarCmd.tooltip "Tallenna tiedosto paikalliseen sijaintiin">
+<!ENTITY filesave.key "s">
+<!ENTITY saveAsCmd.label "Tallenna nimellä...">
+<!ENTITY filesaveas.key "s">
+
+<!ENTITY undoCmd.label "Kumoa">
+<!ENTITY undoCmd.accesskey "m">
+<!ENTITY redoCmd.label "Tee uudelleen">
+<!ENTITY redoCmd.accesskey "T">
+
+<!ENTITY cutCmd.label "Leikkaa">
+<!ENTITY cutCmd.accesskey "L">
+<!ENTITY copyCmd.label "Kopioi">
+<!ENTITY copyCmd.accesskey "K">
+<!ENTITY pasteCmd.label "Liitä">
+<!ENTITY pasteCmd.accesskey "i">
+<!ENTITY pasteNoFormatting.label "Liitä ilman muotoiluja">
+<!ENTITY pasteNoFormatting.accesskey "a">
+<!ENTITY deleteCmd.label "Poista">
+<!ENTITY deleteCmd.accesskey "P">
+<!ENTITY selectAllCmd.label "Valitse kaikki">
+<!ENTITY selectAllCmd.accesskey "V">
+<!ENTITY copyHTMLCodeCmd.label "Kopioi valittu HTML-merkkaus">
+<!ENTITY copyHTMLCodeCmd.accesskey "H">
+<!ENTITY copyHTMLCode.label "Kopioi tämän elementin HTML-merkkaus">
+
+<!ENTITY setZoomFactor.label "Aseta suurennuskerroin">
+
+<!ENTITY fileRecentMenu.label "Viimeksi avatut">
+<!ENTITY filerecentmenu.accesskey "V">
+
+<!ENTITY markupCleanerCmd.label "Merkkaussiivooja">
+<!ENTITY markupcleaner.accesskey "M">
+
+<!ENTITY viewToolbars.label "Työkalupalkit">
+<!ENTITY viewStatusbar.label "Tilarivi">
+
+<!ENTITY formatToolbar.name "Formaatti (ensisijainen)">
+<!ENTITY formatToolbar2.name "Formaatti (toissijainen)">
+
+<!ENTITY wysiwygMode.label "Wysiwyg">
+<!ENTITY printMode.label "Print Preview">
+<!ENTITY sourceMode.label "Lähdekoodi">
+
+<!ENTITY closeTabCmd.label "Sulje nykyinen välilehti">
+
+<!ENTITY filesave.key "s">
+<!ENTITY quit.key "q">
+<!ENTITY closeWindow.key "w">
+<!ENTITY openPage.key "o">
+<!ENTITY undoCmd.key "z">
+<!ENTITY redoCmd.key "y">
+<!ENTITY cutCmd.key "x">
+<!ENTITY copyCmd.key "c">
+<!ENTITY pasteCmd.key "v">
+
+<!ENTITY formInputs.label "Syötekenttiä...">
+<!ENTITY hiddenInputForm.label "Piilotettu merkkijono">
+<!ENTITY textInputForm.label "Tekstisyötekenttä">
+<!ENTITY searchInputForm.label "Hakukenttä">
+<!ENTITY telInputForm.label "Puhelinnumerokenttä">
+<!ENTITY urlInputForm.label "URL-kenttä">
+<!ENTITY emailInputForm.label "Sähköpostiosoitekenttä">
+<!ENTITY passwordInputForm.label "Salasanakenttä">
+<!ENTITY datetimeInputForm.label "Aika- ja päivämäärävalitsin UTC-aikavyöhykkeellä">
+<!ENTITY dateInputForm.label "Päivämäärävalitsin">
+<!ENTITY monthInputForm.label "Vuosi- ja kuukausivalitsin">
+<!ENTITY weekInputForm.label "Viikkovuosi- ja viikkovalitsin">
+<!ENTITY timeInputForm.label "Aikavalitsin ilman aikavyöhykettä">
+<!ENTITY datetimelocalInputForm.label "Aika- ja päivämäärävalitsin ilman aikavyöhykettä">
+<!ENTITY numberInputForm.label "Lukuarvokenttä">
+<!ENTITY rangeInputForm.label "Lukualuevalitsin">
+<!ENTITY colorInputForm.label "Värivalitsin">
+<!ENTITY checkboxInputForm.label "Valintaruutu">
+<!ENTITY radioInputForm.label "Radiopainike">
+<!ENTITY fileInputForm.label "Tiedostovalitsin">
+<!ENTITY submitInputForm.label "Lomakkeenlähetyspainike">
+<!ENTITY imageInputForm.label "Kuvapohjainen lomakkeenlähetyspainike">
+<!ENTITY resetInputForm.label "Lomakkeentyhjennyspainike">
+<!ENTITY buttonInputForm.label "Painike">
+
+
+<!ENTITY allTagsMode.label "Kaikki tunnukset -tila">
+
+<!ENTITY toggleViewMenu.label "Toggle view">
+<!ENTITY toggleViewMenu.accesskey "T">
+
+<!ENTITY spellCheck.label "Oikolue">
+<!ENTITY spellCheck.accesskey "O">
+<!ENTITY dictionary.label "Sanasto">
+<!ENTITY addToDictionary "Lisää sanastoon">
+<!ENTITY ignoreWord.label "Ohita sana">
+
+<!ENTITY specialChars.label "Merkit ja symbolit">
+
+<!-- Table Menu -->
+<!ENTITY tableMenu.label                     "Taulukko">
+<!ENTITY tablemenu.accesskey                 "a">
+<!-- Select Submenu -->
+<!ENTITY tableSelectMenu.label               "Valitse">
+<!ENTITY tableselectmenu.accesskey           "V">
+
+<!ENTITY tableSelectMenu2.label              "Valitse taulukko">
+<!ENTITY tableInsertMenu2.label              "Lisää taulukko">
+<!ENTITY tableDeleteMenu2.label              "Poista taulukko">
+
+<!-- Insert SubMenu -->
+<!ENTITY tableInsertMenu.label               "Lisää">
+<!ENTITY tableinsertmenu.accesskey           "L">
+<!ENTITY tableTable.label                    "Taulukko">
+<!ENTITY tabletable.accesskey                "T">
+<!ENTITY tableRow.label                      "Rivi">
+<!ENTITY tableRows.label                     "Rivi (rivit)">
+<!ENTITY tablerow.accesskey                  "R">
+<!ENTITY tableRowAbove.label                 "Rivi yläpuolelle">
+<!-- uses tablerow.accesskey -->
+<!ENTITY tableRowBelow.label                 "Rivi alapuolelle">
+<!ENTITY tablerowbelow.accesskey             "i">
+<!ENTITY tableColumn.label                   "Sarake">
+<!ENTITY tableColumns.label                  "Sarake (sarakkeet)">
+<!ENTITY tablecolumn.accesskey               "S">
+<!ENTITY tableColumnBefore.label             "Sarake ennen">
+<!-- uses tablecolumn.accesskey -->
+<!ENTITY tableColumnAfter.label              "Sarake jälkeen">
+<!ENTITY tablecolumnafter.accesskey          "a">
+<!ENTITY tableCell.label                     "Solu">
+<!ENTITY tableCells.label                    "Solu (solut)">
+<!ENTITY tablecell.accesskey                 "o">
+<!ENTITY tableCellContents.label             "Solun sisältö">
+<!ENTITY tablecellcontents.accesskey         "l">
+<!ENTITY tableAllCells.label                 "Kaikki solut">
+<!ENTITY tableCellBefore.label               "Solu ennen">
+<!ENTITY tableallcells.accesskey             "K">
+<!-- uses tablecell.accesskey -->
+<!ENTITY tableCellAfter.label                "Solu jälkeen">
+<!ENTITY tablecellafter.accesskey            "l">
+<!-- Delete SubMenu -->
+<!ENTITY tableDeleteMenu.label               "Poista">
+<!ENTITY tabledeletemenu.accesskey           "P">
+
+<!ENTITY tableFix.label                      "Kiinnitä taulukon asettelu">
+<!ENTITY tablefix.accesskey                  "K">
+<!-- text for "Join Cells" is in editor.properties 
+     ("JoinSelectedCells" and "JoinCellToRight")
+     the access key must exist in both of those strings
+     But value must be set here for accesskey to draw properly
+-->
+<!ENTITY tableJoinCells.label                "Yhdistä solut">
+<!ENTITY tablejoincells.accesskey            "Y">
+<!ENTITY tableSplitCell.label                "Jaa solu">
+<!ENTITY tablesplitcell.accesskey            "a">
+<!ENTITY convertToTable.label                "Luo taulukko valinnasta">
+<!ENTITY converttotable.accesskey            "u">
+<!ENTITY tableProperties.label               "Taulukon ominaisuudet…">
+<!ENTITY tableProperties.accesskey           "m">
+
+<!ENTITY forumsHelpMenu.label "Käyttäjien yhteisö">
+<!ENTITY forums.url "http://groups.google.com/group/bluegriffon/">
+<!ENTITY qa.label "Virheilmoitukset ja ehdotukset">
+<!ENTITY homePage.label "Kotisivut">
+<!ENTITY addons.label "Hae lisäosia">
+
+<!ENTITY pageProperties.label "Sivun ominaisuudet">
+
+
+<!ENTITY preferences.label "Asetukset">
+
+<!ENTITY gotoLink.label "Valitse linkin kohde">
+<!ENTITY gotoLink.accesskey "a">
+
+<!ENTITY cMenu_insertLink.label "Lisää linkki tai muokkaa linkkiä">
+<!ENTITY cMenu_insertLink.accesskey "L">
+
+<!ENTITY getAddOns.label "Hae lisäosia!">
+
+<!ENTITY source.label "Lähdekoodinäkymä">
+<!ENTITY theme.label "Teema">
+
+<!ENTITY removeAllStyles.label "Poista kaikki tekstityylit">
+<!ENTITY removeAllStyles.accesskey "P">
+<!ENTITY removeAllLinks.label "Poista kaikki linkit">
+<!ENTITY removeAllLinks.accesskey "i">
+
+<!ENTITY html5Element.label "HTML 5 -elementti">
+<!ENTITY addonsMenu.label "Lisäosat">
+
+<!ENTITY listProperties.label "Luettelon omonaisuudet">
+
+<!ENTITY tableOfContents.label "Sisällysluettelo">
+
+<!ENTITY select.label "Valitse...">
+<!ENTITY parentElement.label "Vanhempielementti">
+<!ENTITY firstChild.label "Ensimmäinen lapsi">
+<!ENTITY nextSibling.label "Seuraava sisarus">
+<!ENTITY previousSibling.label "Edellinen sisarus">
+
+<!ENTITY tableCaption.label "Taulukkokuvateksti">
+
+<!ENTITY lookForUpdates.label "Hae päivityksiä">
+
+<!ENTITY color.label "Edusta">
+<!ENTITY bgColor.label "Tausta">
+
+<!ENTITY newWindow.label  "Uusi ikkuna">
+
+<!ENTITY editComment.label "Muokkaa HTML-kommenttia:">
+<!ENTITY editPHP.label "Muokkaa PHP-käskyjä:">
+<!ENTITY editPI.label "Muokkaa käsittelyohjeita:">
+<!ENTITY targetPI.label "Kohde:">
+<!ENTITY dataPI.label "Data:">
+<!ENTITY commentOrPHPOrPI.label "Kommentit/PHP/Käsittelyohjeet">
+<!ENTITY openLinkCmdInTab.label        "Avaa uuteen välilehteen">
+<!ENTITY blockquoteToolbarCmd.label "Blockquote">
+<!ENTITY blockquoteToolbarCmd.tooltip "Encapsulate into a blockquote">
+<!ENTITY deckMenu.label "Deck">
+<!ENTITY printSetupCmd.label  "Sivun asetukset…">
+<!ENTITY printSetupCmd.accesskey  "e">
+<!ENTITY printCmd.label  "Tulosta…">
+<!ENTITY printCmd.accesskey  "o">
+<!ENTITY printCmd.commandkey  "p">
+<!ENTITY encapsulate.tooltip "Encapsulate selection into an inline element (default is span)">
+
+<!ENTITY deleteCmd.key             "D">
+<!ENTITY selectAllCmd.key          "A">

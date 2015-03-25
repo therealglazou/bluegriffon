@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<!DOCTYPE overlay SYSTEM "chrome://bluegriffon/locale/prefs/file.dtd">
+
+<overlay
+  id     = "filePrefsOverlay"
+  xmlns  = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <prefpane id="filePrefPane">
+    <preferences id="filePreferences">
+      <preference id="pref-historyCount"    name="bluegriffon.history.url_maximum" type="int"/>
+      <preference id="pref-restoreSession"  name="bluegriffon.defaults.restorePreviousSession" type="bool"/>
+      <preference id="pref-extension-html"  name="bluegriffon.defaults.extension.text-html" type="string"/>
+      <preference id="pref-extension-xhtml" name="bluegriffon.defaults.extension.application-xhtml+xml" type="string"/>
+    </preferences>
+
+    <groupbox>
+      <caption label="&fileExtensions.label;"/>
+      <grid>
+        <columns>
+          <column/>
+          <column/>
+          <column/>
+        </columns>
+        <rows>
+          <row align="center">
+            <label value="&fileExtensionForHTML.label;"/>
+            <textbox id="fileExtensionForHTMLTextbox"
+                     preference="pref-extension-html"/>
+          </row>
+          <row align="center">
+            <label value="&fileExtensionForXHTML.label;"/>
+            <textbox id="fileExtensionForXHTMLTextbox"
+                     preference="pref-extension-xhtml"/>
+          </row>
+        </rows>
+      </grid>
+      <label value="&emptyForDefault.label;" class="indent"/>
+    </groupbox>
+    <groupbox>
+      <caption label="&fileHistory.caption;"/>
+      <hbox align="center">
+        <label value="&fileHistoryDepth.label;"/>
+        <textbox id="historyCount" preference="pref-historyCount"
+                 type="number" size="3" maxlength="3"
+                 min="1" max="50" increment="1"/>
+        <label value="&files.label;"/>
+      </hbox>
+      <checkbox id="restoreSessionCheckbox"
+                preference="pref-restoreSession"
+                label="&restoreLastSession.label;"/>
+    </groupbox>
+  </prefpane>
+
+</overlay>

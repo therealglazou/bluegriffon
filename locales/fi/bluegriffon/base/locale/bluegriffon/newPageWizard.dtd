@@ -1,0 +1,155 @@
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1/GPL 2.0/LGPL 2.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is BlueGriffon.
+   -
+   - The Initial Developer of the Original Code is
+   - Disruptive Innovations SARL.
+   - Portions created by the Initial Developer are Copyright (C) 2006
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -   Daniel Glazman (daniel.glazman@disruptive-innovations.com), Original Author
+   -
+   - Alternatively, the contents of this file may be used under the terms of
+   - either the GNU General Public License Version 2 or later (the "GPL"), or
+   - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+   - in which case the provisions of the GPL or the LGPL are applicable instead
+   - of those above. If you wish to allow use of your version of this file only
+   - under the terms of either the GPL or the LGPL, and not to allow others to
+   - use your version of this file under the terms of the MPL, indicate your
+   - decision by deleting the provisions above and replace them with the notice
+   - and other provisions required by the LGPL or the GPL. If you do not delete
+   - the provisions above, a recipient may use your version of this file under
+   - the terms of any one of the MPL, the GPL or the LGPL.
+   -
+   - ***** END LICENSE BLOCK ***** -->
+
+<!ENTITY window.title "Uusi asiakirja -apulainen">
+
+<!ENTITY pageTitle.label "Otsikko:">
+<!ENTITY pageAuthor.label "Tekijä:">
+<!ENTITY pageDescription.label "Kuvaus:">
+<!ENTITY pageTitle.accesskey "O">
+<!ENTITY pageAuthor.accesskey "T">
+<!ENTITY pageDescription.accesskey "K">
+<!ENTITY pageKeywords.label "Avainsanat:">
+<!ENTITY pageKeywords.accesskey "A">
+<!ENTITY documentLanguage.label "Kieli:">
+<!ENTITY language.accesskey "i">
+<!ENTITY charset.label "Merkistö:">
+<!ENTITY charset.accesskey "M">
+<!ENTITY direction.label "Tekstin suunta:">
+<!ENTITY direction.accesskey "e">
+<!ENTITY ltr.label "Vasemmalta oikealle">
+<!ENTITY rtl.label "Oikealta vasemmalle">
+<!ENTITY unspecified.label "Ei määritetty">
+
+<!ENTITY selectLanguage.label "Valitse kieli">
+
+<!ENTITY backgroundImage.label "Taustakuva:">
+<!ENTITY backgroundImage.accesskey "u">
+
+<!ENTITY filepickerForBgImage.title "Valitse taustakuva">
+<!ENTITY pagePreview.label "Esikatselu:">
+
+<!ENTITY useSystemColors.label "Lukijan oletusvärit (Älä aseta värejä sivulle)">
+<!ENTITY userDefinedColors.label "Käytä omia värejä:">
+
+<!ENTITY backgroundColor.label "Tausta:">
+<!ENTITY backgroundColor.accesskey "T">
+<!ENTITY textColor.label "Teksti:">
+<!ENTITY textColor.accesskey "e">
+<!ENTITY linksColor.label "Linkit:">
+<!ENTITY linksColor.accesskey "L">
+<!ENTITY activeLinksColor.label "Aktiiviset linkit:">
+<!ENTITY activeLinksColor.accesskey "A">
+<!ENTITY visitedLinksColor.label "Avatut linkit:">
+<!ENTITY visitedLinksColor.accesskey "v">
+<!ENTITY underlineLinks.label "Alleviivaa linkit">
+
+<!ENTITY relativeURLForBgImage.label "URL on suhteellinen sivun sijaintiin nähden">
+
+<!ENTITY generalTab.label "Yleiset asiakirja-asetukset">
+<!ENTITY colorsTab.label "Värit ja taustat">
+<!ENTITY styleTab.label "Tyyli">
+<!ENTITY advancedTab.label "Lisäasetukset">
+
+<!ENTITY unsavedPage.label "[Uusi, tallentamaton sivu]">
+<!ENTITY noPageLastModified.label "[Ei tietoa]">
+
+<!ENTITY normalText.preview "Normaali teksti">
+<!ENTITY links.preview "Linkit">
+<!ENTITY activeLinks.preview "Aktiiviset linkit">
+<!ENTITY visitedLinks.preview "Avatut linkit">
+
+<!ENTITY makeColorsDefault.label "Tee ylläolevista oletusasetukseni">
+
+<!ENTITY bgTab.label "Asiakirjan tausta">
+
+<!ENTITY layoutsTab.label "Sivun taitto">
+<!ENTITY usePageLayout.checkbox "Sovella esimääritettyä CSS-taittoa">
+<!ENTITY oneColumn100.label "1 sarake, 100&#37;">
+<!ENTITY twoColumns5050.label "2 saraketta, 50&#37;/50&#37;">
+<!ENTITY twoColumns6633.label "2 saraketta, 66&#37;/33&#37;">
+<!ENTITY twoColumns3366.label "2 saraketta, 33&#37;/66&#37;">
+<!ENTITY twoColumns7525.label "2 saraketta, 75&#37;/25&#37;">
+<!ENTITY twoColumns2575.label "2 saraketta, 25&#37;/75&#37;">
+<!ENTITY threeColumns333333.label "3 saraketta, 33&#37;/33&#37;/33&#37;">
+<!ENTITY threeColumns502525.label "3 saraketta, 50&#37;/25&#37;/25&#37;">
+<!ENTITY threeColumns252550.label "3 saraketta, 25&#37;/25&#37;/50&#37;">
+<!ENTITY fourColumns25252525.label "4 saraketta, 25&#37;/25&#37;/25&#37;/25&#37;">
+
+<!ENTITY layoutType.label "Leveys:">
+<!ENTITY layoutType.accesskey "L">
+<!ENTITY layout100percent.label "Täysi leveys">
+<!ENTITY layout750px.label "750px">
+<!ENTITY layout950px.label "950px">
+<!ENTITY layout974px.label "974px">
+<!ENTITY layoutSubtype.label "Sivupalkki:">
+<!ENTITY layoutSubtype.accesskey "S">
+<!ENTITY noSidebar.label "Ei mitään">
+<!ENTITY left160Sidebar.label "Vasen 160px">
+<!ENTITY left180Sidebar.label "Vasen 180px">
+<!ENTITY left300Sidebar.label "Vasen 300px">
+<!ENTITY right180Sidebar.label "Oikea 180px">
+<!ENTITY right240Sidebar.label "Oikea 240px">
+<!ENTITY right300Sidebar.label "Oikea 300px">
+<!ENTITY loremIpsum.label "Sisällytä 'Lorem ipsum' -täytesisältö">
+<!ENTITY loremIpsum.accesskey "i">
+<!ENTITY newRow.label "Uusi rivi">
+<!ENTITY removeRow.label "Poista">
+
+<!ENTITY tile.label "Kertaus:">
+<!ENTITY tile.accesskey "K">
+<!ENTITY scrolling.label "Vieritys:">
+<!ENTITY scrolling.accesskey "V">
+<!ENTITY scrollWithPage.label "Sivun mukana">
+<!ENTITY noScrolling.label "Ei vieritystä">
+<!ENTITY horizPosition.label "Vaaka:">
+<!ENTITY vertPosition.label "Pysty:">
+
+<!ENTITY documentType.label "Asiakirjatyyppi">
+<!ENTITY documentType.description "Minkä tyyppisen asiakirjan haluat luoda?">
+
+<!ENTITY language.label "Asiakirjakieli">
+<!ENTITY html.label "HTML 4">
+<!ENTITY xhtml.label "XHTML 1">
+<!ENTITY xhtml11.label "XHTML 1.1">
+<!ENTITY html5.label "HTML 5">
+<!ENTITY xhtml5.label "XHTML 5">
+
+<!ENTITY doctype.label "Asiakirjatyyppi">
+<!ENTITY transitional.label "Transitional">
+<!ENTITY strict.label "strict">
+

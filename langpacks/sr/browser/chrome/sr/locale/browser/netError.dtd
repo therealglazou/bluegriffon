@@ -1,0 +1,158 @@
+<!ENTITY % brandDTD SYSTEM "chrome://branding/locale/brand.dtd">
+%brandDTD;
+
+<!ENTITY loadError.label "Грешка при учитавању стране">
+<!ENTITY retry.label "Пробај опет">
+
+<!-- Specific error messages -->
+
+<!ENTITY connectionFailure.title "Subukan muli">
+<!ENTITY connectionFailure.longDesc "&sharedLongDesc;">
+
+<!ENTITY deniedPortAccess.title "Ang address na ito ay may restriksyon">
+<!ENTITY deniedPortAccess.longDesc "">
+
+<!ENTITY dnsNotFound.title "Сервер није пронађен">
+<!ENTITY dnsNotFound.longDesc "
+<ul>
+  <li>Kiểm tra các lỗi gõ địa chỉ như là
+    <strong>ww</strong>.example.com thay vì
+    <strong>www</strong>.example.com</li>
+  <li>Nếu bạn không thể mở bất kì trang nào, hãy kiểm tra kết nối mạng của bạn.</li>
+  <li>Nếu máy tính hoặc mạng của bạn được bảo vệ bởi tường lửa hoặc proxy, hãy chắc rằng &brandShortName; được phép truy cập Web.</li>
+</ul>
+">
+
+<!ENTITY fileNotFound.title "Датотека није пронађена">
+<!ENTITY fileNotFound.longDesc "<ul> 
+<li>Проверите подударање малих и великих слова и друге могуће грешке у куцању.</li> 
+<li>Проверите да ли је датотека уклоњена, преименована или померена..</li> 
+</ul>">
+
+
+<!ENTITY generic.title "Ay!">
+<!ENTITY generic.longDesc "<p>Програм &brandShortName; из неког разлога не може да учита ову страну.</p>">
+
+<!ENTITY malformedURI.title "Ang address ay hindi tama">
+<!ENTITY malformedURI.longDesc "
+<ul>
+  <li>Địa chỉ Web thường được viết như sau
+    <strong>http://www.example.com/</strong></li>
+  <li>Hãy chắc rằng bạn đang dùng dấu chéo lên (vd.
+    <strong>/</strong>).</li>
+</ul>
+">
+
+<!ENTITY netInterrupt.title "Веза је прекинута">
+<!ENTITY netInterrupt.longDesc "&sharedLongDesc;">
+
+<!ENTITY netOffline.title "Неповезан рад">
+<!-- LOCALIZATION NOTE (netOffline.overrideLongDesc) - This string should
+     indicate that "Work Offline" is a menu item without being too specific,
+     since it could be in either the normal menu (Mac/Linux) or the Firefox button
+     menu (Windows).
+-->
+<!ENTITY netOffline.overrideLongDesc "<ul>
+ <li>Искључите &quot;Рад ван мреже&quot; у менију Датотека, па покушајте поново.</li>
+</ul>
+">
+
+<!ENTITY contentEncodingError.title "Грешка у кодирању садржаја">
+<!ENTITY contentEncodingError.longDesc "<ul> 
+<li>Молимо да се обратите власницима веб сајта и обавестите их о овом проблему.</li> 
+</ul>">
+
+<!ENTITY unsafeContentType.title "Небезбедна врста датотеке">
+<!ENTITY unsafeContentType.longDesc "<ul> 
+<li>Молимо да се обратите власницима веб сајта и обавестите их о овом проблему.</li> 
+</ul>">
+
+<!ENTITY netReset.title "Веза је ресетована">
+<!ENTITY netReset.longDesc "&sharedLongDesc;">
+
+<!ENTITY netTimeout.title "Веза је истекла">
+<!ENTITY netTimeout.longDesc "&sharedLongDesc;">
+
+<!ENTITY protocolNotFound.title "Нејасна адреса">
+<!ENTITY protocolNotFound.longDesc "<ul> 
+<li>Можда ћете морати да инсталирате неки други програм како бисте отворили ову адресу.</li> 
+</ul>">
+
+<!ENTITY proxyConnectFailure.title "Посредник (proxy) одбија везе">
+<!ENTITY proxyConnectFailure.longDesc "<ul> 
+<li>Проверите подешавања посредника (proxy).</li> 
+<li>Обратите се администратору мреже како бисте били сигурни да заступник ради.</li> 
+</ul>">
+
+<!ENTITY proxyResolveFailure.title "Није могуће пронаћи заступника (proxy)">
+<!ENTITY proxyResolveFailure.longDesc "<ul> 
+<li>Проверите подешавања заступника (proxy).</li> 
+<li>Проверите да ли рачунар има исправну мрежну везу.</li> 
+<li>Ако су рачунар или мрежа заштићени ватробраном (firewall) или посредником (proxy), проверите да ли је програму &brandShortName; дозвољено да приступа мрежи.</li> 
+</ul>">
+
+<!ENTITY redirectLoop.title "Страна садржи неисправно преусмерење">
+<!ENTITY redirectLoop.longDesc "<ul> 
+<li>Овај проблем понекад узрокују искључивање или одбијање колачића.</li> 
+</ul>">
+
+<!ENTITY unknownSocketType.title "Неочекиван одговор од сервера">
+<!ENTITY unknownSocketType.longDesc "<ul> 
+<li>Проверите да ли рачунар има инсталиран личнн управник безбедности.</li> 
+<li>Узрок овој грешци може да буде нестандардно подешавање сервера.</li> 
+</ul>">
+
+<!ENTITY nssFailure2.title "Безбедна веза није успостављена">
+<!ENTITY nssFailure2.longDesc "<ul> <li>Страна коју покушавате да погледате није могла да буде приказана јер аутентичност примљених података није могла бити потврђена.</li> <li>Молимо да се обратите власницима веб сајта и обавестите их о овом проблему.  Или искористите команду из менија за помоћ како бисте пријавили овај сајт као неисправан.</li> </ul>">
+
+<!ENTITY nssBadCert.title "Безбедна веза није успостављена">
+<!ENTITY nssBadCert.longDesc2 "<ul> 
+<li>Ово може да буде проблем са подешавањем сервера, или може да буде неко ко покушава да се лажно представи као удаљени сервер.</li> 
+<li>Ако сте се пре већ успешно повезивали на овај сервер, грешка је онда можда привремена и можете да пробате касније.</li> 
+</ul>">
+
+<!ENTITY sharedLongDesc "<ul> 
+<li>Сајт је можда привремено недоступан или загушен.  Пробајте поново мало касније.</li> 
+<li>Ако не можете да учитате ниједну страну, проверите мрежну везу Вашег рачунара.</li> 
+<li>Ако су рачунар или мрежа заштићени ватробраном (firewall) или посредником (proxy), проверите да ли је програму &brandShortName; дозвољено да приступа мрежи.</li> 
+</ul>">
+
+<!ENTITY malwareBlocked.title "Могући злонамеран сајт!">
+<!ENTITY malwareBlocked.longDesc "<p>Злонамерни сајтови покушавају да инсталирају програме који отимају приватне податке, користе Ваш рачунар за напад на друге, или оштећују Ваш систем.</p> <p>Власници веб сајтова који верују да је њихов сајт пријављен грешком могу да <a href='http://www.stopbadware.org/home/reviewinfo' >захтевају ревизију</a>.</p>">
+
+<!ENTITY phishingBlocked.title "Могућ мрежни фалсификат!">
+<!ENTITY phishingBlocked.longDesc "<p>Уношење ма каквих личних података на овој страни може да буде узрок крађе идентитета или друге врсте преваре.</p> 
+<p>Ова врста мрежних фалсификата користи се у преварама познатим под именом „фишинг‟ (phishing), при којима се злонамерне веб стране или ел. адресе користе да имитирају изворе којима верујете.</p>">
+
+<!ENTITY cspFrameAncestorBlocked.title "Блокирано због полисе о безбедности садржаја">
+<!ENTITY cspFrameAncestorBlocked.longDesc "<p>&brandShortName; је спречио учитавање ове странице на овај начин, јер садржи полису о безбедности садржаја која то онемогућава.</p>">
+
+<!ENTITY securityOverride.linkText "Или можете додати изузетак…">
+<!ENTITY securityOverride.getMeOutOfHereButton "Alisin ako dito!">
+<!ENTITY securityOverride.exceptionButtonLabel "Додај изузетак…">
+
+<!-- LOCALIZATION NOTE (securityOverride.warningContent) - Do not translate the
+contents of the <button> tags. It uses strings already defined above. The
+button is included here (instead of netError.xhtml) because it exposes
+functionality specific to firefox. -->
+
+<!ENTITY securityOverride.warningContent "<p>Не бисте требали да додајете изузетак ако користите Интернетску везу којој не верујете потпуно или ако нисте навикли да виђате упозорења за овај сервер.</p>
+
+<button id='getMeOutOfHereButton'>&securityOverride.getMeOutOfHereButton;</button>
+<button id='exceptionDialogButton'>&securityOverride.exceptionButtonLabel;</button>
+">
+
+<!ENTITY corruptedContentError.longDesc "<p>The page you are trying to view cannot be shown because an error in the data transmission was detected.</p><ul><li>Please contact the website owners to inform them of this problem.</li></ul>">
+
+<!ENTITY corruptedContentError.title "Corrupted Content Error">
+<!ENTITY netOffline.longDesc2 "
+<ul>
+  <li>Press &quot;Try Again&quot; to switch to online mode and reload the page.</li>
+</ul>
+">
+<!ENTITY notCached.longDesc "<p>The requested document is not available in &brandShortName;'s cache.</p><ul><li>As a security precaution, &brandShortName; does not automatically re-request sensitive documents.</li><li>Click Try Again to re-request the document from the website.</li></ul>">
+
+<!ENTITY notCached.title "Document Expired">
+<!ENTITY remoteXUL.longDesc "<p><ul><li>Please contact the website owners to inform them of this problem.</li></ul></p>">
+
+<!ENTITY remoteXUL.title "Remote XUL">

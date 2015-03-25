@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1/GPL 2.0/LGPL 2.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is Mozilla Communicator client code, released
+   - March 31, 1998.
+   -
+   - The Initial Developer of the Original Code is
+   - Netscape Communications Corporation.
+   - Portions created by the Initial Developer are Copyright (C) 1998-1999
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -
+   - Alternatively, the contents of this file may be used under the terms of
+   - either of the GNU General Public License Version 2 or later (the "GPL"),
+   - or the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+   - in which case the provisions of the GPL or the LGPL are applicable instead
+   - of those above. If you wish to allow use of your version of this file only
+   - under the terms of either the GPL or the LGPL, and not to allow others to
+   - use your version of this file under the terms of the MPL, indicate your
+   - decision by deleting the provisions above and replace them with the notice
+   - and other provisions required by the GPL or the LGPL. If you do not delete
+   - the provisions above, a recipient may use your version of this file under
+   - the terms of any one of the MPL, the GPL or the LGPL.
+   -
+   - ***** END LICENSE BLOCK ***** -->
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/bluegriffonDialogs.css" type="text/css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/insertChars.css" type="text/css"?>
+
+<!DOCTYPE dialog SYSTEM "chrome://bluegriffon/locale/insertChars.dtd">
+
+<dialog id="insertCharsDlg"
+        windowtype="BlueGriffon:insertCharsDlg"
+        title="&windowTitle.label;"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        onload = "Startup()"
+        onfocus="OnFocus()"
+        buttons="accept"
+        buttonlabelaccept="&insertButton.label;"
+        ondialogaccept = "return onAccept();"
+        persist="screenX screenY">
+
+  <!-- Methods common to all editor dialogs -->
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/dgid.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/global.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/dialogs/insertChars.js"/>
+
+  <listbox id="blocksListbox"
+           onselect="BlockSelected()">
+    <listhead>
+      <listheader label="&unicode.label;"/>
+      <listheader label="&blockName.label;"/>
+    </listhead>
+  
+    <listcols>
+      <listcol/>
+      <listcol flex="1"/>
+    </listcols>
+
+  </listbox>
+
+  <hbox id="gridBox">
+    <grid id="charGrid" flex="1">
+      <columns>
+        <column />
+        <column flex="1"/><column flex="1"/><column flex="1"/><column flex="1"/><column flex="1"/><column flex="1"/><column flex="1"/><column flex="1"/>
+        <column flex="1"/><column flex="1"/><column flex="1"/><column flex="1"/><column flex="1"/><column flex="1"/><column flex="1"/><column flex="1"/>
+      </columns>
+      <rows id="charGridRows">
+        <row align="center">
+          <spacer/>
+          <label value="0"/><label value="1"/><label value="2"/><label value="3"/><label value="4"/><label value="5"/><label value="6"/><label value="7"/>
+          <label value="8"/><label value="9"/><label value="A"/><label value="B"/><label value="C"/><label value="D"/><label value="E"/><label value="F"/>
+        </row>
+      </rows>
+    </grid>
+    <scrollbar maxpos="196448"
+               increment="16"
+               pageincrement="160"
+               curpos="0"
+               orient="vertical"
+               id="namesScrollbar"
+               oncommand="alert(1)"/>
+  </hbox>
+
+  <hbox>
+    <label id="charPreview" value=""/>
+    <vbox flex="1">
+      <grid>
+        <columns><column/><column/></columns>
+        <rows>
+          <row align="center">
+            <label value="&charName.label;"/>
+            <label id="charName"/>
+          </row>
+          <row align="center">
+            <label value="&charCode.label;"/>
+            <label id="charCode"/>
+          </row>
+        </rows>
+      </grid>
+      <spacer flex="1"/>
+    <textbox id="searchTextbox"
+             placeholder="&search.placeholder;"
+             onpopuphiding="UpdatePopup(this)"
+             timeout="1000"
+             type="autocomplete" autocompletesearch="bluegriffoncharunicode-autocomplete"/>
+    </vbox>
+  </hbox>
+</dialog>

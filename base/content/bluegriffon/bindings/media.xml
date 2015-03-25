@@ -1,0 +1,447 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE bindings [
+  <!ENTITY % mediaDTD SYSTEM "chrome://bluegriffon/locale/media.dtd" >
+  %mediaDTD;
+]>
+
+<bindings id="mediaBindings"
+   xmlns="http://www.mozilla.org/xbl"
+   xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+   xmlns:xbl="http://www.mozilla.org/xbl">
+
+  <binding id="medium">
+
+    <resources>
+      <stylesheet src="chrome://bluegriffon/skin/medium.css"/>
+    </resources>
+
+    <content orient="vertical">
+      <xul:hbox>
+	      <xul:menulist anonid="logicalMenulist">
+	        <xul:menupopup>
+	          <xul:menuitem label="&unspecified.label;" value=""/>
+	          <xul:menuitem label="&not.label;" value="not"/>
+	          <xul:menuitem label="&only.label;" value="only"/>
+	        </xul:menupopup>
+	      </xul:menulist>
+	      <xul:menulist anonid="mediumMenulist">
+	        <xul:menupopup>
+	          <xul:menuitem label="&unspecified.label;" value=""/>
+	          <xul:menuseparator/>
+	          <xul:menuitem label="&allMedia.label;" value="all"/>
+	          <xul:menuseparator/>
+	          <xul:menuitem label="&auralMedia.label;" value="aural"/>
+	          <xul:menuitem label="&brailleMedia.label;" value="braille"/>
+	          <xul:menuitem label="&handheldMedia.label;" value="handheld"/>
+	          <xul:menuitem label="&printMedia.label;" value="print"/>
+	          <xul:menuitem label="&projectionMedia.label;" value="projection"/>
+	          <xul:menuitem label="&screenMedia.label;" value="screen"/>
+	          <xul:menuitem label="&ttyMedia.label;" value="tty"/>
+	          <xul:menuitem label="&tvMedia.label;" value="tv"/>
+	        </xul:menupopup>
+	      </xul:menulist>
+        <xul:button label="&addConstraint.label;"
+                    type="menu"
+                    anonid="constraintButton"
+                    oncommand="AddConstraint(event)">
+          <xul:menupopup style="font-size: smaller">
+            <xul:menuitem value="width"                   label="&widthFeature.label;"             querytype="length"/>
+            <xul:menuitem value="min-width"               label="&minWidthFeature.label;"          querytype="length"/>
+            <xul:menuitem value="max-width"               label="&maxWidthFeature.label;"          querytype="length"/>
+            <xul:menuitem value="height"                  label="&heightFeature.label;"            querytype="length"/>
+            <xul:menuitem value="min-height"              label="&minHeightFeature.label;"         querytype="length"/>
+            <xul:menuitem value="max-height"              label="&maxHeightFeature.label;"         querytype="length"/>
+            <xul:menuseparator/>
+            <xul:menuitem value="device-width"            label="&deviceWidthFeature.label;"       querytype="length"/>
+            <xul:menuitem value="min-device-width"        label="&minDeviceWidthFeature.label;"    querytype="length"/>
+            <xul:menuitem value="max-device-width"        label="&maxDeviceWidthFeature.label;"    querytype="length"/>
+            <xul:menuitem value="device-height"           label="&deviceHeightFeature.label;"      querytype="length"/>
+            <xul:menuitem value="min-device-height"       label="&minDeviceHeightFeature.label;"   querytype="length"/>
+            <xul:menuitem value="max-device-height"       label="&maxDeviceHeightFeature.label;"   querytype="length"/>
+            <xul:menuseparator/>
+            <xul:menuitem value="orientation"             label="&orientationFeature.label;"       querytype="enum(portrait,landscape)"/>
+            <xul:menuseparator/>
+            <xul:menuitem value="aspect-ratio"            label="&aspectRatioFeature.label;"       querytype="ratio"/>
+            <xul:menuitem value="min-aspect-ratio"        label="&minAspectRatioFeature.label;"    querytype="ratio"/>
+            <xul:menuitem value="max-aspect-ratio"        label="&maxAspectRatioFeature.label;"    querytype="ratio"/>
+            <xul:menuitem value="device-aspect-ratio"     label="&deviceAspectRatioFeature.label;" querytype="ratio"/>
+            <xul:menuitem value="min-device-aspect-ratio" label="&minDeviceAspectRatioFeature.label;" querytype="ratio"/>
+            <xul:menuitem value="max-device-aspect-ratio" label="&maxDeviceAspectRatioFeature.label;" querytype="ratio"/>
+            <xul:menuseparator/>
+            <xul:menuitem value="color"                   label="&colorFeature.label;"             querytype="integer"/>
+            <xul:menuitem value="min-color"               label="&minColorFeature.label;"          querytype="integer"/>
+            <xul:menuitem value="max-color"               label="&maxColorFeature.label;"          querytype="integer"/>
+            <xul:menuitem value="color-index"             label="&colorIndexFeature.label;"        querytype="integer"/>
+            <xul:menuitem value="min-color-index"         label="&minColorIndexFeature.label;"     querytype="integer"/>
+            <xul:menuitem value="max-color-index"         label="&maxColorIndexFeature.label;"     querytype="integer"/>
+            <xul:menuitem value="monochrome"              label="&monochromeFeature.label;"        querytype="integer"/>
+            <xul:menuitem value="min-monochrome"          label="&minMonochromeFeature.label;"     querytype="integer"/>
+            <xul:menuitem value="max-monochrome"          label="&maxMonochromeFeature.label;"     querytype="integer"/>
+            <xul:menuseparator/>
+            <xul:menuitem value="resolution"              label="&resolutionFeature.label;"        querytype="resolution"/>
+            <xul:menuitem value="min-resolution"          label="&minResolutionFeature.label;"     querytype="resolution"/>
+            <xul:menuitem value="max-resolution"          label="&maxResolutionFeature.label;"     querytype="resolution"/>
+            <xul:menuseparator/>
+            <xul:menuitem value="scan"                    label="&scanFeature.label;"              querytype="enum(progressive,interlace)"/>
+            <xul:menuseparator/>
+            <xul:menuitem value="grid"                    label="&gridFeature.label;"              querytype="boolean"/>
+          </xul:menupopup>
+        </xul:button>
+	      <xul:spacer flex="1"/>
+	      <xul:toolbarbutton class="medium-delete-button"
+                           oncommand="DeleteMedium()"/>
+      </xul:hbox>
+      <children/>
+    </content>
+
+    <implementation>
+      <method name="getChild">
+        <parameter name="aChildName"/>
+        <body><![CDATA[
+          return document.getAnonymousElementByAttribute(this, "anonid", aChildName);
+        ]]></body>
+      </method>
+
+      <property name="amplifier"
+                onget="return this.getChild('logicalMenulist').value"
+                onset="this.getChild('logicalMenulist').value = val"/>
+
+      <property name="media"
+                onget="return this.getChild('mediumMenulist').value"
+                onset="this.getChild('mediumMenulist').value = val"/>
+
+      <method name="DeleteMedium">
+        <body>
+        <![CDATA[
+          var h = gDialog.mediaGroupbox.boxObject.height;
+          var w = gDialog.mediaGroupbox.boxObject.width;
+          this.parentNode.removeChild(this);
+          var hdiff = gDialog.mediaGroupbox.boxObject.height - h;
+          var wdiff = gDialog.mediaGroupbox.boxObject.width - w;
+          window.resizeBy(wdiff, hdiff);
+        ]]>
+        </body>
+      </method>
+
+      <method name="AddConstraint">
+        <parameter name="aEvent"/>
+        <body>
+        <![CDATA[
+          var target = aEvent.target;
+          var type = target.getAttribute("value");
+          var querytype = target.getAttribute("querytype");
+          var label = target.getAttribute("label");
+          this._AddConstraint(type, querytype, label, null);
+        ]]>
+        </body>
+      </method>
+
+      <method name="_AddConstraint">
+        <parameter name="type"/>
+        <parameter name="querytype"/>
+        <parameter name="label"/>
+        <parameter name="values"/>
+        <body>
+        <![CDATA[
+          var hbox = document.createElement("hbox");
+          hbox.setAttribute("type", type);
+          hbox.setAttribute("querytype", querytype);
+          hbox.setAttribute("align", "center");
+
+          var spacer = document.createElement("spacer");
+          spacer.setAttribute("style", "width: 3em");
+          hbox.appendChild(spacer);
+
+          this.appendChild(hbox);
+
+          switch(querytype) {
+            case "integer":
+              {
+			          var l = document.createElement("label");
+			          l.setAttribute("value", label + ":");
+			          hbox.appendChild(l);
+
+                var textbox = document.createElement("textbox");
+                textbox.setAttribute("type", "number");
+                textbox.setAttribute("style", "width: 6em");
+                textbox.className = "value";
+                hbox.appendChild(textbox);
+
+                if (values)
+                  textbox.value = values[0];
+              }
+              break;
+            case "boolean":
+              {
+                var checkbox = document.createElement("checkbox");
+                checkbox.setAttribute("label", label);
+                checkbox.className = "value";
+                hbox.appendChild(checkbox);
+
+                if (values)
+                  checkbox.checked = (values[0] == "1");
+              }
+              break;
+            case "length":
+              {
+                var l = document.createElement("label");
+                l.setAttribute("value", label + ":");
+                hbox.appendChild(l);
+
+                var lengthbox = document.createElement("length");
+                lengthbox.setAttribute("units", '% px pt cm in mm pc em ex');
+                lengthbox.className = "value";
+                hbox.appendChild(lengthbox);
+
+                if (values)
+                  lengthbox.value = values[0];
+              }
+              break;
+            case "resolution":
+              {
+                var l = document.createElement("label");
+                l.setAttribute("value", label + ":");
+                hbox.appendChild(l);
+
+                var lengthbox = document.createElement("length");
+                lengthbox.setAttribute("units", 'dpi dpcm');
+                lengthbox.className = "value";
+                hbox.appendChild(lengthbox);
+
+                if (values)
+                  lengthbox.value = values[0];
+              }
+              break;
+            case "ratio":
+	            {
+                var l = document.createElement("label");
+                l.setAttribute("value", label + ":");
+                hbox.appendChild(l);
+
+                var t1 = document.createElement("textbox");
+                t1.setAttribute("type", "number");
+                t1.setAttribute("style", "width: 6em");
+                t1.className = "value1";
+                hbox.appendChild(t1);
+
+                var slash = document.createElement("label");
+                slash.setAttribute("value", "/");
+                hbox.appendChild(slash);
+
+                var t2 = document.createElement("textbox");
+                t2.setAttribute("type", "number");
+                t2.setAttribute("style", "width: 6em");
+                t2.className = "value2";
+                hbox.appendChild(t2);
+
+                if (values) {
+                  t1.value = values[0];
+                  t2.value = values[2];
+                }
+	            }
+	            break;
+            default:
+              if (querytype.substr(0,4) == "enum") {
+                hbox.setAttribute("querytype", "enum");
+                var l = document.createElement("label");
+                l.setAttribute("value", label + ":");
+                hbox.appendChild(l);
+
+                var str = querytype.substr(5, querytype.length - 6);
+                var enumArray = str.split(",");
+
+                var radiogroup = document.createElement("radiogroup");
+                radiogroup.setAttribute("orient", "horizontal");
+                radiogroup.className = "value";
+                hbox.appendChild(radiogroup);
+
+                for (var i = 0; i < enumArray.length; i++) {
+                  var e = enumArray[i];
+                  var labelString = gDialog.bundleString.getString(e);
+                  var r = document.createElement("radio");
+                  r.setAttribute("label", labelString);
+                  r.setAttribute("value", e);
+                  radiogroup.appendChild(r);
+                }
+
+                if (values)
+                  radiogroup.value = values[0];
+              }
+              break;
+          }
+
+          spacer = document.createElement("spacer");
+          spacer.setAttribute("flex", "1");
+          hbox.appendChild(spacer);
+
+          var toolbarbutton = document.createElement("toolbarbutton");
+          toolbarbutton.className = "medium-delete-button";
+          toolbarbutton.setAttribute("oncommand", "this.parentNode.parentNode.removeChild(this.parentNode)");
+          hbox.appendChild(toolbarbutton);
+
+          window.sizeToContent();
+        ]]>
+        </body>
+      </method>
+    </implementation>
+  </binding>
+
+  <binding id="length">
+    <resources>
+      <stylesheet src="chrome://bluegriffon/skin/medium.css"/>
+    </resources>
+    <content>
+	    <xul:menulist editable="true" anonid="lengthMenulist"
+			              oncommand="this.parentNode.onLengthMenulistCommand(this, false)"
+			              oninput="this.parentNode.onLengthMenulistCommand(this, false)">
+	      <xul:menupopup id="borderLeftWidthMenupopup"
+	                     onpopupshowing="this.parentNode.parentNode.PopulateLengths(this)"/>
+	    </xul:menulist>
+	    <xul:spinbuttons onup="this.parentNode.IncreaseLength(this)"
+	                     ondown="this.parentNode.DecreaseLength(this, false)"/>
+    </content>
+
+    <implementation>
+      <method name="onLengthMenulistCommand">
+        <parameter name="aElt"/>
+        <parameter name="aAllowNegative"/>
+        <body>
+        <![CDATA[
+          var value;
+          if (aElt.selectedItem)
+            value = aElt.selectedItem.value;
+          else
+            value = aElt.value;
+          aElt.value = value;
+        ]]>
+        </body>
+      </method>
+
+      <method name="PopulateLengths">
+        <parameter name="aElt"/>
+        <body>
+        <![CDATA[
+				  var menuseparator = aElt.querySelector("menuseparator");
+				  if (menuseparator) {
+				    var child = aElt.firstChild;
+				    while (child && child != menuseparator) {
+				      var tmp = child.nextSibling;
+				      aElt.removeChild(child);
+				      child = tmp;
+				    }
+				  }
+				  else
+				    deleteAllChildren(aElt);
+				
+				  var v = parseFloat(aElt.parentNode.value);
+				  if (isNaN(v))
+				    v = 0;
+				  var unitsArray;
+          var unitsString = this.getAttribute("units");
+				  if (unitsString == " ")
+				    unitsArray = [""];
+				  else
+				    unitsArray = unitsString.split(" ");
+				  unitsArray.forEach(function(aArrayElt, aIndex, aArray) {
+				    var menuitem = document.createElement("menuitem");
+				    menuitem.setAttribute("label", v + aArrayElt);
+				    menuitem.setAttribute("value", v + aArrayElt);
+				    aElt.insertBefore(menuitem, menuseparator);
+				  });
+        ]]>
+        </body>
+      </method>
+
+      <method name="IncreaseLength">
+        <parameter name="aElt"/>
+        <body>
+        <![CDATA[
+				  var value;
+				  var menulist = aElt.previousSibling;
+				  if (menulist.selectedItem)
+				    value = menulist.selectedItem.value;
+				  else
+				    value = menulist.value;
+				  var units = this.getAttribute("units").replace( / /g, "|");
+				  var r = new RegExp( "([+-]?[0-9]*\\.[0-9]+|[+-]?[0-9]+)(" + units + ")*", "");
+				  var match = value.match( r );
+				  if (match) {
+				    var unit = match[2];
+				    var v    = parseFloat(match[1]);
+				    switch (unit) {
+				      case "in":
+				      case "cm":
+				        v += 0.1;
+				        v = Math.round( v * 10) / 10;
+				        break;
+				      case "em":
+				      case "ex":
+				        v += 0.5;
+				        v = Math.round( v * 10) / 10;
+				        break;
+				      default:
+				        v += 1;
+				        break;
+				    }
+				    menulist.value = v + (unit ? unit : "");
+				    this.onLengthMenulistCommand(menulist, false);
+          }
+        ]]>
+        </body>
+      </method>
+
+      <method name="DecreaseLength">
+        <parameter name="aElt"/>
+        <parameter name="aAllowNegative"/>
+        <body>
+        <![CDATA[
+				  var value;
+				  var menulist = aElt.previousSibling;
+				  if (menulist.selectedItem)
+				    value = menulist.selectedItem.value;
+				  else
+				    value = menulist.value;
+				  var units = this.getAttribute("units").replace( / /g, "|");
+				  var r = new RegExp( "([+-]?[0-9]*\\.[0-9]+|[+-]?[0-9]+)(" + units + ")*", "");
+				  var match = value.match( r );
+				  if (match) {
+				    var unit = match[2];
+				    var v    = parseFloat(match[1]);
+				    switch (unit) {
+				      case "in":
+				      case "cm":
+				        v -= 0.1;
+				        v = Math.round( v * 10) / 10;
+				        break;
+				      case "em":
+				      case "ex":
+				        v -= 0.5;
+				        v = Math.round( v * 10) / 10;
+				        break;
+				      default:
+				        v -= 1;
+				        break;
+				    }
+				    if (!aAllowNegative && v < 0)
+				      v = 0;
+				    menulist.value = v + (unit ? unit : "");
+				    tis.onLengthMenulistCommand(menulist, aAllowNegative);
+				  }
+        ]]>
+        </body>
+      </method>
+
+      <method name="getChild">
+        <parameter name="aChildName"/>
+        <body><![CDATA[
+          return document.getAnonymousElementByAttribute(this, "anonid", aChildName);
+        ]]></body>
+      </method>
+
+      <property name="value"
+                onget="return this.getChild('lengthMenulist').value"
+                onset="this.getChild('lengthMenulist').value = val"/>
+    </implementation>
+  </binding>
+</bindings>

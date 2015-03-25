@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+
+<bindings id="bluegriffon-editorTabboxBindings"
+          xmlns="http://www.mozilla.org/xbl"
+          xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+          xmlns:xbl="http://www.mozilla.org/xbl">
+
+
+  <binding id="bluegriffon-editortab" display="xul:hbox"
+           extends="chrome://global/content/bindings/tabbox.xml#tab">
+    <content>
+      <xul:image xbl:inherits="validate,src=image" class="tab-icon-image"/>
+      <xul:label flex="1" xbl:inherits="value=label,crop,accesskey" class="tab-text" style="-moz-user-focus: ignore; -moz-user-select:none"/>
+      <xul:toolbarbutton anonid="close-button" tabindex="-1" class="tab-close-button"
+                         oncommand="this.parentNode.CloseTab(this.parentNode)"/>
+    </content>
+
+    <implementation>
+      <field name="mOverCloseButton">false</field>
+
+      <method name="CloseTab">
+        <parameter name="aTab"/>
+      <body>
+        <![CDATA[
+          cmdCloseTab.doCommand();
+        ]]>
+      </body>
+      </method>
+ 
+    </implementation>
+
+  </binding>
+
+</bindings>

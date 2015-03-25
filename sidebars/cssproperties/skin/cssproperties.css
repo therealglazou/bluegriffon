@@ -1,0 +1,187 @@
+/* ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1/GPL 2.0/LGPL 2.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is BlueGriffon.
+ *
+ * The Initial Developer of the Original Code is
+ * Disruptive Innovations SARL.
+ * Portions created by the Initial Developer are Copyright (C) 2006
+ * the Initial Developer. All Rights Reserved.
+ *
+ * Contributor(s):
+ *   Daniel Glazman <daniel.glazman@disruptive-innovations.com>, Original author
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU General Public License Version 2 or later (the "GPL"), or
+ * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+ * in which case the provisions of the GPL or the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of either the GPL or the LGPL, and not to allow others to
+ * use your version of this file under the terms of the MPL, indicate your
+ * decision by deleting the provisions above and replace them with the notice
+ * and other provisions required by the GPL or the LGPL. If you do not delete
+ * the provisions above, a recipient may use your version of this file under
+ * the terms of any one of the MPL, the GPL or the LGPL.
+ *
+ * ***** END LICENSE BLOCK ***** */
+
+
+
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+@namespace html url("http://www.w3.org/1999/xhtml");
+
+#mainBox {
+%ifdef XP_MACOSX
+  font-size: smaller;
+%endif
+  margin: 0px;
+  padding: 0px;
+}
+
+#propertiesBox {
+  overflow: auto;
+}
+
+#mainBoxHeader {
+  padding-left: 2em;
+  padding-right: 2em;
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+#cssPolicyBox {
+%ifdef XP_MACOSX
+  background-image: -moz-linear-gradient(#d0d0d0, silver);
+%endif
+  margin-bottom: 0.5em;
+  border-radius: 5px;
+}
+
+#sectionHeaderContext {
+  background-color: white;
+}
+#sectionHeaderContext menuitem {
+  font-size: smaller;
+}
+
+#warningBox > vbox {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+#currentElementBox {
+  font-family: -moz-fixed;
+  padding: 0.5em;
+  border: thin solid gray;
+  border-radius: 5px;
+  font-size: larger;
+}
+
+#classPicker, #IDPicker {
+  max-width: 7em;
+  min-width: 7em;
+}
+
+#classPicker[valid="false"] html|*.menulist-editable-input {
+  background-color: #ffcccc ! important;
+}
+
+hbox.csspropertiesHeader {
+  border-top: thin solid silver;
+  padding-left: 3px;
+  background-color: #dee4ea;
+%ifndef XP_MACOSX
+  font-weight: bold;
+%endif
+
+}
+
+hbox.csspropertiesHeader > image {
+  list-style-image: url("chrome://cssproperties/skin/filter.png");
+  -moz-transform: rotate(-90deg);
+  -moz-transition: -moz-transform 0.2s;
+}
+
+hbox.csspropertiesHeader:-moz-locale-dir(rtl) > image {
+  -moz-transform: rotate(+90deg) ;
+}
+
+hbox.csspropertiesHeader[open="true"] > image {
+  -moz-transform: rotate(0deg) !important;
+}
+
+.section {
+  -moz-transition: height 0.5s, opacity 0.5s;
+  height: 0px;
+  opacity: 0;
+  overflow: hidden;
+  padding: 1em;
+  background-color: white;
+}
+
+hbox.csspropertiesHeader[open="true"] + .section {
+  height: auto;
+  overflow: visible;
+  opacity: 1;
+}
+
+.section:last-child {
+  border-bottom: thin solid gray;
+}
+
+menulist:not(#cssPolicyMenulist):not(#listStyleTypeMenulist) {
+  width: 10em;
+}
+
+.listboxBg {
+  -moz-box-align: center;
+}
+
+rotator {
+  margin-left: 1em;
+  margin-bottom: 0.5em;
+  -moz-binding: url("chrome://bluegriffon/content/bindings/rotator.xml#rotator");
+}
+
+.multipane-menu menuitem {
+  font-size: smaller;
+}
+
+ecolorpicker {
+  margin-right: 1em;
+}
+
+
+%include general.css
+%include colors.css
+%include geometry.css
+%include position.css
+%include borders.css
+%include transforms.css
+%include flexbox.css
+%include transforms.css
+%include transitions.css
+%include shadows.css
+%include columns.css
+
+#bezierPanel {
+  padding: 1em;
+}
+
+#p1_point, #p2_point {
+  cursor: -moz-grab;
+}
+
+#p1_point.grabbing, #p2_point.grabbing {
+  cursor: -moz-grabbing;
+}

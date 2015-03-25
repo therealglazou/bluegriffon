@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE overlay [
+  <!ENTITY % csspropertiesDTD SYSTEM "chrome://cssproperties/locale/cssproperties.dtd">
+  %csspropertiesDTD;
+]>
+
+<overlay id="fontsOverlay"
+         xmlns:html = "http://www.w3.org/1999/xhtml"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/x-javascript"  src="chrome://cssproperties/content/fonts.js" />
+
+  <vbox id="propertiesBox">
+        <hbox align="center"
+              class="csspropertiesHeader"
+              context="sectionHeaderContext"
+              id="fontsSectionHeader"
+              onclick="ToggleSection(event, this)"
+              position="3">
+        <image />
+        <label value="&fontsSectionHeader.label;"/>
+      </hbox>
+
+      <vbox class="section"
+            id="fontsSection"
+            position="4">
+        <grid id="ffGrid">
+          <columns><column/><column/><column/><column flex="1"/><column/><column/><column/></columns>
+          <rows id="ffRows"
+                oninput="ReserializeFontFeatures(this)"
+                oncommand="ReserializeFontFeatures(this)"/>
+        </grid>
+      </vbox>
+  </vbox>
+  <script type="application/x-javascript">
+    <![CDATA[
+      window.addEventListener('load',
+                              FontsInit,
+                              false);
+    ]]></script>
+</overlay>

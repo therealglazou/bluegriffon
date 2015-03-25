@@ -1,0 +1,192 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE bindings [
+  <!ENTITY % transitionitemDTD SYSTEM "chrome://cssproperties/locale/transitionitem.dtd" >
+  %transitionitemDTD;
+]>
+
+<bindings id="transitionitemBindings"
+   xmlns="http://www.mozilla.org/xbl"
+   xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+   xmlns:xbl="http://www.mozilla.org/xbl">
+
+  <binding id="transitionBase"
+           extends="chrome://global/content/bindings/richlistbox.xml#richlistitem">
+    <resources>
+      <stylesheet src="chrome://cssproperties/skin/transitionitem.css"/>
+    </resources>
+    <implementation>
+      <method name="getChild">
+        <parameter name="aChildName"/>
+        <body><![CDATA[
+          return document.getAnonymousElementByAttribute(this, "anonid", aChildName);
+        ]]></body>
+      </method>
+
+      <property name="propertyValue">
+        <getter>
+        <![CDATA[
+          return this.getChild("property").value;
+        ]]>
+        </getter>
+        <setter>
+        <![CDATA[
+          this.getChild("property").value = val;
+        ]]>
+        </setter>
+      </property>
+
+      <property name="durationValue">
+        <getter>
+        <![CDATA[
+          return (this.getChild("duration").value || "0");
+        ]]>
+        </getter>
+        <setter>
+        <![CDATA[
+          this.getChild("duration").value = val;
+        ]]>
+        </setter>
+      </property>
+
+      <property name="delayValue">
+        <getter>
+        <![CDATA[
+          return (this.getChild("delay").value || "0")
+        ]]>
+        </getter>
+        <setter>
+        <![CDATA[
+          this.getChild("delay").value = val;
+        ]]>
+        </setter>
+      </property>
+
+      <property name="functionValue">
+        <getter>
+        <![CDATA[
+          return this.getChild("function").value || "ease";
+        ]]>
+        </getter>
+        <setter>
+        <![CDATA[
+          this.getChild("function").value = val;
+        ]]>
+        </setter>
+      </property>
+
+    </implementation>
+  </binding>
+
+  <binding id="all"
+           extends="chrome://cssproperties/content/transitionitem.xml#transitionBase">
+
+    <content>
+      <xul:description class="transitionitem-title" >&allProperties.label;</xul:description>
+      <xul:grid oninput="ReapplyTransitions()" oncommand="ReapplyTransitions()">
+        <xul:columns><xul:column/><xul:column/><xul:column/><xul:column/><xul:column/></xul:columns>
+        <xul:rows>
+          <xul:row align="center">
+            <xul:label value="&property.label;"/>
+            <xul:label value="&all.label;"/>
+            <xul:label value="&duration.label;"/>
+            <xul:textbox anonid="duration" type="number" decimalplaces="3"/>
+            <xul:label value="&seconds.label;"/>
+          </xul:row>
+          <xul:row align="center">
+            <xul:label value="&function.label;"/>
+            <xul:menulist anonid="function" editable="true">
+              <xul:menupopup onpopupshowing="OpenPanelIfBezier(this.parentNode)"/>
+            </xul:menulist>
+            <xul:label value="&delay.label;"/>
+            <xul:textbox anonid="delay" type="number" decimalplaces="3"/>
+            <xul:label value="&seconds.label;"/>
+          </xul:row>
+        </xul:rows>
+      </xul:grid>
+    </content>
+
+    <implementation>
+      <property name="propertyValue">
+        <getter>
+        <![CDATA[
+          return "all";
+        ]]>
+        </getter>
+      </property>
+    </implementation>
+
+  </binding>
+
+  <binding id="none"
+           extends="chrome://cssproperties/content/transitionitem.xml#transitionBase">
+    <content>
+      <xul:description class="transitionitem-title" >&noProperty.label;</xul:description>
+      <xul:grid oninput="ReapplyTransitions()" oncommand="ReapplyTransitions()">
+        <xul:columns><xul:column/><xul:column/><xul:column/><xul:column/><xul:column/></xul:columns>
+        <xul:rows>
+          <xul:row align="center">
+            <xul:label value="&property.label;"/>
+            <xul:label value="&none.label;"/>
+            <xul:label value="&duration.label;"/>
+            <xul:textbox anonid="duration" type="number" decimalplaces="3"/>
+            <xul:label value="&seconds.label;"/>
+          </xul:row>
+          <xul:row align="center">
+            <xul:label value="&function.label;"/>
+            <xul:menulist anonid="function" editable="true">
+              <xul:menupopup onpopupshowing="OpenPanelIfBezier(this.parentNode)"/>
+            </xul:menulist>
+            <xul:label value="&delay.label;"/>
+            <xul:textbox anonid="delay" type="number" decimalplaces="3"/>
+            <xul:label value="&seconds.label;"/>
+          </xul:row>
+        </xul:rows>
+      </xul:grid>
+    </content>
+
+    <implementation>
+      <property name="propertyValue">
+        <getter>
+        <![CDATA[
+          return "none";
+        ]]>
+        </getter>
+      </property>
+    </implementation>
+
+  </binding>
+
+  <binding id="property"
+           extends="chrome://cssproperties/content/transitionitem.xml#transitionBase">
+    <resources>
+      <stylesheet src="chrome://cssproperties/skin/transitionitem.css"/>
+    </resources>
+
+    <content>
+      <xul:label class="transitionitem-title" value="&oneProperty.label;"/>
+      <xul:grid oninput="ReapplyTransitions()" oncommand="ReapplyTransitions()">
+        <xul:columns><xul:column/><xul:column/><xul:column/><xul:column/><xul:column/></xul:columns>
+        <xul:rows>
+          <xul:row align="center">
+            <xul:label value="&property.label;"/>
+            <xul:textbox anonid="property"/>
+            <xul:label value="&duration.label;"/>
+            <xul:textbox anonid="duration" type="number" decimalplaces="3"/>
+            <xul:label value="&seconds.label;"/>
+          </xul:row>
+          <xul:row align="center">
+            <xul:label value="&function.label;"/>
+            <xul:menulist anonid="function" editable="true">
+              <xul:menupopup onpopupshowing="OpenPanelIfBezier(this.parentNode)"/>
+            </xul:menulist>
+            <xul:label value="&delay.label;"/>
+            <xul:textbox anonid="delay" type="number" decimalplaces="3"/>
+            <xul:label value="&seconds.label;"/>
+          </xul:row>
+        </xul:rows>
+      </xul:grid>
+    </content>
+  </binding>
+
+</bindings>

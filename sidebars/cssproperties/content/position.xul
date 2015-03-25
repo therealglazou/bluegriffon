@@ -1,0 +1,262 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE overlay [
+  <!ENTITY % csspropertiesDTD SYSTEM "chrome://cssproperties/locale/cssproperties.dtd">
+  %csspropertiesDTD;
+  <!ENTITY % backgrounditemDTD SYSTEM "chrome://cssproperties/locale/backgrounditem.dtd" >
+  %backgrounditemDTD;
+]>
+
+<overlay id="positionOverlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/x-javascript"  src="chrome://cssproperties/content/position.js" />
+
+  <vbox id="propertiesBox">
+      <hbox align="center"
+            class="csspropertiesHeader"
+            context="sectionHeaderContext"
+            id="positionSectionHeader"
+            onclick="ToggleSection(event, this)"
+            position="9">
+        <image />
+        <label value="&positionSectionHeader.label;"/>
+      </hbox>
+
+      <grid class="section" id="positionSection" position="10">
+        <columns><column/><column/></columns>
+        <rows>
+          <row align="center" animatable="false">
+            <label value="&display.label;"/>
+            <hbox>
+              <menulist id="displayMenulist" sizetopopup="none"
+                        property="display"
+                        oncommand="ToggleProperty(this)">
+                <menupopup>
+                  <menuitem label="&noneDisplay.label;"         value="none"/>
+                  <menuseparator/>
+                  <menuitem label="&inlineDisplay.label;"       value="inline"/>
+                  <menuitem label="&runInDisplay.label;"        value="run-in"/>
+                  <menuseparator/>
+                  <menuitem label="&blockDisplay.label;"        value="block"/>
+                  <menuitem label="&inlineBlockDisplay.label;"  value="inline-block"/>
+                  <menuseparator/>
+                  <menuitem label="&listItem.label;"            value="list-item"/>
+                  <menuseparator/>
+                  <menuitem label="&table.label;"               value="table"/>
+                  <menuitem label="&inlineTable.label;"         value="inline-table"/>
+                  <menuseparator/>
+                  <menuitem label="&tableHeaderGroup.label;"    value="table-header-group"/>
+                  <menuitem label="&tableRowGroup.label;"       value="table-row-group"/>
+                  <menuitem label="&tableFooterGroup.label;"    value="table-footer-group"/>
+                  <menuitem label="&tableColumnGroup.label;"    value="table-column-group"/>
+                  <menuseparator/>
+                  <menuitem label="&tableCaption.label;"        value="table-caption"/>
+                  <menuitem label="&tableRow.label;"            value="table-row"/>
+                  <menuitem label="&tableColumn.label;"         value="table-column"/>
+                  <menuitem label="&tableCell.label;"           value="table-cell"/>
+                </menupopup>
+              </menulist>
+            </hbox>
+          </row>
+
+          <row align="center" animatable="false">
+            <label value="&visibility.label;"/>
+            <hbox align="center">
+              <toolbarbutton class="multibutton" label="&visibleVisibility.label;" value="visible" property="visibility" type="checkbox"
+                             id="visibleVisibilityButton" group="visibility"
+                             oncommand="ToggleProperty(this)"/>
+              <toolbarbutton class="multibutton" label="&hiddenVisibility.label;" value="hidden" property="visibility" type="checkbox"
+                             id="hiddenVisibilityButton" group="visibility"
+                             oncommand="ToggleProperty(this)"/>
+              <toolbarbutton class="multibutton" label="&collapseVisibility.label;" value="collapse" property="visibility" type="checkbox"
+                             id="collapseVisibilityButton" group="visibility"
+                             oncommand="ToggleProperty(this)"/>
+            </hbox>
+          </row>
+
+          <row align="center" animatable="false">
+            <label value="&float.label;"/>
+            <hbox align="center">
+              <toolbarbutton class="multibutton" tooltiptext="&leftFloat.label;" value="left" property="float" type="checkbox"
+                             image="chrome://cssproperties/skin/position/left-float.png"
+                             id="floatLeftButton" group="float"
+                             oncommand="ToggleProperty(this)"/>
+              <toolbarbutton class="multibutton" tooltiptext="&noneFloat.label;" value="none" property="float" type="checkbox"
+                             image="chrome://cssproperties/skin/position/none-float.png"
+                             id="floatNoneButton" group="float"
+                             oncommand="ToggleProperty(this)"/>
+              <toolbarbutton class="multibutton" tooltiptext="&rightFloat.label;" value="right" property="float" type="checkbox"
+                             image="chrome://cssproperties/skin/position/right-float.png"
+                             id="floatRightButton" group="float"
+                             oncommand="ToggleProperty(this)"/>
+            </hbox>
+          </row>
+
+          <row align="center" animatable="false">
+            <label value="&clear.label;"/>
+            <hbox>
+              <hbox align="center">
+                <toolbarbutton class="multibutton" label="&leftClear.label;" value="left" property="clear" type="checkbox"
+                               id="clearLeftButton" group="clear"
+                               oncommand="ToggleProperty(this)"/>
+                <toolbarbutton class="multibutton" label="&rightClear.label;" value="right" property="clear" type="checkbox"
+                               id="clearRightButton" group="clear"
+                               oncommand="ToggleProperty(this)"/>
+              </hbox>
+              <hbox align="center">
+                <toolbarbutton class="multibutton" label="&bothClear.label;" value="both" property="clear" type="checkbox"
+                               id="clearBothButton" group="clear"
+                               oncommand="ToggleProperty(this)"/>
+              </hbox>
+              <hbox align="center">
+                <toolbarbutton class="multibutton" label="&noneClear.label;" value="none" property="clear" type="checkbox"
+                               id="clearNoneButton" group="clear"
+                               oncommand="ToggleProperty(this)"/>
+              </hbox>
+            </hbox>
+          </row>
+
+          <row align="center" animatable="false">
+            <label value="&overflow.label;"/>
+            <hbox align="center">
+              <toolbarbutton class="multibutton" label="&visibleOverlow.label;" value="visible" property="overflow" type="checkbox"
+                             id="visibleOverflowButton" group="overflow"
+                             oncommand="ToggleProperty(this)"/>
+              <toolbarbutton class="multibutton" label="&hiddenOverlow.label;" value="hidden" property="overflow" type="checkbox"
+                             id="hiddenOverflowButton" group="overflow"
+                             oncommand="ToggleProperty(this)"/>
+              <toolbarbutton class="multibutton" label="&scrollOverlow.label;" value="scroll" property="overflow" type="checkbox"
+                             id="scrollOverflowButton" group="overflow"
+                             oncommand="ToggleProperty(this)"/>
+              <toolbarbutton class="multibutton" label="&autoOverlow.label;" value="auto" property="overflow" type="checkbox"
+                             id="autoOverflowButton" group="overflow"
+                             oncommand="ToggleProperty(this)"/>
+            </hbox>
+          </row>
+
+           <row align="center" animatable="false">
+            <label value="&textOverflow.label;"/>
+            <hbox align="center">
+              <toolbarbutton class="multibutton" label="&clipTextOverflow.label;" value="clip" property="text-overflow" type="checkbox"
+                             id="clipTextOverflowButton" group="text-overflow"
+                             oncommand="ToggleProperty(this)"/>
+              <toolbarbutton class="multibutton" label="&ellipsisTextOverflow.label;" value="ellipsis" property="text-overflow" type="checkbox"
+                             id="ellipsisTextOverflowButton" group="text-overflow"
+                             oncommand="ToggleProperty(this)"/>
+            </hbox>
+          </row>
+
+          <row align="center" animatable="false">
+            <label value="&position.label;"/>
+            <hbox align="center">
+              <toolbarbutton class="multibutton" label="&staticPosition.label;" value="static" property="position" type="checkbox"
+                             id="positionStaticButton" group="position"
+                             oncommand="ToggleProperty(this)"/>
+              <toolbarbutton class="multibutton" label="&relativePosition.label;" value="relative" property="position" type="checkbox"
+                             id="positionRelativeButton" group="position"
+                             oncommand="ToggleProperty(this)"/>
+              <toolbarbutton class="multibutton" label="&absolutePosition.label;" value="absolute" property="position" type="checkbox"
+                             id="positionAbsoluteButton" group="position"
+                             oncommand="ToggleProperty(this)"/>
+              <toolbarbutton class="multibutton" label="&fixedPosition.label;" value="fixed" property="position" type="checkbox"
+                             id="positionFixedButton" group="position"
+                             oncommand="ToggleProperty(this)"/>
+            </hbox>
+          </row>
+
+          <row align="center">
+            <label value="&zIndex.label;"/>
+           <hbox align="center">
+                <menulist editable="true" id="zIndexMenulist" property="z-index"
+                          oncommand="onLengthMenulistCommand(this, ' ', 'auto', true)"
+                          oninput="onLengthMenulistCommand(this, ' ', 'auto', true)"
+                          sizetopopup="none">
+                  <menupopup id="lineHeightMenupopup"
+                             onpopupshowing="PopulateLengths(this, ' ')">
+                    <menuseparator/>
+                    <menuitem label="&zIndexAuto.label;" value="auto"/>
+                  </menupopup>
+                </menulist>
+                <spinbuttons onup="IncreaseLength(this, ' ')"
+                             ondown="DecreaseLength(this, ' ', true)"/>
+            </hbox>
+          </row>
+
+          <row align="top">
+            <label value="&offsets.label;"/>
+            <hbox>
+              <grid style="background-color: #e0e0e0" id="positionOffsetsGrid">
+                <columns><column/><column/><column/></columns>
+                <rows>
+                  <row>
+                    <spacer/>
+                    <hbox align="center">
+                      <menulist editable="true" id="topMenulist" property="top" sizetopopup="none"
+                                oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'auto', true)"
+                                oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'auto', true)">
+                        <menupopup id="topMenupopup"
+                                   onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
+                          <menuseparator/>
+                          <menuitem label="&offsetAuto.label;" value="auto"/>
+                        </menupopup>
+                      </menulist>
+                      <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
+                                   ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true)"/>
+                   </hbox>
+                 </row>
+  
+                  <row align="center">
+                    <hbox align="center">
+                      <menulist editable="true" id="leftMenulist" property="left" sizetopopup="none"
+                                oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'auto', true)"
+                                oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'auto', true)">
+                        <menupopup id="leftMenupopup"
+                                   onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
+                          <menuseparator/>
+                          <menuitem label="&offsetAuto.label;" value="auto"/>
+                        </menupopup>
+                      </menulist>
+                      <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
+                                   ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true)"/>
+                    </hbox>
+                    <spacer/>
+                    <hbox align="center">
+                      <menulist editable="true" id="rightMenulist" property="right" sizetopopup="none"
+                                oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'auto', true)"
+                                oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'auto', true)">
+                        <menupopup id="rightMenupopup"
+                                   onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
+                          <menuseparator/>
+                          <menuitem label="&offsetAuto.label;" value="auto"/>
+                        </menupopup>
+                      </menulist>
+                      <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
+                                   ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true)"/>
+                    </hbox>
+                  </row>
+  
+                  <row>
+                    <spacer/>
+                    <hbox align="center">
+                      <menulist editable="true" id="bottomMenulist" property="bottom" sizetopopup="none"
+                                oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'auto', true)"
+                                oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'auto', true)">
+                        <menupopup id="bottomMenupopup"
+                                   onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
+                          <menuseparator/>
+                          <menuitem label="&offsetAuto.label;" value="auto"/>
+                        </menupopup>
+                      </menulist>
+                      <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
+                                   ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true)"/>
+                    </hbox>
+                   </row>
+                </rows>
+              </grid>
+            </hbox>
+          </row>
+        </rows>
+      </grid>
+  </vbox>
+</overlay>

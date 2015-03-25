@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+#include overlays.inc
+
+<!DOCTYPE window [
+<!ENTITY % bluegriffonDTD  SYSTEM "chrome://bluegriffon/locale/bluegriffon.dtd" >
+<!ENTITY % findbarDTD      SYSTEM "chrome://bluegriffon/locale/findbar.dtd" >
+<!ENTITY % structurebarDTD SYSTEM "chrome://bluegriffon/locale/structurebar.dtd" >
+<!ENTITY % ariaDTD         SYSTEM "chrome://bluegriffon/locale/aria.dtd" >
+<!ENTITY % brandDTD        SYSTEM "chrome://branding/locale/brand.dtd" >
+<!ENTITY % baseMenuOverlayDTD SYSTEM "chrome://browser/locale/baseMenuOverlay.dtd">
+%baseMenuOverlayDTD;
+%bluegriffonDTD;
+%findbarDTD;
+%structurebarDTD;
+%ariaDTD;
+%brandDTD;
+]>            
+
+<window xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        id="hidden-window" windowtype="hidden-main"
+        width="0" height="0" >
+
+  <script><![CDATA[ 
+    const PREFS_SERVICE_CONTRACTID = "@mozilla.org/preferences-service;1";
+    const WNDMEDIATOR_SERVICE_CONTRACTID = "@mozilla.org/appshell/window-mediator;1";
+    const CMDLINEHANDLER_SERVICE_CONTRACTID = "@disruptive-innovations.com/commandlinehandler/general-startup;1?type=bluegriffon";
+    const Cc = Components.classes;
+    const Ci = Components.interfaces;
+
+    function selectMainWindowAndClose() {
+      window.removeEventListener("load", selectMainWindowAndClose, false);
+      GetUIElements();
+    
+      ComposerCommands.setupMainCommands();
+      window.updateCommands("style");
+      // Setup the dock menu.
+      var dockMenuElement = document.getElementById("menu_mac_dockmenu");
+      if (dockMenuElement != null) {
+        var nativeMenu = Cc["@mozilla.org/widget/standalonenativemenu;1"]
+                         .createInstance(Ci.nsIStandaloneNativeMenu);
+  
+        try {
+          nativeMenu.init(dockMenuElement);
+  
+          var dockSupport = Cc["@mozilla.org/widget/macdocksupport;1"]
+                            .getService(Ci.nsIMacDockSupport);
+          dockSupport.dockMenu = nativeMenu;
+        }
+        catch (e) {
+        }
+      }
+
+      var singletonWindowType = "bluegriffon";
+      var windowMediator = Cc[WNDMEDIATOR_SERVICE_CONTRACTID].getService(Ci.nsIWindowMediator);
+      var win = windowMediator.getMostRecentWindow(singletonWindowType);
+      if (win) {
+        win.focus();
+      }
+      else {
+        OpenBlueGriffonWindow();
+      }
+
+    }
+
+    function OpenBlueGriffonWindow()
+    {
+      window.openDialog("chrome://bluegriffon/content/xul/bluegriffon.xul", "_blank",
+                        "chrome,all,dialog=no");
+    }
+
+    /*if (window.arguments && window.arguments[0]) {
+      var handler = Components.classes[CMDLINEHANDLER_SERVICE_CONTRACTID].getService(Ci.nsICommandLineHandler);
+      handler.QueryInterface(Ci.sbICommandLineManager).handleURL(window.arguments[0]);
+    } */
+    window.addEventListener("load", selectMainWindowAndClose, false);
+
+  ]]></script>
+
+#include scripts.inc
+
+#include sets.inc
+
+#include menubar.inc
+
+<popupset>
+  <menupopup id="menu_mac_dockmenu">
+    <!-- The command cannot be cmd_newNavigator because we need to activate
+         the application. -->
+    <menuitem label="&newMenu.label;"
+              oncommand="OpenBlueGriffonWindow();" />
+  </menupopup>
+</popupset>
+</window>
+

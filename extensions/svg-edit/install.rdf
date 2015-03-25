@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+  <Description about="urn:mozilla:extension:file:chrome"
+                   em:package="content" />
+  <Description about="urn:mozilla:install-manifest">
+    <!-- required properties -->
+    <em:name>SVG-edit</em:name>
+    <em:id>svg-edit@googlegroups.com</em:id>
+    <em:homepageURL>http://svg-edit.googlecode.com/</em:homepageURL>
+    <em:description>A complete vector graphic editor for BlueGriffon</em:description>
+    <em:iconURL>chrome://svg-edit/skin/logo32.png</em:iconURL>
+    <em:version>2.4.1.7.3</em:version>
+    <em:type>2</em:type>
+    <em:targetApplication><!-- BlueGriffon -->
+      <Description>
+	      <em:id>bluegriffon@disruptive-innovations.com</em:id>
+	        <em:minVersion>0.1</em:minVersion>
+	        <em:maxVersion>*</em:maxVersion>
+      </Description>
+    </em:targetApplication>
+  </Description>
+</RDF>

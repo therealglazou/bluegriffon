@@ -1,0 +1,329 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE overlay [
+  <!ENTITY % csspropertiesDTD SYSTEM "chrome://cssproperties/locale/cssproperties.dtd">
+  %csspropertiesDTD;
+  <!ENTITY % backgrounditemDTD SYSTEM "chrome://cssproperties/locale/backgrounditem.dtd" >
+  %backgrounditemDTD;
+]>
+
+<overlay id="generalOverlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/x-javascript"  src="chrome://cssproperties/content/general.js" />
+
+  <vbox id="propertiesBox">
+        <hbox align="center"
+              class="csspropertiesHeader"
+              context="sectionHeaderContext"
+              id="generalSectionHeader"
+              onclick="ToggleSection(event, this)"
+              position="1">
+        <image />
+        <label value="&generalSectionHeader.label;"/>
+      </hbox>
+
+      <vbox class="section"
+            id="generalSection"
+            position="2">
+
+        <grid>
+          <columns><column/><column/></columns>
+          <rows>
+
+            <row align="top" animatable="false">
+              <label value="&fontFamily.label;"/>
+              <vbox>
+                <listbox id="fontFamilyListbox"
+                         onselect="OnFontFamilySelect(this)"
+                         rows="6"/>
+        
+                <hbox class="listboxBg">
+                  <toolbarbutton id="addFontButton" class="listboxBgPlusButton" type="menu"
+                                 oncommand="AddFont(event)">
+                    <menupopup id="addFontMenupopup">
+                      <checkbox id="viewFontsCheckbox" label="View fonts"/>
+                      <menuseparator/>
+                      <menuitem label="Arial, Helvetica, sans-serif" global="true"
+                                style="font-family: Arial, Helvetica, sans-serif" />
+                      <menuitem label="Times New Roman, Times, serif" global="true"
+                                style="font-family: Times New Roman, Times, serif"/>
+                      <menuitem label="Courier New, Courier, monospace" global="true"
+                                style="font-family: Courier New, Courier, monospace"/>
+                      <menuseparator id="beforeWebfontsMenuseparator"/>
+                      <menuseparator id="afterWebfontsMenuseparator" hidden="true"/>
+                    </menupopup>
+                  </toolbarbutton>
+                  <toolbarbutton id="removeFontButton" class="listboxBgMinusButton"
+                                 disabled="true"
+                                 oncommand="DeleteFont()"/>
+                  
+                </hbox>
+              </vbox>
+            </row>
+
+            <row align="center" animatable="true">
+              <label value="&fontSize.label;"/>
+              <hbox align="center">
+                <menulist editable="true" id="fontSizeMenulist" property="font-size"
+                          oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'smaller larger xx-small x-small small medium large x-large xx-large', false)"
+                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'smaller larger xx-small x-small small medium large x-large xx-large', false)">
+                  <menupopup id="fontSizeMenupopup"
+                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
+                    <menuseparator/>
+                    <menuitem label="&fontSizeSmaller.label;" value="smaller"/>
+                    <menuitem label="&fontSizeLarger.label;"  value="larger"/>
+                    <menuseparator/>
+                    <menuitem label="&fontSizeXxsmall.label;" value="xx-small"/>
+                    <menuitem label="&fontSizeXsmall.label;"  value="x-small"/>
+                    <menuitem label="&fontSizeSmall.label;"   value="small"/>
+                    <menuitem label="&fontSizeMedium.label;"  value="medium"/>
+                    <menuitem label="&fontSizeLarge.label;"   value="large"/>
+                    <menuitem label="&fontSizeXlarge.label;"  value="x-large"/>
+                    <menuitem label="&fontSizeXxlarge.label;" value="xx-large"/>
+                  </menupopup>
+                </menulist>
+                <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
+                             ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', false)"/>
+              </hbox>
+            </row>
+
+            <row align="center" animatable="true">
+              <label value="&lineHeight.label;"/>
+              <hbox align="center">
+                <menulist editable="true" id="lineHeightMenulist" property="line-height"
+                          oncommand="onLengthMenulistCommand(this, ' % px pt cm in mm pc em ex rem ch', 'normal', false)"
+                          oninput="onLengthMenulistCommand(this, ' % px pt cm in mm pc em ex rem ch', 'normal', false)">
+                  <menupopup id="lineHeightMenupopup"
+                             onpopupshowing="PopulateLengths(this, ' % px pt cm in mm pc em ex rem ch')">
+                    <menuseparator/>
+                    <menuitem label="&lineHeightNormal.label;" value="normal"/>
+                  </menupopup>
+                </menulist>
+                <spinbuttons onup="IncreaseLength(this, ' % px pt cm in mm pc em ex rem ch')"
+                             ondown="DecreaseLength(this, ' % px pt cm in mm pc em ex rem ch', false)"/>
+              </hbox>
+            </row>
+
+            <row align="center" animatable="true">
+              <label value="&fontWeight.label;"/>
+              <hbox align="center">
+                <toolbarbutton class="multibutton" label="&fontWeightBold.label;" value="bold" property="font-weight" type="checkbox"
+                               style="font-weight:bold" id="fontWeightBoldButton" group="font-weight"
+                               oncommand="ToggleProperty(this)"/>
+                <toolbarbutton class="multibutton" label="&fontWeightLighter.label;" value="lighter" property="font-weight" type="checkbox"
+                               style="font-weight: lighter" id="fontWeightLighterButton" group="font-weight"
+                               oncommand="ToggleProperty(this)"/>
+                <toolbarbutton class="multibutton" label="&fontWeightBolder.label;" value="bolder" property="font-weight" type="checkbox"
+                               style="font-weight: bolder" id="fontWeightBolderButton" group="font-weight"
+                               oncommand="ToggleProperty(this)"/>
+              </hbox>
+            </row>
+
+            <row align="center" animatable="false">
+              <label value="&fontStyle.label;"/>
+              <hbox align="center">
+                <toolbarbutton class="multibutton" label="&fontStyleItalic.label;" value="italic" property="font-style" type="checkbox"
+                               style="font-style: italic" id="fontStyleItalicButton" group="font-style"
+                               oncommand="ToggleProperty(this)"/>
+                <toolbarbutton class="multibutton" label="&fontStyleOblique.label;" value="oblique" property="font-style" type="checkbox"
+                               style="font-style: oblique" id="fontStyleObliqueButton" group="font-style"
+                               oncommand="ToggleProperty(this)"/>
+              </hbox>
+            </row>
+
+            <row align="center" animatable="false">
+              <label value="&textDecoration.label;"/>
+              <hbox align="center">
+                <hbox align="center">
+	                <toolbarbutton class="multibutton" label="&textDecorationNone.label;" value="none" property="text-decoration" type="checkbox"
+	                               id="textDecorationNoneButton" agregator="text-decoration"
+	                               resetter="textDecorationNoneButton"
+	                               oncommand="ToggleProperty(this)"/>
+                </hbox>
+                <toolbarbutton class="multibutton" label="&textDecorationUnderline.label;" value="underline" property="text-decoration" type="checkbox"
+                               style="text-decoration: underline" agregator="text-decoration"
+                               resetter="textDecorationNoneButton"
+                               id="textDecorationUnderlineButton"
+                               oncommand="ToggleProperty(this)"/>
+                <toolbarbutton class="multibutton" label="&textDecorationOverline.label;" value="overline" property="text-decoration" type="checkbox"
+                               style="text-decoration: overline" agregator="text-decoration"
+                               resetter="textDecorationNoneButton"
+                               id="textDecorationOverlineButton"
+                               oncommand="ToggleProperty(this)"/>
+                <toolbarbutton class="multibutton" label="&textDecorationLinethrough.label;" value="line-through" property="text-decoration" type="checkbox"
+                               style="text-decoration: line-through" agregator="text-decoration"
+                               resetter="textDecorationNoneButton"
+                               id="textDecorationLinethroughButton"
+                               oncommand="ToggleProperty(this)"/>
+              </hbox>
+            </row>
+
+            <row align="center" animatable="false">
+              <label value="&textTransform.label;"/>
+              <hbox align="center">
+                <toolbarbutton class="multibutton" label="&textTransformLowercase.label;" value="lowercase" property="text-transform" type="checkbox"
+                               group="text-transform" id="textTransformLowercaseButton"
+                               oncommand="ToggleProperty(this)"/>
+                <toolbarbutton class="multibutton" label="&textTransformUppercase.label;" value="uppercase" property="text-transform" type="checkbox"
+                               group="text-transform" id="textTransformUppercaseButton"
+                               oncommand="ToggleProperty(this)"/>
+                <toolbarbutton class="multibutton" label="&textTransformCapitalize.label;" value="capitalize" property="text-transform" type="checkbox"
+                               group="text-transform" id="textTransformLinethroughButton"
+                               oncommand="ToggleProperty(this)"/>
+              </hbox>
+            </row>
+
+            <row align="center" animatable="false">
+              <label value="&fontVariant.label;"/>
+              <hbox align="center">
+                <toolbarbutton class="multibutton" label="&fontVariantNormal.label;" value="normal" property="font-variant" type="checkbox"
+                               group="font-variant" id="fontVariantNormalButton"
+                               oncommand="ToggleProperty(this)"/>
+                 <toolbarbutton class="multibutton" label="&fontVariantSmallCaps.label;" value="small-caps" property="font-variant" type="checkbox"
+                               group="font-variant" id="fontVariantSmallCapsButton"
+                               oncommand="ToggleProperty(this)"/>
+              </hbox>
+            </row>
+
+            <row align="center" animatable="false">
+              <label value="&textAlign.label;"/>
+              <hbox align="center">
+                <toolbarbutton class="multibutton" image="chrome://bluegriffon/skin/formatToolbar/align-left.png"
+                               value="left" property="text-align" type="checkbox" group="text-align"
+                               id="textAlignLeftButton"
+                               oncommand="ToggleProperty(this)"/>
+                <toolbarbutton class="multibutton" image="chrome://bluegriffon/skin/formatToolbar/align-center.png"
+                               value="center" property="text-align" type="checkbox" group="text-align"
+                               id="textAlignCenterButton"
+                               oncommand="ToggleProperty(this)"/>
+                <toolbarbutton class="multibutton" image="chrome://bluegriffon/skin/formatToolbar/align-right.png"
+                               value="right" property="text-align" type="checkbox" group="text-align"
+                               id="textAlignRightButton"
+                               oncommand="ToggleProperty(this)"/>
+                <toolbarbutton class="multibutton" image="chrome://bluegriffon/skin/formatToolbar/align-justify.png"
+                               value="justify" property="text-align" type="checkbox" group="text-align"
+                               id="textAlignJustifyButton"
+                               oncommand="ToggleProperty(this)"/>
+              </hbox>
+            </row>
+
+            <row align="center" animatable="false">
+              <spacer flex="1"/>
+              <hbox align="center">
+                <toolbarbutton class="multibutton" label="&textAlignStart.label;"
+                               value="start" property="text-align" type="checkbox" group="text-align"
+                               id="textAlignStartButton"
+                               oncommand="ToggleProperty(this)"/>
+                <toolbarbutton class="multibutton" label="&textAlignEnd.label;"
+                               value="end" property="text-align" type="checkbox" group="text-align"
+                               id="textAlignEndButton"
+                               oncommand="ToggleProperty(this)"/>
+              </hbox>
+            </row>
+
+            <row align="center" animatable="true">
+              <label value="&verticalAlign.label;"/>
+              <hbox align="center">
+                <menulist editable="true" id="verticalAlignMenulist" property="vertical-align"
+                          sizetopopup="none"
+                          oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'baseline sub super top text-top middle bottom text-bottom', true)"
+                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'baseline sub super top text-top middle bottom text-bottom', true)">
+                  <menupopup id="verticalAlignMenupopup"
+                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
+                    <menuseparator/>
+                    <menuitem label="&baselineVerticalAlign.label;" value="baseline"/>
+                    <menuitem label="&subVerticalAlign.label;" value="sub"/>
+                    <menuitem label="&superVerticalAlign.label;" value="super"/>
+                    <menuitem label="&topVerticalAlign.label;" value="top"/>
+                    <menuitem label="&textTopVerticalAlign.label;" value="text-top"/>
+                    <menuitem label="&middleVerticalAlign.label;" value="middle"/>
+                    <menuitem label="&bottomVerticalAlign.label;" value="bottom"/>
+                    <menuitem label="&textBottomVerticalAlign.label;" value="text-bottom"/>
+                  </menupopup>
+                </menulist>
+                <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
+                             ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true)"/>
+              </hbox>
+            </row>
+
+            <row align="center" animatable="false">
+              <label value="&direction.label;"/>
+              <hbox align="center">
+                <toolbarbutton class="multibutton" label="▶¶"
+                               value="ltr" property="direction" type="checkbox" group="direction"
+                               id="ltrDirectionButton" tooltiptext="&ltrDirection.label;"
+                               oncommand="ToggleProperty(this)"/>
+                <toolbarbutton class="multibutton" label="¶◀"
+                               value="rtl" property="direction" type="checkbox" group="direction"
+                               id="rtlDirectionButton" tooltiptext="&rtlDirection.label;"
+                               oncommand="ToggleProperty(this)"/>
+              </hbox>
+            </row>
+
+            <row align="center" animatable="true">
+              <label value="&letterSpacing.label;"/>
+              <hbox align="center">
+                <menulist editable="true" id="letterSpacingMenulist" property="letter-spacing"
+                          oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'normal', true)"
+                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'normal', true)">
+                  <menupopup id="letterSpacingMenupopup"
+                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
+                    <menuseparator/>
+                    <menuitem label="&normalLetterSpacing.label;" value="normal"/>
+                  </menupopup>
+                </menulist>
+                <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
+                             ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true)"/>
+              </hbox>
+            </row>
+
+            <row align="center" animatable="true">
+              <label value="&wordSpacing.label;"/>
+              <hbox align="center">
+                <menulist editable="true" id="wordSpacingMenulist" property="word-spacing"
+                          oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'normal', true)"
+                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'normal', true)">
+                  <menupopup id="wordSpacingMenupopup"
+                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
+                    <menuseparator/>
+                    <menuitem label="&normalWordSpacing.label;" value="normal"/>
+                  </menupopup>
+                </menulist>
+                <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
+                             ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true)"/>
+              </hbox>
+            </row>
+
+            <row align="center" animatable="false">
+              <label value="&wordWrap.label;"/>
+              <hbox align="center">
+                <toolbarbutton class="multibutton" label="&normalWordWrap.label;"
+                               value="normal" property="word-wrap" type="checkbox" group="word-wrap"
+                               id="normalWordWrapButton"
+                               oncommand="ToggleProperty(this)"/>
+                <toolbarbutton class="multibutton" label="&breakWordWordWrap.label;"
+                               value="break-word" property="word-wrap" type="checkbox" group="word-wrap"
+                               id="breakWrapWordWrapButton"
+                               oncommand="ToggleProperty(this)"/>
+              </hbox>
+            </row>
+
+            <row align="center" animatable="true">
+              <label value="&textIndent.label;"/>
+              <hbox align="center">
+                <menulist editable="true" id="textIndentMenulist" property="text-indent"
+                          oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', true)"
+                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', true)">
+                  <menupopup id="textIndentMenupopup"
+                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')"/>
+                </menulist>
+                <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
+                             ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true)"/>
+              </hbox>
+            </row>
+          </rows>
+        </grid>
+      </vbox>
+  </vbox>
+</overlay>

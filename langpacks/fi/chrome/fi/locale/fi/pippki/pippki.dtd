@@ -1,0 +1,135 @@
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1/GPL 2.0/LGPL 2.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is mozilla.org code.
+   -
+   - The Initial Developer of the Original Code is
+   - Netscape Communications Corp.
+   - Portions created by the Initial Developer are Copyright (C) 2001
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -   Terry Hayes <thayes@netscape.com>
+   -
+   - Alternatively, the contents of this file may be used under the terms of
+   - either the GNU General Public License Version 2 or later (the "GPL"), or
+   - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+   - in which case the provisions of the GPL or the LGPL are applicable instead
+   - of those above. If you wish to allow use of your version of this file only
+   - under the terms of either the GPL or the LGPL, and not to allow others to
+   - use your version of this file under the terms of the MPL, indicate your
+   - decision by deleting the provisions above and replace them with the notice
+   - and other provisions required by the GPL or the LGPL. If you do not delete
+   - the provisions above, a recipient may use your version of this file under
+   - the terms of any one of the MPL, the GPL or the LGPL.
+   -
+   - ***** END LICENSE BLOCK ***** -->
+
+<!-- Values for changepassword.xul -->
+<!ENTITY setPassword.title   "Vaihda pääsalasana">
+<!ENTITY setPassword.tokenName.label  "Turvallisuuslaite">
+<!ENTITY setPassword.oldPassword.label  "Nykyinen salasana:">
+<!ENTITY setPassword.newPassword.label  "Uusi salasana:">
+<!ENTITY setPassword.reenterPassword.label  "Uusi salasana (uudestaan):">
+<!ENTITY setPassword.meter.label  "Salasanan laadun mittari">
+<!ENTITY setPassword.meter.loading  "Ladataan">
+
+<!-- Values for resetpassword.xul -->
+<!ENTITY resetPasswordButtonLabel  "Poista">
+<!ENTITY resetPassword.title   "Poista pääsalasana">
+<!ENTITY resetPassword.text   "Jos pääsalasana poistetaan, kaikki tallennetut sivusto- ja sähköpostisalasanat, lomaketiedot, henkilökohtaiset varmenteet ja salaiset avaimet unohdetaan. Poistetaanko pääsalasana?">
+
+<!-- Values for getpassword.xul -->
+<!ENTITY getPassword.title   "Kirjoita pääsalasana">
+<!ENTITY getPassword.tokenName2.label  "Turvallisuuslaite:">
+<!ENTITY getPassword.password.label  "Salasana:">
+
+<!-- These should be common -->
+<!ENTITY piperror.title  "Virhe">
+<!ENTITY pipalert.title  "Virhe - ei voida palata alkutilaan">
+
+<!-- Prefs panel strings -->
+<!ENTITY pref.security.general.lHeader  "Turvallisuus">
+<!ENTITY pref.security.general.rHeader  "Yleiset turvallisuusasetukset">
+<!ENTITY pref.security.general.header  "Yleiset turvallisuusasetukset">
+<!ENTITY pref.security.general.level.title  "Turvallisuustaso">
+<!ENTITY pref.security.general.paranoid.label  "Käytä vainoharhaisia turvallisuusasetuksia">
+<!ENTITY pref.security.general.certificates.title  "Varmenteet">
+<!ENTITY pref.security.general.manageCert.label  "Varmenteiden hallinta">
+
+<!-- Downloading a cert -->
+<!ENTITY downloadCert.title  "Ladataan varmennetta">
+<!ENTITY downloadCert.message1  "Aseta uuden varmentajan luotettavuus.">
+<!ENTITY downloadCert.trustSSL  "Sivustojen todentajana.">
+<!ENTITY downloadCert.trustEmail  "Sähköpostien lähettäjien todentajana.">
+<!ENTITY downloadCert.trustObjSign  "Ohjelmiston kehittäjien todentajana.">
+<!ENTITY downloadCert.message3  "Ennen kuin varmentaja lisätään yhdellekään luotettujen varmentajien listalle, tulisi sen varmenne, turvallisuuskäytännöt ja menettelytavat tarkistaa (jos ne ovat saatavilla).">
+<!ENTITY downloadCert.viewCert.label  "Näytä">
+<!ENTITY downloadCert.viewPolicy.label  "Käytäntö">
+<!ENTITY downloadCert.viewCert.text  "Tarkastele varmentajan varmennetta">
+<!ENTITY downloadCert.viewPolicy.text  "Tarkastele varmentajan käytäntöjä ja menettelytapoja">
+
+<!-- Certificate Exists in database -->
+<!ENTITY caCertExists.title  "Varmenne on jo olemassa">
+<!ENTITY caCertExists.message  "Tämä varmenne on jo olemassa.">
+
+<!-- Strings for the SSL client auth ask dialog -->
+<!ENTITY clientAuthAsk.title  "Käyttäjän todentamispyyntö">
+<!ENTITY clientAuthAsk.message1  "Sivusto pyytää sinua todentamaan itsesi varmenteella:">
+<!ENTITY clientAuthAsk.message2  "Valitse todentavana esitettävä varmenne:">
+<!ENTITY clientAuthAsk.message3  "Valitun varmenteen yksityiskohdat:">
+
+<!-- Strings for the cert picker dialog -->
+<!ENTITY certPicker.title  "Valitse varmenne">
+<!ENTITY certPicker.info   "Varmenne:">
+<!ENTITY certPicker.detailsLabel  "Valitun varmenteen yksityiskohdat:">
+
+<!ENTITY pkcs12.setpassword.title   "Valitse varmenteen varmuuskopion salasana">
+<!ENTITY pkcs12.setpassword.message   "Varmenteen varmuuskopion salasana suojaa varmuuskopiota, jota ollaan luomassa. Salasana täytyy asettaa varmuuskopiolle.">
+<!ENTITY pkcs12.setpassword.label1  "Varmenteen varmuuskopion salasana:">
+<!ENTITY pkcs12.setpassword.label2  "Varmenteen varmuuskopion salasana (uudelleen):">
+<!ENTITY pkcs12.setpassword.reminder  "Tärkeää: Jos varmenteen varmuuskopion salasana unohtuu, niin varmennetta ei voi palauttaa myöhemmin. Säilytä salasana turvallisessa paikassa.">
+
+<!ENTITY pkcs12.getpassword.title   "Salasanan kirjoitus">
+<!ENTITY pkcs12.getpassword.message  "Kirjoita salasana, jota käytettiin tämän varmenteen varmuuskopion suojaamiseen.">
+
+<!ENTITY chooseToken.title   "Valitse tunniste">
+<!ENTITY chooseToken.message1  "Valitse tunniste.">
+
+<!ENTITY escrowWarn.title  "Salausavaimen kopio">
+<!ENTITY escrowWarn.message1  "Tärkeää: Tämä varmentaja pyytää tekemään varmuuskopion salaisesta salausavaimestasi.">
+<!ENTITY escrowWarn.benefit1  "Tämän hyöty on siinä, että jos salainen avain hukkuu, sen varmuuskopion voi pyytää tältä varmentajalta.">
+<!ENTITY escrowWarn.message2  "Tällöin salainen avain kuitenkin on varmentajan hallussa ja sitä voitaisiin väärinkäyttää henkilökohtaisen sähköpostin lukemiseen luvatta.">
+<!ENTITY examineCert.label "Näytä varmenne">
+<!ENTITY examineCert.accesskey "N">
+
+<!ENTITY serverCrlNextupdate.message  "Pyydä apua järjestelmänvalvojaltasi">
+
+<!-- Strings for the CreateCertInfo dialog  -->
+<!ENTITY createCertInfo.title  "Luodaan salaista avainta">
+<!ENTITY createCertInfo.msg1  "Avaimen luonti käynnissä… Tämä saattaa kestää muutaman minuutin….">
+<!ENTITY createCertInfo.msg2  "Odota…">
+
+<!-- Form Signing confirmation prompt -->
+<!ENTITY formSigning.title  "Tekstin allekirjoituspyyntö">
+<!ENTITY formSigning.cert  "Allekirjoitusvarmenne">
+<!ENTITY formSigning.confirmPassword  "Vahvista tämän tekstiviestin allekirjoittaminen valitulla varmenteella, antamalla pääsalasana:">
+
+<!-- Strings for protectedAuth dialog -->
+<!ENTITY protectedAuth.title "Suojattu vuoromerkkitodennus">
+<!ENTITY protectedAuth.msg "Todenna vuoromerkille. Todennustapa riippuu vuoromerkin tyypistä.">
+<!ENTITY protectedAuth.tokenName.label "Vuoromerkki:">
+
+<!ENTITY certErrorDlg.title "Suojatun yhteyden muodostaminen epäonnistui">
+<!ENTITY certErrorDlg.info1 "Tämä ongelma voi johtua palvelimen asetuksista tai joku voi yrittää tekeytyä kyseiseksi palvelimeksi.">
+<!ENTITY certErrorDlg.info2 "Jos suojattu yhteys palvelimeen on aikaisemmin muodostunut ongelmitta, vika voi olla tilapäinen ja yrittäminen uudelleen myöhemmion voi auttaa.">

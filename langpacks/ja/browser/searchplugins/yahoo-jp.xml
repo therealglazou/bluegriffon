@@ -1,0 +1,16 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<SearchPlugin xmlns="http://www.mozilla.org/2006/browser/search/">
+<ShortName>Yahoo! JAPAN</ShortName>
+<Description>Yahoo Search</Description>
+<InputEncoding>UTF-8</InputEncoding>
+<Image width="16" height="16">data:image/x-icon;base64,R0lGODlhEAAQAJECAP8AAAAAAP///wAAACH5BAEAAAIALAAAAAAQABAAAAIplI+py+0NogQuyBDEnEd2kHkfFWUamEzmpZSfmaIHPHrRguUm/fT+UwAAOw==</Image>
+<Url type="text/html" method="GET" template="http://search.yahoo.co.jp/search">
+  <Param name="p" value="{searchTerms}"/>
+  <Param name="ei" value="UTF-8"/>
+  <MozParam name="fr" condition="pref" pref="yahoo-fr-ja" />
+</Url>
+<SearchForm>http://search.yahoo.co.jp/</SearchForm>
+</SearchPlugin>

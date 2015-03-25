@@ -1,0 +1,155 @@
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1/GPL 2.0/LGPL 2.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is BlueGriffon.
+   -
+   - The Initial Developer of the Original Code is
+   - Disruptive Innovations SARL.
+   - Portions created by the Initial Developer are Copyright (C) 2006
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -   Daniel Glazman (daniel.glazman@disruptive-innovations.com), Original Author
+   -
+   - Alternatively, the contents of this file may be used under the terms of
+   - either the GNU General Public License Version 2 or later (the "GPL"), or
+   - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+   - in which case the provisions of the GPL or the LGPL are applicable instead
+   - of those above. If you wish to allow use of your version of this file only
+   - under the terms of either the GPL or the LGPL, and not to allow others to
+   - use your version of this file under the terms of the MPL, indicate your
+   - decision by deleting the provisions above and replace them with the notice
+   - and other provisions required by the LGPL or the GPL. If you do not delete
+   - the provisions above, a recipient may use your version of this file under
+   - the terms of any one of the MPL, the GPL or the LGPL.
+   -
+   - ***** END LICENSE BLOCK ***** -->
+
+<!ENTITY window.title "Assistant de création de document">
+
+<!ENTITY pageTitle.label "Titre :">
+<!ENTITY pageAuthor.label "Auteur :">
+<!ENTITY pageDescription.label "Description :">
+<!ENTITY pageTitle.accesskey "T">
+<!ENTITY pageAuthor.accesskey "A">
+<!ENTITY pageDescription.accesskey "D">
+<!ENTITY pageKeywords.label "Mots-clés :">
+<!ENTITY pageKeywords.accesskey "M">
+<!ENTITY documentLanguage.label "Langue :">
+<!ENTITY language.accesskey "L">
+<!ENTITY charset.label "Jeu de caractères :">
+<!ENTITY charset.accesskey "c">
+<!ENTITY direction.label "Direction du texte :">
+<!ENTITY direction.accesskey "x">
+<!ENTITY ltr.label "De gauche à droite">
+<!ENTITY rtl.label "De droite à gauche">
+<!ENTITY unspecified.label "Non spécifié">
+
+<!ENTITY selectLanguage.label "Langue du texte">
+
+<!ENTITY backgroundImage.label "Image de fond:">
+<!ENTITY backgroundImage.accesskey "I">
+
+<!ENTITY filepickerForBgImage.title "Sélectionner une image de fond:">
+<!ENTITY pagePreview.label "Prévisualisation:">
+
+<!ENTITY useSystemColors.label "Couleurs par défaut (Ne pas spécifier de couleurs pour la page)">
+<!ENTITY userDefinedColors.label "Couleurs spécifiques :">
+
+<!ENTITY backgroundColor.label "Fond:">
+<!ENTITY backgroundColor.accesskey "F">
+<!ENTITY textColor.label "Texte:">
+<!ENTITY textColor.accesskey "T">
+<!ENTITY linksColor.label "Liens :">
+<!ENTITY linksColor.accesskey "L">
+<!ENTITY activeLinksColor.label "Liens activés :">
+<!ENTITY activeLinksColor.accesskey "A">
+<!ENTITY visitedLinksColor.label "Liens visités :">
+<!ENTITY visitedLinksColor.accesskey "V">
+<!ENTITY underlineLinks.label "Souligner les liens">
+
+<!ENTITY relativeURLForBgImage.label "Rendre l'URL relatif au document">
+
+<!ENTITY generalTab.label "Propriétés générales du document">
+<!ENTITY colorsTab.label "Couleurs et fond">
+<!ENTITY styleTab.label "Style">
+<!ENTITY advancedTab.label "Avancé">
+
+<!ENTITY unsavedPage.label "[Nouveau document, pas encore enregistré]">
+<!ENTITY noPageLastModified.label "[Pas d'information]">
+
+<!ENTITY normalText.preview "Texte normal">
+<!ENTITY links.preview "Liens">
+<!ENTITY activeLinks.preview "Liens activés">
+<!ENTITY visitedLinks.preview "Liens visités">
+
+<!ENTITY makeColorsDefault.label "Les choix ci-dessus sont mes choix par défaut">
+
+<!ENTITY bgTab.label "Fond du document">
+
+<!ENTITY layoutsTab.label "Modèle de page">
+<!ENTITY usePageLayout.checkbox "Appliquer un modèle CSS de page">
+<!ENTITY oneColumn100.label "1 colonne, 100&#37;">
+<!ENTITY twoColumns5050.label "2 colonnes, 50&#37;/50&#37;">
+<!ENTITY twoColumns6633.label "2 colonnes, 66&#37;/33&#37;">
+<!ENTITY twoColumns3366.label "2 colonnes, 33&#37;/66&#37;">
+<!ENTITY twoColumns7525.label "2 colonnes, 75&#37;/25&#37;">
+<!ENTITY twoColumns2575.label "2 colonnes, 25&#37;/75&#37;">
+<!ENTITY threeColumns333333.label "3 colonnes, 33&#37;/33&#37;/33&#37;">
+<!ENTITY threeColumns502525.label "3 colonnes, 50&#37;/25&#37;/25&#37;">
+<!ENTITY threeColumns252550.label "3 colonnes, 25&#37;/25&#37;/50&#37;">
+<!ENTITY fourColumns25252525.label "4 colonnes, 25&#37;/25&#37;/25&#37;/25&#37;">
+
+<!ENTITY layoutType.label "Largeur:">
+<!ENTITY layoutType.accesskey "L">
+<!ENTITY layout100percent.label "Largeur de la page">
+<!ENTITY layout750px.label "750px">
+<!ENTITY layout950px.label "950px">
+<!ENTITY layout974px.label "974px">
+<!ENTITY layoutSubtype.label "Barre latérale :">
+<!ENTITY layoutSubtype.accesskey "B">
+<!ENTITY noSidebar.label "Aucune">
+<!ENTITY left160Sidebar.label "À gauche 160px">
+<!ENTITY left180Sidebar.label "À gauche 180px">
+<!ENTITY left300Sidebar.label "À gauche 300px">
+<!ENTITY right180Sidebar.label "À droite 180px">
+<!ENTITY right240Sidebar.label "À droite 240px">
+<!ENTITY right300Sidebar.label "À droite 300px">
+<!ENTITY loremIpsum.label "Inclure du contenu 'lorem ipsum'">
+<!ENTITY loremIpsum.accesskey "I">
+<!ENTITY newRow.label "Nouvelle ligne">
+<!ENTITY removeRow.label "Supprimer">
+
+<!ENTITY tile.label "Répéter:">
+<!ENTITY tile.accesskey "t">
+<!ENTITY scrolling.label "Défilement:">
+<!ENTITY scrolling.accesskey "D">
+<!ENTITY scrollWithPage.label "Avec la page">
+<!ENTITY noScrolling.label "Pas de défilement">
+<!ENTITY horizPosition.label "Horiz:">
+<!ENTITY vertPosition.label "Vert:">
+
+<!ENTITY documentType.label "Type de document">
+<!ENTITY documentType.description "Quel type de document voulez-vous créer ?">
+
+<!ENTITY language.label "Langage du document">
+<!ENTITY html.label "HTML 4">
+<!ENTITY xhtml.label "XHTML 1">
+<!ENTITY xhtml11.label "XHTML 1.1">
+<!ENTITY html5.label "HTML 5">
+<!ENTITY xhtml5.label "XHTML 5">
+
+<!ENTITY doctype.label "Type du document">
+<!ENTITY transitional.label "Transitionnel">
+<!ENTITY strict.label "Strict">
+

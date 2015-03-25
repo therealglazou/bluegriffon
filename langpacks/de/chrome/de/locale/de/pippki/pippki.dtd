@@ -1,0 +1,102 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<!-- Values for changepassword.xul -->
+<!ENTITY setPassword.title  "Master-Passwort ändern">
+<!ENTITY setPassword.tokenName.label "Kryptographie-Modul">
+<!ENTITY setPassword.oldPassword.label "Aktuelles Passwort:">
+<!ENTITY setPassword.newPassword.label "Neues Passwort:">
+<!ENTITY setPassword.reenterPassword.label "Neues Passwort (nochmals):">
+<!ENTITY setPassword.meter.label "Passwort-Qualitätsmessung">
+<!ENTITY setPassword.meter.loading "Lade">
+
+<!-- Values for resetpassword.xul -->
+<!ENTITY resetPasswordButtonLabel "Zurücksetzen">
+<!ENTITY resetPassword.title  "Master-Passwort zurücksetzen">
+<!ENTITY resetPassword.text  "Wenn Sie Ihr Master-Passwort zurücksetzen, gehen all Ihre gespeicherten Web- und E-Mail-Passwörter, Formulardaten, persönlichen Zertifikate und privaten Schlüssel verloren. Soll Ihr Master-Passwort trotzdem zurückgesetzt werden?">
+
+<!-- Values for getpassword.xul -->
+<!ENTITY getPassword.title  "Geben Sie das Master-Passwort ein">
+<!ENTITY getPassword.tokenName2.label "Kryptographie-Modul:">
+<!ENTITY getPassword.password.label "Passwort:">
+
+<!-- These should be common -->
+<!ENTITY piperror.title "Fehler">
+<!ENTITY pipalert.title "Fehler - weiterarbeiten nicht möglich">
+
+<!-- Prefs panel strings -->
+<!ENTITY pref.security.general.lHeader "Sicherheit">
+<!ENTITY pref.security.general.rHeader "Einstellungen für allgemeine Sicherheit">
+<!ENTITY pref.security.general.header "Einstellungen für allgemeine Sicherheit">
+<!ENTITY pref.security.general.level.title "Sicherheitsgrad">
+<!ENTITY pref.security.general.paranoid.label "Paranoide Sicherheitseinstellungen verwenden">
+<!ENTITY pref.security.general.certificates.title "Zertifikate">
+<!ENTITY pref.security.general.manageCert.label "Zertifikate verwalten">
+
+<!-- Downloading a cert -->
+<!ENTITY downloadCert.title "Herunterladen des Zertifikats">
+<!ENTITY downloadCert.message1 "Sie wurden gebeten, einer neuen Zertifizierungsstelle (CA) zu vertrauen.">
+<!ENTITY downloadCert.trustSSL "Dieser CA vertrauen, um Websites zu identifizieren.">
+<!ENTITY downloadCert.trustEmail "Dieser CA vertrauen, um E-Mail-Nutzer zu identifizieren.">
+<!ENTITY downloadCert.trustObjSign "Dieser CA vertrauen, um Software-Entwickler zu identifizieren.">
+<!ENTITY downloadCert.message3 "Bevor Sie dieser CA für jeglichen Zweck vertrauen, sollten Sie das Zertifikat sowie seine Richtlinien und Prozeduren (wenn vorhanden) überprüfen.">
+<!ENTITY downloadCert.viewCert.label "Ansicht">
+<!ENTITY downloadCert.viewPolicy.label "Richtlinien">
+<!ENTITY downloadCert.viewCert.text "CA-Zertifikat überprüfen">
+<!ENTITY downloadCert.viewPolicy.text "CA-Richtlinien und -Prozeduren überprüfen">
+
+<!-- Certificate Exists in database -->
+<!ENTITY caCertExists.title "Zertifikat existiert">
+<!ENTITY caCertExists.message "Das Zertifikat existiert bereits.">
+
+<!-- Strings for the SSL client auth ask dialog -->
+<!ENTITY clientAuthAsk.title "Benutzer-Identifikationsanfrage">
+<!ENTITY clientAuthAsk.message1 "Diese Website verlangt, dass Sie sich mit einem Zertifikat identifizieren:">
+<!ENTITY clientAuthAsk.message2 "Wählen Sie ein Zertifikat, das als Identifikation vorgezeigt wird:">
+<!ENTITY clientAuthAsk.message3 "Details des gewählten Zertifikats:">
+
+<!-- Strings for the cert picker dialog -->
+<!ENTITY certPicker.title "Zertifikat wählen">
+<!ENTITY certPicker.info  "Zertifikat:">
+<!ENTITY certPicker.detailsLabel "Details des gewählten Zertifikats:">
+
+<!ENTITY pkcs12.setpassword.title  "Wählen Sie ein Zertifikats-Backup-Passwort">
+<!ENTITY pkcs12.setpassword.message  "Das Zertifikats-Backup-Passwort, das Sie hier festlegen, schützt die Backup-Datei, die Sie im Moment erstellen. Sie müssen dieses Passwort festlegen, um mit dem Backup fortzufahren.">
+<!ENTITY pkcs12.setpassword.label1 "Zertifikats-Backup-Passwort:">
+<!ENTITY pkcs12.setpassword.label2 "Zertifikats-Backup-Passwort (nochmals):">
+<!ENTITY pkcs12.setpassword.reminder "Wichtig: Wenn Sie Ihr Zertifikats-Backup-Passwort vergessen, können Sie dieses Backup später nicht wiederherstellen. Bitte schreiben Sie es an einem sicheren Platz nieder.">
+
+<!ENTITY pkcs12.getpassword.title  "Passworteingabe-Dialog">
+<!ENTITY pkcs12.getpassword.message "Bitte geben Sie das Passwort ein, das verwendet wurde, um dieses Zertifikats-Backup zu verschlüsseln.">
+
+<!ENTITY chooseToken.title  "Token-Wahl-Dialog">
+<!ENTITY chooseToken.message1 "Bitte wählen Sie ein Token.">
+
+<!ENTITY escrowWarn.title "Kopie des Schlüssels zur Verschlüsselung">
+<!ENTITY escrowWarn.message1 "Wichtig: Diese Zertifizierungsstelle hat Sie gebeten, ein Backup Ihres privaten Schlüssels zur Verschlüsselung anzulegen.">
+<!ENTITY escrowWarn.benefit1 "Der Vorteil ist, dass Sie bei Verlust dieses Schlüssels eine Kopie von dieser Zertifizierungsstelle anfordern können.">
+<!ENTITY escrowWarn.message2 "Allerdings wird damit Ihr privater Verschlüsselungs-Schlüssel von der Zertifizierungsstelle gespeichert, und könnte verwendet werden, um Ihre verschlüsselten E-Mails oder Dokumente ohne Ihre Erlaubnis zu lesen.">
+<!ENTITY examineCert.label "Zertifikat ansehen">
+<!ENTITY examineCert.accesskey "Z">
+
+<!ENTITY serverCrlNextupdate.message "Bitte fragen Sie Ihren Systemadministrator um Hilfe">
+
+<!-- Strings for the CreateCertInfo dialog  -->
+<!ENTITY createCertInfo.title "Erstellen eines privaten Schlüssels">
+<!ENTITY createCertInfo.msg1 "Schlüssel wird generiert… Dies kann einige Minuten dauern…">
+<!ENTITY createCertInfo.msg2 "Bitte warten…">
+
+<!-- Form Signing confirmation prompt -->
+<!ENTITY formSigning.title "Textsignaturanfrage">
+<!ENTITY formSigning.cert "Signaturzertifikat">
+<!ENTITY formSigning.confirmPassword "Um zu bestätigen, dass diese Textnachricht wirklich mit Ihrem ausgewählten Zertifikat signiert werden soll, bestätigen Sie dies bitte durch die Eingabe des Master-Passwortes:">
+
+<!-- Strings for protectedAuth dialog -->
+<!ENTITY protectedAuth.title "Geschützte Token-Authentifikation">
+<!ENTITY protectedAuth.msg "Bitte authentifizieren Sie sich beim Token. Die Authentifikationsmethode hängt vom Typ Ihres Tokens ab.">
+<!ENTITY protectedAuth.tokenName.label "Token:">
+
+<!ENTITY certErrorDlg.title "Sichere Verbindung fehlgeschlagen">
+<!ENTITY certErrorDlg.info1 "Das könnte ein Problem mit der Konfiguration des Servers sein, oder jemand will sich als dieser Server ausgeben.">
+<!ENTITY certErrorDlg.info2 "Wenn Sie mit diesem Server in der Vergangenheit erfolgreich Verbindungen herstellen konnten, ist der Fehler eventuell nur vorübergehend, und Sie können es später nochmals versuchen.">

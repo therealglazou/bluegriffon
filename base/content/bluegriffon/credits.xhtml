@@ -1,0 +1,487 @@
+<!-- -*- Mode: Java; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*-
+# ***** BEGIN LICENSE BLOCK *****
+# Version: MPL 1.1/GPL 2.0/LGPL 2.1
+#
+# The contents of this file are subject to the Mozilla Public License Version
+# 1.1 (the "License"); you may not use this file except in compliance with
+# the License. You may obtain a copy of the License at
+# http://www.mozilla.org/MPL/
+#
+# Software distributed under the License is distributed on an "AS IS" basis,
+# WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+# for the specific language governing rights and limitations under the
+# License.
+#
+# The Original Code is Firefox Credits.
+#
+# The Initial Developer of the Original Code is Ben Goodger.
+# Portions created by the Initial Developer are Copyright (C) 2004
+# the Initial Developer. All Rights Reserved.
+#
+# Contributor(s):
+#   Ben Goodger <ben@mozilla.org>
+#   David Baron <dbaron@mozilla.org>
+#   Daniel Glazman <daniel.glazman@disruptive-innovations.com>
+#
+# Alternatively, the contents of this file may be used under the terms of
+# either the GNU General Public License Version 2 or later (the "GPL"), or
+# the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+# in which case the provisions of the GPL or the LGPL are applicable instead
+# of those above. If you wish to allow use of your version of this file only
+# under the terms of either the GPL or the LGPL, and not to allow others to
+# use your version of this file under the terms of the MPL, indicate your
+# decision by deleting the provisions above and replace them with the notice
+# and other provisions required by the GPL or the LGPL. If you do not delete
+# the provisions above, a recipient may use your version of this file under
+# the terms of any one of the MPL, the GPL or the LGPL.
+#
+# ***** END LICENSE BLOCK *****
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+                      "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"
+  [
+    <!ENTITY % brandDTD SYSTEM "chrome://branding/locale/brand.dtd">
+    %brandDTD;
+    <!ENTITY % creditsDTD SYSTEM "chrome://bluegriffon/locale/credits.dtd">
+    %creditsDTD;
+  ]
+>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>&brandFullName; Credits</title>
+
+    <style>
+      html {
+        background-color: transparent;
+      }
+
+      * {
+        cursor: default;
+        -moz-user-select: none;
+      }
+
+      #titleBox {
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        right: 0px;
+        bottom: auto;
+        z-index: 999;
+      }
+
+      #footerBox {
+        position: fixed;
+        left: 0px;
+        top: auto;
+        right: 0px;
+        bottom: 0px;
+        z-index: 999;
+      }
+
+      #creditsBox {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        z-index: 1;
+         margin-left: 10px;
+        margin-right: 10px;
+        font-family: Arial, sans-serif;
+        font-size: small;
+      }
+
+      h3 {
+        font-weight: bold;
+        font-size: small;
+        text-align: center;
+        margin: 15px 0px 5px 0px;
+      }
+
+      .creditsGroup {
+        margin-bottom: 4em;
+        text-align: center;
+        border: thin solid gray;
+        border-radius: 11px;
+      }
+
+      .footnote {
+        font-size: small;
+        text-align: justify;
+      }
+
+      h2.title {
+        margin-top: 100px;
+        margin-bottom: 200px;
+        text-align: center;
+      }
+
+      .motto {
+        margin-top: 2px;
+        font-style: italic;
+        font-size: small;
+        font-weight: normal;
+        padding-left: 2em;
+      }
+
+      #gecko {
+        margin-top:    100px;
+        margin-bottom: 100px;
+        font-size: medium;
+      }
+
+      a {
+        color: blue;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+
+      :not(blockquote) > ul {
+        margin-top: 0px;
+        margin-left: 0px;
+        padding-left: 0px;
+      }
+
+      li {
+        list-style-type: none;
+      }
+      
+      blockquote li {
+        list-style-type: square ! important;
+      }
+
+      .center {
+        text-align: center;
+      }
+
+      blockquote {
+        border-left: thin solid silver;
+        padding-left: 2px;
+      }
+    </style>
+    <script>
+      var callback = null;
+      function onClick(event) {
+        event.preventDefault();
+        var url = event.originalTarget.getAttribute("href");
+        callback(url);
+      }
+      function setCallback(c) { callback = c; }
+      window.addEventListener("click", onClick, true);
+    </script>
+ </head>
+  <body>
+
+    <div id="creditsBox">
+        <div>
+          <img src="chrome://bluegriffon/content/DI.png"/>
+        </div>
+
+        <div class="creditsGroup">
+          <h3>&credit.leads;</h3>
+          <ul>
+            <li>Daniel Glazman</li>
+          </ul>
+
+          <h3>&credit.contributors;</h3>
+          <ul>
+            <li>Laurent Jouanneau</li>
+            <li>Jean-Yves Cronier</li>
+            <li>Alex Bodnaru</li>
+            <li>Frédéric Bezies</li>
+            <li>Dave Yeo</li>
+            <li>Philippe Goetz</li>
+            <li>Charles Cooke</li>
+            <li>Yu Tang</li>
+            <li>Eventric.com</li>
+          </ul>
+
+          <h3>&credit.translation;</h3>
+          <table border="1" style="border-collapse: collapse; margin:auto; margin-bottom: 1.5em">
+            <tbody>
+              <tr>
+                <td>fr-FR (Français, France)</td>
+                <td>Daniel Glazman<br/>
+                    Goofy<br/>
+                    Pascal Cuissinat</td>
+              </tr>
+              <tr>
+                <td>es-ES (Español, España)</td>
+                <td>Antonio Paniaga</td>
+              </tr>
+              <tr>
+                <td>cs (Čeština)</td>
+                <td>Michal Stanke</td>
+              </tr>
+              <tr>
+                <td>de-DE (Deutsch, Deutschland)</td>
+                <td>André Frick<br/>
+                    Simon Speich</td>
+              </tr>
+              <tr>
+                <td>he-IL<span dir="rtl">(עברית, ישראל)</span></td>
+                <td>Alex Bodnaru</td>
+              </tr>
+              <tr>
+                <td>ja-JP(日本語, 日本)</td>
+                <td>Koji Ishii<br/>
+                    Yu Tang</td>
+              </tr>
+              <tr>
+                <td>sl (Slovenščina)</td>
+                <td>Vito Smolej</td>
+              </tr>
+              <tr>
+                <td>it (Italiano)</td>
+                <td>Andrea Sanavia</td>
+              </tr>
+              <tr>
+                <td>nl (Nederlands)</td>
+                <td>Martijn Weisbeek<br/>
+                    Alexander van Oosten</td>
+              </tr>
+              <tr>
+                <td>ko (한국어)</td>
+                <td>Jungoo Lee</td>
+              </tr>
+              <tr>
+                <td>zh-CN (汉语, 中国)</td>
+                <td>Dean Lee</td>
+              </tr>
+              <tr>
+                <td>zh-TW (中文, 中國)</td>
+                <td>Jimmy John</td>
+              </tr>
+              <tr>
+                <td>pl (Polski)</td>
+                <td>Stefan Plewako<br/>
+                    Zbigniew Braniecki<br/>
+                    Rafał Piotrowski</td>
+              </tr>
+              <tr>
+                <td>fi (Suomi)</td>
+                <td>Aki Laaksovirta</td>
+              </tr>
+              <tr>
+                <td>sv-SE (Svenska, Sverige)</td>
+                <td>Martin Karlsson</td>
+              </tr>
+              <tr>
+                <td>sr (српски)</td>
+                <td>Snežana Lukić<br/>
+                    Ivan Starčević</td>
+              </tr>
+              <tr>
+                <td>gl (Galego)</td>
+                <td>Enrique Estévez</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!---p id="gecko" class="center">&credit.poweredByGecko;</p-->
+
+        <p class="footnote">
+          &brandFullName; &tm.part0; <a href="http://disruptive-innovations.com">Disruptive Innovations SAS</a>.
+        </p>
+        <p class="footnote">
+          BlueGriffon is copyright &copy;1998-2013 by its
+          contributors,
+          according to terms set out in the
+          <a href="http://www.mozilla.org/MPL/MPL-1.1.html">Mozilla Public License</a>
+          and
+          <a href="http://www.mozilla.org/MPL/NPL-1.1.html">Netscape Public License</a> documents. All Rights Reserved.</p>
+
+        <p class="footnote">
+          Portions of this software are Copyright &copy;1994 The Regents of the
+          University of California. All Rights Reserved.</p>
+
+        <p class="footnote">
+          Many icons inside BlueGriffon borrowed from <a href="http://tango.freedesktop.org/Tango_Desktop_Project">The
+          Tango Desktop Project</a>, released in the public domain.</p>
+
+        <p class="footnote">
+          Some icons inside BlueGriffon borrowed from <a href="http://www.iconarchive.com/show/glaze-icons-by-mart.html">The
+          Glaze Icons iconset</a> and used under the terms of the <a
+          href="http://en.wikipedia.org/wiki/GNU_Lesser_General_Public_License">GNU Lesser General Public License</a>.</p>
+
+        <p class="footnote">
+          The Bezier Curve editor in the CSS Properties panel is a contribution
+          from Jean-Yves Cronier, used with permission.</p>
+
+        <p class="footnote">
+          Some icons are a work of
+          <a href="http://www.fatcow.com/free-icons">FatCow Web Hosting</a> and used under the terms of the
+          <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a> license.</p>
+
+        <p class="footnote">
+          <a href="https://github.com/einars/js-beautify">Beautify-html.js</a> is a code written by Nochum Sossonko, based on code initially developed by Einar Lielmanis.</p>
+        <blockquote class="footnote">
+          <p>Copyright (c) 2009 - 2011, Einar Lielmanis</p>
+          
+          <p>Permission is hereby granted, free of charge, to any person
+          obtaining a copy of this software and associated documentation
+          files (the "Software"), to deal in the Software without
+          restriction, including without limitation the rights to use,
+          copy, modify, merge, publish, distribute, sublicense, and/or sell
+          copies of the Software, and to permit persons to whom the
+          Software is furnished to do so, subject to the following
+          conditions:</p>
+          
+          <p>The above copyright notice and this permission notice shall be
+          included in all copies or substantial portions of the Software.</p>
+          
+          <p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+          EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+          OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+          NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+          HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+          WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+          FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+          OTHER DEALINGS IN THE SOFTWARE.</p>
+        </blockquote>
+          
+
+        <p class="footnote">
+          <a href="http://codemirror.net/">CodeMirror</a> is copyright (C) 2011 by Marijn Haverbeke</p>
+        <blockquote class="footnote">
+          <p>Permission is hereby granted, free of charge, to any person obtaining a copy
+          of this software and associated documentation files (the "Software"), to deal
+          in the Software without restriction, including without limitation the rights
+          to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+          copies of the Software, and to permit persons to whom the Software is
+          furnished to do so, subject to the following conditions:</p>
+          
+          <p>The above copyright notice and this permission notice shall be included in
+          all copies or substantial portions of the Software.</p>
+          
+          <p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+          IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+          FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+          AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+          LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+          OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+          THE SOFTWARE.</p>
+        </blockquote>
+
+        <p class="footnote">
+          <a href="https://github.com/webpop/ccc">Contextual CodeMirror Completions</a> is copyright (C) 2012 by Domestika LLC</p>
+        <blockquote class="footnote">
+          <p>Permission is hereby granted, free of charge, to any person obtaining a copy
+          of this software and associated documentation files (the "Software"), to deal
+          in the Software without restriction, including without limitation the rights
+          to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+          copies of the Software, and to permit persons to whom the Software is
+          furnished to do so, subject to the following conditions:</p>
+          
+          <p>The above copyright notice and this permission notice shall be included in
+          all copies or substantial portions of the Software.</p>
+          
+          <p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+          IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+          FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+          AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+          LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+          OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+          THE SOFTWARE.</p>
+        </blockquote>
+
+        <p class="footnote">
+          <a href="http://rasm.ods.org/boxcutter/">boxcutter</a> is
+          copyright (c) 2008-2011 Matt Rasmussen and used under the terms of the Gnu Lesser General Public License (LGPL) 2.1.</p>
+
+        <p class="footnote"><a href="https://addons.mozilla.org/fr/firefox/addon/684/">FireFTP</a> is copyright (c) 2004-2010 Mime Cuvalo.</p>
+        <blockquote class="footnote">
+          <p>Code from FireFTP is reused under the Mozilla Public License inside
+          file fireFtp.jsm. We would like to thank Mime Cuvalo giving us his formal
+          authorization to reuse his code in BlueGriffon.</p>
+        </blockquote>
+
+        <p class="footnote">The <a href="http://developer.yahoo.com/yui/grids/">Yahoo! UI Library</a> is copyright (c) 2008, Yahoo! Inc.</p>
+        <blockquote class="footnote">
+          <p>Copyright
+          (c) 2008, Yahoo! Inc. All rights reserved.</p>
+          <p>Redistribution and use of this software in source and binary forms,
+          with or without modification, are permitted provided that the following
+          conditions are met:</p>
+          <ul>
+            <li>Redistributions of source
+          code must retain the above copyright notice, this list of conditions
+          and the following disclaimer.</li>
+            <li>Redistributions in binary
+          form must reproduce the above copyright notice, this list of conditions
+          and the following disclaimer in the documentation and/or other
+          materials provided with the distribution.</li>
+            <li>Neither the name of Yahoo!
+          Inc. nor the names of its contributors may be used to endorse or
+          promote products derived from this software without specific prior
+          written permission of Yahoo! Inc.</li>
+          </ul>
+          <p>THIS SOFTWARE IS PROVIDED BY
+          THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR
+          IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+          WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+          DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+          LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+          CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+          SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+          BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+          WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+          OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+          ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
+        </blockquote>
+
+        <p class="footnote"><a href="http://jquery.com/">jQuery</a> is copyright (c) 2008 John Resig.</p>
+        <blockquote class="footnote">
+          <p>Copyright (c) 2008 John Resig, http://jquery.com/</p>
+          <p>Permission is hereby granted, free of charge, to any person obtaining
+          a copy of this software and associated documentation files (the
+          "Software"), to deal in the Software without restriction, including
+          without limitation the rights to use, copy, modify, merge, publish,
+          distribute, sublicense, and/or sell copies of the Software, and to
+          permit persons to whom the Software is furnished to do so, subject to
+          the following conditions:</p>
+          <p>The above copyright notice and this permission notice shall be
+          included in all copies or substantial portions of the Software.</p>
+          <p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+          EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+          MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+          NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+          LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+          OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+          WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+        </blockquote>
+
+        <p class="footnote"><a href="http://meyerweb.com/eric/tools/color-blend/">Eric Meyer's Color Blender</a> is copyright Eric Meyer.</p>
+        <blockquote class="footnote">
+          <p>BlueGriffon's color blender is adapted from Eric Meyer's Color Blender,
+          used under the terms of the <a href="http://creativecommons.org/licenses/by-sa/1.0/">Creative
+          Commons Attribution-ShareAlike 1.0</a> License and with Eric's
+          <a href="https://twitter.com/meyerweb/status/580025480847355905">agreement</a>.</p>
+        </blockquote> 
+ 
+        <p class="footnote">
+          This software may contain portions that are Copyright &copy;1998-2005
+          SupportSoft, Inc. All Rights Reserved.</p>
+
+        <!--p class="footnote">
+          Mozilla Firefox and the Firefox logo are trademarks of the Mozilla
+          Foundation. You are not granted rights or licenses to the trademarks
+          of the Mozilla Foundation or any party, including without limitation the
+          Firefox name or logo.</p-->
+
+        <p class="footnote">
+          U.S. GOVERNMENT END USERS. The Software is a &ldquo;commercial item,&rdquo;
+          as that term is defined in 48 C.F.R. 2.101 (Oct. 1995), consisting of
+          &ldquo;commercial computer software&rdquo; and &ldquo;commercial computer software
+          documentation,&rdquo; as such terms are used in 48 C.F.R. 12.212 (Sept. 1995).
+          Consistent with 48 C.F.R. 12.212 and 48 C.F.R. 227.7202-1 through
+          227.7202-4 (June 1995), all U.S. Government End Users acquire the
+          Software with only those rights set forth herein.</p>
+
+    </div>
+
+  </body>
+</html>
+

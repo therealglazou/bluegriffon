@@ -1,0 +1,93 @@
+#bespinToolbox1, #bespinToolbox2 {
+  margin: 0px;
+  background-color: #28201C;
+  margin-left: 1px;
+  margin-right: 1px;
+  border-top: thin solid rgb(75, 73, 65);
+  color: rgb(208, 208, 208);
+}
+
+#bespinLineTextbox {
+  border-radius: 11px 11px 11px 11px;
+  -moz-appearance: none;
+  border: thin solid rgb(40, 32, 28);
+  padding-left: 5px;
+  padding-right: 5px;
+  text-align: right;
+  background-color: rgb(208, 208, 208);
+}
+
+#bespinFindTextbox,
+#bespinReplaceTextbox {
+  -moz-appearance: none;
+  border: thin solid rgb(40, 32, 28);
+  border-radius: 11px 11px 11px 11px;
+  height: 16px;
+  font-size: 11px;
+  padding: 0px 5px;
+  background-color: rgb(208, 208, 208);
+}
+
+#bespinFindTextbox html|input,
+#bespinReplaceTextbox html|input {
+  -moz-appearance: none ! important;
+  border: 0px none !important;
+  background-color: transparent ! important;
+}
+
+#bespinFindTextbox .textbox-search-clear,
+#bespinReplaceTextbox .textbox-search-clear {
+  width: 10px; height: 10px;
+}
+
+#bespinFindTextbox.notfound {
+  background-color: rgb(253, 145, 155);
+  color: black;
+}
+
+.findBarButton {
+  padding: 0px 12px 0px 12px;
+  -moz-appearance: none;
+  font-size: smaller;
+  border-radius: 11px;
+  border-top: 1px solid #aaa;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  -moz-border-top-colors:#aaa #bbb #ccc #ddd;
+  -moz-border-left-colors:#aaa #bbb #ccc #ddd;
+  -moz-border-bottom-colors:#aaa #bbb #ccc #ddd;
+  -moz-border-right-colors:#aaa #bbb #ccc #ddd;
+  background-color: #ddd;
+  color: black;
+}
+
+#bespinFindPrevious {
+  padding: 0px 8px 0px 12px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  margin-right: 0px;
+}
+
+#bespinFindNext {
+  padding: 0px 12px 0px 8px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  margin-left: 0px;
+}
+
+.findBarButton:active {
+  background-color: silver;
+}
+
+#closeFindbarButton {
+  list-style-image: url("chrome://bluegriffon/skin/icons/close-findbar.png");
+}
+
+#closeFindbarButton:hover {
+  list-style-image: url("chrome://bluegriffon/skin/icons/close-findbar-hover.png");
+}
+
+#closeFindbarButton:active:hover {
+  list-style-image: url("chrome://bluegriffon/skin/icons/close-findbar-active.png");
+}

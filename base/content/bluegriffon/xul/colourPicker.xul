@@ -1,0 +1,250 @@
+<?xml version="1.0"?>
+
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1/GPL 2.0/LGPL 2.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is Mozilla.org
+   -
+   - The Initial Developer of the Original Code is
+   - Linspire Inc..
+   - Portions created by the Initial Developer are Copyright (C) 2003
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -   Daniel Glazman (glazman@disruptive-innovations.com), on behalf of Linspire Inc.
+   -
+   - Alternatively, the contents of this file may be used under the terms of
+   - either the GNU General Public License Version 2 or later (the "GPL"), or
+   - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+   - in which case the provisions of the GPL or the LGPL are applicable instead
+   - of those above. If you wish to allow use of your version of this file only
+   - under the terms of either the GPL or the LGPL, and not to allow others to
+   - use your version of this file under the terms of the MPL, indicate your
+   - decision by deleting the provisions above and replace them with the notice
+   - and other provisions required by the LGPL or the GPL. If you do not delete
+   - the provisions above, a recipient may use your version of this file under
+   - the terms of any one of the MPL, the GPL or the LGPL.
+   -
+   - ***** END LICENSE BLOCK ***** -->
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/colourPicker.css" type="text/css"?>
+
+<!DOCTYPE dialog SYSTEM "chrome://bluegriffon/locale/colourPicker.dtd" >
+<dialog
+    id="colourPickerDialog"
+    xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    onload="StartUp();"
+    ondialogaccept="return onAccept();"
+    ondialogcancel="return onCancelColor();"
+    persist="screenX screenY"
+    screenX="24" screenY="24"> 
+
+  <script type="application/javascript" src="chrome://bluegriffon/content/utils/dgid.js"/>
+  <script type="application/javascript" src="chrome://bluegriffon/content/js/colourPicker.js"/>
+
+  <stringbundleset id="otherBundles"/>
+
+  <broadcaster id="args" value=""/>
+  <spacer id="location" offsetY="50" persist="offsetX offsetY"/>
+
+  <hbox id="TableOrCellGroup" align="center" collapsed="true">
+    <label control="CellOrTableGroup" value="&background.label;" accesskey="&background.accessKey;"/>
+    <radiogroup id="CellOrTableGroup" orient="horizontal">
+      <radio id="TableRadio" label="&table.label;" accesskey="&table.accessKey;"/>
+      <radio id="CellRadio"  label="&cell.label;"  accesskey="&cell.accessKey;"/>
+    </radiogroup>
+  </hbox>
+
+  <tabbox>
+  	<tabs>
+      <tab label="&dialog.title;"  oncommand="ColorPickerSelected()"/>
+      <tab label="&blender.label;" oncommand="BlenderValidate()"/>
+  	</tabs>
+  	<tabpanels>
+  		<hbox>
+        <vbox>
+          <html:div style="position: relative;">
+            <html:img id="hueAndSaturationImg" src="chrome://bluegriffon/content/hsPanel.png"
+                      style="width: 200px; height: 200px; max-width: 200px; max-height: 200px; border: inset thin; margin: 8px" />
+            <html:img id="hueAndSaturationCrosshair"
+                      src="chrome://bluegriffon/content/colourPickerCrosshair.gif" style="position: absolute; top: 35px; left: 65px" />
+          </html:div>
+          <spacer class="spacer" />
+          <html:div style="position: relative; height: 34px;">
+            <html:img id="brightnessImg"
+                      src="chrome://bluegriffon/content/brightness.png" style="width: 200px; height: 25px; border: inset thin; margin-left: 8px; margin-right: 8px" />
+            <html:img id="brightnessArrow"
+                      src="chrome://bluegriffon/content/colourPickerArrow.gif" style="position: absolute; bottom: 0px; left: 35px" />
+          </html:div>
+          <grid>
+            <columns><column/><column/><column/><column/><column/><column/><column/></columns>
+            <rows>
+              <row align="center">
+                <label value="&hue.label;"
+                       id="hueLabel"
+                       control="hue"/>
+                <textbox size="3"
+                         id="hue"
+                         oninput="onTextboxValueChanged(this, 'hue')"/>
+                <spinbuttons onup="IncreaseTextboxValue('hue', 359)"
+                             ondown="DecreaseTextboxValue('hue', 0)"/>
+                <spacer class="spacer"/>
+                <label value="&red.label;"
+                       control="red"
+                       id="redLabel" />
+                <textbox size="3"
+                         id="red" 
+                         oninput="onTextboxValueChanged(this, 'red')"/>
+                <spinbuttons onup="IncreaseTextboxValue('red', 255)"
+                             ondown="DecreaseTextboxValue('red', 0)"/>
+              </row>
+              <row align="center">
+                <label value="&saturation.label;"
+                       control="saturation"
+                       id="saturationLabel" />
+                <textbox size="3"
+                         id="saturation" 
+                         oninput="onTextboxValueChanged(this, 'saturation')"/>
+                <spinbuttons onup="IncreaseTextboxValue('saturation', 100)"
+                             ondown="DecreaseTextboxValue('saturation', 0)"/>
+                <spacer class="spacer"/>
+                <label value="&green.label;"
+                       control="green"
+                       id="greenLabel" />
+                <textbox size="3"
+                         id="green" 
+                         oninput="onTextboxValueChanged(this, 'green')"/>
+                <spinbuttons onup="IncreaseTextboxValue('green', 255)"
+                             ondown="DecreaseTextboxValue('green', 0)"/>
+              </row>
+              <row align="center">
+                <label value="&brightness.label;"
+                       control="brightness"
+                       id="brightnessLabel" />
+                <textbox size="3"
+                         id="brightness" 
+                         oninput="onTextboxValueChanged(this, 'brightness')"/>
+                <spinbuttons onup="IncreaseTextboxValue('brightness', 255)"
+                             ondown="DecreaseTextboxValue('brightness', 0)"/>
+                <spacer class="spacer"/>
+                <label value="&blue.label;"
+                       control="blue"
+                       id="blueLabel" />
+                <textbox size="3"
+                         id="blue" 
+                         oninput="onTextboxValueChanged(this, 'blue')"/>
+                <spinbuttons onup="IncreaseTextboxValue('blue', 255)"
+                             ondown="DecreaseTextboxValue('blue', 0)"/>
+              </row>
+            </rows>
+          </grid>
+            
+        </vbox>
+    
+        <vbox>
+          <label value="&predef.label;" />
+          <colorpicker id="colorpicker"
+                       onselect="SelectColor();"/>
+          <spacer flex="1"/>
+          <button id="LastPickedButton" crop="right" oncommand="SelectLastPickedColor();">
+            <spacer id="LastPickedColor"
+                        LastTextColor="" LastBackgroundColor=""
+                        persist="LastTextColor LastBackgroundColor"/>
+            <label value="&lastPickedColor.label;" accesskey="&lastPickedColor.accessKey;" flex="1" style="text-align: center;"/>
+          </button>
+          <hbox id="previewHbox">
+            <grid>
+              <columns><column/><column/></columns>
+              <rows>
+                <row align="center">
+                  <label value="&hexColor.label;"
+                         control="hexColour"
+                         id="hexColourLabel" />
+                  <textbox size="7" id="hexColour"
+                  				 oninput="ValidateHex(this)"/>
+                </row>
+                <row align="center">
+                  <label value="&nameColor.label;"
+                         control="nameColour" 
+                         id="nameColourLabel" />
+                  <textbox size="7"
+                           id="nameColour"
+                           oninput="onNamedColourChanged(this)"/>
+                </row>
+              </rows>
+            </grid>
+            <box flex="1" id="swatch"/>
+          </hbox>
+          <!--checkbox label="&transparency.label;"
+                    id="transparencyCheckbox"
+                    oncommand="ToggleTransparency(this)"/-->
+          <hbox align="center">
+            <label value="&opacity.label;"/>
+            <scale min="0" max="100" id="opacityScale" value="100"
+                   onchange="gDialog.opacityTextbox.value = this.value; ToggleTransparency(this)"/>
+            <textbox type="number" min="0" max="100" id="opacityTextbox"
+                     size="3" value="100"
+                     oninput="gDialog.opacityScale.value = this.value;"
+                     onchange="gDialog.opacityScale.value = this.value;"/>
+          </hbox>
+        </vbox>
+  		</hbox>
+  		<hbox align="top">
+  			<vbox id="colorBoxes"/>
+  			<spacer flex="1"/>
+  			<vbox>
+  				<radiogroup orient="vertical" id="colorBlenderRadiogroup">
+  					<grid>
+  						<columns>
+                <column/>
+                <column/>
+                <column/>
+  						</columns>
+  						<rows id="colorBlenderRows">
+                <row align="center">
+                  <radio id="colorBlenderCheckbox1" label="&color1.label;" value="1"/>
+                  <textbox id="colorBlenderTextbox1"
+                  				 oninput="colorBlenderTextboxChanged(this)"/>
+                  <box id="colorBlenderPreviewBox1">
+                    <label value=" "/>
+                  </box>
+                </row>
+                <row align="center" id="colorStopsRow">
+                  <radio id="colorBlenderCheckbox2" label="&color2.label;" value="2"/>
+                  <textbox id="colorBlenderTextbox2"
+                           oninput="colorBlenderTextboxChanged(this)"/>
+                  <box id="colorBlenderPreviewBox2">
+                    <label value=" "/>
+                  </box>
+                </row>
+  						</rows>
+  					</grid>
+          </radiogroup>
+        </vbox>
+        <spacer flex="1"/>
+        <vbox>
+          <hbox align="center">
+            <label value="&stops.label;"/>
+            <textbox id="colorBlenderStopsTextbox"
+                     type="number" min="1" max="10" size="3"
+                     oncommand="onColorBlenderStopsTextboxChanged(this)"
+                     oninput="onColorBlenderStopsTextboxChanged(this)"/>
+          </hbox>
+        </vbox>
+  		</hbox>
+  	</tabpanels>
+  </tabbox>
+
+</dialog>

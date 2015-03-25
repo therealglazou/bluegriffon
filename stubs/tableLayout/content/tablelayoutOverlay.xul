@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+
+<!-- Table Layout extension for BlueGriffon
+   - Copyright (c) Disruptive Innovations SARL 2008
+   - All rights reserved.
+   -->
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<!DOCTYPE overlay SYSTEM "chrome://tablelayout/locale/tablelayoutOverlay.dtd">
+
+<overlay
+  id     = "tableLayoutOverlay"
+  xmlns  = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/x-javascript" src="chrome://tablelayout/content/predefined.js"/>
+  <script type="application/x-javascript" src="chrome://tablelayout/content/tablelayoutOverlay.js"/>
+  <script type="application/x-javascript" src="chrome://tablelayout/content/tablelayout.js"/>
+
+  <stringbundleset id="otherBundles">
+    <stringbundle id="tablelayoutBundle" src="chrome://tablelayout/locale/tablelayoutOverlay.properties" />
+  </stringbundleset>
+
+  <menupopup id="tableMenuPopup">
+    <menuseparator/>
+    <menuitem id="tableLayout-menuitem"
+              label="&tableLayout.label;"
+              command="cmd_tableLayout"/>
+  </menupopup>
+
+  <toolbarpalette id="ComposerToolbarPalette">
+      <toolbarbutton id="tableLayoutButton" class="toolbarbutton-1"
+                     label="&tableLayout.label;"  command="cmd_tableLayout"
+                     tooltiptext="&tableLayout.tooltip;"/>
+  </toolbarpalette>
+
+  <commandset id="composerMenuItems">
+    <command id="cmd_tableLayout"            oncommand="goDoCommand('cmd_tableLayout')"/>
+  </commandset>
+
+  <script type="application/x-javascript">
+  <![CDATA[
+      window.addEventListener('load',
+                              TableLayout_setupComposerCommands,
+                              false);
+  ]]>
+  </script>
+
+</overlay>

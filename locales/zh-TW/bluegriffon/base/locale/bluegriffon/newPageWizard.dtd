@@ -1,0 +1,155 @@
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1/GPL 2.0/LGPL 2.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is BlueGriffon.
+   -
+   - The Initial Developer of the Original Code is
+   - Disruptive Innovations SARL.
+   - Portions created by the Initial Developer are Copyright (C) 2006
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -   Daniel Glazman (daniel.glazman@disruptive-innovations.com), Original Author
+   -
+   - Alternatively, the contents of this file may be used under the terms of
+   - either the GNU General Public License Version 2 or later (the "GPL"), or
+   - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+   - in which case the provisions of the GPL or the LGPL are applicable instead
+   - of those above. If you wish to allow use of your version of this file only
+   - under the terms of either the GPL or the LGPL, and not to allow others to
+   - use your version of this file under the terms of the MPL, indicate your
+   - decision by deleting the provisions above and replace them with the notice
+   - and other provisions required by the LGPL or the GPL. If you do not delete
+   - the provisions above, a recipient may use your version of this file under
+   - the terms of any one of the MPL, the GPL or the LGPL.
+   -
+   - ***** END LICENSE BLOCK ***** -->
+
+<!ENTITY window.title "新文件精靈">
+
+<!ENTITY pageTitle.label "標題:">
+<!ENTITY pageAuthor.label "作者:">
+<!ENTITY pageDescription.label "描述:">
+<!ENTITY pageTitle.accesskey "T">
+<!ENTITY pageAuthor.accesskey "A">
+<!ENTITY pageDescription.accesskey "D">
+<!ENTITY pageKeywords.label "關鍵字:">
+<!ENTITY pageKeywords.accesskey "K">
+<!ENTITY documentLanguage.label "語言:">
+<!ENTITY language.accesskey "L">
+<!ENTITY charset.label "字元設置:">
+<!ENTITY charset.accesskey "C">
+<!ENTITY direction.label "文字方向:">
+<!ENTITY direction.accesskey "X">
+<!ENTITY ltr.label "從左到右">
+<!ENTITY rtl.label "從右到左">
+<!ENTITY unspecified.label "未指定">
+
+<!ENTITY selectLanguage.label "選擇一項語言">
+
+<!ENTITY backgroundImage.label "背景圖片:">
+<!ENTITY backgroundImage.accesskey "B">
+
+<!ENTITY filepickerForBgImage.title "選擇一張背景圖片">
+<!ENTITY pagePreview.label "預覽:">
+
+<!ENTITY useSystemColors.label "讀取器預設顏色 (請勿在此頁設定顏色)">
+<!ENTITY userDefinedColors.label "使用自訂顏色:">
+
+<!ENTITY backgroundColor.label "背景:">
+<!ENTITY backgroundColor.accesskey "B">
+<!ENTITY textColor.label "文字:">
+<!ENTITY textColor.accesskey "(T">
+<!ENTITY linksColor.label "連結:">
+<!ENTITY linksColor.accesskey "L">
+<!ENTITY activeLinksColor.label "觸發中連結:">
+<!ENTITY activeLinksColor.accesskey "A">
+<!ENTITY visitedLinksColor.label "已游覽連結:">
+<!ENTITY visitedLinksColor.accesskey "V">
+<!ENTITY underlineLinks.label "有底線連結">
+
+<!ENTITY relativeURLForBgImage.label "URL是相對於頁面的位置">
+
+<!ENTITY generalTab.label "一般文件設定">
+<!ENTITY colorsTab.label "顏色和背景">
+<!ENTITY styleTab.label "樣式">
+<!ENTITY advancedTab.label "進階">
+
+<!ENTITY unsavedPage.label "[尚未儲存的新頁面]">
+<!ENTITY noPageLastModified.label "[無資訊]">
+
+<!ENTITY normalText.preview "一般字體">
+<!ENTITY links.preview "連結">
+<!ENTITY activeLinks.preview "觸發中連結">
+<!ENTITY visitedLinks.preview "已游覽連結">
+
+<!ENTITY makeColorsDefault.label "以上設定為預設值">
+
+<!ENTITY bgTab.label "文件背景">
+
+<!ENTITY layoutsTab.label "頁面設計">
+<!ENTITY usePageLayout.checkbox "套用預設的 CSS 設計">
+<!ENTITY oneColumn100.label "1列, 100&#37;">
+<!ENTITY twoColumns5050.label "2列, 50&#37;/50&#37;">
+<!ENTITY twoColumns6633.label "2列, 66&#37;/33&#37;">
+<!ENTITY twoColumns3366.label "2列, 33&#37;/66&#37;">
+<!ENTITY twoColumns7525.label "2列, 75&#37;/25&#37;">
+<!ENTITY twoColumns2575.label "2列, 25&#37;/75&#37;">
+<!ENTITY threeColumns333333.label "3列, 33&#37;/33&#37;/33&#37;">
+<!ENTITY threeColumns502525.label "3列, 50&#37;/25&#37;/25&#37;">
+<!ENTITY threeColumns252550.label "3列, 25&#37;/25&#37;/50&#37;">
+<!ENTITY fourColumns25252525.label "4列, 25&#37;/25&#37;/25&#37;/25&#37;">
+
+<!ENTITY layoutType.label "寬:">
+<!ENTITY layoutType.accesskey "W">
+<!ENTITY layout100percent.label "最大寬度">
+<!ENTITY layout750px.label "750px">
+<!ENTITY layout950px.label "950px">
+<!ENTITY layout974px.label "974px">
+<!ENTITY layoutSubtype.label "側欄:">
+<!ENTITY layoutSubtype.accesskey "S">
+<!ENTITY noSidebar.label "無">
+<!ENTITY left160Sidebar.label "左 160px">
+<!ENTITY left180Sidebar.label "左 180px">
+<!ENTITY left300Sidebar.label "左 300px">
+<!ENTITY right180Sidebar.label "右 180px">
+<!ENTITY right240Sidebar.label "右 240px">
+<!ENTITY right300Sidebar.label "右 300px">
+<!ENTITY loremIpsum.label "包含 'lorem ipsum' 無效的內容">
+<!ENTITY loremIpsum.accesskey "I">
+<!ENTITY newRow.label "新欄">
+<!ENTITY removeRow.label "移除">
+
+<!ENTITY tile.label "標題:">
+<!ENTITY tile.accesskey "T">
+<!ENTITY scrolling.label "滾動:">
+<!ENTITY scrolling.accesskey "S">
+<!ENTITY scrollWithPage.label "跟隨頁面">
+<!ENTITY noScrolling.label "無滾動">
+<!ENTITY horizPosition.label "水平:">
+<!ENTITY vertPosition.label "垂直:">
+
+<!ENTITY documentType.label "文件類型">
+<!ENTITY documentType.description "您想建立哪種類型的文件?">
+
+<!ENTITY language.label "文件標示語言">
+<!ENTITY html.label "HTML 4">
+<!ENTITY xhtml.label "XHTML 1">
+<!ENTITY xhtml11.label "XHTML 1.1">
+<!ENTITY html5.label "HTML 5">
+<!ENTITY xhtml5.label "XHTML 5">
+
+<!ENTITY doctype.label "文件類型">
+<!ENTITY transitional.label "過渡">
+<!ENTITY strict.label "嚴格">
+

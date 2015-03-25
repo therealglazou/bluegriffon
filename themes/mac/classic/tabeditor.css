@@ -1,0 +1,215 @@
+/* ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1/GPL 2.0/LGPL 2.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is BlueGriffon.
+ *
+ * The Initial Developer of the Original Code is
+ * Disruptive Innovations SARL.
+ * Portions created by the Initial Developer are Copyright (C) 2006
+ * the Initial Developer. All Rights Reserved.
+ *
+ * Contributor(s):
+ *   Daniel Glazman <daniel.glazman@disruptive-innovations.com>, Original author
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU General Public License Version 2 or later (the "GPL"), or
+ * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+ * in which case the provisions of the GPL or the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of either the GPL or the LGPL, and not to allow others to
+ * use your version of this file under the terms of the MPL, indicate your
+ * decision by deleting the provisions above and replace them with the notice
+ * and other provisions required by the GPL or the LGPL. If you do not delete
+ * the provisions above, a recipient may use your version of this file under
+ * the terms of any one of the MPL, the GPL or the LGPL.
+ *
+ * ***** END LICENSE BLOCK ***** */
+
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+#Bluegriffon .tabeditor-tab[selected="true"] {
+  background-color: -moz-mac-chrome-active;
+}
+/* ----- INACTIVE WINDOW ----- */
+
+#Bluegriffon:not([active="true"]) .tabeditor-strip {
+  background-color: #e2e2e2;
+}
+
+#Bluegriffon:-moz-window-inactive .tabeditor-tab {
+  color: #575757;
+}
+
+#Bluegriffon:-moz-window-inactive .tabeditor-tab[selected="true"] {
+  background-color: -moz-mac-chrome-inactive;
+}
+
+
+
+/* ::::: tabeditor ::::: */
+
+tabeditor[visibility="hidden"] {
+  border-top: silver thin solid;
+  border-left: silver thin solid;
+}
+
+tabeditor > tabbox {
+  margin: 0;
+}
+
+.tab-icon-image {
+  width: 16px;
+  height: 16px;
+  list-style-image: url("chrome://global/skin/tree/item-grayscale.png");
+  opacity: 0.6;
+  margin-top: 2px;
+}
+
+.tabeditor-tab[selected="true"] > .tab-icon-image {
+  list-style-image: url("chrome://global/skin/tree/item.png");
+}
+
+.tabeditor-tab[busy] > .tab-icon-image {
+  list-style-image: url("chrome://global/skin/icons/loading_16.png") !important;
+}
+
+.tabeditor-tab:hover > .tab-icon-image,
+.tabeditor-tab[selected="true"] > .tab-icon-image {
+  opacity: 1;
+}
+
+.tab-text {
+  margin-top: 3px;
+  margin-bottom: 0;
+  font: message-box;
+  font-weight: bold;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.tabeditor-tab {
+  -moz-box-alig: center;
+  -moz-appearance: none;
+  border-radius: 0 0 6px 6px;
+  color: #222;
+  color: black;
+  margin-bottom: 1px;
+  -moz-margin-end: 1px;
+  padding: 0 5px;
+  border-style: none solid solid;
+  border-width: 3px;
+  -moz-border-right-colors: rgba(0, 0, 0, .08) rgba(0, 0, 0, .17) rgba(180, 180, 180, .29);
+  -moz-border-bottom-colors: rgba(0, 0, 0, .08) rgba(0, 0, 0, .17) rgba(180, 180, 180, .29);
+  -moz-border-left-colors: rgba(0, 0, 0, .08) rgba(0, 0, 0, .17) rgba(180, 180, 180, .29);
+  -moz-background-clip: padding;
+  min-width: 1px !important;
+  text-align: left;
+  height: 24px;
+}
+
+.tabeditor-tab:not([selected="true"]) {
+  background-image: url("chrome://bluegriffon/skin/tab-bkgnd.png");
+}
+
+.tabeditor-tab[selected="true"] {
+  -moz-user-focus: normal;
+  padding: 0 6px 1px;
+  border-width: 2px;
+  -moz-border-left-colors: rgba(0, 0, 0, .1) rgba(0, 0, 0, .2);
+  -moz-border-bottom-colors: rgba(0, 0, 0, .1) rgba(0, 0, 0, .2);
+  -moz-border-right-colors: rgba(0, 0, 0, .1) rgba(0, 0, 0, .2);
+  background-color: -moz-mac-chrome-active;
+}
+
+.tabeditor-tab[selected="true"]:focus > .tab-text {
+/*  outline: 2px solid #4F8EC9;
+  outline-offset: -2px;
+  -moz-outline-radius: 3px;*/
+}
+
+.tabeditor-tab[selected="true"],
+.tabeditor-tab:hover {
+  color: #000000;
+}
+
+.tabeditor-strip {
+  margin-top: -1px;
+  border-bottom: 1px solid #404040;
+  background-color: #9B9B9B;
+}
+
+.tabeditor-tabs {
+  border: none;
+  -moz-box-pack: left;
+  -moz-box-align: left;
+  background: url("chrome://bluegriffon/skin/tabeditor-tabs-bkgnd.png") repeat-x;
+  height: 25px;
+  margin-bottom: 0;
+}
+
+.tabs-left, .tabs-right {
+  -moz-box-flex: 1;
+  display: -moz-box;
+  width: 3px;
+}
+
+.tabeditor-tabs[overflow="true"] .tabs-left {
+  display: none;
+}
+
+tabeditor > tabbox > tabpanels {
+  -moz-appearance: none !important;
+}
+
+.tabeditor-tab .tab-icon {
+  visibility: hidden;
+}
+
+.tabeditor-tab:hover .tab-close-button {
+  visibility: visible;
+  list-style-image: url("chrome://global/skin/icons/close.png");
+  -moz-image-region: rect(0, 16px, 16px, 0);
+}
+
+.tabeditor-tab .tab-close-button:hover {
+  -moz-image-region: rect(0, 32px, 16px, 16px);
+}
+
+.tabeditor-tab .tab-close-button:hover:active {
+  -moz-image-region: rect(0, 48px, 16px, 32px);
+}
+
+.tabeditor-tab {
+  -moz-binding: url("chrome://bluegriffon/content/bindings/tab.xml#bluegriffon-editortab");
+}
+
+.tabeditor-tab .toolbarbutton-icon {
+  padding: 0px;
+}
+
+.tabeditor-tab .toolbarbutton-text {
+  display: none;
+}
+
+.tabeditor-tab[modified="true"]  .tab-text {
+  text-shadow: 0 1px 0 rgba(255, 0, 0, 0.4);
+}
+
+tabeditor[tabmode="left"] .tabs-left {
+  width: 8px !important;
+  -moz-box-flex: 0 !important;
+}
+
+tabeditor[tabmode="right"] .tabs-right {
+  max-width: 8px !important;
+  -moz-box-flex: 0 ! important;
+}

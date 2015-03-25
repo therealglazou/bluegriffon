@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type" />
+
+  
+  <title>notifiers</title>
+
+</head>
+
+<body>
+<h3>Notifiers</h3>
+<p>BlueGriffon provides extension developers with an object allowing to register listeners for any kind of events. This object is NotifierUtils:</p>
+<h4>Register a BlueGriffon event callback</h4>
+<table style="text-align: left;" class="methodTable" border="1" cellpadding="2" cellspacing="2">
+
+         <tbody>
+
+            <tr>
+
+               <th>Method name</th>
+
+
+               <td><code>addNotifierCallback</code></td>
+
+            </tr>
+
+
+            <tr>
+
+               <th>Parameters</th>
+
+
+               <td>
+                  
+      <ol>
+        <li><code>aEventName,</code> a string representing the event</li>
+        <li><code>aListener</code>, a function</li>
+        <li><code>aContext</code>, an object to be user in the listener as local context</li>
+      </ol>
+
+               </td>
+
+            </tr>
+
+
+            <tr>
+
+               <th>Return value</th>
+
+
+               <td>no return value ; dumps an error on console if listener cannot be registered</td>
+
+            </tr>
+
+         
+  </tbody>
+      
+</table>
+<h4>Dispatch a BlueGriffon event</h4>
+<p>To dispatch an event use the following method:</p>
+<table style="text-align: left;" class="methodTable" border="1" cellpadding="2" cellspacing="2">
+
+         <tbody>
+
+            <tr>
+
+               <th>Method name</th>
+
+
+               <td><code>notify</code></td>
+
+            </tr>
+
+
+            <tr>
+
+               <th>Parameters</th>
+
+
+               <td>
+                  
+      <ol>
+        <li><code>aEventName,</code> a string representing the event<span style="font-family: monospace;"></span></li>
+        <li>all other arguments will be passed to the listeners for this event</li>
+      </ol>
+
+               </td>
+
+            </tr>
+
+
+            <tr>
+
+               <th>Return value</th>
+
+
+               <td>no return value ; dumps an error on console if no event of that name is registered or if a listener throws an exception</td>
+
+            </tr>
+
+         
+  </tbody>
+      
+</table>
+<h4>Remove&nbsp;a BlueGriffon event callback</h4>
+<table style="text-align: left;" class="methodTable" border="1" cellpadding="2" cellspacing="2">
+
+         <tbody>
+
+            <tr>
+
+               <th>Method name</th>
+
+
+               <td><code>removeNotifierCallback</code></td>
+
+            </tr>
+
+
+            <tr>
+
+               <th>Parameters</th>
+
+
+               <td>
+                  
+      <ol>
+        <li><code>aEventName,</code> a string representing the event</li>
+        <li><code>aListener</code>, a function</li>
+      </ol>
+
+               </td>
+
+            </tr>
+
+
+            <tr>
+
+               <th>Return value</th>
+
+
+               <td>no return value ; dumps an error on console if
+no event of that name is registered or if &nbsp;that listener is not
+registered as callback for that event name</td>
+
+            </tr>
+
+         
+  </tbody>
+      
+</table>
+<h4>Clean all BlueGriffon event callback for a given event name</h4>
+<table style="text-align: left;" class="methodTable" border="1" cellpadding="2" cellspacing="2">
+
+         <tbody>
+
+            <tr>
+
+               <th>Method name</th>
+
+
+               <td><code>cleanNotifier</code></td>
+
+            </tr>
+
+
+            <tr>
+
+               <th>Parameters</th>
+
+
+               <td>
+                  
+      <ol>
+        <li><code>aEventName,</code> a string representing the event<span style="font-family: monospace;"></span></li>
+      </ol>
+
+               </td>
+
+            </tr>
+
+
+            <tr>
+
+               <th>Return value</th>
+
+
+               <td>no return value</td>
+
+            </tr>
+
+         
+  </tbody>
+      
+</table>
+<h4>Example</h4>
+<pre>var EditorScrolledNotifier =&nbsp; {<br />&nbsp; startup: function EditorScrolledNotifier_startup()<br />&nbsp; {<br />&nbsp;&nbsp;&nbsp; var tabeditor = document.getElementById("tabeditor");<br />&nbsp;&nbsp;&nbsp; tabeditor.addEventListener("scroll", this.onEditorScrolled, false);<br />&nbsp; },<br /><br />&nbsp; shutdown: function EditorScrolledNotifier_shutdown()<br />&nbsp; {<br />&nbsp;&nbsp;&nbsp; var tabeditor = document.getElementById("tabeditor");<br />&nbsp;&nbsp;&nbsp; tabeditor.removeEventListener("scroll", this.onEditorScrolled, false);<br />&nbsp; },<br /><br />&nbsp; onEditorScrolled: function EditorScrolledNotifier_onEditorScrolled(aEvent)<br />&nbsp; {<br />&nbsp;&nbsp;&nbsp; NotifierUtils.notify("editorScrolled", EditorUtils.getCurrentEditorElement());<br />&nbsp; }<br />};<br /><br />EditorScrolledNotifier .startup();<br /><br />.....<br /><br />&nbsp; &lt;constructor&gt;<br />&nbsp;&nbsp;&nbsp; &lt;![CDATA[<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NotifierUtils.addNotifierCallback("editorScrolled", this.onEditorScrolled, this);<br />&nbsp;&nbsp;&nbsp; ]]&gt;<br />&nbsp; &lt;/constructor&gt;<br /><br />&nbsp; &lt;destructor&gt;<br />&nbsp;&nbsp;&nbsp; &lt;![CDATA[<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NotifierUtils.removeNotifierCallback("editorScrolled", this.onEditorScrolled);<br />&nbsp;&nbsp;&nbsp; ]]&gt;<br />&nbsp; &lt;/destructor&gt;<br /><br />&nbsp; &lt;method name="onEditorScrolled"&gt;<br />&nbsp;&nbsp;&nbsp; &lt;param name="aEditor"/&gt;<br />&nbsp;&nbsp;&nbsp; &lt;body&gt;<br />&nbsp;&nbsp;&nbsp; &lt;![CDATA[<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var elt = this.getSelectionForEditor(aEditor);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.refreshRulerForElement(elt);<br />&nbsp;&nbsp;&nbsp; ]]&gt;<br />&nbsp;&nbsp;&nbsp; &lt;/body&gt;<br />&nbsp; &lt;/method&gt;</pre>
+</body>
+
+</html>

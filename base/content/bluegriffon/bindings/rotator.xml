@@ -1,0 +1,234 @@
+<?xml version="1.0"?>
+
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1/GPL 2.0/LGPL 2.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is BlueGriffon.
+   -
+   - The Initial Developer of the Original Code is
+   - Disruptive Innovations SARL.
+   - Portions created by the Initial Developer are Copyright (C) 2010
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -   Daniel Glazman (daniel.glazman@disruptive-innovations.com), Original Author
+   -
+   - Alternatively, the contents of this file may be used under the terms of
+   - either the GNU General Public License Version 2 or later (the "GPL"), or
+   - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+   - in which case the provisions of the GPL or the LGPL are applicable instead
+   - of those above. If you wish to allow use of your version of this file only
+   - under the terms of either the GPL or the LGPL, and not to allow others to
+   - use your version of this file under the terms of the MPL, indicate your
+   - decision by deleting the provisions above and replace them with the notice
+   - and other provisions required by the LGPL or the GPL. If you do not delete
+   - the provisions above, a recipient may use your version of this file under
+   - the terms of any one of the MPL, the GPL or the LGPL.
+   -
+   - ***** END LICENSE BLOCK ***** -->
+
+<!DOCTYPE bindings [
+  <!ENTITY % rotatorDTD SYSTEM "chrome://bluegriffon/locale/rotator.dtd" >
+  %rotatorDTD;
+]>
+
+<bindings id="rotatorBindings"
+          xmlns="http://www.mozilla.org/xbl"
+          xmlns:html="http://www.w3.org/1999/xhtml"
+          xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+          xmlns:xbl="http://www.mozilla.org/xbl">
+
+  <binding id="rotator">
+    <resources>
+      <stylesheet src="chrome://bluegriffon/skin/rotator.css"/>
+    </resources>
+
+    <content>
+      <xul:hbox anonid="outerRotator">
+        <xul:hbox anonid="innerRotator" align="center">
+          <xul:spacer flex="1"/>
+          <xul:rotateGrippy xbl:inherits="disabled"/>
+        </xul:hbox>
+      </xul:hbox>
+      <xul:textbox anonid="textbox" size="4" type="number" min="-1000" max="1000"
+                   xbl:inherits="disabled"
+                   value="0"
+                   onchange="this.parentNode.reflectPosition(event, true)"
+                   oninput="this.parentNode.reflectPosition(event, true)"/>
+      <xul:label value="&degrees.label;" xbl:inherits="disabled"/>
+    </content>
+
+    <implementation>
+      <constructor>
+        <![CDATA[
+          if (this.getAttribute("value"))
+            this.value = this.getAttribute("value");
+        ]]>
+      </constructor>
+
+      <property name="value">
+        <getter>
+        <![CDATA[
+          return this.getChild("textbox").value;
+        ]]>
+        </getter>
+        <setter>
+        <![CDATA[
+          this.getChild("textbox").value = val;
+          this.getChild("innerRotator").style.MozTransform = "rotate(" + (val-90) + "deg)";
+        ]]>
+        </setter>
+      </property>
+
+      <property name="disabled">
+        <getter>
+        <![CDATA[
+          return (this.getAttribute("disabled") == "true");
+        ]]>
+        </getter>
+        <setter>
+        <![CDATA[
+          if (val)
+            this.setAttribute("disabled", val);
+          else
+            this.removeAttribute("disabled");
+        ]]>
+        </setter>
+      </property>
+
+      <method name="getChild">
+        <parameter name="aChildName"/>
+        <body><![CDATA[
+          return document.getAnonymousElementByAttribute(this, "anonid", aChildName);
+        ]]></body>
+      </method>
+      <method name="reflectPosition">
+        <parameter name="aEvent"/>
+        <parameter name="aForceCallback"/>
+        <body><![CDATA[
+          var angle = aEvent.originalTarget.value;
+          if (this.getChild("textbox").value != angle)
+            this.getChild("textbox").value = angle;
+          this.getChild("innerRotator").style.MozTransform = "rotate(" + (parseFloat(angle)-90) + "deg)";
+          this.callCallback(angle, aForceCallback);
+          this.getChild("textbox").focus();
+        ]]></body>
+      </method>
+      <method name="callCallback">
+        <parameter name="aAngle"/>
+        <parameter name="aForceCallback"/>
+        <body><![CDATA[
+          if (this.getAttribute("onchange") &&
+              (aForceCallback || this.getAttribute("onlyonrelease") != "true")) {
+            try {
+              var fn = new Function("angle", this.getAttribute("onchange"));
+              fn.call(window, aAngle);
+            }
+            catch(e) {}
+          }
+        ]]></body>
+      </method>
+    </implementation>
+  </binding>
+
+  <binding id="rotateGrippy">
+    <resources>
+      <stylesheet src="chrome://bluegriffon/skin/rotator.css"/>
+    </resources>
+
+    <implementation>
+      <field name="mStartX">0</field>
+      <field name="mStartY">0</field>
+      <field name="mCenterX">0</field>
+      <field name="mCenterY">0</field>
+      <field name="mRotating">false</field>
+      <field name="mAngle">0</field>
+      <field name="mRotator">null</field>
+      <field name="mNegated">false</field>
+    </implementation>
+
+    <handlers>
+      <handler event="mousedown">
+        <![CDATA[
+          if (!this.mRotator)
+            this.mRotator = this.parentNode.parentNode.parentNode; 
+          this.mNegated = (this.mRotator.getAttribute("negated") == "true");
+          if (this.getAttribute("disabled") == "true")
+            return;
+         var bo = this.parentNode.boxObject;
+          this.mCenterX = bo.screenX + (bo.width / 2);
+          this.mCenterY = bo.screenY + (bo.height / 2);
+          this.mStartX = this.mCenterX;
+          this.mStartY = this.mCenterY - 16;
+          this.mRotating = true;
+          this.setAttribute("rotating", "true");
+          this.setCapture(true);
+        ]]>
+      </handler>
+
+      <handler event="mousemove">
+        <![CDATA[
+          if (!this.mRotating)
+            return;
+          var x = event.screenX;
+          var y = event.screenY;
+          with (Math) {
+            var p0c = sqrt(pow(this.mCenterX - this.mStartX,2) +
+                                pow(this.mCenterY - this.mStartY,2)); // p0->c (b)   
+            var p1c = sqrt(pow(this.mCenterX - x,2) +
+                                pow(this.mCenterY - y,2)); // p1->c (a)
+            var p0p1 = sqrt(pow(x - this.mStartX,2) +
+                                 pow(y - this.mStartY,2)); // p0->p1 (c)
+            this.mAngle = floor(acos((p1c*p1c + p0c*p0c - p0p1*p0p1)/(2*p1c*p0c)) * 180 / PI);
+            if (x <= this.mCenterX)
+              this.mAngle = 360 - this.mAngle;
+
+          }
+          this.parentNode.style.MozTransform = "rotate(" + (this.mAngle-90) + "deg)";
+          this.mRotator.getChild("textbox").value = this.mAngle;
+          this.mRotator.callCallback(this.mAngle, false);
+        ]]>
+      </handler>
+
+      <handler event="mouseup">
+        <![CDATA[
+          if (!this.mRotating)
+            return;
+          this.releaseCapture();
+          this.removeAttribute("rotating");
+          this.mRotating = false;
+          var x = event.screenX;
+          var y = event.screenY;
+          var rotator = this.parentNode.parentNode.parentNode;
+          with (Math) {
+            var p0c = sqrt(pow(this.mCenterX - this.mStartX,2) +
+                                pow(this.mCenterY - this.mStartY,2)); // p0->c (b)   
+            var p1c = sqrt(pow(this.mCenterX - x,2) +
+                                pow(this.mCenterY - y,2)); // p1->c (a)
+            var p0p1 = sqrt(pow(x - this.mStartX,2) +
+                                 pow(y - this.mStartY,2)); // p0->p1 (c)
+            this.mAngle = floor(acos((p1c*p1c + p0c*p0c - p0p1*p0p1)/(2*p1c*p0c)) * 180 / PI);
+            if (x <= this.mCenterX)
+              this.mAngle = 360 - this.mAngle;
+
+          }
+          this.parentNode.style.MozTransform = "rotate(" + (this.mAngle-90) + "deg)";
+          this.mRotator.getChild("textbox").value = this.mAngle;
+          this.mRotator.callCallback(this.mAngle, true);
+        ]]>
+      </handler>
+    </handlers>
+
+  </binding>
+  
+</bindings>

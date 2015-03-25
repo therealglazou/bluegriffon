@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+
+<!--
+   - The contents of this file are subject to the Netscape Public
+   - License Version 1.1 (the "License"); you may not use this file
+   - except in compliance with the License. You may obtain a copy of
+   - the License at http://www.mozilla.org/NPL/
+   -  
+   - Software distributed under the License is distributed on an "AS
+   - IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+   - implied. See the License for the specific language governing
+   - rights and limitations under the License.
+   -  
+   - The Original Code is Mozilla Communicator client code, released
+   - March 31, 1998.
+   - 
+   - The Initial Developer of the Original Code is Netscape
+   - Communications Corporation. Portions created by Netscape are
+   - Copyright (C) 1998-2000 Netscape Communications Corporation. All
+   - Rights Reserved.
+   - 
+   - Contributor(s): 
+  -->
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/languages.css" type="text/css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/bluegriffonDialogs.css" type="text/css"?>
+
+<!DOCTYPE dialog SYSTEM "chrome://bluegriffon/locale/languages.dtd">
+
+<dialog title="&window.title;"
+        id="selectLanguageWindow"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        onload="Startup()"
+        buttons="accept,cancel"
+        ondialogaccept="return onAccept();"
+        persist="screenX screenY">
+
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/dgid.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/global.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/editorUtils.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/css.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/l10n.js"/>
+  <script type="application/javascript"   src="chrome://bluegriffon/content/js/languages.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/dialogs/languages.js"/>
+
+  <stringbundleset id="languageSet">
+    <stringbundle id="bundleRegions"      src="chrome://global/locale/regionNames.properties"/>
+    <stringbundle id="bundleLanguages"    src="chrome://global/locale/languageNames.properties"/>
+    <stringbundle id="bundlePreferences"  src="chrome://bluegriffon/locale/language.properties"/>
+    <stringbundle id="bundleAccepted"     src="resource://gre/res/language.properties"/>
+  </stringbundleset>
+
+  <groupbox id="currentLanguageBox">
+    <hbox align="center">
+      <label value="&currentLanguage.label;"/>
+      <label id="currentLanguage"/>
+    </hbox>
+  </groupbox>
+
+  <label value="&languagesList.label;" />
+
+  <listbox id="languageListBox"
+           rows="8"
+           seltype="single"
+           flex="1"
+           onselect="onListboxSelect()" 
+           ondblclick="onListboxDblClick(event)" />
+
+  <hbox align="center">
+    <label value="&others.label;"
+           accesskey="&others.accesskey;"
+           control="otherTextBox" />
+    <textbox id="otherTextBox"
+             oninput="onTextboxInput()" />
+    <label value="&examples.label;"/>
+  </hbox>
+  <checkbox id="clearSubtree"
+            hidden="true"
+            checked="true"
+            label="&clearSubtree.label;"/>
+</dialog>

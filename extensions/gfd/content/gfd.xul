@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/listboxBg.css" type="text/css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/bluegriffonDialogs.css" type="text/css"?>
+<?xml-stylesheet href="chrome://gfd/skin/gfd.css" type="text/css"?>
+
+<!DOCTYPE dialog SYSTEM "chrome://gfd/locale/gfd.dtd">
+
+<dialog title="&window.title;"
+        id="bluegriffonGfd"
+        windowtype="BlueGriffon:Gfd"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        buttons="accept,cancel"
+        onload="Startup()"
+        style="height: auto"
+        ondialogaccept="return onAccept()"
+        persist="screenX screenY width height"
+        width="300"
+        height="300"
+        screenX="24" screenY="24">
+
+  <!-- Methods common to all editor dialogs -->
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/dgid.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/global.js"/>
+
+  <script type="application/x-javascript" src="chrome://gfd/content/directory.js"/>
+  <script type="application/x-javascript" src="chrome://gfd/content/gfd.js"/>
+
+  <keyset>
+    <key keycode="VK_ESCAPE" oncommand="window.close()"/>
+  </keyset>
+
+  <vbox flex="1" id="mainBox">
+    <tree id="installedFontsTree"
+          hidecolumnpicker="true"
+          onselect="UpdateButtons()"
+          flex="1">
+      <treecols>
+        <treecol id="familyCol"
+                 flex="1"
+                 label="&family.col;"
+                 primary="true"
+                 persist="width ordinal hidden"/>
+        <splitter class="tree-splitter"/>
+        <treecol id="variantsCol"
+                 flex="1"
+                 label="&variants.col;"
+                 persist="width ordinal hidden"/>
+        <splitter class="tree-splitter"/>
+        <treecol id="subsetsCol"
+                 flex="1"
+                 label="&subsets.col;"
+                 persist="width ordinal hidden"/>
+      </treecols>
+      <treechildren id="installedFontsTreechildren"/>
+    </tree>
+    <hbox id="UrlsToolbox" class="listboxBg">
+      <toolbarbutton class="listboxBgPlusButton"
+                     tooltiptext="&add.tooltip;"
+                     id="PlusButton"
+                     oncommand="AddFontFamily()"/>
+      <toolbarbutton class="listboxBgMinusButton"
+                     disabled="true"
+                     id="MinusButton"
+                     tooltiptext="&remove.tooltip;"
+                     oncommand="DeleteFontFamily()"/>
+    </hbox>
+  </vbox>
+</dialog>

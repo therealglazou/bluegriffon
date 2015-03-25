@@ -1,0 +1,263 @@
+<?xml version="1.0"?>
+
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1/GPL 2.0/LGPL 2.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is Composer.
+   -
+   - The Initial Developer of the Original Code is
+   - Disruptive Innovations SARL.
+   - Portions created by the Initial Developer are Copyright (C) 2006
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -   Daniel Glazman (daniel.glazman@disruptive-innovations.com), Original Author
+   -
+   - Alternatively, the contents of this file may be used under the terms of
+   - either the GNU General Public License Version 2 or later (the "GPL"), or
+   - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+   - in which case the provisions of the GPL or the LGPL are applicable instead
+   - of those above. If you wish to allow use of your version of this file only
+   - under the terms of either the GPL or the LGPL, and not to allow others to
+   - use your version of this file under the terms of the MPL, indicate your
+   - decision by deleting the provisions above and replace them with the notice
+   - and other provisions required by the LGPL or the GPL. If you do not delete
+   - the provisions above, a recipient may use your version of this file under
+   - the terms of any one of the MPL, the GPL or the LGPL.
+   -
+   - ***** END LICENSE BLOCK ***** -->
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://domexplorer/skin/domexplorer.css" type="text/css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/listboxBg.css" type="text/css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/bluegriffonDialogs.css" type="text/css"?>
+
+<!DOCTYPE window [
+  <!ENTITY % domexplorerDTD  SYSTEM "chrome://domexplorer/locale/domexplorer.dtd" >
+  <!ENTITY % structurebarDTD SYSTEM "chrome://bluegriffon/locale/structurebar.dtd" >
+  <!ENTITY % ariaDTD         SYSTEM "chrome://bluegriffon/locale/aria.dtd" >
+  %domexplorerDTD;
+  %structurebarDTD;
+  %ariaDTD;
+]>            
+
+<page id         = "domexplorer"
+      windowtype = "BlueGriffon:DOMExplorer"
+      title      = "&window.title;"
+      xmlns      = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+      xmlns:html = "http://www.w3.org/1999/xhtml"
+      onload     = "Startup()"
+      onunload   = "Shutdown()">
+
+  <script type="application/x-javascript"  src="chrome://bluegriffon/content/utils/dgid.js"/>
+  <script type="application/x-javascript"  src="chrome://bluegriffon/content/utils/global.js"/>
+  <script type="application/x-javascript"  src="chrome://bluegriffon/content/txns/diStyleAttrChangeTxn.js"/>
+  <script type="application/x-javascript"  src="chrome://bluegriffon/content/txns/diNodeInsertionTxn.js"/>
+  <script type="application/x-javascript"  src="chrome://domexplorer/content/domexplorer.js"/>
+  <script type="application/x-javascript"  src="chrome://domexplorer/content/context.js"/>
+
+  <menupopup id="structureBarContextMenu"
+         onpopupshowing="UpdateStructureBarContextMenu()">
+    <menuitem label="&resetElementLanguage.label;"
+              id="resetElementLanguageMenuitem"
+              accesskey="&resetElementLanguage.accesskey;"
+              oncommand="ResetLanguage(event)" />
+    <menuitem label="&setElementLanguage.label;"
+              accesskey="&setElementLanguage.accesskey;"
+              oncommand="ShowLanguageDialog(event)" />
+    <menuseparator/>
+    <menuitem label="&deleteElement.label;"
+              id="deleteElementMenuitem"
+              accesskey="&deleteElement.accesskey;"
+              oncommand="DeleteElement(event)"/>
+    <menuitem label="&removeTag.label;"
+              id="removeTagMenuitem"
+              accesskey="&removeTag.accesskey;"
+              oncommand="ExplodeElement(event)"/>
+     <menuitem label="&changeTag.label;"
+              id="changeTagMenuitem"
+              accesskey="&changeTag.accesskey;"
+              oncommand="ChangeTag(event)"/>
+     <menuseparator/>
+     <menuitem label="&copyHTMLCodeInStructurebarContext.label;"
+               id="copyHTMLCodeOfElementMenuitem"
+               oncommand="gMain.goDoCommand('cmd_copyHTMLCode')"/>
+     <menuseparator/>
+     <menu label="ARIA Role">
+        <menupopup id="ARIARoleStructureBarPopup" oncommand="gMain.ComposerCommands.doStatefulCommand('cmd_ariaRole', event.target.value)"
+                   onpopupshowing="onARIARoleChangeStructureBar()">
+          <menuitem label="&noARIArole.label;" type="checkbox" value=""/>
+          <menuseparator/>
+          <menuitem label="alert" value="alert" tooltiptext="&alertRole.label;" type="checkbox"/>
+          <menuitem label="alertdialog" value="alertdialog" tooltiptext="&alertdialogRole.label;" type="checkbox"/>
+          <menuitem label="application" value="application" tooltiptext="&applicationRole.label;" type="checkbox"/>
+          <menuitem label="article" value="article" tooltiptext="&articleRole.label;" type="checkbox"/>
+          <menuitem label="banner" value="banner" tooltiptext="&bannerRole.label;" type="checkbox"/>
+          <menuitem label="button" value="button" tooltiptext="&buttonRole.label;" type="checkbox"/>
+          <menuitem label="checkbox" value="checkbox" tooltiptext="&checkboxRole.label;" type="checkbox"/>
+          <menuitem label="columnheader" value="columnheader" tooltiptext="&columnheaderRole.label;" type="checkbox"/>
+          <menuitem label="combobox" value="combobox" tooltiptext="&comboboxRole.label;" type="checkbox"/>
+          <menuitem label="command" value="command" tooltiptext="&commandRole.label;" type="checkbox"/>
+          <menuitem label="complementary" value="complementary" tooltiptext="&complementaryRole.label;" type="checkbox"/>
+          <menuitem label="composite" value="composite" tooltiptext="&compositeRole.label;" type="checkbox"/>
+          <menuitem label="contentinfo" value="contentinfo" tooltiptext="&contentinfoRole.label;" type="checkbox"/>
+          <menuitem label="definition" value="definition" tooltiptext="&definitionRole.label;" type="checkbox"/>
+          <menuitem label="dialog" value="dialog" tooltiptext="&dialogRole.label;" type="checkbox"/>
+          <menuitem label="directory" value="directory" tooltiptext="&directoryRole.label;" type="checkbox"/>
+          <menuitem label="document" value="document" tooltiptext="&documentRole.label;" type="checkbox"/>
+          <menuitem label="form" value="form" tooltiptext="&formRole.label;" type="checkbox"/>
+          <menuitem label="grid" value="grid" tooltiptext="&gridRole.label;" type="checkbox"/>
+          <menuitem label="gridcell" value="gridcell" tooltiptext="&gridcellRole.label;" type="checkbox"/>
+          <menuitem label="group" value="group" tooltiptext="&groupRole.label;" type="checkbox"/>
+          <menuitem label="heading" value="heading" tooltiptext="&headingRole.label;" type="checkbox"/>
+          <menuitem label="img" value="img" tooltiptext="&imgRole.label;" type="checkbox"/>
+          <menuitem label="input" value="input" tooltiptext="&inputRole.label;" type="checkbox"/>
+          <menuitem label="landmark" value="landmark" tooltiptext="&landmarkRole.label;" type="checkbox"/>
+          <menuitem label="link" value="link" tooltiptext="&linkRole.label;" type="checkbox"/>
+          <menuitem label="list" value="list" tooltiptext="&listRole.label;" type="checkbox"/>
+          <menuitem label="listbox" value="listbox" tooltiptext="&listboxRole.label;" type="checkbox"/>
+          <menuitem label="listitem" value="listitem" tooltiptext="&listitemRole.label;" type="checkbox"/>
+          <menuitem label="log" value="log" tooltiptext="&logRole.label;" type="checkbox"/>
+          <menuitem label="main" value="main" tooltiptext="&mainRole.label;" type="checkbox"/>
+          <menuitem label="marquee" value="marquee" tooltiptext="&marqueeRole.label;" type="checkbox"/>
+          <menuitem label="math" value="math" tooltiptext="&mathRole.label;" type="checkbox"/>
+          <menuitem label="menu" value="menu" tooltiptext="&menuRole.label;" type="checkbox"/>
+          <menuitem label="menubar" value="menubar" tooltiptext="&menubarRole.label;" type="checkbox"/>
+          <menuitem label="menuitem" value="menuitem" tooltiptext="&menuitemRole.label;" type="checkbox"/>
+          <menuitem label="menuitemcheckbox" value="menuitemcheckbox" tooltiptext="&menuitemcheckboxRole.label;" type="checkbox"/>
+          <menuitem label="menuitemradio" value="menuitemradio" tooltiptext="&menuitemradioRole.label;" type="checkbox"/>
+          <menuitem label="navigation" value="navigation" tooltiptext="&navigationRole.label;" type="checkbox"/>
+          <menuitem label="note" value="note" tooltiptext="&noteRole.label;" type="checkbox"/>
+          <menuitem label="option" value="option" tooltiptext="&optionRole.label;" type="checkbox"/>
+          <menuitem label="presentation" value="presentation" tooltiptext="&presentationRole.label;" type="checkbox"/>
+          <menuitem label="progressbar" value="progressbar" tooltiptext="&progressbarRole.label;" type="checkbox"/>
+          <menuitem label="radio" value="radio" tooltiptext="&radioRole.label;" type="checkbox"/>
+          <menuitem label="radiogroup" value="radiogroup" tooltiptext="&radiogroupRole.label;" type="checkbox"/>
+          <menuitem label="range" value="range" tooltiptext="&rangeRole.label;" type="checkbox"/>
+          <menuitem label="region" value="region" tooltiptext="&regionRole.label;" type="checkbox"/>
+          <menuitem label="roletype" value="roletype" tooltiptext="&roletypeRole.label;" type="checkbox"/>
+          <menuitem label="row" value="row" tooltiptext="&rowRole.label;" type="checkbox"/>
+          <menuitem label="rowgroup" value="rowgroup" tooltiptext="&rowgroupRole.label;" type="checkbox"/>
+          <menuitem label="rowheader" value="rowheader" tooltiptext="&rowheaderRole.label;" type="checkbox"/>
+          <menuitem label="scrollbar" value="scrollbar" tooltiptext="&scrollbarRole.label;" type="checkbox"/>
+          <menuitem label="search" value="search" tooltiptext="&searchRole.label;" type="checkbox"/>
+          <menuitem label="section" value="section" tooltiptext="&sectionRole.label;" type="checkbox"/>
+          <menuitem label="sectionhead" value="sectionhead" tooltiptext="&sectionheadRole.label;" type="checkbox"/>
+          <menuitem label="select" value="select" tooltiptext="&selectRole.label;" type="checkbox"/>
+          <menuitem label="separator" value="separator" tooltiptext="&separatorRole.label;" type="checkbox"/>
+          <menuitem label="slider" value="slider" tooltiptext="&sliderRole.label;" type="checkbox"/>
+          <menuitem label="spinbutton" value="spinbutton" tooltiptext="&spinbuttonRole.label;" type="checkbox"/>
+          <menuitem label="status" value="status" tooltiptext="&statusRole.label;" type="checkbox"/>
+          <menuitem label="structure" value="structure" tooltiptext="&structureRole.label;" type="checkbox"/>
+          <menuitem label="tab" value="tab" tooltiptext="&tabRole.label;" type="checkbox"/>
+          <menuitem label="tablist" value="tablist" tooltiptext="&tablistRole.label;" type="checkbox"/>
+          <menuitem label="tabpanel" value="tabpanel" tooltiptext="&tabpanelRole.label;" type="checkbox"/>
+          <menuitem label="textbox" value="textbox" tooltiptext="&textboxRole.label;" type="checkbox"/>
+          <menuitem label="timer" value="timer" tooltiptext="&timerRole.label;" type="checkbox"/>
+          <menuitem label="toolbar" value="toolbar" tooltiptext="&toolbarRole.label;" type="checkbox"/>
+          <menuitem label="tooltip" value="tooltip" tooltiptext="&tooltipRole.label;" type="checkbox"/>
+          <menuitem label="tree" value="tree" tooltiptext="&treeRole.label;" type="checkbox"/>
+          <menuitem label="treegrid" value="treegrid" tooltiptext="&treegridRole.label;" type="checkbox"/>
+          <menuitem label="treeitem" value="treeitem" tooltiptext="&treeitemRole.label;" type="checkbox"/>
+          <menuitem label="widget" value="widget" tooltiptext="&widgetRole.label;" type="checkbox"/>
+          <menuitem label="window" value="window" tooltiptext="&windowRole.label;" type="checkbox"/>
+        </menupopup>
+     </menu>
+  </menupopup>
+
+  <vbox id="mainBox" flex="1" style="visibility: hidden">
+    <tree id="elementsTree"
+          flex="1"
+          hidecolumnpicker="true"
+          seltype="single"
+          editable="true"
+          persist="height"
+          context="structureBarContextMenu"
+          onselect="ElementSelectedInTree()">
+      <treecols>
+        <treecol id="elementsTreecol" label="&elements.label;" flex="1"
+                 primary="true"/>
+      </treecols>
+    </tree>
+    <splitter id="mainBoxSplitter"/>
+    <tabbox flex="1" persist="height" id="tabbox">
+      <tabs>
+        <tab label="&attributesTab.label;"/>
+        <tab label="&stylesTab.label;"/>
+      </tabs>
+      <tabpanels flex="1">
+        <vbox flex="1">
+          <tree id="attributesTree" flex="1" hidecolumnpicker="true" seltype="single"
+                editable="true"
+                onselect="UpdateAttributeButtons()">
+            <treecols>
+              <treecol id="attrNameTreecol"  label="&attrName.label;" flex="1" persist="width"/>
+              <splitter class="tree-splitter"/>
+              <treecol id="attrValueTreecol" label="&attrValue.label;" flex="1" persist="width"/>
+            </treecols>
+            <treechildren id="attributesTreechildren"/>
+          </tree>
+          <hbox id="attributesTreeToolbox" class="listboxBg">
+            <toolbarbutton class="listboxBgPlusButton"
+                           tooltiptext="&addAttribute.tooltip;"
+                           id="PlusButton"
+                           oncommand="AddAttribute()"/>
+            <toolbarbutton class="listboxBgMinusButton"
+                           disabled="true"
+                           id="MinusButton"
+                           tooltiptext="&removeAttribute.tooltip;"
+                           oncommand="DeleteAttribute()"/>
+            <toolbarbutton class="listboxBgConfigButton"
+                           tooltiptext="&modifyAttribute.tooltip;"
+                           disabled="true"
+                           id="ConfigButton"
+                           oncommand="ModifyAttribute()"/>
+            <spacer flex="1"/>
+          </hbox>
+        </vbox>
+
+        <vbox flex="1">
+          <tree id="cssTree" flex="1" hidecolumnpicker="true" seltype="single"
+                editable="true"
+                onselect="UpdateCSSButtons()">
+            <treecols>
+              <treecol id="propertyTreecol"  label="&property.label;" flex="1" persist="width"/>
+              <splitter class="tree-splitter"/>
+              <treecol id="valueTreecol" label="&value.label;" flex="1" persist="width"/>
+              <splitter class="tree-splitter"/>
+              <treecol id="priorityTreecol" label="&priority.label;" flex="1" persist="width"/>
+            </treecols>
+            <treechildren id="cssTreechildren"/>
+          </tree>
+          <hbox id="cssTreeToolbox" class="listboxBg">
+            <toolbarbutton class="listboxBgPlusButton"
+                           tooltiptext="&addCSS.tooltip;"
+                           id="PlusCSSButton"
+                           oncommand="AddCSS()"/>
+            <toolbarbutton class="listboxBgMinusButton"
+                           disabled="true"
+                           id="MinusCSSButton"
+                           tooltiptext="&removeCSS.tooltip;"
+                           oncommand="DeleteCSS()"/>
+            <toolbarbutton class="listboxBgConfigButton"
+                           tooltiptext="&modifyCSS.tooltip;"
+                           disabled="true"
+                           id="ConfigCSSButton"
+                           oncommand="ModifyCSS()"/>
+            <spacer flex="1"/>
+          </hbox>
+        </vbox>
+      </tabpanels>
+    </tabbox>
+  </vbox>
+</page>

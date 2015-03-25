@@ -1,0 +1,382 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+   <meta http-equiv="content-type"
+         content="text/html; charset=us-ascii" />
+
+   <title>Color Picker</title>
+   <link rel="stylesheet"
+         href="doc.css"
+         type="text/css" />
+</head>
+
+<body>
+   <div class="header">
+      Composer: developers
+   </div>
+
+   <div id="navBar">
+      <a href="index.html">Index</a> &gt; <a href=
+      "colorPicker.html">ColorPickerHelper</a>
+   </div>
+
+   <h1>Color Picker</h1>
+
+   <p><img style=
+   "margin-left: 1em; width: 232px; height: 206px; float: right;"
+        alt="Color picker"
+        src="colorPicker.png" />Composer has a helper for simple
+        and convenient usage of its new color picker inside a
+        sidebar or extension. This helper allows to create
+        persistent color objects that carry information for a given
+        system color, for example the foreground color, the page's
+        background color, table cells' background color and so
+        on.</p>
+
+   <p style="clear: both;">The object is</p>
+   <pre><span class="objectName">ColorPickerHelper</span>
+   
+  <span class="methodName">newPersistentColorObject:</span> function(aColorObjectId)
+  <span class="methodName">cleanPersistentColorObject</span>: function(aColorObjectId)
+  <span class="methodName">getCurrentColor</span>: function(aColorObjectId)
+  <span class="methodName">setLastPickedColor</span>: function(aColorObjectId, aColor)
+  <span class="methodName">isCancelled</span>: function(aColorObjectId)
+  <span class="methodName">openColorPicker</span>: function(aColorObjectId, aWindowTitle, aShowTransparency)</pre>
+
+   <ol class="readonly"
+       id="mozToc">
+      <!--mozToc h2 1-->
+
+      <li><a href="#mozTocId73209">Create a new persistent color
+      object</a></li>
+
+      <li><a href="#mozTocId303492">Delete a persistent color
+      object</a></li>
+
+      <li><a href="#mozTocId464951">Retrieve the selected color in
+      a color object</a></li>
+
+      <li><a href="#mozTocId299067">Set the last picked color for a
+      given color object</a></li>
+
+      <li><a href="#mozTocId400897">Show the color picker</a></li>
+
+      <li><a href="#mozTocId400897">Check if the color picker was
+      cancelled</a></li>
+
+      <li><a href="#mozTocId303457">Example</a></li>
+   </ol>
+
+   <h2><a class="mozTocH2"
+      name="mozTocId73209"
+      id="mozTocId73209"></a>Create a new persistent color
+      object</h2>
+
+   <div class="section">
+      <table style="text-align: left;"
+             class="methodTable"
+             border="1"
+             cellpadding="2"
+             cellspacing="2">
+         <tbody>
+            <tr>
+               <th>Method name</th>
+
+               <td><code>newPersistentColorObject</code></td>
+            </tr>
+
+            <tr>
+               <th>Parameters</th>
+
+               <td>
+                  <ol>
+                     <li><code>aColorObjectId</code>, a unique
+                     string identifying the color object</li>
+                  </ol>
+               </td>
+            </tr>
+
+            <tr>
+               <th>Return value</th>
+
+               <td><code>null</code> in case of error or failure,
+               the color object otherwise</td>
+            </tr>
+         </tbody>
+      </table>
+
+      <p>List of predefined color object identifiers:</p>
+
+      <ul>
+         <li>"<code>TextColor</code>" : color of the text</li>
+
+         <li>"<code>PageBackgroundColor</code>" : background color
+         of the document</li>
+
+         <li>"<code>TableBackgroundColor</code>" : background of a
+         table</li>
+
+         <li>"<code>TableCellBackgroundColor</code>" : background
+         of a table cell</li>
+
+         <li>"<code>BorderColor</code>" : color of a border or
+         outline applied to an element</li>
+      </ul>
+   </div>
+
+   <h2><a class="mozTocH2"
+      name="mozTocId303492"
+      id="mozTocId303492"></a>Delete a persistent color object</h2>
+
+   <div class="section">
+      <table class="methodTable"
+             style="text-align: left;"
+             border="1"
+             cellpadding="2"
+             cellspacing="2">
+         <tbody>
+            <tr>
+               <th>Method name</th>
+
+               <td><code>cleanPersistentColorObject</code></td>
+            </tr>
+
+            <tr>
+               <th>Parameters</th>
+
+               <td>
+                  <ol>
+                     <li><code>aColorObjectId</code>, a unique
+                     string identifying the color object</li>
+                  </ol>
+               </td>
+            </tr>
+
+            <tr>
+               <th>Return value</th>
+
+               <td><code><span style=
+               "font-family: Arial,Helvetica,sans-serif;">no return
+               value</span></code></td>
+            </tr>
+         </tbody>
+      </table>
+   </div>
+
+   <h2><a class="mozTocH2"
+      name="mozTocId464951"
+      id="mozTocId464951"></a>Retrieve the selected color in a
+      color object</h2>
+
+   <div class="section">
+      <table style="text-align: left;"
+             class="methodTable"
+             border="1"
+             cellpadding="2"
+             cellspacing="2">
+         <tbody>
+            <tr>
+               <th>Method name</th>
+
+               <td><code>getCurrentColor</code></td>
+            </tr>
+
+            <tr>
+               <th>Parameters</th>
+
+               <td>
+                  <ol>
+                     <li><code>aColorObjectId</code>, a unique
+                     string identifying the color object</li>
+                  </ol>
+               </td>
+            </tr>
+
+            <tr>
+               <th>Return value</th>
+
+               <td><code>null</code> in case of error or failure
+               (for instance if the corresponding color object does
+               not exist), the selected color in the corresponding
+               color object otherwise</td>
+            </tr>
+         </tbody>
+      </table>
+   </div>
+
+   <h2><a class="mozTocH2"
+      name="mozTocId299067"
+      id="mozTocId299067"></a>Set the last picked color for a given
+      color object</h2>
+
+   <div class="section">
+      <table class="methodTable"
+             style="text-align: left;"
+             border="1"
+             cellpadding="2"
+             cellspacing="2">
+         <tbody>
+            <tr>
+               <th>Method name</th>
+
+               <td><code>setLastPickedColor</code></td>
+            </tr>
+
+            <tr>
+               <th>Parameters</th>
+
+               <td>
+                  <ol>
+                     <li><code>aColorObjectId</code>, a unique
+                     string identifying the color object</li>
+
+                     <li><code>aColor</code>, a color (see the
+                     <a href=
+                     "http://www.w3.org/TR/1998/REC-CSS2-19980512/syndata.html#color-units">
+                     CSS definition of a color</a>)</li>
+                  </ol>
+               </td>
+            </tr>
+
+            <tr>
+               <th>Return value</th>
+
+               <td><code>null</code> in case of error or failure,
+               the color <code>aColor</code> otherwise</td>
+            </tr>
+         </tbody>
+      </table>
+   </div>
+
+   <h2><a class="mozTocH2"
+      name="mozTocId400897"
+      id="mozTocId400897"></a>Show the color picker</h2>
+
+   <div class="section">
+      <table class="methodTable"
+             style="text-align: left;"
+             border="1"
+             cellpadding="2"
+             cellspacing="2">
+         <tbody>
+            <tr>
+               <th>Method name</th>
+
+               <td><code>openColorPicker</code></td>
+            </tr>
+
+            <tr>
+               <th>Parameters</th>
+
+               <td>
+                  <ol>
+                     <li><code>aColorObjectId</code>, a unique
+                     string identifying the color object ; if the
+                     color object for this identifier does not
+                     already exist, a new color object is created
+                     for that identifier</li>
+
+                     <li>
+                     <code>aWindowTitle</code><code><span style="font-family: Arial,Helvetica,sans-serif;">,</span></code>
+                     a title for the color picker dialog</li>
+
+                     <li><code>aShowTransparency</code>, a boolean
+                     being true if the checkbox allowing to set the
+                     color "transparent" has to be shown (for CSS
+                     backgrounds for instance)</li>
+                  </ol>
+               </td>
+            </tr>
+
+            <tr>
+               <th>Return value</th>
+
+               <td><code>null</code> in case of error or failure,
+               the color object otherwise</td>
+            </tr>
+         </tbody>
+      </table>
+
+      <p>It is possible to check if the color picker was closed by
+      the user on a Cancel action using the following method:</p>
+   </div>
+
+   <h2><a class="mozTocH2"
+      name="mozTocId400897"
+      id="mozTocId400897"></a>Check if the color picker was
+      cancelled</h2>
+
+   <div class="section">
+      <table class="methodTable"
+             style="text-align: left;"
+             border="1"
+             cellpadding="2"
+             cellspacing="2">
+         <tbody>
+            <tr>
+               <th>Method name</th>
+
+               <td><code>isCancelled</code></td>
+            </tr>
+
+            <tr>
+               <th>Parameters</th>
+
+               <td>
+                  <ol>
+                     <li><code>aColorObjectId</code>, a unique
+                     string identifying the color object</li>
+                  </ol>
+               </td>
+            </tr>
+
+            <tr>
+               <th>Return value</th>
+
+               <td><code><span style=
+               "font-family: Arial,Helvetica,sans-serif;">returns a
+               boolean is the last color picked shown for the color
+               object identifier was cancelled ; if there is no
+               color object for this identifier, an exception
+               NS_ERROR_NULL_POINTER is thrown</span></code></td>
+            </tr>
+         </tbody>
+      </table>
+   </div>
+
+   <h2><a class="mozTocH2"
+      name="mozTocId303457"
+      id="mozTocId303457"></a>Example</h2>
+
+   <div class="section">
+      <pre>const kTEMPLATE_COLUMN_BG_COLOR = <code>"TemplateColumnBgColor";</code>
+var colorHelper = window.top.ColorPickerHelper;
+if (colorHelper.<code>newPersistentColorObject(</code>kTEMPLATE_COLUMN_BG_COLOR<code>))
+{
+  colorHelper.openColorPicker( </code>kTEMPLATE_COLUMN_BG_COLOR<code>,
+                               "Set the background color for the column",
+                               true);
+  if (colorHelper.isCancelled(</code>kTEMPLATE_COLUMN_BG_COLOR))
+    return;
+  SetTemplateBgColor(colorHelper.getCurrentColor(kTEMPLATE_COLUMN_BG_COLOR));
+}</pre>
+   </div>
+   <hr style="width: 100%; height: 2px;" />
+
+   <h4>History</h4>
+
+   <div class="section history">
+      <dl>
+         <dt>Last Update:</dt>
+
+         <dd>2007-oct-26, 12:53pm CEST</dd>
+
+         <dt>2007-oct-26, 12:53pm CEST</dt>
+
+         <dd>initial revision (dglazman)</dd>
+      </dl>
+   </div>
+</body>
+</html>

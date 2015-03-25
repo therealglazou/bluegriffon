@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE bindings [
+  <!ENTITY % colorstopItemDTD SYSTEM "chrome://cssproperties/locale/colorstopitem.dtd" >
+  %colorstopItemDTD;
+]>
+
+<bindings id="colorstopItemBindings"
+   xmlns="http://www.mozilla.org/xbl"
+   xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+   xmlns:xbl="http://www.mozilla.org/xbl">
+
+  <binding id="colorstopitem"
+           extends="chrome://global/content/bindings/richlistbox.xml#richlistitem">
+
+    <resources>
+      <stylesheet src="chrome://cssproperties/skin/colorstopitem.css"/>
+    </resources>
+
+    <content>
+      <xul:box anonid="previewBox"
+               onclick="openEditor()"/>
+      <xul:hbox align="center" oncommand="RepaintGradient()" oninput="RepaintGradient()">
+        <xul:label value="&length.label;"/>
+        <xul:menulist editable="true" anonid="offset" sizetopopup="none"
+                      oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', false)"
+                      oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', false)">
+          <xul:menupopup onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')"/>
+        </xul:menulist>
+        <xul:spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
+                         ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', false)"/>
+      </xul:hbox>
+    </content>
+
+    <implementation>
+      <constructor>
+        <![CDATA[
+          this.reset();
+        ]]>
+      </constructor>
+
+      <property name="color">
+        <getter>
+        <![CDATA[
+          return this.getChild("previewBox").style.backgroundColor;
+        ]]>
+        </getter>
+        <setter>
+        <![CDATA[
+          this.getChild("previewBox").style.backgroundColor = val;
+        ]]>
+        </setter>
+      </property>
+
+      <property name="offset">
+        <setter>
+        <![CDATA[
+          this.getChild("offset").value = val;
+        ]]>
+        </setter>
+        <getter>
+        <![CDATA[
+          return this.getChild("offset").value;
+        ]]>
+        </getter>
+      </property>
+
+      <method name="reset">
+        <body><![CDATA[
+          this.getChild("previewBox").style.backgroundColor = "";
+          this.getChild("offset").value = "";
+        ]]></body>
+      </method>
+
+      <method name="getChild">
+        <parameter name="aChildName"/>
+        <body><![CDATA[
+          return document.getAnonymousElementByAttribute(this, "anonid", aChildName);
+        ]]></body>
+      </method>
+
+      <method name="openEditor">
+        <body>
+          <![CDATA[
+            var cph = ColorPickerHelper;
+            cph.openColorPicker(window, "BackgroundColor", "Pick a color for a gradient color stop", true);
+            if (!cph.isCancelled("BackgroundColor"))
+            {
+              var color = cph.getCurrentColor("BackgroundColor");
+              this.getChild("previewBox").style.backgroundColor = color;
+              RepaintGradient();
+            }
+          ]]>
+        </body>
+      </method>
+
+    </implementation>
+
+  </binding>
+
+</bindings>

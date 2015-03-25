@@ -1,0 +1,269 @@
+/* ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1/GPL 2.0/LGPL 2.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is BlueGriffon.
+ *
+ * The Initial Developer of the Original Code is
+ * Disruptive Innovations SARL.
+ * Portions created by the Initial Developer are Copyright (C) 2006
+ * the Initial Developer. All Rights Reserved.
+ *
+ * Contributor(s):
+ *   Daniel Glazman <daniel.glazman@disruptive-innovations.com>, Original author
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU General Public License Version 2 or later (the "GPL"), or
+ * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+ * in which case the provisions of the GPL or the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of either the GPL or the LGPL, and not to allow others to
+ * use your version of this file under the terms of the MPL, indicate your
+ * decision by deleting the provisions above and replace them with the notice
+ * and other provisions required by the GPL or the LGPL. If you do not delete
+ * the provisions above, a recipient may use your version of this file under
+ * the terms of any one of the MPL, the GPL or the LGPL.
+ *
+ * ***** END LICENSE BLOCK ***** */
+
+#FormatToolbox .toolbarbutton-text {
+  display: none;
+}
+
+#FormatToolbox toolbarbutton {
+  margin: 2px;
+  -moz-appearance: none;
+  padding: 0px ! important;  
+}
+
+#FormatToolbox toolbarbutton .toolbarbutton-icon {
+  margin: 2px ! important;
+}
+
+#FormatToolbox toolbarbutton:not([disabled]):hover {
+  background-color: #ffcc66 ! important;
+}
+
+#FormatToolbox toolbarbutton[checked="true"] {
+  background-color: orange ! important;
+  background-image: none ! important;
+  padding: 0px ! important;
+  opacity: 1 !important;
+}
+
+#CustomizeToolbarWindow toolbarbutton,
+#CustomizeToolbarWindow toolbarpalette {
+  -moz-box-orient: vertical;
+}
+
+toolbaritem  menulist {
+  min-height: 20px ! important
+}
+
+/****** encapsulation ******/
+
+#EncapsulateSelect {
+  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/tag.png");
+  margin: 0px !important;
+}
+
+#EncapsulateSelect * {
+  margin: 0px !important;
+}
+
+#EncapsulateSelect[disabled="true"] {
+  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/tag-disabled.png");
+}
+
+/****** EM ******/
+
+#emButton {
+  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/em.png");
+}
+
+#emButton[disabled="true"] {
+  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/em-disabled.png");
+}
+
+/****** STRONG ******/
+
+#strongButton {
+  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/strong.png");
+}
+
+#strongButton[disabled="true"] {
+  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/strong-disabled.png");
+}
+
+/****** BOLD ******/
+
+#boldButton{
+  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/bold.png");
+}
+
+#boldButton[disabled="true"] {
+  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/bold-disabled.png");
+}
+
+/****** ITALIC ******/
+
+#italicButton{
+  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/italic.png");
+}
+
+#italicButton[disabled="true"] {
+  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/italic-disabled.png");
+}
+
+/****** UNDERLINE ******/
+
+#underlineButton{
+  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/underline.png");
+}
+
+#underlineButton[disabled="true"] {
+  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/underline-disabled.png");
+}
+
+/****** UL ******/
+
+#ulButton{
+  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/ul.png");
+}
+
+#ulButton[disabled="true"] {
+  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/ul-disabled.png");
+}
+
+/****** OL *****/
+
+#olButton{
+  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/ol.png");
+}
+
+#olButton[disabled="true"] {
+  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/ol-disabled.png");
+}
+
+/****** ALIGN ******/
+
+#align-left-button {
+  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/align-left.png");
+}
+
+#align-left-button[disabled="true"] {
+  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/align-left-disabled.png");
+}
+
+#align-center-button {
+  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/align-center.png");
+}
+
+#align-center-button[disabled="true"] {
+  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/align-center-disabled.png");
+}
+
+#align-right-button {
+  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/align-right.png");
+}
+
+#align-right-button[disabled="true"] {
+  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/align-right-disabled.png");
+}
+
+#align-justify-button {
+  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/align-justify.png");
+}
+
+#align-justify-button[disabled="true"] {
+  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/align-justify-disabled.png");
+}
+
+/****** INDENT ******/
+
+#indentButton {
+  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/indent.png");
+}
+
+#indentButton[disabled="true"] {
+  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/indent-disabled.png");
+}
+
+/****** OUTDENT ******/
+
+#outdentButton {
+  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/outdent.png");
+}
+
+#outdentButton[disabled="true"] {
+  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/outdent-disabled.png");
+}
+
+/****** BLOCKQUOTE ******/
+
+#blockquoteButton {
+  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/blockquote.png");
+}
+
+#blockquoteButton[disabled="true"] {
+  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/blockquote-disabled.png");
+}
+
+/****** DD ******/
+
+#ddButton {
+  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/dd.png");
+}
+
+#ddButton[disabled="true"] {
+  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/dd-disabled.png");
+}
+
+/****** DT ******/
+
+#dtButton {
+  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/dt.png");
+}
+
+#dtButton[disabled="true"] {
+  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/dt-disabled.png");
+}
+
+/****** CODE ******/
+
+#codeButton{
+  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/code.png");
+}
+
+#codeButton[disabled="true"] {
+  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/code-disabled.png");
+}
+
+/****** COLUMNS ******/
+
+#columnsButton{
+  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/columns.png");
+}
+
+#columnsButton[disabled="true"] {
+  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/columns-disabled.png");
+}
+
+
+
+
+
+
+
+#rotateButton {
+  list-style-image: url("resource://app/res/rotate_icon.png");
+}

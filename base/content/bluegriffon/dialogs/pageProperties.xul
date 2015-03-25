@@ -1,0 +1,134 @@
+<?xml version="1.0"?> 
+
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1/GPL 2.0/LGPL 2.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is BlueGriffon.
+   -
+   - The Initial Developer of the Original Code is
+   - Disruptive Innovations SARL.
+   - Portions created by the Initial Developer are Copyright (C) 2006
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -   Daniel Glazman (daniel.glazman@disruptive-innovations.com), Original Author
+   -
+   - Alternatively, the contents of this file may be used under the terms of
+   - either the GNU General Public License Version 2 or later (the "GPL"), or
+   - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+   - in which case the provisions of the GPL or the LGPL are applicable instead
+   - of those above. If you wish to allow use of your version of this file only
+   - under the terms of either the GPL or the LGPL, and not to allow others to
+   - use your version of this file under the terms of the MPL, indicate your
+   - decision by deleting the provisions above and replace them with the notice
+   - and other provisions required by the LGPL or the GPL. If you do not delete
+   - the provisions above, a recipient may use your version of this file under
+   - the terms of any one of the MPL, the GPL or the LGPL.
+   -
+   - ***** END LICENSE BLOCK ***** -->
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/pageProperties.css" type="text/css"?>
+
+<!DOCTYPE dialog [
+  <!ENTITY % pagePropertiesDTD SYSTEM "chrome://bluegriffon/locale/pageProperties.dtd" >
+  %pagePropertiesDTD;
+]>            
+ 
+<dialog id="pageProperties"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        title="&window.title;"
+        onload="Startup()"
+        ondialogaccept="return onAccept()"
+        ondialogcancel="return onCancel()"
+        style="width: 40em;"
+        persist="screenX screenY">
+
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/dgid.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/global.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/dialogs/pageProperties.js"/>
+
+  <stringbundle id="bundle" src="chrome://global/locale/charsetTitles.properties"/>
+
+  <grid flex="1">
+    <columns><column/><column flex="1"/></columns>
+    <rows>
+      <row align="center">
+        <label value="&pageLocation.label;"/>
+        <label id="pageLocation" value="[New page, not saved yet]"/>
+      </row>
+      <row align="center">
+        <label value="&pageLastModified.label;"/>
+        <label id="pageLastModified" value="foo"/>
+      </row>
+      <row align="center">
+        <label value="&pageTitle.label;"
+               control="pageTitle"
+               accesskey="&pageTitle.accesskey;"/>
+        <textbox id="pageTitle" spellcheck="true"
+                 oninput="TextboxChanged(this.id);"/>
+      </row>
+      <row align="center">
+        <label value="&pageAuthor.label;"
+               control="pageAuthor"
+               accesskey="&pageAuthor.accesskey;"/>
+        <textbox id="pageAuthor"
+                 oninput="TextboxChanged(this.id);"/>
+      </row>
+      <row align="center">
+        <label value="&pageDescription.label;"
+               control="pageDescription"
+               accesskey="&pageDescription.accesskey;"/>
+        <textbox id="pageDescription" spellcheck="true"
+                 oninput="TextboxChanged(this.id);"/>
+      </row>
+      <row align="center">
+        <label value="&pageKeywords.label;"
+               control="pageKeywords"
+               accesskey="&pageKeywords.accesskey;"/>
+        <textbox id="pageKeywords" spellcheck="true"
+                 oninput="TextboxChanged(this.id);"/>
+      </row>
+      <row align="center">
+        <label value="&language.label;"
+               control="pageLanguage"
+               accesskey="&language.accesskey;"/>
+        <hbox align="center">
+          <textbox id="pageLanguage" flex="1"
+                   oninput="TextboxChanged(this.id);"/>
+          <button label="&selectLanguage.label;"
+                  oncommand="SelectLanguage(this)"/>
+       </hbox>
+      </row>
+      <row align="center">
+        <label value="&charset.label;"
+               control="charsetMenulist" />
+        <menulist id="charsetMenulist" value="utf-8">
+          <menupopup id="charsetMenupopup"/>
+        </menulist>
+      </row>
+      <row align="center">
+        <label value="&direction.label;"
+               control="directionRadio"
+               accesskey="&direction.accesskey;"/>
+        <radiogroup id="directionRadio" orient="horizontal">
+          <radio label="&unspecified.label;" value=""/>
+          <radio label="&ltr.label;" value="ltr"/>
+          <radio label="&rtl.label;" value="rtl"/>
+        </radiogroup>
+      </row>
+    </rows>
+  </grid>
+
+</dialog>
+

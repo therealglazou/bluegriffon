@@ -1,0 +1,33 @@
+*[anonid="templateThumbnail"] {
+  max-height: 100px;
+  width: auto;
+}
+
+*[anonid="templateDemo"], *[anonid="templateSelect"] {
+  font-size: smaller;
+  opacity: 0;
+  -moz-transition: opacity 0.2s;
+}
+
+docTemplate:hover *[anonid="templateDemo"],
+docTemplate:hover *[anonid="templateSelect"] {
+  opacity: 1;
+}
+
+*[anonid="templateName"] {
+  font-weight: bold;
+}
+
+*[anonid="templateThumbnail"] {
+  -moz-appearance: none;
+  border: none 0px;
+}
+
+docTemplate:not([preview=""]) *[anonid="templateThumbnail"] {
+  cursor: pointer;
+}
+
+docTemplate[demo=""] *[anonid="templateDemo"] {
+  display: none;
+}
+

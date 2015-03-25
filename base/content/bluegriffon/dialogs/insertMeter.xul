@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/bluegriffonDialogs.css" type="text/css"?>
+
+<!DOCTYPE dialog SYSTEM "chrome://bluegriffon/locale/insertMeter.dtd">
+
+<dialog title="&window.title;"
+        id="insertMeterDialog"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        onload = "Startup()"
+        buttons="accept,cancel"
+        ondialogaccept="return onAccept();"
+        persist="screenX screenY">
+
+  <!-- Methods common to all editor dialogs -->
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/dgid.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/global.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/dialogs/insertMeter.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/dialogs/form-common.js"/>
+
+  <grid id="mainGrid">
+    <columns><column/><column flex="1"/><column/></columns>
+    <rows>
+      <row align="center" attribute="value">
+        <label value="&value.label;"/>
+        <textbox/>
+      </row>
+      <row align="center" attribute="max">
+        <label value="&max.label;"/>
+        <textbox/>
+      </row>
+      <row align="center" attribute="min">
+        <label value="&min.label;"/>
+        <textbox/>
+      </row>
+      <row align="center" attribute="low">
+        <label value="&low.label;"/>
+        <textbox/>
+      </row>
+      <row align="center" attribute="high">
+        <label value="&high.label;"/>
+        <textbox/>
+      </row>
+      <row align="center" attribute="optimum">
+        <label value="&optimum.label;"/>
+        <textbox/>
+      </row>
+      <row align="center" attribute="form">
+        <label value="&form.label;"/>
+        <textbox/>
+      </row>
+    </rows>
+  </grid>
+</dialog>

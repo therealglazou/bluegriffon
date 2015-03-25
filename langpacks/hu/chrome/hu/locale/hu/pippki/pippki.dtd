@@ -1,0 +1,102 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<!-- Values for changepassword.xul -->
+<!ENTITY setPassword.title  "Mesterjelszó megváltoztatása">
+<!ENTITY setPassword.tokenName.label "Adatvédelmi eszköz">
+<!ENTITY setPassword.oldPassword.label "Jelenlegi jelszó:">
+<!ENTITY setPassword.newPassword.label "Új jelszó:">
+<!ENTITY setPassword.reenterPassword.label "Új jelszó (ismét):">
+<!ENTITY setPassword.meter.label "Jelszó minősége">
+<!ENTITY setPassword.meter.loading "Betöltés">
+
+<!-- Values for resetpassword.xul -->
+<!ENTITY resetPasswordButtonLabel "Alaphelyzet">
+<!ENTITY resetPassword.title  "Mesterjelszó törlése">
+<!ENTITY resetPassword.text  "Ha törli a mesterjelszót, minden tárolt webes és e-mail jelszó, űrlapadat, valamint a személyes tanúsítványok és a személyes kulcsok elvesznek. Biztosan törli a mesterjelszót?">
+
+<!-- Values for getpassword.xul -->
+<!ENTITY getPassword.title  "Adja meg a mesterjelszót">
+<!ENTITY getPassword.tokenName2.label "Biztonsági eszköz:">
+<!ENTITY getPassword.password.label "Jelszó:">
+
+<!-- These should be common -->
+<!ENTITY piperror.title "Hiba">
+<!ENTITY pipalert.title "Hiba - nem helyrehozható">
+
+<!-- Prefs panel strings -->
+<!ENTITY pref.security.general.lHeader "Biztonság">
+<!ENTITY pref.security.general.rHeader "Általános biztonsági beállítások">
+<!ENTITY pref.security.general.header "Általános biztonsági beállítások">
+<!ENTITY pref.security.general.level.title "Biztonsági szint">
+<!ENTITY pref.security.general.paranoid.label "Üldözési mániás beállítások alkalmazása">
+<!ENTITY pref.security.general.certificates.title "Tanúsítványok">
+<!ENTITY pref.security.general.manageCert.label "Tanúsítványkezelő">
+
+<!-- Downloading a cert -->
+<!ENTITY downloadCert.title "Tanúsítvány letöltése">
+<!ENTITY downloadCert.message1 "Arra kérik, hogy bízzon meg egy új hitelesítésszolgáltatóban (CA-ban).">
+<!ENTITY downloadCert.trustSSL "Megbízás webhelyek azonosítására">
+<!ENTITY downloadCert.trustEmail "Megbízás a levelezőpartnerek azonosítására">
+<!ENTITY downloadCert.trustObjSign "Megbízás a szoftverfejlesztők azonosítására">
+<!ENTITY downloadCert.message3 "Mielőtt megbízna ebben a CA-ban bármilyen célból, vizsgálja meg a tanúsítványát, valamint az irányelveit (házirendjét) és folyamatait (ha vannak ilyenek).">
+<!ENTITY downloadCert.viewCert.label "Megjelenítés">
+<!ENTITY downloadCert.viewPolicy.label "Irányelvek">
+<!ENTITY downloadCert.viewCert.text "A CA tanúsítványának megvizsgálása">
+<!ENTITY downloadCert.viewPolicy.text "A CA irányelveinek és folyamatainak megvizsgálása">
+
+<!-- Certificate Exists in database -->
+<!ENTITY caCertExists.title "A tanúsítvány létezik">
+<!ENTITY caCertExists.message "Már létezik ez a tanúsítvány.">
+
+<!-- Strings for the SSL client auth ask dialog -->
+<!ENTITY clientAuthAsk.title "Felhasználóazonosítási kérelem">
+<!ENTITY clientAuthAsk.message1 "A webhely azt kívánja, hogy Ön igazolja magát egy tanúsítvánnyal:">
+<!ENTITY clientAuthAsk.message2 "Válassza ki az azonosításhoz használandó tanúsítványt:">
+<!ENTITY clientAuthAsk.message3 "A kijelölt tanúsítvány részletei:">
+
+<!-- Strings for the cert picker dialog -->
+<!ENTITY certPicker.title "Tanúsítvány kiválasztása">
+<!ENTITY certPicker.info  "Tanúsítvány:">
+<!ENTITY certPicker.detailsLabel "A kijelölt tanúsítvány részletei:">
+
+<!ENTITY pkcs12.setpassword.title  "Tanúsítványok biztonsági mentésének jelszava">
+<!ENTITY pkcs12.setpassword.message  "A tanúsítványok biztonsági mentésének jelszava arra szolgál, hogy védje a most létrehozandó mentésfájlt.  A folytatáshoz meg kell adni a jelszót.">
+<!ENTITY pkcs12.setpassword.label1 "Jelszó:">
+<!ENTITY pkcs12.setpassword.label2 "Jelszó (ismét):">
+<!ENTITY pkcs12.setpassword.reminder "Fontos: Ha elfelejti a tanúsítványokról készült biztonsági mentéshez használt jelszót, nem fogja tudni visszaállítani a tanúsítványokat a mentésből.  Írja fel biztonságos helyre.">
+
+<!ENTITY pkcs12.getpassword.title  "Jelszóbevitel párbeszédpanel">
+<!ENTITY pkcs12.getpassword.message "Adja meg a jelszót, amelyet ennek a tanúsítványokról készült biztonsági mentésnek a titkosításához használt.">
+
+<!ENTITY chooseToken.title  "Tokenválasztás párbeszédpanel">
+<!ENTITY chooseToken.message1 "Válasszon egy tokent.">
+
+<!ENTITY escrowWarn.title "Titkosító kulcs másolata">
+<!ENTITY escrowWarn.message1 "Fontos: A hitelesítésszolgáltató arra kérte, hogy készítsen biztonsági másolatot a személyes titkosító kulcsáról.">
+<!ENTITY escrowWarn.benefit1 "Ez előnyös abból a szempontból, hogy ha elveszti a titkosító kulcsát, a hitelesítésszolgáltató (CA) tud adni egy másolatot.">
+<!ENTITY escrowWarn.message2 "Viszont ez azzal is jár, hogy mivel a CA tárolja az Ön személyes titkosító kulcsát, elolvashatja az Önnek szánt titkosított leveleket az engedélye nélkül.">
+<!ENTITY examineCert.label "Tanúsítvány megtekintése">
+<!ENTITY examineCert.accesskey "T">
+
+<!ENTITY serverCrlNextupdate.message "Hívja segítségül a rendszergazdát!">
+
+<!-- Strings for the CreateCertInfo dialog  -->
+<!ENTITY createCertInfo.title "Személyes kulcs generálása">
+<!ENTITY createCertInfo.msg1 "Kulcsgenerálás folyamatban… Ez eltarthat egy pár percig…">
+<!ENTITY createCertInfo.msg2 "Kis türelmet…">
+
+<!-- Form Signing confirmation prompt -->
+<!ENTITY formSigning.title "Szövegaláírási kérés">
+<!ENTITY formSigning.cert "Aláírási tanúsítvány">
+<!ENTITY formSigning.confirmPassword "Ha egyetért azzal, hogy a szöveges üzenetet a kijelölt tanúsítvány segítségével aláírja, adja meg a mesterjelszót:">
+
+<!-- Strings for protectedAuth dialog -->
+<!ENTITY protectedAuth.title "Hitelesítés védett tokennel">
+<!ENTITY protectedAuth.msg "Hitelesítse magát a tokennél. A hitelesítési módszer a token típusától függ.">
+<!ENTITY protectedAuth.tokenName.label "Token:">
+
+<!ENTITY certErrorDlg.title "A biztonságos kapcsolat sikertelen">
+<!ENTITY certErrorDlg.info1 "A probléma a kiszolgáló beállításával lehet kapcsolatban, vagy valaki megpróbálja felvenni a kiszolgáló személyazonosságát.">
+<!ENTITY certErrorDlg.info2 "Ha a múltban sikeresen kapcsolódott ehhez a kiszolgálóhoz, akkor a hiba ideiglenes lehet, és később újra megpróbálhatja.">

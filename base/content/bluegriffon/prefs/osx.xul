@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<!DOCTYPE overlay SYSTEM "chrome://bluegriffon/locale/prefs/osx.dtd">
+
+<overlay
+  id     = "osxPrefsOverlay"
+  xmlns  = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <prefpane id="osxPrefPane">
+    <preferences>
+      <preference id="pref-osxdockintegration" name="bluegriffon.osx.dock-integration" type="bool"/>
+    </preferences>
+    <hbox align="center">
+      <checkbox id="osxDockIntegrationCheckbox"
+                label="&showInDock.label;"
+                preference="pref-osxdockintegration"/>
+    </hbox>
+  </prefpane>
+
+</overlay>

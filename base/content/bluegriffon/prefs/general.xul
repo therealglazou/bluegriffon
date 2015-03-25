@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<!DOCTYPE overlay SYSTEM "chrome://bluegriffon/locale/prefs/general.dtd">
+
+<overlay
+  id     = "generalPrefsOverlay"
+  xmlns  = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <prefpane id="generalPrefPane">
+    <preferences>
+      <preference id="pref-tabmode"        name="bluegriffon.tabs.position" type="string"/>
+      <preference id="pref-showIDs"        name="bluegriffon.structurebar.id.show" type="bool"/>
+      <preference id="pref-showClasses"    name="bluegriffon.structurebar.class.show" type="bool"/>
+      <preference id="pref-showLangs"      name="bluegriffon.structurebar.lang.show" type="bool"/>
+      <preference id="pref-showAriaRole"   name="bluegriffon.structurebar.role.show" type="bool"/>
+      <preference id="pref-spellCheck"     name="bluegriffon.spellCheck.enabled" type="bool"/>
+      <preference id="pref-suggestions"    name="bluegriffon.spellCheck.suggestions" type="int"/>
+    </preferences>
+
+    <groupbox>
+      <caption label="&tabPosition.label;"/>
+      <radiogroup id="tabPositionRadio"
+                  orient="horizontal"
+                  preference="pref-tabmode">
+        <radio label="&leftTabPosition.label;" value="left"/>
+        <radio label="&centerTabPosition.label;" value="center"/>
+        <radio label="&rightTabPosition.label;" value="right"/>
+      </radiogroup>
+    </groupbox>
+
+    <groupbox>
+      <caption label="&structureBar.caption;"/>
+      <grid>
+        <columns><column flex="1"/><column flex="1"/></columns>
+        <rows>
+          <row align="center">
+            <checkbox id="showIDsCheckbox" flex="1"
+                      preference="pref-showIDs"
+                      label="&showIDs.label;"/>
+            <checkbox id="showClassesCheckbox" flex="1"
+                      preference="pref-showClasses"
+                      label="&showClasses.label;"/>
+          </row>
+          <row align="center">
+            <checkbox id="showAriaRoleCheckbox" flex="1"
+                      preference="pref-showAriaRole"
+                      label="&showRoles.label;"/>
+            <checkbox id="showLanguageCheckbox" flex="1"
+                      preference="pref-showLangs"
+                      label="&showLanguage.label;"/>
+
+          </row>
+        </rows>
+      </grid>
+    </groupbox>
+
+    <groupbox>
+      <caption label="&spellCheck.caption;"/>
+      <hbox align="center">
+        <checkbox label="&enableSpellCheck.label;"
+                  id="enableSpellCheckCheckbox"
+                  preference="pref-spellCheck"
+                  />
+      </hbox>
+      <hbox align="center">
+        <label value="&numberSuggestions.label;"/>
+        <textbox id="numberSuggestionsTextbox"
+                 type="number"
+                 size="2"
+                 preference="pref-suggestions"/>
+      </hbox>
+    </groupbox>
+  </prefpane>
+
+</overlay>

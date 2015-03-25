@@ -1,0 +1,20 @@
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+@namespace html url("http://www.w3.org/1999/xhtml");
+
+html|img#previewImage[src] {
+  max-height: 100px;
+  width: auto;
+  height: auto;
+  max-width: 300px;
+}
+
+#relativeURLCheckboxWarning {
+  font-style: italic;
+}
+
+html|img#previewImage:not([src]) {
+  height: 100px;
+  min-height: 100px;
+  width: 100px;
+  min-width: 100px;
+}

@@ -1,0 +1,205 @@
+<?xml version="1.0"?>
+
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1/GPL 2.0/LGPL 2.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is BlueGriffon.
+   -
+   - The Initial Developer of the Original Code is
+   - Disruptive Innovations SARL.
+   - Portions created by the Initial Developer are Copyright (C) 2008
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -   Daniel Glazman (daniel.glazman@disruptive-innovations.com), Original Author
+   -
+   - Alternatively, the contents of this file may be used under the terms of
+   - either the GNU General Public License Version 2 or later (the "GPL"), or
+   - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+   - in which case the provisions of the GPL or the LGPL are applicable instead
+   - of those above. If you wish to allow use of your version of this file only
+   - under the terms of either the GPL or the LGPL, and not to allow others to
+   - use your version of this file under the terms of the MPL, indicate your
+   - decision by deleting the provisions above and replace them with the notice
+   - and other provisions required by the LGPL or the GPL. If you do not delete
+   - the provisions above, a recipient may use your version of this file under
+   - the terms of any one of the MPL, the GPL or the LGPL.
+   -
+   - ***** END LICENSE BLOCK ***** -->
+
+<!DOCTYPE bindings [
+  <!ENTITY % lengthBoxDTD SYSTEM "chrome://bluegriffon/locale/lengthbox.dtd" >
+  %lengthBoxDTD;
+]>
+<bindings id="lengthboxBindings"
+          xmlns="http://www.mozilla.org/xbl"
+          xmlns:html="http://www.w3.org/1999/xhtml"
+          xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+          xmlns:xbl="http://www.mozilla.org/xbl">
+
+  <binding id="lengthbox">
+
+    <content>
+
+      <xul:menulist anonid="textbox"
+                    oninput="this.parentNode.onInput()"
+                    editable="true"
+                    sizetopopup="none"
+                    oncommand="this.parentNode.onCommand(event)"
+                    xbl:inherits="value,disabled">
+        <xul:menupopup onpopupshowing="this.parentNode.parentNode.updateMenulist(this)"/>
+      </xul:menulist>
+      <xul:spinbuttons anonid="spinbuttons"
+                       xbl:inherits="disabled"
+                       onup="this.parentNode.onUp()"
+                       ondown="this.parentNode.onDown()"/>
+
+    </content>
+
+    <implementation>
+
+      <field name="extraValues">[]</field>
+
+      <property name="value">
+        <getter>
+        <![CDATA[
+          return this.getChild("textbox").value;
+        ]]>
+        </getter>
+        <setter>
+        <![CDATA[
+          this.getChild("textbox").value = val;
+        ]]>
+        </setter>
+      </property>
+
+      <method name="onCommand">
+        <parameter name="aEvent"/>
+        <body><![CDATA[
+          var value = aEvent.originalTarget.getAttribute("value");
+          this.getChild("textbox").value = value;
+          this.onInput();
+        ]]></body>
+      </method>
+
+      <method name="onInput">
+        <body><![CDATA[
+          var value = this.getChild("textbox").value;
+          var valueNumber = parseFloat(value);
+          if (isNaN(valueNumber)) {
+            this.getChild("spinbuttons").disabled = true;
+          }
+          else {
+            this.getChild("spinbuttons").disabled = false;
+          }
+        ]]></body>
+      </method>
+
+      <method name="getChild">
+        <parameter name="aChildName"/>
+        <body><![CDATA[
+          return document.getAnonymousElementByAttribute(this, "anonid", aChildName);
+        ]]></body>
+      </method>
+
+      <method name="updateMenulist">
+        <parameter name="aPopup"/>
+        <body><![CDATA[
+          var menulist = aPopup.parentNode;
+          deleteAllChildren(aPopup);
+
+          var unitsArray = this.getAttribute("units").split(",");
+          var value = this.getChild("textbox").value;
+          var valueNumber = parseFloat(value);
+          if (isNaN(valueNumber))
+            valueNumber = 0;
+
+          for (var i = 0; i < unitsArray.length; i++) {
+            var unit = unitsArray[i];
+            if (unit) {
+              var m = document.createElement("menuitem");
+              m.setAttribute("value", valueNumber + unit);
+              m.setAttribute("label", valueNumber + unit);
+              aPopup.appendChild(m);
+            }
+            else {
+              var s = document.createElement("menuseparator");
+              aPopup.appendChild(s);
+            }
+          }
+          if (this.extraValues.length) {
+            s = document.createElement("menuseparator");
+            aPopup.appendChild(s);
+          }
+          for (var i = 0; i < this.extraValues.length; i++) {
+            var extraValue = this.extraValues[i];
+            var value = extraValue.value;
+            var label = extraValue.label;
+            if (value) {
+              var m = document.createElement("menuitem");
+              m.setAttribute("value", value);
+              m.setAttribute("label", label);
+              aPopup.appendChild(m);
+            }
+            else {
+              var s = document.createElement("menuseparator");
+              aPopup.appendChild(s);
+            }
+          }
+        ]]></body>
+      </method>
+
+      <method name="onUp">
+        <body><![CDATA[
+          var value = this.getChild("textbox").value.toLowerCase();
+          var valueNumber = parseFloat(value);
+          if (isNaN(valueNumber))
+            valueNumber = 0;
+          var unit = value.match( /[a-z%]+$/ );
+          if (!unit)
+            unit = "px";
+          var steps = 1;
+          if (unit == "cm" || unit == "in")
+            steps = 10;
+          var newValue = Math.round(valueNumber*steps + 1) / steps;
+          this.getChild("textbox").value = newValue + unit;
+          this.onInput();
+        ]]></body>
+      </method>
+
+      <method name="onDown">
+        <body><![CDATA[
+          var value = this.getChild("textbox").value.toLowerCase();
+          var valueNumber = parseFloat(value);
+          if (isNaN(valueNumber))
+            valueNumber = 0;
+          var unit = value.match( /[a-z%]+$/ );
+          if (!unit)
+            unit = "px";
+          var steps = 1;
+          if (unit == "cm" || unit == "in")
+            steps = 10;
+          var newValue = Math.round(valueNumber*steps - 1) / steps;
+          if (this.getAttribute("type") == "positive")
+            newValue = Math.max(newValue, 0);
+          this.getChild("textbox").value = newValue + unit;
+          this.onInput();
+        ]]></body>
+      </method>
+
+
+    </implementation>
+
+  </binding>
+
+</bindings>

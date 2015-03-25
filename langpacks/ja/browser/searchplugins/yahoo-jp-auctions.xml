@@ -1,0 +1,19 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<SearchPlugin xmlns="http://www.mozilla.org/2006/browser/search/">
+<ShortName>Yahoo!オークション</ShortName>
+<Description>Yahoo!オークション検索</Description>
+<InputEncoding>EUC-JP</InputEncoding>
+<Image width="16" height="16">data:image/x-icon;base64,R0lGODlhEAAQAJECAP8AAAAAAP///wAAACH5BAEAAAIALAAAAAAQABAAAAIplI+py+0NogQuyBDEnEd2kHkfFWUamEzmpZSfmaIHPHrRguUm/fT+UwAAOw==</Image>
+<Url type="text/html" method="GET" template="http://search.auctions.yahoo.co.jp/jp/search/auc">
+  <Param name="p" value="{searchTerms}"/>
+  <Param name="ei" value="EUC-JP"/>
+  <MozParam name="fr" condition="pref" pref="yahoo-fr-ja" />
+  <Param name="rls" value="{moz:distributionID}:ja-JP:{moz:official}"/>
+  <Param name="alocale" value="0jp"/>
+  <Param name="acc" value="jp"/>
+</Url>
+<SearchForm>http://auctions.yahoo.co.jp/</SearchForm>
+</SearchPlugin>

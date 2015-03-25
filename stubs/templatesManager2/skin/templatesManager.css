@@ -1,0 +1,73 @@
+#mainBox {
+  margin: 6px;
+}
+
+#templateFamiliesListbox,
+#listboxBg,
+#templatesBox {
+  margin: 0px;
+}
+
+#templateFamiliesVbox {
+  width: 20em;
+}
+
+#templatesBox {
+  margin-left: 4px;
+  background-color: white;
+  border: thin solid silver;
+}
+
+#infoBox.previewMode #templatesBox {
+  display: none;
+}
+
+#previewBox {
+  margin-left: 4px;
+  background-color: white;
+  border: thin solid silver;
+  display: none; 
+}
+
+#infoBox.previewMode #previewBox {
+  display: -moz-box; 
+}
+
+
+docTemplate {
+  -moz-binding: url("chrome://templatesmanager/content/template.xml#template");
+  -moz-box-orient: vertical;
+  width: 300px;
+  max-width: 300px;
+  overflow: visible;
+  margin: 4px;
+  padding: 4px;
+  border: thin solid #f0f0f0;
+  border-radius: 5px; 
+}
+
+docTemplate:hover {
+  border: thin solid silver;
+}
+
+#backButton {
+  list-style-image: url("chrome://templatesmanager/skin/back.png");
+  -moz-image-region: rect(0px, 36px, 23px, 0px);
+}
+
+#backButton[disabled="true"] {
+  -moz-image-region: rect(23px, 36px, 46px, 0px);
+}
+
+#backButton:active:hover {
+  -moz-image-region: rect(46px, 36px, 69px, 0px);
+}
+
+#searchCloseButton {
+  list-style-image: url("chrome://templatesmanager/skin/empty16.png");
+  cursor: default;
+}
+
+#searchBox[searching] #searchCloseButton {
+    list-style-image: url("chrome://templatesmanager/skin/close.png");
+}

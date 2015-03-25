@@ -1,0 +1,155 @@
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1/GPL 2.0/LGPL 2.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is BlueGriffon.
+   -
+   - The Initial Developer of the Original Code is
+   - Disruptive Innovations SARL.
+   - Portions created by the Initial Developer are Copyright (C) 2006
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -   Daniel Glazman (daniel.glazman@disruptive-innovations.com), Original Author
+   -
+   - Alternatively, the contents of this file may be used under the terms of
+   - either the GNU General Public License Version 2 or later (the "GPL"), or
+   - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+   - in which case the provisions of the GPL or the LGPL are applicable instead
+   - of those above. If you wish to allow use of your version of this file only
+   - under the terms of either the GPL or the LGPL, and not to allow others to
+   - use your version of this file under the terms of the MPL, indicate your
+   - decision by deleting the provisions above and replace them with the notice
+   - and other provisions required by the LGPL or the GPL. If you do not delete
+   - the provisions above, a recipient may use your version of this file under
+   - the terms of any one of the MPL, the GPL or the LGPL.
+   -
+   - ***** END LICENSE BLOCK ***** -->
+
+<!ENTITY window.title "새 문서 마법사">
+
+<!ENTITY pageTitle.label "제목:">
+<!ENTITY pageAuthor.label "저자:">
+<!ENTITY pageDescription.label "설명:">
+<!ENTITY pageTitle.accesskey "T">
+<!ENTITY pageAuthor.accesskey "A">
+<!ENTITY pageDescription.accesskey "D">
+<!ENTITY pageKeywords.label "키워드:">
+<!ENTITY pageKeywords.accesskey "K">
+<!ENTITY documentLanguage.label "언어:">
+<!ENTITY language.accesskey "L">
+<!ENTITY charset.label "문자 세트:">
+<!ENTITY charset.accesskey "C">
+<!ENTITY direction.label "텍스트 방향:">
+<!ENTITY direction.accesskey "x">
+<!ENTITY ltr.label "왼쪽에서 오른쪽으로">
+<!ENTITY rtl.label "오른쪽으로 왼쪽으로">
+<!ENTITY unspecified.label "지정되지 않음">
+
+<!ENTITY selectLanguage.label "언어 선택">
+
+<!ENTITY backgroundImage.label "배경 사진/그림:">
+<!ENTITY backgroundImage.accesskey "B">
+
+<!ENTITY filepickerForBgImage.title "배경사진/그림 선택">
+<!ENTITY pagePreview.label "미리보기:">
+
+<!ENTITY useSystemColors.label "브라우저 규정 색  (페이지 색상을 지정하지 않음)">
+<!ENTITY userDefinedColors.label "사용자 지정색 사용:">
+
+<!ENTITY backgroundColor.label "배경:">
+<!ENTITY backgroundColor.accesskey "B">
+<!ENTITY textColor.label "텍스트:">
+<!ENTITY textColor.accesskey "T">
+<!ENTITY linksColor.label "링크:">
+<!ENTITY linksColor.accesskey "L">
+<!ENTITY activeLinksColor.label "액티브 링크:">
+<!ENTITY activeLinksColor.accesskey "A">
+<!ENTITY visitedLinksColor.label "방문한 링크:">
+<!ENTITY visitedLinksColor.accesskey "V">
+<!ENTITY underlineLinks.label "링크 밑줄">
+
+<!ENTITY relativeURLForBgImage.label "URL is relative to page location">
+
+<!ENTITY generalTab.label "일반문서 속성">
+<!ENTITY colorsTab.label "색과 배경">
+<!ENTITY styleTab.label "스타일">
+<!ENTITY advancedTab.label "고급">
+
+<!ENTITY unsavedPage.label "[저장되지 않은 새 페이지]">
+<!ENTITY noPageLastModified.label "[정보 없음]">
+
+<!ENTITY normalText.preview "보통 텍스트">
+<!ENTITY links.preview "링크">
+<!ENTITY activeLinks.preview "액티브 링크">
+<!ENTITY visitedLinks.preview "방문한 링크">
+
+<!ENTITY makeColorsDefault.label "내 기본 설정으로 하기">
+
+<!ENTITY bgTab.label "문서 배경">
+
+<!ENTITY layoutsTab.label "페이지 레이아웃">
+<!ENTITY usePageLayout.checkbox "정의된 CSS 레이아웃 적용">
+<!ENTITY oneColumn100.label "1 열, 100&#37;">
+<!ENTITY twoColumns5050.label "2 열, 50&#37;/50&#37;">
+<!ENTITY twoColumns6633.label "2 열, 66&#37;/33&#37;">
+<!ENTITY twoColumns3366.label "2 열, 33&#37;/66&#37;">
+<!ENTITY twoColumns7525.label "2 열, 75&#37;/25&#37;">
+<!ENTITY twoColumns2575.label "2 열, 25&#37;/75&#37;">
+<!ENTITY threeColumns333333.label "3 열, 33&#37;/33&#37;/33&#37;">
+<!ENTITY threeColumns502525.label "3 열, 50&#37;/25&#37;/25&#37;">
+<!ENTITY threeColumns252550.label "3 열, 25&#37;/25&#37;/50&#37;">
+<!ENTITY fourColumns25252525.label "4 열, 25&#37;/25&#37;/25&#37;/25&#37;">
+
+<!ENTITY layoutType.label "가로:">
+<!ENTITY layoutType.accesskey "W">
+<!ENTITY layout100percent.label "창 가로">
+<!ENTITY layout750px.label "750px">
+<!ENTITY layout950px.label "950px">
+<!ENTITY layout974px.label "974px">
+<!ENTITY layoutSubtype.label "사이드바:">
+<!ENTITY layoutSubtype.accesskey "S">
+<!ENTITY noSidebar.label "없음">
+<!ENTITY left160Sidebar.label "왼쪽 160px">
+<!ENTITY left180Sidebar.label "왼쪽 180px">
+<!ENTITY left300Sidebar.label "왼쪽 300px">
+<!ENTITY right180Sidebar.label "오른쪽 180px">
+<!ENTITY right240Sidebar.label "오른쪽 240px">
+<!ENTITY right300Sidebar.label "오른쪽 300px">
+<!ENTITY loremIpsum.label "샘플 문장 포함">
+<!ENTITY loremIpsum.accesskey "I">
+<!ENTITY newRow.label "새 행">
+<!ENTITY removeRow.label "삭제">
+
+<!ENTITY tile.label "제목:">
+<!ENTITY tile.accesskey "T">
+<!ENTITY scrolling.label "스크롤:">
+<!ENTITY scrolling.accesskey "S">
+<!ENTITY scrollWithPage.label "페이지와 함께 스크롤">
+<!ENTITY noScrolling.label "스크롤 없음">
+<!ENTITY horizPosition.label "수평:">
+<!ENTITY vertPosition.label "수직:">
+
+<!ENTITY documentType.label "문서 종류">
+<!ENTITY documentType.description "어떤 종류의 문서를 만드시겠습니까?">
+
+<!ENTITY language.label "문서 언어">
+<!ENTITY html.label "HTML 4">
+<!ENTITY xhtml.label "XHTML 1">
+<!ENTITY xhtml11.label "XHTML 1.1">
+<!ENTITY html5.label "HTML 5">
+<!ENTITY xhtml5.label "XHTML 5">
+
+<!ENTITY doctype.label "문서 종류">
+<!ENTITY transitional.label "Transitional">
+<!ENTITY strict.label "strict">
+

@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE bindings SYSTEM "chrome://templatesmanager/locale/template.dtd">
+
+<bindings id="templateBindings"
+          xmlns="http://www.mozilla.org/xbl"
+          xmlns:html="http://www.w3.org/1999/xhtml"
+          xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+          xmlns:xbl="http://www.mozilla.org/xbl">
+
+  <binding id="template">
+
+    <resources>
+      <stylesheet src="chrome://templatesmanager/skin/template.css"/>
+    </resources>
+
+    <content align="center">
+        <xul:label anonid="templateName" xbl:inherits="value=name" />
+        <xul:toolbarbutton anonid="templateThumbnail"
+                           xbl:inherits="url=thumbnail"
+                           oncommand="ShowPreview(this.parentNode)" />
+        <xul:description anonid="templateDescription"></xul:description>
+        <xul:label anonid="templateLicense"
+                   xbl:inherits="value=license" />
+        <xul:label anonid="templateAuthor"
+                   xbl:inherits="value=author" />
+        <xul:hbox align="center" anonid="buttonsBox">
+          <xul:button anonid="templateDemo"
+                      label="&demo.label;"
+                      oncommand="ShowDemo(this.parentNode.parentNode)" />
+          <xul:button anonid="templateSelect"
+                      label="&select.label;"
+                      oncommand="SelectTemplate(this.parentNode.parentNode)" />
+        </xul:hbox>
+        <xul:progressmeter anonid="progressmeter" mode="determined" hidden="true"/>
+    </content>
+
+    <implementation>
+
+      <constructor>
+        <![CDATA[
+          this.description.textContent = this.getAttribute("description");
+        ]]>
+      </constructor>
+
+      <method name="getChild">
+        <parameter name="aChildName"/>
+        <body><![CDATA[
+          return document.getAnonymousElementByAttribute(this, "anonid", aChildName);
+        ]]></body>
+      </method>
+
+      <property name="description"
+                onget="return this.getChild('templateDescription')" />
+      <property name="buttonsBox"
+                onget="return this.getChild('buttonsBox')" />
+      <property name="progressmeter"
+                onget="return this.getChild('progressmeter')" />
+
+      <method name="showProgressMeter">
+        <body>
+        <![CDATA[
+          this.buttonsBox.setAttribute("hidden", "true");
+          this.progressmeter.removeAttribute("hidden");
+        ]]>
+        </body>
+      </method>
+
+      <method name="hideProgressMeter">
+        <body>
+        <![CDATA[
+          this.progressmeter.setAttribute("hidden", "true");
+          this.buttonsBox.removeAttribute("hidden");
+        ]]>
+        </body>
+      </method>
+
+    </implementation>
+  </binding>
+
+</bindings>

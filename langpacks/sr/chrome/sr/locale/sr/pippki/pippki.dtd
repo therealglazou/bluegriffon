@@ -1,0 +1,135 @@
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1/GPL 2.0/LGPL 2.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is mozilla.org code.
+   -
+   - The Initial Developer of the Original Code is
+   - Netscape Communications Corp.
+   - Portions created by the Initial Developer are Copyright (C) 2001
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -   Terry Hayes <thayes@netscape.com>
+   -
+   - Alternatively, the contents of this file may be used under the terms of
+   - either the GNU General Public License Version 2 or later (the "GPL"), or
+   - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+   - in which case the provisions of the GPL or the LGPL are applicable instead
+   - of those above. If you wish to allow use of your version of this file only
+   - under the terms of either the GPL or the LGPL, and not to allow others to
+   - use your version of this file under the terms of the MPL, indicate your
+   - decision by deleting the provisions above and replace them with the notice
+   - and other provisions required by the GPL or the LGPL. If you do not delete
+   - the provisions above, a recipient may use your version of this file under
+   - the terms of any one of the MPL, the GPL or the LGPL.
+   -
+   - ***** END LICENSE BLOCK ***** -->
+
+<!-- Values for changepassword.xul -->
+<!ENTITY setPassword.title  "Промена главне лозинке">
+<!ENTITY setPassword.tokenName.label "Безбедносни уређај">
+<!ENTITY setPassword.oldPassword.label "Текућа лозинка:">
+<!ENTITY setPassword.newPassword.label "Нова лозинка:">
+<!ENTITY setPassword.reenterPassword.label "Нова лозинка (још једном):">
+<!ENTITY setPassword.meter.label "Ниво квалитета лозинке">
+<!ENTITY setPassword.meter.loading "Учитавам">
+
+<!-- Values for resetpassword.xul -->
+<!ENTITY resetPasswordButtonLabel "Поништи">
+<!ENTITY resetPassword.title  "Врати главну лозинку">
+<!ENTITY resetPassword.text  "Ако обновите главну лозинку, све сачуване лозинке за интернет и електронску пошту, садржаји формулара, лични сертификати и кључеви биће &quot;изгубљени&quot;. Да ли заиста желите обновити своју главну лозинку?">
+
+<!-- Values for getpassword.xul -->
+<!ENTITY getPassword.title  "Унос главне лозинке">
+<!ENTITY getPassword.tokenName2.label "Безбедносни уређај:">
+<!ENTITY getPassword.password.label "Лозинка:">
+
+<!-- These should be common -->
+<!ENTITY piperror.title "Грешка">
+<!ENTITY pipalert.title "Грешка - немогућност постављења">
+
+<!-- Prefs panel strings -->
+<!ENTITY pref.security.general.lHeader "безбедности">
+<!ENTITY pref.security.general.rHeader "Општи параметри безбедности">
+<!ENTITY pref.security.general.header "Општи параметри безбедности">
+<!ENTITY pref.security.general.level.title "Ниво безбедности">
+<!ENTITY pref.security.general.paranoid.label "Користи „параноична‟ подешавања безбедности">
+<!ENTITY pref.security.general.certificates.title "Сертификати">
+<!ENTITY pref.security.general.manageCert.label "Уређење сертификата">
+
+<!-- Downloading a cert -->
+<!ENTITY downloadCert.title "Преузимање сертификата">
+<!ENTITY downloadCert.message1 "Упитани сте за поверење новој провери сертификата (ПС).">
+<!ENTITY downloadCert.trustSSL "Веруј овој ПС за избор страна.">
+<!ENTITY downloadCert.trustEmail "Веруј овој ПС за избор ел. адресе корисника.">
+<!ENTITY downloadCert.trustObjSign "Веруј овој ПС за избор развоја програма.">
+<!ENTITY downloadCert.message3 "Пре указивања поверења овом ПС за било коју намену испитај његов сертификат и његове полисе и процедуре (ако постоје).">
+<!ENTITY downloadCert.viewCert.label "Pogledaj">
+<!ENTITY downloadCert.viewPolicy.label "Полиса">
+<!ENTITY downloadCert.viewCert.text "Испитај ПС сертификат">
+<!ENTITY downloadCert.viewPolicy.text "Испитај ПС полисе и процедуре">
+
+<!-- Certificate Exists in database -->
+<!ENTITY caCertExists.title "Сертификат постоји">
+<!ENTITY caCertExists.message "Сертификат већ постоји.">
+
+<!-- Strings for the SSL client auth ask dialog -->
+<!ENTITY clientAuthAsk.title "Захтев за идентификацију корисника">
+<!ENTITY clientAuthAsk.message1 "Овај веб сајт је тражио да се идентификујете помоћу сертификата:">
+<!ENTITY clientAuthAsk.message2 "Изаберите сертификат кога ћете приказати као идентификацију:">
+<!ENTITY clientAuthAsk.message3 "Детаљи о изабраном сертификату:">
+
+<!-- Strings for the cert picker dialog -->
+<!ENTITY certPicker.title "Избор сертификата">
+<!ENTITY certPicker.info  "Сертификат:">
+<!ENTITY certPicker.detailsLabel "Детаљи о изабраном сертификату:">
+
+<!ENTITY pkcs12.setpassword.title  "Изаберите лозинку за резервни умножак">
+<!ENTITY pkcs12.setpassword.message  "Лозинка резервне копије сертификата, коју изаберете овде, штитиће датотеку која ће бити направљена. За продужетак копирања морате поставити лозинку.">
+<!ENTITY pkcs12.setpassword.label1 "Резервна лозинка за сертификат:">
+<!ENTITY pkcs12.setpassword.label2 "Резервна лозинка за сертификат (опет):">
+<!ENTITY pkcs12.setpassword.reminder "Важно: ако заборавите лозинку за резервни умножак сертификата, нећете моћи да касније вратите резервни умножак.  Молимо да лозинку сачувате на безбедно место.">
+
+<!ENTITY pkcs12.getpassword.title  "Унос лозинке">
+<!ENTITY pkcs12.getpassword.message "Молимо да унесете лозинку која је коришћена за шифровање овог резервног умношка сертификата.">
+
+<!ENTITY chooseToken.title  "Изабери знак">
+<!ENTITY chooseToken.message1 "Изаберите знак.">
+
+<!ENTITY escrowWarn.title "Копија шифрованог кључа">
+<!ENTITY escrowWarn.message1 "Важно: овај ауторитет за сертификат је тражио да направи резервни умножак Вашег приватног кључа.">
+<!ENTITY escrowWarn.benefit1 "Предност је да ако изгубите приступ приватном кључу, можете да тражите умножак од ауторитета за сертификат.">
+<!ENTITY escrowWarn.message2 "Међутим, Ваш приватни кључ биће чуван код ауторитета за сертификат и може да се користи за читање шифроване поште или докумената без Ваше дозволе.">
+<!ENTITY examineCert.label "Преглед сертификата">
+<!ENTITY examineCert.accesskey "V">
+
+<!ENTITY serverCrlNextupdate.message "Обратите се за помоћ администратору система">
+
+<!-- Strings for the CreateCertInfo dialog  -->
+<!ENTITY createCertInfo.title "Стварање затвореног кључа">
+<!ENTITY createCertInfo.msg1 "Кључ се генерише…  Ово може да потраје неколико минута…">
+<!ENTITY createCertInfo.msg2 "Молимо да сачекате…">
+
+<!-- Form Signing confirmation prompt -->
+<!ENTITY formSigning.title "Захтев за потпис текста">
+<!ENTITY formSigning.cert "Потписујем сертификат">
+<!ENTITY formSigning.confirmPassword "Како би потврдили да сте сагласни да потпишете текст поруке користећи изабрани сертификат, молим потврдите уносећи главну лозинку:">
+
+<!-- Strings for protectedAuth dialog -->
+<!ENTITY protectedAuth.title "Аутентикација заштићеним новчићем">
+<!ENTITY protectedAuth.msg "Молимо да се пријавите знаком распознавања (token).  Врста аутентикације зависи од врсте знака распознавања.">
+<!ENTITY protectedAuth.tokenName.label "Знак:">
+
+<!ENTITY certErrorDlg.title "Безбедна веза није успостављена">
+<!ENTITY certErrorDlg.info1 "Ово може да буде проблем са подешавањем сервера или може да буде неко ко жели да се представи као сервер.">
+<!ENTITY certErrorDlg.info2 "Ако сте се у прошлости успешно повезивали на овај сервер, грешка је онда можда привремена па је могуће решење да сачекате и пробате касније.">

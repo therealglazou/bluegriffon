@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1/GPL 2.0/LGPL 2.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is ITS 2.0 Panel for BlueGriffon.
+   -
+   - The Initial Developer of the Original Code is
+   - Disruptive Innovations SAS.
+   - Portions created by the Initial Developer are Copyright (C) 2013
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -   Daniel Glazman <daniel.glazman@disruptive-innovations.com>, Original author
+   -     on behalf of DFKI
+   -
+   - Alternatively, the contents of this file may be used under the terms of
+   - either the GNU General Public License Version 2 or later (the "GPL"), or
+   - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+   - in which case the provisions of the GPL or the LGPL are applicable instead
+   - of those above. If you wish to allow use of your version of this file only
+   - under the terms of either the GPL or the LGPL, and not to allow others to
+   - use your version of this file under the terms of the MPL, indicate your
+   - decision by deleting the provisions above and replace them with the notice
+   - and other provisions required by the GPL or the LGPL. If you do not delete
+   - the provisions above, a recipient may use your version of this file under
+   - the terms of any one of the MPL, the GPL or the LGPL.
+   -
+   - ***** END LICENSE BLOCK ***** -->
+
+<!DOCTYPE overlay [
+  <!ENTITY % its20DTD SYSTEM "chrome://its20/locale/its20.dtd">
+  %its20DTD;
+]>
+
+<overlay id="translateOverlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/x-javascript"  src="chrome://its20/content/localAttrs/translate.js" />
+
+  <vbox id="propertiesBox">
+    <hbox class="csspropertiesHeader" open="true" align="center"
+          context="sectionHeaderContext"
+          id="translateSectionHeader"
+          onclick="ToggleSection(event, this)"
+          position="4">
+      <image />
+      <label value="&translateSectionHeader.label;"/>
+      <spacer flex="1"/>
+      <toolbarbutton id="deleteTranslateRule"
+                     class="deleteRuleButton"
+                     onclick="DeleteLocalRule(event, TranslateSectionDeleter)"
+                     tooltiptext="&deleteLocalRule.label;" />
+    </hbox>
+
+    <vbox class="section"
+          id="translateSection"
+          position="5">
+	    <hbox align="center">
+        <spacer flex="1"/>
+        <hbox>
+		      <toolbarbutton class="multibutton" label="&translatable.label;" value="yes" property="translate" type="checkbox"
+		                     id="translateYesButton" group="translate" filter="translateRule"
+		                     oncommand="ToggleProperty(this)"/>
+		      <toolbarbutton class="multibutton" label="&notTranslatable.label;" value="no" property="translate" type="checkbox"
+		                     id="translateNoButton" group="translate" filter="translateRule"
+		                     oncommand="ToggleProperty(this)"/>
+        </hbox>
+        <spacer flex="1"/>
+	    </hbox>
+		</vbox>
+  </vbox>
+</overlay>

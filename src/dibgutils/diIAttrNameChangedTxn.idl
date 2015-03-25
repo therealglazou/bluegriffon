@@ -1,0 +1,19 @@
+
+
+#include "nsISupports.idl"
+#include "domstubs.idl"
+
+interface nsIDOMNode;
+
+/**
+ *
+ */
+[scriptable, uuid(7b881ce7-1c17-430e-b8d5-d960ad25bf05)]
+interface diIAttrNameChangedTxn: nsISupports
+{
+
+
+  nsIDOMNode getNode();
+  wstring getNewAttributeName();
+};
+

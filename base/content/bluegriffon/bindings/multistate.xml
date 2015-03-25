@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1/GPL 2.0/LGPL 2.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is BlueGriffon.
+   -
+   - The Initial Developer of the Original Code is
+   - Disruptive Innovations SARL.
+   - Portions created by the Initial Developer are Copyright (C) 2007
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -   Daniel Glazman (daniel.glazman@disruptive-innovations.com), Original Author
+   -
+   - Alternatively, the contents of this file may be used under the terms of
+   - either the GNU General Public License Version 2 or later (the "GPL"), or
+   - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+   - in which case the provisions of the GPL or the LGPL are applicable instead
+   - of those above. If you wish to allow use of your version of this file only
+   - under the terms of either the GPL or the LGPL, and not to allow others to
+   - use your version of this file under the terms of the MPL, indicate your
+   - decision by deleting the provisions above and replace them with the notice
+   - and other provisions required by the LGPL or the GPL. If you do not delete
+   - the provisions above, a recipient may use your version of this file under
+   - the terms of any one of the MPL, the GPL or the LGPL.
+   -
+   - ***** END LICENSE BLOCK ***** -->
+
+<bindings id="multistateBindings"
+          xmlns="http://www.mozilla.org/xbl"
+          xmlns:html="http://www.w3.org/1999/xhtml"
+          xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+          xmlns:xbl="http://www.mozilla.org/xbl">
+
+  <binding id="multistatebutton">
+
+    <resources>
+      <stylesheet src="chrome://bluegriffon/content/bindings/multistate.css"/>
+    </resources>
+
+    <content>
+      <xul:toolbarbutton xbl:inherits="value,label,image,disabled"
+                  anonid="button"
+                  class="multistate-button"/>
+      <children/>
+    </content>
+
+    <implementation>
+      <property name="mButton"
+                readonly="true"
+                onget="return document.getAnonymousElementByAttribute(this, 'anonid', 'button')" />
+
+      <property name="value"
+                onget="return this.mButton.getAttribute('value');"
+                onset="this.mButton.setAttribute('value', val);"/>
+
+      <property name="disabled"
+                onget="return this.mButton.getAttribute('disabled');"
+                onset="this.mButton.setAttribute('disabled', val);"/>
+
+      <constructor>
+        <![CDATA[
+          if (!this.mButton.hasAttribute("value") && this.firstChild)
+            this._adoptNextState(this.firstChild);
+        ]]>
+      </constructor>
+
+      <method name="_isState">
+        <parameter name="aNode"/>
+        <body>
+        <![CDATA[
+          if (!aNode)
+            throw Components.results.NS_ERROR_NULL_POINTER;
+
+          return (aNode.nodeType == Node.ELEMENT_NODE &&
+                  aNode.nodeName == "state" &&
+                  aNode.namespaceURI == "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul")
+        ]]>
+        </body>
+      </method>
+
+      <method name="_adoptNextState">
+        <parameter name="aSeed"/>
+        <body>
+        <![CDATA[
+          var child = aSeed;
+          while (child)
+          {
+            if (this._isState(child))
+            {
+              this._cloneAttributes(child, this.mButton);
+              return true;
+            }
+            child = child.nextSibling;
+          }
+          return false;
+        ]]>
+        </body>
+      </method>
+
+      <method name="_cloneAttributes">
+        <parameter name="aSrc"/>
+        <parameter name="aDest"/>
+        <body>
+        <![CDATA[
+          if (!aSrc || !aDest)
+            throw Components.results.NS_ERROR_NULL_POINTER;
+
+          if (aSrc.nodeType  != Node.ELEMENT_NODE ||
+              aDest.nodeType != Node.ELEMENT_NODE)
+            throw Components.results.NS_ERROR_INVALID_ARG;
+
+          var attributes = aSrc.attributes;
+          for (var i = 0 ; i < attributes.length; i++)
+            aDest.setAttributeNS(attributes[i].namespaceURI,
+                                 attributes[i].localName,
+                                 attributes[i].nodeValue);
+        ]]>
+        </body>
+      </method>
+
+    </implementation>
+
+    <handlers>
+      <handler event="command" phase="capturing">
+        <![CDATA[
+          var done = false;
+          if (this.mButton.hasAttribute("value"))
+          {
+            var states = this.getElementsByAttribute("value", this.value);
+            for (var i = 0 ; i < states.length; i++)
+              if (this._isState(states[i]))
+              {
+                done = this._adoptNextState(states[i].nextSibling);
+                break;
+              }
+          }
+          if (!done)
+            this._adoptNextState(this.firstChild);
+        ]]>
+      </handler>
+    </handlers>
+
+  </binding>
+
+</bindings>

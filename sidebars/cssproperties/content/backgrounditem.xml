@@ -1,0 +1,338 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE bindings [
+  <!ENTITY % backgrounditemDTD SYSTEM "chrome://cssproperties/locale/backgrounditem.dtd" >
+  %backgrounditemDTD;
+]>
+
+<bindings id="backgrounditemBindings"
+   xmlns="http://www.mozilla.org/xbl"
+   xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+   xmlns:xbl="http://www.mozilla.org/xbl">
+
+  <binding id="backgrounditem"
+           extends="chrome://global/content/bindings/richlistbox.xml#richlistitem">
+
+    <resources>
+      <stylesheet src="chrome://cssproperties/skin/backgrounditem.css"/>
+    </resources>
+
+    <content>
+      <xul:toolbarbutton class="backgrounditem-button"
+                         anonid="backgrounditemButton"
+                         oncommand="openEditor()"/>
+      <xul:vbox flex="1">
+        <xul:label class="backgrounditem-title"
+                   anonid="backgrounditemTitle"/>
+        <xul:grid class="background-properties"
+                  anonid="backgrounditemProperties"
+                  oncommand="FlushBackgroundProperties(event)"
+                  oninput="FlushBackgroundProperties(event)">
+          <xul:columns><xul:column/><xul:column/><xul:column flex="1"/><xul:column/><xul:column/></xul:columns>
+          <xul:rows>
+            <xul:row align="center">
+              <xul:label value="&backgroundAttachment.label;"/>
+              <xul:menulist anonid="backgrounditem-attachment" sizetopopup="none"
+                            property="background-attachment">
+                <xul:menupopup>
+                  <xul:menuitem label="&backgroundAttachmentScroll.label;" value="scroll"/>
+                  <!-- NOT YET IMPLEMENTED IN GECKO -->
+                  <!--xul:menuitem label="&backgroundAttachmentLocal.label;" value="local"/-->
+                  <xul:menuitem label="&backgroundAttachmentFixed.label;" value="fixed"/>
+                </xul:menupopup>
+              </xul:menulist>
+              <xul:spacer/>
+              <xul:label value="&backgroundSize.label;"/>
+              <xul:menulist anonid="backgrounditem-size" sizetopopup="none" editable="true"
+                            oncommand="this.value = event.originalTarget.value"
+                            property="background-size">
+                <xul:menupopup>
+                  <xul:menuitem label="&backgroundSizeAuto.label;"    value="auto"/>
+                  <xul:menuitem label="&backgroundSizeContain.label;" value="contain"/>
+                  <xul:menuitem label="&backgroundSizeCover.label;"   value="cover"/>
+                  <xul:menuseparator/>
+                  <xul:menuitem label="&backgroundSizeUserDefined.label;"
+                                oncommand=""/>
+                </xul:menupopup>
+              </xul:menulist>
+            </xul:row>
+            <xul:row align="center">
+              <xul:label value="&backgroundRepeatX.label;"/>
+              <xul:menulist anonid="backgrounditem-repeatx" sizetopopup="none" editable="true"
+                            oncommand="this.value = event.originalTarget.value"
+                            property="background-repeat">
+                <xul:menupopup>
+                  <xul:menuitem label="&backgroundRepeatRepeat.label;"    value="repeat"/>
+                  <!--xul:menuitem label="&backgroundRepeatSpace.label;"     value="space"/>
+                  <xul:menuitem label="&backgroundRepeatRound.label;"     value="round"/-->
+                  <xul:menuseparator/>
+                  <xul:menuitem label="&backgroundRepeatNorepeat.label;"  value="no-repeat"/>
+                </xul:menupopup>
+              </xul:menulist>
+              <xul:spacer/>
+              <xul:label value="&backgroundClip.label;"/>
+              <xul:menulist anonid="backgrounditem-clip" sizetopopup="none"
+                            property="background-clip">
+                <xul:menupopup>
+                  <xul:menuitem label="&backgroundBorderbox.label;"  value="border-box"/>
+                  <xul:menuitem label="&backgroundPaddingbox.label;" value="padding-box"/>
+                  <xul:menuitem label="&backgroundContentbox.label;" value="content-box"/>
+                </xul:menupopup>
+              </xul:menulist>
+            </xul:row>
+            <xul:row align="center">
+              <xul:label value="&backgroundRepeatY.label;"/>
+              <xul:menulist anonid="backgrounditem-repeaty" sizetopopup="none" editable="true"
+                            oncommand="this.value = event.originalTarget.value"
+                            property="background-repeat">
+                <xul:menupopup>
+                  <xul:menuitem label="&backgroundRepeatRepeat.label;"    value="repeat"/>
+                  <!--xul:menuitem label="&backgroundRepeatSpace.label;"     value="space"/>
+                  <xul:menuitem label="&backgroundRepeatRound.label;"     value="round"/-->
+                  <xul:menuseparator/>
+                  <xul:menuitem label="&backgroundRepeatNorepeat.label;"  value="no-repeat"/>
+                </xul:menupopup>
+              </xul:menulist>
+              <xul:spacer/>
+              <xul:label value="&backgroundOrigin.label;"/>
+              <xul:menulist anonid="backgrounditem-origin" sizetopopup="none"
+                            property="background-origin">
+                <xul:menupopup>
+                  <xul:menuitem label="&backgroundPaddingbox.label;" value="padding-box"/>
+                  <xul:menuitem label="&backgroundBorderbox.label;"  value="border-box"/>
+                  <xul:menuitem label="&backgroundContentbox.label;" value="content-box"/>
+                </xul:menupopup>
+              </xul:menulist>
+            </xul:row>
+            <xul:row align="center">
+              <xul:label value="&backgroundPosition.label;"/>
+              <xul:menulist anonid="backgrounditem-position" sizetopopup="none" editable="true"
+                            oncommand="this.value = event.originalTarget.value"
+                            property="background-position">
+                <xul:menupopup>
+                  <xul:grid class="multipane-menu"
+                            oncommand="this.parentNode.parentNode.value = event.originalTarget.value">
+                    <xul:columns><xul:column/><xul:column/><xul:column/></xul:columns>
+                    <xul:rows>
+                      <xul:row align="center">
+                        <xul:menuitem label="&backgroundPositionLeftTop.label;" value="left top"/>
+                        <xul:menuitem label="&backgroundPositionCenterTop.label;" value="center top"/>
+                        <xul:menuitem label="&backgroundPositionRightTop.label;" value="right top"/>
+                      </xul:row>
+                      <xul:row align="center">
+                        <xul:menuitem label="&backgroundPositionLeftCenter.label;" value="left center"/>
+                        <xul:menuitem label="&backgroundPositionCenterCenter.label;" value="center"/>
+                        <xul:menuitem label="&backgroundPositionRightCenter.label;" value="right center"/>
+                      </xul:row>
+                      <xul:row align="center">
+                        <xul:menuitem label="&backgroundPositionLeftBottom.label;" value="left bottom"/>
+                        <xul:menuitem label="&backgroundPositionCenterBottom.label;" value="center bottom"/>
+                        <xul:menuitem label="&backgroundPositionRightBottom.label;" value="right bottom"/>
+                      </xul:row>
+                    </xul:rows>
+                  </xul:grid>
+                  <xul:menuseparator/>
+                  <xul:menuitem label="&backgroundPositionUserDefined.label;"/>
+                </xul:menupopup>
+              </xul:menulist>
+            </xul:row>
+          </xul:rows>
+        </xul:grid>
+      </xul:vbox>
+    </content>
+
+    <implementation>
+      <constructor>
+        <![CDATA[
+          this.setTitleFromType();
+          this.reset();
+        ]]>
+      </constructor>
+
+      <field name="parsedValue">null</field>
+
+      <property name="serializedValue">
+        <getter>
+        <![CDATA[
+          if (typeof this.parsedValue == "string")
+            return this.parsedValue;
+          return CssInspector.serializeGradient(this.parsedValue);
+        ]]>
+        </getter>
+      </property>
+
+      <property name="type">
+        <getter>
+        <![CDATA[
+          return this.getAttribute("type");
+        ]]>
+        </getter>
+        <setter>
+        <![CDATA[
+          this.setAttribute("type", val);
+        ]]>
+        </setter>
+      </property>
+
+      <method name="reset">
+        <body><![CDATA[
+          this.getChild("backgrounditem-attachment").value = "";
+          this.getChild("backgrounditem-size").value = "";
+          this.getChild("backgrounditem-repeatx").value = "";
+          this.getChild("backgrounditem-repeaty").value = "";
+          this.getChild("backgrounditem-clip").value = "";
+          this.getChild("backgrounditem-attachment").value = "";
+          this.getChild("backgrounditem-position").value = "";
+          this.getChild("backgrounditem-origin").value = "";
+        ]]></body>
+      </method>
+      <method name="getChild">
+        <parameter name="aChildName"/>
+        <body><![CDATA[
+          return document.getAnonymousElementByAttribute(this, "anonid", aChildName);
+        ]]></body>
+      </method>
+
+      <method name="setTitleFromType">
+        <body><![CDATA[
+          var type = this.type;
+          var title = this.getChild("backgrounditemTitle");
+          switch (type) {
+            case "image":    title.setAttribute("value", gDialog.backgrounditemBundle.getString("backgroundImageTitle")); break;
+            case "linear-gradient": title.setAttribute("value", gDialog.backgrounditemBundle.getString("backgroundLinearGradientTitle")); break;
+            case "radial-gradient": title.setAttribute("value", gDialog.backgrounditemBundle.getString("backgroundRadialGradientTitle")); break;
+            default:         break;
+          }
+        ]]></body>
+      </method>
+
+      <method name="openEditor">
+        <body>
+          <![CDATA[
+            var type = this.type;
+            this.parentNode.selectItem(this);
+            switch (type) {
+              case "image":
+                {
+                  var e = this.getChild("backgrounditemButton");
+                  gDialog.backgroundImagePanel.openPopupAtScreen(e.boxObject.screenX,
+                                                                 e.boxObject.screenY,
+                                                                 false);
+                  var _self = this;
+                  // WARNING, the following is a workaround because it takes a short
+                  // while before XBLs are instantiated when you open a floating panel...
+                  setTimeout(function() {
+                    var docUrl = EditorUtils.getDocumentUrl();
+                    var docUrlScheme = UrlUtils.getScheme(docUrl);
+                    gDialog.relativeBackgroundImageCheckbox.disabled = !(docUrlScheme && docUrlScheme != "resource");
+
+                    if (_self.hasAttribute("image")) {
+                      var url = _self.getAttribute("image");
+                      gDialog.imageURLTextbox.value = url;
+                      gDialog.previewBackgroundImage.style.backgroundImage =
+                        'url("' + UrlUtils.makeAbsoluteUrl(url) + '")';
+                    }
+                    else {
+                      gDialog.imageURLTextbox.value = "";
+                      gDialog.previewBackgroundImage.style.backgroundImage = "none";
+                    }
+                  }, 1);
+                }
+                break;
+              case "linear-gradient":
+              case "radial-gradient":
+                {
+                  deleteAllChildren(gDialog.colorStopsRichlistbox);
+                  var e = this.getChild("backgrounditemButton");
+                  // reset
+                  gDialog.linearGradientPanel.openPopupAtScreen(e.boxObject.screenX,
+                                                                e.boxObject.screenY,
+                                                                false);
+                  var _self = this;
+                  // WARNING, the following is a workaround because it takes a short
+                  // while before XBLs are instantiated when you open a floating panel...
+                  setTimeout(function(aType) {
+                    gDialog.linearGradientPropertiesTabbox.selectedIndex = 0;
+                    gDialog.shapeAndSizeTab.hidden = (aType != "radial-gradient");
+                    gDialog.angleTab.hidden = (aType == "radial-gradient");
+                    gDialog.radialGradientShape.value = "";
+                    gDialog.radialGradientSize.value = "";
+                    gDialog.linearGradientAngleRotator.value = "0";
+                    gDialog.linearGradientAngleCheckbox.checked = false;
+  
+                    if (_self.parsedValue) {
+                      var gradient = _self.parsedValue;
+                      if ("isRepeating" in gradient)
+                        gDialog.repeatingGradientCheckbox.checked = gradient.isRepeating;
+                      if ("angle" in gradient) {
+                        gDialog.linearGradientAngleCheckbox.checked = true;
+                        gDialog.linearGradientAngleRotator.value = parseFloat(gradient.angle);
+                      }
+                      if ("position" in gradient) {
+                        gDialog.linearGradientDirectionCheckbox.checked = true;
+                        gDialog.linearGradientDirectionMenulist.value = gradient.position;
+                      }
+                      if (aType == "radial-gradient") {
+                        gDialog.radialGradientShape.value = gradient.shape;
+                        gDialog.radialShapeCheckbox.checked = ("" != gradient.shape);
+ 
+                        gDialog.radialGradientSize.value = gradient.extent;
+                        gDialog.radialSizeCheckbox.checked = ("" != gradient.extent);
+
+                        if (gradient.positions.length) {
+                          gDialog.radialEllipseRayRow.checked = true; 
+                          gDialog.radialEllipseXRayMenulist.value = gradient.positions[0];
+                          if (2 == gradient.positions.length)
+                            gDialog.radialEllipseYRayMenulist.value = gradient.positions[1];
+                          else
+                            gDialog.radialEllipseYRayMenulist.value = "";
+                        }
+                        else {
+                          gDialog.radialEllipseRayRow.checked = false;
+                          gDialog.radialEllipseXRayMenulist.value = "";
+                          gDialog.radialEllipseYRayMenulist.value = "";
+                        }
+
+                        gDialog.radialPositionMenulist.value = gradient.at;
+                        gDialog.radialPositionCheckbox.checked = ("" != gradient.at);
+                      }
+                      gDialog.linearGradientPreview.style.backgroundImage =
+                        _self.getChild("backgrounditemButton").style.backgroundImage;
+                      for (var i = 0; i < gradient.stops.length; i++) {
+                        var cs = gradient.stops[i];
+                        var item = document.createElement("richlistitem");
+                        item.className = "colorstopitem";
+                        gDialog.colorStopsRichlistbox.appendChild(item);
+                        item.color = cs.color;
+                        item.offset = cs.position;
+                      }
+                      
+                    }
+                    UpdateColorStopsRichlistbox();
+                  }, 1, type);
+                }
+                break;
+              default: break;
+            }
+          ]]>
+        </body>
+      </method>
+
+      <method name="applyBackgroundImage">
+        <parameter name="aImageURL"/>
+        <body>
+          <![CDATA[
+            this.getChild("backgrounditemButton").style.backgroundImage = 'url("' + UrlUtils.makeAbsoluteUrl(aImageURL) + '")';
+            aImageURL = 'url("' + aImageURL + '")';
+            if (this.parsedValue != aImageURL) {
+              this.parsedValue = aImageURL;
+              ReapplyBackgrounds();
+            }
+          ]]>
+        </body>
+      </method>
+    </implementation>
+
+  </binding>
+
+</bindings>

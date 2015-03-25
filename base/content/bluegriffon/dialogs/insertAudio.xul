@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/bluegriffonDialogs.css" type="text/css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/insertAudio.css" type="text/css"?>
+
+
+<!DOCTYPE dialog SYSTEM "chrome://bluegriffon/locale/insertAudio.dtd">
+
+<dialog title="&window.title;"
+        id="insertAudioDialog"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        onload = "Startup()"
+        buttons="accept,cancel"
+        style="height: auto"
+        ondialogaccept="return onAccept();"
+        persist="screenX screenY">
+
+  <!-- Methods common to all editor dialogs -->
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/dgid.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/global.js"/>
+  <script type="application/javascript"   src="chrome://bluegriffon/content/txns/diNodeInsertionTxn.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/dialogs/insertAudio.js"/>
+
+  <label value="&audioFileLocation.label;"/>
+  <hbox align="center">
+    <textbox id="urlTextbox" flex="1" oninput="LoadAudioFile(); CheckURL('urlTextbox', 'relativeURLCheckbox')"/>
+    <filepickerbutton id="urlFilepickerbutton"
+                      control="urlTextbox"
+                      mode="0"
+                      filters="filterAudio"
+                      oncommand="LoadAudioFile(); CheckURL('urlTextbox', 'relativeURLCheckbox')"
+                      title="&selectFile.label;"/>
+  </hbox>
+  <hbox align="center">
+    <image src="chrome://bluegriffon/skin/throbber16.gif"
+           id="throbber"
+           cx="0"/>
+    <checkbox class="indent" id="relativeURLCheckbox"
+              label="&relativeUrl.label;"
+              oncommand="ToggleRelativeOrAbsolute('urlTextbox', 'relativeURLCheckbox')"/>
+  </hbox>
+  <vbox id="audioPreviewBox" hidden="true">
+    <grid>
+      <columns><column/><column/><column/><column/></columns>
+      <rows>
+        <row align="center">
+          <label value="&preload.label;"/>
+          <menulist id="preloadMenulist">
+            <menupopup>
+              <menuitem label="&nonePreload.label;" value="none"/>
+              <menuitem label="&metadataPreload.label;" value="metadata"/>
+              <menuitem label="&autoPreload.label;" value="auto"/>
+            </menupopup>
+          </menulist>
+        </row>
+      </rows>
+    </grid>
+    <hbox align="center">
+      <spacer flex="1"/>
+      <checkbox label="&audioControls.label;" id="audioControlsCheckbox"/>
+      <checkbox label="&autoplay.label;"      id="autoplayCheckbox"/>
+      <checkbox label="&loop.label;"          id="loopCheckbox"/>
+      <spacer flex="1"/>
+    </hbox>
+    <hbox align="center" style="margin-top: 2em">
+      <spacer flex="1"/>
+      <html:audio id="preview" controls="controls"
+                  onloadstart="LoadStarts()"
+                  onloadeddata="AudioLoaded()"
+                  onerror="CantLoadAudio()"/>
+      <spacer flex="1"/>
+    </hbox>
+  </vbox>
+</dialog>

@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<!DOCTYPE overlay SYSTEM "chrome://bluegriffon/locale/prefs/source.dtd">
+
+<overlay
+  id     = "sourcePrefsOverlay"
+  xmlns  = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <prefpane id="sourcePrefPane">
+    <preferences>
+      <preference id="pref-source-theme"        name="bluegriffon.source.theme"          type="string"/>
+      <preference id="pref-source-entities"     name="bluegriffon.source.entities"       type="string"/>
+
+      <preference id="pref-source-indent"       name="bluegriffon.source.auto-indent"    type="bool"/>
+      <preference id="pref-source-wrap"         name="bluegriffon.source.wrap"           type="bool"/>
+      <preference id="pref-source-wrap-col"     name="bluegriffon.source.wrap.maxColumn" type="int"/>
+      <preference id="pref-source-nowrap-langs" name="bluegriffon.source.wrap.language-exclusions" type="string"/>
+      <preference id="pref-source-excl-langs"   name="bluegriffon.source.wrap.exclude-languages" type="bool"/>
+
+      <preference id="pref-source-force-lf"     name="bluegriffon.defaults.forceLF"      type="bool"/>
+    </preferences>
+
+    <groupbox>
+      <caption label="&source.label;"/>
+      <hbox align="center">
+        <label value="&theme.label;"/>
+        <menulist id="sourceThemeMenulist"
+                  preference="pref-source-theme">
+          <menupopup id="sourceThemeMenupopup"/>
+        </menulist>
+      </hbox>
+    </groupbox>
+
+    <groupbox>
+      <caption label="&serialization.label;"/>
+      <vbox>
+        <label value="&specialChars.description;"/>
+        <menulist id="entitiesOutputMenulist"
+                  class="indent"
+                  preference="pref-source-entities">
+          <menupopup>
+            <menuitem label="&basicEncoding.label;"          value="basic"/>
+            <menuitem label="&latin1EntitiesEncoding.label;" value="latin1"/>
+            <menuitem label="&htmlEntitiesEncoding.label;"   value="html"/>
+            <menuitem label="&allEntitiesEncoding.label;"    value="unicode"/>
+          </menupopup>
+        </menulist>
+      </vbox>
+      <checkbox label="&forceLF.label;"    preference="pref-source-force-lf" id="forceLFCheckbox"/>
+      <checkbox label="&autoIndent.label;" preference="pref-source-indent"   id="autoIdentCheckbox"/>
+      <checkbox label="&wrap.label;"       preference="pref-source-wrap"     id="wrapCheckbox"
+                oncommand="toggleWrapping()"/>
+      <hbox class="indent" align="center">
+        <label value="&wrapColumn.label;" id="maxColumnLabel"/>
+        <textbox size="4" type="number" preference="pref-source-wrap-col" id="maxColumnCheckbox"/>
+      </hbox>
+      <vbox>
+        <checkbox class="indent" label="&noWrapForLanguages.label;" id="noWrapForLanguagesCheckbox"
+                  preference="pref-source-excl-langs"/>
+        <hbox align="center">
+          <textbox class="indent" flex="1" preference="pref-source-nowrap-langs" id="langExclusionsTextbox"/>
+          <label value="&langExclusionExample.label;" id="langExclusionExampleLabel"/>
+        </hbox>
+      </vbox>
+    </groupbox>
+  </prefpane>
+
+</overlay>

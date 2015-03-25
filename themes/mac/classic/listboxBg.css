@@ -1,0 +1,120 @@
+/* ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1/GPL 2.0/LGPL 2.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is BlueGriffon.
+ *
+ * The Initial Developer of the Original Code is
+ * Disruptive Innovations SARL.
+ * Portions created by the Initial Developer are Copyright (C) 2008
+ * the Initial Developer. All Rights Reserved.
+ *
+ * Contributor(s):
+ *   Daniel Glazman <daniel.glazman@disruptive-innovations.com>, Original author
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU General Public License Version 2 or later (the "GPL"), or
+ * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+ * in which case the provisions of the GPL or the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of either the GPL or the LGPL, and not to allow others to
+ * use your version of this file under the terms of the MPL, indicate your
+ * decision by deleting the provisions above and replace them with the notice
+ * and other provisions required by the GPL or the LGPL. If you do not delete
+ * the provisions above, a recipient may use your version of this file under
+ * the terms of any one of the MPL, the GPL or the LGPL.
+ *
+ * ***** END LICENSE BLOCK ***** */
+
+hbox.listboxBg {
+  max-height: 21px;
+  background-image: url("chrome://bluegriffon/skin/listboxBg.png");
+  border-left: thin solid silver;
+  border-right: thin solid silver;
+  border-bottom: thin solid silver;
+  margin: 0px;
+}
+
+hbox.listboxBg toolbarbutton {
+  -moz-box-orient: horizontal;
+  max-height: 21px;
+  min-height: 21px;
+  padding: 0px 3px; margin: 0px;
+  border-right: thin solid silver;
+  font-weight: bold;
+}
+
+hbox.listboxBg spacer[flex="1"] ~ toolbarbutton {
+  border-left: thin solid silver;
+  border-right: 0px none;
+}
+
+hbox.listboxBg toolbarbutton:not([disabled]):active:hover {
+  background-image: url("chrome://bluegriffon/skin/listboxBgActive.png");
+}
+
+listbox.listboxBg {
+  margin: 0px;
+}
+
+hbox.listboxBg .toolbarbutton-menu-dropmarker,
+hbox.listboxBg .toolbarbutton-text {
+  display: none;
+}
+
+hbox.listboxBg .toolbarbutton-icon {
+  margin: 0px 3px;
+}
+
+hbox.listboxBg .listboxBgPlusButton {
+  list-style-image: url("chrome://bluegriffon/skin/plus.png")
+}
+
+hbox.listboxBg .listboxBgPlusButton[disabled] {
+  list-style-image: url("chrome://bluegriffon/skin/plus-disabled.png")
+}
+
+hbox.listboxBg .listboxBgMinusButton {
+  list-style-image: url("chrome://bluegriffon/skin/minus.png")
+}
+
+hbox.listboxBg .listboxBgMinusButton[disabled] {
+  list-style-image: url("chrome://bluegriffon/skin/minus-disabled.png")
+}
+
+hbox.listboxBg .listboxBgConfigButton {
+  list-style-image: url("chrome://bluegriffon/skin/config.png")
+}
+
+hbox.listboxBg .listboxBgConfigButton[disabled] {
+  list-style-image: url("chrome://bluegriffon/skin/config-disabled.png")
+}
+
+hbox.listboxBg .listboxBgThrobberButton {
+  list-style-image: url("chrome://global/skin/icons/loading_16.png");
+}
+
+hbox.listboxBg .listboxBgDownButton {
+  list-style-image: url("chrome://bluegriffon/skin/icons/down.png")
+}
+
+hbox.listboxBg .listboxBgDownButton[disabled] {
+  list-style-image: url("chrome://bluegriffon/skin/icons/down-disabled.png")
+}
+
+hbox.listboxBg .listboxBgUpButton {
+  list-style-image: url("chrome://bluegriffon/skin/icons/up.png")
+}
+
+hbox.listboxBg .listboxBgUpButton[disabled] {
+  list-style-image: url("chrome://bluegriffon/skin/icons/up-disabled.png")
+}

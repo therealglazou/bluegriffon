@@ -1,0 +1,465 @@
+<?xml version="1.0"?>
+
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1/GPL 2.0/LGPL 2.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is BlueGriffon.
+   -
+   - The Initial Developer of the Original Code is
+   - Disruptive Innovations SARL.
+   - Portions created by the Initial Developer are Copyright (C) 2006
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -   Daniel Glazman (daniel.glazman@disruptive-innovations.com), Original Author
+   -
+   - Alternatively, the contents of this file may be used under the terms of
+   - either the GNU General Public License Version 2 or later (the "GPL"), or
+   - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+   - in which case the provisions of the GPL or the LGPL are applicable instead
+   - of those above. If you wish to allow use of your version of this file only
+   - under the terms of either the GPL or the LGPL, and not to allow others to
+   - use your version of this file under the terms of the MPL, indicate your
+   - decision by deleting the provisions above and replace them with the notice
+   - and other provisions required by the LGPL or the GPL. If you do not delete
+   - the provisions above, a recipient may use your version of this file under
+   - the terms of any one of the MPL, the GPL or the LGPL.
+   -
+   - ***** END LICENSE BLOCK ***** -->
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/newPageWizard.css" type="text/css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/listboxBg.css" type="text/css"?>
+
+<!DOCTYPE wizard [
+  <!ENTITY % pagePropertiesDTD SYSTEM "chrome://bluegriffon/locale/newPageWizard.dtd" >
+  <!ENTITY % filePickingDTD SYSTEM "chrome://bluegriffon/locale/filePicking.dtd" >
+  <!ENTITY % polyglotDTD SYSTEM "chrome://bluegriffon/locale/polyglot.dtd" >
+  %pagePropertiesDTD;
+  %filePickingDTD;
+  %polyglotDTD;
+]>
+
+<wizard id="newPageWizard"
+        title="&window.title;"
+        onload="Startup()"
+        onunload="Shutdown()"
+        onwizardfinish="return CreateNewDocument();"
+        height="350" width="550"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        persist="screenX screenY">
+
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/editorUtils.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/dgid.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/global.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/colors.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/l10n.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/css.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/js/colourPickerHelper.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/notifiers.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/dialogs/newPageWizard.js"/>
+
+  <stringbundle id="bundle" src="chrome://global/locale/charsetTitles.properties"/>
+
+  <panel id="colorPickerPopup"
+#ifndef XP_MACOSX
+         noautohide="true">
+#else
+         >
+#endif
+    <iframe id="colorPickerSheetIFrame" allowevents="true"
+            style="width: 635px; height: 400px;"
+            hidden="true"/>
+  </panel>
+
+  <wizardpage label="&documentType.label;" flex="1">
+    <description>&documentType.description;</description>
+    <groupbox>
+      <caption label="&language.label;"/>
+      <radiogroup id="languageRadiogroup"
+                  onselect="ToggleDoctype(this)"
+                  orient="horizontal">
+        <radio label="&html.label;"
+               value="HTML"/>
+        <radio label="&xhtml.label;"
+               value="XHTML"/>
+        <spacer flex="1"/>
+        <radio label="&xhtml11.label;"
+               value="XHTML11"/>
+        <spacer flex="1"/>
+        <radio label="&html5.label;"
+               value="HTML5"/>
+        <radio label="&xhtml5.label;"
+               value="XHTML5"/>
+      </radiogroup>
+    </groupbox>
+    <groupbox>
+      <caption label="&doctype.label;"/>
+      <radiogroup id="doctypeRadiogroup"
+                  orient="horizontal">
+        <radio label="&transitional.label;"
+               id="transitionalRadio"
+               value="TRANSITIONAL"/>
+        <radio label="&strict.label;"
+               id="strictRadio"
+               value="STRICT"/>
+        <spacer flex="1"/>
+      <checkbox id="polyglotCheckbox"
+                label="&polyglot.label;"
+                oncommand="ToggleDoctype(gDialog.languageRadiogroup)"/>
+      </radiogroup>
+    </groupbox>
+  </wizardpage>
+
+  <wizardpage label="&generalTab.label;" flex="1">
+    <grid flex="1" style="overflow: hidden">
+      <columns><column/><column flex="1"/></columns>
+      <rows>
+        <row align="center">
+          <label value="&pageTitle.label;"
+                 control="pageTitle"
+                 accesskey="&pageTitle.accesskey;"/>
+          <textbox id="pageTitle" spellcheck="true"/>
+        </row>
+        <row align="center">
+          <label value="&pageAuthor.label;"
+                 control="pageAuthor"
+                 accesskey="&pageAuthor.accesskey;"/>
+          <textbox id="pageAuthor"/>
+        </row>
+        <row align="center">
+          <label value="&pageDescription.label;"
+                 control="pageDescription"
+                 accesskey="&pageDescription.accesskey;"/>
+          <textbox id="pageDescription" spellcheck="true"/>
+        </row>
+        <row align="center">
+          <label value="&pageKeywords.label;"
+                 control="pageKeywords"
+                 accesskey="&pageKeywords.accesskey;"/>
+          <textbox id="pageKeywords" spellcheck="true"/>
+        </row>
+        <row align="center">
+          <label value="&documentLanguage.label;"
+                 control="pageLanguage"
+                 accesskey="&language.accesskey;"/>
+          <hbox align="center">
+            <textbox id="pageLanguage" flex="1"
+                     oninput="TextboxChanged(this.id);"/>
+            <button label="&selectLanguage.label;"
+                    oncommand="SelectLanguage(this)"/>
+         </hbox>
+        </row>
+        <row align="center">
+          <label value="&charset.label;"
+                 control="charsetMenulist"
+                 accesskey="&charset.accesskey;"/>
+          <menulist id="charsetMenulist" value="utf-8">
+            <menupopup id="charsetMenupopup"/>
+          </menulist>
+        </row>
+        <row align="center">
+          <label value="&direction.label;"
+                 control="directionRadio"
+                 accesskey="&direction.accesskey;"/>
+          <radiogroup id="directionRadio" orient="horizontal">
+            <radio label="&unspecified.label;" value=""/>
+            <radio label="&ltr.label;" value="ltr"/>
+            <radio label="&rtl.label;" value="rtl"/>
+          </radiogroup>
+        </row>
+      </rows>
+    </grid>
+  </wizardpage>
+
+  <wizardpage label="&colorsTab.label;" flex="1">
+    <checkbox id="userDefinedColors"
+              label="&userDefinedColors.label;"
+              oncommand="EnableUserDefinedColorsControls()"/>
+
+    <hbox class="indent">
+      <grid>
+        <columns><column/><column/></columns>
+        <rows>
+          <row align="center">
+            <label value="&backgroundColor.label;" disabled="true"
+                   accesskey="&backgroundColor.accesskey;"
+                   id="backgroundColorColorpickerLabel"
+                   control="backgroundColorColorpicker"/>
+            <ecolorpicker id="backgroundColorColorpicker"
+                          color="transparent"
+                          disabled="true"
+                          colorObjectId="TextColor"
+                          windowTitle="Background color"
+                          showTransparency="true"/>
+          </row>
+          <row align="center">
+            <label value="&textColor.label;" disabled="true"
+                   accesskey="&textColor.accesskey;"
+                   id="textColorColorpickerLabel"
+                   control="textColorColorpicker"/>
+            <ecolorpicker id="textColorColorpicker"
+                          color="transparent"
+                          disabled="true"
+                          colorObjectId="TextColor"
+                          windowTitle="Text color"
+                          showTransparency="false"/>
+          </row>
+          <row align="center">
+            <label value="&linksColor.label;" disabled="true"
+                   accesskey="&linksColor.accesskey;"
+                   id="linksColorColorpickerLabel"
+                   control="linksColorColorpicker"/>
+            <ecolorpicker id="linksColorColorpicker"
+                          color="transparent"
+                          disabled="true"
+                          colorObjectId="TextColor"
+                          windowTitle="Links color"
+                          showTransparency="false"/>
+          </row>
+          <row align="center">
+            <label value="&activeLinksColor.label;" disabled="true"
+                   accesskey="&activeLinksColor.accesskey;"
+                   id="activeLinksColorColorpickerLabel"
+                   control="activeLinksColorColorpicker"/>
+            <ecolorpicker id="activeLinksColorColorpicker"
+                          color="transparent"
+                          disabled="true"
+                          colorObjectId="TextColor"
+                          windowTitle="Active links color"
+                          showTransparency="false"/>
+          </row>
+          <row align="center">
+            <label value="&visitedLinksColor.label;" disabled="true"
+                   accesskey="&visitedLinksColor.accesskey;"
+                   id="visitedLinksColorColorpickerLabel"
+                   control="visitedLinksColorColorpicker"/>
+            <ecolorpicker id="visitedLinksColorColorpicker"
+                          color="transparent"
+                          disabled="true"
+                          colorObjectId="TextColor"
+                          windowTitle="Visited links color"
+                          showTransparency="false"/>
+          </row>
+        </rows>
+      </grid>
+      <vbox id="pagePreview" flex="1">
+         <spacer flex="1"/>
+         <label class="larger" id="textPreview" value="&normalText.preview;" disabled="true"/>
+         <spacer flex="1"/>
+         <label class="larger" id="linksPreview" value="&links.preview;" disabled="true"/>
+         <spacer flex="1"/>
+         <label class="larger" id="activeLinksPreview" value="&activeLinks.preview;" disabled="true"/>
+         <spacer flex="1"/>
+         <label class="larger" id="visitedLinksPreview" value="&visitedLinks.preview;" disabled="true"/>
+         <spacer flex="1"/>
+      </vbox>
+    </hbox>
+    <checkbox id="underlineLinks" class="indent"
+              label="&underlineLinks.label;"
+              oncommand="EnableUserDefinedColorsControls()"
+              checked="true"/>
+
+    <separator style="height: 5px"/>
+    <checkbox id="makeColorsDefault"
+              label="&makeColorsDefault.label;"
+              checked="true"/>
+  </wizardpage>
+
+  <wizardpage label="&bgTab.label;" flex="1">
+    <grid>
+      <columns>
+        <column/>
+        <column flex="1"/>
+        <column/>
+      </columns>
+      <rows>
+        <row align="center">
+          <label value="&backgroundImage.label;"
+                 control="backgroundImage"
+                 accesskey="&backgroundImage.accesskey;"/>
+          <textbox id="backgroundImage" flex="1"/>
+          <filepickerbutton id="filepickerbutton"
+                            control="backgroundImage"
+                            mode="0"
+                            title="&filepickerForBgImage.title;"/>
+        </row>
+        <row align="center">
+          <label value="&tile.label;"
+                 control="backgroundTile"
+                 accesskey="&tile.accesskey;"/>
+          <menulist id="backgroundTile"
+                    oncommand="SetBackgroundRepeat(this)">
+            <menupopup>
+              <menuitem value="no-repeat" label="None"/>
+              <menuitem value="repeat-x" label="Horizontally"/>
+              <menuitem value="repeat-y" label="Vertically"/>
+              <menuitem value="repeat" label="Both"/>
+            </menupopup>
+          </menulist>
+        </row>
+        <row align="center">
+          <label value="&scrolling.label;"
+                 control="backgroundAttachment"
+                 accesskey="&scrolling.accesskey;"/>
+          <menulist id="backgroundScroll">
+            <menupopup>
+              <menuitem value="scroll" label="&scrollWithPage.label;"/>
+              <menuitem value="fixed" label="&noScrolling.label;"/>
+            </menupopup>
+          </menulist>
+        </row>
+        <row align="center">
+          <spacer/>
+          <hbox>
+            <spacer flex="1"/>
+            <label value="&horizPosition.label;"/>
+            <label id="horizPosition" value="50%"/>
+            <label value="&vertPosition.label;"/>
+            <label id="vertPosition" value="50%"/>
+            <spacer flex="1"/>
+          </hbox>
+        </row>
+        <row align="center">
+          <label value="Position:"/>
+          <hbox align="center">
+            <spacer flex="1"/>
+            <stack
+                 onmousemove="ShowBackgroundPosition(event)"
+                 onmousedown="SetBackgroundPosition(event)"
+                 onmouseout="ExitBackgroundPosition(event)">
+              <box id="backgroundImageBox"/>
+              <box id="backgroundPositionBox"/>
+            </stack>
+            <spacer flex="1"/>
+          </hbox>
+        </row>
+      </rows>
+    </grid>
+  </wizardpage>
+
+  <wizardpage label="&layoutsTab.label;" orient="vertical" flex="1">
+    <checkbox id="usePageLayout"
+              checked="true"
+              oncommand="onUsePageLayoutChanged(this)"
+              label="&usePageLayout.checkbox;"/>
+    <vbox flex="1" class="indent">
+      <hbox align="center">
+        <label value="&layoutType.label;"
+               id="LayoutTypeMenulistLabel"
+               control="LayoutTypeMenulist"
+               accesskey="&layoutType.accesskey;" />
+        <menulist id="LayoutTypeMenulist">
+          <menupopup>
+            <menuitem label="&layout100percent.label;" selected="true"
+                      value="doc3"/>
+            <menuitem label="&layout750px.label;"
+                      value="doc"/>
+            <menuitem label="&layout950px.label;"
+                      value="doc2"/>
+            <menuitem label="&layout974px.label;"
+                      value="doc4"/>
+          </menupopup>
+        </menulist>
+        <spacer flex="1"/>
+        <label value="&layoutSubtype.label;"
+               id="LayoutSubtypeMenulistLabel"
+               control="LayoutSubtypeMenulist"
+               accesskey="&layoutSubtype.accesskey;" />
+        <menulist id="LayoutSubtypeMenulist">
+          <menupopup>
+            <menuitem label="&noSidebar.label;"
+                      value="yui-t7"/>
+            <menuitem label="&left160Sidebar.label;" selected="true"
+                      value="yui-t1"/>
+            <menuitem label="&left180Sidebar.label;"
+                      value="yui-t2"/>
+            <menuitem label="&left300Sidebar.label;"
+                      value="yui-t3"/>
+            <menuitem label="&right180Sidebar.label;"
+                      value="yui-t4"/>
+            <menuitem label="&right240Sidebar.label;"
+                      value="yui-t5"/>
+            <menuitem label="&right300Sidebar.label;"
+                      value="yui-t6"/>
+          </menupopup>
+        </menulist>
+      </hbox>
+      <hbox flex="1" style="margin: 1em">
+        <vbox flex="1">
+          <listbox id="ContentRowsListbox" class="listboxBg" flex="1"/>
+#ifdef XP_MACOSX
+          <hbox class="listboxBg" align="center">
+            <toolbarbutton class="listboxBgPlusButton"
+                           id="ContentRowsPlusButton"
+                           type="menu"
+                           oncommand="AddContentRow(event)">
+              <menupopup>
+                <menuitem value="1"  label="&oneColumn100.label;"/>
+                <menuitem value="2"  label="&twoColumns5050.label;"/>
+                <menuitem value="3"  label="&twoColumns6633.label;"/>
+                <menuitem value="4"  label="&twoColumns3366.label;"/>
+                <menuitem value="5"  label="&twoColumns7525.label;"/>
+                <menuitem value="6"  label="&twoColumns2575.label;"/>
+                <menuitem value="7"  label="&threeColumns333333.label;"/>
+                <menuitem value="8"  label="&threeColumns502525.label;"/>
+                <menuitem value="9"  label="&threeColumns252550.label;"/>
+                <menuitem value="10" label="&fourColumns25252525.label;"/>
+              </menupopup>
+            </toolbarbutton>
+            <toolbarbutton class="listboxBgMinusButton"
+                           id="ContentRowsMinusButton"
+                           oncommand="RemoveContentRow()"
+                           disabled="true"/>
+            <toolbarbutton class="listboxBgConfigButton"
+                           id="ContentRowsConfigButton"
+                           disabled="true"/>
+          </hbox>
+#else
+          <hbox>
+            <button label="&newRow.label;"
+                    id="ContentRowsPlusButton"
+                    type="menu"
+                    oncommand="AddContentRow(event)">
+              <menupopup>
+                <menuitem value="1"  label="&oneColumn100.label;"/>
+                <menuitem value="2"  label="&twoColumns5050.label;"/>
+                <menuitem value="3"  label="&twoColumns6633.label;"/>
+                <menuitem value="4"  label="&twoColumns3366.label;"/>
+                <menuitem value="5"  label="&twoColumns7525.label;"/>
+                <menuitem value="6"  label="&twoColumns2575.label;"/>
+                <menuitem value="7"  label="&threeColumns333333.label;"/>
+                <menuitem value="8"  label="&threeColumns502525.label;"/>
+                <menuitem value="9"  label="&threeColumns252550.label;"/>
+                <menuitem value="10" label="&fourColumns25252525.label;"/>
+              </menupopup>
+            </button>
+            <spacer flex="1"/>
+            <button label="&removeRow.label;"
+                    id="ContentRowsMinusButton"
+                    oncommand="RemoveContentRow()"
+                    disabled="true"/>
+          </hbox>
+#endif
+        </vbox>
+      </hbox>
+      <checkbox label="&loremIpsum.label;"
+                id="LoremIpsumCheckbox"
+                checked="true"
+                accesskey="&loremIpsum.accesskey;" />
+    </vbox>
+  </wizardpage>
+</wizard>
+
+
+

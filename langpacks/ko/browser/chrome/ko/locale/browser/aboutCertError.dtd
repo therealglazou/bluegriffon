@@ -1,0 +1,32 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<!ENTITY % brandDTD
+    SYSTEM "chrome://branding/locale/brand.dtd">
+  %brandDTD;
+
+<!-- These strings are used by Firefox's custom about:certerror page,
+a replacement for the standard security certificate errors produced
+by NSS/PSM via netError.xhtml. -->
+
+<!ENTITY certerror.pagetitle  "신뢰할 수 없는 연결">
+<!ENTITY certerror.longpagetitle "본 연결은 신뢰할 수 없음">
+
+<!-- Localization note (certerror.introPara1) - The string "#1" will
+be replaced at runtime with the name of the server to which the user
+was trying to connect. -->
+<!ENTITY certerror.introPara1 "&brandShortName;가 안전하게 <b>#1</b>로 연결하려고 하지만 실제 보안이 이루어지는지 확인할 수 없습니다.">
+<!ENTITY certerror.introPara2 "일반적으로 안전한 연결을 할 때 웹 사이트는 신뢰된 인증 정보를 제공하여야 하지만 현재 사이트는 이러한 확인 정보를 제대로 보내주지 않고 있습니다.">
+
+<!ENTITY certerror.whatShouldIDo.heading "고려할 사항">
+<!ENTITY certerror.whatShouldIDo.content "만일 지금까지 문제 없이 현재 사이트에 계속 접속했다면 이 오류는 누군가가 웹 사이트를 공격했을 수 있으므로 가급적 계속 접속하지 않기를 권장합니다.">
+<!ENTITY certerror.getMeOutOfHere.label "사이트에서 나가기">
+
+<!ENTITY certerror.expert.heading "위험 사항 확인">
+<!ENTITY certerror.expert.content "계속 더 진행하고자 한다면 &brandShortName;가 인증 정보 확인을 하도록 하여야 합니다.  <b>비록 현재 사이트를 신뢰한다고 하더라도 본 오류 코드는 연결 중 제3자가 침입했을 수 있기 때문입니다.</b>">
+
+<!ENTITY certerror.expert.contentPara2 "현재 사이트가 신뢰된 인증 수단을 사용하지 않는 것에 대한 정확한 정보를 가지고 있을 경우를 제외하고는 예외 수단에 함부로 추가해서는 안됩니다.">
+<!ENTITY certerror.addException.label "예외 추가…">
+
+<!ENTITY certerror.technical.heading "상세 기술 정보">

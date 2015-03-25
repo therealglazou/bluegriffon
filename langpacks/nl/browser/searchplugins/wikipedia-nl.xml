@@ -1,0 +1,19 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<SearchPlugin xmlns="http://www.mozilla.org/2006/browser/search/">
+<ShortName>Wikipedia (nl)</ShortName>
+<Description>De vrije encyclopedie</Description>
+<InputEncoding>UTF-8</InputEncoding>
+<Image width="16" height="16">data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAMFBMVEUDAwMYGBgoKCg7OztHR0dYWFhqamp7e3uDg4OYmJioqKi6urrHx8fZ2dno6Oj9/f34pRgPAAAAc0lEQVQI12P4DwUMmIyt3r/c75feTWX4of3f6V7nv0yGv2LvJ67J/5fP8D/w/BWN9b/XM/zf2P+T9f+L/Qz/v/j+Nfl/Haj9B9dfo/0zQeaovkrO7wMxmquua/aDGIu0fiudBzG++P5PAtv1+/z/20iWAgCSoWURjfnvaQAAAABJRU5ErkJggg==</Image>
+<Url type="application/x-suggestions+json" method="GET" template="http://nl.wikipedia.org/w/api.php">
+  <Param name="action" value="opensearch"/>
+  <Param name="search" value="{searchTerms}"/>
+</Url>
+<Url type="text/html" method="GET" template="http://nl.wikipedia.org/wiki/Speciaal:Zoeken">
+  <Param name="search" value="{searchTerms}"/>
+  <Param name="sourceid" value="Mozilla-search"/>
+</Url>
+<SearchForm>http://nl.wikipedia.org/wiki/Speciaal:Zoeken</SearchForm>
+</SearchPlugin>

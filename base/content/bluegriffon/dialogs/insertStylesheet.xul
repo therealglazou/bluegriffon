@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/listboxBg.css" type="text/css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/bluegriffonDialogs.css" type="text/css"?>
+
+<!DOCTYPE window SYSTEM "chrome://bluegriffon/locale/insertStylesheet.dtd">
+
+<window title="&window.title;"
+        id="insertStylesheetDialog"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        onload = "Startup()"
+        persist="screenX screenY width height">
+
+  <!-- Methods common to all editor dialogs -->
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/dgid.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/global.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/dialogs/insertStylesheet.js"/>
+
+  <keyset>
+    <key keycode="VK_ESCAPE" oncommand="window.close()"/>
+  </keyset>
+
+  <tree id="contentsTree" flex="1" style="margin: 0px; min-width: 200px; height: 200px"
+        treelines="true"
+        onselect="UpdateButtons()"
+        ondblclick="UpdateStylesheet()">
+    <treecols>
+      <treecol id="urlCol"
+               flex="1"
+               label="&url.col;"
+               primary="true"
+               persist="width ordinal hidden"/>
+      <splitter class="tree-splitter"/>
+      <treecol id="alternateCol"
+               label="&alternate.col;"
+               persist="width ordinal hidden"/>
+      <splitter class="tree-splitter"/>
+      <treecol id="titleCol"
+               label="&title.col;"
+               flex="1" 
+               persist="width ordinal hidden"/>
+      <splitter class="tree-splitter"/>
+      <treecol id="mediaCol"
+               label="&media.col;"
+               flex="1" 
+               persist="width ordinal hidden"/>
+    </treecols>
+  </tree>
+  <hbox id="UrlsToolbox" class="listboxBg">
+    <toolbarbutton class="listboxBgPlusButton"
+                   tooltiptext="&add.tooltip;"
+                   id="PlusButton"
+                   oncommand="AddStylesheet()"/>
+    <toolbarbutton class="listboxBgMinusButton"
+                   disabled="true"
+                   id="MinusButton"
+                   tooltiptext="&remove.tooltip;"
+                   oncommand="DeleteStylesheet()"/>
+    <toolbarbutton class="listboxBgConfigButton"
+                   tooltiptext="&modify.tooltip;"
+                   disabled="true"
+                   id="ConfigButton"
+                   oncommand="UpdateStylesheet()"/>
+    <spacer flex="1"/>
+    <toolbarbutton class="listboxBgDownButton"
+                   tooltiptext="&down.tooltip;"
+                   disabled="true"
+                   id="DownButton"
+                   oncommand="Down()"/>
+    <toolbarbutton class="listboxBgUpButton"
+                   tooltiptext="&up.tooltip;"
+                   disabled="true"
+                   id="UpButton"
+                   oncommand="Up()"/>
+  </hbox>
+
+</window>

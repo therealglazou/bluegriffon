@@ -1,0 +1,24 @@
+
+#fullscr-grabber {
+  min-height: 5px;
+  height: 5px;
+  display: none;
+  -moz-appearance: none;
+  border-bottom: 1px solid black;
+}
+
+#Bluegriffon:not([forcetoolbars])[fullscreen] toolbar {
+  display: none !important;
+}
+
+#Bluegriffon:[forcetoolbars][fullscreen] toolbar {
+  display: -moz-box !important;
+}
+
+#Bluegriffon[fullscreen][forcetoolbars] #fullscr-grabber {
+  display: none !important;
+}
+
+#Bluegriffon[fullscreen] #fullscr-grabber {
+  display: -moz-box !important;
+}

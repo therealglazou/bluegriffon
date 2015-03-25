@@ -1,0 +1,338 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE overlay [
+  <!ENTITY % csspropertiesDTD SYSTEM "chrome://cssproperties/locale/cssproperties.dtd">
+  %csspropertiesDTD;
+  <!ENTITY % backgrounditemDTD SYSTEM "chrome://cssproperties/locale/backgrounditem.dtd" >
+  %backgrounditemDTD;
+]>
+
+<overlay id="popupsOverlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/x-javascript"  src="chrome://cssproperties/content/bezier.js"/>
+
+  <panelset id="csspropertiesPanelset">
+    <panel level="top" noautohide="true" id="bezierPanel"
+           alwaysontop="true">
+      <hbox align="center">
+        <stack>
+          <svg xmlns:svg="http://www.w3.org/2000/svg"
+               xmlns="http://www.w3.org/2000/svg"
+               xmlns:xlink="http://www.w3.org/1999/xlink"
+               version="1.1" width="156" height="156" id="svg2">
+            <style type="text/css"> #p1_path {stroke:#fa0000;marker-end:url(#DotL)} #p2_path {stroke:#fa0000;marker-start:url(#DotL)} path {fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1} #grid_path {stroke-width:0.1px} #axis_unit_dec #grid_path {stroke-width:0.5px} #axis_unit path {} text{font-size:9.33333px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Grande} #curve{fill:none;stroke:#000000;stroke-width:1px} </style>
+            <defs>
+      
+              <path d="M 0,-100 V 0" class="grid_path" id="grid_path" />
+              <marker orient="auto" refY="0.0" refX="0.0" id="DotL" style="overflow:visible">
+                <circle cx="0" cy="0" r="3" style="stroke:#000;stroke-width:1px;fill:#F00"/>
+              </marker>
+            </defs>
+            <g>
+              <g transform="translate(50,10)">
+                <g transform="translate(50,50)" id="grid">
+                  <use transform="matrix(0,1,-1,0,0,0)" xlink:href="#axis" />
+      
+                  <g id="axis">
+                    <g transform="translate(-50,50)" id="axis_unit_dec">
+                      <path d="M 0,0 V 10" />
+                      <use xlink:href="#grid_path" />
+                    </g>
+                    <g transform="translate(-50,50)" id="axis_unit">
+                      <use transform="translate(10,0)" xlink:href="#grid_path" />
+                      <path d="M 10,0 V 5" />
+                    </g>
+      
+                    <use transform="translate(50,0)" xlink:href="#axis_unit_dec" />
+                    <use transform="translate(100,0)" xlink:href="#axis_unit_dec" />
+                    <use transform="translate(10,0)" xlink:href="#axis_unit" />
+                    <use transform="translate(20,0)" xlink:href="#axis_unit" />
+                    <use transform="translate(30,0)" xlink:href="#axis_unit" />
+                    <use transform="translate(50,0)" xlink:href="#axis_unit" />
+                    <use transform="translate(60,0)" xlink:href="#axis_unit" />
+                    <use transform="translate(70,0)" xlink:href="#axis_unit" />
+                    <use transform="translate(80,0)" xlink:href="#axis_unit" />
+      
+                  </g>
+                  <text x="-85" y="5">0.5</text>
+                  <text x="-75" y="-45">1</text>
+                  <text x="-10" y="75">0.5</text>
+                  <text x="45" y="75">1</text>
+                  <text x="-75" y="75">0</text>
+      
+                  <text x="-45" y="90">Input Percentage</text>
+                  <text x="-50" y="-90" transform="rotate(-90)">Output Percentage</text>
+                </g>
+                <path d="M 0,100 C 100,100 0,0 100,0" id="curve" />
+                <path d="M 0,100 100,100" id="p1_path" />
+                <path d="M 0,0 100,0" id="p2_path" />
+              </g>
+            </g>
+      
+          </svg>
+          <box id="p1_point" style="width: 8px; height: 8px;" top="6" left="46"/> 
+          <box id="p2_point" style="width: 8px; height: 8px;" top="106" left="146"/> 
+        </stack>
+        <vbox>
+          <label value="Point 1:"/>
+          <hbox align="center" class="indent">
+            <label value="X:"/>
+            <textbox style="max-width: 6em" id="p1_x"
+                     oninput="Bezier.onBezierChanged(this)"/>
+          </hbox>
+          <hbox align="center" class="indent">
+            <label value="Y:"/>
+            <textbox style="max-width: 6em" id="p1_y"
+                     oninput="Bezier.onBezierChanged(this)"/>
+          </hbox>
+          <label value="Point 2:"/>
+          <hbox align="center" class="indent">
+            <label value="X:"/>
+            <textbox style="max-width: 6em" id="p2_x"
+                     oninput="Bezier.onBezierChanged(this)"/>
+          </hbox>
+          <hbox align="center" class="indent">
+            <label value="Y:"/>
+            <textbox style="max-width: 6em" id="p2_y"
+                     oninput="Bezier.onBezierChanged(this)"/>
+          </hbox>
+        </vbox>
+      </hbox>
+      <hbox align="center" id="bezierMultibuttons">
+        <toolbarbutton class="multibutton" label="linear" value="linear"
+                       oncommand="Bezier.toggleBezier(this); Bezier.initWithBezier('linear')"
+                       type="checkbox" group="bezier"/>
+        <toolbarbutton class="multibutton" label="ease" value="ease"
+                       oncommand="Bezier.toggleBezier(this); Bezier.initWithBezier('ease')"
+                       type="checkbox" group="bezier"/>
+        <toolbarbutton class="multibutton" label="ease-in" value="ease-in"
+                       oncommand="Bezier.toggleBezier(this); Bezier.initWithBezier('ease-in')"
+                       type="checkbox" group="bezier"/>
+        <toolbarbutton class="multibutton" label="ease-out" value="ease-out"
+                       oncommand="Bezier.toggleBezier(this); Bezier.initWithBezier('ease-out')"
+                       type="checkbox" group="bezier"/>
+        <toolbarbutton class="multibutton" label="ease-in-out" value="ease-in-out"
+                       oncommand="Bezier.toggleBezier(this); Bezier.initWithBezier('ease-in-out')"
+                       type="checkbox" group="bezier"/>
+      </hbox>
+      <hbox align="center">
+        <spacer flex="1"/>
+        <button label="Cancel" oncommand="this.parentNode.parentNode.hidePopup()"/>
+        <button label="OK" default="true" oncommand="Bezier.onAccept()"
+                id="bezierPanelOkButton"/>
+      </hbox>
+    </panel>
+
+    <menupopup id="sectionHeaderContext">
+      <menuitem label="&closeOtherSections.label;" oncommand="CloseAllSection(false)"/>
+      <menuitem label="&closeAllSections.label;" oncommand="CloseAllSection(true)"/>
+    </menupopup>
+
+    <panel level="floating" id="backgroundImagePanel" noautohide="true">
+      <groupbox style="width: 400px">
+        <caption label="&imageURL.caption;"/>
+        <hbox align="center">
+          <textbox flex="1" id="imageURLTextbox"
+                   oninput="LoadImage()"/>
+          <filepickerbutton id="filepickerbutton"
+                            control="imageURLTextbox"
+                            mode="0"
+                            filters="filterImages"
+                            oncommand="LoadImage(); MakeRelativeUrlBackgroundImage()"
+                            title="&selectImageButton.label;"/>
+        </hbox>
+        <!-- TODO: make relative URL button -->
+        <hbox align="center">
+          <checkbox label="&makeRelative.label;"
+                    id="relativeBackgroundImageCheckbox"
+                    disabled="true"
+                    oncommand="ToggleRelativeOrAbsoluteBackgroundImage()"/>
+        </hbox>
+      </groupbox>
+      <groupbox>
+        <caption label="&preview.caption;"/>
+        <hbox align="center">
+          <spacer flex="1"/>
+          <vbox id="previewBackgroundImage"/>
+          <spacer flex="1"/>
+        </hbox>
+      </groupbox>
+      <hbox align="center">
+        <spacer flex="1"/>
+        <button label="&okButton.label;" oncommand="BackgroundImageSelected()"/>
+      </hbox>
+    </panel>
+
+    <panel level="floating" id="linearGradientPanel" noautohide="true">
+      <hbox align="top">
+        <vbox align="center">
+          <groupbox>
+            <caption label="&preview.caption;"/>
+            <spacer flex="1"/>
+            <vbox id="linearGradientPreview"/>
+            <spacer flex="1"/>
+          </groupbox>
+          <checkbox id="repeatingGradientCheckbox"
+                    label="&repeating.label;"
+                    oncommand="RepaintGradient()"/>
+        </vbox>
+        <tabbox id="linearGradientPropertiesTabbox">
+          <tabs>
+            <tab label="&colorStops.tab;"/>
+            <tab label="&shapeAndSize.tab;" id="shapeAndSizeTab"/>
+            <tab label="&angle.tab;" id="angleTab"/>
+          </tabs>
+          <tabpanels>
+            <vbox flex="1">
+              <richlistbox id="colorStopsRichlistbox"
+                           onselect="UpdateColorStopsRichlistbox()" flex="1"/>
+              <hbox class="listboxBg">
+                <toolbarbutton id="addColorStopButton" class="listboxBgPlusButton"
+                               oncommand="AddColorStopToLinearGradient()"/>
+                <toolbarbutton id="removeColorStopButton" class="listboxBgMinusButton"
+                               disabled="true"
+                               oncommand="DeleteColorStopFromLinearGradient()"/>
+                <spacer flex="1"/>
+                <toolbarbutton id="upColorStopButton" class="listboxBgPlusButton" disabled="true"/>
+                <toolbarbutton id="downColorStopButton" class="listboxBgPlusButton" disabled="true"/>
+              </hbox>
+            </vbox>
+            <grid id="shapeAndSizeTabpanel">
+              <columns><column/><column/><column/><column/></columns>
+              <rows>
+                <row align="center">
+                  <checkbox id="radialShapeCheckbox"
+                            oncommand="RadialShapeSelected()" />
+                  <label value="&shape.label;"/>
+                  <radiogroup id="radialGradientShape" orient="horizontal"
+                              oncommand="gDialog.radialShapeCheckbox.checked=true; RadialShapeSelected()">
+                    <radio label="&circularShape.label;" value="circle" selected="true"/>
+                    <radio label="&ellipticShape.label;" value="ellipse"/>
+                  </radiogroup>
+                </row>
+                <row align="center">
+                  <checkbox id="radialSizeCheckbox"
+                            oncommand="RadialSizeSelected()" />
+                  <label value="&size.label;"/>
+                  <menulist id="radialGradientSize" sizetopopup="none"
+                            oncommand="gDialog.radialSizeCheckbox.checked=true; RadialSizeSelected()">
+                    <menupopup>
+                      <menuitem label="closest-side (contain)" value="closest-side"/>
+                      <menuitem label="closest-corner" value="closest-corner"/>
+                      <menuitem label="farthest-side" value="farthest-side"/>
+                      <menuitem label="farthest-corner (cover)" value="farthest-corner"/>
+                    </menupopup>
+                  </menulist>
+                </row>
+                <row align="center" id="radialEllipseRayRow">
+                  <checkbox id="radialEllipseRayCheckbox"
+                            oncommand="RadialEllipseRaySelected()" />
+                  <label value="&radius.label;"/>
+                  <hbox align="center">
+                    <menulist editable="true" id="radialEllipseXRayMenulist"
+                              oncommand="onLengthMenulistCommand(this, ' % px pt cm in mm pc em ex rem ch', 'normal', false); gDialog.radialEllipseRayCheckbox.checked=true; RadialEllipseRaySelected()"
+                              oninput="onLengthMenulistCommand(this, ' % px pt cm in mm pc em ex rem ch', 'normal', false); gDialog.radialEllipseRayCheckbox.checked=true; RadialEllipseRaySelected()">
+                      <menupopup id="radialEllipseXRayMenupopup"
+                                 onpopupshowing="PopulateLengths(this, ' % px pt cm in mm pc em ex rem ch')" />
+                    </menulist>
+                    <spinbuttons onup="IncreaseLength(this, ' % px pt cm in mm pc em ex rem ch'); gDialog.radialEllipseRayCheckbox.checked=true; RadialEllipseRaySelected()"
+                                 ondown="DecreaseLength(this, ' % px pt cm in mm pc em ex rem ch', false); gDialog.radialEllipseRayCheckbox.checked=true; RadialEllipseRaySelected()"/>
+                  </hbox>
+                  <hbox align="center" id="radialSecondRayHbox">
+                    <menulist editable="true" id="radialEllipseYRayMenulist"
+                              oncommand="onLengthMenulistCommand(this, ' % px pt cm in mm pc em ex rem ch', 'normal', false); gDialog.radialEllipseRayCheckbox.checked=true; RadialEllipseRaySelected()"
+                              oninput="onLengthMenulistCommand(this, ' % px pt cm in mm pc em ex rem ch', 'normal', false); gDialog.radialEllipseRayCheckbox.checked=true; RadialEllipseRaySelected()">
+                      <menupopup id="radialEllipseYRayMenupopup"
+                                 onpopupshowing="PopulateLengths(this, ' % px pt cm in mm pc em ex rem ch')" />
+                    </menulist>
+                    <spinbuttons onup="IncreaseLength(this, ' % px pt cm in mm pc em ex rem ch'); gDialog.radialEllipseRayCheckbox.checked=true; RadialEllipseRaySelected()"
+                                 ondown="DecreaseLength(this, ' % px pt cm in mm pc em ex rem ch', false); gDialog.radialEllipseRayCheckbox.checked=true; RadialEllipseRaySelected()"/>
+                  </hbox>
+                </row>
+                <row align="center">
+                  <checkbox id="radialPositionCheckbox"
+                            oncommand="RadialPositionSelected()" />
+                  <label value="&position.label;"/>
+                  <menulist id="radialPositionMenulist" sizetopopup="none" editable="true"
+                                oncommand="gDialog.radialPositionCheckbox.checked=true; this.value = event.originalTarget.value; RadialPositionSelected()"
+                                oninput="gDialog.radialPositionCheckbox.checked=true; RadialPositionSelected()">
+                    <menupopup>
+                      <grid class="multipane-menu">
+                        <columns><column/><column/><column/></columns>
+                        <rows>
+                          <row align="center">
+                            <menuitem label="&backgroundPositionLeftTop.label;" value="left top"/>
+                            <menuitem label="&backgroundPositionCenterTop.label;" value="center top"/>
+                            <menuitem label="&backgroundPositionRightTop.label;" value="right top"/>
+                          </row>
+                          <row align="center">
+                            <menuitem label="&backgroundPositionLeftCenter.label;" value="left center"/>
+                            <menuitem label="&backgroundPositionCenterCenter.label;" value="center"/>
+                            <menuitem label="&backgroundPositionRightCenter.label;" value="right center"/>
+                          </row>
+                          <row align="center">
+                            <menuitem label="&backgroundPositionLeftBottom.label;" value="left bottom"/>
+                            <menuitem label="&backgroundPositionCenterBottom.label;" value="center bottom"/>
+                            <menuitem label="&backgroundPositionRightBottom.label;" value="right bottom"/>
+                          </row>
+                        </rows>
+                      </grid>
+                      <menuseparator/>
+                      <menuitem label="&backgroundPositionUserDefined.label;"/>
+                    </menupopup>
+                  </menulist>
+                </row>
+              </rows>
+            </grid>
+            <vbox>
+              <hbox align="center">
+                <checkbox label="&angle.checkbox;" id="linearGradientAngleCheckbox"
+                          oncommand="LinearAngleSelected(this)"/>
+                <rotator id="linearGradientAngleRotator"
+                         onchange="gDialog.linearGradientAngleCheckbox.checked=true; LinearAngleSelected(gDialog.linearGradientAngleCheckbox)"
+                         negated="true"/>
+              </hbox>
+              <hbox align="center">
+                <checkbox label="&boxDirection.label;" id="linearGradientDirectionCheckbox"
+                          oncommand="LinearDirectionSelected(this)"/>
+                <menulist id="linearGradientDirectionMenulist" sizetopopup="none" editable="true"
+                          oncommand="this.value = event.originalTarget.value; gDialog.linearGradientDirectionCheckbox.checked=true; LinearDirectionSelected(gDialog.linearGradientDirectionCheckbox)">
+                  <menupopup>
+                    <grid class="multipane-menu"
+                          oncommand="this.parentNode.parentNode.value = event.originalTarget.value">
+                      <columns><column/><column/><column/></columns>
+                      <rows>
+                        <row align="center">
+                          <menuitem label="&backgroundPositionLeftTop.label;" value="left top"/>
+                          <menuitem label="&backgroundPositionCenterTop.label;" value="top"/>
+                          <menuitem label="&backgroundPositionRightTop.label;" value="right top"/>
+                        </row>
+                        <row align="center">
+                          <menuitem label="&backgroundPositionLeftCenter.label;" value="left"/>
+                          <spacer/>
+                          <menuitem label="&backgroundPositionRightCenter.label;" value="right"/>
+                        </row>
+                        <row align="center">
+                          <menuitem label="&backgroundPositionLeftBottom.label;" value="left bottom"/>
+                          <menuitem label="&backgroundPositionCenterBottom.label;" value="bottom"/>
+                          <menuitem label="&backgroundPositionRightBottom.label;" value="right bottom"/>
+                        </row>
+                      </rows>
+                    </grid>
+                  </menupopup>
+                </menulist>
+              </hbox>
+            </vbox>
+          </tabpanels>
+        </tabbox>
+      </hbox>
+      <hbox align="center">
+        <spacer flex="1"/>
+        <button label="&cancelButton.label;" oncommand="this.parentNode.parentNode.hidePopup();"/>
+        <button label="&okButton.label;" id="linearGradientOkButton" oncommand="SetLinearGradient();"/>
+      </hbox>
+    </panel>
+  </panelset>
+
+</overlay>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://fs/skin/fsOverlay.css" type="text/css"?>
+
+<!DOCTYPE overlay [
+  <!ENTITY % fsOverlayDTD SYSTEM "chrome://fs/locale/fsOverlay.dtd">
+  %fsOverlayDTD;
+]>
+
+<overlay id="fsOverlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/x-javascript"  src="chrome://fs/content/fsOverlay.js"/>
+
+  <menupopup id="webfontsMenupopup">
+    <menuitem label="&fsWindow.label;"
+              command="cmd_fsManager"/>
+  </menupopup>
+
+  <commandset id="composerMenuItems">
+    <command id="cmd_fsManager" oncommand="goDoCommand('cmd_fsManager')"/>
+  </commandset>
+
+</overlay>         
+

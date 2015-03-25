@@ -1,0 +1,773 @@
+<?xml version="1.0"?>
+
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1/GPL 2.0/LGPL 2.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is BlueGriffon.
+   -
+   - The Initial Developer of the Original Code is
+   - Disruptive Innovations SARL.
+   - Portions created by the Initial Developer are Copyright (C) 2006
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -   Daniel Glazman (daniel.glazman@disruptive-innovations.com), Original Author
+   -
+   - Alternatively, the contents of this file may be used under the terms of
+   - either the GNU General Public License Version 2 or later (the "GPL"), or
+   - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+   - in which case the provisions of the GPL or the LGPL are applicable instead
+   - of those above. If you wish to allow use of your version of this file only
+   - under the terms of either the GPL or the LGPL, and not to allow others to
+   - use your version of this file under the terms of the MPL, indicate your
+   - decision by deleting the provisions above and replace them with the notice
+   - and other provisions required by the LGPL or the GPL. If you do not delete
+   - the provisions above, a recipient may use your version of this file under
+   - the terms of any one of the MPL, the GPL or the LGPL.
+   -
+   - ***** END LICENSE BLOCK ***** -->
+
+<!DOCTYPE bindings [
+  <!ENTITY % tabEditorDTD SYSTEM "chrome://bluegriffon/locale/tabeditor.dtd" >
+  %tabEditorDTD;
+]>
+
+<bindings id="tabEditorBindings"
+          xmlns="http://www.mozilla.org/xbl"
+          xmlns:html="http://www.w3.org/1999/xhtml"
+          xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+          xmlns:xbl="http://www.mozilla.org/xbl"
+          xmlns:svg="http://www.w3.org/2000/svg">
+
+  <binding id="tabeditor">
+
+    <resources>
+      <stylesheet src="chrome://bluegriffon/skin/tabeditor.css"/>
+    </resources>
+
+    <content>
+      <xul:tabbox anonid="EditorTabbox" flex="1" onselect="">
+        <xul:hbox class="tabeditor-strip" >
+          <xul:tabs flex="1" anonid="EditorTabs" closebutton="true"
+                    class="tabeditor-tabs"
+                    setfocus="false" onselect="onTabSelected(event, this.parentNode.parentNode)"/>
+        </xul:hbox>
+        <xul:grid flex="1">
+          <xul:columns><xul:column /><xul:column flex="1"/></xul:columns>
+          <xul:rows>
+            <xul:row>
+              <xul:spacer/>
+              <xul:hruler anonid="hruler" disabled="true"/>
+            </xul:row>
+            <xul:row flex="1">
+              <xul:vruler anonid="vruler" disabled="true" />
+              <xul:tabpanels anonid="EditorTabpanels" selectedIndex="0" flex="1" style="margin:0px; padding:0px"/>
+            </xul:row>
+          </xul:rows>
+        </xul:grid>
+        
+      </xul:tabbox>
+    </content>
+
+    <implementation>
+
+      <property name="mHruler">
+        <getter>
+        <![CDATA[
+          return document.getAnonymousElementByAttribute(this, "anonid", "hruler");
+        ]]>
+        </getter>
+      </property>
+
+      <property name="mVruler">
+        <getter>
+        <![CDATA[
+          return document.getAnonymousElementByAttribute(this, "anonid", "vruler");
+        ]]>
+        </getter>
+      </property>
+
+      <property name="mTabbox">
+        <getter>
+        <![CDATA[
+          return document.getAnonymousElementByAttribute(this, "anonid", "EditorTabbox");
+        ]]>
+        </getter>
+      </property>
+
+      <property name="mTabs">
+        <getter>
+        <![CDATA[
+          return document.getAnonymousElementByAttribute(this, "anonid", "EditorTabs");
+        ]]>
+        </getter>
+      </property>
+
+      <property name="mTabpanels">
+        <getter>
+        <![CDATA[
+          return document.getAnonymousElementByAttribute(this, "anonid", "EditorTabpanels");
+        ]]>
+        </getter>
+      </property>
+
+      <constructor>
+        <![CDATA[
+          // this.setAttribute("empty", "true");
+        ]]>
+      </constructor>
+
+      <destructor>
+        <![CDATA[
+          const editors = this.mTabPanels.childNodes;
+          for (var i = 0; i < editors.length; i++)
+          {
+            editors[i].lastChild.removeEventListener("DOMTitleChanged", this.changeTabTitle, false);
+          }
+        ]]>
+      </destructor>
+
+      <property name="selectedTab">
+        <getter>
+        <![CDATA[
+          return this.mTabbox.selectedTab;
+        ]]>
+        </getter>
+        <setter>
+        <![CDATA[
+          this.mTabbox.selectedTab = val;
+        ]]>
+        </setter>
+      </property>
+
+      <property name="selectedIndex">
+        <getter>
+        <![CDATA[
+          return this.mTabbox.selectedIndex;
+        ]]>
+        </getter>
+        <setter>
+        <![CDATA[
+          this.mTabbox.selectedIndex = val;
+        ]]>
+        </setter>
+      </property>
+
+      <method name="addEditor">
+        <parameter name="aTitle"/>
+        <parameter name="aURL"/>
+        <body>
+          <![CDATA[
+            function EditorContentListener(aTabeditor, aEditor, aURL, aTab)
+            {
+              this.init(aTabeditor, aEditor, aURL, aTab);
+            }
+
+            EditorContentListener.prototype = {
+              init : function(aTabeditor, aEditor, aURL, aTab)
+                {
+                  this.mTabeditor = aTabeditor;
+                  this.mEditor = aEditor;
+                  this.mURL = aURL;
+                  this.mTab = aTab;
+                },
+            
+              QueryInterface : function(aIID)
+                {
+                  if (aIID.equals(Components.interfaces.nsIWebProgressListener) ||
+                      aIID.equals(Components.interfaces.nsISupportsWeakReference) ||
+                      aIID.equals(Components.interfaces.nsISupports))
+                    return this;
+                  throw Components.results.NS_NOINTERFACE;
+                },
+            
+              onStateChange : function(aWebProgress, aRequest, aStateFlags, aStatus)
+              {
+                const nsIWebProgressListener = Components.interfaces.nsIWebProgressListener;
+            
+                var progress = document.getElementById("progress");
+                var statusbarDeck = document.getElementById("statusbarDeck");
+            
+                if (aStateFlags & nsIWebProgressListener.STATE_IS_REQUEST)
+                {
+                  if (aStateFlags & nsIWebProgressListener.STATE_START)
+                  {
+                    this._requestsStarted++;
+                  }
+                  else if (aStateFlags & nsIWebProgressListener.STATE_STOP)
+                  {
+                    this._requestsFinished++;
+                  }
+                  if (this._requestsStarted > 1)
+                  {
+                    var value = (100 * this._requestsFinished) / this._requestsStarted;
+                    if (progress)
+                    {
+                      progress.setAttribute("mode", "determined");
+                      progress.setAttribute("value", value + "%");
+                    }
+                  }
+                }
+            
+                if (aStateFlags & nsIWebProgressListener.STATE_IS_NETWORK)
+                {
+                  if (aStateFlags & nsIWebProgressListener.STATE_START)
+                  {
+                    if (statusbarDeck)
+                      statusbarDeck.selectedPanel = document.getElementById("progressBar");
+                    if (progress)
+                      progress.setAttribute("style", "");
+                  }
+                  else if (aStateFlags & nsIWebProgressListener.STATE_STOP)
+                  {
+                    if (this._requestsStarted
+                        && this._requestsFinished
+                        && this._requestsStarted == this._requestsFinished ) { // finished !
+                      this.mEditorSheets = false;
+                    } 
+                    if (progress)
+                      progress.setAttribute("style", "display: none");
+                    this.onStatusChange(aWebProgress, aRequest, 0, "Done");
+                    this._requestsStarted = this._requestsFinished = 0;
+
+                    this.mTab.removeAttribute("busy");
+                    try {
+                      var thisURI = Components.classes["@mozilla.org/network/io-service;1"]
+                                              .getService(Components.interfaces.nsIIOService)
+                                              .newURI(this.mURL, null, null);
+                      var scheme = thisURI.scheme;
+                      if (scheme == "resource")
+                        this.mTab.setAttribute("image", "chrome://mozapps/skin/places/defaultFavicon.png");
+                      else
+                        this.mTab.setAttribute("image", thisURI.prePath + "/favicon.ico");
+                    }
+                    catch(e) {}
+
+                    if (statusbarDeck)
+                      statusbarDeck.selectedPanel = document.getElementById("editorBar");
+
+                    var editor = this.mEditor.getEditor(this.mEditor.contentWindow);
+                    if (editor) {
+                      var valueArray = [];
+                      if (!Services.prefs.getBoolPref("bluegriffon.display.comments"))
+                        valueArray.push("comment");
+                      if (!Services.prefs.getBoolPref("bluegriffon.display.php"))
+                        valueArray.push("php");
+                      if (!Services.prefs.getBoolPref("bluegriffon.display.pi"))
+                        valueArray.push("pi");
+                      var value = valueArray.join(" ");
+                      editor.document.documentElement.setAttribute("_moz_hide", value);
+
+                      MakePhpAndCommentsVisible(editor.document);
+                      editor.resetModificationCount();
+                      editor.transactionManager.clear();
+
+                      var links = editor.document.querySelectorAll("link");
+                      for (var i = 0; i < links.length; i++) {
+                        var l = links[i];
+                        var rel = l.getAttribute("rel").toLowerCase();
+                        if (rel == "shortcut icon"
+                            || rel == "icon") {
+                          this.mTab.setAttribute("image", l.getAttribute("href"));
+                        }
+                      }
+                      if (UrlUtils.isUrlOfBlankDocument(editor.document.QueryInterface(Components.interfaces.nsIDOMHTMLDocument).URL)) {
+                        var authorMeta = editor.document.querySelector("meta[name='author']");
+                        if (!authorMeta)
+                          try {
+                            // add author's meta
+                            var author = GetPrefs().getComplexValue("bluegriffon.author",
+                                                                    Components.interfaces.nsISupportsString).data;
+                            if (author) {
+                              var meta = editor.document.createElement("meta");
+                              meta.setAttribute("name", "author");
+                              meta.setAttribute("content", author);
+                              editor.document.querySelector("head").appendChild(meta);
+                            }
+                          }
+                          catch(e) {}
+                      }
+
+                      try {
+                        var returnKeyInPCreatesP = GetPrefs().getBoolPref("bluegriffon.returnKey.createsParagraph");
+                        editor.returnInParagraphCreatesNewParagraph = returnKeyInPCreatesP;
+                      }
+                      catch(e) {} 
+                    }
+                    if (editor && !this.mEditorSheets)
+                    {
+                      this.mEditorSheets = true;
+                      editor instanceof Components.interfaces.nsIPlaintextEditor;
+                      editor instanceof Components.interfaces.nsIHTMLEditor;
+                      editor instanceof Components.interfaces.nsIEditorStyleSheets;
+
+                      editor.addOverrideStyleSheet("chrome://bluegriffon/content/EditorAllTags.css");
+                      editor.enableStyleSheet("chrome://bluegriffon/content/EditorAllTags.css", false);
+                      editor.addOverrideStyleSheet("chrome://bluegriffon/content/EditorContent.css");
+                      editor.addOverrideStyleSheet("chrome://bluegriffon/content/EditorOverride.css");
+
+                      editor.selection.QueryInterface(Components.interfaces.nsISelectionPrivate)
+                        .addSelectionListener(ComposerCommands.selectionListener);
+                      editor.addEditorObserver(ComposerCommands.selectionListener);
+                      editor.addEditorMouseObserver(ComposerCommands.selectionListener);
+                    }
+                    if (editor &&
+                        "ActiveSourceTree" in window)
+                    {
+                      var source = new ActiveSourceTree(this.mEditor);
+                      var sourceElt = source.mSourceTreeXULElement;
+                    }
+                  }
+                  if (editor && editor.document) {
+                    try {
+                      var charset = "";
+
+                      var metas = editor.document.querySelectorAll("meta");
+                      for (var i = 0; !charset && i < metas.length; i++) {
+                        var meta = metas[i];
+                        if (meta.getAttribute("http-equiv")
+                            && meta.getAttribute("http-equiv").toLowerCase() == "content-type") {
+                          var match = meta.getAttribute("content").match( /charset\s*=\s*(.*)$/i );
+                          if (match)
+                            charset = match[1].trim();
+                        } else if (meta.hasAttribute("charset"))
+                          charset = meta.getAttribute("charset");
+                      }
+                      if (!charset) {
+                        // do we deal with a newly created document?
+                        if (this.mURL.substr(0, 11) == "resource://")
+                          charset = "UTF-8";
+                        else
+                          charset = this.mEditor.docShell.charset;
+                      }
+
+                      editor.documentCharacterSet = charset;
+
+                      var metaElts = editor.document.querySelectorAll('meta');
+                      if (metaElts && metaElts.length) {
+                        for (var i = 0; i < metaElts.length; i++) {
+                          var m = metaElts[i];
+                          if ((m.hasAttribute("http-equiv") && m.getAttribute("http-equiv").toLowerCase() == "content-type")
+                              || m.hasAttribute("charset"))
+                            m.parentNode.removeChild(m);
+                        }
+                      }
+                      var meta = editor.document.createElement("meta");
+                      var head = editor.document.querySelector("head");
+                      if (editor.document.doctype
+                          && editor.document.doctype.publicId == ""
+                          && editor.document.documentElement.getAttribute("xmlns") == "http://www.w3.org/1999/xhtml") { // XHTML5
+                        meta.setAttribute("charset", charset);
+                        head.insertBefore(meta, head.firstChild);
+                      }
+                      else {
+                        meta.setAttribute("http-equiv", "content-type");
+                        var doctype = editor.document.doctype;
+                        var systemId = doctype ? doctype.systemId : null;
+                        var isXML = false;
+                        switch (systemId) {
+                          case "http://www.w3.org/TR/html4/strict.dtd": // HTML 4
+                          case "http://www.w3.org/TR/html4/loose.dtd":
+                          case "http://www.w3.org/TR/REC-html40/strict.dtd":
+                          case "http://www.w3.org/TR/REC-html40/loose.dtd":
+                            isXML = false;
+                            break;
+                          case "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd": // XHTML 1
+                          case "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd":
+                          case "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd":
+                            isXML = true;
+                            break;
+                          case "":
+                            isXML = (editor.document.documentElement.getAttribute("xmlns") == "http://www.w3.org/1999/xhtml");
+                            break;
+                          case null:
+                            isXML = (editor.document.compatMode == "CSS1Compat");
+                            break;
+                        }
+                        meta.setAttribute("content", (isXML ? "application/xhtml+xml" : "text/html") + "; charset=" + charset);
+                        head.insertBefore(meta, head.firstChild);
+                      }
+
+                      UpdateTabHTMLDialect(this.mEditor);
+
+                      editor.resetModificationCount();
+                      editor.transactionManager.clear();
+
+                    }
+                    catch(e) {
+                      // uncomment the following line only for debuggin reasons
+                      // alert("tabeditor: " + e);
+                    }
+
+                    window.updateCommands("navigation");
+                    window.updateCommands("create");
+  
+                    NotifierUtils.notify("tabCreated");
+                    RecentPagesHandler.saveRecentFilesPrefs();
+                    RecentPagesHandler.buildRecentPagesMenu();
+                    editor.beginningOfDocument();
+                    // force editor to acquire focus and show caret... workaround for bug 351
+                    gDialog["menulist-zoompanel"].focus();
+                    this.mEditor.contentWindow.focus();
+                    editor.resetModificationCount();
+                    editor.transactionManager.clear();
+                  }
+                }
+              },
+            
+
+              onProgressChange : function(aWebProgress, aRequest,
+                                          aCurSelfProgress, aMaxSelfProgress,
+                                          aCurTotalProgress, aMaxTotalProgress)
+                {
+                },
+            
+              onLocationChange : function(aWebProgress, aRequest, aLocation)
+                {
+                },
+            
+              onStatusChange : function(aWebProgress, aRequest, aStatus, aMessage)
+                {
+                  var status = document.getElementById("status");
+                  if (status) status.setAttribute("label", aMessage);
+                },
+            
+              onSecurityChange : function(aWebProgress, aRequest, aState)
+                {
+                },
+            
+                _requestsStarted: 0,
+                _requestsFinished: 0,
+
+                mTabeditor: null,
+                mEditor: null,
+                mEditorSheets: true,
+                mURL: null,
+                mTab: null
+            };
+
+            this.mHruler.removeAttribute("disabled");
+            this.mHruler.addObject("foo", 50, 200);
+            this.mVruler.removeAttribute("disabled");
+
+            var newBox = this._newEditor();
+            var newEditorElement = newBox.lastChild;
+
+            var newTab = this.mTabs.appendItem(aTitle,
+                           UrlUtils.stripUsernamePassword(aURL, null, null));
+            newTab.setAttribute("label", aTitle);
+            newTab.setAttribute("context", "tabContextPopup");
+            newTab.setAttribute("class", "tabeditor-tab");
+            newTab.setAttribute("maxwidth", 200);
+            newTab.setAttribute("width", 0);
+            newTab.setAttribute("minwidth", 30);
+            newTab.setAttribute("flex", 100);
+            newTab.setAttribute("crop", "end");
+            newTab.setAttribute("busy", "true");
+
+            this.mTabpanels.appendChild(newBox);
+
+            newEditorElement.makeEditable("html", true);
+
+            var docShell = newEditorElement.boxObject.QueryInterface(Components.interfaces.nsIEditorBoxObject).docShell;
+            var progress = docShell.QueryInterface(Components.interfaces.nsIInterfaceRequestor).getInterface(Components.interfaces.nsIWebProgress);
+            var progressListener = new EditorContentListener(this, newEditorElement, aURL, newTab);
+            progress.addProgressListener(progressListener, Components.interfaces.nsIWebProgress.NOTIFY_ALL);
+
+            var _self = this;
+            newEditorElement.addEventListener("load", function(evt) { 
+                if (evt.originalTarget == content.document){ _self.finishInstall(progressListener); } }, true);
+            newEditorElement.addEventListener("DOMTitleChanged", this.changeTabTitle, false);
+
+            newEditorElement.addEventListener("dblclick", function(evt) { OnDoubleClick(evt) }, true);
+            newEditorElement.addEventListener("click", function(evt) { OnClick(evt) }, true);
+
+            // select that new tab
+            this.selectedTab = newTab;
+            this.selectedIndex = this.mTabpanels.childNodes.length - 1;
+            window.EditorLoadUrl(newEditorElement, aURL);
+
+            this.setAttribute("visibility", "visible");
+            ComposerCommands.setupFormatCommands();
+
+            return {tab: newTab, panel: newEditorElement};
+          ]]>
+        </body>
+      </method>
+
+      <method name="enableRulers">
+        <parameter name="aEnabled" />
+        <body>
+        <![CDATA[
+          if (aEnabled) {
+            this.mHruler.removeAttribute("disabled");
+            this.mVruler.removeAttribute("disabled");
+          }
+          else {
+            this.mHruler.setAttribute("disabled", "true");
+            this.mVruler.setAttribute("disabled", "true");
+          }
+        ]]>
+        </body>
+      </method>
+
+      <method name="finishInstall">
+        <parameter name="aPL" />
+        <body>
+        <![CDATA[
+          aPL.onStateChange(null, null, Components.interfaces.nsIWebProgressListener.STATE_STOP |
+                                        Components.interfaces.nsIWebProgressListener.STATE_IS_NETWORK,
+                            null);
+        ]]>
+        </body>
+      </method>
+
+      <method name="changeTabTitle">
+        <parameter name="aEvent" />
+        <body>
+        <![CDATA[
+          var e     = aEvent.currentTarget;
+          if (!e)
+            return;
+
+          var tabeditor = this.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
+          var tabs      = tabeditor.mTabs.childNodes;
+          var editors   = tabeditor.mTabpanels.childNodes;
+          var l = editors.length;
+          for (var i = 0; i < l; i++)
+          {
+            if (editors.item(i).lastChild == e)
+            {
+              var tab = tabs.item(i);
+              var title = UpdateWindowTitle(e);
+              if (title)
+                tab.label = title;
+              return;
+            }
+          }          
+        ]]>
+        </body>
+      </method>
+
+      <method name="stopWebNavigation">
+        <body>
+        <![CDATA[
+          var editor = this.getCurrentEditorElement();
+          var tab    = this.selectedTab;
+          if (tab.hasAttribute("busy"))
+            editor.webNavigation.stop(Components.interfaces.nsIWebNavigation.STOP_ALL);
+        ]]>
+        </body>
+      </method>
+
+      <method name="_installBespin">
+        <parameter name="aIframe"/>
+        <body>
+        <![CDATA[
+            var _self = this; 
+            aIframe.removeEventListener("pageshow", function() {_self._installBespin(aIframe);}, true);
+
+            gDialog.sourceModeButton.removeAttribute("busy");
+            window.updateCommands("mode_switch");
+       ]]>
+        </body>
+      </method>
+
+      <method name="_newEditor">
+        <body>
+        <![CDATA[
+            var editors = this.mTabpanels.childNodes;
+            for (var i = 0; i < editors.length; i++)
+              editors.item(i).lastChild.removeAttribute("type");
+
+            var newBox = document.createElement("deck");
+
+            var iframe = document.createElement("iframe");
+            var _self = this;
+            gDialog.sourceModeButton.setAttribute("busy", "true");
+            iframe.addEventListener("load", function() {_self._installBespin(iframe);}, true);
+            iframe.setAttribute("type", "chrome");
+            iframe.setAttribute("src", "resource://app/res/cm2.html");
+            iframe.setAttribute("onclick", "onBespinFocus(this)");
+            newBox.appendChild(iframe);
+
+            var newEditorElement = document.createElement("editor");
+            newEditorElement.setAttribute("context", "editorContextMenu");
+            newEditorElement.setAttribute("type", "content-primary");
+            newBox.appendChild(newEditorElement);
+
+            return newBox;
+        ]]>
+        </body>
+      </method>
+
+      <method name="getCurrentEditorElement">
+        <body>
+        <![CDATA[
+            if (this.mTabpanels.childNodes
+                && this.mTabpanels.childNodes.length
+                && this.mTabpanels.selectedPanel)
+              return this.mTabpanels.selectedPanel.lastChild;
+            return null;
+        ]]>
+        </body>
+      </method>
+
+      <method name="IsDocumentAlreadyEdited">
+        <parameter name="aURL"/>
+        <body>
+        <![CDATA[
+            var editors = this.mTabpanels.childNodes;
+            for (var i = 0; i < editors.length; i++)
+            {
+              var editorElt = editors.item(i).lastChild;
+              var editor = editorElt.getEditor(editorElt.contentWindow);
+              if (editor.document.URL == aURL)
+                return editorElt;
+            }
+            return null;
+        ]]>
+        </body>
+      </method>
+
+      <method name="onTabSelected">
+        <parameter name="aEvent"/>
+        <parameter name="aTabeditor"/>
+        <body>
+        <![CDATA[
+           var activeSourceDeck = document.getElementById("sourceTreeDeck");
+           if (activeSourceDeck &&
+               aTabeditor.selectedIndex < activeSourceDeck.childNodes.length)
+             activeSourceDeck.selectedIndex = aTabeditor.selectedIndex;
+
+           var editors = this.mTabpanels.childNodes;
+           for (var i = 0; i < editors.length; i++)
+             editors.item(i).lastChild.removeAttribute("type");
+
+           this.getCurrentEditorElement().setAttribute("type", "content-primary");
+           window.content.focus();
+
+           window.UpdateWindowTitle();
+
+           NotifierUtils.notify("tabSelected");
+           var deck = this.getCurrentEditorElement().parentNode;
+           var mode = deck.getAttribute("previousMode");
+           deck.selectedIndex = (mode == "source") ? 0 : 1;
+           gDialog.bespinToolbox1.hidden = true;
+           gDialog.bespinToolbox2.hidden = true;
+           if (mode == "source") {
+             gDialog.sourceModeButton.setAttribute("selected", "true");
+             gDialog.wysiwygModeButton.removeAttribute("selected");
+             gDialog.structurebar.style.visibility = "hidden";
+             deck.firstChild.focus();
+           }
+           else {
+             gDialog.wysiwygModeButton.setAttribute("selected", "true");
+             gDialog.sourceModeButton.removeAttribute("selected");
+             gDialog.structurebar.style.visibility = "";
+             deck.lastChild.focus();
+             var selcon = EditorUtils.getSelectionContainer();
+             if (selcon)
+               gDialog.structurebar.selectionChanged(null, selcon.node,
+                                                     selcon.oneElementSelected);
+           }
+           window.updateCommands("navigation");
+           window.updateCommands("style");
+        ]]>
+        </body>
+      </method>
+
+      <method name="_trimTrailingSlash">
+        <parameter name="aURL" />
+        <body>
+        <![CDATA[
+          if (!aURL)
+            return aURL;
+          if (aURL.charAt(aURL.length - 1) == "/")
+            return aURL.substr(0, aURL.length - 1);
+          return aURL;
+        ]]>
+        </body>
+      </method>
+
+      <method name="isAlreadyEdited">
+        <parameter name="aURL" />
+        <body>
+        <![CDATA[
+          // always accept a new blank document
+          if (UrlUtils.isUrlOfBlankDocument(aURL))
+            return null;
+
+          var editors = this.mTabpanels.childNodes;
+          var i, l = editors.length;
+          for (i=0; i< l; i++)
+          {
+            var e = editors[i].lastChild;
+            var elt = e.getEditor(e.contentWindow);
+            if (elt &&
+                this._trimTrailingSlash(elt.document.URL) == this._trimTrailingSlash(aURL))
+              return { index: i, editor: e };
+          }
+          return null;
+        ]]>
+        </body>
+      </method>
+
+      <method name="showCurrentTabAsModified">
+        <parameter name="val" />
+        <body>
+        <![CDATA[
+          if (val)
+            this.selectedTab.setAttribute("modified", "true");
+          else
+            this.selectedTab.removeAttribute("modified");
+        ]]>
+        </body>
+      </method>
+
+      <method name="getNumberOfModifiedDocuments">
+        <parameter name="val" />
+        <body>
+        <![CDATA[
+          var tabs = this.mTabs.childNodes;
+          var n = 0;
+          for (var i = 0; i < tabs.length; i++) {
+            var tab = tabs.item(i)
+            if (tab.hasAttribute("modified"))
+              n++;
+          }
+
+          return n;
+        ]]>
+        </body>
+      </method>
+
+      <method name="updateOSXCloseButton">
+        <body>
+        <![CDATA[
+          var baseWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+                                 .getInterface(Components.interfaces.nsIWebNavigation)
+                                 .QueryInterface(Components.interfaces.nsIBaseWindow);
+          var badger = Components.classes["@disruptive-innovations.com/osintegration/badger;1"]
+                                 .createInstance(Components.interfaces.diIOSIntegration);
+          var modifiedDocuments = this.getNumberOfModifiedDocuments(); 
+          badger.setDocumentEdited(baseWindow, (0 != modifiedDocuments));
+        ]]>
+        </body>
+      </method>
+
+    </implementation>
+
+  </binding>
+
+</bindings>

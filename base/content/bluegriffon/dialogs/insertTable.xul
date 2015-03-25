@@ -1,0 +1,257 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/insertTable.css" type="text/css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/bluegriffonDialogs.css" type="text/css"?>
+
+
+<!DOCTYPE dialog SYSTEM "chrome://bluegriffon/locale/insertTable.dtd">
+
+<dialog title="&windowTitle.label;"
+        id="tablePropertiesDialog"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        onload = "Startup()"
+        buttons="extra1,accept,cancel"
+        buttonlabelextra1="&applyButton.label;"
+        style="height: auto"
+        ondialogextra1="ApplyChanges()"
+        ondialogaccept="return onAccept();"
+        persist="screenX screenY">
+
+  <!-- Methods common to all editor dialogs -->
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/dgid.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/global.js"/>
+  <script type="application/x-javascript"  src="chrome://bluegriffon/content/txns/diStyleAttrChangeTxn.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/dialogs/insertTable.js"/>
+
+  <stringbundle id="bundleString"         src="chrome://bluegriffon/locale/insertTable.properties"/>
+
+  <tabbox id="tabbox">
+    <tabs onselect="onTabSelect()">
+      <tab label="&table.tab;" value="table"/>
+      <tab label="&cell.tab;"  value="cell"/>
+    </tabs>
+    <tabpanels>
+      <vbox oncommand="DataChanged()"
+            oninput="DataChanged()">
+        <groupbox>
+          <caption label="&size.label;"/>
+          <grid>
+            <columns><column/><column/><column/><column/><column/></columns>
+            <rows>
+              <row align="center">
+                <label value="&rows.label;"/>
+                <textbox type="number" id="tableRowsTextbox" min="1"/>
+                <spacer/>
+                <label value="&width.label;"/>
+                <hbox align="center">
+                  <menulist sizetopopup="none" editable="true" id="widthMenulist"
+                            oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', false);"
+                            oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', false)">
+                    <menupopup id="widthMenupopup"
+                               onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')"/>
+                  </menulist>
+                  <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
+                               ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', false)"/>
+                </hbox>
+              </row>
+
+              <row align="center">
+                <label value="&columns.label;"/>
+                <textbox type="number" id="tableColumnsTextbox" min="1"/>
+                <spacer/>
+                <label value="&height.label;"/>
+                <hbox align="center">
+                  <menulist sizetopopup="none" editable="true" id="heightMenulist"
+                            oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', false);"
+                            oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', false)">
+                    <menupopup id="heightMenupopup"
+                               onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')"/>
+                  </menulist>
+                  <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
+                               ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', false)"/>
+                </hbox>
+              </row>
+
+              <row align="center">
+                <label value="&rowsInHeader.label;"/>
+                <textbox id="rowsInHeaderTextbox" type="number" min="0"/>
+                <checkbox label="&onlyHeaderCells.label;"
+                          id="onlyHeaderCellsInHeaderCheckbox"/>
+              </row>
+
+              <row align="center">
+                <label value="&rowsInFooter.label;"/>
+                <textbox id="rowsInFooterTextbox" type="number" min="0"/>
+                <checkbox label="&onlyHeaderCells.label;"
+                          id="onlyHeaderCellsInFooterCheckbox"/>
+              </row>
+            </rows>
+          </grid>
+        </groupbox>
+        <groupbox>
+          <caption label="&layout.label;"/>
+          <grid>
+            <columns><column/><column/><column/></columns>
+            <rows>
+              <row align="center">
+                <label value="&border.label;"/>
+                <textbox type="number" id="tableBorderTextbox" min="0"/>
+                <label value="&pixels.label;"/>
+              </row>
+              <row align="center">
+                <label value="&cellSpacing.label;"/>
+                <hbox align="center">
+                  <textbox id="tableCellSpacingTextbox" oninput="OnlyDigits(this)"/>
+                  <spinbuttons onup="Increase('tableCellSpacingTextbox')"
+                               ondown="Decrease('tableCellSpacingTextbox')"/>
+                </hbox>
+                <menulist id="tableCellSpacingUnitMenulist">
+                  <menupopup>
+                    <menuitem label="&pixels.label;" value=""/>
+                    <menuitem label="&percent.label;" value="%"/>
+                  </menupopup>
+                </menulist>
+              </row>
+              <row align="center">
+                <label value="&cellPadding.label;"/>
+                <hbox align="center">
+                  <textbox id="tableCellPaddingTextbox" oninput="OnlyDigits(this)"/>
+                  <spinbuttons onup="Increase('tableCellPaddingTextbox')"
+                               ondown="Decrease('tableCellPaddingTextbox')"/>
+                </hbox>
+                <menulist id="tableCellPaddingUnitMenulist">
+                  <menupopup>
+                    <menuitem label="&pixels.label;" value=""/>
+                    <menuitem label="&percent.label;" value="%"/>
+                  </menupopup>
+                </menulist>
+              </row>
+            </rows>
+          </grid>
+        </groupbox>
+      </vbox>
+
+      <vbox flex="1">
+        <groupbox>
+          <caption label="&selection.caption;"/>
+          <hbox align="center">
+            <grid>
+              <columns><column/></columns>
+              <rows>
+                <row>
+                  <menulist id="selectionType"
+                            oncommand="event.preventDefault()">
+                    <menupopup>
+                      <menuitem label="&cells.label;" value="cells"/>
+                      <menuitem label="&rowsSelection.label;" value="rows"/>
+                      <menuitem label="&columnsSelection.label;" value="columns"/>
+                    </menupopup>
+                  </menulist>
+                </row>
+                <row align="center">
+                  <hbox>
+                    <button flex="1" label="&previous.label;"
+                            image="chrome://global/skin/arrow/arrow-lft.gif"
+                            oncommand="Previous()"/>
+                    <button flex="1" label="&next.label;"
+                            image="chrome://global/skin/arrow/arrow-rit.gif"
+                            dir="reverse"
+                            oncommand="Next()"/>
+                  </hbox>
+                </row>
+              </rows>
+            </grid>
+            <description style="margin: 1em">&warning.description;</description>
+          </hbox>
+        </groupbox>
+
+        <hbox oncommand="DataChanged()"
+              oninput="DataChanged()">
+          <groupbox flex="1">
+            <caption label="&size.caption;"/>
+            <grid>
+              <columns><column/><column/><column/></columns>
+              <rows>
+                <row align="center">
+                  <label value="&width.label;"/>
+                  <menulist sizetopopup="none" editable="true" id="cellsWidthMenulist"
+                            oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', false);"
+                            oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', false)">
+                    <menupopup id="cellsWidthMenupopup"
+                               onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')"/>
+                  </menulist>
+                  <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
+                               ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', false)"/>
+                </row>
+                <row align="center">
+                  <label value="&height.label;"/>
+                  <menulist sizetopopup="none" editable="true" id="cellsHeightMenulist"
+                            oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', false);"
+                            oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', false)">
+                    <menupopup id="cellsHeightMenupopup"
+                               onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')"/>
+                  </menulist>
+                  <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
+                               ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', false)"/>
+                </row>
+              </rows>
+            </grid>
+          </groupbox>
+          <groupbox flex="1">
+            <caption label="&alignment.caption;"/>
+            <grid>
+              <columns><column/><column/><column/></columns>
+              <rows>
+                <row align="center">
+                  <label value="&hAlign.label;"/>
+                  <menulist id="cellsHAlignMenulist">
+                    <menupopup>
+                      <menuitem label="&unspecified.label;" value=""/>
+                      <menuseparator/>
+                      <menuitem label="&left.label;" value="left"/>
+                      <menuitem label="&center.label;" value="center"/>
+                      <menuitem label="&right.label;" value="right"/>
+                      <menuseparator/>
+                      <menuitem label="&justify.label;" value="justify"/>
+                    </menupopup>
+                  </menulist>
+                </row>
+                <row align="center">
+                  <label value="&vAlign.label;"/>
+                  <menulist id="cellsVAlignMenulist">
+                    <menupopup>
+                      <menuitem label="&unspecified.label;" value=""/>
+                      <menuseparator/>
+                      <menuitem label="&top.label;" value="top"/>
+                      <menuitem label="&center.label;" value="middle"/>
+                      <menuitem label="&bottom.label;" value="bottom"/>
+                    </menupopup>
+                  </menulist>
+                </row>
+              </rows>
+            </grid>
+          </groupbox>
+        </hbox>
+        <groupbox oncommand="DataChanged()"
+                  oninput="DataChanged()">
+          <caption label="&style.caption;"/>
+          <hbox align="center">
+            <hbox flex="1" align="center">
+              <label value="&bgColor.label;"/>
+              <ecolorpicker id="bgColorColorpicker"
+                            color="transparent"
+                            colorObjectId="BackgroundColor"
+                            windowTitle="&bgColor.windowTitle;"
+                            showTransparency="true"
+                            oncommand="DataChanged()"/>
+            </hbox>
+            <checkbox label="&headers.checkbox;" id="cellsHeadersCheckbox" flex="1"/>
+            <checkbox label="&nowrap.checkbox;"  id="cellsNoWrapCheckbox"  flex="1"/>
+          </hbox>
+        </groupbox>
+      </vbox>
+    </tabpanels>
+  </tabbox>
+
+</dialog>

@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<!DOCTYPE overlay SYSTEM "chrome://bluegriffon/locale/prefs/shortcuts.dtd">
+
+<overlay
+  id     = "shortcutsPrefsOverlay"
+  xmlns  = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <prefpane id="shortcutsPrefPane">
+    <tree id="commandsShortcutsTree"
+          class="tree"
+          treelines="true"
+          hidecolumnpicker="true"
+          rows="15"
+          ondblclick="EditShortCut()">
+      <treecols>
+        <treecol id="commandTreecol" label="&commandShortcutCol.label;" flex="1"
+               primary="true"
+               persist="width ordinal hidden"/>
+        <splitter class="tree-splitter"/>
+        <treecol id="shortcutTreecol" label="&shortcutShortcutCol.label;"
+		 persist="width ordinal hidden"/>
+      </treecols>
+      <treechildren id="commandsShortcutsTreechildren">
+        <treeitem id="menubarShortcutsTreeitem" container="true">
+          <treerow>
+            <treecell label="&menubar.label;"/>
+          </treerow>
+          <treechildren id="menubarShortcutsTreechildren"/>
+        </treeitem>
+        <treeitem id="toolbarsShortcutsTreeitem" container="true">
+          <treerow>
+            <treecell label="&toolbars.label;"/>
+          </treerow>
+          <treechildren id="toolbarsShortcutsTreechildren"/>
+        </treeitem>
+      </treechildren>
+    </tree>
+  </prefpane>
+
+</overlay>

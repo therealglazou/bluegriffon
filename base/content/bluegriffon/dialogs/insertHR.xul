@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/bluegriffonDialogs.css" type="text/css"?>
+
+<!DOCTYPE dialog SYSTEM "chrome://bluegriffon/locale/insertHR.dtd">
+
+<dialog title="&window.title;"
+        id="insertHRDialog"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        onload = "Startup()"
+        buttons="accept,cancel"
+        style="height: auto"
+        ondialogaccept="return onAccept();"
+        persist="screenX screenY">
+
+  <!-- Methods common to all editor dialogs -->
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/dgid.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/global.js"/>
+  <script type="application/x-javascript"  src="chrome://bluegriffon/content/txns/diStyleAttrChangeTxn.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/dialogs/insertHR.js"/>
+
+  <groupbox>
+    <caption label="&size.label;"/>
+    <grid>
+      <columns><column/><column/><column/></columns>
+      <rows>
+        <row align="center">
+          <label value="&width.label;"/>
+          <menulist sizetopopup="none"
+                    editable="true"
+                    style="max-width: 8em"
+                    id="widthMenulist"
+                    oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', false);"
+                    oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', false)">
+            <menupopup id="widthMenupopup"
+                       onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')"/>
+          </menulist>
+          <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
+                       ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', false)"/>
+        </row>
+        <row align="center">
+          <label value="&height.label;"/>
+          <menulist sizetopopup="none"
+                    editable="true"
+                    id="heightMenulist"
+                    style="max-width: 8em"
+                    oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', false);"
+                    oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', false)">
+            <menupopup id="heightMenupopup"
+                       onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')"/>
+          </menulist>
+          <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
+                       ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', false)"/>
+        </row>
+      </rows>
+    </grid>
+  </groupbox>
+
+  <groupbox>
+    <caption label="&style.label;"/>
+    <checkbox label="&shaded.label;" id="shadedCheckbox" checked="true"/>
+    <grid>
+      <columns><column/><column/></columns>
+      <rows>
+        <row align="center">
+          <label value="&alignment.label;"/>
+          <toolbarbutton class="multibutton"
+                         type="checkbox"
+                         id="leftAlignButton"
+                         label="&left.label;"
+                         value="left"
+                         oncommand="ToggleAlignment(this)"/>
+          <toolbarbutton class="multibutton"
+                         type="checkbox"
+                         id="centerAlignButton"
+                         label="&center.label;"
+                         value="center"
+                         oncommand="ToggleAlignment(this)"/>
+          <toolbarbutton class="multibutton"
+                         type="checkbox"
+                         id="rightAlignButton"
+                         label="&right.label;"
+                         value="right"
+                         oncommand="ToggleAlignment(this)"/>
+        </row>
+        <row align="center">
+          <label value="&color.label;"/>
+          <hbox align="center">
+            <ecolorpicker id="colorColorpicker"
+                          color="black"
+                          colorObjectId="BackgroundColor"
+                          windowTitle="&hrColor.label;"
+                          showTransparency="false"/>
+          </hbox>
+        </row>
+      </rows>
+    </grid>
+  </groupbox>
+
+</dialog>

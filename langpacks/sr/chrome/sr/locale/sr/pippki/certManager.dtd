@@ -1,0 +1,147 @@
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1/GPL 2.0/LGPL 2.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is mozilla.org code.
+   -
+   - The Initial Developer of the Original Code is
+   - Netscape Communications Corp.
+   - Portions created by the Initial Developer are Copyright (C) 2001
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -   Ian McGreer <mcgreer@netscape.com>
+   -
+   - Alternatively, the contents of this file may be used under the terms of
+   - either the GNU General Public License Version 2 or later (the "GPL"), or
+   - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+   - in which case the provisions of the GPL or the LGPL are applicable instead
+   - of those above. If you wish to allow use of your version of this file only
+   - under the terms of either the GPL or the LGPL, and not to allow others to
+   - use your version of this file under the terms of the MPL, indicate your
+   - decision by deleting the provisions above and replace them with the notice
+   - and other provisions required by the GPL or the LGPL. If you do not delete
+   - the provisions above, a recipient may use your version of this file under
+   - the terms of any one of the MPL, the GPL or the LGPL.
+   -
+   - ***** END LICENSE BLOCK ***** -->
+
+<!ENTITY certmgr.title                       "Менаџер сертификата">
+
+<!ENTITY certmgr.tab.mine                     "Ваши сертификати">
+<!ENTITY certmgr.tab.others2                  "Људи">
+<!ENTITY certmgr.tab.websites3                "Сервери">
+<!ENTITY certmgr.tab.ca                       "Ауторитети">
+<!ENTITY certmgr.tab.orphan2                  "Остали">
+
+<!ENTITY certmgr.ca.builtins                  "Уграђена ПС-а">
+<!ENTITY certmgr.ca.mycas                     "Кориснички одређене ПС">
+
+<!ENTITY certmgr.mine                         "Имате сертификате наведених организација које Вас препознају:">
+<!ENTITY certmgr.others                       "Имате сертификате који идентификују ове особе:">
+<!ENTITY certmgr.websites2                    "Имате сертификате који идентификују ове сервере:">
+<!ENTITY certmgr.cas                          "Имате сертификате који идентификују ове ауторитете:">
+<!ENTITY certmgr.orphans                      "Имате сертификате који се не уклапају ни у једну другу категорију:">
+
+<!ENTITY certmgr.detail.general_tab.title     "Основне поставке">
+<!ENTITY certmgr.detail.general_tab.accesskey "G">
+<!ENTITY certmgr.detail.prettyprint_tab.title "Детаљи">
+<!ENTITY certmgr.detail.prettyprint_tab.accesskey "D">
+
+<!ENTITY certmgr.pending.label                "Провера сертификата је у току…">
+<!ENTITY certmgr.subjectinfo.label            "Издато за">
+<!ENTITY certmgr.issuerinfo.label             "Издато од">
+<!ENTITY certmgr.validity.label               "Стваран" >
+<!ENTITY certmgr.fingerprints.label           "Отисак прста">
+<!ENTITY certmgr.certdetail.title             "Детаљи сертификата">
+<!ENTITY certmgr.certdetail.cn                "Општи назив">
+<!ENTITY certmgr.certdetail.o                 "Организација">
+<!ENTITY certmgr.certdetail.ou                "Организациона јединица">
+<!ENTITY certmgr.certdetail.serialnumber      "Серијски број">
+<!ENTITY certmgr.certdetail.sha1fingerprint   "SHA1 отисак прста">
+<!ENTITY certmgr.certdetail.md5fingerprint    "MD5 отисак прста">
+
+<!ENTITY certmgr.editcert.title               "Измени поставке безбедносних сертификата:">
+<!ENTITY certmgr.editcacert.title             "Мења подешавање поверења ПС">
+<!ENTITY certmgr.editsslcert.title            "Уређивање поставки о поверењу сертификату за веб сајт">
+<!ENTITY certmgr.editcert.edittrust           "Измени поставке поверења:">
+<!ENTITY certmgr.editcert.trustssl            "Овај сертификат може да идентификује веб сајтове.">
+<!ENTITY certmgr.editcert.trustemail          "Овај сертификат може да идентификује кориснике ел. поште.">
+<!ENTITY certmgr.editcert.trustobjsign        "Овај сертификат може да идентификује произвођаче софтвера.">
+<!ENTITY certmgr.editsslcert.edittrust        "Параметри веровања сертификатима:">
+<!ENTITY certmgr.editsslcert.dotrust          "Веруј веродостојности овог сертификата.">
+<!ENTITY certmgr.editsslcert.donttrust        "Не веруј веродостојности овог сертификата.">
+<!ENTITY certmgr.editemailcert.title          "Уређивање поверења у сертификате за ел. пошту">
+<!ENTITY certmgr.editemailcert.edittrust      "Параметри веровања сертификатима:">
+<!ENTITY certmgr.editemailcert.dotrust        "Веруј веродостојности овог сертификата.">
+<!ENTITY certmgr.editemailcert.donttrust      "Не веруј веродостојности овог сертификата.">
+
+<!ENTITY certmgr.deletecert.title             "Избриши сертификат">
+<!ENTITY certmgr.deletecert.beforename        "Захтевали сте уклањање овог сертификата:">
+<!ENTITY certmgr.deletecert.aftername         "Да ли сигурно желите да уклоните овај сертификат?">
+<!ENTITY certmgr.deleteusercert.title         "Избриши Ваш сертификат">
+<!ENTITY certmgr.deleteusercert.beforename    "Захтевали сте уклањање сертификата:">
+<!ENTITY certmgr.deleteusercert.aftername     "Када једном уклоните овај сертификат, нећете моћи да читате пошту која је шифрована помоћу њега.">
+
+<!ENTITY certmgr.certname                     "Назив сертификата">
+<!ENTITY certmgr.certserver                   "Сервер">
+<!ENTITY certmgr.override_lifetime            "Животни век">
+<!ENTITY certmgr.tokenname                    "Безбедносни уређај">
+<!ENTITY certmgr.issued                       "Издато">
+<!ENTITY certmgr.expires                      "Истиче">
+<!ENTITY certmgr.email                        "Адреса ел. поште">
+<!ENTITY certmgr.serial                       "Серијски број">
+
+<!ENTITY certmgr.close.label                  "Zatvori">
+<!ENTITY certmgr.close.accesskey              "C">
+<!ENTITY certmgr.view2.label                  "Преглед…">
+<!ENTITY certmgr.view2.accesskey              "V">
+<!ENTITY certmgr.edit3.label                  "Уреди поверење…">
+<!ENTITY certmgr.edit3.accesskey              "E">
+<!ENTITY certmgr.editca.label                 "Уреди поверење">
+<!ENTITY certmgr.editca.accesskey             "d">
+<!ENTITY certmgr.add.label                    "Додај">
+<!ENTITY certmgr.add.accesskey                "A">
+<!ENTITY certmgr.export.label                 "Извоз календара…">
+<!ENTITY certmgr.export.accesskey             "x">
+<!ENTITY certmgr.delete2.label                "Уклони…">
+<!ENTITY certmgr.delete2.accesskey            "D">
+<!ENTITY certmgr.delete_builtin.label         "Избриши или укини поверење…">
+<!ENTITY certmgr.delete_builtin.accesskey     "D">
+<!ENTITY certmgr.backup2.label                "Архивирај…">
+<!ENTITY certmgr.backup2.accesskey            "B">
+<!ENTITY certmgr.backupall2.label             "Архивирај све…">
+<!ENTITY certmgr.backupall2.accesskey         "k">
+<!ENTITY certmgr.restore2.label               "Увоз…">
+<!ENTITY certmgr.restore2.accesskey           "m">
+<!ENTITY certmgr.details.label                "Поља сертификата">
+<!ENTITY certmgr.details.accesskey            "F">
+<!ENTITY certmgr.fields.label                 "Вредност поља">
+<!ENTITY certmgr.fields.accesskey             "V">
+<!ENTITY certmgr.hierarchy.label              "Хијерархија сертификата">
+<!ENTITY certmgr.hierarchy.accesskey          "C">
+<!ENTITY certmgr.addException.label           "Додај изузетак…">
+<!ENTITY certmgr.addException.accesskey       "x">
+
+<!ENTITY exceptionMgr.title                   "Додавање безбедносног изузетка">
+<!ENTITY exceptionMgr.exceptionButton.label   "Потврда безбедносног изузетка">
+<!ENTITY exceptionMgr.exceptionButton.accesskey "C">
+<!ENTITY exceptionMgr.supplementalWarning     "Легитимне банке, продавнице и други јавни сајтови вас неће питати да ово радите.">
+<!ENTITY exceptionMgr.certlocation.caption2   "Сервер">
+<!ENTITY exceptionMgr.certlocation.url        "Адреса:">
+<!ENTITY exceptionMgr.certlocation.download   "Добави сертификат">
+<!ENTITY exceptionMgr.certlocation.accesskey  "В">
+<!ENTITY exceptionMgr.certstatus.caption      "Статус сертификата">
+<!ENTITY exceptionMgr.certstatus.viewCert     "Преглед…">
+<!ENTITY exceptionMgr.certstatus.accesskey    "Н">
+<!ENTITY exceptionMgr.permanent.label         "Трајно сачувај овај изузетак">
+<!ENTITY exceptionMgr.permanent.accesskey     "P">

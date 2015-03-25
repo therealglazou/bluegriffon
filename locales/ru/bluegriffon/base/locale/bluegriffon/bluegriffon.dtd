@@ -1,0 +1,512 @@
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1/GPL 2.0/LGPL 2.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is BlueGriffon.
+   -
+   - The Initial Developer of the Original Code is
+   - Disruptive Innovations SARL.
+   - Portions created by the Initial Developer are Copyright (C) 2006
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -   Daniel Glazman (daniel.glazman@disruptive-innovations.com), Original Author
+   -
+   - Alternatively, the contents of this file may be used under the terms of
+   - either the GNU General Public License Version 2 or later (the "GPL"), or
+   - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+   - in which case the provisions of the GPL or the LGPL are applicable instead
+   - of those above. If you wish to allow use of your version of this file only
+   - under the terms of either the GPL or the LGPL, and not to allow others to
+   - use your version of this file under the terms of the MPL, indicate your
+   - decision by deleting the provisions above and replace them with the notice
+   - and other provisions required by the LGPL or the GPL. If you do not delete
+   - the provisions above, a recipient may use your version of this file under
+   - the terms of any one of the MPL, the GPL or the LGPL.
+   -
+   - ***** END LICENSE BLOCK ***** -->
+
+<!ENTITY window.title           "BlueGriffon">
+
+<!ENTITY fileMenu.label         "Файл">
+<!ENTITY fileMenu.accesskey     "">
+<!ENTITY newMenu.label                    "Создать">
+<!ENTITY newMenu.accesskey                "">
+
+<!ENTITY newWizardMenu.label              "Мастер создания нового документа">
+
+<!ENTITY editMenu.label                   "Правка">
+<!ENTITY editMenu.accesskey               "">
+
+<!ENTITY viewMenu.label                   "Вид">
+<!ENTITY viewMenu.accesskey               "">
+<!ENTITY customizeToolbar.label           "Настроить">
+<!ENTITY customizeToolbar.accesskey       "">
+
+<!ENTITY insertMenu.label                 "Вставить">
+<!ENTITY insertMenu.accesskey             "">
+
+<!ENTITY formatMenu.label                 "Формат">
+<!ENTITY formatMenu.accesskey             "">
+<!ENTITY spanCmd.label "Интервал">
+<!ENTITY spanCmd.accesskey "">
+<!-- Font Style SubMenu -->
+<!ENTITY fontStyleMenu.label "Стиль текста">
+<!ENTITY formatstylemenu.accesskey "">
+<!ENTITY styleBoldCmd.label "Полужирный">
+<!ENTITY stylebold.accesskey "">
+<!ENTITY stylebold.keybinding "">
+<!ENTITY styleItalicCmd.label "Курсив">
+<!ENTITY styleitalic.accesskey "">
+<!ENTITY styleitalic.keybinding "">
+<!ENTITY styleUnderlineCmd.label "Подчеркнутый">
+<!ENTITY styleunderline.accesskey "">
+<!ENTITY styleUnderline.key "">
+<!ENTITY styleStrikeThruCmd.label "Зачеркнутый">
+<!ENTITY stylestrikethru.accesskey "">
+<!ENTITY styleSuperscriptCmd.label "Надстрочный">
+<!ENTITY stylesuperscript.accesskey "">
+<!ENTITY styleSubscriptCmd.label "Подстрочный">
+<!ENTITY stylesubscript.accesskey "">
+<!ENTITY styleNonbreakingCmd.label "Неразрывно">
+<!ENTITY stylenonbreaking.accesskey "">
+<!ENTITY styleEm.label "Выделение">
+<!ENTITY styleEm.accesskey "">
+<!ENTITY styleEm.key "">
+<!ENTITY styleStrong.label "Сильное выделение">
+<!ENTITY styleStrong.accesskey "">
+<!ENTITY styleStrong.key "">
+<!ENTITY styleCite.label "Цитата">
+<!ENTITY styleCite.accesskey "">
+<!ENTITY styleAbbr.label "Аббревиатура">
+<!ENTITY styleAbbr.accesskey "">
+<!ENTITY styleAcronym.label "Акроним">
+<!ENTITY styleAcronym.accesskey "">
+<!ENTITY styleCode.label "Код">
+<!ENTITY styleCode.accesskey "">
+<!ENTITY styleCode.key "">
+<!ENTITY styleSamp.label "Примеры вывода">
+<!ENTITY styleSamp.accesskey "">
+<!ENTITY styleVar.label "Переменный">
+<!ENTITY styleVar.accesskey "">
+<!ENTITY fontFixedWidth.label "Моноширинный">
+<!ENTITY fontfixedwidth.accesskey "">
+
+<!ENTITY tableMenu.label                  "Таблица">
+<!ENTITY tableMenu.accesskey              "">
+
+<!ENTITY toolsMenu.label                  "Инструменты">
+<!ENTITY toolsMenu.accesskey              "">
+<!ENTITY consoleMenu.label                "Консоль JavaScript">
+
+<!ENTITY panelsMenu.label                 "Панели">
+<!ENTITY panelsMenu.accesskey             "">
+
+<!ENTITY alignPanels.label                "Выровнять все панели">
+
+<!ENTITY helpMenu.label                   "Справка">
+<!ENTITY helpMenu.accesskey               "">
+<!ENTITY aboutComposer.label              "О программе BlueGriffon">
+
+<!ENTITY throbber.tooltip                 "BlueGriffon">
+
+<!ENTITY newMenu.label                    "Создать">
+<!ENTITY newToolbarCmd.tooltip            "Создать новую страницу">
+<!ENTITY pageInNewTab.label                     "Страница в новой вкладке">
+<!ENTITY pageInNewWindow.label                  "Страница в новом окне">
+<!ENTITY newOtherCmd.label                "Больше опций...">
+
+<!ENTITY openMenu.label                   "Открыть">
+<!ENTITY openMenu.tooltip                 "Открыть существующую страницу">
+<!ENTITY openTab.label                    "Открыть в новой вкладке">
+<!ENTITY openWindow.label                 "Открыть в новом окне">
+<!ENTITY openPage.label                   "Открыть">
+<!ENTITY openPage.accesskey               "">
+<!ENTITY openFileCmd.label                "Открыть файл">
+
+<!ENTITY quit.label                       "Выход">
+<!ENTITY quit.accesskey                   "">
+
+<!ENTITY stopButton.label                 "Остановить">
+<!ENTITY stopButton.tooltip               "Остановить загрузку страницы">
+
+<!ENTITY boldToolbarCmd.tooltip           "Полужирный">
+<!ENTITY boldToolbarCmd.label             "Полужирный">
+<!ENTITY italicToolbarCmd.tooltip         "Курсив">
+<!ENTITY italicToolbarCmd.label           "Курсив">
+<!ENTITY underlineToolbarCmd.tooltip      "Подчеркнутый">
+<!ENTITY underlineToolbarCmd.label        "Подчеркнутый">
+<!ENTITY strongToolbarCmd.tooltip         "Сильное выделение">
+<!ENTITY strongToolbarCmd.label           "Сильное выделение">
+<!ENTITY emToolbarCmd.tooltip             "Выделение">
+<!ENTITY emToolbarCmd.label               "Выделение">
+<!ENTITY codeToolbarCmd.label             "Код">
+<!ENTITY codeToolbarCmd.tooltip           "Код">
+<!-- RTL -->                           
+<!ENTITY writingDirectionMenu.label          "Направление письма">
+<!ENTITY writingdirectionmenu.accesskey      "">
+<!ENTITY defaultDirectionMenu.label          "Не определено">
+<!ENTITY defaultdirectionmenu.accesskey      "">
+<!ENTITY ltrDirectionMenu.label              "Слева направо">
+<!ENTITY ltrdirectionmenu.accesskey          "">
+<!ENTITY rtlDirectionMenu.label              "Справа налево">
+<!ENTITY rtldirectionmenu.accesskey          "">
+<!ENTITY dirLtr.tooltip                      "Слева направо">
+<!ENTITY dirRtl.tooltip                      "Справа налево">
+
+<!ENTITY ParagraphSelect.tooltip "Выбрать формат абзаца">
+<!-- Shared in Paragraph, and Toolbar menulist -->
+<!ENTITY bodyTextCmd.label "Основной текст">
+<!ENTITY paragraphParagraphCmd.label "Абзац">  
+<!ENTITY heading1Cmd.label "Заголовок 1">
+<!ENTITY heading2Cmd.label "Заголовок 2">
+<!ENTITY heading3Cmd.label "Заголовок 3">
+<!ENTITY heading4Cmd.label "Заголовок 4">
+<!ENTITY heading5Cmd.label "Заголовок 5">
+<!ENTITY heading6Cmd.label "Заголовок 6">
+<!ENTITY paragraphAddressCmd.label "Адрес">
+<!ENTITY paragraphPreformatCmd.label "Форматированный">
+<!ENTITY genericContainerCmd.label "Общий контейнер (div)">
+
+<!ENTITY unorderedList.tooltip "Неупорядоченный список">
+<!ENTITY orderedList.tooltip "Упорядоченный список">
+<!ENTITY unorderedList.label "Неупорядоченный список">
+<!ENTITY orderedList.label "Упорядоченный список">
+
+<!ENTITY alignLeft.tooltip "По левому краю">
+<!ENTITY alignCenter.tooltip "По центру">
+<!ENTITY alignRight.tooltip "По правому краю">
+<!ENTITY alignJustify.tooltip "По ширине">
+<!ENTITY alignLeft.label "По левому краю">
+<!ENTITY alignCenter.label "По центру">
+<!ENTITY alignRight.label "По правому краю">
+<!ENTITY alignJustify.label "По ширине">
+
+<!ENTITY indentToolbarCmd.tooltip "Сместить текст вправо">
+<!ENTITY indentToolbarCmd.label "Сместить вправо">
+
+<!ENTITY outdentToolbarCmd.tooltip "Сместить текст влево">
+<!ENTITY outdentToolbarCmd.label "Сместить влево">
+
+<!ENTITY definitionDescription.tooltip "Описание определения">
+<!ENTITY definitionDescription.label "Описание определения">
+<!ENTITY definitionTitle.tooltip "Название определения">
+<!ENTITY definitionTitle.label "Название определения">
+
+<!ENTITY FontFaceSelect.tooltip "Выбрать шрифт">
+<!ENTITY fontVarWidth.label "Переменная ширина">
+<!ENTITY fontFixedWidth.label "Фикированная ширина">
+<!ENTITY fontHelveticaFont.label "Helvetica, Arial">
+<!ENTITY fontTimes.label "Times">
+<!ENTITY fontCourier.label "Courier">
+
+<!ENTITY applyClassToSelectionCmd.tooltip "Применить класс к выделенному">
+<!ENTITY noClass.label "(без класса)">
+
+<!ENTITY applyIdToSelectionCmd.tooltip "Задать идентификатор ID выделенному">
+<!ENTITY noId.label "(без идентификатора)">
+
+<!ENTITY tableToolbarCmd.label "Таблицу">
+<!ENTITY tableToolbarCmd.key "">
+<!ENTITY tableToolbarCmd.tooltip "Вставить новую таблицу или изменить свойства выбранной таблицы">
+
+<!ENTITY imageToolbarCmd.label "Изображение">
+<!ENTITY imageToolbarCmd.key "">
+<!ENTITY imageToolbarCmd.tooltip "Вставить или редактировать изображение">
+
+<!ENTITY anchorToolbarCmd.label "Якорь">
+<!ENTITY anchorToolbarCmd.key "">
+<!ENTITY anchorToolbarCmd.tooltip "Вставить или изменить якорь">
+
+<!ENTITY linkToolbarCmd.label "Ссылку">
+<!ENTITY linkToolbarCmd.key "">
+<!ENTITY linkToolbarCmd.tooltip "Вставить или изменить ссылку">
+
+<!ENTITY hrToolbarCmd.label "Горизонтальную планку">
+<!ENTITY hrToolbarCmd.key "">
+
+<!ENTITY htmlToolbarCmd.label "Разметку HTML">
+<!ENTITY htmlToolbarCmd.key "">
+
+<!ENTITY formToolbarCmd.label "Форму">
+<!ENTITY formToolbarCmd.key "">
+<!ENTITY formToolbarCmd.tooltip "Вставить или изменить форму">
+
+<!ENTITY fieldsetToolbarCmd.label "Поле">
+<!ENTITY fieldsetToolbarCmd.key "">
+
+<!ENTITY labelToolbarCmd.label "Метку">
+<!ENTITY labelToolbarCmd.key "">
+
+<!ENTITY buttonToolbarCmd.label "Кнопку">
+<!ENTITY buttonToolbarCmd.key "">
+
+<!ENTITY selectToolbarCmd.label "Выбор списка">
+<!ENTITY selectToolbarCmd.key "">
+
+<!ENTITY textareaToolbarCmd.label "Область текста">
+<!ENTITY textareaToolbarCmd.key "">
+
+<!ENTITY keygenToolbarCmd.label "Генератор пары ключей">
+<!ENTITY keygenToolbarCmd.key "">
+
+<!ENTITY outputToolbarCmd.label "Вывод">
+<!ENTITY outputToolbarCmd.key "">
+
+<!ENTITY progressToolbarCmd.label "Прогресс">
+<!ENTITY progressToolbarCmd.key "">
+
+<!ENTITY meterToolbarCmd.label "Индикатор">
+<!ENTITY meterToolbarCmd.key "">
+
+<!ENTITY datalistToolbarCmd.label "Список данных">
+<!ENTITY datalistToolbarCmd.key "">
+
+<!ENTITY stylesheetsToolbarCmd.label "Таблицу стилей">
+<!ENTITY stylesheetsToolbarCmd.key "">
+
+<!ENTITY webfonts.label "Веб шрифты">
+
+<!ENTITY videoToolbarCmd.label "Видео">
+<!ENTITY videoToolbarCmd.tooltip "Вставить или изменить видео">
+
+<!ENTITY audioToolbarCmd.label "Аудио">
+<!ENTITY audioToolbarCmd.tooltip "Вставить или изменить аудио файл">
+
+<!ENTITY browseToolbarCmd.label "Просмотр">
+<!ENTITY browseToolbarCmd.tooltip "Просмотреть в браузере">
+
+<!ENTITY saveCmd.label "Сохранить">
+<!ENTITY saveToolbarCmd.tooltip "Сохранить файл в локальной папке">
+<!ENTITY filesave.key "">
+<!ENTITY saveAsCmd.label "Сохранить как...">
+<!ENTITY filesaveas.key "">
+
+<!ENTITY undoCmd.label "Отменить">
+<!ENTITY undoCmd.accesskey "">
+<!ENTITY redoCmd.label "Повторить">
+<!ENTITY redoCmd.accesskey "">
+
+<!ENTITY cutCmd.label "Вырезать">
+<!ENTITY cutCmd.accesskey "">
+<!ENTITY copyCmd.label "Копировать">
+<!ENTITY copyCmd.accesskey "">
+<!ENTITY pasteCmd.label "Вставить">
+<!ENTITY pasteCmd.accesskey "">
+<!ENTITY pasteNoFormatting.label "Вставить без форматирования">
+<!ENTITY pasteNoFormatting.accesskey "">
+<!ENTITY deleteCmd.label "Удалить">
+<!ENTITY deleteCmd.accesskey "">
+<!ENTITY selectAllCmd.label "Выбрать все">
+<!ENTITY selectAllCmd.accesskey "">
+<!ENTITY copyHTMLCodeCmd.label "Копировать выбранный код HTML">
+<!ENTITY copyHTMLCodeCmd.accesskey "">
+<!ENTITY copyHTMLCode.label "Копировать элемент кода HTML">
+
+<!ENTITY setZoomFactor.label "Установить коэффициент увеличения">
+
+<!ENTITY fileRecentMenu.label "Последние файлы">
+<!ENTITY filerecentmenu.accesskey "">
+
+<!ENTITY markupCleanerCmd.label "Очистка кода">
+<!ENTITY markupcleaner.accesskey "">
+
+<!ENTITY viewToolbars.label "Панели инструментов">
+<!ENTITY viewStatusbar.label "Строка состояния">
+
+<!ENTITY formatToolbar.name "Формат (основной)">
+<!ENTITY formatToolbar2.name "Формат (вторичной)">
+
+<!ENTITY wysiwygMode.label "Визуальное отображение">
+<!ENTITY printMode.label "Print Preview">
+<!ENTITY sourceMode.label "Исходный код">
+
+<!ENTITY closeTabCmd.label "Закрыть текущую вкладку">
+
+<!ENTITY filesave.key "">
+<!ENTITY quit.key "">
+<!ENTITY closeWindow.key "">
+<!ENTITY openPage.key "">
+<!ENTITY undoCmd.key "">
+<!ENTITY redoCmd.key "">
+<!ENTITY cutCmd.key "">
+<!ENTITY copyCmd.key "">
+<!ENTITY pasteCmd.key "">
+
+<!ENTITY formInputs.label "Формы ввода...">
+<!ENTITY hiddenInputForm.label "Скрытая строка">
+<!ENTITY textInputForm.label "Поле ввода текста">
+<!ENTITY searchInputForm.label "Поле поиска">
+<!ENTITY telInputForm.label "Поле номер телефона">
+<!ENTITY urlInputForm.label "Поле URL">
+<!ENTITY emailInputForm.label "Поле электронной почты">
+<!ENTITY passwordInputForm.label "Поле пароля">
+<!ENTITY datetimeInputForm.label "Выбор даты и времени в часовом поясе UTC">
+<!ENTITY dateInputForm.label "Выбор даты">
+<!ENTITY monthInputForm.label "Выбор года и месяца">
+<!ENTITY weekInputForm.label "Выбор год-неделя и неделя">
+<!ENTITY timeInputForm.label "Выбор времени без часового пояса">
+<!ENTITY datetimelocalInputForm.label "Выбор даты и времени без часового пояса">
+<!ENTITY numberInputForm.label "Поле числового значения">
+<!ENTITY rangeInputForm.label "Выбор числового диапазона">
+<!ENTITY colorInputForm.label "Выбор цвета">
+<!ENTITY checkboxInputForm.label "Чекбокс">
+<!ENTITY radioInputForm.label "Радиокнопка">
+<!ENTITY fileInputForm.label "Выбор файла">
+<!ENTITY submitInputForm.label "Форма кнопки отправки">
+<!ENTITY imageInputForm.label "Форма кнопки отправки на основе изображения">
+<!ENTITY resetInputForm.label "Форма кнопки сброса">
+<!ENTITY buttonInputForm.label "Кнопка">
+
+
+<!ENTITY allTagsMode.label "Показать HTML-теги">
+
+<!ENTITY toggleViewMenu.label "Переключить вид">
+<!ENTITY toggleViewMenu.accesskey "">
+
+<!ENTITY spellCheck.label "Проверка орфографии">
+<!ENTITY spellCheck.accesskey "">
+<!ENTITY dictionary.label "Словарь">
+<!ENTITY addToDictionary "Добавить словарь">
+<!ENTITY ignoreWord.label "Игнорировать слова">
+
+<!ENTITY specialChars.label "Знаки и символы">
+
+<!-- Table Menu -->
+<!ENTITY tableMenu.label                     "Таблица">
+<!ENTITY tablemenu.accesskey                 "">
+<!-- Select Submenu -->
+<!ENTITY tableSelectMenu.label               "Выбрать">
+<!ENTITY tableselectmenu.accesskey           "">
+
+<!ENTITY tableSelectMenu2.label              "Выбрать таблицу">
+<!ENTITY tableInsertMenu2.label              "Вставить таблицу">
+<!ENTITY tableDeleteMenu2.label              "Удалить таблицу">
+
+<!-- Insert SubMenu -->
+<!ENTITY tableInsertMenu.label               "Вставить">
+<!ENTITY tableinsertmenu.accesskey           "">
+<!ENTITY tableTable.label                    "Таблицу">
+<!ENTITY tabletable.accesskey                "">
+<!ENTITY tableRow.label                      "Строку">
+<!ENTITY tableRows.label                     "Строку(и)">
+<!ENTITY tablerow.accesskey                  "">
+<!ENTITY tableRowAbove.label                 "Строку выше">
+<!-- uses tablerow.accesskey -->
+<!ENTITY tableRowBelow.label                 "Строку ниже">
+<!ENTITY tablerowbelow.accesskey             "">
+<!ENTITY tableColumn.label                   "Столбец">
+<!ENTITY tableColumns.label                  "Столбец(ы)">
+<!ENTITY tablecolumn.accesskey               "">
+<!ENTITY tableColumnBefore.label             "Столбец перед">
+<!-- uses tablecolumn.accesskey -->
+<!ENTITY tableColumnAfter.label              "Столбец после">
+<!ENTITY tablecolumnafter.accesskey          "">
+<!ENTITY tableCell.label                     "Ячейку">
+<!ENTITY tableCells.label                    "Ячейку(и)">
+<!ENTITY tablecell.accesskey                 "">
+<!ENTITY tableCellContents.label             "Содержимое ячеек">
+<!ENTITY tablecellcontents.accesskey         "">
+<!ENTITY tableAllCells.label                 "Все ячейки">
+<!ENTITY tableCellBefore.label               "Ячейку перед">
+<!ENTITY tableallcells.accesskey             "">
+<!-- uses tablecell.accesskey -->
+<!ENTITY tableCellAfter.label                "Ячейку после">
+<!ENTITY tablecellafter.accesskey            "">
+<!-- Delete SubMenu -->
+<!ENTITY tableDeleteMenu.label               "Удалить">
+<!ENTITY tabledeletemenu.accesskey           "">
+
+<!ENTITY tableFix.label                      "Исправить разметку таблицы">
+<!ENTITY tablefix.accesskey                  "">
+<!-- text for "Join Cells" is in editor.properties 
+     ("JoinSelectedCells" and "JoinCellToRight")
+     the access key must exist in both of those strings
+     But value must be set here for accesskey to draw properly
+-->
+<!ENTITY tableJoinCells.label                "Объединить ячейки">
+<!ENTITY tablejoincells.accesskey            "">
+<!ENTITY tableSplitCell.label                "Разбить ячейку">
+<!ENTITY tablesplitcell.accesskey            "">
+<!ENTITY convertToTable.label                "Создать таблицу из выделенного">
+<!ENTITY converttotable.accesskey            "">
+<!ENTITY tableProperties.label               "Свойства таблицы…">
+<!ENTITY tableProperties.accesskey           "">
+
+<!ENTITY forumsHelpMenu.label "Сообщество пользователей">
+<!ENTITY forums.url "http://groups.google.com/group/bluegriffon/">
+<!ENTITY qa.label "Предложения и отчёты об ошибках">
+<!ENTITY homePage.label "Веб-сайт">
+<!ENTITY addons.label "Получить дополнения">
+
+<!ENTITY pageProperties.label "Свойства страницы">
+
+
+<!ENTITY preferences.label "Параметры">
+
+<!ENTITY gotoLink.label "Выбрать цель для ссылки">
+<!ENTITY gotoLink.accesskey "">
+
+<!ENTITY cMenu_insertLink.label "Вставить или изменить ссылку">
+<!ENTITY cMenu_insertLink.accesskey "">
+
+<!ENTITY getAddOns.label "Получить дополнения!">
+
+<!ENTITY source.label "Исходный код">
+<!ENTITY theme.label "Тема">
+
+<!ENTITY removeAllStyles.label "Удалить все стили текста">
+<!ENTITY removeAllStyles.accesskey "">
+<!ENTITY removeAllLinks.label "Удалить все ссылки">
+<!ENTITY removeAllLinks.accesskey "">
+
+<!ENTITY html5Element.label "Элемент HTML 5">
+<!ENTITY addonsMenu.label "Дополнения">
+
+<!ENTITY listProperties.label "Параметры списка">
+
+<!ENTITY tableOfContents.label "Таблицу содержания">
+
+<!ENTITY select.label "Выбрать...">
+<!ENTITY parentElement.label "Родительский элемент">
+<!ENTITY firstChild.label "Первый дочерний элемент">
+<!ENTITY nextSibling.label "Следующий одноуровневый элемент">
+<!ENTITY previousSibling.label "Предыдущий одноуровневый элемент">
+
+<!ENTITY tableCaption.label "Заголовок таблицы">
+
+<!ENTITY lookForUpdates.label "Проверить обновления">
+
+<!ENTITY color.label "Передний план">
+<!ENTITY bgColor.label "Фон">
+
+<!ENTITY newWindow.label "Новое окно">
+
+<!ENTITY editComment.label "Редактировать комментарий HTML:">
+<!ENTITY editPHP.label "Редактировать инструкцию PHP:">
+<!ENTITY editPI.label "Редактировать инструкцию обработки:">
+<!ENTITY targetPI.label "Цель:">
+<!ENTITY dataPI.label "Данные:">
+<!ENTITY commentOrPHPOrPI.label "Комментарии/PHP/инструкции обработки">
+<!ENTITY openLinkCmdInTab.label "Открыть ссылку в новой вкладке">
+<!ENTITY blockquoteToolbarCmd.label "Блок цитирования">
+<!ENTITY blockquoteToolbarCmd.tooltip "Инкапсуляция в блок цитирования">
+<!ENTITY deckMenu.label "Боковая панель">
+<!ENTITY printSetupCmd.label "Параметры страницы…">
+<!ENTITY printSetupCmd.accesskey "">
+<!ENTITY printCmd.label "Печать…">
+<!ENTITY printCmd.accesskey "">
+<!ENTITY printCmd.commandkey "">
+<!ENTITY encapsulate.tooltip "Применить к выделению теги поточного элемента (span по умолчанию)">
+
+<!ENTITY deleteCmd.key            "D">
+<!ENTITY selectAllCmd.key         "A">

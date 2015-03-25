@@ -1,0 +1,91 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this file,
+   - You can obtain one at http://mozilla.org/MPL/2.0/.  -->
+
+<!-- LOCALIZATION NOTE (downloads.title):
+     Used by screen readers to describe the Downloads Panel.
+     -->
+<!ENTITY downloads.title                  "다운로드">
+
+<!-- LOCALIZATION NOTE (downloadDetails.width):
+     Width of details for a Downloads Panel item (which directly influences the
+     width of the Downloads Panel) expressed using a CSS unit. The longest
+     labels that should fit in the item width are usually those of in-progress
+     downloads and those of blocked downloads.
+
+     A good rule of thumb is to try to determine the longest string possible
+     that an in-progress download could display, and use that value in ch
+     units.
+
+     For example, in English, a long string would be:
+     toolkit/locales/en-US/chrome/mozapps/downloads/downloads.properties 참고함
+     59 minutes, 59 seconds remaining - 1022 of 1023 KB
+     59시간 59분 남음 - 1023 / 1022 KB 
+     That's 50 characters, so we set the width at 50ch.
+     한글이 2ch이면 33ch -->
+<!ENTITY downloadDetails.width            "33ch">
+
+<!-- LOCALIZATION NOTE (downloadsSummary.minWidth2):
+     Minimum width for the main description of the downloads summary,
+     which is displayed at the bottom of the Downloads Panel if the
+     number of downloads exceeds the limit that the panel can display.
+
+     A good rule of thumb here is to look at the otherDownloads string
+     in downloads.properties, and make a reasonable estimate of its
+     maximum length. For English, this seems like a reasonable limit:
+
+     +999 other downloads
+     다운로드 항목 999개 더 있음
+     that's 21 characters, so we set the minimum width to 21ch.
+     한글이 2ch이면 29ch -->
+<!ENTITY downloadsSummary.minWidth2       "29ch">
+
+<!ENTITY cmd.pause.label                  "중단">
+<!ENTITY cmd.pause.accesskey              "P">
+<!ENTITY cmd.resume.label                 "계속">
+<!ENTITY cmd.resume.accesskey             "R">
+<!ENTITY cmd.cancel.label                 "취소">
+<!ENTITY cmd.cancel.accesskey             "C">
+<!-- LOCALIZATION NOTE (cmd.show.label, cmd.show.accesskey, cmd.showMac.label,
+     cmd.showMac.accesskey):
+     The show and showMac commands are never shown together, thus they can share
+     the same access key (though the two access keys can also be different).
+     -->
+<!ENTITY cmd.show.label                   "폴더 열기">
+<!ENTITY cmd.show.accesskey               "F">
+<!ENTITY cmd.showMac.label                "Finder에서 보기">
+<!ENTITY cmd.showMac.accesskey            "F">
+<!ENTITY cmd.retry.label                  "다시 시도">
+<!ENTITY cmd.goToDownloadPage.label       "다운로드 페이지 가기">
+<!ENTITY cmd.goToDownloadPage.accesskey   "G">
+<!ENTITY cmd.copyDownloadLink.label       "다운로드 링크 복사">
+<!ENTITY cmd.copyDownloadLink.accesskey   "L">
+<!ENTITY cmd.removeFromHistory.label      "기록에서 삭제">
+<!ENTITY cmd.removeFromHistory.accesskey  "e">
+<!ENTITY cmd.clearList.label              "목록 전체 삭제">
+<!ENTITY cmd.clearList.accesskey          "a">
+<!ENTITY cmd.clearDownloads.label         "다운로드 항목 지우기">
+<!ENTITY cmd.clearDownloads.accesskey     "D">
+
+<!-- LOCALIZATION NOTE (downloadsHistory.label, downloadsHistory.accesskey):
+     This string is shown at the bottom of the Downloads Panel when all the
+     downloads fit in the available space, or when there are no downloads in
+     the panel at all.
+     -->
+<!ENTITY downloadsHistory.label           "다운로드 항목 모두 보기">
+<!ENTITY downloadsHistory.accesskey       "S">
+
+<!ENTITY clearDownloadsButton.label       "다운로드 항목 지우기">
+<!ENTITY clearDownloadsButton.tooltip     "완료, 취소, 그리고 실패한 다운로드 항목 지우기">
+
+<!-- LOCALIZATION NOTE (downloadsListEmpty.label):
+     This string is shown when there are no items in the Downloads view, when it
+     is displayed inside a browser tab.
+     -->
+<!ENTITY downloadsListEmpty.label         "다운로드 항목이 없습니다.">
+
+<!-- LOCALIZATION NOTE (downloadsListNoMatch.label):
+     This string is shown when some search terms are specified, but there are no
+     results in the Downloads view.
+     -->
+<!ENTITY downloadsListNoMatch.label       "일치하는 다운로드 항목이 없습니다.">

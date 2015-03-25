@@ -1,0 +1,38 @@
+# sh
+# Build configuration script for WIN32
+#
+# See http://www.mozilla.org/build/unix.html for build instructions.
+#
+
+# Mandatory if you use VC7 (see Windows build instructions
+# in http://mozilla.org/build/win32.html
+# you may have to edit the lines according to your directory settings
+
+mk_add_options MOZ_OBJDIR=/home/glazou/bin/opt/bg-trunk
+#mk_add_options MOZ_OBJDIR=/home/glazou/bin/debug/bg-trunk
+ac_add_options --enable-application=bluegriffon
+mk_add_options MOZ_TOOLKIT_SEARCH=
+
+# Uncomment the following lines for an optimized build
+ac_add_options --disable-debug
+ac_add_options --enable-optimize
+#ac_add_options --enable-debug
+#ac_add_options --disable-optimize
+
+ac_add_options --disable-installer
+#ac_add_options --disable-javaxpcom
+ac_add_options --disable-activex
+ac_add_options --disable-activex-scripting
+ac_add_options --disable-tests
+ac_add_options --disable-airbag
+ac_add_options --enable-places
+ac_add_options --enable-storage
+
+ac_add_options --disable-vista-sdk-requirements
+
+ac_add_options --enable-shared
+ac_add_options --disable-static
+mk_add_options MOZ_MAKE_FLAGS="-s -j4"
+
+
+

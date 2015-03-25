@@ -1,0 +1,406 @@
+/* ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1/GPL 2.0/LGPL 2.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is BlueGriffon.
+ *
+ * The Initial Developer of the Original Code is
+ * Disruptive Innovations SARL.
+ * Portions created by the Initial Developer are Copyright (C) 2006
+ * the Initial Developer. All Rights Reserved.
+ *
+ * Contributor(s):
+ *   Daniel Glazman <daniel.glazman@disruptive-innovations.com>, Original author
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU General Public License Version 2 or later (the "GPL"), or
+ * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+ * in which case the provisions of the GPL or the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of either the GPL or the LGPL, and not to allow others to
+ * use your version of this file under the terms of the MPL, indicate your
+ * decision by deleting the provisions above and replace them with the notice
+ * and other provisions required by the GPL or the LGPL. If you do not delete
+ * the provisions above, a recipient may use your version of this file under
+ * the terms of any one of the MPL, the GPL or the LGPL.
+ *
+ * ***** END LICENSE BLOCK ***** */
+
+@import url("chrome://bluegriffon/content/bindings/sidebar.css");
+@import url("chrome://bluegriffon/content/bindings/structurebar.css");
+@import url("chrome://bluegriffon/skin/structurebar.css");
+@import url("chrome://bluegriffon/skin/mainToolbar.css");
+@import url("chrome://bluegriffon/skin/formatToolbar.css");
+
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+@namespace svg url("http://www.w3.org/2000/svg");
+@namespace html url("http://www.w3.org/1999/xhtml");
+
+tabeditor {
+  -moz-binding: url('chrome://bluegriffon/content/bindings/tabeditor.xml#tabeditor');
+}
+
+tabeditor[visibility="hidden"]  tabs,
+tabeditor[visibility="hidden"]  tabpanels
+{
+  visibility: hidden;
+}
+
+tabeditor[visibility="hidden"] {
+  background-color: rgb(128,128,128);
+}
+
+sidebar {
+  width: 200px;
+}
+
+sourceeditor {
+  -moz-binding: url('chrome://diavolo/content/sourceeditor.xml#sourceeditor');
+}
+
+hruler {
+  -moz-binding: url('chrome://bluegriffon/content/bindings/rulers.xml#hruler');
+}
+
+vruler {
+  -moz-binding: url('chrome://bluegriffon/content/bindings/rulers.xml#vruler');
+}
+
+.menuitem-iconic .menu-iconic-left {
+  display: -moz-box !important;
+}
+
+
+#infoButton {
+  list-style-image: url('chrome://bluegriffon/skin/icons/information.png');
+  width: 16px;
+  height: 16px;
+}
+
+#infoButton:hover {
+  list-style-image: url('chrome://bluegriffon/skin/icons/information-hover.png'); 
+}
+
+#infoButton[disabled="true"],
+#infoButton[disabled="true"]:hover {
+  list-style-image: url('chrome://bluegriffon/skin/icons/information-disabled.png'); 
+}
+
+#viewSourceButton {
+  list-style-image: url('chrome://bluegriffon/skin/icons/view-source.png');
+}
+
+#helperButtons {
+  border-right: threedshadow 1px solid;
+  padding: 2px;
+}
+
+#treeSourceView
+{
+  background-color: white;
+}
+
+grippy[disabled="true"] {
+  display: none;
+}
+
+/******* ZOOM *******/
+
+#menulist-zoompanel {
+  max-width: 7em;
+}
+
+#CustomizeToolbarSheet > #main-box {
+  border-top: none !important;
+  border-left: 2px solid;
+  border-right: 2px solid;
+  border-bottom: 3px solid;
+  -moz-border-right-colors: -moz-mac-menushadow ThreeDLightShadow  !important;
+  -moz-border-bottom-colors: -moz-mac-menushadow -moz-mac-menushadow ThreeDShadow  !important;
+  -moz-border-left-colors: ThreeDLightShadow ThreeDHighlight !important;
+}
+
+/********* splitters **********/
+
+#splitter1 {
+  border-right: thin solid silver;
+  border-left: thin solid silver;
+}
+
+#splitter2 {
+  border-left: thin solid silver;
+  border-right: thin solid silver;
+}
+
+.multiButton,
+.multiButton:not([selected="true"]):not([disabled]):active {
+  -moz-appearance: none;
+  padding: 2px 3px 0px 5px;
+  border-top: 4px solid #aaa;
+  border-left: 4px solid #ccc;
+  border-right: 4px solid #ccc;
+  border-bottom: 4px solid #ccc;
+  -moz-border-top-colors:#aaa #bbb #ccc #ddd;
+  -moz-border-left-colors:#aaa #bbb #ccc #ddd;
+  -moz-border-bottom-colors:#aaa #bbb #ccc #ddd;
+  -moz-border-right-colors:#aaa #bbb #ccc #ddd;
+  background-color: #ddd;
+  margin: 0px;
+}
+
+.multiButton.left,
+.multiButton:not(.left):not(.right):not(.center) {
+  border-top-left-radius: 0.5em;
+  border-bottom-left-radius: 0.5em;
+}
+
+.multiButton.right,
+.multiButton:not(.left):not(.right):not(.center) {
+  border-top-right-radius: 0.5em;
+  border-bottom-right-radius: 0.5em;
+}
+
+.multiButton:not([selected="true"]):not([disabled]) {
+  color:#414141;
+  padding: 1px 4px 1px 4px;
+  border-top: 4px solid #ccc;
+  border-left: 4px solid #ccc;
+  border-right: 4px solid #ccc;
+  border-bottom: 4px solid #aaa;
+  -moz-border-top-colors:#aaa #fff #fff #fff;
+  -moz-border-right-colors:#aaa #dedede #efefef #fafafa;
+  -moz-border-left-colors:#aaa #dedede #efefef #fafafa;
+  -moz-border-bottom-colors:#aaa #dedede #efefef #fafafa;
+  background-color: #fff;
+}
+
+.multiButton[disabled] {
+  opacity: 0.5;
+}
+
+.multiButton:not([label]) image {
+  margin-left: 6px;
+}
+
+/* BESPIN TOOLBOX */
+
+#bespinToolbox1, #bespinToolbox2 {
+  margin: 0px;
+  background-color: #28201C;
+  margin-left: 1px;
+  margin-right: 1px;
+  border-top: thin solid rgb(75, 73, 65);
+  color: rgb(208, 208, 208);
+}
+
+#bespinLineTextbox {
+  border-radius: 11px 11px 11px 11px;
+  -moz-appearance: none;
+  border: thin solid rgb(40, 32, 28);
+  padding-left: 5px;
+  padding-right: 5px;
+  text-align: right;
+  background-color: rgb(208, 208, 208);
+}
+
+#bespinFindTextbox {
+  -moz-appearance: none;
+  border: thin solid rgb(40, 32, 28);
+  border-radius: 11px 11px 11px 11px;
+  font-size: 11px;
+  padding: 0px 5px;
+  background-color: rgb(208, 208, 208);
+}
+
+#bespinLineTextbox html|input,
+#bespinFindTextbox html|input {
+  font-size: x-small;
+  -moz-appearance: none ! important;
+  border: 0px none !important;
+  background-color: transparent ! important;
+}
+
+#bespinFindTextbox .textbox-search-clear {
+  width: 10px; height: 10px;
+}
+
+#bespinFindTextbox.notfound {
+  background-color: rgb(253, 145, 155);
+  color: black;
+}
+
+#bespinFindPrevious {
+  -moz-appearance: none;
+  font-size: smaller;
+  padding: 0px 8px 0px 12px;
+  border-top-left-radius: 11px;
+  border-bottom-left-radius: 11px;
+  border-top: 1px solid #aaa;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  -moz-border-top-colors:#aaa #bbb #ccc #ddd;
+  -moz-border-left-colors:#aaa #bbb #ccc #ddd;
+  -moz-border-bottom-colors:#aaa #bbb #ccc #ddd;
+  -moz-border-right-colors:#aaa #bbb #ccc #ddd;
+  background-color: #ddd;
+  color: black;
+  margin-right: 0px;
+}
+
+#bespinFindNext {
+  -moz-appearance: none;
+  font-size: smaller;
+  padding: 0px 12px 0px 8px;
+  border-top-right-radius: 11px;
+  border-bottom-right-radius: 11px;
+  border-top: 1px solid #aaa;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  -moz-border-top-colors:#aaa #bbb #ccc #ddd;
+  -moz-border-left-colors:#aaa #bbb #ccc #ddd;
+  -moz-border-bottom-colors:#aaa #bbb #ccc #ddd;
+  -moz-border-right-colors:#aaa #bbb #ccc #ddd;
+  background-color: #ddd;
+  color: black;
+  margin-left: 0px;
+}
+
+#bespinFindPrevious:active, #bespinFindNext:active {
+  background-color: silver;
+}
+
+#closeFindbarButton {
+  list-style-image: url("chrome://bluegriffon/skin/icons/close-findbar.png");
+}
+
+#closeFindbarButton:hover {
+  list-style-image: url("chrome://bluegriffon/skin/icons/close-findbar-hover.png");
+}
+
+#closeFindbarButton:active:hover {
+  list-style-image: url("chrome://bluegriffon/skin/icons/close-findbar-active.png");
+}
+
+/* autoInsertTable */
+*#AutoInsertTableSizeSelector label {
+  width: 2em;
+  margin: 0px ! important;
+}
+
+*#AutoInsertTableSizeSelector:not([disabled]) label:hover,
+*#AutoInsertTableSizeSelector label.selected {
+  background-color: rgb(10,36,106) ! important;
+}
+
+*#AutoInsertTableSizeSelector[disabled] label.selected {
+  background-color: silver ! important;
+}
+
+*#AutoInsertTableSizeSelector label {
+  border: 2px ridge !important;
+}
+
+*#AutoInsertTableSizeSelector[disabled] label {
+  border: silver 2px ridge !important;
+}
+
+/***** FLOATING PANELS *****/
+
+panel[floating="true"] {
+  -moz-binding: url("chrome://bluegriffon/content/bindings/floatingpanel.xml#floatingpanel");
+  -moz-appearance: none;
+  background-color: #606060;
+  color: white;
+  border-radius: 5px;
+  -moz-transition: opacity 0.5s;
+  min-width: 100px;
+}
+
+/* link to add-ons */
+
+#editorBarLabel {
+  text-decoration: underline;
+  color: darkblue;
+}
+
+#editorBarLabel:hover {
+  color: blue;
+}
+
+#editorBarLabel:hover:active {
+  color: red;
+}
+
+tipoftheday {
+  -moz-binding: url("chrome://tipoftheday/content/tipoftheday.xml#tipoftheday");
+}
+
+/*********** menupopups *************/
+
+popup {
+  -moz-appearance: menupopup;
+  background-color: menu;
+}
+
+/*********** decked panels *************/
+
+deckedPanelsTabs  {
+  -moz-binding: url("chrome://bluegriffon/content/bindings/deckedPanelsTabs.xml#deckedPanelsTabs");
+  overflow: hidden;
+  -moz-box-orient: horizontal;
+  background: url("chrome://bluegriffon/skin/tabeditor-tabs-bkgnd.png") repeat-x;
+  height: 25px;
+  padding: 0px;
+  padding-left: 4px;
+  margin: 0px;
+}
+
+deckedPanelsTabs > label {
+  margin: 0px;
+  margin-top: 4px;
+  background-color: #b0b0b0;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border: thin solid gray;
+  border-bottom: none 0px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border-width: 2px;
+  box-shadow: 1px -1px 3px gray,
+              inset 0px -1px 1px gray;
+}
+
+deckedPanelsTabs > label:not([selected="true"]):hover {
+  background-color: transparent;
+  background-image: linear-gradient(0deg, #ededed, #b0b0b0);
+}
+
+deckedPanelsTabs > label:not([selected="true"]):hover:active {
+  background: #ededed;
+}
+
+deckedPanelsTabs > label[selected="true"] {
+  margin: 0px;
+  margin-top: 4px;
+  background-color: #ededed;
+  box-shadow: 1px -1px 3px gray;
+}
+
+/* COLOR AND BGCOLOR PICKERS */
+
+ecolorpicker {
+  -moz-binding: url("chrome://bluegriffon/content/bindings/ecolorpicker.xml#ecolorpicker");
+}

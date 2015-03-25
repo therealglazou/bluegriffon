@@ -1,0 +1,102 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<!-- Values for changepassword.xul -->
+<!ENTITY setPassword.title  "Ändra huvudlösenord">
+<!ENTITY setPassword.tokenName.label "Säkerhetsenhet">
+<!ENTITY setPassword.oldPassword.label "Nuvarande lösenord:">
+<!ENTITY setPassword.newPassword.label "Nytt lösenord:">
+<!ENTITY setPassword.reenterPassword.label "Nytt lösenord (bekräftas):">
+<!ENTITY setPassword.meter.label "Kvalitetsmätare för lösenord">
+<!ENTITY setPassword.meter.loading "Laddar">
+
+<!-- Values for resetpassword.xul -->
+<!ENTITY resetPasswordButtonLabel "Ta bort">
+<!ENTITY resetPassword.title  "Ta bort huvudlösenord">
+<!ENTITY resetPassword.text  "Om du tar bort ditt huvudlösenord kommer alla dina lagrade webb- och e-postlösenord, formulärdata, personliga certifikat och hemliga nycklar att tas bort. Är du säker på att du vill ta bort ditt huvudlösenord?">
+
+<!-- Values for getpassword.xul -->
+<!ENTITY getPassword.title  "Skriv in huvudlösenord">
+<!ENTITY getPassword.tokenName2.label "Säkerhetsenhet:">
+<!ENTITY getPassword.password.label "Lösenord:">
+
+<!-- These should be common -->
+<!ENTITY piperror.title "Fel">
+<!ENTITY pipalert.title "Fel - kan inte återhämtas">
+
+<!-- Prefs panel strings -->
+<!ENTITY pref.security.general.lHeader "Säkerhet">
+<!ENTITY pref.security.general.rHeader "Inställningar för allmän säkerhet">
+<!ENTITY pref.security.general.header "Inställningar för allmän säkerhet">
+<!ENTITY pref.security.general.level.title "Säkerhetsnivå">
+<!ENTITY pref.security.general.paranoid.label "Använd paranoida säkerhetsinställningar">
+<!ENTITY pref.security.general.certificates.title "Certifikat">
+<!ENTITY pref.security.general.manageCert.label "Hantera certifikat">
+
+<!-- Downloading a cert -->
+<!ENTITY downloadCert.title "Hämtar certifikat">
+<!ENTITY downloadCert.message1 "En ny Certifikatutfärdare(CA) vill ha ditt godkännande.">
+<!ENTITY downloadCert.trustSSL "Lita på denna CA för identifiering av webbplatser.">
+<!ENTITY downloadCert.trustEmail "Lita på denna CA för identifiering av e-postanvändare.">
+<!ENTITY downloadCert.trustObjSign "Lita på denna CA för identifiering av programutvecklare.">
+<!ENTITY downloadCert.message3 "Innan du litar på denna CA för något syfte bör du undersöka dess certifikat, policy och tillvägagångssätt (om möjligt).">
+<!ENTITY downloadCert.viewCert.label "Visa">
+<!ENTITY downloadCert.viewPolicy.label "Policy">
+<!ENTITY downloadCert.viewCert.text "Undersök CA-certifikat">
+<!ENTITY downloadCert.viewPolicy.text "Undersök CA:ns policy och tillvägagångssätt">
+
+<!-- Certificate Exists in database -->
+<!ENTITY caCertExists.title "Certifikat finns">
+<!ENTITY caCertExists.message "Certifikatet finns redan.">
+
+<!-- Strings for the SSL client auth ask dialog -->
+<!ENTITY clientAuthAsk.title "Begäran om användaridentifikation">
+<!ENTITY clientAuthAsk.message1 "Denna plats har begärt att du identifierar dig med ett certifikat:">
+<!ENTITY clientAuthAsk.message2 "Välj ett certifikat att ange som identifikation:">
+<!ENTITY clientAuthAsk.message3 "Detaljer om valt certifikat:">
+
+<!-- Strings for the cert picker dialog -->
+<!ENTITY certPicker.title "Välj certifikat">
+<!ENTITY certPicker.info  "Certifikat:">
+<!ENTITY certPicker.detailsLabel "Detaljer om valt certifikat:">
+
+<!ENTITY pkcs12.setpassword.title  "Välj ett lösenord för certifikatets säkerhetskopia">
+<!ENTITY pkcs12.setpassword.message  "Det lösenord för certifikatets säkerhetskopia som du anger här skyddar säkerhetskopian som du håller på att skapa. Du måste ange detta lösenord för att kunna fortsätta.">
+<!ENTITY pkcs12.setpassword.label1 "Lösenord för certifikatets säkerhetskopia:">
+<!ENTITY pkcs12.setpassword.label2 "Lösenord för certifikatets säkerhetskopia (bekräftas):">
+<!ENTITY pkcs12.setpassword.reminder "Viktigt: Om du glömmer detta lösenord kommer du inte att kunna återställa denna säkerhetskopia senare. Lagra detta lösenord på en säker plats.">
+
+<!ENTITY pkcs12.getpassword.title  "Ange lösenord">
+<!ENTITY pkcs12.getpassword.message "Ange det lösenord som användes för att kryptera denna säkerhetskopia av certifikat.">
+
+<!ENTITY chooseToken.title  "Välj informationsbärare">
+<!ENTITY chooseToken.message1 "Välj informationsbärare.">
+
+<!ENTITY escrowWarn.title "Kopiering av krypteringsnyckel">
+<!ENTITY escrowWarn.message1 "Viktigt: Denna certifikatutfärdare har begärt att få göra en säkerhetskopia av din hemliga krypteringsnyckel.">
+<!ENTITY escrowWarn.benefit1 "Fördelen med detta är att om du förlorar tillgång till din hemliga nyckel för kryptering kan du begära en kopia från denna certifikatutfärdare.">
+<!ENTITY escrowWarn.message2 "Det innebär dock att din hemliga krypteringsnyckel kommer att lagras hos denna certifikatutfärdare, och att den skulle kunna användas för att utan din tillåtelse läsa din krypterade e-post eller dina dokument.">
+<!ENTITY examineCert.label "Visa certifikat">
+<!ENTITY examineCert.accesskey "V">
+
+<!ENTITY serverCrlNextupdate.message "Be din systemadministratör om hjälp">
+
+<!-- Strings for the CreateCertInfo dialog  -->
+<!ENTITY createCertInfo.title "Genererar en hemlig nyckel">
+<!ENTITY createCertInfo.msg1 "Nyckelgenerering pågår… Detta kan ta ett par minuter…">
+<!ENTITY createCertInfo.msg2 "Var god vänta…">
+
+<!-- Form Signing confirmation prompt -->
+<!ENTITY formSigning.title "Textsignering begärd">
+<!ENTITY formSigning.cert "Signeringscertifikat">
+<!ENTITY formSigning.confirmPassword "För att bekräfta att du godtar att signera detta textmeddelande med det valda certifikatet, bekräfta genom att ange huvudlösenordet:">
+
+<!-- Strings for protectedAuth dialog -->
+<!ENTITY protectedAuth.title "Skyddad informationsbärarautentisering">
+<!ENTITY protectedAuth.msg "Var god autentisera till informationsbäraren. Autentiseringsmetoden beror på informationsbärarens typ.">
+<!ENTITY protectedAuth.tokenName.label "Informationsbärare:">
+
+<!ENTITY certErrorDlg.title "Säker anslutning misslyckades">
+<!ENTITY certErrorDlg.info1 "Detta kan bero på ett problem med serverns konfiguration, eller så kanske någon annan felaktigt utger sig för att vara servern.">
+<!ENTITY certErrorDlg.info2 "Om du tidigare utan problem har anslutit till den här servern kanske felet är tillfälligt och du kan försöka igen senare.">

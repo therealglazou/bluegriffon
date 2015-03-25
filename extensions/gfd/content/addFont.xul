@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/listboxBg.css" type="text/css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/bluegriffonDialogs.css" type="text/css"?>
+<?xml-stylesheet href="chrome://gfd/skin/addFont.css" type="text/css"?>
+
+<!DOCTYPE dialog SYSTEM "chrome://gfd/locale/addFont.dtd">
+
+<dialog title="&window.title;"
+        id="bluegriffonGfd"
+        windowtype="BlueGriffon:addFont"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        buttons="accept,cancel"
+        onload="Startup()"
+        style="height: auto"
+        ondialogaccept="return onAccept()"
+        persist="screenX screenY"
+        screenX="24" screenY="24">
+
+  <!-- Methods common to all editor dialogs -->
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/dgid.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/global.js"/>
+
+  <script type="application/x-javascript" src="chrome://gfd/content/directory.js"/>
+  <script type="application/x-javascript" src="chrome://gfd/content/addFont.js"/>
+
+  <keyset>
+    <key keycode="VK_ESCAPE" oncommand="window.close()"/>
+  </keyset>
+
+  <groupbox>
+    <caption label="&fontFamily.label;"/>
+    <hbox align="center">
+      <menulist id="fontFamilyMenulist" label="Select a font..."
+                onselect="onFontSelected(this)">
+        <menupopup id="fontFamilyMenupopup"/>
+      </menulist>
+    </hbox>
+  </groupbox>
+
+  <groupbox>
+    <caption label="&preview.label;"/>
+    <iframe id="previewIframe"
+            src="chrome://gfd/content/preview.html" style="height: 60px; width: 450px"/>
+  </groupbox>
+
+  <groupbox>
+    <caption label="&subset.label;"/>
+    <hbox align="center">
+      <checkbox id="latinSubsetCheckbox"    label="&latin.label;"    value="latin"/>
+      <checkbox id="cyrillicSubsetCheckbox" label="&cyrillic.label;" value="cyrillic"/>
+      <checkbox id="greekSubsetCheckbox"    label="&greek.label;"    value="greek"/>
+      <checkbox id="khmerSubsetCheckbox"    label="&khmer.label;"    value="khmer"/>
+    </hbox>
+  </groupbox>
+
+  <groupbox>
+    <caption label="&variants.label;"/>
+    <grid>
+      <columns><column flex="1"/><column flex="1"/></columns>
+      <rows id="variantRows">
+        <row align="center">
+          <checkbox id="regularVariant"     label="&regular.label;" value="regular"/>
+          <checkbox id="italicVariant"      label="&italic.label;" value="italic"/>
+        </row>
+        <row align="center">
+          <checkbox id="boldVariant"        label="&bold.label;" value="bold"/>
+          <checkbox id="bolditalicVariant"  label="&bolditalic.label;" value="bolditalic"/>
+        </row>
+      </rows>
+    </grid>
+  </groupbox>
+</dialog>

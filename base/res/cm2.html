@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8"/>
+  <style type="text/css" media="screen">
+    .CodeMirror { 
+        margin: 0;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: #fefefe;
+    }
+    .CodeMirror-scroll {height: 100% ! important}
+    .CodeMirror-gutter {cursor: pointer;}
+  </style>
+  <link rel="stylesheet" href="cm2/codemirror.css" />
+  <link rel="stylesheet" href="cm2/foldtag.css" />
+
+  <script src="cm2/codemirror.js" type="text/javascript" ></script>
+  <script src="cm2/searchcursor.js" type="text/javascript" ></script>
+  <script src="cm2/foldtag.js" type="text/javascript" ></script>
+  <script src="cm2/xml.js" type="text/javascript" ></script>
+  <script src="cm2/javascript.js" type="text/javascript" ></script>
+  <script src="cm2/css.js" type="text/javascript" ></script>
+  <script src="cm2/htmlmixed.js" type="text/javascript" ></script>
+
+  <script src="cm2/jquery.min.js"></script>
+  <script src="cm2/poptags.js"></script>
+  <script src="cm2/pophtmlmixed.js"></script>
+  
+  <script src="cm2/code-completion.js"></script>
+  <script src="cm2/css-completion.js"></script>
+  <script src="cm2/html-completion.js"></script>
+
+  <link rel="stylesheet" id="theme" type="text/css" href="cm2/cobalt.css" />
+  <link rel="stylesheet" id="theme" type="text/css" href="cm2/eclipse.css" />
+  <link rel="stylesheet" id="theme" type="text/css" href="cm2/elegant.css" />
+  <link rel="stylesheet" id="theme" type="text/css" href="cm2/light.css" />
+  <link rel="stylesheet" id="theme" type="text/css" href="cm2/monokai.css" />
+  <link rel="stylesheet" id="theme" type="text/css" href="cm2/neat.css" />
+  <link rel="stylesheet" id="theme" type="text/css" href="cm2/night.css" />
+  <link rel="stylesheet" id="theme" type="text/css" href="cm2/rubyblue.css" />
+  <link rel="stylesheet"            type="text/css" href="cm2/code-completion.css">  
+</head>
+<body>
+
+<textarea id="code" name="code"></textarea>
+<script>
+  var gEditor = null;
+  var gChangeCallback = null;
+  var gChangeTimer = null;
+  var gTheme  = "light";
+
+  var gModificationCount = 0;
+
+  window.onload = function(){
+     var foldFunc = CodeMirror.newFoldFunction(CodeMirror.tagRangeFinder);
+      function keyEvent(cm, e) {
+        if (e.keyCode == 81 && e.ctrlKey) {
+          if (e.type == "keydown") {
+            e.stop();
+            setTimeout(function() {foldFunc(cm, cm.getCursor().line);}, 50);
+          }
+          return true;
+        }
+      }
+
+     function changeFunc() {
+       gModificationCount++;
+       if (gChangeTimer) {
+         clearTimeout(gChangeTimer);
+         gChangeTimer = null;
+       }
+       if (gChangeCallback)
+         gChangeTimer = setTimeout(gChangeCallback, 100, gEditor.getValue());
+     }
+
+     gEditor = CodeMirror.fromTextArea(document.getElementById("code"), {
+        lineNumbers: true,
+        tabSize: 2,
+        fixedGutter: true,
+        extraGutterSize: 4,
+        indentUnit: 2,
+        indentWithTabs: false,
+        matchBrackets: true,
+        onGutterClick: foldFunc,
+        onChange: changeFunc,
+        mode: "pophtmlmixed",
+        onCursorActivity: function() {
+          if (gActivityCallback)
+            gActivityCallback();
+          gEditor.setLineClass(hlLine, null);
+          hlLine = gEditor.setLineClass(gEditor.getCursor().line, "activeline");
+        }
+      });
+      var htmlCompletion = new CodeCompletion(gEditor, new HtmlCompletion());
+      var cssCompletion = new CodeCompletion(gEditor, new CssCompletion({local: true}));
+      gEditor.setOption("onKeyEvent", function(cm, e) {
+          var cursor = cm.getCursor();
+          var token = cm.getTokenAt(cursor);
+          switch (token.state.mode) {
+            case "html":
+              return htmlCompletion.handleKeyEvent(cm, e);
+            case "css":
+              return cssCompletion.handleKeyEvent(cm, e);
+
+            default: break;              
+          }
+          return false;
+      });
+      /*gEditor.setOption("onKeyEvent", function(cm, e) {
+          return cssCompletion.handleKeyEvent(cm, e);
+      });*/
+
+      var hlLine = gEditor.setLineClass(0, "activeline");
+      useTheme(gTheme);
+  };
+
+  function getEditableElement() {
+    return document.querySelector(".CodeMirror");
+  }
+
+  function useTheme(aTheme) {
+    gTheme = aTheme;
+    gEditor.setOption("theme", aTheme);
+  }
+
+  function getCurrentTheme()
+  {
+    return gTheme;
+  }
+
+  var gInstalled = false;
+  function installCodeMirror(aKeyPressCallback, aChangeCallback, aActivityCallback, aTheme, aTagsArray, aEditorUtils) {
+    if (gInstalled) return;
+    getEditableElement().addEventListener("keypress", aKeyPressCallback, true);
+    gChangeCallback = aChangeCallback;
+    gActivityCallback = aActivityCallback;
+    useTheme(aTheme);
+    html_tags = aTagsArray;
+    editorUtils = aEditorUtils;
+  }
+
+  function markSelection()
+  {
+    const kBGBGBG = "--BG--";
+  
+    gEditor.setSelection( { line: 0, ch: 0 }, { line: 0, ch: 0 } );
+  
+    var searchCursor = gEditor.getSearchCursor(kBGBGBG, { line: 0, ch: 0 }, true);
+    searchCursor.findNext();
+    var startRow    = searchCursor.from().line;
+    var startColumn = searchCursor.from().ch;
+    searchCursor.replace("");
+  
+    searchCursor = gEditor.getSearchCursor(kBGBGBG, { line: 0, ch: 0 }, true);
+    searchCursor.findNext();
+    var endRow      = searchCursor.from().line;
+    var endColumn   = searchCursor.from().ch;
+    searchCursor.replace("");
+  
+    gEditor.clearHistory();
+    gEditor.setSelection( { line: startRow, ch: startColumn }, { line: endRow, ch: endColumn } );
+  }
+
+  function findNeedle(aForward, aInitial, aNeedle, aIsCaseSensitive)
+  {
+    var found = false;
+    if (aInitial || !gEditor.lastNeedle) {
+      var selection = gEditor.getCursor(true);
+      gEditor.lastNeedle = gEditor.getSearchCursor(aNeedle, { line: selection.line, ch: selection.ch }, aIsCaseSensitive);
+      found = gEditor.lastNeedle.findNext();
+    }
+    else {
+      if (aForward) {
+        found = gEditor.lastNeedle.findNext();
+      }
+      else {
+        found = gEditor.lastNeedle.findPrevious();
+      }
+    }
+
+    if (!found) { // maybe we hit the document's limits
+      if (aForward) {
+        gEditor.lastNeedle = gEditor.getSearchCursor(aNeedle, { line: 0, ch: 0 }, aIsCaseSensitive);
+        found = gEditor.lastNeedle.findNext();
+      }
+      else {
+        var line = gEditor.lineCount() - 1;
+        var lineProse = gEditor.getLine(line);
+        gEditor.lastNeedle = gEditor.getSearchCursor(aNeedle, { line: line, ch: lineProse.length -1 }, aIsCaseSensitive);
+        found = gEditor.lastNeedle.findPrevious();
+      }
+    }
+    else
+      gEditor.setSelection(gEditor.lastNeedle.from(), gEditor.lastNeedle.to());
+
+    return found;
+  }
+
+  function ResetModificationCount()
+  {
+    gModificationCount = 0;
+  }
+
+  function GetModificationCount()
+  {
+    return gModificationCount;
+  }
+</script>
+</body>
+</html>

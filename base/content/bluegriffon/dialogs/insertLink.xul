@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/bluegriffonDialogs.css" type="text/css"?>
+
+
+<!DOCTYPE dialog SYSTEM "chrome://bluegriffon/locale/insertLink.dtd">
+
+<dialog title="&window.title;"
+        id="insertLinkDialog"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        onload = "Startup()"
+        buttons="accept,cancel"
+        ondialogaccept="return onAccept();"
+        persist="screenX screenY width height">
+
+  <!-- Methods common to all editor dialogs -->
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/dgid.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/global.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/dialogs/insertLink.js"/>
+
+  <stringbundle id="bundleString"         src="chrome://bluegriffon/locale/insertLink.properties"/>
+
+  <groupbox>
+    <caption label="&linkText.label;"/>
+    <textbox id="linkTextbox"/>
+    <label   id="linkLabel"/>
+  </groupbox>
+
+  <groupbox>
+    <caption label="&linkTarget.label;"/>
+    <hbox align="center">
+      <menulist flex="1" sizetopopup="none"
+                id="urlMenulist"
+                editable="true"
+                oninput="CheckURL()"
+                oncommand="CheckURL()">
+        <menupopup id="urlMenupopup"/>
+      </menulist>
+      <filepickerbutton id="urlFilepickerbutton"
+                        control="urlMenulist"
+                        mode="0"
+                        filters="filterAll"
+                        oncommand="CheckURL()"
+                        title="&selectFile.label;"/>
+    </hbox>
+    <checkbox class="indent" id="emailCheckbox"
+              label="&isMail.label;"/>
+    <checkbox class="indent" id="relativeURLCheckbox"
+              label="&relativeUrl.label;"
+              oncommand="ToggleRelativeOrAbsolute()"/>
+
+  </groupbox>
+  <groupbox>
+    <caption label="&title.caption;"/>
+    <hbox align="center">
+      <label value="&title.label;"/>
+      <textbox id="titleTextbox" flex="1"/>
+    </hbox>
+  </groupbox>
+  <groupbox>
+    <caption label="&windowTarget.label;"/>
+    <checkbox id="applyTargetAttributeCheckbox"
+              label="&openIn.label;"
+              oncommand="ToggleTargetAttribute()"/>
+    <hbox class="indent"
+          align="center">
+      <menulist id="targetAttributeMenulist"
+                disabled="true"
+                oncommand="TargetAttributeSelected(this)"
+                sizetopopup="none"
+                flex="1">
+        <menupopup>
+          <menuitem label="&topTarget.label;" value="_top"/>
+          <menuitem label="&blankTarget.label;" value="_blank"/>
+          <menuitem label="&parentTarget.label;" value="_parent"/>
+          <menuitem label="&selfTarget.label;" value="_self"/>
+          <menuitem label="&otherTarget.label;" value="x"/>
+        </menupopup>
+      </menulist>
+      <textbox id="userDefinedValueTextbox"
+               size="8"
+               disabled="true"/>
+    </hbox>
+  </groupbox>
+</dialog>

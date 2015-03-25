@@ -1,0 +1,60 @@
+dialog {
+  -moz-appearance: none;
+  background-color: transparent;
+  background-image: -moz-linear-gradient(to bottom right, #f0f0f0, #a0a0a0, #d0d0d0)
+}
+
+#outerBox {
+  width: 330px;
+  height: 54px;
+  padding: 15px;
+  border: thin solid black;
+  background-color: white;
+  cursor: pointer;
+}
+
+#greens {
+  width: 100px;
+  height: 20px;
+  padding: 0px;
+  margin: 0px;
+  background-color: lime;
+  cursor: pointer;
+}
+
+#reds {
+  width: 200px;
+  height: 20px;
+  padding: 0px;
+  margin: 0px;
+  background-color: red;
+  cursor: pointer;
+}
+
+#opquastLogo {
+  cursor: pointer;
+}
+
+.passed {
+  background-color: #d7efe3;
+}
+
+.failed {
+  background-color: #ffE0E0;
+}
+
+.index {
+  width: 4em;
+}
+
+.passed .failed {
+  display: none;
+}
+
+.failed .passed {
+  display: none;
+}
+
+richlistitem[selected="true"] {
+  color: black ! important;
+}

@@ -1,0 +1,151 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE overlay [
+  <!ENTITY % csspropertiesDTD SYSTEM "chrome://cssproperties/locale/cssproperties.dtd">
+  %csspropertiesDTD;
+  <!ENTITY % backgrounditemDTD SYSTEM "chrome://cssproperties/locale/backgrounditem.dtd" >
+  %backgrounditemDTD;
+]>
+
+<overlay id="miscOverlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/x-javascript"  src="chrome://cssproperties/content/misc.js" />
+
+  <vbox id="propertiesBox">
+      <hbox align="center"
+            class="csspropertiesHeader last"
+            context="sectionHeaderContext"
+            id="miscSectionHeader"
+            onclick="ToggleSection(event, this)"
+            animatable="false"
+            position="27">
+        <image />
+        <label value="&miscSectionHeader.label;"/>
+      </hbox>
+
+      <vbox class="section" id="miscSection" animatable="false" position="28">
+        <grid>
+          <columns><column/><column/></columns>
+          <rows>
+            <row align="center">
+              <label value="&cursor.label;"/>
+              <hbox>
+                <menulist id="cursorMenulist" oncommand="ToggleProperty(this)"
+                          property="cursor" sizetopopup="none">
+                  <menupopup>
+                    <menuitem label="&autoCursor.label;" value="auto"/>
+                    <menuseparator/>
+                    <menuitem label="&defaultCursor.label;" value="default"/>
+                    <menuseparator/>
+                    <menuitem label="&crossHairCursor.label;" value="crosshair"/>
+                    <menuitem label="&pointerCursor.label;" value="pointer"/>
+                    <menuitem label="&moveCursor.label;" value="move"/>
+                    <menuitem label="&eResizeCursor.label;" value="e-resize"/>
+                    <menuitem label="&neResizeCursor.label;" value="ne-resize"/>
+                    <menuitem label="&nwResizeCursor.label;" value="nw-resize"/>
+                    <menuitem label="&nResizeCursor.label;" value="n-resize"/>
+                    <menuitem label="&seResizeCursor.label;" value="se-resize"/>
+                    <menuitem label="&swResizeCursor.label;" value="sw-resize"/>
+                    <menuitem label="&sResizeCursor.label;" value="s-resize"/>
+                    <menuitem label="&wResizeCursor.label;" value="w-resize"/>
+                    <menuitem label="&textCursor.label;" value="text"/>
+                    <menuitem label="&busyCursor.label;" value="wait"/>
+                    <menuitem label="&helpCursor.label;" value="help"/>
+                    <menuitem label="&progress.label;" value="progress"/>
+                  </menupopup>
+                </menulist>
+              </hbox>
+            </row>
+
+            <row align="center">
+              <label value="&unicodeBidi.label;"/>
+              <hbox align="center">
+                <toolbarbutton class="multibutton"
+                               value="normal" property="unicode-bidi" type="checkbox" group="unicode-bidi"
+                               id="normalUnicodeBidiButton" label="&normalUnicodeBidi.label;"
+                               oncommand="ToggleProperty(this)"/>
+                <toolbarbutton class="multibutton"
+                               value="embed" property="unicode-bidi" type="checkbox" group="unicode-bidi"
+                               id="embedUnicodeBidiButton" label="&embedUnicodeBidi.label;"
+                               oncommand="ToggleProperty(this)"/>
+                <toolbarbutton class="multibutton"
+                               value="bidi-override" property="unicode-bidi" type="checkbox" group="unicode-bidi"
+                               id="bidiOverrideUnicodeBidiButton" label="&bidiOverrideUnicodeBidi.label;"
+                               oncommand="ToggleProperty(this)"/>
+              </hbox>
+            </row>
+
+            <row align="center">
+              <label value="&orphans.label;"/>
+              <hbox>
+                <textbox id="orphansTextbox" type="number" size="3"
+                         property="orphans"
+                         oncommand="ToggleProperty(this)"
+                         oninput="ToggleProperty(this)"/>
+              </hbox>
+            </row>
+
+            <row align="center">
+              <label value="&widows.label;"/>
+              <hbox>
+                <textbox id="widowsTextbox" type="number" size="3"
+                         property="widows"
+                         oncommand="ToggleProperty(this)"
+                         oninput="ToggleProperty(this)"/>
+              </hbox>
+            </row>
+
+            <row align="center">
+              <label value="&pageBreakBefore.label;"/>
+              <hbox>
+                <menulist id="pageBreakBeforeMenulist" sizetopopup="none"
+                          property="page-break-before"
+                          oncommand="ToggleProperty(this)">
+                  <menupopup>
+                    <menuitem label="&autoPageBreak.label;" value="auto"/>
+                    <menuitem label="&alwaysPageBreak.label;" value="always"/>
+                    <menuitem label="&avoidPageBreak.label;" value="avoid"/>
+                    <menuitem label="&leftPageBreak.label;" value="left"/>
+                    <menuitem label="&rightPageBreak.label;" value="right"/>
+                  </menupopup>
+                </menulist>
+              </hbox>
+            </row>
+
+            <row align="center">
+              <label value="&pageBreakInside.label;"/>
+              <hbox>
+                <menulist id="pageBreakInsideMenulist" sizetopopup="none"
+                          property="page-break-inside"
+                          oncommand="ToggleProperty(this)">
+                  <menupopup>
+                    <menuitem label="&autoPageBreak.label;" value="auto"/>
+                    <menuitem label="&avoidPageBreak.label;" value="avoid"/>
+                  </menupopup>
+                </menulist>
+              </hbox>
+            </row>
+
+            <row align="center">
+              <label value="&pageBreakAfter.label;"/>
+              <hbox>
+                <menulist id="pageBreakAfterMenulist" sizetopopup="none"
+                          property="page-break-after"
+                          oncommand="ToggleProperty(this)">
+                  <menupopup>
+                    <menuitem label="&autoPageBreak.label;" value="auto"/>
+                    <menuitem label="&alwaysPageBreak.label;" value="always"/>
+                    <menuitem label="&avoidPageBreak.label;" value="avoid"/>
+                    <menuitem label="&leftPageBreak.label;" value="left"/>
+                    <menuitem label="&rightPageBreak.label;" value="right"/>
+                  </menupopup>
+                </menulist>
+              </hbox>
+            </row>
+
+          </rows>
+        </grid>
+      </vbox>
+  </vbox>
+</overlay>
