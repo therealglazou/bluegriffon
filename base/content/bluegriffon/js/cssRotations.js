@@ -1,4 +1,4 @@
-Components.utils.import("resource://app/modules/handlersManager.jsm");
+Components.utils.import("resource://gre/modules/handlersManager.jsm");
 
 var CSSRotationsHandler = {
 
@@ -126,7 +126,7 @@ var CSSRotationsHandler = {
   
     var img = csr.mRotatingHandle = doc.createElement("img");
     img.className = "_BlueGriffonHandle";
-    img.setAttribute("src", "resource://app/res/rotate_icon.png");
+    img.setAttribute("src", "resource://gre/res/rotate_icon.png");
     img.style.position = "absolute";
     img.style.top = ( parseInt(h)/2 - 7) + "px";
     img.style.left = "100%";

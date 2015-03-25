@@ -479,7 +479,7 @@
 
             newEditorElement.makeEditable("html", true);
 
-            var docShell = newEditorElement.boxObject.QueryInterface(Components.interfaces.nsIEditorBoxObject).docShell;
+            var docShell = newEditorElement.docShell;
             var progress = docShell.QueryInterface(Components.interfaces.nsIInterfaceRequestor).getInterface(Components.interfaces.nsIWebProgress);
             var progressListener = new EditorContentListener(this, newEditorElement, aURL, newTab);
             progress.addProgressListener(progressListener, Components.interfaces.nsIWebProgress.NOTIFY_ALL);
@@ -508,6 +508,7 @@
       <method name="enableRulers">
         <parameter name="aEnabled" />
         <body>
+          alert(1);
         <![CDATA[
           if (aEnabled) {
             this.mHruler.removeAttribute("disabled");
@@ -597,7 +598,7 @@
             gDialog.sourceModeButton.setAttribute("busy", "true");
             iframe.addEventListener("load", function() {_self._installBespin(iframe);}, true);
             iframe.setAttribute("type", "chrome");
-            iframe.setAttribute("src", "resource://app/res/cm2.html");
+            iframe.setAttribute("src", "resource://gre/res/cm2.html");
             iframe.setAttribute("onclick", "onBespinFocus(this)");
             newBox.appendChild(iframe);
 

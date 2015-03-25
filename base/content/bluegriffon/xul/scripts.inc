@@ -26,6 +26,6 @@
   <script type="application/javascript" src="chrome://bluegriffon/content/js/html5.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/js/tableResizer.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/js/beautify-html.js"/>
-  <script type="application/javascript" src="resource://app/res/cm2/themes-list.js"/>
+  <script type="application/javascript" src="resource://gre/res/cm2/themes-list.js"/>
 
   <script type="application/javascript" src="chrome://venkman/content/venkman-overlay.js"/>

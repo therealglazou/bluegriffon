@@ -1,6 +1,6 @@
-Components.utils.import("resource://app/modules/prompterHelper.jsm");
-Components.utils.import("resource://app/modules/editorHelper.jsm");
-Components.utils.import("resource://app/modules/l10nHelper.jsm");
+Components.utils.import("resource://gre/modules/prompterHelper.jsm");
+Components.utils.import("resource://gre/modules/editorHelper.jsm");
+Components.utils.import("resource://gre/modules/l10nHelper.jsm");
 
 if (typeof com == "undefined") com = {};
 if (typeof com.bluegriffon == "undefined") com.bluegriffon = {};
