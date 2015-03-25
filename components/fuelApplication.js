@@ -38,7 +38,7 @@
 const Ci = Components.interfaces;
 const Cc = Components.classes;
 
-Components.utils.import("resource://app/modules/XPCOMUtils.jsm");
+Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
 
 //=================================================
 // Singleton that holds services and utilities

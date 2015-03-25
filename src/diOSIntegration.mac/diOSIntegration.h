@@ -38,9 +38,10 @@
 
 class diOSIntegration : public diIOSIntegration {
 
+  private:
+    virtual ~diOSIntegration();
   public:
     diOSIntegration();
-    virtual ~diOSIntegration();
 
     NS_DECL_ISUPPORTS
 

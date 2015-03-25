@@ -1,6 +1,6 @@
-Components.utils.import("resource://app/modules/editorHelper.jsm");
-Components.utils.import("resource://app/modules/urlHelper.jsm");
-Components.utils.import("resource://app/modules/cssInspector.jsm");
+Components.utils.import("resource://gre/modules/editorHelper.jsm");
+Components.utils.import("resource://gre/modules/urlHelper.jsm");
+Components.utils.import("resource://gre/modules/cssInspector.jsm");
 
 var gDocUrlScheme = null;
 var gElt = null;

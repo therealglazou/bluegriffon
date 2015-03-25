@@ -38,15 +38,15 @@
 Components.utils.import("resource://gre/modules/InlineSpellChecker.jsm");
 Components.utils.import("resource://gre/modules/Services.jsm");
 
-Components.utils.import("resource://app/modules/urlHelper.jsm");
-Components.utils.import("resource://app/modules/prompterHelper.jsm");
-Components.utils.import("resource://app/modules/editorHelper.jsm");
-Components.utils.import("resource://app/modules/cssHelper.jsm");
-Components.utils.import("resource://app/modules/fileHelper.jsm");
-Components.utils.import("resource://app/modules/l10nHelper.jsm");
-Components.utils.import("resource://app/modules/handlersManager.jsm");
-Components.utils.import("resource://app/modules/screens.jsm");
-Components.utils.import("resource://app/modules/fileChanges.jsm");
+Components.utils.import("resource://gre/modules/urlHelper.jsm");
+Components.utils.import("resource://gre/modules/prompterHelper.jsm");
+Components.utils.import("resource://gre/modules/editorHelper.jsm");
+Components.utils.import("resource://gre/modules/cssHelper.jsm");
+Components.utils.import("resource://gre/modules/fileHelper.jsm");
+Components.utils.import("resource://gre/modules/l10nHelper.jsm");
+Components.utils.import("resource://gre/modules/handlersManager.jsm");
+Components.utils.import("resource://gre/modules/screens.jsm");
+Components.utils.import("resource://gre/modules/fileChanges.jsm");
 
 #include blanks.inc
 
@@ -1520,8 +1520,8 @@ function OnClick(aEvent)
 {
   // this is necessary to be able to select for instance video elements
   var target = aEvent.explicitOriginalTarget;
-  if (target && (target instanceof Components.interfaces.nsIDOMHTMLVideoElement
-                 || target instanceof Components.interfaces.nsIDOMHTMLAudioElement
+  if (target && (target instanceof HTMLVideoElement
+                 || target instanceof HTMLAudioElement
                  || target instanceof Components.interfaces.nsIDOMHTMLSelectElement)) {
     EditorUtils.getCurrentEditor().selectElement(target);
   }

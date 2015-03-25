@@ -1,5 +1,5 @@
-Components.utils.import("resource://app/modules/XPCOMUtils.jsm");
-Components.utils.import("resource://app/modules/unicodeHelper.jsm");
+Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
+Components.utils.import("resource://gre/modules/unicodeHelper.jsm");
 
 ////////////////////////////////////////////////////////////////////////////////
 //// Constants

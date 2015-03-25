@@ -1,13 +1,9 @@
 Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
 Components.utils.import("resource://gre/modules/Services.jsm");
-Components.utils.import("resource://app/modules/urlHelper.jsm");
+Components.utils.import("resource://gre/modules/urlHelper.jsm");
 
 const nsISupports            = Components.interfaces.nsISupports;
 
-const nsIBrowserDOMWindow    = Components.interfaces.nsIBrowserDOMWindow;
-const nsIBrowserHandler      = Components.interfaces.nsIBrowserHandler;
-const nsIBrowserHistory      = Components.interfaces.nsIBrowserHistory;
-const nsIChannel             = Components.interfaces.nsIChannel;
 const nsICommandLine         = Components.interfaces.nsICommandLine;
 const nsICommandLineHandler  = Components.interfaces.nsICommandLineHandler;
 const nsIContentHandler      = Components.interfaces.nsIContentHandler;

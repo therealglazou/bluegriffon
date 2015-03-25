@@ -38,7 +38,7 @@
  *
  * ***** END LICENSE BLOCK ***** */
  
-Components.utils.import("resource://app/modules/editorHelper.jsm");
+Components.utils.import("resource://gre/modules/editorHelper.jsm");
 
 var gMisspelledWord;
 var gSpellChecker = null;

@@ -1,4 +1,4 @@
-Components.utils.import("resource://app/modules/cssInspector.jsm");
+Components.utils.import("resource://gre/modules/cssInspector.jsm");
 
 function diChangeFileStylesheetTxn(aHref, aRule, aProperty, aValue, aPriority)
 {

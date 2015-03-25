@@ -42,16 +42,4 @@ VPATH		= @srcdir@
 
 include $(DEPTH)/config/autoconf.mk
 
-EXTRA_COMPONENTS = \
-	bgLocationAutocomplete.js \
-	bgLocationAutocomplete.manifest \
-	bgCommandHandler.manifest \
-  bgCharUnicodeAutocomplete.js \
-  bgCharUnicodeAutocomplete.manifest \
-  phpStreamConverter.js \
-  phpStreamConverter.manifest \
-  $(NULL)
-
-EXTRA_PP_COMPONENTS = bgCommandHandler.js
-
 include $(topsrcdir)/config/rules.mk

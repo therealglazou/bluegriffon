@@ -1,7 +1,16 @@
-MODULE = 'diOSIntegration'
 
-XPIDL_MODULE		= 'diOSIntegration'
-
-XPIDL_SOURCES	= [
-		'diIOSIntegration.idl'
+XPIDL_SOURCES += [
+    'diIOSIntegration.idl',
 ]
+
+SOURCES += [
+    'diOSIntegration.mm',
+    'diOSIntegrationFactory.cpp',
+]
+
+EXTRA_PP_COMPONENTS += ['dibadge.manifest']
+
+EXPORTS += [ 'diOSIntegrationCIID.h' ]
+
+XPIDL_MODULE = 'osinteg'
+FINAL_LIBRARY = 'xul'

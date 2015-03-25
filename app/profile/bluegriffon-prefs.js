@@ -17,13 +17,13 @@ pref("toolbar.customization.usesheet", false); // false otherwise
 #endif
 
 /* debugging prefs */
-pref("browser.dom.window.dump.enabled", false);
-pref("javascript.options.showInConsole", false);
-pref("javascript.options.strict", false);
+pref("browser.dom.window.dump.enabled", true);
+pref("javascript.options.showInConsole", true);
+pref("javascript.options.strict", true);
 pref("nglayout.debug.disable_xul_cache", true);
 pref("nglayout.debug.disable_xul_fastload", true);
 
-pref("general.useragent.extra.mybrowser", "@MOZ_APP_NAME@/@MOZ_APP_VERSION@");
+pref("general.useragent.extra.mybrowser", "bluegriffon/1.7.3");
 pref("intl.locale.matchOS", true);
 pref("intl.accept_charsets", "iso-8859-1,*,utf-8");
 pref("browser.display.use_document_fonts", 1);
@@ -229,3 +229,6 @@ pref("print.print_edge_right", 0);
 pref("print.print_edge_bottom", 0);
 
 pref("layout.css.flexbox.enabled", true);
+
+pref("general.useragent.locale", "en-US");
+pref("intl.locale.matchOS", false);
