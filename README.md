@@ -1,5 +1,6 @@
 # Bluegriffon
-BlueGriffon, the Web editor
+
+The Open Source next-generation Web Editor based on the rendering engine of Firefox
 
 ## To prepare the build
 
