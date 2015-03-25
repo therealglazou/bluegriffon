@@ -32,4 +32,11 @@ You can after that type `make package`in the object directory to package the app
 
 `./mach build`
 
-The NG branch is not entirely ready yet: extensions and stubs are not built, and packaging is not ready yet. There are also a lot of regressions to fix.
+The NG branch is not entirely ready yet: extensions and stubs are not built yet, and packaging is not ready yet. There are also a lot of regressions to fix and a lot of stuff to update.
+
+## Want to contribute to BlueGriffon?
+
+There are two ways to contribute:
+
+1. Contribute code. That's just another OSS project, we're waiting for your Pull Requests!
+2. Contribute L10N. All happens only in the 'locales' directory. You can review the existing locales and proposed changes/fixes or submit a new locale in a Pull Request. In that case, you need to translate everything from en-US into a new locale beforeI can accept the PR.
