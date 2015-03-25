@@ -80,8 +80,8 @@
 <!ENTITY netTimeout.title		"接続がタイムアウトしました">
 <!ENTITY netTimeout.longDesc		"&sharedLongDesc;">
 
-<!ENTITY protocolNotFound.title		"アドレスのプロトコルが不明です">
-<!ENTITY protocolNotFound.longDesc	"
+<!ENTITY unknownProtocolFound.title	"アドレスのプロトコルが不明です">
+<!ENTITY unknownProtocolFound.longDesc	"
 <ul>
   <li>このプロトコルを使用するアドレスを開くには、別のソフトウェアをインストールする必要があるかもしれません。</li>
 </ul>
@@ -120,10 +120,10 @@
 ">
 
 <!ENTITY nssFailure2.title		"安全な接続ができませんでした">
-<!ENTITY nssFailure2.longDesc		"
+<!ENTITY nssFailure2.longDesc2		"
 <ul>
   <li>受信したデータの真正性を検証できなかったため、このページは表示できませんでした。</li>
-  <li>この問題を Web サイトの管理者に連絡してください。あるいは [ヘルプ] メニューの [不具合のあるサイトを報告] でこのサイトについて報告してください。</li>
+  <li>この問題を Web サイトの管理者に連絡してください。</li>
 </ul>
 ">
 
@@ -180,3 +180,22 @@ functionality specific to firefox. -->
 
 <!ENTITY remoteXUL.title		"リモート XUL">
 <!ENTITY remoteXUL.longDesc		"<p><ul><li>Web サイトの所有者に連絡を取り、この問題を報告してください。</li></ul></p>">
+
+<!ENTITY cspBlocked.longDesc "<p>&brandShortName; prevented this page from loading in this way because the page has a content security policy that disallows it.</p>">
+
+<!ENTITY cspBlocked.title "Blocked by Content Security Policy">
+<!ENTITY errorReporting.automatic "Automatically report errors in the future">
+<!ENTITY errorReporting.learnMore "Learn more…">
+<!ENTITY errorReporting.longDesc "Reporting the address and certificate information for <span id='hostname'></span> will help us identify and block malicious sites. Thanks for helping create a safer web!">
+<!ENTITY errorReporting.report "Report">
+<!ENTITY errorReporting.sending "Sending report">
+<!ENTITY errorReporting.sent "Report sent">
+
+<!ENTITY errorReporting.title "Report this error">
+<!ENTITY errorReporting.tryAgain "Try again">
+<!ENTITY sslv3Used.learnMore "Learn More…">
+<!-- LOCALIZATION NOTE (sslv3Used.longDesc) - Do not translate
+     "ssl_error_unsupported_version". -->
+<!ENTITY sslv3Used.longDesc "Advanced info: ssl_error_unsupported_version">
+
+<!ENTITY sslv3Used.title "Unable to Connect Securely">

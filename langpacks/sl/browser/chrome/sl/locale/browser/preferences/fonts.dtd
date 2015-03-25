@@ -1,17 +1,18 @@
-<!ENTITY fontsDialog.title "Pisave">
-<!ENTITY window.width "45em">
-<!ENTITY window.macWidth "47em">
-<!ENTITY window.unixWidth "45em">
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 
-<!ENTITY language.label "Pisave za:">
+<!ENTITY fontsDialog.title "Pisave">
+
+<!ENTITY language.label "Pisava:">
 <!ENTITY language.accesskey "V">
 
 <!ENTITY size.label "Velikost:">
 <!ENTITY sizeProportional.accesskey "l">
-<!ENTITY sizeMonospace.accesskey "e">
+<!ENTITY sizeMonospace.accesskey "i">
 
 <!ENTITY proportional.label "Proporcionalna pisava:">
-<!ENTITY proportional.accesskey "S">
+<!ENTITY proportional.accesskey "R">
 
 <!ENTITY serif.label "Serif:">
 <!ENTITY serif.accesskey "S">
@@ -20,19 +21,17 @@
 <!ENTITY monospace.label "Enoširinska pisava:">
 <!ENTITY monospace.accesskey "E">
 
-<!ENTITY font.langGroup.latin1 "zahodno">
-<!ENTITY font.langGroup.latin2 "srednjeevropsko">
+<!-- LOCALIZATION NOTE (font.langGroup.latin) :
+     Translate "Latin" as the name of Latin (Roman) script, not as the name of the Latin language. -->
+<!ENTITY  font.langGroup.latin "latinica">
 <!ENTITY font.langGroup.japanese "japonsko">
 <!ENTITY font.langGroup.trad-chinese "tradicionalno kitajsko (Tajvan)">
 <!ENTITY font.langGroup.simpl-chinese "poenostavljeno kitajsko">
 <!ENTITY font.langGroup.trad-chinese-hk "tradicionalno kitajsko (Hong Kong)">
 <!ENTITY font.langGroup.korean "korejsko">
 <!ENTITY font.langGroup.cyrillic "cirilica">
-<!ENTITY font.langGroup.baltic "baltsko">
 <!ENTITY font.langGroup.el "grško">
-<!ENTITY font.langGroup.turkish "turško">
-<!ENTITY font.langGroup.unicode "Unicode">
-<!ENTITY font.langGroup.user-def "določi uporabnik">
+<!ENTITY font.langGroup.other "druge pisave">
 <!ENTITY font.langGroup.thai "tajsko">
 <!ENTITY font.langGroup.hebrew "hebrejsko">
 <!ENTITY font.langGroup.arabic "arabsko">
@@ -40,7 +39,7 @@
 <!ENTITY font.langGroup.tamil "tamilsko">
 <!ENTITY font.langGroup.armenian "armensko">
 <!ENTITY font.langGroup.bengali "bengalsko">
-<!ENTITY font.langGroup.canadian "Unified Canadian Syllabary">
+<!ENTITY font.langGroup.canadian "poenoten kanadski Silabari">
 <!ENTITY font.langGroup.ethiopic "etiopsko">
 <!ENTITY font.langGroup.georgian "gruzijsko">
 <!ENTITY font.langGroup.gujarati "gudžaratsko">
@@ -56,20 +55,58 @@
 <!ENTITY minSize.label "Najmanjša velikost pisav:">
 <!ENTITY minSize.accesskey "m">
 <!ENTITY minSize.none "je ni">
-<!-- default font type -->
 
+<!-- default font type -->
 <!ENTITY useDefaultFontSerif.label "Serif">
 <!ENTITY useDefaultFontSansSerif.label "Sans Serif">
 
 <!ENTITY allowPagesToUse.label "Dovoli stranem, da uporabljajo lastne pisave namesto mojih izborov">
 <!ENTITY allowPagesToUse.accesskey "H">
 
-<!ENTITY languages.customize.Charset.grouplabel "Nabor znakov">
-<!ENTITY languages.customize.DefaultCharset.label "Privzeti nabor znakov:">
-<!ENTITY languages.customize.DefaultCharset.accesskey "Z">
+<!ENTITY languages.customize.Fallback.grouplabel  "Nabor znakov za starejše vsebine">
+<!ENTITY languages.customize.Fallback.label       "Privzet nabor znakov:">
+<!ENTITY languages.customize.Fallback.accesskey   "Z">
+<!ENTITY languages.customize.Fallback.desc        "Ta nabor znakov se uporablja za starejše vsebine, ki nimajo navedenega nabora.">
 
-<!ENTITY languages.customize.Fallback.accesskey   "C">
-<!ENTITY languages.customize.Fallback.desc        "This character encoding is used for legacy content that fails to declare its encoding.">
+<!ENTITY languages.customize.Fallback.auto        "Privzeto za trenuten jezik">
+<!-- LOCALIZATION NOTE (languages.customize.Fallback.arabic):
+     Translate "Arabic" as an adjective for an encoding, not as the name of the language. -->
+<!ENTITY languages.customize.Fallback.arabic      "Arabsko">
+<!ENTITY languages.customize.Fallback.baltic      "Baltsko">
+<!ENTITY languages.customize.Fallback.ceiso       "Srednjeevropsko, ISO">
+<!ENTITY languages.customize.Fallback.cewindows   "Srednjeevropsko, Microsoft">
+<!-- LOCALIZATION NOTE (languages.customize.Fallback.simplified):
+     Translate "Chinese" as an adjective for an encoding, not as the name of the language. -->
+<!ENTITY languages.customize.Fallback.simplified  "Kitajsko poenostavljeno">
+<!-- LOCALIZATION NOTE (languages.customize.Fallback.traditional):
+     Translate "Chinese" as an adjective for an encoding, not as the name of the language. -->
+<!ENTITY languages.customize.Fallback.traditional "Kitajsko tradicionalno">
+<!ENTITY languages.customize.Fallback.cyrillic    "Cirilica">
+<!-- LOCALIZATION NOTE (languages.customize.Fallback.greek):
+     Translate "Greek" as an adjective for an encoding, not as the name of the language. -->
+<!ENTITY languages.customize.Fallback.greek       "Grško">
+<!-- LOCALIZATION NOTE (languages.customize.Fallback.hebrew):
+     Translate "Hebrew" as an adjective for an encoding, not as the name of the language. -->
+<!ENTITY languages.customize.Fallback.hebrew      "Hebrejsko">
+<!-- LOCALIZATION NOTE (languages.customize.Fallback.japanese):
+     Translate "Japanese" as an adjective for an encoding, not as the name of the language. -->
+<!ENTITY languages.customize.Fallback.japanese    "Japonsko">
+<!-- LOCALIZATION NOTE (languages.customize.Fallback.korean):
+     Translate "Korean" as an adjective for an encoding, not as the name of the language. -->
+<!ENTITY languages.customize.Fallback.korean      "Korejsko">
+<!-- LOCALIZATION NOTE (languages.customize.Fallback.thai):
+     Translate "Thai" as an adjective for an encoding, not as the name of the language. -->
+<!ENTITY languages.customize.Fallback.thai        "Tajsko">
+<!-- LOCALIZATION NOTE (languages.customize.Fallback.turkish):
+     Translate "Turkish" as an adjective for an encoding, not as the name of the language. -->
+<!ENTITY languages.customize.Fallback.turkish     "Turško">
+<!-- LOCALIZATION NOTE (languages.customize.Fallback.vietnamese):
+     Translate "Vietnamese" as an adjective for an encoding, not as the name of the language. -->
+<!ENTITY languages.customize.Fallback.vietnamese  "Vietnamsko">
+<!ENTITY languages.customize.Fallback.other       "Drugo (tudi zahodnoevropsko)">
 
-<!ENTITY languages.customize.Fallback.grouplabel  "Character Encoding for Legacy Content">
-<!ENTITY languages.customize.Fallback.label       "Fallback Character Encoding:">
+<!ENTITY languages.customize.Fallback2.accesskey  "T">
+<!ENTITY languages.customize.Fallback2.desc       "This text encoding is used for legacy content that fails to declare its encoding.">
+
+<!ENTITY languages.customize.Fallback2.grouplabel "Text Encoding for Legacy Content">
+<!ENTITY languages.customize.Fallback2.label      "Fallback Text Encoding:">

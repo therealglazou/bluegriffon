@@ -1,3 +1,7 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
 <!ENTITY aboutSupport.pageTitle "Odpravljanje težav">
 
 <!-- LOCALIZATION NOTE (aboutSupport.pageSubtitle): don't change the 'supportLink' id. -->
@@ -7,15 +11,37 @@
   &brandShortName;, obiščite <a id='supportLink'>strani za podporo uporabnikom</a>.
 ">
 
+<!ENTITY aboutSupport.crashes.title "Poročila o sesutjih">
+<!-- LOCALIZATION NOTE (aboutSupport.crashes.id):
+This is likely the same like id.heading in crashes.dtd. -->
+<!ENTITY aboutSupport.crashes.id "ID poročila">
+<!ENTITY aboutSupport.crashes.sendDate "Datum pošiljanja">
+<!ENTITY aboutSupport.crashes.allReports "Vsa poročila o sesutjih">
+<!ENTITY aboutSupport.crashes.noConfig "Ta program ni bil nastavljen za prikaz poročil o sesutjih.">
+
 <!ENTITY aboutSupport.extensionsTitle "Razširitve">
 <!ENTITY aboutSupport.extensionName "Ime">
 <!ENTITY aboutSupport.extensionEnabled "Vključeno">
 <!ENTITY aboutSupport.extensionVersion "Različica">
 <!ENTITY aboutSupport.extensionId "ID">
 
+<!ENTITY aboutSupport.experimentsTitle "Poskusne zmogljivosti">
+<!ENTITY aboutSupport.experimentName "Ime">
+<!ENTITY aboutSupport.experimentId "ID">
+<!ENTITY aboutSupport.experimentDescription "Opis">
+<!ENTITY aboutSupport.experimentActive "Aktivno">
+<!ENTITY aboutSupport.experimentEndDate "Datum konca">
+<!ENTITY aboutSupport.experimentHomepage "Domača stran">
+
+
 <!ENTITY aboutSupport.appBasicsTitle "Osnovni podatki">
 <!ENTITY aboutSupport.appBasicsName "Ime">
 <!ENTITY aboutSupport.appBasicsVersion "Različica">
+
+<!-- LOCALIZATION NOTE (aboutSupport.appBasicsUpdateHistory, aboutSupport.appBasicsShowUpdateHistory):
+"Update" is a noun here, not a verb. -->
+<!ENTITY aboutSupport.appBasicsUpdateHistory "Zgodovina posodobitev">
+<!ENTITY aboutSupport.appBasicsShowUpdateHistory "Prikaži zgodovino posodobitev">
 
 <!ENTITY aboutSupport.appBasicsProfileDir "Mapa s profilom">
 <!-- LOCALIZATION NOTE (aboutSupport.appBasicsProfileDirWinMac):
@@ -23,11 +49,12 @@ This is the Windows- and Mac-specific variant of aboutSupport.appBasicsProfileDi
 Windows/Mac use the term "Folder" instead of "Directory" -->
 <!ENTITY aboutSupport.appBasicsProfileDirWinMac "Mapa s profilom">
 
-<!ENTITY aboutSupport.appBasicsEnabledPlugins "Omogočeni vstavki">
-<!ENTITY aboutSupport.appBasicsBuildConfig "Nastavitev gradnje">
+<!ENTITY aboutSupport.appBasicsEnabledPlugins "Omogočeni vtičniki">
+<!ENTITY aboutSupport.appBasicsBuildConfig "Nastavitev graditve">
 <!ENTITY aboutSupport.appBasicsUserAgent "Uporabniški agent">
-<!ENTITY aboutSupport.appBasicsCrashIDs "Poročila o sesutju">
 <!ENTITY aboutSupport.appBasicsMemoryUse "Poraba pomnilnika">
+
+<!ENTITY aboutSupport.appBasicsMultiProcessSupport "Večprocesna okna">
 
 <!ENTITY aboutSupport.showDir.label "Odpri mapo">
 <!-- LOCALIZATION NOTE (aboutSupport.showMac.label): This is the Mac-specific
@@ -42,26 +69,38 @@ variant of aboutSupport.showDir.label. -->
 <!ENTITY aboutSupport.modifiedPrefsName "Ime">
 <!ENTITY aboutSupport.modifiedPrefsValue "Vrednost">
 
+<!-- LOCALIZATION NOTE (aboutSupport.userJSTitle, aboutSupport.userJSDescription): user.js is the name of the preference override file being checked. -->
+<!ENTITY aboutSupport.userJSTitle "Nastavitve user.js">
+<!ENTITY aboutSupport.userJSDescription "V vaši mapi s profilom se nahaja <a id='prefs-user-js-link'>datoteka user.js</a>, ki vsebuje nastavitve, ki jih ni ustvaril &brandShortName;.">
+
+<!ENTITY aboutSupport.lockedKeyPrefsTitle "Pomembne zaklenjene nastavitve">
+<!ENTITY aboutSupport.lockedPrefsName "Ime">
+<!ENTITY aboutSupport.lockedPrefsValue "Vrednost">
+
 <!ENTITY aboutSupport.graphicsTitle "Grafika">
 
 <!ENTITY aboutSupport.jsTitle "JavaScript">
 <!ENTITY aboutSupport.jsIncrementalGC "Inkrementalen GC">
+
+<!ENTITY aboutSupport.a11yTitle "Dostopnost">
+<!ENTITY aboutSupport.a11yActivated "Vključeno">
+<!ENTITY aboutSupport.a11yForceDisabled "Prepreči dostopnost">
 
 <!ENTITY aboutSupport.libraryVersionsTitle "Različice knjižnic">
 
 <!ENTITY aboutSupport.installationHistoryTitle "Zgodovina namestitev">
 <!ENTITY aboutSupport.updateHistoryTitle "Zgodovina posodobitev">
 
-<!ENTITY aboutSupport.copyToClipboard.label "Kopiraj v odložišče">
+<!ENTITY aboutSupport.copyTextToClipboard.label "Kopiraj besedilo v odložišče">
+<!ENTITY aboutSupport.copyRawDataToClipboard.label "Kopiraj neobdelane podatke v odložišče">
 
-<!ENTITY aboutSupport.a11yActivated "Activated">
-<!ENTITY aboutSupport.a11yForceDisabled "Prevent Accessibility">
+<!ENTITY aboutSupport.appBasicsBuildID "Build ID">
 
-<!ENTITY aboutSupport.a11yTitle "Accessibility">
-<!ENTITY aboutSupport.copyRawDataToClipboard.label "Copy raw data to clipboard">
+<!-- LOCALIZATION NOTE (aboutSupport.appBasicsUpdateChannel, aboutSupport.appBasicsUpdateHistory, aboutSupport.appBasicsShowUpdateHistory):
+"Update" is a noun here, not a verb. -->
+<!ENTITY aboutSupport.appBasicsUpdateChannel "Update Channel">
+<!ENTITY aboutSupport.restartInSafeMode.label "Restart with Add-ons Disabled…">
 
-<!ENTITY aboutSupport.copyTextToClipboard.label "Copy text to clipboard">
-<!ENTITY aboutSupport.userJSDescription "Your profile folder contains a <a id='prefs-user-js-link'>user.js file</a>, which includes preferences that were not created by &brandShortName;.">
+<!ENTITY aboutSupport.safeModeTitle "Try Safe Mode">
 
-<!-- LOCALIZATION NOTE (aboutSupport.userJSTitle, aboutSupport.userJSDescription): user.js is the name of the preference override file being checked. -->
-<!ENTITY aboutSupport.userJSTitle "user.js Preferences">
+<!ENTITY aboutSupport.sandboxTitle "Sandbox">

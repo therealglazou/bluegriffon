@@ -26,28 +26,18 @@
 <!ENTITY checkSpelling.label "Při psaní kontrolovat pravopis">
 <!ENTITY checkSpelling.accesskey "k">
 
-<!ENTITY systemDefaults.label "Nastavení systému">
-<!ENTITY alwaysCheckDefault.label "Při startu kontrolovat, zda je &brandShortName; výchozím prohlížečem"><!--XXX-->
-<!ENTITY alwaysCheckDefault.accesskey "t">
-<!ENTITY setDefault.label "Nastavit &brandShortName; jako výchozí prohlížeč">
-<!ENTITY setDefault.accesskey "N">
-<!ENTITY isDefault.label "&brandShortName; je aktuálně výchozím prohlížečem">
-
 <!ENTITY dataChoicesTab.label "Možnosti hlášení">
 
-<!ENTITY healthReportSection.label "Hlášení o zdraví aplikace &brandShortName;">
-<!ENTITY healthReportDesc.label "Pomáhá porozumnět výkonu a zdraví prohlížeče. Data o prohlížeči jsou sdílena s organizací &vendorShortName;.">
+<!ENTITY healthReportDesc.label "Pomáhá porozumět výkonu a zdraví prohlížeče. Data o prohlížeči jsou sdílena s organizací &vendorShortName;.">
 <!ENTITY enableHealthReport.label "Povolit hlášení o zdraví aplikace &brandShortName;">
 <!ENTITY enableHealthReport.accesskey "z">
 <!ENTITY healthReportLearnMore.label "Zjistit více">
 
-<!ENTITY telemetrySection.label "Vzdálené měření">
 <!ENTITY telemetryDesc.label "Zaznamenává data o výkonu, používání, hardware a přizpůsobení prohlížeče &brandShortName;. Data o prohlížeči jsou sdílena s organizací &vendorShortName; z důvodu jeho vylepšení.">
-<!ENTITY enableTelemetry.label "Povolit vzdálené měření">
-<!ENTITY enableTelemetry.accesskey "v">
+<!ENTITY enableTelemetryData.label "Sdílet další údaje (např. telemetrii)">
+<!ENTITY enableTelemetryData.accesskey "S">
 <!ENTITY telemetryLearnMore.label "Zjistit více">
 
-<!ENTITY crashReporterSection.label "Hlášení pádů">
 <!ENTITY crashReporterDesc.label "Odesílá hlášení o pádu prohlížeče &brandShortName; a pomáhá organizaci &vendorShortName; vylepšit jeho stabilitu a bezpečnost.">
 <!ENTITY enableCrashReporter.label "Povolit hlášení pádů">
 <!ENTITY enableCrashReporter.accesskey "h">
@@ -83,16 +73,23 @@
 
 <!ENTITY updateTab.label "Aktualizace">
 
-<!ENTITY updateApp.label "Aktualizace aplikace &brandShortName;:">
-<!ENTITY updateAuto.label "Instalovat aktualizace automaticky (doporučováno z důvodu vyšší bezpečnosti)">
-<!ENTITY updateAuto.accesskey "I">
-<!ENTITY updateCheck.label "Vyhledávat aktualizace, ale dotázat se, zda mají být nainstalovány">
-<!ENTITY updateCheck.accesskey "V">
-<!ENTITY updateManual.label "Nikdy nevyhledávat aktualizace (nedoporučováno z důvodu rizika ohrožení)">
-<!ENTITY updateManual.accesskey "N">
+<!ENTITY updateApp.label                 "Aktualizace aplikace &brandShortName;:">
+<!-- Note either updateAuto1 is used or (updateAutoMetro and updateAutoDesktop),
+     so re-using accesss key in updateAuto1 is OK. updateAutoDesktop can be found
+     in preferences.properties -->
+<!ENTITY updateAuto1.label               "Instalovat aktualizace automaticky (doporučováno z důvodu vyšší bezpečnosti)">
+<!ENTITY updateAuto1.accesskey           "I">
+<!ENTITY updateAutoMetro.label           "Instalovat aktualizace automaticky z desktopu i vzhledu aplikace &brandShortName; pro Windows 8">
+<!ENTITY updateAutoMetro.accesskey       "s">
+<!ENTITY updateCheck.label               "Vyhledávat aktualizace, ale dotázat se, zda mají být nainstalovány">
+<!ENTITY updateCheck.accesskey           "e">
+<!ENTITY updateManual.label              "Nikdy nevyhledávat aktualizace (nedoporučováno z důvodu rizika ohrožení)">
+<!ENTITY updateManual.accesskey          "N">
 
-<!ENTITY updateAutoAddonWarn.label "Upozornit, pokud by aktualizace zakázala některé doplňky">
+<!ENTITY updateAutoAddonWarn.label       "Upozornit, pokud by aktualizace zakázala některé doplňky">
 <!ENTITY updateAutoAddonWarn.accesskey "U">
+
+<!ENTITY updateAutoMetroWarn.label       "(Styl aplikace &brandShortName; pro Windows 8 nekontroluje kompatibilitu doplňků)">
 
 <!ENTITY updateHistory.label "Zobrazit historii aktualizací">
 <!ENTITY updateHistory.accesskey "b">
@@ -115,24 +112,17 @@
 <!ENTITY offlineAppsListRemove.accesskey "d">
 <!ENTITY offlineAppRemove.confirm "Smazat offline obsah">
 
-<!ENTITY encryptionTab.label "Šifrování">
-
-<!ENTITY protocols.label "Protokoly">
-<!ENTITY useSSL3.label "Použít SSL 3.0">
-<!ENTITY useSSL3.accesskey "3">
-<!ENTITY useTLS1.label "Použít TLS 1.0">
-<!ENTITY useTLS1.accesskey "1">
-<!ENTITY certificates.label "Certifikáty">
+<!ENTITY certificateTab.label "Certifikáty">
 <!ENTITY certSelection.description "Pokud server vyžaduje osobní certifikát:">
 <!ENTITY certs.auto "Zvolit automaticky">
 <!ENTITY certs.auto.accesskey "a">
 <!ENTITY certs.ask "Vždy se dotázat">
 <!ENTITY certs.ask.accesskey "d">
+<!ENTITY enableOCSP.label                "Aktuální platnost certifikátů ověřovat na serverech OCSP">
+<!ENTITY enableOCSP.accesskey            "p">
 <!ENTITY viewCerts.label "Certifikáty">
 <!ENTITY viewCerts.accesskey "C">
-<!ENTITY viewCRLs.label "Zneplatnění">
-<!ENTITY viewCRLs.accesskey "Z">
-<!ENTITY verify2.label "Ověřování">
-<!ENTITY verify2.accesskey "O">
 <!ENTITY viewSecurityDevices.label "Bezpečnostní zařízení">
 <!ENTITY viewSecurityDevices.accesskey "B">
+
+<!ENTITY certSelection.label             "Requests">

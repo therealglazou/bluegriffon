@@ -2,51 +2,47 @@
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 
-<!ENTITY certmgr.title			"証明書マネージャ">
+<!ENTITY certmgr.title				"証明書マネージャ">
 
-<!ENTITY certmgr.tab.mine		"あなたの証明書">
-<!ENTITY certmgr.tab.others2		"個人証明書">
-<!ENTITY certmgr.tab.websites3		"サーバ証明書">
-<!ENTITY certmgr.tab.ca			"認証局証明書">
-<!ENTITY certmgr.tab.orphan2		"その他">
+<!ENTITY certmgr.tab.mine			"あなたの証明書">
+<!ENTITY certmgr.tab.others2			"個人証明書">
+<!ENTITY certmgr.tab.websites3			"サーバ証明書">
+<!ENTITY certmgr.tab.ca				"認証局証明書">
+<!ENTITY certmgr.tab.orphan2			"その他">
 
-<!ENTITY certmgr.ca.builtins		"組み込みの認証局">
-<!ENTITY certmgr.ca.mycas		"インポートした認証局">
+<!ENTITY certmgr.ca.builtins			"組み込みの認証局">
+<!ENTITY certmgr.ca.mycas			"インポートした認証局">
 
-<!ENTITY certmgr.mine			"あなたが認証を受けるため以下の証明書が登録されています:">
-<!ENTITY certmgr.others			"他の人を識別するため以下の証明書が登録されています:">
-<!ENTITY certmgr.websites2		"サーバを識別するため以下の証明書が登録されています:">
-<!ENTITY certmgr.cas			"認証局を識別するため以下の証明書が登録されています:">
-<!ENTITY certmgr.orphans		"以下の証明書は他のいずれの分類にも属していません:">
+<!ENTITY certmgr.mine				"あなたが認証を受けるため以下の証明書が登録されています:">
+<!ENTITY certmgr.others				"他の人を識別するため以下の証明書が登録されています:">
+<!ENTITY certmgr.websites2			"サーバを識別するため以下の証明書が登録されています:">
+<!ENTITY certmgr.cas				"認証局を識別するため以下の証明書が登録されています:">
+<!ENTITY certmgr.orphans			"以下の証明書は他のいずれの分類にも属していません:">
 
-<!ENTITY certmgr.detail.general_tab.title	"一般">
-<!ENTITY certmgr.detail.general_tab.accesskey	"G">
-<!ENTITY certmgr.detail.prettyprint_tab.title	"詳細">
+<!ENTITY certmgr.detail.general_tab.title		"一般">
+<!ENTITY certmgr.detail.general_tab.accesskey		"G">
+<!ENTITY certmgr.detail.prettyprint_tab.title		"詳細">
 <!ENTITY certmgr.detail.prettyprint_tab.accesskey	"D">
- 
+
 <!ENTITY certmgr.pending.label			"証明書を検証しています...">
 <!ENTITY certmgr.subjectinfo.label		"発行対象">
 <!ENTITY certmgr.issuerinfo.label		"発行者">
-<!ENTITY certmgr.validity.label			"証明書の有効期間">
+<!ENTITY certmgr.periodofvalidity.label		"証明書の有効期間">
 <!ENTITY certmgr.fingerprints.label		"証明書のフィンガープリント">
 <!ENTITY certmgr.certdetail.title		"証明書の詳細">
 <!ENTITY certmgr.certdetail.cn			"一般名称 (CN)">
 <!ENTITY certmgr.certdetail.o			"組織 (O)">
 <!ENTITY certmgr.certdetail.ou			"部門 (OU)">
 <!ENTITY certmgr.certdetail.serialnumber	"シリアル番号">
+<!ENTITY certmgr.certdetail.sha256fingerprint	"SHA-256 フィンガープリント">
 <!ENTITY certmgr.certdetail.sha1fingerprint	"SHA1 フィンガープリント">
-<!ENTITY certmgr.certdetail.md5fingerprint	"MD5 フィンガープリント">
 
 <!ENTITY certmgr.editcert.title			"証明書の設定">
 <!ENTITY certmgr.editcacert.title		"認証局証明書に対する信頼性の設定">
-<!ENTITY certmgr.editsslcert.title		"サーバ証明書に対する信頼性の設定">
 <!ENTITY certmgr.editcert.edittrust		"証明書の信頼性を設定してください:">
 <!ENTITY certmgr.editcert.trustssl		"この証明書を Web サイトの識別に使用する">
 <!ENTITY certmgr.editcert.trustemail		"この証明書をメールユーザの識別に使用する">
 <!ENTITY certmgr.editcert.trustobjsign		"この証明書をソフトウェア製作者の識別に使用する">
-<!ENTITY certmgr.editsslcert.edittrust		"証明書の信頼性を設定してください:">
-<!ENTITY certmgr.editsslcert.dotrust		"この証明書が本物であると信用する">
-<!ENTITY certmgr.editsslcert.donttrust		"この証明書が本物であると信用しない">
 <!ENTITY certmgr.editemailcert.title		"メール証明書の信頼性の設定">
 <!ENTITY certmgr.editemailcert.edittrust	"証明書の信頼性を設定してください:">
 <!ENTITY certmgr.editemailcert.dotrust		"この証明書が本物であると信用する">
@@ -63,7 +59,7 @@
 <!ENTITY certmgr.certserver			"サーバ">
 <!ENTITY certmgr.override_lifetime		"例外承認期間"><!-- (^^; -->
 <!ENTITY certmgr.tokenname			"セキュリティデバイス">
-<!ENTITY certmgr.issued				"発行日">
+<!ENTITY certmgr.begins				"発行日">
 <!ENTITY certmgr.expires			"有効期限">
 <!ENTITY certmgr.email				"メールアドレス">
 <!ENTITY certmgr.serial				"シリアル番号">
@@ -112,3 +108,5 @@
 <!ENTITY exceptionMgr.certstatus.accesskey	"V">
 <!ENTITY exceptionMgr.permanent.label		"次回以降にもこの例外を有効にする"><!-- (^^; -->
 <!ENTITY exceptionMgr.permanent.accesskey	"P">
+
+<!ENTITY certmgr.hierarchy.accesskey2         "H">

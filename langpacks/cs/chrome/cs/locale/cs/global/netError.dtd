@@ -50,8 +50,8 @@
 <!ENTITY netTimeout.title "Vypršel čas na spojení">
 <!ENTITY netTimeout.longDesc "<p>Požadovaný server neodpověděl na požadavek o připojení a prohlížeč ukončil čekání na tuto odpověď.</p><ul><li>Server může být velmi vytížen; Opakujte akci později.</li><li>Je možné, že se jedná o síťový problém mezi vaším počítačem a serverem.</li><li>Pokud problém přetrvává, konzultujte jej se svým síťovým administrátorem, nebo poskytovatelem připojení k Internetu.</li></ul>">
 
-<!ENTITY protocolNotFound.title "Neznámý protokol">
-<!ENTITY protocolNotFound.longDesc "<p>Adresa (URL) určuje protokol (např. http://), který nebyl prohlížečem rozpoznán. Bez rozpoznání protokolu se prohlížeč nemůže k serveru připojit. (Některé protokoly vyžadují instalaci software či doplňků třetích stran.)</p>">
+<!ENTITY unknownProtocolFound.title "Neznámý protokol">
+<!ENTITY unknownProtocolFound.longDesc "<p>Adresu (URL) určuje protokol (např. <q>wxyz://</q>), který nebyl prohlížečem rozpoznán, a proto se k ní nemůže korektně připojit.</p><ul><li>Zkoušíte přistupovat k multimédiím či jiné netextové službě? Podívejte se, jaké další věci stránka vyžaduje.</li><li>Některé protokoly mohou vyžadovat software třetích stran nebo zásuvné moduly dříve, než je prohlížeč může rozpoznat.</li></ul>">
 
 <!ENTITY proxyConnectFailure.title "Proxy server odmítl spojení">
 <!ENTITY proxyConnectFailure.longDesc "<p>Prohlížeč je nakonfigurován k použití proxy serveru, který odmítl spojení.</p><ul><li>Zkontrolujte v prohlížeči nastavení proxy serveru a opakujte akci.</li><li>Je možné, že proxy server nepovoluje připojení z vaší sítě.</li><li>Pokud problém přetrvává, konzultujte jej se svým síťovým administrátorem, nebo poskytovatelem připojení k Internetu.</li></ul>">
@@ -66,7 +66,8 @@
 <!ENTITY unknownSocketType.longDesc "<p>Server na daný požadavek odpověděl neočekávaným způsobem a nemohl pokračovat.</p><ul><li>Na straně serveru běží jiná služba než je očekáváno.</li><li>Adresa (URL) obsahuje nesrovnalost mezi protokolem (např. http://) a určeným portem (např. mozilla.org:23).</li></ul>">
 
 <!ENTITY nssFailure2.title "Chyba zabezpečeného spojení">
-<!ENTITY nssFailure2.longDesc "<p>Požadovanou stránku nelze zobrazit, protože nelze ověřit autenticitu přijatých dat.</p><ul><li>Kontaktujte prosím vlastníka webového serveru a informujte ho o tomto problému.</li></ul>">
+<!ENTITY nssFailure2.longDesc2 "<p>Požadovanou stránku nelze zobrazit, protože nelze ověřit autenticitu přijatých dat.</p><ul><li>Kontaktujte prosím vlastníka webového serveru a informujte ho o tomto problému.</li></ul>">
+
 
 <!ENTITY nssBadCert.title "Chyba zabezpečeného spojení">
 <!ENTITY nssBadCert.longDesc2 "<ul>
@@ -87,8 +88,8 @@
 <p>Tyto podvodné stránky nazývané též útoky typu phishing se snaží zpravidla napodobit webové stránky nebo e-maily ze zdrojů, kterým věříte.</p>
 ">
 
-<!ENTITY cspFrameAncestorBlocked.title "Zablokováno dle bezpečnostních pravidel stránky">
-<!ENTITY cspFrameAncestorBlocked.longDesc "<p>Aplikace zabránila této stránce v nahrání, neboť tato stránka má bezpečnostní pravidla, která tento způsob užití zakazují.</p>">
+<!ENTITY cspBlocked.title "Zablokováno dle bezpečnostních pravidel stránky">
+<!ENTITY cspBlocked.longDesc "<p>Aplikace zabránila této stránce v nahrání, neboť tato stránka má bezpečnostní pravidla, která tento způsob načtení zakazují.</p>">
 
 <!ENTITY corruptedContentError.title "Chyba v obsahu stránky">
 <!ENTITY corruptedContentError.longDesc "<p>Stránka, kterou se snažíte načíst, nemůže být zobrazena, jelikož v přenesená data jsou chybná.</p><ul><li>Kontaktujte prosím vlastníka stránky a informujte ho o tomto problému.</li></ul>">

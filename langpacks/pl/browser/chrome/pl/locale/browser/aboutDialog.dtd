@@ -1,31 +1,36 @@
-<!ENTITY aboutDialog.title          "O programie &brandFullName;">
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 
-<!-- LOCALIZATION NOTE (warningDesc.version): This is a warning about the experimental nature of Nightly and Aurora builds. It is only shown in those versions. -->
-<!ENTITY warningDesc.version        "&brandShortName; to program eksperymentalny i potencjalnie niestabilny.">
-<!-- LOCALIZATION NOTE (warningDesc.telemetryDesc): This is a notification that Nightly/Aurora builds automatically send Telemetry data back to Mozilla. It is only shown in those versions. "It" refers to brandShortName. -->
-<!ENTITY warningDesc.telemetryDesc  "Do organizacji &vendorShortName; są automatycznie przesyłane informacje o wydajności, charakterystyce sprzętu, wykorzystaniu funkcji i modyfikacjach programu &brandShortName; w celu jego ulepszenia.">
+<!ENTITY aboutDialog.title "O programie &brandFullName;">
 
-<!-- LOCALIZATION NOTE (community.exp.*) This paragraph is shown in "experimental" builds, i.e. Nightly and Aurora builds, instead of the other "community.*" strings below. -->
-<!ENTITY community.exp.start        "">
-<!-- LOCALIZATION NOTE (community.exp.mozillaLink): This is a link title that links to http://www.mozilla.org/. -->
-<!ENTITY community.exp.mozillaLink  "&vendorShortName;">
-<!ENTITY community.exp.middle       " jest ">
-<!-- LOCALIZATION NOTE (community.exp.creditslink): This is a link title that links to about:credits. -->
-<!ENTITY community.exp.creditsLink  "globalną społecznością">
-<!ENTITY community.exp.end          ", starającą się zapewnić, by Internet pozostał otwarty, publiczny i dostępny dla wszystkich.">
+<!ENTITY update.checkForUpdatesButton.label "Sprawdź dostępność aktualizacji">
+<!ENTITY update.checkForUpdatesButton.accesskey "S">
+<!ENTITY update.updateButton.label2 "Uruchom ponownie, aby uaktualnić">
+<!ENTITY update.updateButton.accesskey "U">
+<!ENTITY update.applyButtonBillboard.label "Uaktualnij…">
+<!ENTITY update.applyButtonBillboard.accesskey "U">
 
-<!ENTITY community.start2           "Program &brandShortName; został opracowany przez ">
-<!-- LOCALIZATION NOTE (community.mozillaLink): This is a link title that links to http://www.mozilla.org/. -->
-<!ENTITY community.mozillaLink      "organizację &vendorShortName;">
-<!ENTITY community.middle2          ", która jest ">
-<!-- LOCALIZATION NOTE (community.creditsLink): This is a link title that links to about:credits. -->
-<!ENTITY community.creditsLink      "globalną społecznością">
-<!ENTITY community.end3             ", starającą się zapewnić, by Internet pozostał otwarty, publiczny i dostępny dla wszystkich.">
+<!ENTITY warningDesc.version "Program &brandShortName; jest wersją rozwojową i może być niestabilny.">
+<!ENTITY warningDesc.telemetryDesc "Dane o wydajności, wykorzystaniu, modyfikacjach oraz o sprzęcie, na którym działa, są wysyłane do organizacji &vendorShortName;, aby ulepszać program &brandShortName;.">
 
-<!ENTITY contribute.start           "Brzmi ciekawie? ">
-<!-- LOCALIZATION NOTE (contribute.getInvolvedLink): This is a link title that links to http://www.mozilla.org/contribute/. -->
-<!ENTITY contribute.getInvolvedLink "Dołącz do nas!">
-<!ENTITY contribute.end             "">
+<!ENTITY community.exp.start "">
+<!ENTITY community.exp.mozillaLink "&vendorShortName;">
+<!ENTITY community.exp.middle " jest ">
+<!ENTITY community.exp.creditsLink "globalną społecznością">
+<!ENTITY community.exp.end ", starającą się zapewnić, by Internet pozostał otwarty, publiczny i dostępny dla wszystkich.">
+
+<!ENTITY community.start2 "Program &brandShortName; został opracowany przez ">
+<!ENTITY community.mozillaLink "organizację &vendorShortName;">
+<!ENTITY community.middle2 ", która jest ">
+<!ENTITY community.creditsLink "globalną społecznością">
+<!ENTITY community.end3 ", starającą się zapewnić, by Internet pozostał otwarty, publiczny i dostępny dla wszystkich.">
+
+<!ENTITY helpus.start "Chcesz pomóc? ">
+<!ENTITY helpus.donateLink "Przekaż datek">
+<!ENTITY helpus.middle " lub ">
+<!ENTITY helpus.getInvolvedLink "dołącz do nas">
+<!ENTITY helpus.end "!">
 
 <!-- LOCALIZATION NOTE (bottomLinks.license): This is a link title that links to about:license. -->
 <!ENTITY bottomLinks.license        "Informacje licencyjne">
@@ -36,14 +41,10 @@
 <!-- LOCALIZATION NOTE (bottomLinks.privacy): This is a link title that links to http://www.mozilla.com/legal/privacy/. -->
 <!ENTITY bottomLinks.privacy        "Polityka prywatności">
 
-<!-- LOCALIZATION NOTE (update.checkingForUpdates): try to make the localized text short (see bug 596813 for screenshots). -->
-<!ENTITY update.checkingForUpdates  "Poszukiwanie aktualizacji…">
-<!-- LOCALIZATION NOTE (update.checkingAddonCompat): try to make the localized text short (see bug 596813 for screenshots). -->
-<!ENTITY update.checkingAddonCompat "Sprawdzanie zgodności dodatków…">
-<!-- LOCALIZATION NOTE (update.noUpdatesFound): try to make the localized text short (see bug 596813 for screenshots). -->
-<!ENTITY update.noUpdatesFound      "Program &brandShortName; jest aktualny">
-<!-- LOCALIZATION NOTE (update.adminDisabled): try to make the localized text short (see bug 596813 for screenshots). -->
-<!ENTITY update.adminDisabled       "Aktualizacje zablokowane przez administratora">
+<!ENTITY update.checkingForUpdates "Poszukiwanie aktualizacji…">
+<!ENTITY update.noUpdatesFound "Program &brandShortName; jest aktualny">
+<!ENTITY update.adminDisabled "Aktualizacje zablokowane przez administratora">
+<!ENTITY update.otherInstanceHandlingUpdates "Inna instancja właśnie aktualizuje program &brandShortName;">
 
 <!-- LOCALIZATION NOTE (update.failed.start,update.failed.linkText,update.failed.end):
      update.failed.start, update.failed.linkText, and update.failed.end all go into
@@ -61,6 +62,17 @@
 <!ENTITY update.manual.start        "Aktualizacje dostępne na ">
 <!ENTITY update.manual.end          "">
 
+<!-- LOCALIZATION NOTE (update.unsupported.start,update.unsupported.linkText,update.unsupported.end):
+     update.unsupported.start, update.unsupported.linkText, and
+     update.unsupported.end all go into one line with linkText being wrapped in
+     an anchor that links to a site to provide additional information regarding
+     why the system is no longer supported. As this is all in one line, try to
+     make the localized text short (see bug 843497 for screenshots). -->
+<!ENTITY update.unsupported.start    "Dalsze aktualizacje na tym systemie nie są możliwe. ">
+<!ENTITY update.unsupported.linkText "Więcej informacji">
+<!ENTITY update.unsupported.end      "">
+
+
 <!-- LOCALIZATION NOTE (update.downloading.start,update.downloading.end): update.downloading.start and 
      update.downloading.end all go into one line, with the amount downloaded inserted in between. As this
      is all in one line, try to make the localized text short (see bug 596813 for screenshots). The — is
@@ -74,5 +86,5 @@
 <!-- LOCALIZATION NOTE (channel.description.start,channel.description.end): channel.description.start and
      channel.description.end create one sentence, with the current channel label inserted in between.
      example: You are currently on the _Stable_ update channel. -->
-<!ENTITY channel.description.start  "Obecnie korzystasz z kanału aktualizacji ">
+<!ENTITY channel.description.start  "Obecnie korzystasz z kanału aktualizacji ">
 <!ENTITY channel.description.end    ". ">

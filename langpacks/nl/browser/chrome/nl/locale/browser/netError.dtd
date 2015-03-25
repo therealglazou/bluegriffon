@@ -57,7 +57,7 @@
 <!ENTITY netInterrupt.longDesc "&sharedLongDesc;">
 
 <!ENTITY notCached.title "Document verlopen">
-<!ENTITY notCached.longDesc "<p>Het opgevraagde document is niet beschikbaar in de buffer van &brandShortName;.</p><ul><li>Als veiligheidsvoorzorgsmaatregel vraagt &brandShortName; gevoelige documenten niet automatisch opnieuw op.</li><li>Klik op Opnieuw proberen om het document opnieuw van de website op te vragen.</li></ul>">
+<!ENTITY notCached.longDesc "<p>Het opgevraagde document is niet beschikbaar in de buffer van &brandShortName;.</p><ul><li>Als beveiligingsmaatregel vraagt &brandShortName; gevoelige documenten niet automatisch opnieuw op.</li><li>Klik op Opnieuw proberen om het document opnieuw van de website op te vragen.</li></ul>">
 
 <!ENTITY netOffline.title "Offlinemodus">
 <!ENTITY netOffline.longDesc2 "
@@ -69,14 +69,14 @@
 <!ENTITY contentEncodingError.title "Inhoudcoderingsfout">
 <!ENTITY contentEncodingError.longDesc "
 <ul>
-  <li>Neem contact op met de website-eigenaars om ze te informeren over dit probleem.</li>
+  <li>Neem contact op met de website-eigenaars om ze over dit probleem te informeren.</li>
 </ul>
 ">
 
 <!ENTITY unsafeContentType.title "Onveilig bestandstype">
 <!ENTITY unsafeContentType.longDesc "
 <ul>
-  <li>Neem contact op met de website-eigenaars om ze te informeren over dit probleem.</li>
+  <li>Neem contact op met de website-eigenaars om ze over dit probleem te informeren.</li>
 </ul>
 ">
 
@@ -86,8 +86,8 @@
 <!ENTITY netTimeout.title "De wachttijd voor de verbinding is verstreken">
 <!ENTITY netTimeout.longDesc "&sharedLongDesc;">
 
-<!ENTITY protocolNotFound.title "Het adres werd niet begrepen">
-<!ENTITY protocolNotFound.longDesc "
+<!ENTITY unknownProtocolFound.title "Het adres werd niet begrepen">
+<!ENTITY unknownProtocolFound.longDesc "
 <ul>
   <li>Misschien moet u andere software installeren om dit adres te openen.</li>
 </ul>
@@ -130,10 +130,10 @@
 ">
 
 <!ENTITY nssFailure2.title "Beveiligde verbinding mislukt">
-<!ENTITY nssFailure2.longDesc "
+<!ENTITY nssFailure2.longDesc2 "
 <ul>
   <li>De pagina die u wilt bekijken kan niet worden weergegeven, omdat de echtheid van de ontvangen gegevens niet kon worden geverifieerd.</li>
-  <li>Neem contact op met de website-eigenaars om ze te informeren over dit probleem. U kunt ook de opdracht in het helpmenu gebruiken om deze defecte website te rapporteren.</li>
+  <li>Neem contact op met de website-eigenaars om ze over dit probleem te informeren.</li>
 </ul>
 ">
 
@@ -169,11 +169,11 @@
 <p>Dit soort webvervalsingen wordt gebruikt in e-mailscams die bekend staan als phishingaanvallen, waarbij frauduleuze webpagina’s en e-mails worden gebruikt om bronnen die u misschien vertrouwt na te bootsen.</p>
 ">
 
-<!ENTITY cspFrameAncestorBlocked.title "Geblokkeerd door inhoudbeveiligingsbeleid">
-<!ENTITY cspFrameAncestorBlocked.longDesc "<p>&brandShortName; heeft voorkomen dat de pagina op deze manier werd geladen, omdat de pagina een inhoudbeveiligingsbeleid heeft dat dit niet toestaat.</p>">
+<!ENTITY cspBlocked.title "Geblokkeerd door inhoudbeveiligingsbeleid">
+<!ENTITY cspBlocked.longDesc "<p>&brandShortName; heeft voorkomen dat de pagina op deze manier werd geladen, omdat de pagina een inhoudbeveiligingsbeleid heeft dat dit niet toestaat.</p>">
 
 <!ENTITY corruptedContentError.title "Beschadigde-inhoudsfout">
-<!ENTITY corruptedContentError.longDesc "<p>De pagina die u wilt bekijken kan niet worden weergegeven, omdat er een fout in de gegevensoverdracht is gedetecteerd.</p><ul><li>Neem contact op met de website-eigenaars om ze te informeren over dit probleem.</li></ul>">
+<!ENTITY corruptedContentError.longDesc "<p>De pagina die u wilt bekijken kan niet worden weergegeven, omdat er een fout in de gegevensoverdracht is gedetecteerd.</p><ul><li>Neem contact op met de website-eigenaars om ze over dit probleem te informeren.</li></ul>">
 
 
 <!ENTITY securityOverride.linkText "Of u kunt een uitzondering toevoegen…">
@@ -192,5 +192,30 @@ functionality specific to firefox. -->
 <button id='exceptionDialogButton'>&securityOverride.exceptionButtonLabel;</button>
 ">
 
+<!ENTITY errorReporting.title "Deze fout rapporteren">
+<!ENTITY errorReporting.longDesc "Het rapporteren van het adres en de certificaatgegevens voor <span id='hostname'></span> helpt ons kwaadwillende websites te identificeren en te blokkeren. Bedankt voor uw hulp bij het maken van een veiliger web!">
+<!ENTITY errorReporting.automatic "Fouten in de toekomst automatisch rapporteren">
+<!ENTITY errorReporting.learnMore "Meer info…">
+<!ENTITY errorReporting.sending "Rapport verzenden">
+<!ENTITY errorReporting.sent "Rapport verzonden">
+<!ENTITY errorReporting.report "Rapport">
+<!ENTITY errorReporting.tryAgain "Opnieuw proberen">
+
 <!ENTITY remoteXUL.title "Remote XUL">
-<!ENTITY remoteXUL.longDesc "<p><ul><li>Neem contact op met de website-eigenaars om ze te informeren over dit probleem.</li></ul></p>">
+<!ENTITY remoteXUL.longDesc "<p><ul><li>Neem contact op met de website-eigenaars om ze over dit probleem te informeren.</li></ul></p>">
+
+<!ENTITY oldSecurityProtocol.title "Kan geen beveiligde verbinding maken">
+<!-- LOCALIZATION NOTE (oldSecurityProtocol.longDesc) - Do not translate the
+     <span id='hostname'></span>. -->
+<!ENTITY oldSecurityProtocol.longDesc2 "&brandShortName; kan de veiligheid van uw gegevens op <span id='hostname'></span> niet garanderen, omdat de website gebruikmaakt van SSLv3, een onbetrouwbaar beveiligingsprotocol.">
+<!-- LOCALIZATION NOTE (oldSecurityProtocol.advancedInfo) - Do not translate
+     the <span id='errorcode'></span>. -->
+<!ENTITY oldSecurityProtocol.advancedInfo "Uitgebreide info: <span id='errorcode'></span>">
+<!ENTITY oldSecurityProtocol.learnMore "Meer info…">
+
+<!ENTITY sslv3Used.learnMore "Learn More…">
+<!-- LOCALIZATION NOTE (sslv3Used.longDesc) - Do not translate
+     "ssl_error_unsupported_version". -->
+<!ENTITY sslv3Used.longDesc "Advanced info: ssl_error_unsupported_version">
+
+<!ENTITY sslv3Used.title "Unable to Connect Securely">

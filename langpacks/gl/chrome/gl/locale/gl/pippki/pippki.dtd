@@ -3,7 +3,7 @@
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 
 <!-- Values for changepassword.xul -->
-<!ENTITY setPassword.title  "Cambiar o contrasinal principal">
+<!ENTITY setPassword.title  "Mudar o contrasinal principal">
 <!ENTITY setPassword.tokenName.label "Dispositivo de seguranza">
 <!ENTITY setPassword.oldPassword.label "Contrasinal actual:">
 <!ENTITY setPassword.newPassword.label "Novo contrasinal:">
@@ -14,7 +14,7 @@
 <!-- Values for resetpassword.xul -->
 <!ENTITY resetPasswordButtonLabel "Restabelecer">
 <!ENTITY resetPassword.title  "Restabelecer o contrasinal principal">
-<!ENTITY resetPassword.text  "Se restabelece o contrasinal principal esqueceranse os contrasinais de web e correo electrónico, os datos dos formularios, os certificados persoais e as chaves privadas que estean almacenados. Está seguro de que quere restabelecelo?">
+<!ENTITY resetPassword.text  "Se restabelece o contrasinal principal esqueceranse os contrasinais de web e correo electrónico, os datos dos formularios, os certificados persoais e as chaves privadas que estean almacenados. Confirma que quere restabelecelo?">
 
 <!-- Values for getpassword.xul -->
 <!ENTITY getPassword.title  "Introduza o contrasinal principal">
@@ -36,19 +36,15 @@
 
 <!-- Downloading a cert -->
 <!ENTITY downloadCert.title "Descargando certificado">
-<!ENTITY downloadCert.message1 "Solicitóuselle que confíe nunha nova entidade de acreditación (AC).">
+<!ENTITY downloadCert.message1 "Solicitouse que confíe nunha nova entidade de acreditación (AC).">
 <!ENTITY downloadCert.trustSSL "Confiar nesta AC para identificar sitios web.">
 <!ENTITY downloadCert.trustEmail "Confiar nesta AC para identificar usuarios de correo electrónico.">
-<!ENTITY downloadCert.trustObjSign "Confiar nesta AC para identificar aos desenvolvedores de software.">
+<!ENTITY downloadCert.trustObjSign "Confiar nesta AC para identificar os desenvolvedores de software.">
 <!ENTITY downloadCert.message3 "Antes de confiar nesta AC para calquera finalidade, debería examinar o seu certificado e a súa política e procedementos (se están dispoñíbeis).">
 <!ENTITY downloadCert.viewCert.label "Ver">
 <!ENTITY downloadCert.viewPolicy.label "Política">
 <!ENTITY downloadCert.viewCert.text "Examinar o certificado da AC">
 <!ENTITY downloadCert.viewPolicy.text "Examinar as políticas e procedementos da AC">
-
-<!-- Certificate Exists in database -->
-<!ENTITY caCertExists.title "O certificado existe">
-<!ENTITY caCertExists.message "O certificado xa existe.">
 
 <!-- Strings for the SSL client auth ask dialog -->
 <!ENTITY clientAuthAsk.title "Solicitude de identificación de usuario">
@@ -74,29 +70,18 @@
 <!ENTITY chooseToken.message1 "Escolla unha chave electrónica.">
 
 <!ENTITY escrowWarn.title "Copia da chave de cifrado">
-<!ENTITY escrowWarn.message1 "Importante: Esta autoridade certificadora solicitou facer unha copia de seguranza da súa chave privada de cifrado.">
-<!ENTITY escrowWarn.benefit1 "A vantaxe é que, se perde o acceso á súa chave privada de cifrado, pode solicitar unha copia desta autoridade certificadora.">
-<!ENTITY escrowWarn.message2 "Con todo, a súa chave privada de cifrado será gardada pola autoridade certificadora, e podería utilizarse para ler o seu correo ou documentos cifrados sen o seu permiso.">
+<!ENTITY escrowWarn.message1 "Importante: Esta entidade de acreditación solicitou facer unha copia de seguranza da súa chave privada de cifrado.">
+<!ENTITY escrowWarn.benefit1 "A vantaxe é que, se perde o acceso á súa chave privada de cifrado, pode solicitar unha copia desta entidade de acreditación.">
+<!ENTITY escrowWarn.message2 "Con todo, a súa chave privada de cifrado será gardada pola entidade de acreditación, e podería utilizarse para ler o seu correo ou documentos cifrados sen o seu permiso.">
 <!ENTITY examineCert.label "Ver o certificado">
 <!ENTITY examineCert.accesskey "V">
-
-<!ENTITY serverCrlNextupdate.message "Solicite axuda ao administrador do sistema">
 
 <!-- Strings for the CreateCertInfo dialog  -->
 <!ENTITY createCertInfo.title "Xerando unha chave privada">
 <!ENTITY createCertInfo.msg1 "A chave está a ser xerada… O proceso pode demorar uns minutos….">
 <!ENTITY createCertInfo.msg2 "Agarde…">
 
-<!-- Form Signing confirmation prompt -->
-<!ENTITY formSigning.title "Petición de sinatura de texto">
-<!ENTITY formSigning.cert "Certificado de sinatura">
-<!ENTITY formSigning.confirmPassword "Para confirmar que quere asinar esta mensaxe de texto usando o certificado seleccionado, confírmeo introducindo o contrasinal principal:">
-
 <!-- Strings for protectedAuth dialog -->
 <!ENTITY protectedAuth.title "Autenticación protexida da chave electrónica">
 <!ENTITY protectedAuth.msg "Autentíquese coa chave electrónica. O método de autenticación depende do tipo da súa chave electrónica.">
 <!ENTITY protectedAuth.tokenName.label "Chave electrónica:">
-
-<!ENTITY certErrorDlg.title "Fallou a conexión segura">
-<!ENTITY certErrorDlg.info1 "Isto pode ser un problema coa configuración do servidor ou alguén que está a tentar despersonalizalo.">
-<!ENTITY certErrorDlg.info2 "Se xa se conectou algunha vez correctamente con este servidor o erro pode ser temporal e poderá tentar de novo máis tarde.">

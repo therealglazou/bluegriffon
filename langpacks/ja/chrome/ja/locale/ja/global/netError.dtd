@@ -47,8 +47,8 @@
 <!ENTITY netTimeout.title		"ネットワークがタイムアウトしました">
 <!ENTITY netTimeout.longDesc		"<p>接続リクエストに対してリクエスト先サーバが応答を返さなかったため、接続を中止しました。</p><ul><li>サーバに負荷が集中したり、一時的に停止している可能性があります。しばらく後で再度試してください。</li><li>他のサイトも表示できない場合、コンピュータのネットワーク接続を確認してください。</li><li>ファイアーウォールやプロキシでネットワークが保護されている場合、その設定に問題があると正常に表示できなくなることがあります。</li><li>問題が繰り返される場合、ネットワーク管理者またはインターネットプロバイダに問い合わせてください。</li></ul>">
 
-<!ENTITY protocolNotFound.title		"プロトコルが不明です">
-<!ENTITY protocolNotFound.longDesc	"<p>指定されたプロトコル (例えば <q>wxyz://</q>) を認識できないため、サイトに正常に接続できませんでした。</p><ul><li>マルチメディアファイルなど非テキストデータにアクセスしようとしている場合、サイトによる特別な動作要件がないか確認してください。</li><li>一部のプロトコルを使用するにはサードパーティのソフトウェアやプラグインが必要になります。</li></ul>">
+<!ENTITY unknownProtocolFound.title	"プロトコルが不明です">
+<!ENTITY unknownProtocolFound.longDesc	"<p>指定されたプロトコル (例えば <q>wxyz://</q>) を認識できないため、サイトに正常に接続できませんでした。</p><ul><li>マルチメディアファイルなど非テキストデータにアクセスしようとしている場合、サイトによる特別な動作要件がないか確認してください。</li><li>一部のプロトコルを使用するにはサードパーティのソフトウェアやプラグインが必要になります。</li></ul>">
 
 <!ENTITY proxyConnectFailure.title	"プロキシサーバが接続を拒否しました">
 <!ENTITY proxyConnectFailure.longDesc	"<p>プロキシサーバを使用する設定になっていますが、プロキシサーバは接続を拒否しました。</p><ul><li>ブラウザのプロキシ設定が正しいか確認してください。</li><li>このネットワークからプロキシサービスへの接続が許可されているか確認してください。</li><li>問題が繰り返される場合、ネットワーク管理者またはインターネットプロバイダに問い合わせてください。</li></ul>">
@@ -63,7 +63,7 @@
 <!ENTITY unknownSocketType.longDesc	"<p>ネットワークリクエストに対するサイトの応答が正しくなかったため、接続を中断しました。</p>">
 
 <!ENTITY nssFailure2.title		"安全な接続ができませんでした">
-<!ENTITY nssFailure2.longDesc		"<p>受信したデータの真正性を検証できなかったため、このページは表示できませんでした。</p><ul><li>この問題については Web サイトの管理者に問い合わせてください。</li></ul>">
+<!ENTITY nssFailure2.longDesc2		"<p>受信したデータの真正性を検証できなかったため、このページは表示できません。</p><ul><li>この問題については Web サイトの管理者に問い合わせてください。</li></ul>">
 
 <!ENTITY nssBadCert.title		"安全な接続ができませんでした">
 <!ENTITY nssBadCert.longDesc2		"<ul>
@@ -99,3 +99,7 @@
      Please, try to keep this at the end of the file. -->
 <!ENTITY % netErrorAppDTD SYSTEM "chrome://global/locale/netErrorApp.dtd">
 %netErrorAppDTD;
+
+<!ENTITY cspBlocked.longDesc "<p>The browser prevented this page from loading in this way because the page has a content security policy that disallows it.</p>">
+
+<!ENTITY cspBlocked.title "Blocked by Content Security Policy">

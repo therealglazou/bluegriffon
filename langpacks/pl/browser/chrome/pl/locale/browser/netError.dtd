@@ -17,24 +17,9 @@
 <!ENTITY deniedPortAccess.longDesc "">
 
 <!ENTITY dnsNotFound.title "Nie odnaleziono serwera">
-<!ENTITY dnsNotFound.longDesc "
-<ul>
-  <li>Sprawdź, czy adres nie zawiera literówek jak np.
-    <strong>ww</strong>.example.com zamiast
-    <strong>www</strong>.example.com</li>
-  <li>Jeśli nie można otworzyć żadnej strony, należy sprawdzić swoje połączenie sieciowe.</li>
-  <li>Jeśli ten komputer jest chroniony przez zaporę sieciową lub serwer proxy, należy sprawdzić, czy program &brandShortName; jest uprawniony do łączenia się z Internetem.</li>
-</ul>
-">
-
+<!ENTITY dnsNotFound.longDesc "<ul><li>Sprawdź, czy adres nie zawiera literówek jak np. <strong>ww</strong>.example.com zamiast <strong>www</strong>.example.com</li><li>Jeśli nie można otworzyć żadnej strony, sprawdź swoje połączenie sieciowe.</li><li>Jeśli ten komputer jest chroniony przez zaporę sieciową lub serwer proxy, sprawdź, czy program &brandShortName; jest uprawniony do łączenia się z Internetem.</li></ul>">
 <!ENTITY fileNotFound.title "Nie odnaleziono pliku">
-<!ENTITY fileNotFound.longDesc "
-<ul>
-  <li>Należy sprawdzić wielkość liter oraz upewnić się, że nazwa pliku nie zawiera literówek lub innych błędów w pisowni.</li>
-  <li>Należy sprawdzić, czy plik nie został przeniesiony, usunięty lub jego nazwa nie została zmieniona.</li>
-</ul>
-">
-
+<!ENTITY fileNotFound.longDesc "<ul><li>Sprawdź wielkość liter oraz upewnić się, że nazwa pliku nie zawiera literówek lub innych błędów w pisowni.</li><li>Sprawdź, czy plik nie został przeniesiony, usunięty lub jego nazwa nie została zmieniona.</li></ul>">
 
 <!ENTITY generic.title "Wystąpił błąd">
 <!ENTITY generic.longDesc "
@@ -55,7 +40,7 @@
 <!ENTITY netInterrupt.longDesc "&sharedLongDesc;">
 
 <!ENTITY notCached.title "Dokument wygasł">
-<!ENTITY notCached.longDesc "<p>Żądany dokument nie jest dostępny w pamięci podręcznej Firefoksa.</p><ul><li>Ze względów bezpieczeństwa Firefox
+<!ENTITY notCached.longDesc "<p>Żądany dokument nie jest dostępny w pamięci podręcznej Firefoksa.</p><ul><li>Ze względów bezpieczeństwa Firefox
 nie pobiera ponownie wrażliwych dokumentów automatycznie.</li><li>Kliknij przycisk Spróbuj ponownie, aby jeszcze raz pobrać dokument z witryny.</li></ul>">
 
 <!ENTITY netOffline.title "Tryb offline">
@@ -85,12 +70,8 @@ nie pobiera ponownie wrażliwych dokumentów automatycznie.</li><li>Kliknij przy
 <!ENTITY netTimeout.title "Przekroczono limit czasu połączenia">
 <!ENTITY netTimeout.longDesc "&sharedLongDesc;">
 
-<!ENTITY protocolNotFound.title "Nieznany protokół">
-<!ENTITY protocolNotFound.longDesc "
-<ul>
-  <li>Aby otworzyć ten adres, może być konieczna instalacja innego programu.</li>
-</ul>
-">
+<!ENTITY unknownProtocolFound.title "Nieznany protokół">
+<!ENTITY unknownProtocolFound.longDesc "<ul><li>Aby otworzyć ten adres, może być konieczna instalacja innego programu.</li></ul>">
 
 <!ENTITY proxyConnectFailure.title "Serwer proxy odrzuca połączenia">
 <!ENTITY proxyConnectFailure.longDesc "
@@ -125,14 +106,7 @@ nie pobiera ponownie wrażliwych dokumentów automatycznie.</li><li>Kliknij przy
 ">
 
 <!ENTITY nssFailure2.title "Nie udało się nawiązać bezpiecznego połączenia">
-<!ENTITY nssFailure2.longDesc "
-<p>Żądana strona nie może zostać wyświetlona, ponieważ nie udało się potwierdzić
-autentyczności otrzymanych danych.</p>
-<ul>
-  <li>Należy skontaktować się z właścicielem witryny i poinformować go o tym problemie albo
-  skorzystać z opcji „Zgłoś niedziałającą witrynę” w menu Pomoc.</li>
-</ul>
-">
+<!ENTITY nssFailure2.longDesc2 "<p>Żądana strona nie może zostać wyświetlona, ponieważ nie udało się potwierdzić autentyczności otrzymanych danych.</p><ul><li>Należy skontaktować się z właścicielem witryny i poinformować go o tym problemie.</li></ul>">
 
 <!ENTITY nssBadCert.title "Nie udało się nawiązać bezpiecznego połączenia">
 <!ENTITY nssBadCert.longDesc2 "
@@ -150,12 +124,12 @@ autentyczności otrzymanych danych.</p>
 </ul>
 ">
 
-<!ENTITY malwareBlocked.title "Witryna podejrzewana o dokonywanie ataków!">
+<!ENTITY malwareBlocked.title "Witryna podejrzewana o dokonywanie ataków!">
 <!ENTITY malwareBlocked.longDesc "
 <p>Tego rodzaju witryny mogą próbować instalować oprogramowanie wykradające poufne dane, używające komputera do pośredniczenia w atakach lub uszkadzające system.</p>
 <p>Właściciele witryn, które zostały błędnie uznane za podejrzane, mogą <a href='http://www.stopbadware.org/home/reviewinfo'>poprosić o ponowne ich sprawdzenie</a>.</p>">
 
-<!ENTITY phishingBlocked.title "Prawdopodobne oszustwo!">                        
+<!ENTITY phishingBlocked.title "Prawdopodobne oszustwo!">
 <!ENTITY phishingBlocked.longDesc "
 <p>Wprowadzanie jakichkolwiek informacji osobistych na tej stronie może skutkować
 kradzieżą tożsamości lub inną malwersacją.</p>
@@ -164,11 +138,11 @@ przez przestępców podrobionej strony lub wiadomości udającej źródło godne
 </p>
 ">
 
-<!ENTITY cspFrameAncestorBlocked.title "Zablokowane przez politykę bezpieczeństwa treści">
-<!ENTITY cspFrameAncestorBlocked.longDesc "<p>Program &brandShortName; uniemożliwił tej stronie wczytanie treści w ten sposób, ponieważ strona posiada politykę bezpieczeństwa treści, która na to nie pozwala.</p>">
+<!ENTITY cspBlocked.title "Zablokowane przez politykę bezpieczeństwa treści">
+<!ENTITY cspBlocked.longDesc "<p>Program &brandShortName; uniemożliwił tej stronie wczytanie treści w ten sposób, ponieważ strona posiada politykę bezpieczeństwa treści, która na to nie pozwala.</p>">
 
 <!ENTITY corruptedContentError.title "Błąd: treść uszkodzona">
-<!ENTITY corruptedContentError.longDesc "<p>Strona, którą próbujesz obejrzeć, nie może być wyświetlona, ponieważ wykryto błąd w transmisji danych.</p><ul><li>Prosimy poinformować właścicieli witryny o tym problemie.</li></ul>">
+<!ENTITY corruptedContentError.longDesc "<p>Strona, którą próbujesz obejrzeć, nie może być wyświetlona, ponieważ wykryto błąd w transmisji danych.</p><ul><li>Prosimy poinformować właścicieli witryny o tym problemie.</li></ul>">
 
 <!ENTITY securityOverride.linkText "Możesz także dodać wyjątek…">
 <!ENTITY securityOverride.getMeOutOfHereButton "Zabierz mnie stąd">
@@ -186,5 +160,18 @@ functionality specific to firefox. -->
 <button id='exceptionDialogButton'>&securityOverride.exceptionButtonLabel;</button>
 ">
 
+<!ENTITY errorReporting.title "Zgłoś ten błąd">
+<!ENTITY errorReporting.longDesc "Zgłaszając adres i informacje o certyfikacie dla <span id='hostname'></span>, pomagasz identyfikować i blokować niebezpieczne strony. Dziękujemy za pomoc w tworzeniu bezpieczniejszej sieci!">
+<!ENTITY errorReporting.automatic "Automatyczne zgłaszanie błędów">
+<!ENTITY errorReporting.learnMore "Więcej informacji…">
+<!ENTITY errorReporting.sending "Wysyłanie zgłoszenia">
+<!ENTITY errorReporting.sent "Wysłano zgłoszenie">
+<!ENTITY errorReporting.report "Zgłoś">
+<!ENTITY errorReporting.tryAgain "Spróbuj ponownie">
+
 <!ENTITY remoteXUL.title "Zdalna treść XUL">
-<!ENTITY remoteXUL.longDesc "<p><ul><li>Prosimy poinformować właścicieli witryny o tym problemie.</li></ul></p>">
+<!ENTITY remoteXUL.longDesc "<p><ul><li>Prosimy poinformować właścicieli witryny o tym problemie.</li></ul></p>">
+
+<!ENTITY sslv3Used.title "Nie udało się nawiązać bezpiecznego połączenia">
+<!ENTITY sslv3Used.longDesc "Szczegóły: ssl_error_unsupported_version">
+<!ENTITY sslv3Used.learnMore "Więcej informacji…">

@@ -82,12 +82,8 @@
 <!ENTITY netTimeout.title "連線已逾時">
 <!ENTITY netTimeout.longDesc "&sharedLongDesc;">
 
-<!ENTITY protocolNotFound.title "無法理解的網址">
-<!ENTITY protocolNotFound.longDesc "
-<ul>
-  <li>您需要安裝其他軟體才能開啟此網址。</li>
-</ul>
-">
+<!ENTITY unknownProtocolFound.title "無法理解的網址">
+<!ENTITY unknownProtocolFound.longDesc "<ul><li>您可能需要安裝其他軟體才能開啟此網址。</li></ul>">
 
 <!ENTITY proxyConnectFailure.title "Proxy 伺服器拒絕連線">
 <!ENTITY proxyConnectFailure.longDesc "
@@ -123,12 +119,10 @@
 ">
 
 <!ENTITY nssFailure2.title "安全連線失敗">
-<!ENTITY nssFailure2.longDesc "
-<ul>
+<!ENTITY nssFailure2.longDesc2 "<ul>
   <li>因為無法驗證已接收資料的真實性，無法顯示您嘗試檢視的頁面。</li>
-  <li>請向網站擁有者回報此問題，或是從「說明」功能表中回報這個網站的問題。</li>
-</ul>
-">
+  <li>請向網站擁有者回報此問題。</li>
+</ul>">
 
 <!ENTITY nssBadCert.title "安全連線失敗">
 <!ENTITY nssBadCert.longDesc2 "
@@ -156,8 +150,8 @@
 <p>這些類型的偽造網頁含有常見的詐騙攻擊特徵，可能是罪犯所製作用來模仿您信任的合法來源之詐騙網頁。</p>
 ">
 
-<!ENTITY cspFrameAncestorBlocked.title "已依內容安全政策封鎖">
-<!ENTITY cspFrameAncestorBlocked.longDesc "<p>&brandShortName; 阻止了這個頁面載入，因為這個頁面的內容安全政策不允許其以這種方式被載入。</p>">
+<!ENTITY cspBlocked.title "已依內容安全政策封鎖">
+<!ENTITY cspBlocked.longDesc "<p>&brandShortName; 阻止了這個頁面載入，因為這個頁面的內容安全政策不允許其以這種方式被載入。</p>">
 
 <!ENTITY corruptedContentError.title "內容毀損錯誤">
 <!ENTITY corruptedContentError.longDesc "<p>因為在資料傳輸過程當中偵測到錯誤，無法顯示您正要檢視的頁面。</p><ul><li>請通知網站管理者以讓他們知道這個問題。</li></ul>">
@@ -178,6 +172,21 @@ functionality specific to firefox. -->
 <button id='exceptionDialogButton'>&securityOverride.exceptionButtonLabel;</button>
 ">
 
+<!ENTITY errorReporting.title "回報此錯誤">
+<!ENTITY errorReporting.longDesc "回報 <span id='hostname'></span> 的地址與憑證資訊能夠幫助我們識別並封鎖惡意網站。感謝您幫助我們打造更安全的 Web！">
+<!ENTITY errorReporting.automatic "自動回報未來的錯誤">
+<!ENTITY errorReporting.learnMore "更多資訊…">
+<!ENTITY errorReporting.sending "正在傳送報告">
+<!ENTITY errorReporting.sent "已傳送報告">
+<!ENTITY errorReporting.report "回報">
+<!ENTITY errorReporting.tryAgain "重試">
+
 <!ENTITY remoteXUL.title "遠端 XUL">
 <!ENTITY remoteXUL.longDesc "<p><ul><li>請聯絡網站管理員以通知他們這個問題。</li></ul></p>">
+
+<!ENTITY sslv3Used.title "無法安全地連線">
+<!-- LOCALIZATION NOTE (sslv3Used.longDesc) - Do not translate
+     "ssl_error_unsupported_version". -->
+<!ENTITY sslv3Used.longDesc "進階資訊: ssl_error_unsupported_version">
+<!ENTITY sslv3Used.learnMore "更多資訊…">
 

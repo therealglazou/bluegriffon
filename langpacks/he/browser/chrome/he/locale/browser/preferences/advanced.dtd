@@ -27,15 +27,37 @@
 <!ENTITY checkSpelling.accesskey         "א">
 
 <!ENTITY systemDefaults.label            "ברירות מחדל">
-<!ENTITY alwaysCheckDefault.label        "בדוק בכל הפעלה אם &brandShortName; הוא דפדפן ברירת המחדל">
+<!ENTITY alwaysCheckDefault.label        "בדיקה בכל הפעלה אם &brandShortName; הוא דפדפן ברירת המחדל">
 <!ENTITY alwaysCheckDefault.accesskey    "ת">
 <!ENTITY setDefault.label                "הגדרת &brandShortName; כדפדפן ברירת המחדל">
 <!ENTITY setDefault.accesskey            "ב">
 <!ENTITY isDefault.label                 "&brandShortName; כרגע דפדפן ברירת המחדל שלך">
-<!ENTITY submitCrashes.label             "שלח דיווחי קריסה">
+<!ENTITY submitCrashes.label             "שליחת דיווחי קריסה">
 <!ENTITY submitCrashes.accesskey         "ש">
 <!ENTITY submitTelemetry.label           "שליחת נתוני ביצועים">
 <!ENTITY submitTelemetry.accesskey       "ש">
+
+<!ENTITY dataChoicesTab.label            "בחירות מידע">
+
+<!ENTITY healthReportSection.label       "דוח הבריאות של &brandShortName; ">
+<!ENTITY healthReportDesc.label          "עוזר להבין את ביצועי הדפדפן שלך ואת הנתונים שמשותפים עם &vendorShortName;  על בריאות הדפדפן שלך">
+<!ENTITY enableHealthReport.label        "אפשר את דוח הבריאות של &brandShortName; ">
+<!ENTITY enableHealthReport.accesskey    "ד">
+<!ENTITY healthReportLearnMore.label     "מידע נוסף">
+<!ENTITY telemetryDesc.label             "שיתוף מידע על ביצועים, חומרה, שימוש והתאמות אישיות על הדפדפן שלך עם &vendorShortName; כדי לסייע לנו בשיפור &brandShortName;.">
+<!ENTITY telemetryLearnMore.label        "מידע נוסף">
+<!ENTITY crashReporterSection.label      "מדווח הקריסות">
+<!ENTITY crashReporterDesc.label         "&brandShortName; שולח דיווחי קריסות כדי לעזור ל־&vendorShortName; לעשות את דפדפן שלך יותר יציב ובטוח">
+<!ENTITY enableCrashReporter.label       "אפשר את מדווח הקריסות">
+<!ENTITY enableCrashReporter.accesskey   "מ">
+<!ENTITY crashReporterLearnMore.label    "מידע נוסף">
+
+<!ENTITY telemetrySection.label          "Telemetry">
+<!ENTITY telemetryDesc.label             
+"שיתוף נתוני ביצועים, שימוש, חומרה והתאמה אישית של הדפדפן שלך עם  &vendorShortName; כדי לסייע בשיפור &brandShortName; better">
+<!ENTITY enableTelemetry.label           "לאפשר את Telemetry">
+<!ENTITY enableTelemetry.accesskey       "T">
+<!ENTITY telemetryLearnMore.label        "מידע נוסף">
 
 <!ENTITY networkTab.label                "רשת">
 
@@ -55,7 +77,7 @@
 
   &limitCacheSizeBefore.label [textbox for cache size in MB] &limitCacheSizeAfter.label;
 -->
-<!ENTITY limitCacheSizeBefore.label      "הגבל את גודל המטמון ל־">
+<!ENTITY limitCacheSizeBefore.label      "הגבלת גודל המטמון ל־">
 <!ENTITY limitCacheSizeBefore.accesskey  "ה">
 <!ENTITY limitCacheSizeAfter.label       "מ״ב של מקום">
 <!ENTITY clearCacheNow.label             "מחק עכשיו">
@@ -68,6 +90,14 @@
 <!ENTITY updateTab.label                 "עדכון">
 
 <!ENTITY updateApp.label                 "עדכוני &brandShortName;:">
+<!-- Note either updateAuto1 is used or (updateAutoMetro and updateAutoDesktop),
+     so re-using accesss key in updateAuto1 is OK. updateAutoDesktop can be found
+     in preferences.properties -->
+
+<!ENTITY updateAuto1.label               "התקנת עדכונים אוטומטית (מומלץ: אבטחה משופרת)">
+<!ENTITY updateAuto1.accesskey           "א">
+<!ENTITY updateAutoMetro.label           "התקנת עדכונים אוטומטית עבור גרסת שולחן העבודה ומראה Windows 8 של &brandShortName;">
+<!ENTITY updateAutoMetro.accesskey       "ש">
 <!ENTITY updateAuto.label                "התקנת עדכונים אוטומטית (מומלץ אבטחה משופרת)">
 <!ENTITY updateAuto.accesskey            "א">
 <!ENTITY updateCheck.label               "בדיקת עדכונים, אבל הצגת הודעה שתאפשר לי לבחור אם להתקין אותם">
@@ -78,6 +108,7 @@
 <!ENTITY updateAutoAddonWarn.label       "הזהר אותי אם עדכון זה ינטרל תוספות מותקנות">
 <!ENTITY updateAutoAddonWarn.accesskey   "ז">
 
+<!ENTITY updateAutoMetroWarn.label       "(&brandShortName; בסגנון Windows 8 לא בודק תאימות תוספות)">
 <!ENTITY updateHistory.label             "הצג היסטורית עדכונים">
 <!ENTITY updateHistory.accesskey         "צ">
 
@@ -99,6 +130,8 @@
 <!ENTITY offlineAppsListRemove.accesskey "ה">
 <!ENTITY offlineAppRemove.confirm        "הסר נתונים לא מקוונים">
 
+<!ENTITY certificateTab.label            "אישורים">
+
 <!ENTITY encryptionTab.label             "הצפנה">
 
 <!ENTITY protocols.label                 "פרוטוקולים">
@@ -112,6 +145,8 @@
 <!ENTITY certs.auto.accesskey            "ב">
 <!ENTITY certs.ask                       "שאל אותי בכל פעם">
 <!ENTITY certs.ask.accesskey             "ש">
+<!ENTITY enableOCSP.label                "לתשאל שרתי  OCSP כדי לאמת תקפות נוכחית של אישורי אבטחה">
+<!ENTITY enableOCSP.accesskey            "ת">
 <!ENTITY viewCerts.label                 "הצג אישורים">
 <!ENTITY viewCerts.accesskey             "צ">
 <!ENTITY viewCRLs.label                  "רשימות ביטולים">
@@ -122,23 +157,6 @@
 <!ENTITY viewSecurityDevices.accesskey   "ה">
 
 
-<!ENTITY crashReporterDesc.label         "&brandShortName; submits crash reports to help &vendorShortName; make your browser more stable and secure">
-<!ENTITY crashReporterLearnMore.label    "Learn More">
-
-<!ENTITY crashReporterSection.label      "Crash Reporter">
-
-<!ENTITY dataChoicesTab.label            "Data Choices">
-<!ENTITY enableCrashReporter.accesskey   "C">
-<!ENTITY enableCrashReporter.label       "Enable Crash Reporter">
-<!ENTITY enableHealthReport.accesskey    "R">
-<!ENTITY enableHealthReport.label        "Enable &brandShortName; Health Report">
-<!ENTITY enableTelemetry.accesskey       "T">
-<!ENTITY enableTelemetry.label           "Enable Telemetry">
-<!ENTITY healthReportDesc.label          "Helps you understand your browser performance and shares data with &vendorShortName; about your browser health">
-<!ENTITY healthReportLearnMore.label     "Learn More">
-
-<!ENTITY healthReportSection.label       "&brandShortName; Health Report">
-<!ENTITY telemetryDesc.label             "Shares performance, usage, hardware and customization data about your browser with &vendorShortName; to help us make &brandShortName; better">
-<!ENTITY telemetryLearnMore.label        "Learn More">
-
-<!ENTITY telemetrySection.label          "Telemetry">
+<!ENTITY certSelection.label             "Requests">
+<!ENTITY enableTelemetryData.accesskey   "T">
+<!ENTITY enableTelemetryData.label       "Share additional data (i.e., Telemetry)">

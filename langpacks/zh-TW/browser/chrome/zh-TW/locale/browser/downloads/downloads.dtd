@@ -60,12 +60,37 @@
 <!ENTITY cmd.goToDownloadPage.accesskey   "G">
 <!ENTITY cmd.copyDownloadLink.label       "複製下載鏈結">
 <!ENTITY cmd.copyDownloadLink.accesskey   "l">
-<!ENTITY cmd.removeFromHistory.label      "自下載歷史移除">
+<!ENTITY cmd.removeFromHistory.label      "自下載記錄移除">
 <!ENTITY cmd.removeFromHistory.accesskey  "e">
 <!ENTITY cmd.clearList.label              "清空下載清單">
 <!ENTITY cmd.clearList.accesskey          "a">
 <!ENTITY cmd.clearDownloads.label         "清空下載清單">
 <!ENTITY cmd.clearDownloads.accesskey     "D">
+<!-- LOCALIZATION NOTE (cmd.unblock.label):
+     This command may be shown in the context menu, as a menu button item, or as
+     a text link when malware or potentially unwanted downloads are blocked.
+     -->
+<!ENTITY cmd.unblock.label                "解除封鎖">
+<!ENTITY cmd.unblock.accesskey            "U">
+<!-- LOCALIZATION NOTE (cmd.removeFile.label):
+     This command may be shown in the context menu or as a menu button label
+     when malware or potentially unwanted downloads are blocked.
+     -->
+<!ENTITY cmd.removeFile.label             "移除檔案">
+<!ENTITY cmd.removeFile.accesskey         "m">
+
+<!-- LOCALIZATION NOTE (blocked.label):
+     Shown as a tag before the file name for some types of blocked downloads.
+     Note: This string doesn't exist in the UI yet.  See bug 1053890.
+     -->
+<!ENTITY blocked.label                    "已封鎖">
+
+<!-- LOCALIZATION NOTE (learnMore.label):
+     Shown as a text link for some types of blocked downloads, for example
+     malware, when there is an associated explanation page on the Mozilla site.
+     Note: This string doesn't exist in the UI yet.  See bug 1053890.
+     -->
+<!ENTITY learnMore.label                  "更多資訊">
 
 <!-- LOCALIZATION NOTE (downloadsHistory.label, downloadsHistory.accesskey):
      This string is shown at the bottom of the Downloads Panel when all the
@@ -83,6 +108,11 @@
      is displayed inside a browser tab.
      -->
 <!ENTITY downloadsListEmpty.label         "目前沒有已下載的檔案。">
+
+<!-- LOCALIZATION NOTE (downloadsPanelEmpty.label):
+     This string is shown when there are no items in the Downloads Panel.
+     -->
+<!ENTITY downloadsPanelEmpty.label        "此次瀏覽階段沒有下載項目。">
 
 <!-- LOCALIZATION NOTE (downloadsListNoMatch.label):
      This string is shown when some search terms are specified, but there are no

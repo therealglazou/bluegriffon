@@ -1,20 +1,20 @@
 <!-- This Source Code Form is subject to the terms of the Mozilla Public
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
-
 <!-- The page shown when not logged in... -->
+
 <!ENTITY setupButton.label          "设置 &syncBrand.fullName.label;">
 <!ENTITY setupButton.accesskey      "S">
-<!ENTITY weaveDesc.label            "&syncBrand.fullName.label; 可以在多台电脑间同步您的书签、历史记录、密码、设置和标签页信息。">
-
+<!ENTITY weaveDesc.label            "&syncBrand.fullName.label; 可以在您的多台设备间同步您的书签、历史记录、密码以及打开的标签页。">
 <!-- The page shown when logged in... -->
-
 <!-- Login error feedback -->
+
+
 <!ENTITY updatePass.label             "更新">
 <!ENTITY resetPass.label              "重置">
-
 <!-- Manage Account -->
-<!ENTITY manageAccount.label          "管理帐户">
+
+<!ENTITY manageAccount.label          "管理账户">
 <!ENTITY manageAccount.accesskey      "n">
 <!ENTITY viewQuota.label              "查看配额">
 <!ENTITY changePassword2.label        "修改密码…">
@@ -26,6 +26,8 @@
 <!ENTITY syncMy.label               "同步我的">
 <!ENTITY engine.bookmarks.label     "书签">
 <!ENTITY engine.bookmarks.accesskey "m">
+<!ENTITY engine.readinglist.label   "阅读列表">
+<!ENTITY engine.readinglist.accesskey "L">
 <!ENTITY engine.tabs.label          "标签页">
 <!ENTITY engine.tabs.accesskey      "T">
 <!ENTITY engine.history.label       "历史记录">
@@ -33,15 +35,48 @@
 <!ENTITY engine.passwords.label     "密码">
 <!ENTITY engine.passwords.accesskey "P">
 <!ENTITY engine.prefs.label         "首选项">
-<!ENTITY engine.prefs.accesskey     "S">
+<!ENTITY engine.prefs.accesskey     "s">
 <!ENTITY engine.addons.label        "附加组件">
 <!ENTITY engine.addons.accesskey    "A">
-
 <!-- Device Settings -->
+
 <!ENTITY syncDeviceName.label       "设备名称：">
 <!ENTITY syncDeviceName.accesskey   "c">
 <!ENTITY unlinkDevice.label           "断开此设备">
-
 <!-- Footer stuff -->
+
 <!ENTITY prefs.tosLink.label        "服务条款">
 <!ENTITY prefs.ppLink.label         "隐私权政策">
+<!-- Firefox Accounts stuff -->
+
+<!ENTITY fxaPrivacyNotice.link.label "隐私声明">
+<!ENTITY determiningAcctStatus.label     "正在确定您的账户状态…">
+<!-- LOCALIZATION NOTE (signedInUnverified.beforename.label,
+signedInUnverified.aftername.label): these two string are used respectively
+before and after the account email address. Localizers can use one of them, or
+both, to better adapt this sentence to their language.
+-->
+
+<!ENTITY signedInUnverified.beforename.label "">
+<!ENTITY signedInUnverified.aftername.label "未验证。">
+<!-- LOCALIZATION NOTE (signedInLoginFailure.beforename.label,
+signedInLoginFailure.aftername.label): these two string are used respectively
+before and after the account email address. Localizers can use one of them, or
+both, to better adapt this sentence to their language.
+-->
+
+<!ENTITY signedInLoginFailure.beforename.label "请登录以重新连接">
+<!ENTITY signedInLoginFailure.aftername.label "">
+
+<!ENTITY notSignedIn.label           "您尚未登录。">
+<!ENTITY signIn.label                "登录">
+<!ENTITY manage.label                "管理">
+<!ENTITY disconnect.label            "断开…">
+<!ENTITY verify.label                "验证邮箱">
+<!ENTITY forget.label                "忘记此邮箱">
+
+<!ENTITY welcome.description "随时随地获取您在 &brandShortName; 上的标签页、书签、密码等信息。">
+<!ENTITY welcome.signIn.label "登录">
+<!ENTITY welcome.createAccount.label "创建账户">
+
+<!ENTITY welcome.useOldSync.label "在使用旧版本的同步？">

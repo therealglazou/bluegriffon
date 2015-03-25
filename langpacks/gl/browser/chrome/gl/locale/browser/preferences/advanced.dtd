@@ -26,13 +26,6 @@
 <!ENTITY checkSpelling.label             "Comprobar a ortografía ao escribir">
 <!ENTITY checkSpelling.accesskey         "t">
 
-<!ENTITY systemDefaults.label            "Configuración predeterminada">
-<!ENTITY alwaysCheckDefault.label        "Verificar sempre se &brandShortName; é o navegador predeterminado ao comezar."><!--XXX-->
-<!ENTITY alwaysCheckDefault.accesskey    "n">
-<!ENTITY setDefault.label                "Facer do &brandShortName; o navegador predeterminado">
-<!ENTITY setDefault.accesskey            "d">
-<!ENTITY isDefault.label                 "&brandShortName; xa é o navegador predeterminado">
-
 <!ENTITY dataChoicesTab.label            "Datos">
 
 <!ENTITY healthReportSection.label       "Informe de saúde do &brandShortName;">
@@ -74,9 +67,9 @@
 <!ENTITY limitCacheSizeBefore.label      "Limitar a caché a">
 <!ENTITY limitCacheSizeBefore.accesskey  "L">
 <!ENTITY limitCacheSizeAfter.label       "MB de espazo">
-<!ENTITY clearCacheNow.label             "Limpar agora">
-<!ENTITY clearCacheNow.accesskey         "m">
-<!ENTITY clearOfflineAppCacheNow.label   "Limpar agora">
+<!ENTITY clearCacheNow.label             "Borrar agora">
+<!ENTITY clearCacheNow.accesskey         "B">
+<!ENTITY clearOfflineAppCacheNow.label   "Borrar agora">
 <!ENTITY clearOfflineAppCacheNow.accesskey "g">
 <!ENTITY overrideSmartCacheSize.label    "Sobrescribir a xestión automática da caché">
 <!ENTITY overrideSmartCacheSize.accesskey "o">
@@ -84,8 +77,13 @@
 <!ENTITY updateTab.label                 "Actualizar">
 
 <!ENTITY updateApp.label                 "Actualizacións do &brandShortName;:">
-<!ENTITY updateAuto.label                "Instalar actualizacións automaticamente (recomendado para a súa seguranza)">
-<!ENTITY updateAuto.accesskey            "a">
+<!-- Note either updateAuto1 is used or (updateAutoMetro and updateAutoDesktop),
+     so re-using accesss key in updateAuto1 is OK. updateAutoDesktop can be found
+     in preferences.properties -->
+<!ENTITY updateAuto1.label               "Instalar actualizacións automaticamente (recomendado: mellora a seguranza)">
+<!ENTITY updateAuto1.accesskey           "a">
+<!ENTITY updateAutoMetro.label           "Actualizar automaticamente dende &brandShortName; de escritorio e en modalidade Windows 8">
+<!ENTITY updateAutoMetro.accesskey       "s">
 <!ENTITY updateCheck.label               "Buscar actualizacións, pero permitirme escoller se quero instalalas">
 <!ENTITY updateCheck.accesskey           "c">
 <!ENTITY updateManual.label              "Non buscar actualizacións (non recomendado: risco de seguranza)">
@@ -93,6 +91,8 @@
 
 <!ENTITY updateAutoAddonWarn.label       "Avisarme se isto desactiva algúns dos complementos">
 <!ENTITY updateAutoAddonWarn.accesskey   "v">
+
+<!ENTITY updateAutoMetroWarn.label       "(&brandShortName; en modalidade Windows 8 non comproba a compatibilidade dos complementos)">
 
 <!ENTITY updateHistory.label             "Amosar historial de actualización">
 <!ENTITY updateHistory.accesskey         "z">
@@ -115,24 +115,19 @@
 <!ENTITY offlineAppsListRemove.accesskey "R">
 <!ENTITY offlineAppRemove.confirm        "Retirar datos sen conexión">
 
-<!ENTITY encryptionTab.label             "Cifrado">
-
-<!ENTITY protocols.label                 "Protocolos">
-<!ENTITY useSSL3.label                   "Usar SSL 3.0">
-<!ENTITY useSSL3.accesskey               "3">
-<!ENTITY useTLS1.label                   "Usar TLS 1.0">
-<!ENTITY useTLS1.accesskey               "1">
-<!ENTITY certificates.label              "Certificados">
+<!ENTITY certificateTab.label            "Certificados">
 <!ENTITY certSelection.description       "Cando un servidor solicita o meu certificado persoal:">
 <!ENTITY certs.auto                      "Escoller un automaticamente">
 <!ENTITY certs.auto.accesskey            "l">
 <!ENTITY certs.ask                       "Preguntarme cada vez">
 <!ENTITY certs.ask.accesskey             "g">
+<!ENTITY enableOCSP.label                "Consultar aos servidores OCSP responder para confirmar a validez dos certificados">
+<!ENTITY enableOCSP.accesskey            "u">
 <!ENTITY viewCerts.label                 "Ver certificados">
 <!ENTITY viewCerts.accesskey             "s">
-<!ENTITY viewCRLs.label                  "Listas de revogación">
-<!ENTITY viewCRLs.accesskey              "R">
-<!ENTITY verify2.label                   "Validación">
-<!ENTITY verify2.accesskey               "V">
 <!ENTITY viewSecurityDevices.label       "Dispositivos de seguranza">
 <!ENTITY viewSecurityDevices.accesskey   "D">
+
+<!ENTITY certSelection.label             "Requests">
+<!ENTITY enableTelemetryData.accesskey   "T">
+<!ENTITY enableTelemetryData.label       "Share additional data (i.e., Telemetry)">

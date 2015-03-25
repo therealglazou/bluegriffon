@@ -17,21 +17,14 @@
 
 <!ENTITY browsing.label                  "Navigeren">
 
-<!ENTITY useAutoScroll.label             "Automatisch schuiven gebruiken">
+<!ENTITY useAutoScroll.label             "Automatisch scrollen gebruiken">
 <!ENTITY useAutoScroll.accesskey         "m">
-<!ENTITY useSmoothScrolling.label        "Vloeiend schuiven gebruiken">
+<!ENTITY useSmoothScrolling.label        "Vloeiend scrollen gebruiken">
 <!ENTITY useSmoothScrolling.accesskey    "e">
 <!ENTITY allowHWAccel.label              "Hardwareversnelling gebruiken wanneer beschikbaar">
 <!ENTITY allowHWAccel.accesskey          "v">
 <!ENTITY checkSpelling.label             "Mijn spelling controleren tijdens het typen">
 <!ENTITY checkSpelling.accesskey         "s">
-
-<!ENTITY systemDefaults.label            "Standaardwaarden systeem">
-<!ENTITY alwaysCheckDefault.label        "Altijd tijdens het opstarten controleren of &brandShortName; de standaardbrowser is"><!--XXX-->
-<!ENTITY alwaysCheckDefault.accesskey    "A">
-<!ENTITY setDefault.label                "&brandShortName; de standaardbrowser maken">
-<!ENTITY setDefault.accesskey            "d">
-<!ENTITY isDefault.label                 "&brandShortName; is momenteel uw standaardbrowser">
 
 <!ENTITY dataChoicesTab.label            "Gegevenskeuzes">
 
@@ -84,8 +77,13 @@
 <!ENTITY updateTab.label                 "Update">
 
 <!ENTITY updateApp.label                 "&brandShortName;-updates:">
-<!ENTITY updateAuto.label                "Updates automatisch installeren (aanbevolen: verbeterde beveiliging)">
-<!ENTITY updateAuto.accesskey            "U">
+<!-- Note either updateAuto1 is used or (updateAutoMetro and updateAutoDesktop),
+     so re-using accesss key in updateAuto1 is OK. updateAutoDesktop can be found
+     in preferences.properties -->
+<!ENTITY updateAuto1.label               "Updates automatisch installeren (aanbevolen: verbeterde beveiliging)">
+<!ENTITY updateAuto1.accesskey           "U">
+<!ENTITY updateAutoMetro.label           "Automatisch bijwerken van &brandShortName; voor desktop en in Windows 8-stijl">
+<!ENTITY updateAutoMetro.accesskey       "s">
 <!ENTITY updateCheck.label               "Controleren op updates, maar mij laten kiezen of ik deze wil installeren">
 <!ENTITY updateCheck.accesskey           "C">
 <!ENTITY updateManual.label              "Nooit controleren op updates (niet aanbevolen: beveiligingsrisico)">
@@ -93,6 +91,8 @@
 
 <!ENTITY updateAutoAddonWarn.label       "Mij waarschuwen als dit een van mijn add-ons zal uitschakelen">
 <!ENTITY updateAutoAddonWarn.accesskey   "w">
+
+<!ENTITY updateAutoMetroWarn.label       "(&brandShortName; in Windows 8-stijl controleert geen add-on-compatibiliteit)">
 
 <!ENTITY updateHistory.label             "Updategeschiedenis tonen">
 <!ENTITY updateHistory.accesskey         "d">
@@ -115,24 +115,19 @@
 <!ENTITY offlineAppsListRemove.accesskey "V">
 <!ENTITY offlineAppRemove.confirm        "Offlinegegevens verwijderen">
 
-<!ENTITY encryptionTab.label             "Encryptie">
-
-<!ENTITY protocols.label                 "Protocollen">
-<!ENTITY useSSL3.label                   "SSL 3.0 gebruiken">
-<!ENTITY useSSL3.accesskey               "3">
-<!ENTITY useTLS1.label                   "TLS 1.0 gebruiken">
-<!ENTITY useTLS1.accesskey               "1">
-<!ENTITY certificates.label              "Certificaten">
+<!ENTITY certificateTab.label            "Certificaten">
 <!ENTITY certSelection.description       "Wanneer een server om mijn persoonlijke certificaat vraagt:">
 <!ENTITY certs.auto                      "Er automatisch een selecteren">
 <!ENTITY certs.auto.accesskey            "a">
 <!ENTITY certs.ask                       "Mij elke keer vragen">
 <!ENTITY certs.ask.accesskey             "e">
+<!ENTITY enableOCSP.label                "OCSP-responderservers vragen om de huidige geldigheid van certificaten te bevestigen">
+<!ENTITY enableOCSP.accesskey            "v">
 <!ENTITY viewCerts.label                 "Certificaten bekijken">
 <!ENTITY viewCerts.accesskey             "C">
-<!ENTITY viewCRLs.label                  "Intrekkingslijsten">
-<!ENTITY viewCRLs.accesskey              "I">
-<!ENTITY verify2.label                   "Validatie">
-<!ENTITY verify2.accesskey               "V">
 <!ENTITY viewSecurityDevices.label       "Beveiligingsapparaten">
 <!ENTITY viewSecurityDevices.accesskey   "B">
+
+<!ENTITY certSelection.label             "Requests">
+<!ENTITY enableTelemetryData.accesskey   "T">
+<!ENTITY enableTelemetryData.label       "Share additional data (i.e., Telemetry)">

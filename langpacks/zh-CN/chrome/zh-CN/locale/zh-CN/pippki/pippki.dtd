@@ -1,102 +1,68 @@
 <!-- This Source Code Form is subject to the terms of the Mozilla Public
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
-
 <!-- Values for changepassword.xul -->
+
 <!ENTITY setPassword.title  "修改主密码">
 <!ENTITY setPassword.tokenName.label "安全设备">
 <!ENTITY setPassword.oldPassword.label "当前密码:">
 <!ENTITY setPassword.newPassword.label "新密码:">
 <!ENTITY setPassword.reenterPassword.label "新密码(重复):">
-<!ENTITY setPassword.meter.label "密码品质指示器">
-<!ENTITY setPassword.meter.loading "正在载入">
-
+<!ENTITY setPassword.meter.label "密码质量标尺">
 <!-- Values for resetpassword.xul -->
+
 <!ENTITY resetPasswordButtonLabel "重置">
 <!ENTITY resetPassword.title  "重置主密码">
-<!ENTITY resetPassword.text  "如果重置主密码，您存储的所有Web和e-mail密码、表单数据、个人证书，还有私钥都将被忘记。您确定要重置主密码吗？">
-
+<!ENTITY resetPassword.text  "如果您重置您的主密码，您以此存储的所有网络和电子邮箱密码、表单数据、个人证书以及私钥，都将被丢弃。您确定要重置主密码吗？">
 <!-- Values for getpassword.xul -->
+
 <!ENTITY getPassword.title  "输入主密码">
 <!ENTITY getPassword.tokenName2.label "安全设备：">
 <!ENTITY getPassword.password.label "密码:">
-
-<!-- These should be common -->
-<!ENTITY piperror.title "错误">
-<!ENTITY pipalert.title "错误－无法恢复">
-
-<!-- Prefs panel strings -->
-<!ENTITY pref.security.general.lHeader "安全">
-<!ENTITY pref.security.general.rHeader "常规安全设置">
-<!ENTITY pref.security.general.header "常规安全设置">
-<!ENTITY pref.security.general.level.title "安全级别">
-<!ENTITY pref.security.general.paranoid.label "使用极其严格的安全设置">
-<!ENTITY pref.security.general.certificates.title "证书">
-<!ENTITY pref.security.general.manageCert.label "管理证书">
-
 <!-- Downloading a cert -->
+
 <!ENTITY downloadCert.title "下载证书">
-<!ENTITY downloadCert.message1 "您被询问要求信任一个新的证书授权（CA）。">
-<!ENTITY downloadCert.trustSSL "信任使用此CA来标识的web站点。">
-<!ENTITY downloadCert.trustEmail "信任用此CA来标识的电子邮件用户。">
-<!ENTITY downloadCert.trustObjSign "信任用此CA来标识的软件开发者。">
+<!ENTITY downloadCert.message1 "您被询问要求信任一个新的数字证书认证机构（CA）。">
+<!ENTITY downloadCert.trustSSL "信任使用此CA标识的网站。">
+<!ENTITY downloadCert.trustEmail "信任使用此CA标识的电子邮件用户。">
+<!ENTITY downloadCert.trustObjSign "信任使用此CA标识的软件开发者。">
 <!ENTITY downloadCert.message3 "在信任此CA之前，您应该检查它的证书、策略和它的手续（如果有的话）。">
 <!ENTITY downloadCert.viewCert.label "查看">
-<!ENTITY downloadCert.viewPolicy.label "策略">
 <!ENTITY downloadCert.viewCert.text "检查CA证书">
-<!ENTITY downloadCert.viewPolicy.text "检查CA策略和手续">
-
-<!-- Certificate Exists in database -->
-<!ENTITY caCertExists.title "证书已存在">
-<!ENTITY caCertExists.message "此证书已存在">
-
 <!-- Strings for the SSL client auth ask dialog -->
-<!ENTITY clientAuthAsk.title "使用确认请求">
-<!ENTITY clientAuthAsk.message1 "此站点请求您用证书来标识您自己: ">
-<!ENTITY clientAuthAsk.message2 "选择一个证书作为标识:">
-<!ENTITY clientAuthAsk.message3 "所选证书细节:">
 
+<!ENTITY clientAuthAsk.title "使用确认请求">
+<!ENTITY clientAuthAsk.message1 "此站点请求您用证书来标识您自己：">
+<!ENTITY clientAuthAsk.message2 "选择一个证书作为标识：">
+<!ENTITY clientAuthAsk.message3 "所选证书细节：">
 <!-- Strings for the cert picker dialog -->
+
 <!ENTITY certPicker.title "选择证书">
-<!ENTITY certPicker.info  "证书: ">
-<!ENTITY certPicker.detailsLabel "证书详细信息: ">
+<!ENTITY certPicker.info  "证书：">
+<!ENTITY certPicker.detailsLabel "所选证书细节：">
 
 <!ENTITY pkcs12.setpassword.title  "输入证书备份密码">
 <!ENTITY pkcs12.setpassword.message  "证书备份密码是用来保护您将创建的证书备份文件的。您必需设置此密码来进行备份。">
-<!ENTITY pkcs12.setpassword.label1 "证书备份密码:">
-<!ENTITY pkcs12.setpassword.label2 "证书备份密码(重复):">
-<!ENTITY pkcs12.setpassword.reminder "重要: 如果您忘记了您的证书备份密码，您将无法回复此备份。请将它记在一个安全的地方。">
+<!ENTITY pkcs12.setpassword.label1 "证书备份密码：">
+<!ENTITY pkcs12.setpassword.label2 "证书备份密码（重复）：">
+<!ENTITY pkcs12.setpassword.reminder "重要：如果您忘记了您的证书备份密码，您此后将无法恢复此备份。请将它记在一个安全的地方。">
 
-<!ENTITY pkcs12.getpassword.title  "密码输入对话框">
-<!ENTITY pkcs12.getpassword.message "请输入密码以便将此证书加密备份。">
-
-<!ENTITY chooseToken.title  "记号选择对话框">
-<!ENTITY chooseToken.message1 "请选择一个记号">
+<!ENTITY chooseToken.title  "选择令牌对话框">
+<!ENTITY chooseToken.message1 "请选择一个令牌。">
 
 <!ENTITY escrowWarn.title "加密钥复制">
-<!ENTITY escrowWarn.message1 "重要: 此证书认证请求备份您的加密私钥。">
+<!ENTITY escrowWarn.message1 "重要：此证书认证机构要求您提供您的加密私钥的副本。">
 <!ENTITY escrowWarn.benefit1 "好处是如果您无法访问您的加密私钥时，您可以从证书机构请求一个复件。">
 <!ENTITY escrowWarn.message2 "总之，您的加密私钥将被证书机构保存，可能不经过您的允许而用来读取被您加密的电子邮件或者文档。">
 <!ENTITY examineCert.label "查看证书">
 <!ENTITY examineCert.accesskey "V">
-
-<!ENTITY serverCrlNextupdate.message "请向您的系统管理员请求帮助。">
-
 <!-- Strings for the CreateCertInfo dialog  -->
+
 <!ENTITY createCertInfo.title "产生新的私钥">
 <!ENTITY createCertInfo.msg1 "正在生成密钥… 可能需要几分钟…。">
 <!ENTITY createCertInfo.msg2 "请稍候…">
-
-<!-- Form Signing confirmation prompt -->
-<!ENTITY formSigning.title "文字签署请求">
-<!ENTITY formSigning.cert "正在签署证书">
-<!ENTITY formSigning.confirmPassword "为了确定您同意使用您所选的证书来签署此文字消息，请输入主密码以确认:">
-
 <!-- Strings for protectedAuth dialog -->
-<!ENTITY protectedAuth.title "保护的记号验证">
-<!ENTITY protectedAuth.msg "请验证该记号。认证方式依赖于记号的类型。">
-<!ENTITY protectedAuth.tokenName.label "记号：">
 
-<!ENTITY certErrorDlg.title "安全连接失败">
-<!ENTITY certErrorDlg.info1 "这可能是服务器配置的问题，或者由于有人冒充该服务器导致。">
-<!ENTITY certErrorDlg.info2 "如果您之前成功连接过该服务器，那么此错误可能是暂时的，请稍后重试。">
+<!ENTITY protectedAuth.title "受保护的令牌身份验证">
+<!ENTITY protectedAuth.msg "请验证该令牌。认证方式取决于您的令牌的类型。">
+<!ENTITY protectedAuth.tokenName.label "令牌：">

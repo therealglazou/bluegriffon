@@ -85,8 +85,8 @@
 <!ENTITY netTimeout.title "Le délai d'attente est dépassé">
 <!ENTITY netTimeout.longDesc "&sharedLongDesc;">
 
-<!ENTITY protocolNotFound.title "L'adresse n'a pas été reconnue">
-<!ENTITY protocolNotFound.longDesc "
+<!ENTITY unknownProtocolFound.title "L'adresse n'a pas été reconnue">
+<!ENTITY unknownProtocolFound.longDesc "
 <ul>
   <li>Il est peut-être nécessaire d'installer une autre application pour ouvrir ce type d'adresse.</li>
 </ul>
@@ -129,11 +129,10 @@
 ">
 
 <!ENTITY nssFailure2.title "Échec de la connexion sécurisée">
-<!ENTITY nssFailure2.longDesc "
+<!ENTITY nssFailure2.longDesc2 "
 <ul>
   <li>La page que vous essayez de consulter ne peut pas être affichée car l'authenticité des données reçues ne peut être vérifiée.</li>
-  <li>Veuillez contacter les propriétaires du site web pour les informer de ce problème.
-Vous pouvez également utiliser la commande dans le menu d'aide pour signaler un site non fonctionnel.</li>
+  <li>Veuillez contacter les propriétaires du site web pour les informer de ce problème.</li>
 </ul>
 ">
 
@@ -165,8 +164,8 @@ Vous pouvez également utiliser la commande dans le menu d'aide pour signaler un
 <p>Saisir des informations personnelles sur cette page peut aboutir à un vol d'identité ou à une autre fraude.</p>
 <p>Ces types de contrefaçon de sites sont utilisés dans des courriels frauduleux conçus pour des attaques par hameçonnage (ou phishing), dans lesquelles les pages web et les courriels frauduleux sont utilisés pour imiter des sources en lesquelles vous avez confiance.</p>">
 
-<!ENTITY cspFrameAncestorBlocked.title "Bloqué par une stratégie de sécurité de contenu">
-<!ENTITY cspFrameAncestorBlocked.longDesc "<p>&brandShortName; a empêché le chargement de cette page de cette manière car sa stratégie de sécurité de contenu ne le permet pas.</p>">
+<!ENTITY cspBlocked.title "Bloqué par une stratégie de sécurité de contenu">
+<!ENTITY cspBlocked.longDesc "<p>&brandShortName; a empêché le chargement de cette page de cette manière car sa stratégie de sécurité de contenu ne le permet pas.</p>">
 
 <!ENTITY securityOverride.linkText "Ou vous pouvez ajouter une exception…">
 <!ENTITY securityOverride.getMeOutOfHereButton "Quitter cette page">
@@ -187,5 +186,20 @@ functionality specific to firefox. -->
 <!ENTITY corruptedContentError.title "Erreur due à un contenu corrompu">
 <!ENTITY corruptedContentError.longDesc "<p>La page que vous essayez de voir ne peut pas être affichée car une erreur dans la transmission de données a été détectée.</p><ul><li>Veuillez contacter les propriétaires du site web pour les informer de ce problème.</li></ul>">
 
+<!ENTITY errorReporting.title "Signaler cette erreur">
+<!ENTITY errorReporting.longDesc "Envoyer un rapport contenant des informations sur l'adresse et le certificat de <span id='hostname'></span> nous aidera à identifier et bloquer les sites malveillants. Merci de votre aide pour rendre le Web plus sûr.">
+<!ENTITY errorReporting.automatic "Signaler automatiquement les prochaines erreurs">
+<!ENTITY errorReporting.learnMore "En savoir plus…">
+<!ENTITY errorReporting.sending "Envoi du rapport">
+<!ENTITY errorReporting.sent "Rapport envoyé">
+<!ENTITY errorReporting.report "Signaler">
+<!ENTITY errorReporting.tryAgain "Réessayer">
+
 <!ENTITY remoteXUL.title "XUL distant">
 <!ENTITY remoteXUL.longDesc "<p><ul><li>Veuillez contacter les propriétaires du site web pour les informer de ce problème.</li></ul></p>">
+
+<!ENTITY sslv3Used.title "Impossible d'établir une connexion sécurisée">
+<!-- LOCALIZATION NOTE (sslv3Used.advancedInfo) - Do not translate
+     "ssl_error_unsupported_version". -->
+<!ENTITY sslv3Used.longDesc "Détails de l'erreur : ssl_error_unsupported_version">
+<!ENTITY sslv3Used.learnMore "En savoir plus…">

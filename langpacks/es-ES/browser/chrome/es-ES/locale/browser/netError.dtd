@@ -48,7 +48,7 @@
 <!ENTITY netInterrupt.title "La conexión ha sido interrumpida">
 <!ENTITY netInterrupt.longDesc "&sharedLongDesc;">
 <!ENTITY notCached.title "Documento expirado">
-<!ENTITY notCached.longDesc "<p>El documento requerido ya no está disponible en la caché de &brandShortName;.</p><ul><li>Como precaución de seguridad, &brandShortName; no vuelve a pedir automáticamente documentos sensibles.</li><li>Haga clic en Intentar de nuevo para volver a pedir el documento del sitio web.</li></ul>">
+<!ENTITY notCached.longDesc "<p>El documento requerido ya no está disponible en la caché de &brandShortName;.</p><ul><li>Como precaución de seguridad, &brandShortName; no vuelve a pedir automáticamente documentos sensibles.</li><li>Haga clic en Reintentar para volver a pedir el documento del sitio web.</li></ul>">
 <!ENTITY netOffline.title "Modo sin conexión">
 <!ENTITY netOffline.longDesc2 "
 <ul>
@@ -57,23 +57,22 @@
 <!ENTITY contentEncodingError.title "Error de codificación de contenido">
 <!ENTITY contentEncodingError.longDesc "
 <ul>
-  <li>Por favor, contacte con los propietarios del sitio web para informarles de este problema.</li>
+  <li>Contacte con los propietarios del sitio web para informarles de este problema.</li>
 </ul>
 ">
 <!ENTITY unsafeContentType.title "Tipo de archivo no seguro">
 <!ENTITY unsafeContentType.longDesc "
 <ul>
-  <li>Por favor, contacta con los propietarios del sitio web para informarles de este problema.</li>
+  <li>Contacte con los propietarios del sitio web para informarles de este problema.</li>
 </ul>">
 <!ENTITY netReset.title "La conexión ha sido reiniciada">
 <!ENTITY netReset.longDesc "&sharedLongDesc;">
 <!ENTITY netTimeout.title "La conexión ha caducado">
 <!ENTITY netTimeout.longDesc "&sharedLongDesc;">
-<!ENTITY protocolNotFound.title "La dirección no resulta comprensible">
-<!ENTITY protocolNotFound.longDesc "
+<!ENTITY unknownProtocolFound.title "La dirección no resulta comprensible">
+<!ENTITY unknownProtocolFound.longDesc "
 <ul>
-  <li>Podría necesitar instalar otro software para abrir esta
-   dirección.</li>
+  <li>Podría necesitar instalar otro software para abrir esta dirección.</li>
 </ul>
 ">
 <!ENTITY proxyConnectFailure.title "El servidor proxy está rechazando las conexiones">
@@ -114,10 +113,10 @@
 </ul>
 ">
 <!ENTITY nssFailure2.title "Conexión segura fallida">
-<!ENTITY nssFailure2.longDesc "
+<!ENTITY nssFailure2.longDesc2 "
 <ul>
-  <li>La página que está intentando ver no puede mostrarse porque no se ha podido verificar la autenticidad de los datos recibidos.</li>
-  <li>Por favor, contacte con los administradores del sitio web para informarles de este problema. De manera alternativa, use la opción del menú Ayuda para informar del problema de este sitio web.</li>
+  <li>La página que está intentando ver no se puede mostrar porque la autenticidad de los datos recibidos no ha podido ser verificada.</li>
+  <li>Contacte con los propietarios del sitio web para informarles de este problema.</li>
 </ul>
 ">
 <!ENTITY nssBadCert.title "La conexión segura ha fallado">
@@ -140,15 +139,15 @@
 ">
 <!ENTITY malwareBlocked.title "¡Posible sitio atacante!">
 <!ENTITY malwareBlocked.longDesc "<p>Los sitios atacantes intentan instalar programas que pueden robar información privada, usar su equipo para atacar otros o dañar su sistema.</p>
-<p>Los propietarios de sitios web que crean que han sido reportados como un sitio atacante pueden <a href='http://www.stopbadware.org/home/reviewinfo' >pedir una revisión</a>.</p>
+<p>Los propietarios de sitios web que crean que han sido identificados como un sitio atacante pueden <a href='http://www.stopbadware.org/home/reviewinfo' >pedir una revisión</a>.</p>
 ">
 <!ENTITY phishingBlocked.title "¡Posible sitio web fraudulento!">
 <!ENTITY phishingBlocked.longDesc "<p>Introducir cualquier información personal en esta página puede resultar en un robo de identidad u otro fraude.</p>
-<p>Estos tipos de webs fraudulentas son usadas en ataques de phishing, en los cuales páginas y correos electrónicos fraudulentos se utilizan para imitar fuentes en las que confías.</p>">
-<!ENTITY cspFrameAncestorBlocked.title "Bloqueado por la política de seguridad de contenido">
-<!ENTITY cspFrameAncestorBlocked.longDesc "<p>&brandShortName; evitó que esta página se cargue de esta forma porque la página tiene una política de seguridad de contenido que no lo permite.</p>">
+<p>Estos tipos de webs fraudulentas son usadas en ataques de phishing, en los cuales páginas y correos electrónicos fraudulentos se utilizan para imitar fuentes en las que confía.</p>">
+<!ENTITY cspBlocked.title "Bloqueado por la política de seguridad de contenido">
+<!ENTITY cspBlocked.longDesc "<p>&brandShortName; evitó que esta página se cargue de esta forma porque la página tiene una política de seguridad de contenido que no lo permite.</p>">
 <!ENTITY corruptedContentError.title "Error de contenido corrupto">
-<!ENTITY corruptedContentError.longDesc "<p>La página que está intentando ver no puede ser mostrada porque se detectó un error en la transmisión de los datos.</p><ul><li>Por favor, contacte con los propietarios del sitio web para informarles de este problema</li></ul>">
+<!ENTITY corruptedContentError.longDesc "<p>La página que está intentando ver no puede ser mostrada porque se detectó un error en la transmisión de los datos.</p><ul><li>Contacte con los propietarios del sitio web para informarles de este problema</li></ul>">
 <!ENTITY securityOverride.linkText "O puede añadir una excepción…">
 <!ENTITY securityOverride.getMeOutOfHereButton "¡Sácame de aquí!">
 <!ENTITY securityOverride.exceptionButtonLabel "Añadir excepción…">
@@ -158,5 +157,16 @@
 <button id='getMeOutOfHereButton'>&securityOverride.getMeOutOfHereButton;</button>
 <button id='exceptionDialogButton'>&securityOverride.exceptionButtonLabel;</button>
 ">
+<!ENTITY errorReporting.title "Informar de este error">
+<!ENTITY errorReporting.longDesc "Informar de la dirección y la información del certificado de <span id='hostname'></span> nos ayudará a identificar y bloquear los sitios maliciosos. ¡Gracias por ayudar a crear una web más segura!">
+<!ENTITY errorReporting.automatic "En lo sucesivo, informar de errores automáticamente">
+<!ENTITY errorReporting.learnMore "Más información…">
+<!ENTITY errorReporting.sending "Enviando informe">
+<!ENTITY errorReporting.sent "Informe enviado">
+<!ENTITY errorReporting.report "Informar">
+<!ENTITY errorReporting.tryAgain "Vuelva a intentarlo">
 <!ENTITY remoteXUL.title "XUL remoto">
-<!ENTITY remoteXUL.longDesc "<p><ul><li>Por favor, contacte con los propietarios del sitio web para informarles de este problema.</li></ul></p>">
+<!ENTITY remoteXUL.longDesc "<p><ul><li>Contacte con los propietarios del sitio web para informarles de este problema.</li></ul></p>">
+<!ENTITY sslv3Used.title "No es posible conectar de manera segura">
+<!ENTITY sslv3Used.longDesc "Información avanzada: ssl_error_unsupported_version">
+<!ENTITY sslv3Used.learnMore "Saber más…">

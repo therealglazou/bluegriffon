@@ -2,6 +2,199 @@
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 
+<!-- LOCALIZATION NOTE : FILE This file contains the Toolbox strings -->
+<!-- LOCALIZATION NOTE : FILE Do not translate key -->
+
 <!ENTITY closeCmd.key  "W">
 
-<!ENTITY toolboxCloseButton.tooltip  "Fermer les outils développeurs">
+<!ENTITY toolboxCloseButton.tooltip    "Fermer les outils de développement">
+<!ENTITY toolboxOptionsButton.key      "O">
+<!ENTITY toolboxNextTool.key           "]">
+<!ENTITY toolboxPreviousTool.key       "[">
+
+<!ENTITY toolboxZoomIn.key             "+">
+<!ENTITY toolboxZoomIn.key2            "="> <!-- + is above this key on many keyboards -->
+<!ENTITY toolboxZoomOut.key            "-">
+<!ENTITY toolboxZoomReset.key          "0">
+
+<!ENTITY toolboxReload.key             "r">
+<!-- LOCALIZATION NOTE (toolboxFramesButton): This is the label for
+  -  the iframes menu list that appears only when the document has some.
+  -  It allows you to switch the context of the whole toolbox. -->
+<!ENTITY toolboxFramesTooltip          "Sélectionner un iframe en tant que document cible">
+
+<!-- LOCALIZATION NOTE (options.context.advancedSettings): This is the label for
+  -  the heading of the advanced settings group in the options panel. -->
+<!ENTITY options.context.advancedSettings "Paramètres avancés">
+
+<!-- LOCALIZATION NOTE (options.context.inspector): This is the label for
+  -  the heading of the Inspector group in the options panel. -->
+<!ENTITY options.context.inspector "Inspecteur">
+
+<!-- LOCALIZATION NOTE (options.showUserAgentStyles.label): This is the label
+  -  for the checkbox option to show user agent styles in the Inspector
+  -  panel. -->
+<!ENTITY options.showUserAgentStyles.label "Afficher les styles du navigateur">
+<!ENTITY options.showUserAgentStyles.tooltip "Activer cette option affichera les styles par défaut chargés par le navigateur">
+
+<!-- LOCALIZATION NOTE (options.defaultColorUnit.label): This is the label for a
+  -  dropdown list that controls the default color unit used in the inspector.
+  -  This label is visible in the options panel. -->
+<!ENTITY options.defaultColorUnit.label "Unité par défaut pour les couleurs">
+
+<!-- LOCALIZATION NOTE (options.defaultColorUnit.accesskey): This is the access
+  -  key for a dropdown list that controls the default color unit used in the
+  -  inspector. This is visible in the options panel. -->
+<!ENTITY options.defaultColorUnit.accesskey "U">
+
+<!-- LOCALIZATION NOTE (options.defaultColorUnit.hex): This is used in the
+  -  'Default color unit' dropdown list and is visible in the options panel. -->
+<!ENTITY options.defaultColorUnit.hex "hexadécimal">
+
+<!-- LOCALIZATION NOTE (options.defaultColorUnit.hsl): This is used in the
+  -  'Default color unit' dropdown list and is visible in the options panel. -->
+<!ENTITY options.defaultColorUnit.hsl "TSL(A)">
+
+<!-- LOCALIZATION NOTE (options.defaultColorUnit.rgb): This is used in the
+  -  'Default color unit' dropdown list and is visible in the options panel. -->
+<!ENTITY options.defaultColorUnit.rgb "RVB(A)">
+
+<!-- LOCALIZATION NOTE (options.defaultColorUnit.name): This is used in
+  -  the 'Default color unit' dropdown list and is visible in the options panel.
+  -  -->
+<!ENTITY options.defaultColorUnit.name "noms de couleurs">
+
+<!-- LOCALIZATION NOTE (options.context.triggersPageRefresh): This is the
+  -  triggers page refresh footnote under the advanced settings group in the
+  -  options panel and is used for settings that trigger page reload. -->
+<!ENTITY options.context.triggersPageRefresh  "* Pour cette session, recharge la page">
+
+<!-- LOCALIZATION NOTE (options.enableChrome.label4): This is the label for the
+  -  checkbox that toggles chrome debugging, i.e. devtools.chrome.enabled
+  -  boolean preference in about:config, in the options panel. -->
+<!ENTITY options.enableChrome.label4    "Activer le débogage du chrome et des modules">
+<!ENTITY options.enableChrome.tooltip2  "Activer cette option vous permettra d'utiliser divers outils de développement dans le contexte du navigateur et de déboguer des modules depuis le gestionnaire de modules complémentaires">
+
+<!-- LOCALIZATION NOTE (options.enableRemote.label3): This is the label for the
+  -  checkbox that toggles remote debugging, i.e. devtools.debugger.remote-enabled
+  -  boolean preference in about:config, in the options panel. -->
+<!ENTITY options.enableRemote.label3    "Activer le débogage distant">
+<!ENTITY options.enableRemote.tooltip  "Activer cette option permettra de déboguer grâce aux outils de développement des instances distantes de Firefox telles que Firefox OS">
+
+<!-- LOCALIZATION NOTE (options.disableJavaScript.label,
+  -  options.disableJavaScript.tooltip): This is the options panel label and
+  -  tooltip for the checkbox that toggles JavaScript on or off. -->
+<!ENTITY options.disableJavaScript.label     "Désactiver JavaScript *">
+<!ENTITY options.disableJavaScript.tooltip   "Activer cette option désactivera JavaScript pour l'onglet courant. Ce paramètre sera oublié à la fermeture de l'onglet ou de la boîte à outils.">
+
+<!-- LOCALIZATION NOTE (options.disableCache.label2,
+  -  options.disableCache.tooltip2): This is the options panel label and
+  -  tooltip for the checkbox that toggles the cache on or off. -->
+<!ENTITY options.disableCache.label2     "Désactiver le cache (lorsque la boîte à outils est ouverte)">
+<!ENTITY options.disableCache.tooltip2   "Activer cette option désactivera le cache pour l'ensemble des onglets dans lesquels la boîte à outils est ouverte.">
+
+<!-- LOCALIZATION NOTE (options.selectDefaultTools.label): This is the label for
+  -  the heading of group of checkboxes corresponding to the default developer
+  -  tools. -->
+<!ENTITY options.selectDefaultTools.label     "Outils de développement par défaut">
+
+<!-- LOCALIZATION NOTE (options.selectDefaultTools.label): This is the label for
+  -  the heading of group of checkboxes corresponding to the developer tools
+  -  added by add-ons. This heading is hidden when there is no developer tool
+  -  installed by add-ons. -->
+<!ENTITY options.selectAdditionalTools.label  "Outils installés via modules complémentaires">
+
+<!-- LOCALIZATION NOTE (options.selectEnabledToolboxButtons.label): This is the label for
+  -  the heading of group of checkboxes corresponding to the default developer
+  -  tool buttons. -->
+<!ENTITY options.selectEnabledToolboxButtons.label     "Boutons de la boîte à outils disponibles">
+
+<!-- LOCALIZATION NOTE (options.toolNotSupported.label): This is the label for
+  -  the explanation of the * marker on a tool which is currently not supported
+  -  for the target of the toolbox. -->
+<!ENTITY options.toolNotSupported.label  "* Non géré pour la cible actuelle de la boîte à outils">
+
+<!-- LOCALIZATION NOTE (options.selectDevToolsTheme2.label): This is the label for
+  -  the heading of the radiobox corresponding to the theme of the developer
+  -  tools. -->
+<!ENTITY options.selectDevToolsTheme.label2   "Thèmes">
+
+<!-- LOCALIZATION NOTE (options.usedeveditiontheme.*) Options under the
+  -  toolbox for enabling and disabling the Developer Edition browser theme. -->
+<!ENTITY options.usedeveditiontheme.label   "Utiliser le thème Developer Edition">
+<!ENTITY options.usedeveditiontheme.tooltip "Activer/Désactiver le thème Developer Edition.">
+
+<!-- LOCALIZATION NOTE (options.webconsole.label): This is the label for the
+  -  heading of the group of Web Console preferences in the options panel. -->
+<!ENTITY options.webconsole.label            "Console web">
+
+<!-- LOCALIZATION NOTE (options.timestampMessages.label): This is the
+   - label for the checkbox that toggles timestamps in the Web Console -->
+<!ENTITY options.timestampMessages.label      "Activer l'horodatage">
+<!ENTITY options.timestampMessages.tooltip    "Si vous activez cette option, les commandes et les sorties dans la console web afficheront l'horodatage">
+
+<!-- LOCALIZATION NOTE (options.styleeditor.label): This is the label for the
+  -  heading of the group of Style Editor preferences in the options
+  -  panel. -->
+<!ENTITY options.styleeditor.label            "Éditeur de style">
+
+<!-- LOCALIZATION NOTE (options.stylesheetSourceMaps.label): This is the
+   - label for the checkbox that toggles showing original sources in the Style Editor -->
+<!ENTITY options.stylesheetSourceMaps.label      "Afficher les sources originales">
+<!ENTITY options.stylesheetSourceMaps.tooltip    "Afficher les sources originales (les fichiers Sass, par exemple) dans l'éditeur de style et l'inspecteur">
+
+<!-- LOCALIZATION NOTE (options.stylesheetAutocompletion.label): This is the
+   - label for the checkbox that toggles autocompletion of css in the Style Editor -->
+<!ENTITY options.stylesheetAutocompletion.label      "Compléter automatiquement le CSS">
+<!ENTITY options.stylesheetAutocompletion.tooltip    "Compléter automatiquement les propriétés, valeurs et sélecteurs CSS dans l'éditeur de style lors de la saisie">
+
+<!-- LOCALIZATION NOTE (options.profiler.label): This is the label for the
+  -  heading of the group of JavaScript Profiler preferences in the options
+  -  panel. -->
+<!ENTITY options.profiler.label            "Profileur JavaScript">
+
+<!-- LOCALICATION NOTE (options.commonprefs): This is the label for the heading
+  -  of all preferences that affect both the Web Console and the Network
+  -  Monitor -->
+<!ENTITY options.commonPrefs.label           "Préférences générales">
+
+<!-- LOCALIZATION NOTE (options.enablePersistentLogs.label): This is the
+  -  label for the checkbox that toggles persistent logs in the Web Console and
+  -  network monitor,  i.e. devtools.webconsole.persistlog a boolean preference in
+  -  about:config, in the options panel. -->
+<!ENTITY options.enablePersistentLogs.label    "Activer les journaux persistants">
+<!ENTITY options.enablePersistentLogs.tooltip  "Si vous activez cette option, la console web et le moniteur réseau ne videront pas les sorties à chaque fois que vous changerez de page">
+
+<!-- LOCALIZATION NOTE (options.showPlatformData.label): This is the
+  -  label for the checkbox that toggles the display of the platform data in the,
+  -  Profiler i.e. devtools.profiler.ui.show-platform-data a boolean preference
+  -  in about:config, in the options panel. -->
+<!ENTITY options.showPlatformData.label    "Afficher les données de la plate-forme Gecko">
+<!ENTITY options.showPlatformData.tooltip  "Si vous activez cette option, les rapports du profileur JavaScript incluront les symboles de la plate-forme Gecko">
+
+<!-- LOCALIZATION NOTE (options.sourceeditor.*): Options under the editor
+  -  section. -->
+
+<!ENTITY options.sourceeditor.label                     "Préférences de l'éditeur">
+<!ENTITY options.sourceeditor.detectindentation.label   "Détecter l'indentation">
+<!ENTITY options.sourceeditor.detectindentation.tooltip "Déduire l'indentation d'après le contenu source">
+<!ENTITY options.sourceeditor.autoclosebrackets.label   "Fermer automatiquement les parenthèses">
+<!ENTITY options.sourceeditor.autoclosebrackets.tooltip "Insérer automatiquement les parenthèses fermantes">
+<!ENTITY options.sourceeditor.expandtab.label           "Indenter à l'aide d'espaces">
+<!ENTITY options.sourceeditor.expandtab.tooltip         "Utiliser des espaces à la place du caractère tabulation">
+<!ENTITY options.sourceeditor.tabsize.label             "Taille de la tabulation">
+<!ENTITY options.sourceeditor.tabsize.accesskey         "T">
+<!ENTITY options.sourceeditor.keybinding.label          "Raccourcis clavier">
+<!ENTITY options.sourceeditor.keybinding.accesskey      "R">
+<!ENTITY options.sourceeditor.keybinding.default.label  "Par défaut">
+
+
+<!-- LOCALIZATION NOTE (browserToolboxErrorMessage): This is the label
+  -  shown next to error details when the Browser Toolbox is unable to open. -->
+<!ENTITY browserToolboxErrorMessage          "Error opening Browser Toolbox:">
+
+<!-- LOCALIZATION NOTE (options.enableChrome.label4): This is the label for the
+  -  checkbox that toggles chrome debugging, i.e. devtools.chrome.enabled
+  -  boolean preference in about:config, in the options panel. -->
+<!ENTITY options.enableChrome.label5    "Enable browser chrome and add-on debugging toolboxes">
+<!ENTITY options.enableChrome.tooltip3  "Turning this option on will allow you to use various developer tools in browser context (via Tools > Web Developer > Browser Toolbox) and debug add-ons from the Add-ons Manager">

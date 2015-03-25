@@ -7,9 +7,13 @@
 <!-- LOCALIZATION NOTE (aboutSupport.pageSubtitle): don't change the 'supportLink' id. -->
 <!ENTITY aboutSupport.pageSubtitle	"このページには問題発生時に役立てられる技術情報が表示されます。&brandShortName; に関する一般的な質問については <a id='supportLink'>サポートサイト</a> をご覧ください。">
 
-
-
-
+<!ENTITY aboutSupport.crashes.title		"クラッシュレポート">
+<!-- LOCALIZATION NOTE (aboutSupport.crashes.id):
+This is likely the same like id.heading in crashes.dtd. -->
+<!ENTITY aboutSupport.crashes.id		"レポート ID">
+<!ENTITY aboutSupport.crashes.sendDate		"送信日時">
+<!ENTITY aboutSupport.crashes.allReports	"すべてのクラッシュレポート">
+<!ENTITY aboutSupport.crashes.noConfig		"このプログラムはクラッシュレポートを表示できるように設定されていません。">
 
 <!ENTITY aboutSupport.extensionsTitle	"拡張機能">
 <!ENTITY aboutSupport.extensionName	"名前">
@@ -17,9 +21,23 @@
 <!ENTITY aboutSupport.extensionVersion	"バージョン">
 <!ENTITY aboutSupport.extensionId	"ID">
 
+<!ENTITY aboutSupport.experimentsTitle		"実験的な機能">
+<!ENTITY aboutSupport.experimentName		"名前">
+<!ENTITY aboutSupport.experimentId		"ID">
+<!ENTITY aboutSupport.experimentDescription	"説明">
+<!ENTITY aboutSupport.experimentActive		"アクティブ">
+<!ENTITY aboutSupport.experimentEndDate		"終了日">
+<!ENTITY aboutSupport.experimentHomepage	"ホームページ">
+
+
 <!ENTITY aboutSupport.appBasicsTitle		"アプリケーション基本情報">
 <!ENTITY aboutSupport.appBasicsName		"名前">
 <!ENTITY aboutSupport.appBasicsVersion		"バージョン">
+
+<!-- LOCALIZATION NOTE (aboutSupport.appBasicsUpdateHistory, aboutSupport.appBasicsShowUpdateHistory):
+"Update" is a noun here, not a verb. -->
+<!ENTITY aboutSupport.appBasicsUpdateHistory		"更新履歴">
+<!ENTITY aboutSupport.appBasicsShowUpdateHistory	"更新履歴を表示">
 
 <!ENTITY aboutSupport.appBasicsProfileDir	"プロファイルフォルダ">
 <!-- LOCALIZATION NOTE (aboutSupport.appBasicsProfileDirWinMac):
@@ -30,8 +48,9 @@ Windows/Mac use the term "Folder" instead of "Directory" -->
 <!ENTITY aboutSupport.appBasicsEnabledPlugins	"有効なプラグイン">
 <!ENTITY aboutSupport.appBasicsBuildConfig	"ビルド設定">
 <!ENTITY aboutSupport.appBasicsUserAgent	"ユーザエージェント">
-<!ENTITY aboutSupport.appBasicsCrashIDs		"クラッシュレポート">
 <!ENTITY aboutSupport.appBasicsMemoryUse	"メモリ使用量">
+
+<!ENTITY aboutSupport.appBasicsMultiProcessSupport	"マルチプロセスウィンドウ">
 
 <!ENTITY aboutSupport.showDir.label		"ディレクトリを開く"><!-- Win/Mac 以外 -->
 <!-- LOCALIZATION NOTE (aboutSupport.showMac.label): This is the Mac-specific
@@ -45,6 +64,14 @@ variant of aboutSupport.showDir.label. -->
 <!ENTITY aboutSupport.modifiedKeyPrefsTitle	"変更された重要な設定">
 <!ENTITY aboutSupport.modifiedPrefsName		"名前">
 <!ENTITY aboutSupport.modifiedPrefsValue	"値">
+
+<!-- LOCALIZATION NOTE (aboutSupport.userJSTitle, aboutSupport.userJSDescription): user.js is the name of the preference override file being checked. -->
+<!ENTITY aboutSupport.userJSTitle		"user.js 設定ファイル">
+<!ENTITY aboutSupport.userJSDescription		"このプロファイルには、&brandShortName; では作成されない設定値が含まれた <a id='prefs-user-js-link'>user.js 設定ファイル</a> があります。">
+
+<!ENTITY aboutSupport.lockedKeyPrefsTitle	"ロックされた重要な設定">
+<!ENTITY aboutSupport.lockedPrefsName		"名前">
+<!ENTITY aboutSupport.lockedPrefsValue		"値">
 
 <!ENTITY aboutSupport.graphicsTitle		"グラフィックス">
 
@@ -63,7 +90,13 @@ variant of aboutSupport.showDir.label. -->
 <!ENTITY aboutSupport.copyTextToClipboard.label		"テキストをクリップボードにコピー">
 <!ENTITY aboutSupport.copyRawDataToClipboard.label	"生データをクリップボードにコピー">
 
-<!ENTITY aboutSupport.userJSDescription "Your profile folder contains a <a id='prefs-user-js-link'>user.js file</a>, which includes preferences that were not created by &brandShortName;.">
+<!ENTITY aboutSupport.appBasicsBuildID "Build ID">
 
-<!-- LOCALIZATION NOTE (aboutSupport.userJSTitle, aboutSupport.userJSDescription): user.js is the name of the preference override file being checked. -->
-<!ENTITY aboutSupport.userJSTitle "user.js Preferences">
+<!-- LOCALIZATION NOTE (aboutSupport.appBasicsUpdateChannel, aboutSupport.appBasicsUpdateHistory, aboutSupport.appBasicsShowUpdateHistory):
+"Update" is a noun here, not a verb. -->
+<!ENTITY aboutSupport.appBasicsUpdateChannel "Update Channel">
+<!ENTITY aboutSupport.restartInSafeMode.label "Restart with Add-ons Disabled…">
+
+<!ENTITY aboutSupport.safeModeTitle "Try Safe Mode">
+
+<!ENTITY aboutSupport.sandboxTitle "Sandbox">

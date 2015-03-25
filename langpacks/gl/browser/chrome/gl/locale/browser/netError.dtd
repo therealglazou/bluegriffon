@@ -1,3 +1,7 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
 <!ENTITY % brandDTD SYSTEM "chrome://branding/locale/brand.dtd">
 %brandDTD;
 
@@ -12,10 +16,10 @@
 <!ENTITY deniedPortAccess.title "Este enderezo está restrinxido">
 <!ENTITY deniedPortAccess.longDesc "">
 
-<!ENTITY dnsNotFound.title "Non se encontrou o servidor">
+<!ENTITY dnsNotFound.title "Non se atopou o servidor">
 <!ENTITY dnsNotFound.longDesc "<ul><li>Comprobe que o enderezo non conteña erros de escrita tales como <strong>ww</strong>.example.com no lugar de <strong>www</strong>.example.com</li><li>Se resulta imposíbel cargar algunhas páxinas, comprobe a conexión de rede do seu computador.</li><li>Se o seu computador ou a rede está protexida por unha devasa ou un proxy, asegúrese de que o &brandShortName; ten permisos para acceder á Web.</li></ul>">
 
-<!ENTITY fileNotFound.title "Non se encontrou o ficheiro">
+<!ENTITY fileNotFound.title "Non se atopou o ficheiro">
 <!ENTITY fileNotFound.longDesc "<ul><li>Comprobe o uso de maiúsculas no nome do ficheiro ou outros erros de escrita.</li><li>Comprobe se o ficheiro foi movido, renomeado ou borrado.</li></ul>">
 
 
@@ -57,8 +61,8 @@
 <!ENTITY netTimeout.title "A conexión esgotou o tempo">
 <!ENTITY netTimeout.longDesc "&sharedLongDesc;">
 
-<!ENTITY protocolNotFound.title "Non se entendeu o enderezo">
-<!ENTITY protocolNotFound.longDesc "
+<!ENTITY unknownProtocolFound.title "Non se entendeu o enderezo">
+<!ENTITY unknownProtocolFound.longDesc "
 <ul>
   <li>É posíbel que necesite instalar outro software para abrir este enderezo.</li>
 </ul>
@@ -71,7 +75,7 @@
 </ul>
 ">
 
-<!ENTITY proxyResolveFailure.title "Non é posíbel encontrar o servidor proxy">
+<!ENTITY proxyResolveFailure.title "Non é posíbel atopar o servidor proxy">
 <!ENTITY proxyResolveFailure.longDesc "<ul><li>Comprobe a configuración do proxy para asegurarse de que é a correcta.</li><li>Asegúrese de que o computador ten unha conexión de rede que funcione.</li><li>Se o seu computador ou rede está protexido por unha devasa ou un proxy, asegúrese de que &brandShortName; ten permiso para acceder á Web.</li></ul>">
 
 <!ENTITY redirectLoop.title "A páxina non está a redirixir correctamente">
@@ -81,7 +85,12 @@
 <!ENTITY unknownSocketType.longDesc "<ul><li>Comprobe que o seu sistema ten instalado o Xestor de seguranza persoal.</li><li>Isto podería deberse a unha configuración non estándar no servidor.</li></ul>">
 
 <!ENTITY nssFailure2.title "Fallou a conexión segura">
-<!ENTITY nssFailure2.longDesc "<ul><li>Non é posíbel mostrar a páxina que está a tentar visualizar porque non foi posíbel verificar a autenticidade dos datos recibidos.</li><li>Contacte cos propietarios do sitio web para informalos deste problema. Tamén pode usar a orde que se atopa no menú de axuda para informar deste sitio con problemas.</li></ul>">
+<!ENTITY nssFailure2.longDesc2 "
+<ul>
+  <li>Non é posíbel amosar a páxina que está a tentar visualizar porque non foi posíbel comprobar a autenticidade dos datos recibidos.</li>
+  <li>Contacte cos propietarios do sitio web para informalos deste problema.</li>
+</ul>
+">
 
 <!ENTITY nssBadCert.title "Fallou a conexión segura">
 <!ENTITY nssBadCert.longDesc2 "<ul><li>Isto podería ser un problema coa configuración do servidor ou pode ser alguén que está tentando facerse pasar polo servidor.</li><li>Se xa puido conectarse a este servidor de forma correcta, pode ser que o erro sexa temporal e pode tentalo máis tarde.</li></ul>">
@@ -94,11 +103,11 @@
 <!ENTITY phishingBlocked.title "Web sospeitosa de ser unha falsificación!">
 <!ENTITY phishingBlocked.longDesc " <p>Se introduce información persoal nesta páxina pode resultar na usurpación da súa identidade ou outro tipo de acción fraudulenta.</p> <p>Este tipo de falsificación web utilízase nos casos coñecidos como phishing, nos cales utilízanse correos electrónicos e páxinas web fraudulentas para imitar fontes nas que o usuario pode confiar.</p> ">
 
-<!ENTITY cspFrameAncestorBlocked.title "Bloqueado pola política de seguranza de contidos">
-<!ENTITY cspFrameAncestorBlocked.longDesc "<p>&brandShortName; impediu que esta páxina se cargue desta forma porque a páxina ten una política de seguranza de contido que non o permite.</p>">
+<!ENTITY cspBlocked.title "Bloqueado pola política de seguranza de contidos">
+<!ENTITY cspBlocked.longDesc "<p>&brandShortName; impediu que esta páxina se cargue desta forma porque a páxina ten una política de seguranza de contido que non o permite.</p>">
 
 <!ENTITY corruptedContentError.title "Erro de contido corrupto">
-<!ENTITY corruptedContentError.longDesc "<p>Non é posíbel mostrar a páxina que está a tentar visualizar porque se produciu un erro na transmisión dos datos.</p><ul><li>Contacte cos propietarios do sitio web para informalos deste problema.</li></ul>">
+<!ENTITY corruptedContentError.longDesc "<p>Non é posíbel amosar a páxina que está a tentar visualizar porque se produciu un erro na transmisión dos datos.</p><ul><li>Contacte cos propietarios do sitio web para informalos deste problema.</li></ul>">
 
 
 <!ENTITY securityOverride.linkText "Ou pode engadir unha excepción…">
@@ -116,5 +125,30 @@ functionality specific to firefox. -->
 <button id='exceptionDialogButton'>&securityOverride.exceptionButtonLabel;</button>
 ">
 
+<!ENTITY errorReporting.title "Informar deste erro">
+<!ENTITY errorReporting.longDesc "Informar do enderezo a información do certificado de <span id='hostname'></span> axudaranos a identificar e bloquear sitios maliciosos. Grazas por axudarnos a crear unha web máis segura!">
+<!ENTITY errorReporting.automatic "Informar automaticamente de erros no futuro">
+<!ENTITY errorReporting.learnMore "Obter máis información…">
+<!ENTITY errorReporting.sending "Enviando informe">
+<!ENTITY errorReporting.sent "Enviouse o informe">
+<!ENTITY errorReporting.report "Informar">
+<!ENTITY errorReporting.tryAgain "Tentar de novo">
+
 <!ENTITY remoteXUL.title "XUL remoto">
 <!ENTITY remoteXUL.longDesc "<p><ul><li>Contacte cos propietarios do sitio web para informalos deste problema.</li></ul></p>">
+
+<!ENTITY oldSecurityProtocol.title "Imposíbel estabelecer unha conexión segura">
+<!-- LOCALIZATION NOTE (oldSecurityProtocol.longDesc) - Do not translate the
+     <span id='hostname'></span>. -->
+<!ENTITY oldSecurityProtocol.longDesc2 "Non é posíbel que &brandShortName; garanta a seguranza dos seus datos no sitio <span id='hostname'></span> xa que usa SSLv3, protocolo de seguranza non fiábel.">
+<!-- LOCALIZATION NOTE (oldSecurityProtocol.advancedInfo) - Do not translate
+     the <span id='errorcode'></span>. -->
+<!ENTITY oldSecurityProtocol.advancedInfo "Detalles do erro: <span id='errorcode'></span>">
+<!ENTITY oldSecurityProtocol.learnMore "Obter máis información…">
+
+<!ENTITY sslv3Used.learnMore "Learn More…">
+<!-- LOCALIZATION NOTE (sslv3Used.longDesc) - Do not translate
+     "ssl_error_unsupported_version". -->
+<!ENTITY sslv3Used.longDesc "Advanced info: ssl_error_unsupported_version">
+
+<!ENTITY sslv3Used.title "Unable to Connect Securely">
