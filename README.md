@@ -1,7 +1,7 @@
 # Bluegriffon
 BlueGriffon, the Web editor
 
-## To build BlueGriffon
+## To prepare the build
 
 * make sure to have installed the environment to build Mozilla: [windows](https://developer.mozilla.org/En/Developer_Guide/Build_Instructions/Windows_Prerequisites), [MacOS X](https://developer.mozilla.org/En/Developer_Guide/Build_Instructions/Mac_OS_X_Prerequisites), [linux](https://developer.mozilla.org/En/Developer_Guide/Build_Instructions/Linux_Prerequisites)
 * get mozilla-central from Mozilla through Mercurial:
@@ -19,3 +19,17 @@ BlueGriffon, the Web editor
   ``hg update -r `cat bluegriffon/config/mozilla_central_revision.txt```
 
   `patch -p 1 < bluegriffon/config/content.patch`
+
+* create a `.mozconfig` file inside your `bluegriffon-source` directory.The  settings I am using on a daily basis on OS X (Yosemite) can be found in `bluegriffon/config/mozconfig.macosx`
+
+## To build the master branch
+
+`make client.mk build_all`
+
+You can after that type `make package`in the object directory to package the application for distribution.
+
+## To build the `bluegriffon-ng` branch
+
+`./mach build`
+
+The NG branch is not entirely ready yet: extensions and stubs are not built, and packaging is not ready yet. There are also a lot of regressions to fix.
