@@ -51,6 +51,6 @@ locale tipoftheday "$i" extensions/tipoftheday/
 #    rm firefox-$VERSION.$i.langpack.xpi
 done
 
-find . -name \*.dtd -exec svn add {} \;
-find . -name \*.properties -exec svn add {} \;
-find . -name \*.manifest -exec svn add {} \;
+find . -name \*.dtd -exec git add {} \;
+find . -name \*.properties -exec git add {} \;
+find . -name \*.manifest -exec git add {} \;
