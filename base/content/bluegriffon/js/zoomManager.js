@@ -57,8 +57,7 @@ var BGZoomManager = {
   getMarkupDocumentViewer: function BGZoomManager_getMarkupDocumentViewer()
   {
     return EditorUtils.getCurrentEditorElement()
-             .docShell.contentViewer
-             .QueryInterface(Components.interfaces.nsIMarkupDocumentViewer);
+             .docShell.contentViewer;
   },
 
   getCurrentZoom: function BGZoomManager_getCurrentZoom()
