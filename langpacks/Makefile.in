@@ -37,7 +37,7 @@ _EXTRA_LOCALES =\
     sr \
     $(NULL)
     
-libs::$(_AVAILABLE_LOCALES)
+libs::$(_AVAILABLE_LOCALES) $(_EXTRA_LOCALES)
 	mkdir -p $(FINAL_TARGET)/extensions
 	rm -f $(FINAL_TARGET)/extensions/*.xpi
 	rm -f $(srcdir)/*.xpi
