@@ -322,6 +322,24 @@
                              ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true)"/>
               </hbox>
             </row>
+
+            <row align="center" animatable="true">
+            	<label value="&writingMode.label;"/>
+              <hbox align="center">
+                <toolbarbutton class="multibutton" label="horizontal-tb"
+                               value="horizontal-tb" property="writing-mode" type="checkbox" group="writing-mode"
+                               id="horizontalTbWritingModeButton"
+                               oncommand="ToggleProperty(this)"/>
+                <toolbarbutton class="multibutton" label="vertical-lr"
+                               value="vertical-lr " property="writing-mode" type="checkbox" group="writing-mode"
+                               id="verticalLrWritingModeButton"
+                               oncommand="ToggleProperty(this)"/>
+                <toolbarbutton class="multibutton" label="vertical-rl"
+                               value="vertical-rl " property="writing-mode" type="checkbox" group="writing-mode"
+                               id="verticalRlWritingModeButton"
+                               oncommand="ToggleProperty(this)"/>
+              </hbox>
+            </row>
           </rows>
         </grid>
       </vbox>

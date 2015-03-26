@@ -89,6 +89,11 @@ function GeneralSectionIniter(aElt, aRuleset)
 
   var va = CssInspector.getCascadedValue(aRuleset, "vertical-align");
   gDialog.verticalAlignMenulist.value = va;
+
+  var wr = CssInspector.getCascadedValue(aRuleset, "writing-mode");
+  CheckToggle(gDialog.horizontalTbWritingModeButton, wr == "horizontal-tb");
+  CheckToggle(gDialog.verticalLrWritingModeButton,   wr == "vertical-lr");
+  CheckToggle(gDialog.verticalRlWritingModeButton,   wr == "vertical-rl");
 }
 
 function AddFont(aEvent)
