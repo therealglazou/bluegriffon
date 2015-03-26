@@ -31,6 +31,12 @@ You can after that type `make package`in the object directory to package the app
 
 ## To build the `bluegriffon-ng` branch
 
+`cd bluegriffon`
+
+`git checkout bluegriffon-ng`
+
+`cd ..`
+
 `./mach build`
 
 The NG branch is not entirely ready yet: extensions and stubs are not built yet, and packaging is not ready yet. There are also a lot of regressions to fix and a lot of stuff to update.
