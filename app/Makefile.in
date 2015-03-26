@@ -4,9 +4,6 @@
 
 dist_dest   = $(DIST)/$(MOZ_MACBUNDLE_NAME)
 
-PREF_JS_EXPORTS = $(srcdir)/profile/bluegriffon-prefs.js \
-		  $(NULL)
-
 # hardcode en-US for the moment
 AB_CD = en-US
 
@@ -14,10 +11,6 @@ DEFINES += \
   -DCOMPOSER_ICO='"$(srcdir)/icons/bluegriffon.ico"' \
   -DDOCUMENT_ICO='"$(srcdir)/icons/bluegriffon.ico"' \
   $(NULL)
-
-ifdef LIBXUL_SDK #{
-PREF_JS_EXPORTS += $(srcdir)/profile/channel-prefs.js
-endif #} LIBXUL_SDK
 
 # Build a binary bootstrapping with XRE_main
 
@@ -116,10 +109,3 @@ else
 endif #} cocoa
 endif #} LIBXUL_SDK
 
-libs::
-ifeq (cocoa,$(MOZ_WIDGET_TOOLKIT))
-	mkdir -p $(DIST)/$(MAC_APP_NAME).app/Contents/MacOS/extensions
-	$(INSTALL) $(srcdir)/../langpacks/*.xpi $(DIST)/$(MAC_APP_NAME).app/Contents/MacOS/extensions 
-else
-	$(INSTALL) $(srcdir)/../langpacks/*.xpi $(DIST)/bin/extensions 
-endif

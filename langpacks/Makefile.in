@@ -13,6 +13,9 @@ endif
 
 _AVAILABLE_LOCALES =\
     en-US \
+    $(NULL)
+
+_EXTRA_LOCALES =\
     cs \
     de \
     es-ES \
@@ -35,15 +38,15 @@ _AVAILABLE_LOCALES =\
     $(NULL)
     
 libs::$(_AVAILABLE_LOCALES)
-	mkdir -p $(FINAL_TARGET)/distribution/extensions
-	rm -f $(FINAL_TARGET)/distribution/extensions/*.xpi
+	mkdir -p $(FINAL_TARGET)/extensions
+	rm -f $(FINAL_TARGET)/extensions/*.xpi
 	rm -f $(srcdir)/*.xpi
 	$(foreach f,$^, cd $(srcdir)/`basename $f`; zip -qr ../langpack-`basename $f`@bluegriffon.org.xpi `find . -type f | grep -v svn` ;)
 	$(foreach f,$^, cd $(topsrcdir)/bluegriffon/locales/`basename $f`; zip -qr $(topsrcdir)/bluegriffon/langpacks/langpack-`basename $f`@bluegriffon.org.xpi `find . -type f | grep -v svn` ;)
 ifeq (cocoa,$(MOZ_WIDGET_TOOLKIT))
-	$(INSTALL) $(srcdir)/*.xpi $(DIST)/$(APP_NAME).app/Contents/MacOS/distribution/extensions
+	$(INSTALL) $(srcdir)/*.xpi $(DIST)/$(APP_NAME).app/Contents/MacOS/extensions
 else
-	$(INSTALL) $(srcdir)/*.xpi $(DIST)/bin/distribution/extensions
+	$(INSTALL) $(srcdir)/*.xpi $(DIST)/bin/extensions
 endif
 
 include $(topsrcdir)/config/rules.mk
