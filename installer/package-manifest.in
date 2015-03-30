@@ -149,7 +149,7 @@
 #endif
 #endif
 
-; [Components]
+[Components]
 @RESPATH@/components/alerts.xpt
 #ifdef ACCESSIBILITY
 #ifdef XP_WIN32
@@ -326,6 +326,8 @@
 #ifdef XP_MACOSX
 @RESPATH@/components/widget_cocoa.xpt
 @RESPATH@/components/dibgutils.xpt
+@RESPATH@/components/dibadge.xpt
+@RESPATH@/components/dibadge.manifest
 #endif
 @RESPATH@/components/windowds.xpt
 @RESPATH@/components/windowwatcher.xpt
@@ -381,7 +383,6 @@
 @RESPATH@/components/phpStreamConverter.js
 @RESPATH@/components/phpStreamConverter.manifest
 @RESPATH@/components/bgCommandHandler.js
-@RESPATH@/components/dibadge.manifest
 #ifdef MOZ_GTK
 @RESPATH@/components/nsFilePicker.manifest
 @RESPATH@/components/nsFilePicker.js
