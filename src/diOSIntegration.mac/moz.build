@@ -8,9 +8,10 @@ SOURCES += [
     'diOSIntegrationFactory.cpp',
 ]
 
-EXTRA_PP_COMPONENTS += ['dibadge.manifest']
+EXTRA_COMPONENTS += ['dibadge.manifest']
 
 EXPORTS += [ 'diOSIntegrationCIID.h' ]
 
-XPIDL_MODULE = 'osinteg'
+XPIDL_MODULE = 'dibadge'
+
 FINAL_LIBRARY = 'xul'
