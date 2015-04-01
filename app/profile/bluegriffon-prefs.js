@@ -232,3 +232,5 @@ pref("layout.css.flexbox.enabled", true);
 
 pref("general.useragent.locale", "en-US");
 pref("intl.locale.matchOS", false);
+
+pref("app.support.baseURL", "http://bluegriffon.org/");
