@@ -1,3 +1,7 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
 <!ENTITY aboutSupport.pageTitle "Tietoja ongelmatilanteiden ratkaisuun">
 
 <!-- LOCALIZATION NOTE (aboutSupport.pageSubtitle): don't change the 'supportLink' id. -->
@@ -7,64 +11,92 @@
   &brandShortName;ista, käy katsomassa löytyykö hakemaasi vastausta <a id='supportLink'>tukisivustoltamme</a>.
 ">
 
+<!ENTITY aboutSupport.crashes.title "Kaatumisilmoitukset">
+<!-- LOCALIZATION NOTE (aboutSupport.crashes.id):
+This is likely the same like id.heading in crashes.dtd. -->
+<!ENTITY aboutSupport.crashes.id "Ilmoituksen tunnus">
+<!ENTITY aboutSupport.crashes.sendDate "Lähetetty">
+<!ENTITY aboutSupport.crashes.allReports "Kaikki kaatumisilmoitukset">
+<!ENTITY aboutSupport.crashes.noConfig "Tätä ohjelmaa ei ole säädetty näyttämään kaatumisilmoituksia.">
+
 <!ENTITY aboutSupport.extensionsTitle "Laajennukset">
 <!ENTITY aboutSupport.extensionName "Nimi">
 <!ENTITY aboutSupport.extensionEnabled "Käytössä">
 <!ENTITY aboutSupport.extensionVersion "Versio">
 <!ENTITY aboutSupport.extensionId "ID">
 
+<!ENTITY aboutSupport.experimentsTitle "Kokeelliset ominaisuudet">
+<!ENTITY aboutSupport.experimentName "Nimi">
+<!ENTITY aboutSupport.experimentId "ID">
+<!ENTITY aboutSupport.experimentDescription "Kuvaus">
+<!ENTITY aboutSupport.experimentActive "Käynnissä">
+<!ENTITY aboutSupport.experimentEndDate "Loppumispäivämäärä">
+<!ENTITY aboutSupport.experimentHomepage "Kotisivu">
+
+
 <!ENTITY aboutSupport.appBasicsTitle "Ohjelman perustiedot">
 <!ENTITY aboutSupport.appBasicsName "Nimi">
 <!ENTITY aboutSupport.appBasicsVersion "Versio">
+<!ENTITY aboutSupport.appBasicsBuildID "Koosteen tunniste">
+
+<!-- LOCALIZATION NOTE (aboutSupport.appBasicsUpdateChannel, aboutSupport.appBasicsUpdateHistory, aboutSupport.appBasicsShowUpdateHistory):
+"Update" is a noun here, not a verb. -->
+<!ENTITY aboutSupport.appBasicsUpdateChannel "Päivityskanava">
+<!ENTITY aboutSupport.appBasicsUpdateHistory "Päivityshistoria">
+<!ENTITY aboutSupport.appBasicsShowUpdateHistory "Näytä päivityshistoria">
+
 <!ENTITY aboutSupport.appBasicsProfileDir "Profiilikansio">
+<!-- LOCALIZATION NOTE (aboutSupport.appBasicsProfileDirWinMac):
+This is the Windows- and Mac-specific variant of aboutSupport.appBasicsProfileDir.
+Windows/Mac use the term "Folder" instead of "Directory" -->
+<!ENTITY aboutSupport.appBasicsProfileDirWinMac "Profiilikansio">
+
 <!ENTITY aboutSupport.appBasicsEnabledPlugins "Käytössä olevat liitännäiset">
 <!ENTITY aboutSupport.appBasicsBuildConfig "Koostamisasetukset">
 <!ENTITY aboutSupport.appBasicsUserAgent "Selaintunniste">
+<!ENTITY aboutSupport.appBasicsMemoryUse "Muistin käyttö">
 
-<!ENTITY aboutSupport.show.label "Avaa kansio">
+<!ENTITY aboutSupport.appBasicsMultiProcessSupport "Usean prosessin ikkunoita">
 
+<!ENTITY aboutSupport.showDir.label "Avaa kansio">
 <!-- LOCALIZATION NOTE (aboutSupport.showMac.label): This is the Mac-specific
-variant of aboutSupport.show.label.  This allows us to use the preferred
+variant of aboutSupport.showDir.label.  This allows us to use the preferred
 "Finder" terminology on Mac. -->
 <!ENTITY aboutSupport.showMac.label "Avaa Finderissa">
+<!-- LOCALIZATION NOTE (aboutSupport.showWin.label): This is the Windows-specific
+variant of aboutSupport.showDir.label. -->
+<!ENTITY aboutSupport.showWin.label "Avaa kansio">
 
-<!ENTITY aboutSupport.modifiedPrefsTitle "Muutetut asetukset">
+<!ENTITY aboutSupport.modifiedKeyPrefsTitle "Tärkeät muutetut asetukset">
 <!ENTITY aboutSupport.modifiedPrefsName "Nimi">
 <!ENTITY aboutSupport.modifiedPrefsValue "Arvo">
 
+<!-- LOCALIZATION NOTE (aboutSupport.userJSTitle, aboutSupport.userJSDescription): user.js is the name of the preference override file being checked. -->
+<!ENTITY aboutSupport.userJSTitle "user.js-asetukset">
+<!ENTITY aboutSupport.userJSDescription "Profiilisi sisältää <a id='prefs-user-js-link'>user.js-tiedoston</a>, joka sisältää muiden kuin &brandShortName;in määrittelemät asetukset.">
+
+<!ENTITY aboutSupport.lockedKeyPrefsTitle "Tärkeät lukitut asetukset">
+<!ENTITY aboutSupport.lockedPrefsName "Nimi">
+<!ENTITY aboutSupport.lockedPrefsValue "Arvo">
+
 <!ENTITY aboutSupport.graphicsTitle "Grafiikka">
+
+<!ENTITY aboutSupport.jsTitle "JavaScript">
+<!ENTITY aboutSupport.jsIncrementalGC "Jatkuva roskienkeräys">
+
+<!ENTITY aboutSupport.a11yTitle "Esteettömyystoiminnot">
+<!ENTITY aboutSupport.a11yActivated "Käytössä">
+<!ENTITY aboutSupport.a11yForceDisabled "Estä esteettömyystoiminnot">
+
+<!ENTITY aboutSupport.libraryVersionsTitle "Kirjastojen versiot">
 
 <!ENTITY aboutSupport.installationHistoryTitle "Asennushistoria">
 <!ENTITY aboutSupport.updateHistoryTitle "Päivityshistoria">
 
-<!ENTITY aboutSupport.copyToClipboard.label "Kopioi tiedot leikepöydälle">
+<!ENTITY aboutSupport.copyTextToClipboard.label "Kopioi teksti leikepöydälle">
+<!ENTITY aboutSupport.copyRawDataToClipboard.label "Kopioi muokkaamaton data leikepöydälle">
 
-<!ENTITY aboutSupport.a11yActivated "Activated">
-<!ENTITY aboutSupport.a11yForceDisabled "Prevent Accessibility">
+<!ENTITY aboutSupport.sandboxTitle "Hiekkalaatikko">
 
-<!ENTITY aboutSupport.a11yTitle "Accessibility">
-<!ENTITY aboutSupport.appBasicsCrashIDs "Crash Reports">
-<!ENTITY aboutSupport.appBasicsMemoryUse "Memory Use">
-<!-- LOCALIZATION NOTE (aboutSupport.appBasicsProfileDirWinMac):
-This is the Windows- and Mac-specific variant of aboutSupport.appBasicsProfileDir.
-Windows/Mac use the term "Folder" instead of "Directory" -->
-<!ENTITY aboutSupport.appBasicsProfileDirWinMac "Profile Folder">
-<!ENTITY aboutSupport.copyRawDataToClipboard.label "Copy raw data to clipboard">
-
-<!ENTITY aboutSupport.copyTextToClipboard.label "Copy text to clipboard">
-<!ENTITY aboutSupport.jsIncrementalGC "Incremental GC">
-
-<!ENTITY aboutSupport.jsTitle "JavaScript">
-
-<!ENTITY aboutSupport.libraryVersionsTitle "Library Versions">
-
-<!ENTITY aboutSupport.modifiedKeyPrefsTitle "Important Modified Preferences">
-
-<!ENTITY aboutSupport.showDir.label "Open Directory">
-<!-- LOCALIZATION NOTE (aboutSupport.showWin.label): This is the Windows-specific
-variant of aboutSupport.showDir.label. -->
-<!ENTITY aboutSupport.showWin.label "Show Folder">
-<!ENTITY aboutSupport.userJSDescription "Your profile folder contains a <a id='prefs-user-js-link'>user.js file</a>, which includes preferences that were not created by &brandShortName;.">
-
-<!-- LOCALIZATION NOTE (aboutSupport.userJSTitle, aboutSupport.userJSDescription): user.js is the name of the preference override file being checked. -->
-<!ENTITY aboutSupport.userJSTitle "user.js Preferences">
+<!ENTITY aboutSupport.safeModeTitle "Kokeile vikasietotilaa">
+<!ENTITY aboutSupport.restartInSafeMode.label "Käynnistä uudelleen ilman lisäosia…">

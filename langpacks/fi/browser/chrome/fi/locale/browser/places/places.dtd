@@ -1,3 +1,7 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
 <!-- LOCALIZATION NOTE (places.library.title): use "Library", "Archive" or "Repository" -->
 <!ENTITY places.library.title  "Arkisto">
 <!ENTITY places.library.width  "700">
@@ -6,12 +10,9 @@
 <!ENTITY organize.accesskey    "J">
 <!ENTITY organize.tooltip      "Järjestele kirjanmerkkejäsi">
 
-<!ENTITY file.accesskey                 "J">
 <!ENTITY file.close.label               "Sulje">
 <!ENTITY file.close.accesskey           "S">
 <!ENTITY cmd.close.key                  "w">
-<!ENTITY edit.label                     "Muokkaa">
-<!ENTITY edit.accesskey                 "M">
 <!ENTITY views.label                    "Näkymät">
 <!ENTITY views.accesskey                "N">
 <!ENTITY views.tooltip                  "Muokkaa näkymää">
@@ -26,15 +27,12 @@
 <!ENTITY view.sortDescending.label      "Z > A lajittelu">
 <!ENTITY view.sortDescending.accesskey  "Z">
 
-<!ENTITY cmd.findInBookmarks.label      "Etsi kirjanmerkeistä…">
-<!ENTITY cmd.findInBookmarks.accesskey  "E">
-<!ENTITY cmd.findCurrent.label          "Etsi valitusta kokoelmasta…">
-<!ENTITY cmd.findCurrent.accesskey      "t">
-
-<!ENTITY cmd.exportHTML.label           "Vie HTML-tiedosto…">
-<!ENTITY cmd.exportHTML.accesskey       "V">
-<!ENTITY cmd.importHTML.label           "Tuo HTML-tiedosto…">
-<!ENTITY cmd.importHTML.accesskey       "T">
+<!ENTITY importBookmarksFromHTML.label     "Tuo kirjanmerkit HTML-tiedostosta…">
+<!ENTITY importBookmarksFromHTML.accesskey "T">
+<!ENTITY exportBookmarksToHTML.label       "Vie kirjanmerkit HTML-tiedostoon…">
+<!ENTITY exportBookmarksToHTML.accesskey   "V">
+<!ENTITY importOtherBrowser.label          "Tuo tietoja toisesta selaimesta…">
+<!ENTITY importOtherBrowser.accesskey      "u">
 
 <!ENTITY cmd.backup.label               "Varmuuskopioi…">
 <!ENTITY cmd.backup.accesskey           "V">
@@ -54,6 +52,8 @@
 <!ENTITY cmd.open.accesskey              "A">
 <!ENTITY cmd.open_window.label           "Avaa uuteen ikkunaan">
 <!ENTITY cmd.open_window.accesskey       "v">
+<!ENTITY cmd.open_private_window.label     "Avaa uuteen yksityiseen ikkunaan">
+<!ENTITY cmd.open_private_window.accesskey "y">
 <!ENTITY cmd.open_tab.label              "Avaa uuteen välilehteen">
 <!ENTITY cmd.open_tab.accesskey          "u">
 <!ENTITY cmd.open_all_in_tabs.label      "Avaa välilehtiin">
@@ -76,8 +76,6 @@
 
 <!ENTITY cmd.reloadLivebookmark.label      "Päivitä live-kirjanmerkki">
 <!ENTITY cmd.reloadLivebookmark.accesskey  "ä">
-<!ENTITY cmd.reloadMicrosummary.label      "Päivitä muuttuva otsikko">
-<!ENTITY cmd.reloadMicrosummary.accesskey  "ä">
 
 <!ENTITY cmd.moveBookmarks.label                  "Siirrä…">
 <!ENTITY cmd.moveBookmarks.accesskey              "S">
@@ -85,7 +83,7 @@
 <!ENTITY col.name.label          "Nimi">
 <!ENTITY col.tags.label          "Avainsanat">
 <!ENTITY col.url.label           "Osoite">
-<!ENTITY col.lastvisit.label     "Vierailupäivä">
+<!ENTITY col.mostrecentvisit.label "Viimeisin vierailu">
 <!ENTITY col.visitcount.label    "Vierailukerrat">
 <!ENTITY col.keyword.label       "Pikakomento">
 <!ENTITY col.description.label   "Kuvaus">
@@ -95,41 +93,26 @@
 <!ENTITY search.label                              "Etsi:">
 <!ENTITY search.accesskey                          "E">
 
-<!ENTITY search.in.label                           "Etsi:">
-<!ENTITY search.scopeFolder.label                  "Valitusta kansiosta">
-<!ENTITY search.scopeFolder.accesskey              "V">
-<!ENTITY search.scopeBookmarks.label               "Kirjanmerkeistä">
-<!ENTITY search.scopeBookmarks.accesskey           "k">
-<!ENTITY search.scopeDownloads.label               "Latauksista">
-<!ENTITY search.scopeDownloads.accesskey           "L">
-<!ENTITY search.scopeHistory.label                 "Sivuhistoriasta">
-<!ENTITY search.scopeHistory.accesskey             "S">
-<!ENTITY saveSearch.label                          "Tallenna">
-<!ENTITY saveSearch.accesskey                      "T">
-
 <!ENTITY cmd.find.key  "f">
 
 <!ENTITY maintenance.label   "Tuo ja varmuuskopioi">
 <!ENTITY maintenance.accesskey  "T">
 <!ENTITY maintenance.tooltip    "Tuo ja varmuuskopioi kirjanmerkkejä">
 
-<!ENTITY backCmd.label       "Edellinen">
 <!ENTITY backButton.tooltip  "Palaa edelliseen">
 
-<!ENTITY forwardCmd.label       "Seuraava">
 <!ENTITY forwardButton.tooltip  "Siirry seuraavaan">
 
 <!ENTITY detailsPane.more.label "Lisää">
 <!ENTITY detailsPane.more.accesskey "L">
 <!ENTITY detailsPane.less.label "Vähemmän">
 <!ENTITY detailsPane.less.accesskey "V">
-<!ENTITY detailsPane.noPreviewAvailable.label "Esikatselu">
 <!ENTITY detailsPane.selectAnItemText.description "Valitse kohde, jonka ominaisuuksia muokataan tai näytetään">
 
 <!ENTITY find.label               "Etsi:">
 <!ENTITY find.accesskey           "E">
 <!ENTITY view.label               "Näytä">
-<!ENTITY view.accesskey           "w">
+<!ENTITY view.accesskey           "N">
 <!ENTITY byDate.label             "Päivämäärän mukaan">
 <!ENTITY byDate.accesskey         "P">
 <!ENTITY bySite.label             "Sivuston mukaan">
@@ -140,11 +123,3 @@
 <!ENTITY byLastVisited.accesskey  "a">
 <!ENTITY byDayAndSite.label       "Päivämäärän ja sivuston mukaan">
 <!ENTITY byDayAndSite.accesskey   "j">
-
-<!ENTITY exportBookmarksToHTML.accesskey   "E">
-<!ENTITY exportBookmarksToHTML.label       "Export Bookmarks to HTML…">
-<!ENTITY importBookmarksFromHTML.accesskey "I">
-
-<!ENTITY importBookmarksFromHTML.label     "Import Bookmarks from HTML…">
-<!ENTITY importOtherBrowser.accesskey      "A">
-<!ENTITY importOtherBrowser.label          "Import Data from Another Browser…">

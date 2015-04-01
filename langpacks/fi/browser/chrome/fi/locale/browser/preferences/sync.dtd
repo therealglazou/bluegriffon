@@ -1,3 +1,7 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
 <!-- The page shown when not logged in... -->
 <!ENTITY setupButton.label          "Määritä &syncBrand.fullName.label; -palvelun asetukset">
 <!ENTITY setupButton.accesskey      "M">
@@ -13,14 +17,17 @@
 <!ENTITY manageAccount.label          "Hallinnoi tiliä">
 <!ENTITY manageAccount.accesskey      "H">
 <!ENTITY viewQuota.label              "Näytä tilavaraus">
-<!ENTITY changePassword.label         "Vaihda salasana">
-<!ENTITY mySyncKey.label              "Synkronointiavaimesi">
-<!ENTITY resetSync.label              "Aloita synkronointi alusta">
-<!ENTITY addDevice.label              "Liitä laite">
+<!ENTITY changePassword2.label         "Vaihda salasana…">
+<!ENTITY myRecoveryKey.label          "Palautusavaimeni">
+<!ENTITY resetSync2.label              "Aloita synkronointi alusta…">
+
+<!ENTITY pairDevice.label             "Liitä laite">
 
 <!ENTITY syncMy.label               "Synkronoi">
 <!ENTITY engine.bookmarks.label     "Kirjanmerkit">
 <!ENTITY engine.bookmarks.accesskey "K">
+<!ENTITY engine.readinglist.label   "Lukulista">
+<!ENTITY engine.readinglist.accesskey "L">
 <!ENTITY engine.tabs.label          "Välilehdet">
 <!ENTITY engine.tabs.accesskey      "V">
 <!ENTITY engine.history.label       "Sivuhistoria">
@@ -29,25 +36,47 @@
 <!ENTITY engine.passwords.accesskey "a">
 <!ENTITY engine.prefs.label         "Asetukset">
 <!ENTITY engine.prefs.accesskey     "e">
+<!ENTITY engine.addons.label        "Lisäosat">
+<!ENTITY engine.addons.accesskey    "i">
 
 <!-- Device Settings -->
-<!ENTITY syncComputerName.label       "Laitteen nimi:">
-<!ENTITY syncComputerName.accesskey   "L">
-<!ENTITY deactivateDevice.label       "Irrota laite palvelusta">
+<!ENTITY syncDeviceName.label       "Laitteen nimi:">
+<!ENTITY syncDeviceName.accesskey   "L">
+<!ENTITY unlinkDevice.label           "Irrota laite">
 
 <!-- Footer stuff -->
 <!ENTITY prefs.tosLink.label        "Käyttöehdot">
 <!ENTITY prefs.ppLink.label         "Tietosuojakäytäntö">
 
-<!ENTITY changePassword2.label        "Change Password…">
-<!ENTITY engine.addons.accesskey    "A">
-<!ENTITY engine.addons.label        "Add-ons">
-<!ENTITY myRecoveryKey.label          "My Recovery Key">
+<!-- Firefox Accounts stuff -->
+<!ENTITY fxaPrivacyNotice.link.label "Tietosuojakäytäntö">
+<!ENTITY determiningAcctStatus.label     "Tarkistetaan tilisi tilaa…">
 
-<!ENTITY pairDevice.label             "Pair a Device">
-<!ENTITY resetSync2.label             "Reset Sync…">
-<!ENTITY syncDeviceName.accesskey   "c">
+<!-- LOCALIZATION NOTE (signedInUnverified.beforename.label,
+signedInUnverified.aftername.label): these two string are used respectively
+before and after the account email address. Localizers can use one of them, or
+both, to better adapt this sentence to their language.
+-->
+<!ENTITY signedInUnverified.beforename.label "Sähköpostiosoitetta">
+<!ENTITY signedInUnverified.aftername.label "ei ole vahvistettu.">
 
-<!-- Device Settings -->
-<!ENTITY syncDeviceName.label       "Device Name:">
-<!ENTITY unlinkDevice.label           "Unlink This Device">
+<!-- LOCALIZATION NOTE (signedInLoginFailure.beforename.label,
+signedInLoginFailure.aftername.label): these two string are used respectively
+before and after the account email address. Localizers can use one of them, or
+both, to better adapt this sentence to their language.
+-->
+<!ENTITY signedInLoginFailure.beforename.label "Kirjaudu sisään palauttaaksesi osoitteen">
+<!ENTITY signedInLoginFailure.aftername.label "yhteyden">
+
+<!ENTITY notSignedIn.label           "Et ole kirjautunut sisään.">
+<!ENTITY signIn.label                "Kirjaudu sisään">
+<!ENTITY manage.label                "Hallinnoi">
+<!ENTITY disconnect.label            "Katkaise yhteys…">
+<!ENTITY verify.label                "Vahvista sähköpostiosoite">
+<!ENTITY forget.label                "Unohda sähköpostiosoite">
+
+<!ENTITY welcome.description "Kun käytät &brandShortName;ia välilehtesi, kirjanmerkkisi, salasanasi ja muut tietosi ovat aina käytettävissäsi.">
+<!ENTITY welcome.signIn.label "Kirjaudu sisään">
+<!ENTITY welcome.createAccount.label "Luo tili">
+
+<!ENTITY welcome.useOldSync.label "Käytätkö vanhempaa versiota Sync-palvelusta?">

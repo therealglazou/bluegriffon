@@ -1,3 +1,7 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
 <!ENTITY % brandDTD SYSTEM "chrome://branding/locale/brand.dtd">
 %brandDTD;
 
@@ -52,15 +56,13 @@
 <!ENTITY netInterrupt.title "Tiedonsiirto keskeytyi">
 <!ENTITY netInterrupt.longDesc "&sharedLongDesc;">
 
+<!ENTITY notCached.title "Dokumentti on vanhentunut">
+<!ENTITY notCached.longDesc "<p>Pyydettyä dokumenttia ei ole tallennettu &brandShortName;in väliaikaistiedostoihin.</p><ul><li>Turvallisuusvarotoimena &brandShortName; ei automaattisesti lataa uudelleen luottamuksellisia dokumentteja.</li><li>Napsauta alta Yritä uudestaan ladataksesi dokumentin sivustolta uudestaan.</li></ul>">
+
 <!ENTITY netOffline.title "Yhteydettömässä tilassa">
-<!-- LOCALIZATION NOTE (netOffline.overrideLongDesc) - This string should
-     indicate that "Work Offline" is a menu item without being too specific,
-     since it could be in either the normal menu (Mac/Linux) or the Firefox button
-     menu (Windows).
--->
-<!ENTITY netOffline.overrideLongDesc "
+<!ENTITY netOffline.longDesc2 "
 <ul>
-  <li>Poista valinta kohdasta &quot;Työskentele yhteydettömässä tilassa&quot; ja yritä uudestaan.</li>
+  <li>Siirry yhteystilaan ja lataa sivu uudestaan valitsemalla &quot;Yritä uudelleen&quot;.</li>
 </ul>
 ">
 
@@ -84,8 +86,8 @@
 <!ENTITY netTimeout.title "Yhteyden aikakatkaisu">
 <!ENTITY netTimeout.longDesc "&sharedLongDesc;">
 
-<!ENTITY protocolNotFound.title "Osoitetta ei ymmärretty">
-<!ENTITY protocolNotFound.longDesc "
+<!ENTITY unknownProtocolFound.title "Osoitetta ei ymmärretty">
+<!ENTITY unknownProtocolFound.longDesc "
 <ul>
   <li>Osoitteen avaaminen voi vaatia uuden ohjelman asentamista.</li>
 </ul>
@@ -128,10 +130,10 @@
 ">
 
 <!ENTITY nssFailure2.title "Suojatun yhteyden muodostaminen epäonnistui">
-<!ENTITY nssFailure2.longDesc "
+<!ENTITY nssFailure2.longDesc2 "
 <ul>
   <li>Avattavaa sivua ei voida näyttää, koska vastaanotetun datan alkuperää ei kyetty varmentamaan.</li>
-  <li>Ilmoitathan ongelmasta sivuston omistajalle. Vaihtoehtoisesti ilmoita sivusto Mozillalle Ohje-valikon toiminnolla Ilmoita viallinen sivusto.</li>
+  <li>Ilmoitathan ongelmasta sivuston omistajalle.</li>
 </ul>
 ">
 
@@ -168,8 +170,12 @@
 <p>Tämän tyyppiset verkkohuijaukset ovat osa phishing- tai khalastushuijauksia, joissa sivuilla tai sähköposteilla yritetään jäljitellä mahdollisesti luottamiesi toimijoiden viestintää.</p>
 ">
 
-<!ENTITY cspFrameAncestorBlocked.title "Sisällön tietosuojakäytännön estämä">
-<!ENTITY cspFrameAncestorBlocked.longDesc "<p>&brandShortName; esti tämän sivun latautumisen tässä yhteydessä, koska sivun sisällön tietosuojakäytäntö kieltää sen.</p>">
+<!ENTITY cspBlocked.title "Sisällön tietosuojakäytännön estämä">
+<!ENTITY cspBlocked.longDesc "<p>&brandShortName; esti tämän sivun latautumisen tässä yhteydessä, koska sivun sisällön tietosuojakäytäntö kieltää sen.</p>">
+
+<!ENTITY corruptedContentError.title "Sisältö vioittunut virhe">
+<!ENTITY corruptedContentError.longDesc "<p>Avattavaa sivua ei voida näyttää, koska tiedonsiirrossa tapahtui virhe.</p><ul><li>Ilmoitathan ongelmasta sivuston omistajalle.</li></ul>">
+
 
 <!ENTITY securityOverride.linkText "Tai lisää poikkeussääntö…">
 <!ENTITY securityOverride.getMeOutOfHereButton "Siirry pois sivulta">
@@ -187,17 +193,20 @@ functionality specific to firefox. -->
 <button id='exceptionDialogButton'>&securityOverride.exceptionButtonLabel;</button>
 ">
 
-<!ENTITY corruptedContentError.longDesc "<p>The page you are trying to view cannot be shown because an error in the data transmission was detected.</p><ul><li>Please contact the website owners to inform them of this problem.</li></ul>">
+<!ENTITY errorReporting.title "Ilmoita virheestä">
+<!ENTITY errorReporting.longDesc "Palvelimen <span id='hostname'></span> osoite- ja varmennetietojen ilmoittaminen auttaa meitä tunnistamaan ja estämään pahantahtoisia sivustoja. Kiitos avustasi turvallisemman verkon puolesta!">
+<!ENTITY errorReporting.automatic "Ilmoita virheistä automaattisesti tästä lähtien">
+<!ENTITY errorReporting.learnMore "Lue lisää…">
+<!ENTITY errorReporting.sending "Lähetetään ilmoitusta">
+<!ENTITY errorReporting.sent "Ilmoitus lähetetty">
+<!ENTITY errorReporting.report "Ilmoita">
+<!ENTITY errorReporting.tryAgain "Yritä uudestaan">
 
-<!ENTITY corruptedContentError.title "Corrupted Content Error">
-<!ENTITY netOffline.longDesc2 "
-<ul>
-  <li>Press &quot;Try Again&quot; to switch to online mode and reload the page.</li>
-</ul>
-">
-<!ENTITY notCached.longDesc "<p>The requested document is not available in &brandShortName;'s cache.</p><ul><li>As a security precaution, &brandShortName; does not automatically re-request sensitive documents.</li><li>Click Try Again to re-request the document from the website.</li></ul>">
+<!ENTITY remoteXUL.title "XUL-koodia etänä">
+<!ENTITY remoteXUL.longDesc "<p><ul><li>Ilmoitathan ongelmasta sivuston omistajalle.</li></ul></p>">
 
-<!ENTITY notCached.title "Document Expired">
-<!ENTITY remoteXUL.longDesc "<p><ul><li>Please contact the website owners to inform them of this problem.</li></ul></p>">
-
-<!ENTITY remoteXUL.title "Remote XUL">
+<!ENTITY sslv3Used.title "Ei voitu muodostaa suojattua yhteyttä">
+<!-- LOCALIZATION NOTE (sslv3Used.longDesc) - Do not translate
+     "ssl_error_unsupported_version". -->
+<!ENTITY sslv3Used.longDesc "Tarkemmat tiedot: ssl_error_unsupported_version">
+<!ENTITY sslv3Used.learnMore "Lue lisää…">

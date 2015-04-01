@@ -1,33 +1,41 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
 <!ENTITY accountSetupTitle.label    "&syncBrand.fullName.label; -palvelun asennus">
 
 <!-- First page of the wizard -->
 
-<!ENTITY setup.pickSetupType.description "Tervetuloa! Jos et ole aikaisemmin käyttänyt &syncBrand.fullName.label; -palvelua, sinun tarvitsee luoda uusi tili.">
+<!ENTITY setup.pickSetupType.description2 "Tervetuloa! Jos et ole aikaisemmin käyttänyt &syncBrand.fullName.label; -palvelua, sinun tarvitsee luoda uusi tili.">
 <!ENTITY button.createNewAccount.label "Luo uusi tili">
-<!ENTITY setup.haveAccount.label "Minulla on jo &syncBrand.fullName.label; -tili.">
-<!ENTITY button.connect.label    "Yhdistä">
+<!ENTITY button.haveAccount.label      "Minulla on tili">
 
 <!ENTITY setup.choicePage.title.label     "Oletko aiemmin käyttänyt &syncBrand.fullName.label; -palvelua?">
 <!ENTITY setup.choicePage.new.label       "En ole aiemmin käyttänyt &syncBrand.shortName.label;-palvelua">
-<!ENTITY setup.choicePage.existing.label  "&syncBrand.shortName.label;-palvelu on jo minulla käytössä toisella laitteella">
+<!ENTITY setup.choicePage.existing2.label "&syncBrand.shortName.label;-palvelu on jo minulla käytössä toisella laitteella">
 
 <!-- New Account AND Existing Account -->
 <!ENTITY server.label               "Palvelin">
-<!ENTITY serverType.main.label      "&syncBrand.fullName.label; -palvelin">
+<!ENTITY serverType.default.label      "Oletus: Mozilla &syncBrand.fullName.label; -palvelin">
 <!ENTITY serverType.custom2.label   "Käytä omaa palvelinta…">
 <!ENTITY signIn.account2.label      "Tili">
 <!ENTITY signIn.account2.accesskey  "T">
 <!ENTITY signIn.password.label      "Salasana">
 <!ENTITY signIn.password.accesskey  "a">
-<!ENTITY signIn.syncKey.label       "Synkronointiavain">
-<!ENTITY signIn.syncKey.accesskey   "S">
+<!ENTITY signIn.recoveryKey.label       "Palautusavain">
+<!ENTITY signIn.recoveryKey.accesskey   "P">
 
 <!-- New Account Page 1: Basic Account Info -->
 <!ENTITY setup.newAccountDetailsPage.title.label "Tilin tiedot">
-<!ENTITY setup.confirmPassword.label  "Vahvista salasana">
-<!ENTITY setup.confirmPassword.accesskey  "V">
 <!ENTITY setup.emailAddress.label     "Sähköpostiosoite">
 <!ENTITY setup.emailAddress.accesskey "S">
+<!ENTITY setup.choosePassword.label      "Anna salasana">
+<!ENTITY setup.choosePassword.accesskey  "A">
+<!ENTITY setup.confirmPassword.label     "Vahvista salasana">
+<!ENTITY setup.confirmPassword.accesskey "V">
+<!ENTITY setup.setupMetro.label     "Synkronoi Windows 8:n &brandShortName;in kanssa">
+<!ENTITY setup.setupMetro.accesskey "W">
+
 <!-- LOCALIZATION NOTE: tosAgree1, tosLink, tosAgree2, ppLink, tosAgree3 are
      joined with implicit white space, so spaces in the strings aren't necessary -->
 <!ENTITY setup.tosAgree1.label      "Hyväksyn palvelun">
@@ -38,45 +46,43 @@
 <!ENTITY setup.tosAgree3.label      "">
 <!ENTITY setup.tosAgree2.accesskey  "">
 
-<!-- New Account Page 2: Sync Key -->
-<!ENTITY setup.newSyncKeyPage.title.label "&brandShortName; ja yksityisyydensuojasi">
-<!ENTITY setup.newSyncKeyPage.description.label "Varmistaaksemme täydellisen yksityisyydensuojan, kaikki tiedot salataan ennen kuin ne lähetetään eteenpäin. Synkronointiavaimesi on välttämätön tietojen purkamiseen, mutta sitä ei lähetetä eteenpäin.">
-<!ENTITY syncKeyEntry.label        "Synkronointiavaimesi">
-<!ENTITY syncKeyEntry.accesskey    "S">
-<!ENTITY syncKeyGenerate.label     "Luo">
-<!ENTITY syncKeyBackup.description "Tarvitset synkronointiavaintasi kun haluat liittää toisia laitteita &syncBrand.fullName.label; -tiliisi. Otathan siis avaimesta varmuuskopion. Emme voi auttaa sinua palauttamaan hävinnyttä synkronointiavainta.">
+<!-- My Recovery Key dialog -->
+<!ENTITY setup.newRecoveryKeyPage.title.label "&brandShortName; pitää huolta yksityisyydensuojastasi">
+<!ENTITY setup.newRecoveryKeyPage.description.label "Varmistaaksemme täydellisen yksityisyydensuojan, kaikki tiedot salataan ennen kuin ne lähetetään eteenpäin. Palautusavaimesi on välttämätön tietojen purkamiseen, mutta sitä ei lähetetä eteenpäin.">
+<!ENTITY recoveryKeyEntry.label        "Palautusavaimesi">
+<!ENTITY recoveryKeyEntry.accesskey    "P">
+<!ENTITY syncGenerateNewKey.label  "Luo uusi avain">
+<!ENTITY recoveryKeyBackup.description "Tarvitset palautusavaintasi kun haluat liittää toisia laitteita &syncBrand.fullName.label; -tiliisi. Otathan siis avaimesta varmuuskopion. Emme voi auttaa sinua palauttamaan hävinnyttä palautusavainta.">
 
 <!ENTITY button.syncKeyBackup.print.label     "Tulosta…">
 <!ENTITY button.syncKeyBackup.print.accesskey "T">
 <!ENTITY button.syncKeyBackup.save.label      "Tallenna…">
 <!ENTITY button.syncKeyBackup.save.accesskey  "a">
 
-<!-- New Account Page 3: Captcha -->
-<!ENTITY setup.captchaPage2.title.label     "Todista, että et ole robotti">
-<!-- Existing Account Page 1: Add Device (incl. Add a Device dialog strings) -->
-<!ENTITY addDevice.title.label              "Liitä laite">
+<!-- Existing Account Page 1: Pair a Device (incl. Pair a Device dialog strings) -->
+<!ENTITY pairDevice.title.label             "Liitä laite">
 <!ENTITY addDevice.showMeHow.label          "Näytä ohje.">
 <!ENTITY addDevice.dontHaveDevice.label     "Laite ei ole mukanani">
-<!ENTITY addDevice.setup.description.label  "Aktivoi tämän laitteen synkronointi avaamalla jo synkronoitavassa laitteessa &syncBrand.shortName.label;-palvelun asetukset ja valitsemalla &#x0022;Liitä laite&#x0022;.">
+<!ENTITY pairDevice.setup.description.label  "Aktivoi synkronointi valitsemalla &#x0022;Liitä laite&#x0022; toisessa laitteessa.">
 <!ENTITY addDevice.setup.enterCode.label    "Kirjoita sen jälkeen seuraava koodi tuolle laitteelle:">
-<!ENTITY addDevice.dialog.description.label "Aktivoi uuden laitteesi synkronointi avaamalla siinä &syncBrand.shortName.label;-palvelun asetusten määritys ja valitsemalla &#x0022;Yhdistä.&#x0022;">
+<!ENTITY pairDevice.dialog.description.label "Aktivoi uusi laite valitsemalla laitteessa &#x0022;Määritä Sync-palvelun asetukset&#x0022;.">
 <!ENTITY addDevice.dialog.enterCode.label   "Kirjoita alle uuden laitteen antama koodi:">
 <!ENTITY addDevice.dialog.tryAgain.label    "Yritä uudestaan.">
 <!ENTITY addDevice.dialog.successful.label  "Laitteen liittäminen onnistui. Ensimmäinen synkronointi voi kestää useita minuutteja ja se suoritetaan taustalla.">
-<!ENTITY addDevice.dialog.syncKey.label     "Kirjoita synkronointiavaimesi aktivoidaksesi laitteen. Kirjoita ylös tai tulosta tämä avain ja ota se mukaasi.">
+<!ENTITY addDevice.dialog.recoveryKey.label     "Kirjoita palautusavaimesi aktivoidaksesi laitteen. Kirjoita ylös tai tulosta tämä avain ja ota se mukaasi.">
 <!ENTITY addDevice.dialog.connected.label   "Laite liitetty">
 
 <!-- Existing Account Page 2: Manual Login -->
 <!ENTITY setup.signInPage.title.label "Kirjaudu sisään">
-<!ENTITY existingSyncKey.description "Voit tarkistaa synkronointiavaimesi avaamalla &syncBrand.shortName.label;-palvelun asetukset toisella laitteellasi ja valitsemalla &#x0022;Hallinnoi tiliä&#x0022; ja &#x0022;Synkronointiavaimeni&#x0022;.">
+<!ENTITY existingRecoveryKey.description "Voit tarkistaa palautusavaimesi avaamalla &syncBrand.shortName.label;-palvelun asetukset toisella laitteellasi ja valitsemalla &#x0022;Hallinnoi tiliä&#x0022; ja &#x0022;Palautusavaimeni&#x0022;.">
 <!ENTITY verifying.label              "Todennetaan…">
 <!ENTITY resetPassword.label          "Tyhjennä salasana">
 <!ENTITY resetSyncKey.label           "Toinen synkronoitava laitteeni on kadonnut.">
 
 <!-- Sync Options -->
 <!ENTITY setup.optionsPage.title      "Synkronointiasetukset">
-<!ENTITY syncComputerName.label       "Laitteen nimi:">
-<!ENTITY syncComputerName.accesskey   "L">
+<!ENTITY syncDeviceName.label       "Laitteen nimi:">
+<!ENTITY syncDeviceName.accesskey   "L">
 
 <!ENTITY syncMy.label               "Synkronoi">
 <!ENTITY engine.bookmarks.label     "Kirjanmerkit">
@@ -89,60 +95,22 @@
 <!ENTITY engine.passwords.accesskey "a">
 <!ENTITY engine.prefs.label         "Asetukset">
 <!ENTITY engine.prefs.accesskey     "e">
+<!ENTITY engine.addons.label        "Lisäosat">
+<!ENTITY engine.addons.accesskey    "L">
 
-<!ENTITY choice2.merge.main.label      "Yhdistä tämän laitteen tiedot &syncBrand.shortName.label;-palvelussa oleviin tietoihin">
+<!ENTITY choice2a.merge.main.label       "Yhdistä tämän laitteen tiedot &syncBrand.shortName.label;-palvelussa oleviin tietoihin">
 <!ENTITY choice2.merge.recommended.label "Suositeltu:">
-<!ENTITY choice2.client.main.label     "Korvaa kaikki tämän laitteen tiedot &syncBrand.shortName.label;-palvelussa olevilla tiedoilla">
-<!ENTITY choice2.server.main.label     "Korvaa kaikkien muiden laitteiden tiedot tämän laitteen tiedoilla">
+<!ENTITY choice2a.client.main.label      "Korvaa kaikki tämän laitteen tiedot &syncBrand.shortName.label;-palvelussa olevilla tiedoilla">
+<!ENTITY choice2a.server.main.label      "Korvaa kaikkien muiden laitteiden tiedot tämän laitteen tiedoilla">
 
 <!-- Confirm Merge Options -->
 <!ENTITY setup.optionsConfirmPage.title "Vahvista">
-<!ENTITY confirm.merge.label    "&syncBrand.fullName.label; -palvelussa yhdistetään tämän laitteen tiedot synkronointitilisi muihin tietoihin.">
-<!ENTITY confirm.client2.label         "Varoitus: Seuraavat &brandShortName;in tallentamat tiedot tällä laitteella poistetaan:">
-<!ENTITY confirm.client.moreinfo.label "&brandShortName; kopioi sen jälkeen &syncBrand.fullName.label; -palveluun tallennetut tiedot tälle laitteelle.">
+<!ENTITY confirm.merge2.label    "&syncBrand.fullName.label; -palvelussa yhdistetään tämän laitteen tiedot synkronointitilisi muihin tietoihin.">
+<!ENTITY confirm.client3.label         "Varoitus: Seuraavat &brandShortName;in tallentamat tiedot tällä laitteella poistetaan:">
+<!ENTITY confirm.client2.moreinfo.label "&brandShortName; kopioi sen jälkeen &syncBrand.fullName.label; -palveluun tallennetut tiedot tälle laitteelle.">
 <!ENTITY confirm.server2.label         "Varoitus: Seuraaville laitteille tallennetut tiedot korvataan tälle laitteelle tallennetuilla tiedoilla:">
 
 <!-- New & Existing Account: Setup Complete -->
 <!ENTITY setup.successPage.title "Asennus on valmis">
 <!ENTITY changeOptions.label "Voit muuttaa tätä asetusta valitsemalla alta synkronointiasetukset.">
 <!ENTITY continueUsing.label "Voit nyt jatkaa &brandShortName;in käyttämistä.">
-
-<!ENTITY addDevice.dialog.recoveryKey.label     "To activate your device you will need to enter your Recovery Key. Please print or save this key and take it with you.">
-<!ENTITY button.haveAccount.label      "I Have an Account">
-<!ENTITY choice2a.client.main.label      "Replace all data on this device with my &syncBrand.shortName.label; data">
-
-<!ENTITY choice2a.merge.main.label       "Merge this device's data with my &syncBrand.shortName.label; data">
-<!ENTITY choice2a.server.main.label      "Replace all other devices with this device's data">
-<!ENTITY confirm.client2.moreinfo.label "&brandShortName; will then copy your &syncBrand.fullName.label; data to this device.">
-<!ENTITY confirm.client3.label         "Warning: The following &brandShortName; data on this device  will be deleted:">
-<!ENTITY confirm.merge2.label    "&syncBrand.fullName.label; will now merge all this device's browser data into your Sync account.">
-<!ENTITY engine.addons.accesskey    "A">
-<!ENTITY engine.addons.label        "Add-ons">
-<!ENTITY existingRecoveryKey.description "You can get a copy of your Recovery Key by going to &syncBrand.shortName.label; Options on your other device, and selecting  &#x0022;My Recovery Key&#x0022; under &#x0022;Manage Account&#x0022;.">
-<!ENTITY pairDevice.dialog.description.label "To activate your new device, select &#x0022;Set Up Sync&#x0022; on the device.">
-<!ENTITY pairDevice.setup.description.label  "To activate, select &#x0022;Pair a Device&#x0022; on your other device.">
-
-<!-- Existing Account Page 1: Pair a Device (incl. Pair a Device dialog strings) -->
-<!ENTITY pairDevice.title.label             "Pair a Device">
-<!ENTITY recoveryKeyBackup.description "Your Recovery Key is required to access &syncBrand.fullName.label; on other machines. Please create a backup copy. We cannot help you recover your Recovery Key.">
-<!ENTITY recoveryKeyEntry.accesskey    "K">
-<!ENTITY recoveryKeyEntry.label        "Your Recovery Key">
-<!ENTITY serverType.default.label      "Default: Mozilla &syncBrand.fullName.label; server">
-<!ENTITY setup.choicePage.existing2.label "I'm already using &syncBrand.shortName.label; on another device">
-<!ENTITY setup.choosePassword.accesskey  "P">
-<!ENTITY setup.choosePassword.label      "Choose a Password">
-<!ENTITY setup.newRecoveryKeyPage.description.label "To ensure your total privacy, all of your data is encrypted prior to being uploaded. The Recovery Key which is necessary to decrypt your data is not uploaded.">
-
-<!-- My Recovery Key dialog -->
-<!ENTITY setup.newRecoveryKeyPage.title.label "&brandShortName; Cares About Your Privacy">
-
-<!-- First page of the wizard -->
-
-<!ENTITY setup.pickSetupType.description2 "Welcome! If you've never used &syncBrand.fullName.label; before, you will need to create a new account.">
-<!ENTITY setup.setupMetro.accesskey "S">
-<!ENTITY setup.setupMetro.label     "Sync with Windows 8 style &brandShortName;">
-<!ENTITY signIn.recoveryKey.accesskey   "K">
-<!ENTITY signIn.recoveryKey.label       "Recovery Key">
-<!ENTITY syncDeviceName.accesskey   "c">
-<!ENTITY syncDeviceName.label       "Device Name:">
-<!ENTITY syncGenerateNewKey.label  "Generate a new key">
