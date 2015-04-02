@@ -23,7 +23,7 @@ pref("javascript.options.strict", false);
 pref("nglayout.debug.disable_xul_cache", true);
 pref("nglayout.debug.disable_xul_fastload", true);
 
-pref("general.useragent.extra.mybrowser", "bluegriffon/1.7.3");
+pref("general.useragent.extra.mybrowser", "bluegriffon/1.8");
 pref("intl.locale.matchOS", true);
 pref("intl.accept_charsets", "iso-8859-1,*,utf-8");
 pref("browser.display.use_document_fonts", 1);
