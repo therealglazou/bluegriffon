@@ -6,14 +6,14 @@ filepickerbutton {
   -moz-binding: url('chrome://bluegriffon/content/bindings/filepickerbutton.xml#filepickerbutton');
 }
 
-toolbarbutton.multibutton[checked],
-toolbarbutton.multibutton:hover:active:not([disabled]) {
+.multibutton[checked],
+.multibutton:hover:active:not([disabled]) {
   text-shadow: 0 1px rgba(255, 255, 255, .4);
   background-color: rgba(0,0,0,0.2);
   box-shadow: inset 0 2px 5px rgba(0,0,0,0.6), 0 1px rgba(255,255,255,0.2);
 }
 
-toolbarbutton.multibutton {
+.multibutton {
   margin: 4px 0px;
   padding: 1px 10px;
 %ifdef XP_MACOSX
@@ -25,46 +25,46 @@ toolbarbutton.multibutton {
   border: thin silver solid;
 }
 
-toolbarbutton.multibutton:-moz-locale-dir(ltr) {
+.multibutton:-moz-locale-dir(ltr) {
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
 }
 
-toolbarbutton.multibutton:-moz-locale-dir(rtl) {
+.multibutton:-moz-locale-dir(rtl) {
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
 }
 
-toolbarbutton.multibutton:-moz-locale-dir(ltr) + toolbarbutton.multibutton {
+.multibutton:-moz-locale-dir(ltr) + .multibutton {
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
   border-left: 0px;
 }
 
-toolbarbutton.multibutton:-moz-locale-dir(rtl) + toolbarbutton.multibutton {
+.multibutton:-moz-locale-dir(rtl) + .multibutton {
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
   border-right: 0px;
 }
 
-toolbarbutton.multibutton:last-child:-moz-locale-dir(ltr) {
+.multibutton:last-child:-moz-locale-dir(ltr) {
   border-top-right-radius: 5px; 
   border-bottom-right-radius: 5px;
   margin-right: 1em;
 }
 
-toolbarbutton.multibutton:last-child:-moz-locale-dir(rtl) {
+.multibutton:last-child:-moz-locale-dir(rtl) {
   border-top-left-radius: 5px; 
   border-bottom-left-radius: 5px;
   margin-left: 1em;
 }
 
-toolbarbutton.multibutton .toolbarbutton-icon[src] {
+.multibutton .toolbarbutton-icon[src] {
   margin-left: 1em;
   margin-right: 1em;
 }
 
-toolbarbutton.multibutton:not([label]) .toolbarbutton-text {
+.multibutton:not([label]) .toolbarbutton-text {
   display: none;
 }
 
