@@ -132,32 +132,17 @@
               </hbox>
             </row>
 
-            <row align="center" animatable="false">
-              <label value="&textDecoration.label;"/>
-              <hbox align="center">
-                <hbox align="center">
-	                <toolbarbutton class="multibutton" label="&textDecorationNone.label;" value="none" property="text-decoration" type="checkbox"
-	                               id="textDecorationNoneButton" agregator="text-decoration"
-	                               resetter="textDecorationNoneButton"
-	                               oncommand="ToggleProperty(this)"/>
-                </hbox>
-                <toolbarbutton class="multibutton" label="&textDecorationUnderline.label;" value="underline" property="text-decoration" type="checkbox"
-                               style="text-decoration: underline" agregator="text-decoration"
-                               resetter="textDecorationNoneButton"
-                               id="textDecorationUnderlineButton"
-                               oncommand="ToggleProperty(this)"/>
-                <toolbarbutton class="multibutton" label="&textDecorationOverline.label;" value="overline" property="text-decoration" type="checkbox"
-                               style="text-decoration: overline" agregator="text-decoration"
-                               resetter="textDecorationNoneButton"
-                               id="textDecorationOverlineButton"
-                               oncommand="ToggleProperty(this)"/>
-                <toolbarbutton class="multibutton" label="&textDecorationLinethrough.label;" value="line-through" property="text-decoration" type="checkbox"
-                               style="text-decoration: line-through" agregator="text-decoration"
-                               resetter="textDecorationNoneButton"
-                               id="textDecorationLinethroughButton"
-                               oncommand="ToggleProperty(this)"/>
-              </hbox>
-            </row>
+            <cssproperty property="text-decoration"
+                         grammar="none | [ underline || overline || line-through || blink ]">
+              <l10n>
+                text-decoration=&textDecoration.label;
+                none=&textDecorationNone.label;
+                underline=&textDecorationUnderline.label;
+                overline=&textDecorationOverline.label;
+                line-through=&textDecorationLinethrough.label;
+              </l10n>
+            </cssproperty>
+
 
             <row align="center" animatable="false">
               <label value="&textTransform.label;"/>
@@ -323,23 +308,12 @@
               </hbox>
             </row>
 
-            <row align="center" animatable="true">
-            	<label value="&writingMode.label;"/>
-              <hbox align="center">
-                <toolbarbutton class="multibutton" label="horizontal-tb"
-                               value="horizontal-tb" property="writing-mode" type="checkbox" group="writing-mode"
-                               id="horizontalTbWritingModeButton"
-                               oncommand="ToggleProperty(this)"/>
-                <toolbarbutton class="multibutton" label="vertical-lr"
-                               value="vertical-lr " property="writing-mode" type="checkbox" group="writing-mode"
-                               id="verticalLrWritingModeButton"
-                               oncommand="ToggleProperty(this)"/>
-                <toolbarbutton class="multibutton" label="vertical-rl"
-                               value="vertical-rl " property="writing-mode" type="checkbox" group="writing-mode"
-                               id="verticalRlWritingModeButton"
-                               oncommand="ToggleProperty(this)"/>
-              </hbox>
-            </row>
+            <cssproperty property="writing-mode"
+                         grammar="horizontal-tb| vertical-lr | vertical-rl">
+              <l10n>
+                writing-mode=&writingMode.label;
+              </l10n>
+            </cssproperty>
           </rows>
         </grid>
       </vbox>

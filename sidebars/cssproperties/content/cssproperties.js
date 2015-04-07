@@ -981,3 +981,12 @@ function IsSheetOnlyForPrint(aSheet)
   var media = aSheet.media.mediaText || "";
   return (media == "print");
 }
+
+RegisterIniter(CssPropertyBindingsIniter);
+
+function CssPropertyBindingsIniter(aElt, aRuleset)
+{
+	var boundElts = document.querySelectorAll("cssproperty");
+	for (var i = 0; i < boundElts.length; i++)
+	  boundElts[i].update(aElt, aRuleset);
+}

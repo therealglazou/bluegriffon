@@ -43,6 +43,21 @@
         ]]>
       </constructor>
 
+      <method name="update">
+        <parameter name="aElt"/>
+        <parameter name="aRuleset"/>
+        <body><![CDATA[
+          var value = CssInspector.getCascadedValue(aRuleset, this._property);
+          var valueArray = value.split(" ");
+          var csslengths = this.querySelectorAll("csslength");
+          var cssidents = this.querySelectorAll("cssident");
+          for (var i = 0; i < csslengths.length; i++)
+            csslengths[i].update(value, valueArray);
+          for (var i = 0; i < cssidents.length; i++)
+            cssidents[i].update(value, valueArray);
+        ]]></body>
+      </method>
+
       <method name="parseL10N">
         <body><![CDATA[
           // parse the L10N definitions
@@ -83,20 +98,22 @@
           while (token.isNotNull()) {
             if (token.isFunction("ulength(") || token.isFunction("length(")) {
               var unsigned = token.isFunction("ulength(");
-              // here, we need a string
+              // here, we need a string or just the closing parenthesis
               token = parser.getToken(true, true);
-              if (!token.isString())
+              if (!token.isString() && !token.isSymbol(")"))
                 this.error(property, "string expected in length()");
-
+              var excludedUnits = "";
+              if (token.isString()) {
+                // look for closing parenthesis
+                token = parser.getToken(true, true);
+                if (!token.isSymbol(")"))
+                  this.error(property, "closing parenthesis expected");
+              }
               var allUnitsArray = this._lengthUnits.split(" ");
-              var excludedUnitsArray = token.value.substr(1, token.value.length - 2).split(" ");
+              var excludedUnitsArray = excludedUnits.substr(1, token.value.length - 2).split(" ");
               var unitsArray = allUnitsArray.filter(
                 function(e) {return (excludedUnitsArray.indexOf(e) == -1);}
               );
-              // look for closing parenthesis
-              token = parser.getToken(true, true);
-              if (!token.isSymbol(")"))
-                this.error(property, "closing parenthesis expected");
 
               var csslength = document.createElement("csslength");
               csslength.setAttribute("units", unitsArray.join(" "));
@@ -229,6 +246,22 @@
         ]]></body>
       </method>
 
+      <method name="update">
+        <parameter name="aValue"/>
+        <parameter name="aValueArray"/>
+        <body><![CDATA[
+          // check if we have a numeric value
+          var units = this.getAttribute("units").replace( / /g, "|");
+          var r = new RegExp( "([+-]?[0-9]*\\.[0-9]+|[+-]?[0-9]+)(" + units + ")*", "");
+          if (aValue.match( r ) || this.getAttribute("extraunits").indexOf(aValue) != -1) {
+            this.getChild("menulist").value = aValue;
+          }
+          else {
+            this.getChild("menulist").value = "";
+          }
+        ]]></body>
+      </method>
+
       <method name="addSeparator">
         <body><![CDATA[
           var menuseparator = document.createElement("menuseparator");
@@ -283,6 +316,17 @@
         <parameter name="aElt"/>
         <body><![CDATA[
           this.propertyElement = aElt;
+        ]]></body>
+      </method>
+
+      <method name="update">
+        <parameter name="aValue"/>
+        <parameter name="aValueArray"/>
+        <body><![CDATA[
+          if (aValueArray.indexOf(this.getAttribute("value")) != -1)
+            this.setAttribute("checked", "true");
+          else
+            this.removeAttribute("checked");
         ]]></body>
       </method>
     </implementation>
