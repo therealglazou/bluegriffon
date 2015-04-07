@@ -63,7 +63,7 @@
             </row>
 
             <cssproperty property="font-size"
-                         grammar="ulength('') | smaller | larger | _ | xx-small | x-small | small | medium | large | x-large || xx-large ]">
+                         grammar="ulength('') | smaller | larger | _ | xx-small | x-small | small | medium | large | x-large | xx-large">
               <l10n>
                 font-size=&fontSize.label;
                 url=https://developer.mozilla.org/en-US/docs/Web/CSS/font-size
@@ -89,26 +89,26 @@
             </cssproperty>
 
             <cssproperty property="font-weight"
-            						 grammar="normal | bold | _ | lighter | bolder">
-            	<l10n>
-            		font-weight=&fontWeight.label;
-            		url=https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight
-            		normal=&fontWeightNormal.label;
-            		bold=&fontWeightBold.label;
-            		lighter=&fontWeightLighter.label;
-            		bolder=&fontWeightBolder.label;
-            	</l10n>
+                         grammar="normal | bold | _ | lighter | bolder">
+              <l10n>
+                font-weight=&fontWeight.label;
+                url=https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight
+                normal=&fontWeightNormal.label;
+                bold=&fontWeightBold.label;
+                lighter=&fontWeightLighter.label;
+                bolder=&fontWeightBolder.label;
+              </l10n>
             </cssproperty>
 
             <cssproperty property="font-style"
-            						 grammar="normal | italic | oblique">
-            	<l10n>
-            		font-style=&fontStyle.label;
-            		url=https://developer.mozilla.org/en-US/docs/Web/CSS/font-style
-            		normal=&fontStyleNormal.label;
-            		italic=&fontStyleItalic.label;
-            		oblique=&fontStyleOblique.label;
-            	</l10n>
+                         grammar="normal | italic | oblique">
+              <l10n>
+                font-style=&fontStyle.label;
+                url=https://developer.mozilla.org/en-US/docs/Web/CSS/font-style
+                normal=&fontStyleNormal.label;
+                italic=&fontStyleItalic.label;
+                oblique=&fontStyleOblique.label;
+              </l10n>
             </cssproperty> 
 
             <cssproperty property="text-decoration"
@@ -124,137 +124,98 @@
             </cssproperty>
 
             <cssproperty property="text-transform"
-            						 grammar="none | lowercase | uppercase | capitalize">
-            	<l10n>
-            		text-transform=&textTransform.label;
-            		url=https://developer.mozilla.org/en-US/docs/Web/CSS/text-transform
-            		none=&textTransformNone.label;
-            		lowercase=&textTransformLowercase.label;
-            		uppercase=&textTransformUppercase.label;
-            		capitalize=&textTransformCapitalize.label;
-            	</l10n>
+                         grammar="none | lowercase | uppercase | capitalize">
+              <l10n>
+                text-transform=&textTransform.label;
+                url=https://developer.mozilla.org/en-US/docs/Web/CSS/text-transform
+                none=&textTransformNone.label;
+                lowercase=&textTransformLowercase.label;
+                uppercase=&textTransformUppercase.label;
+                capitalize=&textTransformCapitalize.label;
+              </l10n>
             </cssproperty>
 
             <cssproperty property="font-variant"
-            						 grammar="normal | small-caps">
-            	<l10n>
-            		font-variant=&fontVariant.label;
-            		url=https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant
-            		normal=&fontVariantNormal.label;
-            		small-caps=&fontVariantSmallCaps.label;
-            	</l10n>
+                         grammar="normal | small-caps">
+              <l10n>
+                font-variant=&fontVariant.label;
+                url=https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant
+                normal=&fontVariantNormal.label;
+                small-caps=&fontVariantSmallCaps.label;
+              </l10n>
             </cssproperty>
 
             <cssproperty property="text-align"
-            						 grammar="left | center | right | _ | justify | __ | start | end">
-            	<l10n>
-            		text-align=&textAlign.label;
-            		url=https://developer.mozilla.org/en-US/docs/Web/CSS/text-align
-            		start=&textAlignStart.label;
-            		end=&textAlignEnd.label;
-            	</l10n>
+                         grammar="left | center | right | _ | justify | __ | start | end">
+              <l10n>
+                text-align=&textAlign.label;
+                url=https://developer.mozilla.org/en-US/docs/Web/CSS/vertical-align
+                start=&textAlignStart.label;
+                end=&textAlignEnd.label;
+              </l10n>
             </cssproperty> 
 
-            <row align="center" animatable="true">
-              <label value="&verticalAlign.label;"/>
-              <hbox align="center">
-                <menulist editable="true" id="verticalAlignMenulist" property="vertical-align"
-                          sizetopopup="none"
-                          oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'baseline sub super top text-top middle bottom text-bottom', true)"
-                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'baseline sub super top text-top middle bottom text-bottom', true)">
-                  <menupopup id="verticalAlignMenupopup"
-                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
-                    <menuseparator/>
-                    <menuitem label="&baselineVerticalAlign.label;" value="baseline"/>
-                    <menuitem label="&subVerticalAlign.label;" value="sub"/>
-                    <menuitem label="&superVerticalAlign.label;" value="super"/>
-                    <menuitem label="&topVerticalAlign.label;" value="top"/>
-                    <menuitem label="&textTopVerticalAlign.label;" value="text-top"/>
-                    <menuitem label="&middleVerticalAlign.label;" value="middle"/>
-                    <menuitem label="&bottomVerticalAlign.label;" value="bottom"/>
-                    <menuitem label="&textBottomVerticalAlign.label;" value="text-bottom"/>
-                  </menupopup>
-                </menulist>
-                <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
-                             ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true)"/>
-              </hbox>
-            </row>
+            <cssproperty property="vertical-align"
+                         grammar="length('') | baseline | sub | super | top | text-top | middle | bottom | text-bottom">
+              <l10n>
+                vertical-align=&verticalAlign.label;
+                url=https://developer.mozilla.org/en-US/docs/Web/CSS/line-height
+                baseline=&baselineVerticalAlign.label;
+                sub=&subVerticalAlign.label;
+                super=&superVerticalAlign.label;
+                top=&topVerticalAlign.label;
+                text-top=&textTopVerticalAlign.label;
+                middle=&middleVerticalAlign.label;
+                bottom=&bottomVerticalAlign.label;
+                text-bottom=&textBottomVerticalAlign.label;
+              </l10n>
+            </cssproperty>
 
-            <row align="center" animatable="false">
-              <label value="&direction.label;"/>
-              <hbox align="center">
-                <toolbarbutton class="multibutton" label="▶¶"
-                               value="ltr" property="direction" type="checkbox" group="direction"
-                               id="ltrDirectionButton" tooltiptext="&ltrDirection.label;"
-                               oncommand="ToggleProperty(this)"/>
-                <toolbarbutton class="multibutton" label="¶◀"
-                               value="rtl" property="direction" type="checkbox" group="direction"
-                               id="rtlDirectionButton" tooltiptext="&rtlDirection.label;"
-                               oncommand="ToggleProperty(this)"/>
-              </hbox>
-            </row>
+            <cssproperty property="direction"
+                         grammar="ltr | rtl">
+              <l10n>
+                direction=&direction.label;
+                url=https://developer.mozilla.org/en-US/docs/Web/CSS/direction
+                ltr=&ltrDirection.label;
+                rtl=&rtlDirection.label;
+              </l10n>
+            </cssproperty> 
 
-            <row align="center" animatable="true">
-              <label value="&letterSpacing.label;"/>
-              <hbox align="center">
-                <menulist editable="true" id="letterSpacingMenulist" property="letter-spacing"
-                          oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'normal', true)"
-                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'normal', true)">
-                  <menupopup id="letterSpacingMenupopup"
-                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
-                    <menuseparator/>
-                    <menuitem label="&normalLetterSpacing.label;" value="normal"/>
-                  </menupopup>
-                </menulist>
-                <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
-                             ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true)"/>
-              </hbox>
-            </row>
+            <cssproperty property="letter-spacing"
+                         grammar="length('') | normal">
+              <l10n>
+                letter-spacing=&letterSpacing.label;
+                url=https://developer.mozilla.org/en-US/docs/Web/CSS/letter-spacing
+                normal=&normalLetterSpacing.label;
+              </l10n>
+            </cssproperty>
 
-            <row align="center" animatable="true">
-              <label value="&wordSpacing.label;"/>
-              <hbox align="center">
-                <menulist editable="true" id="wordSpacingMenulist" property="word-spacing"
-                          oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'normal', true)"
-                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'normal', true)">
-                  <menupopup id="wordSpacingMenupopup"
-                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
-                    <menuseparator/>
-                    <menuitem label="&normalWordSpacing.label;" value="normal"/>
-                  </menupopup>
-                </menulist>
-                <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
-                             ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true)"/>
-              </hbox>
-            </row>
+            <cssproperty property="word-spacing"
+                         grammar="length('') | normal">
+              <l10n>
+                word-spacing=&wordSpacing.label;
+                url=https://developer.mozilla.org/en-US/docs/Web/CSS/word-spacing
+                normal=&normalWordSpacing.label;
+              </l10n>
+            </cssproperty>
 
-            <row align="center" animatable="false">
-              <label value="&wordWrap.label;"/>
-              <hbox align="center">
-                <toolbarbutton class="multibutton" label="&normalWordWrap.label;"
-                               value="normal" property="word-wrap" type="checkbox" group="word-wrap"
-                               id="normalWordWrapButton"
-                               oncommand="ToggleProperty(this)"/>
-                <toolbarbutton class="multibutton" label="&breakWordWordWrap.label;"
-                               value="break-word" property="word-wrap" type="checkbox" group="word-wrap"
-                               id="breakWrapWordWrapButton"
-                               oncommand="ToggleProperty(this)"/>
-              </hbox>
-            </row>
+            <cssproperty property="word-wrap"
+                         grammar="normal | break-word">
+              <l10n>
+                word-wrap=&wordWrap.label;
+                url=https://developer.mozilla.org/en-US/docs/Web/CSS/word-wrap
+                normal=&normalWordWrap.label;
+                break-word=&breakWordWordWrap.label;
+              </l10n>
+            </cssproperty>
 
-            <row align="center" animatable="true">
-              <label value="&textIndent.label;"/>
-              <hbox align="center">
-                <menulist editable="true" id="textIndentMenulist" property="text-indent"
-                          oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', true)"
-                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', true)">
-                  <menupopup id="textIndentMenupopup"
-                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')"/>
-                </menulist>
-                <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
-                             ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true)"/>
-              </hbox>
-            </row>
+            <cssproperty property="text-indent"
+                         grammar="length('')">
+              <l10n>
+                text-indent=&textIndent.label;
+                url=https://developer.mozilla.org/en-US/docs/Web/CSS/text-indent
+              </l10n>
+            </cssproperty>
 
             <cssproperty property="writing-mode"
                          grammar="horizontal-tb| vertical-lr | vertical-rl">

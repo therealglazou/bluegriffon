@@ -8,6 +8,8 @@ function GeneralSectionIniter(aElt, aRuleset)
   if (fontFamily) {
     var fonts = fontFamily.split(",");
     fonts.forEach(function(aElt, aIndex, aArray) {
+        if (aElt[0] == "'" || aElt[0] == '"')
+          aElt = aElt.substr(1, aElt.length - 2);
         gDialog.fontFamilyListbox.appendItem(aElt, aElt);
       });
     //SetEnabledElement(gDialog.removeFontButton, gDialog.fontFamilyListbox.itemCount);
@@ -29,26 +31,6 @@ function GeneralSectionIniter(aElt, aRuleset)
     gDialog.addFontMenupopup.insertBefore(item, gDialog.afterWebfontsMenuseparator)
   }
   gDialog.afterWebfontsMenuseparator.hidden = !found;
-
-  var ls = CssInspector.getCascadedValue(aRuleset, "letter-spacing");
-  gDialog.letterSpacingMenulist.value = ls;
-
-  var ws = CssInspector.getCascadedValue(aRuleset, "word-spacing");
-  gDialog.wordSpacingMenulist.value = ws;
-
-  var ww = CssInspector.getCascadedValue(aRuleset, "word-wrap");
-  CheckToggle(gDialog.normalWordWrapButton,    ww == "normal");
-  CheckToggle(gDialog.breakWrapWordWrapButton, ww == "break-word");
-
-  var d = CssInspector.getCascadedValue(aRuleset, "direction");
-  CheckToggle(gDialog.ltrDirectionButton,    d == "ltr");
-  CheckToggle(gDialog.rtlDirectionButton,    d == "rtl");
-
-  var ti = CssInspector.getCascadedValue(aRuleset, "text-indent");
-  gDialog.textIndentMenulist.value = ti;
-
-  var va = CssInspector.getCascadedValue(aRuleset, "vertical-align");
-  gDialog.verticalAlignMenulist.value = va;
 }
 
 function AddFont(aEvent)
@@ -97,6 +79,7 @@ function ApplyFontFamily()
       ff += child.value;
     child = child.nextSibling;
   }
+  alert(ff);
   ApplyStyles([
                 {
                   property: "font-family",
