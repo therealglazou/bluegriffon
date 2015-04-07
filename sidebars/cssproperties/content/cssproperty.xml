@@ -12,7 +12,8 @@
 
    <binding id="cssPropertyBinding">
      <content>
-       <xul:label xbl:inherits="tooltiptext=property" anonid="label"/>
+       <xul:label xbl:inherits="tooltiptext=property"
+                  anonid="label"/>
        <xul:hbox align="center" anonid="valueBox">
          <children/>
        </xul:hbox>
@@ -34,11 +35,16 @@
           box.id = this._propertyClean + "0";
   
           this.parseL10N();
+          var label = this.getChild("label");
           if (this._property in this._L10N)
-            this.getChild("label").setAttribute("value", this._L10N[this._property]);
+            label.setAttribute("value", this._L10N[this._property]);
           else
-            this.getChild("label").setAttribute("value", this._property + ":");
+            label.setAttribute("value", this._property + ":");
 
+          if ("url" in this._L10N) {
+            label.className = "text-link";
+            label.setAttribute("href", this._L10N["url"]);
+          }
           this.parseGrammar();
         ]]>
       </constructor>
@@ -137,8 +143,9 @@
               currentHost = null;
             }
             else if (token.isIdent("_")) {
-              if (currentHost.localName == "csslength")
+              if (currentHost.localName == "csslength") {
                 currentHost.addSeparator();
+              }
               else {
                 // we don't increment groupId
                 currentHost = this.createHostIfNeeded(null, groupId);
@@ -211,10 +218,8 @@
 
   <binding id="csslengthBinding">
     <content>
-      <xul:menulist xbl:inherits="editable,property" anonid="menulist">
-        <xul:menupopup anonid="popup">
-          <children/>
-        </xul:menupopup>
+      <xul:menulist xbl:inherits="editable,property" anonid="menulist" sizetopopup="none">
+        <xul:menupopup anonid="popup"/>
       </xul:menulist>
       <xul:spinbuttons anonid="spinbuttons"/>
     </content>
@@ -265,7 +270,7 @@
       <method name="addSeparator">
         <body><![CDATA[
           var menuseparator = document.createElement("menuseparator");
-          popup.appendChild(menuseparator);
+          this.getChild("popup").appendChild(menuseparator);
         ]]></body>
       </method>
 

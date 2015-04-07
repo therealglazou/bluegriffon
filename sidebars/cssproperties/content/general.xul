@@ -62,31 +62,22 @@
               </vbox>
             </row>
 
-            <row align="center" animatable="true">
-              <label value="&fontSize.label;"/>
-              <hbox align="center">
-                <menulist editable="true" id="fontSizeMenulist" property="font-size"
-                          oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'smaller larger xx-small x-small small medium large x-large xx-large', false)"
-                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'smaller larger xx-small x-small small medium large x-large xx-large', false)">
-                  <menupopup id="fontSizeMenupopup"
-                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
-                    <menuseparator/>
-                    <menuitem label="&fontSizeSmaller.label;" value="smaller"/>
-                    <menuitem label="&fontSizeLarger.label;"  value="larger"/>
-                    <menuseparator/>
-                    <menuitem label="&fontSizeXxsmall.label;" value="xx-small"/>
-                    <menuitem label="&fontSizeXsmall.label;"  value="x-small"/>
-                    <menuitem label="&fontSizeSmall.label;"   value="small"/>
-                    <menuitem label="&fontSizeMedium.label;"  value="medium"/>
-                    <menuitem label="&fontSizeLarge.label;"   value="large"/>
-                    <menuitem label="&fontSizeXlarge.label;"  value="x-large"/>
-                    <menuitem label="&fontSizeXxlarge.label;" value="xx-large"/>
-                  </menupopup>
-                </menulist>
-                <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
-                             ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', false)"/>
-              </hbox>
-            </row>
+            <cssproperty property="font-size"
+                         grammar="ulength('') | smaller | larger | _ | xx-small | x-small | small | medium | large | x-large || xx-large ]">
+              <l10n>
+                font-size=&fontSize.label;
+                url=https://developer.mozilla.org/en-US/docs/Web/CSS/font-size
+                smaller=&fontSizeSmaller.label;
+                larger=&fontSizeLarger.label;
+                xx-small=&fontSizeXxsmall.label;
+                x-small=&fontSizeXsmall.label;
+                small=&fontSizeSmall.label;
+                medium=&fontSizeMedium.label;
+                large=&fontSizeLarge.label;
+                x-large=&fontSizeXlarge.label;
+                xx-large=&fontSizeXxlarge.label;
+              </l10n>
+            </cssproperty>
 
             <row align="center" animatable="true">
               <label value="&lineHeight.label;"/>
@@ -136,6 +127,7 @@
                          grammar="none | [ underline || overline || line-through || blink ]">
               <l10n>
                 text-decoration=&textDecoration.label;
+                url=https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration
                 none=&textDecorationNone.label;
                 underline=&textDecorationUnderline.label;
                 overline=&textDecorationOverline.label;
@@ -312,6 +304,7 @@
                          grammar="horizontal-tb| vertical-lr | vertical-rl">
               <l10n>
                 writing-mode=&writingMode.label;
+                url=https://developer.mozilla.org/en-US/docs/Web/CSS/writing-mode
               </l10n>
             </cssproperty>
           </rows>

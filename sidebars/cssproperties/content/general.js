@@ -53,10 +53,6 @@ function GeneralSectionIniter(aElt, aRuleset)
   CheckToggle(gDialog.textAlignStartButton,   ta == "start");
   CheckToggle(gDialog.textAlignEndButton,     ta == "end");
 
-  //var fs = CssUtils.getComputedValue(aElt, "font-size");
-  var fs = CssInspector.getCascadedValue(aRuleset, "font-size");
-  gDialog.fontSizeMenulist.value = fs;
-
   var lh = CssInspector.getCascadedValue(aRuleset, "line-height");
   gDialog.lineHeightMenulist.value = lh;
 
