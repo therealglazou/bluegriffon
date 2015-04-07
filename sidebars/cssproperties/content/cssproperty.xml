@@ -14,9 +14,11 @@
      <content>
        <xul:label xbl:inherits="tooltiptext=property"
                   anonid="label"/>
-       <xul:hbox align="center" anonid="valueBox">
-         <children/>
-       </xul:hbox>
+       <xul:vbox anonid="vbox">
+         <xul:hbox align="center" anonid="valueBox">
+           <children/>
+         </xul:hbox>
+       </xul:vbox>
      </content>
     <implementation>
       <field name="_property"></field>
@@ -55,8 +57,8 @@
         <body><![CDATA[
           var value = CssInspector.getCascadedValue(aRuleset, this._property);
           var valueArray = value.split(" ");
-          var csslengths = this.querySelectorAll("csslength");
-          var cssidents = this.querySelectorAll("cssident");
+          var csslengths = this.getChild("vbox").querySelectorAll("csslength");
+          var cssidents = this.getChild("vbox").querySelectorAll("cssident");
           for (var i = 0; i < csslengths.length; i++)
             csslengths[i].update(value, valueArray);
           for (var i = 0; i < cssidents.length; i++)
@@ -127,7 +129,7 @@
               csslength.setAttribute("editable", "true");
               csslength.setAttribute("property", this._property);
               csslength.setAttribute("unsigned", unsigned);
-              this.appendChild(csslength);
+              this.getChild("valueBox").appendChild(csslength);
 
               if (!inGroup)
                 currentHost = csslength;
@@ -150,6 +152,17 @@
                 // we don't increment groupId
                 currentHost = this.createHostIfNeeded(null, groupId);
               }
+            }
+            else if (token.isIdent("__")) {
+              var box = this.getChild("valueBox");
+              box.removeAttribute("anonid");
+              var parent = this.getChild("vbox");
+              box = document.createElement("hbox");
+              box.setAttribute("anonid", "valueBox");
+              groupId++;
+              box.id = this._propertyClean + groupId;
+              this.getChild("vbox").appendChild(box);
+              currentHost = null;
             }
             else if (token.isIdent()) {
               var label = (token.value in this._L10N)
@@ -208,7 +221,7 @@
             currentHost = document.createElement("hbox");
             currentHost.setAttribute("align", "center");
             currentHost.setAttribute("group", this._propertyClean + groupId);
-            this.appendChild(currentHost);
+            this.getChild("valueBox").appendChild(currentHost);
           }
           return currentHost;
         ]]></body>

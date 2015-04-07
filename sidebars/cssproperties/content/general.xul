@@ -135,39 +135,25 @@
             	</l10n>
             </cssproperty>
 
-            <row align="center" animatable="false">
-              <label value="&fontVariant.label;"/>
-              <hbox align="center">
-                <toolbarbutton class="multibutton" label="&fontVariantNormal.label;" value="normal" property="font-variant" type="checkbox"
-                               group="font-variant" id="fontVariantNormalButton"
-                               oncommand="ToggleProperty(this)"/>
-                 <toolbarbutton class="multibutton" label="&fontVariantSmallCaps.label;" value="small-caps" property="font-variant" type="checkbox"
-                               group="font-variant" id="fontVariantSmallCapsButton"
-                               oncommand="ToggleProperty(this)"/>
-              </hbox>
-            </row>
+            <cssproperty property="font-variant"
+            						 grammar="normal | small-caps">
+            	<l10n>
+            		font-variant=&fontVariant.label;
+            		url=https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant
+            		normal=&fontVariantNormal.label;
+            		small-caps=&fontVariantSmallCaps.label;
+            	</l10n>
+            </cssproperty>
 
-            <row align="center" animatable="false">
-              <label value="&textAlign.label;"/>
-              <hbox align="center">
-                <toolbarbutton class="multibutton" image="chrome://bluegriffon/skin/formatToolbar/align-left.png"
-                               value="left" property="text-align" type="checkbox" group="text-align"
-                               id="textAlignLeftButton"
-                               oncommand="ToggleProperty(this)"/>
-                <toolbarbutton class="multibutton" image="chrome://bluegriffon/skin/formatToolbar/align-center.png"
-                               value="center" property="text-align" type="checkbox" group="text-align"
-                               id="textAlignCenterButton"
-                               oncommand="ToggleProperty(this)"/>
-                <toolbarbutton class="multibutton" image="chrome://bluegriffon/skin/formatToolbar/align-right.png"
-                               value="right" property="text-align" type="checkbox" group="text-align"
-                               id="textAlignRightButton"
-                               oncommand="ToggleProperty(this)"/>
-                <toolbarbutton class="multibutton" image="chrome://bluegriffon/skin/formatToolbar/align-justify.png"
-                               value="justify" property="text-align" type="checkbox" group="text-align"
-                               id="textAlignJustifyButton"
-                               oncommand="ToggleProperty(this)"/>
-              </hbox>
-            </row>
+            <cssproperty property="text-align"
+            						 grammar="left | center | right | _ | justify | __ | start | end">
+            	<l10n>
+            		text-align=&textAlign.label;
+            		url=https://developer.mozilla.org/en-US/docs/Web/CSS/text-align
+            		start=&textAlignStart.label;
+            		end=&textAlignEnd.label;
+            	</l10n>
+            </cssproperty> 
 
             <row align="center" animatable="false">
               <spacer flex="1"/>

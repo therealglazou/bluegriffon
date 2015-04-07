@@ -30,19 +30,6 @@ function GeneralSectionIniter(aElt, aRuleset)
   }
   gDialog.afterWebfontsMenuseparator.hidden = !found;
 
-  var ta = CssInspector.getCascadedValue(aRuleset, "text-align");
-  CheckToggle(gDialog.textAlignLeftButton,    ta == "left");
-  CheckToggle(gDialog.textAlignCenterButton,  ta == "center");
-  CheckToggle(gDialog.textAlignRightButton,   ta == "right");
-  CheckToggle(gDialog.textAlignJustifyButton, ta == "justify");
-
-  CheckToggle(gDialog.textAlignStartButton,   ta == "start");
-  CheckToggle(gDialog.textAlignEndButton,     ta == "end");
-
-  var fv = CssInspector.getCascadedValue(aRuleset, "font-variant");
-  CheckToggle(gDialog.fontVariantNormalButton,    fv == "normal");
-  CheckToggle(gDialog.fontVariantSmallCapsButton, fv == "small-caps");
-
   var ls = CssInspector.getCascadedValue(aRuleset, "letter-spacing");
   gDialog.letterSpacingMenulist.value = ls;
 
