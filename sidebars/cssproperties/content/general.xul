@@ -79,49 +79,37 @@
               </l10n>
             </cssproperty>
 
-            <row align="center" animatable="true">
-              <label value="&lineHeight.label;"/>
-              <hbox align="center">
-                <menulist editable="true" id="lineHeightMenulist" property="line-height"
-                          oncommand="onLengthMenulistCommand(this, ' % px pt cm in mm pc em ex rem ch', 'normal', false)"
-                          oninput="onLengthMenulistCommand(this, ' % px pt cm in mm pc em ex rem ch', 'normal', false)">
-                  <menupopup id="lineHeightMenupopup"
-                             onpopupshowing="PopulateLengths(this, ' % px pt cm in mm pc em ex rem ch')">
-                    <menuseparator/>
-                    <menuitem label="&lineHeightNormal.label;" value="normal"/>
-                  </menupopup>
-                </menulist>
-                <spinbuttons onup="IncreaseLength(this, ' % px pt cm in mm pc em ex rem ch')"
-                             ondown="DecreaseLength(this, ' % px pt cm in mm pc em ex rem ch', false)"/>
-              </hbox>
-            </row>
+            <cssproperty property="line-height"
+                         grammar="ulength('') | normal ]">
+              <l10n>
+                line-height=&lineHeight.label;
+                url=https://developer.mozilla.org/en-US/docs/Web/CSS/line-height
+                normal=&lineHeightNormal.label;
+              </l10n>
+            </cssproperty>
 
-            <row align="center" animatable="true">
-              <label value="&fontWeight.label;"/>
-              <hbox align="center">
-                <toolbarbutton class="multibutton" label="&fontWeightBold.label;" value="bold" property="font-weight" type="checkbox"
-                               style="font-weight:bold" id="fontWeightBoldButton" group="font-weight"
-                               oncommand="ToggleProperty(this)"/>
-                <toolbarbutton class="multibutton" label="&fontWeightLighter.label;" value="lighter" property="font-weight" type="checkbox"
-                               style="font-weight: lighter" id="fontWeightLighterButton" group="font-weight"
-                               oncommand="ToggleProperty(this)"/>
-                <toolbarbutton class="multibutton" label="&fontWeightBolder.label;" value="bolder" property="font-weight" type="checkbox"
-                               style="font-weight: bolder" id="fontWeightBolderButton" group="font-weight"
-                               oncommand="ToggleProperty(this)"/>
-              </hbox>
-            </row>
+            <cssproperty property="font-weight"
+            						 grammar="normal | bold | _ | lighter | bolder">
+            	<l10n>
+            		font-weight=&fontWeight.label;
+            		url=https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight
+            		normal=&fontWeightNormal.label;
+            		bold=&fontWeightBold.label;
+            		lighter=&fontWeightLighter.label;
+            		bolder=&fontWeightBolder.label;
+            	</l10n>
+            </cssproperty>
 
-            <row align="center" animatable="false">
-              <label value="&fontStyle.label;"/>
-              <hbox align="center">
-                <toolbarbutton class="multibutton" label="&fontStyleItalic.label;" value="italic" property="font-style" type="checkbox"
-                               style="font-style: italic" id="fontStyleItalicButton" group="font-style"
-                               oncommand="ToggleProperty(this)"/>
-                <toolbarbutton class="multibutton" label="&fontStyleOblique.label;" value="oblique" property="font-style" type="checkbox"
-                               style="font-style: oblique" id="fontStyleObliqueButton" group="font-style"
-                               oncommand="ToggleProperty(this)"/>
-              </hbox>
-            </row>
+            <cssproperty property="font-style"
+            						 grammar="normal | italic | oblique">
+            	<l10n>
+            		font-style=&fontStyle.label;
+            		url=https://developer.mozilla.org/en-US/docs/Web/CSS/font-style
+            		normal=&fontStyleNormal.label;
+            		italic=&fontStyleItalic.label;
+            		oblique=&fontStyleOblique.label;
+            	</l10n>
+            </cssproperty> 
 
             <cssproperty property="text-decoration"
                          grammar="none | [ underline || overline || line-through || blink ]">

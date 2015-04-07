@@ -30,15 +30,6 @@ function GeneralSectionIniter(aElt, aRuleset)
   }
   gDialog.afterWebfontsMenuseparator.hidden = !found;
 
-  var fw = CssInspector.getCascadedValue(aRuleset, "font-weight");
-  CheckToggle(gDialog.fontWeightBoldButton,    fw == "bold" || fw == "700");
-  CheckToggle(gDialog.fontWeightLighterButton, fw == "lighter");
-  CheckToggle(gDialog.fontWeightBolderButton,  fw == "bolder");
-
-  var fs = CssInspector.getCascadedValue(aRuleset, "font-style");
-  CheckToggle(gDialog.fontStyleItalicButton,   fs == "italic");
-  CheckToggle(gDialog.fontStyleObliqueButton,  fs == "oblique");
-
   var tt = CssInspector.getCascadedValue(aRuleset, "text-transform");
   CheckToggle(gDialog.textTransformLowercaseButton,   tt == "lowercase");
   CheckToggle(gDialog.textTransformUppercaseButton,   tt == "uppercase");
@@ -52,9 +43,6 @@ function GeneralSectionIniter(aElt, aRuleset)
 
   CheckToggle(gDialog.textAlignStartButton,   ta == "start");
   CheckToggle(gDialog.textAlignEndButton,     ta == "end");
-
-  var lh = CssInspector.getCascadedValue(aRuleset, "line-height");
-  gDialog.lineHeightMenulist.value = lh;
 
   var fv = CssInspector.getCascadedValue(aRuleset, "font-variant");
   CheckToggle(gDialog.fontVariantNormalButton,    fv == "normal");
