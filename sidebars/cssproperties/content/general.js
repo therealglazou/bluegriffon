@@ -39,12 +39,6 @@ function GeneralSectionIniter(aElt, aRuleset)
   CheckToggle(gDialog.fontStyleItalicButton,   fs == "italic");
   CheckToggle(gDialog.fontStyleObliqueButton,  fs == "oblique");
 
-  var td = CssInspector.getCascadedValue(aRuleset, "text-decoration");
-  var tdArray = td.split(" ");
-  CheckToggle(gDialog.textDecorationUnderlineButton,    tdArray.indexOf("underline") != -1);
-  CheckToggle(gDialog.textDecorationOverlineButton,     tdArray.indexOf("overline") != -1);
-  CheckToggle(gDialog.textDecorationLinethroughButton,  tdArray.indexOf("line-through") != -1);
-
   var tt = CssInspector.getCascadedValue(aRuleset, "text-transform");
   CheckToggle(gDialog.textTransformLowercaseButton,   tt == "lowercase");
   CheckToggle(gDialog.textTransformUppercaseButton,   tt == "uppercase");
@@ -89,11 +83,6 @@ function GeneralSectionIniter(aElt, aRuleset)
 
   var va = CssInspector.getCascadedValue(aRuleset, "vertical-align");
   gDialog.verticalAlignMenulist.value = va;
-
-  var wr = CssInspector.getCascadedValue(aRuleset, "writing-mode");
-  CheckToggle(gDialog.horizontalTbWritingModeButton, wr == "horizontal-tb");
-  CheckToggle(gDialog.verticalLrWritingModeButton,   wr == "vertical-lr");
-  CheckToggle(gDialog.verticalRlWritingModeButton,   wr == "vertical-rl");
 }
 
 function AddFont(aEvent)
