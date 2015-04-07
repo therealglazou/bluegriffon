@@ -123,21 +123,17 @@
               </l10n>
             </cssproperty>
 
-
-            <row align="center" animatable="false">
-              <label value="&textTransform.label;"/>
-              <hbox align="center">
-                <toolbarbutton class="multibutton" label="&textTransformLowercase.label;" value="lowercase" property="text-transform" type="checkbox"
-                               group="text-transform" id="textTransformLowercaseButton"
-                               oncommand="ToggleProperty(this)"/>
-                <toolbarbutton class="multibutton" label="&textTransformUppercase.label;" value="uppercase" property="text-transform" type="checkbox"
-                               group="text-transform" id="textTransformUppercaseButton"
-                               oncommand="ToggleProperty(this)"/>
-                <toolbarbutton class="multibutton" label="&textTransformCapitalize.label;" value="capitalize" property="text-transform" type="checkbox"
-                               group="text-transform" id="textTransformLinethroughButton"
-                               oncommand="ToggleProperty(this)"/>
-              </hbox>
-            </row>
+            <cssproperty property="text-transform"
+            						 grammar="none | lowercase | uppercase | capitalize">
+            	<l10n>
+            		text-transform=&textTransform.label;
+            		url=https://developer.mozilla.org/en-US/docs/Web/CSS/text-transform
+            		none=&textTransformNone.label;
+            		lowercase=&textTransformLowercase.label;
+            		uppercase=&textTransformUppercase.label;
+            		capitalize=&textTransformCapitalize.label;
+            	</l10n>
+            </cssproperty>
 
             <row align="center" animatable="false">
               <label value="&fontVariant.label;"/>

@@ -30,11 +30,6 @@ function GeneralSectionIniter(aElt, aRuleset)
   }
   gDialog.afterWebfontsMenuseparator.hidden = !found;
 
-  var tt = CssInspector.getCascadedValue(aRuleset, "text-transform");
-  CheckToggle(gDialog.textTransformLowercaseButton,   tt == "lowercase");
-  CheckToggle(gDialog.textTransformUppercaseButton,   tt == "uppercase");
-  CheckToggle(gDialog.textTransformLinethroughButton, tt == "capitalize");
-
   var ta = CssInspector.getCascadedValue(aRuleset, "text-align");
   CheckToggle(gDialog.textAlignLeftButton,    ta == "left");
   CheckToggle(gDialog.textAlignCenterButton,  ta == "center");
