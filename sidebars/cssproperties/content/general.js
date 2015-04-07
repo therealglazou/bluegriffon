@@ -14,6 +14,8 @@ function GeneralSectionIniter(aElt, aRuleset)
       });
     //SetEnabledElement(gDialog.removeFontButton, gDialog.fontFamilyListbox.itemCount);
   }
+  if (gDialog.fontFamilyListbox.itemCount)
+    gDialog.fontFamilyListbox.selectedIndex = 0;
 
   var webFonts = CssInspector.getWebFonts(EditorUtils.getCurrentDocument());
   var child = gDialog.beforeWebfontsMenuseparator.nextSibling;
@@ -79,7 +81,6 @@ function ApplyFontFamily()
       ff += child.value;
     child = child.nextSibling;
   }
-  alert(ff);
   ApplyStyles([
                 {
                   property: "font-family",
