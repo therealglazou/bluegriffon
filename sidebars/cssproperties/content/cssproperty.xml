@@ -57,12 +57,9 @@
         <body><![CDATA[
           var value = CssInspector.getCascadedValue(aRuleset, this._property);
           var valueArray = value.split(" ");
-          var csslengths = this.getChild("vbox").querySelectorAll("csslength");
-          var cssidents = this.getChild("vbox").querySelectorAll("cssident");
-          for (var i = 0; i < csslengths.length; i++)
-            csslengths[i].update(value, valueArray);
-          for (var i = 0; i < cssidents.length; i++)
-            cssidents[i].update(value, valueArray);
+          var elts = this.getChild("vbox").querySelectorAll("csslength,cssident,csscolor");
+          for (var i = 0; i < elts.length; i++)
+            elts[i].update(value, valueArray);
         ]]></body>
       </method>
 
@@ -134,6 +131,23 @@
               if (!inGroup)
                 currentHost = csslength;
               this.elements.push(csslength);
+            }
+            else if (token.isFunction("color(")) {
+              token = parser.getToken(true, true);
+              if (!token.isIdent("true") && !token.isIdent("false"))
+                this.error(property, "expecting a boolean as parameter of color()");
+              var allowTransparency = token.isIdent("true");
+              token = parser.getToken(true, true);
+              if (!token.isSymbol(")"))
+                this.error(property, "closing parenthesis expected");
+
+              var csscolor = document.createElement("csscolor");
+              csscolor.setAttribute("showTransparency", allowTransparency);
+              csscolor.setAttribute("property", this._property);
+              csscolor.setAttribute("propertyClean", this._propertyClean);
+              csscolor.setAttribute("color", allowTransparency ? "transparent" : "black");
+              this.getChild("valueBox").appendChild(csscolor);
+              this.elements.push(csscolor);
             }
             else if (token.isSymbol("[")) {
               inGroup = true;
@@ -379,5 +393,29 @@
         ]]>
       </handler>
     </handlers>
+  </binding>
+
+  <binding id="csscolorBinding">
+    <content>
+      <xul:ecolorpicker anonid="picker"
+                        xbl:inherits="property,colorObjectId=propertyClean,showTransparency,color"
+                        oncommand="SetColor(this)"/>
+    </content>
+    <implementation>
+      <method name="getChild">
+        <parameter name="aChildName"/>
+        <body><![CDATA[
+          return document.getAnonymousElementByAttribute(this, "anonid", aChildName);
+        ]]></body>
+      </method>
+
+      <method name="update">
+        <parameter name="aValue"/>
+        <parameter name="aValueArray"/>
+        <body><![CDATA[
+          this.getChild("picker").color = aValue;
+        ]]></body>
+      </method>
+    </implementation>
   </binding>
 </bindings>

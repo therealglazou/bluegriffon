@@ -3,11 +3,6 @@ RegisterIniter(ColorsSectionIniter);
 function ColorsSectionIniter(aElt, aRuleset)
 {
   deleteAllChildren(gDialog.backgroundsRichlistbox);
-  var color = CssInspector.getCascadedValue(aRuleset, "color");
-  gDialog.colorColorpicker.color = color;
-
-  var bgColor = CssInspector.getCascadedValue(aRuleset, "background-color");
-  gDialog.bgColorColorpicker.color = bgColor;
 
   var bgImages = CssInspector.getCascadedValue(aRuleset, "background-image");
   var parsedImages = CssInspector.parseBackgroundImages(bgImages);

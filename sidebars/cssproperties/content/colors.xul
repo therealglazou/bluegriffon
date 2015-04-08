@@ -24,31 +24,27 @@
       </hbox>
 
       <vbox class="section" id="colorsSection" position="6">
-        <hbox align="center" style="margin-bottom:1em" animatable="true">
-          <label value="&color.label;"/>
-          <hbox>
-            <ecolorpicker id="colorColorpicker"
-                          color="black"
-                          colorObjectId="ForegroundColor"
-                          windowTitle="Foreground color"
-                          showTransparency="false"
-                          property="color"
-                          oncommand="SetColor(this)"/>
-          </hbox>
-          <label value="&bgColor.label;"/>
-          <hbox>
-            <ecolorpicker id="bgColorColorpicker"
-                          color="transparent"
-                          colorObjectId="BackgroundColor"
-                          windowTitle="Background color"
-                          showTransparency="true"
-                          property="background-color"
-                          oncommand="SetColor(this)"/>
-          </hbox>
-        </hbox>
         <grid animatable="true">
           <columns><column/><column flex="1"/></columns>
           <rows>
+            <cssproperty property="color"
+                         grammar="color(false)"
+                         style="margin-bottom: 5px">
+              <l10n>
+                color=&color.label;
+                url=https://developer.mozilla.org/en-US/docs/Web/CSS/color
+              </l10n>
+            </cssproperty>
+
+            <cssproperty property="background-color"
+                         grammar="color(true)"
+                         style="margin-bottom: 5px">
+              <l10n>
+                background-color=&bgColor.label;
+                url=https://developer.mozilla.org/en-US/docs/Web/CSS/background-color
+              </l10n>
+            </cssproperty>
+
             <row align="top">
               <label value="&backgrounds.label;"/>
               <vbox flex="1">
