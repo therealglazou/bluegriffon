@@ -244,9 +244,8 @@ function FlushBackgroundProperties(aEvent)
     target = target.parentNode; 
   var property = target.getAttribute("property");
   var valueArray = [];
+  var anonid = target.getAttribute("anonid");
   if (property == "background-repeat") {
-    var anonid = target.getAttribute("anonid");
-  
     var items = document.querySelectorAll("richlistitem.backgrounditem");
     for (var i = 0; i < items.length; i++) {
       var vx = items[i].getChild("backgrounditem-repeatx").value.trim().toLowerCase();
