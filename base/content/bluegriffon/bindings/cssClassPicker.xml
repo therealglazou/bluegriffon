@@ -64,8 +64,8 @@
     <implementation>
       <constructor>
         <![CDATA[
-          Components.utils.import("resource://gre/modules/editorHelper.jsm");
-          Components.utils.import("resource://gre/modules/cssHelper.jsm");
+          Components.utils.import("resource://app/modules/editorHelper.jsm");
+          Components.utils.import("resource://app/modules/cssHelper.jsm");
           var classes = CssUtils.getAllClassesForDocument(EditorUtils.getCurrentDocument());
           classes.sort();
           for (var i = 0; i < classes.length; i++) {

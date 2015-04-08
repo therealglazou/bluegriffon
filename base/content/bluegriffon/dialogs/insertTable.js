@@ -1,6 +1,6 @@
-Components.utils.import("resource://gre/modules/editorHelper.jsm");
-Components.utils.import("resource://gre/modules/cssInspector.jsm");
-Components.utils.import("resource://gre/modules/prompterHelper.jsm");
+Components.utils.import("resource://app/modules/editorHelper.jsm");
+Components.utils.import("resource://app/modules/cssInspector.jsm");
+Components.utils.import("resource://app/modules/prompterHelper.jsm");
 
 var gNode = null;
 var gTable = null;

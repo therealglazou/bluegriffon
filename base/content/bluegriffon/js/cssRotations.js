@@ -1,4 +1,4 @@
-Components.utils.import("resource://gre/modules/handlersManager.jsm");
+Components.utils.import("resource://app/modules/handlersManager.jsm");
 
 var CSSRotationsHandler = {
 

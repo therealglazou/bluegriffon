@@ -1,5 +1,5 @@
-Components.utils.import("resource://gre/modules/urlHelper.jsm");
-Components.utils.import("resource://gre/modules/l10nHelper.jsm");
+Components.utils.import("resource://app/modules/urlHelper.jsm");
+Components.utils.import("resource://app/modules/l10nHelper.jsm");
 
 const kFONT_FEATURES = [
   "aalt",

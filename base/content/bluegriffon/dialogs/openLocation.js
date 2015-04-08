@@ -35,7 +35,7 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-Components.utils.import("resource://gre/modules/urlHelper.jsm");
+Components.utils.import("resource://app/modules/urlHelper.jsm");
 
 const nsIFilePicker = Components.interfaces.nsIFilePicker;
 

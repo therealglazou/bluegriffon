@@ -35,8 +35,8 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-Components.utils.import("resource://gre/modules/l10nHelper.jsm");
-Components.utils.import("resource://gre/modules/prompterHelper.jsm");
+Components.utils.import("resource://app/modules/l10nHelper.jsm");
+Components.utils.import("resource://app/modules/prompterHelper.jsm");
 
 var LoginUtils = {
 

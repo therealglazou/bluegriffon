@@ -1,5 +1,5 @@
-Components.utils.import("resource://gre/modules/editorHelper.jsm");
-Components.utils.import("resource://gre/modules/urlHelper.jsm");
+Components.utils.import("resource://app/modules/editorHelper.jsm");
+Components.utils.import("resource://app/modules/urlHelper.jsm");
 
 var gNode = null;
 var gEditor = null;

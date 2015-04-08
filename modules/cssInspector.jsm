@@ -46,7 +46,7 @@
 
 var EXPORTED_SYMBOLS = ["CssInspector", "CSSParser"];
 
-Components.utils.import("resource://gre/modules/fileChanges.jsm");
+Components.utils.import("resource://app/modules/fileChanges.jsm");
 
 const kCHARSET_RULE_MISSING_SEMICOLON = "Missing semicolon at the end of @charset rule";
 const kCHARSET_RULE_CHARSET_IS_STRING = "The charset in the @charset rule should be a string";

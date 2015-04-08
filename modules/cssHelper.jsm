@@ -35,8 +35,8 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-Components.utils.import("resource://gre/modules/editorHelper.jsm");
-Components.utils.import("resource://gre/modules/cssInspector.jsm");
+Components.utils.import("resource://app/modules/editorHelper.jsm");
+Components.utils.import("resource://app/modules/cssInspector.jsm");
 Components.utils.import("resource://gre/modules/Services.jsm");
 
 var EXPORTED_SYMBOLS = ["CssUtils"];

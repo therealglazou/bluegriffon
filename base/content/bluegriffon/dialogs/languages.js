@@ -35,7 +35,7 @@
  *
  * ***** END LICENSE BLOCK ***** */
  
-Components.utils.import("resource://gre/modules/editorHelper.jsm");
+Components.utils.import("resource://app/modules/editorHelper.jsm");
 
 var gNode = null;
 var gOkButton = null;

@@ -10,7 +10,7 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-Components.utils.import("resource://gre/modules/printHelper.jsm");
+Components.utils.import("resource://app/modules/printHelper.jsm");
 
 //-----------------------------------------------------------------------------------
 var cmdPrint =

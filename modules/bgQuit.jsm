@@ -1,5 +1,5 @@
 Components.utils.import("resource://gre/modules/Services.jsm");
-Components.utils.import("resource://gre/modules/prompterHelper.jsm");
+Components.utils.import("resource://app/modules/prompterHelper.jsm");
 
 var EXPORTED_SYMBOLS = ["BlueGriffonQuitHelper"];
 

@@ -1,4 +1,4 @@
-Components.utils.import("resource://gre/modules/editorHelper.jsm");
+Components.utils.import("resource://app/modules/editorHelper.jsm");
 
 const kSPEEDS = [1, 10, 50, 100, 150, 250, 350, 500, 750, 1000];
 var dontFocus = false;
