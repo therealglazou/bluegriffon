@@ -47,6 +47,7 @@ ifeq (cocoa,$(MOZ_WIDGET_TOOLKIT))
 	$(INSTALL) $(srcdir)/*.xpi $(DIST)/$(APP_NAME).app/Contents/MacOS/extensions
 else
 	$(INSTALL) $(srcdir)/*.xpi $(DIST)/bin/extensions
+	rm $(srcdir)/*.xpi
 endif
 
 include $(topsrcdir)/config/rules.mk
