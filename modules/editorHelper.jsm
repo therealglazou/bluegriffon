@@ -580,6 +580,7 @@ var EditorUtils = {
         isXML = true;
         break;
       case "":
+      case "about:legacy-compat":
         isXML = (doc.documentElement.getAttribute("xmlns") == "http://www.w3.org/1999/xhtml");
         break;
       case null:

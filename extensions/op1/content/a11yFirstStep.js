@@ -21,6 +21,7 @@ var OPQUAST_CRITERIA = [
           return true;
 
         case "":
+        case "about:legacy-compat":
           if (root.getAttribute("xmlns")) { // XHTML 5
             return (root.getAttribute("xmlns") == "http://www.w3.org/1999/xhtml");
           }

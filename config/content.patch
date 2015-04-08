@@ -900,7 +900,7 @@ diff --git a/dom/base/nsXMLContentSerializer.cpp b/dom/base/nsXMLContentSerializ
  }
  
  bool
-@@ -991,81 +1018,79 @@ nsXMLContentSerializer::AppendEndOfEleme
+@@ -991,81 +1018,82 @@ nsXMLContentSerializer::AppendEndOfEleme
  NS_IMETHODIMP 
  nsXMLContentSerializer::AppendElementEnd(Element* aElement,
                                           nsAString& aStr)
@@ -911,39 +911,42 @@ diff --git a/dom/base/nsXMLContentSerializer.cpp b/dom/base/nsXMLContentSerializ
  
 -  bool forceFormat = false, outputElementEnd;
 -  outputElementEnd = CheckElementEnd(content, forceFormat, aStr);
-+  nsAutoString tagPrefix, tagLocalName, tagNamespaceURI;
- 
+-
 -  nsIAtom *name = content->NodeInfo()->NameAtom();
-+  bool hideTag = tagNamespaceURI.LowerCaseEqualsLiteral("http://disruptive-innovations.com/zoo/bluegriffon");
-+  if (!hideTag) {
-+    bool forceFormat = false, outputElementEnd;
-+    outputElementEnd = CheckElementEnd(content, forceFormat, aStr);
- 
+-
 -  if ((mDoFormat || forceFormat) && !mDoRaw && !PreLevel()) {
 -    DecrIndentation(name);
 -  }
-+    nsIAtom *name = content->NodeInfo()->NameAtom();
- 
+-
 -  if (!outputElementEnd) {
 -    PopNameSpaceDeclsFor(aElement);
 -    MaybeFlagNewlineForRootNode(aElement);
 -    return NS_OK;
 -  }
+-
+   nsAutoString tagPrefix, tagLocalName, tagNamespaceURI;
+-  
+   aElement->NodeInfo()->GetPrefix(tagPrefix);
+   aElement->NodeInfo()->GetName(tagLocalName);
+   aElement->NodeInfo()->GetNamespaceURI(tagNamespaceURI);
+ 
++  bool hideTag = tagNamespaceURI.LowerCaseEqualsLiteral("http://disruptive-innovations.com/zoo/bluegriffon");
++  if (!hideTag) {
++    bool forceFormat = false, outputElementEnd;
++    outputElementEnd = CheckElementEnd(content, forceFormat, aStr);
++
++    nsIAtom *name = content->NodeInfo()->NameAtom();
++
 +    if ((mDoFormat || forceFormat) && !PreLevel() && !mDoRaw) {
 +      DecrIndentation(name);
 +    }
- 
--  nsAutoString tagPrefix, tagLocalName, tagNamespaceURI;
--  
--  aElement->NodeInfo()->GetPrefix(tagPrefix);
--  aElement->NodeInfo()->GetName(tagLocalName);
--  aElement->NodeInfo()->GetNamespaceURI(tagNamespaceURI);
++
 +    if (!outputElementEnd) {
 +      PopNameSpaceDeclsFor(aElement);
 +      MaybeFlagNewlineForRootNode(aElement);
 +      return NS_OK;
 +    }
- 
++
  #ifdef DEBUG
 -  bool debugNeedToPushNamespace =
 +    bool debugNeedToPushNamespace =
@@ -1027,7 +1030,7 @@ diff --git a/dom/base/nsXMLContentSerializer.cpp b/dom/base/nsXMLContentSerializ
  }
  
  NS_IMETHODIMP
-@@ -1141,16 +1166,33 @@ nsXMLContentSerializer::AppendToString(c
+@@ -1141,16 +1169,33 @@ nsXMLContentSerializer::AppendToString(c
  bool
  nsXMLContentSerializer::AppendToString(const nsAString& aStr,
                                         nsAString& aOutputStr)
@@ -1061,7 +1064,7 @@ diff --git a/dom/base/nsXMLContentSerializer.cpp b/dom/base/nsXMLContentSerializ
  static const char* kEntities[] = {
    "", "", "", "", "", "", "", "", "", "",
    "", "", "", "", "", "", "", "", "", "",
-@@ -1257,16 +1299,20 @@ nsXMLContentSerializer::MaybeLeaveFromPr
+@@ -1257,16 +1302,20 @@ nsXMLContentSerializer::MaybeLeaveFromPr
      if (space.EqualsLiteral("preserve"))
        --PreLevel();
    }
@@ -1082,7 +1085,7 @@ diff --git a/dom/base/nsXMLContentSerializer.cpp b/dom/base/nsXMLContentSerializ
    return result;
  }
  
-@@ -1563,19 +1609,39 @@ nsXMLContentSerializer::AppendWrapped_No
+@@ -1563,19 +1612,39 @@ nsXMLContentSerializer::AppendWrapped_No
            if (!mColPos && mDoFormat) {
              NS_ENSURE_TRUE(AppendIndentation(aOutputStr), false);
            }

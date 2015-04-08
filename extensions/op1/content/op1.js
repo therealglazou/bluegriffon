@@ -61,6 +61,7 @@ function onFocus()
           isXML = true;
           break;
         case "":
+        case "about:legacy-compat":
           isXML = (EditorUtils.getCurrentDocument().documentElement.getAttribute("xmlns") == "http://www.w3.org/1999/xhtml");
           break;
       }

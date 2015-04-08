@@ -804,6 +804,7 @@ function onSourceChangeCallback(source)
       isXML = true;
       break;
     case "":
+    case "about:legacy-compat":
       isXML = (EditorUtils.getCurrentDocument().documentElement.getAttribute("xmlns") == "http://www.w3.org/1999/xhtml");
       break;
     case null:
@@ -895,6 +896,7 @@ function ToggleViewMode(aElement)
       isXML = true;
       break;
     case "":
+    case "about:legacy-compat":
       isXML = (EditorUtils.getCurrentDocument().documentElement.getAttribute("xmlns") == "http://www.w3.org/1999/xhtml");
       break;
     case null:
@@ -946,6 +948,7 @@ function ToggleViewMode(aElement)
 
     MarkSelection();
     source = encoder.encodeToString();
+    alert(mimeType + " " + source);
 
     UnmarkSelection();
 
@@ -1571,6 +1574,7 @@ function UpdateTabHTMLDialect(aEditorElement)
           tab.setAttribute("tooltiptext", "XHTML 1.1");
           break;
         case "":
+        case "about:legacy-compat":
           tab.setAttribute("tooltiptext",
              (aEditorElement.contentDocument.documentElement.getAttribute("xmlns") == "http://www.w3.org/1999/xhtml") ?
                "XHTML 5" : "HTML 5");

@@ -37,6 +37,7 @@ function InitDialog()
       gIsXml = true;
       break;
     case "":
+    case "about:legacy-compat":
       gIsXml = (EditorUtils.getCurrentDocument().documentElement.getAttribute("xmlns") == "http://www.w3.org/1999/xhtml");
       break;
     case null:
