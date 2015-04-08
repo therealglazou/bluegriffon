@@ -179,9 +179,17 @@
                   <label value="&nameColor.label;"
                          control="nameColour" 
                          id="nameColourLabel" />
-                  <textbox size="7"
-                           id="nameColour"
-                           oninput="onNamedColourChanged(this)"/>
+                  <menulist size="4"
+                            id="nameColour"
+                            sizetopopup="none"
+                            editable="true"
+                            style="max-width: 8em"
+                            oninput="onNamedColourChanged(this)"
+                            oncommand="onNamedColourChanged(this)">
+                    <menupopup id="nameColourPopup"
+                               style="max-height: 20em"
+                               onpopupshowing="PopulateColorNames()"/>
+                  </menulist>
                 </row>
               </rows>
             </grid>
