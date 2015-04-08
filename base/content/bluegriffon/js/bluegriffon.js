@@ -948,7 +948,6 @@ function ToggleViewMode(aElement)
 
     MarkSelection();
     source = encoder.encodeToString();
-    alert(mimeType + " " + source);
 
     UnmarkSelection();
 
