@@ -1985,6 +1985,14 @@ function ShowUpdates()
 
 function CheckForUpdates(aPopup)
 {
+  // If there's an active update, substitute its name into the label
+  // we show for this item, otherwise display a generic label.
+  function getStringWithUpdateName(s, a, key) {
+    if (a && a.name)
+      return s.formatStringFromName(key, [a.name], 1);
+    return s.formatStringFromName(key, ["..."], 1);
+  }
+
   var item = aPopup.querySelector("#menu_updates");
   if (item) {
     // copied from buildHelpMenu in mozilla/browser/base/content/utilityOverlay.js
@@ -2007,14 +2015,6 @@ function CheckForUpdates(aPopup)
       Services.strings
               .createBundle("chrome://bluegriffon/locale/updates.properties");
     var activeUpdate = um.activeUpdate;
-
-    // If there's an active update, substitute its name into the label
-    // we show for this item, otherwise display a generic label.
-    function getStringWithUpdateName(key) {
-      if (activeUpdate && activeUpdate.name)
-        return strings.formatStringFromName(key, [activeUpdate.name], 1);
-      return strings.formatStringFromName(key, ["..."], 1);
-    }
 
     // By default, show "Check for Updates..."
     var key = "update.checkInsideButton";
