@@ -306,7 +306,9 @@
                         item.color = cs.color;
                         item.offset = cs.position;
                       }
-                      
+                    }
+                    else {
+                      gDialog.linearGradientPreview.style.backgroundImage = "none";
                     }
                     UpdateColorStopsRichlistbox();
                   }, 1, type);
