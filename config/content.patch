@@ -85,7 +85,7 @@ diff --git a/dom/base/nsCopySupport.cpp b/dom/base/nsCopySupport.cpp
 diff --git a/dom/base/nsDocument.cpp b/dom/base/nsDocument.cpp
 --- a/dom/base/nsDocument.cpp
 +++ b/dom/base/nsDocument.cpp
-@@ -7566,16 +7566,23 @@ nsIDocument::GetInputEncoding(nsAString&
+@@ -7567,16 +7567,23 @@ nsIDocument::GetInputEncoding(nsAString&
  NS_IMETHODIMP
  nsDocument::GetMozSyntheticDocument(bool *aSyntheticDocument)
  {
@@ -155,7 +155,7 @@ diff --git a/dom/base/nsDocumentEncoder.cpp b/dom/base/nsDocumentEncoder.cpp
  }
  
  NS_IMETHODIMP
-@@ -1401,17 +1408,17 @@ nsHTMLCopyEncoder::SetSelection(nsISelec
+@@ -1388,17 +1395,17 @@ nsHTMLCopyEncoder::SetSelection(nsISelec
      mSelection = aSelection;
      mMimeType.AssignLiteral("text/plain");
      return NS_OK;
@@ -177,7 +177,7 @@ diff --git a/dom/base/nsDocumentEncoder.cpp b/dom/base/nsDocumentEncoder.cpp
 diff --git a/dom/base/nsFocusManager.cpp b/dom/base/nsFocusManager.cpp
 --- a/dom/base/nsFocusManager.cpp
 +++ b/dom/base/nsFocusManager.cpp
-@@ -2540,31 +2540,16 @@ nsFocusManager::DetermineElementToMoveFo
+@@ -2544,31 +2544,16 @@ nsFocusManager::DetermineElementToMoveFo
          if (startContent ==
                nsLayoutUtils::GetEditableRootContentByContentEditable(doc)) {
            doNavigation = false;
@@ -209,7 +209,7 @@ diff --git a/dom/base/nsFocusManager.cpp b/dom/base/nsFocusManager.cpp
                               getter_AddRefs(endSelectionContent));
          // If the selection is on the rootContent, then there is no selection
          if (startContent == rootContent) {
-@@ -2584,24 +2569,37 @@ nsFocusManager::DetermineElementToMoveFo
+@@ -2588,24 +2573,37 @@ nsFocusManager::DetermineElementToMoveFo
  
          if (startContent) {
            // when starting from a selection, we always want to find the next or
@@ -251,7 +251,7 @@ diff --git a/dom/base/nsFocusManager.cpp b/dom/base/nsFocusManager.cpp
 diff --git a/dom/base/nsHTMLContentSerializer.cpp b/dom/base/nsHTMLContentSerializer.cpp
 --- a/dom/base/nsHTMLContentSerializer.cpp
 +++ b/dom/base/nsHTMLContentSerializer.cpp
-@@ -191,111 +191,120 @@ nsHTMLContentSerializer::AppendElementSt
+@@ -189,111 +189,120 @@ nsHTMLContentSerializer::AppendElementSt
      return rv;
    }
  
@@ -448,7 +448,7 @@ diff --git a/dom/base/nsHTMLContentSerializer.cpp b/dom/base/nsHTMLContentSerial
  }
    
  NS_IMETHODIMP 
-@@ -304,16 +313,23 @@ nsHTMLContentSerializer::AppendElementEn
+@@ -302,16 +311,23 @@ nsHTMLContentSerializer::AppendElementEn
  {
    NS_ENSURE_ARG(aElement);
  
@@ -472,7 +472,7 @@ diff --git a/dom/base/nsHTMLContentSerializer.cpp b/dom/base/nsHTMLContentSerial
      --mDisableEntityEncoding;
    }
  
-@@ -471,17 +487,18 @@ nsHTMLContentSerializer::AppendAndTransl
+@@ -469,17 +485,18 @@ nsHTMLContentSerializer::AppendAndTransl
  
    if (mDisableEntityEncoding) {
      return aOutputStr.Append(aStr, mozilla::fallible);
@@ -492,7 +492,7 @@ diff --git a/dom/base/nsHTMLContentSerializer.cpp b/dom/base/nsHTMLContentSerial
      const uint32_t len = aStr.Length();
      for (uint32_t i = 0; i < len; ++i) {
        const char* entity = nullptr;
-@@ -528,17 +545,23 @@ nsHTMLContentSerializer::AppendAndTransl
+@@ -526,17 +543,23 @@ nsHTMLContentSerializer::AppendAndTransl
        const char* fullConstEntityText = nullptr;
        char* fullEntityText = nullptr;
  
@@ -564,7 +564,7 @@ diff --git a/dom/base/nsIDocumentEncoder.idl b/dom/base/nsIDocumentEncoder.idl
 diff --git a/dom/base/nsXHTMLContentSerializer.cpp b/dom/base/nsXHTMLContentSerializer.cpp
 --- a/dom/base/nsXHTMLContentSerializer.cpp
 +++ b/dom/base/nsXHTMLContentSerializer.cpp
-@@ -60,24 +60,16 @@ nsXHTMLContentSerializer::~nsXHTMLConten
+@@ -58,24 +58,16 @@ nsXHTMLContentSerializer::~nsXHTMLConten
    NS_ASSERTION(mOLStateStack.IsEmpty(), "Expected OL State stack to be empty");
  }
  
@@ -589,7 +589,7 @@ diff --git a/dom/base/nsXHTMLContentSerializer.cpp b/dom/base/nsXHTMLContentSeri
    mIsCopying = aIsCopying;
    mIsFirstChildOfOL = false;
    mInBody = 0;
-@@ -724,17 +716,26 @@ nsXHTMLContentSerializer::LineBreakBefor
+@@ -722,17 +714,26 @@ nsXHTMLContentSerializer::LineBreakBefor
  
    if (aName == nsGkAtoms::title ||
        aName == nsGkAtoms::meta  ||
@@ -617,7 +617,7 @@ diff --git a/dom/base/nsXHTMLContentSerializer.cpp b/dom/base/nsXHTMLContentSeri
      if (parserService) {
        bool res;
        parserService->
-@@ -751,17 +752,17 @@ nsXHTMLContentSerializer::LineBreakAfter
+@@ -749,17 +750,17 @@ nsXHTMLContentSerializer::LineBreakAfter
  {
  
    if (aNamespaceID != kNameSpaceID_XHTML) {
@@ -636,7 +636,7 @@ diff --git a/dom/base/nsXHTMLContentSerializer.cpp b/dom/base/nsXHTMLContentSeri
        (aName == nsGkAtoms::tr) ||
        (aName == nsGkAtoms::br) ||
        (aName == nsGkAtoms::meta) ||
-@@ -788,17 +789,20 @@ nsXHTMLContentSerializer::LineBreakBefor
+@@ -786,17 +787,20 @@ nsXHTMLContentSerializer::LineBreakBefor
    if ((aName == nsGkAtoms::html) ||
        (aName == nsGkAtoms::head) ||
        (aName == nsGkAtoms::body) ||
@@ -658,7 +658,7 @@ diff --git a/dom/base/nsXHTMLContentSerializer.cpp b/dom/base/nsXHTMLContentSeri
  bool 
  nsXHTMLContentSerializer::LineBreakAfterClose(int32_t aNamespaceID, nsIAtom* aName)
  {
-@@ -850,16 +854,18 @@ nsXHTMLContentSerializer::MaybeEnterInPr
+@@ -848,16 +852,18 @@ nsXHTMLContentSerializer::MaybeEnterInPr
    }
  
    if (IsElementPreformatted(aNode) ||
@@ -677,7 +677,7 @@ diff --git a/dom/base/nsXHTMLContentSerializer.cpp b/dom/base/nsXHTMLContentSeri
  {
    if (!ShouldMaintainPreLevel() ||
        !aNode->IsHTMLElement()) {
-@@ -867,16 +873,18 @@ nsXHTMLContentSerializer::MaybeLeaveFrom
+@@ -865,16 +871,18 @@ nsXHTMLContentSerializer::MaybeLeaveFrom
    }
  
    if (IsElementPreformatted(aNode) ||
@@ -699,7 +699,7 @@ diff --git a/dom/base/nsXHTMLContentSerializer.cpp b/dom/base/nsXHTMLContentSeri
 diff --git a/dom/base/nsXMLContentSerializer.cpp b/dom/base/nsXMLContentSerializer.cpp
 --- a/dom/base/nsXMLContentSerializer.cpp
 +++ b/dom/base/nsXMLContentSerializer.cpp
-@@ -619,16 +619,35 @@ nsXMLContentSerializer::SerializeAttr(co
+@@ -617,16 +617,35 @@ nsXMLContentSerializer::SerializeAttr(co
  {
    nsAutoString attrString_;
    // For innerHTML we can do faster appending without
@@ -735,7 +735,7 @@ diff --git a/dom/base/nsXMLContentSerializer.cpp b/dom/base/nsXMLContentSerializ
  
    if (aDoEscapeEntities) {
      // if problem characters are turned into character entity references
-@@ -693,29 +712,31 @@ nsXMLContentSerializer::SerializeAttr(co
+@@ -691,29 +710,31 @@ nsXMLContentSerializer::SerializeAttr(co
                                             NS_LITERAL_STRING("&amp;"), mozilla::fallible), false);
      if (bIncludesDouble && bIncludesSingle) {
        NS_ENSURE_TRUE(sValue.ReplaceSubstring(NS_LITERAL_STRING("\""),
@@ -768,7 +768,7 @@ diff --git a/dom/base/nsXMLContentSerializer.cpp b/dom/base/nsXMLContentSerializ
                                                    nsIContent *aOriginalElement,
                                                    const nsAString& aTagNamespaceURI)
  {
-@@ -899,78 +920,84 @@ nsXMLContentSerializer::AppendElementSta
+@@ -897,78 +918,84 @@ nsXMLContentSerializer::AppendElementSta
  
    NS_ENSURE_SUCCESS(rv, rv);
  
@@ -900,7 +900,7 @@ diff --git a/dom/base/nsXMLContentSerializer.cpp b/dom/base/nsXMLContentSerializ
  }
  
  bool
-@@ -991,81 +1018,82 @@ nsXMLContentSerializer::AppendEndOfEleme
+@@ -989,81 +1016,82 @@ nsXMLContentSerializer::AppendEndOfEleme
  NS_IMETHODIMP 
  nsXMLContentSerializer::AppendElementEnd(Element* aElement,
                                           nsAString& aStr)
@@ -1030,7 +1030,7 @@ diff --git a/dom/base/nsXMLContentSerializer.cpp b/dom/base/nsXMLContentSerializ
  }
  
  NS_IMETHODIMP
-@@ -1141,16 +1169,33 @@ nsXMLContentSerializer::AppendToString(c
+@@ -1139,16 +1167,33 @@ nsXMLContentSerializer::AppendToString(c
  bool
  nsXMLContentSerializer::AppendToString(const nsAString& aStr,
                                         nsAString& aOutputStr)
@@ -1064,7 +1064,7 @@ diff --git a/dom/base/nsXMLContentSerializer.cpp b/dom/base/nsXMLContentSerializ
  static const char* kEntities[] = {
    "", "", "", "", "", "", "", "", "", "",
    "", "", "", "", "", "", "", "", "", "",
-@@ -1257,16 +1302,20 @@ nsXMLContentSerializer::MaybeLeaveFromPr
+@@ -1255,16 +1300,20 @@ nsXMLContentSerializer::MaybeLeaveFromPr
      if (space.EqualsLiteral("preserve"))
        --PreLevel();
    }
@@ -1085,7 +1085,7 @@ diff --git a/dom/base/nsXMLContentSerializer.cpp b/dom/base/nsXMLContentSerializ
    return result;
  }
  
-@@ -1563,19 +1612,39 @@ nsXMLContentSerializer::AppendWrapped_No
+@@ -1561,19 +1610,39 @@ nsXMLContentSerializer::AppendWrapped_No
            if (!mColPos && mDoFormat) {
              NS_ENSURE_TRUE(AppendIndentation(aOutputStr), false);
            }
@@ -1171,7 +1171,7 @@ diff --git a/dom/interfaces/core/nsIDOMDocument.idl b/dom/interfaces/core/nsIDOM
 diff --git a/dom/xbl/nsXBLContentSink.cpp b/dom/xbl/nsXBLContentSink.cpp
 --- a/dom/xbl/nsXBLContentSink.cpp
 +++ b/dom/xbl/nsXBLContentSink.cpp
-@@ -164,16 +164,18 @@ nsXBLContentSink::FlushText(bool aReleas
+@@ -163,16 +163,18 @@ nsXBLContentSink::FlushText(bool aReleas
  
    return nsXMLContentSink::FlushText(aReleaseTextNode);
  }
@@ -1190,7 +1190,7 @@ diff --git a/dom/xbl/nsXBLContentSink.cpp b/dom/xbl/nsXBLContentSink.cpp
    // nsXMLContentSink::ReportError, and probably should die.  See bug 347826.
  
    // XXX We should make sure the binding has no effect, but that it also
-@@ -189,16 +191,18 @@ nsXBLContentSink::ReportError(const char
+@@ -188,16 +190,18 @@ nsXBLContentSink::ReportError(const char
            NS_LossyConvertUTF16toASCII(aSourceText).get());
  #endif
  
@@ -1356,13 +1356,13 @@ diff --git a/dom/xslt/xslt/txMozillaStylesheetCompiler.cpp b/dom/xslt/xslt/txMoz
 diff --git a/dom/xul/nsXULContentSink.cpp b/dom/xul/nsXULContentSink.cpp
 --- a/dom/xul/nsXULContentSink.cpp
 +++ b/dom/xul/nsXULContentSink.cpp
-@@ -670,16 +670,18 @@ XULContentSinkImpl::HandleXMLDeclaration
+@@ -659,16 +659,18 @@ XULContentSinkImpl::HandleXMLDeclaration
    return NS_OK;
  }
  
  
  NS_IMETHODIMP
- XULContentSinkImpl::ReportError(const char16_t* aErrorText, 
+ XULContentSinkImpl::ReportError(const char16_t* aErrorText,
                                  const char16_t* aSourceText,
                                  nsIScriptError *aError,
 +                                uint32_t aLineNumber,
@@ -1931,7 +1931,7 @@ diff --git a/editor/libeditor/nsHTMLCSSUtils.cpp b/editor/libeditor/nsHTMLCSSUti
  
    // ALIGN attribute on elements supporting it
    if (aAttribute && (aAttribute->EqualsLiteral("align")) &&
-@@ -816,16 +817,18 @@ nsHTMLCSSUtils::GenerateCSSDeclarationsF
+@@ -815,16 +816,18 @@ nsHTMLCSSUtils::GenerateCSSDeclarationsF
    if (nsGkAtoms::b == aHTMLProperty) {
      equivTable = boldEquivTable;
    } else if (nsGkAtoms::i == aHTMLProperty) {
@@ -2211,7 +2211,7 @@ diff --git a/editor/libeditor/nsHTMLEditor.cpp b/editor/libeditor/nsHTMLEditor.c
            if (outValue) *outValue = value;
            if (!value.IsEmpty())
            {
-@@ -5317,8 +5313,39 @@ nsHTMLEditor::IsEditable(nsINode* aNode)
+@@ -5324,8 +5320,39 @@ nsHTMLEditor::IsEditable(nsINode* aNode)
  }
  
  // virtual override
@@ -2868,6 +2868,28 @@ diff --git a/editor/nsIEditor.idl b/editor/nsIEditor.idl
  
    /** Add a DocumentStateListener to the editors list of doc state listeners. */
    void addDocumentStateListener(in nsIDocumentStateListener listener);
+diff --git a/editor/nsIEditorMouseObserver.idl b/editor/nsIEditorMouseObserver.idl
+new file mode 100644
+--- /dev/null
++++ b/editor/nsIEditorMouseObserver.idl
+@@ -0,0 +1,17 @@
++/* -*- Mode: C++; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
++/* This Source Code Form is subject to the terms of the Mozilla Public
++ * License, v. 2.0. If a copy of the MPL was not distributed with this
++ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
++
++#include "nsISupports.idl"
++#include "domstubs.idl"
++
++
++[scriptable, uuid(7A76F573-7512-4051-BB20-E6E279F26F55)]
++
++interface nsIEditorMouseObserver : nsISupports {
++
++  bool MouseDown(in int32_t aClientX, in int32_t aClientY, in nsIDOMNode aTarget, in boolean aShiftKey);
++  bool MouseUp(in int32_t aClientX, in int32_t aClientY, in nsIDOMNode aTarget, in boolean aShiftKey);
++  bool MouseMove(in int32_t aClientX, in int32_t aClientY, in nsIDOMNode aTarget, in boolean aShiftKey);
++};
 diff --git a/editor/nsIHTMLEditor.idl b/editor/nsIHTMLEditor.idl
 --- a/editor/nsIHTMLEditor.idl
 +++ b/editor/nsIHTMLEditor.idl
@@ -3056,7 +3078,7 @@ diff --git a/layout/style/Loader.cpp b/layout/style/Loader.cpp
 diff --git a/layout/style/nsCSSParser.cpp b/layout/style/nsCSSParser.cpp
 --- a/layout/style/nsCSSParser.cpp
 +++ b/layout/style/nsCSSParser.cpp
-@@ -5389,16 +5389,26 @@ CSSParserImpl::ParseAttributeSelector(in
+@@ -5387,16 +5387,26 @@ CSSParserImpl::ParseAttributeSelector(in
        UngetToken(); // bad function
        return eSelectorParsingStatus_Error;
      }
@@ -3083,7 +3105,7 @@ diff --git a/layout/style/nsCSSParser.cpp b/layout/style/nsCSSParser.cpp
            REPORT_UNEXPECTED_EOF(PEAttSelCloseEOF);
            gotClosingBracket = true;
          } else {
-@@ -5407,17 +5417,17 @@ CSSParserImpl::ParseAttributeSelector(in
+@@ -5405,17 +5415,17 @@ CSSParserImpl::ParseAttributeSelector(in
          if (gotClosingBracket) {
            bool isCaseSensitive = true;
  
