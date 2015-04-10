@@ -107,7 +107,7 @@ function OnBackgroundSelect(aElt)
 function DeleteBackground()
 {
   var item = gDialog.backgroundsRichlistbox.selectedItem;
-  if (!item) return; // sanity check
+  if (!item || !item.parentNode) return; // sanity check
   item.parentNode.removeChild(item);
   SetEnabledElement(gDialog.removeBackgroundButton, (gDialog.backgroundsRichlistbox.itemCount != 0));
   ReapplyBackgrounds();
@@ -235,6 +235,7 @@ function DeleteColorStopFromLinearGradient()
 {
   gDialog.colorStopsRichlistbox.removeChild(gDialog.colorStopsRichlistbox.selectedItem);
   UpdateColorStopsRichlistbox();
+  RepaintGradient();
 }
 
 function FlushBackgroundProperties(aEvent)
