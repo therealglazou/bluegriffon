@@ -281,12 +281,14 @@ function FlushBackgroundProperties(aEvent)
       valueArray.pop();
     else
       break;
-  ApplyStyles([
-                {
-                  property: property,
-                  value: valueArray.join(", ")
-                }
-              ]);
+  var value = valueArray.join(", ");
+  if (CSS.supports(property, value))
+    ApplyStyles([
+                  {
+                    property: property,
+                    value: value
+                  }
+                ]);
 }
 
 function ToggleRelativeOrAbsoluteBackgroundImage()

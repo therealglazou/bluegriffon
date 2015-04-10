@@ -33,8 +33,9 @@ function ApplyBorderSpacing()
 {
   var h = gDialog.borderSpacingHMenulist.value;
   var v = gDialog.borderSpacingVMenulist.value;
-  ApplyStyles( [ {
-                   property: "border-spacing",
-                   value: h + " " + v
-                 }])
+  if (CSS.supports("border-spacing", h + " " + v))
+    ApplyStyles( [ {
+                     property: "border-spacing",
+                     value: h + " " + v
+                   }])
 }
