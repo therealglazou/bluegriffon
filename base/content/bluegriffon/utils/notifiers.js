@@ -44,19 +44,11 @@ var NotifierUtils = {
 
   _error: function NotifierUtils__error(aErrorString, aHelperString)
   {
-    var caller = this._error.caller;
-    var s = "";
-    for (var i in this)
-      if (this[i].toString() == caller)
-      {
-        s = i + "()";
-        break;
-      }
     var errorString = aErrorString +
                       (aHelperString ? " '" + aHelperString + "'" : "");
-    /*Components.classes['@mozilla.org/consoleservice;1']
+    Components.classes['@mozilla.org/consoleservice;1']
               .getService(Components.interfaces.nsIConsoleService)
-              .logStringMessage(errorString);*/
+              .logStringMessage(errorString);
   },
 
   _addNotifier: function NotifierUtils__addNotifier(aKeyword)

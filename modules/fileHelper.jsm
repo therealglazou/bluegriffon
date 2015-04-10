@@ -144,7 +144,7 @@ var FileUtils = {
                      createInstance(Components.interfaces.nsIFileOutputStream);
       
       // use 0x02 | 0x10 to open file for appending.
-      foStream.init(destinationLocation, 0x02 | 0x08 | 0x20, 0666, 0); 
+      foStream.init(destinationLocation, 0x02 | 0x08 | 0x20, 0x1b6, 0);
       // write, create, truncate
       // In a c file operation, we have no need to set file mode with or operation,
       // directly using "r" or "w" usually.
@@ -289,7 +289,7 @@ var FileUtils = {
                      createInstance(Components.interfaces.nsIFileOutputStream);
       
       // use 0x02 | 0x10 to open file for appending.
-      foStream.init(destinationLocation, 0x02 | 0x08 | 0x20, 0666, 0); 
+      foStream.init(destinationLocation, 0x02 | 0x08 | 0x20, 0x1b6, 0);
       encoder.encodeToStream(foStream);
       foStream.close(); // this closes foStream
     }

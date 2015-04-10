@@ -180,10 +180,10 @@ function style_html(html_source, options) {
           content = [],
           space = false,
           tag_start, tag_end,
-          peek = typeof peek !== 'undefined' ? peek : false,
           orig_pos = this.pos,
           orig_line_char_count = this.line_char_count;
 
+      peek = typeof peek !== 'undefined' ? peek : false;
       do {
         if (this.pos >= this.input.length) {
           if (peek) {
