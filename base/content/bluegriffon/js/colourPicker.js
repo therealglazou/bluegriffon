@@ -278,12 +278,12 @@ function StartUp()
   // SetWindowLocation();
   var colorBoxes = gDialog.colorBoxes;
   var colors = new Array('00','33','66','99','CC','FF');
-  for (i = 5; i >= 0; i--) {
+  for (var i = 5; i >= 0; i--) {
   	var hbox;
-    for (j = 5; j >= 0; j--) {
+    for (var j = 5; j >= 0; j--) {
       hbox = document.createElement("hbox");
       colorBoxes.appendChild(hbox);
-    	for (k= 5; k >= 0; k--) {
+      for (var k= 5; k >= 0; k--) {
         var box = document.createElement("box");
         box.className = "colorBox";
         box.style.backgroundColor = "#" + colors[i]+colors[j]+colors[k];
