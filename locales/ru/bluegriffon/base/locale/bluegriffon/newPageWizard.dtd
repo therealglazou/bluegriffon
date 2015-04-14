@@ -1,0 +1,155 @@
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1/GPL 2.0/LGPL 2.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is BlueGriffon.
+   -
+   - The Initial Developer of the Original Code is
+   - Disruptive Innovations SARL.
+   - Portions created by the Initial Developer are Copyright (C) 2006
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -   Daniel Glazman (daniel.glazman@disruptive-innovations.com), Original Author
+   -
+   - Alternatively, the contents of this file may be used under the terms of
+   - either the GNU General Public License Version 2 or later (the "GPL"), or
+   - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+   - in which case the provisions of the GPL or the LGPL are applicable instead
+   - of those above. If you wish to allow use of your version of this file only
+   - under the terms of either the GPL or the LGPL, and not to allow others to
+   - use your version of this file under the terms of the MPL, indicate your
+   - decision by deleting the provisions above and replace them with the notice
+   - and other provisions required by the LGPL or the GPL. If you do not delete
+   - the provisions above, a recipient may use your version of this file under
+   - the terms of any one of the MPL, the GPL or the LGPL.
+   -
+   - ***** END LICENSE BLOCK ***** -->
+
+<!ENTITY window.title "Мастер создания документа">
+
+<!ENTITY pageTitle.label "Название:">
+<!ENTITY pageAuthor.label "Автор:">
+<!ENTITY pageDescription.label "Описание:">
+<!ENTITY pageTitle.accesskey "">
+<!ENTITY pageAuthor.accesskey "">
+<!ENTITY pageDescription.accesskey "">
+<!ENTITY pageKeywords.label "Ключевые слова:">
+<!ENTITY pageKeywords.accesskey "">
+<!ENTITY documentLanguage.label "Язык:">
+<!ENTITY language.accesskey "">
+<!ENTITY charset.label "Кодировка:">
+<!ENTITY charset.accesskey "">
+<!ENTITY direction.label "Направление текста:">
+<!ENTITY direction.accesskey "">
+<!ENTITY ltr.label "Слева направо">
+<!ENTITY rtl.label "Справа налево">
+<!ENTITY unspecified.label "Неопределённый">
+
+<!ENTITY selectLanguage.label "Выбрать язык">
+
+<!ENTITY backgroundImage.label "Фоновое изображение:">
+<!ENTITY backgroundImage.accesskey "">
+
+<!ENTITY filepickerForBgImage.title "Выбрать фоновое изображение">
+<!ENTITY pagePreview.label "Просмотр:">
+
+<!ENTITY useSystemColors.label "Считыватели цвета по умолчанию (Не устанавливать в цвета страницы)">
+<!ENTITY userDefinedColors.label "Использовать пользовательские цвета:">
+
+<!ENTITY backgroundColor.label "Фон:">
+<!ENTITY backgroundColor.accesskey "">
+<!ENTITY textColor.label "Текст:">
+<!ENTITY textColor.accesskey "">
+<!ENTITY linksColor.label "Ссылки:">
+<!ENTITY linksColor.accesskey "">
+<!ENTITY activeLinksColor.label "Активные ссылки:">
+<!ENTITY activeLinksColor.accesskey "">
+<!ENTITY visitedLinksColor.label "Посещенные ссылки:">
+<!ENTITY visitedLinksColor.accesskey "">
+<!ENTITY underlineLinks.label "Подчеркивать ссылки">
+
+<!ENTITY relativeURLForBgImage.label "Относительный URL">
+
+<!ENTITY generalTab.label "Общие параметры документа">
+<!ENTITY colorsTab.label "Цвет и фон">
+<!ENTITY styleTab.label "Стиль">
+<!ENTITY advancedTab.label "Расширенные">
+
+<!ENTITY unsavedPage.label "[Новая страница, еще не сохраненная]">
+<!ENTITY noPageLastModified.label "[Нет информации]">
+
+<!ENTITY normalText.preview "Обычный текст">
+<!ENTITY links.preview "Ссылки">
+<!ENTITY activeLinks.preview "Активные ссылки">
+<!ENTITY visitedLinks.preview "Посещенные ссылки">
+
+<!ENTITY makeColorsDefault.label "Сделать мои выше настроек по умолчанию">
+
+<!ENTITY bgTab.label "Фон документа">
+
+<!ENTITY layoutsTab.label "Макеты страницы">
+<!ENTITY usePageLayout.checkbox "Применить предопределенный макет CSS">
+<!ENTITY oneColumn100.label "1 столбец, 100&#37;">
+<!ENTITY twoColumns5050.label "2 столбца, 50&#37;/50&#37;">
+<!ENTITY twoColumns6633.label "2 столбца, 66&#37;/33&#37;">
+<!ENTITY twoColumns3366.label "2 столбца, 33&#37;/66&#37;">
+<!ENTITY twoColumns7525.label "2 столбца, 75&#37;/25&#37;">
+<!ENTITY twoColumns2575.label "2 столбца, 25&#37;/75&#37;">
+<!ENTITY threeColumns333333.label "3 столбца, 33&#37;/33&#37;/33&#37;">
+<!ENTITY threeColumns502525.label "3 столбца, 50&#37;/25&#37;/25&#37;">
+<!ENTITY threeColumns252550.label "3 столбца, 25&#37;/25&#37;/50&#37;">
+<!ENTITY fourColumns25252525.label "4 столбца, 25&#37;/25&#37;/25&#37;/25&#37;">
+
+<!ENTITY layoutType.label "Ширина:">
+<!ENTITY layoutType.accesskey "">
+<!ENTITY layout100percent.label "Полная ширина">
+<!ENTITY layout750px.label "750px">
+<!ENTITY layout950px.label "950px">
+<!ENTITY layout974px.label "974px">
+<!ENTITY layoutSubtype.label "Боковая панель:">
+<!ENTITY layoutSubtype.accesskey "">
+<!ENTITY noSidebar.label "Нет">
+<!ENTITY left160Sidebar.label "Слева 160px">
+<!ENTITY left180Sidebar.label "Слева 180px">
+<!ENTITY left300Sidebar.label "Слева 300px">
+<!ENTITY right180Sidebar.label "Справа 180px">
+<!ENTITY right240Sidebar.label "Справа 240px">
+<!ENTITY right300Sidebar.label "Справа 300px">
+<!ENTITY loremIpsum.label "Включить (вставить) шаблон текста `lorem ipsum`">
+<!ENTITY loremIpsum.accesskey "">
+<!ENTITY newRow.label "Новая строка">
+<!ENTITY removeRow.label "Удалить">
+
+<!ENTITY tile.label "Название:">
+<!ENTITY tile.accesskey "">
+<!ENTITY scrolling.label "Прокрутка:">
+<!ENTITY scrolling.accesskey "">
+<!ENTITY scrollWithPage.label "Со страницей">
+<!ENTITY noScrolling.label "Без прокрутки">
+<!ENTITY horizPosition.label "Гориз:">
+<!ENTITY vertPosition.label "Верт:">
+
+<!ENTITY documentType.label "Тип документа">
+<!ENTITY documentType.description "Какой документ вы хотите создать?">
+
+<!ENTITY language.label "Язык документа">
+<!ENTITY html.label "HTML 4">
+<!ENTITY xhtml.label "XHTML 1">
+<!ENTITY xhtml11.label "XHTML 1.1">
+<!ENTITY html5.label "HTML 5">
+<!ENTITY xhtml5.label "XHTML 5">
+
+<!ENTITY doctype.label "Тип документа">
+<!ENTITY transitional.label "Переходный">
+<!ENTITY strict.label "Точный">
+
