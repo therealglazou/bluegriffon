@@ -93,14 +93,18 @@ function ReapplyTransitions()
   var delays     = [];
   for (var i = 0; i < items.length; i++) {
     var item = items[i];
-    if (item.propertyValue) {
+    if (item.propertyValue
+        && (CSS.supports(item.propertyValue, "inherit")
+            || (i == 0
+                && (item.propertyValue == "all"
+                    || item.propertyValue == "none")))) {
       properties.push( item.propertyValue );
       durations.push( item.durationValue + "s" );
       functions.push( item.functionValue );
       delays.push( item.delayValue + "s");
     }
-    else
-      return;
+    /*else
+      return;*/
   }
   ApplyStyles( [
                  {

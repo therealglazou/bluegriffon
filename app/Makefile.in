@@ -97,6 +97,11 @@ tools repackage:: $(PROGRAM)
 	rsync -aL $(PROGRAM) $(dist_dest)/Contents/MacOS
 	cp -RL $(srcdir)/macbuild/Contents/Resources/bluegriffon.icns $(DIST)/$(MAC_APP_NAME).app/Contents/Resources/bluegriffon.icns
 	printf APPLMOZB > $(dist_dest)/Contents/PkgInfo
+ifeq (cocoa,$(MOZ_WIDGET_TOOLKIT))
+	$(INSTALL) $(DIST)/xpi-stage/*.xpi $(DIST)/$(MAC_APP_NAME).app/Contents/MacOS/extensions 
+else
+	$(INSTALL) $(DIST)/xpi-stage/*.xpi $(DIST)/bin/extensions 
+endif
 endif
 
 ifdef LIBXUL_SDK #{
@@ -109,9 +114,3 @@ else
 endif #} cocoa
 endif #} LIBXUL_SDK
 
-libs::
-ifeq (cocoa,$(MOZ_WIDGET_TOOLKIT))
-	$(INSTALL) $(DIST)/xpi-stage/*.xpi $(DIST)/$(APP_NAME).app/Contents/MacOS/distribution/extensions 
-else
-	$(INSTALL) $(DIST)/xpi-stage/*.xpi $(DIST)/bin/distribution/extensions 
-endif

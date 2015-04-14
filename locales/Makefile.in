@@ -19,16 +19,40 @@ ifneq (,$(filter mac cocoa, $(MOZ_WIDGET_TOOLKIT)))
 DEFINES += -DTOOLBAR_CUSTOMIZATION_SHEET
 endif
 
-_AVAILABLE_LOCALES =\
-		en-US \
-		$(NULL)
-		
+_AVAILABLE_LOCALES=en-US
+
+_EXTRA_LOCALES =\
+    cs \
+    de \
+    es-ES \
+    fi \
+    fr \
+    gl \
+    he \
+    it \
+    ja \
+    ko \
+    nl \
+    pl \
+    ru \
+    sl \
+    sv-SE \
+    zh-CN \
+    zh-TW \
+    hu \
+    sr \
+    $(NULL)
+
+_EXTENSIONS_=\
+  fs \
+  gfd \
+  markdown \
+  op1 \
+  tipoftheday \
+  $(NULL)
+
 libs:: $(_AVAILABLE_LOCALES)
 	cp $(topsrcdir)/bluegriffon/base/jar.mn.in $(topsrcdir)/bluegriffon/base/jar.mn
-	cp $(topsrcdir)/bluegriffon/extensions/op1/jar.mn.in $(topsrcdir)/bluegriffon/extensions/op1/jar.mn
-	cp $(topsrcdir)/bluegriffon/extensions/gfd/jar.mn.in $(topsrcdir)/bluegriffon/extensions/gfd/jar.mn
-	cp $(topsrcdir)/bluegriffon/extensions/fs/jar.mn.in $(topsrcdir)/bluegriffon/extensions/fs/jar.mn
-	cp $(topsrcdir)/bluegriffon/extensions/tipoftheday/jar.mn.in $(topsrcdir)/bluegriffon/extensions/tipoftheday/jar.mn
 	cp $(topsrcdir)/bluegriffon/sidebars/scripteditor/jar.mn.in $(topsrcdir)/bluegriffon/sidebars/scripteditor/jar.mn
 	cp $(topsrcdir)/bluegriffon/sidebars/stylesheets/jar.mn.in $(topsrcdir)/bluegriffon/sidebars/stylesheets/jar.mn
 	cp $(topsrcdir)/bluegriffon/sidebars/cssproperties/jar.mn.in $(topsrcdir)/bluegriffon/sidebars/cssproperties/jar.mn
@@ -36,10 +60,6 @@ libs:: $(_AVAILABLE_LOCALES)
 	cp $(topsrcdir)/bluegriffon/sidebars/domexplorer/jar.mn.in $(topsrcdir)/bluegriffon/sidebars/domexplorer/jar.mn
 	#
 	$(foreach f,$^, rm -fr $(topsrcdir)/bluegriffon/base/locale/`basename $f` ;)
-	$(foreach f,$^, rm -fr $(topsrcdir)/bluegriffon/extensions/op1/locale/`basename $f` ;)
-	$(foreach f,$^, rm -fr $(topsrcdir)/bluegriffon/extensions/gfd/locale/`basename $f` ;)
-	$(foreach f,$^, rm -fr $(topsrcdir)/bluegriffon/extensions/fs/locale/`basename $f` ;)
-	$(foreach f,$^, rm -fr $(topsrcdir)/bluegriffon/extensions/tipoftheday/locale/`basename $f` ;)
 	$(foreach f,$^, rm -fr $(topsrcdir)/bluegriffon/sidebars/scripteditor/locale/`basename $f` ;)
 	$(foreach f,$^, rm -fr $(topsrcdir)/bluegriffon/sidebars/stylesheets/locale/`basename $f` ;)
 	$(foreach f,$^, rm -fr $(topsrcdir)/bluegriffon/sidebars/cssproperties/locale/`basename $f` ;)
@@ -47,10 +67,6 @@ libs:: $(_AVAILABLE_LOCALES)
 	$(foreach f,$^, rm -fr $(topsrcdir)/bluegriffon/sidebars/domexplorer/locale/`basename $f` ;)
 	#
 	$(foreach f,$^, mkdir -p $(topsrcdir)/bluegriffon/base/locale/`basename $f` ;)
-	$(foreach f,$^, mkdir -p $(topsrcdir)/bluegriffon/extensions/op1/locale/`basename $f` ;)
-	$(foreach f,$^, mkdir -p $(topsrcdir)/bluegriffon/extensions/gfd/locale/`basename $f` ;)
-	$(foreach f,$^, mkdir -p $(topsrcdir)/bluegriffon/extensions/fs/locale/`basename $f` ;)
-	$(foreach f,$^, mkdir -p $(topsrcdir)/bluegriffon/extensions/tipoftheday/locale/`basename $f` ;)
 	$(foreach f,$^, mkdir -p $(topsrcdir)/bluegriffon/sidebars/scripteditor/locale/`basename $f` ;)
 	$(foreach f,$^, mkdir -p $(topsrcdir)/bluegriffon/sidebars/stylesheets/locale/`basename $f` ;)
 	$(foreach f,$^, mkdir -p $(topsrcdir)/bluegriffon/sidebars/cssproperties/locale/`basename $f` ;)
@@ -59,18 +75,6 @@ libs:: $(_AVAILABLE_LOCALES)
 	#
 	cat $(foreach f,$^,"$f/base.mn") >> $(topsrcdir)/bluegriffon/base/jar.mn
 	$(foreach f,$^, cp -Rf $f/bluegriffon/base/locale/* $(topsrcdir)/bluegriffon/base/locale/`basename $f` ;)
-	#
-	cat $(foreach f,$^,"$f/op1.mn") >> $(topsrcdir)/bluegriffon/extensions/op1/jar.mn
-	$(foreach f,$^, cp -Rf $f/bluegriffon/extensions/op1/* $(topsrcdir)/bluegriffon/extensions/op1/locale/`basename $f` ;)
-	#
-	cat $(foreach f,$^,"$f/gfd.mn") >> $(topsrcdir)/bluegriffon/extensions/gfd/jar.mn
-	$(foreach f,$^, cp -Rf $f/bluegriffon/extensions/gfd/* $(topsrcdir)/bluegriffon/extensions/gfd/locale/`basename $f` ;)
-	#
-	cat $(foreach f,$^,"$f/fs.mn") >> $(topsrcdir)/bluegriffon/extensions/fs/jar.mn
-	$(foreach f,$^, cp -Rf $f/bluegriffon/extensions/fs/* $(topsrcdir)/bluegriffon/extensions/fs/locale/`basename $f` ;)
-	#
-	cat $(foreach f,$^,"$f/tipoftheday.mn") >> $(topsrcdir)/bluegriffon/extensions/tipoftheday/jar.mn
-	$(foreach f,$^, cp -Rf $f/bluegriffon/extensions/tipoftheday/* $(topsrcdir)/bluegriffon/extensions/tipoftheday/locale/`basename $f` ;)
 	#
 	cat $(foreach f,$^,"$f/scripteditor.mn") >> $(topsrcdir)/bluegriffon/sidebars/scripteditor/jar.mn
 	$(foreach f,$^, cp -Rf $f/bluegriffon/sidebars/scripteditor/* $(topsrcdir)/bluegriffon/sidebars/scripteditor/locale/`basename $f` ;)
@@ -86,6 +90,19 @@ libs:: $(_AVAILABLE_LOCALES)
 	#
 	cat $(foreach f,$^,"$f/domexplorer.mn") >> $(topsrcdir)/bluegriffon/sidebars/domexplorer/jar.mn
 	$(foreach f,$^, cp -Rf $f/bluegriffon/sidebars/domexplorer/* $(topsrcdir)/bluegriffon/sidebars/domexplorer/locale/`basename $f` ;)
+
+libs:: en-US $(_EXTRA_LOCALES_)
+	@for ext in $(_EXTENSIONS_);\
+	do \
+		rm -fr $(topsrcdir)/bluegriffon/extensions/$$ext/locale; \
+		cp $(topsrcdir)/bluegriffon/extensions/$$ext/jar.mn.in $(topsrcdir)/bluegriffon/extensions/$$ext/jar.mn; \
+		for locale in $(_AVAILABLE_LOCALES) $(_EXTRA_LOCALES);\
+		do \
+			mkdir -p $(topsrcdir)/bluegriffon/extensions/$$ext/locale/$$locale; \
+			cp $(topsrcdir)/bluegriffon/locales/$$locale/bluegriffon/extensions/$$ext/* $(topsrcdir)/bluegriffon/extensions/$$ext/locale/$$locale; \
+			cat $(topsrcdir)/bluegriffon/locales/$$locale/$$ext.mn >> $(topsrcdir)/bluegriffon/extensions/$$ext/jar.mn; \
+		done \
+	done
 
 include $(topsrcdir)/config/rules.mk
 
