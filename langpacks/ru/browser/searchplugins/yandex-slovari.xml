@@ -1,0 +1,18 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<SearchPlugin xmlns="http://www.mozilla.org/2006/browser/search/">
+<ShortName>Яндекс.Словари</ShortName>
+<Description>Поиск словарных статей и определений: БСЭ, Даль, Брокгауз и более 20 других словарей. Перевод на 5 языков.</Description>
+<InputEncoding>UTF-8</InputEncoding>
+<Image width="16" height="16">data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAByUlEQVQ4T43S/0sacRzH8fd/0D/U37DCYMW2GusHKWqwUTNN6QumtbBhNM1WaTltZllUUoeVmMwKJSxtiVQKzdCgHyJijAheve+gKKLrDh5wb+79/Nz9cOTbPtWzAoMC9ljuHz1Ent8nhejhFXh40fzOGXhf++gAVySH1XRJEWGviAne56aMZxLRSCiLxcSJYt7oMbjpF9/OM9FgMA1/LCdxhY9gChzAOPs8Mz+3LqXBXTk3RP2BHUyGs5IuXwr5s0vIXdnCBUaEP+DOyw1R99QWHCv7knZ3UjYWr1Dyr7Rr9sfBrZp0zgisC7uSlvE4ciX5L0jlz6VdC385t0n6PByCZiwC9cAymr+v412fgDe9T9X0LKP+WxgfHTGYpuPo8W2D2yQ1WoOo7vQjkS3JvnklkYfp1+a9TzYB3KqprncWKp0H/69vZA8wTcXQ/XNDovkRwoevc16+J3prnEaVzo145lT2gEA0gw7XGgzOVbw3z4C7cp6JXnd60GSZQ+UXJ161jD9L1TYBjS2IBksA3Eg/kmFUIFLpJ9HuCCqisS2iyuAGN2U8k4gqdK5i69A8tPaFF9UaveB9Pd/THarQOjtYkUEB+8NYdAuWfAWMUZVknwAAAABJRU5ErkJggg==</Image>
+<Url type="application/x-suggestions+json" method="GET" template="http://suggest-slovari.yandex.ru/suggest-os">
+  <Param name="part" value="{searchTerms}"/>
+</Url>
+<Url type="text/html" method="GET" template="http://slovari.yandex.ru/search.xml" resultdomain="slovari.yandex.ru">
+  <Param name="text" value="{searchTerms}"/>
+  <Param name="from" value="fx3"/>
+</Url>
+<SearchForm>http://slovari.yandex.ru/</SearchForm>
+</SearchPlugin>
