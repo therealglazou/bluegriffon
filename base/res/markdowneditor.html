@@ -17,12 +17,19 @@
     .CodeMirror-gutter {cursor: pointer;}
   </style>
   <link rel="stylesheet" href="cm2/codemirror.css" />
+  <link rel="stylesheet" href="cm2/foldtag.css" />
 
   <script src="cm2/codemirror.js" type="text/javascript" ></script>
   <script src="cm2/searchcursor.js" type="text/javascript" ></script>
-  <script src="cm2/markdown.js" type="text/javascript" ></script>
+  <script src="cm2/foldcode.js" type="text/javascript" ></script>
+  <script src="cm2/css.js" type="text/javascript" ></script>
 
   <script src="cm2/jquery.min.js"></script>
+  <script src="cm2/poptags.js"></script>
+  <script src="cm2/pophtmlmixed.js"></script>
+
+  <script src="cm2/code-completion.js"></script>
+  <script src="cm2/css-completion.js"></script>
 
   <link rel="stylesheet" id="theme" type="text/css" href="cm2/cobalt.css" />
   <link rel="stylesheet" id="theme" type="text/css" href="cm2/eclipse.css" />
@@ -90,7 +97,6 @@
     getEditableElement().addEventListener("keypress", gKeyPressCallback, true);
     gEditor.setValue(gInitialValue);
     gEditor.clearHistory();
-    gEditor.ResetModificationCount();
     gEditor.focus();
    };
 

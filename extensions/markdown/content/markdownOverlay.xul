@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://markdown/skin/markdownOverlay.css" type="text/css"?>
+
+<!DOCTYPE overlay [
+  <!ENTITY % markdownOverlayDTD SYSTEM "chrome://markdown/locale/markdownOverlay.dtd">
+  %markdownOverlayDTD;
+]>
+
+<overlay id="markdownOverlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/x-javascript"  src="chrome://markdown/content/markdownOverlay.js"/>
+
+  <menupopup id="insertMenuPopup">
+    <menuseparator/>
+    <menuitem label="&markdownMenu.label;"
+              command="cmd_insertMarkdown"/>
+  </menupopup>
+
+  <toolbarpalette id="ComposerToolbarPalette">
+    <toolbarbutton id="markdownMainToolbarButton"
+                   label="&markdownMenu.label;"
+                   class="toolbarbutton-1"
+                   command="cmd_insertMarkdown"
+                   tooltiptext="&markdownMenu.label;"/>
+  </toolbarpalette>
+
+  <commandset id="composerMenuItems">
+    <command id="cmd_insertMarkdown" oncommand="goDoCommand('cmd_insertMarkdown')"/>
+  </commandset>
+</overlay>         
+

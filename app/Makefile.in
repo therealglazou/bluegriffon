@@ -109,3 +109,9 @@ else
 endif #} cocoa
 endif #} LIBXUL_SDK
 
+libs::
+ifeq (cocoa,$(MOZ_WIDGET_TOOLKIT))
+	$(INSTALL) $(DIST)/xpi-stage/*.xpi $(DIST)/$(APP_NAME).app/Contents/MacOS/distribution/extensions 
+else
+	$(INSTALL) $(DIST)/xpi-stage/*.xpi $(DIST)/bin/distribution/extensions 
+endif
