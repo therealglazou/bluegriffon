@@ -136,7 +136,7 @@ pref("media.autoplay.enabled", false);
 pref("bluegriffon.defaults.forceLF", false);
 pref("bluegriffon.defaults.backups", true);
 
-pref("bluegriffon.source.theme", "light");
+pref("bluegriffon.source.theme", "eclipse");
 pref("bluegriffon.source.entities", "basic");
 pref("bluegriffon.source.auto-indent", true);
 pref("bluegriffon.source.wrap", true);

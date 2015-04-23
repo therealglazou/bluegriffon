@@ -599,7 +599,6 @@
             iframe.addEventListener("load", function() {_self._installBespin(iframe);}, true);
             iframe.setAttribute("type", "chrome");
             iframe.setAttribute("src", "resource://gre/res/cm2.html");
-            iframe.setAttribute("onclick", "onBespinFocus(this)");
             newBox.appendChild(iframe);
 
             var newEditorElement = document.createElement("editor");

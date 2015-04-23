@@ -3,8 +3,59 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="UTF-8"/>
+  <link rel="stylesheet" href="codemirror/lib/codemirror.css"/>
+
+  <link rel="stylesheet" href="codemirror/theme/3024-day.css"/>
+  <link rel="stylesheet" href="codemirror/theme/3024-night.css"/>
+  <link rel="stylesheet" href="codemirror/theme/ambiance-mobile.css"/>
+  <link rel="stylesheet" href="codemirror/theme/ambiance.css"/>
+  <link rel="stylesheet" href="codemirror/theme/base16-dark.css"/>
+  <link rel="stylesheet" href="codemirror/theme/base16-light.css"/>
+  <link rel="stylesheet" href="codemirror/theme/blackboard.css"/>
+  <link rel="stylesheet" href="codemirror/theme/cobalt.css"/>
+  <link rel="stylesheet" href="codemirror/theme/colorforth.css"/>
+  <link rel="stylesheet" href="codemirror/theme/eclipse.css"/>
+  <link rel="stylesheet" href="codemirror/theme/elegant.css"/>
+  <link rel="stylesheet" href="codemirror/theme/erlang-dark.css"/>
+  <link rel="stylesheet" href="codemirror/theme/lesser-dark.css"/>
+  <link rel="stylesheet" href="codemirror/theme/mbo.css"/>
+  <link rel="stylesheet" href="codemirror/theme/mdn-like.css"/>
+  <link rel="stylesheet" href="codemirror/theme/midnight.css"/>
+  <link rel="stylesheet" href="codemirror/theme/monokai.css"/>
+  <link rel="stylesheet" href="codemirror/theme/neat.css"/>
+  <link rel="stylesheet" href="codemirror/theme/neo.css"/>
+  <link rel="stylesheet" href="codemirror/theme/night.css"/>
+  <link rel="stylesheet" href="codemirror/theme/paraiso-dark.css"/>
+  <link rel="stylesheet" href="codemirror/theme/paraiso-light.css"/>
+  <link rel="stylesheet" href="codemirror/theme/pastel-on-dark.css"/>
+  <link rel="stylesheet" href="codemirror/theme/rubyblue.css"/>
+  <link rel="stylesheet" href="codemirror/theme/solarized.css"/>
+  <link rel="stylesheet" href="codemirror/theme/the-matrix.css"/>
+  <link rel="stylesheet" href="codemirror/theme/tomorrow-night-bright.css"/>
+  <link rel="stylesheet" href="codemirror/theme/tomorrow-night-eighties.css"/>
+  <link rel="stylesheet" href="codemirror/theme/twilight.css"/>
+  <link rel="stylesheet" href="codemirror/theme/vibrant-ink.css"/>
+  <link rel="stylesheet" href="codemirror/theme/xq-dark.css"/>
+  <link rel="stylesheet" href="codemirror/theme/xq-light.css"/>
+  <link rel="stylesheet" href="codemirror/theme/zenburn.css"/>
+
+  <link rel="stylesheet" href="codemirror/addon/hint/show-hint.css"/>
+
+  <script src="codemirror/lib/codemirror.js"></script>
+  <script src="codemirror/addon/selection/active-line.js"></script>
+  <script src="codemirror/addon/fold/xml-fold.js"></script>
+  <script src="codemirror/addon/edit/matchtags.js"></script>
+  <script src="codemirror/addon/hint/show-hint.js"></script>
+  <script src="codemirror/addon/hint/xml-hint.js"></script>
+  <script src="codemirror/addon/hint/html-hint.js"></script>
+  <script src="codemirror/addon/search/searchcursor.js"></script>
+  <script src="codemirror/mode/xml/xml.js"></script>
+  <script src="codemirror/mode/javascript/javascript.js"></script>
+  <script src="codemirror/mode/css/css.js"></script>
+  <script src="codemirror/mode/htmlmixed/htmlmixed.js"></script>
   <style type="text/css" media="screen">
-    .CodeMirror { 
+    .CodeMirror {
+        height: 100%;
         margin: 0;
         position: absolute;
         top: 0;
@@ -12,39 +63,11 @@
         left: 0;
         right: 0;
         background-color: #fefefe;
-    }
-    .CodeMirror-scroll {height: 100% ! important}
-    .CodeMirror-gutter {cursor: pointer;}
-  </style>
-  <link rel="stylesheet" href="cm2/codemirror.css" />
-  <link rel="stylesheet" href="cm2/foldtag.css" />
-
-  <script src="cm2/codemirror.js" type="text/javascript" ></script>
-  <script src="cm2/searchcursor.js" type="text/javascript" ></script>
-  <script src="cm2/foldtag.js" type="text/javascript" ></script>
-  <script src="cm2/xml.js" type="text/javascript" ></script>
-  <script src="cm2/javascript.js" type="text/javascript" ></script>
-  <script src="cm2/css.js" type="text/javascript" ></script>
-  <script src="cm2/htmlmixed.js" type="text/javascript" ></script>
-
-  <script src="cm2/jquery.min.js"></script>
-  <script src="cm2/poptags.js"></script>
-  <script src="cm2/pophtmlmixed.js"></script>
-  
-  <script src="cm2/code-completion.js"></script>
-  <script src="cm2/css-completion.js"></script>
-  <script src="cm2/html-completion.js"></script>
-
-  <link rel="stylesheet" id="theme" type="text/css" href="cm2/cobalt.css" />
-  <link rel="stylesheet" id="theme" type="text/css" href="cm2/eclipse.css" />
-  <link rel="stylesheet" id="theme" type="text/css" href="cm2/elegant.css" />
-  <link rel="stylesheet" id="theme" type="text/css" href="cm2/light.css" />
-  <link rel="stylesheet" id="theme" type="text/css" href="cm2/monokai.css" />
-  <link rel="stylesheet" id="theme" type="text/css" href="cm2/neat.css" />
-  <link rel="stylesheet" id="theme" type="text/css" href="cm2/night.css" />
-  <link rel="stylesheet" id="theme" type="text/css" href="cm2/rubyblue.css" />
-  <link rel="stylesheet"            type="text/css" href="cm2/code-completion.css">  
-</head>
+     }
+     .CodeMirror-scroll {height: 100% ! important}
+     .CodeMirror-gutter {cursor: pointer;}
+   </style>
+ </head>
 <body>
 
 <textarea id="code" name="code"></textarea>
@@ -57,16 +80,6 @@
   var gModificationCount = 0;
 
   window.onload = function(){
-     var foldFunc = CodeMirror.newFoldFunction(CodeMirror.tagRangeFinder);
-      function keyEvent(cm, e) {
-        if (e.keyCode == 81 && e.ctrlKey) {
-          if (e.type == "keydown") {
-            e.stop();
-            setTimeout(function() {foldFunc(cm, cm.getCursor().line);}, 50);
-          }
-          return true;
-        }
-      }
 
      function changeFunc() {
        gModificationCount++;
@@ -79,43 +92,52 @@
      }
 
      gEditor = CodeMirror.fromTextArea(document.getElementById("code"), {
+        mode: "htmlmixed",
+        extraKeys: {"Ctrl-Space": "autocomplete"},
         lineNumbers: true,
+        lineWrapping: false,
+        value: "",
+        styleActiveLine: true,
+        matchTags: {bothTags: true},
+
         tabSize: 2,
         fixedGutter: true,
         extraGutterSize: 4,
         indentUnit: 2,
         indentWithTabs: false,
         matchBrackets: true,
-        onGutterClick: foldFunc,
         onChange: changeFunc,
-        mode: "pophtmlmixed",
         onCursorActivity: function() {
           if (gActivityCallback)
             gActivityCallback();
-          gEditor.setLineClass(hlLine, null);
-          hlLine = gEditor.setLineClass(gEditor.getCursor().line, "activeline");
         }
       });
-      var htmlCompletion = new CodeCompletion(gEditor, new HtmlCompletion());
-      var cssCompletion = new CodeCompletion(gEditor, new CssCompletion({local: true}));
-      gEditor.setOption("onKeyEvent", function(cm, e) {
-          var cursor = cm.getCursor();
-          var token = cm.getTokenAt(cursor);
-          switch (token.state.mode) {
-            case "html":
-              return htmlCompletion.handleKeyEvent(cm, e);
-            case "css":
-              return cssCompletion.handleKeyEvent(cm, e);
-
-            default: break;              
+ 
+      gEditor.on("gutterClick", function(cm, n, gutter, ev) {
+        if (ev.shiftKey) {
+          var anchor = gEditor.getCursor("anchor");
+          var head = gEditor.getCursor("head");
+          if (head.line > anchor.line
+              || (head.line == anchor.line && head.ch >= anchor.ch)) {
+            // the primary selection is in the normal direction
+            if (n < anchor.line)
+              gEditor.setSelections([{anchor: anchor, head: {line:n, ch:0}}]);
+            else
+              gEditor.setSelections([{anchor: anchor, head: {line:n, ch:null}}]);
           }
-          return false;
+          else {
+            // the selection is in the reverse direction
+            if (n < anchor.line)
+              gEditor.setSelections([{anchor: anchor, head: {line:n, ch:0}}]);
+            else
+              gEditor.setSelections([{anchor: anchor, head: {line:n, ch:null}}]);              
+          }
+          gEditor.setSelections(sel, 0);
+        }
+        else
+          gEditor.setSelection({line:n, ch:0}, {line:n, ch:null});
       });
-      /*gEditor.setOption("onKeyEvent", function(cm, e) {
-          return cssCompletion.handleKeyEvent(cm, e);
-      });*/
 
-      var hlLine = gEditor.setLineClass(0, "activeline");
       useTheme(gTheme);
   };
 

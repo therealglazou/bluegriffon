@@ -15,8 +15,7 @@ function _InstallBespin(aValue)
   catch(e) {}
 
   gDialog.bespinIframe.addEventListener("load", function() {InstallBespin(gDialog.bespinIframe, theme, aValue);}, true);
-  gDialog.bespinIframe.setAttribute("src", "resource://gre/res/csseditor.html");
-  gDialog.bespinIframe.setAttribute("onclick", "OnBespinFocus(this)");
+  gDialog.bespinIframe.setAttribute("src", "resource://gre/res/scripteditor.html");
 }
 
 function Startup()

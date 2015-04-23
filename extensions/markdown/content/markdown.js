@@ -15,7 +15,6 @@ function _InstallBespin(aValue)
 
   gDialog.bespinIframe.addEventListener("load", function() {InstallBespin(gDialog.bespinIframe, theme, aValue);}, true);
   gDialog.bespinIframe.setAttribute("src", "resource://gre/res/markdowneditor.html");
-  gDialog.bespinIframe.setAttribute("onclick", "OnBespinFocus(this)");
 }
 
 function Startup()
