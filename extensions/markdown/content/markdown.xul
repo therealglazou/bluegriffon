@@ -13,7 +13,7 @@
   %findbarDTD;
 ]>            
 
-<dialog title="&window.title;"
+<window title="&window.title;"
         id="bluegriffonMarkdown"
         windowtype="BlueGriffon:Markdown"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
@@ -51,4 +51,10 @@
           flex="1"/>
 
 #include ../../../base/content/bluegriffon/xul/findbar.inc
-</dialog>
+
+  <hbox>
+    <spacer flex="1"/>
+    <button label="&commitChanges.label;"
+            oncommand="CommitChanges()"/>
+  </hbox>
+</window>

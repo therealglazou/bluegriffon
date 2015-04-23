@@ -24,7 +24,7 @@ function Startup()
 }
 
 
- function onAccept()
+ function CommitChanges()
 {
   var editor = EditorUtils.getCurrentEditor();
   var bespinEditor = gDialog.bespinIframe.contentWindow.wrappedJSObject.gEditor;
@@ -34,7 +34,7 @@ function Startup()
     editor.insertHTML(html);
   }
   catch(e) {}
-  return true;
+  window.close();
 }
 
 function InstallBespin(aIframe, aTheme, aValue)
