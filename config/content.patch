@@ -3478,6 +3478,34 @@ diff --git a/toolkit/toolkit.mozbuild b/toolkit/toolkit.mozbuild
          '/testing/mochitest',
          '/testing/xpcshell',
          '/testing/tools/screenshot',
+diff --git a/widget/PuppetWidget.cpp b/widget/PuppetWidget.cpp
+--- a/widget/PuppetWidget.cpp
++++ b/widget/PuppetWidget.cpp
+@@ -1122,16 +1122,24 @@ NS_IMETHODIMP
+ PuppetScreenManager::ScreenForId(uint32_t aId,
+                                  nsIScreen** outScreen)
+ {
+   NS_IF_ADDREF(*outScreen = mOneScreen.get());
+   return NS_OK;
+ }
+ 
+ NS_IMETHODIMP
++PuppetScreenManager::ScreenForIndex(uint32_t aId,
++                                 nsIScreen** outScreen)
++{
++  NS_IF_ADDREF(*outScreen = mOneScreen.get());
++  return NS_OK;
++}
++
++NS_IMETHODIMP
+ PuppetScreenManager::GetPrimaryScreen(nsIScreen** outScreen)
+ {
+   NS_IF_ADDREF(*outScreen = mOneScreen.get());
+   return NS_OK;
+ }
+ 
+ NS_IMETHODIMP
+ PuppetScreenManager::ScreenForRect(int32_t inLeft,
 diff --git a/widget/cocoa/nsMenuItemX.mm b/widget/cocoa/nsMenuItemX.mm
 --- a/widget/cocoa/nsMenuItemX.mm
 +++ b/widget/cocoa/nsMenuItemX.mm
@@ -3650,7 +3678,7 @@ diff --git a/widget/windows/nsScreenManagerWin.cpp b/widget/windows/nsScreenMana
  }
 +
 +NS_IMETHODIMP
-+nsScreenManagerCocoa::ScreenForIndex(uint32_t aIndex, nsIScreen**outScreen)
++nsScreenManagerWin::ScreenForIndex(uint32_t aIndex, nsIScreen**outScreen)
 +{
 +  *outScreen = nullptr;
 +
