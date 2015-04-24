@@ -550,8 +550,7 @@ function redisplayBrightness()
    var h = colours.getHue();
    var s = colours.getSaturation();
    satSlider.setHSB(h, s, 255);
-   sat.setAttribute("style",
-     sat.getAttribute("style") + ";background-color: #" + satSlider.getHex());
+   sat.style.backgroundColor = "#" + satSlider.getHex();
 }
 
 function redisplaySaturation()
@@ -560,8 +559,7 @@ function redisplaySaturation()
    var h = colours.getHue();
    var b = colours.getBrightness();
    satSlider.setHSB(h, 1, b);
-   sat.setAttribute("style",
-     sat.getAttribute("style") + ";background-color: #" + satSlider.getHex());
+   sat.style.backgroundColor = "#" + satSlider.getHex();
 }
 
 function redisplaySwatches()
@@ -592,25 +590,25 @@ function redisplayRGBValues()
 
 function redisplayHSBValues()
 {
-  var h = Math.round(colours.getHue());
-  var s = Math.round(colours.getSaturation() * 100);
-  var b = Math.round(colours.getBrightness());
+  try {
+    var h = Math.round(colours.getHue());
+    var s = Math.round(colours.getSaturation() * 100);
+    var b = Math.round(colours.getBrightness());
 
-  gDialog.hue.value        = h;
-  gDialog.saturation.value = s;
-  gDialog.brightness.value = b;
+    gDialog.hue.value        = h;
+    gDialog.saturation.value = s;
+    gDialog.brightness.value = b;
 
-  computeOffsets(gDialog.hueAndSaturationCrosshair.parentNode);
+    computeOffsets(gDialog.hueAndSaturationCrosshair.parentNode);
 
-  var arrow = gDialog.brightnessArrow;
-  arrow.setAttribute("style",
-    arrow.getAttribute("style") + ";left: " + (b/255*200 + 2) + "px");
+    var arrow = gDialog.brightnessArrow;
+    arrow.style.left = (b/255*200 + 2) + "px";
 
-  var crosshair = gDialog.hueAndSaturationCrosshair;
-  crosshair.setAttribute("style",
-    crosshair.getAttribute("style") + ";left: " + (h/360*200 + 4) + "px"
-                                    + ";top:  " + ((100-s)/100*200 +4) + "px");
-
+    var crosshair = gDialog.hueAndSaturationCrosshair;
+    crosshair.style.left = (h/360*200 + 4) + "px";
+    crosshair.style.top  = ((100-s)/100*200 +4) + "px";
+  }
+  catch(e){}
 }
 
 

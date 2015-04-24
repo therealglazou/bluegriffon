@@ -3457,6 +3457,27 @@ diff --git a/toolkit/mozapps/handling/nsContentDispatchChooser.js b/toolkit/moza
  
    QueryInterface: XPCOMUtils.generateQI([Ci.nsIContentDispatchChooser])
  };
+diff --git a/toolkit/toolkit.mozbuild b/toolkit/toolkit.mozbuild
+--- a/toolkit/toolkit.mozbuild
++++ b/toolkit/toolkit.mozbuild
+@@ -166,17 +166,16 @@ if not CONFIG['MOZ_ENABLE_QTNETWORK'] an
+     DIRS += ['/toolkit/system/dbus']
+ 
+ DIRS += ['/addon-sdk']
+ 
+ if CONFIG['ENABLE_MARIONETTE'] or CONFIG['MOZ_WIDGET_TOOLKIT'] not in ('gonk', 'android'):
+     DIRS += ['/testing/marionette']
+ 
+ DIRS += [
+-    '/tools/quitter',
+     '/media/gmp-clearkey/0.1',
+ ]
+ 
+ if CONFIG['ENABLE_TESTS']:
+     DIRS += [
+         '/testing/mochitest',
+         '/testing/xpcshell',
+         '/testing/tools/screenshot',
 diff --git a/widget/cocoa/nsMenuItemX.mm b/widget/cocoa/nsMenuItemX.mm
 --- a/widget/cocoa/nsMenuItemX.mm
 +++ b/widget/cocoa/nsMenuItemX.mm
@@ -3500,6 +3521,38 @@ diff --git a/widget/cocoa/nsMenuItemX.mm b/widget/cocoa/nsMenuItemX.mm
          [mNativeMenuItem setKeyEquivalent:@""];
        else
          [mNativeMenuItem setKeyEquivalent:keyEquivalent];
+diff --git a/widget/cocoa/nsScreenManagerCocoa.mm b/widget/cocoa/nsScreenManagerCocoa.mm
+--- a/widget/cocoa/nsScreenManagerCocoa.mm
++++ b/widget/cocoa/nsScreenManagerCocoa.mm
+@@ -140,8 +140,28 @@ nsScreenManagerCocoa::ScreenForNativeWid
+         return NS_OK;
+     }
+ 
+     *outScreen = nullptr;
+     return NS_OK;
+ 
+     NS_OBJC_END_TRY_ABORT_BLOCK_NSRESULT;
+ }
++
++NS_IMETHODIMP
++nsScreenManagerCocoa::ScreenForIndex(uint32_t aIndex, nsIScreen**outScreen)
++{
++    NS_OBJC_BEGIN_TRY_ABORT_BLOCK_NSRESULT;
++
++    uint32_t numberOfScreens;
++    GetNumberOfScreens(&numberOfScreens);
++    if (aIndex >= numberOfScreens)
++        return NS_ERROR_FAILURE;
++  
++    NSScreen *sc = [[NSScreen screens] objectAtIndex: aIndex];
++  
++    *outScreen = ScreenForCocoaScreen(sc);
++    NS_ADDREF(*outScreen);
++  
++    return NS_OK;
++  
++    NS_OBJC_END_TRY_ABORT_BLOCK_NSRESULT;
++}
 diff --git a/widget/gtk/nsWindow.cpp b/widget/gtk/nsWindow.cpp
 --- a/widget/gtk/nsWindow.cpp
 +++ b/widget/gtk/nsWindow.cpp
@@ -3522,3 +3575,90 @@ diff --git a/widget/gtk/nsWindow.cpp b/widget/gtk/nsWindow.cpp
              }
              else {
                  switch (aInitData->mPopupHint) {
+diff --git a/widget/nsIScreenManager.idl b/widget/nsIScreenManager.idl
+--- a/widget/nsIScreenManager.idl
++++ b/widget/nsIScreenManager.idl
+@@ -2,27 +2,27 @@
+  *
+  * This Source Code Form is subject to the terms of the Mozilla Public
+  * License, v. 2.0. If a copy of the MPL was not distributed with this
+  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+ 
+ #include "nsISupports.idl"
+ #include "nsIScreen.idl"
+ 
+-[scriptable, uuid(e8a96e60-6b61-4a14-bacc-53891604b502)]
++[scriptable, uuid(0F311A41-3477-4E8D-AA33-AC6F9EF1D66D)]
+ interface nsIScreenManager : nsISupports
+ {
+     //
+     // Returns the screen that contains the rectangle. If the rect overlaps
+     // multiple screens, it picks the screen with the greatest area of intersection.
+     //
+     // The coordinates are in pixels (not twips) and in screen coordinates.
+     //
+   nsIScreen screenForRect ( in long left, in long top, in long width, in long height ) ;
+-
++  nsIScreen screenForIndex ( in unsigned long index);
+     //
+     // Returns the screen corresponding to the id. If no such screen exists,
+     // this will throw NS_ERROR_FAILURE. The id is a unique numeric value
+     // assigned to each screen, and is an attribute available on the nsIScreen
+     // interface.
+   nsIScreen screenForId ( in unsigned long id ) ;
+ 
+     // The screen with the menubar/taskbar. This shouldn't be needed very
+diff --git a/widget/nsScreenManagerProxy.cpp b/widget/nsScreenManagerProxy.cpp
+--- a/widget/nsScreenManagerProxy.cpp
++++ b/widget/nsScreenManagerProxy.cpp
+@@ -79,16 +79,24 @@ NS_IMETHODIMP
+ nsScreenManagerProxy::ScreenForId(uint32_t aId, nsIScreen** outScreen)
+ {
+   // At this time, there's no need for child processes to query for
+   // screens by ID.
+   return NS_ERROR_NOT_IMPLEMENTED;
+ }
+ 
+ NS_IMETHODIMP
++nsScreenManagerProxy::ScreenForIndex(uint32_t aIndex, nsIScreen**outScreen)
++{
++  // At this time, there's no need for child processes to query for
++  // screens by ID.
++  return NS_ERROR_NOT_IMPLEMENTED;
++}
++
++NS_IMETHODIMP
+ nsScreenManagerProxy::ScreenForRect(int32_t inLeft,
+                                     int32_t inTop,
+                                     int32_t inWidth,
+                                     int32_t inHeight,
+                                     nsIScreen** outScreen)
+ {
+   bool success = false;
+   ScreenDetails details;
+diff --git a/widget/windows/nsScreenManagerWin.cpp b/widget/windows/nsScreenManagerWin.cpp
+--- a/widget/windows/nsScreenManagerWin.cpp
++++ b/widget/windows/nsScreenManagerWin.cpp
+@@ -180,8 +180,22 @@ nsScreenManagerWin::GetSystemDefaultScal
+ 
+ NS_IMETHODIMP
+ nsScreenManagerWin::ScreenForNativeWidget(void *aWidget, nsIScreen **outScreen)
+ {
+   HMONITOR mon = MonitorFromWindow((HWND) aWidget, MONITOR_DEFAULTTOPRIMARY);
+   *outScreen = CreateNewScreenObject(mon);
+   return NS_OK;
+ }
++
++NS_IMETHODIMP
++nsScreenManagerCocoa::ScreenForIndex(uint32_t aIndex, nsIScreen**outScreen)
++{
++  *outScreen = nullptr;
++
++  if (aIndex < mScreenList.Length()) {
++    ScreenListItem& curr = mScreenList[aIndex];
++    NS_IF_ADDREF(*outScreen = curr.mScreen.get());
++    return NS_OK;
++  }
++
++  return NS_ERROR_FAILURE;
++}

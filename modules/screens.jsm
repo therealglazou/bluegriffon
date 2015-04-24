@@ -185,26 +185,48 @@ var ScreenUtils = {
     return this.mScreenManager;
   },
 
+  get numberOfScreens() {
+    return this.mScreenManager.numberOfScreens;
+  },
+
   get screens()
   {
-    var screen = null;
     var screens = [];
-    var screenManager = this.screenManager;
     var min = 0;
-    var max = 0;
-    for (x = 0; x < 15000; x += 600) {
-      var s = screenManager.screenForRect(x, 20, 10, 10);
-      if (s != screen) {
-        screen = s;
-        var left = {}, top = {}, width = {}, height = {};
-        screenManager.primaryScreen.GetRect(left, top, width, height);
-        screens.push( { width: width.value,
-                        height: height.value,
-                        min: min,
-                        max: min + width.value} );
-        min += width.value;
-      }
+    var screenManager = this.screenManager;
+    var numberOfScreens = screenManager.numberOfScreens;
+    for (var i = 0; i < numberOfScreens; i++) {
+      var screen = screenManager.screenForIndex(i);
+      var left = {}, top = {}, width = {}, height = {};
+      screen.GetRectDisplayPix(left, top, width, height);
+      screens.push( { width: width.value,
+                      height: height.value,
+                      min: left.value,
+                      max: (left.value + width.value),
+                      factor: screen.contentsScaleFactor,
+                      id: screen.id} );
     }
+    screens.sort(function(a,b) {
+      if (a.min < b.min)
+        return -1;
+      if (a.min > b.min)
+        return 1;
+      return 0;
+    });
+    var realMin = 0;
+    for (var i = 0; i < screens.length; i++) {
+      var s = screens[i];
+      s.realMin = realMin;
+      realMin += s.width * s.factor;
+      s.realMax = realMin;
+    }
+    screens.sort(function(a,b) {
+      if (a.id < b.id)
+        return -1;
+      if (a.id > b.id)
+        return 1;
+      return 0;
+    });
     return screens;
   },
 
