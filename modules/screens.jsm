@@ -217,7 +217,7 @@ var ScreenUtils = {
     for (var i = 0; i < screens.length; i++) {
       var s = screens[i];
       s.realMin = realMin;
-      realMin += s.width * s.factor;
+      realMin += s.width;
       s.realMax = realMin;
     }
     screens.sort(function(a,b) {
