@@ -537,7 +537,7 @@ var EditorUtils = {
   {
     try {
       var aDOMHTMLDoc = this.getCurrentEditor().document.QueryInterface(Components.interfaces.nsIDOMHTMLDocument);
-      return aDOMHTMLDoc.URL;
+      return aDOMHTMLDoc.location.toString();
     }
     catch (e) {}
     return "";
