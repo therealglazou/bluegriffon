@@ -186,7 +186,11 @@ var ScreenUtils = {
   },
 
   get numberOfScreens() {
+#ifdef XP_MACOSX
     return this.mScreenManager.numberOfScreens;
+#else
+    return 1;
+#endif
   },
 
   get screens()

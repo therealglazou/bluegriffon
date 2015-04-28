@@ -12,11 +12,11 @@ EXTRA_JS_MODULES += [
   'printHelper.jsm',
   'projectManager.jsm',
   'prompterHelper.jsm',
-  'screens.jsm',
   'urlHelper.jsm',
 ]
 
 if CONFIG['MOZ_WIDGET_TOOLKIT'] in ('windows', 'gtk2', 'gtk3'):
     EXTRA_PP_JS_MODULES += [
+        'screens.jsm',
         'unicodeHelper.jsm',
     ]
