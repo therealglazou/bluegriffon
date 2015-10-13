@@ -1,6 +1,7 @@
 Components.utils.import("resource://app/modules/prompterHelper.jsm");
 Components.utils.import("resource://app/modules/editorHelper.jsm");
 Components.utils.import("resource://app/modules/l10nHelper.jsm");
+Components.utils.import("resource://gre/modules/Services.jsm");
 
 if (typeof com == "undefined") com = {};
 if (typeof com.bluegriffon == "undefined") com.bluegriffon = {};
@@ -9,7 +10,10 @@ var cmdOp1Command =
 {
   isCommandEnabled: function(aCommand, dummy)
   {
-    return (EditorUtils.getCurrentEditor() != null);
+    return (EditorUtils.getCurrentEditorElement() &&
+            EditorUtils.isDocumentEditable() &&
+            EditorUtils.isEditingRenderedHTML() &&
+            GetCurrentViewMode() == "wysiwyg");
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -27,16 +31,15 @@ var cmdOp1Command =
   }
 };
 
-com.bluegriffon.op1 = {
+var Op1Helper = {
 
   startup: function()
   {
-    window.removeEventListener("load", com.bluegriffon.op1.startup, false);
+    window.removeEventListener('load', Op1Helper.startup, false);
 
     var commandTable = ComposerCommands.getComposerCommandTable();
     commandTable.registerCommand("cmd_op1", cmdOp1Command);
   }
 
 };
-
-window.addEventListener("load", com.bluegriffon.op1.startup, false);
+window.addEventListener('load', Op1Helper.startup, false);
