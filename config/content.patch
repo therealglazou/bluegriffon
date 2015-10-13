@@ -1,3 +1,44 @@
+diff --git a/browser/base/content/baseMenuOverlay.xul b/browser/base/content/baseMenuOverlay.xul
+--- a/browser/base/content/baseMenuOverlay.xul
++++ b/browser/base/content/baseMenuOverlay.xul
+@@ -96,17 +96,17 @@
+              oncommand="openHelpLink('firefox-osxkey');"
+              key="&helpMac.commandkey;"
+              modifiers="accel"/>
+ <!-- These are used to build the Application menu under Cocoa widgets -->
+         <key id="key_preferencesCmdMac"
+              key="&preferencesCmdMac.commandkey;"
+              modifiers="accel"/>
+         <key id="key_hideThisAppCmdMac"
+-             key="&hideThisAppCmdMac2.commandkey;"
++             key="&hideThisAppCmdMac.commandkey;"
+              modifiers="accel"/>
+         <key id="key_hideOtherAppsCmdMac"
+              key="&hideOtherAppsCmdMac.commandkey;"
+              modifiers="accel,alt"/>
+ #endif
+     </keyset>
+ 
+     <stringbundleset id="stringbundleset">
+diff --git a/browser/locales/en-US/chrome/browser/baseMenuOverlay.dtd b/browser/locales/en-US/chrome/browser/baseMenuOverlay.dtd
+--- a/browser/locales/en-US/chrome/browser/baseMenuOverlay.dtd
++++ b/browser/locales/en-US/chrome/browser/baseMenuOverlay.dtd
+@@ -39,14 +39,14 @@
+ <!ENTITY helpShowTour2.accesskey        "o">
+ 
+ <!ENTITY preferencesCmdMac.label        "Preferences…">
+ <!ENTITY preferencesCmdMac.commandkey   ",">
+ 
+ <!ENTITY servicesMenuMac.label          "Services">
+ 
+ <!ENTITY hideThisAppCmdMac2.label       "Hide &brandShorterName;">
+-<!ENTITY hideThisAppCmdMac2.commandkey  "H">
++<!ENTITY hideThisAppCmdMac.commandkey  "H">
+ 
+ <!ENTITY hideOtherAppsCmdMac.label      "Hide Others">
+ <!ENTITY hideOtherAppsCmdMac.commandkey "H">
+ 
+ <!ENTITY showAllAppsCmdMac.label        "Show All">
 diff --git a/caps/nsScriptSecurityManager.cpp b/caps/nsScriptSecurityManager.cpp
 --- a/caps/nsScriptSecurityManager.cpp
 +++ b/caps/nsScriptSecurityManager.cpp
@@ -36,6 +77,27 @@ diff --git a/caps/nsScriptSecurityManager.cpp b/caps/nsScriptSecurityManager.cpp
                  return NS_OK;
              }
          }
+ 
+diff --git a/docshell/base/nsDocShell.cpp b/docshell/base/nsDocShell.cpp
+--- a/docshell/base/nsDocShell.cpp
++++ b/docshell/base/nsDocShell.cpp
+@@ -2006,16 +2006,17 @@ nsDocShell::SetCurrentURI(nsIURI* aURI, 
+     nsAutoCString spec;
+     if (aURI) {
+       aURI->GetSpec(spec);
+     }
+     PR_LogPrint("DOCSHELL %p SetCurrentURI %s\n", this, spec.get());
+   }
+ #endif
+ 
++
+   // We don't want to send a location change when we're displaying an error
+   // page, and we don't want to change our idea of "current URI" either
+   if (mLoadType == LOAD_ERROR_PAGE) {
+     return false;
+   }
+ 
+   mCurrentURI = NS_TryToMakeImmutable(aURI);
  
 diff --git a/dom/base/nsCopySupport.cpp b/dom/base/nsCopySupport.cpp
 --- a/dom/base/nsCopySupport.cpp
@@ -3580,6 +3642,30 @@ diff --git a/widget/cocoa/nsScreenManagerCocoa.mm b/widget/cocoa/nsScreenManager
 +    return NS_OK;
 +  
 +    NS_OBJC_END_TRY_ABORT_BLOCK_NSRESULT;
++}
+diff --git a/widget/gtk/nsScreenManagerGtk.cpp b/widget/gtk/nsScreenManagerGtk.cpp
+--- a/widget/gtk/nsScreenManagerGtk.cpp
++++ b/widget/gtk/nsScreenManagerGtk.cpp
+@@ -362,8 +362,20 @@ nsScreenManagerGtk :: ScreenForNativeWid
+     gdk_window_get_origin(GDK_WINDOW(aWidget), &x, &y);
+     rv = ScreenForRectPix(x, y, width, height, outScreen);
+   } else {
+     rv = GetPrimaryScreen(outScreen);
+   }
+ 
+   return rv;
+ }
++
++NS_IMETHODIMP
++nsScreenManagerGtk::ScreenForIndex(uint32_t aIndex, nsIScreen**outScreen)
++{
++    uint32_t numberOfScreens;
++    GetNumberOfScreens(&numberOfScreens);
++    if (aIndex >= numberOfScreens)
++        return NS_ERROR_FAILURE;
++
++    NS_IF_ADDREF(*outScreen = mCachedScreenArray[aIndex]);
++    return NS_OK;
 +}
 diff --git a/widget/gtk/nsWindow.cpp b/widget/gtk/nsWindow.cpp
 --- a/widget/gtk/nsWindow.cpp
