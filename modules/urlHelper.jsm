@@ -166,7 +166,7 @@ var UrlUtils = {
     return aText && /^http:\/\/|^https:\/\/|^file:\/\/|^ftp:\/\/|^about:|^mailto:|^news:|^snews:|^telnet:|^ldap:|^ldaps:|^gopher:|^finger:|^javascript:/i.test(aText);
   },
 
-  makeRelativeUrl: function makeRelativeUrl(aURLString)
+  makeRelativeUrl: function makeRelativeUrl(aURLString, aDocURL)
   {
     var inputUrl = aURLString.trim();
     if (!inputUrl)
@@ -174,7 +174,7 @@ var UrlUtils = {
 
     // Get the filespec relative to current document's location
     // NOTE: Can't do this if file isn't saved yet!
-    var docUrl = this.getDocumentBaseUrl();
+    var docUrl = aDocURL ? aDocURL : this.getDocumentBaseUrl();
     var docScheme = this.getScheme(docUrl);
 
     // Can't relativize if no doc scheme (page hasn't been saved)

@@ -26,7 +26,7 @@
 
 #ifdef XP_MACOSX
   <key id="key_preferencesCmdMac" key="&preferencesCmdMac.commandkey;" modifiers="accel"/>
-  <key id="key_hideThisAppCmdMac" key="&hideThisAppCmdMac2.commandkey;" modifiers="accel"/>
+  <key id="key_hideThisAppCmdMac" key="&hideThisAppCmdMac.commandkey;" modifiers="accel"/>
   <key id="key_hideOtherAppsCmdMac" key="&hideOtherAppsCmdMac.commandkey;" modifiers="accel,alt"/>
 #endif
 

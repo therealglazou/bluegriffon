@@ -201,7 +201,7 @@ function InitLocalFontFaceMenu(menuPopup)
       var itemNode = document.createElementNS(BlueGriffonVars.kXUL_NS, "menuitem");
       itemNode.setAttribute("label", BlueGriffonVars.localFonts[i]);
       itemNode.setAttribute("value", BlueGriffonVars.localFonts[i]);
-      itemNode.setAttribute("style", "font-family: " + BlueGriffonVars.localFonts[i]);
+      itemNode.setAttribute("style", "font-family: \"" + BlueGriffonVars.localFonts[i] + "\"");
       menuPopup.appendChild(itemNode);
     }
   }
