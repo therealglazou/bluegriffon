@@ -860,10 +860,6 @@ function ToggleViewMode(aElement)
   else if (aElement.id == "printPreviewModeButton")
     editor.setMedium("print");
 
-  var mode =  aElement.getAttribute("mode");
-  if (mode == GetCurrentViewMode())
-    return true;
-
   var child = aElement.parentNode.firstChild;
   while (child) {
     if (child == aElement)
@@ -872,6 +868,10 @@ function ToggleViewMode(aElement)
       child.removeAttribute("selected");
     child = child.nextSibling;
   }
+
+  var mode =  aElement.getAttribute("mode");
+  if (mode == GetCurrentViewMode())
+    return true;
 
   var editor = EditorUtils.getCurrentEditor();
   var editorElement = EditorUtils.getCurrentEditorElement();
