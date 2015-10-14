@@ -102,7 +102,8 @@ else
 
 .PHONY: repackage
 tools repackage:: $(PROGRAM)
-	cp $(DIST)/xpi-stage/*.xpi $(DIST)/bin/extensions 
+#	cp $(DIST)/xpi-stage/*.xpi $(DIST)/bin/extensions
+	$(INSTALL) $(DIST)/xpi-stage/*.xpi $(DIST)/bin/distribution/extensions
 
 endif
 
