@@ -17,7 +17,7 @@ The Open Source next-generation Web Editor based on the rendering engine of Fire
 
 * update the mozilla tree
 
-  if you want to build the bluegriffon-ng branch, you need to `git checkout bluegriffon-ng`
+  if you want to build the bluegriffon-ng branch, you need to `cd bluegriffon; git checkout bluegriffon-ng; cd ..`
 
   ``hg update -r `cat bluegriffon/config/mozilla_central_revision.txt```
 
