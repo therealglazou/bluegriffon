@@ -396,24 +396,27 @@ nvu|php, nvu|comment {
 * {
   /* Do NOT allow animations and transitions to run in an editor */
   /* if you except the ones blow this current rule */
-  -moz-animation: none ! important;
-  -moz-transition: none ! important;
+  animation: none ! important;
+  transition: none ! important;
 }
 
 @keyframes flasher {
   from {
-    outline-color: #CC0000 ! important;
+    outline-color: red ;
+  }
+  50% {
+    outline-color: green;
   }
   to {
-    outline-color: white ! important;
+    outline-color: white;
   }
 }
 
 *[\_moz_flasher] {
-  -moz-animation: flasher 0.2s 5 ! important;
-  outline-width: 2px ! important;
-  outline-style: solid ! important;
-  outline-color: white ! important;
+  animation-iteration-count: 5 !important;
+  animation-duration: 0.2s !important;
+  animation-name: flasher !important;
+  outline: transparent solid 2px;
 }
 
 /***** TABLES ****/
