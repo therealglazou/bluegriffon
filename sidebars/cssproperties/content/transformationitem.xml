@@ -61,31 +61,28 @@
       <xul:hbox align="center">
         <xul:label value="&x.label;"/>
         <xul:menulist anonid="Htextbox" editable="true"
+                      bgtype="csslength" units='% px pt cm in mm pc em ex rem ch' unsigned="true"
                       oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', true, ReapplyTransforms)"
                       oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', true, ReapplyTransforms)">
           <xul:menupopup anonid="horizontalTranslationMenupopup"
                          onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')"/>
         </xul:menulist>
-        <xul:spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch', ReapplyTransforms)"
-                         ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true, ReapplyTransforms)"/>
         <xul:label value="&y.label;"/>
         <xul:menulist anonid="Vtextbox" editable="true"
+                      bgtype="csslength" units='% px pt cm in mm pc em ex rem ch' unsigned="true"
                       oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', true, ReapplyTransforms)"
                       oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', true, ReapplyTransforms)">
           <xul:menupopup anonid="verticalTranslationMenupopup"
                          onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch', ReapplyTransforms)"/>
         </xul:menulist>
-        <xul:spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch', ReapplyTransforms)"
-                         ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true, ReapplyTransforms)"/>
         <xul:label value="&z.label;"/>
         <xul:menulist anonid="Ztextbox" editable="true"
+                      bgtype="csslength" units='% px pt cm in mm pc em ex rem ch' unsigned="true"
                       oncommand="onLengthMenulistCommand(this, 'px pt cm in mm pc em ex rem ch', '', true, ReapplyTransforms)"
                       oninput="onLengthMenulistCommand(this, 'px pt cm in mm pc em ex rem ch', '', true, ReapplyTransforms)">
           <xul:menupopup anonid="verticalTranslationMenupopup"
                          onpopupshowing="PopulateLengths(this, 'px pt cm in mm pc em ex rem ch', ReapplyTransforms)"/>
         </xul:menulist>
-        <xul:spinbuttons onup="IncreaseLength(this, 'px pt cm in mm pc em ex rem ch', ReapplyTransforms)"
-                         ondown="DecreaseLength(this, 'px pt cm in mm pc em ex rem ch', true, ReapplyTransforms)"/>
       </xul:hbox>
     </content>
 
@@ -150,13 +147,12 @@
       <xul:hbox align="center">
         <xul:label value="&depth.label;"/>
         <xul:menulist anonid="depthTextbox" editable="true"
+                      bgtype="csslength" units='% px pt cm in mm pc em ex rem ch' unsigned="true"
                       oncommand="onLengthMenulistCommand(this, 'px pt cm in mm pc em ex rem ch', '', true, ReapplyTransforms)"
                       oninput="onLengthMenulistCommand(this, 'px pt cm in mm pc em ex rem ch', '', true, ReapplyTransforms)">
           <xul:menupopup anonid="verticalTranslationMenupopup"
                          onpopupshowing="PopulateLengths(this, 'px pt cm in mm pc em ex rem ch', ReapplyTransforms)"/>
         </xul:menulist>
-        <xul:spinbuttons onup="IncreaseLength(this, 'px pt cm in mm pc em ex rem ch', ReapplyTransforms)"
-                         ondown="DecreaseLength(this, 'px pt cm in mm pc em ex rem ch', true, ReapplyTransforms)"/>
       </xul:hbox>
     </content>
 

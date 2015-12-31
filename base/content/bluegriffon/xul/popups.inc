@@ -7,14 +7,6 @@
     <menuitem id="revertTabContextMenu"           label="&revert.label;" oncommand="RevertTab()" />
   </menupopup>
 
-  <menupopup id="main-toolbar-context-menu">
-    <menuitem oncommand="CustomizeToolbar('MainToolbox');" id="CustomizeMainToolbar" label="&customizeToolbar.label;" accesskey="&customizeToolbar.accesskey;"/>
-  </menupopup>
-
-  <menupopup id="format-toolbar-context-menu">
-    <menuitem oncommand="CustomizeToolbar('FormatToolbox');" id="CustomizeFormatToolbar" label="&customizeToolbar.label;" accesskey="&customizeToolbar.accesskey;"/>
-  </menupopup>
-
   <menupopup id="structureBarContextMenu"
          onpopupshowing="UpdateStructureBarContextMenu()">
     <menuitem label="&resetElementLanguage.label;"

@@ -64,6 +64,11 @@
                      tooltiptext="&mathmlToolbarCmd.tooltip;"/>
   </toolbarpalette>
 
+  <menupopup id="insertMenuPopup">
+    <menuitem id="mathmlMenuitem"
+              label="&mathmlToolbarCmd.label;" command="cmd_mathml"/>
+  </menupopup>
+
   <commandset id="composerMenuItems">
     <command id="cmd_mathml"              oncommand="goDoCommand('cmd_mathml')"/>
   </commandset>

@@ -1440,7 +1440,49 @@ diff --git a/dom/xul/nsXULContentSink.cpp b/dom/xul/nsXULContentSink.cpp
 diff --git a/editor/composer/nsComposerCommands.cpp b/editor/composer/nsComposerCommands.cpp
 --- a/editor/composer/nsComposerCommands.cpp
 +++ b/editor/composer/nsComposerCommands.cpp
-@@ -461,17 +461,25 @@ nsIndentCommand::IsCommandEnabled(const 
+@@ -206,16 +206,23 @@ nsStyleUpdatingCommand::ToggleState(nsIE
+ 
+   //create some params now...
+   nsresult rv;
+   nsCOMPtr<nsICommandParams> params =
+       do_CreateInstance(NS_COMMAND_PARAMS_CONTRACTID,&rv);
+   if (NS_FAILED(rv) || !params)
+     return rv;
+ 
++  bool isCSS;
++  htmlEditor->GetIsCSSEnabled(&isCSS);
++  if (isCSS
++      && (mTagName == nsGkAtoms::b
++          || mTagName == nsGkAtoms::i
++          || mTagName == nsGkAtoms::u))
++    htmlEditor->SetIsCSSEnabled(false);
+   // tags "href" and "name" are special cases in the core editor 
+   // they are used to remove named anchor/link and shouldn't be used for insertion
+   bool doTagRemoval;
+   if (mTagName == nsGkAtoms::href || mTagName == nsGkAtoms::name) {
+     doTagRemoval = true;
+   } else {
+     // check current selection; set doTagRemoval if formatting should be removed
+     rv = GetCurrentState(aEditor, params);
+@@ -247,16 +254,17 @@ nsStyleUpdatingCommand::ToggleState(nsIE
+       rv = RemoveTextProperty(htmlEditor, tagName);
+     }
+     if (NS_SUCCEEDED(rv))
+       rv = SetTextProperty(htmlEditor, tagName);
+ 
+     aEditor->EndTransaction();
+   }
+ 
++  htmlEditor->SetIsCSSEnabled(isCSS);
+   return rv;
+ }
+ 
+ nsListCommand::nsListCommand(nsIAtom* aTagName)
+ : nsBaseStateUpdatingCommand(aTagName)
+ {
+ }
+ 
+@@ -461,17 +469,25 @@ nsIndentCommand::IsCommandEnabled(const 
  NS_IMETHODIMP
  nsIndentCommand::DoCommand(const char *aCommandName, nsISupports *refCon)
  {
@@ -1466,7 +1508,7 @@ diff --git a/editor/composer/nsComposerCommands.cpp b/editor/composer/nsComposer
  NS_IMETHODIMP
  nsIndentCommand::DoCommandParams(const char *aCommandName,
                                   nsICommandParams *aParams,
-@@ -510,17 +518,27 @@ nsOutdentCommand::IsCommandEnabled(const
+@@ -510,17 +526,27 @@ nsOutdentCommand::IsCommandEnabled(const
  }
  
  
@@ -1495,7 +1537,7 @@ diff --git a/editor/composer/nsComposerCommands.cpp b/editor/composer/nsComposer
  nsOutdentCommand::DoCommandParams(const char *aCommandName,
                                    nsICommandParams *aParams, 
                                    nsISupports *refCon)
-@@ -921,22 +939,30 @@ nsAlignCommand::nsAlignCommand()
+@@ -921,22 +947,30 @@ nsAlignCommand::nsAlignCommand()
  nsresult
  nsAlignCommand::GetCurrentState(nsIEditor *aEditor, nsICommandParams *aParams)
  {
@@ -1528,7 +1570,7 @@ diff --git a/editor/composer/nsComposerCommands.cpp b/editor/composer/nsComposer
        outStateString.AssignLiteral("left");
        break;
        
-@@ -962,17 +988,24 @@ nsAlignCommand::GetCurrentState(nsIEdito
+@@ -962,17 +996,24 @@ nsAlignCommand::GetCurrentState(nsIEdito
  nsresult
  nsAlignCommand::SetState(nsIEditor *aEditor, nsString& newState)
  {
@@ -1975,14 +2017,22 @@ diff --git a/editor/libeditor/nsEditorEventListener.h b/editor/libeditor/nsEdito
 diff --git a/editor/libeditor/nsHTMLCSSUtils.cpp b/editor/libeditor/nsHTMLCSSUtils.cpp
 --- a/editor/libeditor/nsHTMLCSSUtils.cpp
 +++ b/editor/libeditor/nsHTMLCSSUtils.cpp
-@@ -327,16 +327,17 @@ nsHTMLCSSUtils::IsCSSEditableProperty(ns
+@@ -322,21 +322,22 @@ nsHTMLCSSUtils::IsCSSEditableProperty(ns
+   nsIContent* content = aNode;
+   // we need an element node here
+   if (content->NodeType() == nsIDOMNode::TEXT_NODE) {
+     content = content->GetParent();
+     NS_ENSURE_TRUE(content, false);
    }
  
    // html inline styles B I TT U STRIKE and COLOR/FACE on FONT
-   if (nsGkAtoms::b == aProperty ||
-       nsGkAtoms::i == aProperty ||
+-  if (nsGkAtoms::b == aProperty ||
+-      nsGkAtoms::i == aProperty ||
++  if (//nsGkAtoms::b == aProperty ||
++      //nsGkAtoms::i == aProperty ||
        nsGkAtoms::tt == aProperty ||
-       nsGkAtoms::u == aProperty ||
+-      nsGkAtoms::u == aProperty ||
++      //nsGkAtoms::u == aProperty ||
        nsGkAtoms::strike == aProperty ||
 +      nsGkAtoms::nobr == aProperty ||
        (nsGkAtoms::font == aProperty && aAttribute &&
@@ -3344,6 +3394,76 @@ diff --git a/toolkit/content/widgets/menu.xml b/toolkit/content/widgets/menu.xml
        </xul:hbox>
        <xul:label class="menu-iconic-text" flex="1" xbl:inherits="value=label,accesskey,crop" crop="right"/>
      </content>
+diff --git a/toolkit/content/widgets/menulist.xml b/toolkit/content/widgets/menulist.xml
+--- a/toolkit/content/widgets/menulist.xml
++++ b/toolkit/content/widgets/menulist.xml
+@@ -540,16 +540,23 @@
+                                          else this.removeAttribute('readonly'); return val;"
+                                   onget="return this.inputField.readOnly;"/>
+ 
+       <method name="select">
+         <body>
+           this.inputField.select();
+         </body>
+       </method>
++
++      <method name="getChild">
++        <parameter name="aChildName"/>
++        <body><![CDATA[
++          return document.getAnonymousElementByAttribute(this, "anonid", aChildName);
++        ]]></body>
++      </method>
+     </implementation>
+ 
+     <handlers>
+       <handler event="focus" phase="capturing">
+         <![CDATA[
+           this.setAttribute('focused','true');
+         ]]>
+       </handler>
+@@ -574,24 +581,35 @@
+               // For now, only do this when the outermost menupopup opens.
+               this.menuBoxObject.activeChild = this.mSelectedInternal;
+           }
+         ]]>
+       </handler>
+ 
+       <handler event="keypress">
+         <![CDATA[
++          if (event.ctrlKey && event.shiftKey)
++            return;
++
++          if (this.getAttribute("bgtype") == "csslength") {
++            if (event.keyCode == KeyEvent.DOM_VK_UP) {
++              IncreaseLength(this, this.getAttribute("units"));
++              event.preventDefault();
++            }
++            else if (event.keyCode == KeyEvent.DOM_VK_DOWN) {
++              DecreaseLength(this, this.getAttribute("units"), !(this.getAttribute("unsigned") == "true"));
++              event.preventDefault();
++            }
++          }
+           // open popup if key is up arrow, down arrow, or F4
+-          if (!event.ctrlKey && !event.shiftKey) {
+-            if (event.keyCode == KeyEvent.DOM_VK_UP ||
+-                event.keyCode == KeyEvent.DOM_VK_DOWN ||
+-                (event.keyCode == KeyEvent.DOM_VK_F4 && !event.altKey)) {
+-              event.preventDefault();
+-              this.open = true;
+-            }
++          else if (event.keyCode == KeyEvent.DOM_VK_UP ||
++                   event.keyCode == KeyEvent.DOM_VK_DOWN ||
++                   (event.keyCode == KeyEvent.DOM_VK_F4 && !event.altKey)) {
++            event.preventDefault();
++            this.open = true;
+           }
+         ]]>
+       </handler>
+     </handlers>
+   </binding>
+ 
+   <binding id="menulist-description" display="xul:menu"
+            extends="chrome://global/content/bindings/menulist.xml#menulist">
 diff --git a/toolkit/content/xul.css b/toolkit/content/xul.css
 --- a/toolkit/content/xul.css
 +++ b/toolkit/content/xul.css
@@ -3611,6 +3731,28 @@ diff --git a/widget/cocoa/nsMenuItemX.mm b/widget/cocoa/nsMenuItemX.mm
          [mNativeMenuItem setKeyEquivalent:@""];
        else
          [mNativeMenuItem setKeyEquivalent:keyEquivalent];
+diff --git a/widget/cocoa/nsNativeThemeCocoa.mm b/widget/cocoa/nsNativeThemeCocoa.mm
+--- a/widget/cocoa/nsNativeThemeCocoa.mm
++++ b/widget/cocoa/nsNativeThemeCocoa.mm
+@@ -2607,17 +2607,17 @@ nsNativeThemeCocoa::DrawWidgetBackground
+     }
+       break;
+ 
+     case NS_THEME_WINDOW_TITLEBAR: {
+       NSWindow* win = NativeWindowForFrame(aFrame);
+       BOOL isMain = [win isMainWindow];
+       float unifiedToolbarHeight = [win isKindOfClass:[ToolbarWindow class]] ?
+         [(ToolbarWindow*)win unifiedToolbarHeight] : macRect.size.height;
+-      DrawNativeTitlebar(cgContext, macRect, unifiedToolbarHeight, isMain, YES);
++      //DrawNativeTitlebar(cgContext, macRect, unifiedToolbarHeight, isMain, YES);
+     }
+       break;
+ 
+     case NS_THEME_STATUSBAR: 
+       DrawStatusBar(cgContext, macRect, aFrame);
+       break;
+ 
+     case NS_THEME_DROPDOWN:
 diff --git a/widget/cocoa/nsScreenManagerCocoa.mm b/widget/cocoa/nsScreenManagerCocoa.mm
 --- a/widget/cocoa/nsScreenManagerCocoa.mm
 +++ b/widget/cocoa/nsScreenManagerCocoa.mm

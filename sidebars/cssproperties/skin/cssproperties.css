@@ -40,16 +40,20 @@
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 @namespace html url("http://www.w3.org/1999/xhtml");
 
+page {
+  -moz-appearance: none;
+  background-color: transparent;
+  color: white;
+}
+
 #mainBox {
-%ifdef XP_MACOSX
-  font-size: smaller;
-%endif
   margin: 0px;
   padding: 0px;
 }
 
 #propertiesBox {
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 #mainBoxHeader {
@@ -57,14 +61,11 @@
   padding-right: 2em;
   padding-top: 1em;
   padding-bottom: 1em;
+  overflow-x: hidden;
 }
 
 #cssPolicyBox {
-%ifdef XP_MACOSX
-  background-image: -moz-linear-gradient(#d0d0d0, silver);
-%endif
   margin-bottom: 0.5em;
-  border-radius: 5px;
 }
 
 #sectionHeaderContext {
@@ -79,14 +80,6 @@
   margin-right: 5px;
 }
 
-#currentElementBox {
-  font-family: -moz-fixed;
-  padding: 0.5em;
-  border: thin solid gray;
-  border-radius: 5px;
-  font-size: larger;
-}
-
 #classPicker, #IDPicker {
   max-width: 7em;
   min-width: 7em;
@@ -97,27 +90,34 @@
 }
 
 hbox.csspropertiesHeader {
-  border-top: thin solid silver;
+  border-top: 2px solid #181818;
+  -moz-border-top-colors: #181818 #494f51;
   padding-left: 3px;
-  background-color: #dee4ea;
-%ifndef XP_MACOSX
+  padding-top: 2px;
+  padding-bottom: 2px;
+  text-transform: uppercase;
   font-weight: bold;
-%endif
-
+  -moz-transition: color 0.5s;
 }
 
 hbox.csspropertiesHeader > image {
   list-style-image: url("chrome://cssproperties/skin/filter.png");
   -moz-transform: rotate(-90deg);
-  -moz-transition: -moz-transform 0.2s;
+  -moz-transition: -moz-transform 0.5s, filter 0.5s;
+  filter: grayscale(100%) contrast(600%);
 }
 
 hbox.csspropertiesHeader:-moz-locale-dir(rtl) > image {
   -moz-transform: rotate(+90deg) ;
 }
 
+hbox.csspropertiesHeader[open="true"] {
+  color: #00abff;
+}
+
 hbox.csspropertiesHeader[open="true"] > image {
   -moz-transform: rotate(0deg) !important;
+  filter: none;
 }
 
 .section {
@@ -126,7 +126,6 @@ hbox.csspropertiesHeader[open="true"] > image {
   opacity: 0;
   overflow: hidden;
   padding: 1em;
-  background-color: white;
 }
 
 hbox.csspropertiesHeader[open="true"] + .section {
@@ -207,4 +206,27 @@ csscolor {
 
 l10n {
   display: none;
+}
+
+listbox, richlistbox {
+  background-color: #363d3f;
+  color: white;
+  border: #181818 solid thin;
+  -moz-appearance: none;
+}
+
+hbox.listboxBg {
+  background-color: #363d3f;
+  color: white;
+  border-color: #181818;
+}
+
+hbox.listboxBg > * {
+  background-color: transparent;
+  color: white;
+  border-right: thin solid #181818;
+}
+
+hbox.listboxBg > *:last-child {
+  border-right: 0px none;
 }

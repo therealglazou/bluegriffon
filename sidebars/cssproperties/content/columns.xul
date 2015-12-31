@@ -51,6 +51,7 @@
             <label value="&columnWidth.label;"/>
             <hbox align="center">
               <menulist editable="true" id="columnWidthMenulist" sizetopopup="none"
+                        bgtype="csslength" units='% px pt cm in mm pc em ex rem ch'
                         oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'auto', false)"
                         property="-moz-column-width"
                         oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'auto', false)">
@@ -59,8 +60,6 @@
                   <menuitem label="&automaticColumnWidth.label;" value="auto"/>
                 </menupopup>
               </menulist>
-              <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
-                               ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', false)"/>
             </hbox>
           </row>
 
@@ -68,6 +67,7 @@
             <label value="&columnGap.label;"/>
             <hbox align="center">
               <menulist editable="true" id="columnGapMenulist" sizetopopup="none"
+                        bgtype="csslength" units='% px pt cm in mm pc em ex rem ch'
                         oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'normal', false)"
                         property="-moz-column-gap"
                         oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'normal', false)">
@@ -76,8 +76,6 @@
                   <menuitem label="&normalColumnGap.label;" value="normal"/>
                 </menupopup>
               </menulist>
-              <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
-                               ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', false)"/>
             </hbox>
 
           </row>
@@ -121,6 +119,7 @@
             <label value="&columnRuleWidth.label;"/>
             <hbox align="center">
               <menulist editable="true" id="columnRuleWidthMenulist" property="-moz-column-rule-width"
+                        bgtype="csslength" units='% px pt cm in mm pc em ex rem ch'
                         oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'none thin medium thick', false)"
                         oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'none thin medium thick', false)">
                 <menupopup id="columnRuleWidthMenupopup"
@@ -133,8 +132,6 @@
                   <menuitem label="&noneColumnRuleWidth.label;" value="none"/>
                 </menupopup>
               </menulist>
-              <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
-                           ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', false)"/>
             </hbox>
           </row>
         </rows>

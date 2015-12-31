@@ -42,8 +42,6 @@ function Startup()
   RestoreShortcuts();
   RestorePanels();
 
-  InstallCustomizationDoneCallbacks();
-
   gDialog.structurebar.init();
 
   ResizeEventNotifier.startup();
@@ -78,6 +76,9 @@ function Startup()
   NotifierUtils.addNotifierCallback("selection_strict", BlueGriffon_lookForFileChanges, this);
 
   window.addEventListener("sizemodechange", onSizeModeChange, false);
+
+  if ("ActiveViewManager" in window)
+    ActiveViewManager.init();
 }
 
 var gLookingForFileChangesTimeout = null;

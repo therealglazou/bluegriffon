@@ -231,23 +231,21 @@
                   <label value="&radius.label;"/>
                   <hbox align="center">
                     <menulist editable="true" id="radialEllipseXRayMenulist"
+                              bgtype="csslength" units='% px pt cm in mm pc em ex rem ch'
                               oncommand="onLengthMenulistCommand(this, ' % px pt cm in mm pc em ex rem ch', 'normal', false); gDialog.radialEllipseRayCheckbox.checked=true; RadialEllipseRaySelected()"
                               oninput="onLengthMenulistCommand(this, ' % px pt cm in mm pc em ex rem ch', 'normal', false); gDialog.radialEllipseRayCheckbox.checked=true; RadialEllipseRaySelected()">
                       <menupopup id="radialEllipseXRayMenupopup"
                                  onpopupshowing="PopulateLengths(this, ' % px pt cm in mm pc em ex rem ch')" />
                     </menulist>
-                    <spinbuttons onup="IncreaseLength(this, ' % px pt cm in mm pc em ex rem ch'); gDialog.radialEllipseRayCheckbox.checked=true; RadialEllipseRaySelected()"
-                                 ondown="DecreaseLength(this, ' % px pt cm in mm pc em ex rem ch', false); gDialog.radialEllipseRayCheckbox.checked=true; RadialEllipseRaySelected()"/>
                   </hbox>
                   <hbox align="center" id="radialSecondRayHbox">
                     <menulist editable="true" id="radialEllipseYRayMenulist"
+                              bgtype="csslength" units='% px pt cm in mm pc em ex rem ch'
                               oncommand="onLengthMenulistCommand(this, ' % px pt cm in mm pc em ex rem ch', 'normal', false); gDialog.radialEllipseRayCheckbox.checked=true; RadialEllipseRaySelected()"
                               oninput="onLengthMenulistCommand(this, ' % px pt cm in mm pc em ex rem ch', 'normal', false); gDialog.radialEllipseRayCheckbox.checked=true; RadialEllipseRaySelected()">
                       <menupopup id="radialEllipseYRayMenupopup"
                                  onpopupshowing="PopulateLengths(this, ' % px pt cm in mm pc em ex rem ch')" />
                     </menulist>
-                    <spinbuttons onup="IncreaseLength(this, ' % px pt cm in mm pc em ex rem ch'); gDialog.radialEllipseRayCheckbox.checked=true; RadialEllipseRaySelected()"
-                                 ondown="DecreaseLength(this, ' % px pt cm in mm pc em ex rem ch', false); gDialog.radialEllipseRayCheckbox.checked=true; RadialEllipseRaySelected()"/>
                   </hbox>
                 </row>
                 <row align="center">

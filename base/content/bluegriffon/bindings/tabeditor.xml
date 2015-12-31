@@ -40,6 +40,8 @@
 <!DOCTYPE bindings [
   <!ENTITY % tabEditorDTD SYSTEM "chrome://bluegriffon/locale/tabeditor.dtd" >
   %tabEditorDTD;
+  <!ENTITY % bluegriffonDTD  SYSTEM "chrome://bluegriffon/locale/bluegriffon.dtd" >
+  %bluegriffonDTD;
 ]>
 
 <bindings id="tabEditorBindings"
@@ -57,10 +59,20 @@
 
     <content>
       <xul:tabbox anonid="EditorTabbox" flex="1" onselect="">
-        <xul:hbox class="tabeditor-strip" >
+        <xul:hbox style="min-height: 24px">
           <xul:tabs flex="1" anonid="EditorTabs" closebutton="true"
-                    class="tabeditor-tabs"
                     setfocus="false" onselect="onTabSelected(event, this.parentNode.parentNode)"/>
+          <xul:vbox style="width: 24px" id="newDocumentButton">
+            <xul:spacer flex="1"/>
+            <xul:hbox>
+              <xul:spacer flex="1"/>
+              <xul:toolbarbutton image="chrome://bluegriffon/skin/plus.png"
+                                 tooltiptext="&newToolbarCmd.tooltip;"
+                                 oncommand="NewDocumentWithOptions(event);"/>
+              <xul:spacer flex="1"/>
+            </xul:hbox>
+            <xul:spacer flex="1"/>
+          </xul:vbox>
         </xul:hbox>
         <xul:grid flex="1">
           <xul:columns><xul:column /><xul:column flex="1"/></xul:columns>
@@ -69,9 +81,13 @@
               <xul:spacer/>
               <xul:hruler anonid="hruler" disabled="true"/>
             </xul:row>
-            <xul:row flex="1">
+            <xul:row flex="1" style="background-image: url('chrome://bluegriffon/content/logo.png'); background-repeat: no-repeat; background-position: center center">
               <xul:vruler anonid="vruler" disabled="true" />
-              <xul:tabpanels anonid="EditorTabpanels" selectedIndex="0" flex="1" style="margin:0px; padding:0px"/>
+              <xul:tabpanels anonid="EditorTabpanels" selectedIndex="0" flex="1" style="margin:0px; padding:0px;"/>
+            </xul:row>
+            <xul:row id="helperButtons" align="center">
+              <xul:spacer flex="1"/>
+              <children/>
             </xul:row>
           </xul:rows>
         </xul:grid>
@@ -309,6 +325,7 @@
                       this.mEditorSheets = true;
                       editor instanceof Components.interfaces.nsIPlaintextEditor;
                       editor instanceof Components.interfaces.nsIHTMLEditor;
+                      editor instanceof Components.interfaces.nsIEditor;
                       editor instanceof Components.interfaces.nsIEditorStyleSheets;
 
                       editor.addOverrideStyleSheet("chrome://bluegriffon/content/EditorAllTags.css");
@@ -322,10 +339,10 @@
                       editor.addEditorMouseObserver(ComposerCommands.selectionListener);
                     }
                     if (editor &&
-                        "ActiveSourceTree" in window)
+                        "ActiveViewManager" in window &&
+                        aStateFlags & nsIWebProgressListener.STATE_IS_WINDOW)
                     {
-                      var source = new ActiveSourceTree(this.mEditor);
-                      var sourceElt = source.mSourceTreeXULElement;
+                      ActiveViewManager.newDocument(this.mEditor);
                     }
                   }
                   if (editor && editor.document) {

@@ -47,3 +47,5 @@ function GetUIElements()
     gDialog[ elt.getAttribute("id") ] = elt;
   }
 }
+
+document.documentElement.setAttribute("rtl", Components.classes["@mozilla.org/chrome/chrome-registry;1"].getService(Components.interfaces.nsIXULChromeRegistry).isLocaleRTL("global"));

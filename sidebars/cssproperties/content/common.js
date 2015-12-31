@@ -101,7 +101,7 @@ function ApplyPropertyFromMenulist(aElt)
 function IncreaseLength(aElt, aUnitsString, aCallback)
 {
   var value;
-  var menulist = aElt.previousSibling;
+  var menulist = aElt;
   if (menulist.selectedItem)
     value = menulist.selectedItem.value;
   else
@@ -137,7 +137,7 @@ function IncreaseLength(aElt, aUnitsString, aCallback)
 function DecreaseLength(aElt, aUnitsString, aAllowNegative, aCallback)
 {
   var value;
-  var menulist = aElt.previousSibling;
+  var menulist = aElt;
   if (menulist.selectedItem)
     value = menulist.selectedItem.value;
   else

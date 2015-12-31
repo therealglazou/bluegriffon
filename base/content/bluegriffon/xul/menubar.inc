@@ -5,6 +5,9 @@
       <menupopup id="fileMenu_popup">
         <menuitem label="&newMenu.label;" accesskey="&newMenu.accesskey;" key="key_newNavigator"
                   command="cmd_new"/>
+        <menuitem label="&newOtherCmd.label;"     oncommand="NewDocumentWithOptions(event);" class="indent"/>
+
+        <menuseparator/>
         <menuitem label="&newWizardMenu.label;"
                   command="cmd_newWizard"/>
         <menu id="menu_RecentFiles" accesskey="&filerecentmenu.accesskey;" label="&fileRecentMenu.label;"
@@ -25,6 +28,10 @@
         <menuseparator/>
         <menuitem id="saveMenuitem"   key="savekb" command="cmd_save"/>
         <menuitem id="saveAsMenuitem" key="saveaskb" command="cmd_saveAs"/>
+
+        <menuseparator/>
+        <menuitem id="browseMenuitem"
+                  label="&browseToolbarCmd.label;" command="cmd_browse"/>
 
         <menuseparator/>
         <menuitem id="printSettingsMenuitem" command="cmd_printSettings"/>
@@ -137,9 +144,6 @@
         <menuitem label="&imageToolbarCmd.label;"
                   command="cmd_image"
                   accesskey="&imageToolbarCmd.key;"/>
-        <menuitem label="&tableToolbarCmd.label;"
-                  command="cmd_InsertTable"
-                  accesskey="&tableToolbarCmd.key;"/>
         <menuitem label="&linkToolbarCmd.label;"
                   command="cmd_link"
                   accesskey="&linkToolbarCmd.key;"/>
@@ -149,7 +153,12 @@
         <menuitem label="&hrToolbarCmd.label;"
                   command="cmd_hr"
                   accesskey="&hrToolbarCmd.key;"/>
-        <menu label="&formToolbarCmd.label;">
+        <menuitem id="videoMenuitem"
+                  label="&videoToolbarCmd.label;" command="cmd_video"/>
+        <menuitem id="audioMenuitem"
+                  label="&audioToolbarCmd.label;" command="cmd_audio"/>
+
+        <menu label="&formToolbarCmd.label;" id="formMenu">
             <menupopup>
               <menuitem label="&formToolbarCmd.label;"
                         accesskey="&formToolbarCmd.key;"
@@ -348,24 +357,7 @@
 
     <menu id="panelsMenu" label="&panelsMenu.label;" accesskey="&panelsMenu.accesskey;"
           oncommand="start_panel(event.originalTarget)">
-      <menupopup id="panelsMenuPopup"
-                 onpopupshowing="UpdatePanelsStatusInMenu()">
-#ifdef XP_UNIX
-#ifdef XP_MACOSX
-        <menuitem label="&alignPanels.label;"
-                  oncommand="AlignAllPanels();"/>
-#endif
-#else
-        <menuitem label="&alignPanels.label;"
-                  oncommand="AlignAllPanels();"/>
-#endif
-        <menu label="&deckMenu.label;" id="deckMenu">
-          <menupopup id="deckMenupopup"
-                     onpopupshowing="UpdateDeckMenu()"
-                     oncommand="DeckOrUndeckPanel(event);"/>
-        </menu>
-        <menuseparator id="beforeAllPanelsMenuseparator"/>
-      </menupopup>
+      <menupopup id="panelsMenuPopup"/>
     </menu>
 
     <menu id="toolsMenu" label="&toolsMenu.label;" accesskey="&toolsMenu.accesskey;">

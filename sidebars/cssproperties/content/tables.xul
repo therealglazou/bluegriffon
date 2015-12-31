@@ -73,21 +73,19 @@
               <label value="&borderSpacing.label;"/>
               <hbox align="center">
                 <menulist editable="true" id="borderSpacingHMenulist" sizetopopup="none"
+                          bgtype="csslength" units='% px pt cm in mm pc em ex rem ch'
                           oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', false); ApplyBorderSpacing()"
                           oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', false); ApplyBorderSpacing()">
                   <menupopup onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')"/>
                 </menulist>
-                <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch'); ApplyBorderSpacing()"
-                                 ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', false); ApplyBorderSpacing()"/>
               </hbox>
               <hbox align="center">
                 <menulist editable="true" id="borderSpacingVMenulist" sizetopopup="none"
+                          bgtype="csslength" units='% px pt cm in mm pc em ex rem ch'
                           oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', false); ApplyBorderSpacing()"
                           oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', false); ApplyBorderSpacing()">
                   <menupopup onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')"/>
                 </menulist>
-                <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch'); ApplyBorderSpacing()"
-                                 ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', false); ApplyBorderSpacing()"/>
               </hbox>
             </row>
 

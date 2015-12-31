@@ -23,12 +23,11 @@
       <xul:hbox align="center" oncommand="RepaintGradient()" oninput="RepaintGradient()">
         <xul:label value="&length.label;"/>
         <xul:menulist editable="true" anonid="offset" sizetopopup="none"
+                      bgtype="csslength" units='% px pt cm in mm pc em ex rem ch'
                       oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', false)"
                       oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', false)">
           <xul:menupopup onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')"/>
         </xul:menulist>
-        <xul:spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
-                         ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', false)"/>
       </xul:hbox>
     </content>
 

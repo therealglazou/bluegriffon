@@ -28,7 +28,9 @@ var AutoInsertTable = {
     gDialog.AutoInsertTable_r1c2.className = "selected";
     gDialog.AutoInsertTable_r2c1.className = "selected";
     gDialog.AutoInsertTable_r2c2.className = "selected";
-    gDialog.AutoInsertTableSizeLabel.setAttribute("label", "2x2");
+    gDialog.AutoInsertTableSizeLabel.setAttribute("value", "2 x 2");
+    gDialog.AutoInsertTableSheetPopup.removeAttribute("width");
+    gDialog.AutoInsertTableSheetPopup.removeAttribute("height");
   },
 
   selectArea: function(cell)

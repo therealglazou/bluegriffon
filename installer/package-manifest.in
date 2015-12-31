@@ -601,7 +601,11 @@
 
 ; [Browser Chrome Files]
 @RESPATH@/chrome/*
+#ifdef XP_MACOSX
 @BINPATH@/extensions/*
+#else
+@BINPATH@/distribution
+#endif
 #ifdef MOZ_GTK
 ; @RESPATH@/browser/chrome/icons/default/default16.png
 ; @RESPATH@/browser/chrome/icons/default/default32.png

@@ -58,11 +58,6 @@
 
 /* ::::: tabeditor ::::: */
 
-tabeditor[visibility="hidden"] {
-  border-top: silver thin solid;
-  border-left: silver thin solid;
-}
-
 tabeditor > tabbox {
   margin: 0;
 }
@@ -93,41 +88,33 @@ tabeditor > tabbox {
   margin-bottom: 0;
   font: message-box;
   font-weight: bold;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+  /*text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);*/
 }
 
 .tabeditor-tab {
-  -moz-box-alig: center;
+  -moz-box-align: center;
   -moz-appearance: none;
-  border-radius: 0 0 6px 6px;
-  color: #222;
-  color: black;
-  margin-bottom: 1px;
+  border-radius: 4px 4px 0px 0px;
+  color: #c0c0c0;
   -moz-margin-end: 1px;
   padding: 0 5px;
-  border-style: none solid solid;
-  border-width: 3px;
-  -moz-border-right-colors: rgba(0, 0, 0, .08) rgba(0, 0, 0, .17) rgba(180, 180, 180, .29);
-  -moz-border-bottom-colors: rgba(0, 0, 0, .08) rgba(0, 0, 0, .17) rgba(180, 180, 180, .29);
-  -moz-border-left-colors: rgba(0, 0, 0, .08) rgba(0, 0, 0, .17) rgba(180, 180, 180, .29);
-  -moz-background-clip: padding;
   min-width: 1px !important;
   text-align: left;
   height: 24px;
 }
 
-.tabeditor-tab:not([selected="true"]) {
-  background-image: url("chrome://bluegriffon/skin/tab-bkgnd.png");
+.tabeditor-tab:not([selected="true"]):hover {
+  background-image: linear-gradient(to bottom, #474d4f, #474d4f);
 }
 
 .tabeditor-tab[selected="true"] {
   -moz-user-focus: normal;
   padding: 0 6px 1px;
-  border-width: 2px;
-  -moz-border-left-colors: rgba(0, 0, 0, .1) rgba(0, 0, 0, .2);
-  -moz-border-bottom-colors: rgba(0, 0, 0, .1) rgba(0, 0, 0, .2);
-  -moz-border-right-colors: rgba(0, 0, 0, .1) rgba(0, 0, 0, .2);
-  background-color: -moz-mac-chrome-active;
+  border: thin solid #6d7373;
+  border-bottom-width: 0px;
+  border-left-width: 0px;
+  border-right-width: 0px;
+  background-image: linear-gradient(to bottom, #474d4f, #383f41);
 }
 
 .tabeditor-tab[selected="true"]:focus > .tab-text {
@@ -138,7 +125,7 @@ tabeditor > tabbox {
 
 .tabeditor-tab[selected="true"],
 .tabeditor-tab:hover {
-  color: #000000;
+  color: white;
 }
 
 .tabeditor-strip {
@@ -151,7 +138,7 @@ tabeditor > tabbox {
   border: none;
   -moz-box-pack: left;
   -moz-box-align: left;
-  background: url("chrome://bluegriffon/skin/tabeditor-tabs-bkgnd.png") repeat-x;
+  /* background: url("chrome://bluegriffon/skin/tabeditor-tabs-bkgnd.png") repeat-x;*/ /*FORMER THEME*/
   height: 25px;
   margin-bottom: 0;
 }
@@ -201,7 +188,7 @@ tabeditor > tabbox > tabpanels {
 }
 
 .tabeditor-tab[modified="true"]  .tab-text {
-  text-shadow: 0 1px 0 rgba(255, 0, 0, 0.4);
+  /*text-shadow: 0 1px 0 rgba(255, 0, 0, 0.4);*/
 }
 
 tabeditor[tabmode="left"] .tabs-left {
@@ -212,4 +199,21 @@ tabeditor[tabmode="left"] .tabs-left {
 tabeditor[tabmode="right"] .tabs-right {
   max-width: 8px !important;
   -moz-box-flex: 0 ! important;
+}
+
+#newDocumentButton {
+  -moz-appearance: none;
+  padding: 0 6px 1px;
+  opacity: 0.5;
+  border: thin solid transparent;
+  border-bottom-width: 0px;
+  border-left-width: 0px;
+  border-right-width: 0px;
+}
+
+#newDocumentButton:hover {
+  opacity: 1;
+  border-color: #6d7373;
+  background-image: linear-gradient(to bottom, #474d4f, #383f41);
+  border-radius: 4px 4px 0px 0px;
 }

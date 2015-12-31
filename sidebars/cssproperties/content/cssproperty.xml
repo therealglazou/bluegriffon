@@ -245,10 +245,9 @@
 
   <binding id="csslengthBinding">
     <content>
-      <xul:menulist xbl:inherits="editable,property" anonid="menulist" sizetopopup="none">
+      <xul:menulist xbl:inherits="editable,property,bgtype,units,unsigned" anonid="menulist" sizetopopup="none" bgtype="csslength">
         <xul:menupopup anonid="popup"/>
       </xul:menulist>
-      <xul:spinbuttons anonid="spinbuttons"/>
     </content>
     <implementation>
       <method name="getChild">
@@ -312,16 +311,6 @@
     </implementation>
 
     <handlers>
-      <handler event="up">
-        <![CDATA[
-          IncreaseLength(this.getChild("spinbuttons"), this.getAttribute("units"));
-        ]]>
-      </handler>
-      <handler event="down">
-        <![CDATA[
-          DecreaseLength(this.getChild("spinbuttons"), this.getAttribute("units"), !(this.getAttribute("unsigned") == "true"));
-        ]]>
-      </handler>
       <handler event="command">
         <![CDATA[
           this.handleCommand();

@@ -437,15 +437,7 @@ function ScrollToElement(aElement)
 {
   if (!aElement)
     return;
-
-  var x = 0;
-  var y = 0;
-  while (aElement) {
-    x += aElement.offsetLeft;
-    y += aElement.offsetTop;
-    aElement = aElement.offsetParent;
-  }
-  var editorElt = EditorUtils.getCurrentEditorElement();
-  y = Math.max(0, y - editorElt.boxObject.height/2);
-  editorElt.contentWindow.scrollTo(x, y);
+  aElement.scrollIntoView(true);
+  EditorUtils.getCurrentEditorElement().contentWindow.scrollBy(0, -15);
+  return;
 }

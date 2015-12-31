@@ -118,7 +118,7 @@ var HTML5Helper = {
   insertTable: function()
   {
     AutoInsertTable.reset();
-    gDialog.AutoInsertTableSheetPopup.openPopup(gDialog["tableButton"], "after_start", 0, 0, false);
+    gDialog.AutoInsertTableSheetPopup.openPopup(EditorUtils.getCurrentTabEditor(), "at_pointer", 0, 0, false);
   },
 
   insertSelect: function()

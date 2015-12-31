@@ -75,6 +75,7 @@
 
   <command id="cmd_list"             oncommand="goDoCommand('cmd_list')"/>
   <command id="cmd_table"            oncommand="goDoCommand('cmd_table')"/>
+  <command id="cmd_InsertTable"      oncommand="goDoCommand('cmd_InsertTable')"/>
   <command id="cmd_image"            oncommand="goDoCommand('cmd_image')"/>
   <command id="cmd_anchor"           oncommand="goDoCommand('cmd_anchor')"/>
   <command id="cmd_link"             oncommand="goDoCommand('cmd_link')"/>
@@ -266,7 +267,6 @@
   <command id="cmd_SelectColumn"        oncommand="goDoCommand('cmd_SelectColumn')"/>
   <command id="cmd_SelectCell"          oncommand="goDoCommand('cmd_SelectCell')"/>
   <command id="cmd_SelectAllCells"      oncommand="goDoCommand('cmd_SelectAllCells')"/>
-  <command id="cmd_InsertTable"         oncommand="goDoCommand('cmd_InsertTable')"/>
   <command id="cmd_InsertTableCaption"  oncommand="goDoCommand('cmd_InsertTableCaption')"/>
   <command id="cmd_InsertRowAbove"      oncommand="goDoCommand('cmd_InsertRowAbove')"/>
   <command id="cmd_InsertRowBelow"      oncommand="goDoCommand('cmd_InsertRowBelow')"/>

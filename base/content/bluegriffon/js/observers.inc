@@ -109,18 +109,31 @@ var gEditorDocumentObserver =
 var ResizeEventNotifier = {
   startup: function ResizeEventNotifier_startup()
   {
-    window.addEventListener("resize", this.onResizeEvent, false);
+    var _self = this;
+    window.addEventListener("resize", function(e) {_self.onResizeEvent(e); }, false);
+    var tabeditor = EditorUtils.getCurrentTabEditor();
+    if (tabeditor)
+      tabeditor.addEventListener("resize", this.doNotify, false);
   },
 
   shutdown: function ResizeEventNotifier_shutdown()
   {
-    window.removeEventListener("resize", this.onResizeEvent, false);
+    var _self = this;
+    window.removeEventListener("resize", function(e) {_self.onResizeEvent(e); }, false);
+    var tabeditor = EditorUtils.getCurrentTabEditor();
+    if (tabeditor)
+      tabeditor.removeEventListener("resize", this.doNotify, false);
+  },
+
+  doNotify: function()
+  {
+    NotifierUtils.notify("resizeEvent");
   },
 
   onResizeEvent: function ResizeEventNotifier_onResizeEvent(aEvent)
   {
     if (aEvent.target.document.location.href == "chrome://bluegriffon/content/xul/bluegriffon.xul")
-      NotifierUtils.notify("resizeEvent");
+      this.doNotify();
   }
 };
 

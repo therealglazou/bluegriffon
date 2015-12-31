@@ -84,7 +84,7 @@ function GetPreferredNewDocumentURL()
 {
   var url = window["kHTML_TRANSITIONAL"];
   try {
-    urlId = Services.prefs.getCharPref("bluegriffon.defaults.doctype");
+    var urlId = Services.prefs.getCharPref("bluegriffon.defaults.doctype");
     url = window[urlId]; 
   }
   catch(e) {}
@@ -410,16 +410,6 @@ const kFixedFontFaceMenuItems = 7; // number of fixed font face menuitems
 
 function initLocalFontFaceMenu(menuPopup)
 {
-  // fill in the menu only once...
-  var callingId = menuPopup.parentNode.id;
-
-  if(!BlueGriffonVars.fontMenuOk)
-    BlueGriffonVars.fontMenuOk = {};
-  if (BlueGriffonVars.fontMenuOk[callingId ] &&
-      menuPopup.childNodes.length != kFixedFontFaceMenuItems)
-    return;
-  BlueGriffonVars.fontMenuOk[callingId ] = callingId ;
-
   if (!BlueGriffonVars.localFonts)
   {
     // Build list of all local fonts once per editor
@@ -433,6 +423,18 @@ function initLocalFontFaceMenu(menuPopup)
     catch(e) { }
   }
   
+  if (!menuPopup)
+    return;
+  // fill in the menu only once...
+  var callingId = menuPopup.parentNode.id;
+
+  if(!BlueGriffonVars.fontMenuOk)
+    BlueGriffonVars.fontMenuOk = {};
+  if (BlueGriffonVars.fontMenuOk[callingId ] &&
+      menuPopup.childNodes.length != kFixedFontFaceMenuItems)
+    return;
+  BlueGriffonVars.fontMenuOk[callingId ] = callingId ;
+
   var useRadioMenuitems = (menuPopup.parentNode.localName == "menu"); // don't do this for menulists  
   if (menuPopup.childNodes.length == kFixedFontFaceMenuItems) 
   {
@@ -1173,8 +1175,10 @@ function doCloseTab(aTab)
     tabbox.parentNode.mHruler.setAttribute("disabled", "true");
     tabbox.parentNode.mVruler.setAttribute("disabled", "true");
     tabbox.parentNode.setAttribute("visibility", "hidden");
-    if (gDialog.structurebar)
-      gDialog.structurebar.className = "hidden";
+    if (gDialog.structurebar) {
+      //gDialog.structurebar.className = "hidden";
+      gDialog.structurebar.style.visibility = "hidden";
+    }
     document.title = "BlueGriffon";
   }
   window.updateCommands("style");
@@ -1371,21 +1375,6 @@ function AlignAllPanels()
 
 function UpdateDeckMenu()
 {
-  deleteAllChildren(gDialog.deckMenupopup);
-  var child = gDialog.beforeAllPanelsMenuseparator.nextSibling;
-  while (child) {
-    if (child.getAttribute("checked") == "true") {
-      var item = document.createElement("menuitem");
-      item.setAttribute("label", child.getAttribute("label"));
-      item.setAttribute("panel", child.getAttribute("panel"));
-      item.setAttribute("type",  "checkbox");
-      if (child.getAttribute("decked") == "true")
-        item.setAttribute("checked", "true");
-      gDialog.deckMenupopup.appendChild(item);
-    }
-
-    child = child.nextSibling;
-  }
 }
 
 function DeckOrUndeckPanel(aEvent)
@@ -1413,7 +1402,7 @@ function DeckOrUndeckPanel(aEvent)
 
 function UpdatePanelsStatusInMenu()
 {
-  var child = gDialog.beforeAllPanelsMenuseparator.nextSibling;
+  var child = gDialog.panelsMenuPopup.firstElementChild;
   if ("UNIX" == gSYSTEM) {
     while(child) {
       var w1, w2 = null;

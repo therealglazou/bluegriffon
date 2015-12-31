@@ -211,12 +211,6 @@ function SelectionChanged(aArgs, aElt, aOneElementSelected)
   for (var i = 0; i < gIniters.length; i++)
     gIniters[i](aElt, ruleset);
 
-  gDialog.currentElementBox.setAttribute("value",
-       "<" + gCurrentElement.localName +
-       (gCurrentElement.id ? " id='" + gCurrentElement.id + "'" : "") +
-       (gCurrentElement.className ? " class='" + gCurrentElement.className + "'" : "") +
-       ">" +
-       gCurrentElement.innerHTML.substr(0, 100));
 }
 
 function CheckClass(aElt)

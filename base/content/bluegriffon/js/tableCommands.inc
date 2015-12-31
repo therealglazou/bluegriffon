@@ -15,7 +15,7 @@ var bgInsertTableCommand =
   {
     // reset the table insertion panel
     AutoInsertTable.reset();
-    gDialog.AutoInsertTableSheetPopup.openPopup(gDialog["tableButton"], "after_start", 0, 0, false);
+    gDialog.AutoInsertTableSheetPopup.openPopup(EditorUtils.getCurrentTabEditor(), "at_pointer", 0, 0, false);
   }
 };
 

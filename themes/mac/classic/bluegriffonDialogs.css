@@ -1,3 +1,6 @@
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+@namespace html url("http://www.w3.org/1999/xhtml");
+
 ecolorpicker {
   -moz-binding: url("chrome://bluegriffon/content/bindings/ecolorpicker.xml#ecolorpicker");
 }
@@ -8,21 +11,16 @@ filepickerbutton {
 
 .multibutton[checked],
 .multibutton:hover:active:not([disabled]) {
-  text-shadow: 0 1px rgba(255, 255, 255, .4);
-  background-color: rgba(0,0,0,0.2);
-  box-shadow: inset 0 2px 5px rgba(0,0,0,0.6), 0 1px rgba(255,255,255,0.2);
+  color: #00abff;
 }
 
 .multibutton {
   margin: 4px 0px;
-  padding: 1px 10px;
-%ifdef XP_MACOSX
-  background-image: -moz-linear-gradient(#e0e0e0, #d0d0d0, #e0e0e0);
-%else
-  background-image: -moz-linear-gradient(#cac7b6, #dbd8b7, #cac7b6);
-%endif
+  background-color: #363d3f;
   -moz-appearance: none;
-  border: thin silver solid;
+  border: thin #181818 solid;
+  color: white;
+  padding: 2px 6px;
 }
 
 .multibutton:-moz-locale-dir(ltr) {
@@ -92,4 +90,56 @@ hbox:hover > .medium-delete-button {
 
 .medium-delete-button:hover:active {
   -moz-image-region: rect(0, 48px, 16px, 32px);
+}
+
+menulist {
+  -moz-appearance: none;
+  padding-left: 3px;
+  padding-right: 3px;
+  background-color: #363d3f;
+  padding-left: 3px;
+  border: thin solid #181818;
+  color: white;
+}
+
+menulist .menulist-dropmarker {
+  -moz-appearance: none;
+  display: -moz-box;
+  background: transparent;
+  border: none 0px;
+}
+
+menulist html|*.menulist-editable-input {
+  color: white;
+}
+
+menulist[disabled="true"],
+menulist[disabled="true"] html|*.menulist-editable-input,
+menulist html|*.menulist-editable-input::-moz-placeholder  {
+  color: graytext;
+}
+
+menulist html|*.menulist-editable-input::-moz-placeholder  {
+  font-style: italic;
+}
+
+menulist[editable="true"] {
+  margin-top: 5px;
+  margin-bottom: 3px
+}
+
+menulist menupopup {
+  -moz-appearance: none;
+  color: white;
+  background-color: #363d3f;
+}
+
+menulist menuitem {
+  -moz-appearance: none;
+  color: white;
+}
+
+menulist menuseparator {
+  -moz-appearance: none;
+  border-bottom: silver thin solid;
 }

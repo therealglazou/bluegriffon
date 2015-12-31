@@ -46,6 +46,7 @@
             <row align="center">
               <label value="&transformOrigin.label;"/>
               <menulist id="transformOriginXMenulist" editable="true"
+                        bgtype="csslength" units='% px pt cm in mm pc em ex rem ch' unsigned="true"
                         oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'left center right', true, ReapplyTransforms)"
                         oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'left center right', true, ReapplyTransforms)">
                 <menupopup anonid="transformOriginXMenupopup"
@@ -56,9 +57,8 @@
                   <menuitem label="&rightTransformOrigin.label;" value="right"/>
                 </menupopup>
               </menulist>
-              <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch', ReapplyTransforms)"
-                           ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true, ReapplyTransforms)"/>
               <menulist id="transformOriginYMenulist" editable="true"
+                        bgtype="csslength" units='% px pt cm in mm pc em ex rem ch' unsigned="true"
                         oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'left center right', true, ReapplyTransforms)"
                         oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'left center right', true, ReapplyTransforms)">
                 <menupopup anonid="transformOriginYMenupopup"
@@ -69,21 +69,19 @@
                   <menuitem label="&bottomTransformOrigin.label;" value="bottom"/>
                 </menupopup>
               </menulist>
-              <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch', ReapplyTransforms)"
-                           ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true, ReapplyTransforms)"/>
               <menulist id="transformOriginZMenulist" editable="true"
+                        bgtype="csslength" units='% px pt cm in mm pc em ex rem ch' unsigned="true"
                         oncommand="onLengthMenulistCommand(this, 'px pt cm in mm pc em ex rem ch', '', true, ReapplyTransforms)"
                         oninput="onLengthMenulistCommand(this, 'px pt cm in mm pc em ex rem ch', '', true, ReapplyTransforms)">
                 <menupopup anonid="transformOriginZMenupopup"
                            onpopupshowing="PopulateLengths(this, 'px pt cm in mm pc em ex rem ch')"/>
               </menulist>
-              <spinbuttons onup="IncreaseLength(this, 'px pt cm in mm pc em ex rem ch', ReapplyTransforms)"
-                           ondown="DecreaseLength(this, 'px pt cm in mm pc em ex rem ch', true, ReapplyTransforms)"/>
             </row>
 
             <row align="center">
               <label value="&perspectivOrigin.label;"/>
               <menulist id="perspectiveOriginXMenulist" editable="true"
+                        bgtype="csslength" units='% px pt cm in mm pc em ex rem ch' unsigned="true"
                         oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'left center right', true, ReapplyTransforms)"
                         oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'left center right', true, ReapplyTransforms)">
                 <menupopup anonid="perspectiveOriginXMenupopup"
@@ -94,9 +92,8 @@
                   <menuitem label="&rightTransformOrigin.label;" value="right"/>
                 </menupopup>
               </menulist>
-              <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch', ReapplyTransforms)"
-                           ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true, ReapplyTransforms)"/>
               <menulist id="perspectiveOriginYMenulist" editable="true"
+                        bgtype="csslength" units='% px pt cm in mm pc em ex rem ch' unsigned="true"
                         oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'left center right', true, ReapplyTransforms)"
                         oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'left center right', true, ReapplyTransforms)">
                 <menupopup anonid="perspectiveOriginYMenupopup"
@@ -107,20 +104,17 @@
                   <menuitem label="&bottomTransformOrigin.label;" value="bottom"/>
                 </menupopup>
               </menulist>
-              <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch', ReapplyTransforms)"
-                           ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true, ReapplyTransforms)"/>
             </row>
 
             <row align="center" animatable="false">
               <label value="&perspectiveDepth.label;"/>
               <menulist id="perspectiveMenulist" editable="true"
+                        bgtype="csslength" units='% px pt cm in mm pc em ex rem ch' unsigned="true"
                         oncommand="onLengthMenulistCommand(this, 'px pt cm in mm pc em ex rem ch', 'none', true, ReapplyTransforms)"
                         oninput="onLengthMenulistCommand(this, 'px pt cm in mm pc em ex rem ch', 'none', true, ReapplyTransforms)">
                 <menupopup anonid="perspectiveMenupopup"
                            onpopupshowing="PopulateLengths(this, 'px pt cm in mm pc em ex rem ch')"/>
               </menulist>
-              <spinbuttons onup="IncreaseLength(this, 'px pt cm in mm pc em ex rem ch', ReapplyTransforms)"
-                           ondown="DecreaseLength(this, 'px pt cm in mm pc em ex rem ch', true, ReapplyTransforms)"/>
             </row>
 
             <row align="center" animatable="false">

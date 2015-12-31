@@ -17,4 +17,11 @@
                    oncommand="start_svg_edit(null);"/>
   </toolbarpalette>
 
+  <menupopup id="insertMenuPopup">
+    <menuseparator/>
+    <menuitem id="svgEditMenuitem"
+              label="SVG"
+              observes="cmd_renderedHTMLEnabler"
+              oncommand="start_svg_edit(null);"/>
+  </menupopup>
 </overlay>
