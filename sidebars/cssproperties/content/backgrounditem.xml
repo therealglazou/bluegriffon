@@ -245,8 +245,8 @@
                   deleteAllChildren(gDialog.colorStopsRichlistbox);
                   var e = this.getChild("backgrounditemButton");
                   // reset
-                  gDialog.linearGradientPanel.openPopupAtScreen(e.boxObject.screenX,
-                                                                e.boxObject.screenY,
+                  gDialog.linearGradientPanel.openPopupAtScreen(e.boxObject.screenX + 16,
+                                                                e.boxObject.screenY + 16,
                                                                 false);
                   var _self = this;
                   // WARNING, the following is a workaround because it takes a short
