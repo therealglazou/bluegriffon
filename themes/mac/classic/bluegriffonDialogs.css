@@ -92,7 +92,8 @@ hbox:hover > .medium-delete-button {
   -moz-image-region: rect(0, 48px, 16px, 32px);
 }
 
-menulist {
+menulist,
+textbox[type="number"] {
   -moz-appearance: none;
   padding-left: 3px;
   padding-right: 3px;
@@ -100,6 +101,12 @@ menulist {
   padding-left: 3px;
   border: thin solid #181818;
   color: white;
+}
+
+textbox[type="number"] .numberbox-input-box {
+  -moz-appearance: none;
+  border: none 0px;
+  background-color: transparent;
 }
 
 menulist .menulist-dropmarker {
