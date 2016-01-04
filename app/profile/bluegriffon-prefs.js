@@ -171,8 +171,6 @@ pref("extensions.getAddons.cache.enabled", false);
 pref("bluegriffon.css.colors.names.enabled", true);
 pref("bluegriffon.css.colors.type", "hex");
 
-pref("tipoftheday.openAtStartup", true);
-
 // make links absolute when copied
 pref("clipboard.absoluteLinks", true);
 
