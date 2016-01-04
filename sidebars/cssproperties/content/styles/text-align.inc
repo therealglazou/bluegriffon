@@ -23,3 +23,9 @@
   display: none;
 }
 
+#lefttextalignButton:not([checked]) .toolbarbutton-icon,
+#righttextalignButton:not([checked]) .toolbarbutton-icon,
+#centertextalignButton:not([checked]) .toolbarbutton-icon,
+#justifytextalignButton:not([checked]) .toolbarbutton-icon {
+  filter: grayscale(100%) contrast(600%);
+}
