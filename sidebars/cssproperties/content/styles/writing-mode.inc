@@ -18,3 +18,8 @@
   display: none;
 }
 
+#horizontaltbwritingmodeButton:not([checked]) .toolbarbutton-icon,
+#verticallrwritingmodeButton:not([checked]) .toolbarbutton-icon,
+#verticalrlwritingmodeButton:not([checked]) .toolbarbutton-icon {
+  filter: grayscale(100%) contrast(600%);
+}
