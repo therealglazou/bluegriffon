@@ -67,19 +67,17 @@ window[rtl="false"] structurebar {
 window[rtl="false"] structurebar .autorepeatbutton-up {
   list-style-image: url("chrome://bluegriffon/skin/structurebar/arrow-left.png");
   -moz-image-region: auto; /* cut off inheritance */
+  filter: grayscale(100%);
 }
 
 window[rtl="false"] structurebar .autorepeatbutton-down {
   list-style-image: url("chrome://bluegriffon/skin/structurebar/arrow-right.png");
   -moz-image-region: auto; /* cut off inheritance */
-}
-
-window[rtl="false"] structurebar autorepeatbutton[disabled="true"] {
   filter: grayscale(100%);
 }
 
 window[rtl="false"] structurebar autorepeatbutton:not([disabled]):hover {
-  filter: grayscale(100%) contrast(600%);
+  filter: none;
 }
 
 window[rtl="false"] structurebar .autorepeatbutton-up:not([disabled="true"]) {
