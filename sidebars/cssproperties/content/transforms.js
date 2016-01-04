@@ -230,7 +230,7 @@ function AddTransform(aEvent)
 function DeleteTransform()
 {
   var item = gDialog.transformsRichlistbox.selectedItem;
-  if (!item) return; // sanity check
+  if (!item || item.parentNode) return; // sanity check
   item.parentNode.removeChild(item);
   SetEnabledElement(gDialog.removeTransformButton, (gDialog.transformsRichlistbox.itemCount != 0));
   ReapplyTransforms();
