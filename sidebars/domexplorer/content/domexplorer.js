@@ -125,6 +125,7 @@ function Inspect()
   {
     var editor = gMain.EditorUtils.getCurrentEditor();
     gDialog.mainBox.style.visibility = editor ? "" : "hidden";
+    gMain.document.querySelector("[panelid='panel-domexplorer']").className = editor ? "" : "inactive";
     if (editor) {
       var node = gMain.EditorUtils.getSelectionContainer().node;
       if (node) {

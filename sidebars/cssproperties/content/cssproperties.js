@@ -144,6 +144,7 @@ function Inspect()
     var editor = gMain.EditorUtils.getCurrentEditor();
     var visible = editor && (gMain.GetCurrentViewMode() == "wysiwyg");
     gDialog.mainBox.style.visibility = visible ? "" : "hidden";
+    gMain.document.querySelector("[panelid='panel-cssproperties']").className = visible ? "" : "inactive";
     if (visible) {
       var node = EditorUtils.getSelectionContainer().node;
       if (node) {

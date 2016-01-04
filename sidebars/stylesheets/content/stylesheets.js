@@ -107,6 +107,7 @@ function Inspect()
   var editor = gMain.EditorUtils.getCurrentEditor();
   var visible = editor && (gMain.GetCurrentViewMode() == "wysiwyg");
   gDialog.mainBox.style.visibility = visible ? "" : "hidden";
+  gMain.document.querySelector("[panelid='panel-stylesheets']").className = visible ? "" : "inactive";
   if (!visible) {
     return;
   }
