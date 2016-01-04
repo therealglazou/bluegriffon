@@ -16,4 +16,87 @@ tabbox {
 
 tabpanels {
   color: graytext;
+  -moz-appearance: none;
+}
+
+%ifdef CAN_DRAW_IN_TITLEBAR
+#aboutDialog:not([chromemargin]) > #titlebar,
+#aboutDialog[inFullscreen] > #titlebar,
+#aboutDialog[inFullscreen] .titlebar-placeholder,
+#aboutDialog:not([tabsintitlebar]) .titlebar-placeholder {
+  display: none;
+}
+
+#titlebar {
+  -moz-binding: url("chrome://global/content/bindings/general.xml#windowdragbox");
+
+%ifdef XP_MACOSX
+  -moz-window-dragging: drag;
+%endif
+}
+
+#titlebar-spacer {
+  pointer-events: none;
+}
+
+#aboutDialog[tabsintitlebar] #titlebar-buttonbox {
+  position: relative;
+}
+
+#titlebar-buttonbox {
+  -moz-appearance: -moz-window-button-box;
+}
+
+%ifdef XP_MACOSX
+#titlebar-fullscreen-button {
+  -moz-appearance: -moz-mac-fullscreen-button;
+}
+
+/* Because these buttons don't move, they should always be aligned the same,
+ * left and right were deprecated, so we have to do work to get it to mean that: */
+#titlebar-buttonbox-container:-moz-locale-dir(ltr) {
+  -moz-box-align: start;
+}
+
+#titlebar-buttonbox-container:-moz-locale-dir(rtl) {
+  -moz-box-align: end;
+}
+
+/* Fullscreen and caption buttons don't move with RTL on OS X so override the automatic ordering. */
+#titlebar-secondary-buttonbox:-moz-locale-dir(ltr),
+#titlebar-buttonbox-container:-moz-locale-dir(rtl),
+.titlebar-placeholder[type="fullscreen-button"]:-moz-locale-dir(ltr),
+.titlebar-placeholder[type="caption-buttons"]:-moz-locale-dir(rtl) {
+  -moz-box-ordinal-group: 1000;
+}
+
+#titlebar-secondary-buttonbox:-moz-locale-dir(rtl),
+#titlebar-buttonbox-container:-moz-locale-dir(ltr),
+.titlebar-placeholder[type="caption-buttons"]:-moz-locale-dir(ltr),
+.titlebar-placeholder[type="fullscreen-button"]:-moz-locale-dir(rtl) {
+  -moz-box-ordinal-group: 0;
+}
+%else
+/* On non-OSX, these should be start-aligned */
+#titlebar-buttonbox-container {
+  -moz-box-align: start;
+}
+%endif
+
+%if !defined(MOZ_WIDGET_GTK) && !defined(MOZ_WIDGET_QT)
+#TabsToolbar > .private-browsing-indicator {
+  -moz-box-ordinal-group: 1000;
+}
+%endif
+
+%ifdef XP_WIN
+#aboutDialog[sizemode="maximized"] #titlebar-buttonbox {
+  -moz-appearance: -moz-window-button-box-maximized;
+}
+%endif
+
+%endif
+
+#titlebar {
+  margin: 4px 8px;
 }

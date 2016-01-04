@@ -95,11 +95,6 @@
   <hbox id="titlebar-content">
     <spacer id="titlebar-spacer" flex="1"/>
     <hbox id="titlebar-buttonbox-container">
-#ifdef XP_WIN
-      <hbox id="private-browsing-indicator-titlebar">
-        <hbox class="private-browsing-indicator"/>
-      </hbox>
-#endif
       <hbox id="titlebar-buttonbox">
         <toolbarbutton class="titlebar-button" id="titlebar-min" oncommand="window.minimize();"/>
         <toolbarbutton class="titlebar-button" id="titlebar-max" oncommand="onTitlebarMaxClick();"/>
