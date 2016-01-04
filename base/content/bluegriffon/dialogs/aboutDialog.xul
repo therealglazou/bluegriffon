@@ -61,7 +61,7 @@
         windowtype="BlueGriffon:About"
         title="&aboutDialog.title;"
         onload="Startup()"
-        persist="screenX screenY width height">
+        persist="screenX screenY">
 
   <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/global.js"/>
   <script type="application/x-javascript" src="chrome://bluegriffon/content/dialogs/aboutDialog.js"/>
@@ -76,7 +76,8 @@
       <vbox flex="1">
         <hbox>
           <spacer flex="1"/>
-          <image src="chrome://bluegriffon/skin/about-logo.png"/>
+          <image src="chrome://bluegriffon/skin/about-logo.png"
+                 style="background-color: graytext; border-radius: 15px;"/>
           <spacer flex="1"/>
         </hbox>
   

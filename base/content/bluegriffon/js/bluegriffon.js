@@ -174,8 +174,9 @@ function AboutComposer()
     win.focus();
     return;
   }
-  window.open('chrome://bluegriffon/content/dialogs/aboutDialog.xul',"_blank",
-              "chrome,resizable,scrollbars=yes");
+  /*window.openDialog(,"_blank",
+                    "chrome,modal,dialog=no,titlebar,centerscreen");*/
+  OpenAppModalWindow(window, 'chrome://bluegriffon/content/dialogs/aboutDialog.xul', "aboutDialog", true); 
 }
 
 function OpenConsole()
