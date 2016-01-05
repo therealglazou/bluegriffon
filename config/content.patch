@@ -3292,7 +3292,7 @@ diff --git a/layout/style/nsCSSValue.cpp b/layout/style/nsCSSValue.cpp
  {
    MOZ_ASSERT(aUnit == eCSSUnit_Integer || aUnit == eCSSUnit_Enumerated ||
               aUnit == eCSSUnit_EnumColor,
-@@ -1304,16 +1305,22 @@ nsCSSValue::AppendToString(nsCSSProperty
+@@ -1304,16 +1305,23 @@ nsCSSValue::AppendToString(nsCSSProperty
      nsAutoCString str;
      if (nsCSSProps::GetColorName(GetIntValue(), str)){
        AppendASCIItoUTF16(str, aResult);
@@ -3306,6 +3306,7 @@ diff --git a/layout/style/nsCSSValue.cpp b/layout/style/nsCSSValue.cpp
 +    nsCOMPtr<nsIPrefBranch> prefBranch = do_GetService(NS_PREFSERVICE_CONTRACTID, &rv);
 +    if (NS_SUCCEEDED(rv) && prefBranch)
 +      prefBranch->GetBoolPref("bluegriffon.css.colors.names.enabled", &outputCssNames);
++    bool serializeName = false;
 +
      if (aSerialization == eNormalized ||
          unit == eCSSUnit_RGBColor ||
@@ -3315,6 +3316,59 @@ diff --git a/layout/style/nsCSSValue.cpp b/layout/style/nsCSSValue.cpp
            color == NS_RGBA(0, 0, 0, 0)) {
          // Use the strictest match for 'transparent' so we do correct
          // round-tripping of all other rgba() values.
+@@ -1322,31 +1330,42 @@ nsCSSValue::AppendToString(nsCSSProperty
+         uint8_t a = NS_GET_A(color);
+         bool showAlpha =
+           (aSerialization == eNormalized && a < 255) ||
+           (aSerialization == eAuthorSpecified &&
+            unit == eCSSUnit_RGBAColor);
+         if (showAlpha) {
+           aResult.AppendLiteral("rgba(");
+         } else {
+-          aResult.AppendLiteral("rgb(");
++          if (outputCssNames) {
++            nsAutoString nameToSerialize;
++            serializeName = NS_RGBToColorName(color, nameToSerialize);
++            if (serializeName)
++              aResult.Append(nameToSerialize);
++            else
++              aResult.AppendLiteral("rgb(");
++          }
++          else
++            aResult.AppendLiteral("rgb(");
+         }
+ 
+-        NS_NAMED_LITERAL_STRING(comma, ", ");
++        if (!serializeName) {
++          NS_NAMED_LITERAL_STRING(comma, ", ");
+ 
+-        aResult.AppendInt(NS_GET_R(color), 10);
+-        aResult.Append(comma);
+-        aResult.AppendInt(NS_GET_G(color), 10);
+-        aResult.Append(comma);
+-        aResult.AppendInt(NS_GET_B(color), 10);
+-        if (showAlpha) {
++          aResult.AppendInt(NS_GET_R(color), 10);
+           aResult.Append(comma);
+-          aResult.AppendFloat(nsStyleUtil::ColorComponentToFloat(a));
++          aResult.AppendInt(NS_GET_G(color), 10);
++          aResult.Append(comma);
++          aResult.AppendInt(NS_GET_B(color), 10);
++          if (showAlpha) {
++            aResult.Append(comma);
++            aResult.AppendFloat(nsStyleUtil::ColorComponentToFloat(a));
++          }
++          aResult.Append(char16_t(')'));
+         }
+-        aResult.Append(char16_t(')'));
+       }
+     } else if (eCSSUnit_HexColor == unit) {
+       nscolor color = GetColorValue();
+       aResult.Append('#');
+       aResult.AppendPrintf("%02x", NS_GET_R(color));
+       aResult.AppendPrintf("%02x", NS_GET_G(color));
+       aResult.AppendPrintf("%02x", NS_GET_B(color));
+     } else if (eCSSUnit_ShortHexColor == unit) {
 diff --git a/parser/htmlparser/nsExpatDriver.cpp b/parser/htmlparser/nsExpatDriver.cpp
 --- a/parser/htmlparser/nsExpatDriver.cpp
 +++ b/parser/htmlparser/nsExpatDriver.cpp
