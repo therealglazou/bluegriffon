@@ -122,7 +122,10 @@
                         oncommand="onLengthMenulistCommand(this, 'px pt cm in mm pc em ex rem ch', 'none', true, ReapplyTransforms)"
                         oninput="onLengthMenulistCommand(this, 'px pt cm in mm pc em ex rem ch', 'none', true, ReapplyTransforms)">
                 <menupopup anonid="perspectiveMenupopup"
-                           onpopupshowing="PopulateLengths(this, 'px pt cm in mm pc em ex rem ch')"/>
+                           onpopupshowing="PopulateLengths(this, 'px pt cm in mm pc em ex rem ch')">
+                  <menuseparator/>
+                  <menuitem label="&perspectiveNone.label;" value="none"/>
+                </menupopup>
               </menulist>
             </row>
 
@@ -130,7 +133,7 @@
               <label value="&transformStyle.label;"
                    class="text-link"
                    href="https://developer.mozilla.org/en-US/docs/Web/CSS/transform-style"
-                   tooltiptext="trasnform-style"/>
+                   tooltiptext="transform-style"/>
               <hbox align="center">
                 <toolbarbutton class="multibutton" label="&transformStyleFlat.label;"
                                value="flat" property="transform-style" type="checkbox"

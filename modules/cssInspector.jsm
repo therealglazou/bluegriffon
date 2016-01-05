@@ -47,6 +47,7 @@
 var EXPORTED_SYMBOLS = ["CssInspector", "CSSParser"];
 
 Components.utils.import("resource://app/modules/fileChanges.jsm");
+Components.utils.import("resource://gre/modules/Services.jsm");
 
 const kCHARSET_RULE_MISSING_SEMICOLON = "Missing semicolon at the end of @charset rule";
 const kCHARSET_RULE_CHARSET_IS_STRING = "The charset in the @charset rule should be a string";
@@ -5238,16 +5239,16 @@ function jscsspStyleRule()
 
 jscsspStyleRule.prototype = {
   cssText: function() {
-    var rv = this.mSelectorText + " {";
+    var rv = this.mSelectorText + " {\n";
     var preservedGTABS = gTABS;
     gTABS += "  ";
     for (var i = 0; i < this.declarations.length; i++) {
       var declText = this.declarations[i].cssText();
       if (declText)
-        rv += gTABS + this.declarations[i].cssText() ;
+        rv += gTABS + this.declarations[i].cssText() + "\n";
     }
     gTABS = preservedGTABS;
-    return rv + gTABS + "\n}";
+    return rv + gTABS + "}";
   },
 
   setCssText: function(val) {

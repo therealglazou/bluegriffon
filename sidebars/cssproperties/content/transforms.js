@@ -2,7 +2,7 @@ RegisterIniter(TransformsSectionIniter);
 
 function TransformsSectionIniter(aElt, aRuleset)
 {
-  var mto = CssInspector.getCascadedValue(aRuleset, "-moz-transform-origin");
+  var mto = CssInspector.getCascadedValue(aRuleset, "transform-origin");
   var mtoArray = mto.split(" ");
   switch (mtoArray.length) {
     case 1:
@@ -25,8 +25,8 @@ function TransformsSectionIniter(aElt, aRuleset)
       break;
   }
 
-  var mpo = CssInspector.getCascadedValue(aRuleset, "-moz-perspective-origin");
-  var mpoArray = mto.split(" ");
+  var mpo = CssInspector.getCascadedValue(aRuleset, "perspective-origin");
+  var mpoArray = mpo.split(" ");
   switch (mpoArray.length) {
     case 1:
       gDialog.perspectiveOriginXMenulist.value = mpoArray[0];
@@ -42,16 +42,19 @@ function TransformsSectionIniter(aElt, aRuleset)
       break;
   }
 
-  var mts = CssInspector.getCascadedValue(aRuleset, "-moz-transform-style");
+  var mts = CssInspector.getCascadedValue(aRuleset, "transform-style");
   CheckToggle(gDialog.transformStyleFlatButton, mts == "flat");
   CheckToggle(gDialog.transformStyle3DButton,   mts == "preserve-3d");
 
-  var mbv = CssInspector.getCascadedValue(aRuleset, "-moz-backface-visibility");
+  var mp = CssInspector.getCascadedValue(aRuleset, "perspective");
+  gDialog.perspectiveMenulist.value = (mp ? mp : "0px");
+
+  var mbv = CssInspector.getCascadedValue(aRuleset, "backface-visibility");
   CheckToggle(gDialog.backfaceVisibilityVisibleButton, mbv == "visible");
   CheckToggle(gDialog.backfaceVisibilityHiddenButton,  mbv == "hidden");
 
   deleteAllChildren(gDialog.transformsRichlistbox);
-  var mt = CssInspector.getCascadedValue(aRuleset, "-moz-transform");
+  var mt = CssInspector.getCascadedValue(aRuleset, "transform");
   var transformsArray = [];
   if (mt) {
    var mtArray = mt.split(")");
@@ -386,15 +389,15 @@ function ReapplyTransforms()
   }
   ApplyStyles([
                 {
-                  property: "-moz-transform",
+                  property: "transform",
                   value: transforms.join(" ")
                 },
                 {
-                  property: "-moz-perspective",
+                  property: "perspective",
                   value: gDialog.perspectiveMenulist.value
                 },
                 {
-                  property: "-moz-transform-origin",
+                  property: "transform-origin",
                   value: (gDialog.transformOriginXMenulist.value
                           + " "
                           + gDialog.transformOriginYMenulist.value
@@ -402,7 +405,7 @@ function ReapplyTransforms()
                           + gDialog.transformOriginZMenulist.value).trim()
                 },
                 {
-                  property: "-moz-perspective-origin",
+                  property: "perspective-origin",
                   value: (gDialog.perspectiveOriginXMenulist.value
                           + " "
                           + gDialog.perspectiveOriginYMenulist.value).trim()
