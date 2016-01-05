@@ -421,3 +421,16 @@ function SelectStyleSet(aList)
   editor.document.selectedStyleSheetSet = aList.value;
   Inspect();
 }
+
+function UpdateConfigMenu()
+{
+  var tree = gDialog.contentsTree;
+  var contentView = tree.contentView;
+  var view = tree.view;
+  var index = view.selection.currentIndex;
+  var treeitem = contentView.getItemAtIndex(index);
+  var elt = treeitem.getUserData("element");
+
+  var href = elt.href;
+  gDialog.styleCodeMenuitem.disabled = !(!href || href.substr(0, 8) == "file:///");
+}

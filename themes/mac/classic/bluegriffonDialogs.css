@@ -148,8 +148,19 @@ toolbarbutton menuitem {
   color: white;
 }
 
+menulist menuitem[disabled="true"],
+toolbarbutton menuitem[disabled="true"] {
+  background-color: transparent ! important;
+}
+
 menulist menuseparator,
 toolbarbutton menuseparator {
   -moz-appearance: none;
   border-bottom: silver thin solid;
+}
+
+menu[disabled="true"], menuitem[disabled="true"],
+menu[_moz-menuactive="true"][disabled="true"],
+menuitem[_moz-menuactive="true"][disabled="true"] {
+  color: -moz-mac-menutextdisable ! important;
 }
