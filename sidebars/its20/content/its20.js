@@ -202,13 +202,6 @@ function SelectionChanged(aArgs, aElt, aOneElementSelected)
   }
   // else // we still need to reflow
 
-  // show the selection's container in the info box
-  gDialog.currentElementBox.setAttribute("value",
-       "<" + gCurrentElement.localName +
-       (gCurrentElement.id ? " id='" + gCurrentElement.id + "'" : "") +
-       (gCurrentElement.className ? " class='" + gCurrentElement.className + "'" : "") +
-       ">" +
-       gCurrentElement.innerHTML.substr(0, 100));
   gLastElement = gCurrentElement;
 }
 

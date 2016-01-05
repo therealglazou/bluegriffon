@@ -43,20 +43,10 @@
 
 #mainBox {
   margin: 0px;
-  margin-top: 4px;
   padding: 0px;
-}
-
-#currentElementBox {
-  font-family: -moz-fixed;
-  padding: 0.5em;
-  border: 2px inset silver;
-  border-radius: 5px;
-  font-size: larger;
-  background-color: #505050;
+  padding-top: 4px;
+  background-color: #474d4f;
   color: white;
-  font-weight: bold;
-  margin-bottom: 4px;
 }
 
 #propertiesBox {
@@ -71,33 +61,47 @@
   display: -moz-box;
 }
 
+#locationTabbox {
+  margin: 0px;
+  color: black;
+}
+
 #tabpanels {
   padding-left: 1px;
   padding-right: 1px;
+  -moz-appearance: none;
 }
 
 hbox.csspropertiesHeader {
-  border-top: thin solid silver;
+  border-top: 2px solid #181818;
+  -moz-border-top-colors: #181818 #494f51;
   padding-left: 3px;
-  background-color: #dee4ea;
-%ifndef XP_MACOSX
+  padding-top: 2px;
+  padding-bottom: 2px;
+  text-transform: uppercase;
   font-weight: bold;
-%endif
-
+  -moz-transition: color 0.5s;
+  color: white;
 }
 
 hbox.csspropertiesHeader > image {
   list-style-image: url("chrome://cssproperties/skin/filter.png");
   -moz-transform: rotate(-90deg);
-  -moz-transition: -moz-transform 0.2s;
+  -moz-transition: -moz-transform 0.5s, filter 0.5s;
+  filter: grayscale(100%) contrast(600%);
 }
 
 hbox.csspropertiesHeader:-moz-locale-dir(rtl) > image {
   -moz-transform: rotate(+90deg) ;
 }
 
+hbox.csspropertiesHeader[open="true"] {
+  color: #00abff;
+}
+
 hbox.csspropertiesHeader[open="true"] > image {
   -moz-transform: rotate(0deg) !important;
+  filter: none;
 }
 
 .section {
@@ -106,7 +110,7 @@ hbox.csspropertiesHeader[open="true"] > image {
   opacity: 0;
   overflow: hidden;
   padding: 1em;
-  background-color: white;
+  color: white;
 }
 
 hbox.csspropertiesHeader[open="true"] + .section {
@@ -123,7 +127,7 @@ hbox.csspropertiesHeader[open="true"] + .section {
 }
 
 .section:last-child {
-  border-bottom: thin solid gray;
+  border-bottom: thin solid #363d3f;
 }
 
 .deleteRuleButton {
@@ -150,6 +154,10 @@ hbox.csspropertiesHeader[open="true"] + .section {
 #paramsBox,
 #rulesBox {
   margin: 0px;
+  -moz-appearance: none;
+  background-color: #363d3f;
+  color: white;
+  border: thin solid black;
 }
 
 #rulesetsBox listcell:last-of-type {
@@ -181,4 +189,22 @@ listitem.ancestor:not([selected]) {
 #annotatorsRefWarningLabel {
   color: red;
   font-weight: bold;
+}
+
+.multibutton {
+  text-shadow: none;
+}
+
+listheader {
+  -moz-appearance: none;
+  color: white;
+  background-color: transparent;
+  border: 0px none transparent;
+  border-bottom: thin solid black;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+listheader:not(:last-of-type) {
+  -moz-border-end: black thin solid;
 }
