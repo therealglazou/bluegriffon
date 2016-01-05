@@ -53,30 +53,19 @@
               windowType="BlueGriffon:StyleSheets"
               url="chrome://stylesheets/content/stylesheets.xul"
               label="&stylesheetsPanel.title;"
+              decked="true"
               type="checkbox"/>
   </menupopup>
 
-#ifdef XP_MACOSX
   <panelset id="panels">
     <panel id="panel-stylesheets"
            floating="true"
+           decked="true"
            label="&stylesheetsPanel.title;">
       <iframe type="chrome"
               flex="1"/>
     </panel>
   </panelset>
-#else
-#ifndef XP_UNIX
-  <panelset id="panels">
-    <panel id="panel-stylesheets"
-           floating="true"
-           label="&stylesheetsPanel.title;">
-      <iframe type="chrome"
-              flex="1"/>
-    </panel>
-  </panelset>
-#endif
-#endif
 
   <commandset id="webNavigationItems">
     <command id="cmd_stylesheets" oncommand="goDoCommand('cmd_stylesheets')"/>

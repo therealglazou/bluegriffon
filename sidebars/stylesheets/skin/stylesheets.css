@@ -1,12 +1,66 @@
+#insertStylesheetDialog {
+  -moz-appearance: none;
+  background-color: transparent;
+  color: white;
+}
+
 #contentsTree {
-  margin: 0px;
-  margin-top: 4px;
+  margin: 4px 8px 0px 8px;
   min-width: 200px;
   height: 200px;
+}
+
+#UrlsToolbox {
+  margin: 0px 8px 8px 8px;
 }
 
 treechildren::-moz-tree-checkbox(checked)
 {
     /* css for checked cells */
-    list-style-image: url("chrome://global/skin/checkbox/cbox-check.gif");
+    list-style-image: url("chrome://stylesheets/skin/cbox-check.gif");
+}
+
+tree {
+  -moz-appearance: none;
+  background-color: #363d3f;
+  border: thin solid black;
+  color: white;
+}
+
+treechildren {
+  -moz-appearance: none;
+  background-color: #363d3f;
+  color: white;
+}
+
+treechildren::-moz-tree-row {
+  background-color: #363d3f;
+}
+
+treechildren::-moz-tree-cell-text {
+  color: white;
+}
+
+treechildren::-moz-tree-row(selected) {
+  background-color: Highlight;
+}
+
+treechildren::-moz-tree-row(selected, focus) {
+  background-color: Highlight;
+}
+
+treecol, treecolpicker {
+  -moz-appearance: none;
+  color: white;
+  background-color: transparent;
+  border: 0px none transparent;
+  border-bottom: thin solid black;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+/* ::::: column picker :::::  */
+
+.tree-columnpicker-icon {
+  list-style-image: url("chrome://stylesheets/skin/columnpicker.gif");
 }
