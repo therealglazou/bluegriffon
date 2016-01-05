@@ -51,30 +51,19 @@
               windowType="BlueGriffon:ScriptEditor"
               url="chrome://scripteditor/content/scripteditor.xul"
               label="&scripteditor.label;"
+              decked="true"
               type="checkbox"/>
   </menupopup>
 
-#ifdef XP_MACOSX
   <panelset id="panels">
     <panel id="panel-scripteditor"
+           decked="true"
            floating="true"
            label="&scripteditor.label;">
       <iframe type="chrome"
               flex="1"/>
     </panel>
   </panelset>
-#else
-#ifndef XP_UNIX
-  <panelset id="panels">
-    <panel id="panel-scripteditor"
-           floating="true"
-           label="&scripteditor.label;">
-      <iframe type="chrome"
-              flex="1"/>
-    </panel>
-  </panelset>
-#endif
-#endif
 
 </overlay>         
 
