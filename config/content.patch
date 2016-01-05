@@ -3109,6 +3109,37 @@ diff --git a/gfx/src/nsColor.h b/gfx/src/nsColor.h
  // the float parameters are all expected to be in the range 0-1
  NS_GFX_(nscolor) NS_HSL2RGB(float h, float s, float l);
  
+diff --git a/gfx/thebes/gfxPlatformMac.cpp b/gfx/thebes/gfxPlatformMac.cpp
+--- a/gfx/thebes/gfxPlatformMac.cpp
++++ b/gfx/thebes/gfxPlatformMac.cpp
+@@ -567,17 +567,26 @@ static CVReturn VsyncCallback(CVDisplayL
+ {
+   // Executed on OS X hardware vsync thread
+   OSXVsyncSource::OSXDisplay* display = (OSXVsyncSource::OSXDisplay*) aDisplayLinkContext;
+   int64_t nextVsyncTimestamp = aOutputTime->hostTime;
+   mozilla::TimeStamp nextVsync = mozilla::TimeStamp::FromSystemTime(nextVsyncTimestamp);
+ 
+   mozilla::TimeStamp previousVsync = display->mPreviousTimestamp;
+   display->mPreviousTimestamp = nextVsync;
+-  MOZ_ASSERT(TimeStamp::Now() > previousVsync);
++  mozilla::TimeStamp now = TimeStamp::Now();
++  MOZ_ASSERT(nextVsync > previousVsync);
++
++  // Bug 1158321 - The VsyncCallback can sometimes execute before the reported
++  // vsync time. In those cases, normalize the timestamp to Now() as sending
++  // timestamps in the future has undefined behavior. See the comment above
++  // OSXDisplay::mPreviousTimestamp
++  if (now < previousVsync) {
++    previousVsync = now;
++  }
+ 
+   display->NotifyVsync(previousVsync);
+   return kCVReturnSuccess;
+ }
+ 
+ already_AddRefed<mozilla::gfx::VsyncSource>
+ gfxPlatformMac::CreateHardwareVsyncSource()
+ {
 diff --git a/layout/base/nsPresContext.cpp b/layout/base/nsPresContext.cpp
 --- a/layout/base/nsPresContext.cpp
 +++ b/layout/base/nsPresContext.cpp
@@ -3190,7 +3221,7 @@ diff --git a/layout/style/Loader.cpp b/layout/style/Loader.cpp
 diff --git a/layout/style/nsCSSParser.cpp b/layout/style/nsCSSParser.cpp
 --- a/layout/style/nsCSSParser.cpp
 +++ b/layout/style/nsCSSParser.cpp
-@@ -5387,16 +5387,26 @@ CSSParserImpl::ParseAttributeSelector(in
+@@ -5387,35 +5387,47 @@ CSSParserImpl::ParseAttributeSelector(in
        UngetToken(); // bad function
        return eSelectorParsingStatus_Error;
      }
@@ -3199,15 +3230,8 @@ diff --git a/layout/style/nsCSSParser.cpp b/layout/style/nsCSSParser.cpp
          REPORT_UNEXPECTED_EOF(PEAttSelValueEOF);
          return eSelectorParsingStatus_Error;
        }
-+        bool isCaseSensitive = true;
-+        if (eCSSToken_Ident == mToken.mType && mToken.mIdent.LowerCaseEqualsLiteral("i")) {
-+          // Case-insensitive attribute selectors from Selectors Level 4 section 6.3
-+          isCaseSensitive = false;
-+          if (! GetToken(true)) { // premature EOF
-+            REPORT_UNEXPECTED_EOF(PEAttSelValueEOF);
-+            return eSelectorParsingStatus_Error;
-+          }
-+        }
++
++      bool isCaseSensitive = true;
 +
        if ((eCSSToken_Ident == mToken.mType) || (eCSSToken_String == mToken.mType)) {
          nsAutoString  value(mToken.mIdent);
@@ -3217,9 +3241,20 @@ diff --git a/layout/style/nsCSSParser.cpp b/layout/style/nsCSSParser.cpp
            REPORT_UNEXPECTED_EOF(PEAttSelCloseEOF);
            gotClosingBracket = true;
          } else {
-@@ -5405,17 +5415,17 @@ CSSParserImpl::ParseAttributeSelector(in
+           gotClosingBracket = mToken.IsSymbol(']');
++          if (!gotClosingBracket && eCSSToken_Ident == mToken.mType && mToken.mIdent.LowerCaseEqualsLiteral("i")) {
++            // Case-insensitive attribute selectors from Selectors Level 4 section 6.3
++            isCaseSensitive = false;
++            if (! GetToken(true)) { // premature EOF
++              REPORT_UNEXPECTED_EOF(PEAttSelValueEOF);
++              gotClosingBracket = true;
++            }
++            else
++              gotClosingBracket = mToken.IsSymbol(']');
++          }
+         }
          if (gotClosingBracket) {
-           bool isCaseSensitive = true;
+-          bool isCaseSensitive = true;
  
            // For cases when this style sheet is applied to an HTML
            // element in an HTML document, and the attribute selector is
