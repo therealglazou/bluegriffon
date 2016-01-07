@@ -4916,11 +4916,11 @@ jscsspDeclaration.prototype = {
   kUNMODIFIED_COMMA_SEPARATED_PROPERTIES: {
     "text-shadow": true,
     "box-shadow": true,
-    "-moz-transition": true,
-    "-moz-transition-property": true,
-    "-moz-transition-duration": true,
-    "-moz-transition-timing-function": true,
-    "-moz-transition-delay": true,
+    "transition": true,
+    "transition-property": true,
+    "transition-duration": true,
+    "transition-timing-function": true,
+    "transition-delay": true,
     "src": true,
     "-moz-font-feature-settings": true
   },

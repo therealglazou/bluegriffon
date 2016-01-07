@@ -80,14 +80,14 @@ hbox.csspropertiesHeader {
   padding-bottom: 2px;
   text-transform: uppercase;
   font-weight: bold;
-  -moz-transition: color 0.5s;
+  transition: color 0.5s;
   color: white;
 }
 
 hbox.csspropertiesHeader > image {
   list-style-image: url("chrome://cssproperties/skin/filter.png");
   -moz-transform: rotate(-90deg);
-  -moz-transition: -moz-transform 0.5s, filter 0.5s;
+  transition: -moz-transform 0.5s, filter 0.5s;
   filter: grayscale(100%) contrast(600%);
 }
 
@@ -105,7 +105,7 @@ hbox.csspropertiesHeader[open="true"] > image {
 }
 
 .section {
-  -moz-transition: height 0.5s, opacity 0.5s;
+  transition: height 0.5s, opacity 0.5s;
   height: 0px;
   opacity: 0;
   overflow: hidden;
