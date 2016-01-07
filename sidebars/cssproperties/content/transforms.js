@@ -239,7 +239,7 @@ function DeleteTransform()
   ReapplyTransforms();
 }
 
-function ReapplyTransforms()
+function ReapplyTransforms(aNoSelectionUpdate)
 {
   var items = gDialog.transformsRichlistbox.querySelectorAll("richlistitem");
   var transforms = [];
@@ -410,7 +410,7 @@ function ReapplyTransforms()
                           + " "
                           + gDialog.perspectiveOriginYMenulist.value).trim()
                 }
-              ]);
+              ], aNoSelectionUpdate);
 }
 
 

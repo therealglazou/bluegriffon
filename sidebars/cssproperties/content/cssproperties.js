@@ -314,7 +314,7 @@ function RestoreSelection()
   gSavedSelection = null;
 }
 
-function ApplyStyles(aStyles)
+function ApplyStyles(aStyles, aNoSelectionUpdate)
 {
   var className;
   var editor = EditorUtils.getCurrentEditor();
@@ -448,7 +448,8 @@ function ApplyStyles(aStyles)
     }
   }
   editor.endTransaction();
-  SelectionChanged(null, elt, true);
+  if (!aNoSelectionUpdate)
+    SelectionChanged(null, elt, true);
   RestoreSelection();
 }
 

@@ -112,16 +112,17 @@
           return document.getAnonymousElementByAttribute(this, "anonid", aChildName);
         ]]></body>
       </method>
+
       <method name="reflectPosition">
         <parameter name="aEvent"/>
         <parameter name="aForceCallback"/>
         <body><![CDATA[
+          var textbox = this.getChild("textbox");
           var angle = aEvent.originalTarget.value;
-          if (this.getChild("textbox").value != angle)
-            this.getChild("textbox").value = angle;
+          if (textbox.value != angle)
+            textbox.value = angle;
           this.getChild("innerRotator").style.MozTransform = "rotate(" + (parseFloat(angle)-90) + "deg)";
           this.callCallback(angle, aForceCallback);
-          this.getChild("textbox").focus();
         ]]></body>
       </method>
       <method name="callCallback">

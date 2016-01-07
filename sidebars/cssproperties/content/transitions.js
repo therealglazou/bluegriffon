@@ -84,7 +84,7 @@ function DeleteTransition()
   ReapplyTransitions();
 }
 
-function ReapplyTransitions()
+function ReapplyTransitions(aDontChangeSelection)
 {
   var items = gDialog.transitionsRichlistbox.querySelectorAll("richlistitem");
   var properties = [];
@@ -128,7 +128,7 @@ function ReapplyTransitions()
                  });
 
   if (toPush.length)
-    ApplyStyles( toPush );
+    ApplyStyles( toPush, aDontChangeSelection );
 }
 
 function UpdateTransitionUI()
