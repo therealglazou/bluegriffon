@@ -97,3 +97,76 @@ window#Bluegriffon {
 #titlebar {
   margin: 4px 8px;
 }
+
+menulist,
+textbox[type="number"] {
+  -moz-appearance: none;
+  padding-left: 3px;
+  padding-right: 3px;
+  background-color: #363d3f;
+  padding-left: 3px;
+  border: thin solid #181818;
+  color: white;
+}
+
+textbox[type="number"] .numberbox-input-box {
+  -moz-appearance: none;
+  border: none 0px;
+  background-color: transparent;
+}
+
+menulist .menulist-dropmarker {
+  -moz-appearance: none;
+  display: -moz-box;
+  background: transparent;
+  border: none 0px;
+}
+
+menulist html|*.menulist-editable-input {
+  color: white;
+}
+
+menulist[disabled="true"],
+menulist[disabled="true"] html|*.menulist-editable-input,
+menulist html|*.menulist-editable-input::-moz-placeholder  {
+  color: graytext;
+}
+
+menulist html|*.menulist-editable-input::-moz-placeholder  {
+  font-style: italic;
+}
+
+menulist[editable="true"] {
+  margin-top: 5px;
+  margin-bottom: 3px
+}
+
+menulist menupopup,
+toolbarbutton menupopup {
+  -moz-appearance: none;
+  color: white;
+  background-color: #363d3f;
+}
+
+menulist menuitem,
+toolbarbutton menuitem {
+  -moz-appearance: none;
+  color: white;
+}
+
+menulist menuitem[disabled="true"],
+toolbarbutton menuitem[disabled="true"] {
+  background-color: transparent ! important;
+}
+
+menulist menuseparator,
+toolbarbutton menuseparator {
+  -moz-appearance: none;
+  border-bottom: silver thin solid;
+}
+
+menu[disabled="true"], menuitem[disabled="true"],
+menu[_moz-menuactive="true"][disabled="true"],
+menuitem[_moz-menuactive="true"][disabled="true"] {
+  color: -moz-mac-menutextdisable ! important;
+}
