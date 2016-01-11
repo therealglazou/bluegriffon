@@ -29,7 +29,6 @@ function Shutdown()
 function InitDialog()
 {
   var strings = gDialog.bundle.strings;
-  alert(strings)
   var charsets = [];
   while (strings.hasMoreElements())
   {
