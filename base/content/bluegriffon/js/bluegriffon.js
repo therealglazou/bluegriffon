@@ -128,7 +128,7 @@ function OpenFile(aURL, aInTab)
     var editor = alreadyEdited.editor;
     var index  = alreadyEdited.index;
     win.document.getElementById("tabeditor").selectedIndex = index;
-    win.document.getElementById("tabeditor").mTabpanels.selectedPanel = editor;
+    win.document.getElementById("tabeditor").mTabpanels.selectedPanel = editor.parentNode;
 
     // nothing else to do here...
     win.focus();

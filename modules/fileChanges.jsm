@@ -35,6 +35,7 @@ var FileChangeUtils = {
           ////////////////////////
           // this file was updated
           ////////////////////////
+          var updateFiles = true;
           if (showAlert) {
             var rv = { value: false };
             var titleWindow   = L10NUtils.getString("AFileWasChanged");
@@ -43,69 +44,86 @@ var FileChangeUtils = {
                                          .formatStringFromName("ReloadFile",
                                                                [i.substr(i.lastIndexOf("/") + 1)],
                                                                1);
-            Services.prompt.alertCheck(null,
-                                       titleWindow,
-                                       message,
-                                       checkboxLabel,
-                                       rv);
+            updateFiles = Services.prompt.confirmCheck(null,
+                                                       titleWindow,
+                                                       message,
+                                                       checkboxLabel,
+                                                       rv);
             showAlert = !rv.value;
             Services.prefs.setBoolPref("bluegriffon.files.alert-on-update", showAlert);
           }
-          for (var n = 0; n < this.mLinkedFiles[i].nodes.length; n++) {
-            var node = this.mLinkedFiles[i].nodes[n];
-            if (node instanceof Components.interfaces.nsIDOMElement) { // it's an element node
-              if (node.nodeName.toLowerCase() == "link") {
-                var href = node.getAttribute("href");
-                node.setAttribute("href", "");
-                node.setAttribute("href", href);
-              }
-              else { // img, audio, video
-                var srcAttr = node.getAttribute("src");
-                var src = node.src;
+          if (updateFiles) {
+            for (var n = 0; n < this.mLinkedFiles[i].nodes.length; n++) {
+              var node = this.mLinkedFiles[i].nodes[n];
+              if (node instanceof Components.interfaces.nsIDOMElement) { // it's an element node
+                if (node.nodeName.toLowerCase() == "html") {
+                  // we need to reload the whole document!
+                  var docURI = node.ownerDocument.documentURI;
+                  var alreadyEdited = EditorUtils.isAlreadyEdited(docURI);
+                  var win    = alreadyEdited.window;
+                  var editor = alreadyEdited.editor;
+                  var index  = alreadyEdited.index;
+                  win.document.getElementById("tabeditor").selectedIndex = index;
+                  win.document.getElementById("tabeditor").mTabpanels.selectedPanel = editor.parentNode;
+                  // close the tab containing that document
+                  win.focus();
+                  win.doCloseTab(EditorUtils.getCurrentTabEditor().selectedTab);
+                  // and reopen the file
+                  win.OpenFile(docURI, true);
+                }
+                else if (node.nodeName.toLowerCase() == "link") {
+                  var href = node.getAttribute("href");
+                  node.setAttribute("href", "");
+                  node.setAttribute("href", href);
+                }
+                else { // img, audio, video
+                  var srcAttr = node.getAttribute("src");
+                  var src = node.src;
 
-                try {
-                  // Remove the image URL from image cache so it loads fresh
-                  //  (if we don't do this, loads after the first will always use image cache
-                  //   and we won't see image edit changes or be able to get actual width and height)
-                  
-                  var IOService = UrlUtils.getIOService();
-                  if (IOService)
-                  {
-                    if (UrlUtils.getScheme(src))
+                  try {
+                    // Remove the image URL from image cache so it loads fresh
+                    //  (if we don't do this, loads after the first will always use image cache
+                    //   and we won't see image edit changes or be able to get actual width and height)
+
+                    var IOService = UrlUtils.getIOService();
+                    if (IOService)
                     {
-                      var uri = IOService.newURI(src, null, null);
-                      if (uri)
+                      if (UrlUtils.getScheme(src))
                       {
-                        var imgCacheService = Components.classes["@mozilla.org/image/cache;1"].getService();
-                        var imgCache = imgCacheService.QueryInterface(Components.interfaces.imgICache);
-              
-                        // This returns error if image wasn't in the cache; ignore that
-                        imgCache.removeEntry(uri);
+                        var uri = IOService.newURI(src, null, null);
+                        if (uri)
+                        {
+                          var imgCacheService = Components.classes["@mozilla.org/image/cache;1"].getService();
+                          var imgCache = imgCacheService.QueryInterface(Components.interfaces.imgICache);
+
+                          // This returns error if image wasn't in the cache; ignore that
+                          imgCache.removeEntry(uri);
+                        }
                       }
                     }
                   }
-                }
-                catch(e) {}
+                  catch(e) {}
 
-                node.setAttribute("src", "");
-                node.setAttribute("src", srcAttr);
+                  node.setAttribute("src", "");
+                  node.setAttribute("src", srcAttr);
+                }
               }
-            }
-            else { // it's a style rule
-              var parentStyleSheet = node.parentStyleSheet;
-              while (!parentStyleSheet.ownerNode) {
-                parentStyleSheet = parentStyleSheet.ownerRule.parentStyleSheet;
-              }
-              var node = parentStyleSheet.ownerNode;
-              if (node.nodeName.toLowerCase() == "style") {
-                var prose = node.textContent;
-                node.textContent = "";
-                node.textContent = prose;
-              }
-              else { // link
-                var href = node.getAttribute("href");
-                node.setAttribute("href", "");
-                node.setAttribute("href", href);
+              else { // it's a style rule
+                var parentStyleSheet = node.parentStyleSheet;
+                while (!parentStyleSheet.ownerNode) {
+                  parentStyleSheet = parentStyleSheet.ownerRule.parentStyleSheet;
+                }
+                var node = parentStyleSheet.ownerNode;
+                if (node.nodeName.toLowerCase() == "style") {
+                  var prose = node.textContent;
+                  node.textContent = "";
+                  node.textContent = prose;
+                }
+                else { // link
+                  var href = node.getAttribute("href");
+                  node.setAttribute("href", "");
+                  node.setAttribute("href", href);
+                }
               }
             }
           }
@@ -172,6 +190,10 @@ var FileChangeUtils = {
 
     var innerEditor = aElt.getEditor(aElt.contentWindow);
     var doc = innerEditor.document;
+    var docURI = doc.documentURI;
+    if (docURI && docURI.substr(0, 7) == "file://") {
+      this.addLinkedFile(docURI, doc.documentElement);
+    }
     // first, find nodes with external references
     var nodes = doc.querySelectorAll("link[rel*='stylesheet'][href], img[src], audio[src], video[src]");
     for (var i = 0; i < nodes.length; i++) {
