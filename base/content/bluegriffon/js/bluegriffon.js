@@ -233,10 +233,11 @@ function UpdateWindowTitle(aEditorElement)
 
     // Set window title with
     var titleModifier = L10NUtils.getString("titleModifier");
-    document.title    = L10NUtils.getBundle()
-                                 .formatStringFromName("titleFormat",
-                                                       [windowTitle, titleModifier],
-                                                       2);
+    gDialog.titleInTitlebar.setAttribute("value",
+                                         L10NUtils.getBundle()
+                                           .formatStringFromName("titleFormat",
+                                                                 [windowTitle, titleModifier],
+                                                                 2));
     return windowTitle;                                                       
   } catch (e) { }
   return "";
