@@ -1181,7 +1181,7 @@ function doCloseTab(aTab)
       //gDialog.structurebar.className = "hidden";
       gDialog.structurebar.style.visibility = "hidden";
     }
-    document.title = "BlueGriffon";
+    gDialog.titleInTitlebar.setAttribute("value", "BlueGriffon");
   }
   window.updateCommands("style");
   NotifierUtils.notify("tabClosed");
