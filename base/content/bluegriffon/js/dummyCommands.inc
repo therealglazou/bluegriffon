@@ -85,7 +85,9 @@ var cmdMarkupCleaner =
 {
   isCommandEnabled: function(aCommand, dummy)
   {
-    return (EditorUtils.isDocumentEditable()  &&
+    return (EditorUtils.getCurrentEditorElement() &&
+            EditorUtils.isDocumentEditable() &&
+            EditorUtils.isEditingRenderedHTML() &&
             GetCurrentViewMode() == "wysiwyg");
   },
 

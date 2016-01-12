@@ -132,6 +132,7 @@
   <command id="cmd_editLink"          oncommand="goDoCommand('cmd_editLink')"/>
 
   <command id="cmd_toggleView"        oncommand="goDoCommand('cmd_toggleView')"/>
+  <command id="cmd_cleanup"           oncommand="goDoCommand('cmd_cleanup')" label="&markupCleanerCmd.label;" accesskey="&markupcleaner.accesskey;"/>
 </commandset>
 
 <commandset id="composerStyleMenuItems"
@@ -247,13 +248,6 @@
   <command id="cmd_bgfindagain"    label="&findAgainCmd.label;"      accesskey="&findAgainCmd.accesskey;" oncommand="goDoCommand('cmd_bgfindagain')"/>
   <command id="cmd_replace"        label="&replaceCmd.label;"        accesskey="&replaceCmd.accesskey;" oncommand="goDoCommand('cmd_replace')"/>
   <command id="cmd_browse"                                           oncommand="goDoCommand('cmd_browse')"/>
-</commandset>
-
-<commandset id="composerEditMenuItems"
-            commandupdater="true"
-            events="create, mode_switch"
-            oncommandupdate="ComposerCommands.goUpdateComposerMenuItems(this)">
-  <command id="cmd_cleanup"         oncommand="goDoCommand('cmd_cleanup')"      label="&markupCleanerCmd.label;" accesskey="&markupcleaner.accesskey;"/>
 </commandset>
 
 <commandset id="composerTableMenuItems"
