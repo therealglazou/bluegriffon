@@ -5245,10 +5245,10 @@ jscsspStyleRule.prototype = {
     for (var i = 0; i < this.declarations.length; i++) {
       var declText = this.declarations[i].cssText();
       if (declText)
-        rv += declText + "\n";
+        rv += declText;
     }
     gTABS = preservedGTABS;
-    return rv + gTABS + "}";
+    return rv + "\n" + gTABS + "}";
   },
 
   setCssText: function(val) {
