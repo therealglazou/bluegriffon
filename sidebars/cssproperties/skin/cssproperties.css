@@ -37,7 +37,6 @@
 
 @import url("chrome://bluegriffon/skin/black.css");
 
-
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 @namespace html url("http://www.w3.org/1999/xhtml");
 
@@ -210,14 +209,14 @@ l10n {
 }
 
 listbox, richlistbox {
-  background-color: #363d3f;
+  background-color: var(--bg-dark-background);
   color: white;
   border: #181818 solid thin;
   -moz-appearance: none;
 }
 
 hbox.listboxBg {
-  background-color: #363d3f;
+  background-color: var(--bg-dark-background);
   color: white;
   border-color: #181818;
 }

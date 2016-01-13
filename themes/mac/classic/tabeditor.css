@@ -104,7 +104,7 @@ tabeditor > tabbox {
 }
 
 .tabeditor-tab:not([selected="true"]):hover {
-  background-image: linear-gradient(to bottom, #474d4f, #474d4f);
+  background-image: linear-gradient(to bottom, var(--bg-dark-gray), var(--bg-dark-gray));
 }
 
 .tabeditor-tab[selected="true"] {
@@ -114,7 +114,7 @@ tabeditor > tabbox {
   border-bottom-width: 0px;
   border-left-width: 0px;
   border-right-width: 0px;
-  background-image: linear-gradient(to bottom, #474d4f, #383f41);
+  background-image: linear-gradient(to bottom, var(--bg-dark-gray), var(--bg-lighter-dark-gray));
 }
 
 .tabeditor-tab[selected="true"]:focus > .tab-text {
@@ -214,6 +214,6 @@ tabeditor[tabmode="right"] .tabs-right {
 #newDocumentButton:hover {
   opacity: 1;
   border-color: #6d7373;
-  background-image: linear-gradient(to bottom, #474d4f, #383f41);
+  background-image: linear-gradient(to bottom, var(--bg-dark-gray), var(--bg-lighter-dark-gray));
   border-radius: 4px 4px 0px 0px;
 }

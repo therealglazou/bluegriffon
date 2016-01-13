@@ -46,10 +46,18 @@
 @namespace svg url("http://www.w3.org/2000/svg");
 @namespace html url("http://www.w3.org/1999/xhtml");
 
-#titleInTitlebar {
-  color: white;
+#FormatToolbox toolbar {
+  -moz-box-orient: vertical;
 }
 
+toolbar {
+  -moz-appearance: none;
+}
+
+#MainToolbar {
+  display: none;
+  }
+  
 tabeditor {
   -moz-binding: url('chrome://bluegriffon/content/bindings/tabeditor.xml#tabeditor');
 }
@@ -66,7 +74,7 @@ tabeditor[visibility="hidden"]  tabpanels
   border-top: 2px solid #181818;
   -moz-border-top-colors: #181818 #494f51;
   border-bottom: thin solid #181818;
-  background-color: #363d3f ! important;
+  background-color: var(--bg-dark-background) ! important;
   padding-top: 6px;
 }
 
@@ -162,7 +170,7 @@ grippy[disabled="true"] {
   border-bottom-width: 0px;
   border-left-width: 0px;
   border-right-width: 0px;
-  background-color: #474d4f;
+  background-color: var(--bg-dark-gray);
 }
 
 .multiButton:hover {
@@ -397,7 +405,7 @@ deckedPanelsTabs  {
 }
 
 #deckPanelsIframe {
-  background-color: #474d4f;
+  background-color: var(--bg-dark-gray);
 }
 
 deckedPanelsTabs > label {
@@ -415,18 +423,13 @@ deckedPanelsTabs > label {
   border-bottom-width: 0px;
   border-left-width: 0px;
   border-right-width: 0px;
-  background-color: #474d4f;
-}
-
-deckedPanelsTabs > label:not([selected="true"]) {
-  /*background-image: linear-gradient(to bottom, #474d4f, #474d4f);*/
+  background-color: var(--bg-dark-gray);
 }
 
 deckedPanelsTabs > label[selected="true"] {
   color: white;
   -moz-user-focus: normal;
   border-top: thin solid #6d7373;
-  /*background-image: linear-gradient(to bottom, #474d4f, #383f41);*/
 }
 
 deckedPanelsTabs > label:hover {
@@ -449,7 +452,7 @@ toolbar {
   border-right: thin solid #181818;
   border-top: 2px solid #181818;
   -moz-border-top-colors: #181818 #494f51;
-  background-color: #363d3f ! important;
+  background-color: var(--bg-dark-background) ! important;
   padding-top: 5px;
 }
 
@@ -468,7 +471,7 @@ menulist {
   -moz-appearance: none;
   padding-left: 3px;
   padding-right: 3px;
-  background-color: #363d3f;
+  background-color: var(--bg-dark-background);
   padding-left: 3px;
   border: thin solid #181818;
   color: white;

@@ -35,6 +35,11 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
+@import url("chrome://bluegriffon/skin/black.css");
+
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+@namespace html url("http://www.w3.org/1999/xhtml");
+
 #elementsTree {
   margin: 4px;
   border: thin solid black;
@@ -65,11 +70,11 @@ tabs {
 
 tree, treechildren {
   -moz-appearance: none;
-  background-color: #363d3f;
+  background-color: var(--bg-dark-background);
 }
 
 treechildren::-moz-tree-row {
-  background-color: #363d3f;
+  background-color: var(--bg-dark-background);
 }
 
 treechildren::-moz-tree-cell-text {

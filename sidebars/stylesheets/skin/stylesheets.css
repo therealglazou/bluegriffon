@@ -1,3 +1,8 @@
+@import url("chrome://bluegriffon/skin/black.css");
+
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+@namespace html url("http://www.w3.org/1999/xhtml");
+
 #insertStylesheetDialog {
   -moz-appearance: none;
   background-color: transparent;
@@ -14,53 +19,3 @@
   margin: 0px 8px 8px 8px;
 }
 
-treechildren::-moz-tree-checkbox(checked)
-{
-    /* css for checked cells */
-    list-style-image: url("chrome://stylesheets/skin/cbox-check.gif");
-}
-
-tree {
-  -moz-appearance: none;
-  background-color: #363d3f;
-  border: thin solid black;
-  color: white;
-}
-
-treechildren {
-  -moz-appearance: none;
-  background-color: #363d3f;
-  color: white;
-}
-
-treechildren::-moz-tree-row {
-  background-color: #363d3f;
-}
-
-treechildren::-moz-tree-cell-text {
-  color: white;
-}
-
-treechildren::-moz-tree-row(selected) {
-  background-color: Highlight;
-}
-
-treechildren::-moz-tree-row(selected, focus) {
-  background-color: Highlight;
-}
-
-treecol, treecolpicker {
-  -moz-appearance: none;
-  color: white;
-  background-color: transparent;
-  border: 0px none transparent;
-  border-bottom: thin solid black;
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-/* ::::: column picker :::::  */
-
-.tree-columnpicker-icon {
-  list-style-image: url("chrome://stylesheets/skin/columnpicker.gif");
-}
