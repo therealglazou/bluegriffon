@@ -4931,7 +4931,7 @@ jscsspDeclaration.prototype = {
     var rv = "";
     if (this.property in this.kUNMODIFIED_COMMA_SEPARATED_PROPERTIES) {
       if (prefixes) {
-        rv = "";
+        rv = "\n";
         for (var propertyIndex = 0; propertyIndex < prefixes.length; propertyIndex++) {
           var property = prefixes[propertyIndex];
           rv += (propertyIndex ? gTABS : "") + property + ": ";
@@ -4945,10 +4945,10 @@ jscsspDeclaration.prototype = {
     }
 
     if (prefixes) {
-      rv = "";
+      rv = "\n";
       for (var propertyIndex = 0; propertyIndex < prefixes.length; propertyIndex++) {
         var property = prefixes[propertyIndex];
-        rv += (propertyIndex ? gTABS : "") + property + ": ";
+        rv += gTABS + property + ": ";
         var separator = (property in this.kCOMMA_SEPARATED) ? ", " : " ";
         for (var i = 0; i < this.values.length; i++)
           if (this.values[i].cssText() != null)
@@ -5239,13 +5239,13 @@ function jscsspStyleRule()
 
 jscsspStyleRule.prototype = {
   cssText: function() {
-    var rv = this.mSelectorText + " {\n";
+    var rv = this.mSelectorText + " {";
     var preservedGTABS = gTABS;
     gTABS += "  ";
     for (var i = 0; i < this.declarations.length; i++) {
       var declText = this.declarations[i].cssText();
       if (declText)
-        rv += gTABS + this.declarations[i].cssText() + "\n";
+        rv += declText + "\n";
     }
     gTABS = preservedGTABS;
     return rv + gTABS + "}";
