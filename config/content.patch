@@ -3510,7 +3510,7 @@ diff --git a/toolkit/content/widgets/menulist.xml b/toolkit/content/widgets/menu
            this.setAttribute('focused','true');
          ]]>
        </handler>
-@@ -574,24 +581,35 @@
+@@ -574,24 +581,40 @@
                // For now, only do this when the outermost menupopup opens.
                this.menuBoxObject.activeChild = this.mSelectedInternal;
            }
@@ -3523,12 +3523,17 @@ diff --git a/toolkit/content/widgets/menulist.xml b/toolkit/content/widgets/menu
 +            return;
 +
 +          if (this.getAttribute("bgtype") == "csslength") {
++            var _self = this;
 +            if (event.keyCode == KeyEvent.DOM_VK_UP) {
 +              IncreaseLength(this, this.getAttribute("units"));
++              if (this.oninput)
++                this.oninput.call(_self);
 +              event.preventDefault();
 +            }
 +            else if (event.keyCode == KeyEvent.DOM_VK_DOWN) {
 +              DecreaseLength(this, this.getAttribute("units"), !(this.getAttribute("unsigned") == "true"));
++              if (this.oninput)
++                this.oninput.call(_self);
 +              event.preventDefault();
 +            }
 +          }
@@ -3553,6 +3558,84 @@ diff --git a/toolkit/content/widgets/menulist.xml b/toolkit/content/widgets/menu
  
    <binding id="menulist-description" display="xul:menu"
             extends="chrome://global/content/bindings/menulist.xml#menulist">
+diff --git a/toolkit/content/widgets/tree.xml b/toolkit/content/widgets/tree.xml
+--- a/toolkit/content/widgets/tree.xml
++++ b/toolkit/content/widgets/tree.xml
+@@ -710,17 +710,18 @@
+       <handler event="MozSwipeGesture" preventdefault="true">
+         <![CDATA[
+           // Figure out which row to show
+           let targetRow = 0;
+ 
+           // Only handle swipe gestures up and down
+           switch (event.direction) {
+             case event.DIRECTION_DOWN:
+-              targetRow = this.view.rowCount - 1;
++              if (this.view)
++                targetRow = this.view.rowCount - 1;
+               // Fall through for actual action
+             case event.DIRECTION_UP:
+               this.treeBoxObject.ensureRowIsVisible(targetRow);
+               break;
+           }
+         ]]>
+       </handler>
+       <handler event="select" phase="target"
+@@ -1463,35 +1464,36 @@
+           <![CDATA[
+             // We no longer cache the picker content, remove the old content.
+             while (aPopup.childNodes.length > 2)
+               aPopup.removeChild(aPopup.firstChild);
+ 
+             var refChild = aPopup.firstChild;
+ 
+             var tree = this.parentNode.parentNode;
+-            for (var currCol = tree.columns.getFirstColumn(); currCol;
+-                 currCol = currCol.getNext()) {
+-              // Construct an entry for each column in the row, unless
+-              // it is not being shown.
+-              var currElement = currCol.element;
+-              if (!currElement.hasAttribute("ignoreincolumnpicker")) {
+-                var popupChild = document.createElement("menuitem");
+-                popupChild.setAttribute("type", "checkbox");
+-                var columnName = currElement.getAttribute("display") ||
+-                                 currElement.getAttribute("label");
+-                popupChild.setAttribute("label", columnName);
+-                popupChild.setAttribute("colindex", currCol.index);
+-                if (currElement.getAttribute("hidden") != "true")
+-                  popupChild.setAttribute("checked", "true");
+-                if (currCol.primary)
+-                  popupChild.setAttribute("disabled", "true");
+-                aPopup.insertBefore(popupChild, refChild);
++            if (tree.columns) // sanity case
++              for (var currCol = tree.columns.getFirstColumn(); currCol;
++                   currCol = currCol.getNext()) {
++                // Construct an entry for each column in the row, unless
++                // it is not being shown.
++                var currElement = currCol.element;
++                if (!currElement.hasAttribute("ignoreincolumnpicker")) {
++                  var popupChild = document.createElement("menuitem");
++                  popupChild.setAttribute("type", "checkbox");
++                  var columnName = currElement.getAttribute("display") ||
++                                   currElement.getAttribute("label");
++                  popupChild.setAttribute("label", columnName);
++                  popupChild.setAttribute("colindex", currCol.index);
++                  if (currElement.getAttribute("hidden") != "true")
++                    popupChild.setAttribute("checked", "true");
++                  if (currCol.primary)
++                    popupChild.setAttribute("disabled", "true");
++                  aPopup.insertBefore(popupChild, refChild);
++                }
+               }
+-            }
+ 
+             var hidden = !tree.enableColumnDrag;
+             const anonids = ["menuseparator", "menuitem"];
+             for (var i = 0; i < anonids.length; i++) {
+               var element = document.getAnonymousElementByAttribute(this, "anonid", anonids[i]);
+               element.hidden = hidden;
+             }
+           ]]>
 diff --git a/toolkit/content/xul.css b/toolkit/content/xul.css
 --- a/toolkit/content/xul.css
 +++ b/toolkit/content/xul.css
@@ -3731,10 +3814,17 @@ diff --git a/toolkit/mozapps/handling/nsContentDispatchChooser.js b/toolkit/moza
 diff --git a/toolkit/toolkit.mozbuild b/toolkit/toolkit.mozbuild
 --- a/toolkit/toolkit.mozbuild
 +++ b/toolkit/toolkit.mozbuild
-@@ -166,17 +166,16 @@ if not CONFIG['MOZ_ENABLE_QTNETWORK'] an
+@@ -160,23 +160,22 @@ DIRS += [
+ 
+ if CONFIG['MOZ_ENABLE_GNOME_COMPONENT']:
+     DIRS += ['/toolkit/system/gnome']
+ 
+ # if QtNetwork is present, it will do its own network monitoring
+ if not CONFIG['MOZ_ENABLE_QTNETWORK'] and CONFIG['MOZ_ENABLE_DBUS']:
      DIRS += ['/toolkit/system/dbus']
  
- DIRS += ['/addon-sdk']
+-DIRS += ['/addon-sdk']
++#DIRS += ['/addon-sdk']
  
  if CONFIG['ENABLE_MARIONETTE'] or CONFIG['MOZ_WIDGET_TOOLKIT'] not in ('gonk', 'android'):
      DIRS += ['/testing/marionette']
@@ -3777,6 +3867,28 @@ diff --git a/widget/PuppetWidget.cpp b/widget/PuppetWidget.cpp
  
  NS_IMETHODIMP
  PuppetScreenManager::ScreenForRect(int32_t inLeft,
+diff --git a/widget/cocoa/nsChildView.mm b/widget/cocoa/nsChildView.mm
+--- a/widget/cocoa/nsChildView.mm
++++ b/widget/cocoa/nsChildView.mm
+@@ -6394,17 +6394,17 @@ HandleEvent(CGEventTapProxy aProxy, CGEv
+   CFRunLoopStop(CFRunLoopGetCurrent());
+ }
+ 
+ - (void)shutdownAndReleaseCalledOnAnyThread
+ {
+   [self performSelector:@selector(shutdownAndReleaseCalledOnEventThread) onThread:mThread withObject:nil waitUntilDone:NO];
+ }
+ 
+-static const CGEventField kCGWindowNumberField = 51;
++static const CGEventField kCGWindowNumberField = (const CGEventField) 51;
+ 
+ // Called on scroll thread
+ - (void)handleEvent:(CGEventRef)cgEvent type:(CGEventType)type
+ {
+   if (type != kCGEventScrollWheel) {
+     return;
+   }
+ 
 diff --git a/widget/cocoa/nsMenuItemX.mm b/widget/cocoa/nsMenuItemX.mm
 --- a/widget/cocoa/nsMenuItemX.mm
 +++ b/widget/cocoa/nsMenuItemX.mm
