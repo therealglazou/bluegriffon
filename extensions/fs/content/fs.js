@@ -100,7 +100,7 @@ function ShowFontList(aClassification)
     var f = gFontLists[aClassification][i];
     var item = document.createElement("listitem");
     item.setAttribute("label", f.family_name);
-    item.setAttribute("value", i);
+    item.setAttribute("value", f.family_urlname);
     item.setAttribute("classification", aClassification);
     gDialog.fontListBox.appendChild(item);
   }
@@ -113,13 +113,18 @@ function onFontSelected(aElt)
 
   document.documentElement.getButton("accept").removeAttribute("disabled");
 
-  var fontIndex      = aElt.selectedItem.getAttribute("value");
-  var classification = aElt.selectedItem.getAttribute("classification");
-  var font = gFontLists[classification][fontIndex];
-  var url = kPREVIEW_URL.replace( /%id/g, font.id)
-                        .replace( /%ttf/g, font.font_filename)
-                        .replace( /%w/g, gDialog.previewBox.boxObject.width)
+  SendRequest(kFONTDETAILS_QUERY_URL + aElt.selectedItem.getAttribute("value"), _onFontSelected, null);
+}
+
+var lastChecksum = "";
+function _onFontSelected(aJSON, aDummy)
+{
+  var fontInfo = JSON.parse(aJSON);
+
+  var url = kPREVIEW_URL.replace( /%id/g, fontInfo[0].checksum)
                         .replace( /%text/g, escape(gDialog.previewTextbox.value));
+
+  lastChecksum = fontInfo[0].checksum;
   gDialog.ThrobberButton.hidden = false;
   gDialog.preview.setAttribute("src", url);
 }
@@ -127,7 +132,14 @@ function onFontSelected(aElt)
 function UpdatePreview()
 {
   gTimeout = null;
-  gDialog.preview.setAttribute("src", "");
+  if (lastChecksum) {
+    var url = kPREVIEW_URL.replace( /%id/g, lastChecksum)
+                          .replace( /%text/g, escape(gDialog.previewTextbox.value));
+  
+    gDialog.ThrobberButton.hidden = false;
+    gDialog.preview.setAttribute("src", url);
+    return;
+  }
   GetPrefs().setCharPref("extension.fs.preview.prose", gDialog.previewTextbox.value);
   onFontSelected(gDialog.fontListBox);
 }
