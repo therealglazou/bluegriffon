@@ -19,6 +19,8 @@ The Open Source next-generation Web Editor based on the rendering engine of Fire
 
   if you want to build the bluegriffon-ng branch, you need to `cd bluegriffon; git checkout bluegriffon-ng; cd ..`
 
+  if you want to build the bg2 branch, you need to `cd bluegriffon; git checkout bg2; cd ..`
+
   ``hg update -r `cat bluegriffon/config/mozilla_central_revision.txt```
 
   `patch -p 1 < bluegriffon/config/content.patch`
@@ -31,7 +33,7 @@ The Open Source next-generation Web Editor based on the rendering engine of Fire
 
 You can after that type `make package`in the object directory to package the application for distribution.
 
-## To build the `bluegriffon-ng` branch
+## To build the `bluegriffon-ng` or the `bg2` branch
 
 `./mach build`
 
