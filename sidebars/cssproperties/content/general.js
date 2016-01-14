@@ -75,10 +75,7 @@ function ApplyFontFamily()
   var ff = "";
   while (child) {
     ff += (ff ? ", " : "");
-    if (child.value.indexOf(" ") != -1)
-      ff += '"' + child.value + '"';
-    else
-      ff += child.value;
+    ff += '"' + child.value + '"';
     child = child.nextSibling;
   }
   ApplyStyles([

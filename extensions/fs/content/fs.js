@@ -100,7 +100,8 @@ function ShowFontList(aClassification)
     var f = gFontLists[aClassification][i];
     var item = document.createElement("listitem");
     item.setAttribute("label", f.family_name);
-    item.setAttribute("value", f.family_urlname);
+    item.setAttribute("value", i);
+    item.setAttribute("family_urlname", f.family_urlname);
     item.setAttribute("classification", aClassification);
     gDialog.fontListBox.appendChild(item);
   }
@@ -113,7 +114,7 @@ function onFontSelected(aElt)
 
   document.documentElement.getButton("accept").removeAttribute("disabled");
 
-  SendRequest(kFONTDETAILS_QUERY_URL + aElt.selectedItem.getAttribute("value"), _onFontSelected, null);
+  SendRequest(kFONTDETAILS_QUERY_URL + aElt.selectedItem.getAttribute("family_urlname"), _onFontSelected, null);
 }
 
 var lastChecksum = "";
@@ -236,12 +237,11 @@ function WriteFile(aFilename, aData)
     if (!dir.exists())
       dir.create(Components.interfaces.nsIFile.DIRECTORY_TYPE, 0755);
   
-    UnzipPackage(file, dir);
+    var sFile = UnzipPackage(file, dir);
     file.remove(false);
-    dir.append("stylesheet.css");
     // guess who's messing around... Windows...
-    dir.permissions = 0444;
-    AddLinkToDocument(dir);
+    sFile.permissions = 0444;
+    AddLinkToDocument(sFile);
     window.close();
     return;
   }
@@ -251,6 +251,7 @@ function WriteFile(aFilename, aData)
 
 function UnzipPackage(aFile, aDir)
 {
+  var sFile = null;
   var zipReader = Components.classes["@mozilla.org/libjar/zip-reader;1"]
                     .createInstance(Components.interfaces.nsIZipReader);
   zipReader.open(aFile);
@@ -260,20 +261,22 @@ function UnzipPackage(aFile, aDir)
   catch(e)
   {
     alert(e);
-    return false;
+    return null;
   }
 
   var entries = zipReader.findEntries(null);
   while (entries.hasMore())
   {
     var entryName = entries.getNext();
-    _installZipEntry(zipReader, entryName, aDir);
+    sFile = _installZipEntry(zipReader, entryName, aDir, sFile);
   }
   zipReader.close();
+  return sFile;
 }
 
-function _installZipEntry(aZipReader, aZipEntry, aDestination)
+function _installZipEntry(aZipReader, aZipEntry, aDestination, aFile)
 {
+  var sFile = aFile;
   var file = aDestination.clone();
   var dirs = aZipEntry.split(/\//);
   var isDirectory = /\/$/.test(aZipEntry);
@@ -292,9 +295,12 @@ function _installZipEntry(aZipReader, aZipEntry, aDestination)
   if (!isDirectory)
   {
     file.append(dirs[end]);
+    if (dirs[end] == "stylesheet.css")
+      sFile = file;
     aZipReader.extract(aZipEntry, file);
     file.permissions = 0644;
   }
+  return sFile;
 }
 
 function AddLinkToDocument(aFile)
