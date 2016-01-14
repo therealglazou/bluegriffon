@@ -155,6 +155,15 @@ textbox[type="number"] .numberbox-input-box {
   background-color: transparent;
 }
 
+textbox:not([type="number"]) {
+  -moz-appearance: none;
+  color: white;
+  margin: 4px 0px;
+  padding: 2px;
+  background-color: var(--bg-dark-background);
+  border: thin solid black;
+}
+
 menulist .menulist-dropmarker {
   -moz-appearance: none;
   display: -moz-box;
@@ -268,4 +277,22 @@ treechildren::-moz-tree-checkbox(checked)
 {
     /* css for checked cells */
     list-style-image: url("chrome://bluegriffon/skin/icons/cbox-check.gif");
+}
+
+/* LISTBOX */
+
+listheader {
+  -moz-appearance: none;
+  background: transparent;
+  color: white;
+  border: none 0px;
+}
+
+listheader:not(:last-of-type) {
+  -moz-border-end: black solid thin;
+}
+
+listhead {
+  border-bottom: black solid thin;
+  padding: 2px;
 }
