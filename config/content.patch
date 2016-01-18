@@ -3221,7 +3221,45 @@ diff --git a/layout/style/Loader.cpp b/layout/style/Loader.cpp
 diff --git a/layout/style/nsCSSParser.cpp b/layout/style/nsCSSParser.cpp
 --- a/layout/style/nsCSSParser.cpp
 +++ b/layout/style/nsCSSParser.cpp
-@@ -5387,35 +5387,47 @@ CSSParserImpl::ParseAttributeSelector(in
+@@ -46,16 +46,18 @@
+ #include "nsMediaFeatures.h"
+ #include "nsLayoutUtils.h"
+ #include "mozilla/Preferences.h"
+ #include "nsRuleData.h"
+ #include "mozilla/CSSVariableValues.h"
+ #include "mozilla/dom/URL.h"
+ #include "gfxFontFamilyList.h"
+ 
++#define BG_CONSOLE_SHOW_INVALID_VARIABLES "bluegriffon.console.showInvalidVariables"
++
+ using namespace mozilla;
+ 
+ typedef nsCSSProps::KTableValue KTableValue;
+ 
+ // pref-backed bool values (hooked up in nsCSSParser::Startup)
+ static bool sOpentypeSVGEnabled;
+ static bool sUnprefixingServiceEnabled;
+ 
+@@ -2613,17 +2615,17 @@ CSSParserImpl::ParsePropertyWithVariable
+   {
+     nsCSSScanner scanner(aValue, 0);
+     css::ErrorReporter reporter(scanner, aSheet, mChildLoader, aDocURL);
+     InitScanner(scanner, reporter, aDocURL, aBaseURL, aDocPrincipal);
+ 
+     nsCSSTokenSerializationType firstToken, lastToken;
+     valid = ResolveValueWithVariableReferences(aVariables, expandedValue,
+                                                firstToken, lastToken);
+-    if (!valid) {
++    if (!valid && Preferences::GetBool(BG_CONSOLE_SHOW_INVALID_VARIABLES)) {
+       NS_ConvertASCIItoUTF16 propName(nsCSSProps::GetStringValue(aPropertyID));
+       REPORT_UNEXPECTED(PEInvalidVariableReference);
+       REPORT_UNEXPECTED_P(PEValueParsingError, propName);
+       if (nsCSSProps::IsInherited(aPropertyID)) {
+         REPORT_UNEXPECTED(PEValueWithVariablesFallbackInherit);
+       } else {
+         REPORT_UNEXPECTED(PEValueWithVariablesFallbackInitial);
+       }
+@@ -5387,35 +5389,47 @@ CSSParserImpl::ParseAttributeSelector(in
        UngetToken(); // bad function
        return eSelectorParsingStatus_Error;
      }
@@ -3454,6 +3492,30 @@ diff --git a/rdf/base/nsRDFContentSink.cpp b/rdf/base/nsRDFContentSink.cpp
    *_retval = true;
    return NS_OK;
  }
+diff --git a/toolkit/components/console/content/consoleBindings.xml b/toolkit/components/console/content/consoleBindings.xml
+--- a/toolkit/components/console/content/consoleBindings.xml
++++ b/toolkit/components/console/content/consoleBindings.xml
+@@ -149,16 +149,20 @@
+ 
+       <method name="appendItem">
+         <parameter name="aObject"/>
+         <body><![CDATA[
+           try {
+             // Try to QI it to a script error to get more info
+             var scriptError = aObject.QueryInterface(Components.interfaces.nsIScriptError);
+ 
++            // don't show cm5 errors
++            if (scriptError.sourceName.substr(0, 19) == "resource://gre/res/")
++              return;
++
+             // filter chrome urls
+             if (!this.showChromeErrors && scriptError.sourceName.substr(0, 9) == "chrome://")
+               return;
+ 
+             // filter private windows
+             if (scriptError.isFromPrivateWindow)
+               return;
+ 
 diff --git a/toolkit/content/widgets/menu.xml b/toolkit/content/widgets/menu.xml
 --- a/toolkit/content/widgets/menu.xml
 +++ b/toolkit/content/widgets/menu.xml
