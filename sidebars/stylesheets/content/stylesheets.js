@@ -47,6 +47,9 @@ function Startup()
   gMain.NotifierUtils.addNotifierCallback("afterLeavingSourceMode",
                                           Inspect,
                                           window);
+  gMain.NotifierUtils.addNotifierCallback("CSSEditorChanges",
+                                          Inspect,
+                                          window);
   gDialog.contentsTree.addEventListener("DOMAttrModified", onTreeModified, true);
   gMutationObserver = new MutationObserver(function(mutations) {
     mutations.forEach(function(mutation) {
@@ -87,6 +90,9 @@ function Shutdown()
   gMain.NotifierUtils.removeNotifierCallback("afterLeavingSourceMode",
                                              Inspect,
                                              window);
+  gMain.NotifierUtils.removeNotifierCallback("CSSEditorChanges",
+                                          Inspect,
+                                          window);
 }
 
 function RedrawAll(aNotification, aPanelId)
@@ -214,6 +220,7 @@ function AddStylesheet()
                     "chrome,modal,titlebar,resizable=yes,dialog=yes",
                     null);
   Inspect();
+  gMain.NotifierUtils.notify("StylesheetsPanelChanges");
 }
 
 function UpdateButtons()
@@ -247,6 +254,8 @@ function DeleteStylesheet()
   var elt = treeitem.getUserData("element");
   gEditor.deleteNode(elt);
   treeitem.parentNode.removeChild(treeitem);
+  gMain.NotifierUtils.notify("StylesheetsPanelChanges");
+
 }
 
 function Up()
@@ -268,6 +277,7 @@ function Up()
   }
   gEditor.insertNode(elt, elt.parentNode, index);
   treeitem.parentNode.insertBefore(treeitem, previous);
+  gMain.NotifierUtils.notify("StylesheetsPanelChanges");
 }
 
 function Down()
@@ -289,6 +299,8 @@ function Down()
   }
   gEditor.insertNode(elt, elt.parentNode, index+1);
   treeitem.parentNode.insertBefore(treeitem, next.nextSibling);
+  gMain.NotifierUtils.notify("StylesheetsPanelChanges");
+
 }
 
 function UpdateStylesheet()
@@ -305,6 +317,8 @@ function UpdateStylesheet()
                     "chrome,modal,titlebar,resizable=yes,dialog=yes",
                     elt);
   Inspect();
+  gMain.NotifierUtils.notify("StylesheetsPanelChanges");
+
 }
 
 function OpenStylesheet()
@@ -353,6 +367,7 @@ function OpenStylesheet()
         gMain.EditorUtils.getCurrentEditor().incrementModificationCount(1);
       }
       Inspect();
+      gMain.NotifierUtils.notify("StylesheetsPanelChanges");
     }
   }
 }
@@ -420,6 +435,7 @@ function SelectStyleSet(aList)
   var editor = gMain.EditorUtils.getCurrentEditor();
   editor.document.selectedStyleSheetSet = aList.value;
   Inspect();
+  gMain.NotifierUtils.notify("StylesheetsPanelChanges");
 }
 
 function UpdateConfigMenu()
