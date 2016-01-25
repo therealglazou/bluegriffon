@@ -42,6 +42,7 @@ Components.utils.import("resource://app/modules/prompterHelper.jsm");
 Components.utils.import("resource://app/modules/editorHelper.jsm");
 Components.utils.import("resource://app/modules/l10nHelper.jsm");
 Components.utils.import("resource://app/modules/handlersManager.jsm");
+Components.utils.import("resource://app/modules/fileChanges.jsm");
 
 var EXPORTED_SYMBOLS = ["FileUtils"];
 
@@ -301,6 +302,7 @@ var FileUtils = {
     if (success)
     {
       try {
+        FileChangeUtils.notifyFileModifiedByBlueGriffon(urlstring);
         if (doUpdateURI)
         {
            // If a local file, we must create a new uri from nsILocalFile
@@ -625,8 +627,8 @@ var FileUtils = {
   setSaveAndPublishUI: function(urlstring)
   {
     // Be sure enabled state of toolbar buttons are correct
-    goUpdateCommand("cmd_save");
-    goUpdateCommand("cmd_publish");
+    EditorUtils.getCurrentEditorWindow().goUpdateCommand("cmd_save");
+    EditorUtils.getCurrentEditorWindow().goUpdateCommand("cmd_publish");
   }
 };
 
