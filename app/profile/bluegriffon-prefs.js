@@ -150,25 +150,6 @@ pref("bluegriffon.tabs.position", "center");
 pref("bluegriffon.osx.dock-integration", true);
 pref("extensions.getAddons.cache.enabled", false);
 
-// +------------------------------------+
-// | Disabled for now, too late for 1.4 |
-// +------------------------------------+
-//
-// pref("app.update.enabled", true);
-// pref("app.update.auto", true);
-// pref("app.update.mode", 2);
-// pref("app.update.silent", false);
-// pref("app.update.url", "http://bluegriffon.org/update.php/%PRODUCT%/%VERSION%/%BUILD_TARGET%/update.xml");
-// pref("app.update.url.manual", "http://bluegriffon.org/pages/Download");
-// pref("app.update.url.details", "http://bluegriffon.org/pages/Download");
-// pref("app.update.interval", 86400);
-// pref("app.update.nagTimer.download", 86400);
-// pref("app.update.nagTimer.restart", 1800);
-// pref("app.update.timer", 600000);
-// pref("app.update.showInstalledUI", false);
-// pref("app.update.incompatible.mode", 0);
-// pref("app.update.log", false);
-
 pref("bluegriffon.css.colors.names.enabled", true);
 pref("bluegriffon.css.colors.type", "hex");
 
