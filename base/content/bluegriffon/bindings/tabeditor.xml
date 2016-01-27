@@ -145,10 +145,12 @@
 
       <destructor>
         <![CDATA[
-          const editors = this.mTabPanels.childNodes;
-          for (var i = 0; i < editors.length; i++)
-          {
-            editors[i].lastChild.removeEventListener("DOMTitleChanged", this.changeTabTitle, false);
+          if (this.mTabPanels) {
+            const editors = this.mTabPanels.childNodes;
+            for (var i = 0; i < editors.length; i++)
+            {
+              editors[i].lastChild.removeEventListener("DOMTitleChanged", this.changeTabTitle, false);
+            }
           }
         ]]>
       </destructor>
