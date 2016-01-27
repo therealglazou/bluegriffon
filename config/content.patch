@@ -3495,17 +3495,21 @@ diff --git a/rdf/base/nsRDFContentSink.cpp b/rdf/base/nsRDFContentSink.cpp
 diff --git a/toolkit/components/console/content/consoleBindings.xml b/toolkit/components/console/content/consoleBindings.xml
 --- a/toolkit/components/console/content/consoleBindings.xml
 +++ b/toolkit/components/console/content/consoleBindings.xml
-@@ -149,16 +149,20 @@
+@@ -146,19 +146,24 @@
+             this.appendItem(messages[i]);
+         ]]></body>
+       </method>
  
        <method name="appendItem">
          <parameter name="aObject"/>
          <body><![CDATA[
            try {
++            const CM_RESOURCE_URL = "resource://gre/res/codemirror/";
              // Try to QI it to a script error to get more info
              var scriptError = aObject.QueryInterface(Components.interfaces.nsIScriptError);
  
-+            // don't show cm5 errors
-+            if (scriptError.sourceName.substr(0, 19) == "resource://gre/res/")
++            // don't show codemirror errors
++            if (scriptError.sourceName.substr(0, CM_RESOURCE_URL.length) == CM_RESOURCE_URL)
 +              return;
 +
              // filter chrome urls
@@ -3876,17 +3880,10 @@ diff --git a/toolkit/mozapps/handling/nsContentDispatchChooser.js b/toolkit/moza
 diff --git a/toolkit/toolkit.mozbuild b/toolkit/toolkit.mozbuild
 --- a/toolkit/toolkit.mozbuild
 +++ b/toolkit/toolkit.mozbuild
-@@ -160,23 +160,22 @@ DIRS += [
- 
- if CONFIG['MOZ_ENABLE_GNOME_COMPONENT']:
-     DIRS += ['/toolkit/system/gnome']
- 
- # if QtNetwork is present, it will do its own network monitoring
- if not CONFIG['MOZ_ENABLE_QTNETWORK'] and CONFIG['MOZ_ENABLE_DBUS']:
+@@ -166,17 +166,16 @@ if not CONFIG['MOZ_ENABLE_QTNETWORK'] an
      DIRS += ['/toolkit/system/dbus']
  
--DIRS += ['/addon-sdk']
-+#DIRS += ['/addon-sdk']
+ DIRS += ['/addon-sdk']
  
  if CONFIG['ENABLE_MARIONETTE'] or CONFIG['MOZ_WIDGET_TOOLKIT'] not in ('gonk', 'android'):
      DIRS += ['/testing/marionette']
