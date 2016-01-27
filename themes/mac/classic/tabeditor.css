@@ -120,7 +120,7 @@ tabeditor > tabbox {
 .tabeditor-tab[selected="true"]:focus > .tab-text {
 /*  outline: 2px solid #4F8EC9;
   outline-offset: -2px;
-  -moz-outline-radius: 3px;*/
+  outline-radius: 3px;*/
 }
 
 .tabeditor-tab[selected="true"],
@@ -187,8 +187,8 @@ tabeditor > tabbox > tabpanels {
   display: none;
 }
 
-.tabeditor-tab[modified="true"]  .tab-text {
-  /*text-shadow: 0 1px 0 rgba(255, 0, 0, 0.4);*/
+.tabeditor-tab[modified="true"] {
+   border-bottom: rgb(128,0,0) solid thin;
 }
 
 tabeditor[tabmode="left"] .tabs-left {
