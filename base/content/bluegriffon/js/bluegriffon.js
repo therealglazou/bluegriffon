@@ -1052,12 +1052,12 @@ function CloneElementContents(editor, sourceElt, destElt)
       editor.insertNode(destChild, destElt, destElt.childNodes.length);
     }
     else if (sourceChild.nodeType == Node.TEXT_NODE) {
-      t = editor.document.createTextNode(sourceChild.data);
+      var t = editor.document.createTextNode(sourceChild.data);
       editor.insertNode(t, destElt, destElt.childNodes.length);
     }
     else if (sourceChild.nodeType == Node.COMMENT_NODE) {
-      t = editor.document.createComment(sourceChild.data);
-      editor.insertNode(t, destElt, destElt.childNodes.length);
+      var c = editor.document.createComment(sourceChild.data);
+      editor.insertNode(c, destElt, destElt.childNodes.length);
     }
 
     sourceChild = sourceChild.nextSibling;
