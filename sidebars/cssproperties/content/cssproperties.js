@@ -459,6 +459,7 @@ function FindLastEditableStyleSheet(aQuery)
   var headElt = doc.querySelector("head");
   var child = headElt.lastElementChild;
   var found = false;
+  var sheet = null;
   while (!found && child) {
     var name = child.localName;
     if (name == "style" ||
