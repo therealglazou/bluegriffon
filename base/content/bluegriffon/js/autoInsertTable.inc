@@ -52,9 +52,9 @@ var AutoInsertTable = {
     for (var i = 0; i < cells.length; i++)
       cells[i].className = "";
   
-    for (i = row; i > 0; i--)
+    for (var i = row; i > 0; i--)
     {
-      anyCell = document.getElementById("AutoInsertTable_r"+i+"c"+this.mColumn);
+      var anyCell = document.getElementById("AutoInsertTable_r"+i+"c"+this.mColumn);
       while (anyCell)
       {
         anyCell.setAttribute("class", "selected");
