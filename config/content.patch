@@ -236,6 +236,29 @@ diff --git a/dom/base/nsDocumentEncoder.cpp b/dom/base/nsDocumentEncoder.cpp
    
    // there's no Clone() for selection! fix...
    //nsresult rv = aSelection->Clone(getter_AddRefs(mSelection);
+@@ -1409,19 +1416,20 @@ nsHTMLCopyEncoder::SetSelection(nsISelec
+   // loop thru the ranges in the selection
+   for (uint32_t rangeIdx = 0; rangeIdx < rangeCount; ++rangeIdx) {
+     range = selection->GetRangeAt(rangeIdx);
+     NS_ENSURE_TRUE(range, NS_ERROR_FAILURE);
+     nsCOMPtr<nsIDOMRange> myRange;
+     range->CloneRange(getter_AddRefs(myRange));
+     NS_ENSURE_TRUE(myRange, NS_ERROR_FAILURE);
+ 
++    // BLUEGRIFFON, do not promote ranges for copy
+     // adjust range to include any ancestors who's children are entirely selected
+-    rv = PromoteRange(myRange);
+-    NS_ENSURE_SUCCESS(rv, rv);
++    /*rv = PromoteRange(myRange);
++    NS_ENSURE_SUCCESS(rv, rv);*/
+     
+     rv = mSelection->AddRange(myRange);
+     NS_ENSURE_SUCCESS(rv, rv);
+   }
+ 
+   return NS_OK;
+ }
+ 
 diff --git a/dom/base/nsFocusManager.cpp b/dom/base/nsFocusManager.cpp
 --- a/dom/base/nsFocusManager.cpp
 +++ b/dom/base/nsFocusManager.cpp
