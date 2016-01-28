@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+
+<!DOCTYPE prefwindow SYSTEM "chrome://dbgserver/locale/dbgserver.dtd">
+
+<prefwindow id="dbgserver"
+            xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+            title="&options.title;"
+            buttons="accept"
+            width="300"
+            height="300"
+            ondialogaccept="return true;">
+  <prefpane id="dbgserver-prefpane" flex="1" onpaneload="initPane()">
+    <preferences>
+      <preference id="devtools.debugger.remote-port" name="devtools.debugger.remote-port" type="int" onchange="RemoteDebuggerServer.stop(); updateState();"/>
+      <preference id="devtools.debugger.force-local" name="devtools.debugger.force-local" type="bool" inverted="true"/>
+    </preferences>
+
+    <grid flex="1">
+      <columns>
+        <column/>
+        <column flex="1"/>
+      </columns>
+      <rows>
+        <row>
+          <label for="port">&options.port.label;</label>
+          <textbox type="number"
+                   id="port"
+                   preference="devtools.debugger.remote-port"/>
+        </row>
+        <row>
+          <label>&options.status.label;</label>
+          <label id="status-label"/>
+        </row>
+        <checkbox id="force-local"
+                  preference="devtools.debugger.force-local"
+                  label="&options.forcelocal.label;"/>
+      </rows>
+    </grid>
+    <button id="toggleDebugger-button" oncommand="toggleDebugger()"/>
+  </prefpane>
+  <script src="chrome://dbgserver/content/options.js" type="application/javascript"/>
+  <stringbundle id="strings" src="chrome://dbgserver/locale/dbgserver.properties"/>
+</prefwindow>
