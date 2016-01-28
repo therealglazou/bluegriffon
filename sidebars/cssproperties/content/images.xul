@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE overlay [
+  <!ENTITY % csspropertiesDTD SYSTEM "chrome://cssproperties/locale/cssproperties.dtd">
+  %csspropertiesDTD;
+  <!ENTITY % backgrounditemDTD SYSTEM "chrome://cssproperties/locale/backgrounditem.dtd" >
+  %backgrounditemDTD;
+]>
+
+<overlay id="imagesOverlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/x-javascript"  src="chrome://cssproperties/content/images.js" />
+
+  <vbox id="propertiesBox">
+      <hbox align="center"
+            class="csspropertiesHeader"
+            context="sectionHeaderContext"
+            id="imagesSectionHeader"
+            onclick="ToggleSection(event, this)"
+            position="15">
+        <image />
+        <label value="&imagesSectionHeader.label;"/>
+      </hbox>
+
+      <grid class="section" id="imagesSection" position="16">
+        <columns><column/><column/></columns>
+        <rows>
+          <row align="center">
+            <label value="&imageOrientation.label;"/>
+            <hbox align="center">
+              <menulist editable="true" id="imageOrientationMenulist" sizetopopup="none"
+                        bgtype="csslength" units='deg rad grad turn'
+                        oncommand="onLengthMenulistCommand(this, 'deg rad grad turn', '', false); ApplyImageOrientationAngle(this)"
+                        oninput="onLengthMenulistCommand(this, 'deg rad grad turn', '', false); ApplyImageOrientationAngle(this)">
+                <menupopup onpopupshowing="PopulateLengths(this, 'deg rad grad turn')"/>
+              </menulist>
+              <checkbox id="flipImageOrientationCheckbox"
+                        oncommand="ApplyImageOrientationAngle(this)"
+                        label="&flipImage.label;"/>
+            </hbox>
+          </row>
+          <row align="center">
+            <spacer/>
+            <hbox align="center">
+              <toolbarbutton class="multibutton" tooltiptext="&fromImageImageOrientation.tooltip;"
+                             label="&fromImageImageOrientation.label;"
+                             value="from-image" property="image-orientation" type="checkbox"
+                             id="fromImageImageOrientationButton" group="image-orientation"
+                             oncommand="ApplyImageOrientationAngle(this)"/>
+            </hbox>
+          </row>
+        </rows>
+      </grid>
+  </vbox>
+</overlay>
