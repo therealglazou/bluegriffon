@@ -743,16 +743,25 @@ diff --git a/dom/base/nsXHTMLContentSerializer.cpp b/dom/base/nsXHTMLContentSeri
  bool 
  nsXHTMLContentSerializer::LineBreakAfterClose(int32_t aNamespaceID, nsIAtom* aName)
  {
-@@ -848,16 +852,18 @@ nsXHTMLContentSerializer::MaybeEnterInPr
+@@ -842,39 +846,45 @@ nsXHTMLContentSerializer::LineBreakAfter
+ void
+ nsXHTMLContentSerializer::MaybeEnterInPreContent(nsIContent* aNode)
+ {
+   if (!ShouldMaintainPreLevel() ||
+       !aNode->IsHTMLElement()) {
+     return;
    }
  
-   if (IsElementPreformatted(aNode) ||
+-  if (IsElementPreformatted(aNode) ||
++  PRBool disableEntityEncoding =
        aNode->IsAnyOfHTMLElements(nsGkAtoms::script,
                                   nsGkAtoms::style,
                                   nsGkAtoms::noscript,
-                                  nsGkAtoms::noframes)) {
+-                                 nsGkAtoms::noframes)) {
++                                 nsGkAtoms::noframes);
++  if (IsElementPreformatted(aNode) || disableEntityEncoding) {
      PreLevel()++;
-+    if (!aNode->IsHTMLElement(nsGkAtoms::pre))
++    if (disableEntityEncoding)
 +      ++mDisableEntityEncoding;
    }
  }
@@ -762,16 +771,19 @@ diff --git a/dom/base/nsXHTMLContentSerializer.cpp b/dom/base/nsXHTMLContentSeri
  {
    if (!ShouldMaintainPreLevel() ||
        !aNode->IsHTMLElement()) {
-@@ -865,16 +871,18 @@ nsXHTMLContentSerializer::MaybeLeaveFrom
+     return;
    }
  
-   if (IsElementPreformatted(aNode) ||
+-  if (IsElementPreformatted(aNode) ||
++  PRBool disableEntityEncoding =
        aNode->IsAnyOfHTMLElements(nsGkAtoms::script,
                                   nsGkAtoms::style,
                                   nsGkAtoms::noscript,
-                                  nsGkAtoms::noframes)) {
+-                                 nsGkAtoms::noframes)) {
++                                 nsGkAtoms::noframes);
++  if (IsElementPreformatted(aNode) || disableEntityEncoding) {
      --PreLevel();
-+    if (!aNode->IsHTMLElement(nsGkAtoms::pre))
++    if (disableEntityEncoding)
 +      --mDisableEntityEncoding;
    }
  }
