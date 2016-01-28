@@ -160,6 +160,7 @@ var FileUtils = {
   
     if (success)
     {
+      FileChangeUtils.notifyFileModifiedByBlueGriffon(urlstring);
       try {
         if (doUpdateURI)
         {
