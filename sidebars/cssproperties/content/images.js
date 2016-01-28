@@ -33,6 +33,7 @@ function ApplyImageOrientationAngle(aElement)
     }
   }
   else {
+    gDialog.fromImageImageOrientationButton.checked = false;
     v = gDialog.imageOrientationMenulist.value;
     v += (v ? " " : "");
     v += (gDialog.flipImageOrientationCheckbox.checked ? "flip" : "");
