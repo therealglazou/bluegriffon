@@ -1,0 +1,36 @@
+filepickerbutton {
+  -moz-binding: url('chrome://bluegriffon/content/bindings/filepickerbutton.xml#filepickerbutton');
+}
+
+#removeBackground {
+  list-style-image: url("chrome://bluegriffon/skin/icons/close-button.png");
+  -moz-image-region: rect(0px 16px 16px 0px);
+  padding: 0px;
+  min-width: 0px;
+  margin: 0px;
+}
+
+#pagePreview {
+  margin: 2px 4px;
+  margin-left: 1em;
+  border: 2px solid;
+  -moz-border-top-colors: ThreeDShadow ThreeDDarkShadow;
+  -moz-border-right-colors: ThreeDHighlight ThreeDLightShadow;
+  -moz-border-bottom-colors: ThreeDHighlight ThreeDLightShadow;
+  -moz-border-left-colors: ThreeDShadow ThreeDDarkShadow;
+}
+
+.larger {
+  font-size: larger;
+}
+
+/*.colorpicker-button-colorbox[disabled="true"] {
+ border-color: GrayText;
+ background-color: transparent ! important;
+}*/
+
+#removeBackground .toolbarbutton-icon {
+  min-width: 0px;
+  padding: 0px;
+  margin: 2px ! important;
+}
