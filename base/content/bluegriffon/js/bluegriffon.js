@@ -243,24 +243,6 @@ function UpdateWindowTitle(aEditorElement)
   return "";
 }
 
-function ApplyDirectTextColorChange(aColor)
-{
-    var editor = EditorUtils.getCurrentEditor();
-    var isCSSEnabled = editor.isCSSEnabled;
-    editor.isCSSEnabled = true;
-    editor.setInlineProperty('font', 'color', aColor)
-    editor.isCSSEnabled = isCSSEnabled;
-}
-
-function ApplyDirectBackgroundColorChange(aColor)
-{
-    var editor = EditorUtils.getCurrentEditor();
-    var isCSSEnabled = editor.isCSSEnabled;
-    editor.isCSSEnabled = true;
-    editor.setBackgroundColor(aColor)
-    editor.isCSSEnabled = isCSSEnabled;
-}
-
 function onParagraphFormatChange(paraMenuList, commandID)
 {
   if (!paraMenuList)
@@ -2043,22 +2025,6 @@ function onFontColorChange()
     if (button)
     {
       // No color set - get color set on page or other defaults
-      if (!color || color == "mixed")
-        color = "transparent";
-      button.color = color;
-    }
-  }
-}
-
-function onBackgroundColorChange()
-{
-  var commandNode = document.getElementById("cmd_highlight");
-  if (commandNode)
-  {
-    var color = commandNode.getAttribute("state");
-    var button = document.getElementById("BackgroundColorColorpicker");
-    if (button)
-    {
       if (!color || color == "mixed")
         color = "transparent";
       button.color = color;

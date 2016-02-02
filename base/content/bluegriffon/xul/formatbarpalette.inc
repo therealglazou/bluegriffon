@@ -91,29 +91,6 @@
         <observes element="cmd_dt" attribute="state" onbroadcast="onButtonUpdate(this.parentNode, 'cmd_dt')"/>
     </toolbarbutton>
 
-    <toolbarbutton id="rotateButton" command="cmd_renderedHTMLEnabler" label="Rotate" tooltiptext="Rotate"
-                   type="checkbox" oncommand="CSSRotationsHandler.toggle(this)"/>
-
-    <toolbaritem id="ColorsBox">
-      <hbox align="center">
-        <ecolorpicker id="TextColorColorpicker"
-                      color="transparent"
-                      tooltiptext="&color.label;"
-                      colorObjectId="TextColor"
-                      windowTitle="Text color"
-                      observes="cmd_fontColor" 
-                      oncommand="ApplyDirectTextColorChange(this.color)"
-                      showTransparency="false"/>
-        <ecolorpicker id="BackgroundColorColorpicker"
-                      colorObjectId="BackgroundColor"
-                      tooltiptext="&bgColor.label;"
-                      windowTitle="Background color"
-                      observes="cmd_backgroundColor" 
-                      oncommand="ApplyDirectBackgroundColorChange(this.color)"
-                      showTransparency="true"/>
-      </hbox>
-    </toolbaritem>
-
     <toolbarbutton id="EncapsulateSelect"
                    type="menu"
                    tooltiptext="&encapsulate.tooltip;"

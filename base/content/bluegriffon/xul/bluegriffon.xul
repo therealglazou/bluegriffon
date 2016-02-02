@@ -129,21 +129,6 @@
     <toolbarset id="customFormatMenulistsToolbars" context="format-toolbar-context-menu"/>
   </toolbox>
   <hbox id="horizContainer" flex="1">
-  <toolbox id="MainToolbox" context="main-toolbar-context-menu">
-#include maintoolbarpalette.inc
-    <toolbar id="MainToolbar" align="center"
-             toolbarname="Main"
-             fullscreentoolbar="true"
-             persist="iconsize,mode"
-             iconsize="small"
-             mode="icons"
-#ifdef XP_MACOSX
-             defaultset="newButton,openButton,saveButton,stopButton,spacer,tableButton,tableLayoutButton,imageButton,thumbnailButton,anchorButton,linkButton,domexplorerButton,cssButton,csseditorButton,svgEditMainToolbarButton,videoButton,audioButton,markdownMainToolbarButton,formButton,mathmlButton,its20Button,spacer,browseButton,spring,throbber-box"/>
-#else
-             defaultset="newButton,spacer,openButton,spacer,saveButton,stopButton,spacer,tableButton,tableLayoutButton,imageButton,thumbnailButton,anchorButton,linkButton,domexplorerButton,cssButton,csseditorButton,svgEditMainToolbarButton,videoButton,audioButton,markdownMainToolbarButton,formButton,mathmlButton,its20Button,spacer,browseButton,spring,throbber-box,spacer"/>
-#endif
-  </toolbox>
-
   <toolbox id="FormatToolbox" mode="full">
 #include formatbarpalette.inc
     <toolbar id="FormatToolbar"

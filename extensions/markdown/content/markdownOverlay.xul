@@ -1,7 +1,5 @@
 <?xml version="1.0"?>
 
-<?xml-stylesheet href="chrome://markdown/skin/markdownOverlay.css" type="text/css"?>
-
 <!DOCTYPE overlay [
   <!ENTITY % markdownOverlayDTD SYSTEM "chrome://markdown/locale/markdownOverlay.dtd">
   %markdownOverlayDTD;
@@ -16,14 +14,6 @@
     <menuitem label="&markdownMenu.label;"
               command="cmd_insertMarkdown"/>
   </menupopup>
-
-  <toolbarpalette id="ComposerToolbarPalette">
-    <toolbarbutton id="markdownMainToolbarButton"
-                   label="&markdownMenu.label;"
-                   class="toolbarbutton-1"
-                   command="cmd_insertMarkdown"
-                   tooltiptext="&markdownMenu.label;"/>
-  </toolbarpalette>
 
   <commandset id="composerMenuItems">
     <command id="cmd_insertMarkdown" oncommand="goDoCommand('cmd_insertMarkdown')"/>
