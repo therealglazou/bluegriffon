@@ -1,0 +1,94 @@
+ecolorpicker {
+  -moz-binding: url("chrome://bluegriffon/content/bindings/ecolorpicker.xml#ecolorpicker");
+}
+
+filepickerbutton {
+  -moz-binding: url('chrome://bluegriffon/content/bindings/filepickerbutton.xml#filepickerbutton');
+}
+
+
+.multibutton[checked],
+.multibutton:hover:active:not([disabled]) {
+  text-shadow: 0 1px rgba(255, 255, 255, .4);
+  background-color: rgba(0,0,0,0.2);
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.6), 0 1px rgba(255,255,255,0.2);
+}
+
+.multibutton {
+  margin: 4px 0px;
+  padding: 1px 5px;
+%ifdef XP_MACOSX
+  background-image: -moz-linear-gradient(#e0e0e0, #d0d0d0, #e0e0e0);
+%else
+  background-image: -moz-linear-gradient(#cac7b6, #dbd8b7, #cac7b6);
+%endif
+  -moz-appearance: none;
+  border: thin silver solid;
+}
+
+.multibutton:-moz-locale-dir(ltr) {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.multibutton:-moz-locale-dir(rtl) {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.multibutton:-moz-locale-dir(ltr) + .multibutton {
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border-left: 0px;
+}
+
+.multibutton:-moz-locale-dir(rtl) + .multibutton {
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-right: 0px;
+}
+
+.multibutton:last-child:-moz-locale-dir(ltr) {
+  border-top-right-radius: 5px; 
+  border-bottom-right-radius: 5px;
+  margin-right: 1em;
+}
+
+.multibutton:last-child:-moz-locale-dir(rtl) {
+  border-top-left-radius: 5px; 
+  border-bottom-left-radius: 5px;
+  margin-left: 1em;
+}
+
+.multibutton .toolbarbutton-icon[src] {
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+.multibutton:not([label]) .toolbarbutton-text {
+  display: none;
+}
+medium {
+  -moz-binding: url('chrome://bluegriffon/content/bindings/media.xml#medium');
+}
+
+length {
+  -moz-binding: url('chrome://bluegriffon/content/bindings/media.xml#length');
+}
+
+.medium-delete-button {
+  visibility: hidden;
+  list-style-image: url("chrome://bluegriffon/skin/icons/closetab.png");
+}
+
+hbox:hover > .medium-delete-button {
+  visibility: visible;
+}
+
+.medium-delete-button:hover {
+  list-style-image: url("chrome://bluegriffon/skin/icons/closetab-hover.png") !important;
+}
+
+.medium-delete-button:hover:active {
+  list-style-image: url("chrome://bluegriffon/skin/icons/closetab-active.png");
+}

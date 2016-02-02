@@ -42,22 +42,31 @@
 #FormatToolbox toolbarbutton {
   margin: 2px;
   -moz-appearance: none;
-  padding: 0px ! important;  
+  
 }
 
 #FormatToolbox toolbarbutton .toolbarbutton-icon {
   margin: 2px ! important;
 }
 
-#FormatToolbox toolbarbutton:not([disabled]):hover {
-  background-color: #ffcc66 ! important;
+#FormatToolbox toolbarbutton:not([checked="true"]):not([disabled]):hover {
+  /*background-color: #ffcc66 ! important;*/
+ filter: grayscale(100%) contrast(1000%);
 }
 
 #FormatToolbox toolbarbutton[checked="true"] {
-  background-color: orange ! important;
+  /*background-color: orange ! important;*/
   background-image: none ! important;
-  padding: 0px ! important;
+  /*padding: 0px ! important;*/
   opacity: 1 !important;
+}
+
+#FormatToolbox toolbarbutton:not([checked="true"]) {
+  filter: grayscale(100%) contrast(600%);
+}
+
+#FormatToolbox toolbarbutton[disabled="true"] {
+  filter: grayscale(100%) contrast(50%);
 }
 
 #CustomizeToolbarWindow toolbarbutton,
@@ -80,8 +89,8 @@ toolbaritem  menulist {
   margin: 0px !important;
 }
 
-#EncapsulateSelect[disabled="true"] {
-  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/tag-disabled.png");
+#EncapsulateSelect .toolbarbutton-menu-dropmarker {
+  display: none;
 }
 
 /****** EM ******/
@@ -90,18 +99,10 @@ toolbaritem  menulist {
   list-style-image: url("chrome://bluegriffon/skin/formatToolbar/em.png");
 }
 
-#emButton[disabled="true"] {
-  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/em-disabled.png");
-}
-
 /****** STRONG ******/
 
 #strongButton {
   list-style-image: url("chrome://bluegriffon/skin/formatToolbar/strong.png");
-}
-
-#strongButton[disabled="true"] {
-  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/strong-disabled.png");
 }
 
 /****** BOLD ******/
@@ -110,18 +111,10 @@ toolbaritem  menulist {
   list-style-image: url("chrome://bluegriffon/skin/formatToolbar/bold.png");
 }
 
-#boldButton[disabled="true"] {
-  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/bold-disabled.png");
-}
-
 /****** ITALIC ******/
 
 #italicButton{
   list-style-image: url("chrome://bluegriffon/skin/formatToolbar/italic.png");
-}
-
-#italicButton[disabled="true"] {
-  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/italic-disabled.png");
 }
 
 /****** UNDERLINE ******/
@@ -130,18 +123,10 @@ toolbaritem  menulist {
   list-style-image: url("chrome://bluegriffon/skin/formatToolbar/underline.png");
 }
 
-#underlineButton[disabled="true"] {
-  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/underline-disabled.png");
-}
-
 /****** UL ******/
 
 #ulButton{
   list-style-image: url("chrome://bluegriffon/skin/formatToolbar/ul.png");
-}
-
-#ulButton[disabled="true"] {
-  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/ul-disabled.png");
 }
 
 /****** OL *****/
@@ -150,42 +135,22 @@ toolbaritem  menulist {
   list-style-image: url("chrome://bluegriffon/skin/formatToolbar/ol.png");
 }
 
-#olButton[disabled="true"] {
-  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/ol-disabled.png");
-}
-
 /****** ALIGN ******/
 
 #align-left-button {
   list-style-image: url("chrome://bluegriffon/skin/formatToolbar/align-left.png");
 }
 
-#align-left-button[disabled="true"] {
-  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/align-left-disabled.png");
-}
-
 #align-center-button {
   list-style-image: url("chrome://bluegriffon/skin/formatToolbar/align-center.png");
-}
-
-#align-center-button[disabled="true"] {
-  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/align-center-disabled.png");
 }
 
 #align-right-button {
   list-style-image: url("chrome://bluegriffon/skin/formatToolbar/align-right.png");
 }
 
-#align-right-button[disabled="true"] {
-  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/align-right-disabled.png");
-}
-
 #align-justify-button {
   list-style-image: url("chrome://bluegriffon/skin/formatToolbar/align-justify.png");
-}
-
-#align-justify-button[disabled="true"] {
-  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/align-justify-disabled.png");
 }
 
 /****** INDENT ******/
@@ -194,18 +159,10 @@ toolbaritem  menulist {
   list-style-image: url("chrome://bluegriffon/skin/formatToolbar/indent.png");
 }
 
-#indentButton[disabled="true"] {
-  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/indent-disabled.png");
-}
-
 /****** OUTDENT ******/
 
 #outdentButton {
   list-style-image: url("chrome://bluegriffon/skin/formatToolbar/outdent.png");
-}
-
-#outdentButton[disabled="true"] {
-  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/outdent-disabled.png");
 }
 
 /****** BLOCKQUOTE ******/
@@ -214,28 +171,16 @@ toolbaritem  menulist {
   list-style-image: url("chrome://bluegriffon/skin/formatToolbar/blockquote.png");
 }
 
-#blockquoteButton[disabled="true"] {
-  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/blockquote-disabled.png");
-}
-
 /****** DD ******/
 
 #ddButton {
   list-style-image: url("chrome://bluegriffon/skin/formatToolbar/dd.png");
 }
 
-#ddButton[disabled="true"] {
-  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/dd-disabled.png");
-}
-
 /****** DT ******/
 
 #dtButton {
   list-style-image: url("chrome://bluegriffon/skin/formatToolbar/dt.png");
-}
-
-#dtButton[disabled="true"] {
-  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/dt-disabled.png");
 }
 
 /****** CODE ******/
@@ -248,16 +193,7 @@ toolbaritem  menulist {
   list-style-image: url("chrome://bluegriffon/skin/formatToolbar/code-disabled.png");
 }
 
-/****** COLUMNS ******/
-
-#columnsButton{
-  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/columns.png");
+#FormatToolbox toolbarseparator {
+  height: 16px;
+  background-color: transparent;
 }
-
-#columnsButton[disabled="true"] {
-  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/columns-disabled.png");
-}
-
-
-
-

@@ -37,11 +37,12 @@
 
 hbox.listboxBg {
   max-height: 21px;
-  background-image: url("chrome://bluegriffon/skin/listboxBg.png");
-  border-left: thin solid silver;
-  border-right: thin solid silver;
-  border-bottom: thin solid silver;
+  border-left: thin solid #181818;
+  border-right: thin solid #181818;
+  border-bottom: thin solid #181818;
   margin: 0px;
+  background-color: var(--bg-dark-background);
+  color: white;
 }
 
 hbox.listboxBg toolbarbutton {
@@ -49,21 +50,22 @@ hbox.listboxBg toolbarbutton {
   max-height: 21px;
   min-height: 21px;
   padding: 0px 3px; margin: 0px;
-  border-right: thin solid silver;
+  border-right: thin solid #181818;
   font-weight: bold;
 }
 
 hbox.listboxBg spacer[flex="1"] ~ toolbarbutton {
-  border-left: thin solid silver;
+  border-left: thin solid #181818;
   border-right: 0px none;
 }
 
-hbox.listboxBg toolbarbutton:not([disabled]):active:hover {
-  background-image: url("chrome://bluegriffon/skin/listboxBgActive.png");
-}
 
 listbox.listboxBg {
   margin: 0px;
+  background-color: var(--bg-dark-background);
+  color: white;
+  border: #181818 solid thin;
+  -moz-appearance: none;
 }
 
 hbox.listboxBg .toolbarbutton-menu-dropmarker,

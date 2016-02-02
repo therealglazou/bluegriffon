@@ -2,17 +2,17 @@
 @namespace svg url("http://www.w3.org/2000/svg");
 
 svg|text {
-  stroke-width: 4px;
-  font-family: -moz-fixed;
+  stroke-width: 1px;
+  /*font-family: -moz-fixed;*/
   font-variant: normal;
   line-height: normal;
-  font-size: small ! important;
+  font-size: 8pt ! important;
   dominant-baseline: middle;
   text-anchor: middle;
-  color: white;
+  stroke: white;
 }
 
-hruler[disabled], vruler[disabled] {
+hruler[disabled], vruler[disabled]  {
   visibility: hidden;
 }
 
@@ -23,8 +23,8 @@ hruler, vruler {
 
 hruler {
   stroke-width: 4px;
-  font-family: -moz-fixed;
-  font-weight: bold;
+  /*font-family: -moz-fixed;
+  font-weight: bold;*/
   font-variant: normal;
   line-height: normal;
   font-size: x-small;
@@ -36,8 +36,8 @@ hruler {
 
 vruler {
   stroke-width: 4px;
-  font-family: -moz-fixed;
-  font-weight: bold;
+  /*font-family: -moz-fixed;
+  font-weight: bold;*/
   font-variant: normal;
   line-height: normal;
   font-size: x-small;
@@ -46,3 +46,10 @@ vruler {
   /*position: absolute;*/
 }
 
+hruler svg|rect, vruler svg|rect {
+  fill: #454545;
+}
+
+svg|rect.ruler-separator {
+  fill: gray;
+}

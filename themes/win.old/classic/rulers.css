@@ -1,0 +1,48 @@
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+@namespace svg url("http://www.w3.org/2000/svg");
+
+svg|text {
+  stroke-width: 4px;
+  font-family: -moz-fixed;
+  font-variant: normal;
+  line-height: normal;
+  font-size: small ! important;
+  dominant-baseline: middle;
+  text-anchor: middle;
+  color: white;
+}
+
+hruler[disabled], vruler[disabled] {
+  visibility: hidden;
+}
+
+hruler, vruler {
+  display: -moz-box;
+  background-color: transparent;
+}
+
+hruler {
+  stroke-width: 4px;
+  font-family: -moz-fixed;
+  font-weight: bold;
+  font-variant: normal;
+  line-height: normal;
+  font-size: x-small;
+  height: 16px;
+  width: 100%;
+  margin: 2px 0px;
+  position: absolute;
+}
+
+vruler {
+  stroke-width: 4px;
+  font-family: -moz-fixed;
+  font-weight: bold;
+  font-variant: normal;
+  line-height: normal;
+  font-size: x-small;
+  width: 16px;
+  margin: 0px 2px;
+  /*position: absolute;*/
+}
+

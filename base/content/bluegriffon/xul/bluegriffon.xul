@@ -88,8 +88,6 @@
 #include sets.inc
 #include popups.inc
 
-#include menubar.inc
-
 #ifdef CAN_DRAW_IN_TITLEBAR
 <vbox id="titlebar">
   <hbox id="titlebar-content">
@@ -114,6 +112,8 @@
   </hbox>
 </vbox>
 #endif
+
+#include menubar.inc
 
   <toolbox id="FormatMenulistsToolbox" mode="full">
 #include formatmenulistsbarpalette.inc
