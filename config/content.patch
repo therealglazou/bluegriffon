@@ -4806,23 +4806,7 @@ diff --git a/widget/windows/nsColorPicker.cpp b/widget/windows/nsColorPicker.cpp
 diff --git a/widget/windows/nsColorPicker.h b/widget/windows/nsColorPicker.h
 --- a/widget/windows/nsColorPicker.h
 +++ b/widget/windows/nsColorPicker.h
-@@ -28,32 +28,33 @@ public:
- private:
-   void Update(COLORREF aColor);
- 
-   static UINT_PTR CALLBACK HookProc(HWND aDialog, UINT aMsg,
-                                     WPARAM aWParam, LPARAM aLParam);
- 
-   COLORREF mInitialColor;
-   COLORREF mColor;
-+  bool mShowsAlpa
-   nsCOMPtr<nsIWidget> mParentWidget;
-   nsCOMPtr<nsIColorPickerShownCallback> mCallback;
- };
- 
- class nsColorPicker :
-   public nsIColorPicker
- {
+@@ -43,17 +43,18 @@ class nsColorPicker :
    virtual ~nsColorPicker();
  
  public:
@@ -4838,6 +4822,7 @@ diff --git a/widget/windows/nsColorPicker.h b/widget/windows/nsColorPicker.h
  private:
    COLORREF mInitialColor;
    nsCOMPtr<nsIWidget> mParentWidget;
++  bool mShowsAlpha;
  };
  
  #endif // nsColorPicker_h__
