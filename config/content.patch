@@ -4581,6 +4581,142 @@ diff --git a/widget/cocoa/nsScreenManagerCocoa.mm b/widget/cocoa/nsScreenManager
 +  
 +    NS_OBJC_END_TRY_ABORT_BLOCK_NSRESULT;
 +}
+diff --git a/widget/gtk/nsColorPicker.cpp b/widget/gtk/nsColorPicker.cpp
+--- a/widget/gtk/nsColorPicker.cpp
++++ b/widget/gtk/nsColorPicker.cpp
+@@ -1,14 +1,15 @@
+ /* -*- Mode: C++; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
+ /* This Source Code Form is subject to the terms of the Mozilla Public
+  * License, v. 2.0. If a copy of the MPL was not distributed with this
+  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+ 
+ #include <gtk/gtk.h>
++#include <gtk/gtkcolorsel.h>
+ 
+ #include "nsColor.h"
+ #include "nsColorPicker.h"
+ #include "nsGtkUtils.h"
+ #include "nsIWidget.h"
+ #include "WidgetUtils.h"
+ 
+ NS_IMPL_ISUPPORTS(nsColorPicker, nsIColorPicker)
+@@ -35,38 +36,39 @@ GtkColorSelection* nsColorPicker::Widget
+ {
+   return GTK_COLOR_SELECTION(gtk_color_selection_dialog_get_color_selection(
+                              GTK_COLOR_SELECTION_DIALOG(widget)));
+ }
+ 
+ /* void init (in nsIDOMWindow parent, in AString title, in short mode); */
+ NS_IMETHODIMP nsColorPicker::Init(nsIDOMWindow *parent,
+                                   const nsAString& title,
+-                                  const nsAString& initialColor)
++                                  const nsAString& initialColor,
++                                  bool aShowsAlpha)
+ {
+   mParentWidget = mozilla::widget::WidgetUtils::DOMWindowToWidget(parent);
+   mTitle = title;
+   mInitialColor = initialColor;
++  mShowsAlpha = aShowsAlpha:
+ 
+   return NS_OK;
+ }
+ 
+ /* void open (in nsIColorPickerShownCallback aColorPickerShownCallback); */
+ NS_IMETHODIMP nsColorPicker::Open(nsIColorPickerShownCallback *aColorPickerShownCallback)
+ {
+ 
+-  // Input color string should be 7 length (i.e. a string representing a valid
+-  // simple color)
+-  if (mInitialColor.Length() != 7) {
++  nsCSSValue value;
++  nsCSSParser parser;
++  if (!parser.ParseColorString(mInitialColor, nullptr, 0, value)) {
+     return NS_ERROR_FAILURE;
+   }
+ 
+-  const nsAString& withoutHash  = StringTail(mInitialColor, 6);
+   nscolor color;
+-  if (!NS_HexToRGB(withoutHash, &color)) {
++  if (!nsRuleNode::ComputeColor(value, nullptr, nullptr, color)) {
+     return NS_ERROR_FAILURE;
+   }
+ 
+   GdkColor color_gdk = convertToGdkColor(color);
+ 
+   if (mCallback) {
+     // It means Open has already been called: this is not allowed
+     NS_WARNING("mCallback is already set. Open called twice?");
+@@ -80,16 +82,18 @@ NS_IMETHODIMP nsColorPicker::Open(nsICol
+ 
+   GtkWindow *parent_window = GTK_WINDOW(mParentWidget->GetNativeData(NS_NATIVE_SHELLWIDGET));
+   if (parent_window) {
+     GtkWindow *window = GTK_WINDOW(color_chooser);
+     gtk_window_set_transient_for(window, parent_window);
+     gtk_window_set_destroy_with_parent(window, TRUE);
+   }
+ 
++  gtk_color_selection_set_has_opacity_control(WidgetGetColorSelection(color_chooser),
++                                              mShowsAlpha);
+   gtk_color_selection_set_current_color(WidgetGetColorSelection(color_chooser),
+                                         &color_gdk);
+ 
+   NS_ADDREF_THIS();
+   g_signal_connect(WidgetGetColorSelection(color_chooser), "color-changed",
+                    G_CALLBACK(OnColorChanged), this);
+   g_signal_connect(color_chooser, "response", G_CALLBACK(OnResponse), this);
+   g_signal_connect(color_chooser, "destroy", G_CALLBACK(OnDestroy), this);
+@@ -170,13 +174,31 @@ nsString nsColorPicker::ToHexString(int 
+   return result;
+ }
+ 
+ void nsColorPicker::ReadValueFromColorSelection(GtkColorSelection* colorselection)
+ {
+   GdkColor rgba;
+   gtk_color_selection_get_current_color(colorselection, &rgba);
+ 
+-  mColor.Assign('#');
+-  mColor += ToHexString(convertGdkColorComponent(rgba.red));
+-  mColor += ToHexString(convertGdkColorComponent(rgba.green));
+-  mColor += ToHexString(convertGdkColorComponent(rgba.blue));
++  guint16 alphaValue;
++  if (mShowsAlpha) {
++    gtk_color_selection_set_current_alpha(WidgetGetColorSelection(color_chooser), &alphaValue);
++  }
++
++  if (alphaValue == 65535) {
++    mColor.Assign('#');
++    mColor += ToHexString(convertGdkColorComponent(rgba.red));
++    mColor += ToHexString(convertGdkColorComponent(rgba.green));
++    mColor += ToHexString(convertGdkColorComponent(rgba.blue));
++  }
++  else {
++    mColor.Assign("rgba(");
++    mColor += convertGdkColorComponent(rgba.red);
++    mColor += ", ";
++    mColor += convertGdkColorComponent(rgba.green);
++    mColor += ", ";
++    mColor += convertGdkColorComponent(rgba.blue);
++    mColor += ", ";
++    mColor += (alphaValue / 65535);
++    mColor += ")";
++  }
+ }
+diff --git a/widget/gtk/nsColorPicker.h b/widget/gtk/nsColorPicker.h
+--- a/widget/gtk/nsColorPicker.h
++++ b/widget/gtk/nsColorPicker.h
+@@ -43,11 +43,12 @@ private:
+   void Update(GtkColorSelection* colorselection);
+   void ReadValueFromColorSelection(GtkColorSelection* colorselection);
+ 
+   nsCOMPtr<nsIWidget> mParentWidget;
+   nsCOMPtr<nsIColorPickerShownCallback> mCallback;
+   nsString mTitle;
+   nsString mColor;
+   nsString mInitialColor;
++  bool mShowsAlpha;
+ };
+ 
+ #endif // nsColorPicker_h__
 diff --git a/widget/gtk/nsScreenManagerGtk.cpp b/widget/gtk/nsScreenManagerGtk.cpp
 --- a/widget/gtk/nsScreenManagerGtk.cpp
 +++ b/widget/gtk/nsScreenManagerGtk.cpp
