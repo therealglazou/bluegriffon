@@ -292,7 +292,7 @@ var UrlUtils = {
     return urlPath;
   },
 
-  makeAbsoluteUrl: function makeAbsoluteUrl(url)
+  makeAbsoluteUrlFrom: function (url, docUrl)
   {
     var resultUrl = url.trim();
     if (!resultUrl)
@@ -304,7 +304,6 @@ var UrlUtils = {
     if (urlScheme)
       return resultUrl;
 
-    var docUrl = this.getDocumentBaseUrl();
     var docScheme = this.getScheme(docUrl);
 
     // Can't relativize if no doc scheme (page hasn't been saved)
@@ -327,6 +326,12 @@ var UrlUtils = {
     } catch (e) { }
 
     return absoluteUrl;
+  },
+
+  makeAbsoluteUrl: function (url)
+  {
+    var docUrl = this.getDocumentBaseUrl();
+    return this.makeAbsoluteUrlFrom(url, docUrl);
   },
 
   getDocumentBaseUrl: function getDocumentBaseUrl()
