@@ -7,6 +7,7 @@
 
 <bindings id="csspropertyBindings"
           xmlns="http://www.mozilla.org/xbl"
+          xmlns:html="http://www.w3.org/1999/xhtml"
           xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
           xmlns:xbl="http://www.mozilla.org/xbl">
 
@@ -386,9 +387,16 @@
 
   <binding id="csscolorBinding">
     <content>
+#ifndef XP_MACOSX
       <xul:ecolorpicker anonid="picker"
                         xbl:inherits="property,colorObjectId=propertyClean,showTransparency,color"
-                        oncommand="SetColor(this)"/>
+                        oncommand="SetColor(this, this.color)"/>
+#else
+      <html:input anonid="picker"
+                  type="color"
+                  xbl:inherits="property,value=color"
+                  onchange="SetColor(this, this.value)"/>
+#endif
     </content>
     <implementation>
       <method name="getChild">
@@ -402,7 +410,12 @@
         <parameter name="aValue"/>
         <parameter name="aValueArray"/>
         <body><![CDATA[
+#ifdef XP_MACOSX
+          this.getChild("picker").value = aValue ? aValue : "white";
+          this.getChild("picker").setAttribute("value", aValue ? aValue : "white");
+#else
           this.getChild("picker").color = aValue;
+#endif
         ]]></body>
       </method>
     </implementation>

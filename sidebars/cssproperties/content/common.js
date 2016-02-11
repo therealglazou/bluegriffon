@@ -207,9 +207,8 @@ function InitLocalFontFaceMenu(menuPopup)
   }
 }
 
-function SetColor(aElt)
+function SetColor(aElt, color)
 {
-  var color = aElt.color;
   var toApply = [
                   {
                     property: aElt.getAttribute("property"),
