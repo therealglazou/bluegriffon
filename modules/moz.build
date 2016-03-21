@@ -20,6 +20,6 @@ EXTRA_PP_JS_MODULES += [
 ]
 
 if CONFIG['MOZ_WIDGET_TOOLKIT'] in ('windows', 'gtk2', 'gtk3'):
-    EXTRA_PP_JS_MODULES += [
+    EXTRA_JS_MODULES += [
         'unicodeHelper.jsm',
     ]
