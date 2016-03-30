@@ -7,6 +7,8 @@
 
 <!ENTITY loadError.label "Probleem bij het laden van de pagina">
 <!ENTITY retry.label "Opnieuw proberen">
+<!ENTITY returnToPreviousPage.label "Terug">
+<!ENTITY advanced.label "Geavanceerd">
 
 <!-- Specific error messages -->
 
@@ -20,12 +22,12 @@
 <!ENTITY dnsNotFound.longDesc "
 <ul>
   <li>Controleer het adres op typefouten, zoals
-    <strong>ww</strong>.voorbeeld.com in plaats van
-    <strong>www</strong>.voorbeeld.com</li>
-  <li>Controleer uw netwerkverbinding als u geen enkele pagina kunt
-    laden.</li>
-  <li>Verzeker u ervan dat &brandShortName; toegang heeft tot het web als uw 
-    computer of netwerk is beveiligd door een firewall of proxyserver.</li>
+    <strong>ww</strong>.example.com in plaats van
+    <strong>www</strong>.example.com</li>
+  <li>Als u geen enkele pagina kunt laden, controleer dan de netwerkverbinding
+    van uw computer.</li>
+  <li>Als uw computer of netwerk wordt beveiligd door een firewall of proxy,
+    zorg er dan voor dat &brandShortName; toegang heeft tot het web.</li>
 </ul>
 ">
 
@@ -40,14 +42,14 @@
 
 <!ENTITY generic.title "Oei.">
 <!ENTITY generic.longDesc "
-<p>&brandShortName; kan om één of andere reden deze pagina niet laden.</p>
+<p>&brandShortName; kan om de een of andere reden deze pagina niet laden.</p>
 ">
 
 <!ENTITY malformedURI.title "Het adres is niet geldig">
 <!ENTITY malformedURI.longDesc "
 <ul>
   <li>Webadressen worden doorgaans geschreven als
-    <strong>http://www.voorbeeld.com/</strong></li>
+    <strong>http://www.example.com/</strong></li>
   <li>Let erop dat u voorwaartse slashes gebruikt (d.i.
     <strong>/</strong>).</li>
 </ul>
@@ -62,7 +64,7 @@
 <!ENTITY netOffline.title "Offlinemodus">
 <!ENTITY netOffline.longDesc2 "
 <ul>
-  <li>Druk op “Opnieuw proberen” om naar de onlinemodus over te schakelen en vernieuw de pagina.</li>
+  <li>Klik op ‘Opnieuw proberen’ om naar de onlinemodus over te schakelen en vernieuw de pagina.</li>
 </ul>
 ">
 
@@ -106,9 +108,9 @@
 <!ENTITY proxyResolveFailure.longDesc "
 <ul>
   <li>Controleer of uw proxyinstellingen juist zijn.</li>
-  <li>Verzeker u ervan dat uw computer op een werkend netwerk is aangesloten.</li>
-  <li>Verzeker u ervan dat &brandShortName; toegang heeft tot het web als uw 
-    computer of netwerk is beveiligd door een firewall of proxyserver.</li>
+  <li>Controleer of uw computer een werkende netwerkverbinding heeft.</li>
+  <li>Als uw computer of netwerk wordt beveiligd door een firewall of proxy,
+    zorg er dan voor dat &brandShortName; toegang heeft tot het web.</li>
 </ul>
 ">
 
@@ -123,8 +125,8 @@
 <!ENTITY unknownSocketType.title "Onverwacht antwoord van server">
 <!ENTITY unknownSocketType.longDesc "
 <ul>
-  <li>Verzeker u ervan dat de persoonlijke beveiligingsbeheerder is geïnstalleerd op
-    uw systeem.</li>
+  <li>Zorg ervoor dat de persoonlijke beveiligingsbeheerder op uw systeem
+    is geïnstalleerd.</li>
   <li>Dit kan het gevolg zijn van een niet-standaard configuratie van de server.</li>
 </ul>
 ">
@@ -151,22 +153,11 @@
 <ul>
   <li>Misschien is de website tijdelijk niet beschikbaar of overbelast. Probeer het 
     over enkele ogenblikken opnieuw.</li>
-  <li>Controleer uw netwerkverbinding als u geen enkele pagina kunt laden.</li>
-  <li>Verzeker u ervan dat &brandShortName; toegang heeft tot het web als uw 
-    computer of netwerk is beveiligd door een firewall of proxyserver.</li>
+  <li>Als u geen enkele pagina kunt laden, controleer dan de netwerkverbinding
+    van uw computer.</li>
+  <li>Als uw computer of netwerk wordt beveiligd door een firewall of proxy,
+    zorg er dan voor dat &brandShortName; toegang heeft tot het web.</li>
 </ul>
-">
-
-<!ENTITY malwareBlocked.title "Vermoedelijke aanvalsite!">
-<!ENTITY malwareBlocked.longDesc "
-<p>Aanvalsites proberen programma’s te installeren die privégegevens stelen, uw computer gebruiken om anderen aan te vallen, of uw systeem beschadigen.</p>
-<p>Website-eigenaars die menen dat hun website ten onrechte is gerapporteerd als een aanvalsite kunnen om een <a href='http://www.stopbadware.org/home/reviewinfo' >herbeoordeling vragen</a>.</p>
-">
-
-<!ENTITY phishingBlocked.title "Vermoedelijke webvervalsing!">
-<!ENTITY phishingBlocked.longDesc "
-<p>Het invoeren van persoonlijke gegevens op deze pagina kan leiden tot diefstal van identiteitsgegevens of andere fraude.</p>
-<p>Dit soort webvervalsingen wordt gebruikt in e-mailscams die bekend staan als phishingaanvallen, waarbij frauduleuze webpagina’s en e-mails worden gebruikt om bronnen die u misschien vertrouwt na te bootsen.</p>
 ">
 
 <!ENTITY cspBlocked.title "Geblokkeerd door inhoudbeveiligingsbeleid">
@@ -192,30 +183,21 @@ functionality specific to firefox. -->
 <button id='exceptionDialogButton'>&securityOverride.exceptionButtonLabel;</button>
 ">
 
-<!ENTITY errorReporting.title "Deze fout rapporteren">
-<!ENTITY errorReporting.longDesc "Het rapporteren van het adres en de certificaatgegevens voor <span id='hostname'></span> helpt ons kwaadwillende websites te identificeren en te blokkeren. Bedankt voor uw hulp bij het maken van een veiliger web!">
-<!ENTITY errorReporting.automatic "Fouten in de toekomst automatisch rapporteren">
+<!ENTITY errorReporting.automatic2 "Rapporteer fouten als deze om Mozilla te helpen kwaadwillende websites te herkennen en te blokkeren">
 <!ENTITY errorReporting.learnMore "Meer info…">
-<!ENTITY errorReporting.sending "Rapport verzenden">
-<!ENTITY errorReporting.sent "Rapport verzonden">
-<!ENTITY errorReporting.report "Rapport">
-<!ENTITY errorReporting.tryAgain "Opnieuw proberen">
 
 <!ENTITY remoteXUL.title "Remote XUL">
 <!ENTITY remoteXUL.longDesc "<p><ul><li>Neem contact op met de website-eigenaars om ze over dit probleem te informeren.</li></ul></p>">
 
-<!ENTITY oldSecurityProtocol.title "Kan geen beveiligde verbinding maken">
-<!-- LOCALIZATION NOTE (oldSecurityProtocol.longDesc) - Do not translate the
-     <span id='hostname'></span>. -->
-<!ENTITY oldSecurityProtocol.longDesc2 "&brandShortName; kan de veiligheid van uw gegevens op <span id='hostname'></span> niet garanderen, omdat de website gebruikmaakt van SSLv3, een onbetrouwbaar beveiligingsprotocol.">
-<!-- LOCALIZATION NOTE (oldSecurityProtocol.advancedInfo) - Do not translate
-     the <span id='errorcode'></span>. -->
-<!ENTITY oldSecurityProtocol.advancedInfo "Uitgebreide info: <span id='errorcode'></span>">
-<!ENTITY oldSecurityProtocol.learnMore "Meer info…">
+<!ENTITY sslv3Used.title "Kan geen beveiligde verbinding maken">
+<!-- LOCALIZATION NOTE (sslv3Used.longDesc2) - Do not translate
+     "SSL_ERROR_UNSUPPORTED_VERSION". -->
+<!ENTITY sslv3Used.longDesc2 "Geavanceerde info: SSL_ERROR_UNSUPPORTED_VERSION">
 
-<!ENTITY sslv3Used.learnMore "Learn More…">
-<!-- LOCALIZATION NOTE (sslv3Used.longDesc) - Do not translate
-     "ssl_error_unsupported_version". -->
-<!ENTITY sslv3Used.longDesc "Advanced info: ssl_error_unsupported_version">
-
-<!ENTITY sslv3Used.title "Unable to Connect Securely">
+<!ENTITY weakCryptoUsed.title "Uw verbinding is niet beveiligd">
+<!-- LOCALIZATION NOTE (weakCryptoUsed.longDesc2) - Do not translate
+     "SSL_ERROR_NO_CYPHER_OVERLAP". -->
+<!ENTITY weakCryptoUsed.longDesc2 "Geavanceerde info: SSL_ERROR_NO_CYPHER_OVERLAP">
+<!ENTITY weakCryptoAdvanced.title "Geavanceerd">
+<!ENTITY weakCryptoAdvanced.longDesc "<span class='hostname'></span> gebruikt verouderde beveiligingstechnologie die kwetsbaar is voor aanvallen. Een aanvaller kan eenvoudig gegevens onthullen waarvan u dacht dat deze veilig waren.">
+<!ENTITY weakCryptoAdvanced.override "(Niet beveiligd) <span class='hostname'></span> proberen te laden via verouderde beveiliging">

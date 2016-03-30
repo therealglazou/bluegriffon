@@ -2,18 +2,54 @@
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 
-<!ENTITY aboutPrivateBrowsing.title            "您已进入隐私浏览模式">
-<!ENTITY aboutPrivateBrowsing.title.normal     "打开一个隐私浏览窗口？">
-
-<!ENTITY aboutPrivateBrowsing.subtitle         "&brandShortName; 将不对此窗口记录任何历史记录。">
-<!ENTITY aboutPrivateBrowsing.subtitle.normal  "&brandShortName; 不会对隐私窗口保存任何历史记录。">
-
-<!ENTITY aboutPrivateBrowsing.description      "这包括浏览历史、搜索历史、下载历史、网络表单历史、Cookie，以及临时性互联网文件。不过，您下载的文件与添加的书签将会保留。">
-
 <!ENTITY aboutPrivateBrowsing.notPrivate       "您当前未处于一个隐私浏览窗口。">
-
-<!ENTITY aboutPrivateBrowsing.moreInfo         "尽管本机将不会记录您的浏览历史，但您的雇主或者互联网服务提供商还是可能追溯您访问过的页面。">
-<!ENTITY aboutPrivateBrowsing.learnMore        "详细了解。">
-
 <!ENTITY privatebrowsingpage.openPrivateWindow.label "打开隐私浏览窗口">
 <!ENTITY privatebrowsingpage.openPrivateWindow.accesskey "P">
+
+<!ENTITY privateBrowsing.title                 "隐私浏览模式">
+
+<!-- LOCALIZATION NOTE (aboutPrivateBrowsing.width1):
+     Width of the Private Browsing section. This should depend primarily on the
+     length of the headers and text, but should be roughly 1.5 times the width
+     of the Tracking Protection section, and in general not much larger than
+     30em to prevent the sections from wrapping on smaller window sizes.
+     -->
+<!ENTITY aboutPrivateBrowsing.width1           "30em">
+<!ENTITY aboutPrivateBrowsing.title            "您已进入隐私浏览模式">
+
+<!ENTITY aboutPrivateBrowsing.info.notsaved    "不会保留">
+<!ENTITY aboutPrivateBrowsing.info.history     "历史记录">
+<!ENTITY aboutPrivateBrowsing.info.searches    "搜索">
+<!ENTITY aboutPrivateBrowsing.info.cookies     "Cookie">
+<!ENTITY aboutPrivateBrowsing.info.temporaryFiles "临时文件">
+
+<!ENTITY aboutPrivateBrowsing.info.saved       "仍将保留">
+<!ENTITY aboutPrivateBrowsing.info.downloads   "下载">
+<!ENTITY aboutPrivateBrowsing.info.bookmarks   "书签">
+
+<!ENTITY aboutPrivateBrowsing.note1            "请注意，您的雇主或者互联网服务提供商仍然可以跟踪到您访问的页面。">
+<!ENTITY aboutPrivateBrowsing.learnMore        "详细了解。">
+
+<!-- LOCALIZATION NOTE (trackingProtection.width1):
+     Width of the Tracking Protection section. It is fine for the enabled or
+     disabled indicator or the words in the title to wrap to the next line, but
+     you can expand or reduce this section to fit better, as long as the width
+     of the Private Browsing section is roughly 1.5 times the width of this one.
+     Note that the required space may vary between platforms because fonts are
+     different, so testing on Windows, Mac, and Linux is encouraged.
+     -->
+<!ENTITY trackingProtection.width1             "22em">
+<!ENTITY trackingProtection.title              "跟踪保护">
+
+<!-- LOCALIZATION NOTE (trackingProtection.state.width):
+     Width of the element representing the enabled or disabled indicator.
+     -->
+<!ENTITY trackingProtection.state.width        "6ch">
+<!ENTITY trackingProtection.state.enabled      "开">
+<!ENTITY trackingProtection.state.disabled     "关">
+
+<!ENTITY trackingProtection.description1       "隐私浏览窗口现在会禁止在页面中跟踪您浏览行为的动作。">
+
+<!ENTITY trackingProtection.disable            "关闭跟踪保护功能">
+<!ENTITY trackingProtection.enable             "开启跟踪保护功能">
+<!ENTITY trackingProtection.startTour1         "了解如何生效">

@@ -2,16 +2,14 @@
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 
-<!ENTITY % netErrorAppDTD SYSTEM "chrome://global/locale/netErrorApp.dtd">
-%netErrorAppDTD;
 <!ENTITY loadError.label "Errore caricamento pagina">
 <!ENTITY retry.label "Riprova">
 <!ENTITY connectionFailure.title "Connessione non riuscita">
 <!ENTITY connectionFailure.longDesc "<p>Anche se l’indirizzo del sito sembra valido, il browser non riesce a stabilire una connessione.</p><ul><li>Il sito potrebbe non essere disponibile al momento? Riprovare in un altro momento.</li><li>Non è possibile navigare da questa postazione? Controllare la connessione alla rete di questo computer.</li><li>Il computer o la rete sono protetti da un firewall o un proxy? Eventuali impostazioni errate potrebbero bloccare la navigazione.</li></ul>">
 <!ENTITY deniedPortAccess.title "Porta bloccata per motivi di sicurezza">
-<!ENTITY deniedPortAccess.longDesc "<p>L’indirizzo richiesto specifica una porta (ad esempio <q>mozillaitalia.org:80</q> per la porta 80 su mozillaitalia.org) normalmente utilizzata per scopi <em>differenti</em> dalla navigazione. Il browser ha annullato la richiesta per proteggere il computer.</p>">
+<!ENTITY deniedPortAccess.longDesc "<p>L’indirizzo richiesto specifica una porta (ad esempio <q>example.com:80</q> per la porta 80 su example.com) normalmente utilizzata per scopi <em>differenti</em> dalla navigazione. Il browser ha annullato la richiesta per motivi di sicurezza.</p>">
 <!ENTITY dnsNotFound.title "Indirizzo non trovato">
-<!ENTITY dnsNotFound.longDesc "<p>Il browser non trova il server host relativo all’indirizzo inserito.</p><ul><li>Si è commesso un errore nella digitazione del dominio? (ad esempio <q><strong>ww</strong>.mozillaitalia.org</q> invece di <q><strong>www</strong>.mozillaitalia.org</q>)</li><li>Si è certi che questo dominio esista?  La sua registrazione potrebbe essere scaduta.</li><li>È possibile navigare in altri siti?  Controllare la connessione alla rete e le impostazioni relative ai server DNS.</li><li>Il computer o la rete sono protetti da un firewall o un proxy? Eventuali impostazioni errate potrebbero bloccare la navigazione.</li></ul>">
+<!ENTITY dnsNotFound.longDesc "<p>Il browser non trova il server host relativo all’indirizzo inserito.</p><ul><li>Si è commesso un errore nella digitazione del dominio? (ad esempio <q><strong>ww</strong>.example.com</q> invece di <q><strong>www</strong>.example.com</q>)</li><li>Si è certi che questo dominio esista?  La sua registrazione potrebbe essere scaduta.</li><li>È possibile navigare in altri siti?  Controllare la connessione alla rete e le impostazioni relative ai server DNS.</li><li>Il computer o la rete sono protetti da un firewall o un proxy? Eventuali impostazioni errate potrebbero bloccare la navigazione.</li></ul>">
 <!ENTITY fileNotFound.title "File non trovato">
 <!ENTITY fileNotFound.longDesc "<ul><li>L’oggetto potrebbe essere stato rinominato, rimosso o spostato?</li><li>Potrebbe esserci un errore nell’indirizzo?</li><li>Si possiedono i permessi per accedere all’oggetto specificato?</li></ul>">
 <!ENTITY generic.title "Impossibile completare la richiesta">
@@ -57,14 +55,11 @@
 <li>Potrebbe trattarsi di un problema nella configurazione del server oppure di un tentativo da parte di qualcuno di sostituirsi al server stesso.</li>
 <li>Se è stato possibile connettersi a questo server in passato, il problema potrebbe essere solo temporaneo. Si consiglia di riprovare in seguito.</li>
 </ul>">
-<!ENTITY malwareBlocked.title "Sospetto sito web malevolo">
-<!ENTITY malwareBlocked.longDesc "
-<p>I siti web maligni cercano di installare dei software in grado di sottrarre le informazioni personali degli utenti, sfruttare il computer per attaccare altre macchine o semplicemente danneggiare il sistema.</p>
-<p>Il responsabile di un sito web segnalato nell’elenco dei siti pericolosi, nel caso ritenesse tale segnalazione errata, può <a href='http://www.stopbadware.org/home/reviewinfo' >chiedere una nuova valutazione</a>.</p>">
-<!ENTITY phishingBlocked.title "Sospetto sito contraffatto">
-<!ENTITY phishingBlocked.longDesc "
-<p>L’inserimento di informazioni personali in questa pagina può dare origine a furti d’identità o altre frodi.</p>
-<p>Questo tipo di contraffazione viene sfruttato nei cosiddetti attacchi phishing, dove vengono utilizzate in modo fraudolento pagine web ed email per imitare fonti di cui solitamente ci si fida.</p>">
+<!ENTITY securityOverride.linkText "Oppure è possibile aggiungere un’eccezione…">
+<!ENTITY securityOverride.warningContent "
+<p>È sconsigliato aggiungere un’eccezione nel caso in cui si stia utilizzando una connessione non completamente affidabile oppure se è la prima volta che questi avvisi di sicurezza appaiono con questo server.</p>
+<p>È comunque possibile aggiungere un’eccezione per questo sito attraverso le opzioni avanzate per la cifratura.</p>
+">
 <!ENTITY cspBlocked.title "Bloccato dai criteri sulla sicurezza dei contenuti">
 <!ENTITY cspBlocked.longDesc "<p>Il browser ha bloccato il caricamento della pagina con questa modalità in quanto include dei criteri sulla sicurezza dei contenuti che lo impediscono.</p>">
 <!ENTITY corruptedContentError.title "Errore contenuto danneggiato">

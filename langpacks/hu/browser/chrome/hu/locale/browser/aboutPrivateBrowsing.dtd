@@ -2,22 +2,54 @@
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 
-<!ENTITY aboutPrivateBrowsing.title            "Privát böngészést folytat">
-<!ENTITY aboutPrivateBrowsing.title.normal     "Megnyitja a privát ablakot?">
-
-<!ENTITY aboutPrivateBrowsing.subtitle         "A &brandShortName; semmit nem fog megjegyezni ebből az ablakból.">
-<!ENTITY aboutPrivateBrowsing.subtitle.normal  "A &brandShortName; nem fogja megjegyezni a privát ablakok előzményeit.">
-
-<!ENTITY aboutPrivateBrowsing.description      "Ez alatt a böngészés előzményeit, a keresés előzményeit, a letöltés előzményeit, az űrlapok előzményeit, a sütiket, illetve az ideiglenes internetfájlokat kell érteni. A letöltött fájlok és a könyvjelzők viszont megmaradnak.">
-
 <!ENTITY aboutPrivateBrowsing.notPrivate       "Jelenleg nem privát ablakot használ.">
-
-<!ENTITY aboutPrivateBrowsing.moreInfo         "Bár ezen a számítógépen nem lesznek tárolva a böngészési előzmények, az internetszolgáltatója vagy a munkáltatója ettől függetlenül is ellenőrizheti, hogy milyen oldalakat látogat meg.">
-<!ENTITY aboutPrivateBrowsing.learnMore        "Tudjon meg többet.">
-
 <!ENTITY privatebrowsingpage.openPrivateWindow.label "Privát ablak megnyitása">
 <!ENTITY privatebrowsingpage.openPrivateWindow.accesskey "P">
 
-<!-- TO BE REMOVED POST-AUSTRALIS --> 
-<!-- LOCALIZATION NOTE (privatebrowsingpage.howToStart3): please leave &basePBMenu.label; intact in the translation -->
-<!ENTITY privatebrowsingpage.howToStart3               "A privát böngészés indításához választhatja az &basePBMenu.label; > &newPrivateWindow.label; menüparancsot is.">
+<!ENTITY privateBrowsing.title                 "Privát böngészés">
+<!-- LOCALIZATION NOTE (aboutPrivateBrowsing.width1):
+     Width of the Private Browsing section. This should depend primarily on the
+     length of the headers and text, but should be roughly 1.5 times the width
+     of the Tracking Protection section, and in general not much larger than
+     30em to prevent the sections from wrapping on smaller window sizes.
+     -->
+
+<!ENTITY aboutPrivateBrowsing.width1           "30em">
+<!ENTITY aboutPrivateBrowsing.title            "Privát böngészést folytat">
+
+<!ENTITY aboutPrivateBrowsing.info.notsaved    "Nem mentett">
+<!ENTITY aboutPrivateBrowsing.info.history     "Előzmények">
+<!ENTITY aboutPrivateBrowsing.info.searches    "Keresések">
+<!ENTITY aboutPrivateBrowsing.info.cookies     "Sütik">
+<!ENTITY aboutPrivateBrowsing.info.temporaryFiles "Ideiglenes fájlok">
+
+<!ENTITY aboutPrivateBrowsing.info.saved       "Mentett">
+<!ENTITY aboutPrivateBrowsing.info.downloads   "Letöltések">
+<!ENTITY aboutPrivateBrowsing.info.bookmarks   "Könyvjelzők">
+
+<!ENTITY aboutPrivateBrowsing.note1            "Ne feledje, hogy az internetszolgáltatója vagy a munkáltatója ettől függetlenül is ellenőrizheti, hogy milyen oldalakat látogat meg.">
+<!ENTITY aboutPrivateBrowsing.learnMore        "Tudjon meg többet.">
+<!-- LOCALIZATION NOTE (trackingProtection.width1):
+     Width of the Tracking Protection section. It is fine for the enabled or
+     disabled indicator or the words in the title to wrap to the next line, but
+     you can expand or reduce this section to fit better, as long as the width
+     of the Private Browsing section is roughly 1.5 times the width of this one.
+     Note that the required space may vary between platforms because fonts are
+     different, so testing on Windows, Mac, and Linux is encouraged.
+     -->
+
+<!ENTITY trackingProtection.width1             "26em">
+<!ENTITY trackingProtection.title              "Védelem követés ellen">
+<!-- LOCALIZATION NOTE (trackingProtection.state.width):
+     Width of the element representing the enabled or disabled indicator.
+     -->
+
+<!ENTITY trackingProtection.state.width        "6ch">
+<!ENTITY trackingProtection.state.enabled      "BE">
+<!ENTITY trackingProtection.state.disabled     "KI">
+
+<!ENTITY trackingProtection.description1       "A privát ablakok mostantól blokkolják az oldal azon részeit, amelyek követhetik az Ön böngészési tevékenységét.">
+
+<!ENTITY trackingProtection.disable            "Követés elleni védelem kikapcsolása">
+<!ENTITY trackingProtection.enable             "Követés elleni védelem bekapcsolása">
+<!ENTITY trackingProtection.startTour1         "Nézze meg ennek működését">

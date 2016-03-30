@@ -110,13 +110,11 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY showAllTabsCmd.accesskey "a">
 
 <!ENTITY fxaSignIn.label "Conectarse a &syncBrand.shortName.label;">
+<!ENTITY fxaSignedIn.tooltip "Abir as preferencias de &syncBrand.shortName.label;">
 <!ENTITY fxaSignInError.label "Volver a conectarse a &syncBrand.shortName.label;">
+<!ENTITY fxaUnverified.label "Comprobar a súa conta">
 <!ENTITY syncStartPanel2.heading "&syncBrand.shortName.label; activado">
 <!ENTITY syncStartPanel2.subTitle "&brandShortName; comezará a sincronización nuns instantes.">
-<!ENTITY syncErrorPanel.heading "Non é posíbel conectarse a &syncBrand.shortName.label;">
-<!ENTITY syncErrorPanel.subTitle "Identifíquese para continuar a sincronización.">
-<!ENTITY syncErrorPanel.signInButton.label "Identificarse">
-<!ENTITY syncErrorPanel.signInButton.accesskey "s">
 
 
 <!ENTITY fullScreenMinimize.tooltip "Minimizar">
@@ -126,10 +124,20 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY fullScreenAutohide.accesskey "o">
 <!ENTITY fullScreenExit.label "Saír do modo Pantalla completa">
 <!ENTITY fullScreenExit.accesskey "c">
-<!ENTITY fullscreenAllowButton.label "Permitir">
-<!ENTITY fullscreenExitButton.label "Denegar">
 
-<!ENTITY fullscreenExitHint2.value "Prema ESC en calquera momento para saír.">
+<!-- LOCALIZATION NOTE (fullscreenWarning.beforeDomain.label,
+     fullscreenWarning.afterDomain.label): these two strings are used
+     respectively before and after the domain requiring fullscreen.
+     Localizers can use one of them, or both, to better adapt this
+     sentence to their language. -->
+<!ENTITY fullscreenWarning.beforeDomain.label "">
+<!ENTITY fullscreenWarning.afterDomain.label "está agora en pantalla completa">
+<!ENTITY fullscreenWarning.generic.label "Este documento está agora en pantalla completa">
+<!-- LOCALIZATION NOTE (exitDOMFullscreen.button,
+     exitDOMFullscreenMac.button): the "escape" button on PC keyboards
+     is uppercase, while on Mac keyboards it is lowercase -->
+<!ENTITY exitDOMFullscreen.button "Saír de pantalla completa (Esc)">
+<!ENTITY exitDOMFullscreenMac.button "Saír de pantalla completa (esc)">
 <!ENTITY leaveDOMFullScreen.label "Saír de pantalla completa">
 <!ENTITY leaveDOMFullScreen.accesskey "a">
 
@@ -269,11 +277,13 @@ These should match what Safari and other Apple applications use on OS X Lion. --
   -  application menu item that opens the browser toolbox UI in the Tools menu. -->
 <!ENTITY browserToolboxMenu.label     "Caixa de ferramentas do navegador">
 <!ENTITY browserToolboxMenu.accesskey "x">
+<!ENTITY browserToolboxCmd.commandkey "i">
 
 <!-- LOCALIZATION NOTE (browserContentToolboxMenu.label): This is the label for the
   -  application menu item that opens the browser content toolbox UI in the Tools menu.
   -  This toolbox allows to debug the chrome of the content process in multiprocess builds.  -->
 <!ENTITY browserContentToolboxMenu.label     "Caixa de ferramentas de contido do navegador">
+<!ENTITY browserContentToolboxMenu.accesskey "x">
 
 <!ENTITY devToolbarCloseButton.tooltiptext "Pechar a barra de desenvolvemento">
 <!ENTITY devToolbarMenu.label              "Barra de desenvolvemento">
@@ -303,6 +313,7 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY newNavigatorCmd.accesskey      "N">
 <!ENTITY newPrivateWindow.label     "Nova xanela privada">
 <!ENTITY newPrivateWindow.accesskey "x">
+<!ENTITY newNonRemoteWindow.label   "Nova xanela non e10s">
 
 <!ENTITY editMenu.label         "Editar"> 
 <!ENTITY editMenu.accesskey       "E"> 
@@ -393,6 +404,14 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY urlbar.accesskey             "d">
 <!ENTITY urlbar.switchToTab.label     "Cambiar á lapela:">
 
+<!ENTITY urlbar.searchSuggestionsNotification.question "Desexa mellorar a súa experiencia de buscar con suxestións?">
+<!ENTITY urlbar.searchSuggestionsNotification.learnMore "Obter máis información…">
+<!ENTITY urlbar.searchSuggestionsNotification.learnMore.accesskey "m">
+<!ENTITY urlbar.searchSuggestionsNotification.disable "Non">
+<!ENTITY urlbar.searchSuggestionsNotification.disable.accesskey "n">
+<!ENTITY urlbar.searchSuggestionsNotification.enable "Si">
+<!ENTITY urlbar.searchSuggestionsNotification.enable.accesskey "i">
+
 <!-- 
   Comment duplicated from browser-sets.inc:
 
@@ -417,12 +436,41 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY searchFocus.commandkey2      "e">
 <!ENTITY searchFocusUnix.commandkey   "j">
 
+<!-- LOCALIZATION NOTE (contentSearchInput.label, contentSearchSubmit.label):
+     These are set as the aria-label attribute for the search input box and
+     submit button in the in-content search UI, to be used by screen readers. -->
+<!ENTITY contentSearchInput.label     "Criterios de busca">
+<!ENTITY contentSearchSubmit.label    "Enviar busca">
+
 <!-- LOCALIZATION NOTE (searchFor.label, searchWith.label):
      These two strings are used to build the header above the list of one-click
      search providers:  "Search for <used typed keywords> with:" -->
 <!ENTITY searchFor.label              "Buscar por:">
 <!ENTITY searchWith.label             " con:">
+
+<!-- LOCALIZATION NOTE (search.label, searchAfter.label):
+     This string is used to build the header above the list of one-click search
+     providers when a one off engine has been selected.  The searchAfter text is
+     intentionally left empty for en-US and can be used by other localizations to
+     display a string after the search engine name.  This string will be displayed
+     as:  "Search <selected engine name><searchAfter.label text>" -->
+<!ENTITY search.label                 "Buscar">
+<!ENTITY searchAfter.label            "">
+
+<!-- LOCALIZATION NOTE (searchWithHeader.label):
+     The wording of this string should be as close as possible to
+     searchFor.label and searchWith.label. This string will be used instead of
+     them when the user has not typed any keyword. -->
+<!ENTITY searchWithHeader.label       "Buscar con:">
+<!-- LOCALIZATION NOTE (changeSearchSettings.button):
+     This string won't wrap, so if the translated string is longer,
+     consider translating it as if it said only "Search Settings". -->
 <!ENTITY changeSearchSettings.button  "Cambiar configuración da busca">
+
+<!ENTITY searchInNewTab.label         "Buscar nunha nova lapela">
+<!ENTITY searchInNewTab.accesskey     "B">
+<!ENTITY searchSetAsDefault.label     "Estabelecer como buscador predeterminado">
+<!ENTITY searchSetAsDefault.accesskey "d">
 
 <!ENTITY tabView.commandkey           "e">
 
@@ -597,20 +645,22 @@ you can use these alternative items. Otherwise, their values should be empty.  -
 
 <!ENTITY sidebarCloseButton.tooltip     "Pechar a barra lateral">
 
-<!ENTITY quitApplicationCmdWin.label       "Saír"> 
-<!ENTITY quitApplicationCmdWin.accesskey   "S">
-<!ENTITY quitApplicationCmdWin.tooltip     "Saír do &brandShortName;">
+<!ENTITY quitApplicationCmdWin2.label       "Saír">
+<!ENTITY quitApplicationCmdWin2.accesskey   "S">
+<!ENTITY quitApplicationCmdWin2.tooltip     "Saír do &brandShorterName;">
 <!ENTITY goBackCmd.commandKey "[">
 <!ENTITY goForwardCmd.commandKey "]">
 <!ENTITY quitApplicationCmd.label       "Saír"> 
 <!ENTITY quitApplicationCmd.accesskey   "S">
-<!ENTITY quitApplicationCmdMac.label    "Saír de &brandShortName;">
+<!ENTITY quitApplicationCmdMac2.label   "Saír do &brandShorterName;">
 <!-- LOCALIZATION NOTE(quitApplicationCmdUnix.key): This keyboard shortcut is used by both Linux and OSX builds. -->
 <!ENTITY quitApplicationCmdUnix.key     "Q">
 
 <!ENTITY closeCmd.label                 "Pechar">  
 <!ENTITY closeCmd.key                   "W">  
 <!ENTITY closeCmd.accesskey             "c">
+
+<!ENTITY toggleMuteCmd.key              "M">
 
 <!ENTITY pageStyleMenu.label "Estilo de páxina">
 <!ENTITY pageStyleMenu.accesskey "E">
@@ -652,29 +702,41 @@ you can use these alternative items. Otherwise, their values should be empty.  -
 <!ENTITY editBookmark.cancel.label                   "Cancelar">
 <!ENTITY editBookmark.removeBookmark.accessKey       "R">
 
-<!ENTITY identity.unverifiedsite2 "Este sitio web non fornece información de identidade.">
-<!ENTITY identity.connectedTo "Esta conectado/a a">
-<!-- Localization note (identity.runBy) : This string appears between a
-domain name (above) and an organization name (below). E.g.
+<!ENTITY identity.connectionSecure "Conexión segura">
+<!ENTITY identity.connectionNotSecure "A conexión non é segura">
+<!ENTITY identity.connectionFile "Está páxina está almacenada no computador.">
+<!ENTITY identity.connectionVerified1 "Está conectado en modo seguro a este sitio, xestionado por:">
+<!ENTITY identity.connectionInternal "Esta é unha páxina segura de &brandShortName;.">
+<!ENTITY identity.insecureLoginForms "A súa identificación podería estar comprometida.">
 
-example.com
-which is run by
-Example Enterprises, Inc.
+<!-- Strings for connection state warnings. -->
+<!ENTITY identity.activeBlocked "&brandShortName; bloqueou partes desta páxina que non son seguras.">
+<!ENTITY identity.passiveLoaded "Partes desta páxina non son seguras (como as imaxes).">
+<!ENTITY identity.activeLoaded "Desactivou a protección nesta páxina.">
+<!ENTITY identity.weakEncryption "Esta páxina usa cifrado débil.">
 
-The layout of the identity dialog prevents combining this into a single string with
-substitution variables.  If it is difficult to translate the sense of the string
-with that structure, consider a translation which ignores the preceding domain and
-just addresses the organization to follow, e.g. "This site is run by " -->
-<!ENTITY identity.runBy "que pertence a">
+<!-- Strings for connection state warnings in the subview. -->
+<!ENTITY identity.description.insecure "A conexión con este sitio non é privada. A información que envíe podería ser visíbel por outros (como contrasinais, mensaxes, tarxetas de crédito, etc.).">
+<!ENTITY identity.description.insecureLoginForms "A información de identificación que introduciu nesta páxina non é segura e podería estar comprometida.">
+<!ENTITY identity.description.weakCipher "A conexión con este sitio web usa un cifrado débil e non é privada.">
+<!ENTITY identity.description.weakCipher2 "Outras persoas poden ver a súa información ou modificar o comportamento do sitio web.">
+<!ENTITY identity.description.activeBlocked "&brandShortName; bloqueou partes desta páxina que non son seguras.">
+<!ENTITY identity.description.passiveLoaded "A súa conexión non é privada e a información que comparte con este sitio podería ser visíbel por outros.">
+<!ENTITY identity.description.passiveLoaded2 "Este sitio web contén contido que non é seguro (como as imaxes).">
+<!ENTITY identity.description.passiveLoaded3 "Aínda que &brandShortName; bloqueou algún contido, aínda hai contido na páxina que non é seguro (como as imaxes).">
+<!ENTITY identity.description.activeLoaded "Este sitio web contén contido que non é seguro (como os scripts) e a súa conexión non é privada.">
+<!ENTITY identity.description.activeLoaded2 "A información que comparte con este sitio podería ser visíbel por outros (como contrasinais, mensaxes, tarxetas de crédito, etc.).">
 
-<!ENTITY identity.moreInfoLinkText "Máis información…">
+<!ENTITY identity.enableMixedContentBlocking.label "Activar protección">
+<!ENTITY identity.enableMixedContentBlocking.accesskey "e">
+<!ENTITY identity.disableMixedContentBlocking.label "Desactivar a protección por agora">
+<!ENTITY identity.disableMixedContentBlocking.accesskey "D">
+<!ENTITY identity.learnMore "Obteña máis información">
+
+<!ENTITY identity.moreInfoLinkText2 "Máis información">
 
 <!ENTITY identity.permissions "Permisos">
-
-<!-- LOCALIZATION NOTE (identity.help.tooltip) : This string should be the
-     localized title of this SUMO article
-     https://support.mozilla.org/kb/how-do-i-tell-if-my-connection-is-secure -->
-<!ENTITY identity.help.tooltip "Como podo saber se a miña conexión cun sitio web é segura?">
+<!ENTITY identity.permissionsEmpty "Non lle concedeu ningún permiso especial a este sitio.">
 
 <!-- Name for the tabs toolbar as spoken by screen readers.
      The word "toolbar" is appended automatically and should not be contained below! -->
@@ -685,8 +747,8 @@ just addresses the organization to follow, e.g. "This site is run by " -->
 
 <!ENTITY syncBrand.shortName.label    "Sync">
 
-<!ENTITY syncSetup.label              "Configurar o &syncBrand.shortName.label;…">
-<!ENTITY syncSetup.accesskey          "g">
+<!ENTITY syncSignIn.label             "Acceder a &syncBrand.shortName.label;…">
+<!ENTITY syncSignIn.accesskey         "e">
 <!ENTITY syncSyncNowItem.label        "Sincronizar agora">
 <!ENTITY syncSyncNowItem.accesskey    "S">
 <!ENTITY syncReAuthItem.label         "Volver a conectarse a &syncBrand.shortName.label;…">
@@ -733,7 +795,6 @@ just addresses the organization to follow, e.g. "This site is run by " -->
 <!ENTITY customizeMode.lwthemes.menuManage.accessKey "X">
 <!ENTITY customizeMode.lwthemes.menuGetMore "Obter máis temas">
 <!ENTITY customizeMode.lwthemes.menuGetMore.accessKey "b">
-<!ENTITY customizeMode.deveditionTheme.label2 "Usar o tema Developer Edition">
 
 <!ENTITY social.chatBar.commandkey "c">
 <!ENTITY social.chatBar.label "Seleccionar as conversas">
@@ -748,20 +809,25 @@ just addresses the organization to follow, e.g. "This site is run by " -->
 <!ENTITY getUserMedia.selectCamera.accesskey "C">
 <!ENTITY getUserMedia.selectMicrophone.label "Micrófono a compartir:">
 <!ENTITY getUserMedia.selectMicrophone.accesskey "M">
+<!ENTITY getUserMedia.audioCapture.label "Compartirase o son da lapela.">
 <!ENTITY getUserMedia.allWindowsShared.message "Compartiranse todas as xanelas visíbeis na súa pantalla.">
 
-<!-- Bad Content Blocker Doorhanger Notification -->
-<!ENTITY badContentBlocked.moreinfo "A maioría dos sitios web traballarán correctamente incluso se o contido está bloqueado.">
-
-<!ENTITY mixedContentBlocked2.message "Contido inseguro">
-<!ENTITY mixedContentBlocked2.moreinfo "Bloqueáronse algúns elementos non cifrados neste sitio web.">
-<!ENTITY mixedContentBlocked2.learnMore "Obter máis información">
-<!ENTITY mixedContentBlocked2.options "Opcións">
-<!ENTITY mixedContentBlocked2.unblock.label "Desactivar a protección por agora">
-<!ENTITY mixedContentBlocked2.unblock.accesskey "D">
-<!ENTITY mixedContentBlocked2.block.label "Activar protección">
-<!ENTITY mixedContentBlocked2.block.accesskey "e">
-<!ENTITY mixedContentBlocked2.disabled.message "A protección está desactivada">
+<!ENTITY trackingProtection.title "Protección contra o seguimento">
+<!ENTITY trackingProtection.detectedBlocked3 "&brandShortName; está bloqueando partes da páxina que poden seguir a súa actividade de navegación.">
+<!ENTITY trackingProtection.detectedNotBlocked3 "Este sitio inclúe elementos que poden seguir a súa actividade de navegación. Ten a protección desactivada.">
+<!ENTITY trackingProtection.notDetected3 "Non se detectaron elementos de seguimento nesta páxina.">
+<!-- LOCALIZATION NOTE (trackingProtection.unblock.label, trackingProtection.unblock.accesskey):
+     The associated button with this label and accesskey is only shown when opening the control
+     center while looking at a site with trackers in NON-private browsing mode. -->
+<!ENTITY trackingProtection.unblock.label "Desactivar a protección para este sitio">
+<!ENTITY trackingProtection.unblock.accesskey "D">
+<!-- LOCALIZATION NOTE (trackingProtection.unblockPrivate.label, trackingProtection.unblockPrivate.accesskey):
+     The associated button with this label and accesskey is only shown when opening the control
+     center while looking at a site with trackers in PRIVATE browsing mode. -->
+<!ENTITY trackingProtection.unblockPrivate.label "Desactivar a protección para esta sesión">
+<!ENTITY trackingProtection.unblockPrivate.accesskey "D">
+<!ENTITY trackingProtection.block2.label "Activar a protección">
+<!ENTITY trackingProtection.block2.accesskey "e">
 
 <!ENTITY trackingContentBlocked.message "Seguimento">
 <!ENTITY trackingContentBlocked.moreinfo "Bloqueáronse partes da páxina que seguen a súa actividade en liña.">
@@ -790,16 +856,9 @@ just addresses the organization to follow, e.g. "This site is run by " -->
      a CSS length value. -->
 <!ENTITY pluginNotification.width "28em">
 
-<!ENTITY tabCrashed.header "Quebrou a lapela">
-<!ENTITY tabCrashed.message "Vaia, sentímolo. Tentouse amosar esta páxina web pero non está respondendo.">
-<!ENTITY tabCrashed.checkSendReport "Informe a &vendorShortName; sobre esta quebra para que poida arranxala.">
-<!ENTITY tabCrashed.tryAgain "Tentar de novo">
-
 <!ENTITY uiTour.infoPanel.close "Pechar">
 
 <!ENTITY appMenuSidebars.label         "Barras laterais">
-
-<!ENTITY switchToMetroCmd2.label       "Reiniciar en &brandShortName; para Windows 8 táctil">
 
 <!-- LOCALIZATION NOTE: (panicButton.view.mainTimeframeDesc, panicButton.view.5min, panicButton.view.2hr, panicButton.view.day):
      The .mainTimeframeDesc string combined with any of the 3 others is meant to form a complete sentence, e.g. "Forget the last: Five minutes".
@@ -826,43 +885,110 @@ just addresses the organization to follow, e.g. "This site is run by " -->
 <!ENTITY panicButton.thankyou.msg2                "Navegación segura!">
 <!ENTITY panicButton.thankyou.buttonlabel         "Grazas!">
 
-
-<!ENTITY browserToolboxCmd.commandkey "i">
-<!ENTITY emeLearnMoreContextMenu.accesskey        "D">
-
-<!ENTITY emeLearnMoreContextMenu.label            "Learn more about DRM…">
-<!ENTITY emeNotificationsDontAskAgain.accesskey   "D">
-<!ENTITY emeNotificationsDontAskAgain.label       "Don't ask me again">
-<!ENTITY emeNotificationsNotNow.accesskey         "N">
-<!ENTITY emeNotificationsNotNow.label             "Not now">
+<!ENTITY processHang.terminateScript.label        "Deter o script">
+<!ENTITY processHang.terminateScript.accessKey    "D">
+<!ENTITY processHang.debugScript.label            "Depurar o script">
 <!ENTITY processHang.debugScript.accessKey        "D">
-<!ENTITY processHang.debugScript.label            "Debug Script">
-<!ENTITY processHang.terminatePlugin.accessKey    "P">
-<!ENTITY processHang.terminatePlugin.label        "Kill Plugin">
-<!ENTITY processHang.terminateProcess.accessKey   "K">
-<!ENTITY processHang.terminateProcess.label       "Kill Web Process">
-<!ENTITY processHang.terminateScript.accessKey    "S">
+<!ENTITY processHang.terminatePlugin.label        "Matar o engadido">
+<!ENTITY processHang.terminatePlugin.accessKey    "g">
+<!ENTITY processHang.terminateProcess.label       "Matar o proceso web">
+<!ENTITY processHang.terminateProcess.accessKey   "w">
 
-<!ENTITY processHang.terminateScript.label        "Stop Script">
-<!ENTITY quitApplicationCmdMac2.label   "Quit &brandShorterName;">
-<!ENTITY quitApplicationCmdWin2.accesskey   "x">
+<!ENTITY emeLearnMoreContextMenu.label            "Obteña máis información sobre DRM…">
+<!ENTITY emeLearnMoreContextMenu.accesskey        "D">
+<!ENTITY emeNotificationsNotNow.label             "Agora non">
+<!ENTITY emeNotificationsNotNow.accesskey         "n">
+<!ENTITY emeNotificationsDontAskAgain.label       "Non preguntar de novo">
+<!ENTITY emeNotificationsDontAskAgain.accesskey   "d">
 
-<!ENTITY quitApplicationCmdWin2.label       "Exit">
-<!ENTITY quitApplicationCmdWin2.tooltip     "Exit &brandShorterName;">
+<!-- LOCALIZATION NOTE (saveToPocketCmd.label, saveLinkToPocketCmd.label, pocketMenuitem.label): Pocket is a brand name -->
+<!ENTITY saveToPocketCmd.label     "Gardar páxina en Pocket">
+<!ENTITY saveToPocketCmd.accesskey "k">
+<!ENTITY saveLinkToPocketCmd.label     "Gardar ligazón en Pocket">
+<!ENTITY saveLinkToPocketCmd.accesskey "o">
+<!ENTITY pocketMenuitem.label      "Ver a lista de Pocket">
 
-<!ENTITY readingList.label                        "Reading List">
-<!ENTITY readingList.showSidebar.label            "Show Reading List Sidebar">
-<!-- Pre-landed strings for bug 1123519 -->
-<!ENTITY readingList.sidebar.add.label            "Add to Reading List">
-<!ENTITY readingList.sidebar.add.tooltip          "Add this page to your Reading List">
-<!ENTITY readingList.sidebar.commandKey           "R">
-<!ENTITY readingList.sidebar.delete.tooltip       "Remove this from your Reading List">
-<!-- Pre-landed string for bug 1133662 -->
-<!ENTITY readingList.sidebar.emptyText            "Add articles to your Reading List to save them for later and find them easily when you need them.">
-<!-- Pre-landed string for bug 1124153 -->
-<!ENTITY readingList.sidebar.showMore.label       "Show more…">
-<!-- LOCALIZATION NOTE (searchWithHeader.label):
-     The wording of this string should be as close as possible to
-     searchFor.label and searchWith.label. This string will be used instead of
-     them when the user has not typed any keyword. -->
-<!ENTITY searchWithHeader.label       "Search with:">
+<!ENTITY appMenuRemoteTabs.fetching.label "Fetching Synced Tabs…">
+
+<!ENTITY appMenuRemoteTabs.label "Synced Tabs">
+<!-- LOCALIZATION NOTE (appMenuRemoteTabs.noclients.label): This is shown
+     when Sync is configured but this appears to be the only device attached to
+     the account. We also show links to download Firefox for android/ios. -->
+<!ENTITY appMenuRemoteTabs.noclients.label "Sign in to Firefox from your other devices to view their tabs here.">
+<!-- LOCALIZATION NOTE (appMenuRemoteTabs.notabs.label): This is shown beneath
+     the name of a device when that device has no open tabs -->
+<!ENTITY appMenuRemoteTabs.notabs.label "No open tabs">
+<!ENTITY appMenuRemoteTabs.notsignedin.label "Sign in to view a list of tabs from your other devices.">
+<!ENTITY appMenuRemoteTabs.openprefs.label "Sync Preferences">
+<!ENTITY appMenuRemoteTabs.sidebar.label "View Synced Tabs Sidebar">
+<!ENTITY appMenuRemoteTabs.signin.label "Sign in to Sync">
+<!-- LOCALIZATION NOTE (appMenuRemoteTabs.tabsnotsyncing.label): This is shown
+     when Sync is configured but syncing tabs is disabled. -->
+<!ENTITY appMenuRemoteTabs.tabsnotsyncing.label "Turn on tab syncing to view a list of tabs from your other devices.">
+<!ENTITY devtoolsServiceWorkers.accesskey  "k">
+
+<!ENTITY devtoolsServiceWorkers.label      "Service Workers">
+<!ENTITY feedsMenu2.label "Subscribe to This Page">
+<!ENTITY identity.insecureLoginForms2 "Logins entered on this page could be compromised.">
+<!ENTITY identity.removeCertException.accesskey "R">
+
+<!ENTITY identity.removeCertException.label "Remove Exception">
+<!ENTITY newUserContext.accesskey         "C">
+<!ENTITY newUserContext.label             "New Container Tab">
+<!ENTITY openLinkCmdInContainerTab.accesskey "C">
+<!ENTITY openLinkCmdInContainerTab.label "Open Link in New Container Tab">
+
+<!-- LOCALIZATION NOTE (syncTabsMenu3.label): This appears in the history menu -->
+<!ENTITY syncTabsMenu3.label     "Synced Tabs">
+<!ENTITY syncedTabs.context.bookmarkSingleTab.accesskey     "B">
+<!ENTITY syncedTabs.context.bookmarkSingleTab.label         "Bookmark This Tab…">
+<!ENTITY syncedTabs.context.openTab.accesskey               "O">
+
+<!ENTITY syncedTabs.context.openTab.label                   "Open This Tab">
+<!ENTITY syncedTabs.sidebar.fetching.label     "Fetching Synced Tabs…">
+
+<!ENTITY syncedTabs.sidebar.label              "Synced Tabs">
+<!ENTITY syncedTabs.sidebar.noclients.label    "Sign in to Firefox from your other devices to view their tabs here.">
+<!ENTITY syncedTabs.sidebar.notabs.label       "No open tabs">
+<!ENTITY syncedTabs.sidebar.notsignedin.label  "Sign in to view a list of tabs from your other devices.">
+<!ENTITY syncedTabs.sidebar.openprefs.label    "Open &syncBrand.shortName.label; Preferences">
+<!-- LOCALIZATION NOTE (syncedTabs.sidebar.tabsnotsyncing.label): This is shown
+     when Sync is configured but syncing tabs is disabled. -->
+<!ENTITY syncedTabs.sidebar.tabsnotsyncing.label       "Turn on tab syncing to view a list of tabs from your other devices.">
+<!ENTITY urlbar.addonsNotificationAnchor.label          "View the add-on install message">
+<!-- LOCALIZATION NOTE: all of the following urlbar NotificationAnchor.label strings are
+     used to provide accessible labels to users of assistive technology like screenreaders.
+     It is not possible to see them visually in the UI. -->
+<!ENTITY urlbar.defaultNotificationAnchor.label         "View a notification">
+<!ENTITY urlbar.emeNotificationAnchor.label             "Manage use of DRM software">
+<!ENTITY urlbar.geolocationNotificationAnchor.label     "View the location request">
+<!ENTITY urlbar.indexedDBNotificationAnchor.label       "View the app-offline storage message">
+<!ENTITY urlbar.loginFillNotificationAnchor.label       "Manage your login information">
+
+<!ENTITY urlbar.openHistoryPopup.tooltip                "Show history">
+<!ENTITY urlbar.passwordNotificationAnchor.label        "Check if you want to save your password">
+<!ENTITY urlbar.pluginsNotificationAnchor.label         "Manage plugin usage on this page">
+
+<!ENTITY urlbar.pointerLockNotificationAnchor.label     "Change whether the site can hide the pointer">
+<!ENTITY urlbar.servicesNotificationAnchor.label        "View the service install message">
+<!ENTITY urlbar.translateNotificationAnchor.label       "Translate this page">
+<!ENTITY urlbar.translatedNotificationAnchor.label      "Manage page translation">
+
+<!ENTITY urlbar.viewSiteInfo.label                      "View site information">
+<!ENTITY urlbar.webNotsNotificationAnchor3.label        "Change whether you can receive notifications from the site">
+
+<!ENTITY urlbar.webRTCShareDevicesNotificationAnchor.label      "Manage sharing your camera and/or microphone with the site">
+<!ENTITY urlbar.webRTCShareMicrophoneNotificationAnchor.label   "Manage sharing your microphone with the site">
+<!ENTITY urlbar.webRTCShareScreenNotificationAnchor.label       "Manage sharing your windows or screen with the site">
+<!ENTITY urlbar.webRTCSharingDevicesNotificationAnchor.label    "You are sharing your camera and/or microphone with the site">
+<!ENTITY urlbar.webRTCSharingMicrophoneNotificationAnchor.label "You are sharing your microphone with the site">
+<!ENTITY urlbar.webRTCSharingScreenNotificationAnchor.label     "You are sharing a window or your screen with the site">
+<!ENTITY urlbar.webappsNotificationAnchor.label         "View the app install message">
+<!ENTITY userContextBanking.accesskey     "B">
+<!ENTITY userContextBanking.label         "Banking">
+<!ENTITY userContextPersonal.accesskey    "P">
+<!ENTITY userContextPersonal.label        "Personal">
+<!ENTITY userContextShopping.accesskey    "S">
+<!ENTITY userContextShopping.label        "Shopping">
+<!ENTITY userContextWork.accesskey        "W">
+<!ENTITY userContextWork.label            "Work">

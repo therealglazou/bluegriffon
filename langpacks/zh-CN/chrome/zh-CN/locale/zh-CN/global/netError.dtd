@@ -4,8 +4,8 @@
 
 <!ENTITY loadError.label "页面载入出错">
 <!ENTITY retry.label "重试">
-<!-- Specific error messages -->
 
+<!-- Specific error messages -->
 
 <!ENTITY connectionFailure.title "连接失败">
 <!ENTITY connectionFailure.longDesc "<p>虽然此站点似乎有效，但浏览器无法建立连接到该站点。</p><ul><li>该站点是否暂时不可用？请稍后再试。</li><li>您是否也无法浏览其他站点呢？请检查您计算机的网络连接。</li><li>您的计算机或网络是否被防火墙、代理服务器保护？请尝试修正可能不正确的设置。</li></ul>">
@@ -38,7 +38,9 @@
 <!ENTITY contentEncodingError.longDesc "<p>您尝试查看的页面无法显示，因为它使用了无效的或者不支持的压缩格式。</p><ul><li>请联系网站的所有者，告知他们这个问题。</li></ul>">
 
 <!ENTITY unsafeContentType.title "不安全的文件类型">
-<!ENTITY unsafeContentType.longDesc " <ul>   <li>请联系网站所有者并告知该问题。</li> </ul> ">
+<!ENTITY unsafeContentType.longDesc "<ul> 
+<li>请联系网站所有者并告知该问题。</li> 
+</ul>">
 
 <!ENTITY netReset.title "连接被中断">
 <!ENTITY netReset.longDesc "<p>当连接握手时，到该站点的连接被断开。请重试</p>">
@@ -47,7 +49,7 @@
 <!ENTITY netTimeout.longDesc "<p>请求的站点在指定的时间内没有响应连接，因此浏览器停止了等待。</p><ul><li>该服务器是否过载或者暂时不可用？请稍后再试。</li><li>您是否也无法浏览其他站点呢？请检查您计算机的网络连接。</li><li>您的计算机或网络是否被防火墙、代理服务器保护？请尝试修正可能与网页浏览相关的不正确设置。</li><li>仍然不行？请联系您的网络管理员或者互联网服务提供商寻求援助。</li></ul>">
 
 <!ENTITY unknownProtocolFound.title "未知协议">
-<!ENTITY unknownProtocolFound.longDesc "<p>浏览器无法识别该地址的协议。（例如 <q>wxyz://</q>），因此浏览器无法连接至该站点。</p><ul><li>您是否尝试连接多媒体或其他非文字服务？请检查该站点确定是否有其它要求。</li><li>某些协议可能需要安装第三方插件，这样浏览器才能识别。</li></ul>">
+<!ENTITY unknownProtocolFound.longDesc "<p>浏览器无法识别该地址的协议。（例如 <q>wxyz://</q>），因此浏览器无法连接至该站点。</p><ul><li>您是否在尝试访问多媒体或其他非文字服务？请检查该站点是否有其他要求。</li><li>某些协议可能需要安装第三方软件或插件后浏览器才能识别。</li></ul>">
 
 <!ENTITY proxyConnectFailure.title "代理服务器拒绝连接">
 <!ENTITY proxyConnectFailure.longDesc "<p>浏览器被设置为使用代理服务器，但是该代理服务器拒绝了该连接。</p><ul><li>浏览器的代理服务器设置是否正确？请检查并重试。</li><li>该代理服务是否允许来自此网络的连接？</li><li>仍然不行？请联系您的网络管理员或者互联网服务提供商以寻求协助。</li></ul>">
@@ -71,12 +73,26 @@
 </ul>">
 
 <!ENTITY malwareBlocked.title "可疑的攻击站点！">
-<!ENTITY malwareBlocked.longDesc " <p>攻击站点尝试通过安装程序来盗取隐私数据、使用您的计算机攻击他人或者破坏您的系统。</p> <p>网站所有者若认为自己的站点被错误地报告为攻击站点，可以<a href='http://www.stopbadware.org/home/reviewinfo' >请求评审</a>。</p> ">
+<!ENTITY malwareBlocked.longDesc "<p>有攻击行为的站点尝试通过安装程序来窃取隐私数据、使用您的计算机攻击他人或者破坏您的系统。</p> 
+<p>网站所有者若认为自己的站点被错误地举报为攻击站点，可以<a href='http://www.stopbadware.org/home/reviewinfo' >申诉</a>。</p> ">
 
-<!ENTITY phishingBlocked.title "可疑的钓鱼网站！">
+<!ENTITY unwantedBlocked.title "疑似不受欢迎软件的网站！">
+<!ENTITY unwantedBlocked.longDesc "<p>提供不安全的软件的网页可能会诱导您安装诈骗软件，或以其他难以预料的方式损害您的系统。</p>">
+
+<!ENTITY phishingBlocked.title "疑似钓鱼网站！">
 <!ENTITY phishingBlocked.longDesc " <p>在本页面输入个人信息可能会导致账号被盗或其他危险。</p><p>这类钓鱼网站常含有被称为“钓鱼攻击”的诈骗行为，这些伪装的网页或邮件地址可能用来假冒成您信任的源地址以实施诈骗。</p> ">
 
-<!ENTITY cspBlocked.title "由于内容安全策略而被阻止">
+<!ENTITY forbiddenBlocked.title "禁止的站点">
+<!ENTITY forbiddenBlocked.longDesc "<p>浏览器阻止了此页面的加载，因为它被配置成需要阻止它。</p>
+">
+
+<!ENTITY securityOverride.linkText "或者，您可以添加一个例外…">
+<!ENTITY securityOverride.warningContent "
+<p>您不应该添加例外，如果你使用的是您不完全信任的互联网连接，或如果你不习惯看到此服务器的警告。</p>
+<p>如果你仍然想为此站点添加例外，可以在高级加密设置中这样做。</p>
+">
+
+<!ENTITY cspBlocked.title "由于内容安全策略而被拦截">
 <!ENTITY cspBlocked.longDesc "<p>浏览器阻止了这个页面的载入，因为该页面含有安全政策不允许的内容。</p>">
 
 <!ENTITY corruptedContentError.title "内容损坏错误">
@@ -84,10 +100,3 @@
 
 <!ENTITY remoteXUL.title "远程 XUL">
 <!ENTITY remoteXUL.longDesc "<p><ul><li>请联系网站拥有者告知这个问题。</li></ul></p>">
-<!-- Include app-specific error messages - do not change this in localization!
-     Some applications might override netErrorApp.dtd with their specific version,
-     this inclusion needs to be intact for that approach to work correctly.
-     Please, try to keep this at the end of the file. -->
-
-<!ENTITY % netErrorAppDTD SYSTEM "chrome://global/locale/netErrorApp.dtd">
-%netErrorAppDTD;

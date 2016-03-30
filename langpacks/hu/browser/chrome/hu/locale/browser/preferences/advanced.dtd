@@ -1,8 +1,8 @@
 <!-- This Source Code Form is subject to the terms of the Mozilla Public
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
-
 <!-- Note: each tab panel must contain unique accesskeys -->
+
 
 <!ENTITY generalTab.label                "Általános">
 
@@ -14,6 +14,8 @@
 <!ENTITY searchStartTyping.accesskey     "d">
 <!ENTITY blockAutoRefresh.label          "Figyelmeztetés, ha a webhely átirányítja vagy frissíti az oldalt">
 <!ENTITY blockAutoRefresh.accesskey      "w">
+<!ENTITY useOnScreenKeyboard.label       "Érintőbillentyűzet megjelenítése, ha szükséges">
+<!ENTITY useOnScreenKeyboard.accesskey   "r">
 
 <!ENTITY browsing.label                  "Böngészés">
 
@@ -26,25 +28,22 @@
 <!ENTITY checkSpelling.label             "Helyesírás-ellenőrzés beírás közben">
 <!ENTITY checkSpelling.accesskey         "H">
 
-<!ENTITY dataChoicesTab.label            "Adatválasztások">
+<!ENTITY dataChoicesTab.label            "Adatküldések">
 
-<!ENTITY healthReportSection.label       "&brandShortName; állapotjelentés">
 <!ENTITY healthReportDesc.label          "Segít megérteni a böngésző teljesítményét és adatokat oszt meg a &vendorShortName;val a böngésző állapotáról">
 <!ENTITY enableHealthReport.label        "A &brandShortName; állapotjelentés bekapcsolása">
 <!ENTITY enableHealthReport.accesskey    "b">
-<!ENTITY healthReportLearnMore.label     "További információ">
+<!ENTITY healthReportLearnMore.label     "További tudnivalók">
 
-<!ENTITY telemetrySection.label          "Telemetria">
 <!ENTITY telemetryDesc.label             "Adatokat küld a &vendorShortName;nak a böngésző teljesítményéről, a hardverről, a felhasználásról és az egyéni beállításokról, hogy a &brandShortName; jobb lehessen.">
-<!ENTITY enableTelemetry.label           "Telemetria bekapcsolása">
-<!ENTITY enableTelemetry.accesskey       "T">
-<!ENTITY telemetryLearnMore.label        "További információ">
+<!ENTITY enableTelemetryData.label       "További adatok (például Telemetria) megosztása">
+<!ENTITY enableTelemetryData.accesskey   "T">
+<!ENTITY telemetryLearnMore.label        "További tudnivalók">
 
-<!ENTITY crashReporterSection.label      "Hibajelentő">
 <!ENTITY crashReporterDesc.label         "A &brandShortName; hibajelentéseket küld, hogy a &vendorShortName; stabilabbá és biztonságosabbá tehesse a böngészőjét">
 <!ENTITY enableCrashReporter.label       "Hibajelentő bekapcsolása ">
 <!ENTITY enableCrashReporter.accesskey   "o">
-<!ENTITY crashReporterLearnMore.label    "További információ">
+<!ENTITY crashReporterLearnMore.label    "További tudnivalók">
 
 <!ENTITY networkTab.label                "Hálózat">
 
@@ -57,13 +56,13 @@
 <!ENTITY httpCache.label                 "Gyorsítótárazott webtartalom">
 
 <!ENTITY offlineStorage2.label           "Offline webtartalom és felhasználói adatok">
-
 <!-- LOCALIZATION NOTE:
   The entities limitCacheSizeBefore.label and limitCacheSizeAfter.label appear on a single
   line in preferences as follows:
 
   &limitCacheSizeBefore.label [textbox for cache size in MB] &limitCacheSizeAfter.label;
 -->
+
 <!ENTITY limitCacheSizeBefore.label      "Gyorsítótár korlátozása">
 <!ENTITY limitCacheSizeBefore.accesskey  "G">
 <!ENTITY limitCacheSizeAfter.label       "MB">
@@ -77,13 +76,8 @@
 <!ENTITY updateTab.label                 "Frissítés">
 
 <!ENTITY updateApp.label                 "&brandShortName; frissítések:">
-<!-- Note either updateAuto1 is used or (updateAutoMetro and updateAutoDesktop),
-     so re-using accesss key in updateAuto1 is OK. updateAutoDesktop can be found
-     in preferences.properties -->
 <!ENTITY updateAuto1.label               "Frissítések automatikus telepítése (ez ajánlott a maximális biztonság érdekében)">
-<!ENTITY updateAuto1.accesskey           "A">
-<!ENTITY updateAutoMetro.label           "Frissítések automatikus telepítése az asztali és a Windows 8 stílusú &brandShortName;ról">
-<!ENTITY updateAutoMetro.accesskey       "w">
+<!ENTITY updateAuto1.accesskey           "a">
 <!ENTITY updateCheck.label               "Frissítések keresése, de a telepítés kézzel történik">
 <!ENTITY updateCheck.accesskey           "k">
 <!ENTITY updateManual.label              "Ne legyen frissítve (nem ajánlott a biztonsági kockázat miatt">
@@ -91,8 +85,6 @@
 
 <!ENTITY updateAutoAddonWarn.label       "Figyelmeztetés, ha a kiegészítők elérhetetlenek lesznek emiatt">
 <!ENTITY updateAutoAddonWarn.accesskey   "F">
-
-<!ENTITY updateAutoMetroWarn.label       "(a Windows 8 stílusú &brandShortName; nem ellenőrzi a kiegészítők kompatibilitását)">
 
 <!ENTITY updateHistory.label             "Frissítési előzmények megjelenítése">
 <!ENTITY updateHistory.accesskey         "z">
@@ -102,7 +94,7 @@
 
 <!ENTITY updateOthers.label              "Automatikus frissítés:">
 <!ENTITY enableSearchUpdate.label        "Keresőszolgáltatások">
-<!ENTITY enableSearchUpdate.accesskey    "E">
+<!ENTITY enableSearchUpdate.accesskey    "e">
 
 <!ENTITY offlineNotify.label             "Figyelmeztetés, ha a webhely adatokat akar tárolni kapcsolat nélküli használatra">
 <!ENTITY offlineNotify.accesskey         "w">
@@ -116,6 +108,7 @@
 <!ENTITY offlineAppRemove.confirm        "Kapcsolat nélküli adatok eltávolítása">
 
 <!ENTITY certificateTab.label            "Tanúsítványok">
+<!ENTITY certSelection.label             "Kérések">
 <!ENTITY certSelection.description       "Ha a kiszolgáló elkéri a személyes tanúsítványt:">
 <!ENTITY certs.auto                      "Automatikus választás">
 <!ENTITY certs.auto.accesskey            "u">
@@ -126,8 +119,4 @@
 <!ENTITY viewCerts.label                 "Tanúsítványkezelő">
 <!ENTITY viewCerts.accesskey             "T">
 <!ENTITY viewSecurityDevices.label       "Adatvédelmi eszközök">
-<!ENTITY viewSecurityDevices.accesskey   "D">
-
-<!ENTITY certSelection.label             "Requests">
-<!ENTITY enableTelemetryData.accesskey   "T">
-<!ENTITY enableTelemetryData.label       "Share additional data (i.e., Telemetry)">
+<!ENTITY viewSecurityDevices.accesskey   "d">

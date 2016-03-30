@@ -10,29 +10,22 @@
 a replacement for the standard security certificate errors produced
 by NSS/PSM via netError.xhtml. -->
 
-<!ENTITY certerror.pagetitle  "Niet-beveiligde verbinding">
-<!ENTITY certerror.longpagetitle "Deze verbinding is niet beveiligd">
+<!ENTITY certerror.pagetitle1  "Niet-beveiligde verbinding">
+<!ENTITY certerror.longpagetitle1 "Uw verbinding is niet beveiligd">
 
-<!-- Localization note (certerror.introPara1) - The string "#1" will
-be replaced at runtime with the name of the server to which the user
+<!-- Localization note (certerror.introPara) - The text content of the span tag
+will be replaced at runtime with the name of the server to which the user
 was trying to connect. -->
-<!ENTITY certerror.introPara1 "U hebt &brandShortName; gevraagd een beveiligde verbinding
-op te zetten met <b>#1</b>, maar we kunnen niet bevestigen dat uw verbinding beveiligd is.">
-<!ENTITY certerror.introPara2 "Normaal gesproken zullen websites vertrouwde identificatie
-tonen wanneer u een beveiligde verbinding wilt opzetten, om te bewijzen dat u naar de
-juiste plek gaat. De identiteit van deze website kan echter niet worden bevestigd.">
+<!ENTITY certerror.introPara "De eigenaar van <span class='hostname'/> heeft zijn of haar website niet juist geconfigureerd. Om uw gegevens tegen diefstal te beschermen, heeft &brandShortName; geen verbinding met deze website gemaakt.">
+<!ENTITY certerror.returnToPreviousPage.label "Terug">
+<!ENTITY certerror.learnMore "Meer info…">
+<!ENTITY certerror.advanced.label "Geavanceerd">
 
-<!ENTITY certerror.whatShouldIDo.heading "Wat moet ik doen?">
-<!ENTITY certerror.whatShouldIDo.content "Als u doorgaans zonder problemen verbinding
-maakt met deze website, kan deze fout betekenen dat iemand de website probeert
-na te bootsen en kunt u beter niet verdergaan.">
 <!ENTITY certerror.whatShouldIDo.badStsCertExplanation "Deze website maakt gebruik van HTTP
 Strict Transport Security (HSTS) om aan te geven dat &brandShortName; alleen een beveiligde verbinding
-mag opzetten. Hierdoor is het niet mogelijk om een uitzondering voor dit certificaat toe
+mag maken. Hierdoor is het niet mogelijk om een uitzondering voor dit certificaat toe
 te voegen.">
-<!ENTITY certerror.getMeOutOfHere.label "Haal me hier vandaan!">
 
-<!ENTITY certerror.expert.heading "Ik begrijp de risico’s">
 <!ENTITY certerror.expert.content "Als u begrijpt wat er aan de hand is,
 kunt u &brandShortName; vertellen de identiteit van deze website te vertrouwen.
 <b>Zelfs als u de website vertrouwt, kan deze fout betekenen dat iemand met 
@@ -40,5 +33,6 @@ uw verbinding aan het knoeien is.</b>">
 <!ENTITY certerror.expert.contentPara2 "U kunt beter geen uitzondering toevoegen, tenzij
 u weet dat er een goede reden is dat deze website geen vertrouwde identificatie gebruikt.">
 <!ENTITY certerror.addException.label "Uitzondering toevoegen…">
+<!ENTITY certerror.copyToClipboard.label "Tekst naar klembord kopiëren">
 
-<!ENTITY certerror.technical.heading "Technische details">
+<!ENTITY errorReporting.automatic "Rapporteer fouten als deze om Mozilla te helpen onjuist geconfigureerde websites te herkennen">

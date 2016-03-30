@@ -2,17 +2,9 @@
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 
-<!-- LOCALIZATION NOTE : FILE This file contains the browser main menu items -->
-<!-- LOCALIZATION NOTE : FILE Do not translate commandkeys -->
-
-<!-- LOCALIZATION NOTE (mainWindow.title): DONT_TRANSLATE -->
-<!ENTITY mainWindow.title "&brandFullName;" >
-<!-- LOCALIZATION NOTE (mainWindow.titlemodifier) : DONT_TRANSLATE -->
-<!ENTITY mainWindow.titlemodifier "&brandFullName;" >
-<!-- LOCALIZATION NOTE (mainWindow.titlemodifiermenuseparator): DONT_TRANSLATE -->
-<!ENTITY mainWindow.titlemodifiermenuseparator " - " >
-<!-- LOCALIZATION NOTE (mainWindow.titlePrivateBrowsingSuffix): This will be appended to the window's title
-                                                                inside the private browsing mode -->
+<!ENTITY mainWindow.title "&brandFullName;">
+<!ENTITY mainWindow.titlemodifier "&brandFullName;">
+<!ENTITY mainWindow.titlemodifiermenuseparator " - ">
 <!ENTITY mainWindow.titlePrivateBrowsingSuffix "(tryb prywatny)">
 
 <!ENTITY appmenu.tooltip "Otwórz menu">
@@ -40,9 +32,6 @@ can reach it easily. -->
 <!ENTITY  pinTab.accesskey                   "n">
 <!ENTITY  unpinTab.label                     "Odepnij kartę">
 <!ENTITY  unpinTab.accesskey                 "n">
-<!ENTITY moveToGroup.label                   "Przenieś do grupy">
-<!ENTITY moveToGroup.accesskey               "e">
-<!ENTITY moveToNewGroup.label                "Nowa grupa">
 <!ENTITY  moveToNewWindow.label              "Przenieś do nowego okna">
 <!ENTITY  moveToNewWindow.accesskey          "o">
 <!ENTITY bookmarkAllTabs.label               "Dodaj zakładki do wszystkich kart…">
@@ -107,13 +96,11 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY showAllTabsCmd.accesskey "W">
 
 <!ENTITY fxaSignIn.label "Zaloguj się do &syncBrand.shortName.label;">
+<!ENTITY fxaSignedIn.tooltip "Otwórz ustawienia &syncBrand.shortName.label;">
 <!ENTITY fxaSignInError.label "Zaloguj się ponownie do &syncBrand.shortName.label;">
+<!ENTITY fxaUnverified.label "Zweryfikuj konto">
 <!ENTITY syncStartPanel2.heading "Włączono &syncBrand.shortName.label;">
 <!ENTITY syncStartPanel2.subTitle "&brandShortName; za moment rozpocznie synchronizację.">
-<!ENTITY syncErrorPanel.heading "Nie można połączyć się z &syncBrand.shortName.label;">
-<!ENTITY syncErrorPanel.subTitle "Zaloguj się, aby wznowić synchronizację.">
-<!ENTITY syncErrorPanel.signInButton.label "Zaloguj się">
-<!ENTITY syncErrorPanel.signInButton.accesskey "Z">
 
 <!ENTITY fullScreenMinimize.tooltip "Minimalizuj">
 <!ENTITY fullScreenRestore.tooltip "Przywróć">
@@ -122,10 +109,12 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY fullScreenAutohide.accesskey "U">
 <!ENTITY fullScreenExit.label "Opuść tryb pełnoekranowy">
 <!ENTITY fullScreenExit.accesskey "O">
-<!ENTITY fullscreenAllowButton.label "Zezwól">
-<!ENTITY fullscreenExitButton.label "Zabroń">
 
-<!ENTITY fullscreenExitHint2.value "Naciśnij ESC w dowolnej chwili, by wyjść.">
+<!ENTITY fullscreenWarning.beforeDomain.label "">
+<!ENTITY fullscreenWarning.afterDomain.label "działa teraz w trybie pełnoekranowym">
+<!ENTITY fullscreenWarning.generic.label "Dokument jest teraz wyświetlany w trybie pełnoekranowym">
+<!ENTITY exitDOMFullscreen.button "Opuść tryb pełnoekranowy (Esc)">
+<!ENTITY exitDOMFullscreenMac.button "Opuść tryb pełnoekranowy (esc)">
 <!ENTITY leaveDOMFullScreen.label "Opuść tryb pełnoekranowy">
 <!ENTITY leaveDOMFullScreen.accesskey "u">
 
@@ -144,17 +133,18 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY sharePageCmd.accesskey "U">
 <!ENTITY shareLink.label "Udostępnij ten odnośnik">
 <!ENTITY shareLink.accesskey "U">
-<!ENTITY shareImage.label "Udostępnij ten obrazek">
+<!ENTITY shareImage.label "Udostępnij ten obraz">
 <!ENTITY shareImage.accesskey "s">
 <!ENTITY shareSelect.label "Udostępnij zaznaczenie">
 <!ENTITY shareSelect.accesskey "s">
 <!ENTITY shareVideo.label "Udostępnij to wideo">
 <!ENTITY shareVideo.accesskey "s">
-<!ENTITY feedsMenu.label "Subskrybuj">
+<!ENTITY feedsMenu2.label "Subskrybuj tę stronę">
 <!ENTITY subscribeToPageMenupopup.label "Subskrybuj tę stronę">
 <!ENTITY subscribeToPageMenuitem.label "Subskrybuj tę stronę…">
 <!ENTITY addCurPagesCmd.label "Dodaj zakładki do wszystkich kart…">
 <!ENTITY showAllBookmarks2.label "Wyświetl wszystkie zakładki">
+<!ENTITY recentBookmarks.label "Ostatnio dodane">
 <!ENTITY unsortedBookmarksCmd.label "Zakładki nieposortowane">
 <!ENTITY bookmarksToolbarChevron.tooltip "Wyświetl więcej zakładek">
 
@@ -173,13 +163,33 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY printButton.label "Drukuj" >
 <!ENTITY printButton.tooltip "Drukuj bieżącą stronę">
 
-<!ENTITY locationItem.title "Adres" >
+<!ENTITY urlbar.viewSiteInfo.label "Wyświetl informacje o stronie">
+<!ENTITY urlbar.defaultNotificationAnchor.label "Wyświetl powiadomienie">
+<!ENTITY urlbar.geolocationNotificationAnchor.label "Wyświetl zapytanie o położenie">
+<!ENTITY urlbar.addonsNotificationAnchor.label "Wyświetl zapytanie o instalację dodatku">
+<!ENTITY urlbar.indexedDBNotificationAnchor.label "Wyświetl zapytanie o przechowywanie danych offline">
+<!ENTITY urlbar.loginFillNotificationAnchor.label "Zarządzaj danym logowania">
+<!ENTITY urlbar.passwordNotificationAnchor.label "Określ, czy zachować hasło">
+<!ENTITY urlbar.webappsNotificationAnchor.label "Wyświetl zapytanie instalacji aplikacji">
+<!ENTITY urlbar.pluginsNotificationAnchor.label "Zarządzaj wtyczkami używanymi na tej stronie">
+<!ENTITY urlbar.webNotsNotificationAnchor3.label "Określ, czy strona ma prawo wyświetlać powiadomienia">
+<!ENTITY urlbar.webRTCShareDevicesNotificationAnchor.label "Zarządzaj udostępnianiem tej stronie kamery i mikrofonu">
+<!ENTITY urlbar.webRTCSharingDevicesNotificationAnchor.label "Udostępniasz tej stronie obraz z kamery i/lub dźwięk dźwięk z mikrofonu">
+<!ENTITY urlbar.webRTCShareMicrophoneNotificationAnchor.label "Zarządzaj udostępnianiem mikrofonu tej stronie">
+<!ENTITY urlbar.webRTCSharingMicrophoneNotificationAnchor.label "Udostępniasz tej stronie dźwięk z mikrofonu">
+<!ENTITY urlbar.webRTCShareScreenNotificationAnchor.label "Zarządzaj udostępnianiem tej stronie okien i ekranu">
+<!ENTITY urlbar.webRTCSharingScreenNotificationAnchor.label "Udostępniasz tej stronie okno lub ekran">
+<!ENTITY urlbar.pointerLockNotificationAnchor.label "Określ, czy strona ma prawo ukrywać kursor">
+<!ENTITY urlbar.servicesNotificationAnchor.label "Wyświetl zapytanie instalacji usługi">
+<!ENTITY urlbar.translateNotificationAnchor.label "Przetłumacz tę stronę">
+<!ENTITY urlbar.translatedNotificationAnchor.label "Zarządzaj ustawieniami tłumaczenia">
+<!ENTITY urlbar.emeNotificationAnchor.label "Zarządzaj ustawieniami DRM">
+<!ENTITY urlbar.openHistoryPopup.tooltip "Wyświetl historię">
+
 <!ENTITY searchItem.title "Znajdź" >
 
 <!-- Toolbar items -->
 <!ENTITY homeButton.label             "Strona startowa" >
-
-<!ENTITY tabGroupsButton.label        "Grupy kart">
 
 <!ENTITY bookmarksButton.label          "Zakładki">
 <!ENTITY bookmarksCmd.commandkey        "b">
@@ -211,14 +221,15 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY addons.label		"Dodatki">
 <!ENTITY addons.accesskey		"D">
 <!ENTITY addons.commandkey            "A">
-<!ENTITY webapps.label "Aplikacje">
-<!ENTITY webapps.accesskey "A">
 
 <!ENTITY webDeveloperMenu.label       "Dla twórców witryn">
 <!ENTITY webDeveloperMenu.accesskey   "W">
 
 <!ENTITY devToolsCmd.keycode          "VK_F12">
 <!ENTITY devToolsCmd.keytext          "F12">
+
+<!ENTITY devtoolsServiceWorkers.label "Wątki usługowe">
+<!ENTITY devtoolsServiceWorkers.accesskey "u">
 
 <!ENTITY devtoolsConnect.label "Połącz…">
 <!ENTITY devtoolsConnect.accesskey "P">
@@ -260,11 +271,10 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY browserToolboxMenu.accesskey "d">
 <!ENTITY browserToolboxCmd.commandkey "i">
 <!ENTITY browserContentToolboxMenu.label "Narzędzia treści przeglądarki">
+<!ENTITY browserContentToolboxMenu.accesskey "t">
 <!ENTITY devToolbarCloseButton.tooltiptext "Zamknij pasek programisty">
 <!ENTITY devToolbarMenu.label              "Pasek programisty">
 <!ENTITY devToolbarMenu.accesskey          "P">
-<!ENTITY devAppMgrMenu.label "Menedżer aplikacji">
-<!ENTITY devAppMgrMenu.accesskey "a">
 <!ENTITY webide.label "WebIDE">
 <!ENTITY webide.accesskey "W">
 <!ENTITY webide.keycode "VK_F8">
@@ -283,11 +293,22 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 
 <!ENTITY fileMenu.label "Plik" >
 <!ENTITY fileMenu.accesskey "P" >
+<!ENTITY newUserContext.label "Nowa karta z kontekstem">
+<!ENTITY newUserContext.accesskey "k">
+<!ENTITY userContextPersonal.label "Osobiste">
+<!ENTITY userContextPersonal.accesskey "O">
+<!ENTITY userContextWork.label "Praca">
+<!ENTITY userContextWork.accesskey "P">
+<!ENTITY userContextBanking.label "Bankowość">
+<!ENTITY userContextBanking.accesskey "B">
+<!ENTITY userContextShopping.label "Zakupy">
+<!ENTITY userContextShopping.accesskey "Z">
 <!ENTITY newNavigatorCmd.label "Nowe okno" >
 <!ENTITY newNavigatorCmd.key "N" >
 <!ENTITY newNavigatorCmd.accesskey "N" >
 <!ENTITY newPrivateWindow.label     "Nowe okno prywatne">
 <!ENTITY newPrivateWindow.accesskey "p">
+<!ENTITY newNonRemoteWindow.label "Nowe okno z pojedynczym procesem">
 
 <!ENTITY editMenu.label "Edycja" >
 <!ENTITY editMenu.accesskey "E" >
@@ -323,8 +344,6 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 
 <!ENTITY viewMenu.label "Widok" >
 <!ENTITY viewMenu.accesskey "W" >
-<!ENTITY viewTabGroups.label            "Grupy kart">
-<!ENTITY viewTabGroups.accesskey        "G">
 <!ENTITY viewToolbarsMenu.label "Paski narzędzi" >
 <!ENTITY viewToolbarsMenu.accesskey "P" >
 <!ENTITY viewSidebarMenu.label "Panel boczny" >
@@ -353,6 +372,16 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY appMenuHistory.viewSidebar.label "Wyświetl historię w panelu bocznym">
 <!ENTITY appMenuHelp.tooltip "Pomoc">
 
+<!ENTITY appMenuRemoteTabs.label "Karty z innych urządzeń">
+<!ENTITY appMenuRemoteTabs.fetching.label "Pobieranie listy kart…">
+<!ENTITY appMenuRemoteTabs.notabs.label "Brak otwartych kart">
+<!ENTITY appMenuRemoteTabs.tabsnotsyncing.label "Włącz synchronizację kart, aby wyświetlić ich listę z innych urządzeń.">
+<!ENTITY appMenuRemoteTabs.noclients.label "Zaloguj się na innych urządzeniach, aby wyświetlić tutaj listę otwartych na nich kart.">
+<!ENTITY appMenuRemoteTabs.openprefs.label "Ustawienia synchronizacji">
+<!ENTITY appMenuRemoteTabs.notsignedin.label "Zaloguj się, aby wyświetlić tutaj listę kart z innych urządzeń.">
+<!ENTITY appMenuRemoteTabs.signin.label "Zaloguj się do synchronizacji">
+<!ENTITY appMenuRemoteTabs.sidebar.label "Wyświetl karty z innych urządzeń w panelu bocznym">
+
 <!ENTITY customizeMenu.addToToolbar.label "Dodaj do paska narzędzi">
 <!ENTITY customizeMenu.addToToolbar.accesskey "D">
 <!ENTITY customizeMenu.addToPanel.label "Dodaj do menu">
@@ -373,16 +402,32 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY urlbar.accesskey "d" >
 <!ENTITY urlbar.switchToTab.label     "Przełącz na kartę:">
 
+<!ENTITY urlbar.searchSuggestionsNotification.question "Czy wyświetlać w podpowiedziach paska adresu podpowiedzi dostarczane przez wyszukiwarki?">
+<!ENTITY urlbar.searchSuggestionsNotification.learnMore "Więcej informacji…">
+<!ENTITY urlbar.searchSuggestionsNotification.learnMore.accesskey "W">
+<!ENTITY urlbar.searchSuggestionsNotification.disable "Nie">
+<!ENTITY urlbar.searchSuggestionsNotification.disable.accesskey "N">
+<!ENTITY urlbar.searchSuggestionsNotification.enable "Tak">
+<!ENTITY urlbar.searchSuggestionsNotification.enable.accesskey "T">
+
 <!ENTITY searchFocus.commandkey       "k">
 <!ENTITY searchFocus.commandkey2      "e">
 <!ENTITY searchFocusUnix.commandkey   "j">
 
+<!ENTITY contentSearchInput.label "Pole wyszukiwania">
+<!ENTITY contentSearchSubmit.label "Szukaj">
+
 <!ENTITY searchFor.label "Wyszukaj „">
 <!ENTITY searchWith.label "” z:">
-<!ENTITY searchWithHeader.label "Szukaj z:">
+<!ENTITY search.label "Szukaj z ">
+<!ENTITY searchAfter.label "">
+<!ENTITY searchWithHeader.label "Szukaj z">
 <!ENTITY changeSearchSettings.button "Zmień ustawienia wyszukiwania">
 
-<!ENTITY tabView.commandkey           "e">
+<!ENTITY searchInNewTab.label "Szukaj w nowej karcie">
+<!ENTITY searchInNewTab.accesskey "S">
+<!ENTITY searchSetAsDefault.label "Ustaw jako domyślną wyszukiwarkę">
+<!ENTITY searchSetAsDefault.accesskey "U">
 
 <!ENTITY openLinkCmdInTab.label "Otwórz odnośnik w nowej karcie" >
 <!ENTITY openLinkCmdInTab.accesskey "j" >
@@ -396,6 +441,8 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY openFrameCmdInTab.accesskey "j" >
 <!ENTITY openFrameCmd.label "Otwórz ramkę w nowym oknie" >
 <!ENTITY openFrameCmd.accesskey "n" >
+<!ENTITY openLinkCmdInContainerTab.label "Otwórz odnośnik w nowej karcie w nowym kontenerze">
+<!ENTITY openLinkCmdInContainerTab.accesskey "k">
 <!ENTITY showOnlyThisFrameCmd.label "Pokaż tylko tę ramkę" >
 <!ENTITY showOnlyThisFrameCmd.accesskey "r" >
 <!ENTITY reloadCmd.commandkey "r" >
@@ -414,17 +461,17 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY viewPageInfoCmd.accesskey "I" >
 <!ENTITY viewFrameInfoCmd.label "Pokaż informacje o ramce" >
 <!ENTITY viewFrameInfoCmd.accesskey "i" >
-<!ENTITY reloadImageCmd.label         "Odśwież obrazek">
+<!ENTITY reloadImageCmd.label "Odśwież obraz">
 <!ENTITY reloadImageCmd.accesskey     "O">
-<!ENTITY viewImageCmd.label           "Pokaż obrazek" >
+<!ENTITY viewImageCmd.label "Pokaż obraz">
 <!ENTITY viewImageCmd.accesskey       "P" >
-<!ENTITY viewImageInfoCmd.label       "Pokaż informacje o obrazku">
+<!ENTITY viewImageInfoCmd.label "Pokaż informacje o obrazie">
 <!ENTITY viewImageInfoCmd.accesskey   "f">
 <!ENTITY viewImageDescCmd.label       "Pokaż opis">
 <!ENTITY viewImageDescCmd.accesskey   "s">
 <!ENTITY viewVideoCmd.label           "Pokaż wideo">
 <!ENTITY viewVideoCmd.accesskey       "k">
-<!ENTITY viewBGImageCmd.label "Pokaż obrazek tła" >
+<!ENTITY viewBGImageCmd.label "Pokaż obraz tła">
 <!ENTITY viewBGImageCmd.accesskey "t" >
 <!ENTITY setDesktopBackgroundCmd.label "Ustaw jako tapetę…" >
 <!ENTITY setDesktopBackgroundCmd.accesskey "t" >
@@ -446,13 +493,13 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY printFrameCmd.accesskey      "u">
 <!ENTITY saveLinkCmd.label "Zapisz element docelowy jako…" >
 <!ENTITY saveLinkCmd.accesskey "s" >
-<!ENTITY saveImageCmd.label "Zapisz obrazek jako…" >
+<!ENTITY saveImageCmd.label "Zapisz obraz jako…">
 <!ENTITY saveImageCmd.accesskey "Z" >
 <!ENTITY saveVideoCmd.label           "Zapisz wideo jako…">
 <!ENTITY saveVideoCmd.accesskey       "s">
 <!ENTITY saveAudioCmd.label           "Zapisz dźwięk jako…">
 <!ENTITY saveAudioCmd.accesskey       "s">
-<!ENTITY emailImageCmd.label "Wyślij obrazek…">
+<!ENTITY emailImageCmd.label "Wyślij obraz…">
 <!ENTITY emailImageCmd.accesskey "o">
 <!ENTITY emailVideoCmd.label "Wyślij wideo…">
 <!ENTITY emailVideoCmd.accesskey "o">
@@ -466,9 +513,9 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY hidePluginCmd.accesskey      "U">
 <!ENTITY copyLinkCmd.label "Kopiuj adres odnośnika" >
 <!ENTITY copyLinkCmd.accesskey "K" >
-<!ENTITY copyImageCmd.label "Kopiuj adres obrazka" >
+<!ENTITY copyImageCmd.label "Kopiuj adres obrazu">
 <!ENTITY copyImageCmd.accesskey "b" >
-<!ENTITY copyImageContentsCmd.label	"Kopiuj obrazek">
+<!ENTITY copyImageContentsCmd.label "Kopiuj obraz">
 <!ENTITY copyImageContentsCmd.accesskey	"r">
 <!ENTITY copyVideoURLCmd.label        "Kopiuj adres wideo">
 <!ENTITY copyVideoURLCmd.accesskey    "u">
@@ -487,13 +534,10 @@ items are mutually exclusive. -->
 <!ENTITY mediaPlay.accesskey         "z">
 <!ENTITY mediaPause.label            "Wstrzymaj">
 <!ENTITY mediaPause.accesskey        "W">
-<!-- LOCALIZATION NOTE: The access keys for "Mute" and
-"Unmute" are the same because the two context-menu
-items are mutually exclusive. -->
 <!ENTITY mediaMute.label             "Wycisz">
 <!ENTITY mediaMute.accesskey         "c">
-<!ENTITY mediaUnmute.label           "Przywróć głośność">
-<!ENTITY mediaUnmute.accesskey       "P">
+<!ENTITY mediaUnmute.label "Włącz dźwięk">
+<!ENTITY mediaUnmute.accesskey "c">
 <!ENTITY mediaPlaybackRate.label     "Szybkość odtwarzania">
 <!ENTITY mediaPlaybackRate.accesskey "b">
 <!ENTITY mediaPlaybackRate050x.label "Zwolnione tempo (0.5×)">
@@ -525,7 +569,7 @@ items are mutually exclusive. -->
 <!ENTITY videoShowStats.accesskey    "t">
 <!ENTITY videoHideStats.label        "Ukryj statystyki">
 <!ENTITY videoHideStats.accesskey    "t">
-    
+
 <!-- LOCALIZATION NOTE :
 fullZoomEnlargeCmd.commandkey3, fullZoomReduceCmd.commandkey2 and 
 fullZoomResetCmd.commandkey2 are alternative acceleration keys for zoom.
@@ -570,6 +614,8 @@ you can use these alternative items. Otherwise, their values should be empty. --
 <!ENTITY closeCmd.key "W" >
 <!ENTITY closeCmd.accesskey "Z" >
 
+<!ENTITY toggleMuteCmd.key "M">
+
 <!ENTITY pageStyleMenu.label "Styl strony">
 <!ENTITY pageStyleMenu.accesskey "S">
 <!ENTITY pageStyleNoStyle.label "Ignoruj style">
@@ -607,40 +653,66 @@ you can use these alternative items. Otherwise, their values should be empty. --
 <!ENTITY spellAddDictionaries.accesskey "o">
 
 <!ENTITY editBookmark.done.label                     "Gotowe">
-<!ENTITY editBookmark.cancel.label                   "Anuluj">
 <!ENTITY editBookmark.removeBookmark.accessKey       "U">
 
-<!ENTITY identity.unverifiedsite2 "Ta witryna nie dostarcza informacji o swej tożsamości.">
-<!ENTITY identity.connectedTo "Połączono z witryną">
-<!-- Localization note (identity.runBy) : This string appears between a
-domain name (above) and an organization name (below). E.g.
+<!ENTITY identity.connectionSecure "Zabezpieczone połączenie">
+<!ENTITY identity.connectionNotSecure "Połączenie nie jest bezpieczne">
+<!ENTITY identity.connectionFile "Strona wczytana z tego komputera">
+<!ENTITY identity.connectionVerified1 "Połączenie bezpieczne, strona prowadzona przez:">
+<!ENTITY identity.connectionInternal "To jest strona programu &brandShortName;.">
+<!ENTITY identity.insecureLoginForms2 "Dane logowania wprowadzone na tej stronie nie są chronione">
 
-example.com
-which is run by
-Example Enterprises, Inc.
+<!ENTITY identity.activeBlocked "&brandShortName; zablokował elementy tej strony, które nie były przesłane w sposób bezpieczny.">
+<!ENTITY identity.passiveLoaded "Niektóre elementy tej strony (np. obrazy) nie były przesłane w sposób bezpieczny.">
+<!ENTITY identity.activeLoaded "Ochrona na tej stronie została wyłączona przez użytkownika.">
+<!ENTITY identity.weakEncryption "Strona używa słabego szyfrowania.">
 
-The layout of the identity dialog prevents combining this into a single string with
-substitution variables.  If it is difficult to translate the sense of the string
-with that structure, consider a translation which ignores the preceding domain and
-just addresses the organization to follow, e.g. "This site is run by " -->
-<!ENTITY identity.runBy "prowadzoną przez">
+<!ENTITY identity.description.insecure "Prywatność podczas łączenia się z tą stroną nie jest chroniona. Przesyłane informacje (np. hasła, wiadomości, numery kart) mogą być dostępne dla innych.">
+<!ENTITY identity.description.insecureLoginForms "Dane logowania wprowadzone na tej stronie nie są bezpieczne i mogą być dostępne dla innych.">
+<!ENTITY identity.description.weakCipher "Połączenie z tą stroną nie zapewnia prywatności, ponieważ szyfrowanie nie jest wystarczające.">
+<!ENTITY identity.description.weakCipher2 "Informacje na stronie mogą być dostępne dla innych a jej działanie modyfikowane.">
+<!ENTITY identity.description.activeBlocked "&brandShortName; zablokował elementy tej strony, które nie były przesłane w sposób bezpieczny.">
+<!ENTITY identity.description.passiveLoaded "Połączenie z tą stroną nie zapewnia prywatności a przesyłane informacje mogą być dostępne dla innych.">
+<!ENTITY identity.description.passiveLoaded2 "Niektóre elementy tej strony (np. obrazy) nie były przesłane w sposób bezpieczny.">
+<!ENTITY identity.description.passiveLoaded3 "&brandShortName; zablokował niektóre elementy strony, mimo to nie wszystkie pozostałe elementy były przesłane w sposób bezpieczny (np. obrazy).">
+<!ENTITY identity.description.activeLoaded "Strona zawiera elementy, które nie były przesłane w sposób bezpieczny (np. skrypty) i połączenie z nią nie zapewnia prywatności.">
+<!ENTITY identity.description.activeLoaded2 "Przesyłane informacje (np. hasła, wiadomości, numery kart) mogą być dostępne dla innych.">
 
-<!ENTITY identity.moreInfoLinkText "Więcej informacji…">
+<!ENTITY identity.enableMixedContentBlocking.label "Włącz ochronę">
+<!ENTITY identity.enableMixedContentBlocking.accesskey "W">
+<!ENTITY identity.disableMixedContentBlocking.label "Tymczasowo wyłącz ochronę">
+<!ENTITY identity.disableMixedContentBlocking.accesskey "T">
+<!ENTITY identity.learnMore "Więcej informacji">
 
+<!ENTITY identity.removeCertException.label "Usuń wyjątek">
+<!ENTITY identity.removeCertException.accesskey "U">
+
+<!ENTITY identity.moreInfoLinkText2 "Więcej informacji…">
 <!ENTITY identity.permissions "Uprawnienia">
-<!ENTITY identity.help.tooltip "Jak określić, czy połączenie ze stroną jest bezpieczne?">
+<!ENTITY identity.permissionsEmpty "Strona korzysta z domyślnych uprawnień.">
 
 <!-- Name for the tabs toolbar as spoken by screen readers.
      The word "toolbar" is appended automatically and should not be contained below! -->
 <!ENTITY tabsToolbar.label "Karty przeglądarki">
 
-<!-- LOCALIZATION NOTE (syncTabsMenu.label): This appears in the history menu -->
-<!ENTITY syncTabsMenu2.label     "Karty z innych urządzeń">
+<!ENTITY syncTabsMenu3.label "Karty z innych urządzeń">
 
-<!ENTITY syncBrand.shortName.label  "Sync">
+<!ENTITY syncedTabs.sidebar.label "Karty z innych urządzeń">
+<!ENTITY syncedTabs.sidebar.fetching.label "Pobieranie listy kart z innych urządzeń…">
+<!ENTITY syncedTabs.sidebar.noclients.label "Zaloguj się w Firefoksie na innym urządzeniu, aby wyświetlić tutaj listę otwartych na nim kart.">
+<!ENTITY syncedTabs.sidebar.notsignedin.label "Zaloguj się, aby wyświetlić listę kart z innych urządzeń.">
+<!ENTITY syncedTabs.sidebar.notabs.label "Brak otwartych kart">
+<!ENTITY syncedTabs.sidebar.openprefs.label "Otwórz ustawienia synchronizacji">
+<!ENTITY syncedTabs.sidebar.tabsnotsyncing.label "Włącz synchronizację kart, aby wyświetlać listę otwartych na innych urządzeniach.">
 
-<!ENTITY syncSetup.label              "Skonfiguruj usługę &syncBrand.shortName.label;…">
-<!ENTITY syncSetup.accesskey          "S">
+<!ENTITY syncedTabs.context.openTab.label "Otwórz kartę">
+<!ENTITY syncedTabs.context.openTab.accesskey "O">
+<!ENTITY syncedTabs.context.bookmarkSingleTab.label "Dodaj zakładkę do tej karty…">
+<!ENTITY syncedTabs.context.bookmarkSingleTab.accesskey "D">
+
+<!ENTITY syncBrand.shortName.label "Firefox Sync">
+<!ENTITY syncSignIn.label "Zaloguj się do &syncBrand.shortName.label;…">
+<!ENTITY syncSignIn.accesskey "s">
 <!ENTITY syncSyncNowItem.label        "Synchronizuj teraz">
 <!ENTITY syncSyncNowItem.accesskey    "S">
 <!ENTITY syncReAuthItem.label "Zaloguj się ponownie do &syncBrand.shortName.label;…">
@@ -663,8 +735,8 @@ just addresses the organization to follow, e.g. "This site is run by " -->
 <!ENTITY social.activated.description "Usługi dostarczane przez <label/> zostały włączone. Można zmienić ustawienia dla tych usług w <label class='text-link'>Menedżerze dodatków</label>.">
 <!ENTITY social.activated.undo.label "Cofnij to!">
 <!ENTITY social.activated.undo.accesskey "C">
-<!ENTITY social.learnMore.label "Dowiedz się więcej…">
-<!ENTITY social.learnMore.accesskey "D">
+<!ENTITY social.learnMore.label "Więcej informacji…">
+<!ENTITY social.learnMore.accesskey "W">
 <!ENTITY social.closeNotificationItem.label "Nie teraz">
 
 <!ENTITY social.directory.label "Katalog aktywowania">
@@ -673,7 +745,6 @@ just addresses the organization to follow, e.g. "This site is run by " -->
 <!ENTITY social.directory.introText "Wybierz serwis, by dodać go do programu &brandShortName;.">
 <!ENTITY social.directory.viewmore.text "Więcej">
 
-<!ENTITY customizeMode.tabTitle "Dostosowywanie programu &brandShortName;">
 <!ENTITY customizeMode.menuAndToolbars.header2 "Dodatkowe funkcje i opcje">
 <!ENTITY customizeMode.menuAndToolbars.empty "Jeszcze więcej narzędzi?">
 <!ENTITY customizeMode.menuAndToolbars.emptyLink "Możesz wybierać spośród tysięcy dodatków">
@@ -687,7 +758,6 @@ just addresses the organization to follow, e.g. "This site is run by " -->
 <!ENTITY customizeMode.lwthemes.menuManage.accessKey "Z">
 <!ENTITY customizeMode.lwthemes.menuGetMore "Pobierz więcej">
 <!ENTITY customizeMode.lwthemes.menuGetMore.accessKey "P">
-<!ENTITY customizeMode.deveditionTheme.label2 "Użyj motywu programu Firefox Developer Edition">
 
 <!ENTITY social.chatBar.commandkey "c">
 <!ENTITY social.chatBar.label "Przenieś zaznaczenie do czatów">
@@ -702,19 +772,19 @@ just addresses the organization to follow, e.g. "This site is run by " -->
 <!ENTITY getUserMedia.selectCamera.accesskey "K">
 <!ENTITY getUserMedia.selectMicrophone.label "Mikrofon do udostępnienia:">
 <!ENTITY getUserMedia.selectMicrophone.accesskey "M">
+<!ENTITY getUserMedia.audioCapture.label "Dźwięk z karty będzie udostępniany.">
 <!ENTITY getUserMedia.allWindowsShared.message "Wszystkie widoczne na ekranie okna zostaną udostępnione.">
 
-<!ENTITY badContentBlocked.moreinfo "Większość stron będzie działać prawidłowo nawet, gdy blokowane są treści.">
-
-<!ENTITY mixedContentBlocked2.message "Niezabezpieczone treści">
-<!ENTITY mixedContentBlocked2.moreinfo "Niektóre niezaszyfrowane elementy tej strony zostały zablokowane.">
-<!ENTITY mixedContentBlocked2.learnMore "Więcej informacji">
-<!ENTITY mixedContentBlocked2.options "Ustawienia">
-<!ENTITY mixedContentBlocked2.unblock.label "Tymczasowo wyłącz ochronę">
-<!ENTITY mixedContentBlocked2.unblock.accesskey "T">
-<!ENTITY mixedContentBlocked2.block.label "Włącz ochronę">
-<!ENTITY mixedContentBlocked2.block.accesskey "W">
-<!ENTITY mixedContentBlocked2.disabled.message "Ochrona została wyłączona">
+<!ENTITY trackingProtection.title "Ochrona przed śledzeniem">
+<!ENTITY trackingProtection.detectedBlocked3 "&brandShortName; blokuje elementy strony mogące śledzić Twoją aktywność w sieci.">
+<!ENTITY trackingProtection.detectedNotBlocked3 "Strona zawiera elementy mogące śledzić Twoją aktywność w sieci, jednak ochrona przed nimi została wyłączona.">
+<!ENTITY trackingProtection.notDetected3 "Nie wykryto elementów śledzących aktywność użytkownika na tej stronie.">
+<!ENTITY trackingProtection.unblock.label "Wyłącz ochronę dla tej strony">
+<!ENTITY trackingProtection.unblock.accesskey "W">
+<!ENTITY trackingProtection.unblockPrivate.label "Wyłącz ochronę w tym oknie prywatnym">
+<!ENTITY trackingProtection.unblockPrivate.accesskey "W">
+<!ENTITY trackingProtection.block2.label "Włącz ochronę dla tej strony">
+<!ENTITY trackingProtection.block2.accesskey "W">
 
 <!ENTITY trackingContentBlocked.message "Śledzenie">
 <!ENTITY trackingContentBlocked.moreinfo "Części strony odpowiedzialne za śledzenie aktywności użytkowników zostały zablokowane.">
@@ -726,7 +796,7 @@ just addresses the organization to follow, e.g. "This site is run by " -->
 <!ENTITY trackingContentBlocked.block.accesskey "W">
 <!ENTITY trackingContentBlocked.disabled.message "Ochrona przed śledzeniem jest wyłączona">
 
-<!ENTITY pointerLock.notification.message "Naciśnij ESC w dowolnej chwili, aby wyświetlić go ponownie.">
+<!ENTITY pointerLock.notification.message "Naciśnij Esc w dowolnej chwili, aby wyświetlić go ponownie.">
 
 <!ENTITY pluginNotification.showAll.label "Wyświetl wszystkie">
 <!ENTITY pluginNotification.showAll.accesskey "W">
@@ -740,7 +810,6 @@ just addresses the organization to follow, e.g. "This site is run by " -->
 <!ENTITY uiTour.infoPanel.close "Zamknij">
 
 <!ENTITY appMenuSidebars.label "Panele boczne">
-<!ENTITY switchToMetroCmd2.label "Przejdź do programu &brandShortName; w stylu Windows 8 Touch">
 
 <!ENTITY panicButton.view.mainTimeframeDesc "Wyczyść historię przeglądania ostatnich:">
 <!ENTITY panicButton.view.5min "Pięciu minut">
@@ -751,33 +820,11 @@ just addresses the organization to follow, e.g. "This site is run by " -->
 <!ENTITY panicButton.view.deleteHistory "Usunięcie ostatniej <html:strong>historii</html:strong>">
 <!ENTITY panicButton.view.deleteTabsAndWindows "Zamknięcie wszystkich <html:strong>kart</html:strong> i <html:strong>okien</html:strong>">
 <!ENTITY panicButton.view.openNewWindow "Otworzenie nowego okna">
-<!ENTITY panicButton.view.undoWarning "Tej operacji nie można cofnąć.">
+<!ENTITY panicButton.view.undoWarning "Tej czynności nie można cofnąć.">
 <!ENTITY panicButton.view.forgetButton "Wyczyść!">
 <!ENTITY panicButton.thankyou.msg1 "Historia ostatniego przeglądania została wyczyszczona.">
 <!ENTITY panicButton.thankyou.msg2 "Bezpiecznego przeglądania!">
 <!ENTITY panicButton.thankyou.buttonlabel "Dzięki!">
 
-<!ENTITY processHang.terminateScript.label "Zatrzymaj skrypt">
-<!ENTITY processHang.terminateScript.accessKey "Z">
-<!ENTITY processHang.debugScript.label "Debuguj Skrypt">
-<!ENTITY processHang.debugScript.accessKey "D">
-<!ENTITY processHang.terminatePlugin.label "Zabij wtyczkę">
-<!ENTITY processHang.terminatePlugin.accessKey "w">
-<!ENTITY processHang.terminateProcess.label "Zabij proces">
-<!ENTITY processHang.terminateProcess.accessKey "s">
-
-<!ENTITY emeLearnMoreContextMenu.label "Dowiedz się więcej o DRM…">
+<!ENTITY emeLearnMoreContextMenu.label "Więcej informacji o DRM…">
 <!ENTITY emeLearnMoreContextMenu.accesskey "D">
-<!ENTITY emeNotificationsNotNow.label "Zapytaj później">
-<!ENTITY emeNotificationsNotNow.accesskey "Z">
-<!ENTITY emeNotificationsDontAskAgain.label "Nie pytaj ponownie">
-<!ENTITY emeNotificationsDontAskAgain.accesskey "e">
-
-<!ENTITY readingList.label "Czytelnia">
-<!ENTITY readingList.sidebar.commandKey "R">
-<!ENTITY readingList.showSidebar.label "Pokaż pasek boczny czytelni">
-<!ENTITY readingList.sidebar.showMore.label "Wyświetl więcej…">
-<!ENTITY readingList.sidebar.emptyText "Dodawaj artykuły do czytelni, aby zachować je na później i łatwo później odnajdywać.">
-<!ENTITY readingList.sidebar.delete.tooltip "Usuń z czytelni">
-<!ENTITY readingList.sidebar.add.label "Dodaj do czytelni">
-<!ENTITY readingList.sidebar.add.tooltip "Dodaj tę stronę do czytelni">

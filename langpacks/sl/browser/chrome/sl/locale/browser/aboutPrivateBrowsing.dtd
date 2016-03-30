@@ -2,22 +2,54 @@
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 
-<!ENTITY aboutPrivateBrowsing.title            "Uporabljate zasebno brskanje">
-<!ENTITY aboutPrivateBrowsing.title.normal     "Odprem zasebno okno?">
-
-<!ENTITY aboutPrivateBrowsing.subtitle         "&brandShortName; za to okno ne bo hranil zgodovine.">
-<!ENTITY aboutPrivateBrowsing.subtitle.normal  "&brandShortName; za zasebna okna ne bo hranil zgodovine.">
-
-<!ENTITY aboutPrivateBrowsing.description      "To vključuje zgodovino brskanja, zgodovino iskanja, zgodovino prenosov, zgodovino spletnih obrazcev, piškotke in začasne datoteke. Prenesene datoteke in ustvarjeni zaznamki pa se bodo ohranili.">
-
 <!ENTITY aboutPrivateBrowsing.notPrivate       "Trenutno niste v zasebnem oknu.">
-
-<!ENTITY aboutPrivateBrowsing.moreInfo         "Kljub temu da ta računalnik ne bo hranil zgodovine brskanja, lahko vaš delodajalec ali ponudnik internetnih storitev še vedno sledi stranem, ki ste jih obiskali.">
-<!ENTITY aboutPrivateBrowsing.learnMore        "Več o tem.">
-
 <!ENTITY privatebrowsingpage.openPrivateWindow.label "Odpri zasebno okno">
 <!ENTITY privatebrowsingpage.openPrivateWindow.accesskey "Z">
 
-<!-- TO BE REMOVED POST-AUSTRALIS --> 
-<!-- LOCALIZATION NOTE (privatebrowsingpage.howToStart3): please leave &basePBMenu.label; intact in the translation -->
-<!ENTITY privatebrowsingpage.howToStart3               "Zasebno brskanje lahko začnete tudi z izbiro &basePBMenu.label; &gt; &newPrivateWindow.label;.">
+<!ENTITY privateBrowsing.title                 "Zasebno brskanje">
+
+<!-- LOCALIZATION NOTE (aboutPrivateBrowsing.width1):
+     Width of the Private Browsing section. This should depend primarily on the
+     length of the headers and text, but should be roughly 1.5 times the width
+     of the Tracking Protection section, and in general not much larger than
+     30em to prevent the sections from wrapping on smaller window sizes.
+     -->
+<!ENTITY aboutPrivateBrowsing.width1           "30em">
+<!ENTITY aboutPrivateBrowsing.title            "Uporabljate zasebno brskanje">
+
+<!ENTITY aboutPrivateBrowsing.info.notsaved    "Se ne shranjuje">
+<!ENTITY aboutPrivateBrowsing.info.history     "Zgodovina">
+<!ENTITY aboutPrivateBrowsing.info.searches    "Iskanja">
+<!ENTITY aboutPrivateBrowsing.info.cookies     "Piškotki">
+<!ENTITY aboutPrivateBrowsing.info.temporaryFiles "Začasne datoteke">
+
+<!ENTITY aboutPrivateBrowsing.info.saved       "Se shranjuje">
+<!ENTITY aboutPrivateBrowsing.info.downloads   "Prenosi">
+<!ENTITY aboutPrivateBrowsing.info.bookmarks   "Zaznamki">
+
+<!ENTITY aboutPrivateBrowsing.note1            "Vaš delodajalec ali ponudnik internetnih storitev lahko še vedno sledi stranem, ki jih obiskujete.">
+<!ENTITY aboutPrivateBrowsing.learnMore        "Več o tem.">
+
+<!-- LOCALIZATION NOTE (trackingProtection.width1):
+     Width of the Tracking Protection section. It is fine for the enabled or
+     disabled indicator or the words in the title to wrap to the next line, but
+     you can expand or reduce this section to fit better, as long as the width
+     of the Private Browsing section is roughly 1.5 times the width of this one.
+     Note that the required space may vary between platforms because fonts are
+     different, so testing on Windows, Mac, and Linux is encouraged.
+     -->
+<!ENTITY trackingProtection.width1             "22em">
+<!ENTITY trackingProtection.title              "Zaščita pred sledenjem">
+
+<!-- LOCALIZATION NOTE (trackingProtection.state.width):
+     Width of the element representing the enabled or disabled indicator.
+     -->
+<!ENTITY trackingProtection.state.width        "15ch">
+<!ENTITY trackingProtection.state.enabled      "VKLJUČENA">
+<!ENTITY trackingProtection.state.disabled     "IZKLJUČENA">
+
+<!ENTITY trackingProtection.description1       "Zasebna okna zdaj zavračajo dele strani, ki lahko sledijo vaši dejavnosti na spletu.">
+
+<!ENTITY trackingProtection.disable            "Izključi zaščito pred sledenjem">
+<!ENTITY trackingProtection.enable             "Vključi zaščito pred sledenjem">
+<!ENTITY trackingProtection.startTour1         "Kako deluje">

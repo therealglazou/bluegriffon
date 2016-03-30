@@ -3,7 +3,7 @@
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 
 <!ENTITY loadError.label "Chyba při načítání stránky">
-<!ENTITY retry.label "Opakovat akci">
+<!ENTITY retry.label "Zkusit znovu">
 
 <!-- Specific error messages -->
 
@@ -29,7 +29,7 @@
 <!ENTITY netInterrupt.longDesc "<p>Podařilo se připojit k serveru, ale spojení bylo v průběhu přenosu přerušeno. Opakujte akci.</p><ul><li>Nemůžete-li prohlížet i ostatní stránky, zkontrolujte síťové připojení svého počítače.</li><li>Pokud problém přetrvává, konzultujte jej s svým síťovým administrátorem, nebo poskytovatelem připojení k Internetu.</li></ul>">
 
 <!ENTITY notCached.title "Platnost dokumentu vypršela">
-<!ENTITY notCached.longDesc "<p>Požadovaný dokument již není dostupný v mezipaměti aplikace.</p><ul><li>Z důvodů bezpečnosti nejsou důvěrné dokumenty automaticky stahovány.</li><li>Pro opětovné stažení dokumentu z webového serveru klepněte na tlačítko „Zkusit znovu“.</li></ul>">
+<!ENTITY notCached.longDesc "<p>Požadovaný dokument již není dostupný v mezipaměti aplikace.</p><ul><li>Z bezpečnostních důvodů nejsou důvěrné dokumenty automaticky stahovány.</li><li>Pro opětovné stažení dokumentu z webového serveru klepněte na tlačítko „Zkusit znovu“.</li></ul>">
 
 <!ENTITY netOffline.title "Režim offline">
 <!ENTITY netOffline.longDesc2 "<p>Prohlížeč je nyní v režimu offline a k požadované položce se nelze připojit.</p><ul><li>Je počítač připojen k funkční síti?</li><li>Pro přechod do režimu online a obnovení stránky klepněte na tlačítko „Zkusit znovu“.</li></ul>">
@@ -68,7 +68,6 @@
 <!ENTITY nssFailure2.title "Chyba zabezpečeného spojení">
 <!ENTITY nssFailure2.longDesc2 "<p>Požadovanou stránku nelze zobrazit, protože nelze ověřit autenticitu přijatých dat.</p><ul><li>Kontaktujte prosím vlastníka webového serveru a informujte ho o tomto problému.</li></ul>">
 
-
 <!ENTITY nssBadCert.title "Chyba zabezpečeného spojení">
 <!ENTITY nssBadCert.longDesc2 "<ul>
 <li>Tato chyba může být způsobena chybnou konfigurací serveru nebo někým, kdo se snaží vydávat za server.</li>
@@ -76,30 +75,17 @@
 </ul>
 ">
 
-<!ENTITY malwareBlocked.title "Podezřelá útočná stránka!">
-<!ENTITY malwareBlocked.longDesc "
-<p>Útočné stránky se pokouší nainstalovat programy, které kradou vaše důvěrná data, používají váš počítač k dalším útokům, nebo jakkoliv poničí váš systém.</p>
-<p>Vlastníci webových stránek, kteří jsou přesvědčení, že jejich stránky byly nahlášeny omylem jako útočné, mohou <a href='http://www.stopbadware.org/home/reviewinfo' >požádat o kontrolu</a>.</p>
-">
-
-<!ENTITY phishingBlocked.title "Podezřelá podvodná stránka!">
-<!ENTITY phishingBlocked.longDesc "
-<p>Vložení osobních informací na takovéto stránce může skočit krádeží identity nebo jiným podvodem.</p>
-<p>Tyto podvodné stránky nazývané též útoky typu phishing se snaží zpravidla napodobit webové stránky nebo e-maily ze zdrojů, kterým věříte.</p>
+<!ENTITY securityOverride.linkText "Nebo můžete přidat výjimku…">
+<!ENTITY securityOverride.warningContent "
+<p>Není doporučováno přidávat výjimku, pokud nemůžete svému internetovému spojení plně důvěřovat nebo pokud nejste u tohoto serveru zvyklí vídat podobná varování.</p>
+<p>Pokud si přesto přejete výjimku pro tuto stránku přidat, můžete tak učinit v rozšířeném nastavení šifrování.</p>
 ">
 
 <!ENTITY cspBlocked.title "Zablokováno dle bezpečnostních pravidel stránky">
-<!ENTITY cspBlocked.longDesc "<p>Aplikace zabránila této stránce v nahrání, neboť tato stránka má bezpečnostní pravidla, která tento způsob načtení zakazují.</p>">
+<!ENTITY cspBlocked.longDesc "<p>Aplikace zabránila této stránce v nahrání, protože tato stránka má bezpečnostní pravidla, která tento způsob načtení zakazují.</p>">
 
 <!ENTITY corruptedContentError.title "Chyba v obsahu stránky">
-<!ENTITY corruptedContentError.longDesc "<p>Stránka, kterou se snažíte načíst, nemůže být zobrazena, jelikož v přenesená data jsou chybná.</p><ul><li>Kontaktujte prosím vlastníka stránky a informujte ho o tomto problému.</li></ul>">
+<!ENTITY corruptedContentError.longDesc "<p>Stránka, kterou se snažíte načíst, nemůže být zobrazena, protože přenesená data jsou chybná.</p><ul><li>Kontaktujte prosím vlastníka stránky a informujte ho o tomto problému.</li></ul>">
 
 <!ENTITY remoteXUL.title "Vzdálené XUL">
 <!ENTITY remoteXUL.longDesc "<p><ul><li>Kontaktujte prosím vlastníka stránky a informujte ho o tomto problému.</li></ul></p>">
-
-<!-- Include app-specific error messages - do not change this in localization!
-     Some applications might override netErrorApp.dtd with their specific version,
-     this inclusion needs to be intact for that approach to work correctly.
-     Please, try to keep this at the end of the file. -->
-<!ENTITY % netErrorAppDTD SYSTEM "chrome://global/locale/netErrorApp.dtd">
-%netErrorAppDTD;

@@ -2,22 +2,54 @@
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 
-<!ENTITY aboutPrivateBrowsing.title            "プライベートブラウジング中です">
-<!ENTITY aboutPrivateBrowsing.title.normal     "プライベートウィンドウを開きますか？">
-
-<!ENTITY aboutPrivateBrowsing.subtitle         "&brandShortName; はこのウィンドウの履歴を一切保存しません。">
-<!ENTITY aboutPrivateBrowsing.subtitle.normal  "&brandShortName; はプライベートウィンドウの履歴を一切保存しません。">
-
-<!ENTITY aboutPrivateBrowsing.description      "保存されない履歴は、表示したページの履歴、検索履歴、ダウンロード履歴、Web フォーム履歴、Cookie、ディスクキャッシュです。ダウンロードしたファイルと作成したブックマークは保存されます。">
-
-<!ENTITY aboutPrivateBrowsing.notPrivate       "プライベートウィンドウではありません。">
-
-<!ENTITY aboutPrivateBrowsing.moreInfo         "表示したページの履歴はこのコンピュータには記録されませんが、会社やインターネットサービスプロバイダが記録している可能性はあります。">
-<!ENTITY aboutPrivateBrowsing.learnMore        "詳細を表示">
-
+<!ENTITY aboutPrivateBrowsing.notPrivate       "これはプライベートウィンドウではありません。">
 <!ENTITY privatebrowsingpage.openPrivateWindow.label "プライベートウィンドウを開く">
 <!ENTITY privatebrowsingpage.openPrivateWindow.accesskey "P">
 
-<!-- TO BE REMOVED POST-AUSTRALIS --> 
-<!-- LOCALIZATION NOTE (privatebrowsingpage.howToStart3): please leave &basePBMenu.label; intact in the translation -->
-<!ENTITY privatebrowsingpage.howToStart3               "[&basePBMenu.label;] メニューの [&newPrivateWindow.label;] でプライベートブラウジングを開始します。">
+<!ENTITY privateBrowsing.title                 "プライベートブラウジング">
+
+<!-- LOCALIZATION NOTE (aboutPrivateBrowsing.width1):
+     Width of the Private Browsing section. This should depend primarily on the
+     length of the headers and text, but should be roughly 1.5 times the width
+     of the Tracking Protection section, and in general not much larger than
+     30em to prevent the sections from wrapping on smaller window sizes.
+     -->
+<!ENTITY aboutPrivateBrowsing.width1           "30em">
+<!ENTITY aboutPrivateBrowsing.title            "プライベートブラウジング中です">
+
+<!ENTITY aboutPrivateBrowsing.info.notsaved    "保存しません">
+<!ENTITY aboutPrivateBrowsing.info.history     "表示履歴">
+<!ENTITY aboutPrivateBrowsing.info.searches    "検索履歴">
+<!ENTITY aboutPrivateBrowsing.info.cookies     "Cookie">
+<!ENTITY aboutPrivateBrowsing.info.temporaryFiles "一時ファイル">
+
+<!ENTITY aboutPrivateBrowsing.info.saved       "保存します">
+<!ENTITY aboutPrivateBrowsing.info.downloads   "ダウンロードファイル">
+<!ENTITY aboutPrivateBrowsing.info.bookmarks   "ブックマーク編集">
+
+<!ENTITY aboutPrivateBrowsing.note1            "ネットワーク管理者やインターネットサービスプロバイダは、依然としてあなたが訪れたページを追跡できます。">
+<!ENTITY aboutPrivateBrowsing.learnMore        "詳細情報">
+
+<!-- LOCALIZATION NOTE (trackingProtection.width1):
+     Width of the Tracking Protection section. It is fine for the enabled or
+     disabled indicator or the words in the title to wrap to the next line, but
+     you can expand or reduce this section to fit better, as long as the width
+     of the Private Browsing section is roughly 1.5 times the width of this one.
+     Note that the required space may vary between platforms because fonts are
+     different, so testing on Windows, Mac, and Linux is encouraged.
+     -->
+<!ENTITY trackingProtection.width1             "22em"><!-- en-US: 22em -->
+<!ENTITY trackingProtection.title              "トラッキング保護">
+
+<!-- LOCALIZATION NOTE (trackingProtection.state.width):
+     Width of the element representing the enabled or disabled indicator.
+     -->
+<!ENTITY trackingProtection.state.width        "6ch"><!-- en-US: 6ch -->
+<!ENTITY trackingProtection.state.enabled      "有効">
+<!ENTITY trackingProtection.state.disabled     "無効">
+
+<!ENTITY trackingProtection.description1       "プライベートウィンドウでは、ユーザのオンライン行動を追跡するコンテンツがブロックされます。">
+
+<!ENTITY trackingProtection.disable            "トラッキング保護を無効にする">
+<!ENTITY trackingProtection.enable             "トラッキング保護を有効にする">
+<!ENTITY trackingProtection.startTour1         "動作の仕組みを見る">

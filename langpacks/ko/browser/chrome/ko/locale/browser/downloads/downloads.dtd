@@ -18,11 +18,11 @@
      units.
 
      For example, in English, a long string would be:
-     toolkit/locales/en-US/chrome/mozapps/downloads/downloads.properties 참고함
+
      59 minutes, 59 seconds remaining - 1022 of 1023 KB
-     59시간 59분 남음 - 1023 / 1022 KB 
+
      That's 50 characters, so we set the width at 50ch.
-     한글이 2ch이면 33ch -->
+     -->
 <!ENTITY downloadDetails.width            "33ch">
 
 <!-- LOCALIZATION NOTE (downloadsSummary.minWidth2):
@@ -30,14 +30,14 @@
      which is displayed at the bottom of the Downloads Panel if the
      number of downloads exceeds the limit that the panel can display.
 
-     A good rule of thumb here is to look at the otherDownloads string
+     A good rule of thumb here is to look at the otherDownloads2 string
      in downloads.properties, and make a reasonable estimate of its
      maximum length. For English, this seems like a reasonable limit:
 
-     +999 other downloads
-     다운로드 항목 999개 더 있음
+     + 999 other downloads
+
      that's 21 characters, so we set the minimum width to 21ch.
-     한글이 2ch이면 29ch -->
+     -->
 <!ENTITY downloadsSummary.minWidth2       "29ch">
 
 <!ENTITY cmd.pause.label                  "중단">
@@ -66,6 +66,31 @@
 <!ENTITY cmd.clearList.accesskey          "a">
 <!ENTITY cmd.clearDownloads.label         "다운로드 항목 지우기">
 <!ENTITY cmd.clearDownloads.accesskey     "D">
+<!-- LOCALIZATION NOTE (cmd.unblock.label):
+     This command may be shown in the context menu, as a menu button item, or as
+     a text link when malware or potentially unwanted downloads are blocked.
+     -->
+<!ENTITY cmd.unblock.label                "차단 풀기">
+<!ENTITY cmd.unblock.accesskey            "U">
+<!-- LOCALIZATION NOTE (cmd.removeFile.label):
+     This command may be shown in the context menu or as a menu button label
+     when malware or potentially unwanted downloads are blocked.
+     -->
+<!ENTITY cmd.removeFile.label             "파일 없애기">
+<!ENTITY cmd.removeFile.accesskey         "m">
+
+<!-- LOCALIZATION NOTE (blocked.label):
+     Shown as a tag before the file name for some types of blocked downloads.
+     Note: This string doesn't exist in the UI yet.  See bug 1053890.
+     -->
+<!ENTITY blocked.label                    "차단">
+
+<!-- LOCALIZATION NOTE (learnMore.label):
+     Shown as a text link for some types of blocked downloads, for example
+     malware, when there is an associated explanation page on the Mozilla site.
+     Note: This string doesn't exist in the UI yet.  See bug 1053890.
+     -->
+<!ENTITY learnMore.label                  "더 알아보기">
 
 <!-- LOCALIZATION NOTE (downloadsHistory.label, downloadsHistory.accesskey):
      This string is shown at the bottom of the Downloads Panel when all the
@@ -94,29 +119,3 @@
      results in the Downloads view.
      -->
 <!ENTITY downloadsListNoMatch.label       "일치하는 다운로드 항목이 없습니다.">
-
-
-<!-- LOCALIZATION NOTE (blocked.label):
-     Shown as a tag before the file name for some types of blocked downloads.
-     Note: This string doesn't exist in the UI yet.  See bug 1053890.
-     -->
-<!ENTITY blocked.label                    "BLOCKED">
-<!ENTITY cmd.removeFile.accesskey         "m">
-<!-- LOCALIZATION NOTE (cmd.removeFile.label):
-     This command may be shown in the context menu or as a menu button label
-     when malware or potentially unwanted downloads are blocked.
-     -->
-<!ENTITY cmd.removeFile.label             "Remove File">
-<!ENTITY cmd.unblock.accesskey            "U">
-<!-- LOCALIZATION NOTE (cmd.unblock.label):
-     This command may be shown in the context menu, as a menu button item, or as
-     a text link when malware or potentially unwanted downloads are blocked.
-     -->
-<!ENTITY cmd.unblock.label                "Unblock">
-
-<!-- LOCALIZATION NOTE (learnMore.label):
-     Shown as a text link for some types of blocked downloads, for example
-     malware, when there is an associated explanation page on the Mozilla site.
-     Note: This string doesn't exist in the UI yet.  See bug 1053890.
-     -->
-<!ENTITY learnMore.label                  "Learn More">

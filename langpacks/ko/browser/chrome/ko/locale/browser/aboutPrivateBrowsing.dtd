@@ -2,22 +2,54 @@
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 
-<!ENTITY aboutPrivateBrowsing.title            "남들이 모르게 둘러보고 있습니다">
-<!ENTITY aboutPrivateBrowsing.title.normal     "사생활 보호 창을 여시겠습니까?">
-
-<!ENTITY aboutPrivateBrowsing.subtitle         "&brandShortName;는 현재 창에서 어떤 기록도 저장하지 않습니다.">
-<!ENTITY aboutPrivateBrowsing.subtitle.normal  "&brandShortName;는 사생활 보호 창에서 어떤 기록도 저장하지 않을 것입니다.">
-
-<!ENTITY aboutPrivateBrowsing.description      "방문 기록, 검색 기록, 다운로드 기록, 폼 양식 기록, 쿠키, 임시 파일 등이 포함됩니다. 다운로드 목록 및 북마크 내용은 저장합니다. 이 기능은 공공 장소에 위치한 PC를 이용할 때 도움이 됩니다.">
-
 <!ENTITY aboutPrivateBrowsing.notPrivate       "현재 사생활 보호 창에 있지 않습니다.">
-
-<!ENTITY aboutPrivateBrowsing.moreInfo         "컴퓨터에 웹 브라우징 기록이 남지 않지만, 회사나 인터넷 제공업체에서 여러분이 사용하는 페이지를 기록하고 있을 가능성은 있습니다.">
-<!ENTITY aboutPrivateBrowsing.learnMore        "더 알아보기.">
-
 <!ENTITY privatebrowsingpage.openPrivateWindow.label "새 사생활 보호 창 시작">
 <!ENTITY privatebrowsingpage.openPrivateWindow.accesskey "P">
 
-<!-- TO BE REMOVED POST-AUSTRALIS --> 
-<!-- LOCALIZATION NOTE (privatebrowsingpage.howToStart3): please leave &basePBMenu.label; intact in the translation -->
-<!ENTITY privatebrowsingpage.howToStart3               "사생활 보호 모드를 시작하시려면 &basePBMenu.label; &gt; &newPrivateWindow.label;를 선택하십시오.">
+<!ENTITY privateBrowsing.title                 "사생활 보호 창">
+
+<!-- LOCALIZATION NOTE (aboutPrivateBrowsing.width1):
+     Width of the Private Browsing section. This should depend primarily on the
+     length of the headers and text, but should be roughly 1.5 times the width
+     of the Tracking Protection section, and in general not much larger than
+     30em to prevent the sections from wrapping on smaller window sizes.
+     -->
+<!ENTITY aboutPrivateBrowsing.width1           "30em">
+<!ENTITY aboutPrivateBrowsing.title            "남들이 모르게 둘러보고 있습니다">
+
+<!ENTITY aboutPrivateBrowsing.info.notsaved    "저장 안됨">
+<!ENTITY aboutPrivateBrowsing.info.history     "탐색기록">
+<!ENTITY aboutPrivateBrowsing.info.searches    "검색">
+<!ENTITY aboutPrivateBrowsing.info.cookies     "쿠키">
+<!ENTITY aboutPrivateBrowsing.info.temporaryFiles "임시 파일">
+
+<!ENTITY aboutPrivateBrowsing.info.saved       "저장됨">
+<!ENTITY aboutPrivateBrowsing.info.downloads   "다운로드">
+<!ENTITY aboutPrivateBrowsing.info.bookmarks   "즐겨찾기">
+
+<!ENTITY aboutPrivateBrowsing.note1            "고용주나 인터넷 서비스 제공자는 여전히 방문한 페이지를 파악할 수 있습니다.">
+<!ENTITY aboutPrivateBrowsing.learnMore        "더 알아보기.">
+
+<!-- LOCALIZATION NOTE (trackingProtection.width1):
+     Width of the Tracking Protection section. It is fine for the enabled or
+     disabled indicator or the words in the title to wrap to the next line, but
+     you can expand or reduce this section to fit better, as long as the width
+     of the Private Browsing section is roughly 1.5 times the width of this one.
+     Note that the required space may vary between platforms because fonts are
+     different, so testing on Windows, Mac, and Linux is encouraged.
+     -->
+<!ENTITY trackingProtection.width1             "22em">
+<!ENTITY trackingProtection.title              "추적 보호">
+
+<!-- LOCALIZATION NOTE (trackingProtection.state.width):
+     Width of the element representing the enabled or disabled indicator.
+     -->
+<!ENTITY trackingProtection.state.width        "6ch">
+<!ENTITY trackingProtection.state.enabled      "켬">
+<!ENTITY trackingProtection.state.disabled     "끔">
+
+<!ENTITY trackingProtection.description1       "사생활 보호 창이 사용자의 탐색 활동을 추적할 수 있는 페이지 일부를 막았습니다.">
+
+<!ENTITY trackingProtection.disable            "추적 보호 끔">
+<!ENTITY trackingProtection.enable             "추적 보호 켬">
+<!ENTITY trackingProtection.startTour1         "작동 원리 살펴보기">

@@ -10,28 +10,21 @@
 a replacement for the standard security certificate errors produced
 by NSS/PSM via netError.xhtml. -->
 
-<!ENTITY certerror.pagetitle  "Nepreverjena povezava">
-<!ENTITY certerror.longpagetitle "Ta povezava je nepreverjena">
+<!ENTITY certerror.pagetitle1  "Povezava ni varna">
+<!ENTITY certerror.longpagetitle1 "Vaša povezava ni varna">
 
-<!-- Localization note (certerror.introPara1) - The string "#1" will
-be replaced at runtime with the name of the server to which the user
+<!-- Localization note (certerror.introPara) - The text content of the span tag
+will be replaced at runtime with the name of the server to which the user
 was trying to connect. -->
-<!ENTITY certerror.introPara1 "&brandShortName; ste zaprosili za varno
-povezavo z <b>#1</b>, vendar ne moremo zagotoviti, da je vaša povezava res varna.">
-<!ENTITY certerror.introPara2 "Ko se poskušate varno povezati, se spletne strani
-običajno predstavijo in tako dokažejo, da ste prišli na pravo mesto. Toda istovetnosti
-te strani žal ni mogoče overiti.">
+<!ENTITY certerror.introPara "Lastnik <span class='hostname'/> je neustrezno nastavil svojo spletno stran. &brandShortName; se ni povezal s to spletno stranjo, da bi preprečil krajo vaših podatkov.">
+<!ENTITY certerror.returnToPreviousPage.label "Nazaj">
+<!ENTITY certerror.learnMore "Več o tem ...">
+<!ENTITY certerror.advanced.label "Napredno">
 
-<!ENTITY certerror.whatShouldIDo.heading "Kaj naj storim?">
-<!ENTITY certerror.whatShouldIDo.content "Če se na to stran
-ponavadi povezujete brez težav, jo morda kdo poskuša oponašati,
-zato vam nadaljevanje odsvetujemo.">
 <!ENTITY certerror.whatShouldIDo.badStsCertExplanation "Ta stran uporablja HSTS
 (HTTP Strict Transport Security), ki določa, da se lahko &brandShortName; nanjo
 poveže zgolj varno. Posledično za to digitalno potrdilo ni mogoče dodati izjeme.">
-<!ENTITY certerror.getMeOutOfHere.label "Hočem vstran!">
 
-<!ENTITY certerror.expert.heading "Razumem tveganje">
 <!ENTITY certerror.expert.content "Če razumete, kaj se dogaja, lahko  
 &brandShortName;u naročite, da začne zaupati istovetnosti te strani.
 <b>Četudi zaupate strani, pa lahko nekdo še vedno poskuša prestrezati vašo 
@@ -39,5 +32,9 @@ povezavo.</b>">
 <!ENTITY certerror.expert.contentPara2 "Ne dodajajte izjeme, razen če ste 
 prepričani, da obstaja dober razlog, zakaj ta stran ne uporablja zaupljive istovetnosti.">
 <!ENTITY certerror.addException.label "Dodaj izjemo …">
+<!ENTITY certerror.copyToClipboard.label "Kopiraj besedilo v odložišče">
 
-<!ENTITY certerror.technical.heading "Tehnične podrobnosti">
+<!ENTITY errorReporting.automatic "S prijavo podobnih napak pomagate Mozilli prepoznavati neustrezno nastavljene strani">
+<!ENTITY errorReporting.sending "Pošiljanje poročila">
+<!ENTITY errorReporting.sent "Poročilo poslano">
+<!ENTITY errorReporting.tryAgain "Poskusi znova">

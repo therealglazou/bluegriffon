@@ -2,18 +2,54 @@
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 
-<!ENTITY aboutPrivateBrowsing.title            "Sie surfen im privaten Modus">
-<!ENTITY aboutPrivateBrowsing.title.normal     "Neues privates Fenster öffnen?">
-
-<!ENTITY aboutPrivateBrowsing.subtitle         "&brandShortName; wird keine Chronik für dieses Fenster anlegen.">
-<!ENTITY aboutPrivateBrowsing.subtitle.normal  "&brandShortName; wird keine Chronik für private Fenster anlegen.">
-
-<!ENTITY aboutPrivateBrowsing.description      "Dies schließt besuchte Seiten, Sucheinträge, Download-Chronik, Formulardaten, Cookies, und temporäre Internetdateien ein. Allerdings werden alle Lesezeichen, die Sie anlegen, und Dateien, die Sie herunterladen, beibehalten.">
-
 <!ENTITY aboutPrivateBrowsing.notPrivate       "Sie befinden sich derzeit nicht in einem privaten Fenster.">
+<!ENTITY privatebrowsingpage.openPrivateWindow.label "Neues privates Fenster öffnen">
+<!ENTITY privatebrowsingpage.openPrivateWindow.accesskey "F">
 
-<!ENTITY aboutPrivateBrowsing.moreInfo         "Während auf diesem Computer keine Spuren Ihrer Browserchronik gespeichert werden, kann Ihr Arbeitgeber oder Ihr Internetanbieter trotzdem nachverfolgen, welche Seiten Sie besuchen.">
+<!ENTITY privateBrowsing.title                 "Privates Surfen">
+
+<!-- LOCALIZATION NOTE (aboutPrivateBrowsing.width1):
+     Width of the Private Browsing section. This should depend primarily on the
+     length of the headers and text, but should be roughly 1.5 times the width
+     of the Tracking Protection section, and in general not much larger than
+     30em to prevent the sections from wrapping on smaller window sizes.
+     -->
+<!ENTITY aboutPrivateBrowsing.width1           "30em">
+<!ENTITY aboutPrivateBrowsing.title            "Sie surfen privat">
+
+<!ENTITY aboutPrivateBrowsing.info.notsaved    "Werden nicht gespeichert">
+<!ENTITY aboutPrivateBrowsing.info.history     "Chronik">
+<!ENTITY aboutPrivateBrowsing.info.searches    "Suchanfragen">
+<!ENTITY aboutPrivateBrowsing.info.cookies     "Cookies">
+<!ENTITY aboutPrivateBrowsing.info.temporaryFiles "Temporäre Dateien">
+
+<!ENTITY aboutPrivateBrowsing.info.saved       "Werden gespeichert">
+<!ENTITY aboutPrivateBrowsing.info.downloads   "Downloads">
+<!ENTITY aboutPrivateBrowsing.info.bookmarks   "Lesezeichen">
+
+<!ENTITY aboutPrivateBrowsing.note1            "Ihr Arbeitgeber oder Ihr Internetanbieter können weiterhin verfolgen, welche Seiten Sie besuchen.">
 <!ENTITY aboutPrivateBrowsing.learnMore        "Weitere Informationen">
 
-<!ENTITY privatebrowsingpage.openPrivateWindow.label "Neues privates Fenster öffnen">
-<!ENTITY privatebrowsingpage.openPrivateWindow.accesskey "p">
+<!-- LOCALIZATION NOTE (trackingProtection.width1):
+     Width of the Tracking Protection section. It is fine for the enabled or
+     disabled indicator or the words in the title to wrap to the next line, but
+     you can expand or reduce this section to fit better, as long as the width
+     of the Private Browsing section is roughly 1.5 times the width of this one.
+     Note that the required space may vary between platforms because fonts are
+     different, so testing on Windows, Mac, and Linux is encouraged.
+     -->
+<!ENTITY trackingProtection.width1             "22em">
+<!ENTITY trackingProtection.title              "Schutz vor Aktivitätenverfolgung">
+
+<!-- LOCALIZATION NOTE (trackingProtection.state.width):
+     Width of the element representing the enabled or disabled indicator.
+     -->
+<!ENTITY trackingProtection.state.width        "6ch">
+<!ENTITY trackingProtection.state.enabled      "EIN">
+<!ENTITY trackingProtection.state.disabled     "AUS">
+
+<!ENTITY trackingProtection.description1       "Private Fenster blockieren nun Seiteninhalte, die Ihre Surfaktivitäten verfolgen könnten.">
+
+<!ENTITY trackingProtection.disable            "Schutz vor Aktivitätenverfolgung deaktivieren">
+<!ENTITY trackingProtection.enable             "Schutz vor Aktivitätenverfolgung aktivieren">
+<!ENTITY trackingProtection.startTour1         "Wie es funktioniert">

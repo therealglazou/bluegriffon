@@ -14,6 +14,8 @@
 <!ENTITY searchStartTyping.accesskey     "x">
 <!ENTITY blockAutoRefresh.label          "Web ページが自動的に転送や再読み込みさせようとしたときに警告する">
 <!ENTITY blockAutoRefresh.accesskey      "b">
+<!ENTITY useOnScreenKeyboard.label       "必要であればタッチキーボードを表示する">
+<!ENTITY useOnScreenKeyboard.accesskey   "k">
 
 <!ENTITY browsing.label                  "ブラウズ">
 
@@ -28,20 +30,17 @@
 
 <!ENTITY dataChoicesTab.label            "データの選択">
 
-<!ENTITY healthReportSection.label       "&brandShortName; ヘルスレポート">
 <!ENTITY healthReportDesc.label          "パフォーマンス情報の取得と、ブラウザの健康状態を &vendorShortName; と共有するのに役立ちます">
 <!ENTITY enableHealthReport.label        "&brandShortName; ヘルスレポートを有効にする">
 <!ENTITY enableHealthReport.accesskey    "R">
 <!ENTITY healthReportLearnMore.label     "詳細">
 
-<!ENTITY telemetrySection.label          "パフォーマンス情報の送信">
 <!ENTITY telemetryDesc.label             "&brandShortName; をよりよいものにするため、パフォーマンス情報、使用状況、ハードウェア情報、設定したデータを &vendorShortName; と共有します。">
-<!ENTITY enableTelemetry.label           "パフォーマンス情報の送信を有効にする">
-<!ENTITY enableTelemetry.accesskey       "T">
+<!ENTITY enableTelemetryData.label       "追加データを共有する (パフォーマンス情報など)">
+<!ENTITY enableTelemetryData.accesskey   "T">
 <!ENTITY telemetryLearnMore.label        "詳細">
 
-<!ENTITY crashReporterSection.label      "クラッシュレポートの送信">
-<!ENTITY crashReporterDesc.label         "&vendorShortName; をより安定した、セキュアなものにするため、&brandShortName; はクラッシュレポートを &vendorShortName; に送信します。">
+<!ENTITY crashReporterDesc.label         "ブラウザをより安定した安全なものにするため、&brandShortName; がクラッシュレポートを &vendorShortName; に送信します。">
 <!ENTITY enableCrashReporter.label       "クラッシュレポートの送信を有効にする">
 <!ENTITY enableCrashReporter.accesskey   "C">
 <!ENTITY crashReporterLearnMore.label    "詳細">
@@ -77,13 +76,8 @@
 <!ENTITY updateTab.label                 "更新">
 
 <!ENTITY updateApp.label                 "&brandShortName; の更新:">
-<!-- Note either updateAuto1 is used or (updateAutoMetro and updateAutoDesktop),
-     so re-using accesss key in updateAuto1 is OK. updateAutoDesktop can be found
-     in preferences.properties -->
 <!ENTITY updateAuto1.label               "更新を自動的にインストールする (推奨: セキュリティ向上)">
 <!ENTITY updateAuto1.accesskey           "A">
-<!ENTITY updateAutoMetro.label           "デスクトップと Windows 8 スタイルの &brandShortName; を自動的に更新する">
-<!ENTITY updateAutoMetro.accesskey       "s">
 <!ENTITY updateCheck.label               "更新の確認は行うが、インストールするかどうかを選択する">
 <!ENTITY updateCheck.accesskey           "C">
 <!ENTITY updateManual.label              "更新の確認は行わない (非推奨: セキュリティリスク)">
@@ -91,8 +85,6 @@
 
 <!ENTITY updateAutoAddonWarn.label       "更新によりアドオンが無効化される場合は警告する">
 <!ENTITY updateAutoAddonWarn.accesskey   "W">
-
-<!ENTITY updateAutoMetroWarn.label       "(Windows 8 スタイルの &brandShortName; はアドオンの互換性を確認しません)">
 
 <!ENTITY updateHistory.label             "更新履歴を表示...">
 <!ENTITY updateHistory.accesskey         "p">
@@ -116,6 +108,7 @@
 <!ENTITY offlineAppRemove.confirm        "オフライン作業用データの削除">
 
 <!ENTITY certificateTab.label            "証明書">
+<!ENTITY certSelection.label             "要求">
 <!ENTITY certSelection.description       "サーバが個人証明書を要求したとき:">
 <!ENTITY certs.auto                      "自動的に選択する">
 <!ENTITY certs.auto.accesskey            "S">
@@ -127,7 +120,3 @@
 <!ENTITY viewCerts.accesskey             "C">
 <!ENTITY viewSecurityDevices.label       "セキュリティデバイス...">
 <!ENTITY viewSecurityDevices.accesskey   "D">
-
-<!ENTITY certSelection.label             "Requests">
-<!ENTITY enableTelemetryData.accesskey   "T">
-<!ENTITY enableTelemetryData.label       "Share additional data (i.e., Telemetry)">

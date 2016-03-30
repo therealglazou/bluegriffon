@@ -4,6 +4,7 @@
 <!ENTITY addons.windowTitle			"アドオンマネージャ">
 
 <!ENTITY search.placeholder			"アドオンを検索します">
+<!ENTITY search.buttonlabel			"検索">
 <!-- LOCALIZATION NOTE (search.commandKey):
      The search command key should match findOnCmd.commandkey from browser.dtd -->
 <!ENTITY search.commandkey			"f">
@@ -21,6 +22,11 @@
 
 <!ENTITY cmd.back.tooltip			"前のページへ戻ります">
 <!ENTITY cmd.forward.tooltip			"次のページへ進みます">
+
+<!ENTITY showUnsignedExtensions.button.label	"一部の拡張機能を検証できませんでした">
+<!ENTITY showAllExtensions.button.label		"すべての拡張機能を表示">
+<!ENTITY debugAddons.label			"アドオンをデバッグ">
+<!ENTITY debugAddons.accesskey			"B">
 
 <!-- global warnings -->
 <!ENTITY warning.safemode.label				"セーフモードによりすべてのアドオンが無効化されています。">
@@ -57,18 +63,18 @@
      update checking behavior for all add-ons to the default global behavior
      (which itself is either "Automatically" or "Manually", controlled by the
      updates.updateAddonsAutomatically.label menu item). -->
-<!ENTITY updates.resetUpdatesToAutomatic.label	"すべてのアドオンを自動的に更新">
+<!ENTITY updates.resetUpdatesToAutomatic.label		"すべてのアドオンを自動的に更新">
 <!ENTITY updates.resetUpdatesToAutomatic.accesskey	"R">
-<!ENTITY updates.resetUpdatesToManual.label	"すべてのアドオンを手動で更新">
-<!ENTITY updates.resetUpdatesToManual.accesskey	"R">
-<!ENTITY updates.updating.label			"更新を確認しています">
-<!ENTITY updates.installed.label		"アドオンが更新されました。">
-<!ENTITY updates.downloaded.label		"アドオンの更新がダウンロードされました。">
-<!ENTITY updates.restart.label			"再起動して更新を完了してください">
-<!ENTITY updates.noneFound.label		"更新は見つかりませんでした">
-<!ENTITY updates.manualUpdatesFound.label	"更新可能なアドオンを表示">
-<!ENTITY updates.updateSelected.label		"更新をインストール">
-<!ENTITY updates.updateSelected.tooltip		"このリストの更新可能なアドオンをインストールします">
+<!ENTITY updates.resetUpdatesToManual.label		"すべてのアドオンを手動で更新">
+<!ENTITY updates.resetUpdatesToManual.accesskey		"R">
+<!ENTITY updates.updating.label				"更新を確認しています">
+<!ENTITY updates.installed.label			"アドオンが更新されました。">
+<!ENTITY updates.downloaded.label			"アドオンの更新がダウンロードされました。">
+<!ENTITY updates.restart.label				"再起動して更新を完了してください">
+<!ENTITY updates.noneFound.label			"更新は見つかりませんでした">
+<!ENTITY updates.manualUpdatesFound.label		"更新可能なアドオンを表示">
+<!ENTITY updates.updateSelected.label			"更新をインストール">
+<!ENTITY updates.updateSelected.tooltip			"このリストの更新可能なアドオンをインストールします">
 
 <!-- addon actions -->
 <!ENTITY cmd.showDetails.label			"詳細情報を表示">
@@ -101,7 +107,6 @@
 <!ENTITY cmd.installAddon.accesskey		"I">
 <!ENTITY cmd.uninstallAddon.label		"削除">
 <!ENTITY cmd.uninstallAddon.accesskey		"R">
-<!ENTITY cmd.debugAddon.label			"デバッグ">
 <!ENTITY cmd.showPreferencesWin.label		"設定">
 <!ENTITY cmd.showPreferencesWin.tooltip		"このアドオンの設定を変更します">
 <!ENTITY cmd.showPreferencesUnix.label		"設定">
@@ -160,7 +165,7 @@
 <!ENTITY rating2.label				"評価">
 
 <!-- download/install progress -->
-<!ENTITY progress.pause.tooltip			"中断">
+<!ENTITY progress.pause.tooltip			"一時停止">
 <!ENTITY progress.cancel.tooltip		"キャンセル">
 
 
@@ -223,12 +228,25 @@
      This tab won't be displayed unless an Experiment add-on is installed.
      Install https://people.mozilla.org/~gszorc/dummy-experiment-addon.xpi
      to cause this tab to appear. -->
-<!ENTITY experiment.info.label			"What's this? Telemetry may install and run experiments from time to time.">
-<!ENTITY experiment.info.learnmore		"詳細">
-<!ENTITY experiment.info.learnmore.accesskey	"L">
-<!ENTITY experiment.info.changetelemetry	"Telemetry 設定">
+<!ENTITY experiment.info.label				"What's this? Telemetry may install and run experiments from time to time.">
+<!ENTITY experiment.info.learnmore			"詳細">
+<!ENTITY experiment.info.learnmore.accesskey		"L">
+<!ENTITY experiment.info.changetelemetry		"Telemetry 設定">
 <!ENTITY experiment.info.changetelemetry.accesskey	"T">
 
-<!ENTITY search.buttonlabel                   "Search">
+<!ENTITY setting.learnmore				"詳細...">
 
-<!ENTITY setting.learnmore "Learn More…">
+<!ENTITY disabledUnsigned.heading			"一部のアドオンが無効化されています">
+<!-- LOCALIZATION NOTE (disabledUnsigned.description.start, disabledUnsigned.description.findAddonsLink, disabledUnsigned.description.end):
+     These entities form a sentence, with
+     disabledUnsigned.description.findAddonsLink being a link to an external site. -->
+<!ENTITY disabledUnsigned.description.start		"次のアドオンは &brandShortName; での使用が検証されていません。">
+<!ENTITY disabledUnsigned.description.findAddonsLink	"代わりのアドオンを見つける">
+<!ENTITY disabledUnsigned.description.end		"か、検証されたアドオンを入手できるように開発者に依頼してください。">
+<!ENTITY disabledUnsigned.learnMore			"ユーザのオンライン上の安全を保つ私たちの活動について学んでください。">
+<!-- LOCALIZATION NOTE (disabledUnsigned.devInfo.start, disabledUnsigned.devInfo.linkToManual, disabledUnsigned.devInfo.end):
+     These entities form a sentence, with disabledUnsigned.devInfo.linkToManual
+     being a link to an external site. -->
+<!ENTITY disabledUnsigned.devInfo.start			"アドオンの検証に興味のある開発者の方は">
+<!ENTITY disabledUnsigned.devInfo.linkToManual		"マニュアル">
+<!ENTITY disabledUnsigned.devInfo.end			"をお読みください。">

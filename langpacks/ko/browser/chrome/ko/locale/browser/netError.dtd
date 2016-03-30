@@ -7,6 +7,8 @@
 
 <!ENTITY loadError.label "페이지 읽기 오류">
 <!ENTITY retry.label "재시도">
+<!ENTITY returnToPreviousPage.label "뒤로">
+<!ENTITY advanced.label "고급">
 
 <!-- Specific error messages -->
 
@@ -158,20 +160,8 @@
 </ul>
 ">
 
-<!ENTITY malwareBlocked.title "공격 의심 사이트!">
-<!ENTITY malwareBlocked.longDesc "
-<p>공격 사이트가 개인 정보를 탈취하거나, 다른 컴퓨터를 공격하기 위해 사용자 컴퓨터를 이용하거나, 사용자 시스템에 손상 입히는데 사용할 악성 프로그램을 설치하려고 합니다.</p>
-<p>만약 사용자가 공격 사이트로 지정된 웹 사이트의 소유자이고 잘못 등록되어 있다면 <a href='http://www.stopbadware.org/home/reviewinfo'>확인 요청</a>을 하실 수 있습니다.</p>
-">
-
-<!ENTITY phishingBlocked.title "위조 의심 사이트!">
-<!ENTITY phishingBlocked.longDesc "
-<p>현재 페이지에 개인 정보나 금융 정보를 입력하면 개인 정보 유출과 같은 신원 도난이나 유출한 개인 정보를 이용한 사기를 당할 수 있습니다.</p>
-<p>이런 종류의 위조 웹 사이트들은 피싱 (Phishing) 공격을 하는 것으로 알려져있는데, 사용자가 신뢰할만한 사이트의 웹 페이지와 전자 메일 주소를 거의 원본에 가깝게 위조해서, 마치 신뢰된 웹 사이트에서 개인 정보 입력을 요구하는 것처럼 위장하여 사용자를 속입니다.</p>
-">
-
-<!ENTITY cspFrameAncestorBlocked.title "콘텐츠 보안 정책에 의한 차단">
-<!ENTITY cspFrameAncestorBlocked.longDesc "<p>이 페이지는 콘텐츠 보안 정책에서 허락하지 않는 방법으로 로딩되어 &brandShortName;가 차단했습니다.</p>">
+<!ENTITY cspBlocked.title "콘텐츠 보안 정책에 의한 차단">
+<!ENTITY cspBlocked.longDesc "<p>이 페이지는 콘텐츠 보안 정책에서 허락하지 않는 방법으로 로딩되어 &brandShortName;가 차단했습니다.</p>">
 
 <!ENTITY corruptedContentError.title "콘텐츠 전송 오류">
 <!ENTITY corruptedContentError.longDesc "<p>이 페이지는 전송 데이터에 오류가 감지되어서 표시할 수 없습니다.</p><ul><li>웹 사이트 관리자에게 본 문제점을 알려 주시기 바랍니다.</li></ul>">
@@ -193,24 +183,21 @@ functionality specific to firefox. -->
 <button id='exceptionDialogButton'>&securityOverride.exceptionButtonLabel;</button>
 ">
 
+<!ENTITY errorReporting.automatic2 "오류 보고서를 보내면 멜웨어 사이트를 차단하거나 그 오류를 분석하는데 도움이 됩니다.">
+<!ENTITY errorReporting.learnMore "더 알아보기…">
+
 <!ENTITY remoteXUL.title "원격 XUL">
 <!ENTITY remoteXUL.longDesc "<p><ul><li>현재 문제에 대해 웹 사이트 관리자에게 알려 주시기 바랍니다.</li></ul></p>">
 
-<!ENTITY cspBlocked.longDesc "<p>&brandShortName; prevented this page from loading in this way because the page has a content security policy that disallows it.</p>">
+<!ENTITY sslv3Used.title "보안 접속을 할 수 없음">
+<!-- LOCALIZATION NOTE (sslv3Used.longDesc2) - Do not translate
+     "SSL_ERROR_UNSUPPORTED_VERSION". -->
+<!ENTITY sslv3Used.longDesc2 "고급 정보: SSL_ERROR_UNSUPPORTED_VERSION">
 
-<!ENTITY cspBlocked.title "Blocked by Content Security Policy">
-<!ENTITY errorReporting.automatic "Automatically report errors in the future">
-<!ENTITY errorReporting.learnMore "Learn more…">
-<!ENTITY errorReporting.longDesc "Reporting the address and certificate information for <span id='hostname'></span> will help us identify and block malicious sites. Thanks for helping create a safer web!">
-<!ENTITY errorReporting.report "Report">
-<!ENTITY errorReporting.sending "Sending report">
-<!ENTITY errorReporting.sent "Report sent">
-
-<!ENTITY errorReporting.title "Report this error">
-<!ENTITY errorReporting.tryAgain "Try again">
-<!ENTITY sslv3Used.learnMore "Learn More…">
-<!-- LOCALIZATION NOTE (sslv3Used.longDesc) - Do not translate
-     "ssl_error_unsupported_version". -->
-<!ENTITY sslv3Used.longDesc "Advanced info: ssl_error_unsupported_version">
-
-<!ENTITY sslv3Used.title "Unable to Connect Securely">
+<!ENTITY weakCryptoUsed.title "연결이 안전하지 않음">
+<!-- LOCALIZATION NOTE (weakCryptoUsed.longDesc2) - Do not translate
+     "SSL_ERROR_NO_CYPHER_OVERLAP". -->
+<!ENTITY weakCryptoUsed.longDesc2 "고급 정보: SSL_ERROR_NO_CYPHER_OVERLAP">
+<!ENTITY weakCryptoAdvanced.title "고급">
+<!ENTITY weakCryptoAdvanced.longDesc "<span class='hostname'></span>에서 사용하는 보안 기술이 오래되었고 공격에 취약합니다. 안전하다고 생각하는 정보가 공격에 의해 쉽게 노출될 수 있습니다.">
+<!ENTITY weakCryptoAdvanced.override "(안전하지 않음) 오래된 보안을 이용해서 <span class='hostname'></span> 로딩 시도">

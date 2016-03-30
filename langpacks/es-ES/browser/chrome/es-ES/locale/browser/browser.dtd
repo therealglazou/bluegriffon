@@ -20,9 +20,6 @@
 <!ENTITY pinTab.accesskey "F">
 <!ENTITY unpinTab.label "Soltar pestaña">
 <!ENTITY unpinTab.accesskey "ñ">
-<!ENTITY moveToGroup.label "Mover al grupo">
-<!ENTITY moveToGroup.accesskey "M">
-<!ENTITY moveToNewGroup.label "Nuevo grupo">
 <!ENTITY moveToNewWindow.label "Mover a una nueva ventana">
 <!ENTITY moveToNewWindow.accesskey "V">
 <!ENTITY bookmarkAllTabs.label "Añadir pestañas a marcadores…">
@@ -78,13 +75,11 @@
 <!ENTITY showAllTabsCmd.label "Mostrar todas las pestañas">
 <!ENTITY showAllTabsCmd.accesskey "A">
 <!ENTITY fxaSignIn.label "Conectarse a &syncBrand.shortName.label;">
+<!ENTITY fxaSignedIn.tooltip "Abrir preferencias de &syncBrand.shortName.label;">
 <!ENTITY fxaSignInError.label "Reconectar a &syncBrand.shortName.label;">
+<!ENTITY fxaUnverified.label "Verifique su cuenta">
 <!ENTITY syncStartPanel2.heading "&syncBrand.shortName.label; activado">
 <!ENTITY syncStartPanel2.subTitle "&brandShortName; comenzará a sincronizar en breves momentos.">
-<!ENTITY syncErrorPanel.heading "No se puede conectar a &syncBrand.shortName.label;">
-<!ENTITY syncErrorPanel.subTitle "Por favor, inicie sesión para continuar sincronizando.">
-<!ENTITY syncErrorPanel.signInButton.label "Conectarse">
-<!ENTITY syncErrorPanel.signInButton.accesskey "C">
 <!ENTITY fullScreenMinimize.tooltip "Minimizar">
 <!ENTITY fullScreenRestore.tooltip "Restaurar">
 <!ENTITY fullScreenClose.tooltip "Cerrar">
@@ -92,9 +87,11 @@
 <!ENTITY fullScreenAutohide.accesskey "H">
 <!ENTITY fullScreenExit.label "Salir del modo pantalla completa">
 <!ENTITY fullScreenExit.accesskey "m">
-<!ENTITY fullscreenAllowButton.label "Permitir">
-<!ENTITY fullscreenExitButton.label "Denegar">
-<!ENTITY fullscreenExitHint2.value "Pulse ESC en cualquier momento para salir.">
+<!ENTITY fullscreenWarning.beforeDomain.label "">
+<!ENTITY fullscreenWarning.afterDomain.label "está ahora en pantalla completa">
+<!ENTITY fullscreenWarning.generic.label "Este documento está ahora en pantalla completa">
+<!ENTITY exitDOMFullscreen.button "Salir de pantalla completa (Esc)">
+<!ENTITY exitDOMFullscreenMac.button "Salir de pantalla completa (esc)">
 <!ENTITY leaveDOMFullScreen.label "Salir de la pantalla completa">
 <!ENTITY leaveDOMFullScreen.accesskey "p">
 <!ENTITY closeWindow.label "Cerrar ventana">
@@ -117,7 +114,7 @@
 <!ENTITY shareSelect.accesskey "m">
 <!ENTITY shareVideo.label "Compartir este vídeo">
 <!ENTITY shareVideo.accesskey "m">
-<!ENTITY feedsMenu.label "Suscribirse">
+<!ENTITY feedsMenu2.label "Suscribirse a esta página">
 <!ENTITY subscribeToPageMenupopup.label "Suscribirse a esta página">
 <!ENTITY subscribeToPageMenuitem.label "Suscribirse a esta página…">
 <!ENTITY addCurPagesCmd.label "Añadir pestañas a marcadores…">
@@ -138,10 +135,30 @@
 <!ENTITY goEndCap.tooltip "Ir a la URL de la barra de direcciones">
 <!ENTITY printButton.label "Imprimir">
 <!ENTITY printButton.tooltip "Imprimir esta página">
-<!ENTITY locationItem.title "Dirección">
+<!ENTITY urlbar.viewSiteInfo.label "Ver información del sitio">
+<!ENTITY urlbar.defaultNotificationAnchor.label "Ver una notificación">
+<!ENTITY urlbar.geolocationNotificationAnchor.label "Ver la petición de ubicación">
+<!ENTITY urlbar.addonsNotificationAnchor.label "Ver el mensaje de instalación del complemento">
+<!ENTITY urlbar.indexedDBNotificationAnchor.label "Ver el mensaje de almacenamiento de aplicaciones sin conexión">
+<!ENTITY urlbar.loginFillNotificationAnchor.label "Administrar su información de inicio de sesión">
+<!ENTITY urlbar.passwordNotificationAnchor.label "Marque si quiere guardar su contraseña">
+<!ENTITY urlbar.webappsNotificationAnchor.label "Ver el mensaje de instalación de aplicaciones">
+<!ENTITY urlbar.pluginsNotificationAnchor.label "Administrar uso de plugins en esta página">
+<!ENTITY urlbar.webNotsNotificationAnchor3.label "Cambiar si puede recibir notificaciones del sitio">
+<!ENTITY urlbar.webRTCShareDevicesNotificationAnchor.label "Administrar compartición de su cámara o micrófono con el sitio">
+<!ENTITY urlbar.webRTCSharingDevicesNotificationAnchor.label "Está compartiendo su cámara o micrófono con el sitio">
+<!ENTITY urlbar.webRTCShareMicrophoneNotificationAnchor.label "Administrar compartición de su micrófono con el sitio">
+<!ENTITY urlbar.webRTCSharingMicrophoneNotificationAnchor.label "Está compartiendo su micrófono con el sitio">
+<!ENTITY urlbar.webRTCShareScreenNotificationAnchor.label "Administrar compartición de sus ventanas o pantalla con el sitio">
+<!ENTITY urlbar.webRTCSharingScreenNotificationAnchor.label "Está compartiendo una ventana o su pantalla con el sitio">
+<!ENTITY urlbar.pointerLockNotificationAnchor.label "Cambiar si el sitio puede ocultar el puntero">
+<!ENTITY urlbar.servicesNotificationAnchor.label "Ver el mensaje de instalación de servicio">
+<!ENTITY urlbar.translateNotificationAnchor.label "Traducir esta página">
+<!ENTITY urlbar.translatedNotificationAnchor.label "Administrar traducción de la página">
+<!ENTITY urlbar.emeNotificationAnchor.label "Administrar uso del software DRM">
+<!ENTITY urlbar.openHistoryPopup.tooltip "Mostrar historial">
 <!ENTITY searchItem.title "Buscar">
 <!ENTITY homeButton.label "Inicio">
-<!ENTITY tabGroupsButton.label "Grupos de pestañas">
 <!ENTITY bookmarksButton.label "Marcadores">
 <!ENTITY bookmarksCmd.commandkey "b">
 <!ENTITY bookmarksMenuButton.label "Marcadores">
@@ -163,12 +180,12 @@
 <!ENTITY addons.label "Complementos">
 <!ENTITY addons.accesskey "C">
 <!ENTITY addons.commandkey "A">
-<!ENTITY webapps.label "Aplicaciones">
-<!ENTITY webapps.accesskey "p">
 <!ENTITY webDeveloperMenu.label "Desarrollador web">
 <!ENTITY webDeveloperMenu.accesskey "W">
 <!ENTITY devToolsCmd.keycode "VK_F12">
 <!ENTITY devToolsCmd.keytext "F12">
+<!ENTITY devtoolsServiceWorkers.label "Service Workers">
+<!ENTITY devtoolsServiceWorkers.accesskey "k">
 <!ENTITY devtoolsConnect.label "Conectar…">
 <!ENTITY devtoolsConnect.accesskey "e">
 <!ENTITY errorConsoleCmd.label "Consola de errores">
@@ -192,11 +209,10 @@
 <!ENTITY browserToolboxMenu.accesskey "h">
 <!ENTITY browserToolboxCmd.commandkey "i">
 <!ENTITY browserContentToolboxMenu.label "Caja de herramientas de contenido del navegador">
+<!ENTITY browserContentToolboxMenu.accesskey "h">
 <!ENTITY devToolbarCloseButton.tooltiptext "Cerrar la barra de desarrolladores">
 <!ENTITY devToolbarMenu.label "Barra de desarrolladores">
 <!ENTITY devToolbarMenu.accesskey "B">
-<!ENTITY devAppMgrMenu.label "Administrador de aplicaciones">
-<!ENTITY devAppMgrMenu.accesskey "A">
 <!ENTITY webide.label "WebIDE">
 <!ENTITY webide.accesskey "W">
 <!ENTITY webide.keycode "VK_F8">
@@ -212,11 +228,22 @@
 <!ENTITY getMoreDevtoolsCmd.accesskey "h">
 <!ENTITY fileMenu.label "Archivo">
 <!ENTITY fileMenu.accesskey "A">
+<!ENTITY newUserContext.label "Nueva pestaña contenedor">
+<!ENTITY newUserContext.accesskey "C">
+<!ENTITY userContextPersonal.label "Personal">
+<!ENTITY userContextPersonal.accesskey "P">
+<!ENTITY userContextWork.label "Trabajo">
+<!ENTITY userContextWork.accesskey "T">
+<!ENTITY userContextBanking.label "Banca">
+<!ENTITY userContextBanking.accesskey "B">
+<!ENTITY userContextShopping.label "Compras">
+<!ENTITY userContextShopping.accesskey "C">
 <!ENTITY newNavigatorCmd.label "Nueva ventana">
 <!ENTITY newNavigatorCmd.key "N">
 <!ENTITY newNavigatorCmd.accesskey "N">
 <!ENTITY newPrivateWindow.label "Nueva ventana privada">
 <!ENTITY newPrivateWindow.accesskey "P">
+<!ENTITY newNonRemoteWindow.label "Nueva ventana no-e10s">
 <!ENTITY editMenu.label "Editar">
 <!ENTITY editMenu.accesskey "E">
 <!ENTITY undoCmd.label "Deshacer">
@@ -248,8 +275,6 @@
 <!ENTITY privateBrowsingCmd.commandkey "P">
 <!ENTITY viewMenu.label "Ver">
 <!ENTITY viewMenu.accesskey "V">
-<!ENTITY viewTabGroups.label "Grupos de pestañas">
-<!ENTITY viewTabGroups.accesskey "g">
 <!ENTITY viewToolbarsMenu.label "Barras de herramientas">
 <!ENTITY viewToolbarsMenu.accesskey "T">
 <!ENTITY viewSidebarMenu.label "Panel lateral">
@@ -273,6 +298,15 @@
 <!ENTITY appMenuHistory.restoreSession.label "Restaurar sesión anterior">
 <!ENTITY appMenuHistory.viewSidebar.label "Ver panel lateral del historial">
 <!ENTITY appMenuHelp.tooltip "Abrir menú de ayuda">
+<!ENTITY appMenuRemoteTabs.label "Pestañas sincronizadas">
+<!ENTITY appMenuRemoteTabs.fetching.label "Recuperando pestañas sincronizadas…">
+<!ENTITY appMenuRemoteTabs.notabs.label "No hay pestañas abiertas">
+<!ENTITY appMenuRemoteTabs.tabsnotsyncing.label "Active la sincronización de pestañas para ver una lista de las mismas de sus otros dispositivos.">
+<!ENTITY appMenuRemoteTabs.noclients.label "Inicie sesión en Firefox desde sus otros dispositivos para ver sus pestañas aquí.">
+<!ENTITY appMenuRemoteTabs.openprefs.label "Preferencias de Sync">
+<!ENTITY appMenuRemoteTabs.notsignedin.label "Inicie sesión para ver una lista de pestañas de sus otros dispositivos.">
+<!ENTITY appMenuRemoteTabs.signin.label "Inicie sesión en Sync">
+<!ENTITY appMenuRemoteTabs.sidebar.label "Ver panel lateral de pestañas sincronizadas">
 <!ENTITY customizeMenu.addToToolbar.label "Añadir a la barra de herramientas">
 <!ENTITY customizeMenu.addToToolbar.accesskey "b">
 <!ENTITY customizeMenu.addToPanel.label "Añadir al menú">
@@ -291,14 +325,28 @@
 <!ENTITY urlbar.placeholder2 "Término de búsqueda o dirección">
 <!ENTITY urlbar.accesskey "d">
 <!ENTITY urlbar.switchToTab.label "Cambiar a la pestaña:">
+<!ENTITY urlbar.searchSuggestionsNotification.question "¿Le gustaría mejorar su experiencia de búsqueda con sugerencias?">
+<!ENTITY urlbar.searchSuggestionsNotification.learnMore "Saber más…">
+<!ENTITY urlbar.searchSuggestionsNotification.learnMore.accesskey "m">
+<!ENTITY urlbar.searchSuggestionsNotification.disable "No">
+<!ENTITY urlbar.searchSuggestionsNotification.disable.accesskey "n">
+<!ENTITY urlbar.searchSuggestionsNotification.enable "Sí">
+<!ENTITY urlbar.searchSuggestionsNotification.enable.accesskey "S">
 <!ENTITY searchFocus.commandkey "k">
 <!ENTITY searchFocus.commandkey2 "e">
 <!ENTITY searchFocusUnix.commandkey "j">
+<!ENTITY contentSearchInput.label "Criterios de búsqueda">
+<!ENTITY contentSearchSubmit.label "Enviar búsqueda">
 <!ENTITY searchFor.label "Buscar ">
 <!ENTITY searchWith.label " con:">
+<!ENTITY search.label "Buscar ">
+<!ENTITY searchAfter.label "">
 <!ENTITY searchWithHeader.label "Buscar con:">
 <!ENTITY changeSearchSettings.button "Cambiar configuración de búsqueda">
-<!ENTITY tabView.commandkey "e">
+<!ENTITY searchInNewTab.label "Buscar en una pestaña nueva">
+<!ENTITY searchInNewTab.accesskey "B">
+<!ENTITY searchSetAsDefault.label "Establecer como buscador predeterminado">
+<!ENTITY searchSetAsDefault.accesskey "E">
 <!ENTITY openLinkCmdInTab.label "Abrir enlace en una pestaña nueva">
 <!ENTITY openLinkCmdInTab.accesskey "T">
 <!ENTITY openLinkCmd.label "Abrir enlace en una ventana nueva">
@@ -311,6 +359,8 @@
 <!ENTITY openFrameCmdInTab.accesskey "T">
 <!ENTITY openFrameCmd.label "Abrir el marco en una ventana nueva">
 <!ENTITY openFrameCmd.accesskey "e">
+<!ENTITY openLinkCmdInContainerTab.label "Abrir enlace en pestaña de contenedor nueva.">
+<!ENTITY openLinkCmdInContainerTab.accesskey "C">
 <!ENTITY showOnlyThisFrameCmd.label "Mostrar sólo este marco">
 <!ENTITY showOnlyThisFrameCmd.accesskey "o">
 <!ENTITY reloadCmd.commandkey "r">
@@ -450,6 +500,7 @@
 <!ENTITY closeCmd.label "Cerrar">
 <!ENTITY closeCmd.key "W">
 <!ENTITY closeCmd.accesskey "C">
+<!ENTITY toggleMuteCmd.key "M">
 <!ENTITY pageStyleMenu.label "Estilo de página">
 <!ENTITY pageStyleMenu.accesskey "g">
 <!ENTITY pageStyleNoStyle.label "Sin estilo">
@@ -478,19 +529,53 @@
 <!ENTITY spellAddDictionaries.label "Añadir diccionarios…">
 <!ENTITY spellAddDictionaries.accesskey "A">
 <!ENTITY editBookmark.done.label "Terminar">
-<!ENTITY editBookmark.cancel.label "Cancelar">
 <!ENTITY editBookmark.removeBookmark.accessKey "r">
-<!ENTITY identity.unverifiedsite2 "Este sitio web no proporciona información de identidad.">
-<!ENTITY identity.connectedTo "Está conectado a">
-<!ENTITY identity.runBy "que pertenece a">
-<!ENTITY identity.moreInfoLinkText "Más información…">
+<!ENTITY identity.connectionSecure "Conexión segura">
+<!ENTITY identity.connectionNotSecure "La conexión no es segura">
+<!ENTITY identity.connectionFile "Esta página se guarda en su equipo.">
+<!ENTITY identity.connectionVerified1 "Está conectado de forma segura a este sitio, mantenido por:">
+<!ENTITY identity.connectionInternal "Esta es una página segura de &brandShortName;.">
+<!ENTITY identity.insecureLoginForms2 "Los inicios de sesión introducidos en esta página podrían verse comprometidos.">
+<!ENTITY identity.activeBlocked "&brandShortName; ha bloqueado partes de esta página que no son seguras.">
+<!ENTITY identity.passiveLoaded "Partes de esta página no son seguras (como imágenes).">
+<!ENTITY identity.activeLoaded "Tiene la protección desactivada en esta página.">
+<!ENTITY identity.weakEncryption "Esta página usa cifrado débil.">
+<!ENTITY identity.description.insecure "Su conexión a este sitio no es privada. La información que envíe podría ser vista por otros (como contraseñas, mensajes, tarjetas de crédito, etc.).">
+<!ENTITY identity.description.insecureLoginForms "La información de inicio de sesión que ha introducido en esta página no es segura podría verse comprometida.">
+<!ENTITY identity.description.weakCipher "Su conexión a este sitio web usa cifrado débil y no es privada.">
+<!ENTITY identity.description.weakCipher2 "Otras personas pueden ver su información o modificar el comportamiento del sitio web.">
+<!ENTITY identity.description.activeBlocked "&brandShortName; ha bloqueado partes de esta página que no son seguras.">
+<!ENTITY identity.description.passiveLoaded "Su conexión no es privada y la información que comparta con el sitio podría ser vista por otros.">
+<!ENTITY identity.description.passiveLoaded2 "Este sitio web contiene contenido que no es seguro (como imágenes).">
+<!ENTITY identity.description.passiveLoaded3 "Aunque &brandShortName; ha bloqueado cierto contenido, aún hay contenido en la página que no es seguro (como imágenes).">
+<!ENTITY identity.description.activeLoaded "Este sitio web contiene contenido que no es seguro (tal como scripts) y su conexión no es privada.">
+<!ENTITY identity.description.activeLoaded2 "La información que comparta con este sitio podría ser vista por otros (como contraseñas, mensajes, tarjetas de crédito, etc.).">
+<!ENTITY identity.enableMixedContentBlocking.label "Activar protección">
+<!ENTITY identity.enableMixedContentBlocking.accesskey "A">
+<!ENTITY identity.disableMixedContentBlocking.label "Desactivar protección por ahora">
+<!ENTITY identity.disableMixedContentBlocking.accesskey "D">
+<!ENTITY identity.learnMore "Saber más">
+<!ENTITY identity.removeCertException.label "Eliminar excepción">
+<!ENTITY identity.removeCertException.accesskey "E">
+<!ENTITY identity.moreInfoLinkText2 "Más información">
 <!ENTITY identity.permissions "Permisos">
-<!ENTITY identity.help.tooltip "¿Cómo averiguo si mi conexión a un sitio web es segura?">
+<!ENTITY identity.permissionsEmpty "No ha concedido ningún permiso especial a este sitio.">
 <!ENTITY tabsToolbar.label "Pestañas del navegador">
-<!ENTITY syncTabsMenu2.label "Pestañas de otros dispositivos">
+<!ENTITY syncTabsMenu3.label "Pestañas sincronizadas">
+<!ENTITY syncedTabs.sidebar.label "Pestañas sincronizadas">
+<!ENTITY syncedTabs.sidebar.fetching.label "Recuperando pestañas sincronizadas…">
+<!ENTITY syncedTabs.sidebar.noclients.label "Inicie sesión en Firefox desde sus otros dispositivos para ver sus pestañas aquí.">
+<!ENTITY syncedTabs.sidebar.notsignedin.label "Inicie sesión para ver una lista de pestañas de sus otros dispositivos.">
+<!ENTITY syncedTabs.sidebar.notabs.label "No hay pestañas abiertas">
+<!ENTITY syncedTabs.sidebar.openprefs.label "Abrir preferencias de &syncBrand.shortName.label;">
+<!ENTITY syncedTabs.sidebar.tabsnotsyncing.label "Active la sincronización de pestañas para ver una lista de las mismas de sus otros dispositivos.">
+<!ENTITY syncedTabs.context.openTab.label "Abrir esta pestaña">
+<!ENTITY syncedTabs.context.openTab.accesskey "A">
+<!ENTITY syncedTabs.context.bookmarkSingleTab.label "Añadir a marcadores esta pestaña…">
+<!ENTITY syncedTabs.context.bookmarkSingleTab.accesskey "m">
 <!ENTITY syncBrand.shortName.label "Sync">
-<!ENTITY syncSetup.label "Configurar &syncBrand.shortName.label;…">
-<!ENTITY syncSetup.accesskey "f">
+<!ENTITY syncSignIn.label "Conectarse a &syncBrand.shortName.label;…">
+<!ENTITY syncSignIn.accesskey "Y">
 <!ENTITY syncSyncNowItem.label "Sincronizar ahora">
 <!ENTITY syncSyncNowItem.accesskey "z">
 <!ENTITY syncReAuthItem.label "Reconectar a &syncBrand.shortName.label;…">
@@ -515,7 +600,6 @@
 <!ENTITY social.directory.button "¡Llévame allí!">
 <!ENTITY social.directory.introText "Pulse en un servicio para añadirlo a &brandShortName;.">
 <!ENTITY social.directory.viewmore.text "Ver más">
-<!ENTITY customizeMode.tabTitle "Personalizar &brandShortName;">
 <!ENTITY customizeMode.menuAndToolbars.header2 "Herramientas y características adicionales">
 <!ENTITY customizeMode.menuAndToolbars.empty "¿Quiere más herramientas?">
 <!ENTITY customizeMode.menuAndToolbars.emptyLink "Elija de entre miles de complementos">
@@ -529,7 +613,6 @@
 <!ENTITY customizeMode.lwthemes.menuManage.accessKey "M">
 <!ENTITY customizeMode.lwthemes.menuGetMore "Conseguir más temas">
 <!ENTITY customizeMode.lwthemes.menuGetMore.accessKey "C">
-<!ENTITY customizeMode.deveditionTheme.label2 "Usar el tema Developer Edition">
 <!ENTITY social.chatBar.commandkey "c">
 <!ENTITY social.chatBar.label "Enfocar conversaciones">
 <!ENTITY social.chatBar.accesskey "c">
@@ -541,17 +624,18 @@
 <!ENTITY getUserMedia.selectCamera.accesskey "C">
 <!ENTITY getUserMedia.selectMicrophone.label "Micrófono para compartir:">
 <!ENTITY getUserMedia.selectMicrophone.accesskey "M">
+<!ENTITY getUserMedia.audioCapture.label "Se compartirá el audio de la pestaña.">
 <!ENTITY getUserMedia.allWindowsShared.message "Se compartirán todas las ventanas visibles en su pantalla.">
-<!ENTITY badContentBlocked.moreinfo "La mayoría de los sitios web funcionarán correctamente incluso si se bloquea contenido.">
-<!ENTITY mixedContentBlocked2.message "Contenido inseguro">
-<!ENTITY mixedContentBlocked2.moreinfo "Algunos elementos no cifrados en este sitio web han sido bloqueados.">
-<!ENTITY mixedContentBlocked2.learnMore "Saber más">
-<!ENTITY mixedContentBlocked2.options "Opciones">
-<!ENTITY mixedContentBlocked2.unblock.label "Desactivar la protección por ahora">
-<!ENTITY mixedContentBlocked2.unblock.accesskey "D">
-<!ENTITY mixedContentBlocked2.block.label "Activar protección">
-<!ENTITY mixedContentBlocked2.block.accesskey "v">
-<!ENTITY mixedContentBlocked2.disabled.message "La protección está desactivada">
+<!ENTITY trackingProtection.title "Protección contra rastreo">
+<!ENTITY trackingProtection.detectedBlocked3 "&brandShortName; está bloqueando partes de esta página que pueden rastrear su navegación.">
+<!ENTITY trackingProtection.detectedNotBlocked3 "Este sitio incluye elementos que pueden rastrear su navegación. Tiene la protección desactivada.">
+<!ENTITY trackingProtection.notDetected3 "No se han detectado elementos de rastreo en esta página.">
+<!ENTITY trackingProtection.unblock.label "Desactivar protección en este sitio">
+<!ENTITY trackingProtection.unblock.accesskey "e">
+<!ENTITY trackingProtection.unblockPrivate.label "Desactivar protección en esta sesión">
+<!ENTITY trackingProtection.unblockPrivate.accesskey "D">
+<!ENTITY trackingProtection.block2.label "Activar protección">
+<!ENTITY trackingProtection.block2.accesskey "A">
 <!ENTITY trackingContentBlocked.message "Rastreo">
 <!ENTITY trackingContentBlocked.moreinfo "Las partes de esta página que rastrean su actividad en línea han sido bloqueadas.">
 <!ENTITY trackingContentBlocked.learnMore "Saber más">
@@ -570,7 +654,6 @@
 <!ENTITY pluginNotification.width "28em">
 <!ENTITY uiTour.infoPanel.close "Cerrar">
 <!ENTITY appMenuSidebars.label "Barras laterales">
-<!ENTITY switchToMetroCmd2.label "Relanzar en &brandShortName; para Windows 8 táctil">
 <!ENTITY panicButton.view.mainTimeframeDesc "Olvidar:">
 <!ENTITY panicButton.view.5min "últimos 5 minutos">
 <!ENTITY panicButton.view.2hr "últimas 2 horas">
@@ -585,25 +668,5 @@
 <!ENTITY panicButton.thankyou.msg1 "Se ha eliminado su historial reciente.">
 <!ENTITY panicButton.thankyou.msg2 "¡Navegación segura!">
 <!ENTITY panicButton.thankyou.buttonlabel "¡Gracias!">
-<!ENTITY processHang.terminateScript.label "Detener script">
-<!ENTITY processHang.terminateScript.accessKey "D">
-<!ENTITY processHang.debugScript.label "Depurar script">
-<!ENTITY processHang.debugScript.accessKey "u">
-<!ENTITY processHang.terminatePlugin.label "Matar plugin">
-<!ENTITY processHang.terminatePlugin.accessKey "M">
-<!ENTITY processHang.terminateProcess.label "Matar proceso web">
-<!ENTITY processHang.terminateProcess.accessKey "w">
 <!ENTITY emeLearnMoreContextMenu.label "Más información sobre DRM…">
 <!ENTITY emeLearnMoreContextMenu.accesskey "D">
-<!ENTITY emeNotificationsNotNow.label "Ahora no">
-<!ENTITY emeNotificationsNotNow.accesskey "A">
-<!ENTITY emeNotificationsDontAskAgain.label "No preguntarme de nuevo">
-<!ENTITY emeNotificationsDontAskAgain.accesskey "N">
-<!ENTITY readingList.label "Lista de lectura">
-<!ENTITY readingList.sidebar.commandKey "R">
-<!ENTITY readingList.showSidebar.label "Mostrar el panel lateral de la lista de lectura">
-<!ENTITY readingList.sidebar.showMore.label "Mostrar más…">
-<!ENTITY readingList.sidebar.emptyText "Añada artículos a su lista de lectura para guardarlos para más tarde y encuéntrelos fácilmente cuando los necesite.">
-<!ENTITY readingList.sidebar.delete.tooltip "Eliminar de su lista de lectura">
-<!ENTITY readingList.sidebar.add.label "Añadir a la lista de lectura">
-<!ENTITY readingList.sidebar.add.tooltip "Añadir esta página a su lista de lectura">

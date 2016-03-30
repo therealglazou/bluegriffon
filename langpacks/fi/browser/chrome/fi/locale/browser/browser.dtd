@@ -40,9 +40,6 @@ can reach it easily. -->
 <!ENTITY  pinTab.accesskey                   "K">
 <!ENTITY  unpinTab.label                     "Irrota välilehti">
 <!ENTITY  unpinTab.accesskey                 "I">
-<!ENTITY  moveToGroup.label                  "Siirrä ryhmään">
-<!ENTITY  moveToGroup.accesskey              "S">
-<!ENTITY  moveToNewGroup.label               "Uusi ryhmä">
 <!ENTITY  moveToNewWindow.label              "Siirrä uuteen ikkunaan">
 <!ENTITY  moveToNewWindow.accesskey          "S">
 <!ENTITY  bookmarkAllTabs.label              "Lisää välilehdet kirjanmerkkeihin…">
@@ -110,13 +107,11 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY showAllTabsCmd.accesskey "N">
 
 <!ENTITY fxaSignIn.label "Kirjaudu sisään &syncBrand.shortName.label;-palveluun">
+<!ENTITY fxaSignedIn.tooltip "Avaa &syncBrand.shortName.label;-asetukset">
 <!ENTITY fxaSignInError.label "Palauta yhteys &syncBrand.shortName.label;-palveluun">
+<!ENTITY fxaUnverified.label "Vahvista tilisi">
 <!ENTITY syncStartPanel2.heading "&syncBrand.shortName.label; käytössä">
 <!ENTITY syncStartPanel2.subTitle "&brandShortName; aloittaa synkronoinnin hetken kuluttua.">
-<!ENTITY syncErrorPanel.heading "Yhteyden muodostaminen &syncBrand.shortName.label;-palveluun epäonnistui">
-<!ENTITY syncErrorPanel.subTitle "Kirjaudu sisään jatkaaksesi synkronointia.">
-<!ENTITY syncErrorPanel.signInButton.label "Kirjaudu sisään">
-<!ENTITY syncErrorPanel.signInButton.accesskey "K">
 
 
 <!ENTITY fullScreenMinimize.tooltip  "Pienennä ikkuna">
@@ -126,10 +121,20 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY fullScreenAutohide.accesskey "P">
 <!ENTITY fullScreenExit.label "Poistu kokoruututilasta">
 <!ENTITY fullScreenExit.accesskey "o">
-<!ENTITY fullscreenAllowButton.label "Salli">
-<!ENTITY fullscreenExitButton.label "Estä">
 
-<!ENTITY fullscreenExitHint2.value "Poistu koska tahansa painamalla ESC-näppäintä.">
+<!-- LOCALIZATION NOTE (fullscreenWarning.beforeDomain.label,
+     fullscreenWarning.afterDomain.label): these two strings are used
+     respectively before and after the domain requiring fullscreen.
+     Localizers can use one of them, or both, to better adapt this
+     sentence to their language. -->
+<!ENTITY fullscreenWarning.beforeDomain.label "">
+<!ENTITY fullscreenWarning.afterDomain.label "on nyt kokoruututilassa">
+<!ENTITY fullscreenWarning.generic.label "Dokumentti on nyt kokoruututilassa">
+<!-- LOCALIZATION NOTE (exitDOMFullscreen.button,
+     exitDOMFullscreenMac.button): the "escape" button on PC keyboards
+     is uppercase, while on Mac keyboards it is lowercase -->
+<!ENTITY exitDOMFullscreen.button "Poistu kokoruututilasta (Esc)">
+<!ENTITY exitDOMFullscreenMac.button "Poistu kokoruututilasta (esc)">
 <!ENTITY leaveDOMFullScreen.label "Poistu kokoruututilasta">
 <!ENTITY leaveDOMFullScreen.accesskey "P">
 
@@ -158,7 +163,7 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY shareSelect.accesskey "a">
 <!ENTITY shareVideo.label "Jaa video">
 <!ENTITY shareVideo.accesskey "v">
-<!ENTITY feedsMenu.label "Tilaa">
+<!ENTITY feedsMenu2.label "Tilaa sivu">
 <!ENTITY subscribeToPageMenupopup.label "Tilaa sivu">
 <!ENTITY subscribeToPageMenuitem.label "Tilaa sivu…">
 <!ENTITY addCurPagesCmd.label "Lisää välilehdet kirjanmerkkeihin…">
@@ -181,13 +186,39 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY printButton.label             "Tulosta">
 <!ENTITY printButton.tooltip           "Tulosta sivu">
 
-<!ENTITY locationItem.title            "Osoite">
+<!ENTITY urlbar.viewSiteInfo.label                      "Näytä tiedot sivustosta">
+<!-- LOCALIZATION NOTE: all of the following urlbar NotificationAnchor.label strings are
+     used to provide accessible labels to users of assistive technology like screenreaders.
+     It is not possible to see them visually in the UI. -->
+<!ENTITY urlbar.defaultNotificationAnchor.label         "Näytä ilmoitus">
+<!ENTITY urlbar.geolocationNotificationAnchor.label     "Näytä paikannuspyyntö">
+<!ENTITY urlbar.addonsNotificationAnchor.label          "Näytä lisäosan asennusviesti">
+<!ENTITY urlbar.indexedDBNotificationAnchor.label       "Näytä lisäosan viesti yhteydettömän tilan tiedoista">
+<!ENTITY urlbar.loginFillNotificationAnchor.label       "Muokkaa kirjautumistietoja">
+<!ENTITY urlbar.passwordNotificationAnchor.label        "Valitse tallennetaanko salasanaa">
+<!ENTITY urlbar.webappsNotificationAnchor.label         "Näytä sovelluksen asennusviesti">
+<!ENTITY urlbar.pluginsNotificationAnchor.label         "Muokkaa liitännäisten käyttöä sivulla">
+<!ENTITY urlbar.webNotsNotificationAnchor3.label         "Muokkaa sivuston oikeutta näyttää ilmoituksia">
+
+<!ENTITY urlbar.webRTCShareDevicesNotificationAnchor.label      "Muokkaa kameran ja/tai mikrofonin jakamisasetuksia sivustolla">
+<!ENTITY urlbar.webRTCSharingDevicesNotificationAnchor.label    "Jaat kamerasi ja/tai mikrofonisi sivuston kanssa">
+<!ENTITY urlbar.webRTCShareMicrophoneNotificationAnchor.label   "Muokkaa mikrofonin jakamisasetuksia sivustolla">
+<!ENTITY urlbar.webRTCSharingMicrophoneNotificationAnchor.label "Jaat mikrofonisi sivuston kanssa">
+<!ENTITY urlbar.webRTCShareScreenNotificationAnchor.label       "Muokkaa ikkunoiden tai näytön jakamisasetuksia sivustolla">
+<!ENTITY urlbar.webRTCSharingScreenNotificationAnchor.label     "Jaat ikkunan tai näyttösi sivuston kanssa">
+
+<!ENTITY urlbar.pointerLockNotificationAnchor.label     "Valitse voiko sivusto piilottaa hiiren osoittimen">
+<!ENTITY urlbar.servicesNotificationAnchor.label        "Näytä palvelun asennusviesti">
+<!ENTITY urlbar.translateNotificationAnchor.label       "Käännä sivu">
+<!ENTITY urlbar.translatedNotificationAnchor.label      "Muokkaa sivujen kääntämistä">
+<!ENTITY urlbar.emeNotificationAnchor.label             "Muokkaa DRM-ohjelmien käyttöä">
+
+<!ENTITY urlbar.openHistoryPopup.tooltip                "Avaa sivuhistoria">
+
 <!ENTITY searchItem.title              "Etsi">
 
 <!-- Toolbar items --> 
 <!ENTITY homeButton.label             "Aloitussivu">
-
-<!ENTITY tabGroupsButton.label        "Välilehtiryhmät">
 
 <!ENTITY bookmarksButton.label           "Kirjanmerkit">
 <!ENTITY bookmarksCmd.commandkey "b">
@@ -219,14 +250,15 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY addons.label                 "Lisäosat">
 <!ENTITY addons.accesskey             "o">
 <!ENTITY addons.commandkey            "A">
-<!ENTITY webapps.label                "Sovellukset">
-<!ENTITY webapps.accesskey            "S">
 
 <!ENTITY webDeveloperMenu.label       "Web-työkalut (englanninkielisiä)">
 <!ENTITY webDeveloperMenu.accesskey   "W">
 
 <!ENTITY devToolsCmd.keycode          "VK_F12">
 <!ENTITY devToolsCmd.keytext          "F12">
+
+<!ENTITY devtoolsServiceWorkers.label      "Service Workers">
+<!ENTITY devtoolsServiceWorkers.accesskey  "k">
 
 <!ENTITY devtoolsConnect.label        "Connect…">
 <!ENTITY devtoolsConnect.accesskey    "e">
@@ -269,17 +301,17 @@ These should match what Safari and other Apple applications use on OS X Lion. --
   -  application menu item that opens the browser toolbox UI in the Tools menu. -->
 <!ENTITY browserToolboxMenu.label     "Browser Toolbox">
 <!ENTITY browserToolboxMenu.accesskey "e">
+<!ENTITY browserToolboxCmd.commandkey "i">
 
 <!-- LOCALIZATION NOTE (browserContentToolboxMenu.label): This is the label for the
   -  application menu item that opens the browser content toolbox UI in the Tools menu.
   -  This toolbox allows to debug the chrome of the content process in multiprocess builds.  -->
 <!ENTITY browserContentToolboxMenu.label     "Browser Content Toolbox">
+<!ENTITY browserContentToolboxMenu.accesskey "x">
 
 <!ENTITY devToolbarCloseButton.tooltiptext "Close Developer Toolbar">
 <!ENTITY devToolbarMenu.label              "Developer Toolbar">
 <!ENTITY devToolbarMenu.accesskey          "v">
-<!ENTITY devAppMgrMenu.label               "App Manager">
-<!ENTITY devAppMgrMenu.accesskey           "A">
 <!ENTITY webide.label                      "WebIDE">
 <!ENTITY webide.accesskey                  "W">
 <!ENTITY webide.keycode                    "VK_F8">
@@ -298,11 +330,22 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 
 <!ENTITY fileMenu.label          "Tiedosto">
 <!ENTITY fileMenu.accesskey        "T">
+<!ENTITY newUserContext.label             "Uusi luokiteltu välilehti">
+<!ENTITY newUserContext.accesskey         "l">
+<!ENTITY userContextPersonal.label        "Omat">
+<!ENTITY userContextPersonal.accesskey    "H">
+<!ENTITY userContextWork.label            "Työ">
+<!ENTITY userContextWork.accesskey        "T">
+<!ENTITY userContextBanking.label         "Raha">
+<!ENTITY userContextBanking.accesskey     "R">
+<!ENTITY userContextShopping.label        "Kaupat">
+<!ENTITY userContextShopping.accesskey    "K">
 <!ENTITY newNavigatorCmd.label         "Uusi ikkuna">
 <!ENTITY newNavigatorCmd.key         "N">
 <!ENTITY newNavigatorCmd.accesskey       "U">
 <!ENTITY newPrivateWindow.label     "Uusi yksityinen ikkuna">
 <!ENTITY newPrivateWindow.accesskey "y">
+<!ENTITY newNonRemoteWindow.label   "Uusi ei-e10s ikkuna">
 
 <!ENTITY editMenu.label          "Muokkaa">
 <!ENTITY editMenu.accesskey        "M">
@@ -338,8 +381,6 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 
 <!ENTITY viewMenu.label          "Näytä">
 <!ENTITY viewMenu.accesskey        "N">
-<!ENTITY viewTabGroups.label            "Välilehtiryhmät">
-<!ENTITY viewTabGroups.accesskey        "V">
 <!ENTITY viewToolbarsMenu.label        "Työkalupalkit">
 <!ENTITY viewToolbarsMenu.accesskey      "T">
 <!ENTITY viewSidebarMenu.label  "Sivupaneeli">
@@ -368,6 +409,23 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY appMenuHistory.viewSidebar.label "Näytä sivuhistoriapaneeli">
 <!ENTITY appMenuHelp.tooltip "Avaa ohjevalikko">
 
+<!ENTITY appMenuRemoteTabs.label "Synkronoidut välilehdet">
+<!ENTITY appMenuRemoteTabs.fetching.label "Noudetaan synkronoituja välilehtiä…">
+<!-- LOCALIZATION NOTE (appMenuRemoteTabs.notabs.label): This is shown beneath
+     the name of a device when that device has no open tabs -->
+<!ENTITY appMenuRemoteTabs.notabs.label "Ei avoimia välilehtiä">
+<!-- LOCALIZATION NOTE (appMenuRemoteTabs.tabsnotsyncing.label): This is shown
+     when Sync is configured but syncing tabs is disabled. -->
+<!ENTITY appMenuRemoteTabs.tabsnotsyncing.label "Ota välilehtien synkronointi käyttöön, jotta voit katsella listaa muiden laitteidesi välilehdistä.">
+<!-- LOCALIZATION NOTE (appMenuRemoteTabs.noclients.label): This is shown
+     when Sync is configured but this appears to be the only device attached to
+     the account. We also show links to download Firefox for android/ios. -->
+<!ENTITY appMenuRemoteTabs.noclients.label "Kirjaudu Firefoxiin muilla laitteillasi, jotta voit katsella niiden välilehtiä tästä.">
+<!ENTITY appMenuRemoteTabs.openprefs.label "Sync-palvelun asetukset">
+<!ENTITY appMenuRemoteTabs.notsignedin.label "Kirjaudu sisään, jotta voit katsella listaa muiden laitteidesi välilehdistä.">
+<!ENTITY appMenuRemoteTabs.signin.label "Kirjaudu Sync-palveluun">
+<!ENTITY appMenuRemoteTabs.sidebar.label "Näytä synkronoit. välilehtien sivupaneeli">
+
 <!ENTITY customizeMenu.addToToolbar.label "Lisää työkalupalkkiin">
 <!ENTITY customizeMenu.addToToolbar.accesskey "L">
 <!ENTITY customizeMenu.addToPanel.label "Lisää valikkoon">
@@ -393,6 +451,14 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY urlbar.accesskey             "d">
 <!ENTITY urlbar.switchToTab.label     "Siirry välilehteen:">
 
+<!ENTITY urlbar.searchSuggestionsNotification.question "Näytetäänkö hakuja tehdessä hakuehdotuksia?">
+<!ENTITY urlbar.searchSuggestionsNotification.learnMore "Lue lisää…">
+<!ENTITY urlbar.searchSuggestionsNotification.learnMore.accesskey "L">
+<!ENTITY urlbar.searchSuggestionsNotification.disable "Ei">
+<!ENTITY urlbar.searchSuggestionsNotification.disable.accesskey "E">
+<!ENTITY urlbar.searchSuggestionsNotification.enable "Kyllä">
+<!ENTITY urlbar.searchSuggestionsNotification.enable.accesskey "K">
+
 <!-- 
   Comment duplicated from browser-sets.inc:
 
@@ -417,11 +483,27 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY searchFocus.commandkey2      "e">
 <!ENTITY searchFocusUnix.commandkey   "j">
 
+<!-- LOCALIZATION NOTE (contentSearchInput.label, contentSearchSubmit.label):
+     These are set as the aria-label attribute for the search input box and
+     submit button in the in-content search UI, to be used by screen readers. -->
+<!ENTITY contentSearchInput.label     "Hakutermit">
+<!ENTITY contentSearchSubmit.label    "Suorita haku">
+
 <!-- LOCALIZATION NOTE (searchFor.label, searchWith.label):
      These two strings are used to build the header above the list of one-click
      search providers:  "Search for <used typed keywords> with:" -->
-<!ENTITY searchFor.label              "Haku ">
+<!ENTITY searchFor.label              "Hae ">
 <!ENTITY searchWith.label             " palvelusta:">
+
+<!-- LOCALIZATION NOTE (search.label, searchAfter.label):
+     This string is used to build the header above the list of one-click search
+     providers when a one off engine has been selected.  The searchAfter text is
+     intentionally left empty for en-US and can be used by other localizations to
+     display a string after the search engine name.  This string will be displayed
+     as:  "Search <selected engine name><searchAfter.label text>" -->
+<!ENTITY search.label                 "Hae palvelusta ">
+<!ENTITY searchAfter.label            "">
+
 <!-- LOCALIZATION NOTE (searchWithHeader.label):
      The wording of this string should be as close as possible to
      searchFor.label and searchWith.label. This string will be used instead of
@@ -432,7 +514,10 @@ These should match what Safari and other Apple applications use on OS X Lion. --
      consider translating it as if it said only "Search Settings". -->
 <!ENTITY changeSearchSettings.button  "Muuta hakuasetuksia">
 
-<!ENTITY tabView.commandkey           "e">
+<!ENTITY searchInNewTab.label         "Etsi uudessa välilehdessä">
+<!ENTITY searchInNewTab.accesskey     "E">
+<!ENTITY searchSetAsDefault.label     "Aseta oletushakukoneeksi">
+<!ENTITY searchSetAsDefault.accesskey "A">
 
 <!ENTITY openLinkCmdInTab.label        "Avaa uuteen välilehteen">
 <!ENTITY openLinkCmdInTab.accesskey    "v">
@@ -620,6 +705,8 @@ you can use these alternative items. Otherwise, their values should be empty.  -
 <!ENTITY closeCmd.key                    "W">
 <!ENTITY closeCmd.accesskey              "S">
 
+<!ENTITY toggleMuteCmd.key              "M">
+
 <!ENTITY pageStyleMenu.label  "Sivun tyylit">
 <!ENTITY pageStyleMenu.accesskey  "v">
 <!ENTITY pageStyleNoStyle.label  "Ei tyylimäärittelyjä">
@@ -657,44 +744,71 @@ you can use these alternative items. Otherwise, their values should be empty.  -
 <!ENTITY spellAddDictionaries.accesskey "H">
 
 <!ENTITY editBookmark.done.label                     "Valmis">
-<!ENTITY editBookmark.cancel.label                   "Peruuta">
 <!ENTITY editBookmark.removeBookmark.accessKey       "P">
 
-<!ENTITY identity.unverifiedsite2 "Tähän verkkosivustoon ei liity identiteettitietoja.">
-<!ENTITY identity.connectedTo "Yhteys muodostettu verkkosivustoon">
-<!-- Localization note (identity.runBy) : This string appears between a
-domain name (above) and an organization name (below). E.g.
+<!ENTITY identity.connectionSecure "Suojattu yhteys">
+<!ENTITY identity.connectionNotSecure "Yhteys ei ole suojattu">
+<!ENTITY identity.connectionFile "Sivu on tallennettu tietokoneellesi.">
+<!ENTITY identity.connectionVerified1 "Yhteys sivustoon on suojattu ja sivustoa hallinnoi:">
+<!ENTITY identity.connectionInternal "Tämä on suojattu &brandShortName;-sivu.">
+<!ENTITY identity.insecureLoginForms2 "Tällä sivulla kirjoitettujen kirjautumistietojen turvallisuus voi vaarantua.">
 
-example.com
-which is run by
-Example Enterprises, Inc.
+<!-- Strings for connection state warnings. -->
+<!ENTITY identity.activeBlocked "&brandShortName; on estänyt suojaamattoman sisällön näyttämisen.">
+<!ENTITY identity.passiveLoaded "Tällä sivulla on suojaamatonta sisältöä (kuten kuvat).">
+<!ENTITY identity.activeLoaded "Suojaamattoman sisällön estäminen on otettu pois päältä sivustolla.">
+<!ENTITY identity.weakEncryption "Sivusto käyttää heikkoa salausta.">
 
-The layout of the identity dialog prevents combining this into a single string with
-substitution variables.  If it is difficult to translate the sense of the string
-with that structure, consider a translation which ignores the preceding domain and
-just addresses the organization to follow, e.g. "This site is run by " -->
-<!ENTITY identity.runBy "Sivustoa hallinnoi">
+<!-- Strings for connection state warnings in the subview. -->
+<!ENTITY identity.description.insecure "Yhteytesi verkkosivustoon ei ole yksityinen. Sivullisten on mahdollista tarkastella lähetettyjä tietoja (esim. salasanat, viestit, luottokorttitiedot).">
+<!ENTITY identity.description.insecureLoginForms "Kirjautumistiedot, jotka annat tällä sivulla eivät ole suojassa ja ne voidaan murtaa.">
+<!ENTITY identity.description.weakCipher "Yhteytesi verkkosivustoon käyttää heikkoa salausta eikä sen takia ole yksityinen.">
+<!ENTITY identity.description.weakCipher2 "Sivullisten on mahdollista tarkastella lähetettyjä tietoja tai vaikuttaa sivuston toimintaan.">
+<!ENTITY identity.description.activeBlocked "&brandShortName; on estänyt suojaamattoman sisällön näyttämisen.">
+<!ENTITY identity.description.passiveLoaded "Yhteytesi verkkosivustoon ei ole yksityinen ja sivullisten on mahdollista tarkastella tietoja, joita lähetät sivustolle.">
+<!ENTITY identity.description.passiveLoaded2 "Tällä sivulla on suojaamatonta sisältöä (kuten kuvat).">
+<!ENTITY identity.description.passiveLoaded3 "Vaikka &brandShortName; on osaksi estänyt suojaamattoman sisällön, mutta osa näkyvästä sisällöstä on edelleen suojaamatonta (kuten kuvat).">
+<!ENTITY identity.description.activeLoaded "Tällä sivulla on suojaamatonta sisältöä (kuten komentosarjat) eikä yhteytesi sivustoon ei ole yksityinen.">
+<!ENTITY identity.description.activeLoaded2 "Sivullisten on mahdollista tarkastella lähetettyjä tietoja (esim. salasanat, viestit, luottokorttitiedot).">
 
-<!ENTITY identity.moreInfoLinkText "Lisätietoja…">
+<!ENTITY identity.enableMixedContentBlocking.label "Ota suojaus käyttöön">
+<!ENTITY identity.enableMixedContentBlocking.accesskey "O">
+<!ENTITY identity.disableMixedContentBlocking.label "Poista suojaus käytöstä">
+<!ENTITY identity.disableMixedContentBlocking.accesskey "P">
+<!ENTITY identity.learnMore "Lue lisää">
+
+<!ENTITY identity.moreInfoLinkText2 "Lisätietoja">
 
 <!ENTITY identity.permissions "Oikeudet">
-
-<!-- LOCALIZATION NOTE (identity.help.tooltip) : This string should be the
-     localized title of this SUMO article
-     https://support.mozilla.org/kb/how-do-i-tell-if-my-connection-is-secure -->
-<!ENTITY identity.help.tooltip "Mistä tiedän, onko yhteyteni sivustoon suojattu?">
+<!ENTITY identity.permissionsEmpty "Sivustolle ei ole myönnetty mitään erityisoikeuksia.">
 
 <!-- Name for the tabs toolbar as spoken by screen readers.
      The word "toolbar" is appended automatically and should not be contained below! -->
 <!ENTITY tabsToolbar.label "Selaimen välilehdet">
 
-<!-- LOCALIZATION NOTE (syncTabsMenu2.label): This appears in the history menu -->
-<!ENTITY syncTabsMenu2.label     "Välilehdet muissa laitteissa">
+<!-- LOCALIZATION NOTE (syncTabsMenu3.label): This appears in the history menu and history panel -->
+<!ENTITY syncTabsMenu3.label     "Synkronoidut välilehdet">
+
+<!ENTITY syncedTabs.sidebar.label              "Synkronoidut välilehdet">
+<!ENTITY syncedTabs.sidebar.fetching.label     "Noudetaan synkronoituja välilehtiä…">
+<!ENTITY syncedTabs.sidebar.noclients.label    "Kirjaudu Firefoxiin muilla laitteillasi, jotta voit katsella niiden välilehtiä tästä.">
+<!ENTITY syncedTabs.sidebar.notsignedin.label  "Kirjaudu sisään, jotta voit katsella listaa muiden laitteidesi välilehdistä.">
+<!ENTITY syncedTabs.sidebar.notabs.label       "Ei avoimia välilehtiä">
+<!ENTITY syncedTabs.sidebar.openprefs.label    "Avaa &syncBrand.shortName.label;-asetukset">
+<!-- LOCALIZATION NOTE (syncedTabs.sidebar.tabsnotsyncing.label): This is shown
+     when Sync is configured but syncing tabs is disabled. -->
+<!ENTITY syncedTabs.sidebar.tabsnotsyncing.label       "Ota välilehtien synkronointi käyttöön, jotta voit katsella listaa muiden laitteidesi välilehdistä.">
+
+<!ENTITY syncedTabs.context.openTab.label                   "Avaa tämä välilehti">
+<!ENTITY syncedTabs.context.openTab.accesskey               "A">
+<!ENTITY syncedTabs.context.bookmarkSingleTab.label         "Luo tästä välilehdestä kirjanmerkki…">
+<!ENTITY syncedTabs.context.bookmarkSingleTab.accesskey     "L">
+
 
 <!ENTITY syncBrand.shortName.label    "Sync">
 
-<!ENTITY syncSetup.label              "Määritä &syncBrand.shortName.label;n asetukset…">
-<!ENTITY syncSetup.accesskey          "M">
+<!ENTITY syncSignIn.label             "Kirjaudu &syncBrand.shortName.label;-palveluun…">
+<!ENTITY syncSignIn.accesskey         "K">
 <!ENTITY syncSyncNowItem.label        "Synkronoi">
 <!ENTITY syncSyncNowItem.accesskey    "S">
 <!ENTITY syncReAuthItem.label         "Palauta yhteys &syncBrand.shortName.label;-palveluun…">
@@ -727,7 +841,6 @@ just addresses the organization to follow, e.g. "This site is run by " -->
 <!ENTITY social.directory.introText "Lisää palvelu &brandShortName;iin napsauttamalla.">
 <!ENTITY social.directory.viewmore.text "Näytä lisää">
 
-<!ENTITY customizeMode.tabTitle "Muokkaa &brandShortName;ia">
 <!ENTITY customizeMode.menuAndToolbars.header2 "Lisää työkaluja ja ominaisuuksia">
 <!ENTITY customizeMode.menuAndToolbars.empty "Haluatko muita työkaluja?">
 <!ENTITY customizeMode.menuAndToolbars.emptyLink "Valitse tuhansista lisäosista">
@@ -741,7 +854,6 @@ just addresses the organization to follow, e.g. "This site is run by " -->
 <!ENTITY customizeMode.lwthemes.menuManage.accessKey "M">
 <!ENTITY customizeMode.lwthemes.menuGetMore "Lataa lisää teemoja">
 <!ENTITY customizeMode.lwthemes.menuGetMore.accessKey "L">
-<!ENTITY customizeMode.deveditionTheme.label2 "Käytä kehittäjäversion teemaa">
 
 <!ENTITY social.chatBar.commandkey "c">
 <!ENTITY social.chatBar.label "Keskustelut">
@@ -756,20 +868,25 @@ just addresses the organization to follow, e.g. "This site is run by " -->
 <!ENTITY getUserMedia.selectCamera.accesskey "k">
 <!ENTITY getUserMedia.selectMicrophone.label "Jaettava mikrofoni:">
 <!ENTITY getUserMedia.selectMicrophone.accesskey "m">
+<!ENTITY getUserMedia.audioCapture.label "Välilehden äänet jaetaan.">
 <!ENTITY getUserMedia.allWindowsShared.message "Kaikki näkyvissä olevat ikkunat jaetaan.">
 
-<!-- Bad Content Blocker Doorhanger Notification -->
-<!ENTITY badContentBlocked.moreinfo "Useimmat verkkosivut toimivat edelleen moitteettomasti vaikka sisältö on estetty.">
-
-<!ENTITY mixedContentBlocked2.message "Suojaamatonta sisältöä">
-<!ENTITY mixedContentBlocked2.moreinfo "Jotkin sivuston suojaamattomista elementeistä estettiin.">
-<!ENTITY mixedContentBlocked2.learnMore "Lue lisää">
-<!ENTITY mixedContentBlocked2.options "Asetukset">
-<!ENTITY mixedContentBlocked2.unblock.label "Poista suojaus käytöstä toistaiseksi">
-<!ENTITY mixedContentBlocked2.unblock.accesskey "P">
-<!ENTITY mixedContentBlocked2.block.label "Ota suojaus käyttöön">
-<!ENTITY mixedContentBlocked2.block.accesskey "O">
-<!ENTITY mixedContentBlocked2.disabled.message "Suojaus on pois päältä">
+<!ENTITY trackingProtection.title "Seurannan suojaus">
+<!ENTITY trackingProtection.detectedBlocked3 "&brandShortName; estää osia sivusta, jotka saattavat seurata selaamistasi.">
+<!ENTITY trackingProtection.detectedNotBlocked3 "Sivusto sisältää osia, jotka saattavat seurata sinua. Seurannan suojaus on pois päältä.">
+<!ENTITY trackingProtection.notDetected3 "Sivulta ei löytynyt seuraavia osia.">
+<!-- LOCALIZATION NOTE (trackingProtection.unblock.label, trackingProtection.unblock.accesskey):
+     The associated button with this label and accesskey is only shown when opening the control
+     center while looking at a site with trackers in NON-private browsing mode. -->
+<!ENTITY trackingProtection.unblock.label "Poista suojaus tältä sivustolta">
+<!ENTITY trackingProtection.unblock.accesskey "s">
+<!-- LOCALIZATION NOTE (trackingProtection.unblockPrivate.label, trackingProtection.unblockPrivate.accesskey):
+     The associated button with this label and accesskey is only shown when opening the control
+     center while looking at a site with trackers in PRIVATE browsing mode. -->
+<!ENTITY trackingProtection.unblockPrivate.label "Poista suojaus tästä istunnosta">
+<!ENTITY trackingProtection.unblockPrivate.accesskey "i">
+<!ENTITY trackingProtection.block2.label "Ota suojaus käyttöön">
+<!ENTITY trackingProtection.block2.accesskey "O">
 
 <!ENTITY trackingContentBlocked.message "Seuranta">
 <!ENTITY trackingContentBlocked.moreinfo "Sivun sinua verkossa seuraavat osat estettiin.">
@@ -802,8 +919,6 @@ just addresses the organization to follow, e.g. "This site is run by " -->
 
 <!ENTITY appMenuSidebars.label         "Sivupalkit">
 
-<!ENTITY switchToMetroCmd2.label       "Käynnistä &brandShortName; uudestaan Windows 8 kosketusnäyttöversiona">
-
 <!-- LOCALIZATION NOTE: (panicButton.view.mainTimeframeDesc, panicButton.view.5min, panicButton.view.2hr, panicButton.view.day):
      The .mainTimeframeDesc string combined with any of the 3 others is meant to form a complete sentence, e.g. "Forget the last: Five minutes".
      Please ensure that this remains the case in the translation. -->
@@ -829,15 +944,6 @@ just addresses the organization to follow, e.g. "This site is run by " -->
 <!ENTITY panicButton.thankyou.msg2                "Turvallista selaamista!">
 <!ENTITY panicButton.thankyou.buttonlabel         "Kiitos!">
 
-<!ENTITY processHang.terminateScript.label        "Pysäytä komentosarja">
-<!ENTITY processHang.terminateScript.accessKey    "P">
-<!ENTITY processHang.debugScript.label            "Etsi vika komentosarjasta">
-<!ENTITY processHang.debugScript.accessKey        "E">
-<!ENTITY processHang.terminatePlugin.label        "Tapa liitännäinen">
-<!ENTITY processHang.terminatePlugin.accessKey    "l">
-<!ENTITY processHang.terminateProcess.label       "Tapa verkkosivuprosessi">
-<!ENTITY processHang.terminateProcess.accessKey   "v">
-
 <!ENTITY emeLearnMoreContextMenu.label            "Lue lisää DRM-suojauksesta…">
 <!ENTITY emeLearnMoreContextMenu.accesskey        "D">
 <!ENTITY emeNotificationsNotNow.label             "Ei nyt">
@@ -845,15 +951,8 @@ just addresses the organization to follow, e.g. "This site is run by " -->
 <!ENTITY emeNotificationsDontAskAgain.label       "Älä kysy uudestaan">
 <!ENTITY emeNotificationsDontAskAgain.accesskey   "Ä">
 
-<!ENTITY readingList.label                        "Lukulista">
-<!ENTITY readingList.sidebar.commandKey           "L">
-<!ENTITY readingList.showSidebar.label            "Näytä lukulistasivupaneeli">
-<!-- Pre-landed string for bug 1124153 -->
-<!ENTITY readingList.sidebar.showMore.label       "Näytä enemmän…">
-<!-- Pre-landed string for bug 1133662 -->
-<!ENTITY readingList.sidebar.emptyText            "Lisää artikkeleita lukulistaan, jotta löydät ne helposti myöhemmin kun tarvitset niitä.">
-<!-- Pre-landed string for bug 1123525 -->
-<!ENTITY readingList.sidebar.delete.tooltip       "Poista lukulistasta">
-<!-- Pre-landed strings for bug 1123519 -->
-<!ENTITY readingList.sidebar.add.label            "Lisää lukulistaan">
-<!ENTITY readingList.sidebar.add.tooltip          "Lisää sivu lukulistaan">
+<!ENTITY identity.removeCertException.accesskey "R">
+
+<!ENTITY identity.removeCertException.label "Remove Exception">
+<!ENTITY openLinkCmdInContainerTab.accesskey "C">
+<!ENTITY openLinkCmdInContainerTab.label "Open Link in New Container Tab">

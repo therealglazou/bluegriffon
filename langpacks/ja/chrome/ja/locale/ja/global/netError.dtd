@@ -73,9 +73,14 @@
 ">
 
 <!ENTITY malwareBlocked.title		"攻撃サイトの疑いがあります！">
-<!ENTITY malwareBlocked.longDesc		"
+<!ENTITY malwareBlocked.longDesc	"
 <p>攻撃サイトはあなたの個人情報を盗んだり、コンピュータを乗っ取って他のコンピュータへの攻撃に利用したり、あなたのシステムを破壊するためのプログラムをインストールしようとします。</p>
 <p>あなたがこのサイトの管理者で、この警告が誤りである場合は<a href='http://www.stopbadware.org/home/reviewinfo'>再審査を求める</a>ことができます。</p>
+">
+
+<!ENTITY unwantedBlocked.title		"望ましくないソフトウェアサイトの疑いがあります！">
+<!ENTITY unwantedBlocked.longDesc	"
+<p>望ましくないソフトウェアのページは、予期しない方法で欺き、システムに影響を与えるソフトウェアをインストールさせようとします。</p>
 ">
 
 <!ENTITY phishingBlocked.title		"偽装サイトの疑いがあります！">
@@ -84,22 +89,21 @@
 <p>この種の偽装サイトはフィッシングと呼ばれる詐欺に使われています。本物のサイトに見せかけた詐欺ページを作り、あなたに信頼させようとしているのです。</p>
 ">
 
-<!ENTITY cspFrameAncestorBlocked.title	"コンテンツセキュリティポリシーによりブロックされました">
-<!ENTITY cspFrameAncestorBlocked.longDesc	"<p>セキュリティポリシーにより読み込みが禁止されたコンテンツが含まれているため、このページの読み込みを中止しました。</p>">
+<!ENTITY forbiddenBlocked.title		"禁止サイト">
+<!ENTITY forbiddenBlocked.longDesc	"<p>このページの読み込みは、ブラウザの設定に従いブロックされています。</p>
+">
+
+<!ENTITY securityOverride.linkText	"例外として扱うこともできます...">
+<!ENTITY securityOverride.warningContent "
+<p>インターネット接続環境を完全には信頼できない場合や、これまでこのサーバではこの警告が表示されなかった場合は、このサイトを例外として追加しないでください。</p>
+<p>どうしてもこのサイトを例外として追加したい場合は、暗号化の高度な設定で追加してください。</p>
+">
+
+<!ENTITY cspBlocked.title		"コンテンツセキュリティポリシーによりブロックされました">
+<!ENTITY cspBlocked.longDesc		"<p>セキュリティポリシーにより読み込みが禁止されたコンテンツが含まれているため、このページの読み込みを中止しました。</p>">
 
 <!ENTITY corruptedContentError.title	"コンテンツデータ破損エラー">
 <!ENTITY corruptedContentError.longDesc	"<p>このページは、データの伝送中にエラーが検出されたため表示できません。</p><ul><li>Web サイトの所有者に連絡を取り、この問題を報告してください。</li></ul>">
 
 <!ENTITY remoteXUL.title		"リモート XUL">
 <!ENTITY remoteXUL.longDesc		"<p><ul><li>Web サイトの所有者に連絡を取り、この問題を報告してください。</li></ul></p>">
-
-<!-- Include app-specific error messages - do not change this in localization!
-     Some applications might override netErrorApp.dtd with their specific version,
-     this inclusion needs to be intact for that approach to work correctly.
-     Please, try to keep this at the end of the file. -->
-<!ENTITY % netErrorAppDTD SYSTEM "chrome://global/locale/netErrorApp.dtd">
-%netErrorAppDTD;
-
-<!ENTITY cspBlocked.longDesc "<p>The browser prevented this page from loading in this way because the page has a content security policy that disallows it.</p>">
-
-<!ENTITY cspBlocked.title "Blocked by Content Security Policy">

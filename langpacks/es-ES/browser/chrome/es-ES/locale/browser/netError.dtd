@@ -6,6 +6,8 @@
 %brandDTD;
 <!ENTITY loadError.label "Problema al cargar la página">
 <!ENTITY retry.label "Reintentar">
+<!ENTITY returnToPreviousPage.label "Ir atrás">
+<!ENTITY advanced.label "Avanzado">
 <!ENTITY connectionFailure.title "No se puede conectar">
 <!ENTITY connectionFailure.longDesc "&sharedLongDesc;">
 <!ENTITY deniedPortAccess.title "Esta dirección está restringida">
@@ -137,13 +139,6 @@
    acceder a la web.</li>
 </ul>
 ">
-<!ENTITY malwareBlocked.title "¡Posible sitio atacante!">
-<!ENTITY malwareBlocked.longDesc "<p>Los sitios atacantes intentan instalar programas que pueden robar información privada, usar su equipo para atacar otros o dañar su sistema.</p>
-<p>Los propietarios de sitios web que crean que han sido identificados como un sitio atacante pueden <a href='http://www.stopbadware.org/home/reviewinfo' >pedir una revisión</a>.</p>
-">
-<!ENTITY phishingBlocked.title "¡Posible sitio web fraudulento!">
-<!ENTITY phishingBlocked.longDesc "<p>Introducir cualquier información personal en esta página puede resultar en un robo de identidad u otro fraude.</p>
-<p>Estos tipos de webs fraudulentas son usadas en ataques de phishing, en los cuales páginas y correos electrónicos fraudulentos se utilizan para imitar fuentes en las que confía.</p>">
 <!ENTITY cspBlocked.title "Bloqueado por la política de seguridad de contenido">
 <!ENTITY cspBlocked.longDesc "<p>&brandShortName; evitó que esta página se cargue de esta forma porque la página tiene una política de seguridad de contenido que no lo permite.</p>">
 <!ENTITY corruptedContentError.title "Error de contenido corrupto">
@@ -157,16 +152,14 @@
 <button id='getMeOutOfHereButton'>&securityOverride.getMeOutOfHereButton;</button>
 <button id='exceptionDialogButton'>&securityOverride.exceptionButtonLabel;</button>
 ">
-<!ENTITY errorReporting.title "Informar de este error">
-<!ENTITY errorReporting.longDesc "Informar de la dirección y la información del certificado de <span id='hostname'></span> nos ayudará a identificar y bloquear los sitios maliciosos. ¡Gracias por ayudar a crear una web más segura!">
-<!ENTITY errorReporting.automatic "En lo sucesivo, informar de errores automáticamente">
+<!ENTITY errorReporting.automatic2 "Informar de errores como esto ayuda a Mozilla a identificar y bloquear sitios maliciosos">
 <!ENTITY errorReporting.learnMore "Más información…">
-<!ENTITY errorReporting.sending "Enviando informe">
-<!ENTITY errorReporting.sent "Informe enviado">
-<!ENTITY errorReporting.report "Informar">
-<!ENTITY errorReporting.tryAgain "Vuelva a intentarlo">
 <!ENTITY remoteXUL.title "XUL remoto">
 <!ENTITY remoteXUL.longDesc "<p><ul><li>Contacte con los propietarios del sitio web para informarles de este problema.</li></ul></p>">
 <!ENTITY sslv3Used.title "No es posible conectar de manera segura">
-<!ENTITY sslv3Used.longDesc "Información avanzada: ssl_error_unsupported_version">
-<!ENTITY sslv3Used.learnMore "Saber más…">
+<!ENTITY sslv3Used.longDesc2 "Información avanzada: SSL_ERROR_UNSUPPORTED_VERSION">
+<!ENTITY weakCryptoUsed.title "Su conexión no es segura">
+<!ENTITY weakCryptoUsed.longDesc2 "Información avanzada: SSL_ERROR_NO_CYPHER_OVERLAP">
+<!ENTITY weakCryptoAdvanced.title "Avanzado">
+<!ENTITY weakCryptoAdvanced.longDesc "<span class='hostname'></span> usa tecnología de seguridad que está obsoleta y es vulnerable a ataques. Un atacante podría revelar información fácilmente que usted pensaba que es segura.">
+<!ENTITY weakCryptoAdvanced.override "(No seguro) Pruebe a cargar <span class='hostname'></span> usando seguridad obsoleta">

@@ -7,6 +7,8 @@
 
 <!ENTITY loadError.label		"ページ読み込みエラー"><!-- (^^; タイトルバーやタブに表示されるので簡潔に -->
 <!ENTITY retry.label			"再試行">
+<!ENTITY returnToPreviousPage.label	"戻る">
+<!ENTITY advanced.label			"エラー内容">
 
 <!-- Specific error messages -->
 
@@ -149,14 +151,22 @@
 <p>あなたがこのサイトの管理者で、この警告が誤りである場合は<a href='http://www.stopbadware.org/home/reviewinfo'>再審査を求める</a>ことができます。</p>
 ">
 
+<!ENTITY unwantedBlocked.title		"望ましくないソフトウェアサイトの疑いがあります！">
+<!ENTITY unwantedBlocked.longDesc	"
+<p>望ましくないソフトウェアのページは、予期しない方法で欺き、システムに影響を与えるソフトウェアをインストールさせようとします。</p>
+">
+
 <!ENTITY phishingBlocked.title		"偽装サイトの疑いがあります！">
 <!ENTITY phishingBlocked.longDesc	"
 <p>このページで個人情報を入力してしまうと、なりすましや詐欺などの被害に遭う恐れがあります。</p>
 <p>この種の偽装サイトはフィッシングと呼ばれる詐欺に使われています。本物のサイトに見せかけた詐欺ページを作り、あなたに信頼させようとしているのです。</p>
 ">
 
-<!ENTITY cspFrameAncestorBlocked.title	"コンテンツセキュリティポリシーによりブロックされました">
-<!ENTITY cspFrameAncestorBlocked.longDesc	"<p>セキュリティポリシーにより読み込みが禁止されたコンテンツが含まれているため、このページの読み込みを中止しました。</p>">
+<!ENTITY forbiddenBlocked.title		"禁止サイト">
+<!ENTITY forbiddenBlocked.longDesc	"<p>このページの読み込みは、&brandShortName; の設定に従いブロックされています。</p>">
+
+<!ENTITY cspBlocked.title		"コンテンツセキュリティポリシーによりブロックされました">
+<!ENTITY cspBlocked.longDesc		"<p>セキュリティポリシーにより読み込みが禁止されたコンテンツが含まれているため、このページの読み込みを中止しました。</p>">
 
 <!ENTITY corruptedContentError.title	"コンテンツデータ破損エラー">
 <!ENTITY corruptedContentError.longDesc	"<p>このページは、データの伝送中にエラーが検出されたため表示できません。</p><ul><li>Web サイトの所有者に連絡を取り、この問題を報告してください。</li></ul>">
@@ -178,24 +188,24 @@ functionality specific to firefox. -->
 <button id='exceptionDialogButton'>&securityOverride.exceptionButtonLabel;</button>
 ">
 
+<!ENTITY errorReporting.automatic2	"エラーを報告すると、悪意のあるサイトの特定とブロックに役立ちます">
+<!ENTITY errorReporting.learnMore	"詳細...">
+<!ENTITY errorReporting.sending		"報告を送信中">
+<!ENTITY errorReporting.sent		"報告を送信しました">
+<!ENTITY errorReporting.tryAgain	"再試行">
+
 <!ENTITY remoteXUL.title		"リモート XUL">
 <!ENTITY remoteXUL.longDesc		"<p><ul><li>Web サイトの所有者に連絡を取り、この問題を報告してください。</li></ul></p>">
 
-<!ENTITY cspBlocked.longDesc "<p>&brandShortName; prevented this page from loading in this way because the page has a content security policy that disallows it.</p>">
+<!ENTITY sslv3Used.title		"安全な接続を確保できません">
+<!-- LOCALIZATION NOTE (sslv3Used.longDesc2) - Do not translate
+     "SSL_ERROR_UNSUPPORTED_VERSION". -->
+<!ENTITY sslv3Used.longDesc2		"高度な情報: SSL_ERROR_UNSUPPORTED_VERSION">
 
-<!ENTITY cspBlocked.title "Blocked by Content Security Policy">
-<!ENTITY errorReporting.automatic "Automatically report errors in the future">
-<!ENTITY errorReporting.learnMore "Learn more…">
-<!ENTITY errorReporting.longDesc "Reporting the address and certificate information for <span id='hostname'></span> will help us identify and block malicious sites. Thanks for helping create a safer web!">
-<!ENTITY errorReporting.report "Report">
-<!ENTITY errorReporting.sending "Sending report">
-<!ENTITY errorReporting.sent "Report sent">
-
-<!ENTITY errorReporting.title "Report this error">
-<!ENTITY errorReporting.tryAgain "Try again">
-<!ENTITY sslv3Used.learnMore "Learn More…">
-<!-- LOCALIZATION NOTE (sslv3Used.longDesc) - Do not translate
-     "ssl_error_unsupported_version". -->
-<!ENTITY sslv3Used.longDesc "Advanced info: ssl_error_unsupported_version">
-
-<!ENTITY sslv3Used.title "Unable to Connect Securely">
+<!ENTITY weakCryptoUsed.title		"接続が安全ではありません">
+<!-- LOCALIZATION NOTE (weakCryptoUsed.longDesc2) - Do not translate
+     "SSL_ERROR_NO_CYPHER_OVERLAP". -->
+<!ENTITY weakCryptoUsed.longDesc2	"高度な情報: SSL_ERROR_NO_CYPHER_OVERLAP">
+<!ENTITY weakCryptoAdvanced.title	"エラー内容">
+<!ENTITY weakCryptoAdvanced.longDesc	"<span class='hostname'></span> は攻撃を受ける可能性のある古い技術を利用しています。攻撃者は安全だと想定される秘密情報を、簡単に開示させる可能性があります。">
+<!ENTITY weakCryptoAdvanced.override	"(安全ではない接続) 古い技術で <span class='hostname'></span> を読み込む">

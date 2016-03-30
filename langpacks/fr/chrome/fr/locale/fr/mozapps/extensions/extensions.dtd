@@ -7,9 +7,9 @@
 <!ENTITY search.commandkey                    "f">
 
 <!ENTITY loading.label                        "Chargement…">
-<!ENTITY listEmpty.installed.label            "Vous n'avez aucun module de ce type installé">
+<!ENTITY listEmpty.installed.label            "Vous n’avez aucun module de ce type installé">
 <!ENTITY listEmpty.availableUpdates.label     "Aucune mise à jour trouvée">
-<!ENTITY listEmpty.recentUpdates.label        "Vous n'avez pas mis à jour vos modules complémentaires depuis un certain temps">
+<!ENTITY listEmpty.recentUpdates.label        "Vous n’avez pas mis à jour vos modules complémentaires depuis un certain temps">
 <!ENTITY listEmpty.findUpdates.label          "Vérifier les mises à jour">
 <!ENTITY listEmpty.search.label               "Aucun module correspondant">
 <!ENTITY listEmpty.button.label               "En apprendre plus sur les modules complémentaires">
@@ -17,8 +17,11 @@
 <!ENTITY installAddonFromFile.accesskey       "I">
 <!ENTITY toolsMenu.tooltip                    "Outils pour tous les modules">
 
-<!ENTITY cmd.back.tooltip                     "Reculer d'une page">
-<!ENTITY cmd.forward.tooltip                  "Avancer d'une page">
+<!ENTITY cmd.back.tooltip                     "Reculer d’une page">
+<!ENTITY cmd.forward.tooltip                  "Avancer d’une page">
+
+<!ENTITY showUnsignedExtensions.button.label  "Certaines extensions n’ont pas pu être vérifiées">
+<!ENTITY showAllExtensions.button.label       "Afficher toutes les extensions">
 
 <!-- global warnings -->
 <!ENTITY warning.safemode.label                    "Tous les modules complémentaires ont été désactivés par le mode sans échec.">
@@ -53,14 +56,14 @@
 <!ENTITY updates.updating.label               "Mise à jour des modules">
 <!ENTITY updates.installed.label              "Vos modules ont été mis à jour.">
 <!ENTITY updates.downloaded.label             "Les mises à jour de vos modules ont été téléchargées.">
-<!ENTITY updates.restart.label                "Redémarrer maintenant pour terminer l'installation">
+<!ENTITY updates.restart.label                "Redémarrer maintenant pour terminer l’installation">
 <!ENTITY updates.noneFound.label              "Aucune mise à jour disponible">
 <!ENTITY updates.manualUpdatesFound.label     "Afficher les mises à jour disponibles">
 <!ENTITY updates.updateSelected.label         "Installer les mises à jour">
 <!ENTITY updates.updateSelected.tooltip       "Installer les mises à jour disponibles dans cette liste">
 
 <!-- addon actions -->
-<!ENTITY cmd.showDetails.label                "Afficher plus d'informations">
+<!ENTITY cmd.showDetails.label                "Afficher plus d’informations">
 <!ENTITY cmd.showDetails.accesskey            "A">
 <!ENTITY cmd.findUpdates.label                "Rechercher des mises à jour">
 <!ENTITY cmd.findUpdates.accesskey            "R">
@@ -80,7 +83,7 @@
 <!ENTITY cmd.disableTheme.label               "Enlever le thème">
 <!ENTITY cmd.disableTheme.accesskey           "E">
 <!ENTITY cmd.askToActivate.label              "Demander pour activer">
-<!ENTITY cmd.askToActivate.tooltip            "Demander à chaque fois la permission d'utiliser ce module complémentaire">
+<!ENTITY cmd.askToActivate.tooltip            "Demander à chaque fois la permission d’utiliser ce module complémentaire">
 <!ENTITY cmd.alwaysActivate.label             "Toujours activer">
 <!ENTITY cmd.alwaysActivate.tooltip           "Toujours utiliser ce module complémentaire">
 <!ENTITY cmd.neverActivate.label              "Ne jamais activer">
@@ -90,7 +93,8 @@
 <!ENTITY cmd.installAddon.accesskey           "I">
 <!ENTITY cmd.uninstallAddon.label             "Supprimer">
 <!ENTITY cmd.uninstallAddon.accesskey         "S">
-<!ENTITY cmd.debugAddon.label                 "Déboguer">
+<!ENTITY debugAddons.label                    "Déboguer des modules">
+<!ENTITY debugAddons.accesskey                "b">
 <!ENTITY cmd.showPreferencesWin.label         "Options">
 <!ENTITY cmd.showPreferencesWin.tooltip       "Modifier les options de ce module complémentaire">
 <!ENTITY cmd.showPreferencesUnix.label        "Préférences">
@@ -108,7 +112,7 @@
      Displayed in the center of the Get Add-ons view, see bug 601143 for mockups. -->
 <!ENTITY discover.title                       "Que sont les modules complémentaires ?">
 <!ENTITY discover.description2                "Les modules complémentaires sont des applications permettant de personnaliser &brandShortName;
-  avec des fonctionnalités ou des styles supplémentaires. Gagnez du temps avec un panneau latéral, surveillez la météo ou changez l'apparence de &brandShortName;
+  avec des fonctionnalités ou des styles supplémentaires. Gagnez du temps avec un panneau latéral, surveillez la météo ou changez l’apparence de &brandShortName;
   à votre guise.">
 <!ENTITY discover.footer                      "Lorsque votre connexion Internet sera active, ce panneau vous permettra de découvrir
   certains des meilleurs modules complémentaires ainsi que les plus populaires.">
@@ -117,19 +121,19 @@
 <!ENTITY detail.version.label                 "Version">
 <!ENTITY detail.lastupdated.label             "Dernière mise à jour">
 <!ENTITY detail.creator.label                 "Développeur">
-<!ENTITY detail.homepage.label                "Page d'accueil">
+<!ENTITY detail.homepage.label                "Page d’accueil">
 <!ENTITY detail.numberOfDownloads.label       "Téléchargements">
 
-<!ENTITY detail.contributions.description     "Le développeur de ce module demande que vous l'aidiez à assurer la poursuite de son développement en lui versant une petite contribution.">
+<!ENTITY detail.contributions.description     "Le développeur de ce module demande que vous l’aidiez à assurer la poursuite de son développement en lui versant une petite contribution.">
 
 <!ENTITY detail.updateType                    "Mises à jour automatiques">
 <!ENTITY detail.updateDefault.label           "Par défaut">
-<!ENTITY detail.updateDefault.tooltip         "N'installer les mises à jour automatiquement que s'il s'agit du réglage par défaut">
+<!ENTITY detail.updateDefault.tooltip         "N’installer les mises à jour automatiquement que s’il s’agit du réglage par défaut">
 <!ENTITY detail.updateAutomatic.label         "Activées">
 <!ENTITY detail.updateAutomatic.tooltip       "Installer automatiquement les mises à jour">
 <!ENTITY detail.updateManual.label            "Désactivées">
 <!ENTITY detail.updateManual.tooltip          "Ne pas installer automatiquement les mises à jour">
-<!ENTITY detail.home                          "Page d'accueil">
+<!ENTITY detail.home                          "Page d’accueil">
 <!ENTITY detail.repository                    "Profil du module">
 <!ENTITY detail.size                          "Taille">
 
@@ -166,9 +170,9 @@
 <!ENTITY search.filter2.installed.label       "Mes modules complémentaires">
 <!ENTITY search.filter2.installed.tooltip     "Afficher les modules complémentaires installés">
 <!ENTITY search.filter2.available.label       "Modules complémentaires disponibles">
-<!ENTITY search.filter2.available.tooltip     "Afficher les modules complémentaires disponibles à l'installation">
+<!ENTITY search.filter2.available.tooltip     "Afficher les modules complémentaires disponibles à l’installation">
 
-<!ENTITY addon.homepage                       "Page d'accueil">
+<!ENTITY addon.homepage                       "Page d’accueil">
 <!ENTITY addon.details.label                  "Plus">
 <!ENTITY addon.details.tooltip                "Afficher plus de détails concernant ce module complémentaire">
 <!ENTITY addon.unknownDate                    "Inconnue">
@@ -195,7 +199,7 @@
 <!ENTITY addon.checkingForUpdates.label       "Vérification des mises à jour…">
 <!ENTITY addon.releaseNotes.label             "Notes de version :">
 <!ENTITY addon.loadingReleaseNotes.label      "Chargement…">
-<!ENTITY addon.errorLoadingReleaseNotes.label "Une erreur s'est produite lors du chargement des notes de version.">
+<!ENTITY addon.errorLoadingReleaseNotes.label "Une erreur s’est produite lors du chargement des notes de version.">
 
 <!ENTITY addon.createdBy.label                "Par ">
 
@@ -211,10 +215,25 @@
      This tab won't be displayed unless an Experiment add-on is installed.
      Install https://people.mozilla.org/~gszorc/dummy-experiment-addon.xpi
      to cause this tab to appear. -->
-<!ENTITY experiment.info.label "Qu'est-ce que ceci ? La télémétrie peut installer et lancer des expérimentations de temps en temps.">
+<!ENTITY experiment.info.label "Qu’est-ce que ceci ? La télémétrie peut installer et lancer des expérimentations de temps en temps.">
 <!ENTITY experiment.info.learnmore "En savoir plus">
 <!ENTITY experiment.info.learnmore.accesskey "E">
 <!ENTITY experiment.info.changetelemetry "Paramètres de la télémétrie">
 <!ENTITY experiment.info.changetelemetry.accesskey "P">
 
 <!ENTITY setting.learnmore "En savoir plus…">
+
+<!ENTITY disabledUnsigned.heading "Certains modules complémentaires ont été désactivés">
+<!-- LOCALIZATION NOTE (disabledUnsigned.description.start, disabledUnsigned.description.findAddonsLink, disabledUnsigned.description.end):
+     These entities form a sentence, with
+     disabledUnsigned.description.findAddonsLink being a link to an external site. -->
+<!ENTITY disabledUnsigned.description.start "Les modules complémentaires suivants n’ont pas pu être vérifiés pour leur utilisation dans &brandShortName;. Vous pouvez ">
+<!ENTITY disabledUnsigned.description.findAddonsLink "rechercher des modules équivalents">
+<!ENTITY disabledUnsigned.description.end " ou demander au développeur de les faire vérifier.">
+<!ENTITY disabledUnsigned.learnMore "En savoir plus sur nos efforts pour vous apporter plus de sécurité en ligne.">
+<!-- LOCALIZATION NOTE (disabledUnsigned.devInfo.start, disabledUnsigned.devInfo.linkToManual, disabledUnsigned.devInfo.end):
+     These entities form a sentence, with disabledUnsigned.devInfo.linkToManual
+     being a link to an external site. -->
+<!ENTITY disabledUnsigned.devInfo.start "Les développeurs souhaitant faire vérifier leurs modules complémentaires peuvent obtenir davantage d’informations en lisant notre ">
+<!ENTITY disabledUnsigned.devInfo.linkToManual "manuel">
+<!ENTITY disabledUnsigned.devInfo.end ".">

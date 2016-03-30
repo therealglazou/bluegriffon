@@ -100,6 +100,11 @@
 <!ENTITY malwareBlocked.title "Sitio sospeitoso de ser atacante!">
 <!ENTITY malwareBlocked.longDesc "<p>Os sitios atacantes tentan instalar  programas para roubarlle información privada, utilizar o seu computador para atacar a outros ou danar o seu sistema.</p> <p>Os propietarios de sitios web que crean que foron identificados por erro como sitio atacante poden <a  href='http://www.stopbadware.org/home/reviewinfo' >solicitar unha revisión</a>.</p>">
 
+<!ENTITY unwantedBlocked.title "Sitio sospeitoso de servir software non desexado!">
+<!ENTITY unwantedBlocked.longDesc "
+<p>As páxinas con software non desexado tentan instalar un software que pode aparentar facer algo diferente ao que fai e afectar ao seu sistema de maneira inesperada.</p>
+">
+
 <!ENTITY phishingBlocked.title "Web sospeitosa de ser unha falsificación!">
 <!ENTITY phishingBlocked.longDesc " <p>Se introduce información persoal nesta páxina pode resultar na usurpación da súa identidade ou outro tipo de acción fraudulenta.</p> <p>Este tipo de falsificación web utilízase nos casos coñecidos como phishing, nos cales utilízanse correos electrónicos e páxinas web fraudulentas para imitar fontes nas que o usuario pode confiar.</p> ">
 
@@ -137,18 +142,24 @@ functionality specific to firefox. -->
 <!ENTITY remoteXUL.title "XUL remoto">
 <!ENTITY remoteXUL.longDesc "<p><ul><li>Contacte cos propietarios do sitio web para informalos deste problema.</li></ul></p>">
 
-<!ENTITY oldSecurityProtocol.title "Imposíbel estabelecer unha conexión segura">
-<!-- LOCALIZATION NOTE (oldSecurityProtocol.longDesc) - Do not translate the
-     <span id='hostname'></span>. -->
-<!ENTITY oldSecurityProtocol.longDesc2 "Non é posíbel que &brandShortName; garanta a seguranza dos seus datos no sitio <span id='hostname'></span> xa que usa SSLv3, protocolo de seguranza non fiábel.">
-<!-- LOCALIZATION NOTE (oldSecurityProtocol.advancedInfo) - Do not translate
-     the <span id='errorcode'></span>. -->
-<!ENTITY oldSecurityProtocol.advancedInfo "Detalles do erro: <span id='errorcode'></span>">
-<!ENTITY oldSecurityProtocol.learnMore "Obter máis información…">
-
-<!ENTITY sslv3Used.learnMore "Learn More…">
+<!ENTITY sslv3Used.title "Non é posíbel conectarse de forma segura">
 <!-- LOCALIZATION NOTE (sslv3Used.longDesc) - Do not translate
      "ssl_error_unsupported_version". -->
-<!ENTITY sslv3Used.longDesc "Advanced info: ssl_error_unsupported_version">
+<!ENTITY sslv3Used.longDesc "Información avanzada: ssl_error_unsupported_version">
+<!ENTITY sslv3Used.learnMore "Máis información…">
 
-<!ENTITY sslv3Used.title "Unable to Connect Securely">
+<!ENTITY advanced.label "Advanced">
+
+<!ENTITY errorReporting.automatic2 "Report errors like this to help Mozilla identify and block malicious sites">
+<!ENTITY returnToPreviousPage.label "Go Back">
+<!-- LOCALIZATION NOTE (sslv3Used.longDesc2) - Do not translate
+     "SSL_ERROR_UNSUPPORTED_VERSION". -->
+<!ENTITY sslv3Used.longDesc2 "Advanced info: SSL_ERROR_UNSUPPORTED_VERSION">
+<!ENTITY weakCryptoAdvanced.longDesc "<span class='hostname'></span> uses security technology that is outdated and vulnerable to attack. An attacker could easily reveal information which you thought to be safe.">
+<!ENTITY weakCryptoAdvanced.override "(Not secure) Try loading <span class='hostname'></span> using outdated security">
+<!ENTITY weakCryptoAdvanced.title "Advanced">
+<!-- LOCALIZATION NOTE (weakCryptoUsed.longDesc2) - Do not translate
+     "SSL_ERROR_NO_CYPHER_OVERLAP". -->
+<!ENTITY weakCryptoUsed.longDesc2 "Advanced info: SSL_ERROR_NO_CYPHER_OVERLAP">
+
+<!ENTITY weakCryptoUsed.title "Your connection is not secure">

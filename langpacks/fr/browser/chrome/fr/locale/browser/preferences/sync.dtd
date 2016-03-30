@@ -5,7 +5,7 @@
 <!-- The page shown when not logged in... -->
 <!ENTITY setupButton.label          "Configurer &syncBrand.fullName.label;">
 <!ENTITY setupButton.accesskey      "S">
-<!ENTITY weaveDesc.label            "&syncBrand.fullName.label; permet d'accéder à votre historique, vos marque-pages, vos mots de passe et onglets ouverts depuis différents ordinateurs et appareils.">
+<!ENTITY weaveDesc.label            "&syncBrand.fullName.label; permet d’accéder à votre historique, vos marque-pages, vos mots de passe et onglets ouverts depuis différents ordinateurs et appareils.">
 
 <!-- The page shown when logged in... -->
 
@@ -16,7 +16,6 @@
 <!-- Manage Account -->
 <!ENTITY manageAccount.label          "Gestion du compte">
 <!ENTITY manageAccount.accesskey      "c">
-<!ENTITY viewQuota.label              "Afficher le quota">
 <!ENTITY changePassword2.label        "Modifier le mot de passe…">
 <!ENTITY myRecoveryKey.label          "Ma clé de récupération">
 <!ENTITY resetSync2.label             "Réinitialiser la synchronisation…">
@@ -26,8 +25,6 @@
 <!-- Fixing bug 1108402 -->
 <!ENTITY engine.bookmarks.label     "Marque-pages">
 <!ENTITY engine.bookmarks.accesskey "M">
-<!ENTITY engine.readinglist.label   "Liste de lecture">
-<!ENTITY engine.readinglist.accesskey "L">
 <!ENTITY engine.tabs.label          "Onglets">
 <!ENTITY engine.tabs.accesskey      "O">
 <!ENTITY engine.history.label       "Historique">
@@ -40,31 +37,56 @@
 <!ENTITY engine.addons.accesskey    "u">
 
 <!-- Device Settings -->
-<!ENTITY syncDeviceName.label         "Nom de l'appareil :">
+<!ENTITY syncDeviceName.label         "Nom de l’appareil :">
 <!ENTITY syncDeviceName.accesskey     "d">
+<!ENTITY fxaSyncDeviceName.label      "Nom de l’appareil">
+<!ENTITY changeSyncDeviceName.label   "Changer le nom de l’appareil…">
+<!ENTITY cancelChangeSyncDeviceName.label "Annuler">
+<!ENTITY saveChangeSyncDeviceName.label "Enregistrer">
 <!ENTITY unlinkDevice.label           "Retirer cet appareil">
 
 <!-- Footer stuff -->
-<!ENTITY prefs.tosLink.label        "Conditions d'utilisation">
+<!ENTITY prefs.tosLink.label        "Conditions d’utilisation">
 <!ENTITY prefs.ppLink.label         "Politique de confidentialité">
 
 <!-- Firefox Accounts stuff -->
 <!ENTITY fxaPrivacyNotice.link.label "Politique de confidentialité">
-<!ENTITY determiningAcctStatus.label "Vérification de l'état de votre compte…">
+<!ENTITY determiningAcctStatus.label "Vérification de l’état de votre compte…">
 <!ENTITY signedInUnverified.beforename.label "">
-<!ENTITY signedInUnverified.aftername.label "n'est pas vérifié.">
+<!ENTITY signedInUnverified.aftername.label "n’est pas vérifié.">
 
 <!ENTITY signedInLoginFailure.beforename.label "Veuillez vous identifier pour reconnecter">
 <!ENTITY signedInLoginFailure.aftername.label "">
 
-<!ENTITY notSignedIn.label           "Vous n'êtes pas connecté.">
+<!ENTITY notSignedIn.label           "Vous n’êtes pas connecté.">
 <!ENTITY signIn.label                "Connexion">
-<!ENTITY manage.label                "Gérer">
+<!ENTITY profilePicture.tooltip      "Changer la photo de profil">
+<!ENTITY verifiedManage.label        "Gérer le compte">
 <!ENTITY disconnect.label            "Se déconnecter…">
-<!ENTITY verify.label                "Vérifier l'adresse électronique">
+<!ENTITY verify.label                "Vérifier l’adresse électronique">
 <!ENTITY forget.label                "Oublier cette adresse électronique">
 
-<!ENTITY welcome.description "Accédez à vos onglets, marque-pages, mots de passe et bien plus, quel que soit l'appareil sur lequel vous utilisez &brandShortName;.">
+<!ENTITY welcome.description "Accédez à vos onglets, marque-pages, mots de passe et bien plus, quel que soit l’appareil sur lequel vous utilisez &brandShortName;.">
 <!ENTITY welcome.signIn.label "Se connecter">
 <!ENTITY welcome.createAccount.label "Créer un compte">
 <!ENTITY welcome.useOldSync.label "Vous utilisez une ancienne version de Sync ?">
+
+<!ENTITY signedOut.caption            "Emportez votre Web partout avec vous">
+<!ENTITY signedOut.description        "Synchronisez marque-pages, historique, onglets, mots de passe, modules complémentaires et préférences entre tous vos appareils.">
+<!ENTITY signedOut.accountBox.title   "Se connecter avec un &syncBrand.fxAccount.label;">
+<!ENTITY signedOut.accountBox.create  "Créer un compte">
+<!ENTITY signedOut.accountBox.signin  "Se connecter">
+
+<!ENTITY signedIn.engines.label       "Données à synchroniser entre tous vos appareils">
+
+
+<!ENTITY mobilePromo3.start            "Téléchargez Firefox pour ">
+<!-- LOCALIZATION NOTE (mobilePromo3.androidLink): This is a link title that links to https://www.mozilla.org/firefox/android/ -->
+<!ENTITY mobilePromo3.androidLink      "Android">
+
+<!-- LOCALIZATION NOTE (mobilePromo3.iOSBefore): This is text displayed between mobilePromo3.androidLink and mobilePromo3.iosLink -->
+<!ENTITY mobilePromo3.iOSBefore         " ou ">
+<!-- LOCALIZATION NOTE (mobilePromo3.iOSLink): This is a link title that links to https://www.mozilla.org/firefox/ios/ -->
+<!ENTITY mobilePromo3.iOSLink          "iOS">
+
+<!ENTITY mobilePromo3.end              " afin de synchroniser vos données avec votre appareil mobile.">

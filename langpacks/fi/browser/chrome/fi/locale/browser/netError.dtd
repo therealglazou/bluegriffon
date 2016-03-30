@@ -7,6 +7,8 @@
 
 <!ENTITY loadError.label "Sivun lataamisvirhe">
 <!ENTITY retry.label "Yritä uudestaan">
+<!ENTITY returnToPreviousPage.label "Palaa">
+<!ENTITY advanced.label "Yksityiskohdat">
 
 <!-- Specific error messages -->
 
@@ -164,10 +166,19 @@
 <p>Sivuston omistajat, joiden sivusto on virheellisesti ilmoitettu hyökkäyssivustoksi, voivat <a href='http://www.stopbadware.org/home/reviewinfo' >anoa sivuston tilan tarkistamista</a>.</p>
 ">
 
+<!ENTITY unwantedBlocked.title "Epäilty ei-haluttuja sovelluksia jakeleva sivusto!">
+<!ENTITY unwantedBlocked.longDesc "
+<p>Sivustot, jotka jakelevat ei haluttuja sovelluksia yrittävät asentaa tietokoneellesi sovelluksia, jotka ovat petollisia tai vaikuttavat järjestelmään odottamattomalla tavalla.</p>
+">
+
 <!ENTITY phishingBlocked.title "Epäilty huijaussivusto!">
 <!ENTITY phishingBlocked.longDesc "
 <p>Henkilötietojen kirjoittaminen tälle sivulle voi johtaa identiteettivarkauteen tai johonkin muuhun petokseen.</p>
 <p>Tämän tyyppiset verkkohuijaukset ovat osa phishing- tai khalastushuijauksia, joissa sivuilla tai sähköposteilla yritetään jäljitellä mahdollisesti luottamiesi toimijoiden viestintää.</p>
+">
+
+<!ENTITY forbiddenBlocked.title "Estetty sivusto">
+<!ENTITY forbiddenBlocked.longDesc "<p>&brandShortName; esti tämän sivun latautumisen, koska se on määritetty tekemään niin.</p>
 ">
 
 <!ENTITY cspBlocked.title "Sisällön tietosuojakäytännön estämä">
@@ -187,26 +198,30 @@ button is included here (instead of netError.xhtml) because it exposes
 functionality specific to firefox. -->
 
 <!ENTITY securityOverride.warningContent "
-<p>Älä lisää poikkeussääntöä jos et ole aivan varma käyttämäsi Internet-yhteyden turvallisuudesta, tai jos et ole aikaisemmin nähnyt vastaavaa varoitusta tälle palvelimelle.</p>
+<p>Älä lisää poikkeussääntöä, jos et ole aivan varma käyttämäsi Internet-yhteyden turvallisuudesta tai jos et ole aikaisemmin nähnyt vastaavaa varoitusta tälle palvelimelle.</p>
 
 <button id='getMeOutOfHereButton'>&securityOverride.getMeOutOfHereButton;</button>
 <button id='exceptionDialogButton'>&securityOverride.exceptionButtonLabel;</button>
 ">
 
-<!ENTITY errorReporting.title "Ilmoita virheestä">
-<!ENTITY errorReporting.longDesc "Palvelimen <span id='hostname'></span> osoite- ja varmennetietojen ilmoittaminen auttaa meitä tunnistamaan ja estämään pahantahtoisia sivustoja. Kiitos avustasi turvallisemman verkon puolesta!">
-<!ENTITY errorReporting.automatic "Ilmoita virheistä automaattisesti tästä lähtien">
+<!ENTITY errorReporting.automatic2 "Ilmoita tällaisista virheistä auttaaksesi Mozillaa tunnistamaan ja estämään haitallisia sivustoja">
 <!ENTITY errorReporting.learnMore "Lue lisää…">
 <!ENTITY errorReporting.sending "Lähetetään ilmoitusta">
 <!ENTITY errorReporting.sent "Ilmoitus lähetetty">
-<!ENTITY errorReporting.report "Ilmoita">
 <!ENTITY errorReporting.tryAgain "Yritä uudestaan">
 
 <!ENTITY remoteXUL.title "XUL-koodia etänä">
 <!ENTITY remoteXUL.longDesc "<p><ul><li>Ilmoitathan ongelmasta sivuston omistajalle.</li></ul></p>">
 
 <!ENTITY sslv3Used.title "Ei voitu muodostaa suojattua yhteyttä">
-<!-- LOCALIZATION NOTE (sslv3Used.longDesc) - Do not translate
-     "ssl_error_unsupported_version". -->
-<!ENTITY sslv3Used.longDesc "Tarkemmat tiedot: ssl_error_unsupported_version">
-<!ENTITY sslv3Used.learnMore "Lue lisää…">
+<!-- LOCALIZATION NOTE (sslv3Used.longDesc2) - Do not translate
+     "SSL_ERROR_UNSUPPORTED_VERSION". -->
+<!ENTITY sslv3Used.longDesc2 "Lisätiedot: SSL_ERROR_UNSUPPORTED_VERSION">
+
+<!ENTITY weakCryptoUsed.title "Yhteys ei ole suojattu">
+<!-- LOCALIZATION NOTE (weakCryptoUsed.longDesc2) - Do not translate
+     "SSL_ERROR_NO_CYPHER_OVERLAP". -->
+<!ENTITY weakCryptoUsed.longDesc2 "Lisätiedot: SSL_ERROR_NO_CYPHER_OVERLAP">
+<!ENTITY weakCryptoAdvanced.title "Yksityiskohdat">
+<!ENTITY weakCryptoAdvanced.longDesc "<span class='hostname'></span> käyttää tietosuojateknologiaa, joka on vanhentunut ja hyökkäyksille haavoittuvainen. Hyökkääjä voisi helposti lukea tietoja, joiden luulit olevan suojattuja.">
+<!ENTITY weakCryptoAdvanced.override "(Ei suojattu) Yritä ladata <span class='hostname'></span> käyttäen vanhentunut tietosuojaa">

@@ -81,10 +81,25 @@
 <p>Sivuston omistajat, joiden sivusto on virheellisesti ilmoitettu hyökkäyssivustoksi, voivat <a href='http://www.stopbadware.org/home/reviewinfo' >anoa sivuston tilan tarkistamista</a>.</p>
 ">
 
+<!ENTITY unwantedBlocked.title "Epäilty ei-haluttuja sovelluksia jakeleva sivusto!">
+<!ENTITY unwantedBlocked.longDesc "
+<p>Sivustot, jotka jakelevat ei haluttuja sovelluksia yrittävät asentaa tietokoneellesi sovelluksia, jotka ovat petollisia tai vaikuttavat järjestelmään odottamattomalla tavalla.</p>
+">
+
 <!ENTITY phishingBlocked.title "Epäilty huijaussivusto!">
 <!ENTITY phishingBlocked.longDesc "
 <p>Henkilötietojen kirjoittaminen tälle sivulle voi johtaa identiteettivarkauteen tai johonkin muuhun petokseen.</p>
 <p>Tämän tyyppiset verkkohuijaukset ovat osa phishing- tai khalastushuijauksia, joissa sivuilla tai sähköposteilla yritetään jäljitellä mahdollisesti luottamiesi toimijoiden viestintää.</p>
+">
+
+<!ENTITY forbiddenBlocked.title "Estetty sivusto">
+<!ENTITY forbiddenBlocked.longDesc "<p>Selain esti tämän sivun latautumisen, koska se on määritetty tekemään niin.</p>
+">
+
+<!ENTITY securityOverride.linkText "Tai lisää poikkeussääntö…">
+<!ENTITY securityOverride.warningContent "
+<p>Älä lisää poikkeussääntöä, jos et ole aivan varma käyttämäsi Internet-yhteyden turvallisuudesta tai jos et ole aikaisemmin nähnyt vastaavaa varoitusta tälle palvelimelle.</p>
+<p>Sivustolle voi lisätä poikkeussäännön salauksen lisäasetuksista.</p>
 ">
 
 <!ENTITY cspBlocked.title "Sisällön tietosuojakäytännön estämä">
@@ -95,10 +110,3 @@
 
 <!ENTITY remoteXUL.title "XUL-koodia etänä">
 <!ENTITY remoteXUL.longDesc "<p><ul><li>Ilmoitathan ongelmasta sivuston omistajalle.</li></ul></p>">
-
-<!-- Include app-specific error messages - do not change this in localization!
-     Some applications might override netErrorApp.dtd with their specific version,
-     this inclusion needs to be intact for that approach to work correctly.
-     Please, try to keep this at the end of the file. -->
-<!ENTITY % netErrorAppDTD SYSTEM "chrome://global/locale/netErrorApp.dtd">
-%netErrorAppDTD;

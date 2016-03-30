@@ -5,21 +5,23 @@
 <!ENTITY % brandDTD SYSTEM "chrome://branding/locale/brand.dtd">
 %brandDTD;
 
-<!ENTITY loadError.label "Грешка при учитавању странице">
-<!ENTITY retry.label "Пoкушај опет">
+<!ENTITY loadError.label "Проблем при учитавању странице">
+<!ENTITY retry.label "Пoкушај поново">
+<!ENTITY returnToPreviousPage.label "Иди назад">
+<!ENTITY advanced.label "Напредно">
 
 <!-- Specific error messages -->
 
 <!ENTITY connectionFailure.title "Повезивање није успело">
 <!ENTITY connectionFailure.longDesc "&sharedLongDesc;">
 
-<!ENTITY deniedPortAccess.title "Приступ овој адреси је забрањен">
+<!ENTITY deniedPortAccess.title "Ова адреса је забрањена">
 <!ENTITY deniedPortAccess.longDesc "">
 
 <!ENTITY dnsNotFound.title "Сервер није пронађен">
 <!ENTITY dnsNotFound.longDesc "
 <ul>
-  <li>Проверите адресу на грешке у куцању, попут
+  <li>Проверите да ли у адреси има грешака у куцању као што су
     <strong>ww</strong>.example.com уместо
     <strong>www</strong>.example.com</li>
   <li>Ако не можете да учитате ниједну страницу, проверите да ли је веза рачунара са
@@ -33,12 +35,12 @@
 <!ENTITY fileNotFound.longDesc "
 <ul>
   <li>Проверите подударање малих и великих слова и друге могуће грешке у куцању.</li>
-  <li>Проверите да ли је датотека уклоњена, преименована или избрисана.</li>
+  <li>Проверите да ли је датотека премештена, преименована или избрисана.</li>
 </ul>
 ">
 
 
-<!ENTITY generic.title "Упа!">
+<!ENTITY generic.title "Упс.">
 <!ENTITY generic.longDesc "
 <p>&brandShortName; из неког разлога не може да учита ову страницу.</p>
 ">
@@ -62,21 +64,21 @@
 <!ENTITY netOffline.title "Рад ван мреже">
 <!ENTITY netOffline.longDesc2 "
 <ul>
-  <li>Press &quot;Try Again&quot; to switch to online mode and reload the page.</li>
+  <li>Притисните &quot;Пoкушај опет&quot; да бисте се пребацили на режим на мрежи и поново учитали страницу.</li>
 </ul>
 ">
 
 <!ENTITY contentEncodingError.title "Грешка у кодирању садржаја">
 <!ENTITY contentEncodingError.longDesc "
 <ul>
-  <li>Молимо да се обратите власницима веб сајта и обавестите их о овом проблему.</li>
+  <li>Oбратите се власницима веб сајта и обавестите их о овом проблему.</li>
 </ul>
 ">
 
 <!ENTITY unsafeContentType.title "Небезбедна врста датотеке">
 <!ENTITY unsafeContentType.longDesc "
 <ul>
-  <li>Молимо да се обратите власницима веб сајта и обавестите их о овом проблему.</li> 
+  <li>Oбратите се власницима веб сајта и обавестите их о овом проблему.</li> 
 </ul>
 ">
 
@@ -93,7 +95,7 @@
 </ul>
 ">
 
-<!ENTITY proxyConnectFailure.title "Прокси одбија везе">
+<!ENTITY proxyConnectFailure.title "Прокси сервер одбија везе">
 <!ENTITY proxyConnectFailure.longDesc "
 <ul>
   <li>Проверите подешавања проксија.</li>
@@ -102,20 +104,20 @@
 </ul>
 ">
 
-<!ENTITY proxyResolveFailure.title "Није могуће пронаћи прокси сервер">
+<!ENTITY proxyResolveFailure.title "Не могу да пронађем прокси сервер">
 <!ENTITY proxyResolveFailure.longDesc "
 <ul>
   <li>Проверите подешавања проксија.</li>
   <li>Проверите да ли рачунар има исправну мрежну везу.</li>
   <li>Ако су рачунар или мрежа заштићени са заштитним зидом или проксијем, проверите
-    да ли је програму &brandShortName; дозвољено да приступа мрежи.</li>
+    да ли је програму &brandShortName; дозвољено да приступи мрежи.</li>
 </ul>
 ">
 
 <!ENTITY redirectLoop.title "Страница се не преусмерава исправно">
 <!ENTITY redirectLoop.longDesc "
 <ul> 
-  <li>Овај проблем понекад узрокују искључивање или одбијање
+  <li>Овај проблем понекад настаје ако искључите или одбијете прихватање
     колачића.</li> 
 </ul>
 ">
@@ -133,48 +135,36 @@
 <!ENTITY nssFailure2.longDesc2 "
 <ul>
   <li>Страница коју желите да прикажете не може бити приказана јер није могуће проверити аутентичност примљених података.</li>
-  <li>Молимо да контактирате власнике веб сајта и обавестите их о овом проблему.</li>
+  <li>Обратите се власницима веб сајта и обавестите их о овом проблему.</li>
 </ul>
 ">
 
 <!ENTITY nssBadCert.title "Безбедна веза није успостављена">
 <!ENTITY nssBadCert.longDesc2 "
 <ul>
-  <li>Ово може да буде проблем са подешавањем сервера, или може да буде
-неко ко покушава да се лажно представи као удаљени сервер.</li>
-  <li>Ако сте се пре већ успешно повезивали на овај сервер, грешка је онда можда
-привремена и можете да пробате касније.</li>
+  <li>Ово може да буде проблем са подешавањима сервера, или може бити неко ко 
+покушава да се лажно представи као сервер.</li>
+  <li>Ако сте се раније успешно повезивали на овај сервер, грешка је онда можда
+привремена и можете покушати касније.</li>
 </ul>
 ">
 
 <!ENTITY sharedLongDesc "
 <ul>
-  <li>Сајт је можда привремено недоступан или загушен. Пробајте поново
+  <li>Сајт је можда привремено недоступан или загушен. Покушајте поново
     мало касније.</li>
-  <li>Ако не можете да учитате ниједну страницу, проверите мрежну везу Вашег
+  <li>Ако не можете да учитате ниједну страницу, проверите мрежну везу
     рачунара.</li>
   <li>Ако су рачунар или мрежа заштићена са заштитним зидом или проксијем, проверите
     да ли је &brandShortName; дозвољено да приступа мрежи.</li>
 </ul>
 ">
 
-<!ENTITY malwareBlocked.title "Могући злонамеран сајт!">
-<!ENTITY malwareBlocked.longDesc "
-<p>Злонамерни сајтови покушавају да украду личне податке, искористе Ваш рачунар за нападе на други, или нанесу штету Вашем рачунару.</p>
-<p>Власници веб сајтова који сматрају да су њихови сајтови грешком пријављени као злонамерни могу <a href='http://www.stopbadware.org/home/reviewinfo' >да траже преиспитивање</a>.</p>
-">
-
-<!ENTITY phishingBlocked.title "Могући веб фалсификат!">
-<!ENTITY phishingBlocked.longDesc "
-<p>Уношење ма каквих личних података на овој страници може да буде узрок крађе идентитета или друге врсте преваре.</p> 
-<p>Ова врста веб фалсификата користи се у преварама познатим под именом „фишинг‟, при којима се злонамерне веб странице или е-поште користе да имитирају изворе којима верујете.</p>
-">
-
 <!ENTITY cspBlocked.title "Блокирано због полисе о безбедности садржаја">
 <!ENTITY cspBlocked.longDesc "<p>&brandShortName; је спречио учитавање ове странице на овај начин јер садржи полису о безбедности садржаја која то онемогућава.</p>">
 
 <!ENTITY corruptedContentError.title "Грешка услед оштећеног садржаја">
-<!ENTITY corruptedContentError.longDesc "<p>Страница коју желите да погледате не може бити приказана услед грешке у преносу података.</p><ul><li>Молимо да се обратите власницима веб странице и обавестите их о проблему.</li></ul>">
+<!ENTITY corruptedContentError.longDesc "<p>Страница коју желите да погледате не може бити приказана услед грешке у преносу података.</p><ul><li>Обратите се власницима веб странице и обавестите их о проблему.</li></ul>">
 
 
 <!ENTITY securityOverride.linkText "Или можете додати изузетак…">
@@ -193,20 +183,21 @@ functionality specific to firefox. -->
 <button id='exceptionDialogButton'>&securityOverride.exceptionButtonLabel;</button>
 ">
 
-<!ENTITY errorReporting.title "Пријави ову грешку">
-<!ENTITY errorReporting.longDesc "Пријављивање адресе и информације сертификата <span id='hostname'></span> ће нам помоћи да блокирамо злонамерне сајтове. Хвала Вам што нам помажете да створимо безбеднији веб!">
-<!ENTITY errorReporting.automatic "Аутоматски пријави грешке у будућности">
+<!ENTITY errorReporting.automatic2 "Аутоматски пријавите грешке да бисте помогли Mozilla-и да идентификује и блокира злонамере сајтове">
 <!ENTITY errorReporting.learnMore "Сазнајте више…">
-<!ENTITY errorReporting.sending "Шаљем пријаву">
-<!ENTITY errorReporting.sent "Пријава је послата">
-<!ENTITY errorReporting.report "Пријави">
-<!ENTITY errorReporting.tryAgain "Покушај поново">
 
 <!ENTITY remoteXUL.title "Удаљени XUL">
-<!ENTITY remoteXUL.longDesc "<p><ul><li>Молимо да обавестите власнике веб сајта о овом проблему.</li></ul></p>">
+<!ENTITY remoteXUL.longDesc "<p><ul><li>Обавестите власнике веб сајта о овом проблему.</li></ul></p>">
 
 <!ENTITY sslv3Used.title "Не могу се повезати безбедно">
-<!-- LOCALIZATION NOTE (sslv3Used.longDesc) - Do not translate
-     "ssl_error_unsupported_version". -->
-<!ENTITY sslv3Used.longDesc "Дадатне информације: ssl_error_unsupported_version">
-<!ENTITY sslv3Used.learnMore "Сазнајте више…">
+<!-- LOCALIZATION NOTE (sslv3Used.longDesc2) - Do not translate
+     "SSL_ERROR_UNSUPPORTED_VERSION". -->
+<!ENTITY sslv3Used.longDesc2 "Додатне информације: SSL_ERROR_UNSUPPORTED_VERSION">
+
+<!ENTITY weakCryptoUsed.title "Ваша конекција није безбедна">
+<!-- LOCALIZATION NOTE (weakCryptoUsed.longDesc2) - Do not translate
+     "SSL_ERROR_NO_CYPHER_OVERLAP". -->
+<!ENTITY weakCryptoUsed.longDesc2 "Додатне информације: SSL_ERROR_NO_CYPHER_OVERLAP">
+<!ENTITY weakCryptoAdvanced.title "Напредно">
+<!ENTITY weakCryptoAdvanced.longDesc "<span class='hostname'></span> користи технологију за безбедност која је застарела и рањива је на нападе. Нападач лако може доћи до ваших информација.">
+<!ENTITY weakCryptoAdvanced.override "(Није безбедно) Покушавате да учитате <span class='hostname'></span> користећи застарелу безбедност">

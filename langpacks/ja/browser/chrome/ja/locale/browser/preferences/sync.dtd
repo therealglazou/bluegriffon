@@ -16,7 +16,6 @@
 <!-- Manage Account -->
 <!ENTITY manageAccount.label          "アカウントを管理">
 <!ENTITY manageAccount.accesskey      "n">
-<!ENTITY viewQuota.label              "サーバ使用量を表示">
 <!ENTITY changePassword2.label        "パスワードを変更...">
 <!ENTITY myRecoveryKey.label          "リカバリキー">
 <!ENTITY resetSync2.label             "Sync をリセット...">
@@ -38,40 +37,45 @@
 <!ENTITY engine.addons.accesskey    "A">
 
 <!-- Device Settings -->
-<!ENTITY syncDeviceName.label       "端末名:">
-<!ENTITY syncDeviceName.accesskey   "c">
-<!ENTITY unlinkDevice.label           "この端末を切り離す">
+<!ENTITY syncDeviceName.label			"端末名:">
+<!ENTITY syncDeviceName.accesskey		"c">
+<!ENTITY fxaSyncDeviceName.label		"端末名">
+<!ENTITY changeSyncDeviceName.label		"端末名を変更...">
+<!ENTITY cancelChangeSyncDeviceName.label	"キャンセル">
+<!ENTITY saveChangeSyncDeviceName.label		"保存">
+<!ENTITY unlinkDevice.label			"この端末を切り離す">
 
 <!-- Footer stuff -->
-<!ENTITY prefs.tosLink.label        "利用規約">
-<!ENTITY prefs.ppLink.label         "プライバシーポリシー">
+<!ENTITY prefs.tosLink.label		"利用規約">
+<!ENTITY prefs.ppLink.label		"プライバシーポリシー">
 
 <!-- Firefox Accounts stuff -->
-<!ENTITY fxaPrivacyNotice.link.label "プライバシーポリシーを表示">
-<!ENTITY determiningAcctStatus.label     "アカウントの状態を確認しています...">
+<!ENTITY fxaPrivacyNotice.link.label	"プライバシーポリシーを表示">
+<!ENTITY determiningAcctStatus.label	"アカウントの状態を確認しています...">
 
 <!-- LOCALIZATION NOTE (signedInUnverified.beforename.label,
 signedInUnverified.aftername.label): these two string are used respectively
 before and after the account email address. Localizers can use one of them, or
 both, to better adapt this sentence to their language.
 -->
-<!ENTITY signedInUnverified.beforename.label "">
-<!ENTITY signedInUnverified.aftername.label "は認証されていません。">
+<!ENTITY signedInUnverified.beforename.label	"">
+<!ENTITY signedInUnverified.aftername.label	"は認証されていません。">
 
 <!-- LOCALIZATION NOTE (signedInLoginFailure.beforename.label,
 signedInLoginFailure.aftername.label): these two string are used respectively
 before and after the account email address. Localizers can use one of them, or
 both, to better adapt this sentence to their language.
 -->
-<!ENTITY signedInLoginFailure.beforename.label "">
-<!ENTITY signedInLoginFailure.aftername.label "に再接続するにはサインインしてください。">
+<!ENTITY signedInLoginFailure.beforename.label	"">
+<!ENTITY signedInLoginFailure.aftername.label	"に再接続するにはサインインしてください。">
 
 <!ENTITY notSignedIn.label           "サインインしていません。">
 <!ENTITY signIn.label                "サインイン">
-<!ENTITY manage.label                "管理">
+<!ENTITY profilePicture.tooltip      "プロフィール写真を変更します">
+<!ENTITY verifiedManage.label        "アカウントの管理">
 <!ENTITY disconnect.label            "切断...">
-<!ENTITY verify.label                "認証メール">
-<!ENTITY forget.label                "このメールを消去">
+<!ENTITY verify.label                "メールアドレス認証">
+<!ENTITY forget.label                "このメールアドレスを解除">
 
 <!ENTITY welcome.description		"&brandShortName; なら、どこからでもタブやブックマークやパスワードなどにアクセスできます。">
 <!ENTITY welcome.signIn.label		"サインイン">
@@ -79,5 +83,43 @@ both, to better adapt this sentence to their language.
 
 <!ENTITY welcome.useOldSync.label	"古いバージョンの Sync をお使いですか？">
 
-<!ENTITY engine.readinglist.accesskey "L">
-<!ENTITY engine.readinglist.label   "Reading List">
+<!ENTITY signedOut.caption            "Web を持ち歩こう">
+<!ENTITY signedOut.description        "ブックマークやページの表示履歴、タブ、パスワード、アドオン、設定を、お持ちのすべての端末間で同期できます。">
+<!ENTITY signedOut.accountBox.title   "&syncBrand.fxAccount.label; で接続する">
+<!ENTITY signedOut.accountBox.create  "アカウント作成">
+<!ENTITY signedOut.accountBox.signin  "サインイン">
+
+<!ENTITY signedIn.engines.label       "すべての端末を同期する">
+
+<!-- LOCALIZATION NOTE (mobilePromo2.*): the following strings will be used to
+     create a single sentence with active links.
+     The resulting sentence in English is: "Sync to your mobile device.
+     Download Firefox for Android or Firefox for iOS." -->
+
+<!ENTITY mobilePromo2.start            "">
+<!-- LOCALIZATION NOTE (mobilePromo2.androidLink): This is a link title that links to https://www.mozilla.org/firefox/android/ -->
+<!ENTITY mobilePromo2.androidLink      "Firefox for Android">
+
+<!-- LOCALIZATION NOTE (mobilePromo2.iOSBefore): This is text displayed between mobilePromo2.androidLink and mobilePromo2.iosLink -->
+<!ENTITY mobilePromo2.iOSBefore         " または ">
+<!-- LOCALIZATION NOTE (mobilePromo2.iOSLink): This is a link title that links to https://www.mozilla.org/firefox/ios/ -->
+<!ENTITY mobilePromo2.iOSLink          "Firefox for iOS">
+
+<!ENTITY mobilePromo2.end              "をダウンロードしてモバイル端末と同期しましょう。">
+
+<!-- LOCALIZATION NOTE (mobilePromo3.androidLink): This is a link title that links to https://www.mozilla.org/firefox/android/ -->
+<!ENTITY mobilePromo3.androidLink      "Android">
+
+<!ENTITY mobilePromo3.end              " to sync with your mobile device.">
+
+<!-- LOCALIZATION NOTE (mobilePromo3.iOSBefore): This is text displayed between mobilePromo3.androidLink and mobilePromo3.iosLink -->
+<!ENTITY mobilePromo3.iOSBefore         " or ">
+<!-- LOCALIZATION NOTE (mobilePromo3.iOSLink): This is a link title that links to https://www.mozilla.org/firefox/ios/ -->
+<!ENTITY mobilePromo3.iOSLink          "iOS">
+
+<!-- LOCALIZATION NOTE (mobilePromo3.*): the following strings will be used to
+     create a single sentence with active links.
+     The resulting sentence in English is: "Download Firefox for
+     Android or iOS to sync with your mobile device." -->
+
+<!ENTITY mobilePromo3.start            "Download Firefox for ">

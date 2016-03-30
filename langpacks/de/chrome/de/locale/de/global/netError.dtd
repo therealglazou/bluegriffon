@@ -29,7 +29,7 @@
 <!ENTITY netInterrupt.longDesc "<p>Die Verbindung wurde erfolgreich aufgebaut, aber während der Datenübertragung unterbrochen.  Bitte versuchen Sie es erneut.</p><ul><li>Können Sie auch andere Websites nicht aufrufen? Überprüfen Sie die Netzwerkverbindung des Computers.</li><li>Treten auch weiterhin Probleme auf? Kontaktieren Sie Ihren Netzwerkadministrator oder Internetanbieter zur Unterstützung.</li></ul>">
 
 <!ENTITY notCached.title "Dokument erloschen">
-<!ENTITY notCached.longDesc "<p>Das angeforderte Dokument ist nicht im Browser-Cache verfügbar.</p><ul><li>Als Sicherheitsmaßnahme fordert der Browser vertrauliche Dokumente nicht automatisch erneut an.</li><li>Klicken Sie auf &quot;Nochmal versuchen&quot;, um das Dokument erneut von der Website anzufordern.</li></ul>">
+<!ENTITY notCached.longDesc "<p>Das angeforderte Dokument ist nicht im Browser-Cache verfügbar.</p><ul><li>Als Sicherheitsmaßnahme fordert der Browser vertrauliche Dokumente nicht automatisch erneut an.</li><li>Klicken Sie auf &quot;Erneut versuchen&quot;, um das Dokument erneut von der Website anzufordern.</li></ul>">
 
 <!ENTITY netOffline.title "Offline-Modus">
 <!ENTITY netOffline.longDesc2 "<p>Der Browser arbeitet im Offline-Modus und kann daher keine Verbindung mit dem angefragten Element aufbauen.</p><ul><li>Ist der Computer mit einem aktiven Netzwerk verbunden?</li><li>Wählen Sie &quot;Erneut versuchen&quot;, um in den Online-Modus zu wechseln und die Seite erneut zu laden.</li></ul>">
@@ -75,16 +75,10 @@
 </ul>
 ">
 
-<!ENTITY malwareBlocked.title "Attackierende Website vermutet!">
-<!ENTITY malwareBlocked.longDesc '
-<p>Attackierende Websites versuchen, Programme zu installieren, die private Informationen stehlen, Ihren Computer verwenden, um andere zu attackieren, oder Ihr System beschädigen.</p>
-<p>Website-Betreiber, die glauben, dass ihre Website zu Unrecht als attackierende Website gemeldet wurde, können <a href="http://www.stopbadware.org/home/reviewinfo">ein "Review" beantragen</a>.</p>
-'>
-
-<!ENTITY phishingBlocked.title "Betrugsversuch vermutet!">
-<!ENTITY phishingBlocked.longDesc "
-<p>Falls Sie hier persönliche Daten eingeben, müssen Sie mit Identitätsdiebstahl oder sonstigem Betrug rechnen.</p>
-<p>Diese Arten von Web-Fälschungen werden in Betrugsversuchen verwendet, die als &quot;Phishing-Attacken&quot; bekannt sind. Dabei versuchen Kriminelle in betrügerischer Absicht, Webseiten oder E-Mails nachzuahmen, denen Sie eventuell vertrauen.</p>
+<!ENTITY securityOverride.linkText "Oder Sie können eine Ausnahme hinzufügen…">
+<!ENTITY securityOverride.warningContent "
+<p>Sie sollten keine Ausnahme hinzufügen, wenn Sie eine Internetverbindung verwenden, der Sie nicht komplett vertrauen, oder nicht gewohnt sind, diese Warnung für diesen Server zu sehen.</p>
+<p>Wenn Sie trotzdem eine Ausnahme für diese Website hinzufügen möchten, können Sie das in Ihren erweiterten Verschlüsselungseinstellungen tun.</p>
 ">
 
 <!ENTITY cspBlocked.title "Durch Inhaltsicherheitsrichtlinie (CSP) blockiert">
@@ -95,10 +89,3 @@
 
 <!ENTITY remoteXUL.title "Externes XUL">
 <!ENTITY remoteXUL.longDesc "<p><ul><li>Bitte kontaktieren Sie die Inhaber der Website, um sie über dieses Problem zu informieren.</li></ul></p>">
-
-<!-- Include app-specific error messages - do not change this in localization!
-     Some applications might override netErrorApp.dtd with their specific version,
-     this inclusion needs to be intact for that approach to work correctly.
-     Please, try to keep this at the end of the file. -->
-<!ENTITY % netErrorAppDTD SYSTEM "chrome://global/locale/netErrorApp.dtd">
-%netErrorAppDTD;

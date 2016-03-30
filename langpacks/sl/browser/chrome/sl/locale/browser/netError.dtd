@@ -7,6 +7,8 @@
 
 <!ENTITY loadError.label "Napaka pri nalaganju strani">
 <!ENTITY retry.label "Poskusi znova">
+<!ENTITY returnToPreviousPage.label "Nazaj">
+<!ENTITY advanced.label "Napredno">
 
 <!-- Specific error messages -->
 
@@ -131,7 +133,6 @@
 <ul>
   <li>Strani, ki si jo želite ogledati, ni mogoče prikazati, ker ni mogoče preveriti pristnosti sprejetih podatkov.</li>
   <li>O napaki obvestite lastnike spletne strani.</li>
-  <li>Please contact the website owners to inform them of this problem.</li>
 </ul>
 ">
 
@@ -159,7 +160,12 @@ začasna in lahko poskusite znova pozneje.</li>
 <!ENTITY malwareBlocked.title "Morebitna napadalna stran!">
 <!ENTITY malwareBlocked.longDesc "
 <p>Napadalne strani poskušajo namestiti programe, ki kradejo osebne podatke, uporabljajo vaš računalnik za napad na druge ali poškodujejo vaš sistem.</p>
-<p>Lastniki spletnih strani, ki verjemejo, da je bila njihova stran prijavljena pomotoma, lahko <a href='http://www.stopbadware.org/home/reviewinfo' >zahtevajo preverjanje</a>.</p>
+<p>Lastniki spletnih strani, ki verjamejo, da je bila njihova stran prijavljena pomotoma, lahko <a href='http://www.stopbadware.org/home/reviewinfo' >zahtevajo preverjanje</a>.</p>
+">
+
+<!ENTITY unwantedBlocked.title "Morebitna stran z neželeno programsko opremo!">
+<!ENTITY unwantedBlocked.longDesc "
+<p>Strani z neželeno programsko opremo poskušajo namestiti programsko opremo, ki je lahko zavajajoča in lahko neželeno vpliva na vaš sistem.</p>
 ">
 
 <!ENTITY phishingBlocked.title "Morebitna spletna prevara!">
@@ -168,8 +174,11 @@ začasna in lahko poskusite znova pozneje.</li>
 <p>Tovrstne spletne prevare se uporabljajo v zlorabah, znanih kot ribarjenje, kjer zlonamerne spletne strani ali elektronska pošta oponašajo vire, ki jim zaupate.</p>
 ">
 
-<!ENTITY cspFrameAncestorBlocked.title "Zavrnjeno zaradi varnostne politike vsebine">
-<!ENTITY cspFrameAncestorBlocked.longDesc "<p>&brandShortName; je preprečil nalaganje strani v takšni obliki, ker tako določa varnostna politika vsebine.</p>">
+<!ENTITY forbiddenBlocked.title "Prepovedana stran">
+<!ENTITY forbiddenBlocked.longDesc "<p>&brandShortName; je preprečil nalaganje te strani, ker je nastavljen, da jo zavrača.</p>">
+
+<!ENTITY cspBlocked.title "Zavrnjeno zaradi varnostne politike vsebine">
+<!ENTITY cspBlocked.longDesc "<p>&brandShortName; je preprečil nalaganje strani v taki obliki, ker tako določa varnostna politika vsebine strani.</p>">
 
 <!ENTITY corruptedContentError.title "Okvara vsebine">
 <!ENTITY corruptedContentError.longDesc "<p>Strani, ki si jo želite ogledati, ni mogoče prikazati, ker je bila med prenosom podatkov odkrita napaka.</p><ul><li>O napaki obvestite lastnike spletne strani.</li></ul>">
@@ -191,24 +200,25 @@ functionality specific to firefox. -->
 <button id='exceptionDialogButton'>&securityOverride.exceptionButtonLabel;</button>
 ">
 
+<!ENTITY errorReporting.automatic2 "S prijavo podobnih napak pomagate Mozilli prepoznati in zavračati zlonamerne strani">
+<!ENTITY errorReporting.learnMore "Več o tem …">
+<!ENTITY errorReporting.sending "Pošiljanje poročila">
+<!ENTITY errorReporting.sent "Poročilo poslano">
+<!ENTITY errorReporting.report "Sporoči">
+<!ENTITY errorReporting.tryAgain "Poskusi znova">
+
 <!ENTITY remoteXUL.title "Oddaljeni XUL">
 <!ENTITY remoteXUL.longDesc "<p><ul><li>O napaki obvestite lastnike spletne strani.</li></ul></p>">
 
-<!ENTITY cspBlocked.longDesc "<p>&brandShortName; prevented this page from loading in this way because the page has a content security policy that disallows it.</p>">
+<!ENTITY sslv3Used.title "Varna povezava ni mogoča">
+<!-- LOCALIZATION NOTE (sslv3Used.longDesc2) - Do not translate
+     "SSL_ERROR_UNSUPPORTED_VERSION". -->
+<!ENTITY sslv3Used.longDesc2 "Napredni podatki: SSL_ERROR_UNSUPPORTED_VERSION">
 
-<!ENTITY cspBlocked.title "Blocked by Content Security Policy">
-<!ENTITY errorReporting.automatic "Automatically report errors in the future">
-<!ENTITY errorReporting.learnMore "Learn more…">
-<!ENTITY errorReporting.longDesc "Reporting the address and certificate information for <span id='hostname'></span> will help us identify and block malicious sites. Thanks for helping create a safer web!">
-<!ENTITY errorReporting.report "Report">
-<!ENTITY errorReporting.sending "Sending report">
-<!ENTITY errorReporting.sent "Report sent">
-
-<!ENTITY errorReporting.title "Report this error">
-<!ENTITY errorReporting.tryAgain "Try again">
-<!ENTITY sslv3Used.learnMore "Learn More…">
-<!-- LOCALIZATION NOTE (sslv3Used.longDesc) - Do not translate
-     "ssl_error_unsupported_version". -->
-<!ENTITY sslv3Used.longDesc "Advanced info: ssl_error_unsupported_version">
-
-<!ENTITY sslv3Used.title "Unable to Connect Securely">
+<!ENTITY weakCryptoUsed.title "Vaša povezava ni varna">
+<!-- LOCALIZATION NOTE (weakCryptoUsed.longDesc2) - Do not translate
+     "SSL_ERROR_NO_CYPHER_OVERLAP". -->
+<!ENTITY weakCryptoUsed.longDesc2 "Napredni podatki: SSL_ERROR_NO_CYPHER_OVERLAP">
+<!ENTITY weakCryptoAdvanced.title "Napredno">
+<!ENTITY weakCryptoAdvanced.longDesc "<span class='hostname'></span> uporablja varnostno tehnologijo, ki je zastarela in ranljiva za napade. Napadalec lahko zlahka razkrije podatke, ki naj bi bili zaščiteni.">
+<!ENTITY weakCryptoAdvanced.override "(Ni varno) Naloži <span class='hostname'></span> z uporabo zastarele varnostne tehnologije">

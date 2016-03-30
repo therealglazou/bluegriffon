@@ -81,28 +81,32 @@
 <p>Lastniki spletnih strani, ki so bile po njihovem mnenju zmotno prijavljene kot napadalne, lahko <a href='http://www.stopbadware.org/home/reviewinfo' >zahtevajo pregled</a>.</p>
 ">
 
+<!ENTITY unwantedBlocked.title "Morebitna stran z neželeno programsko opremo!">
+<!ENTITY unwantedBlocked.longDesc "
+<p>Strani z neželeno programsko opremo poskušajo namestiti programsko opremo, ki je lahko zavajajoča in lahko neželeno vpliva na vaš sistem.</p>
+">
+
 <!ENTITY phishingBlocked.title "Morebitna spletna prevara!">
 <!ENTITY phishingBlocked.longDesc "
 <p>Vnos osebnih podatkov na tej strani lahko pripelje do kraje identitete ali drugih zlorab.</p> 
 <p>Tovrstne spletne prevare se uporabljajo v zlorabah, znanih kot ribarjenje, kjer zlonamerne spletne strani ali elektronska pošta oponašajo vire, ki jim zaupate.</p>
 ">
 
-<!ENTITY cspFrameAncestorBlocked.title "Zavrnjeno zaradi varnostne politike vsebine">
-<!ENTITY cspFrameAncestorBlocked.longDesc "<p>Brskalnik je preprečil nalaganje strani v taki obliki, ker tako določa varnostna politika vsebine.</p>">
+<!ENTITY forbiddenBlocked.title "Prepovedana stran">
+<!ENTITY forbiddenBlocked.longDesc "<p>Brskalnik je preprečil nalaganje te strani, ker je nastavljen, da jo zavrača.</p>
+">
+
+<!ENTITY securityOverride.linkText "Lahko pa dodate izjemo …">
+<!ENTITY securityOverride.warningContent "
+<p>Izjeme ne dodajajte, če uporabljate internetno povezavo, ki je ne zaupate popolnoma ali če tega opozorila običajno na tem strežniku ne vidite.</p>
+<p>Če še vedno želite dodati izjemo za to stran, lahko to storite v nastavitvah za napredno šifriranje.</p>
+">
+
+<!ENTITY cspBlocked.title "Zavrnjeno zaradi varnostne politike vsebine">
+<!ENTITY cspBlocked.longDesc "<p>Brskalnik je preprečil nalaganje strani v taki obliki, ker tako določa varnostna politika vsebine strani.</p>">
 
 <!ENTITY corruptedContentError.title "Okvara vsebine">
 <!ENTITY corruptedContentError.longDesc "<p>Strani, ki si jo želite ogledati, ni mogoče prikazati, ker je bila med prenosom podatkov odkrita napaka.</p> <ul><li>O napaki obvestite lastnike spletne strani.</li></ul>">
 
 <!ENTITY remoteXUL.title "Oddaljeni XUL">
 <!ENTITY remoteXUL.longDesc "<p><ul><li>Obrnite se na lastnike spletne strani in jih obvestite o težavi.</li></ul></p>">
-
-<!-- Include app-specific error messages - do not change this in localization!
-     Some applications might override netErrorApp.dtd with their specific version,
-     this inclusion needs to be intact for that approach to work correctly.
-     Please, try to keep this at the end of the file. -->
-<!ENTITY % netErrorAppDTD SYSTEM "chrome://global/locale/netErrorApp.dtd">
-%netErrorAppDTD;
-
-<!ENTITY cspBlocked.longDesc "<p>The browser prevented this page from loading in this way because the page has a content security policy that disallows it.</p>">
-
-<!ENTITY cspBlocked.title "Blocked by Content Security Policy">

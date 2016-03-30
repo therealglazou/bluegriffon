@@ -10,31 +10,22 @@
 a replacement for the standard security certificate errors produced
 by NSS/PSM via netError.xhtml. -->
 
-<!ENTITY certerror.pagetitle  "Yhteys ei ole luotettu">
-<!ENTITY certerror.longpagetitle "Yhteys ei ole suojattu">
+<!ENTITY certerror.pagetitle1  "Suojaamaton yhteys">
+<!ENTITY certerror.longpagetitle1 "Tämä yhteys ei ole suojattu">
 
-<!-- Localization note (certerror.introPara1) - The string "#1" will
-be replaced at runtime with the name of the server to which the user
+<!-- Localization note (certerror.introPara) - The text content of the span tag
+will be replaced at runtime with the name of the server to which the user
 was trying to connect. -->
-<!ENTITY certerror.introPara1 "&brandShortName; yritti muodostaa suojatun
-yhteyden sivustoon <b>#1</b>, mutta yhteyden turvallisuutta ei pystytä varmistamaan.">
-<!ENTITY certerror.introPara2 "Yleensä muodostettaessa suojattua yhteyttä, 
-sivustot lähettävät varmennetut identiteettitietonsa, jotta voimme olla varmoja, 
-että tietoja siirretään oikean paikan kanssa. Tämän sivuston identiteettiä ei 
-kuitenkaan voida varmentaa.">
+<!ENTITY certerror.introPara "Sivuston <span class='hostname'/> omistaja on määrittänyt sivuston virheellisesti. &brandShortName; ei muodostanut yhteyttä sivustoon suojellakseen tietojasi varkaudelta.">
+<!ENTITY certerror.returnToPreviousPage.label "Palaa">
+<!ENTITY certerror.learnMore "Lue lisää…">
+<!ENTITY certerror.advanced.label "Yksityiskohdat">
 
-<!ENTITY certerror.whatShouldIDo.heading "Mitä minun pitäisi tehdä?">
-<!ENTITY certerror.whatShouldIDo.content "Jos olet aikaisemmin saanut
-ongelmitta muodostettua suojatun yhteyden tähän sivustoon, tämä virhe voi 
-olla merkkinä siitä, että jokin taho yrittää vilpillisesti tekeytyä täksi 
-sivustoksi, jolloin sinun ei pitäisi jatkaa sivustolle.">
 <!ENTITY certerror.whatShouldIDo.badStsCertExplanation "Tämä sivusto on 
 HTTP-yhteyskäytännön tiukan tiedonsiirtosuojan (HSTS) kautta rajannut, että
 &brandShortName;in täytyy muodostaa sivustoon vain suojattuja yhteyksiä. 
 Tämän takia tälle varmenteelle ei voi lisätä poikkeusta.">
-<!ENTITY certerror.getMeOutOfHere.label "Siirry pois sivulta">
 
-<!ENTITY certerror.expert.heading "Ymmärrän riskit">
 <!ENTITY certerror.expert.content "Jos ymmärrät tilanteen, voit asettaa
 sivuston identiteetin &brandShortName;in luottamien sivustojen listalle.
 <b>Vaikka luotatkin sivustoon, tämä virhe voi olla merkkinä siitä, että jokin 
@@ -42,5 +33,9 @@ taho häiritsee verkkoyhteyttäsi.</b>">
 <!ENTITY certerror.expert.contentPara2 "Älä lisää poikkeusta ellet 
 tiedä hyvää syytä, miksi tällä sivustolla ei ole luotettuja identiteettitietoja.">
 <!ENTITY certerror.addException.label "Lisää poikkeus…">
+<!ENTITY certerror.copyToClipboard.label "Kopioi teksti leikepöydälle">
 
-<!ENTITY certerror.technical.heading "Tekniset yksityiskohdat">
+<!ENTITY errorReporting.automatic "Ilmoita tällaisista virheistä auttaaksesi Mozillaa tunnistamaan virheellisesti määritettyjä sivustoja">
+<!ENTITY errorReporting.sending "Lähetetään ilmoitusta">
+<!ENTITY errorReporting.sent "Ilmoitus lähetetty">
+<!ENTITY errorReporting.tryAgain "Yritä uudestaan">

@@ -1,10 +1,14 @@
 <!-- This Source Code Form is subject to the terms of the Mozilla Public
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
-
 <!ENTITY addons.windowTitle                   "부가 기능 관리자">
+
 <!ENTITY search.placeholder                   "부가 기능 검색">
-<!ENTITY search.commandkey					  "f">
+<!ENTITY search.buttonlabel                   "검색">
+<!-- LOCALIZATION NOTE (search.commandKey):
+     The search command key should match findOnCmd.commandkey from browser.dtd -->
+<!ENTITY search.commandkey                    "f">
+
 <!ENTITY loading.label                        "읽는 중…">
 <!ENTITY listEmpty.installed.label            "설치한 부가 기능이 없음">
 <!ENTITY listEmpty.availableUpdates.label     "업데이트 없음">
@@ -19,6 +23,11 @@
 <!ENTITY cmd.back.tooltip                     "뒤로">
 <!ENTITY cmd.forward.tooltip                  "앞으로">
 
+<!ENTITY showUnsignedExtensions.button.label  "몇몇 확장기능은 확인을 할 수 없음">
+<!ENTITY showAllExtensions.button.label       "모든 확장기능 보기">
+<!ENTITY debugAddons.label                    "부가 기능 디버그">
+<!ENTITY debugAddons.accesskey                "B">
+
 <!-- global warnings -->
 <!ENTITY warning.safemode.label                    "안전 모드에서 부가 기능 전체를 사용할 수 없습니다.">
 <!ENTITY warning.checkcompatibility.label          "부가 기능 호환성 확인 기능을 중단 합니다. 호환성이 맞지 않을 수 있습니다.">
@@ -29,8 +38,8 @@
 <!ENTITY warning.updatesecurity.enable.tooltip     "부가 기능 업데이트 보안 확인 기능 사용">
 
 <!-- global informations -->
-<!ENTITY info.plugincheck.label "플러그인이 최신 버전인지 확인">
-<!ENTITY info.plugincheck.tooltip "설치된 유효한 플러그인이 최신 버전인지 확인합니다.">
+<!ENTITY info.plugincheck.label                 "플러그인이 최신 버전인지 확인">
+<!ENTITY info.plugincheck.tooltip               "설치된 유효한 플러그인이 최신 버전인지 확인합니다.">
 
 <!-- categories / views -->
 <!ENTITY view.search.label                    "검색">
@@ -43,8 +52,17 @@
 <!ENTITY updates.checkForUpdates.accesskey    "C">
 <!ENTITY updates.viewUpdates.label            "최신 업데이트 보기">
 <!ENTITY updates.viewUpdates.accesskey        "V">
+<!-- LOCALIZATION NOTE (updates.updateAddonsAutomatically.label): This menu item
+     is a checkbox that toggles the default global behavior for add-on update
+     checking. -->
 <!ENTITY updates.updateAddonsAutomatically.label     "자동 업데이트 하기">
 <!ENTITY updates.updateAddonsAutomatically.accesskey "A">
+<!-- LOCALIZATION NOTE (updates.resetUpdatesToAutomatic.label, updates.resetUpdatesToManual.label):
+     Specific addons can have custom update checking behaviors ("Manually",
+     "Automatically", "Use default global behavior"). These menu items reset the
+     update checking behavior for all add-ons to the default global behavior
+     (which itself is either "Automatically" or "Manually", controlled by the
+     updates.updateAddonsAutomatically.label menu item). -->
 <!ENTITY updates.resetUpdatesToAutomatic.label       "자동 업데이트 설정">
 <!ENTITY updates.resetUpdatesToAutomatic.accesskey   "R">
 <!ENTITY updates.resetUpdatesToManual.label          "자동 업데이트 설정 해제">
@@ -78,18 +96,17 @@
 <!ENTITY cmd.enableTheme.accesskey            "W">
 <!ENTITY cmd.disableTheme.label               "테마 적용 중지">
 <!ENTITY cmd.disableTheme.accesskey           "W">
-<!ENTITY cmd.askToActivate.label			  "런타임 확인">
-<!ENTITY cmd.askToActivate.tooltip			  "현재 부가 기능 사용 확인">
-<!ENTITY cmd.alwaysActivate.label			  "항상 사용">
-<!ENTITY cmd.alwaysActivate.tooltip			  "현재 부가 기능은 항상 사용">
-<!ENTITY cmd.neverActivate.label			  "사용 안함 ">
-<!ENTITY cmd.neverActivate.tooltip			  "현재 부가 기능은 사용 안함">
-<!ENTITY cmd.stateMenu.tooltip			      "부가 기능 사용 상태 변경">
+<!ENTITY cmd.askToActivate.label              "런타임 확인">
+<!ENTITY cmd.askToActivate.tooltip            "현재 부가 기능 사용 확인">
+<!ENTITY cmd.alwaysActivate.label             "항상 사용">
+<!ENTITY cmd.alwaysActivate.tooltip           "현재 부가 기능은 항상 사용">
+<!ENTITY cmd.neverActivate.label              "사용 안함 ">
+<!ENTITY cmd.neverActivate.tooltip            "현재 부가 기능은 사용 안함">
+<!ENTITY cmd.stateMenu.tooltip                "부가 기능 사용 상태 변경">
 <!ENTITY cmd.installAddon.label               "설치">
 <!ENTITY cmd.installAddon.accesskey           "I">
 <!ENTITY cmd.uninstallAddon.label             "제거">
 <!ENTITY cmd.uninstallAddon.accesskey         "R">
-<!ENTITY cmd.debugAddon.label                 "디버그">
 <!ENTITY cmd.showPreferencesWin.label         "설정">
 <!ENTITY cmd.showPreferencesWin.tooltip       "부가 기능 설정 변경">
 <!ENTITY cmd.showPreferencesUnix.label        "환경 설정">
@@ -140,12 +157,14 @@
 <!ENTITY detail.showPreferencesUnix.accesskey "P">
 <!ENTITY detail.showPreferencesUnix.tooltip   "부가 기능 환경 설정 변경">
 
+
 <!-- ratings -->
-<!ENTITY rating2.label                         "평가">
+<!ENTITY rating2.label                        "평가">
 
 <!-- download/install progress -->
 <!ENTITY progress.pause.tooltip               "중단">
 <!ENTITY progress.cancel.tooltip              "취소">
+
 
 <!-- list sorting -->
 <!ENTITY sort.name.label                      "이름">
@@ -167,8 +186,14 @@
 <!ENTITY addon.details.label                  "상세보기">
 <!ENTITY addon.details.tooltip                "부가 기능에 대한 상세 정보 표시">
 <!ENTITY addon.unknownDate                    "알수 없음">
+<!-- LOCALIZATION NOTE (addon.disabled.postfix): This is used in a normal list
+     to signify that an add-on is disabled, in the form
+     "<Addon name> <1.0> (disabled)" -->
 <!ENTITY addon.disabled.postfix               "(사용 안 함)">
-<!-- LOCALIZATION NOTE (addon.update.postfix): This is used to signify that an item is an update, in the form "Addon v1.0 Update" -->
+<!-- LOCALIZATION NOTE (addon.update.postfix): This is used in the available
+     updates list to signify that an item is an update, in the form
+     "<Addon name> <1.1> Update". It is fine to use constructs like brackets if
+     necessary -->
 <!ENTITY addon.update.postfix                 "업데이트">
 <!ENTITY addon.undoAction.label               "실행 취소">
 <!ENTITY addon.undoAction.tooltip             "현재 동작 취소">
@@ -206,6 +231,19 @@
 <!ENTITY experiment.info.changetelemetry "원격 측정 설정">
 <!ENTITY experiment.info.changetelemetry.accesskey "T">
 
-<!ENTITY search.buttonlabel                   "Search">
+<!ENTITY setting.learnmore "자세히 보기…">
 
-<!ENTITY setting.learnmore "Learn More…">
+<!ENTITY disabledUnsigned.heading "몇몇 부가 기능이 비활성화 됨">
+<!-- LOCALIZATION NOTE (disabledUnsigned.description.start, disabledUnsigned.description.findAddonsLink, disabledUnsigned.description.end):
+     These entities form a sentence, with
+     disabledUnsigned.description.findAddonsLink being a link to an external site. -->
+<!ENTITY disabledUnsigned.description.start "다음 부가기능은 &brandShortName;에서의 사용이 확인되지 않았습니다. ">
+<!ENTITY disabledUnsigned.description.findAddonsLink "대체제를 검색">
+<!ENTITY disabledUnsigned.description.end "하거나 개발자가 확인을 받도록 요청할 수 있습니다.">
+<!ENTITY disabledUnsigned.learnMore "사용자가 온라인에서 안전할 수 있게 노력하는 내용에 대해서 더 알아보세요.">
+<!-- LOCALIZATION NOTE (disabledUnsigned.devInfo.start, disabledUnsigned.devInfo.linkToManual, disabledUnsigned.devInfo.end):
+     These entities form a sentence, with disabledUnsigned.devInfo.linkToManual
+     being a link to an external site. -->
+<!ENTITY disabledUnsigned.devInfo.start "부가기능을 확인하는데 관심이 있는 개발자는 ">
+<!ENTITY disabledUnsigned.devInfo.linkToManual "메뉴얼">
+<!ENTITY disabledUnsigned.devInfo.end "을 읽어보세요.">

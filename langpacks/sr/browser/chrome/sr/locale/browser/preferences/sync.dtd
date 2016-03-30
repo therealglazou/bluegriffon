@@ -5,7 +5,7 @@
 <!-- The page shown when not logged in... -->
 <!ENTITY setupButton.label          "Подеси &syncBrand.fullName.label;">
 <!ENTITY setupButton.accesskey      "П">
-<!ENTITY weaveDesc.label            "&syncBrand.fullName.label; Вам дозвољава приступ Вашем историјату, забелешкама, лозинкама и отвореним језичцима на свим уређајима.">
+<!ENTITY weaveDesc.label            "&syncBrand.fullName.label; дозвољава приступ историјату, забелешкама, лозинкама и отвореним језичцима на свим уређајима.">
 
 <!-- The page shown when logged in... -->
 
@@ -16,7 +16,6 @@
 <!-- Manage Account -->
 <!ENTITY manageAccount.label          "Управљање налогом">
 <!ENTITY manageAccount.accesskey      "У">
-<!ENTITY viewQuota.label              "Преглед квота">
 <!ENTITY changePassword2.label        "Промена лозинке…">
 <!ENTITY myRecoveryKey.label          "Мој кључ за опоравак">
 <!ENTITY resetSync2.label             "Ресетуј Sync…">
@@ -26,8 +25,6 @@
 <!ENTITY syncMy.label               "Синхронизуј">
 <!ENTITY engine.bookmarks.label     "Забелешке">
 <!ENTITY engine.bookmarks.accesskey "З">
-<!ENTITY engine.readinglist.label   "Листа за читање">
-<!ENTITY engine.readinglist.accesskey "ч">
 <!ENTITY engine.tabs.label          "Језичци">
 <!ENTITY engine.tabs.accesskey      "Ј">
 <!ENTITY engine.history.label       "Историјат">
@@ -42,6 +39,10 @@
 <!-- Device Settings -->
 <!ENTITY syncDeviceName.label       "Назив уређаја">
 <!ENTITY syncDeviceName.accesskey   "ђ">
+<!ENTITY fxaSyncDeviceName.label       "Име уређаја">
+<!ENTITY changeSyncDeviceName.label "Промени име уређаја…">
+<!ENTITY cancelChangeSyncDeviceName.label "Откажи">
+<!ENTITY saveChangeSyncDeviceName.label "Сачувај">
 <!ENTITY unlinkDevice.label           "Уклони овај уређај">
 
 <!-- Footer stuff -->
@@ -50,7 +51,7 @@
 
 <!-- Firefox Accounts stuff -->
 <!ENTITY fxaPrivacyNotice.link.label "Обавештење о приватности">
-<!ENTITY determiningAcctStatus.label     "Утврђујем стање Вашег налога…">
+<!ENTITY determiningAcctStatus.label     "Утврђујем стање налога…">
 
 <!-- LOCALIZATION NOTE (signedInUnverified.beforename.label,
 signedInUnverified.aftername.label): these two string are used respectively
@@ -58,25 +59,50 @@ before and after the account email address. Localizers can use one of them, or
 both, to better adapt this sentence to their language.
 -->
 <!ENTITY signedInUnverified.beforename.label "">
-<!ENTITY signedInUnverified.aftername.label "није верификован.">
+<!ENTITY signedInUnverified.aftername.label "није потврђен.">
 
 <!-- LOCALIZATION NOTE (signedInLoginFailure.beforename.label,
 signedInLoginFailure.aftername.label): these two string are used respectively
 before and after the account email address. Localizers can use one of them, or
 both, to better adapt this sentence to their language.
 -->
-<!ENTITY signedInLoginFailure.beforename.label "Пријавите се да бисте се поново конектовали">
+<!ENTITY signedInLoginFailure.beforename.label "Пријавите се да бисте се поново повезали">
 <!ENTITY signedInLoginFailure.aftername.label "">
 
 <!ENTITY notSignedIn.label           "Нисте пријављени.">
 <!ENTITY signIn.label                "Пријави се">
-<!ENTITY manage.label                " Поставке">
-<!ENTITY disconnect.label            "Прекини конекцију…">
-<!ENTITY verify.label                "Верификуј е-пошту">
+<!ENTITY profilePicture.tooltip      "Промени профилну слику">
+<!ENTITY verifiedManage.label        "Управљај налогом">
+<!ENTITY disconnect.label            "Прекини везу…">
+<!ENTITY verify.label                "Потврди е-пошту">
 <!ENTITY forget.label                "Заборави на ову е-пошту">
 
-<!ENTITY welcome.description "Приступите Вашим језичцима, забелешкама и лозинкама кад год користите &brandShortName;.">
+<!ENTITY welcome.description "Приступите језичцима, забелешкама и лозинкама кад год користите &brandShortName;.">
 <!ENTITY welcome.signIn.label "Пријави се">
 <!ENTITY welcome.createAccount.label "Направи налог">
 
 <!ENTITY welcome.useOldSync.label "Користите старију Sync верзију?">
+
+<!ENTITY signedOut.caption            "Понесите веб са собом">
+<!ENTITY signedOut.description        "Синхронизујте забелешке, историјат, јазичке, лозинке, додатке и поставке на свим уређајима.">
+<!ENTITY signedOut.accountBox.title   "Повезивање са &syncBrand.fxAccount.label;">
+<!ENTITY signedOut.accountBox.create  "Направи налог">
+<!ENTITY signedOut.accountBox.signin  "Пријави се">
+
+<!ENTITY signedIn.engines.label       "Синхронизуј све уређаје">
+
+<!-- LOCALIZATION NOTE (mobilePromo3.*): the following strings will be used to
+     create a single sentence with active links.
+     The resulting sentence in English is: "Download Firefox for
+     Android or iOS to sync with your mobile device." -->
+
+<!ENTITY mobilePromo3.start            "Преузмите Firefox за ">
+<!-- LOCALIZATION NOTE (mobilePromo3.androidLink): This is a link title that links to https://www.mozilla.org/firefox/android/ -->
+<!ENTITY mobilePromo3.androidLink      "Android">
+
+<!-- LOCALIZATION NOTE (mobilePromo3.iOSBefore): This is text displayed between mobilePromo3.androidLink and mobilePromo3.iosLink -->
+<!ENTITY mobilePromo3.iOSBefore         " или ">
+<!-- LOCALIZATION NOTE (mobilePromo3.iOSLink): This is a link title that links to https://www.mozilla.org/firefox/ios/ -->
+<!ENTITY mobilePromo3.iOSLink          "iOS">
+
+<!ENTITY mobilePromo3.end              " да синхронизујете ваше мобилне уређаје.">

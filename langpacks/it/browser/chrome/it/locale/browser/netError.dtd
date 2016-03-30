@@ -6,6 +6,8 @@
 %brandDTD;
 <!ENTITY loadError.label "Errore caricamento pagina">
 <!ENTITY retry.label "Riprova">
+<!ENTITY returnToPreviousPage.label "Torna indietro">
+<!ENTITY advanced.label "Avanzate">
 <!ENTITY connectionFailure.title "Connessione non riuscita">
 <!ENTITY connectionFailure.longDesc "&sharedLongDesc;">
 <!ENTITY deniedPortAccess.title "Questo indirizzo è bloccato">
@@ -111,19 +113,11 @@
   <li>Se il computer o la rete sono protetti da un firewall o un proxy, assicurarsi che &brandShortName; abbia i permessi per accedere al web.</li>
 </ul>
 ">
-<!ENTITY malwareBlocked.title "Sospetto sito web malevolo">
-<!ENTITY malwareBlocked.longDesc "
-<p>I siti web maligni cercano di installare dei software in grado di sottrarre le informazioni personali degli utenti, sfruttare il computer per attaccare altre macchine o semplicemente danneggiare il sistema.</p>
-<p>Il responsabile di un sito web segnalato nell’elenco dei siti pericolosi, nel caso ritenesse tale segnalazione errata, può <a href='http://www.stopbadware.org/home/reviewinfo'>chiedere una nuova valutazione</a>.</p>">
-<!ENTITY phishingBlocked.title "Sospetto sito contraffatto">
-<!ENTITY phishingBlocked.longDesc "
-<p>L’inserimento di informazioni personali in questa pagina può dare origine a furti d’identità o altre frodi.</p>
-<p>Questo tipo di contraffazione viene sfruttato nei cosiddetti attacchi phishing, dove vengono utilizzate in modo fraudolento pagine web ed email per imitare fonti di cui solitamente ci si fida.</p>">
 <!ENTITY cspBlocked.title "Bloccato dai criteri sulla sicurezza dei contenuti">
 <!ENTITY cspBlocked.longDesc "<p>&brandShortName; ha bloccato il caricamento della pagina con questa modalità in quanto include dei criteri sulla sicurezza dei contenuti che lo impediscono.</p>  ">
 <!ENTITY corruptedContentError.title "Errore contenuto danneggiato">
 <!ENTITY corruptedContentError.longDesc "<p>La pagina richiesta non può essere visualizzata a causa di un errore rilevato durante la trasmissione dei dati.</p><ul><li>Contattare il proprietario del sito web e segnalare il problema.</li></ul>">
-<!ENTITY securityOverride.linkText "Oppure è possibile aggiungere un’eccezione">
+<!ENTITY securityOverride.linkText "Oppure è possibile aggiungere un’eccezione…">
 <!ENTITY securityOverride.getMeOutOfHereButton "Allontanarsi da questo sito">
 <!ENTITY securityOverride.exceptionButtonLabel "Aggiungi eccezione…">
 <!ENTITY securityOverride.warningContent "
@@ -132,16 +126,14 @@
 <button id='getMeOutOfHereButton'>&securityOverride.getMeOutOfHereButton;</button>
 <button id='exceptionDialogButton'>&securityOverride.exceptionButtonLabel;</button>
 ">
-<!ENTITY errorReporting.title "Segnala questo errore">
-<!ENTITY errorReporting.longDesc "La segnalazione dell’indirizzo e delle informazioni sul certificato relativi a <span id='hostname'></span> ci aiuta a identificare e bloccare siti malevoli. Aiutaci a creare un Web più sicuro.">
-<!ENTITY errorReporting.automatic "Invia automaticamente le segnalazioni di errore in futuro">
+<!ENTITY errorReporting.automatic2 "Segnala errori come questo per aiutare Mozilla a identificare e bloccare siti dannosi">
 <!ENTITY errorReporting.learnMore "Ulteriori informazioni…">
-<!ENTITY errorReporting.sending "Invio in corso">
-<!ENTITY errorReporting.sent "Segnalazione inviata">
-<!ENTITY errorReporting.report "Segnala">
-<!ENTITY errorReporting.tryAgain "Riprova">
 <!ENTITY remoteXUL.title "XUL remoto">
 <!ENTITY remoteXUL.longDesc "<p><ul><li>Contattare l’amministratore del sito web e segnalare il problema.</li></ul></p>">
 <!ENTITY sslv3Used.title "Impossibile stabilire una connessione sicura">
-<!ENTITY sslv3Used.longDesc "Dettaglio errore: ssl_error_unsupported_version">
-<!ENTITY sslv3Used.learnMore "Ulteriori informazioni…">
+<!ENTITY sslv3Used.longDesc2 "Informazioni avanzate: SSL_ERROR_UNSUPPORTED_VERSION">
+<!ENTITY weakCryptoUsed.title "Questa connessione non è sicura">
+<!ENTITY weakCryptoUsed.longDesc2 "Informazioni avanzate: SSL_ERROR_NO_CYPHER_OVERLAP">
+<!ENTITY weakCryptoAdvanced.title "Avanzate">
+<!ENTITY weakCryptoAdvanced.longDesc "<span class='hostname'></span> utilizza protocolli di sicurezza obsoleti e vulnerabili. Questo potrebbe consentire a malintenzionati di intercettare e leggere informazioni che l’utente considera sicure.">
+<!ENTITY weakCryptoAdvanced.override "(Non sicuro) Prova a caricare <span class='hostname'></span> utilizzando protocolli di sicurezza obsoleti">

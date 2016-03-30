@@ -1,5 +1,5 @@
-//@line 4 "c:\builds\moz2_slave\rel-m-beta-w32_rpk_4-000000000\l10n\fi\browser\firefox-l10n.js"
+//@line 4 "c:\builds\moz2_slave\m-aurora-w32-l10n-ntly-2-00000\build\l10n\fi\browser\firefox-l10n.js"
 
-//@line 6 "c:\builds\moz2_slave\rel-m-beta-w32_rpk_4-000000000\l10n\fi\browser\firefox-l10n.js"
+//@line 6 "c:\builds\moz2_slave\m-aurora-w32-l10n-ntly-2-00000\build\l10n\fi\browser\firefox-l10n.js"
 
 pref("general.useragent.locale", "fi");

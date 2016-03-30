@@ -1,16 +1,15 @@
 <!-- This Source Code Form is subject to the terms of the Mozilla Public
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
-
 <!-- rights.locale-direction instead of the usual local.dir entity, so RTL can skip translating page. -->
 <!ENTITY rights.locale-direction "ltr">
-<!ENTITY rights.pagetitle "O vašich právech">
-<!ENTITY rights.intro-header "O vašich právech">
+<!ENTITY rights.pagetitle       "O vašich právech">
+<!ENTITY rights.intro-header    "O vašich právech">
 <!ENTITY rights.intro "&brandFullName; je svobodný software s otevřeným zdrojovým kódem, který je vytvářen tisíci dobrovolníky z celého světa. Je zde ale několik věcí, které byste měli vědět:">
 
 <!-- Note on pointa / pointb / pointc form:
      These points each have an embedded link in the HTML, so each point is
-     split into chunks for text before the link, the link test, and the text
+     split into chunks for text before the link, the link text, and the text
      after the link. If a localized grammar doesn't need the before or after
      chunk, it can be left blank.
 
@@ -25,7 +24,7 @@
 <!ENTITY rights.intro-point2-c ".">
 
 <!-- point 2.5 text for official branded builds -->
-<!ENTITY rights.intro-point2.5 "Některé funkce aplikace &brandShortName; jako např. hlášení pádů, vám umožní odeslat zpětnou vazbu organizaci &vendorShortName;. Odesláním zpětné vazby, poskytujete organizaci &vendorShortName; povolení k užití zpětné vazbu pro vylepšení svých produktů, publikaci zpětně vazby na svých stránkách a distribuci zpětné vazby.">
+<!ENTITY rights.intro-point2.5 "Některé funkce aplikace &brandShortName;, jako např. hlášení pádů, vám umožní odeslat zpětnou vazbu organizaci &vendorShortName;. Odesláním zpětné vazby poskytujete organizaci &vendorShortName; povolení k užití zpětné vazbu pro vylepšení svých produktů, publikaci na svých stránkách a distribuci.">
 
 <!-- point 3 text for official branded builds -->
 <!ENTITY rights2.intro-point3a "Způsoby užití osobních informací a zpětné vazby odeslané organizaci &vendorShortName; pomocí aplikace &brandShortName; jsou popsány v ">
@@ -47,30 +46,33 @@
 
 <!ENTITY rights2.webservices-header "Webové informační služby aplikace &brandFullName;">
 
+<!-- point 5 -->
+<!ENTITY rights.intro-point5 "Pro přehrání některých typů video obsahu &brandShortName; stáhne odpovídající dešifrovací moduly třetích stran.">
+
 <!-- Note that this paragraph references a couple of entities from
      preferences/security.dtd, so that we can refer to text the user sees in
      the UI, without this page being forgotten every time those strings are
      updated.  -->
 <!-- intro paragraph for branded builds -->
-<!ENTITY rights2.webservices-a "&brandFullName; používá webové informační služby („Služby“) z důvodu zajištění některých funkcí dostupných v rámci této binární verze aplikace &brandShortName; za podmínek popsaných níže. Pokud si nepřejete jednu nebo více Služeb používat nebo jsou pro vás níže uvedené podmínky neakceptovatelné, lze tyto služby vypnout. Postup, jak lze vypnout určitou funkcionalitu nebo Službu lze najít ">
+<!ENTITY rights2.webservices-a "&brandFullName; používá webové informační služby („Služby“) z důvodu zajištění některých funkcí dostupných v rámci této binární verze aplikace &brandShortName; za podmínek popsaných níže. Pokud si nepřejete jednu nebo více Služeb používat nebo jsou pro vás níže uvedené podmínky neakceptovatelné, lze tyto služby vypnout. Postup, jak lze vypnout určitou funkcionalitu nebo Službu, lze najít ">
 <!ENTITY rights2.webservices-b "v samostatné sekci">
 <!ENTITY rights3.webservices-c ". Další vlastnosti a Služby mohou být zakázány v předvolbách aplikace.">
 
 <!-- safe browsing points for branded builds -->
 <!ENTITY rights.safebrowsing-a "Bezpečné prohlížení: ">
-<!ENTITY rights.safebrowsing-b "Zakázání funkce bezpečného prohlížení je nedoporučováno neboť vám umožní navštěvovat nebezpečné stránky. Pokud ale chcete tuto funkci zakázat, postupujte podle těchto kroků:">
+<!ENTITY rights.safebrowsing-b "Zakázání funkce bezpečného prohlížení není doporučováno, protože vám umožní navštěvovat nebezpečné stránky. Pokud ale chcete tuto funkci zakázat, postupujte podle těchto kroků:">
 <!ENTITY rights.safebrowsing-term1 "Otevřete předvolby aplikace">
 <!ENTITY rights.safebrowsing-term2 "Zvolte panel Zabezpečení">
-<!ENTITY rights.safebrowsing-term3 "Odškrtněte předvolby „&blockAttackSites.label;“ a „&blockWebForgeries.label;“">
+<!ENTITY rights.safebrowsing-term3 "Zrušte zaškrtnutí předvolby „&blockAttackSites.label;“ a „&blockWebForgeries.label;“">
 <!ENTITY rights.safebrowsing-term4 "Bezpečné prohlížení je nyní vypnuto">
 
 <!-- location aware browsing points for branded builds -->
 <!ENTITY rights.locationawarebrowsing-a "Prohlížení se znalostí polohy: ">
 <!ENTITY rights.locationawarebrowsing-b "Služby se znalostí polohy si vždy musí vyžádat váš souhlas, bez kterého nejsou odeslány žádné informace o poloze. Pokud ale chcete tuto funkci zakázat, postupujte podle těchto kroků:">
-<!ENTITY rights.locationawarebrowsing-term1a "Do pole adresy vepište ">
+<!ENTITY rights.locationawarebrowsing-term1a "Do pole adresy zadejte ">
 <!ENTITY rights.locationawarebrowsing-term1b "about:config">
-<!ENTITY rights.locationawarebrowsing-term2 "a potvrďte varování. Vložte filtr „geo.enabled“">
-<!ENTITY rights.locationawarebrowsing-term3 "Z místní nabídky přepněte předvolbu na hodnotu nepravda">
+<!ENTITY rights.locationawarebrowsing-term2 "a potvrďte varování. Zadejte hledat „geo.enabled“">
+<!ENTITY rights.locationawarebrowsing-term3 "Z místní nabídky přepněte předvolbu na hodnotu false">
 <!ENTITY rights.locationawarebrowsing-term4 "Prohlížení se znalostí polohy je nyní vypnuto">
 
 <!-- intro paragraph for unbranded builds -->

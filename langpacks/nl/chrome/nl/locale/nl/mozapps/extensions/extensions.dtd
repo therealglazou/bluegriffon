@@ -4,6 +4,7 @@
 <!ENTITY addons.windowTitle                   "Add-onbeheerder">
 
 <!ENTITY search.placeholder                   "Alle add-ons doorzoeken">
+<!ENTITY search.buttonlabel                   "Zoeken">
 <!-- LOCALIZATION NOTE (search.commandKey):
      The search command key should match findOnCmd.commandkey from browser.dtd -->
 <!ENTITY search.commandkey                    "f">
@@ -21,6 +22,11 @@
 
 <!ENTITY cmd.back.tooltip                     "Een pagina terug gaan">
 <!ENTITY cmd.forward.tooltip                  "Een pagina vooruit gaan">
+
+<!ENTITY showUnsignedExtensions.button.label  "Sommige extensies konden niet worden geverifieerd">
+<!ENTITY showAllExtensions.button.label       "Alle extensies tonen">
+<!ENTITY debugAddons.label                    "Add-ons debuggen">
+<!ENTITY debugAddons.accesskey                "b">
 
 <!-- global warnings -->
 <!ENTITY warning.safemode.label                    "Alle add-ons zijn uitgeschakeld door de veilige modus.">
@@ -101,7 +107,6 @@
 <!ENTITY cmd.installAddon.accesskey           "I">
 <!ENTITY cmd.uninstallAddon.label             "Verwijderen">
 <!ENTITY cmd.uninstallAddon.accesskey         "V">
-<!ENTITY cmd.debugAddon.label                 "Foutopsporing">
 <!ENTITY cmd.showPreferencesWin.label         "Opties">
 <!ENTITY cmd.showPreferencesWin.tooltip       "Opties van deze add-on wijzigen">
 <!ENTITY cmd.showPreferencesUnix.label        "Voorkeuren">
@@ -192,7 +197,7 @@
      updates list to signify that an item is an update, in the form
      "<Addon name> <1.1> Update". It is fine to use constructs like brackets if
      necessary -->
-<!ENTITY addon.update.postfix                 "Bijwerken">
+<!ENTITY addon.update.postfix                 "(update)">
 <!ENTITY addon.undoAction.label               "Ongedaan maken">
 <!ENTITY addon.undoAction.tooltip             "Deze actie ongedaan maken">
 <!ENTITY addon.undoRemove.label               "Ongedaan maken">
@@ -229,6 +234,19 @@
 <!ENTITY experiment.info.changetelemetry "Telemetry-instellingen">
 <!ENTITY experiment.info.changetelemetry.accesskey "T">
 
-<!ENTITY search.buttonlabel                   "Search">
+<!ENTITY setting.learnmore "Meer info…">
 
-<!ENTITY setting.learnmore "Learn More…">
+<!ENTITY disabledUnsigned.heading "Sommige add-ons zijn uitgeschakeld">
+<!-- LOCALIZATION NOTE (disabledUnsigned.description.start, disabledUnsigned.description.findAddonsLink, disabledUnsigned.description.end):
+     These entities form a sentence, with
+     disabledUnsigned.description.findAddonsLink being a link to an external site. -->
+<!ENTITY disabledUnsigned.description.start "De volgende add-ons zijn niet geverifieerd voor gebruik in &brandShortName;. U kunt ">
+<!ENTITY disabledUnsigned.description.findAddonsLink "naar vervangingen zoeken">
+<!ENTITY disabledUnsigned.description.end " of de ontwikkelaar vragen deze te laten verifiëren.">
+<!ENTITY disabledUnsigned.learnMore "Lees meer over onze pogingen om u online veilig te houden.">
+<!-- LOCALIZATION NOTE (disabledUnsigned.devInfo.start, disabledUnsigned.devInfo.linkToManual, disabledUnsigned.devInfo.end):
+     These entities form a sentence, with disabledUnsigned.devInfo.linkToManual
+     being a link to an external site. -->
+<!ENTITY disabledUnsigned.devInfo.start "Ontwikkelaars die interesse hebben in het laten verifiëren van hun add-ons kunnen verdergaan door onze ">
+<!ENTITY disabledUnsigned.devInfo.linkToManual "handleiding">
+<!ENTITY disabledUnsigned.devInfo.end " te lezen.">

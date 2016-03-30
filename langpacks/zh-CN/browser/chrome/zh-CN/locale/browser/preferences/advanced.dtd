@@ -1,8 +1,8 @@
 <!-- This Source Code Form is subject to the terms of the Mozilla Public
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
-<!-- Note: each tab panel must contain unique accesskeys -->
 
+<!-- Note: each tab panel must contain unique accesskeys -->
 
 <!ENTITY generalTab.label                "常规">
 
@@ -14,6 +14,8 @@
 <!ENTITY searchStartTyping.accesskey     "x">
 <!ENTITY blockAutoRefresh.label          "当网站试图重定向或重新载入页面时发出警告">
 <!ENTITY blockAutoRefresh.accesskey      "b">
+<!ENTITY useOnScreenKeyboard.label       "在需要时显示触摸键盘">
+<!ENTITY useOnScreenKeyboard.accesskey   "k">
 
 <!ENTITY browsing.label                  "浏览">
 
@@ -26,7 +28,7 @@
 <!ENTITY checkSpelling.label             "输入时即检查拼写">
 <!ENTITY checkSpelling.accesskey         "t">
 
-<!ENTITY dataChoicesTab.label            "反馈">
+<!ENTITY dataChoicesTab.label            "数据反馈">
 
 <!ENTITY healthReportDesc.label          "帮助您了解浏览器的工作性能，并与 &vendorShortName; 分享您的浏览器健康状况。">
 <!ENTITY enableHealthReport.label        "启用 &brandShortName; 健康报告">
@@ -54,13 +56,13 @@
 <!ENTITY httpCache.label                 "网络内容缓存">
 
 <!ENTITY offlineStorage2.label           "离线 Web 内容和用户数据">
+
 <!-- LOCALIZATION NOTE:
   The entities limitCacheSizeBefore.label and limitCacheSizeAfter.label appear on a single
   line in preferences as follows:
 
   &limitCacheSizeBefore.label [textbox for cache size in MB] &limitCacheSizeAfter.label;
 -->
-
 <!ENTITY limitCacheSizeBefore.label      "缓存最大为">
 <!ENTITY limitCacheSizeBefore.accesskey  "L">
 <!ENTITY limitCacheSizeAfter.label       "MB 磁盘空间">
@@ -74,13 +76,8 @@
 <!ENTITY updateTab.label                 "更新">
 
 <!ENTITY updateApp.label                 "&brandShortName; 更新：">
-<!-- Note either updateAuto1 is used or (updateAutoMetro and updateAutoDesktop),
-     so re-using accesss key in updateAuto1 is OK. updateAutoDesktop can be found
-     in preferences.properties -->
 <!ENTITY updateAuto1.label               "自动安装更新（推荐：可提升安全性）">
 <!ENTITY updateAuto1.accesskey           "A">
-<!ENTITY updateAutoMetro.label           "在桌面版和 Windows 8 风格的 &brandShortName; 中均自动安装更新">
-<!ENTITY updateAutoMetro.accesskey       "s">
 <!ENTITY updateCheck.label               "检查更新，但是让我选择是否安装">
 <!ENTITY updateCheck.accesskey           "C">
 <!ENTITY updateManual.label              "不检查更新（不推荐：存在安全风险）">
@@ -88,8 +85,6 @@
 
 <!ENTITY updateAutoAddonWarn.label       "如果将禁用任何附加组件，警告我">
 <!ENTITY updateAutoAddonWarn.accesskey   "W">
-
-<!ENTITY updateAutoMetroWarn.label       "（Windows 8 风格的 &brandShortName; 尚未检查附加组件兼容性）">
 
 <!ENTITY updateHistory.label             "显示更新历史">
 <!ENTITY updateHistory.accesskey         "p">
@@ -113,16 +108,15 @@
 <!ENTITY offlineAppRemove.confirm        "移除脱机数据">
 
 <!ENTITY certificateTab.label            "证书">
+<!ENTITY certSelection.label             "请求">
 <!ENTITY certSelection.description       "当某个服务器请求我的个人证书：">
 <!ENTITY certs.auto                      "自动选择一个">
 <!ENTITY certs.auto.accesskey            "S">
 <!ENTITY certs.ask                       "每次均询问">
 <!ENTITY certs.ask.accesskey             "A">
-<!ENTITY enableOCSP.label                "查询 OCSP 响应服务器以确认证书的当前有效性">
+<!ENTITY enableOCSP.label                "查询 OCSP 响应服务器，以确认证书当前是否有效">
 <!ENTITY enableOCSP.accesskey            "Q">
 <!ENTITY viewCerts.label                 "查看证书">
 <!ENTITY viewCerts.accesskey             "C">
 <!ENTITY viewSecurityDevices.label       "安全设备">
 <!ENTITY viewSecurityDevices.accesskey   "D">
-
-<!ENTITY certSelection.label             "Requests">

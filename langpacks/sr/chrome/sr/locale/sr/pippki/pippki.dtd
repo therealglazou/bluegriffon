@@ -13,27 +13,22 @@
 <!-- Values for resetpassword.xul -->
 <!ENTITY resetPasswordButtonLabel "Ресетуј">
 <!ENTITY resetPassword.title  "Ресетуј главну лозинку">
-<!ENTITY resetPassword.text  "Ако ресетујете главну лозинку, све сачуване лозинке за интернет и е-пошту, садржаји формулара, лични сертификати и кључеви биће &quot;изгубљени&quot;. Да ли заиста желите обновити своју главну лозинку?">
-
-<!-- Values for getpassword.xul -->
-<!ENTITY getPassword.title  "Унос главне лозинке">
-<!ENTITY getPassword.tokenName2.label "Безбедносни уређај:">
-<!ENTITY getPassword.password.label "Лозинка:">
+<!ENTITY resetPassword.text  "Ако ресетујете главну лозинку, све сачуване лозинке за интернет и е-пошту, садржаји формулара, лични сертификати и кључеви биће &quot;изгубљени&quot;. Да ли заиста желите ресетовати своју главну лозинку?">
 
 <!-- Downloading a cert -->
 <!ENTITY downloadCert.title "Пријем сертификата">
-<!ENTITY downloadCert.message1 "Тражено је од Вас да верујете новом сертификационом телу (СА).">
-<!ENTITY downloadCert.trustSSL "Веруј овој компанији о идентитету веб сајтова.">
-<!ENTITY downloadCert.trustEmail "Веруј овој компанији за избор е-поште корисника.">
-<!ENTITY downloadCert.trustObjSign "Веруј овој компанији за избор развоја програма.">
-<!ENTITY downloadCert.message3 "Пре указивања поверења овој компанији за било коју намену испитај њен сертификат и њене полисе и процедуре (ако постоје).">
+<!ENTITY downloadCert.message1 "Тражено је да верујете новом сертификационом телу (СА).">
+<!ENTITY downloadCert.trustSSL "Веруј овом сертификационом телу (CA) да идентификује веб сајтова.">
+<!ENTITY downloadCert.trustEmail "Веруј овом сертификационом телу (CA) да идентификује е-поште корисника.">
+<!ENTITY downloadCert.trustObjSign "Веруј овом сертификационом телу (CA) да идентификује програмере.">
+<!ENTITY downloadCert.message3 "Пре указивања поверења овој компанији за било коју намену испитајте њен сертификат и њене полисе и процедуре (ако постоје).">
 <!ENTITY downloadCert.viewCert.label "Преглед">
-<!ENTITY downloadCert.viewCert.text "Испитај сертификат компаније">
+<!ENTITY downloadCert.viewCert.text "Испитај сертификат сертификационог тела">
 
 <!-- Strings for the SSL client auth ask dialog -->
 <!ENTITY clientAuthAsk.title "Захтев за идентификацију корисника">
 <!ENTITY clientAuthAsk.message1 "Овај веб сајт је тражио да се идентификујете помоћу сертификата:">
-<!ENTITY clientAuthAsk.message2 "Изаберите сертификат кога ћете приказати као идентификацију:">
+<!ENTITY clientAuthAsk.message2 "Изаберите сертификат који ће служити за идентификацију:">
 <!ENTITY clientAuthAsk.message3 "Детаљи о изабраном сертификату:">
 
 <!-- Strings for the cert picker dialog -->
@@ -45,24 +40,17 @@
 <!ENTITY pkcs12.setpassword.message  "Резервна лозинка за сертификат, коју изаберете овде, штитиће датотеку која ће бити направљена. За исте наставили морате поставити лозинку.">
 <!ENTITY pkcs12.setpassword.label1 "Резервна лозинка за сертификат:">
 <!ENTITY pkcs12.setpassword.label2 "Резервна лозинка за сертификат (опет):">
-<!ENTITY pkcs12.setpassword.reminder "Важно: ако заборавите лозинку за резервну лозинку сертификата, нећете моћи да касније вратите сертификат.  Молимо да лозинку сачувате на безбедно место.">
+<!ENTITY pkcs12.setpassword.reminder "Важно: ако заборавите лозинку за резервну лозинку сертификата, нећете моћи да касније вратите сертификат.  Лозинку сачувајте на безбедно место.">
 
 <!ENTITY chooseToken.title  "Изабери знак">
 <!ENTITY chooseToken.message1 "Изаберите знак.">
 
-<!ENTITY escrowWarn.title "Копија шифрованог кључа">
-<!ENTITY escrowWarn.message1 "Важно: ово сертификационо тело је тражило да направите резервне копије Вашег приватног кључа.">
-<!ENTITY escrowWarn.benefit1 "Предност је да ако изгубите приступ приватном кључу, можете затражити копију од сертификационог тела.">
-<!ENTITY escrowWarn.message2 "Међутим, Ваш приватни кључ ће чувати сертификационо тело и може да се користи за читање Ваше шифроване е-поште или докумената без Ваше дозволе.">
-<!ENTITY examineCert.label "Преглед сертификата">
-<!ENTITY examineCert.accesskey "П">
-
 <!-- Strings for the CreateCertInfo dialog  -->
 <!ENTITY createCertInfo.title "Прављење приватног кључа">
-<!ENTITY createCertInfo.msg1 "Кључ се генерише…  Ово може да потраје неколико минута…">
-<!ENTITY createCertInfo.msg2 "Молимо да сачекате…">
+<!ENTITY createCertInfo.msg1 "Кључ се генерише… Ово може да потраје неколико минута…">
+<!ENTITY createCertInfo.msg2 "Сачекајте…">
 
 <!-- Strings for protectedAuth dialog -->
-<!ENTITY protectedAuth.title "Аутентикација заштићеним токеном">
-<!ENTITY protectedAuth.msg "Молимо да се пријавите знаком распознавања (token).  Врста аутентикације зависи од врсте знака распознавања.">
+<!ENTITY protectedAuth.title "Потврда идентитета заштићеним знаком">
+<!ENTITY protectedAuth.msg "Пријавите се са знаком распознавања (token). Врста потврде идентитета зависи од врсте знака распознавања.">
 <!ENTITY protectedAuth.tokenName.label "Знак:">

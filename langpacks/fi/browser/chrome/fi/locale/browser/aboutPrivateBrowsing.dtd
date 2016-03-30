@@ -2,18 +2,54 @@
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 
-<!ENTITY aboutPrivateBrowsing.title            "Selain on yksityinen selaus -tilassa">
-<!ENTITY aboutPrivateBrowsing.title.normal     "Avataanko yksityinen selaus -ikkuna?">
+<!ENTITY aboutPrivateBrowsing.notPrivate       "Yksityistä selausikkunaa ei ole valittu.">
+<!ENTITY privatebrowsingpage.openPrivateWindow.label "Avaa yksityinen ikkuna">
+<!ENTITY privatebrowsingpage.openPrivateWindow.accesskey "y">
 
-<!ENTITY aboutPrivateBrowsing.subtitle         "&brandShortName; ei tallenna historiatietoja tälle ikkunalle.">
-<!ENTITY aboutPrivateBrowsing.subtitle.normal  "&brandShortName; ei tallenna historiatietoja yksityinen selaus -ikkunoille.">
+<!ENTITY privateBrowsing.title                 "Yksityinen selaus">
 
-<!ENTITY aboutPrivateBrowsing.description      "Näitä tietoja ovat sivu-, haku- ja lataushistoria, lomakekenttiin syötetyt tiedot, evästeet ja väliaikaistiedostot. Ladatut tiedostot ja kirjanmerkit sivustoille säilyvät normaalilla tavalla.">
+<!-- LOCALIZATION NOTE (aboutPrivateBrowsing.width1):
+     Width of the Private Browsing section. This should depend primarily on the
+     length of the headers and text, but should be roughly 1.5 times the width
+     of the Tracking Protection section, and in general not much larger than
+     30em to prevent the sections from wrapping on smaller window sizes.
+     -->
+<!ENTITY aboutPrivateBrowsing.width1           "30em">
+<!ENTITY aboutPrivateBrowsing.title            "Selaat yksityisessä tilassa">
 
-<!ENTITY aboutPrivateBrowsing.notPrivate       "Valittuna ei ole yksityisen selauksen ikkunaa.">
+<!ENTITY aboutPrivateBrowsing.info.notsaved    "Ei tallenneta">
+<!ENTITY aboutPrivateBrowsing.info.history     "Sivuhistoria">
+<!ENTITY aboutPrivateBrowsing.info.searches    "Haut">
+<!ENTITY aboutPrivateBrowsing.info.cookies     "Evästeet">
+<!ENTITY aboutPrivateBrowsing.info.temporaryFiles "Väliaikatiedostot">
 
-<!ENTITY aboutPrivateBrowsing.moreInfo         "Vaikka tälle tietokoneelle ei jää jälkiä selatuista sivuista, Internet-palveluntarjoajasi tai esimerkiksi työnantajasi voi edelleen seurata, millä sivuilla on vierailtu.">
+<!ENTITY aboutPrivateBrowsing.info.saved       "Tallennetaan">
+<!ENTITY aboutPrivateBrowsing.info.downloads   "Lataukset">
+<!ENTITY aboutPrivateBrowsing.info.bookmarks   "Kirjanmerkit">
+
+<!ENTITY aboutPrivateBrowsing.note1            "Huomaa, että työnantajasi tai Internet-palveluntarjoajasi voi edelleen seurata, millä sivuilla on vierailtu.">
 <!ENTITY aboutPrivateBrowsing.learnMore        "Lue lisää.">
 
-<!ENTITY privatebrowsingpage.openPrivateWindow.label "Avaa yksityisen selauksen ikkuna">
-<!ENTITY privatebrowsingpage.openPrivateWindow.accesskey "t">
+<!-- LOCALIZATION NOTE (trackingProtection.width1):
+     Width of the Tracking Protection section. It is fine for the enabled or
+     disabled indicator or the words in the title to wrap to the next line, but
+     you can expand or reduce this section to fit better, as long as the width
+     of the Private Browsing section is roughly 1.5 times the width of this one.
+     Note that the required space may vary between platforms because fonts are
+     different, so testing on Windows, Mac, and Linux is encouraged.
+     -->
+<!ENTITY trackingProtection.width1             "22em">
+<!ENTITY trackingProtection.title              "Seurannan suojaus">
+
+<!-- LOCALIZATION NOTE (trackingProtection.state.width):
+     Width of the element representing the enabled or disabled indicator.
+     -->
+<!ENTITY trackingProtection.state.width        "12ch">
+<!ENTITY trackingProtection.state.enabled      "PÄÄLLÄ">
+<!ENTITY trackingProtection.state.disabled     "POIS PÄÄLTÄ">
+
+<!ENTITY trackingProtection.description1       "Yksityisen selaamisen ikkunat estävät nyt sinua mahdollisesti seuraavat osat sivuista.">
+
+<!ENTITY trackingProtection.disable            "Poista seurannan suojaus käytöstä">
+<!ENTITY trackingProtection.enable             "Ota seurannan suojaus käyttöön">
+<!ENTITY trackingProtection.startTour1         "Lue, kuinka tämä toimii">

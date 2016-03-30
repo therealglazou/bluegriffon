@@ -22,8 +22,13 @@
 
 <!ENTITY cmd.back.tooltip                     "转到上一页">
 <!ENTITY cmd.forward.tooltip                  "转到下一页">
-<!-- global warnings -->
 
+<!ENTITY showUnsignedExtensions.button.label  "一些扩展未通过验证">
+<!ENTITY showAllExtensions.button.label       "显示所有扩展">
+<!ENTITY debugAddons.label                    "调试附加组件">
+<!ENTITY debugAddons.accesskey                "B">
+
+<!-- global warnings -->
 <!ENTITY warning.safemode.label                    "所有附加组件都已被安全模式暂时禁用。">
 <!ENTITY warning.checkcompatibility.label          "附加组件兼容性检查已禁用。您可能有不兼容的附加组件。">
 <!ENTITY warning.checkcompatibility.enable.label   "启用">
@@ -31,18 +36,18 @@
 <!ENTITY warning.updatesecurity.label              "附加组件更新安全检查已被禁用。您可能会受到更新带来的安全威胁。">
 <!ENTITY warning.updatesecurity.enable.label       "启用">
 <!ENTITY warning.updatesecurity.enable.tooltip     "启用附加组件安全更新检查">
-<!-- global informations -->
 
+<!-- global informations -->
 <!ENTITY info.plugincheck.label                 "检查你的插件是否都是最新版本">
 <!ENTITY info.plugincheck.tooltip               "来检查看看，了解你的插件是否都已是最新版本">
-<!-- categories / views -->
 
+<!-- categories / views -->
 <!ENTITY view.search.label                    "搜索">
 <!ENTITY view.discover.label                  "获取附加组件">
 <!ENTITY view.recentUpdates.label             "最近更新">
 <!ENTITY view.availableUpdates.label          "可用更新">
-<!-- addon updates -->
 
+<!-- addon updates -->
 <!ENTITY updates.checkForUpdates.label        "检查更新">
 <!ENTITY updates.checkForUpdates.accesskey    "C">
 <!ENTITY updates.viewUpdates.label            "查看最近更新">
@@ -70,8 +75,8 @@
 <!ENTITY updates.manualUpdatesFound.label     "查看可用更新">
 <!ENTITY updates.updateSelected.label         "安装选中的更新">
 <!ENTITY updates.updateSelected.tooltip       "安装在此列表选中的可用更新">
-<!-- addon actions -->
 
+<!-- addon actions -->
 <!ENTITY cmd.showDetails.label                "显示更多信息">
 <!ENTITY cmd.showDetails.accesskey            "S">
 <!ENTITY cmd.findUpdates.label                "查找更新">
@@ -102,7 +107,6 @@
 <!ENTITY cmd.installAddon.accesskey           "I">
 <!ENTITY cmd.uninstallAddon.label             "移除">
 <!ENTITY cmd.uninstallAddon.accesskey         "R">
-<!ENTITY cmd.debugAddon.label                 "调试">
 <!ENTITY cmd.showPreferencesWin.label         "选项">
 <!ENTITY cmd.showPreferencesWin.tooltip       "更改此附加组件的选项">
 <!ENTITY cmd.showPreferencesUnix.label        "首选项">
@@ -115,15 +119,15 @@
 <!ENTITY cmd.showReleaseNotes.tooltip         "显示此更新的发行说明">
 <!ENTITY cmd.hideReleaseNotes.label           "隐藏发行说明">
 <!ENTITY cmd.hideReleaseNotes.tooltip         "隐藏此更新的发行说明">
+
 <!-- discovery view -->
 <!-- LOCALIZATION NOTE (discover.title,discover.description,discover.footer):
      Displayed in the center of the Get Add-ons view, see bug 601143 for mockups. -->
-
 <!ENTITY discover.title                       "什么是附加组件？">
 <!ENTITY discover.description2                "附加组件是一些可以让您使用更多功能或样式来个性化 &brandShortName; 的应用程序。您可以试试快捷省时的侧边栏、天气通知或一个主题，将 &brandShortName; 变成独一无二的。">
 <!ENTITY discover.footer                      "在您连接到互联网的情况下，此面板将列出一些最好、最流行的附加组件供您尝试。">
-<!-- detail view -->
 
+<!-- detail view -->
 <!ENTITY detail.version.label                 "版本">
 <!ENTITY detail.lastupdated.label             "上次更新">
 <!ENTITY detail.creator.label                 "开发者">
@@ -152,17 +156,17 @@
 <!ENTITY detail.showPreferencesUnix.label     "首选项">
 <!ENTITY detail.showPreferencesUnix.accesskey "P">
 <!ENTITY detail.showPreferencesUnix.tooltip   "更改此附加组件的首选项">
+
+
 <!-- ratings -->
-
-
 <!ENTITY rating2.label                        "评分">
-<!-- download/install progress -->
 
+<!-- download/install progress -->
 <!ENTITY progress.pause.tooltip               "暂停">
 <!ENTITY progress.cancel.tooltip              "取消">
+
+
 <!-- list sorting -->
-
-
 <!ENTITY sort.name.label                      "名称">
 <!ENTITY sort.name.tooltip                    "按名称排列">
 <!ENTITY sort.dateUpdated.label               "上次更新">
@@ -215,12 +219,12 @@
 <!ENTITY eula.accept                          "接受并安装…">
 
 <!ENTITY settings.path.button.label           "浏览…">
+
 <!-- LOCALIZATION NOTE (experiment.info.label): The strings related to
      experiments are present on the "Experiments" tab of the add-ons manager.
      This tab won't be displayed unless an Experiment add-on is installed.
      Install https://people.mozilla.org/~gszorc/dummy-experiment-addon.xpi
      to cause this tab to appear. -->
-
 <!ENTITY experiment.info.label "想问这是什么？“遥测”会不时地安装和运行一些实验项目。">
 <!ENTITY experiment.info.learnmore "详细了解">
 <!ENTITY experiment.info.learnmore.accesskey "L">
@@ -228,3 +232,18 @@
 <!ENTITY experiment.info.changetelemetry.accesskey "T">
 
 <!ENTITY setting.learnmore "详细了解…">
+
+<!ENTITY disabledUnsigned.heading "一些附加组件已被禁用">
+<!-- LOCALIZATION NOTE (disabledUnsigned.description.start, disabledUnsigned.description.findAddonsLink, disabledUnsigned.description.end):
+     These entities form a sentence, with
+     disabledUnsigned.description.findAddonsLink being a link to an external site. -->
+<!ENTITY disabledUnsigned.description.start "下列附加组件未通过针对是否适用于 &brandShortName; 的验证。您可以">
+<!ENTITY disabledUnsigned.description.findAddonsLink "找找有无替代品">
+<!ENTITY disabledUnsigned.description.end "或者请开发者申请验证。">
+<!ENTITY disabledUnsigned.learnMore "了解我们为保障您的网上安全做了哪些努力。">
+<!-- LOCALIZATION NOTE (disabledUnsigned.devInfo.start, disabledUnsigned.devInfo.linkToManual, disabledUnsigned.devInfo.end):
+     These entities form a sentence, with disabledUnsigned.devInfo.linkToManual
+     being a link to an external site. -->
+<!ENTITY disabledUnsigned.devInfo.start "想要自己的附加组件获得验证的开发者可继续阅读我们的">
+<!ENTITY disabledUnsigned.devInfo.linkToManual "相关手册">
+<!ENTITY disabledUnsigned.devInfo.end "。">

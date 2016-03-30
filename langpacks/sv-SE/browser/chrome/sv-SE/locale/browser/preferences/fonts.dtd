@@ -3,9 +3,6 @@
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 
 <!ENTITY  fontsDialog.title                       "Teckensnitt">
-<!ENTITY  window.width                            "39em">
-<!ENTITY  window.macWidth                         "43em">
-<!ENTITY  window.unixWidth                        "41em">
 
 <!ENTITY  language.label                          "Teckensnitt för:">
 <!ENTITY  language.accesskey                      "c">
@@ -23,19 +20,18 @@
 <!ENTITY  sans-serif.accesskey                    "n">
 <!ENTITY  monospace.label                         "Fast bredd:">
 <!ENTITY  monospace.accesskey                     "F">
+<!-- LOCALIZATION NOTE (font.langGroup.latin) :
+     Translate "Latin" as the name of Latin (Roman) script, not as the name of the Latin language. -->
 
-<!ENTITY  font.langGroup.latin1                   "Västeuropeiska språk">
-<!ENTITY  font.langGroup.latin2                   "Centraleuropeiska språk">
+<!ENTITY  font.langGroup.latin                    "Latin">
 <!ENTITY  font.langGroup.japanese                 "Japanska">
 <!ENTITY  font.langGroup.trad-chinese             "Kinesiska, traditionell (Taiwan)">
 <!ENTITY  font.langGroup.simpl-chinese            "Kinesiska, förenklad">
 <!ENTITY  font.langGroup.trad-chinese-hk          "Kinesiska, traditionell (Hong Kong)">
 <!ENTITY  font.langGroup.korean                   "Koreanska">
 <!ENTITY  font.langGroup.cyrillic                 "Kyrilliska språk">
-<!ENTITY  font.langGroup.baltic                   "Baltiska språk">
 <!ENTITY  font.langGroup.el                       "Grekiska">
-<!ENTITY  font.langGroup.turkish                  "Turkiska">
-<!ENTITY  font.langGroup.unicode                  "Andra språk">
+<!ENTITY  font.langGroup.other                    "Andra skriftsystem">
 <!ENTITY  font.langGroup.thai                     "Thai">
 <!ENTITY  font.langGroup.hebrew                   "Hebreiska">
 <!ENTITY  font.langGroup.arabic                   "Arabiska">
@@ -50,6 +46,7 @@
 <!ENTITY  font.langGroup.gurmukhi                 "Gurmukhi">
 <!ENTITY  font.langGroup.khmer                    "Khmer">
 <!ENTITY  font.langGroup.malayalam                "Malayalam">
+<!ENTITY  font.langGroup.math                     "Matematik">
 <!ENTITY  font.langGroup.oriya                    "Oriya">
 <!ENTITY  font.langGroup.telugu                   "Telugu">
 <!ENTITY  font.langGroup.kannada                  "Kannada">
@@ -59,18 +56,18 @@
 <!ENTITY minSize.label                            "Minsta storlek:">
 <!ENTITY minSize.accesskey                        "M">
 <!ENTITY minSize.none                             "Ingen">
-
 <!-- default font type -->
+
 <!ENTITY  useDefaultFontSerif.label               "Serif">
 <!ENTITY  useDefaultFontSansSerif.label           "Sans Serif">
 
 <!ENTITY  allowPagesToUse.label                   "Låt sidor använda egna teckensnitt, i stället för ovanstående">
 <!ENTITY  allowPagesToUse.accesskey               "L">
 
-<!ENTITY languages.customize.Fallback.grouplabel  "Teckenkodning för gammalt innehåll">
-<!ENTITY languages.customize.Fallback.label       "Reservteckenkod:">
-<!ENTITY languages.customize.Fallback.accesskey   "R">
-<!ENTITY languages.customize.Fallback.desc        "Den här teckenkodningen används för gammalt innehåll som inte har angivit någon kodning.">
+<!ENTITY languages.customize.Fallback2.grouplabel "Teckenkodning för gammalt innehåll">
+<!ENTITY languages.customize.Fallback2.label      "Teckenkodning att falla tillbaka på:">
+<!ENTITY languages.customize.Fallback2.accesskey  "T">
+<!ENTITY languages.customize.Fallback2.desc       "Den här teckenkodningen används för gammalt innehåll som inte har angivit någon annan kodning.">
 
 <!ENTITY languages.customize.Fallback.auto        "Standard för aktuellt språkområde">
 <!-- LOCALIZATION NOTE (languages.customize.Fallback.arabic):
@@ -103,19 +100,8 @@
 <!ENTITY languages.customize.Fallback.thai        "Thai">
 <!-- LOCALIZATION NOTE (languages.customize.Fallback.turkish):
      Translate "Turkish" as an adjective for an encoding, not as the name of the language. -->
-<!ENTITY languages.customize.Fallback.turkish     "Turkisk">
+<!ENTITY languages.customize.Fallback.turkish     "Turkiska">
 <!-- LOCALIZATION NOTE (languages.customize.Fallback.vietnamese):
      Translate "Vietnamese" as an adjective for an encoding, not as the name of the language. -->
 <!ENTITY languages.customize.Fallback.vietnamese  "Vietnamesisk">
 <!ENTITY languages.customize.Fallback.other       "Annan (inkl. västeuropeisk)">
-
-
-<!-- LOCALIZATION NOTE (font.langGroup.latin) :
-     Translate "Latin" as the name of Latin (Roman) script, not as the name of the Latin language. -->
-<!ENTITY  font.langGroup.latin                    "Latin">
-<!ENTITY  font.langGroup.other                    "Other Writing Systems">
-<!ENTITY languages.customize.Fallback2.accesskey  "T">
-<!ENTITY languages.customize.Fallback2.desc       "This text encoding is used for legacy content that fails to declare its encoding.">
-
-<!ENTITY languages.customize.Fallback2.grouplabel "Text Encoding for Legacy Content">
-<!ENTITY languages.customize.Fallback2.label      "Fallback Text Encoding:">

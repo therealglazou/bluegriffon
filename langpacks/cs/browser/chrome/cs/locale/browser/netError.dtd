@@ -7,6 +7,8 @@
 
 <!ENTITY loadError.label "Chyba při načítání stránky">
 <!ENTITY retry.label "Zkusit znovu">
+<!ENTITY returnToPreviousPage.label "Přejít zpět">
+<!ENTITY advanced.label "Rozšířené">
 
 <!-- Specific error messages -->
 
@@ -57,7 +59,7 @@
 <!ENTITY netInterrupt.longDesc "&sharedLongDesc;">
 
 <!ENTITY notCached.title "Platnost dokumentu vypršela">
-<!ENTITY notCached.longDesc "<p>Požadovaný dokument již není dostupný v mezipaměti aplikace &brandShortName;.</p><ul><li>Z důvodů bezpečnosti &brandShortName; automaticky nestahuje důvěrné dokumenty.</li><li>Pro opětovné stažení dokumentu z webového serveru klepněte na tlačítko „Zkusit znovu“.</li></ul>">
+<!ENTITY notCached.longDesc "<p>Požadovaný dokument již není dostupný v mezipaměti aplikace &brandShortName;.</p><ul><li>Z bezpečnostních důvodů &brandShortName; automaticky nestahuje důvěrné dokumenty.</li><li>Pro opětovné stažení dokumentu z webového serveru klepněte na tlačítko „Zkusit znovu“.</li></ul>">
 
 <!ENTITY netOffline.title "Režim offline">
 <!ENTITY netOffline.longDesc2 "
@@ -66,7 +68,7 @@
 </ul>
 ">
 
-<!ENTITY contentEncodingError.title "Chyba kódování obsahu">
+<!ENTITY contentEncodingError.title "Chyba znakové sady obsahu">
 <!ENTITY contentEncodingError.longDesc "
 <ul>
   <li>Kontaktujte prosím vlastníka webového serveru a informujte ho o tomto problému.</li>
@@ -100,7 +102,6 @@
   <li>Kontaktujte svého síťového administrátora, zda je proxy server v provozu.</li>
 </ul>
 ">
-
 
 <!ENTITY proxyResolveFailure.title "Proxy server nenalezen">
 <!ENTITY proxyResolveFailure.longDesc "
@@ -158,23 +159,11 @@ za chvíli.</li>
 </ul>
 ">
 
-<!ENTITY malwareBlocked.title "Podezřelá útočná stránka!">
-<!ENTITY malwareBlocked.longDesc "
-<p>Útočné stránky se pokouší nainstalovat programy, které kradou vaše důvěrná data, používají váš počítač k dalším útokům, nebo jakkoliv poničí váš systém.</p>
-<p>Vlastníci webových stránek, kteří jsou přesvědčení, že jejich stránky byly nahlášeny omylem jako útočné, mohou <a href='http://www.stopbadware.org/home/reviewinfo' >požádat o kontrolu</a>.</p>
-">
-
-<!ENTITY phishingBlocked.title "Podezřelá podvodná stránka!">
-<!ENTITY phishingBlocked.longDesc "
-<p>Vložení osobních informací na takovéto stránce může skočit krádeží identity nebo jiným podvodem.</p>
-<p>Tyto podvodné stránky nazývané též útoky typu phishing se snaží zpravidla napodobit webové stránky nebo e-maily ze zdrojů, kterým věříte.</p>
-">
-
 <!ENTITY cspBlocked.title "Zablokováno dle bezpečnostních pravidel obsahu">
-<!ENTITY cspBlocked.longDesc "<p>Aplikace &brandShortName; zabránila v nahrání této stránky, neboť tato stránka má bezpečnostní pravidla, která takovýto způsob nahrání zakazují.</p>">
+<!ENTITY cspBlocked.longDesc "<p>Aplikace &brandShortName; zabránila v nahrání této stránky, protože tato stránka má bezpečnostní pravidla, která takovýto způsob nahrání zakazují.</p>">
 
 <!ENTITY corruptedContentError.title "Chyba v obsahu stránky">
-<!ENTITY corruptedContentError.longDesc "<p>Stránka, kterou se snažíte načíst, nemůže být zobrazena, jelikož v přenesená data jsou chybná.</p><ul><li>Kontaktujte prosím vlastníka stránky a informujte ho o tomto problému.</li></ul>">
+<!ENTITY corruptedContentError.longDesc "<p>Stránka, kterou se snažíte načíst, nemůže být zobrazena, protože přenesená data jsou chybná.</p><ul><li>Kontaktujte prosím vlastníka stránky a informujte ho o tomto problému.</li></ul>">
 
 
 <!ENTITY securityOverride.linkText "Nebo můžete přidat výjimku…">
@@ -193,19 +182,21 @@ functionality specific to firefox. -->
 <button id='exceptionDialogButton'>&securityOverride.exceptionButtonLabel;</button>
 ">
 
-<!ENTITY errorReporting.title "Nahlášení této chyby">
-<!ENTITY errorReporting.longDesc "Hlášení adresy a informace o certifikátu pro <span id='hostname'></span> nám pomohou identifikovat a blokovat škodlivé stránky. Děkujeme, že pomáháte utvářet bezpečnější web!">
-<!ENTITY errorReporting.automatic "Automaticky v budoucnu hlásit chyby">
+<!ENTITY errorReporting.automatic2 "Hlásit chyby jako je tato a pomoci tak organizaci Mozilla identifikovat a blokovat škodlivé stránky">
 <!ENTITY errorReporting.learnMore "Zjistit více…">
-<!ENTITY errorReporting.sending "Odesílání hlášení">
-<!ENTITY errorReporting.sent "Hlášení odesláno">
-<!ENTITY errorReporting.report "Hlášení">
-<!ENTITY errorReporting.tryAgain "Zkusit znovu">
 
 <!ENTITY remoteXUL.title "Vzdálené XUL">
 <!ENTITY remoteXUL.longDesc "<p><ul><li>Kontaktujte prosím vlastníka stránky a informujte ho o tomto problému.</li></ul></p>">
 
 <!ENTITY sslv3Used.title "Nelze se zabezpečeně připojit">
-<!-- LOCALIZATION NOTE (sslv3Used.longDesc) - Do not translate "ssl_error_unsupported_version". -->
-<!ENTITY sslv3Used.longDesc "Rozšířené informace: ssl_error_unsupported_version">
-<!ENTITY sslv3Used.learnMore "Zjistit více…">
+<!-- LOCALIZATION NOTE (sslv3Used.longDesc2) - Do not translate
+     "SSL_ERROR_UNSUPPORTED_VERSION". -->
+<!ENTITY sslv3Used.longDesc2 "Podrobné informace: SSL_ERROR_UNSUPPORTED_VERSION">
+
+<!ENTITY weakCryptoUsed.title "Vaše připojení není zabezpečené">
+<!-- LOCALIZATION NOTE (weakCryptoUsed.longDesc2) - Do not translate
+     "SSL_ERROR_NO_CYPHER_OVERLAP". -->
+<!ENTITY weakCryptoUsed.longDesc2 "Podrobné informace: SSL_ERROR_NO_CYPHER_OVERLAP">
+<!ENTITY weakCryptoAdvanced.title "Rozšířené">
+<!ENTITY weakCryptoAdvanced.longDesc "<span class='hostname'></span> používá zabezpečení, které je zastaralé a náchylné k útoku. Útočník by mohl snadno odhalit informace, o kterých jste si mysleli, že jsou v bezpečí.">
+<!ENTITY weakCryptoAdvanced.override "(Nezabezpečeno) Zkusí načíst <span class='hostname'></span> pomocí zastaralého zabezpečení">

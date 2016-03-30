@@ -7,8 +7,10 @@
 
 <!ENTITY loadError.label "页面载入出错">
 <!ENTITY retry.label "重试">
-<!-- Specific error messages -->
+<!ENTITY returnToPreviousPage.label "后退">
+<!ENTITY advanced.label "高级">
 
+<!-- Specific error messages -->
 
 <!ENTITY connectionFailure.title "无法连接">
 <!ENTITY connectionFailure.longDesc "&sharedLongDesc;">
@@ -98,13 +100,7 @@
 <li>如果您的计算机或网络受到防火墙或者代理服务器的保护，请确认 &brandShortName; 已被授权访问网络。</li> 
 </ul>">
 
-<!ENTITY malwareBlocked.title "可疑的攻击站点！">
-<!ENTITY malwareBlocked.longDesc " <p>攻击站点尝试通过安装程序来盗取隐私数据、使用您的计算机攻击他人或者破坏您的系统。</p> <p>网站所有者若认为自己的站点被错误地报告为攻击站点，可以<a href='http://www.stopbadware.org/home/reviewinfo' >请求评审</a>。</p> ">
-
-<!ENTITY phishingBlocked.title "可疑的钓鱼网站！">
-<!ENTITY phishingBlocked.longDesc " <p>在本页面输入个人信息可能会导致账号被盗或其他危险。</p><p>这类钓鱼网站常含有被称为“钓鱼攻击”的诈骗行为，这些伪装的网页或邮件地址可能用来假冒成您信任的源地址以实施诈骗。</p> ">
-
-<!ENTITY cspBlocked.title "由于内容安全策略而被阻止">
+<!ENTITY cspBlocked.title "由于内容安全策略而被拦截">
 <!ENTITY cspBlocked.longDesc "<p>&brandShortName; 阻止了这个页面载入，因为这个页面的内容安全政策不允许其以这种方式被载入。</p>">
 
 <!ENTITY corruptedContentError.title "内容损坏错误">
@@ -114,31 +110,32 @@
 <!ENTITY securityOverride.linkText "或者，您可以添加一个例外…">
 <!ENTITY securityOverride.getMeOutOfHereButton "离开这里！">
 <!ENTITY securityOverride.exceptionButtonLabel "添加例外…">
+
 <!-- LOCALIZATION NOTE (securityOverride.warningContent) - Do not translate the
 contents of the <button> tags. It uses strings already defined above. The
 button is included here (instead of netError.xhtml) because it exposes
 functionality specific to firefox. -->
-
 
 <!ENTITY securityOverride.warningContent "<p>如果您使用的是一个您不能完全信任的互联网连接，或者您并不使用警告的此服务器，您不应该添加一个例外。</p> 
  
 <button id='getMeOutOfHereButton'>&securityOverride.getMeOutOfHereButton;</button> 
 <button id='exceptionDialogButton'>&securityOverride.exceptionButtonLabel;</button>">
 
-<!ENTITY errorReporting.title "回报此错误">
-<!ENTITY errorReporting.longDesc "回报 <span id='hostname'></span> 的地址与证书信息能够帮助我们识别并封锁恶意网站。感谢您帮助我们打造更安全的网络！">
-<!ENTITY errorReporting.automatic "自动回报未来的错误">
+<!ENTITY errorReporting.automatic2 "报告类似错误以帮助 Mozilla 识别和拦截恶意站点">
 <!ENTITY errorReporting.learnMore "详细了解…">
-<!ENTITY errorReporting.sending "正在发送报告">
-<!ENTITY errorReporting.sent "已发送的报告">
-<!ENTITY errorReporting.report "报告">
-<!ENTITY errorReporting.tryAgain "重试">
 
 <!ENTITY remoteXUL.title "远程 XUL">
 <!ENTITY remoteXUL.longDesc "<p><ul><li>请联系网站拥有者告知这个问题。</li></ul></p>">
 
 <!ENTITY sslv3Used.title "无法安全地连接">
-<!-- LOCALIZATION NOTE (sslv3Used.longDesc) - Do not translate
-     "ssl_error_unsupported_version". -->
-<!ENTITY sslv3Used.longDesc "专业信息: ssl_error_unsupported_version">
-<!ENTITY sslv3Used.learnMore "了解详情…">
+<!-- LOCALIZATION NOTE (sslv3Used.longDesc2) - Do not translate
+     "SSL_ERROR_UNSUPPORTED_VERSION". -->
+<!ENTITY sslv3Used.longDesc2 "高级信息: SSL_ERROR_UNSUPPORTED_VERSION">
+
+<!ENTITY weakCryptoUsed.title "您的连接并不安全">
+<!-- LOCALIZATION NOTE (weakCryptoUsed.longDesc2) - Do not translate
+     "SSL_ERROR_NO_CYPHER_OVERLAP". -->
+<!ENTITY weakCryptoUsed.longDesc2 "高级信息: SSL_ERROR_NO_CYPHER_OVERLAP">
+<!ENTITY weakCryptoAdvanced.title "高级">
+<!ENTITY weakCryptoAdvanced.longDesc "<span class='hostname'></span> 使用了过时的安全技术，较容易遭受攻击。攻击者可以容易地获取您认为是安全的信息。">
+<!ENTITY weakCryptoAdvanced.override "尝试使用过时的安全性设置载入此页面 <span class='hostname'></span>（不安全）">
