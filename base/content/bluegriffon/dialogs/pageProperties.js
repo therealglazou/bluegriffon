@@ -1,4 +1,4 @@
-Components.utils.import("resource://app/modules/urlHelper.jsm");
+Components.utils.import("resource://gre/modules/urlHelper.jsm");
 
 var gAuthorElement;
 var gDescriptionElement;

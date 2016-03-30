@@ -37,12 +37,12 @@
 
 Components.utils.import("resource://gre/modules/Services.jsm");
 
-Components.utils.import("resource://app/modules/urlHelper.jsm");
-Components.utils.import("resource://app/modules/prompterHelper.jsm");
-Components.utils.import("resource://app/modules/editorHelper.jsm");
-Components.utils.import("resource://app/modules/l10nHelper.jsm");
-Components.utils.import("resource://app/modules/handlersManager.jsm");
-Components.utils.import("resource://app/modules/fileChanges.jsm");
+Components.utils.import("resource://gre/modules/urlHelper.jsm");
+Components.utils.import("resource://gre/modules/prompterHelper.jsm");
+Components.utils.import("resource://gre/modules/editorHelper.jsm");
+Components.utils.import("resource://gre/modules/l10nHelper.jsm");
+Components.utils.import("resource://gre/modules/handlersManager.jsm");
+Components.utils.import("resource://gre/modules/fileChanges.jsm");
 
 var EXPORTED_SYMBOLS = ["FileUtils"];
 

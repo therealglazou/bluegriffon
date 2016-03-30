@@ -37,7 +37,7 @@
 
 var EXPORTED_SYMBOLS = ["UrlUtils"];
 
-Components.utils.import("resource://app/modules/editorHelper.jsm");
+Components.utils.import("resource://gre/modules/editorHelper.jsm");
 
 var UrlUtils = {
 
@@ -336,7 +336,7 @@ var UrlUtils = {
 
   getDocumentBaseUrl: function getDocumentBaseUrl()
   {
-    Components.utils.import("resource://app/modules/editorHelper.jsm");
+    Components.utils.import("resource://gre/modules/editorHelper.jsm");
     try {
       var docUrl;
 

@@ -38,8 +38,8 @@
 var EXPORTED_SYMBOLS = ["EditorUtils"];
 
 Components.utils.import("resource://gre/modules/Services.jsm");
-Components.utils.import("resource://app/modules/urlHelper.jsm");
-//Components.utils.import("resource://app/modules/cssHelper.jsm");
+Components.utils.import("resource://gre/modules/urlHelper.jsm");
+//Components.utils.import("resource://gre/modules/cssHelper.jsm");
 
 var EditorUtils = {
 
@@ -194,7 +194,7 @@ var EditorUtils = {
 
   isAlreadyEdited: function isAlreadyEdited(aURL)
   {
-    Components.utils.import("resource://app/modules/urlHelper.jsm");
+    Components.utils.import("resource://gre/modules/urlHelper.jsm");
     // blank documents are never "already edited"...
     if (UrlUtils.isUrlOfBlankDocument(aURL))
       return null;

@@ -25,7 +25,11 @@ The Open Source next-generation Web Editor based on the rendering engine of Fire
 
   `patch -p 1 < bluegriffon/config/content.patch`
 
-* create a `.mozconfig` file inside your `bluegriffon-source` directory.The  settings I am using on a daily basis on OS X (Yosemite) can be found in `bluegriffon/config/mozconfig.macosx`
+* create a `.mozconfig` file inside your `bluegriffon-source` directory. The  settings I am using on a daily basis on OS X (Yosemite) can be found in `bluegriffon/config/mozconfig.macosx`
+
+## My own build
+
+20160330: I am successfully building bg2 on OS X 10.11.4 with Xcode version 7.3 (7D175)
 
 ## To build the master branch
 

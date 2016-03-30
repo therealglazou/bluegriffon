@@ -1,6 +1,6 @@
 Components.utils.import("resource://gre/modules/Services.jsm");
-Components.utils.import("resource://app/modules/editorHelper.jsm");
-Components.utils.import("resource://app/modules/l10nHelper.jsm");
+Components.utils.import("resource://gre/modules/editorHelper.jsm");
+Components.utils.import("resource://gre/modules/l10nHelper.jsm");
 
 var bespinEditor = null;
 var gSource = {value: ""};
