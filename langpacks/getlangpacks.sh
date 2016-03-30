@@ -10,7 +10,7 @@ R_VERSION=`echo $VERSION | sed -e "s/\./\\\\\./g" | sed -e "s/\n//"`
 R_BG_VERSION=`echo $BG_VERSION | sed -e "s/\./\\\\\./g" | sed -e "s/\n//"`
 
 echo $R_VERSION " " $R_BG_VERSION
-wget ftp://ftp.mozilla.org/pub/firefox/nightly/latest-mozilla-central/firefox-$VERSION.en-US.langpack.xpi
+wget http://ftp.mozilla.org/pub/firefox/nightly/latest-mozilla-aurora/firefox-$VERSION.en-US.langpack.xpi
 for i in `echo $LOCALES`
 do
     wget http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-mozilla-aurora-l10n/win32/xpi//firefox-$VERSION.$i.langpack.xpi
