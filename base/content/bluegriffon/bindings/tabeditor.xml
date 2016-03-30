@@ -266,8 +266,9 @@
                       var scheme = thisURI.scheme;
                       if (scheme == "resource")
                         this.mTab.setAttribute("image", "chrome://mozapps/skin/places/defaultFavicon.png");
-                      else
+                      else {
                         this.mTab.setAttribute("image", thisURI.prePath + "/favicon.ico");
+                      }
                     }
                     catch(e) {}
 
@@ -296,7 +297,7 @@
                         var rel = l.getAttribute("rel").toLowerCase();
                         if (rel == "shortcut icon"
                             || rel == "icon") {
-                          this.mTab.setAttribute("image", l.getAttribute("href"));
+                          this.mTab.setAttribute("image", l.href);
                         }
                       }
                       if (UrlUtils.isUrlOfBlankDocument(editor.document.QueryInterface(Components.interfaces.nsIDOMHTMLDocument).URL)) {
