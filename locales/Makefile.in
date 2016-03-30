@@ -44,62 +44,28 @@ _EXTRA_LOCALES =\
     $(NULL)
 
 _EXTENSIONS_=\
-  fs \
-  gfd \
-  markdown \
-  op1 \
-  $(NULL)
+	base \
+	sidebars/scripteditor \
+	sidebars/stylesheets \
+	sidebars/cssproperties \
+	sidebars/its20 \
+	sidebars/domexplorer \
+	extensions/fs \
+	extensions/gfd \
+	extensions/markdown \
+	extensions/op1 \
+	$(NULL)
 
 libs:: $(_AVAILABLE_LOCALES)
-	cp $(topsrcdir)/bluegriffon/base/jar.mn.in $(topsrcdir)/bluegriffon/base/jar.mn
-	cp $(topsrcdir)/bluegriffon/sidebars/scripteditor/jar.mn.in $(topsrcdir)/bluegriffon/sidebars/scripteditor/jar.mn
-	cp $(topsrcdir)/bluegriffon/sidebars/stylesheets/jar.mn.in $(topsrcdir)/bluegriffon/sidebars/stylesheets/jar.mn
-	cp $(topsrcdir)/bluegriffon/sidebars/cssproperties/jar.mn.in $(topsrcdir)/bluegriffon/sidebars/cssproperties/jar.mn
-	cp $(topsrcdir)/bluegriffon/sidebars/its20/jar.mn.in $(topsrcdir)/bluegriffon/sidebars/its20/jar.mn
-	cp $(topsrcdir)/bluegriffon/sidebars/domexplorer/jar.mn.in $(topsrcdir)/bluegriffon/sidebars/domexplorer/jar.mn
-	#
-	$(foreach f,$^, rm -fr $(topsrcdir)/bluegriffon/base/locale/`basename $f` ;)
-	$(foreach f,$^, rm -fr $(topsrcdir)/bluegriffon/sidebars/scripteditor/locale/`basename $f` ;)
-	$(foreach f,$^, rm -fr $(topsrcdir)/bluegriffon/sidebars/stylesheets/locale/`basename $f` ;)
-	$(foreach f,$^, rm -fr $(topsrcdir)/bluegriffon/sidebars/cssproperties/locale/`basename $f` ;)
-	$(foreach f,$^, rm -fr $(topsrcdir)/bluegriffon/sidebars/its20/locale/`basename $f` ;)
-	$(foreach f,$^, rm -fr $(topsrcdir)/bluegriffon/sidebars/domexplorer/locale/`basename $f` ;)
-	#
-	$(foreach f,$^, mkdir -p $(topsrcdir)/bluegriffon/base/locale/`basename $f` ;)
-	$(foreach f,$^, mkdir -p $(topsrcdir)/bluegriffon/sidebars/scripteditor/locale/`basename $f` ;)
-	$(foreach f,$^, mkdir -p $(topsrcdir)/bluegriffon/sidebars/stylesheets/locale/`basename $f` ;)
-	$(foreach f,$^, mkdir -p $(topsrcdir)/bluegriffon/sidebars/cssproperties/locale/`basename $f` ;)
-	$(foreach f,$^, mkdir -p $(topsrcdir)/bluegriffon/sidebars/its20/locale/`basename $f` ;)
-	$(foreach f,$^, mkdir -p $(topsrcdir)/bluegriffon/sidebars/domexplorer/locale/`basename $f` ;)
-	#
-	cat $(foreach f,$^,"$f/base.mn") >> $(topsrcdir)/bluegriffon/base/jar.mn
-	$(foreach f,$^, cp -Rf $f/bluegriffon/base/locale/* $(topsrcdir)/bluegriffon/base/locale/`basename $f` ;)
-	#
-	cat $(foreach f,$^,"$f/scripteditor.mn") >> $(topsrcdir)/bluegriffon/sidebars/scripteditor/jar.mn
-	$(foreach f,$^, cp -Rf $f/bluegriffon/sidebars/scripteditor/* $(topsrcdir)/bluegriffon/sidebars/scripteditor/locale/`basename $f` ;)
-	#
-	cat $(foreach f,$^,"$f/stylesheets.mn") >> $(topsrcdir)/bluegriffon/sidebars/stylesheets/jar.mn
-	$(foreach f,$^, cp -Rf $f/bluegriffon/sidebars/stylesheets/* $(topsrcdir)/bluegriffon/sidebars/stylesheets/locale/`basename $f` ;)
-	#
-	cat $(foreach f,$^,"$f/cssproperties.mn") >> $(topsrcdir)/bluegriffon/sidebars/cssproperties/jar.mn
-	$(foreach f,$^, cp -Rf $f/bluegriffon/sidebars/cssproperties/* $(topsrcdir)/bluegriffon/sidebars/cssproperties/locale/`basename $f` ;)
-	#
-	cat $(foreach f,$^,"$f/its20.mn") >> $(topsrcdir)/bluegriffon/sidebars/its20/jar.mn
-	$(foreach f,$^, cp -Rf $f/bluegriffon/sidebars/its20/* $(topsrcdir)/bluegriffon/sidebars/its20/locale/`basename $f` ;)
-	#
-	cat $(foreach f,$^,"$f/domexplorer.mn") >> $(topsrcdir)/bluegriffon/sidebars/domexplorer/jar.mn
-	$(foreach f,$^, cp -Rf $f/bluegriffon/sidebars/domexplorer/* $(topsrcdir)/bluegriffon/sidebars/domexplorer/locale/`basename $f` ;)
-
-libs:: en-US $(_EXTRA_LOCALES_)
-	@for ext in $(_EXTENSIONS_);\
+	@for ext in $(_EXTENSIONS);\
 	do \
-		rm -fr $(topsrcdir)/bluegriffon/extensions/$$ext/locale; \
-		cp $(topsrcdir)/bluegriffon/extensions/$$ext/jar.mn.in $(topsrcdir)/bluegriffon/extensions/$$ext/jar.mn; \
-		for locale in $(_AVAILABLE_LOCALES) $(_EXTRA_LOCALES);\
+		cp $(topsrcdir)/bluegriffon/$$ext/jar.mn.in $(topsrcdir)/bluegriffon/$$ext/jar.mn; \
+		for locale in $(_AVAILABLE_LOCALES);\
 		do \
-			mkdir -p $(topsrcdir)/bluegriffon/extensions/$$ext/locale/$$locale; \
-			cp $(topsrcdir)/bluegriffon/locales/$$locale/bluegriffon/extensions/$$ext/* $(topsrcdir)/bluegriffon/extensions/$$ext/locale/$$locale; \
-			cat $(topsrcdir)/bluegriffon/locales/$$locale/$$ext.mn >> $(topsrcdir)/bluegriffon/extensions/$$ext/jar.mn; \
+			rm -fr $(topsrcdir)/bluegriffon/$$ext/locale/$$locale; \
+			mkdir -p $(topsrcdir)/bluegriffon/$$ext/locale/; \
+			cat $$locale/`basename $$ext`.mn >> $(topsrcdir)/bluegriffon/$$ext/jar.mn; \
+			cp -Rf $$locale/bluegriffon/$$ext/locale/* $(topsrcdir)/bluegriffon/$$ext/locale/$$locale; \
 		done \
 	done
 
