@@ -6,10 +6,11 @@
 @namespace html url("http://www.w3.org/1999/xhtml");
 
 scrollbar {
-  -moz-appearance: scrollbar;
+  -moz-appearance: none;
+  min-width: 18px;
   -moz-binding: url(chrome://global/content/bindings/scrollbar.xml#scrollbar);
   cursor: default;
-  background-color: white;
+  background-color: var(--bg-dark-background);
   pointer-events: auto;
 }
 
@@ -34,7 +35,7 @@ html|select[multiple] > scrollbar {
 
 slider {
   -moz-appearance: var(--bg-dark-scrollbar-appearance);
-  background-color: var(--bg-dark-background);
+  background: var(--bg-dark-background);
 }
 
 /*slider[orient="vertical"] {
