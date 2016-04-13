@@ -21,30 +21,7 @@ endif
 
 _AVAILABLE_LOCALES=en-US
 
-_EXTRA_LOCALES =\
-    cs \
-    de \
-    es-ES \
-    fi \
-    fr \
-    gl \
-    he \
-    it \
-    ja \
-    ko \
-    nl \
-    pl \
-    ru \
-    sl \
-    sv-SE \
-    zh-CN \
-    zh-TW \
-    hu \
-    sr \
-    $(NULL)
-
 _EXTENSIONS_=\
-	base \
 	sidebars/scripteditor \
 	sidebars/stylesheets \
 	sidebars/cssproperties \
@@ -57,15 +34,23 @@ _EXTENSIONS_=\
 	$(NULL)
 
 libs:: $(_AVAILABLE_LOCALES)
-	@for ext in $(_EXTENSIONS);\
+	cp $(topsrcdir)/bluegriffon/base/jar.mn.in $(topsrcdir)/bluegriffon/base/jar.mn
+	for locale in $(_AVAILABLE_LOCALES);\
+	do \
+		rm -fr $(topsrcdir)/bluegriffon/base/locale/$$locale; \
+		mkdir -p $(topsrcdir)/bluegriffon/base/locale/$$locale; \
+		cat $(topsrcdir)/bluegriffon/locales/$$locale/`basename base`.mn >> $(topsrcdir)/bluegriffon/base/jar.mn; \
+		cp -Rf $(topsrcdir)/bluegriffon/locales/$$locale/bluegriffon/base/locale/* $(topsrcdir)/bluegriffon/base/locale/$$locale; \
+	done
+	for ext in $(_EXTENSIONS_);\
 	do \
 		cp $(topsrcdir)/bluegriffon/$$ext/jar.mn.in $(topsrcdir)/bluegriffon/$$ext/jar.mn; \
 		for locale in $(_AVAILABLE_LOCALES);\
 		do \
 			rm -fr $(topsrcdir)/bluegriffon/$$ext/locale/$$locale; \
-			mkdir -p $(topsrcdir)/bluegriffon/$$ext/locale/; \
-			cat $$locale/`basename $$ext`.mn >> $(topsrcdir)/bluegriffon/$$ext/jar.mn; \
-			cp -Rf $$locale/bluegriffon/$$ext/locale/* $(topsrcdir)/bluegriffon/$$ext/locale/$$locale; \
+			mkdir -p $(topsrcdir)/bluegriffon/$$ext/locale/$$locale; \
+			cat $(topsrcdir)/bluegriffon/locales/$$locale/`basename $$ext`.mn >> $(topsrcdir)/bluegriffon/$$ext/jar.mn; \
+			cp -Rf $(topsrcdir)/bluegriffon/locales/$$locale/bluegriffon/$$ext/* $(topsrcdir)/bluegriffon/$$ext/locale/$$locale; \
 		done \
 	done
 
