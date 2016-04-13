@@ -3558,7 +3558,7 @@ diff --git a/layout/style/nsCSSValue.cpp b/layout/style/nsCSSValue.cpp
            color == NS_RGBA(0, 0, 0, 0)) {
          // Use the strictest match for 'transparent' so we do correct
          // round-tripping of all other rgba() values.
-@@ -1397,29 +1404,41 @@ nsCSSValue::AppendToString(nsCSSProperty
+@@ -1397,31 +1404,42 @@ nsCSSValue::AppendToString(nsCSSProperty
          uint8_t a = NS_GET_A(color);
          bool showAlpha =
            (aSerialization == eNormalized && a < 255) ||
@@ -3602,13 +3602,34 @@ diff --git a/layout/style/nsCSSValue.cpp b/layout/style/nsCSSValue.cpp
 +          }
 +          aResult.Append(char16_t(')'));
          }
-         aResult.Append(char16_t(')'));
+-        aResult.Append(char16_t(')'));
        }
      } else if (eCSSUnit_HexColor == unit) {
        nscolor color = GetColorValue();
        aResult.Append('#');
        aResult.AppendPrintf("%02x", NS_GET_R(color));
        aResult.AppendPrintf("%02x", NS_GET_G(color));
+       aResult.AppendPrintf("%02x", NS_GET_B(color));
+     } else if (eCSSUnit_ShortHexColor == unit) {
+diff --git a/netwerk/protocol/res/nsResProtocolHandler.cpp b/netwerk/protocol/res/nsResProtocolHandler.cpp
+--- a/netwerk/protocol/res/nsResProtocolHandler.cpp
++++ b/netwerk/protocol/res/nsResProtocolHandler.cpp
+@@ -87,13 +87,13 @@ nsResProtocolHandler::ResolveSpecialCase
+     }
+     aResult.Append(aPath);
+     return true;
+ }
+ 
+ nsresult
+ nsResProtocolHandler::SetSubstitution(const nsACString& aRoot, nsIURI* aBaseURI)
+ {
+-    MOZ_ASSERT(!aRoot.Equals(""));
++    /*MOZ_ASSERT(!aRoot.Equals(""));
+     MOZ_ASSERT(!aRoot.Equals(kAPP));
+-    MOZ_ASSERT(!aRoot.Equals(kGRE));
++    MOZ_ASSERT(!aRoot.Equals(kGRE));*/
+     return SubstitutingProtocolHandler::SetSubstitution(aRoot, aBaseURI);
+ }
 diff --git a/parser/htmlparser/nsExpatDriver.cpp b/parser/htmlparser/nsExpatDriver.cpp
 --- a/parser/htmlparser/nsExpatDriver.cpp
 +++ b/parser/htmlparser/nsExpatDriver.cpp
@@ -4187,7 +4208,7 @@ diff --git a/widget/cocoa/nsColorPicker.mm b/widget/cocoa/nsColorPicker.mm
    unsigned int result = 0;
  
    for (unsigned int i = 0; i < [str length]; ++i) {
-@@ -32,36 +34,37 @@ HexStrToInt(NSString* str)
+@@ -32,39 +34,40 @@ HexStrToInt(NSString* str)
  }
  
  @interface NSColorPanelWrapper : NSObject <NSWindowDelegate>
@@ -4221,13 +4242,17 @@ diff --git a/widget/cocoa/nsColorPicker.mm b/widget/cocoa/nsColorPicker.mm
 +  [mColorPanel setShowsAlpha:aShowsAlpha];
    [mColorPanel setAction:@selector(colorChanged:)];
    [mColorPanel setDelegate:self];
-   [mColorPanel makeKeyAndOrderFront:nil];
+-  [mColorPanel makeKeyAndOrderFront:nil];
++  [mColorPanel orderFront:nil];
  }
  
  - (void)colorChanged:(NSColorPanel*)aPanel
  {
    mColorPicker->Update([mColorPanel color]);
-@@ -98,77 +101,101 @@ NS_IMPL_ISUPPORTS(nsColorPicker, nsIColo
+ }
+ 
+ - (void)windowWillClose:(NSNotification*)aNotification
+@@ -98,76 +101,100 @@ NS_IMPL_ISUPPORTS(nsColorPicker, nsIColo
  NSColorPanelWrapper* nsColorPicker::sColorPanelWrapper = nullptr;
  
  nsColorPicker::~nsColorPicker()
@@ -4329,14 +4354,14 @@ diff --git a/widget/cocoa/nsColorPicker.mm b/widget/cocoa/nsColorPicker.mm
  void
  nsColorPicker::Update(NSColor* aColor)
  {
-   GetHexStringFromNSColor(aColor, mColor);
--  mCallback->Update(mColor);
+-  GetHexStringFromNSColor(aColor, mColor);
 +  NSColor *color = aColor;
 +  if ([[aColor colorSpaceName] isEqualToString:NSNamedColorSpace])        {
 +    color = [aColor colorUsingColorSpace:[NSColorSpace genericRGBColorSpace]];
 +  }
 +
 +  GetHexStringFromNSColor(color, mColor);
+   mCallback->Update(mColor);
  }
  
  void
@@ -4344,7 +4369,6 @@ diff --git a/widget/cocoa/nsColorPicker.mm b/widget/cocoa/nsColorPicker.mm
  {
    mCallback->Done(EmptyString());
    mCallback = nullptr;
-   NS_RELEASE_THIS();
 diff --git a/widget/cocoa/nsMenuItemX.mm b/widget/cocoa/nsMenuItemX.mm
 --- a/widget/cocoa/nsMenuItemX.mm
 +++ b/widget/cocoa/nsMenuItemX.mm
