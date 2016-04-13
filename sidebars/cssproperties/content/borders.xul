@@ -31,14 +31,21 @@
           <columns><column/><column/><column style="margin-right: 1em"/><column/></columns>
           <rows>
             <row align="center">
-              <label value="&topBorder.label;"/>
-              <ecolorpicker id="borderTopColorpicker"
+              <cssproperty id="borderTopColorpicker" flexingspacer="true"
+                           property="border-top-color"
+                           grammar="color(true)">
+                <l10n>
+                  border-top-color=&topBorder.label;
+                  url=https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-color
+                </l10n>
+              </cssproperty>
+              <!--ecolorpicker id="borderTopColorpicker"
                             color="black"
                             colorObjectId="BorderColor"
                             windowTitle="Border color"
                             showTransparency="true"
                             property="border-top-color"
-                            oncommand="SetColor(this)"/>
+                            oncommand="SetColor(this)"/-->
               <hbox align="center">
                 <menulist editable="true" id="borderTopWidthMenulist" property="border-top-width"
                           bgtype="csslength" units='px pt cm in mm pc em ex rem ch'
@@ -72,14 +79,21 @@
             </row>
 
             <row align="center">
-              <label value="&leftBorder.label;"/>
-              <ecolorpicker id="borderLeftColorpicker"
+              <cssproperty id="borderLeftColorpicker" flexingspacer="true"
+                           property="border-left-color"
+                           grammar="color(true)">
+                <l10n>
+                  border-left-color=&leftBorder.label;
+                  url=https://developer.mozilla.org/en-US/docs/Web/CSS/border-left-color
+                </l10n>
+              </cssproperty>
+              <!--ecolorpicker id="borderLeftColorpicker"
                             color="black"
                             colorObjectId="BorderColor"
                             windowTitle="Border color"
                             showTransparency="true"
                             property="border-left-color"
-                            oncommand="SetColor(this)"/>
+                            oncommand="SetColor(this)"/-->
               <hbox align="center">
                 <menulist editable="true" id="borderLeftWidthMenulist" property="border-left-width"
                           bgtype="csslength" units='% px pt cm in mm pc em ex rem ch'
@@ -113,14 +127,21 @@
             </row>
 
             <row align="center">
-              <label value="&rightBorder.label;"/>
-              <ecolorpicker id="borderRightColorpicker"
+              <cssproperty id="borderRightColorpicker" flexingspacer="true"
+                           property="border-right-color"
+                           grammar="color(true)">
+                <l10n>
+                  border-right-color=&rightBorder.label;
+                  url=https://developer.mozilla.org/en-US/docs/Web/CSS/border-right-color
+                </l10n>
+              </cssproperty>
+              <!--ecolorpicker id="borderRightColorpicker"
                             color="black"
                             colorObjectId="BorderColor"
                             windowTitle="Border color"
                             showTransparency="true"
                             property="border-right-color"
-                            oncommand="SetColor(this)"/>
+                            oncommand="SetColor(this)"/-->
               <hbox align="center">
                 <menulist editable="true" id="borderRightWidthMenulist" property="border-right-width"
                           bgtype="csslength" units='% px pt cm in mm pc em ex rem ch'
@@ -154,8 +175,17 @@
             </row>
 
             <row align="center">
-              <label value="&bottomBorder.label;" id="borderBottomLabel"/>
-              <ecolorpicker id="borderBottomColorpicker"
+              <cssproperty id="borderBottomColorpicker" flexingspacer="true"
+                           property="border-bottom-color"
+                           grammar="color(true)"
+                           fouredges="border-top-color,border-right-color,border-left-color"
+                           fouredgescontrol="sameBorderOnFourEdgesCheckbox">
+                <l10n>
+                  border-bottom-color=&bottomBorder.label;
+                  url=https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-color
+                </l10n>
+              </cssproperty>
+              <!--ecolorpicker id="borderBottomColorpicker"
                             color="black"
                             colorObjectId="BorderColor"
                             windowTitle="Border color"
@@ -163,7 +193,7 @@
                             property="border-bottom-color"
                             fouredges="border-top-color,border-right-color,border-left-color"
                             fouredgescontrol="sameBorderOnFourEdgesCheckbox"
-                            oncommand="SetColor(this)"/>
+                            oncommand="SetColor(this)"/-->
               <hbox align="center">
                 <menulist editable="true" id="borderBottomWidthMenulist" property="border-bottom-width"
                           bgtype="csslength" units='% px pt cm in mm pc em ex rem ch'

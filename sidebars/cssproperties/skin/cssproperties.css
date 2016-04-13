@@ -255,3 +255,23 @@ html|input[type="color"]::-moz-color-swatch {
   margin: 0px;
   padding: 0px;
 }
+
+/******* id alert *****/
+
+#idAlert {
+  background-color: orange;
+  padding: 16px;
+  overflow: hidden;
+  max-height: 0px;
+  transition: max-height ease-in 1s;
+}
+
+#idAlert[open="true"] {
+  max-height: 1000px;
+}
+
+#idAlert > description {
+  font-size: larger;
+  font-weight: bold;
+  color: black;
+}

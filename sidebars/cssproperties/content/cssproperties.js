@@ -40,6 +40,7 @@ Components.utils.import("resource://gre/modules/urlHelper.jsm");
 Components.utils.import("resource://gre/modules/cssHelper.jsm");
 Components.utils.import("resource://gre/modules/cssInspector.jsm");
 Components.utils.import("resource://gre/modules/prompterHelper.jsm");
+Components.utils.import("resource://gre/modules/Services.jsm");
 
 var gMain = null;
 var gCurrentElement = null;
@@ -178,6 +179,8 @@ function SelectionChanged(aArgs, aElt, aOneElementSelected)
     return;
   }
 
+  gDialog.idAlert.removeAttribute("open");
+
   gCurrentElement = aElt;
   deleteAllChildren(gDialog.classPickerPopup);
   gDialog.classPicker.value =  "";
@@ -314,8 +317,54 @@ function RestoreSelection()
   gSavedSelection = null;
 }
 
-function ApplyStyles(aStyles, aNoSelectionUpdate)
+var gIdAlertStyles = null;
+var gIdNoSelectionUpdate = false;
+var gIdCurrentElement = null;
+
+function ShowIdAlert(aStyles, aNoSelectionUpdate)
 {
+  gIdAlertStyles = aStyles;
+  gIdNoSelectionUpdate = aNoSelectionUpdate;
+  gIdCurrentElement = gCurrentElement;
+
+  gDialog.idAlertTextbox.value = "";
+  gDialog.idAlertButton.setAttribute("disabled", "true");
+
+  gDialog.idAlert.setAttribute("open", "true");
+  gDialog.idAlertTextbox.focus();
+}
+
+function CheckIdFromIdAlert(aElt)
+{
+  var value = aElt.value;
+  if (!value || null == value.match( gXmlNAMERegExp )) {
+    gDialog.idAlertButton.setAttribute("disabled", "true");
+    return;
+  }
+
+  gDialog.idAlertButton.removeAttribute("disabled");
+}
+
+function ApplyIdFromIdAlert()
+{
+  var value = gDialog.idAlertTextbox.value;
+  var editor = EditorUtils.getCurrentEditor();
+
+  editor.beginTransaction();
+  var elt = value ? editor.document.getElementById(value) : null;
+  if (elt && elt != gIdCurrentElement) {
+    editor.removeAttribute(elt, "id");
+  }
+  editor.setAttribute(gIdCurrentElement, "id", value);
+  gCurrentElement = gIdCurrentElement;
+  gDialog.idAlert.removeAttribute("open");
+  ApplyStyles(gIdAlertStyles, gIdNoSelectionUpdate, true);
+}
+
+function ApplyStyles(aStyles, aNoSelectionUpdate, aDoNotBeginTransaction)
+{
+  gDialog.idAlert.removeAttribute("open");
+
   var className;
   var editor = EditorUtils.getCurrentEditor();
   if (gDialog.hoverStateCheckbox.checked && gDialog.cssPolicyMenulist.value == "inline")
@@ -324,8 +373,10 @@ function ApplyStyles(aStyles, aNoSelectionUpdate)
   switch (gDialog.cssPolicyMenulist.value) {
     case "id":
       // if the element has no ID, ask for one...
-      if (gCurrentElement.id)
-        editor.beginTransaction();
+      if (gCurrentElement.id) {
+        if (!aDoNotBeginTransaction)
+          editor.beginTransaction();
+      }
       else if (cssPolicy == "automatic") {
         var prefix = gPrefs.getCharPref("bluegriffon.css.prefix");
         var id = prefix + new Date().valueOf() +
@@ -334,38 +385,8 @@ function ApplyStyles(aStyles, aNoSelectionUpdate)
         editor.setAttribute(gCurrentElement, "id", id);
       }
       else {
-        var result = {};
-        var valid = false;
-
-        while (!valid) {
-          if (!PromptUtils.prompt(window,
-                                  gDialog.csspropertiesBundle.getString("EnterAnId"),
-                                  gDialog.csspropertiesBundle.getString("EnterUniqueId"),
-                                  result)) {
-            Inspect();
-            return;
-          }
-          valid = (null != result.value.match( gXmlNAMERegExp ));
-        }
-        var id = result.value;
-        var elt = id ? editor.document.getElementById(id) : null;
-        var rv = 0;
-        if (elt && elt != gCurrentElement)
-          rv = PromptUtils.confirmWithTitle(
-                                 L10NUtils.getString("IdAlreadyTaken"),
-                                 L10NUtils.getString("RemoveIdFromElement"),
-                                 L10NUtils.getString("YesRemoveId"),
-                                 L10NUtils.getString("NoCancel"),
-                                 null);
-        if (rv == 1) {
-          Inspect();
-          return;
-        }
-        editor.beginTransaction();
-        if (elt && elt != gCurrentElement) {
-          editor.removeAttribute(elt, "id");
-        }
-        editor.setAttribute(gCurrentElement, "id", result.value);
+        ShowIdAlert(aStyles, aNoSelectionUpdate);
+        return;
       }
       break;
 

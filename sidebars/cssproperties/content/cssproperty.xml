@@ -15,6 +15,7 @@
      <content>
        <xul:label xbl:inherits="tooltiptext=property"
                   anonid="label"/>
+       <xul:spacer anonid="spacer" flex="1"/>
        <xul:vbox anonid="vbox">
          <xul:hbox align="center" anonid="valueBox">
            <children/>
@@ -48,6 +49,8 @@
             label.className = "text-link";
             label.setAttribute("href", this._L10N["url"]);
           }
+          if (this.getAttribute("flexingspacer") != "true")
+            this.getChild("spacer").setAttribute("hidden", "true");
           this.parseGrammar();
         ]]>
       </constructor>
@@ -147,6 +150,10 @@
               csscolor.setAttribute("property", this._property);
               csscolor.setAttribute("propertyClean", this._propertyClean);
               csscolor.setAttribute("color", allowTransparency ? "transparent" : "black");
+              if (this.hasAttribute("fouredges"))
+                csscolor.setAttribute("fouredges", this.getAttribute("fouredges"));
+              if (this.hasAttribute("fouredgescontrol"))
+                csscolor.setAttribute("fouredgescontrol", this.getAttribute("fouredgescontrol"));
               this.getChild("valueBox").appendChild(csscolor);
               this.elements.push(csscolor);
             }
@@ -389,13 +396,13 @@
     <content>
 #ifndef XP_MACOSX
       <xul:ecolorpicker anonid="picker"
-                        xbl:inherits="property,colorObjectId=propertyClean,showTransparency,color"
+                        xbl:inherits="property,colorObjectId=propertyClean,showTransparency,color,fouredges,fouredgescontrol"
                         oncommand="SetColor(this, this.color)"/>
 #else
       <html:input anonid="picker"
                   type="color"
-                  xbl:inherits="property,value=color"
-                  onchange="SetColor(this, this.value)"/>
+                  xbl:inherits="property,value=color,fouredges,fouredgescontrol"
+                  oninput="SetColor(this, this.value)"/>
 #endif
     </content>
     <implementation>

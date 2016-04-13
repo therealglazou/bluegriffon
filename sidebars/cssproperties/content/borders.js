@@ -19,11 +19,6 @@ function BordersSectionIniter(aElt, aRuleset)
   var blc = CssInspector.getCascadedValue(aRuleset, "border-left-color");
   var brc = CssInspector.getCascadedValue(aRuleset, "border-right-color");
 
-  gDialog.borderTopColorpicker.color    = btc;
-  gDialog.borderLeftColorpicker.color   = blc;
-  gDialog.borderRightColorpicker.color  = brc;
-  gDialog.borderBottomColorpicker.color = bbc;
-
   gDialog.borderTopWidthMenulist.value    = btw;
   gDialog.borderLeftWidthMenulist.value   = blw;
   gDialog.borderRightWidthMenulist.value  = brw;
@@ -42,7 +37,7 @@ function BordersSectionIniter(aElt, aRuleset)
   gDialog.borderTopColorpicker.parentNode.hidden = sameOnFourEdges;
   gDialog.borderLeftColorpicker.parentNode.hidden = sameOnFourEdges;
   gDialog.borderRightColorpicker.parentNode.hidden = sameOnFourEdges;
-  gDialog.borderBottomLabel.style.visibility = (sameOnFourEdges ? "hidden" : "visible");
+  // gDialog.borderBottomLabel.style.visibility = (sameOnFourEdges ? "hidden" : "visible");
 
   var tlCorner = CssInspector.getCascadedValue(aRuleset, "border-top-left-radius");
   var trCorner = CssInspector.getCascadedValue(aRuleset, "border-top-right-radius");
@@ -151,7 +146,11 @@ function ToggleSameBorderOnFourEdges(aElt)
 {
   var sameOnFourEdges = aElt.checked;
   if (sameOnFourEdges) {
-    var bbc = gDialog.borderBottomColorpicker.color;
+#ifndef XP_MACOSX
+    var bbc = gDialog.borderBottomColorpicker.getChild("valueBox").querySelector("csscolor").getChild("picker").value;
+#else
+    var bbc = gDialog.borderBottomColorpicker.getChild("valueBox").querySelector("csscolor").getChild("picker").color;
+#endif
     var bbs = gDialog.borderBottomStyleMenulist.value;
     var bbw = gDialog.borderBottomWidthMenulist.value;
 
@@ -209,7 +208,7 @@ function ToggleSameBorderOnFourEdges(aElt)
   gDialog.borderTopColorpicker.parentNode.hidden = sameOnFourEdges;
   gDialog.borderLeftColorpicker.parentNode.hidden = sameOnFourEdges;
   gDialog.borderRightColorpicker.parentNode.hidden = sameOnFourEdges;
-  gDialog.borderBottomLabel.style.visibility = (sameOnFourEdges ? "hidden" : "visible");
+  //gDialog.borderBottomLabel.style.visibility = (sameOnFourEdges ? "hidden" : "visible");
 }
 
 function ApplyBorderRadius(aElt)

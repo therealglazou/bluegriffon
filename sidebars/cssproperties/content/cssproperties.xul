@@ -91,6 +91,15 @@
   <panelset id="csspropertiesPanelset" />
 
   <vbox id="mainBox" flex="1" style="visibility: hidden">
+    <vbox id="idAlert">
+      <description>Please enter an ID:</description>
+      <hbox align="center">
+        <textbox id="idAlertTextbox"
+                 oninput="CheckIdFromIdAlert(this)"/>
+        <button id="idAlertButton" label="ok"
+                oncommand="ApplyIdFromIdAlert()"/>
+      </hbox>
+    </vbox>
     <vbox id="mainBoxHeader">
       <label value="&applyStyles.label;"/>
       <hbox id="cssPolicyBox" align="center" class="indent">
