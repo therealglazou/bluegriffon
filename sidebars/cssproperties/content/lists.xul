@@ -101,20 +101,15 @@
               </menulist>
             </row>
 
-            <row align="center">
-              <label value="&listStylePosition.label;"
-                   class="text-link"
-                   href="https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-position"
-                   tooltiptext="list-style-position"/>
-              <hbox align="center">
-                <toolbarbutton class="multibutton" label="&insideListStylePosition.label;" value="inside" property="list-style-position" type="checkbox"
-                               id="insideListStylePositionButton" group="list-style-position"
-                               oncommand="ToggleProperty(this)"/>
-                <toolbarbutton class="multibutton" label="&outsideListStylePosition.label;" value="outside" property="list-style-position" type="checkbox"
-                               id="outsideListStylePositionButton" group="list-style-position"
-                               oncommand="ToggleProperty(this)"/>
-              </hbox>
-            </row>
+            <cssproperty property="list-style-position"
+                         grammar="inside | outside">
+              <l10n>
+                list-style-position=&listStylePosition.label;
+                url=https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-position
+                inside=&insideListStylePosition.label;
+                outside=&outsideListStylePosition.label;
+              </l10n>
+            </cssproperty>
 
             <row align="center">
               <label value="&listStyleImage.label;"
