@@ -147,9 +147,9 @@ function ToggleSameBorderOnFourEdges(aElt)
   var sameOnFourEdges = aElt.checked;
   if (sameOnFourEdges) {
 #ifndef XP_MACOSX
-    var bbc = gDialog.borderBottomColorpicker.getChild("valueBox").querySelector("csscolor").getChild("picker").value;
-#else
     var bbc = gDialog.borderBottomColorpicker.getChild("valueBox").querySelector("csscolor").getChild("picker").color;
+#else
+    var bbc = gDialog.borderBottomColorpicker.getChild("valueBox").querySelector("csscolor").getChild("picker").value;
 #endif
     var bbs = gDialog.borderBottomStyleMenulist.value;
     var bbw = gDialog.borderBottomWidthMenulist.value;
@@ -244,7 +244,7 @@ function ApplyBorderRadius(aElt)
   }
   var val1    = gDialog[elts[0]].value;
   var val2    = (gDialog[elts[1]].value ? "/ " + gDialog[elts[1]].value : "");
-  var val2bis = (gDialog[elts[1]].value ? gDialog[elts[1]].value : "");
+  var val2bis = (gDialog[elts[1]].value ? " " + gDialog[elts[1]].value : "");
   if (gDialog.sameFourCornersCheckbox.checked)
     ApplyStyles([
                   {
