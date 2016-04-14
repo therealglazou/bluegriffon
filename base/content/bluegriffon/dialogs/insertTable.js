@@ -25,7 +25,12 @@ function Startup()
   document.documentElement.getButton("extra1").disabled = true;
 
   InitTableData(gNode);
-  InitCellsData(gNode);
+
+  var editor = EditorUtils.getCurrentEditor();
+  editor instanceof Components.interfaces.nsITableEditor;
+  var selection = editor.selection;
+  var cells = GetSelectedCells(selection);
+  InitCellsData(cells[0]);
 }
 
 function onCssPolicyChange(aElt)
