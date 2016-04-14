@@ -67,7 +67,6 @@
         } catch (e) {}
 #ifdef XP_MACOSX
         var colorpicker = this.getChild("colorbox");
-        if (this.hasAttribute("disabled")) colorpicker.setAttribute("disabled", this.getAttribute("disabled"));
         if (this.hasAttribute("color")) colorpicker.setAttribute("value", this.getAttribute("color"));
         if (this.hasAttribute("showTransparency")) colorpicker.setAttribute("showTransparency", this.getAttribute("showTransparency"));
 #endif
@@ -90,6 +89,14 @@
                 onset="this.setAttribute('color', val); this.setAttribute('tooltiptext', val); this.mColorBox.style.backgroundColor = val;"/>
 #else
                 onset="this.getChild('colorbox').value = val; this.setAttribute('color', val); this.setAttribute('tooltiptext', val); this.mColorBox.style.backgroundColor = val;"/>
+#endif
+
+      <property name="disabled"
+                onget="return this.getAttribute('disabled');"
+#ifndef XP_MACOSX
+                onset="SetEnabledElement(this, !val)"/>
+#else
+                onset="SetEnabledElement(this.getChild('colorbox'), !val); SetEnabledElement(this, !val)"/>
 #endif
 
       <property name="shownColor"
