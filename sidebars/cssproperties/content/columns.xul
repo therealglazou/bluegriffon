@@ -50,60 +50,32 @@
             </hbox>
           </row>
 
-          <row align="center">
-            <label value="&columnWidth.label;"
-                     class="text-link"
-                     href="https://developer.mozilla.org/en-US/docs/Web/CSS/column-width"
-                     tooltiptext="column-width"/>
-            <hbox align="center">
-              <menulist editable="true" id="columnWidthMenulist" sizetopopup="none"
-                        bgtype="csslength" units='% px pt cm in mm pc em ex rem ch'
-                        oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'auto', false)"
-                        property="-moz-column-width"
-                        oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'auto', false)">
-                <menupopup onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
-                  <menuseparator/>
-                  <menuitem label="&automaticColumnWidth.label;" value="auto"/>
-                </menupopup>
-              </menulist>
-            </hbox>
-          </row>
+          <cssproperty property="-moz-column-width"
+                       grammar="ulength('') | auto">
+            <l10n>
+              -moz-column-width=&columnWidth.label;
+              url=https://developer.mozilla.org/en-US/docs/Web/CSS/column-width
+              auto=&automaticColumnWidth.label;
+            </l10n>
+          </cssproperty>
 
-          <row align="center">
-            <label value="&columnGap.label;"
-                     class="text-link"
-                     href="https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap"
-                     tooltiptext="column-gap"/>
-            <hbox align="center">
-              <menulist editable="true" id="columnGapMenulist" sizetopopup="none"
-                        bgtype="csslength" units='% px pt cm in mm pc em ex rem ch'
-                        oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'normal', false)"
-                        property="-moz-column-gap"
-                        oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'normal', false)">
-                <menupopup onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
-                  <menuseparator/>
-                  <menuitem label="&normalColumnGap.label;" value="normal"/>
-                </menupopup>
-              </menulist>
-            </hbox>
+          <cssproperty property="-moz-column-gap"
+                       grammar="ulength('') | normal">
+            <l10n>
+              -moz-column-gap=&columnGap.label;
+              url=https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap
+              normal=&normalColumnGap.label;
+            </l10n>
+          </cssproperty>
 
-          </row>
-
-          <row align="center">
-            <label value="&columnRuleColor.label;"
-                     class="text-link"
-                     href="https://developer.mozilla.org/en-US/docs/Web/CSS/column-rule-color"
-                     tooltiptext="column-rule-color"/>
-            <hbox align="center">
-              <ecolorpicker id="columnRuleColorpicker"
-                            color=""
-                            colorObjectId="ColumnRuleColor"
-                            windowTitle="&columnRuleColor.title;"
-                            showTransparency="false"
-                            property="-moz-column-rule-color"
-                            oncommand="SetColor(this)"/>
-            </hbox>
-          </row>
+            <cssproperty property="-moz-column-rule-color"
+                         grammar="color(true)"
+                         style="margin-bottom: 5px; -moz-box-align: center">
+              <l10n>
+                -moz-column-rule-color=&columnRuleColor.label;
+                url=https://developer.mozilla.org/en-US/docs/Web/CSS/column-rule-color
+              </l10n>
+            </cssproperty>
 
           <row align="center" animatable="false">
             <label value="&columnRuleStyle.label;"
@@ -130,28 +102,17 @@
             </hbox>
           </row>
 
-          <row align="center">
-            <label value="&columnRuleWidth.label;"
-                     class="text-link"
-                     href="https://developer.mozilla.org/en-US/docs/Web/CSS/column-rule-width"
-                     tooltiptext="column-rule-width"/>
-            <hbox align="center">
-              <menulist editable="true" id="columnRuleWidthMenulist" property="-moz-column-rule-width"
-                        bgtype="csslength" units='% px pt cm in mm pc em ex rem ch'
-                        oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'none thin medium thick', false)"
-                        oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'none thin medium thick', false)">
-                <menupopup id="columnRuleWidthMenupopup"
-                           onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
-                  <menuseparator/>
-                  <menuitem label="&thinColumnRuleWidth.label;" value="thin"/>
-                  <menuitem label="&mediumColumnRuleWidth.label;" value="medium"/>
-                  <menuitem label="&thickColumnRuleWidth.label;" value="thick"/>
-                  <menuseparator/>
-                  <menuitem label="&noneColumnRuleWidth.label;" value="none"/>
-                </menupopup>
-              </menulist>
-            </hbox>
-          </row>
+          <cssproperty property="-moz-column-rule-width"
+                       grammar="ulength('') | thin | medium | thick | _ | none">
+            <l10n>
+              -moz-column-rule-width=&columnRuleWidth.label;
+              url=https://developer.mozilla.org/en-US/docs/Web/CSS/column-rule-width
+              thin=&thinColumnRuleWidth.label;
+              medium=&mediumColumnRuleWidth.label;
+              thick=&thickColumnRuleWidth.label;
+              none=&noneColumnRuleWidth.label;
+            </l10n>
+          </cssproperty>
         </rows>
       </grid>
   </vbox>
