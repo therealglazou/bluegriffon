@@ -175,24 +175,35 @@ var CssUtils = {
   {
     var ruleList = this.getAllLocalRulesForSelector(aDocument, aSelector);
     var l = ruleList.length;
-    for (var i = 0; i < l; i++)
-    {
-      var rule = ruleList[i].rule;
-      var parentRule = rule.parentRule;
-      var parentStyleSheet = rule.parentStyleSheet;
-      if (rule.type == CssUtils.kCSSRule.STYLE_RULE && !parentRule)
+    if (l) {
+      for (var i = 0; i < l; i++)
       {
-        if (aDeclarations)
+        var rule = ruleList[i].rule;
+        var parentRule = rule.parentRule;
+        var parentStyleSheet = rule.parentStyleSheet;
+        var modified = false;
+        if (rule.type == CssUtils.kCSSRule.STYLE_RULE && !parentRule)
         {
-          for (var j = 0; j < aDeclarations.length; j++)
-            rule.style.removeProperty(aDeclarations[j].property);
-          if (!rule.style.length)
+          if (aDeclarations)
+          {
+            for (var j = 0; j < aDeclarations.length; j++)
+              if (rule.style.getPropertyValue(aDeclarations[j].property)) {
+                rule.style.removeProperty(aDeclarations[j].property);
+                modified = true;
+              }
+            if (!rule.style.length) {
+              parentStyleSheet.deleteRule(ruleList[i].index);
+              modified = true;
+            }
+          }
+          else {
             parentStyleSheet.deleteRule(ruleList[i].index);
+            modified = true;
+          }
         }
-        else
-          parentStyleSheet.deleteRule(ruleList[i].index);
+        if (modified)
+          this.reserializeEmbeddedStylesheet(parentStyleSheet, aEditor, aDocument);
       }
-      this.reserializeEmbeddedStylesheet(parentStyleSheet, aEditor, aDocument);
     }
   },
 
@@ -273,7 +284,6 @@ var CssUtils = {
           }
       }
     }
-
     this.reserializeEmbeddedStylesheet(stylesheet, aEditor, aDocument);
   },
 
@@ -296,15 +306,15 @@ var CssUtils = {
           break;
       }
     }
-    var styleElt = aSheet.ownerNode;
-    var child = styleElt.firstChild;
+    var styleEltForSheet = aSheet.ownerNode;
+    var child = styleEltForSheet.firstChild;
     while (child)
     {
       var tmp = child.nextSibling;
       if (editor)
         editor.deleteNode(child);
       else
-        styleElt.removeChild(child);
+        styleEltForSheet.removeChild(child);
       child = tmp;
     }
     var cssParser = new CSSParser(str);
@@ -314,11 +324,11 @@ var CssUtils = {
     }
 
     var textNode;
-    textNode = styleElt.ownerDocument.createTextNode("\n" + str);
+    textNode = styleEltForSheet.ownerDocument.createTextNode("\n" + str);
     if (editor)
-      editor.insertNode(textNode, styleElt, 0);
+      editor.insertNode(textNode, styleEltForSheet, 0);
     else
-      styleElt.appendChild(textNode);
+      styleEltForSheet.appendChild(textNode);
   },
 
   getUseCSSPref: function()
