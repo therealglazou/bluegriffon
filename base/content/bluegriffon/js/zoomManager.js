@@ -109,8 +109,8 @@ var BGZoomManager = {
 
   addToSourceViewFontSize: function(aIncrement) {
     var editorElement = EditorUtils.getCurrentEditorElement();
-    var sourceIframe = editorElement.previousSibling;
-    var sourceEditor = sourceIframe.contentWindow.getEditableElement();
+    var sourceIframe =  editorElement.previousSibling;
+    var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.getEditableElement();
 
     var fontSize = sourceEditor.ownerDocument
                                .defaultView
