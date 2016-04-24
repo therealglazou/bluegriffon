@@ -200,17 +200,14 @@ function SelectionChanged(aArgs, aElt, aOneElementSelected)
 
   var inspector = Components.classes["@mozilla.org/inspector/dom-utils;1"]
                     .getService(Components.interfaces.inIDOMUtils);
-  var state;
   var dynamicPseudo = "";
   if (gDialog.hoverStateCheckbox.checked) {
-    state = inspector.getContentState(gCurrentElement);
-    inspector.setContentState(gCurrentElement, state | 4); // NS_EVENT_STATE_HOVER
+    inspector.addPseudoClassLock(gCurrentElement, ":hover");
     dynamicPseudo = "hover";
   }
   var ruleset = CssInspector.getCSSStyleRules(aElt, false, dynamicPseudo);
   if (gDialog.hoverStateCheckbox.checked) {
-    inspector.setContentState(gCurrentElement.ownerDocument.documentElement, 4); // NS_EVENT_STATE_HOVER
-    var display = gCurrentElement.style.display;
+    inspector.clearPseudoClassLocks(gCurrentElement);
   }
   for (var i = 0; i < gIniters.length; i++)
     gIniters[i](aElt, ruleset);
