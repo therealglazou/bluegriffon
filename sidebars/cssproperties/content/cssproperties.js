@@ -607,17 +607,15 @@ function ApplyStyleChangesToStylesheets(editor,           // the current editor
   //= EditorUtils.getCurrentTabEditor().mResponsiveRuler.currentQuery;
   var inspector = Components.classes["@mozilla.org/inspector/dom-utils;1"]
                     .getService(Components.interfaces.inIDOMUtils);
-  var state;
   var dynamicPseudo = "";
   if (gDialog.hoverStateCheckbox.checked) {
-    state = inspector.getContentState(gCurrentElement);
-    inspector.setContentState(gCurrentElement, state | 4); // NS_EVENT_STATE_HOVER
+    inspector.addPseudoClassLock(gCurrentElement, ":hover");
     aIdent += ":hover";
     dynamicPseudo = "hover";
   }
   var ruleset = CssInspector.getCSSStyleRules(aElement, true, dynamicPseudo);
   if (gDialog.hoverStateCheckbox.checked) {
-    inspector.setContentState(gCurrentElement.ownerDocument.documentElement, state | 4);
+    inspector.clearPseudoClassLocks(gCurrentElement);
   }
 
   var whereToInsert;
