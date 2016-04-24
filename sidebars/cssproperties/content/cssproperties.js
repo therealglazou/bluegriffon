@@ -361,7 +361,7 @@ function ApplyIdFromIdAlert()
   ApplyStyles(gIdAlertStyles, gIdNoSelectionUpdate, true);
 }
 
-function ApplyStyles(aStyles, aNoSelectionUpdate, aDoNotBeginTransaction)
+function ApplyStyles(aStyles, aNoSelectionUpdate, aDoNotBeginTransaction, aCallback)
 {
   gDialog.idAlert.removeAttribute("open");
 
@@ -369,7 +369,7 @@ function ApplyStyles(aStyles, aNoSelectionUpdate, aDoNotBeginTransaction)
   var editor = EditorUtils.getCurrentEditor();
   if (gDialog.hoverStateCheckbox.checked && gDialog.cssPolicyMenulist.value == "inline")
     gDialog.cssPolicyMenulist.value = "id";
-  var cssPolicy = gPrefs.getCharPref("bluegriffon.css.policy"); 
+  var cssPolicy = gPrefs.getCharPref("bluegriffon.css.policy");
   switch (gDialog.cssPolicyMenulist.value) {
     case "id":
       // if the element has no ID, ask for one...
@@ -431,7 +431,6 @@ function ApplyStyles(aStyles, aNoSelectionUpdate, aDoNotBeginTransaction)
       editor.beginTransaction();
       break;
   }
-
   SaveSelection();
   var elt = gCurrentElement;
   for (var i = 0; i < aStyles.length; i++) {
@@ -472,6 +471,9 @@ function ApplyStyles(aStyles, aNoSelectionUpdate, aDoNotBeginTransaction)
   if (!aNoSelectionUpdate)
     SelectionChanged(null, elt, true);
   RestoreSelection();
+
+  if (aCallback)
+    aCallback();
 }
 
 function FindLastEditableStyleSheet(aQuery)

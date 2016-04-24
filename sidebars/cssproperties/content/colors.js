@@ -126,6 +126,11 @@ function BackgroundImageSelected()
   item.applyBackgroundImage(gDialog.imageURLTextbox.value);
 }
 
+function ReapplyBackgroundsCallback()
+{
+  SelectionChanged(null, gCurrentElement, true);
+}
+
 function ReapplyBackgrounds()
 {
   var items = gDialog.backgroundsRichlistbox.querySelectorAll("richlistitem");
@@ -139,8 +144,9 @@ function ReapplyBackgrounds()
                   property: "background-image",
                   value: bgImages.join(", ")
                 }
-              ]);
-  SelectionChanged(null, gCurrentElement, true);
+              ],
+              false, false,
+              ReapplyBackgroundsCallback);
 }
 
 function RepaintGradient()
@@ -189,7 +195,8 @@ function RepaintGradient()
     if (i)
       str += ", ";
     var s = stops[i];
-    str += s.color + (s.offset ? " " + s.offset : "");
+    str += s.color;
+    str += (s.offset ? " " + s.offset : "");
   }
   str += ")";
   gDialog.linearGradientPreview.style.backgroundImage = str;
@@ -228,7 +235,6 @@ function AddColorStopToLinearGradient()
   e.className = "colorstopitem";
   gDialog.colorStopsRichlistbox.appendChild(e);
   UpdateColorStopsRichlistbox();
-  e.openEditor();
 }
 
 function DeleteColorStopFromLinearGradient()
