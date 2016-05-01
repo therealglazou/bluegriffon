@@ -3572,7 +3572,7 @@ diff --git a/layout/style/nsCSSParser.cpp b/layout/style/nsCSSParser.cpp
 diff --git a/layout/style/nsCSSValue.cpp b/layout/style/nsCSSValue.cpp
 --- a/layout/style/nsCSSValue.cpp
 +++ b/layout/style/nsCSSValue.cpp
-@@ -1379,16 +1379,23 @@ nsCSSValue::AppendToString(nsCSSProperty
+@@ -1379,16 +1379,27 @@ nsCSSValue::AppendToString(nsCSSProperty
      nsAutoCString str;
      if (nsCSSProps::GetColorName(GetIntValue(), str)){
        AppendASCIItoUTF16(str, aResult);
@@ -3582,11 +3582,15 @@ diff --git a/layout/style/nsCSSValue.cpp b/layout/style/nsCSSValue.cpp
    }
    else if (IsNumericColorUnit(unit)) {
 +    bool outputCssNames = false;
++    nsXPIDLCString colorOutputType;
 +    nsresult rv;
 +    nsCOMPtr<nsIPrefBranch> prefBranch = do_GetService(NS_PREFSERVICE_CONTRACTID, &rv);
-+    if (NS_SUCCEEDED(rv) && prefBranch)
++    if (NS_SUCCEEDED(rv) && prefBranch) {
 +      prefBranch->GetBoolPref("bluegriffon.css.colors.names.enabled", &outputCssNames);
++      prefBranch->GetCharPref("bluegriffon.css.colors.type", getter_Copies(colorOutputType));
++    }
 +    bool serializeName = false;
++    bool forceHexSerialization = false;
 +
      if (aSerialization == eNormalized ||
          unit == eCSSUnit_RGBColor ||
@@ -3596,7 +3600,7 @@ diff --git a/layout/style/nsCSSValue.cpp b/layout/style/nsCSSValue.cpp
            color == NS_RGBA(0, 0, 0, 0)) {
          // Use the strictest match for 'transparent' so we do correct
          // round-tripping of all other rgba() values.
-@@ -1397,31 +1404,42 @@ nsCSSValue::AppendToString(nsCSSProperty
+@@ -1397,31 +1408,62 @@ nsCSSValue::AppendToString(nsCSSProperty
          uint8_t a = NS_GET_A(color);
          bool showAlpha =
            (aSerialization == eNormalized && a < 255) ||
@@ -3609,18 +3613,37 @@ diff --git a/layout/style/nsCSSValue.cpp b/layout/style/nsCSSValue.cpp
 +          if (outputCssNames) {
 +            nsAutoString nameToSerialize;
 +            serializeName = NS_RGBToColorName(color, nameToSerialize);
-+            if (serializeName)
++            if (serializeName) {
 +              aResult.Append(nameToSerialize);
++            }
++            else {
++              if (!PL_strcmp(colorOutputType, "hex")) {
++                forceHexSerialization = true;
++              }
++              else
++                aResult.AppendLiteral("rgb(");
++            }
++          }
++          else {
++            if (!PL_strcmp(colorOutputType, "hex")) {
++              forceHexSerialization = true;
++            }
 +            else
 +              aResult.AppendLiteral("rgb(");
 +          }
-+          else
-+            aResult.AppendLiteral("rgb(");
          }
  
 -        NS_NAMED_LITERAL_STRING(comma, ", ");
 +        if (!serializeName) {
-+          NS_NAMED_LITERAL_STRING(comma, ", ");
++          if (forceHexSerialization) {
++            nscolor color = GetColorValue();
++            aResult.Append('#');
++            aResult.AppendPrintf("%02x", NS_GET_R(color));
++            aResult.AppendPrintf("%02x", NS_GET_G(color));
++            aResult.AppendPrintf("%02x", NS_GET_B(color));
++          }
++          else {
++            NS_NAMED_LITERAL_STRING(comma, ", ");
  
 -        aResult.AppendInt(NS_GET_R(color), 10);
 -        aResult.Append(comma);
@@ -3628,17 +3651,19 @@ diff --git a/layout/style/nsCSSValue.cpp b/layout/style/nsCSSValue.cpp
 -        aResult.Append(comma);
 -        aResult.AppendInt(NS_GET_B(color), 10);
 -        if (showAlpha) {
-+          aResult.AppendInt(NS_GET_R(color), 10);
-           aResult.Append(comma);
+-          aResult.Append(comma);
 -          aResult.AppendFloat(nsStyleUtil::ColorComponentToFloat(a));
-+          aResult.AppendInt(NS_GET_G(color), 10);
-+          aResult.Append(comma);
-+          aResult.AppendInt(NS_GET_B(color), 10);
-+          if (showAlpha) {
++            aResult.AppendInt(NS_GET_R(color), 10);
 +            aResult.Append(comma);
-+            aResult.AppendFloat(nsStyleUtil::ColorComponentToFloat(a));
++            aResult.AppendInt(NS_GET_G(color), 10);
++            aResult.Append(comma);
++            aResult.AppendInt(NS_GET_B(color), 10);
++            if (showAlpha) {
++              aResult.Append(comma);
++              aResult.AppendFloat(nsStyleUtil::ColorComponentToFloat(a));
++            }
++            aResult.Append(char16_t(')'));
 +          }
-+          aResult.Append(char16_t(')'));
          }
 -        aResult.Append(char16_t(')'));
        }
