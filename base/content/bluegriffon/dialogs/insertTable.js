@@ -1,6 +1,7 @@
 Components.utils.import("resource://gre/modules/editorHelper.jsm");
 Components.utils.import("resource://gre/modules/cssInspector.jsm");
 Components.utils.import("resource://gre/modules/prompterHelper.jsm");
+Components.utils.import("resource://gre/modules/Services.jsm");
 
 var gNode = null;
 var gTable = null;
@@ -462,7 +463,7 @@ function InitCellsData(aNode)
   gDialog.cellsVAlignMenulist.value = vAlign;
 
   var bg = CssInspector.getCascadedValue(ruleset, "background-color");
-  gDialog.bgColorColorpicker.color = bg;
+  gDialog.bgColorColorpicker.color = bg ? bg : "white";
 
   gDialog.cellsHeadersCheckbox.checked = (aNode.nodeName.toLowerCase() == "th");
 
