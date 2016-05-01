@@ -84,7 +84,7 @@ var cmdSave =
           var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
           var source = sourceEditor.getValue();
 
-          result = FileUtils.saveSourceDocument(source,
+          result = BGFileHelper.saveSourceDocument(source,
                      UrlUtils.isUrlOfBlankDocument(EditorUtils.getDocumentUrl()),
                      false,
                      EditorUtils.getCurrentDocumentMimeType());
@@ -96,7 +96,7 @@ var cmdSave =
         }
         else {
           EditorUtils.cleanup();
-          result = FileUtils.saveDocument(
+          result = BGFileHelper.saveDocument(
                      UrlUtils.isUrlOfBlankDocument(EditorUtils.getDocumentUrl()),
                      false,
                      EditorUtils.getCurrentDocumentMimeType());
@@ -134,7 +134,7 @@ var cmdSaveAs =
           var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
           var source = sourceEditor.getValue();
 
-          result = FileUtils.saveSourceDocument(source,
+          result = BGFileHelper.saveSourceDocument(source,
                      true,
                      false,
                      EditorUtils.getCurrentDocumentMimeType());
@@ -146,7 +146,7 @@ var cmdSaveAs =
         }
         else {
           EditorUtils.cleanup();
-          result = FileUtils.saveDocument(
+          result = BGFileHelper.saveDocument(
                      true,
                      false,
                      EditorUtils.getCurrentDocumentMimeType());
