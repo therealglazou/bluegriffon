@@ -25,6 +25,11 @@
     <stringbundle id="shortcutsBundle"      src="chrome://bluegriffon/locale/prefs/shortcuts.properties"/>
   </stringbundleset>
 
+  <prefpane id="licensePrefPane"
+            label="&license.title;"
+            onpaneload="OnLicensePaneLoad()"
+            image="chrome://bluegriffon/skin/prefs/bluegriffon.png"
+            src="chrome://bluegriffon/content/prefs/license.xul"/>
   <prefpane id="generalPrefPane"
             label="&general.title;"
             image="chrome://bluegriffon/skin/prefs/general.png"
@@ -82,6 +87,7 @@
   <script type="application/javascript" src="chrome://bluegriffon/content/prefs/advanced.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/prefs/shortcuts.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/prefs/file.js"/>
+  <script type="application/javascript" src="chrome://bluegriffon/content/prefs/license.js"/>
 #ifdef XP_MACOSX
   <script type="application/javascript" src="chrome://bluegriffon/content/prefs/osx.js"/>
 #endif
