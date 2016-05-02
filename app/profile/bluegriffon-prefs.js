@@ -86,10 +86,12 @@ pref("bluegriffon.defaults.extension.text-html", "html");
 pref("editor.use_css", true);
 pref("bluegriffon.css.policy", "manual");
 pref("bluegriffon.css.prefix", "BG_");
+pref("bluegriffon.css.support.blink", true);
 pref("bluegriffon.css.support.gecko", true);
+pref("bluegriffon.css.support.servo", true);
 pref("bluegriffon.css.support.webkit", true);
-pref("bluegriffon.css.support.presto", true);
-pref("bluegriffon.css.support.trident", true);
+pref("bluegriffon.css.support.vivliostyle", true);
+pref("bluegriffon.css.support.weasyprint", true);
 
 pref("bluegriffon.prettyprint", true);
 pref("bluegriffon.encode_entity", "html");

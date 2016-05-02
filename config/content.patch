@@ -337,6 +337,27 @@ diff --git a/dom/base/nsFocusManager.cpp b/dom/base/nsFocusManager.cpp
    // get checked as it will be skipped when the focus is retargetted to it.
    if (forDocumentNavigation && doc->IsXULDocument()) {
      nsAutoString retarget;
+diff --git a/dom/base/nsGkAtomList.h b/dom/base/nsGkAtomList.h
+--- a/dom/base/nsGkAtomList.h
++++ b/dom/base/nsGkAtomList.h
+@@ -1114,16 +1114,17 @@ GK_ATOM(selectedindex, "selectedindex")
+ GK_ATOM(self, "self")
+ GK_ATOM(seltype, "seltype")
+ GK_ATOM(setcookie, "set-cookie")
+ GK_ATOM(setter, "setter")
+ GK_ATOM(shape, "shape")
+ GK_ATOM(show, "show")
+ GK_ATOM(showcaret, "showcaret")
+ GK_ATOM(showresizer, "showresizer")
++GK_ATOM(showtransparency, "showTransparency")
+ GK_ATOM(simple, "simple")
+ GK_ATOM(single, "single")
+ GK_ATOM(size, "size")
+ GK_ATOM(sizes, "sizes")
+ GK_ATOM(sizemode, "sizemode")
+ GK_ATOM(sizetopopup, "sizetopopup")
+ GK_ATOM(slider, "slider")
+ GK_ATOM(small, "small")
 diff --git a/dom/base/nsHTMLContentSerializer.cpp b/dom/base/nsHTMLContentSerializer.cpp
 --- a/dom/base/nsHTMLContentSerializer.cpp
 +++ b/dom/base/nsHTMLContentSerializer.cpp
@@ -1215,7 +1236,7 @@ diff --git a/dom/base/nsXMLContentSerializer.cpp b/dom/base/nsXMLContentSerializ
 diff --git a/dom/html/HTMLInputElement.cpp b/dom/html/HTMLInputElement.cpp
 --- a/dom/html/HTMLInputElement.cpp
 +++ b/dom/html/HTMLInputElement.cpp
-@@ -116,16 +116,19 @@
+@@ -116,16 +116,18 @@
  #include "HTMLSplitOnSpacesTokenizer.h"
  #include "nsIController.h"
  #include "nsIMIMEInfo.h"
@@ -1225,7 +1246,6 @@ diff --git a/dom/html/HTMLInputElement.cpp b/dom/html/HTMLInputElement.cpp
  #include "js/Date.h"
  
 +#include "nsCSSParser.h"
-+#include "nsIDOMXULDocument.h"
 +
  NS_IMPL_NS_NEW_HTML_ELEMENT_CHECK_PARSER(Input)
  
@@ -1235,7 +1255,7 @@ diff --git a/dom/html/HTMLInputElement.cpp b/dom/html/HTMLInputElement.cpp
  
  // This must come outside of any namespace, or else it won't overload with the
  // double based version in nsMathUtils.h
-@@ -596,19 +599,24 @@ HTMLInputElement::InitColorPicker()
+@@ -596,19 +598,23 @@ HTMLInputElement::InitColorPicker()
    nsContentUtils::GetLocalizedString(nsContentUtils::eFORMS_PROPERTIES,
                                       "ColorPicker", title);
  
@@ -1244,10 +1264,9 @@ diff --git a/dom/html/HTMLInputElement.cpp b/dom/html/HTMLInputElement.cpp
      return NS_ERROR_FAILURE;
    }
  
-+  PRBool showAlpha = false;
-+  nsCOMPtr<nsIDOMXULDocument> xulDoc = do_QueryInterface(doc);
-+  if (xulDoc)
-+    showAlpha = true;
++  nsAutoString showtransparency;
++  GetAttr(kNameSpaceID_None, nsGkAtoms::showtransparency, showtransparency);
++  PRBool showAlpha = showtransparency.EqualsLiteral("true");
 +
    nsAutoString initialValue;
    GetValueInternal(initialValue);
@@ -1261,7 +1280,7 @@ diff --git a/dom/html/HTMLInputElement.cpp b/dom/html/HTMLInputElement.cpp
    rv = colorPicker->Open(callback);
    if (NS_SUCCEEDED(rv)) {
      mPickerRunning = true;
-@@ -4493,27 +4501,27 @@ HTMLInputElement::SanitizeValue(nsAStrin
+@@ -4493,27 +4499,27 @@ HTMLInputElement::SanitizeValue(nsAStrin
          }
        }
        break;
@@ -3153,6 +3172,25 @@ diff --git a/editor/libeditor/nsTableEditor.cpp b/editor/libeditor/nsTableEditor
    }
  
    // Delete cells whose contents were moved
+@@ -2687,17 +2735,17 @@ nsHTMLEditor::GetCellDataAt(nsIDOMElemen
+   }
+ 
+   nsTableOuterFrame* tableFrame = GetTableFrame(aTable);
+   NS_ENSURE_TRUE(tableFrame, NS_ERROR_FAILURE);
+ 
+   nsTableCellFrame* cellFrame =
+     tableFrame->GetCellFrameAt(aRowIndex, aColIndex);
+   if (!cellFrame)
+-    return NS_ERROR_FAILURE;
++    return NS_EDITOR_ELEMENT_NOT_FOUND;
+ 
+   *aIsSelected = cellFrame->IsSelected();
+   cellFrame->GetRowIndex(*aStartRowIndex);
+   cellFrame->GetColIndex(*aStartColIndex);
+   *aRowSpan = cellFrame->GetRowSpan();
+   *aColSpan = cellFrame->GetColSpan();
+   *aActualRowSpan = tableFrame->GetEffectiveRowSpanAt(aRowIndex, aColIndex);
+   *aActualColSpan = tableFrame->GetEffectiveColSpanAt(aRowIndex, aColIndex);
 diff --git a/editor/libeditor/nsWSRunObject.cpp b/editor/libeditor/nsWSRunObject.cpp
 --- a/editor/libeditor/nsWSRunObject.cpp
 +++ b/editor/libeditor/nsWSRunObject.cpp
@@ -3534,7 +3572,7 @@ diff --git a/layout/style/nsCSSParser.cpp b/layout/style/nsCSSParser.cpp
 diff --git a/layout/style/nsCSSValue.cpp b/layout/style/nsCSSValue.cpp
 --- a/layout/style/nsCSSValue.cpp
 +++ b/layout/style/nsCSSValue.cpp
-@@ -1379,16 +1379,23 @@ nsCSSValue::AppendToString(nsCSSProperty
+@@ -1379,16 +1379,27 @@ nsCSSValue::AppendToString(nsCSSProperty
      nsAutoCString str;
      if (nsCSSProps::GetColorName(GetIntValue(), str)){
        AppendASCIItoUTF16(str, aResult);
@@ -3544,11 +3582,15 @@ diff --git a/layout/style/nsCSSValue.cpp b/layout/style/nsCSSValue.cpp
    }
    else if (IsNumericColorUnit(unit)) {
 +    bool outputCssNames = false;
++    nsXPIDLCString colorOutputType;
 +    nsresult rv;
 +    nsCOMPtr<nsIPrefBranch> prefBranch = do_GetService(NS_PREFSERVICE_CONTRACTID, &rv);
-+    if (NS_SUCCEEDED(rv) && prefBranch)
++    if (NS_SUCCEEDED(rv) && prefBranch) {
 +      prefBranch->GetBoolPref("bluegriffon.css.colors.names.enabled", &outputCssNames);
++      prefBranch->GetCharPref("bluegriffon.css.colors.type", getter_Copies(colorOutputType));
++    }
 +    bool serializeName = false;
++    bool forceHexSerialization = false;
 +
      if (aSerialization == eNormalized ||
          unit == eCSSUnit_RGBColor ||
@@ -3558,7 +3600,7 @@ diff --git a/layout/style/nsCSSValue.cpp b/layout/style/nsCSSValue.cpp
            color == NS_RGBA(0, 0, 0, 0)) {
          // Use the strictest match for 'transparent' so we do correct
          // round-tripping of all other rgba() values.
-@@ -1397,31 +1404,42 @@ nsCSSValue::AppendToString(nsCSSProperty
+@@ -1397,31 +1408,62 @@ nsCSSValue::AppendToString(nsCSSProperty
          uint8_t a = NS_GET_A(color);
          bool showAlpha =
            (aSerialization == eNormalized && a < 255) ||
@@ -3571,18 +3613,37 @@ diff --git a/layout/style/nsCSSValue.cpp b/layout/style/nsCSSValue.cpp
 +          if (outputCssNames) {
 +            nsAutoString nameToSerialize;
 +            serializeName = NS_RGBToColorName(color, nameToSerialize);
-+            if (serializeName)
++            if (serializeName) {
 +              aResult.Append(nameToSerialize);
++            }
++            else {
++              if (!PL_strcmp(colorOutputType, "hex")) {
++                forceHexSerialization = true;
++              }
++              else
++                aResult.AppendLiteral("rgb(");
++            }
++          }
++          else {
++            if (!PL_strcmp(colorOutputType, "hex")) {
++              forceHexSerialization = true;
++            }
 +            else
 +              aResult.AppendLiteral("rgb(");
 +          }
-+          else
-+            aResult.AppendLiteral("rgb(");
          }
  
 -        NS_NAMED_LITERAL_STRING(comma, ", ");
 +        if (!serializeName) {
-+          NS_NAMED_LITERAL_STRING(comma, ", ");
++          if (forceHexSerialization) {
++            nscolor color = GetColorValue();
++            aResult.Append('#');
++            aResult.AppendPrintf("%02x", NS_GET_R(color));
++            aResult.AppendPrintf("%02x", NS_GET_G(color));
++            aResult.AppendPrintf("%02x", NS_GET_B(color));
++          }
++          else {
++            NS_NAMED_LITERAL_STRING(comma, ", ");
  
 -        aResult.AppendInt(NS_GET_R(color), 10);
 -        aResult.Append(comma);
@@ -3590,17 +3651,19 @@ diff --git a/layout/style/nsCSSValue.cpp b/layout/style/nsCSSValue.cpp
 -        aResult.Append(comma);
 -        aResult.AppendInt(NS_GET_B(color), 10);
 -        if (showAlpha) {
-+          aResult.AppendInt(NS_GET_R(color), 10);
-           aResult.Append(comma);
+-          aResult.Append(comma);
 -          aResult.AppendFloat(nsStyleUtil::ColorComponentToFloat(a));
-+          aResult.AppendInt(NS_GET_G(color), 10);
-+          aResult.Append(comma);
-+          aResult.AppendInt(NS_GET_B(color), 10);
-+          if (showAlpha) {
++            aResult.AppendInt(NS_GET_R(color), 10);
 +            aResult.Append(comma);
-+            aResult.AppendFloat(nsStyleUtil::ColorComponentToFloat(a));
++            aResult.AppendInt(NS_GET_G(color), 10);
++            aResult.Append(comma);
++            aResult.AppendInt(NS_GET_B(color), 10);
++            if (showAlpha) {
++              aResult.Append(comma);
++              aResult.AppendFloat(nsStyleUtil::ColorComponentToFloat(a));
++            }
++            aResult.Append(char16_t(')'));
 +          }
-+          aResult.Append(char16_t(')'));
          }
 -        aResult.Append(char16_t(')'));
        }

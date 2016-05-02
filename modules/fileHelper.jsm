@@ -44,9 +44,9 @@ Components.utils.import("resource://gre/modules/l10nHelper.jsm");
 Components.utils.import("resource://gre/modules/handlersManager.jsm");
 Components.utils.import("resource://gre/modules/fileChanges.jsm");
 
-var EXPORTED_SYMBOLS = ["FileUtils"];
+var EXPORTED_SYMBOLS = ["BGFileHelper"];
 
-var FileUtils = {
+var BGFileHelper = {
 
   kLAST_FILE_LOCATION_PREFIX: "bluegriffon.lastFileLocation.",
 

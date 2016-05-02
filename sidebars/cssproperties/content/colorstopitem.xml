@@ -7,6 +7,7 @@
 
 <bindings id="colorstopItemBindings"
    xmlns="http://www.mozilla.org/xbl"
+   xmlns:html="http://www.w3.org/1999/xhtml"
    xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
    xmlns:xbl="http://www.mozilla.org/xbl">
 
@@ -18,8 +19,18 @@
     </resources>
 
     <content>
-      <xul:box anonid="previewBox"
-               onclick="openEditor()"/>
+#ifndef XP_MACOSX
+      <xul:ecolorpicker anonid="previewBox"
+                        color="black"
+                        colorObjectId="ColorStopColor"
+                        showTransparency="true"
+                        oncommand="RepaintGradient()"/>
+#else
+      <html:input anonid="previewBox"
+                  type="color"
+                  showTransparency="true"
+                  oninput="RepaintGradient()"/>
+#endif
       <xul:hbox align="center" oncommand="RepaintGradient()" oninput="RepaintGradient()">
         <xul:label value="&length.label;"/>
         <xul:menulist editable="true" anonid="offset" sizetopopup="none"
@@ -41,12 +52,20 @@
       <property name="color">
         <getter>
         <![CDATA[
-          return this.getChild("previewBox").style.backgroundColor;
+#ifndef XP_MACOSX
+          return this.getChild("previewBox").color;
+#else
+          return this.getChild("previewBox").value;
+#endif
         ]]>
         </getter>
         <setter>
         <![CDATA[
-          this.getChild("previewBox").style.backgroundColor = val;
+#ifndef XP_MACOSX
+          this.getChild("previewBox").color = val;
+#else
+          this.getChild("previewBox").value = val;
+#endif
         ]]>
         </setter>
       </property>
@@ -66,7 +85,7 @@
 
       <method name="reset">
         <body><![CDATA[
-          this.getChild("previewBox").style.backgroundColor = "";
+          this.getChild("previewBox").color = "";
           this.getChild("offset").value = "";
         ]]></body>
       </method>

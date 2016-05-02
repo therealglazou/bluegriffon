@@ -7,6 +7,7 @@
 
 <bindings id="textshadowitemBindings"
    xmlns="http://www.mozilla.org/xbl"
+   xmlns:html="http://www.w3.org/1999/xhtml"
    xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
    xmlns:xbl="http://www.mozilla.org/xbl">
 
@@ -28,12 +29,20 @@
           <xul:row align="center">
             <xul:label value="&colorTextShadow.label;"/>
             <xul:hbox>
+#ifndef XP_MACOSX
               <xul:ecolorpicker anonid="color"
                                 color="black"
                                 colorObjectId="BoxShadowColor"
                                 windowTitle="&colorTextShadow.title;"
                                 showTransparency="true"
                                 oncommand="ReapplyBoxShadows()"/>
+#else
+              <html:input anonid="color"
+                          type="color"
+                          title="&colorTextShadow.title;"
+                          showTransparency="true"
+                          oninput="ReapplyBoxShadows()"/>
+#endif
             </xul:hbox>
             <xul:checkbox label="&inset.label;" anonid="inset"/>
           </xul:row>
@@ -109,12 +118,20 @@
       <property name="color">
         <getter>
         <![CDATA[
+#ifndef XP_MACOSX
           return this.getChild("color").color;
+#else
+          return this.getChild("color").value;
+#endif
         ]]>
         </getter>
         <setter>
         <![CDATA[
+#ifndef XP_MACOSX
           this.getChild("color").color = val;
+#else
+          this.getChild("color").value = val;
+#endif
         ]]>
         </setter>
       </property>

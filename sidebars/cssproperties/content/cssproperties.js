@@ -200,17 +200,14 @@ function SelectionChanged(aArgs, aElt, aOneElementSelected)
 
   var inspector = Components.classes["@mozilla.org/inspector/dom-utils;1"]
                     .getService(Components.interfaces.inIDOMUtils);
-  var state;
   var dynamicPseudo = "";
   if (gDialog.hoverStateCheckbox.checked) {
-    state = inspector.getContentState(gCurrentElement);
-    inspector.setContentState(gCurrentElement, state | 4); // NS_EVENT_STATE_HOVER
+    inspector.addPseudoClassLock(gCurrentElement, ":hover");
     dynamicPseudo = "hover";
   }
   var ruleset = CssInspector.getCSSStyleRules(aElt, false, dynamicPseudo);
   if (gDialog.hoverStateCheckbox.checked) {
-    inspector.setContentState(gCurrentElement.ownerDocument.documentElement, 4); // NS_EVENT_STATE_HOVER
-    var display = gCurrentElement.style.display;
+    inspector.clearPseudoClassLocks(gCurrentElement);
   }
   for (var i = 0; i < gIniters.length; i++)
     gIniters[i](aElt, ruleset);
@@ -361,7 +358,7 @@ function ApplyIdFromIdAlert()
   ApplyStyles(gIdAlertStyles, gIdNoSelectionUpdate, true);
 }
 
-function ApplyStyles(aStyles, aNoSelectionUpdate, aDoNotBeginTransaction)
+function ApplyStyles(aStyles, aNoSelectionUpdate, aDoNotBeginTransaction, aCallback)
 {
   gDialog.idAlert.removeAttribute("open");
 
@@ -369,7 +366,7 @@ function ApplyStyles(aStyles, aNoSelectionUpdate, aDoNotBeginTransaction)
   var editor = EditorUtils.getCurrentEditor();
   if (gDialog.hoverStateCheckbox.checked && gDialog.cssPolicyMenulist.value == "inline")
     gDialog.cssPolicyMenulist.value = "id";
-  var cssPolicy = gPrefs.getCharPref("bluegriffon.css.policy"); 
+  var cssPolicy = gPrefs.getCharPref("bluegriffon.css.policy");
   switch (gDialog.cssPolicyMenulist.value) {
     case "id":
       // if the element has no ID, ask for one...
@@ -431,7 +428,6 @@ function ApplyStyles(aStyles, aNoSelectionUpdate, aDoNotBeginTransaction)
       editor.beginTransaction();
       break;
   }
-
   SaveSelection();
   var elt = gCurrentElement;
   for (var i = 0; i < aStyles.length; i++) {
@@ -472,6 +468,9 @@ function ApplyStyles(aStyles, aNoSelectionUpdate, aDoNotBeginTransaction)
   if (!aNoSelectionUpdate)
     SelectionChanged(null, elt, true);
   RestoreSelection();
+
+  if (aCallback)
+    aCallback();
 }
 
 function FindLastEditableStyleSheet(aQuery)
@@ -608,17 +607,15 @@ function ApplyStyleChangesToStylesheets(editor,           // the current editor
   //= EditorUtils.getCurrentTabEditor().mResponsiveRuler.currentQuery;
   var inspector = Components.classes["@mozilla.org/inspector/dom-utils;1"]
                     .getService(Components.interfaces.inIDOMUtils);
-  var state;
   var dynamicPseudo = "";
   if (gDialog.hoverStateCheckbox.checked) {
-    state = inspector.getContentState(gCurrentElement);
-    inspector.setContentState(gCurrentElement, state | 4); // NS_EVENT_STATE_HOVER
+    inspector.addPseudoClassLock(gCurrentElement, ":hover");
     aIdent += ":hover";
     dynamicPseudo = "hover";
   }
   var ruleset = CssInspector.getCSSStyleRules(aElement, true, dynamicPseudo);
   if (gDialog.hoverStateCheckbox.checked) {
-    inspector.setContentState(gCurrentElement.ownerDocument.documentElement, state | 4);
+    inspector.clearPseudoClassLocks(gCurrentElement);
   }
 
   var whereToInsert;

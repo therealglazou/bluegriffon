@@ -17,10 +17,12 @@
       <preference id="pref-css-output-names" name="bluegriffon.css.colors.names.enabled" type="bool"/>
       <preference id="pref-css-output-type"  name="bluegriffon.css.colors.type" type="string"/>
 
-      <preference id="pref-support-gecko"    name="bluegriffon.css.support.gecko" type="bool"/>
-      <preference id="pref-support-webkit"   name="bluegriffon.css.support.webkit" type="bool"/>
-      <preference id="pref-support-presto"   name="bluegriffon.css.support.presto" type="bool"/>
-      <preference id="pref-support-trident"  name="bluegriffon.css.support.trident" type="bool"/>
+      <preference id="pref-support-blink"       name="bluegriffon.css.support.blink" type="bool"/>
+      <preference id="pref-support-gecko"       name="bluegriffon.css.support.gecko" type="bool"/>
+      <preference id="pref-support-servo"       name="bluegriffon.css.support.servo" type="bool"/>
+      <preference id="pref-support-vivliostyle" name="bluegriffon.css.support.vivliostyle" type="bool"/>
+      <preference id="pref-support-weasyprint"  name="bluegriffon.css.support.weasyprint" type="bool"/>
+      <preference id="pref-support-webkit"      name="bluegriffon.css.support.webkit" type="bool"/>
     </preferences>
     <groupbox>
       <caption label="&cssPolicy.caption;"/>
@@ -58,10 +60,12 @@
     </groupbox>
     <groupbox>
       <caption label="&browserSupport.caption;"/>
+      <checkbox label="&blink.label;" id="blinkBrowsers" preference="pref-support-blink" oncommand="CleanPrefixes()"/>
       <checkbox label="&gecko.label;" id="geckoBrowsers" disabled="true" preference="pref-support-gecko" oncommand="CleanPrefixes()"/>
+      <checkbox label="&servo.label;" id="servoBrowsers" preference="pref-support-servo" oncommand="CleanPrefixes()"/>
+      <checkbox label="&vivliostyle.label;" id="vivliostyleBrowsers" preference="pref-support-vivliostyle" oncommand="CleanPrefixes()"/>
+      <checkbox label="&weasyprint.label;" id="weasyprintBrowsers" preference="pref-support-weasyprint" oncommand="CleanPrefixes()"/>
       <checkbox label="&webkit.label;" id="webkitBrowsers" preference="pref-support-webkit" oncommand="CleanPrefixes()"/>
-      <checkbox label="&presto.label;" id="prestoBrowsers" preference="pref-support-presto" oncommand="CleanPrefixes()"/>
-      <checkbox label="&trident.label;" id="tridentBrowsers" preference="pref-support-trident" oncommand="CleanPrefixes()"/>
     </groupbox>
   </prefpane>
 
