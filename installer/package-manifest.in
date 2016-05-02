@@ -37,27 +37,18 @@
 @APPNAME@/Contents/Info.plist
 @APPNAME@/Contents/PkgInfo
 @RESPATH@/bluegriffon.icns
-@RESPATH@/@AB@.lproj/*
+@RESPATH@/en.lproj/*
 #endif
 
 [@AB_CD@]
-; @RESPATH@/chrome/@AB_CD@@JAREXT@
-; @RESPATH@/chrome/@AB_CD@.manifest
 @RESPATH@/dictionaries/*
 @RESPATH@/hyphenation/*
-#ifdef XP_WIN32
-; @BINPATH@/uninstall/helper.exe
-#endif
-#ifdef MOZ_UPDATER
-; @RESPATH@/update.locale
-; @RESPATH@/updater.ini
+#ifdef HAVE_MAKENSISU
+@BINPATH@/uninstall/helper.exe
 #endif
 
 [xpcom]
 @RESPATH@/dependentlibs.list
-#ifdef GKMEDIAS_SHARED_LIBRARY
-@BINPATH@/@DLL_PREFIX@gkmedias@DLL_SUFFIX@
-#endif
 #ifdef MOZ_SHARED_MOZGLUE
 @BINPATH@/@DLL_PREFIX@mozglue@DLL_SUFFIX@
 #endif
@@ -67,7 +58,7 @@
 #ifdef MOZ_DMD
 @BINPATH@/@DLL_PREFIX@dmd@DLL_SUFFIX@
 #endif
-#ifndef MOZ_NATIVE_NSPR
+#ifndef MOZ_SYSTEM_NSPR
 #ifndef MOZ_FOLD_LIBS
 @BINPATH@/@DLL_PREFIX@nspr4@DLL_SUFFIX@
 @BINPATH@/@DLL_PREFIX@plc4@DLL_SUFFIX@
@@ -90,15 +81,13 @@
 #if MOZ_PACKAGE_MSVC_DLLS
 @BINPATH@/@MSVC_C_RUNTIME_DLL@
 @BINPATH@/@MSVC_CXX_RUNTIME_DLL@
-#ifdef MSVC_APPCRT_DLL
-@BINPATH@/@MSVC_APPCRT_DLL@
 #endif
-#ifdef MSVC_DESKTOPCRT_DLL
-@BINPATH@/@MSVC_DESKTOPCRT_DLL@
-#endif
+#if MOZ_PACKAGE_WIN_UCRT_DLLS
+@BINPATH@/api-ms-win-*.dll
+@BINPATH@/ucrtbase.dll
 #endif
 #endif
-#ifndef MOZ_NATIVE_ICU
+#ifndef MOZ_SYSTEM_ICU
 #ifdef MOZ_SHARED_ICU
 #ifdef XP_WIN
 @BINPATH@/icudt@MOZ_ICU_DBG_SUFFIX@@MOZ_ICU_VERSION@.dll
@@ -115,14 +104,9 @@
 #endif
 #endif
 #endif
-#ifdef MOZ_REPLACE_MALLOC
-#ifndef MOZ_JEMALLOC3
-@BINPATH@/@DLL_PREFIX@replace_jemalloc@DLL_SUFFIX@
-#endif
-#endif
 #ifdef MOZ_GTK3
 @BINPATH@/@DLL_PREFIX@mozgtk@DLL_SUFFIX@
-@BINPATH@/@DLL_PREFIX@mozgtk2@DLL_SUFFIX@
+@BINPATH@/gtk2/@DLL_PREFIX@mozgtk@DLL_SUFFIX@
 #endif
 
 [browser]
@@ -138,10 +122,15 @@
 @RESPATH@/update-settings.ini
 #endif
 @RESPATH@/platform.ini
-#ifndef MOZ_NATIVE_SQLITE
+#ifndef MOZ_SYSTEM_SQLITE
 #ifndef MOZ_FOLD_LIBS
 @BINPATH@/@DLL_PREFIX@mozsqlite3@DLL_SUFFIX@
 #endif
+#endif
+@BINPATH@/@DLL_PREFIX@lgpllibs@DLL_SUFFIX@
+#ifdef MOZ_FFVPX
+@BINPATH@/@DLL_PREFIX@mozavutil@DLL_SUFFIX@
+@BINPATH@/@DLL_PREFIX@mozavcodec@DLL_SUFFIX@
 #endif
 #ifdef XP_UNIX
 #ifndef XP_MACOSX
@@ -149,7 +138,7 @@
 #endif
 #endif
 
-[Components]
+; [Components]
 @RESPATH@/components/alerts.xpt
 #ifdef ACCESSIBILITY
 #ifdef XP_WIN32
@@ -175,7 +164,6 @@
 #endif
 @RESPATH@/components/content_xslt.xpt
 @RESPATH@/components/cookie.xpt
-@RESPATH@/components/devtools_security.xpt
 @RESPATH@/components/directory.xpt
 @RESPATH@/components/docshell.xpt
 @RESPATH@/components/dom.xpt
@@ -184,6 +172,7 @@
 @RESPATH@/components/dom_messages.xpt
 #endif
 @RESPATH@/components/dom_apps.xpt
+@RESPATH@/components/dom_newapps.xpt
 @RESPATH@/components/dom_base.xpt
 @RESPATH@/components/dom_system.xpt
 #ifdef MOZ_B2G_BT
@@ -193,16 +182,17 @@
 @RESPATH@/components/dom_alarm.xpt
 @RESPATH@/components/dom_core.xpt
 @RESPATH@/components/dom_css.xpt
-@RESPATH@/components/dom_devicestorage.xpt
 @RESPATH@/components/dom_events.xpt
 @RESPATH@/components/dom_geolocation.xpt
 @RESPATH@/components/dom_media.xpt
 @RESPATH@/components/dom_network.xpt
 @RESPATH@/components/dom_notification.xpt
 @RESPATH@/components/dom_html.xpt
+@RESPATH@/components/dom_icc.xpt
 @RESPATH@/components/dom_offline.xpt
 @RESPATH@/components/dom_json.xpt
 @RESPATH@/components/dom_power.xpt
+@RESPATH@/components/dom_push.xpt
 @RESPATH@/components/dom_quota.xpt
 @RESPATH@/components/dom_range.xpt
 @RESPATH@/components/dom_security.xpt
@@ -250,7 +240,6 @@
 @RESPATH@/components/jar.xpt
 @RESPATH@/components/jsdebugger.xpt
 @RESPATH@/components/jsdownloads.xpt
-@RESPATH@/components/jsinspector.xpt
 @RESPATH@/components/layout_base.xpt
 #ifdef NS_PRINTING
 @RESPATH@/components/layout_printing.xpt
@@ -259,6 +248,9 @@
 @RESPATH@/components/layout_xul.xpt
 @RESPATH@/components/locale.xpt
 @RESPATH@/components/lwbrk.xpt
+#ifdef MOZ_ENABLE_PROFILER_SPS
+@RESPATH@/components/memory_profiler.xpt
+#endif
 @RESPATH@/components/mimetype.xpt
 @RESPATH@/components/mozfind.xpt
 @RESPATH@/components/necko_about.xpt
@@ -269,6 +261,7 @@
 @RESPATH@/components/necko_file.xpt
 @RESPATH@/components/necko_ftp.xpt
 @RESPATH@/components/necko_http.xpt
+@RESPATH@/components/necko_mdns.xpt
 @RESPATH@/components/necko_res.xpt
 @RESPATH@/components/necko_socket.xpt
 @RESPATH@/components/necko_strconv.xpt
@@ -288,7 +281,6 @@
 @RESPATH@/components/plugin.xpt
 @RESPATH@/components/pref.xpt
 @RESPATH@/components/prefetch.xpt
-@RESPATH@/components/profile.xpt
 #ifdef MOZ_ENABLE_PROFILER_SPS
 @RESPATH@/components/profiler.xpt
 #endif
@@ -296,9 +288,7 @@
 @RESPATH@/components/satchel.xpt
 @RESPATH@/components/saxparser.xpt
 @RESPATH@/components/services-crypto-component.xpt
-#ifdef MOZ_CAPTIVEDETECT
 @RESPATH@/components/captivedetect.xpt
-#endif
 @RESPATH@/components/shistory.xpt
 @RESPATH@/components/spellchecker.xpt
 @RESPATH@/components/storage.xpt
@@ -307,6 +297,8 @@
 @RESPATH@/components/toolkit_finalizationwitness.xpt
 @RESPATH@/components/toolkit_formautofill.xpt
 @RESPATH@/components/toolkit_osfile.xpt
+@RESPATH@/components/toolkit_securityreporter.xpt
+@RESPATH@/components/toolkit_perfmonitoring.xpt
 @RESPATH@/components/toolkit_xulstore.xpt
 @RESPATH@/components/toolkitprofile.xpt
 #ifdef MOZ_ENABLE_XREMOTE
@@ -324,9 +316,6 @@
 @RESPATH@/components/widget.xpt
 #ifdef XP_MACOSX
 @RESPATH@/components/widget_cocoa.xpt
-@RESPATH@/components/dibgutils.xpt
-@RESPATH@/components/dibadge.xpt
-@RESPATH@/components/dibadge.manifest
 #endif
 @RESPATH@/components/windowds.xpt
 @RESPATH@/components/windowwatcher.xpt
@@ -351,8 +340,12 @@
 @RESPATH@/components/ConsoleAPIStorage.js
 @RESPATH@/components/BrowserElementParent.manifest
 @RESPATH@/components/BrowserElementParent.js
+@RESPATH@/components/BrowserElementProxy.manifest
+@RESPATH@/components/BrowserElementProxy.js
 @RESPATH@/components/FeedProcessor.manifest
 @RESPATH@/components/FeedProcessor.js
+@RESPATH@/components/PackagedAppUtils.js
+@RESPATH@/components/PackagedAppUtils.manifest
 @RESPATH@/components/Downloads.manifest
 @RESPATH@/components/DownloadLegacy.js
 @RESPATH@/components/BrowserPageThumbs.manifest
@@ -374,14 +367,6 @@
 @RESPATH@/components/webvtt.xpt
 @RESPATH@/components/WebVTT.manifest
 @RESPATH@/components/WebVTTParserWrapper.js
-@RESPATH@/components/bgCharUnicodeAutocomplete.js
-@RESPATH@/components/bgCharUnicodeAutocomplete.manifest
-@RESPATH@/components/bgCommandHandler.manifest
-@RESPATH@/components/bgLocationAutocomplete.js
-@RESPATH@/components/bgLocationAutocomplete.manifest
-@RESPATH@/components/phpStreamConverter.js
-@RESPATH@/components/phpStreamConverter.manifest
-@RESPATH@/components/bgCommandHandler.js
 #ifdef MOZ_GTK
 @RESPATH@/components/nsFilePicker.manifest
 @RESPATH@/components/nsFilePicker.js
@@ -396,6 +381,7 @@
 @RESPATH@/components/amInstallTrigger.js
 @RESPATH@/components/amWebInstallListener.js
 @RESPATH@/components/nsBlocklistService.js
+@RESPATH@/components/nsBlocklistServiceContent.js
 #ifdef MOZ_UPDATER
 @RESPATH@/components/nsUpdateService.manifest
 @RESPATH@/components/nsUpdateService.js
@@ -405,7 +391,9 @@
 @RESPATH@/components/nsUpdateTimerManager.js
 @RESPATH@/components/addoncompat.manifest
 @RESPATH@/components/multiprocessShims.js
-@RESPATH@/components/remoteTagService.js
+@RESPATH@/components/defaultShims.js
+@RESPATH@/components/utils.manifest
+@RESPATH@/components/simpleServices.js
 @RESPATH@/components/pluginGlue.manifest
 @RESPATH@/components/ProcessSingleton.manifest
 @RESPATH@/components/MainProcessSingleton.js
@@ -449,34 +437,16 @@
 @RESPATH@/components/contentAreaDropListener.js
 #ifdef XP_WIN
 #endif
-#ifdef MOZ_ENABLE_DBUS
-@RESPATH@/components/@DLL_PREFIX@dbusservice@DLL_SUFFIX@
-#endif
-#ifdef MOZ_ENABLE_GNOME_COMPONENT
-@RESPATH@/components/@DLL_PREFIX@mozgnome@DLL_SUFFIX@
-#endif
-#if defined(MOZ_ENABLE_DBUS) || defined(MOZ_ENABLE_GNOME_COMPONENT)
-@RESPATH@/components/components.manifest
+#ifdef XP_MACOSX
 #endif
 @RESPATH@/components/nsINIProcessor.manifest
 @RESPATH@/components/nsINIProcessor.js
 @RESPATH@/components/nsPrompter.manifest
 @RESPATH@/components/nsPrompter.js
-#ifdef MOZ_DATA_REPORTING
-@RESPATH@/components/DataReporting.manifest
-@RESPATH@/components/DataReportingService.js
-#endif
-#ifdef MOZ_SERVICES_HEALTHREPORT
-@RESPATH@/components/HealthReportComponents.manifest
-#endif
-#ifdef MOZ_SERVICES_SYNC
-@RESPATH@/components/SyncComponents.manifest
-@RESPATH@/components/Weave.js
-#endif
-#ifdef MOZ_CAPTIVEDETECT
+@RESPATH@/components/FxAccountsComponents.manifest
+@RESPATH@/components/FxAccountsPush.js
 @RESPATH@/components/CaptivePortalDetectComponents.manifest
 @RESPATH@/components/captivedetect.js
-#endif
 @RESPATH@/components/servicesComponents.manifest
 @RESPATH@/components/cryptoComponents.manifest
 @RESPATH@/components/TelemetryStartup.js
@@ -512,10 +482,16 @@
 @RESPATH@/components/AlarmsManager.manifest
 @RESPATH@/components/Push.js
 @RESPATH@/components/Push.manifest
-@RESPATH@/components/PushServiceLauncher.js
+@RESPATH@/components/PushComponents.js
+
+@RESPATH@/components/remotebrowserutils.manifest
+@RESPATH@/components/RemoteWebNavigation.js
 
 @RESPATH@/components/SlowScriptDebug.manifest
 @RESPATH@/components/SlowScriptDebug.js
+
+@RESPATH@/components/TVSimulatorService.js
+@RESPATH@/components/TVSimulatorService.manifest
 
 #ifndef RELEASE_BUILD
 @RESPATH@/components/InterAppComm.manifest
@@ -523,11 +499,6 @@
 @RESPATH@/components/InterAppConnection.js
 @RESPATH@/components/InterAppMessagePort.js
 #endif
-
-@RESPATH@/components/TCPSocket.js
-@RESPATH@/components/TCPServerSocket.js
-@RESPATH@/components/TCPSocketParentIntermediary.js
-@RESPATH@/components/TCPSocket.manifest
 
 #ifdef MOZ_ACTIVITIES
 @RESPATH@/components/SystemMessageCache.js
@@ -541,10 +512,6 @@
 @RESPATH@/components/ActivityWrapper.js
 @RESPATH@/components/ActivityMessageConfigurator.js
 #endif
-
-; @RESPATH@/components/Payment.js
-; @RESPATH@/components/PaymentFlowInfo.js
-; @RESPATH@/components/Payment.manifest
 
 #ifdef MOZ_WEBRTC
 @RESPATH@/components/PeerConnection.js
@@ -563,6 +530,8 @@
 
 @RESPATH@/components/PresentationDeviceInfoManager.manifest
 @RESPATH@/components/PresentationDeviceInfoManager.js
+@RESPATH@/components/BuiltinProviders.manifest
+@RESPATH@/components/TCPPresentationServer.js
 
 ; InputMethod API
 @RESPATH@/components/MozKeyboard.js
@@ -571,7 +540,11 @@
 #ifdef MOZ_DEBUG
 @RESPATH@/components/TestInterfaceJS.js
 @RESPATH@/components/TestInterfaceJS.manifest
+@RESPATH@/components/TestInterfaceJSMaplike.js
 #endif
+
+@RESPATH@/components/PACGenerator.js
+@RESPATH@/components/PACGenerator.manifest
 
 ; Modules
 @RESPATH@/modules/*
@@ -584,6 +557,19 @@
 @RESPATH@/components/nsUrlClassifierLib.js
 @RESPATH@/components/url-classifier.xpt
 #endif
+
+; Private Browsing
+@RESPATH@/components/privatebrowsing.xpt
+@RESPATH@/components/PrivateBrowsing.manifest
+@RESPATH@/components/PrivateBrowsingTrackingProtectionWhitelist.js
+
+; Security Reports
+@RESPATH@/components/SecurityReporter.manifest
+@RESPATH@/components/SecurityReporter.js
+
+; Signed Packaged Content
+@RESPATH@/components/InstallPackagedWebapp.manifest
+@RESPATH@/components/InstallPackagedWebapp.js
 
 ; ANGLE GLES-on-D3D rendering library
 #ifdef MOZ_ANGLE_RENDERER
@@ -628,26 +614,17 @@
 ; All the pref files must be part of base to prevent migration bugs
 @RESPATH@/defaults/pref/bluegriffon-prefs.js
 @RESPATH@/greprefs.js
-@RESPATH@/defaults/autoconfig/platform.js
 @RESPATH@/defaults/autoconfig/prefcalls.js
 @RESPATH@/defaults/profile/prefs.js
 
-#ifndef LIBXUL_SDK
 ; Warning: changing the path to channel-prefs.js can cause bugs (Bug 756325)
 ; Technically this is an app pref file, but we are keeping it in the original
 ; gre location for now.
 @RESPATH@/defaults/pref/channel-prefs.js
-#else
-; For Fx-on-xr, channel-prefs lives with the app preferences. (Bug 762588)
-@RESPATH@/@PREF_DIR@/channel-prefs.js
-#endif
 
 ; Services (gre) prefs
 #ifdef MOZ_SERVICES_NOTIFICATIONS
 @RESPATH@/defaults/pref/services-notifications.js
-#endif
-#ifdef MOZ_SERVICES_SYNC
-@RESPATH@/defaults/pref/services-sync.js
 #endif
 
 ; [Layout Engine Resources]
@@ -668,11 +645,11 @@
 @RESPATH@/res/xhtml_strict.xhtml
 @RESPATH@/res/xhtml_transitional.html
 @RESPATH@/res/xhtml_transitional.xhtml
+@RESPATH@/res/scripteditor.html
 @RESPATH@/res/designmode.css
 @RESPATH@/res/ImageDocument.css
 @RESPATH@/res/TopLevelImageDocument.css
 @RESPATH@/res/TopLevelVideoDocument.css
-@RESPATH@/res/scripteditor.html
 @RESPATH@/res/table-add-column-after-active.gif
 @RESPATH@/res/table-add-column-after-hover.gif
 @RESPATH@/res/table-add-column-after.gif
@@ -718,7 +695,7 @@
 ; NSS libraries are signed in the staging directory,
 ; meaning their .chk files are created there directly.
 ;
-#ifndef MOZ_NATIVE_NSS
+#ifndef MOZ_SYSTEM_NSS
 @BINPATH@/@DLL_PREFIX@freebl3@DLL_SUFFIX@
 @BINPATH@/@DLL_PREFIX@nss3@DLL_SUFFIX@
 @BINPATH@/@DLL_PREFIX@nssckbi@DLL_SUFFIX@
@@ -732,7 +709,6 @@
 #endif
 @BINPATH@/@DLL_PREFIX@softokn3@DLL_SUFFIX@
 #endif
-@RESPATH@/components/pipboot.xpt
 @RESPATH@/components/pipnss.xpt
 @RESPATH@/components/pippki.xpt
 
@@ -790,65 +766,11 @@ bin/libfreebl_32int64_3.so
 #endif
 #endif
 
-#ifdef MOZ_WEBAPP_RUNTIME
-[WebappRuntime]
-#ifdef XP_WIN
-@BINPATH@/webapp-uninstaller@BIN_SUFFIX@
-#endif
-@RESPATH@/webapprt-stub@BIN_SUFFIX@
-@RESPATH@/webapprt/webapprt.ini
-@RESPATH@/webapprt/chrome.manifest
-@RESPATH@/webapprt/chrome/webapprt@JAREXT@
-@RESPATH@/webapprt/chrome/webapprt.manifest
-@RESPATH@/webapprt/chrome/@AB_CD@@JAREXT@
-@RESPATH@/webapprt/chrome/@AB_CD@.manifest
-@RESPATH@/webapprt/components/CommandLineHandler.js
-@RESPATH@/webapprt/components/ContentPermission.js
-@RESPATH@/webapprt/components/DirectoryProvider.js
-@RESPATH@/webapprt/components/PaymentUIGlue.js
-@RESPATH@/webapprt/components/components.manifest
-@RESPATH@/webapprt/defaults/preferences/prefs.js
-@RESPATH@/webapprt/modules/DownloadView.jsm
-@RESPATH@/webapprt/modules/Startup.jsm
-@RESPATH@/webapprt/modules/WebappRT.jsm
-@RESPATH@/webapprt/modules/WebappManager.jsm
-@RESPATH@/webapprt/modules/RemoteDebugger.jsm
-@RESPATH@/webapprt/modules/WebRTCHandler.jsm
-#endif
-
-#ifdef MOZ_METRO
-@RESPATH@/components/MetroUIUtils.js
-@RESPATH@/components/MetroUIUtils.manifest
-[metro]
-; gre resources
-@BINPATH@/CommandExecuteHandler@BIN_SUFFIX@
-@RESPATH@/resources.pri
-@RESPATH@/VisualElementsManifest.xml
-@RESPATH@/tileresources
-; app dir resources
-@RESPATH@/metro/chrome.manifest
-@RESPATH@/metro/searchplugins
-@RESPATH@/metro/metroapp.ini
-@RESPATH@/metro/chrome/browser@JAREXT@
-@RESPATH@/metro/chrome/browser.manifest
-@RESPATH@/metro/chrome/chrome@JAREXT@
-@RESPATH@/metro/chrome/chrome.manifest
-@RESPATH@/metro/chrome/@AB_CD@@JAREXT@
-@RESPATH@/metro/chrome/@AB_CD@.manifest
-#ifdef NIGHTLY_BUILD
-@RESPATH@/metro/chrome/shumway.manifest
-@RESPATH@/metro/chrome/shumway/*
-@RESPATH@/metro/chrome/pdfjs.manifest
-@RESPATH@/metro/chrome/pdfjs/*
-#endif
-@RESPATH@/metro/components
-@RESPATH@/metro/defaults
-@RESPATH@/metro/modules
-#endif
-
 @RESPATH@/components/DataStore.manifest
 @RESPATH@/components/DataStoreImpl.js
 @RESPATH@/components/dom_datastore.xpt
+
+@RESPATH@/components/dom_audiochannel.xpt
 
 ; Shutdown Terminator
 @RESPATH@/components/nsTerminatorTelemetry.js
@@ -869,4 +791,14 @@ bin/libfreebl_32int64_3.so
 #ifdef MOZ_EME
 @RESPATH@/gmp-clearkey/0.1/@DLL_PREFIX@clearkey@DLL_SUFFIX@
 @RESPATH@/gmp-clearkey/0.1/clearkey.info
+#endif
+
+; gfx
+#ifdef XP_WIN
+@RESPATH@/components/GfxSanityTest.manifest
+@RESPATH@/components/SanityTest.js
+#endif
+
+#ifdef MOZ_MULET
+#include ../../b2g/installer/package-manifest.in
 #endif
