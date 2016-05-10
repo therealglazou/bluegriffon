@@ -1,41 +1,49 @@
   <toolbarpalette id="FormatToolbarPalette">
 
       <toolbarbutton id="boldButton" type="checkbox" autoCheck="false" command="cmd_bold" label="&boldToolbarCmd.label;"
+                       observes="cmd_renderedHTMLEnabler"
                      tooltiptext="&boldToolbarCmd.tooltip;">
         <observes element="cmd_bold" type="checkbox" attribute="state" onbroadcast="onButtonUpdate(this.parentNode, 'cmd_bold')"/>
       </toolbarbutton>
 
       <toolbarbutton id="italicButton" type="checkbox" autoCheck="false" command="cmd_italic" label="&italicToolbarCmd.label;"
+                       observes="cmd_renderedHTMLEnabler"
                      tooltiptext="&italicToolbarCmd.tooltip;">
         <observes element="cmd_italic" attribute="state" onbroadcast="onButtonUpdate(this.parentNode, 'cmd_italic')"/>
       </toolbarbutton>
 
       <toolbarbutton id="underlineButton" type="checkbox" autoCheck="false" command="cmd_underline" label="&underlineToolbarCmd.label;"
+                       observes="cmd_renderedHTMLEnabler"
                      tooltiptext="&underlineToolbarCmd.tooltip;">
         <observes element="cmd_underline" attribute="state" onbroadcast="onButtonUpdate(this.parentNode, 'cmd_underline')"/>
       </toolbarbutton>
     
       <toolbarbutton id="strongButton" type="checkbox" autoCheck="false" command="cmd_strong" label="&strongToolbarCmd.label;"
+                       observes="cmd_renderedHTMLEnabler"
                      tooltiptext="&strongToolbarCmd.tooltip;">
         <observes element="cmd_strong" attribute="state" onbroadcast="onButtonUpdate(this.parentNode, 'cmd_strong')"/>
       </toolbarbutton>
     
       <toolbarbutton id="emButton" type="checkbox" autoCheck="false" command="cmd_em" label="&emToolbarCmd.label;"
+                       observes="cmd_renderedHTMLEnabler"
                      tooltiptext="&emToolbarCmd.tooltip;">
         <observes element="cmd_em" attribute="state" onbroadcast="onButtonUpdate(this.parentNode, 'cmd_em')"/>
       </toolbarbutton>
 
       <toolbarbutton id="codeButton" type="checkbox" autoCheck="false" command="cmd_code" label="&codeToolbarCmd.label;"
+                       observes="cmd_renderedHTMLEnabler"
                      tooltiptext="&codeToolbarCmd.tooltip;">
         <observes element="cmd_code" type="checkbox" attribute="state" onbroadcast="onButtonUpdate(this.parentNode, 'cmd_code')"/>
       </toolbarbutton>
 
     <toolbarbutton id="ulButton" type="radio" group="lists" autoCheck="false" command="cmd_ul"
+                       observes="cmd_renderedHTMLEnabler"
                    tooltiptext="&unorderedList.tooltip;" label="&unorderedList.label;">
         <observes element="cmd_ul" attribute="state" onbroadcast="onButtonUpdate(this.parentNode, 'cmd_ul')"/>
     </toolbarbutton>
 
     <toolbarbutton id="olButton" type="radio" group="lists" autoCheck="false" command="cmd_ol"
+                       observes="cmd_renderedHTMLEnabler"
                    tooltiptext="&orderedList.tooltip;" label="&orderedList.label;">
         <observes element="cmd_ol" attribute="state" onbroadcast="onButtonUpdate(this.parentNode, 'cmd_ol')"/>
     </toolbarbutton>
@@ -73,20 +81,25 @@
     </toolbarbutton>
 
     <toolbarbutton id="indentButton" command="cmd_indent" label="&indentToolbarCmd.label;"
+                   observes="cmd_renderedHTMLEnabler"
                    tooltiptext="&indentToolbarCmd.tooltip;"/>
 
     <toolbarbutton id="outdentButton" command="cmd_outdent" label="&outdentToolbarCmd.label;"
+                   observes="cmd_renderedHTMLEnabler"
                    tooltiptext="&outdentToolbarCmd.tooltip;"/>
 
     <toolbarbutton id="blockquoteButton" command="cmd_blockquote" label="&blockquoteToolbarCmd.label;"
+                   observes="cmd_renderedHTMLEnabler"
                    tooltiptext="&blockquoteToolbarCmd.tooltip;"/>
 
     <toolbarbutton id="ddButton" type="radio" group="lists" autoCheck="false" command="cmd_dd"
+                   observes="cmd_renderedHTMLEnabler"
                    tooltiptext="&definitionDescription.tooltip;" label="&definitionDescription.label;">
         <observes element="cmd_dd" attribute="state" onbroadcast="onButtonUpdate(this.parentNode, 'cmd_dd')"/>
     </toolbarbutton>
 
     <toolbarbutton id="dtButton" type="radio" group="lists" autoCheck="false" command="cmd_dt"
+                   observes="cmd_renderedHTMLEnabler"
                    tooltiptext="&definitionTitle.tooltip;" label="&definitionTitle.label;">
         <observes element="cmd_dt" attribute="state" onbroadcast="onButtonUpdate(this.parentNode, 'cmd_dt')"/>
     </toolbarbutton>
