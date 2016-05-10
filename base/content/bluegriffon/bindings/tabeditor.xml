@@ -689,17 +689,22 @@
              gDialog.sourceModeButton.setAttribute("selected", "true");
              gDialog.wysiwygModeButton.removeAttribute("selected");
              gDialog.structurebar.style.visibility = "hidden";
+             HandlersManager.hideAllHandlers();
+             gDialog.tabeditor.enableRulers(false);
              deck.firstChild.focus();
            }
            else {
+             gDialog.tabeditor.enableRulers(true);
              gDialog.wysiwygModeButton.setAttribute("selected", "true");
              gDialog.sourceModeButton.removeAttribute("selected");
              gDialog.structurebar.style.visibility = "";
              deck.lastChild.focus();
              var selcon = EditorUtils.getSelectionContainer();
-             if (selcon)
+             if (selcon) {
+               NotifierUtils.notify("selection", selcon.node, true)
                gDialog.structurebar.selectionChanged(null, selcon.node,
                                                      selcon.oneElementSelected);
+             }
            }
            window.updateCommands("navigation");
            window.updateCommands("style");
