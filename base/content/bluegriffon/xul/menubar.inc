@@ -5,7 +5,7 @@
       <menupopup id="fileMenu_popup">
         <menuitem label="&newMenu.label;" accesskey="&newMenu.accesskey;" key="key_newNavigator"
                   command="cmd_new"/>
-        <menuitem label="&newOtherCmd.label;"     oncommand="NewDocumentWithOptions(event);" class="indent"/>
+        <menuitem label="&newOtherCmd.label;"     oncommand="NewDocumentWithOptions(event);"/>
 
         <menuseparator/>
         <menuitem label="&newWizardMenu.label;"
@@ -380,7 +380,7 @@
         <menuitem id="menu_mac_hide_others" label="&hideOtherAppsCmdMac.label;" key="key_hideOtherAppsCmdMac"/>
         <menuitem id="menu_mac_show_all" label="&showAllAppsCmdMac.label;"/>
 #endif
-        <menuitem id="menu_inspector" label="DOMI" oncommand="inspectDOMDocument();" hidden="true"/>
+        <menuitem id="menu_inspector" label="DOMI" oncommand="inspectDOMDocument();"/>
       </menupopup>
     </menu>
 
