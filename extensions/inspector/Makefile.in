@@ -13,18 +13,12 @@ include $(DEPTH)/config/autoconf.mk
 
 DOMi_VERSION = 2.0.17pre
 
-XPI_NAME               = inspector
-INSTALL_EXTENSION_ID   = inspector@mozilla.org
-XPI_PKGNAME            = inspector-$(DOMi_VERSION)
-
-DIST_FILES = install.rdf
-
 DEFINES += -DDOMi_VERSION=$(DOMi_VERSION)
 
 include $(topsrcdir)/config/rules.mk
 
-export::
-	$(NSINSTALL) -D $(FINAL_TARGET)/chrome/icons/default
-	$(INSTALL) $(srcdir)/resources/content/res/Linux/winInspectorMain.xpm $(FINAL_TARGET)/chrome/icons/default
-	$(INSTALL) $(srcdir)/resources/content/res/Linux/winInspectorMain16.xpm $(FINAL_TARGET)/chrome/icons/default
-	$(INSTALL) $(srcdir)/resources/content/res/WINNT/winInspectorMain.ico $(FINAL_TARGET)/chrome/icons/default
+#export::
+#	$(NSINSTALL) -D $(FINAL_TARGET)/chrome/icons/default
+#	$(INSTALL) $(srcdir)/resources/content/res/Linux/winInspectorMain.xpm $(FINAL_TARGET)/chrome/icons/default
+#	$(INSTALL) $(srcdir)/resources/content/res/Linux/winInspectorMain16.xpm $(FINAL_TARGET)/chrome/icons/default
+#	$(INSTALL) $(srcdir)/resources/content/res/WINNT/winInspectorMain.ico $(FINAL_TARGET)/chrome/icons/default
