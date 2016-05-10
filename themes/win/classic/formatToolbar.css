@@ -40,9 +40,10 @@
 }
 
 #FormatToolbox toolbarbutton {
-  margin: 2px;
+  margin: 0px;
   -moz-appearance: none;
-  
+  border: 0px none;
+  padding: 4px;
 }
 
 #FormatToolbox toolbarbutton .toolbarbutton-icon {
@@ -55,10 +56,11 @@
 }
 
 #FormatToolbox toolbarbutton[checked="true"] {
-  /*background-color: orange ! important;*/
   background-image: none ! important;
-  /*padding: 0px ! important;*/
   opacity: 1 !important;
+  padding: 4px;
+  border: 0px none;
+  background-color: transparent;
 }
 
 #FormatToolbox toolbarbutton:not([checked="true"]) {
