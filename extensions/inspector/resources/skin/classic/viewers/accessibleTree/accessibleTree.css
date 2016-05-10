@@ -1,0 +1,22 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+@import url("chrome://inspector/skin");
+
+treechildren::-moz-tree-row(highlight) {
+  background-color: #feeecd;
+}
+
+treechildren::-moz-tree-row(selected, highlight) {
+  background-color: #c0ffff;
+}
+
+treechildren::-moz-tree-cell-text(highlight) {
+  color: black;
+}
+
+treechildren::-moz-tree-cell-text(grayout) {
+  color: gray;
+  font-weight: bold;
+}

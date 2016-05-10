@@ -1,0 +1,45 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+@import url("chrome://inspector/skin");
+@import url("chrome://navigator/skin");
+@import url("chrome://browser/skin");
+
+#bxURLBar {
+  padding: 2px;
+}
+
+#bxSearch {
+  height: 150px;
+}
+
+#splPanels {
+  width: 5px;
+}
+
+/* ::::: toolbar buttons ::::: */
+
+#btnSelecting {
+  list-style-image: url("chrome://inspector/skin/btnSelecting.gif");
+}
+
+#btnSelecting[checked="true"] {
+  list-style-image: url("chrome://inspector/skin/btnSelecting-act.gif");
+}
+
+#btnSelecting[disabled="true"] {
+  list-style-image: url("chrome://inspector/skin/btnSelecting-dis.gif");
+}
+
+#btnFind {
+  list-style-image: url("chrome://inspector/skin/btnFind.gif");
+}
+
+#btnFind[disabled="true"] {
+  list-style-image: url("chrome://inspector/skin/btnFind-dis.gif");
+}
+
+.viewer-list, .viewer-menu {
+  -moz-user-focus: ignore;
+}

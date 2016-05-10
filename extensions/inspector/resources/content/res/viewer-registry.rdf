@@ -1,0 +1,336 @@
+<?xml version="1.0"?>
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+
+<!DOCTYPE RDF SYSTEM "chrome://inspector/locale/viewer-registry.dtd">  
+ 
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+         xmlns:ins="http://www.mozilla.org/inspector#">
+
+<!-- Inspector-specific RDF attributes
+  xmlns:ins     Sets the ins: prefix to an Inspector-specific namespace URI.
+
+  ins:uid       Sets the basic viewer filename Inspector uses to find the viewer XUL file.
+                For example, ins:uid="dom" leads to chrome://inspector/content/viewers/dom/dom.xul
+                (ViewerRegistry.js#getEntryURL())
+
+  ins:panels    This determines which DOM Inspector panels, by id, the viewer referenced is valid for.
+                For example, ins:panels="bxObjectPanel bxObjPanel" means the panel id must be 
+                bxObjectPanel or bxObjPanel.
+
+  ins:description
+                This sets a title for the viewer.
+
+  ins:icon      This sets an icon for the viewer.  Currently unused.
+
+  ins:filter    This determines which nodes (or in the case of JavaScript Object
+                viewer, values), the viewer referenced is valid for.
+
+                @param object - nsIDOMNode object (or in the case of JavaScript
+                  Object viewer, JavaScript object).
+                @param linkedViewer - linked viewer object.
+
+                For example, ins:filter=
+                "return object instanceof Components.interfaces.nsIDOMDocument;"
+                is a JavaScript fragment ViewerRegistry.js uses to define a
+                filter function if the panel's subject node is an instance of
+                nsIDOMDocument.
+-->
+
+  <rdf:Seq about="inspector:viewers">
+    <rdf:li><rdf:Description 
+      ins:uid="dom"
+      ins:panels="bxDocPanel"
+      ins:description="&dom.label;"
+      ins:icon="chrome://inspector/content/viewers/dom/dom-icon.gif"
+      ins:filter="return object instanceof Components.interfaces.nsIDOMDocument;"/>
+    </rdf:li>
+
+    <rdf:li><rdf:Description 
+      ins:uid="stylesheets"
+      ins:panels="bxDocPanel"
+      ins:description="&stylesheets.label;"
+      ins:filter="return object instanceof Components.interfaces.nsIDOMDocument;"/>
+    </rdf:li>
+
+    <rdf:li>
+      <rdf:Description
+        ins:uid="domNode"
+        ins:panels="bxObjectPanel bxObjPanel"
+        ins:description="&domNode.label;">
+        <ins:filter><![CDATA[
+          return object instanceof Components.interfaces.nsIDOMNode ||
+            "@mozilla.org/accessibleRetrieval;1" in Components.classes &&
+            object instanceof Components.interfaces.nsIAccessible;
+        ]]></ins:filter>
+      </rdf:Description>
+    </rdf:li>
+
+    <rdf:li>
+      <rdf:Description
+        ins:uid="boxModel"
+        ins:panels="bxObjectPanel bxObjPanel"
+        ins:description="&boxModel.label;">
+        <ins:filter><![CDATA[
+          return object instanceof Components.interfaces.nsIDOMElement ||
+            "@mozilla.org/accessibleRetrieval;1" in Components.classes &&
+            object instanceof Components.interfaces.nsIAccessible &&
+            object.DOMNode instanceof Components.interfaces.nsIDOMElement;
+        ]]></ins:filter>
+      </rdf:Description>
+    </rdf:li>
+
+    <rdf:li>
+      <rdf:Description 
+        ins:uid="xblBindings"
+        ins:panels="bxObjectPanel bxObjPanel"
+        ins:description="&xblBindings.label;">
+        <ins:filter><![CDATA[
+          var node =
+            "@mozilla.org/accessibleRetrieval;1" in Components.classes &&
+            object instanceof Components.interfaces.nsIAccessible ?
+            object.DOMNode : object;
+
+          if (node instanceof Components.interfaces.nsIDOMElement) {
+            try {
+              var urls =
+                Components.classes["@mozilla.org/inspector/dom-utils;1"].
+                  getService(Components.interfaces["inIDOMUtils"]).
+                  getBindingURLs(node);
+              return urls && urls.length;
+            }
+            catch (e) { }
+          }
+          return false;
+        ]]></ins:filter>
+      </rdf:Description>
+    </rdf:li>
+
+    <rdf:li>
+      <rdf:Description
+        ins:uid="styleRules"
+        ins:panels="bxObjectPanel bxObjPanel"
+        ins:description="&styleRules.label;">
+      <ins:filter><![CDATA[
+        return object instanceof Components.interfaces.nsIDOMElement ||
+          object instanceof Components.interfaces.nsIDOMCSSStyleSheet ||
+          "@mozilla.org/accessibleRetrieval;1" in Components.classes &&
+          object instanceof Components.interfaces.nsIAccessible &&
+          object.DOMNode instanceof Components.interfaces.nsIDOMElement;
+      ]]></ins:filter>
+      </rdf:Description>
+    </rdf:li>
+
+    <rdf:li>
+      <rdf:Description
+        ins:uid="computedStyle"
+        ins:panels="bxObjectPanel bxObjPanel"
+        ins:description="&computedStyle.label;">
+        <ins:filter><![CDATA[
+          return object instanceof Components.interfaces.nsIDOMElement ||
+            "@mozilla.org/accessibleRetrieval;1" in Components.classes &&
+            object instanceof Components.interfaces.nsIAccessible &&
+            object.DOMNode instanceof Components.interfaces.nsIDOMElement;
+        ]]></ins:filter>
+      </rdf:Description>
+    </rdf:li>
+
+    <rdf:li><rdf:Description 
+      ins:uid="usedFontFaces"
+      ins:panels="bxObjectPanel bxObjPanel"
+      ins:description="&usedFontFaces.label;">
+        <ins:filter><![CDATA[
+          // XXX getUsedFontFaces really works on a Range,
+          // but to avoid bug 166749 we permit any Node.
+          return (object instanceof Components.interfaces.nsIDOMNode ||
+                  "@mozilla.org/accessibleRetrieval;1" in Components.classes &&
+                  object instanceof Components.interfaces.nsIAccessible) &&
+            "getUsedFontFaces" in XPCU.getService("@mozilla.org/inspector/dom-utils;1", "inIDOMUtils");
+        ]]></ins:filter>
+      </rdf:Description>
+    </rdf:li>
+
+    <rdf:li><rdf:Description
+      ins:uid="jsObject"
+      ins:panels="bxDocPanel bxObjectPanel bxObjPanel"
+      ins:description="&jsObject.label;"
+      ins:filter="return true;"/>
+    </rdf:li>
+
+    <rdf:li>
+      <rdf:Description ins:uid="accessibleEvent"
+                       ins:panels="bxObjectPanel bxObjPanel"
+                       ins:description="&accessibleEvent.label;">
+        <ins:filter><![CDATA[
+          if (!linkedViewer || linkedViewer.uid != "accessibleEvents") {
+            return false;
+          }
+
+          const Ci = Components.interfaces;
+          if (object instanceof Ci.nsIDOMNode ||
+              ("@mozilla.org/accessibleRetrieval;1" in Components.classes &&
+               object instanceof Ci.nsIAccessible)) {
+            return object;
+          }
+
+          return false;
+        ]]></ins:filter>
+      </rdf:Description>
+    </rdf:li>
+
+    <rdf:li>
+      <rdf:Description ins:uid="accessibleObject"
+                       ins:panels="bxObjectPanel bxObjPanel"
+                       ins:description="&accessibleObject.label;">
+        <ins:filter><![CDATA[
+          if (("@mozilla.org/accessibleRetrieval;1" in Components.classes) &&
+              object instanceof Components.interfaces.nsIAccessible) {
+            return true;
+          }
+
+          if (!linkedViewer ||
+              !(object instanceof Components.interfaces.nsIDOMNode))
+            return false;
+
+          if (linkedViewer.uid != "accessibleEvents" &&
+              linkedViewer.uid != "accessibleTree" &&
+              (linkedViewer.uid != "dom" || !linkedViewer.getAccessibleNodes()))
+            return false;
+
+          try {
+            var accService =
+              Components.classes["@mozilla.org/accessibleRetrieval;1"]
+                        .getService(Components.interfaces.nsIAccessibleRetrieval);
+
+            if ("getAttachedAccessibleFor" in accService)
+              return accService.getAttachedAccessibleFor(object);
+            return accService.getAccessibleFor(object);
+          } catch(e) {
+            return false;
+          }
+        ]]></ins:filter>
+      </rdf:Description>
+    </rdf:li>
+
+    <rdf:li>
+      <rdf:Description ins:uid="accessibleProps"
+                       ins:panels="bxObjectPanel bxObjPanel"
+                       ins:description="&accessibleProps.label;">
+        <ins:filter><![CDATA[
+          if (("@mozilla.org/accessibleRetrieval;1" in Components.classes) &&
+              object instanceof Components.interfaces.nsIAccessible) {
+            return true;
+          }
+
+          if (!linkedViewer ||
+              !(object instanceof Components.interfaces.nsIDOMNode))
+            return false;
+
+          if (linkedViewer.uid != "accessibleEvents" &&
+              linkedViewer.uid != "accessibleTree" &&
+              (linkedViewer.uid != "dom" || !linkedViewer.getAccessibleNodes()))
+            return false;
+
+          try {
+            var accService =
+              Components.classes["@mozilla.org/accessibleRetrieval;1"]
+                        .getService(Components.interfaces.nsIAccessibleRetrieval);
+
+            if ("getAttachedAccessibleFor" in accService)
+              return accService.getAttachedAccessibleFor(object);
+            return accService.getAccessibleFor(object);
+          } catch(e) {
+            return false;
+          }
+        ]]></ins:filter>
+      </rdf:Description>
+    </rdf:li>
+
+    <rdf:li>
+      <rdf:Description ins:uid="accessibleRelations"
+                       ins:panels="bxObjectPanel bxObjPanel"
+                       ins:description="&accessibleRelations.label;">
+        <ins:filter><![CDATA[
+          if (("@mozilla.org/accessibleRetrieval;1" in Components.classes) &&
+              object instanceof Components.interfaces.nsIAccessible) {
+            return true;
+          }
+
+          if (!linkedViewer ||
+              !(object instanceof Components.interfaces.nsIDOMNode))
+            return false;
+
+          if (linkedViewer.uid != "accessibleEvents" &&
+              linkedViewer.uid != "accessibleTree" &&
+              (linkedViewer.uid != "dom" || !linkedViewer.getAccessibleNodes()))
+            return false;
+
+          try {
+            var accService =
+              Components.classes["@mozilla.org/accessibleRetrieval;1"]
+                        .getService(Components.interfaces.nsIAccessibleRetrieval);
+
+            if ("getAttachedAccessibleFor" in accService)
+              return accService.getAttachedAccessibleFor(object);
+            return accService.getAccessibleFor(object);
+          } catch(e) {
+            return false;
+          }
+        ]]></ins:filter>
+      </rdf:Description>
+    </rdf:li>
+
+    <rdf:li>
+      <rdf:Description ins:uid="accessibleEvents"
+                       ins:panels="bxDocPanel"
+                       ins:description="&accessibleEvents.label;">
+        <ins:filter><![CDATA[
+          if (!("@mozilla.org/accessibleRetrieval;1" in Components.classes)) {
+            return false;
+          }
+
+          // Allow for DOM document and application accessible (compatible
+          // with Gecko 2.0 and 1.9.2).
+          const Ci = Components.interfaces;
+          if (object instanceof Ci.nsIDOMDocument) {
+            return true;
+          }
+
+          if ("nsIAccessibleApplication" in Ci) {
+            return object instanceof Ci.nsIAccessibleApplication;
+          }
+
+          return object instanceof Ci.nsIAccessible && !object.parent;
+        ]]></ins:filter>
+      </rdf:Description>
+    </rdf:li>
+
+    <rdf:li>
+      <rdf:Description ins:uid="accessibleTree"
+                       ins:panels="bxDocPanel"
+                       ins:description="&accessibleTree.label;">
+        <ins:filter><![CDATA[
+          if (!("@mozilla.org/accessibleRetrieval;1" in Components.classes)) {
+            return false;
+          }
+
+          // Allow for DOM document and application accessible (compatible
+          // with Gecko 2.0 and 1.9.2).
+          const Ci = Components.interfaces;
+          if (object instanceof Ci.nsIDOMDocument) {
+            return true;
+          }
+
+          if ("nsIAccessibleApplication" in Ci) {
+            return object instanceof Ci.nsIAccessibleApplication;
+          }
+
+          return object instanceof Ci.nsIAccessible && !object.parent;
+        ]]></ins:filter>
+      </rdf:Description>
+    </rdf:li>
+  </rdf:Seq>
+
+</rdf:RDF>

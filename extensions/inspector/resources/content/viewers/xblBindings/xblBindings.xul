@@ -1,0 +1,167 @@
+<?xml version="1.0"?>
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+
+<!DOCTYPE page SYSTEM "chrome://inspector/locale/viewers/xblBindings.dtd">
+
+<?xul-overlay href="chrome://inspector/content/editingOverlay.xul"?>
+
+<?xml-stylesheet
+    href="chrome://inspector/skin/viewers/xblBindings/xblBindings.css"?>
+
+<page id="winXBLBindings"
+      orient="vertical"
+      xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/javascript"
+          src="chrome://inspector/content/jsutil/xul/inBaseTreeView.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/utils.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/hooks.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/jsutil/xpcom/XPCU.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/jsutil/events/ObserverManager.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/jsutil/commands/baseCommands.js"/>
+  <script type="application/javascript"
+          src="chrome://global/content/viewSourceUtils.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/viewers/xblBindings/xblBindings.js"/>
+
+  <commandset id="cmdsEditingExtras"/>
+
+  <popupset id="psPopups">
+    <!-- Just split this if it's ever at all specialized. -->
+    <menupopup id="ppSharedContext"
+               onpopupshowing="viewer.onPopupShowing(this);">
+      <menuitem id="mnEditCopyFileURI"/>
+      <menuitem id="mnEditViewFileURI"/>
+    </menupopup>
+  </popupset>
+
+  <menulist id="mlBindings" oncommand="viewer.displayBinding(this.value)"
+            crop="center" contextmenu="ppSharedContext">
+    <menupopup id="mpBindings"/>
+  </menulist>
+
+  <tabbox id="bxBindingAspects" flex="1">
+    <tabs>
+      <tab id="tbContent" label="&bindingContent.label;"
+           disabled="true"/>
+      <tab id="tbMethods" label="&bindingMethods.label;"
+           disabled="true"/>
+      <tab id="tbProps" label="&bindingProperties.label;"
+           disabled="true"/>
+      <tab id="tbHandlers" label="&bindingHandlers.label;"
+           disabled="true"/>
+      <tab id="tbResources" label="&bindingResources.label;"
+           disabled="true"/>
+    </tabs>
+    <tabpanels flex="1">
+      <tree id="olContent" seltype="single" treelines="true">
+        <treecols>
+          <!-- Don't localize these DOM API names -->
+          <treecol id="colNodeName" primary="true" label="nodeName" flex="1"/>
+          <splitter class="tree-splitter"/>
+          <treecol id="colNodeValue" label="nodeValue" flex="1"/>
+        </treecols>
+        <treechildren id="olbContent"/>
+      </tree>
+
+      <vbox>
+        <tree id="olMethods" seltype="single"
+              hidecolumnpicker="true"
+              flex="1"
+              onselect="viewer.onMethodSelected()"
+              persist="height">
+          <treecols>
+            <treecol id="olcMethodName" label="&bindingMethodName.label;"
+                     flex="1"/>
+          </treecols>
+          <treechildren id="olbMethods" alternatingbackground="true"/>
+        </tree>
+        <splitter id="splMethods" orient="vertical" collapse="after"
+                  persist="state">
+          <grippy/>
+        </splitter>
+        <groupbox id="gbMethods" flex="1" persist="height">
+          <caption label="Source Code"/>
+          <textbox id="txbMethodCode" readonly="true" multiline="true"
+                   flex="1"/>
+        </groupbox>
+      </vbox>
+
+      <vbox>
+        <vbox id="bxProps" flex="1" persist="height">
+          <tree id="olProps" seltype="single"
+                hidecolumnpicker="true"
+                flex="1"
+                onselect="viewer.onPropSelected()">
+            <treecols>
+              <treecol id="olcPropName" label="&bindingProperty.label;"
+                       flex="1"/>
+            </treecols>
+            <treechildren id="olbProps" alternatingbackground="true"/>
+          </tree>
+          <radiogroup id="rgPropGetterSetter" orient="horizontal">
+            <radio id="raPropGetter" label="&bindingGetter.label;"
+                   value="get" oncommand="viewer.onPropSelected()"
+                   selected="true"/>
+            <radio id="raPropSetter" label="&bindingSetter.label;"
+                   value="set" oncommand="viewer.onPropSelected()"/>
+          </radiogroup>
+        </vbox>
+        <splitter id="splProps" orient="vertical" collapse="after"
+                  persist="state">
+          <grippy/>
+        </splitter>
+        <groupbox id="gbProps" flex="1" persist="height">
+          <caption label="Source Code"/>
+          <textbox id="txbPropCode" readonly="true" multiline="true"
+                   flex="1"/>
+        </groupbox>
+      </vbox>
+
+      <vbox>
+        <tree id="olHandlers" seltype="single"
+              flex="1"
+              onselect="viewer.onHandlerSelected()"
+              persist="height">
+          <treecols>
+            <treecol id="olcHandlerEvent" label="&bindingHandlerEvent.label;"
+                     flex="1"/>
+            <splitter class="tree-splitter"/>
+            <treecol id="olcHandlerPhase"
+                     label="&bindingHandlerPhase.label;"/>
+          </treecols>
+          <treechildren id="olbHandlers" alternatingbackground="true"/>
+        </tree>
+        <splitter id="splHandlers" orient="vertical" collapse="after"
+                  persist="state">
+          <grippy/>
+        </splitter>
+        <groupbox id="gbHandlers" flex="1" persist="height">
+          <caption label="Source Code"/>
+          <textbox id="txbHandlerCode" readonly="true" multiline="true"
+                   flex="1"/>
+        </groupbox>
+      </vbox>
+
+      <tree id="olResources" seltype="single"
+            contextmenu="ppSharedContext">
+        <treecols>
+          <treecol id="olcResourceType" label="&bindingResourceType.label;"
+                   flex="1"/>
+          <splitter class="tree-splitter"/>
+          <treecol id="olcResourceSrc" label="&bindingResourceSrc.label;"
+                   flex="2"/>
+        </treecols>
+        <treechildren id="olbResources" alternatingbackground="true"/>
+      </tree>
+    </tabpanels>
+  </tabbox>
+</page>

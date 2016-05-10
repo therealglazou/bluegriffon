@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<!DOCTYPE page [
+  <!ENTITY % dtd1 SYSTEM "chrome://inspector/locale/inspector.dtd"> %dtd1;
+  <!ENTITY % dtd2 SYSTEM "chrome://inspector/locale/viewers/accessibleRelations.dtd"> %dtd2;
+]>
+
+<?xml-stylesheet href="chrome://inspector/skin/"?>
+<?xul-overlay href="chrome://inspector/content/editingOverlay.xul"?>
+
+<page id="winAccessibleEvents"
+      xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/javascript"
+          src="chrome://inspector/content/utils.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/hooks.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/jsutil/xul/inBaseTreeView.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/jsutil/xpcom/XPCU.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/jsutil/events/ObserverManager.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/jsutil/commands/baseCommands.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/viewers/accessibleRelations/accessibleRelations.js"/>
+
+  <commandset id="cmdsEditingExtras"/>
+
+  <popupset>
+    <menupopup id="popupContext">
+      <menuitem id="mnEditInspectInNewWindow"/>
+    </menupopup>
+  </popupset>
+
+  <label control="olAccessibleRelations"
+         value="&relations.label;"/>
+
+  <tree id="olAccessibleRelations"
+        class="plain"
+        flex="1"
+        onselect="viewer.onItemSelected()">
+
+    <treecols>
+      <treecol id="olcRelationType"
+               label="&relationType.label;"
+               primary="true"
+               flex="1"
+               persist="width,hidden,ordinal"/>
+    </treecols>
+    <treechildren id="olbAccessibleRelations"
+                  alternatingbackground="true"/>
+  </tree>
+
+  <label control="olAccessibleTargets"
+         value="&relationTargets.label;"/>
+
+  <tree id="olAccessibleTargets"
+        class="plain"
+        flex="1"
+        context="popupContext"
+        onselect="viewer.pane.panelset.updateAllCommands();">
+
+    <treecols>
+      <treecol id="olcRole"
+               primary="true"
+               label="&role.label;"
+               persist="width,hidden,ordinal"
+               flex="1"/>
+      <splitter class="tree-splitter"/>
+      <treecol id="olcNodeName"
+               label="&nodeName.label;"
+               persist="width,hidden,ordinal"
+               flex="1"/>
+    </treecols>
+    <treechildren id="olbAccessibleTargets"
+                  alternatingbackground="true"/>
+  </tree>
+
+</page>
+

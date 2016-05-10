@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<!DOCTYPE page [
+  <!ENTITY % dtd1 SYSTEM "chrome://inspector/locale/inspector.dtd"> %dtd1;
+  <!ENTITY % dtd2 SYSTEM "chrome://inspector/locale/viewers/usedFontFaces.dtd"> %dtd2;
+]>
+
+<?xul-overlay href="chrome://inspector/content/editingOverlay.xul"?>
+
+<?xml-stylesheet href="chrome://inspector/skin/"?>
+
+<page id="winUsedFontFaces"
+      orient="vertical"
+      xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <!--============================= SCRIPTS ============================= -->
+
+  <script type="application/javascript"
+          src="chrome://inspector/content/utils.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/jsutil/xul/inBaseTreeView.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/jsutil/commands/baseCommands.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/viewers/usedFontFaces/usedFontFaces.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/jsutil/xpcom/XPCU.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/jsutil/events/ObserverManager.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/jsutil/system/clipboardFlavors.js"/>
+
+  <!--============================ COMMANDS ============================= -->
+
+  <commandset id="cmdsEditing"/>
+  <commandset id="cmdsEditingExtras"/>
+
+  <!--============================= POPUPS ============================== -->
+
+  <popupset id="psPopups">
+    <menupopup id="ppUsedFontFacesContext"
+               onpopupshowing="return viewer.onPopupShowing('cmdsEditingExtras')">
+      <menuitem id="mnEditCopy"/>
+      <menuitem id="mnEditCopyFileURI"/>
+    </menupopup>
+  </popupset>
+
+  <!--============================= CONTENT ============================== -->
+
+  <tree id="olFonts" flex="1" onselect="viewer.onItemSelected()"
+        class="plain" contextmenu="ppUsedFontFacesContext">
+    <treecols>
+      <treecol id="olcFontName" label="&fontName.label;" flex="1"/>
+      <splitter class="tree-splitter"/>
+      <treecol id="olcCSSFamilyName" label="&cssFamilyName.label;" flex="1"/>
+      <splitter class="tree-splitter"/>
+      <treecol id="olcURI" label="&uri.label;" flex="1" hidden="true"/>
+      <splitter class="tree-splitter"/>
+      <treecol id="olcLocalName" label="&localName.label;" flex="1" hidden="true"/>
+      <splitter class="tree-splitter"/>
+      <treecol id="olcFormat" label="&format.label;" flex="1" hidden="true"/>
+    </treecols>
+    <treechildren id="olbFonts" alternatingbackground="true"/>
+  </tree>
+</page>

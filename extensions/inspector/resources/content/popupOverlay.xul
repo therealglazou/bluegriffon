@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+
+<!DOCTYPE overlay [
+  <!ENTITY % dtd1 SYSTEM "chrome://inspector/locale/inspector.dtd"> %dtd1;
+]>
+
+<?xul-overlay href="chrome://inspector/content/editingOverlay.xul"?>
+
+<overlay id="ovPopupsMain"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <popupset id="aTooltipSet">
+    <tooltip id="docItemsTooltip"
+             noautohide="true"
+             onpopupshowing="return inspector.fillInTooltip(document.tooltipNode);">
+      <vbox>
+        <label id="docItemsTitle" class="tooltip-label"/>
+        <label id="docItemsURI" class="tooltip-label"/>
+      </vbox>
+    </tooltip>
+  </popupset>
+
+  <menupopup id="menu_FilePopup">
+    <menu oncommand="inspector.setTargetDocument(event.target.doc);"
+          id="mnInspectContentDocumentFile"
+          label="&mnInspectContentDocument.label;"
+          accesskey="&mnInspectContentDocument.accesskey;">
+      <menupopup id="list-content-documents-popup"
+                 tooltip="docItemsTooltip"
+                 onpopupshowing="inspector.showInspectDocumentList(event, false);"/>
+    </menu>
+    <menu oncommand="inspector.setTargetDocument(event.target.doc);"
+          id="mnInspectChromeDocumentFile"
+          label="&mnInspectChromeDocument.label;"
+          accesskey="&mnInspectChromeDocument.accesskey;">
+      <menupopup id="list-chrome-documents-popup"
+                 tooltip="docItemsTooltip"
+                 onpopupshowing="inspector.showInspectDocumentList(event, true);"/>
+    </menu>
+    <menuitem oncommand="inspector.setTargetApplicationAccessible();"
+              id="mnInspectApplicationAccessible"
+              label="&mnInspectApplicationAccessible.label;"
+              accesskey="&mnInspectApplicationAccessible.accesskey;"/>
+    <menuitem label="&cmdEnterLocation.label;"
+              accesskey="&cmdEnterLocation.accesskey;"
+              id="mnEnterLocation" observes="cmdEnterLocation"/>
+    <menuitem label="&cmdClose.label;" accesskey="&cmdClose.accesskey;"
+              id="mnClose" observes="cmdClose" key="key_closeInspector"/>
+    <menuseparator/>
+    <menuitem label="&cmdSave.label;" accesskey="&cmdSave.accesskey;"
+              observes="cmdSave" key="key_saveInspector" id="mi-save"/>
+  </menupopup>
+
+  <menupopup id="mppEdit">
+    <menuitem id="mnEditUndo"/>
+    <menuitem id="mnEditRedo"/>
+    <menuseparator/>
+    <menuitem id="mnEditCut"/>
+    <menuitem id="mnEditCopy"/>
+    <menuitem id="mnEditPaste"/>
+    <menuitem id="mnEditDelete"/>
+    <menuitem id="mnEditInsert"/>
+    <menuseparator/>
+    <menuitem id="mnEditInspectInNewWindow"/>
+  </menupopup>
+
+  <menupopup id="mppView">
+    <menu id="mnDocViewerList"
+          label="&mnDocViewerList.label;"
+          accesskey="&mnDocViewerList.accesskey;"
+          oncommand="inspector.onViewerListCommand(event.target);"
+          disabled="true">
+      <menupopup id="mppDocViewerList"/>
+    </menu>
+    <menu id="mnObjectViewerList"
+          label="&mnObjectViewerList.label;"
+          accesskey="&mnObjectViewerList.accesskey;"
+          oncommand="inspector.onViewerListCommand(event.target);"
+          disabled="true">
+      <menupopup id="mppObjectViewerList"/>
+    </menu>
+    <menuitem class="menuitem-iconic" type="checkbox"
+              id="item:toggleDocument"
+              label="&cmdToggleDocument.label;"
+              accesskey="&cmdToggleDocument.accesskey;"
+              observes="cmdToggleDocument" disabled="true"/> 
+    <menuseparator/>
+    <menuitem id="item:flashOnSelect"
+              class="menuitem-iconic"
+              type="checkbox"
+              label="&cmdFlashOnSelect.label;"
+              accesskey="&cmdFlashOnSelect.accesskey;"
+              observes="cmdFlashOnSelect"/>
+  </menupopup>
+
+  <popupset id="ppsViewerPopupset"/>
+
+</overlay>

@@ -1,0 +1,226 @@
+<?xml version="1.0"?>
+
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<!DOCTYPE page [
+  <!ENTITY % dtd1 SYSTEM "chrome://inspector/locale/inspector.dtd"> %dtd1;
+  <!ENTITY % dtd2 SYSTEM "chrome://inspector/locale/viewers/accessibleProps.dtd"> %dtd2;
+]>
+
+<?xml-stylesheet href="chrome://inspector/skin/viewers/accessibleProps/accessibleProps.css"?>
+
+<?xul-overlay href="chrome://inspector/content/editingOverlay.xul"?>
+
+<page id="winAccessibleProps"
+      xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/javascript"
+          src="chrome://inspector/content/utils.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/jsutil/xpcom/XPCU.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/hooks.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/jsutil/events/ObserverManager.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/jsutil/commands/baseCommands.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/jsutil/xul/inBaseTreeView.js"/>
+
+  <script type="application/javascript"
+          src="chrome://inspector/content/viewers/accessibleProps/accessibleProps.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/viewers/accessibleProps/accessiblePropViewerMgr.js"/>
+
+  <stringbundle id="accessiblePropsBundle"
+                src="chrome://inspector/locale/viewers/accessibleProps.properties"/>
+
+  <commandset id="cmdsEditingExtras"/>
+
+  <popupset>
+    <menupopup id="popupContext">
+      <menuitem id="mnEditInspectInNewWindow"/>
+    </menupopup>
+  </popupset>
+
+  <grid id="mainPropContainer">
+    <columns>
+      <column/>
+      <column flex="1"/>
+    </columns>
+    <rows>
+      <row>
+        <description>&descRole.label;</description>
+        <textbox prop="role" readonly="true" class="plain"/>
+      </row>
+      <row>
+        <description>&descName.label;</description>
+        <textbox prop="name" readonly="true" class="plain"/>
+      </row>
+      <row>
+        <description>&descDescription.label;</description>
+        <textbox prop="description" readonly="true" class="plain"/>
+      </row>
+      <row>
+        <description>&descValue.label;</description>
+        <textbox prop="value" readonly="true" class="plain"/>
+      </row>
+      <row>
+        <description>&descState.label;</description>
+        <textbox prop="state" readonly="true" class="plain"/>
+      </row>
+      <row>
+        <description>&descBounds.label;</description>
+        <textbox prop="bounds" readonly="true" class="plain"/>
+      </row>
+    </rows>
+  </grid>
+
+  <tabbox id="tabviewers" flex="1">
+    <tabs>
+      <tab id="tab_attributes" label="&tabAttrs.label;"/>
+      <tab id="tab_actions" label="&tabActions.label;"/>
+      <tab id="tab_textattrs" label="&tabTextAttrs.label;"/>
+      <tab id="tab_tablecell" label="&tabTableCell.label;"/>
+    </tabs>
+    <tabpanels flex="1">
+
+      <!-- Object attributes tab panel -->
+      <tree>
+        <treecols>
+          <treecol label="&colAttrName.label;" flex="1"/>
+          <treecol label="&colAttrValue.label;" flex="2"/>
+        </treecols>
+        <treechildren id="trAttrBody"/>
+      </tree>
+
+      <!-- Action properties tab panel -->
+      <vbox id="actionTabPanel">
+        <grid>
+          <columns>
+            <column/>
+            <column flex="1"/>
+          </columns>
+          <rows id="actionItemContainer">
+            <row id="actionItem">
+              <description prop="actionIndex"/>
+              <vbox>
+                <hbox>
+                  <label value="&descName.label;"/>
+                  <description prop="actionName"/>
+                </hbox>
+                <hbox>
+                  <label value="&descDescription.label;"/>
+                  <description prop="actionDescription"/>
+                </hbox>
+                <hbox>
+                  <label value="&descKeyBindings.label;"/>
+                  <description prop="actionKeyBindings"/>
+                </hbox>
+                <button label="&descInvoke.label;"
+                        prop="invokeAction"/>
+              </vbox>
+            </row>
+          </rows>
+        </grid>
+      </vbox>
+
+      <!-- Text attributes -->
+      <vbox id="textAttrsTabPanel">
+        <label control="textAttrs:default:tree"
+               value="&descDefaultAttrs.label;"/>
+        <tree flex="1" id="textAttrs:default:tree">
+          <treecols>
+            <treecol label="&colAttrName.label;" flex="2"/>
+            <splitter class="tree-splitter"/>
+            <treecol label="&colAttrValue.label;" flex="4"/>
+          </treecols>
+          <treechildren id="textAttrs:default:treeBody"/>
+        </tree>
+
+        <description id="textAttrs:content"/>
+
+        <hbox>
+          <description>&descStartOffset.label;</description>
+          <description id="textAttrs:startOffset"/>
+          <description>&descEndOffset.label;</description>
+          <description id="textAttrs:endOffset"/>
+        </hbox>
+
+        <tree flex="1" id="textAttrs:tree">
+          <treecols>
+            <treecol label="&colAttrName.label;" flex="2"/>
+            <splitter class="tree-splitter"/>
+            <treecol label="&colAttrValue.label;" flex="4"/>
+          </treecols>
+          <treechildren id="textAttrs:treeBody"/>
+        </tree>
+      </vbox>
+
+      <!-- Table cell properties tab panel -->
+      <vbox>
+        <grid>
+          <columns>
+            <column/>
+            <column flex="1"/>
+            <column/>
+            <column flex="1"/>
+          </columns>
+          <rows>
+            <row>
+              <description>&descColumnIdx.label;</description>
+              <description id="tableCell:columnIndex"/>
+
+              <description>&descRowIdx.label;</description>
+              <description id="tableCell:rowIndex"/>
+            </row>
+            <row>
+              <description>&descColumnExtent.label;</description>
+              <description id="tableCell:columnExtent"/>
+
+              <description>&descRowExtent.label;</description>
+              <description id="tableCell:rowExtent"/>
+            </row>
+            <row>
+              <description>&descIsSelected.label;</description>
+              <description id="tableCell:isSelected"/>
+            </row>
+          </rows>
+        </grid>
+
+        <tree id="tableCell:accObjects"
+              flex="1"
+              context="popupContext"
+              onselect="viewer.pane.panelset.updateAllCommands();">
+
+          <treecols>
+            <treecol id="tableCell:property"
+                     primary="true"
+                     label="&colProp.label;"
+                     persist="width,hidden,ordinal"
+                     flex="1"/>
+            <splitter class="tree-splitter"/>
+            <treecol id="tableCell:role"
+                     label="&colRole.label;"
+                     persist="width,hidden,ordinal"
+                     flex="1"/>
+            <splitter class="tree-splitter"/>
+            <treecol id="tableCell:name"
+                     label="&colName.label;"
+                     persist="width,hidden,ordinal"
+                     flex="1"/>
+            <splitter class="tree-splitter"/>
+            <treecol id="tableCell:nodeName"
+                     label="&colNodeName.label;"
+                     persist="width,hidden,ordinal"
+                     flex="1"/>
+          </treecols>
+          <treechildren/>
+        </tree>
+      </vbox>
+    </tabpanels>
+  </tabbox>
+</page>
+

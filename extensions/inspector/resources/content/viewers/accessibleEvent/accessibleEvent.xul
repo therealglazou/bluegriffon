@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<!DOCTYPE page [
+  <!ENTITY % dtd1 SYSTEM "chrome://inspector/locale/inspector.dtd"> %dtd1;
+  <!ENTITY % dtd2 SYSTEM "chrome://inspector/locale/viewers/accessibleEvent.dtd"> %dtd2;
+]>
+
+<?xml-stylesheet
+    href="chrome://inspector/skin/viewers/accessibleEvent/accessibleEvent.css"?>
+
+<page id="winAccessibleEvent"
+      xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/javascript"
+          src="chrome://inspector/content/jsutil/xpcom/XPCU.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/jsutil/events/ObserverManager.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/viewers/accessibleEvent/accessibleEvent.js"/>
+
+  <grid>
+    <columns>
+      <column/>
+      <column flex="1"/>
+    </columns>
+    <rows>
+      <row>
+        <description>&descIsFromUserInput.label;</description>
+        <description prop="isFromUserInput"/>
+      </row>
+      <row>
+        <description>&descState.label;</description>
+        <description prop="state" class="stateChangeEvent"/>
+      </row>
+      <row>
+        <description>&descIsEnabled.label;</description>
+        <description prop="isEnabled" class="stateChangeEvent"/>
+      </row>
+      <row>
+        <description>&descStartOffset.label;</description>
+        <description prop="startOffset" class="textChangeEvent"/>
+      </row>
+      <row>
+        <description>&descLength.label;</description>
+        <description prop="length" class="textChangeEvent"/>
+      </row>
+      <row>
+        <description>&descIsInserted.label;</description>
+        <description prop="isInserted" class="textChangeEvent"/>
+      </row>
+      <row>
+        <description>&descModifiedText.label;</description>
+        <description prop="modifiedText" class="textChangeEvent"/>
+      </row>
+      <row>
+        <description>&descCaretOffset.label;</description>
+        <description prop="caretOffset" class="caretMoveEvent"/>
+      </row>
+    </rows>
+  </grid>
+  <vbox flex="1">
+    <description>&descrHandlerOutput.label;</description>
+    <vbox id="handlerOutput" flex="1"/>
+  </vbox>
+</page>
+

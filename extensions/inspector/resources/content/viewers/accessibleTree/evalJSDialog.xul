@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<!DOCTYPE dialog [
+  <!ENTITY % dtd1 SYSTEM "chrome://inspector/locale/viewers/accessibleTreeEvalJSDialog.dtd"> %dtd1;
+]>
+
+<?xml-stylesheet href="chrome://inspector/skin"?>
+
+<dialog id="winEvalJS"
+        title="&evaluateDialog.title;"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        buttons="accept, extra1"
+        buttonlabelextra1="&btnEvaluateJS.label;"
+        buttonaccesskeyextra1="&btnEvaluateJS.accesskey;"
+        ondialogextra1="return execute();"
+        style="width: 30em;"
+        onload="load();"
+        ondialogaccept="closeDialog();">
+
+  <script type="application/javascript"
+          src="chrome://inspector/content/viewers/accessibleTree/evalJSDialog.js"/>
+
+  <label control="JSInputArea"
+         accesskey="&txtInputArea.accesskey;">&txtInputArea.label;</label>
+  <textbox id="JSInputArea"
+           flex="1"
+           multiline="true"
+           rows="10"/>
+
+  <label control="JSOutputArea"
+         value="&txtOutputArea.label;"
+         accesskey="&txtOutputArea.accesskey;"/>
+  <textbox id="JSOutputArea"
+           flex="1"
+           multiline="true"
+           readonly="true"
+           rows="8"/>
+
+</dialog>

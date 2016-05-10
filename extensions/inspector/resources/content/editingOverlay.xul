@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+
+<!DOCTYPE overlay SYSTEM "chrome://inspector/locale/editing.dtd">
+
+<overlay id="ovEditing"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+<!-- This overlay is pulled in by popupOverlay.xul, which is itself pulled in
+     by the top-level inspectors (inspector.xul, object.xul, and sidebar.xul),
+     to add these items to its menus.  Additionally, this overlay is suitable
+     for use by viewers which want to offer any of these items (e.g., for
+     their context menus).  Note that the cmdsEditing commandset is used only
+     by viewers due to scoping differences; the implementation of the commands
+     used in the top-level inspectors can be found in commandOverlay.xul. -->
+
+  <commandset id="cmdsEditing">
+    <command id="cmdEditUndo"
+             oncommand="viewer.pane.panelset.execCommand('cmdEditUndo');"/>
+    <command id="cmdEditRedo"
+             oncommand="viewer.pane.panelset.execCommand('cmdEditRedo');"/>
+    <command id="cmdEditCut"
+             oncommand="viewer.pane.panelset.execCommand('cmdEditCut');"/>
+    <command id="cmdEditCopy"
+             oncommand="viewer.pane.panelset.execCommand('cmdEditCopy');"/>
+    <command id="cmdEditPaste"
+             oncommand="viewer.pane.panelset.execCommand('cmdEditPaste');"/>
+    <command id="cmdEditInsert"
+             oncommand="viewer.pane.panelset.execCommand('cmdEditInsert');"/>
+    <command id="cmdEditEdit"
+             oncommand="viewer.pane.panelset.execCommand('cmdEditEdit');"/>
+    <command id="cmdEditDelete"
+             oncommand="viewer.pane.panelset.execCommand('cmdEditDelete');"/>
+  </commandset>
+  <commandset id="cmdsEditingExtras">
+    <command id="cmdEditInspectInNewWindow"
+             oncommand="viewer.pane.panelset.execCommand('cmdEditInspectInNewWindow');"/>
+    <command id="cmdEditCopyFileURI"
+             oncommand="viewer.pane.panelset.execCommand('cmdEditCopyFileURI');"/>
+    <command id="cmdEditViewFileURI"
+             oncommand="viewer.pane.panelset.execCommand('cmdEditViewFileURI');"/>
+  </commandset>
+
+  <keyset id="ksGlobalKeyset">
+    <key id="keyEditUndo" key="z" modifiers="accel" command="cmdEditUndo"/>
+    <key id="keyEditRedo" key="z" modifiers="accel,shift"
+         command="cmdEditRedo"/>
+    <key id="keyEditRedo2" key="y" modifiers="accel" command="cmdEditRedo"/>
+    <key id="keyEditCut" key="x" modifiers="accel" command="cmdEditCut"/>
+    <key id="keyEditCopy" key="c" modifiers="accel" command="cmdEditCopy"/>
+    <key id="keyEditPaste" key="v" modifiers="accel" command="cmdEditPaste"/>
+    <key id="keyEditDelete" keycode="VK_DELETE" command="cmdEditDelete"/>
+    <key id="keyEditDeleteMac" keycode="VK_BACK" command="cmdEditDelete"/>
+    <key id="keyEditInspectInNewWindow" key="&mnEditInspectInNewWindow.key;"
+         modifiers="accel" command="cmdEditInspectInNewWindow"/>
+  </keyset>
+
+  <menuitem id="mnEditUndo" label="&mnEditUndo.label;" command="cmdEditUndo"
+            accesskey="&mnEditUndo.accesskey;" key="keyEditUndo"/>
+  <menuitem id="mnEditRedo" label="&mnEditRedo.label;" command="cmdEditRedo"
+            accesskey="&mnEditRedo.accesskey;" key="keyEditRedo"/>
+  <menuitem id="mnEditCut" label="&mnEditCut.label;" command="cmdEditCut"
+            accesskey="&mnEditCut.accesskey;" key="keyEditCut"/>
+  <menuitem id="mnEditCopy" label="&mnEditCopy.label;" command="cmdEditCopy"
+            accesskey="&mnEditCopy.accesskey;" key="keyEditCopy"/>
+  <menuitem id="mnEditPaste" label="&mnEditPaste.label;" command="cmdEditPaste"
+            accesskey="&mnEditPaste.accesskey;" key="keyEditPaste"/>
+  <menuitem id="mnEditInsert" label="&mnEditInsert.label;"
+            command="cmdEditInsert" accesskey="&mnEditInsert.accesskey;"/>
+  <menuitem id="mnEditEdit" label="&mnEditEdit.label;" command="cmdEditEdit"
+            accesskey="&mnEditEdit.accesskey;"/>
+  <menuitem id="mnEditDelete" label="&mnEditDelete.label;"
+            command="cmdEditDelete" accesskey="&mnEditDelete.accesskey;"
+            key="keyEditDelete"/>
+  <menuitem id="mnEditInspectInNewWindow"
+            label="&mnEditInspectInNewWindow.label;"
+            command="cmdEditInspectInNewWindow"
+            accesskey="&mnEditInspectInNewWindow.accesskey;"
+            key="keyEditInspectInNewWindow"/>
+  <menuitem id="mnEditCopyFileURI" label="&mnEditCopyFileURI.label;"
+            command="cmdEditCopyFileURI"
+            accesskey="&mnEditCopyFileURI.accesskey;"/>
+  <menuitem id="mnEditViewFileURI" label="&mnEditViewFileURI.label;"
+            command="cmdEditViewFileURI"
+            accesskey="&mnEditViewFileURI.accesskey;"/>
+
+</overlay>

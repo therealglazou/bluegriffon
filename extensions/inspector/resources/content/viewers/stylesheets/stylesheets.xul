@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+
+<!DOCTYPE page [
+  <!ENTITY % dtd1 SYSTEM "chrome://inspector/locale/inspector.dtd"> %dtd1;
+  <!ENTITY % dtd2 SYSTEM "chrome://inspector/locale/viewers/stylesheets.dtd"> %dtd2;
+]>
+
+<?xml-stylesheet href="chrome://inspector/skin/"?>
+
+<?xul-overlay href="chrome://inspector/content/editingOverlay.xul"?>
+
+<page id="winStylesheets"
+      xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/javascript"
+          src="chrome://inspector/content/jsutil/xul/inBaseTreeView.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/jsutil/xpcom/XPCU.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/jsutil/events/ObserverManager.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/utils.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/hooks.js"/>
+  <script type="application/javascript"
+          src="chrome://global/content/viewSourceUtils.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/jsutil/commands/baseCommands.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/viewers/stylesheets/stylesheets.js"/>
+
+  <commandset id="cmdsEditingExtras"/>
+
+  <popupset id="psPopups">
+    <menupopup id="ppStyleSheetsContext"
+               onpopupshowing="viewer.onPopupShowing('cmdsEditingExtras');">
+      <menuitem id="mnEditInspectInNewWindow"/>
+      <menuseparator/>
+      <menuitem id="mnEditCopyFileURI"/>
+      <menuitem id="mnEditViewFileURI"/>
+    </menupopup>
+  </popupset>
+
+  <tree id="olStyleSheets" class="plain" treelines="true" flex="1"
+        seltype="single" onselect="viewer.onItemSelected()"
+        context="ppStyleSheetsContext">
+    <treecols>
+      <treecol id="olcHref" label="&sheetLocation.label;" primary="true"
+               persist="width,hidden,ordinal" flex="1"/>
+      <splitter class="tree-splitter"/>
+      <treecol id="olcRules" label="&sheetRules.label;"
+               persist="width,hidden,ordinal" style="width: 4em"/>
+    </treecols>
+    <treechildren id="olbStyleSheets"
+                  alternatingbackground="true"/>
+  </tree>
+</page>
