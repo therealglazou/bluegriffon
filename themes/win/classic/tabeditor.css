@@ -68,6 +68,7 @@ tabeditor > tabbox {
   list-style-image: url("chrome://global/skin/tree/item-grayscale.png");
   opacity: 0.6;
   margin-top: 2px;
+  -moz-margin-end: 1em;
 }
 
 .tabeditor-tab[selected="true"] > .tab-icon-image {
@@ -101,6 +102,8 @@ tabeditor > tabbox {
   min-width: 1px !important;
   text-align: left;
   height: 24px;
+  background-image: linear-gradient(to bottom, var(--bg-dark-gray), var(--bg-lighter-dark-gray));
+  border: 0px none !important;
 }
 
 .tabeditor-tab:not([selected="true"]):hover {
@@ -114,7 +117,6 @@ tabeditor > tabbox {
   border-bottom-width: 0px;
   border-left-width: 0px;
   border-right-width: 0px;
-  background-image: linear-gradient(to bottom, var(--bg-dark-gray), var(--bg-lighter-dark-gray));
 }
 
 .tabeditor-tab[selected="true"]:focus > .tab-text {
@@ -192,7 +194,7 @@ tabeditor > tabbox > tabpanels {
 }
 
 .tabeditor-tab[modified="true"] {
-   border-bottom: rgb(128,0,0) solid thin;
+   border-bottom: rgb(128,0,0) solid thin ! important;
 }
 
 tabeditor[tabmode="left"] .tabs-left {
