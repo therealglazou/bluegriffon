@@ -64,12 +64,6 @@ function Startup()
   setTimeout(LoadLastTabs, 1000);
   BlueGriffonQuitHelper.init();
 
-  AddonManager.getAddonByID("{f13b157f-b174-47e7-a34d-4815ddfdfeb8}",
-    function(addon) { if(addon) document.getElementById("venkmanMenuitem").hidden = false; } );
-
-  AddonManager.getAddonByID("inspector@mozilla.org",
-    function(addon) { if(addon) document.getElementById("menu_inspector").hidden = false; } );
-
   NotifierUtils.addNotifierCallback("selection_strict", BlueGriffon_lookForFileChanges, this);
 
   window.addEventListener("sizemodechange", onSizeModeChange, false);
