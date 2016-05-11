@@ -28,12 +28,12 @@ do
     for j in install.rdf chrome.manifest
     do
     	cat $j | sed -e "s/firefox.mozilla.org/bluegriffon.org/" \
-    	       | sed -e "s/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}/bluegriffon@disruptive-innovations.com/" \
+    	       | sed -e "s/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}/bluegriffon@bluegriffon.com/" \
     	       | sed -e "s/$R_VERSION/$R_BG_VERSION/" \
              > foo
       mv foo $j
     done
-    echo "manifest bluegriffon/chrome.manifest application=bluegriffon@disruptive-innovations.com" >> chrome.manifest
+    echo "manifest bluegriffon/chrome.manifest application=bluegriffon@bluegriffon.com" >> chrome.manifest
     mkdir bluegriffon
     echo "locale bluegriffon "$i" base/locale/bluegriffon/
 locale branding "$i" base/locale/branding/

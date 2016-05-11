@@ -61,4 +61,4 @@ MOZ_APP_VERSION=`cat $MOZ_APP_VERSION_TXT`
 MOZ_APP_CODENAME_TXT=${_topsrcdir}/$MOZ_BUILD_APP/config/codename.txt
 MOZ_APP_CODENAME=`cat $MOZ_APP_CODENAME_TXT`
 
-MOZ_APP_ID=bluegriffon@disruptive-innovations.com
+MOZ_APP_ID=bluegriffon@bluegriffon.com
