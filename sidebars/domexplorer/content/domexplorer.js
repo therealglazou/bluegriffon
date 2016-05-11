@@ -81,6 +81,12 @@ function Startup()
   gMain.NotifierUtils.addNotifierCallback("panelClosed",
                                           PanelClosed,
                                           window);
+  gMain.NotifierUtils.addNotifierCallback("afterEnteringSourceMode",
+                                          Inspect,
+                                          window);
+  gMain.NotifierUtils.addNotifierCallback("afterLeavingSourceMode",
+                                          Inspect,
+                                          window);
   Inspect();
   if (gMain && gMain.EditorUtils && gIsPanelActive &&
       gMain.EditorUtils.getCurrentEditor()) {
@@ -113,6 +119,12 @@ function Shutdown()
     gMain.NotifierUtils.removeNotifierCallback("panelClosed",
                                                 PanelClosed,
                                                 window);
+    gMain.NotifierUtils.removeNotifierCallback("afterEnteringSourceMode",
+                                               Inspect,
+                                               window);
+    gMain.NotifierUtils.removeNotifierCallback("afterLeavingSourceMode",
+                                               Inspect,
+                                               window);
     gDialog.elementsTree.removeEventListener("DOMAttrModified", onElementsTreeModified, true);
     gDialog.attributesTree.removeEventListener("DOMAttrModified", onAttributesTreeModified, true);
     gDialog.cssTree.removeEventListener("DOMAttrModified", onCssTreeModified, true);
@@ -124,8 +136,13 @@ function Inspect()
   if (gMain && gMain.EditorUtils)
   {
     var editor = gMain.EditorUtils.getCurrentEditor();
-    gDialog.mainBox.style.visibility = editor ? "" : "hidden";
-    gMain.document.querySelector("[panelid='panel-domexplorer']").className = editor ? "" : "inactive";
+    var visible = editor && (gMain.GetCurrentViewMode() == "wysiwyg");
+    gDialog.mainBox.style.visibility = visible ? "" : "hidden";
+    gMain.document.querySelector("[panelid='panel-domexplorer']").className = visible ? "" : "inactive";
+    if (!visible) {
+      return;
+    }
+
     if (editor) {
       var node = gMain.EditorUtils.getSelectionContainer().node;
       if (node) {
