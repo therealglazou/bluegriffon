@@ -47,7 +47,9 @@
 
 #Bluegriffon {
   -moz-appearance: -moz-win-borderless-glass;
-  /*background: transparent;*/
+%ifdef XP_WIN
+  background: transparent;
+%endif
 }
 
 #composer-main-menubar {
