@@ -130,6 +130,12 @@ window:root {
   margin: 4px 8px;
 }
 
+%ifdef XP_UNIX
+.menulist-editable-box {
+  -moz-appearance: none;
+}
+%endif
+
 menulist,
 textbox[type="number"] {
   -moz-appearance: none;
