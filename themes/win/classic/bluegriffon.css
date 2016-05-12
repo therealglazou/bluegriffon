@@ -47,7 +47,7 @@
 
 #Bluegriffon {
   -moz-appearance: -moz-win-borderless-glass;
-  background: transparent;
+  /*background: transparent;*/
 }
 
 #composer-main-menubar {
@@ -557,3 +557,9 @@ menulist[editable="true"] {
 #titleInTitlebar:-moz-window-inactive {
   color: ThreeDShadow;
 }
+
+%ifdef XP_UNIX
+.statusbar-resizerpanel {
+    display: none;
+}
+%endif
