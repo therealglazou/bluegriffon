@@ -163,7 +163,9 @@ textbox:not([type="number"]) {
 }
 
 menulist .menulist-dropmarker {
+%ifndef XP_UNIX
   -moz-appearance: none;
+%endif
   display: -moz-box;
   background: transparent;
   border: none 0px;
