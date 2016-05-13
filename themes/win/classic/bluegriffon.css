@@ -47,7 +47,9 @@
 
 #Bluegriffon {
   -moz-appearance: -moz-win-borderless-glass;
-  /*background: transparent;*/
+%ifdef XP_WIN
+  background: transparent;
+%endif
 }
 
 #composer-main-menubar {
@@ -491,7 +493,9 @@ menulist {
 }
 
 menulist .menulist-dropmarker {
+%ifndef XP_UNIX
   -moz-appearance: none;
+%endif
   display: -moz-box;
   background: transparent;
   border: none 0px;
