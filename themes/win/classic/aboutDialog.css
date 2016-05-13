@@ -9,7 +9,9 @@
    width: 578px;
    height: 380px;
    -moz-appearance: -moz-win-borderless-glass;
-   background-color: var(--bg-dark-background);
+%ifdef XP_WIN
+  background: transparent;
+%endif
  }
 
 tabbox {
@@ -21,10 +23,12 @@ tabbox {
 }
 
 tabpanels {
-  color: graytext;
   -moz-appearance: none;
 }
 
+#titlebar {
+  margin: 4px 8px;
+}
 
 #awardsBox {
   background-color: white;
@@ -35,4 +39,30 @@ tabpanels {
 #awardsBox image {
   margin-top: 1em;
   margin-bottom: 1em;
+}
+
+#titleInTitlebar {
+  color: CaptionText;
+}
+
+#titleInTitlebar:-moz-window-inactive {
+  color: ThreeDShadow;
+}
+
+/* titlebar command buttons */
+
+#titlebar-min {
+  -moz-appearance: -moz-window-button-minimize;
+}
+
+#titlebar-max {
+  -moz-appearance: -moz-window-button-maximize;
+}
+
+#main-window[sizemode="maximized"] #titlebar-max {
+  -moz-appearance: -moz-window-button-restore;
+}
+
+#titlebar-close {
+  -moz-appearance: -moz-window-button-close;
 }

@@ -56,7 +56,9 @@
     <style>
       html {
         background-color: transparent;
+#ifdef XP_MACOSX
         color: graytext;
+#endif
       }
 
       * {
@@ -133,7 +135,9 @@
       }
 
       a {
+#ifdef XP_MACOSX
         color: white;
+#endif
         text-decoration: underline;
         cursor: pointer;
       }

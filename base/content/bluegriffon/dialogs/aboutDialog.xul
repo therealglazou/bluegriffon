@@ -78,6 +78,8 @@
 <vbox id="titlebar">
   <hbox id="titlebar-content">
     <spacer id="titlebar-spacer" flex="1"/>
+    <label id="titleInTitlebar" value="&aboutDialog.title;"/>
+    <spacer id="titlebar-spacer2" flex="1"/>
     <hbox id="titlebar-buttonbox-container">
       <hbox id="titlebar-buttonbox">
         <toolbarbutton class="titlebar-button" id="titlebar-min" oncommand="window.minimize();"/>
@@ -109,7 +111,11 @@
         <hbox>
           <spacer flex="1"/>
           <image src="chrome://bluegriffon/skin/about-logo.png"
+#ifdef XP_MACOSX
                  style="background-color: graytext; border-radius: 15px;"/>
+#else
+                 style="border-radius: 15px;"/>
+#endif
           <spacer flex="1"/>
         </hbox>
   
