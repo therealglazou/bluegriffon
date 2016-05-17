@@ -4,11 +4,7 @@ function OnLicensePaneLoad()
 {
   GetUIElements();
   CheckDeactivationButton();
-}
 
-
-function onWindowLoaded()
-{
   var collapseLicensePane = true;
   try {
     var cr = Components.classes["@mozilla.org/chrome/chrome-registry;1"].
@@ -28,23 +24,8 @@ function onWindowLoaded()
   catch(e) {}
 
   if (collapseLicensePane) {
-    var id = "";
-    try {
-      var currentPane = document.documentElement.currentPane;
-      id = currentPane ? currentPane.getAttribute("id") : null;
-
-      var licensePane  = document.getElementById('licensePrefPane');
-      var licenseRadio = document.getAnonymousElementByAttribute(document.documentElement, "pane", "licensePrefPane");
-      if (licenseRadio)
-        licenseRadio.setAttribute("collapsed", "true");
-      if (licensePane)
-        licensePane.setAttribute("collapsed", "true");
-  
-      if (id == "licensePrefPane") {
-        document.documentElement.showPane(document.getElementById("generalPrefPane"));
-      }
-    }
-    catch(e) {}
+    gDialog.licenseKeyTextbox.setAttribute("disabled", "true");
+    gDialog.licenseInvoiceTextbox.setAttribute("disabled", "true");
   }
 }
 
@@ -68,5 +49,3 @@ function DeactivateLicense()
                     "chrome,modal,dialog=yes,titlebar,resizable=no");
   CheckDeactivationButton();
 }
-
-window.addEventListener("load", onWindowLoaded, false);
