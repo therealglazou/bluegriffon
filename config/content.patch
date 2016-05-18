@@ -2489,7 +2489,25 @@ diff --git a/editor/libeditor/nsHTMLEditRules.cpp b/editor/libeditor/nsHTMLEditR
      return aSelection->Collapse(node, offset);
    }
  
-@@ -6706,16 +6669,19 @@ nsHTMLEditRules::ReturnInListItem(Select
+@@ -6635,16 +6598,17 @@ nsHTMLEditRules::SplitParagraph(nsIDOMNo
+     aSelection->Collapse(child,0);
+   }
+   else
+   {
+     int32_t offset;
+     nsCOMPtr<nsIDOMNode> parent = nsEditor::GetNodeLocation(child, &offset);
+     aSelection->Collapse(parent,offset);
+   }
++  ClearCachedStyles();
+   return res;
+ }
+ 
+ 
+ ///////////////////////////////////////////////////////////////////////////
+ // ReturnInListItem: do the right thing for returns pressed in list items
+ //
+ nsresult
+@@ -6706,16 +6670,19 @@ nsHTMLEditRules::ReturnInListItem(Select
      }
      else
      {
@@ -2509,7 +2527,7 @@ diff --git a/editor/libeditor/nsHTMLEditRules.cpp b/editor/libeditor/nsHTMLEditR
                                      offset + 1, getter_AddRefs(pNode));
        NS_ENSURE_SUCCESS(res, res);
  
-@@ -6767,16 +6733,18 @@ nsHTMLEditRules::ReturnInListItem(Select
+@@ -6767,16 +6734,18 @@ nsHTMLEditRules::ReturnInListItem(Select
          if (nodeAtom == nsGkAtoms::dd || nodeAtom == nsGkAtoms::dt) {
            int32_t itemOffset;
            nsCOMPtr<nsIDOMNode> list = nsEditor::GetNodeLocation(aListItem, &itemOffset);

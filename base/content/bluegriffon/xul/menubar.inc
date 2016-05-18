@@ -399,6 +399,9 @@
                   oncommand="loadExternalURL('&forums.url;')"/>
         <menuitem label="&qa.label;"
                   oncommand="loadExternalURL('http://bugzilla.bluegriffon.org')"/>
+        <menuseparator/>
+        <menuitem label="BlueGriffon.com"
+                  oncommand="loadExternalURL('http://bluegriffon.com')"/>
       </menupopup>
     </menu>
 

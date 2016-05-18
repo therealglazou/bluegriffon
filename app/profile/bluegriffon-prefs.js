@@ -17,9 +17,9 @@ pref("toolbar.customization.usesheet", false); // false otherwise
 #endif
 
 /* debugging prefs */
-pref("browser.dom.window.dump.enabled", true);
-pref("javascript.options.showInConsole", true);
-pref("javascript.options.strict", true);
+pref("browser.dom.window.dump.enabled", false);
+pref("javascript.options.showInConsole", false);
+pref("javascript.options.strict", false);
 pref("bluegriffon.console.showInvalidVariables", false);
 pref("nglayout.debug.disable_xul_cache", true);
 pref("nglayout.debug.disable_xul_fastload", true);
