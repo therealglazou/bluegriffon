@@ -14,6 +14,10 @@ scrollbar {
   pointer-events: auto;
 }
 
+scrollbar[orient="horizontal"]:not([disabled]) {
+  height: 16px;
+}
+
 scrollbar[root="true"] {
   position: relative;
   z-index: 2147483647; /* largest positive value of a signed 32-bit integer */
@@ -79,7 +83,7 @@ scrollcorner {
   -moz-binding: url(chrome://global/content/bindings/scrollbar.xml#scrollbar-base);
   width: 16px;
   cursor: default;
-  background-color: white;
+  background-color: transparent;
 }
 
 /* ::::::::::::::::::::: MEDIA PRINT :::::::::::::::::::::: */
