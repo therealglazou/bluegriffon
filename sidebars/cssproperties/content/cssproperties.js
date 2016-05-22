@@ -77,7 +77,9 @@ function Startup()
 
   if (!gMain)
     return;
-  
+
+  gDialog.allTree.addEventListener("DOMAttrModified", onAllTreeModified, true);
+
   gMain.NotifierUtils.addNotifierCallback("selection",
                                           SelectionChanged,
                                           window);
@@ -116,6 +118,9 @@ function Shutdown()
 {
   if (gMain)
   {
+
+    gDialog.allTree.addEventListener("DOMAttrModified", onAllTreeModified, true);
+
     gMain.NotifierUtils.removeNotifierCallback("selection",
                                                SelectionChanged,
                                                window);
