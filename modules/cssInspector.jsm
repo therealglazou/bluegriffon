@@ -135,8 +135,10 @@ var CssInspector = {
       this.mVENDOR_PREFIXES = {};
       for (var i in kCSS_PROPERTIES.properties) {
         var p = kCSS_PROPERTIES.properties[i];
-        if (p.gecko && (p.blink || p.servo || p.vivliostyle || p.weasyprint || p.webkit)) {
+        if (p.gecko || p.blink || p.servo || p.vivliostyle || p.weasyprint || p.webkit) {
           var o = {};
+          if (!p.gecko)
+            p.gecko = i;
           o.generic = i;
           if (useGecko)                        o.gecko = p.gecko
           if (useBlink && p.blink)             o.blink = p.blink
@@ -1222,7 +1224,11 @@ CSSScanner.prototype = {
   },
 
   startsWithIdent: function(aFirstChar, aSecondChar) {
-    var code = aFirstChar.charCodeAt(0);
+    if (aFirstChar == "-" && aSecondChar == "-" &&
+       this.mPos+1 < this.mString.length &&
+       this.isIdentStart(this.mString.charAt(this.mPos+1)))
+      return true;
+
     return this.isIdentStart(aFirstChar) ||
            (aFirstChar == "-" && this.isIdentStart(aSecondChar));
   },
@@ -2303,6 +2309,7 @@ CSSParser.prototype = {
             if (token.isSymbol(")")) {
               var value = new jscsspVariable(kJscsspVARIABLE_VALUE, aSheet);
               valueText += "var(" + name + ")";
+              value.value = "var(" + name + ")";
               value.name = name;
               values.push(value);
             }
@@ -4648,7 +4655,9 @@ jscsspDeclaration.prototype = {
   },
 
   cssText: function() {
-    var prefixes = CssInspector.prefixesForProperty(this.property);
+    var prefixes = this.property.startsWith("--")
+                   ? [ this.property ]
+                   : CssInspector.prefixesForProperty(this.property);
 
     var rv = "";
     if (this.property in this.kUNMODIFIED_COMMA_SEPARATED_PROPERTIES) {
@@ -5105,10 +5114,7 @@ function jscsspVariable(aType, aSheet)
 
 jscsspVariable.prototype = {
   cssText: function() {
-    if (this.type == kJscsspVARIABLE_VALUE)
-      return this.resolveVariable(this.name, this.parentRule, this.parentStyleSheet);
-    else
-      return this.value;
+    return this.value;
   },
 
   setCssText: function(val) {
