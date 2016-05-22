@@ -79,6 +79,7 @@ function Startup()
     return;
 
   gDialog.allTree.addEventListener("DOMAttrModified", onAllTreeModified, true);
+  gDialog.variablesTree.addEventListener("DOMAttrModified", onVariablesTreeModified, true);
 
   gMain.NotifierUtils.addNotifierCallback("selection",
                                           SelectionChanged,
@@ -119,7 +120,8 @@ function Shutdown()
   if (gMain)
   {
 
-    gDialog.allTree.addEventListener("DOMAttrModified", onAllTreeModified, true);
+    gDialog.allTree.removeEventListener("DOMAttrModified", onAllTreeModified, true);
+    gDialog.variablesTree.removeEventListener("DOMAttrModified", onVariablesTreeModified, true);
 
     gMain.NotifierUtils.removeNotifierCallback("selection",
                                                SelectionChanged,

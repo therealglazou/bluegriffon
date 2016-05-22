@@ -34,7 +34,6 @@ function AllSectionIniter(aElt, aRuleset)
 	    item.firstChild.appendChild(cell1);
 	    item.firstChild.appendChild(cell2);
     }
-    gDialog.allTree.setUserData("rule", rule, null);
   }
 }
 

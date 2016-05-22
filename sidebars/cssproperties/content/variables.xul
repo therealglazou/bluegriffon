@@ -5,40 +5,40 @@
   %csspropertiesDTD;
 ]>
 
-<overlay id="allOverlay"
+<overlay id="variablesOverlay"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
-  <script type="application/x-javascript"  src="chrome://cssproperties/content/all.js" />
+  <script type="application/x-javascript"  src="chrome://cssproperties/content/variables.js" />
 
   <vbox id="propertiesBox">
     <hbox align="center"
           class="csspropertiesHeader"
           context="sectionHeaderContext"
-          id="allSectionHeader"
+          id="variablesSectionHeader"
           onclick="ToggleSection(event, this)"
-          position="33">
+          position="29">
       <image />
-      <label value="&allSectionHeader.label;"/>
+      <label value="&variablesSectionHeader.label;"/>
     </hbox>
   
     <vbox class="section"
-          id="allSection"
-          position="34">
-      <tree id="allTree"
+          id="variablesSection"
+          position="30">
+      <tree id="variablesTree"
             flex="1"
             editable="true"
             persist="height"
             style="margin: 0px; min-width: 200px; height: 200px"
             treelines="true"
-            onselect="UpdateAllButtons()">
+            onselect="UpdateVariableButtons()">
         <treecols>
-          <treecol id="propertyCol"
+          <treecol id="variablesPropertyCol"
                    flex="1"
-                   label="Property"
+                   label="Variable"
                    primary="true"
                    persist="width ordinal hidden"/>
           <splitter class="tree-splitter"/>
-          <treecol id="valueCol"
+          <treecol id="variablesValueCol"
                    label="Value"
                    flex="1" 
                    persist="width ordinal hidden"/>
@@ -46,19 +46,16 @@
       </tree>
       <hbox id="allTreeToolbox" class="listboxBg">
         <toolbarbutton class="listboxBgPlusButton"
-                       tooltiptext="&addCSS.tooltip;"
-                       id="PlusCSSButton"
-                       oncommand="AddCSS()"/>
+                       id="PlusVariableButton"
+                       oncommand="AddVariable()"/>
         <toolbarbutton class="listboxBgMinusButton"
                        disabled="true"
-                       id="MinusCSSButton"
-                       tooltiptext="&removeCSS.tooltip;"
-                       oncommand="DeleteCSS()"/>
+                       id="MinusVariableButton"
+                       oncommand="DeleteVariable()"/>
         <toolbarbutton class="listboxBgConfigButton"
-                       tooltiptext="&modifyCSS.tooltip;"
                        disabled="true"
-                       id="ConfigCSSButton"
-                       oncommand="ModifyCSS()"/>
+                       id="ConfigVariableButton"
+                       oncommand="ModifyVariable()"/>
         <spacer flex="1"/>
       </hbox>
     </vbox>
