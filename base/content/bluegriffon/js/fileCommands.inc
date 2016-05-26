@@ -152,8 +152,9 @@ var cmdSaveAs =
                      EditorUtils.getCurrentDocumentMimeType());
         }
         window.content.focus();
-        if (result)
+        if (result) {
           StoreUrlInLocationDB(EditorUtils.getDocumentUrl());
+        }
       }
       catch (e) {}
     return result;
