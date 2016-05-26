@@ -1604,6 +1604,8 @@ function ToggleAllTagsMode()
 
 function UpdateViewMenu()
 {
+  if (!("tabeditor" in gDialog))
+    return;
   var tab = gDialog.tabeditor.selectedTab;
   if (tab) {
     if (tab.hasAttribute("alltags")) {
