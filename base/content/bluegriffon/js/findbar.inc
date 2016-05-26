@@ -282,6 +282,7 @@ function WysiwygShowFindBar()
       BespinFind(true, true);
     }
   }
+  gDialog.bespinFindTextbox.editor.selectAll();
 }
 
 function CloseFindBar()
