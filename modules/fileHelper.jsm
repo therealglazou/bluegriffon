@@ -397,7 +397,9 @@ var BGFileHelper = {
     if (aDoSaveAsText || aEditorType == "text")
       promptString = L10NUtils.getString("ExportToText");
     else
-      promptString = L10NUtils.getString("SaveDocumentAs")
+      promptString = L10NUtils.getString("SaveDocumentAs");
+
+    promptString += " : " + EditorUtils.getDocumentTitle();
   
     fp.init(EditorUtils.getCurrentEditorWindow(), promptString, this.nsIFilePicker.modeSave);
   
