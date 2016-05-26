@@ -4231,6 +4231,58 @@ diff --git a/widget/PuppetWidget.cpp b/widget/PuppetWidget.cpp
  
  NS_IMETHODIMP
  PuppetScreenManager::ScreenForRect(int32_t inLeft,
+diff --git a/widget/cocoa/nsCocoaUtils.mm b/widget/cocoa/nsCocoaUtils.mm
+--- a/widget/cocoa/nsCocoaUtils.mm
++++ b/widget/cocoa/nsCocoaUtils.mm
+@@ -301,39 +301,42 @@ void nsCocoaUtils::PrepareForNativeAppMo
+   NS_OBJC_BEGIN_TRY_ABORT_BLOCK;
+ 
+   // Don't do anything if this is embedding. We'll assume that if there is no hidden
+   // window we shouldn't do anything, and that should cover the embedding case.
+   nsMenuBarX* hiddenWindowMenuBar = nsMenuUtilsX::GetHiddenWindowMenuBar();
+   if (!hiddenWindowMenuBar)
+     return;
+ 
++  // XXX BLUEGRIFFON ; do NOT paint the hidden menubar because otherwise, that's
++  // what's show when you close a filepicker... And in that case, menus are mostly
++  // disabled and inable to operate even on a visible window...
+   // First put up the hidden window menu bar so that app menu event handling is correct.
+-  hiddenWindowMenuBar->Paint();
++  //hiddenWindowMenuBar->Paint();
+ 
+   NSMenu* mainMenu = [NSApp mainMenu];
+   NS_ASSERTION([mainMenu numberOfItems] > 0, "Main menu does not have any items, something is terribly wrong!");
+-  
++
+   // Create new menu bar for use with modal dialog
+   NSMenu* newMenuBar = [[NSMenu alloc] initWithTitle:@""];
+-  
++
+   // Swap in our app menu. Note that the event target is whatever window is up when
+   // the app modal dialog goes up.
+   NSMenuItem* firstMenuItem = [[mainMenu itemAtIndex:0] retain];
+   [mainMenu removeItemAtIndex:0];
+   [newMenuBar insertItem:firstMenuItem atIndex:0];
+   [firstMenuItem release];
+-  
++
+   // Add standard edit menu
+   [newMenuBar addItem:nsMenuUtilsX::GetStandardEditMenuItem()];
+-  
++
+   // Show the new menu bar
+   [NSApp setMainMenu:newMenuBar];
+   [newMenuBar release];
+-  
++
+   NS_OBJC_END_TRY_ABORT_BLOCK;
+ }
+ 
+ void nsCocoaUtils::CleanUpAfterNativeAppModalDialog()
+ {
+   NS_OBJC_BEGIN_TRY_ABORT_BLOCK;
+ 
+   // Don't do anything if this is embedding. We'll assume that if there is no hidden
 diff --git a/widget/cocoa/nsColorPicker.h b/widget/cocoa/nsColorPicker.h
 --- a/widget/cocoa/nsColorPicker.h
 +++ b/widget/cocoa/nsColorPicker.h
