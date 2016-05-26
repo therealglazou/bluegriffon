@@ -175,7 +175,8 @@ var BGFileHelper = {
         // Update window title to show possibly different filename
         // This also covers problem that after undoing a title change,
         //   window title loses the extra [filename] part that this adds
-        EditorUtils.getCurrentEditorWindow().UpdateWindowTitle();
+        var newTitle = EditorUtils.getCurrentEditorWindow().UpdateWindowTitle();
+        EditorUtils.getCurrentTabEditor().selectedTab.label = newTitle;
   
         if (!aSaveCopy) {
           editor.resetModificationCount();
@@ -317,7 +318,8 @@ var BGFileHelper = {
         // Update window title to show possibly different filename
         // This also covers problem that after undoing a title change,
         //   window title loses the extra [filename] part that this adds
-        EditorUtils.getCurrentEditorWindow().UpdateWindowTitle();
+        var newTitle = EditorUtils.getCurrentEditorWindow().UpdateWindowTitle();
+        EditorUtils.getCurrentTabEditor().selectedTab.label = newTitle;
   
         if (!aSaveCopy) {
           editor.resetModificationCount();
