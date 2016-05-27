@@ -154,9 +154,15 @@ var cmdEditLinkCommand =
         GetCurrentViewMode() == "wysiwyg") {
       var element = EditorUtils.getObjectForProperties(["a"], "href");
       if (element) {
-        var url = UrlUtils.makeRelativeUrl(element.getAttribute("href"));
-        if (url.length && url[0] != "#")
-          return true;
+        var url = UrlUtils.makeAbsoluteUrl(element.getAttribute("href"));
+        try {
+          var uri = Components.classes["@mozilla.org/network/io-service;1"]
+                              .getService(Components.interfaces.nsIIOService)
+                              .newURI(url, null, null);
+          if (uri.specIgnoringRef != EditorUtils.getDocumentUrl())
+            return true;
+        }
+        catch(e) {}
       }
     }
     return false;
@@ -168,7 +174,7 @@ var cmdEditLinkCommand =
   doCommand: function(aCommand)
   {
     var element = EditorUtils.getObjectForProperties(["a"], "href");
-    var target = element.getAttribute("href");
+    var target = element.href;
     OpenFile(target, true);
   }
 };
