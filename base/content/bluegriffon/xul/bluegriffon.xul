@@ -98,7 +98,7 @@
       <hbox id="titlebar-buttonbox">
         <toolbarbutton class="titlebar-button" id="titlebar-min" oncommand="window.minimize();"/>
         <toolbarbutton class="titlebar-button" id="titlebar-max" oncommand="onTitlebarMaxClick();"/>
-        <toolbarbutton class="titlebar-button" id="titlebar-close" command="cmd_closeWindow"/>
+        <toolbarbutton class="titlebar-button" id="titlebar-close" oncommand="if (doSaveTabsBeforeQuit()) window.close()"/>
       </hbox>
     </hbox>
 #ifdef XP_MACOSX
@@ -137,6 +137,8 @@
              persist="iconsize,mode"
              iconsize="small"
              mode="full"
+	     sizemode="normal"
+	     fullscreenbutton="true"
              defaultset="EncapsulateSelect,separator,emButton,strongButton,codeButton,separator,boldButton,italicButton,underlineButton,separator,ulButton,olButton,dtButton,ddButton,separator,align-left-button,align-center-button,align-right-button,align-justify-button,separator,indentButton,outdentButton,separator,blockquoteButton,separator,dirLtrButton,dirRtlButton"/>
   </toolbox>
 
