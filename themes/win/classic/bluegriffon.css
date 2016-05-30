@@ -53,8 +53,14 @@
 }
 
 #composer-main-menubar {
-  -moz-appearance: none;
+    -moz-appearance: none;
 }
+
+%ifndef XP_WIN
+menubar > menu:not([open="true"]) {
+  color: white ! important;
+}
+%endif
 
 #FormatToolbox, #statusbar {
   -moz-appearance: none;
