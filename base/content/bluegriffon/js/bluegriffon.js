@@ -2123,3 +2123,10 @@ function CloseAllTabsButOne()
 }
 
 #include phpAndComments.inc
+
+function onTitlebarMaxClick() {
+  if (window.windowState == window.STATE_MAXIMIZED)
+    window.restore();
+  else
+    window.maximize();
+}

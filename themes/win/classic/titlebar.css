@@ -1,0 +1,60 @@
+/* ::::: titlebar ::::: */
+
+#Bluegriffon[sizemode="normal"] > #titlebar {
+  -moz-appearance: -moz-window-titlebar;
+}
+
+#Bluegriffon[sizemode="maximized"] > #titlebar {
+  -moz-appearance: -moz-window-titlebar-maximized;
+}
+
+@media (-moz-windows-classic) {
+  #Bluegriffon[tabsintitlebar][sizemode="normal"] > #tab-view-deck > #browser-panel > #navigator-toolbox > #toolbar-menubar {
+    margin-top: 4px;
+  }
+}
+
+/* The button box must appear on top of the navigator-toolbox in order for
+ * click and hover mouse events to work properly for the button in the restored
+ * window state. Otherwise, elements in the navigator-toolbox, like the menubar,
+ * can swallow those events. It will also place the buttons above the fog on
+ * themes with Aero Glass.
+ */
+#titlebar-buttonbox {
+  z-index: 1;
+}
+
+.titlebar-placeholder[type="caption-buttons"] {
+  margin-left: 22px; /* space needed for Aero Snap */
+}
+
+@media (-moz-os-version: windows-xp) {
+  .titlebar-placeholder[type="caption-buttons"] {
+    margin-left: 10px; /* less space needed on XP because there's no Aero Snap */
+  }
+}
+
+/* titlebar command buttons */
+
+#titlebar-min {
+  -moz-appearance: -moz-window-button-minimize;
+}
+
+#titlebar-max {
+  -moz-appearance: -moz-window-button-maximize;
+}
+
+#Bluegriffon[sizemode="maximized"] #titlebar-max {
+  -moz-appearance: -moz-window-button-restore;
+}
+
+#titlebar-close {
+  -moz-appearance: -moz-window-button-close;
+}
+
+@media not all and (-moz-windows-classic) {
+  #titlebar-min {
+    -moz-margin-end: 2px;
+  }
+}
+
