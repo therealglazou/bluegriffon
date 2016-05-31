@@ -103,7 +103,7 @@ var FileChangeUtils = {
                       }
                     }
                   }
-                  catch(e) { Services.prompt.alert(null, "foo", e)}
+                  catch(e) { /* DO NOT SHOW ALERT */ }
 
                   node.setAttribute("src", "");
                   node.setAttribute("src", srcAttr);
