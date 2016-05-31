@@ -93,16 +93,17 @@ var FileChangeUtils = {
                         var uri = IOService.newURI(src, null, null);
                         if (uri)
                         {
-                          var imgCacheService = Components.classes["@mozilla.org/image/cache;1"].getService();
-                          var imgCache = imgCacheService.QueryInterface(Components.interfaces.imgICache);
+                          var imgCache = Components.classes["@mozilla.org/image/tools;1"]
+                                                   .getService(Components.interfaces.imgITools)
+                                                   .getImgCacheForDocument(node.ownerDocument);
 
                           // This returns error if image wasn't in the cache; ignore that
-                          imgCache.removeEntry(uri);
+                          imgCache.removeEntry(uri, node.ownerDocument);
                         }
                       }
                     }
                   }
-                  catch(e) {}
+                  catch(e) { Services.prompt.alert(null, "foo", e)}
 
                   node.setAttribute("src", "");
                   node.setAttribute("src", srcAttr);
