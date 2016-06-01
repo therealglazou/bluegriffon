@@ -400,8 +400,10 @@
         <menuitem label="&qa.label;"
                   oncommand="loadExternalURL('http://bugzilla.bluegriffon.org')"/>
         <menuseparator/>
-        <menuitem label="BlueGriffon.com"
-                  oncommand="loadExternalURL('http://bluegriffon.com')"/>
+        <menuitem label="&buyUsersManual.label;"
+                  oncommand="loadExternalURL('http://bluegriffon.com/#manual')"/>
+        <menuitem label="&buyLicense.label;"
+                  oncommand="loadExternalURL('http://bluegriffon.com/#buy')"/>
       </menupopup>
     </menu>
 
