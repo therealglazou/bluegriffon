@@ -25,7 +25,6 @@ pref("nglayout.debug.disable_xul_cache", true);
 pref("nglayout.debug.disable_xul_fastload", true);
 
 pref("general.useragent.extra.mybrowser", "bluegriffon/1.8");
-pref("intl.locale.matchOS", true);
 pref("intl.accept_charsets", "iso-8859-1,*,utf-8");
 pref("browser.display.use_document_fonts", 1);
 
@@ -213,6 +212,6 @@ pref("print.print_edge_bottom", 0);
 pref("layout.css.flexbox.enabled", true);
 
 pref("general.useragent.locale", "en-US");
-pref("intl.locale.matchOS", false);
+pref("intl.locale.matchOS", true);
 
 pref("app.support.baseURL", "http://bluegriffon.org/");
