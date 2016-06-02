@@ -37,9 +37,9 @@
 
 hbox.listboxBg {
   max-height: 21px;
-  border-left: thin solid #181818;
-  border-right: thin solid #181818;
-  border-bottom: thin solid #181818;
+  border-left: thin solid var(--bg-dark-border);
+  border-right: thin solid var(--bg-dark-border);
+  border-bottom: thin solid var(--bg-dark-border);
   margin: 0px;
   background-color: var(--bg-dark-background);
   color: white;
@@ -50,12 +50,12 @@ hbox.listboxBg toolbarbutton {
   max-height: 21px;
   min-height: 21px;
   padding: 0px 3px; margin: 0px;
-  border-right: thin solid #181818;
+  border-right: thin solid var(--bg-dark-border);
   font-weight: bold;
 }
 
 hbox.listboxBg spacer[flex="1"] ~ toolbarbutton {
-  border-left: thin solid #181818;
+  border-left: thin solid var(--bg-dark-border);
   border-right: 0px none;
 }
 
@@ -64,7 +64,7 @@ listbox.listboxBg {
   margin: 0px;
   background-color: var(--bg-dark-background);
   color: white;
-  border: #181818 solid thin;
+  border: var(--bg-dark-border) solid thin;
   -moz-appearance: none;
 }
 
