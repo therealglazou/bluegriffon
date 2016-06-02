@@ -5,7 +5,8 @@ var cmdInsertOrEditTableCommand =
   {
     return (EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
-            EditorUtils.isEditingRenderedHTML());
+            EditorUtils.isEditingRenderedHTML() && 
+            GetCurrentViewMode() == "wysiwyg");
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -36,7 +37,8 @@ var cmdInsertImageCommand =
   {
     return (EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
-            EditorUtils.isEditingRenderedHTML());
+            EditorUtils.isEditingRenderedHTML() && 
+            GetCurrentViewMode() == "wysiwyg");
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -58,7 +60,8 @@ var cmdInsertAnchorCommand =
   {
     return (EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
-            EditorUtils.isEditingRenderedHTML());
+            EditorUtils.isEditingRenderedHTML() && 
+            GetCurrentViewMode() == "wysiwyg");
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},

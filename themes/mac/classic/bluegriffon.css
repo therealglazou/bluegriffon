@@ -38,6 +38,7 @@
 @import url("chrome://bluegriffon/content/bindings/structurebar.css");
 @import url("chrome://bluegriffon/skin/structurebar.css");
 @import url("chrome://bluegriffon/skin/formatToolbar.css");
+@import url("chrome://bluegriffon/skin/mainToolbar.css");
 
 @import url("chrome://bluegriffon/skin/black.css");
 
@@ -52,10 +53,6 @@
 toolbar {
   -moz-appearance: none;
 }
-
-#MainToolbar {
-  display: none;
-  }
   
 tabeditor {
   -moz-binding: url('chrome://bluegriffon/content/bindings/tabeditor.xml#tabeditor');
@@ -69,10 +66,10 @@ tabeditor[visibility="hidden"]  tabpanels
 
 #maincontainer {
   margin-left: -1px;
-  border-left: thin solid #181818;
-  border-top: 2px solid #181818;
-  -moz-border-top-colors: #181818 #494f51;
-  border-bottom: thin solid #181818;
+  border-left: thin solid var(--bg-dark-border);
+  border-top: 2px solid var(--bg-dark-border);
+  -moz-border-top-colors: var(--bg-dark-border) var(--bg-lighter-border);
+  border-bottom: thin solid var(--bg-dark-border);
   background-color: var(--bg-dark-background) ! important;
   padding-top: 6px;
 }
@@ -445,15 +442,16 @@ ecolorpicker {
 /* TOOLBARS and editing area*/
 
 toolbar {
-  border-right: thin solid #181818;
-  border-top: 2px solid #181818;
-  -moz-border-top-colors: #181818 #494f51;
+  border-right: thin solid var(--bg-dark-border);
+  border-top: 2px solid var(--bg-dark-border);
+  -moz-border-top-colors: var(--bg-dark-border) var(--bg-lighter-border);
   background-color: var(--bg-dark-background) ! important;
   padding-top: 5px;
+  padding-bottom: 5px;
 }
 
-toolbar:not(#FormatMenulistsToolbar):last-of-type {
-  border-bottom: thin solid #181818;
+toolbar:not(#FormatMenulistsToolbar):last-of-type:not(#MainToolbar) {
+  border-bottom: thin solid var(--bg-dark-border);
 }
 
 toolbarseparator {
@@ -469,7 +467,7 @@ menulist {
   padding-right: 3px;
   background-color: var(--bg-dark-background);
   padding-left: 3px;
-  border: thin solid #181818;
+  border: thin solid var(--bg-dark-border);
   color: white;
 }
 

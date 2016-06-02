@@ -115,6 +115,22 @@
 
 #include menubar.inc
 
+  <toolbox class="toolbox-top" id="MainToolbox" context="main-toolbar-context-menu">
+#include maintoolbarpalette.inc
+    <toolbar id="MainToolbar" class="toolbar-primary chromeclass-toolbar" align="center"
+             toolbarname="Main"
+             fullscreentoolbar="true"
+             persist="iconsize,mode"
+             iconsize="small"
+             mode="icons"
+#ifdef XP_MACOSX
+             defaultset="newButton,openButton,saveButton,stopButton,spacer,tableButton,tableLayoutButton,imageButton,thumbnailButton,anchorButton,linkButton,domexplorerButton,cssButton,csseditorButton,svgEditMainToolbarButton,videoButton,audioButton,formButton,mathmlButton,its20Button,spacer,browseButton"/>
+#else
+             defaultset="newButton,spacer,openButton,spacer,saveButton,stopButton,spacer,tableButton,tableLayoutButton,imageButton,thumbnailButton,anchorButton,linkButton,domexplorerButton,cssButton,csseditorButton,svgEditMainToolbarButton,videoButton,audioButton,formButton,mathmlButton,its20Button,spacer,browseButton"/>
+#endif
+    <toolbarset id="customMainToolbars" context="main-toolbar-context-menu"/>
+  </toolbox>
+
   <toolbox id="FormatMenulistsToolbox" mode="full">
 #include formatmenulistsbarpalette.inc
     <toolbar id="FormatMenulistsToolbar"
