@@ -12,6 +12,7 @@
   <prefpane id="generalPrefPane">
     <preferences>
       <preference id="pref-tabmode"        name="bluegriffon.tabs.position" type="string"/>
+      <preference id="pref-maintoolbar"    name="bluegriffon.toolbar.enabled" type="bool"/>
       <preference id="pref-showIDs"        name="bluegriffon.structurebar.id.show" type="bool"/>
       <preference id="pref-showClasses"    name="bluegriffon.structurebar.class.show" type="bool"/>
       <preference id="pref-showLangs"      name="bluegriffon.structurebar.lang.show" type="bool"/>
@@ -19,6 +20,13 @@
       <preference id="pref-spellCheck"     name="bluegriffon.spellCheck.enabled" type="bool"/>
       <preference id="pref-suggestions"    name="bluegriffon.spellCheck.suggestions" type="int"/>
     </preferences>
+
+    <groupbox>
+      <caption label="&mainToolbar.label;"/>
+      <checkbox id="mainToolbarVisibilityCheckbox"
+                preference="pref-maintoolbar"
+                label="&mainToolbarEnabled.label;"/>
+    </groupbox>
 
     <groupbox>
       <caption label="&tabPosition.label;"/>

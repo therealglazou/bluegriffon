@@ -199,6 +199,19 @@ var BlueGriffonPrefsObserver = {
       }
     }
 
+    else if (prefName == "bluegriffon.toolbar.enabled") {
+      var value = Services.prefs.getBoolPref("bluegriffon.toolbar.enabled");
+      var windowEnumerator = Services.wm.getEnumerator("bluegriffon");
+      while (windowEnumerator.hasMoreElements()) {
+        var w = windowEnumerator.getNext();
+        var mainToolbar = w.gDialog.MainToolbar;
+        if (value)
+          mainToolbar.removeAttribute("hidden");
+        else
+          mainToolbar.setAttribute("hidden", "true");
+      }
+    }
+
     else if (prefName == "bluegriffon.tabs.position") {
       var value = Services.prefs.getCharPref("bluegriffon.tabs.position");
       var windowEnumerator = Services.wm.getEnumerator("bluegriffon");
