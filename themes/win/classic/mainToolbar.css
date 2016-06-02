@@ -1,22 +1,20 @@
-<<<<<<< HEAD
-=======
 
-#MainToolbox > toolbar{
+#MainToolbox > toolbar {
   padding: 4px;
 }
 
-#MainToolbox toolbarbutton,
+#MainToolbox > toolbar toolbarbutton,
 #CustomizeToolbarWindow toolbarbutton,
 #CustomizeToolbarSheet toolbarbutton {
   -moz-image-region: rect(0px 32px 32px 0px);
   -moz-box-orient: vertical;
 }
 
-#MainToolbox .toolbarbutton-icon {
+#MainToolbox > toolbar .toolbarbutton-icon {
   margin: 2px;
 }
 
-#MainToolbox .toolbarbutton-text {
+#MainToolbox > toolbar .toolbarbutton-text {
   padding-bottom: 4px;
 }
 
@@ -33,12 +31,12 @@
   padding: 4px;
 }
 
-#MainToolbox toolbarbutton:hover,
-#MainToolbox toolbarbutton:hover:active {
+#MainToolbox > toolbar toolbarbutton:hover,
+#MainToolbox > toolbar toolbarbutton:hover:active {
   -moz-image-region: rect(32px 32px 64px 0px);
 }
 
-#MainToolbox toolbarbutton[disabled="true"]
+#MainToolbox > toolbar toolbarbutton[disabled="true"]
 {
   -moz-image-region: rect(64px 32px 96px 0px);
 }
@@ -79,12 +77,12 @@
   list-style-image: url("chrome://bluegriffon/skin/mainToolbar/css.png");
 }
 
-#videoButton {
-  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/video.png");
-}
-
 #audioButton {
   list-style-image: url("chrome://bluegriffon/skin/mainToolbar/audio.png");
+}
+
+#videoButton {
+  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/video.png");
 }
 
 #browseButton {
@@ -155,12 +153,12 @@
   list-style-image: url("chrome://bluegriffon/skin/mainToolbar/small/css.png");
 }
 
-#MainToolbox > toolbar[iconsize="small"] #videoButton {
-  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/small/video.png");
-}
-
 #MainToolbox > toolbar[iconsize="small"] #audioButton {
   list-style-image: url("chrome://bluegriffon/skin/mainToolbar/small/audio.png");
+}
+
+#MainToolbox > toolbar[iconsize="small"] #videoButton {
+  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/small/video.png");
 }
 
 #MainToolbox > toolbar[iconsize="small"] #browseButton {
@@ -196,13 +194,3 @@
 #MainToolbox > toolbar[iconsize="small"] #composer-throbber:hover {
   list-style-image: url('chrome://bluegriffon/skin/mainToolbar/small/logo-hover.png');
 }
-
-#MainToolbox toolbarseparator {
-  height: 32px;
-  background-color: transparent;
-}
-
-#MainToolbox[iconsize="small"] toolbarseparator {
-  height: 24px;
-}
->>>>>>> 1be3de0ecb29818f14b309f9ae59d63478b77115
