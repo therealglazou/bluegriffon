@@ -35,22 +35,24 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
+@import url("chrome://bluegriffon/skin/black.css");
+
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 @namespace html url("http://www.w3.org/1999/xhtml");
 
 page {
   -moz-appearance: none;
   background-color: transparent;
-  color: white;
+  color: var(--bg-main-foreground-color);
   font-size: smaller;
 }
 
 #scriptLists {
   margin: 4px 4px 0px 4px;
   -moz-appearance: none;
-  background-color: rgb(54, 61, 63);
-  border: thin solid black;
-  color: white;
+  background-color: var(--bg-list-background);
+  border: thin solid var(--bg-dark-border);
+  color: var(--bg-main-foreground-color);
 }
 
 #ProjectMgrBox {
@@ -67,7 +69,7 @@ richlistitem {
 }
 
 listitem {
-  color: white;
+  color: var(--bg-main-foreground-color);
 }
 
 listbox[disabled] > listitem {

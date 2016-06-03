@@ -171,6 +171,7 @@ function Inspect()
       item.setAttribute("class", "listitem-iconic " + (hasSrc ? "external" : "embedded"));
       item.setAttribute("crop",  hasSrc ? "center" : "end");
       item.setAttribute("scriptsrc", url);
+      item.setAttribute("imagetheming", "never");
 
       gDialog.scriptLists.appendChild(item);
     }
