@@ -15,7 +15,7 @@ filepickerbutton {
 }
 
 hbox.listboxBg {
-  background-color: #363d3f ! important;
+  /*background-color: #363d3f ! important;*/
 }
 
 .multibutton {
@@ -23,9 +23,13 @@ hbox.listboxBg {
   background-color: #363d3f;
   -moz-appearance: none;
   border: thin var(--bg-dark-border) solid;
-  color: white;
+  color: var(--bg-main-foreground-color);
   padding: 2px 6px;
   text-shadow: none;
+}
+
+:root[cleartheme="true"] .multibutton {
+  background-color: #fafafa;
 }
 
 .multibutton:-moz-locale-dir(ltr) {

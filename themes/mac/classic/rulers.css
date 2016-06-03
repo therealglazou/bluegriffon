@@ -9,7 +9,11 @@ svg|text {
   font-size: 8pt ! important;
   dominant-baseline: middle;
   text-anchor: middle;
-  stroke: white;
+  fill: white;
+}
+
+:root[cleartheme="true"] svg|text {
+  fill: black;
 }
 
 hruler[disabled], vruler[disabled]  {
@@ -46,10 +50,20 @@ vruler {
   /*position: absolute;*/
 }
 
-hruler svg|rect, vruler svg|rect {
+hruler svg|rect,
+vruler svg|rect {
   fill: #454545;
+}
+
+:root[cleartheme="true"] hruler svg|rect,
+:root[cleartheme="true"] vruler svg|rect {
+  fill: white;
 }
 
 svg|rect.ruler-separator {
   fill: gray;
+}
+
+:root[cleartheme="true"] svg|rect.ruler-separator {
+  fill: black;
 }

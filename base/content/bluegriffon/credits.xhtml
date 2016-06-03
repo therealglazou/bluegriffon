@@ -54,11 +54,38 @@
     <title>&brandFullName; Credits</title>
 
     <style>
+      :root {
+      
+        --bg-main-window-appearance: none;
+        
+        --bg-dark-scrollbar-appearance: none;
+      
+        --bg-dark-background: #363d3f;
+        --bg-dark-gray: #474D4F;
+        --bg-lighter-dark-gray: #383f41;
+        --bg-dark-border:  #181818;
+        --bg-lighter-border: #494f51;
+      
+        --bg-list-background: #363d3f;
+      
+        --bg-main-foreground-color: white;
+      }
+      
+      :root[cleartheme="true"] {
+        --bg-dark-background: #E0E0E0;
+        --bg-dark-gray: #D0D0D0;
+        --bg-lighter-dark-gray: #B0B0B0;
+        --bg-dark-border:  #c0c0c0;
+        --bg-lighter-border: #D0D0D0;
+      
+        --bg-list-background: white;
+      
+        --bg-main-foreground-color: black;
+      }
+
       html {
         background-color: transparent;
-#ifdef XP_MACOSX
-        color: graytext;
-#endif
+        color: var(--bg-main-foreground-color);
       }
 
       * {
@@ -105,7 +132,7 @@
       .creditsGroup {
         margin-bottom: 4em;
         text-align: center;
-        border: thin solid gray;
+        border: thin solid var(--bg-dark-border);
         border-radius: 11px;
       }
 
@@ -135,9 +162,6 @@
       }
 
       a {
-#ifdef XP_MACOSX
-        color: white;
-#endif
         text-decoration: underline;
         cursor: pointer;
       }

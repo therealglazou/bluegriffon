@@ -16,6 +16,9 @@ pref("toolbar.customization.usesheet", true); // true for Mac
 pref("toolbar.customization.usesheet", false); // false otherwise
 #endif
 
+/* main theme */
+pref("bluegriffon.wysiwyg.theme", "dark");
+
 /* debugging prefs */
 pref("browser.dom.window.dump.enabled", false);
 pref("javascript.options.showInConsole", false);

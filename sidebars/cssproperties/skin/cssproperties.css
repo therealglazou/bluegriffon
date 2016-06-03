@@ -43,7 +43,7 @@
 page {
   -moz-appearance: none;
   background-color: transparent;
-  color: white;
+  color: var(--bg-main-foreground-color);
 }
 
 #mainBox {
@@ -87,8 +87,8 @@ page {
 }
 
 hbox.csspropertiesHeader {
-  border-top: 2px solid #181818;
-  -moz-border-top-colors: #181818 #494f51;
+  border-top: 2px solid var(--bg-dark-border);
+  -moz-border-top-colors: var(--bg-dark-border) var(--bg-lighter-border);
   padding-left: 3px;
   padding-top: 2px;
   padding-bottom: 2px;
@@ -206,22 +206,27 @@ l10n {
 }
 
 listbox, richlistbox {
-  background-color: var(--bg-dark-background);
-  color: white;
-  border: #181818 solid thin;
+  background-color: var(--bg-list-background);
+  color: var(--bg-main-foreground-color);
+  border: var(--bg-dark-border) solid thin;
   -moz-appearance: none;
 }
+
+:root[cleartheme="true"] listbox,
+:root[cleartheme="true"] richlistbox {
+   background-color: white;
+ }
 
 hbox.listboxBg {
   background-color: var(--bg-dark-background);
   color: white;
-  border-color: #181818;
+  border-color: var(--bg-dark-border);
 }
 
 hbox.listboxBg > * {
   background-color: transparent;
-  color: white;
-  border-right: thin solid #181818;
+  color: var(--bg-main-foreground-color);
+  border-right: thin solid var(--bg-dark-border);
 }
 
 hbox.listboxBg > *:last-child {

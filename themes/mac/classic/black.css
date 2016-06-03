@@ -40,21 +40,50 @@
 @namespace html url("http://www.w3.org/1999/xhtml");
 
 :root {
+
+  --bg-main-window-appearance: none;
+  
+  --bg-dark-scrollbar-appearance: none;
+
   --bg-dark-background: #363d3f;
   --bg-dark-gray: #474D4F;
   --bg-lighter-dark-gray: #383f41;
-  --bg-dark-scrollbar-appearance: none;
   --bg-dark-border:  #181818;
   --bg-lighter-border: #494f51;
+
+  --bg-list-background: #363d3f;
+
+  --bg-main-foreground-color: white;
+}
+
+:root[cleartheme="true"] {
+  --bg-dark-background: #E0E0E0;
+  --bg-dark-gray: #D0D0D0;
+  --bg-lighter-dark-gray: #B0B0B0;
+  --bg-dark-border:  #c0c0c0;
+  --bg-lighter-border: #D0D0D0;
+
+  --bg-list-background: white;
+
+  --bg-main-foreground-color: black;
+}
+
+:root[cleartheme="true"] image:not(.checkbox-check):not(.radio-check) {
+  filter: invert(80%);
+}
+
+*[imagetheming="never"] image,
+image[imagetheming="never"] {
+  filter: none ! important;
 }
 
 window:root {
-  -moz-appearance: none;
+  -moz-appearance: var(--bg-main-window-appearance);
   background-color: var(--bg-dark-background);
 }
 
 #titleInTitlebar {
-  color: white;
+  color: var(--bg-main-foreground-color);
 }
 
 %ifdef CAN_DRAW_IN_TITLEBAR
@@ -140,120 +169,122 @@ window:root {
   margin: 4px 8px;
 }
 
-menulist,
-textbox[type="number"] {
+:root:not([cleartheme="true"]) menulist,
+:root:not([cleartheme="true"]) textbox[type="number"] {
   -moz-appearance: none;
   padding-left: 3px;
   padding-right: 3px;
   background-color: var(--bg-dark-background);
   padding-left: 3px;
   border: thin solid var(--bg-dark-border);
-  color: white;
+  color: var(--bg-main-foreground-color);
 }
 
-textbox[type="number"] .numberbox-input-box {
+:root:not([cleartheme="true"]) textbox[type="number"] .numberbox-input-box {
   -moz-appearance: none;
   border: none 0px;
   background-color: transparent;
 }
 
-textbox:not([type="number"]) {
+:root:not([cleartheme="true"]) textbox:not([type="number"]) {
   -moz-appearance: none;
-  color: white;
+  color: var(--bg-main-foreground-color);
   margin: 4px 0px;
   padding: 2px;
   background-color: var(--bg-dark-background);
   border: thin solid black;
 }
 
-menulist .menulist-dropmarker {
+:root:not([cleartheme="true"]) menulist .menulist-dropmarker {
   -moz-appearance: none;
   display: -moz-box;
   background: transparent;
   border: none 0px;
 }
 
-menulist html|*.menulist-editable-input {
-  color: white;
+:root:not([cleartheme="true"]) menulist html|*.menulist-editable-input {
+  color: var(--bg-main-foreground-color);
 }
 
-menulist[disabled="true"],
-menulist[disabled="true"] html|*.menulist-editable-input,
-menulist html|*.menulist-editable-input::-moz-placeholder  {
+:root:not([cleartheme="true"]) menulist[disabled="true"],
+:root:not([cleartheme="true"]) menulist[disabled="true"] html|*.menulist-editable-input,
+:root:not([cleartheme="true"]) menulist html|*.menulist-editable-input::-moz-placeholder  {
   color: graytext;
 }
 
-menulist html|*.menulist-editable-input::-moz-placeholder  {
+:root:not([cleartheme="true"]) menulist html|*.menulist-editable-input::-moz-placeholder  {
   font-style: italic;
 }
 
-menulist[editable="true"] {
+:root:not([cleartheme="true"]) menulist[editable="true"] {
   margin-top: 5px;
   margin-bottom: 3px
 }
 
-menulist menupopup,
-toolbarbutton menupopup {
+:root:not([cleartheme="true"]) menulist menupopup,
+:root:not([cleartheme="true"]) toolbarbutton menupopup {
   -moz-appearance: none;
-  color: white;
+  color: var(--bg-main-foreground-color);
   background-color: var(--bg-dark-background);
 }
 
-menulist menuitem,
-toolbarbutton menuitem {
+:root:not([cleartheme="true"]) menulist menuitem,
+:root:not([cleartheme="true"]) toolbarbutton menuitem {
   -moz-appearance: none;
-  color: white;
+  color: var(--bg-main-foreground-color);
 }
 
-menulist menuitem[disabled="true"],
-toolbarbutton menuitem[disabled="true"] {
+:root:not([cleartheme="true"]) menulist menuitem[disabled="true"],
+:root:not([cleartheme="true"]) toolbarbutton menuitem[disabled="true"] {
   background-color: transparent ! important;
 }
 
-menulist menuseparator,
-toolbarbutton menuseparator {
+:root:not([cleartheme="true"]) menulist menuseparator,
+:root:not([cleartheme="true"]) toolbarbutton menuseparator {
   -moz-appearance: none;
   border-bottom: silver thin solid;
 }
 
-menu[disabled="true"], menuitem[disabled="true"],
-menu[_moz-menuactive="true"][disabled="true"],
-menuitem[_moz-menuactive="true"][disabled="true"] {
+:root:not([cleartheme="true"]) menu[disabled="true"], menuitem[disabled="true"],
+:root:not([cleartheme="true"]) menu[_moz-menuactive="true"][disabled="true"],
+:root:not([cleartheme="true"]) menuitem[_moz-menuactive="true"][disabled="true"] {
   color: -moz-mac-menutextdisable ! important;
 }
 
-html|*.menulist-editable-input {
-  color: white;
+:root:not([cleartheme="true"]) html|*.menulist-editable-input {
+  color: var(--bg-main-foreground-color);
 }
 
-tree, treechildren {
+:root:not([cleartheme="true"]) tree,
+:root:not([cleartheme="true"]) treechildren {
   -moz-appearance: none;
   background-color: var(--bg-dark-background);
 }
 
-tree {
+:root:not([cleartheme="true"]) tree {
   border: thin solid black;
 }
 
-treechildren::-moz-tree-row {
+:root:not([cleartheme="true"]) treechildren::-moz-tree-row {
   background-color: var(--bg-dark-background);
 }
 
-treechildren::-moz-tree-cell-text {
-  color: white;
+:root:not([cleartheme="true"]) treechildren::-moz-tree-cell-text {
+  color: var(--bg-main-foreground-color);
 }
 
-treechildren::-moz-tree-row(selected) {
+:root:not([cleartheme="true"]) treechildren::-moz-tree-row(selected) {
   background-color: Highlight;
 }
 
-treechildren::-moz-tree-row(selected, focus) {
+:root:not([cleartheme="true"]) treechildren::-moz-tree-row(selected, focus) {
   background-color: Highlight;
 }
 
-treecol, treecolpicker {
+:root:not([cleartheme="true"]) treecol,
+:root:not([cleartheme="true"]) treecolpicker {
   -moz-appearance: none;
-  color: white;
+  color: var(--bg-main-foreground-color);
   background-color: transparent;
   border: 0px none transparent;
   border-bottom: thin solid black;
@@ -261,21 +292,21 @@ treecol, treecolpicker {
   padding-bottom: 4px;
 }
 
-treecol:not(:first-of-type) {
+:root:not([cleartheme="true"]) treecol:not(:first-of-type) {
   -moz-border-start: solid thin black;
 }
 
-treecolpicker {
+:root:not([cleartheme="true"]) treecolpicker {
   -moz-border-start: thin solid black;
 }
  
 /* ::::: column picker :::::  */
 
-.tree-columnpicker-icon {
+:root:not([cleartheme="true"]) .tree-columnpicker-icon {
   list-style-image: url("chrome://bluegriffon/skin/icons/columnpicker.gif");
 }
 
-treechildren::-moz-tree-checkbox(checked)
+:root:not([cleartheme="true"]) treechildren::-moz-tree-checkbox(checked)
 {
     /* css for checked cells */
     list-style-image: url("chrome://bluegriffon/skin/icons/cbox-check.gif");
@@ -283,18 +314,18 @@ treechildren::-moz-tree-checkbox(checked)
 
 /* LISTBOX */
 
-listheader {
+:root:not([cleartheme="true"]) listheader {
   -moz-appearance: none;
   background: transparent;
-  color: white;
+  color: var(--bg-main-foreground-color);
   border: none 0px;
 }
 
-listheader:not(:last-of-type) {
+:root:not([cleartheme="true"]) listheader:not(:last-of-type) {
   -moz-border-end: black solid thin;
 }
 
-listhead {
+:root:not([cleartheme="true"]) listhead {
   border-bottom: black solid thin;
   padding: 2px;
 }

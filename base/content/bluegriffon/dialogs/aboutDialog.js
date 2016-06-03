@@ -1,3 +1,5 @@
+Components.utils.import("resource://gre/modules/Services.jsm");
+
 function Startup()
 {
   var windowElt = document.documentElement;
@@ -14,6 +16,7 @@ function Startup()
 
 function onIframeLoaded()
 {
+  ApplyWysiwygThemeChange(document, Services.prefs.getCharPref("bluegriffon.wysiwyg.theme"));
   document.getElementById("iframe").contentWindow.
     setCallback(onUrlClicked);
 }

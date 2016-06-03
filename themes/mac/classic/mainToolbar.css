@@ -12,6 +12,13 @@
   -moz-box-orient: vertical;
 }
 
+@media (min-resolution: 2dppx) {
+  #MainToolbox toolbarbutton {
+    width: 8px;
+    height: 8px;
+  }
+}
+
 #MainToolbox .toolbarbutton-icon {
   margin: 2px;
 }
@@ -104,12 +111,12 @@
 }
 
 #MainToolbox toolbarseparator {
-  height: 32px;
+  height: 16px;
   background-color: transparent;
 }
 
 #MainToolbox[iconsize="small"] toolbarseparator {
-  height: 24px;
+  height: 16px;
 }
 
 
@@ -121,7 +128,7 @@
 #restore-button {
   -moz-box-orient: vertical;
   -moz-appearance: none;
-  height: 22px;
+  height: 16px;
   padding: 0;
   border: 0;
 }

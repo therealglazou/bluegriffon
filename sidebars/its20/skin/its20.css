@@ -44,7 +44,7 @@
 page {
   -moz-appearance: none;
   background-color: transparent;
-  color: white;
+  color: var(--bg-main-foreground-color);
 }
 
 #mainBox {
@@ -52,7 +52,7 @@ page {
   padding: 0px;
   padding-top: 4px;
   background-color: var(--bg-dark-gray);
-  color: white;
+  color: var(--bg-main-foreground-color);
 }
 
 #propertiesBox {
@@ -69,7 +69,6 @@ page {
 
 #locationTabbox {
   margin: 0px;
-  color: black;
 }
 
 #tabpanels {
@@ -80,15 +79,14 @@ page {
 }
 
 hbox.csspropertiesHeader {
-  border-top: 2px solid #181818;
-  -moz-border-top-colors: #181818 #494f51;
+  border-top: 2px solid var(--bg-dark-border);
+  -moz-border-top-colors: var(--bg-dark-border) var(--bg-lighter-border);
   padding-left: 3px;
   padding-top: 2px;
   padding-bottom: 2px;
   text-transform: uppercase;
   font-weight: bold;
   transition: color 0.5s;
-  color: white;
 }
 
 hbox.csspropertiesHeader > image {
@@ -117,7 +115,6 @@ hbox.csspropertiesHeader[open="true"] > image {
   opacity: 0;
   overflow: hidden;
   padding: 1em;
-  color: white;
 }
 
 hbox.csspropertiesHeader[open="true"] + .section {
@@ -162,9 +159,8 @@ hbox.csspropertiesHeader[open="true"] + .section {
 #rulesBox {
   margin: 0px;
   -moz-appearance: none;
-  background-color: var(--bg-dark-background);
-  color: white;
-  border: thin solid black;
+  background-color: var(--bg-list-background);
+  border: thin solid var(--bg-dark-border);
 }
 
 #rulesetsBox listcell:last-of-type {
@@ -204,14 +200,13 @@ listitem.ancestor:not([selected]) {
 
 listheader {
   -moz-appearance: none;
-  color: white;
   background-color: transparent;
   border: 0px none transparent;
-  border-bottom: thin solid black;
+  border-bottom: thin solid var(--bg-dark-border);
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
 listheader:not(:last-of-type) {
-  -moz-border-end: black thin solid;
+  -moz-border-end: var(--bg-dark-border) thin solid;
 }

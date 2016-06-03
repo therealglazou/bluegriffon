@@ -222,6 +222,24 @@ var BlueGriffonPrefsObserver = {
       }
     }
 
+    else if (prefName == "bluegriffon.wysiwyg.theme") {
+      var value = Services.prefs.getCharPref("bluegriffon.wysiwyg.theme");
+      var windowEnumerator = Services.wm.getEnumerator(null);
+      while (windowEnumerator.hasMoreElements()) {
+        var w = windowEnumerator.getNext();
+        var root = w.document.documentElement;
+        if (value == "black" &&
+            root.getAttribute("forcecleartheme") != "true")
+          root.removeAttribute("cleartheme");
+        else
+          root.setAttribute("cleartheme", "true");
+        if (root.id)
+          w.document.persist(root.id, "cleartheme");
+
+        ApplyWysiwygThemeChange(w.document, value);
+      }
+    }
+
     else if (prefName == "bluegriffon.source.theme") {
       var value = Services.prefs.getCharPref("bluegriffon.source.theme");
       var windowEnumerator = Services.wm.getEnumerator("bluegriffon");
