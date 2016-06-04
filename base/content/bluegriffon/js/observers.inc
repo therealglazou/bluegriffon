@@ -212,6 +212,16 @@ var BlueGriffonPrefsObserver = {
       }
     }
 
+    else if (prefName == "bluegriffon.toolbar.icons") {
+      var value = Services.prefs.getCharPref("bluegriffon.toolbar.icons");
+      var windowEnumerator = Services.wm.getEnumerator("bluegriffon");
+      while (windowEnumerator.hasMoreElements()) {
+        var w = windowEnumerator.getNext();
+        w.document.documentElement.setAttribute("iconsize", value);
+        w.document.persist(w.document.documentElement.id, "iconsize");
+      }
+    }
+
     else if (prefName == "bluegriffon.tabs.position") {
       var value = Services.prefs.getCharPref("bluegriffon.tabs.position");
       var windowEnumerator = Services.wm.getEnumerator("bluegriffon");

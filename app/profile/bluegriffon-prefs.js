@@ -150,6 +150,7 @@ pref("bluegriffon.source.wrap.exclude-languages", true);
 pref("bluegriffon.source.wrap.language-exclusions", "");
 
 pref("bluegriffon.toolbar.enabled", true);
+pref("bluegriffon.toolbar.icons", "medium");
 pref("bluegriffon.tabs.position", "center");
 
 pref("bluegriffon.osx.dock-integration", true);

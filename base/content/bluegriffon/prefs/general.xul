@@ -11,6 +11,7 @@
 
   <prefpane id="generalPrefPane">
     <preferences>
+      <preference id="pref-iconsize"       name="bluegriffon.toolbar.icons" type="string"/>
       <preference id="pref-wysiwygTheme"   name="bluegriffon.wysiwyg.theme" type="string"/>
       <preference id="pref-tabmode"        name="bluegriffon.tabs.position" type="string"/>
       <preference id="pref-maintoolbar"    name="bluegriffon.toolbar.enabled" type="bool"/>
@@ -37,6 +38,13 @@
       <checkbox id="mainToolbarVisibilityCheckbox"
                 preference="pref-maintoolbar"
                 label="&mainToolbarEnabled.label;"/>
+      <radiogroup id="wysiwygIconSizeRadiogroup"
+                  orient="horizontal"
+                  preference="pref-iconsize">
+        <radio label="&toolbarIconSizeSmall.label;" value="small"/>
+        <radio label="&toolbarIconSizeMedium.label;" value="medium"/>
+        <radio label="&toolbarIconSizeLarge.label;" value="large"/>
+      </radiogroup>
     </groupbox>
 
     <groupbox>
