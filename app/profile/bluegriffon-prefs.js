@@ -17,7 +17,7 @@ pref("toolbar.customization.usesheet", false); // false otherwise
 #endif
 
 /* main theme */
-pref("bluegriffon.wysiwyg.theme", "dark");
+pref("bluegriffon.wysiwyg.theme", "black");
 
 /* debugging prefs */
 pref("browser.dom.window.dump.enabled", false);
