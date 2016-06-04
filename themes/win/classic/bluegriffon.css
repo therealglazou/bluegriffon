@@ -59,7 +59,7 @@
 
 %ifndef XP_WIN
 menubar > menu:not([open="true"]) {
-  color: white ! important;
+  color: var(--bg-main-foreground-color) ! important;
 }
 %endif
 
@@ -176,7 +176,7 @@ grippy[disabled="true"] {
 
 /******** multibuttons ********/
 .multiButton {
-  color: #c0c0c0;
+  color: var(--bg-main-foreground-color);
   -moz-appearance: none;
   height: 12pt;
   padding: 4px 8px;
@@ -191,12 +191,25 @@ grippy[disabled="true"] {
   background-color: var(--bg-dark-gray);
 }
 
+:root[cleartheme="true"] .multiButton {
+  border-top: 2px solid #ddd;
+  border-left: 2px solid #ddd;
+  border-right: 2px solid #ddd;
+  border-bottom: 2px solid #aaa;
+  -moz-border-top-colors:#aaa #fff ;
+  -moz-border-right-colors:#aaa #dedede ;
+  -moz-border-left-colors:#aaa #dedede ;
+  -moz-border-bottom-colors:#aaa #dedede ;
+  background-color: #fafafa;
+  font-weight: normal;
+}
+
 .multiButton:hover {
-  color: white;
+  color: var(--bg-main-foreground-color);
 }
 
 .multiButton:hover:active {
-  color: white ! important;
+  color: var(--bg-main-foreground-color) ! important;
 }
 
 .multiButton[disabled] {
@@ -391,7 +404,7 @@ panel[floating="true"] {
   -moz-binding: url("chrome://bluegriffon/content/bindings/floatingpanel.xml#floatingpanel");
   -moz-appearance: none; 
   background-color: rgba(96,96,96,0.9);
-  color: white;
+  color: var(--bg-main-foreground-color);
   border-radius: 5px;
   transition: opacity 0.5s;
 }
@@ -446,13 +459,13 @@ deckedPanelsTabs > label {
 }
 
 deckedPanelsTabs > label[selected="true"] {
-  color: white;
+  color: var(--bg-main-foreground-color);
   -moz-user-focus: normal;
   border-top: thin solid #6d7373;
 }
 
 deckedPanelsTabs > label:hover {
-  color: white;
+  color: var(--bg-main-foreground-color);
 }
 
 /* COLOR AND BGCOLOR PICKERS */
@@ -486,17 +499,17 @@ toolbarseparator {
 
 /* MENULISTS */
 
-menulist {
+:root:not([cleartheme="true"]) menulist {
   -moz-appearance: none;
   padding-left: 3px;
   padding-right: 3px;
   background-color: var(--bg-dark-background);
   padding-left: 3px;
   border: thin solid var(--bg-dark-border);
-  color: white;
+  color: var(--bg-main-foreground-color);
 }
 
-menulist .menulist-dropmarker {
+:root:not([cleartheme="true"]) menulist .menulist-dropmarker {
 %ifndef XP_UNIX
   -moz-appearance: none;
 %endif
@@ -505,8 +518,8 @@ menulist .menulist-dropmarker {
   border: none 0px;
 }
 
-menulist html|*.menulist-editable-input {
-  color: white;
+:root:not([cleartheme="true"]) menulist html|*.menulist-editable-input {
+  color: var(--bg-main-foreground-color);
 }
 
 menulist[disabled="true"],
