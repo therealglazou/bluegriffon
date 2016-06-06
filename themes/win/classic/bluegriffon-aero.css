@@ -202,17 +202,6 @@
     .titlebar-button {
       display: none;
     }
-
-    /* The borders on the glass frame are ours, and inside #browser, and on
-     * vista and win7 we want to make sure they are "glassy", so we can't use
-     * #browser as the exclude-glass container. We use #appcontent instead. */
-    #browser {
-      -moz-appearance: none;
-    }
-
-    #appcontent {
-      -moz-appearance: -moz-win-exclude-glass;
-    }
   }
 
   @media (-moz-os-version: windows-win8) {
@@ -282,6 +271,7 @@
       border-top-style: none;
       background-clip: padding-box;
     }
+
   }
 
   #Bluegriffon[sizemode=normal] #TabsToolbar {
@@ -295,7 +285,11 @@
 
   #composer-main-menubar:not(:-moz-lwtheme):not(:-moz-window-inactive) {
     background-color: rgba(255,255,255,.5);
-    color: black;
+    color: captiontext;
+  }
+
+  #composer-main-menubar:not(:-moz-lwtheme):-moz-window-inactive {
+    color: inactivecaptiontext;
   }
 
   @media (-moz-os-version: windows-vista),
@@ -304,26 +298,6 @@
       border-radius: 4px;
     }
 
-    /* Artificially draw window borders that are covered by lwtheme, see bug 591930.
-     * We use a different border for win8, and this is not necessary on win10+ */
-    #Bluegriffon[sizemode="normal"] > #tab-view-deck > #browser-panel:-moz-lwtheme {
-      border-top: 2px solid;
-      -moz-border-top-colors: @glassActiveBorderColor@ rgba(255,255,255,.6);
-    }
-
-    #Bluegriffon[sizemode="normal"] > #tab-view-deck > #browser-panel:-moz-lwtheme:-moz-window-inactive {
-      -moz-border-top-colors: @glassInactiveBorderColor@ rgba(255,255,255,.6);
-    }
-  }
-
-  #ctrlTab-panel {
-    background: transparent;
-    -moz-appearance: -moz-win-glass;
-    border-radius: 0;
-    border: none;
-    font: normal 1.2em "Segoe UI";
-    color: black;
-    text-shadow: white -1px -1px .35em, white -1px 1px .35em, white 1px 1px .35em, white 1px -1px .35em;
   }
 }
 
@@ -338,41 +312,6 @@
     background-color: #556;
   }
 
-  /* Glass Fog */
-
-  #TabsToolbar:not(:-moz-lwtheme) {
-    position: relative;
-  }
-
-  #TabsToolbar:not(:-moz-lwtheme)::after {
-    /* Because we use placeholders for window controls etc. in the tabstrip,
-     * and position those with ordinal attributes, and because our layout code
-     * expects :before/:after nodes to come first/last in the frame list,
-     * we have to reorder this element to come last, hence the
-     * ordinal group value (see bug 853415). */
-    -moz-box-ordinal-group: 1001;
-    box-shadow: 0 0 30px 30px rgba(174,189,204,0.85);
-    content: "";
-    display: -moz-box;
-    height: 0;
-    margin: 0 60px; /* (30px + 30px) from box-shadow */
-    position: absolute;
-    pointer-events: none;
-    top: 50%;
-    width: -moz-available;
-    z-index: -1;
-  }
-
-  /* Need to constrain the glass fog to avoid overlapping layers, see bug 886281. */
-  #navigator-toolbox:not(:-moz-lwtheme) {
-    overflow: -moz-hidden-unscrollable;
-  }
-
-  #Bluegriffon[sizemode=normal] .tabbrowser-arrowscrollbox > .arrowscrollbox-scrollbox > .scrollbox-innerbox:not(:-moz-lwtheme) {
-    position: relative;
-  }
-
-  /* End Glass Fog */
 }
 
 /* Aero Basic */
@@ -384,22 +323,19 @@
     #Bluegriffon:-moz-window-inactive {
       background-color: rgb(215,228,242);
     }
-
-    /* Render a window top border for lwthemes: */
-    #Bluegriffon[tabsintitlebar][sizemode="normal"] > #tab-view-deck > #browser-panel:-moz-lwtheme {
-      background-image: linear-gradient(to bottom,
-            @glassActiveBorderColor@ 0, @glassActiveBorderColor@ 1px,
-            rgba(255,255,255,.6) 1px, rgba(255,255,255,.6) 2px, transparent 2px);
-    }
-
-    #Bluegriffon[tabsintitlebar][sizemode="normal"] > #tab-view-deck > #browser-panel:-moz-lwtheme:-moz-window-inactive {
-      background-image: linear-gradient(to bottom,
-            @glassInactiveBorderColor@ 0, @glassInactiveBorderColor@ 1px,
-            rgba(255,255,255,.6) 1px, rgba(255,255,255,.6) 2px, transparent 2px);
-    }
   }
 
   #print-preview-toolbar:not(:-moz-lwtheme) {
     -moz-appearance: -moz-win-browsertabbar-toolbox;
   }
 }
+
+#composer-main-menubar > menu {
+  color: var(--bg-main-foreground-color) ! important;
+  -moz-appearance: none;
+  background-color: transparent;
+}
+#composer-main-menubar > menu:-moz-window-inactive {
+  color: var(--bg-dark-gray) ! important;
+}
+
