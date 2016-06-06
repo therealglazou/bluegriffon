@@ -4189,6 +4189,31 @@ diff --git a/toolkit/mozapps/extensions/content/extensions.xul b/toolkit/mozapps
                  accesskey="&cmd.showDetails.accesskey;"/>
        <menuitem id="menuitem_enableItem" command="cmd_enableItem"
                  label="&cmd.enableAddon.label;"
+diff --git a/toolkit/mozapps/extensions/internal/XPIProvider.jsm b/toolkit/mozapps/extensions/internal/XPIProvider.jsm
+--- a/toolkit/mozapps/extensions/internal/XPIProvider.jsm
++++ b/toolkit/mozapps/extensions/internal/XPIProvider.jsm
+@@ -1205,17 +1205,20 @@ function loadManifestFromRDF(aUri, aStre
+   addon.icons = {};
+ 
+   return addon;
+ }
+ 
+ function defineSyncGUID(aAddon) {
+   // Load the storage service before NSS (nsIRandomGenerator),
+   // to avoid a SQLite initialization error (bug 717904).
+-  let storage = Services.storage;
++  try {
++    let storage = Services.storage;
++  }
++  catch(e) {}
+ 
+   // Define .syncGUID as a lazy property which is also settable
+   Object.defineProperty(aAddon, "syncGUID", {
+     get: () => {
+       // Generate random GUID used for Sync.
+       // This was lifted from util.js:makeGUID() from services-sync.
+       let rng = Cc["@mozilla.org/security/random-generator;1"].
+         createInstance(Ci.nsIRandomGenerator);
 diff --git a/toolkit/mozapps/handling/nsContentDispatchChooser.js b/toolkit/mozapps/handling/nsContentDispatchChooser.js
 --- a/toolkit/mozapps/handling/nsContentDispatchChooser.js
 +++ b/toolkit/mozapps/handling/nsContentDispatchChooser.js
