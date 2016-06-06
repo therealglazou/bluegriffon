@@ -62,6 +62,10 @@ function Startup()
 
   //window.sizeToContent();
   AdaptDialog();
+
+#ifndef XP_MACOSX
+  CenterDialogOnOpener();
+#endif
 }
 
 function AdaptDialog()

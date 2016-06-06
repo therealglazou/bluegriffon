@@ -33,6 +33,10 @@ function Startup()
     else
       gDialog.downloadButton.hidden = true;
   }
+
+#ifndef XP_MACOSX
+  CenterDialogOnOpener();
+#endif
 }
 
 function SkipVersion()

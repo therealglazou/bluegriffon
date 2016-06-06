@@ -155,6 +155,10 @@ function Startup()
       tocHeadersArray[index - 1] = [ tag, className ];
     }
   }
+
+#ifndef XP_MACOSX
+  CenterDialogOnOpener();
+#endif
 }
 
 

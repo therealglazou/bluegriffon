@@ -9,6 +9,10 @@ function Startup()
   gEditor = EditorUtils.getCurrentEditor();
   gDoc = gEditor.document;
   ListStylesheets();
+
+#ifndef XP_MACOSX
+  CenterDialogOnOpener();
+#endif
 }
 
 function ListStylesheets()

@@ -10,7 +10,10 @@ function Startup()
   GetUIElements();
 
   InitDialog();
-  //window.sizeToContent();
+
+#ifndef XP_MACOSX
+  CenterDialogOnOpener();
+#endif
 }
 
 function CheckFormName(aElt)

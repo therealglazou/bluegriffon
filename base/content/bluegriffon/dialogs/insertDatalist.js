@@ -13,6 +13,10 @@ function Startup()
   if (gNode) {
     InitDialog2(gNode, gDialog.contentsTree);
   }
+
+#ifndef XP_MACOSX
+  CenterDialogOnOpener();
+#endif
 }
 
 function onAccept()

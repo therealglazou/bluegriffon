@@ -18,7 +18,10 @@ function Startup()
 
   InitDialog();
   CheckURL();
-  //window.sizeToContent();
+
+#ifndef XP_MACOSX
+  CenterDialogOnOpener();
+#endif
 }
 
 function InitDialog()

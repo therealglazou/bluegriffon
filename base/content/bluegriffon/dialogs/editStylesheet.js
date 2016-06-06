@@ -17,7 +17,10 @@ function Startup()
     UpdateDialog();
   else
     UpdateType();
-  //window.sizeToContent();
+
+#ifndef XP_MACOSX
+  CenterDialogOnOpener();
+#endif
 }
 
 function CheckURL(aTextboxId, aCheckboxId)

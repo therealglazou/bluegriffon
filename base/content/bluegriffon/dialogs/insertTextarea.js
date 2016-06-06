@@ -10,6 +10,10 @@ function Startup()
   GetUIElements();
 
   InitDialog();
+
+#ifndef XP_MACOSX
+  CenterDialogOnOpener();
+#endif
 }
 
 function onAccept()

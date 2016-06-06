@@ -29,6 +29,10 @@ function Startup()
   InitDialog();
   CheckURL('urlTextbox', 'relativeURLCheckbox');
   CheckURL('urlPosterTextbox', 'relativeURLPosterCheckbox');
+
+#ifndef XP_MACOSX
+  CenterDialogOnOpener();
+#endif
 }
 
 function InitDialog()

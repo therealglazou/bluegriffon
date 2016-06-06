@@ -21,6 +21,10 @@ function Startup()
     }
   }
   Toggle();
+
+#ifndef XP_MACOSX
+  CenterDialogOnOpener();
+#endif
 }
 
 function Toggle()

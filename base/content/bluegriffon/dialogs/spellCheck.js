@@ -113,6 +113,10 @@ function Startup()
   //  no misspelled word is found
   //  (different message when used for the first time)
   gFirstTime = false;
+
+#ifndef XP_MACOSX
+  CenterDialogOnOpener();
+#endif
 }
 
 function SetElementEnabledById(aId, aEnabled)

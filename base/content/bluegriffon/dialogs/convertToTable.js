@@ -72,6 +72,10 @@ function Startup()
 
   // Set initial enable state on character input and "collapse" checkbox
   SelectCharacter(gIndex);
+
+#ifndef XP_MACOSX
+  CenterDialogOnOpener();
+#endif
 }
 
 function InputSepCharacter()

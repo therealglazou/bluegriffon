@@ -12,6 +12,10 @@ function Startup()
     false);
   document.getElementById("iframe").setAttribute("src",
     "chrome://bluegriffon/content/credits.xhtml");
+
+#ifndef XP_MACOSX
+  CenterDialogOnOpener();
+#endif
 }
 
 function onIframeLoaded()

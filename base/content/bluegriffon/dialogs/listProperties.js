@@ -16,6 +16,10 @@ function Startup()
   GetAllListItems(s);
 
   InitDialog();
+
+#ifndef XP_MACOSX
+  CenterDialogOnOpener();
+#endif
 }
 
 function InitDialog()

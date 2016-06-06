@@ -19,6 +19,10 @@ function Startup()
     gDialog.forMenulist.appendItem(ids[i], ids[i]);
 
   InitDialog();
+
+#ifndef XP_MACOSX
+  CenterDialogOnOpener();
+#endif
 }
 
 function onAccept()

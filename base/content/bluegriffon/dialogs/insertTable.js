@@ -12,6 +12,10 @@ function DataChanged()
 {
   gDataChanged = true;
   document.documentElement.getButton("extra1").disabled = false;
+
+#ifndef XP_MACOSX
+  CenterDialogOnOpener();
+#endif
 }
 
 function Startup()

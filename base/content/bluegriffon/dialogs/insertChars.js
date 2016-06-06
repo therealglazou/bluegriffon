@@ -42,6 +42,10 @@ function Startup()
 
   UpdateChars(0);
   document.addEventListener("DOMAttrModified", OnMutationEventOnScrollbar, false);
+
+#ifndef XP_MACOSX
+  CenterDialogOnOpener();
+#endif
 }
 
 function ToHex4(n)

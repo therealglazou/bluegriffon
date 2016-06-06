@@ -127,7 +127,9 @@ function Startup()
 
   SetTextboxFocus(gDialog.pageTitle);
 
-  // SetWindowLocation();
+#ifndef XP_MACOSX
+  CenterDialogOnOpener();
+#endif
 }
 
 function InitDialog()
