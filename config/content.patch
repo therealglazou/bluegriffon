@@ -4192,7 +4192,7 @@ diff --git a/toolkit/mozapps/extensions/content/extensions.xul b/toolkit/mozapps
 diff --git a/toolkit/mozapps/extensions/internal/XPIProvider.jsm b/toolkit/mozapps/extensions/internal/XPIProvider.jsm
 --- a/toolkit/mozapps/extensions/internal/XPIProvider.jsm
 +++ b/toolkit/mozapps/extensions/internal/XPIProvider.jsm
-@@ -1205,17 +1205,20 @@ function loadManifestFromRDF(aUri, aStre
+@@ -1205,17 +1205,21 @@ function loadManifestFromRDF(aUri, aStre
    addon.icons = {};
  
    return addon;
@@ -4203,6 +4203,7 @@ diff --git a/toolkit/mozapps/extensions/internal/XPIProvider.jsm b/toolkit/mozap
    // to avoid a SQLite initialization error (bug 717904).
 -  let storage = Services.storage;
 +  try {
++    // BLUEGRIFFON BMO bug 1277295
 +    let storage = Services.storage;
 +  }
 +  catch(e) {}
@@ -4214,6 +4215,26 @@ diff --git a/toolkit/mozapps/extensions/internal/XPIProvider.jsm b/toolkit/mozap
        // This was lifted from util.js:makeGUID() from services-sync.
        let rng = Cc["@mozilla.org/security/random-generator;1"].
          createInstance(Ci.nsIRandomGenerator);
+@@ -7314,17 +7318,18 @@ function defineAddonWrapperProperty(name
+ }
+ 
+ ["id", "syncGUID", "version", "isCompatible", "isPlatformCompatible",
+  "providesUpdatesSecurely", "blocklistState", "blocklistURL", "appDisabled",
+  "softDisabled", "skinnable", "size", "foreignInstall", "hasBinaryComponents",
+  "strictCompatibility", "compatibilityOverrides", "updateURL",
+  "getDataDirectory", "multiprocessCompatible", "signedState"].forEach(function(aProp) {
+    defineAddonWrapperProperty(aProp, function() {
+-     return addonFor(this)[aProp];
++		let addon = addonFor(this);
++		return (aProp in addon) ? addon[aProp] : undefined;
+    });
+ });
+ 
+ ["fullDescription", "developerComments", "eula", "supportURL",
+  "contributionURL", "contributionAmount", "averageRating", "reviewCount",
+  "reviewURL", "totalDownloads", "weeklyDownloads", "dailyUsers",
+  "repositoryStatus"].forEach(function(aProp) {
+   defineAddonWrapperProperty(aProp, function() {
 diff --git a/toolkit/mozapps/handling/nsContentDispatchChooser.js b/toolkit/mozapps/handling/nsContentDispatchChooser.js
 --- a/toolkit/mozapps/handling/nsContentDispatchChooser.js
 +++ b/toolkit/mozapps/handling/nsContentDispatchChooser.js
