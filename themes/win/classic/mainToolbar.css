@@ -33,6 +33,19 @@
   width: 24px;
 }
 
+/* smaller icons */
+
+:root[iconsize="medium"] #MainToolbox toolbarbutton[iconsize="smaller"] .toolbarbutton-icon {
+  height: 12px;
+  width:  12px;
+}
+:root[iconsize="large"] #MainToolbox toolbarbutton[iconsize="smaller"] .toolbarbutton-icon {
+  height: 16px;
+  width:  16px;
+}
+
+/* end smaller icons */
+
 #MainToolbox > toolbar .toolbarbutton-icon {
   margin: 2px;
 }
@@ -105,7 +118,6 @@
 #formButton {
   list-style-image: url("chrome://bluegriffon/skin/mainToolbar/form.svg");
 }
-
 
 /***************** THROBBER **************/
 

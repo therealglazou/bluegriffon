@@ -221,7 +221,7 @@ function UpdateWindowTitle(aEditorElement)
 
     // Append just the 'leaf' filename to the Doc. Title for the window caption
     var docUrl = doc.QueryInterface(Components.interfaces.nsIDOMHTMLDocument).URL;
-    if (docUrl && !UrlUtils.isUrlOfBlankDocument(docUrl))
+    if (docUrl && !UrlUtils.isUrlOfBlankDocument(docUrl) && docUrl != "about:blank")
     {
       var scheme = UrlUtils.getScheme(docUrl);
       var filename = UrlUtils.getFilename(docUrl);
