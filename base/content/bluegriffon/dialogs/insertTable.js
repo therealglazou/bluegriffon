@@ -431,6 +431,7 @@ function onTabSelect()
 
 function InitCellsData(aNode)
 {
+  Services.prompt.alert(null, "foo", aNode.nodeName)
   var nodeName = aNode.nodeName.toLowerCase();
   var editing = "cells";
   if (nodeName == "tr")
@@ -610,7 +611,7 @@ function UpdateColumns(editor)
 
       // now find the enclosing thead/tbody/tfoot
       var enclosing = c;
-      while (enclosing && !(enclosing instanceof Components.interfaces.nsIDOMHTMLTableSectionElement))
+      while (enclosing && !(enclosing instanceof HTMLTableSectionElement))
         enclosing = enclosing.parentNode;
       if (!enclosing) // sanity check
         return; // uuuh well should never happen
@@ -925,7 +926,7 @@ function NextRow()
   }
   var editor = EditorUtils.getCurrentEditor();
   //var cells = row.querySelectorAll("td,th");
-  var cells = collectDescendants(row, "td").join(collectDescendants(row, "th"));
+  var cells = collectDescendants(row, "td").concat(collectDescendants(row, "th"));
   var selection = editor.selection;
   selection.removeAllRanges();
   for (var i = 0; i < cells.length; i++) {
@@ -1080,7 +1081,7 @@ function PreviousRow()
   }
   var editor = EditorUtils.getCurrentEditor();
   //var cells = row.querySelectorAll("td,th");
-  var cells = collectDescendants(row, "td").join(collectDescendants(row, "th"));
+  var cells = collectDescendants(row, "td").concat(collectDescendants(row, "th"));
   var selection = editor.selection;
   selection.removeAllRanges();
   for (var i = 0; i < cells.length; i++) {
