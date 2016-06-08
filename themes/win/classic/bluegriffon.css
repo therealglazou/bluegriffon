@@ -576,3 +576,13 @@ menulist[editable="true"] {
 %include bluegriffon-aero.css
 }
 %endif
+
+%ifdef XP_UNIX
+toolbarbutton,
+toolbarbutton:hover {
+  -moz-appearance: none;
+  border: 0px none ! important;
+  background-image: none ! important;
+  background-color: transparent ! important;
+}
+%endif
