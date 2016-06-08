@@ -1226,7 +1226,7 @@ function OpenPreferences()
   if (w)
     w.focus();
   else {
-    var features = "chrome,titlebar,toolbar,centerscreen,dialog=yes,resizable=yes";
+    var features = "chrome,titlebar,toolbar,centerscreen,dialog=no,resizable=yes";
     window.openDialog("chrome://bluegriffon/content/prefs/prefs.xul", "Preferences", features);
   }
 }
