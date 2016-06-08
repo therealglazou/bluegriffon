@@ -233,11 +233,15 @@ function UpdateWindowTitle(aEditorElement)
 
     // Set window title with
     var titleModifier = L10NUtils.getString("titleModifier");
-    gDialog.titleInTitlebar.setAttribute("value",
-                                         L10NUtils.getBundle()
-                                           .formatStringFromName("titleFormat",
-                                                                 [windowTitle, titleModifier],
-                                                                 2));
+    var title = L10NUtils.getBundle()
+                         .formatStringFromName("titleFormat",
+                                               [windowTitle, titleModifier],
+                                               2);
+#ifdef CAN_DRAW_IN_TITLEBAR
+    gDialog.titleInTitlebar.setAttribute("value", title);
+#else
+    document.title = title;
+#endif
     return windowTitle;                                                       
   } catch (e) { }
   return "";
@@ -1163,7 +1167,11 @@ function doCloseTab(aTab)
       //gDialog.structurebar.className = "hidden";
       gDialog.structurebar.style.visibility = "hidden";
     }
+#ifdef CAN_DRAW_IN_TITLEBAR
     gDialog.titleInTitlebar.setAttribute("value", "BlueGriffon");
+#else
+    document.title = "BlueGriffon";
+#endif
   }
   window.updateCommands("style");
   NotifierUtils.notify("tabClosed");

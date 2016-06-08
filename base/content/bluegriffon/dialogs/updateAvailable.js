@@ -26,7 +26,6 @@ function Startup()
   }
 
   if (message) {
-    gDialog.titleInTitlebar.setAttribute("value", "BlueGriffon");
     gDialog.warningMessage.firstChild.textContent = message;
     if (messageURL)
       DOWNLOAD_URL = messageURL;
