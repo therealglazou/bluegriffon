@@ -3862,6 +3862,36 @@ diff --git a/rdf/base/nsRDFContentSink.cpp b/rdf/base/nsRDFContentSink.cpp
    *_retval = true;
    return NS_OK;
  }
+diff --git a/toolkit/components/console/content/console.js b/toolkit/components/console/content/console.js
+--- a/toolkit/components/console/content/console.js
++++ b/toolkit/components/console/content/console.js
+@@ -91,21 +91,19 @@ function evaluateTypein()
+   // reset the iframe first; the code will be evaluated in loadOrDisplayResult
+   // below, once about:blank has completed loading (see bug 385092)
+   gEvaluator.contentWindow.location = "about:blank";
+ }
+ 
+ function loadOrDisplayResult()
+ {
+   if (gCodeToEvaluate) {
+-    gEvaluator.contentWindow.location = "javascript: " +
+-                                        gCodeToEvaluate.replace(/%/g, "%25");
++    var s = gEvaluator.contentDocument.createElement("script");
++    var t = gEvaluator.contentDocument.createTextNode("javascript:document.write(" + gCodeToEvaluate + ")");
++    s.appendChild(t);
++    gEvaluator.contentDocument.body.previousElementSibling.appendChild(s);
+     gCodeToEvaluate = "";
+-    return;
+   }
+-
+-  var resultRange = gEvaluator.contentDocument.createRange();
+-  resultRange.selectNode(gEvaluator.contentDocument.documentElement);
+-  var result = resultRange.toString();
++  var result = gEvaluator.contentDocument.documentElement.textContent;
+   if (result)
+     Services.console.logStringMessage(result);
+     // or could use appendMessage which doesn't persist
+ }
 diff --git a/toolkit/components/console/content/consoleBindings.xml b/toolkit/components/console/content/consoleBindings.xml
 --- a/toolkit/components/console/content/consoleBindings.xml
 +++ b/toolkit/components/console/content/consoleBindings.xml
