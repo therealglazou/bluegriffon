@@ -21,10 +21,19 @@ function AllSectionIniter(aElt, aRuleset)
     gDialog.allTree.removeChild(treechildren);
 
   if (aRuleset && aRuleset.length) {
-    var rule = aRuleset[0].rule;
-    for (var i = 0; i < rule.style.length; i++) {
-      var property   = rule.style.item(i);
-      var value      = rule.style.getPropertyValue(property);
+    var properties = [];
+    for (var i = 0; i < aRuleset.length; i++) {
+      var rule = aRuleset[i].rule;
+      for (var j = 0; j < rule.style.length; j++) {
+        var property   = rule.style.item(j);
+        if (properties.indexOf(property) == -1)
+          properties.push(property);
+      }
+    }
+
+    for (var i = 0; i < properties.length; i++) {
+      var property   = properties[i];
+      var value      = CssInspector.getCascadedValue(aRuleset, property);
 
       var item = AddTreeItem(gDialog.allTree);
 	    var cell1 = document.createElement("treecell");
