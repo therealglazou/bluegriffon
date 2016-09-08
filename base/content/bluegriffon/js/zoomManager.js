@@ -68,6 +68,7 @@ var BGZoomManager = {
   setCurrentZoom: function BGZoomManager_setCurrentZoom(aZoom)
   {
     this.getMarkupDocumentViewer().fullZoom = aZoom;
+    NotifierUtils.notify("zoomChanged");
   },
 
   fillZoomValues: function BGZoomManager_fillZoomValues(aPopup)

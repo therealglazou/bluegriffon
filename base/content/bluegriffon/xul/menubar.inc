@@ -366,7 +366,9 @@
         <menuseparator/>
         <menuitem label="&addonsMenu.label;"  oncommand="OpenExtensionsManager()"/>
         <menuseparator/>
+#ifndef BG_RELEASE
         <menuitem label="&consoleMenu.label;"  oncommand="OpenConsole()"/>
+#endif
         <menuseparator id="menu_PrefsSeparator"/>
         <menuitem id="menu_preferences"
                   label="&preferences.label;"
@@ -380,7 +382,9 @@
         <menuitem id="menu_mac_hide_others" label="&hideOtherAppsCmdMac.label;" key="key_hideOtherAppsCmdMac"/>
         <menuitem id="menu_mac_show_all" label="&showAllAppsCmdMac.label;"/>
 #endif
-        <!--menuitem id="menu_inspector" label="DOMI" oncommand="inspectDOMDocument();"/-->
+#ifndef BG_RELEASE
+        <menuitem id="menu_inspector" label="DOMI" oncommand="inspectDOMDocument();"/>
+#endif
       </menupopup>
     </menu>
 

@@ -541,6 +541,26 @@ var ComposerCommands = {
   },
 
   selectionListener: {
+    //Interfaces this component implements.
+    interfaces: [Components.interfaces.nsIEditorObserver,
+                 Components.interfaces.nsIEditorMouseObserver,
+                 Components.interfaces.nsISelectionListener,
+                 Components.interfaces.nsITransactionListener,
+                 Components.interfaces.nsISupports],
+  
+    // nsISupports
+  
+    QueryInterface: function(iid) {
+      if (!this.interfaces.some( function(v) { return iid.equals(v) } ))
+        throw Components.results.NS_ERROR_NO_INTERFACE;
+  
+      return this;
+    },
+  
+    getInterface: function(iid) {
+      return this.QueryInterface(iid);
+    },
+
     notifySelectionChanged: function(doc, sel, reason)
     {
       ComposerCommands.updateSelectionBased(false);
@@ -561,8 +581,28 @@ var ComposerCommands = {
 
     MouseUp: function(aClientX, aClientY, aTarget, aIsShiftKey) {
       return TableResizer.MouseUp(aClientX, aClientY, aTarget, aIsShiftKey);
-    }
+    },
 
+    willDo: function(aManager, aTransaction) { return false; },
+    didDo: function(aManager, aTransaction, aDoResult) { },
+    willUndo: function(aManager, aTransaction) { return false; },
+    didUndo: function(aManager, aTransaction, aDoResult) {
+      ComposerCommands.updateSelectionBased(false);
+      if ("ResponsiveRulerHelper" in window)
+        setTimeout(function() { ResponsiveRulerHelper.refresh() }, 100);
+    },
+    willRedo: function(aManager, aTransaction) { return false; },
+    didRedo: function(aManager, aTransaction, aDoResult) {
+      ComposerCommands.updateSelectionBased(false);
+      if ("ResponsiveRulerHelper" in window)
+        setTimeout(function() { ResponsiveRulerHelper.refresh() }, 100);
+    },
+    willBeginBatch: function(aManager) { return false; },
+    didBeginBatch: function(aManager, aResult) {},
+    willEndBatch: function(aManager) { return false; },
+    didEndBatch: function(aManager, aResult) {},
+    willMerge: function(aManager, aTopTransaction, aTransactionToMerge) { return false; },
+    didMerge: function(aManager, aTopTransaction, aTransactionToMerge, aDidMerge, aMergeResult) {}
   }
 };
 

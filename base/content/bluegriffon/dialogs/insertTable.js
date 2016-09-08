@@ -431,7 +431,6 @@ function onTabSelect()
 
 function InitCellsData(aNode)
 {
-  Services.prompt.alert(null, "foo", aNode.nodeName)
   var nodeName = aNode.nodeName.toLowerCase();
   var editing = "cells";
   if (nodeName == "tr")

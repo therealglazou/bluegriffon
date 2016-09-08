@@ -81,7 +81,7 @@ function Startup()
   gDialog.allTree.addEventListener("DOMAttrModified", onAllTreeModified, true);
   gDialog.variablesTree.addEventListener("DOMAttrModified", onVariablesTreeModified, true);
 
-  gMain.NotifierUtils.addNotifierCallback("selection",
+  gMain.NotifierUtils.addNotifierCallback("selection_strict",
                                           SelectionChanged,
                                           window);
   gMain.NotifierUtils.addNotifierCallback("tabClosed",
@@ -442,6 +442,9 @@ function ApplyStyles(aStyles, aNoSelectionUpdate, aDoNotBeginTransaction, aCallb
     var property = s.property;
     var value = s.value;
 
+    if (!gInUtils.cssPropertyIsValid(property, value))
+      continue;
+
     switch (gDialog.cssPolicyMenulist.value) {
 
       case "id":
@@ -628,7 +631,14 @@ function ApplyStyleChangesToStylesheets(editor,           // the current editor
   var whereToInsert;
   switch (query) {
     case "":
-      whereToInsert = FindWhereToInsertRuleForScreen(ruleset, property, value, aDelimitor, aRegExpDelimitor, aIdent);
+      if ("ResponsiveRulerHelper" in gMain) {
+        if (gMain.ResponsiveRulerHelper.hasSelectedMediaQuery())
+          whereToInsert = gMain.ResponsiveInsertionHelper.findWhereToInsertRuleForSelectedMQ(ruleset, property, value, aDelimitor, aRegExpDelimitor, aIdent);
+        else
+          whereToInsert = FindWhereToInsertRuleForScreen(ruleset, property, value, aDelimitor, aRegExpDelimitor, aIdent);
+      }
+      else
+        whereToInsert = FindWhereToInsertRuleForScreen(ruleset, property, value, aDelimitor, aRegExpDelimitor, aIdent);
       if (whereToInsert.sheet) {
         if (whereToInsert.rule) {
           if (value) {

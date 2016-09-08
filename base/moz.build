@@ -686,3 +686,6 @@ RESOURCE_FILES.codemirror.theme += [
 
 if CONFIG['MOZ_WIDGET_TOOLKIT'] in ('windows', 'cocoa'):
     DEFINES['CAN_DRAW_IN_TITLEBAR'] = 1
+
+if CONFIG['BG_RELEASE']:
+    DEFINES['BG_RELEASE'] = 1

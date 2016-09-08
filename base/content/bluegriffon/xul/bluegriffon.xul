@@ -162,49 +162,51 @@
     <vbox flex="1" id="maincontainer">
       <vbox flex="1">
         <box flex="1" id="tabeditorContainer" >
-          <tabeditor flex="1" id="tabeditor" visibility="hidden" persist="tabmode">
-              <hbox id="modeTabbox" previousMode="wysiwyg">
-                <spacer flex="1"/>
-                <label class="multiButton left"
-                         selected="true"
-                         id="wysiwygModeButton"
-                         value="&wysiwygMode.label;"
-                         onclick="ToggleViewMode(this)"
-                         mode="wysiwyg"
-                         observes="cmd_viewModeEnabler"/>
-                <label class="multiButton center"
-                         id="sourceModeButton"
-                         value="&sourceMode.label;"
-                         onclick="ToggleViewMode(this)"
-                         mode="source"
-                         observes="cmd_viewModeEnabler"/>
-                <label class="multiButton right"
-                         id="printPreviewModeButton"
-                         value="&printMode.label;"
-                         onclick="ToggleViewMode(this)"
-                         mode="wysiwyg"
-                         observes="cmd_viewModeEnabler"/>
-                <spacer flex="1"/>
-                <hbox id="zoomPanel">
-                  <spinbuttons onup="BGZoomManager.enlarge(this.nextSibling)"
-                               ondown="BGZoomManager.reduce(this.nextSibling)"/>
-                  <menulist id="menulist-zoompanel"
-                            observes="cmd_renderedHTMLEnabler"
-                            editable="true"
-                            tooltiptext="&setZoomFactor.label;"
-                            value="100%"
-                            sizetopopup="none"
-                            onkeyup="BGZoomManager.onKeyUp(event, this)"
-                            oncommand="BGZoomManager.applyZoomValue(this)">
-                    <menupopup id="menupopup-zoompanel"
-                               onpopupshowing="BGZoomManager.fillZoomValues(this)">
-                      <menuitem label="dummy"/>
-                    </menupopup>
-                  </menulist>
-        
+          <vbox id="responsiveContainer" flex="1">
+            <tabeditor flex="1" id="tabeditor" visibility="hidden" persist="tabmode">
+                <hbox id="modeTabbox" previousMode="wysiwyg">
+                  <spacer flex="1"/>
+                  <label class="multiButton left"
+                           selected="true"
+                           id="wysiwygModeButton"
+                           value="&wysiwygMode.label;"
+                           onclick="ToggleViewMode(this)"
+                           mode="wysiwyg"
+                           observes="cmd_viewModeEnabler"/>
+                  <label class="multiButton center"
+                           id="sourceModeButton"
+                           value="&sourceMode.label;"
+                           onclick="ToggleViewMode(this)"
+                           mode="source"
+                           observes="cmd_viewModeEnabler"/>
+                  <label class="multiButton right"
+                           id="printPreviewModeButton"
+                           value="&printMode.label;"
+                           onclick="ToggleViewMode(this)"
+                           mode="wysiwyg"
+                           observes="cmd_viewModeEnabler"/>
+                  <spacer flex="1"/>
+                  <hbox id="zoomPanel">
+                    <spinbuttons onup="BGZoomManager.enlarge(this.nextSibling)"
+                                 ondown="BGZoomManager.reduce(this.nextSibling)"/>
+                    <menulist id="menulist-zoompanel"
+                              observes="cmd_renderedHTMLEnabler"
+                              editable="true"
+                              tooltiptext="&setZoomFactor.label;"
+                              value="100%"
+                              sizetopopup="none"
+                              onkeyup="BGZoomManager.onKeyUp(event, this)"
+                              oncommand="BGZoomManager.applyZoomValue(this)">
+                      <menupopup id="menupopup-zoompanel"
+                                 onpopupshowing="BGZoomManager.fillZoomValues(this)">
+                        <menuitem label="dummy"/>
+                      </menupopup>
+                    </menulist>
+          
+                  </hbox>
                 </hbox>
-              </hbox>
-          </tabeditor>
+            </tabeditor>
+          </vbox>
           <splitter id="deckedPanelsSplitter"
                     collapse="after">
 #ifndef XP_MACOSX

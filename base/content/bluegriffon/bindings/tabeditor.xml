@@ -84,7 +84,15 @@
             </xul:row>
             <xul:row flex="1" style="background-image: url('chrome://bluegriffon/content/logo.png'); background-repeat: no-repeat; background-position: center center">
               <xul:vruler anonid="vruler" disabled="true" />
-              <xul:tabpanels anonid="EditorTabpanels" selectedIndex="0" flex="1" style="margin:0px; padding:0px;"/>
+              <xul:hbox flex="1">
+                <xul:tabpanels anonid="EditorTabpanels" id="EditorTabpanels" selectedIndex="0" flex="1" style="margin:0px; padding:0px;"/>
+                <xul:splitter id="responsiveSplitter"
+                              anonid="responsiveSplitter"
+                              collapse="after"
+                              hidden="true"
+                              tooltiptext="to resize your editing viewport"/>
+                <xul:box anonid="viewportSplitterBox" flex="1" collapsed="true" hidden="true"/>
+              </xul:hbox>
             </xul:row>
             <xul:row id="helperButtons" align="center">
               <xul:spacer flex="1"/>
@@ -98,10 +106,17 @@
 
     <implementation>
 
+      <method name="getChild">
+        <parameter name="aChildName"/>
+        <body><![CDATA[
+          return document.getAnonymousElementByAttribute(this, "anonid", aChildName);
+        ]]></body>
+      </method>
+
       <property name="mHruler">
         <getter>
         <![CDATA[
-          return document.getAnonymousElementByAttribute(this, "anonid", "hruler");
+          return this.getChild("hruler");
         ]]>
         </getter>
       </property>
@@ -109,7 +124,7 @@
       <property name="mVruler">
         <getter>
         <![CDATA[
-          return document.getAnonymousElementByAttribute(this, "anonid", "vruler");
+          return this.getChild("vruler");
         ]]>
         </getter>
       </property>
@@ -117,7 +132,7 @@
       <property name="mTabbox">
         <getter>
         <![CDATA[
-          return document.getAnonymousElementByAttribute(this, "anonid", "EditorTabbox");
+          return this.getChild("EditorTabbox");
         ]]>
         </getter>
       </property>
@@ -125,7 +140,7 @@
       <property name="mTabs">
         <getter>
         <![CDATA[
-          return document.getAnonymousElementByAttribute(this, "anonid", "EditorTabs");
+          return this.getChild("EditorTabs");
         ]]>
         </getter>
       </property>
@@ -133,7 +148,7 @@
       <property name="mTabpanels">
         <getter>
         <![CDATA[
-          return document.getAnonymousElementByAttribute(this, "anonid", "EditorTabpanels");
+          return this.getChild("EditorTabpanels");
         ]]>
         </getter>
       </property>
@@ -341,6 +356,8 @@
                         .addSelectionListener(ComposerCommands.selectionListener);
                       editor.addEditorObserver(ComposerCommands.selectionListener);
                       editor.addEditorMouseObserver(ComposerCommands.selectionListener);
+                      editor.transactionManager
+                        .AddListener(ComposerCommands.selectionListener);
                     }
                     if (editor &&
                         "ActiveViewManager" in window &&
@@ -562,7 +579,7 @@
           if (!e)
             return;
 
-          var tabeditor = this.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
+          var tabeditor = gDialog.tabeditor;
           var tabs      = tabeditor.mTabs.childNodes;
           var editors   = tabeditor.mTabpanels.childNodes;
           var l = editors.length;

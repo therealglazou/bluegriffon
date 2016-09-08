@@ -217,3 +217,13 @@ tabeditor[tabmode="right"] .tabs-right {
   background-image: linear-gradient(to bottom, var(--bg-dark-gray), var(--bg-lighter-dark-gray));
   border-radius: 4px 4px 0px 0px;
 }
+
+#responsiveSplitter {
+  background-image: url("chrome://responsive/skin/responsive-vertical-resizer.png");
+}
+
+@media (min-resolution: 1.1dppx) {
+  #responsiveSplitter {
+    background-image: url("chrome://responsive/skin/responsive-vertical-resizer@2x.png");
+  }
+}

@@ -54,6 +54,7 @@
   --bg-list-background: #363d3f;
 
   --bg-main-foreground-color: white;
+  --bg-disabled-foreground-color: #808080;
 }
 
 :root[cleartheme="true"] {
@@ -66,6 +67,7 @@
   --bg-list-background: white;
 
   --bg-main-foreground-color: black;
+  --bg-disabled-foreground-color: #808080;
 }
 
 :root[cleartheme="true"] image:not(.checkbox-check):not(.radio-check) {
@@ -178,6 +180,11 @@ window:root {
   padding-left: 3px;
   border: thin solid var(--bg-dark-border);
   color: var(--bg-main-foreground-color);
+}
+
+:root:not([cleartheme="true"]) menulist[disabled="true"],
+:root:not([cleartheme="true"]) textbox[type="number"][disabled="true"] {
+  color: var(--bg-disabled-foreground-color);
 }
 
 :root:not([cleartheme="true"]) textbox[type="number"] .numberbox-input-box {
