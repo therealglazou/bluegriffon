@@ -220,3 +220,5 @@ pref("general.useragent.locale", "en-US");
 pref("intl.locale.matchOS", true);
 
 pref("app.support.baseURL", "http://bluegriffon.org/");
+
+pref("bluegriffon.responsive.default", "min"); // min, max, minmax
