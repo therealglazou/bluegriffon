@@ -9,6 +9,8 @@ The Open Source next-generation Web Editor based on the rendering engine of Fire
 
   `hg clone http://hg.mozilla.org/mozilla-central bluegriffon-source`
 
+  Warning: on Windows, it's HIGHLY recommended to have both Windows and Visual Studio in the same locale, preferably en-US. If for instance you have a fr-FR Windows10 and a en-US VS, build will miserably fail...
+
 * get BlueGriffon's tree through:
 
   `cd bluegriffon-source`
