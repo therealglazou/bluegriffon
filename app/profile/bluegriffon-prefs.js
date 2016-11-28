@@ -222,3 +222,6 @@ pref("intl.locale.matchOS", true);
 pref("app.support.baseURL", "http://bluegriffon.org/");
 
 pref("bluegriffon.responsive.default", "min"); // min, max, minmax
+
+// Blocklist preferences
+pref("extensions.blocklist.enabled", false);
