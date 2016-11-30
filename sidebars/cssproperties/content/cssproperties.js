@@ -349,6 +349,14 @@ function CheckIdFromIdAlert(aElt)
   gDialog.idAlertButton.removeAttribute("disabled");
 }
 
+function CheckReturnInIdAlert(aElt, aEvent)
+{
+  if (aEvent.which == 13 &&
+      !gDialog.idAlertButton.hasAttribute("disabled")) {
+    ApplyIdFromIdAlert();
+  }
+}
+
 function ApplyIdFromIdAlert()
 {
   var value = gDialog.idAlertTextbox.value;
@@ -361,8 +369,11 @@ function ApplyIdFromIdAlert()
   }
   editor.setAttribute(gIdCurrentElement, "id", value);
   gCurrentElement = gIdCurrentElement;
+  gDialog.idAlert.setAttribute("hidden", "true");
   gDialog.idAlert.removeAttribute("open");
   ApplyStyles(gIdAlertStyles, gIdNoSelectionUpdate, true);
+  setTimeout(function() {gDialog.idAlert.removeAttribute("hidden");}, 1000);
+  EditorUtils.getCurrentEditorWindow().content.focus();
 }
 
 function ApplyStyles(aStyles, aNoSelectionUpdate, aDoNotBeginTransaction, aCallback)

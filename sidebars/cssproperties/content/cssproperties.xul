@@ -97,6 +97,7 @@
       <description>Please enter an ID:</description>
       <hbox align="center">
         <textbox id="idAlertTextbox"
+                 onkeypress="CheckReturnInIdAlert(this, event)"
                  oninput="CheckIdFromIdAlert(this)"/>
         <button id="idAlertButton" label="ok"
                 oncommand="ApplyIdFromIdAlert()"/>
