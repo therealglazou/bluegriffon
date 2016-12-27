@@ -177,8 +177,8 @@ function SelectionChanged(aArgs, aElt, aOneElementSelected, aSelectedInDOMETree)
   gCurrentElement = aElt;
 
   var node = gCurrentElement;
-  if (node.hasAttribute("role")) {
-    var role = node.getAttribute("role");
+  if (node.hasAttribute("role") || node.hasAttributeNS("http://www.idpf.org/2007/ops", "type")) {
+    var role = node.getAttribute("role") || node.getAttributeNS("http://www.idpf.org/2007/ops", "type");
     gDialog.roleMenulist.value = role;
 
     CheckConstraints(node, role);
@@ -359,7 +359,19 @@ function SetRole(aEvent)
     var editor = EditorUtils.getCurrentEditor();
     var role = aEvent.originalTarget.value;
 
-    editor.setAttribute(gCurrentElement, "role", role);
+    if (gCurrentElement.hasAttributeNS("http://www.idpf.org/2007/ops", "type")) {
+      editor.beginTransaction();
+
+      try {
+      var txn = new diRemoveAttributeNSTxn(gCurrentElement, "type", "http://www.idpf.org/2007/ops");
+      editor.transactionManager.doTransaction(txn);
+      } catch(e) {alert(e)}
+
+      editor.setAttribute(gCurrentElement, "role", role);
+      editor.endTransaction();
+    }
+    else
+      editor.setAttribute(gCurrentElement, "role", role);
     gDialog.roleMenulist.setAttribute("label", role);
     gDialog.roleMenulist.setAttribute("value", role);
 
