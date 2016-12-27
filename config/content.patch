@@ -72,6 +72,28 @@ diff --git a/browser/locales/en-US/chrome/browser/baseMenuOverlay.dtd b/browser/
  <!ENTITY hideOtherAppsCmdMac.commandkey "H">
  
  <!ENTITY showAllAppsCmdMac.label        "Show All">
+diff --git a/build/mach_bootstrap.py b/build/mach_bootstrap.py
+--- a/build/mach_bootstrap.py
++++ b/build/mach_bootstrap.py
+@@ -108,17 +108,17 @@ SEARCH_PATHS = [
+     'testing/web-platform/harness',
+     'testing/web-platform/tests/tools/wptserve',
+     'testing/xpcshell',
+     'xpcom/idl-parser',
+ ]
+ 
+ # Individual files providing mach commands.
+ MACH_MODULES = [
+-    'addon-sdk/mach_commands.py',
++#    'addon-sdk/mach_commands.py',
+     'build/valgrind/mach_commands.py',
+     'dom/bindings/mach_commands.py',
+     'dom/media/test/external/mach_commands.py',
+     'layout/tools/reftest/mach_commands.py',
+     'python/mach_commands.py',
+     'python/mach/mach/commands/commandinfo.py',
+     'python/compare-locales/mach_commands.py',
+     'python/mozboot/mozboot/mach_commands.py',
 diff --git a/caps/nsScriptSecurityManager.cpp b/caps/nsScriptSecurityManager.cpp
 --- a/caps/nsScriptSecurityManager.cpp
 +++ b/caps/nsScriptSecurityManager.cpp
@@ -423,29 +445,17 @@ diff --git a/dom/base/nsHTMLContentSerializer.cpp b/dom/base/nsHTMLContentSerial
 -  // Always reset to avoid false newlines in case MaybeAddNewlineForRootNode wasn't
 -  // called
 -  mAddNewlineForRootNode = false;
-+    else {
-+      NS_ENSURE_TRUE(MaybeAddNewlineForRootNode(aStr), NS_ERROR_OUT_OF_MEMORY);
-+    }
-+    // Always reset to avoid false newlines in case MaybeAddNewlineForRootNode wasn't
-+    // called
-+    mAddNewlineForRootNode = false;
- 
+-
 -  NS_ENSURE_TRUE(AppendToString(kLessThan, aStr), NS_ERROR_OUT_OF_MEMORY);
-+    NS_ENSURE_TRUE(AppendToString(kLessThan, aStr), NS_ERROR_OUT_OF_MEMORY);
- 
+-
 -  NS_ENSURE_TRUE(AppendToString(nsDependentAtomString(name), aStr), NS_ERROR_OUT_OF_MEMORY);
-+    NS_ENSURE_TRUE(AppendToString(nsDependentAtomString(name), aStr), NS_ERROR_OUT_OF_MEMORY);
- 
+-
 -  MaybeEnterInPreContent(content);
-+    MaybeEnterInPreContent(content);
- 
+-
 -  // for block elements, we increase the indentation
 -  if ((mDoFormat || forceFormat) && !mDoRaw && !PreLevel())
 -    NS_ENSURE_TRUE(IncrIndentation(name), NS_ERROR_OUT_OF_MEMORY);
-+    // for block elements, we increase the indentation
-+    if ((mDoFormat || forceFormat) && !mDoRaw && !PreLevel())
-+      NS_ENSURE_TRUE(IncrIndentation(name), NS_ERROR_OUT_OF_MEMORY);
- 
+-
 -  // Need to keep track of OL and LI elements in order to get ordinal number 
 -  // for the LI.
 -  if (mIsCopying && name == nsGkAtoms::ol && ns == kNameSpaceID_XHTML){
@@ -453,13 +463,12 @@ diff --git a/dom/base/nsHTMLContentSerializer.cpp b/dom/base/nsHTMLContentSerial
 -    // Store its start attribute value in olState->startVal.
 -    nsAutoString start;
 -    int32_t startAttrVal = 0;
-+    // Need to keep track of OL and LI elements in order to get ordinal number
-+    // for the LI.
-+    if (mIsCopying && name == nsGkAtoms::ol && ns == kNameSpaceID_XHTML){
-+      // We are copying and current node is an OL;
-+      // Store its start attribute value in olState->startVal.
-+      nsAutoString start;
-+      int32_t startAttrVal = 0;
++    else {
++      NS_ENSURE_TRUE(MaybeAddNewlineForRootNode(aStr), NS_ERROR_OUT_OF_MEMORY);
++    }
++    // Always reset to avoid false newlines in case MaybeAddNewlineForRootNode wasn't
++    // called
++    mAddNewlineForRootNode = false;
  
 -    aElement->GetAttr(kNameSpaceID_None, nsGkAtoms::start, start);
 -    if (!start.IsEmpty()){
@@ -472,6 +481,56 @@ diff --git a/dom/base/nsHTMLContentSerializer.cpp b/dom/base/nsHTMLContentSerial
 -        startAttrVal--; 
 -      else
 -        startAttrVal = 0;
+-    }
+-    mOLStateStack.AppendElement(olState(startAttrVal, true));
+-  }
+-
+-  if (mIsCopying && name == nsGkAtoms::li && ns == kNameSpaceID_XHTML) {
+-    mIsFirstChildOfOL = IsFirstChildOfOL(aOriginalElement);
+-    if (mIsFirstChildOfOL){
+-      // If OL is parent of this LI, serialize attributes in different manner.
+-      NS_ENSURE_TRUE(SerializeLIValueAttribute(aElement, aStr), NS_ERROR_OUT_OF_MEMORY);
+-    }
+-  }
++    NS_ENSURE_TRUE(AppendToString(kLessThan, aStr), NS_ERROR_OUT_OF_MEMORY);
+ 
+-  // Even LI passed above have to go through this 
+-  // for serializing attributes other than "value".
+-  nsAutoString dummyPrefix;
+-  NS_ENSURE_TRUE(SerializeHTMLAttributes(content,
+-                                         aOriginalElement,
+-                                         dummyPrefix,
+-                                         EmptyString(),
+-                                         name,
+-                                         ns,
+-                                         aStr), NS_ERROR_OUT_OF_MEMORY);
++    NS_ENSURE_TRUE(AppendToString(nsDependentAtomString(name), aStr), NS_ERROR_OUT_OF_MEMORY);
+ 
+-  NS_ENSURE_TRUE(AppendToString(kGreaterThan, aStr), NS_ERROR_OUT_OF_MEMORY);
++    MaybeEnterInPreContent(content);
+ 
+-  if (ns == kNameSpaceID_XHTML &&
+-      (name == nsGkAtoms::script ||
+-       name == nsGkAtoms::style ||
+-       name == nsGkAtoms::noscript ||
+-       name == nsGkAtoms::noframes)) {
+-    ++mDisableEntityEncoding;
+-  }
++    // for block elements, we increase the indentation
++    if ((mDoFormat || forceFormat) && !mDoRaw && !PreLevel())
++      NS_ENSURE_TRUE(IncrIndentation(name), NS_ERROR_OUT_OF_MEMORY);
+ 
+-  if ((mDoFormat || forceFormat) && !mDoRaw && !PreLevel() &&
+-    LineBreakAfterOpen(ns, name)) {
+-    NS_ENSURE_TRUE(AppendNewLineToString(aStr), NS_ERROR_OUT_OF_MEMORY);
++    // Need to keep track of OL and LI elements in order to get ordinal number
++    // for the LI.
++    if (mIsCopying && name == nsGkAtoms::ol && ns == kNameSpaceID_XHTML){
++      // We are copying and current node is an OL;
++      // Store its start attribute value in olState->startVal.
++      nsAutoString start;
++      int32_t startAttrVal = 0;
++
 +      aElement->GetAttr(kNameSpaceID_None, nsGkAtoms::start, start);
 +      if (!start.IsEmpty()){
 +        nsresult rv = NS_OK;
@@ -485,34 +544,16 @@ diff --git a/dom/base/nsHTMLContentSerializer.cpp b/dom/base/nsHTMLContentSerial
 +          startAttrVal = 0;
 +      }
 +      mOLStateStack.AppendElement(olState(startAttrVal, true));
-     }
--    mOLStateStack.AppendElement(olState(startAttrVal, true));
--  }
- 
--  if (mIsCopying && name == nsGkAtoms::li && ns == kNameSpaceID_XHTML) {
--    mIsFirstChildOfOL = IsFirstChildOfOL(aOriginalElement);
--    if (mIsFirstChildOfOL){
--      // If OL is parent of this LI, serialize attributes in different manner.
--      NS_ENSURE_TRUE(SerializeLIValueAttribute(aElement, aStr), NS_ERROR_OUT_OF_MEMORY);
++    }
++
 +    if (mIsCopying && name == nsGkAtoms::li && ns == kNameSpaceID_XHTML) {
 +      mIsFirstChildOfOL = IsFirstChildOfOL(aOriginalElement);
 +      if (mIsFirstChildOfOL){
 +        // If OL is parent of this LI, serialize attributes in different manner.
 +        NS_ENSURE_TRUE(SerializeLIValueAttribute(aElement, aStr), NS_ERROR_OUT_OF_MEMORY);
 +      }
-     }
--  }
- 
--  // Even LI passed above have to go through this 
--  // for serializing attributes other than "value".
--  nsAutoString dummyPrefix;
--  NS_ENSURE_TRUE(SerializeHTMLAttributes(content,
--                                         aOriginalElement,
--                                         dummyPrefix,
--                                         EmptyString(),
--                                         name,
--                                         ns,
--                                         aStr), NS_ERROR_OUT_OF_MEMORY);
++    }
++
 +    // Even LI passed above have to go through this
 +    // for serializing attributes other than "value".
 +    nsAutoString dummyPrefix;
@@ -523,17 +564,9 @@ diff --git a/dom/base/nsHTMLContentSerializer.cpp b/dom/base/nsHTMLContentSerial
 +                                           name,
 +                                           ns,
 +                                           aStr), NS_ERROR_OUT_OF_MEMORY);
- 
--  NS_ENSURE_TRUE(AppendToString(kGreaterThan, aStr), NS_ERROR_OUT_OF_MEMORY);
++
 +    NS_ENSURE_TRUE(AppendToString(kGreaterThan, aStr), NS_ERROR_OUT_OF_MEMORY);
- 
--  if (ns == kNameSpaceID_XHTML &&
--      (name == nsGkAtoms::script ||
--       name == nsGkAtoms::style ||
--       name == nsGkAtoms::noscript ||
--       name == nsGkAtoms::noframes)) {
--    ++mDisableEntityEncoding;
--  }
++
 +    if (ns == kNameSpaceID_XHTML &&
 +        (name == nsGkAtoms::script ||
 +         name == nsGkAtoms::style ||
@@ -541,10 +574,7 @@ diff --git a/dom/base/nsHTMLContentSerializer.cpp b/dom/base/nsHTMLContentSerial
 +         name == nsGkAtoms::noframes)) {
 +      ++mDisableEntityEncoding;
 +    }
- 
--  if ((mDoFormat || forceFormat) && !mDoRaw && !PreLevel() &&
--    LineBreakAfterOpen(ns, name)) {
--    NS_ENSURE_TRUE(AppendNewLineToString(aStr), NS_ERROR_OUT_OF_MEMORY);
++
 +    if ((mDoFormat || forceFormat) && !PreLevel() &&
 +      !mDoRaw && LineBreakAfterOpen(ns, name)) {
 +      NS_ENSURE_TRUE(AppendNewLineToString(aStr), NS_ERROR_OUT_OF_MEMORY);
@@ -887,15 +917,13 @@ diff --git a/dom/base/nsXMLContentSerializer.cpp b/dom/base/nsXMLContentSerializ
  
 -  uint32_t skipAttr = ScanNamespaceDeclarations(content,
 -                          aOriginalElement, tagNamespaceURI);
+-
+-  nsIAtom *name = content->NodeInfo()->NameAtom();
+-  bool lineBreakBeforeOpen = LineBreakBeforeOpen(content->GetNameSpaceID(), name);
 +  bool hideTag = tagNamespaceURI.LowerCaseEqualsLiteral("http://disruptive-innovations.com/zoo/bluegriffon");
 +  if (!hideTag) {
 +    uint32_t skipAttr = ScanNamespaceDeclarations(content,
 +                            aOriginalElement, tagNamespaceURI);
- 
--  nsIAtom *name = content->NodeInfo()->NameAtom();
--  bool lineBreakBeforeOpen = LineBreakBeforeOpen(content->GetNameSpaceID(), name);
-+    nsIAtom *name = content->NodeInfo()->NameAtom();
-+    bool lineBreakBeforeOpen = LineBreakBeforeOpen(content->GetNameSpaceID(), name);
  
 -  if ((mDoFormat || forceFormat) && !mDoRaw && !PreLevel()) {
 -    if (mColPos && lineBreakBeforeOpen) {
@@ -906,6 +934,9 @@ diff --git a/dom/base/nsXMLContentSerializer.cpp b/dom/base/nsXMLContentSerializ
 -    }
 -    if (!mColPos) {
 -      NS_ENSURE_TRUE(AppendIndentation(aStr), NS_ERROR_OUT_OF_MEMORY);
++    nsIAtom *name = content->NodeInfo()->NameAtom();
++    bool lineBreakBeforeOpen = LineBreakBeforeOpen(content->GetNameSpaceID(), name);
++
 +    if (((mDoFormat || forceFormat) && !PreLevel()) || mDoRaw) {
 +      if (mColPos && lineBreakBeforeOpen) {
 +        AppendNewLineToString(aStr);
@@ -933,23 +964,17 @@ diff --git a/dom/base/nsXMLContentSerializer.cpp b/dom/base/nsXMLContentSerializ
 -  else {
 -    NS_ENSURE_TRUE(MaybeAddNewlineForRootNode(aStr), NS_ERROR_OUT_OF_MEMORY);
 -  }
-+    else {
-+      MaybeAddNewlineForRootNode(aStr);
-+    }
- 
+-
 -  // Always reset to avoid false newlines in case MaybeAddNewlineForRootNode wasn't
 -  // called
 -  mAddNewlineForRootNode = false;
-+    // Always reset to avoid false newlines in case MaybeAddNewlineForRootNode wasn't
-+    // called
-+    mAddNewlineForRootNode = false;
- 
+-
 -  bool addNSAttr;
 -  addNSAttr = ConfirmPrefix(tagPrefix, tagNamespaceURI, aOriginalElement,
 -                            false);
-+    bool addNSAttr;
-+    addNSAttr = ConfirmPrefix(tagPrefix, tagNamespaceURI, aOriginalElement,
-+                              false);
++    else {
++      MaybeAddNewlineForRootNode(aStr);
++    }
  
 -  // Serialize the qualified name of the element
 -  NS_ENSURE_TRUE(AppendToString(kLessThan, aStr), NS_ERROR_OUT_OF_MEMORY);
@@ -958,12 +983,29 @@ diff --git a/dom/base/nsXMLContentSerializer.cpp b/dom/base/nsXMLContentSerializ
 -    NS_ENSURE_TRUE(AppendToString(NS_LITERAL_STRING(":"), aStr), NS_ERROR_OUT_OF_MEMORY);
 -  }
 -  NS_ENSURE_TRUE(AppendToString(tagLocalName, aStr), NS_ERROR_OUT_OF_MEMORY);
+-
+-  MaybeEnterInPreContent(content);
++    // Always reset to avoid false newlines in case MaybeAddNewlineForRootNode wasn't
++    // called
++    mAddNewlineForRootNode = false;
+ 
+-  if ((mDoFormat || forceFormat) && !mDoRaw && !PreLevel()) {
+-    NS_ENSURE_TRUE(IncrIndentation(name), NS_ERROR_OUT_OF_MEMORY);
+-  }
++    bool addNSAttr;
++    addNSAttr = ConfirmPrefix(tagPrefix, tagNamespaceURI, aOriginalElement,
++                              false);
+ 
+-  NS_ENSURE_TRUE(SerializeAttributes(content, aOriginalElement, tagPrefix, tagNamespaceURI,
+-                                     name, aStr, skipAttr, addNSAttr),
+-                 NS_ERROR_OUT_OF_MEMORY);
 +    if (!mNameSpaceStack.Length()
 +        && tagNamespaceURI.EqualsLiteral("http://www.w3.org/1999/xhtml")
 +        && !tagLocalName.EqualsLiteral("html"))
 +      addNSAttr = false;
  
--  MaybeEnterInPreContent(content);
+-  NS_ENSURE_TRUE(AppendEndOfElementStart(aElement, aOriginalElement, aStr),
+-                 NS_ERROR_OUT_OF_MEMORY);
 +    // Serialize the qualified name of the element
 +    AppendToString(kLessThan, aStr);
 +    if (!tagPrefix.IsEmpty()) {
@@ -972,26 +1014,18 @@ diff --git a/dom/base/nsXMLContentSerializer.cpp b/dom/base/nsXMLContentSerializ
 +    }
 +    AppendToString(tagLocalName, aStr);
  
--  if ((mDoFormat || forceFormat) && !mDoRaw && !PreLevel()) {
--    NS_ENSURE_TRUE(IncrIndentation(name), NS_ERROR_OUT_OF_MEMORY);
--  }
-+    MaybeEnterInPreContent(content);
- 
--  NS_ENSURE_TRUE(SerializeAttributes(content, aOriginalElement, tagPrefix, tagNamespaceURI,
--                                     name, aStr, skipAttr, addNSAttr),
--                 NS_ERROR_OUT_OF_MEMORY);
-+    if ((mDoFormat || forceFormat) && !PreLevel() && !mDoRaw) {
-+      IncrIndentation(name);
-+    }
- 
--  NS_ENSURE_TRUE(AppendEndOfElementStart(aElement, aOriginalElement, aStr),
--                 NS_ERROR_OUT_OF_MEMORY);
-+    SerializeAttributes(content, aOriginalElement, tagPrefix, tagNamespaceURI,
-+                        name, aStr, skipAttr, addNSAttr);
- 
 -  if ((mDoFormat || forceFormat) && !mDoRaw && !PreLevel()
 -    && LineBreakAfterOpen(content->GetNameSpaceID(), name)) {
 -    NS_ENSURE_TRUE(AppendNewLineToString(aStr), NS_ERROR_OUT_OF_MEMORY);
++    MaybeEnterInPreContent(content);
++
++    if ((mDoFormat || forceFormat) && !PreLevel() && !mDoRaw) {
++      IncrIndentation(name);
++    }
++
++    SerializeAttributes(content, aOriginalElement, tagPrefix, tagNamespaceURI,
++                        name, aStr, skipAttr, addNSAttr);
++
 +    AppendEndOfElementStart(aElement, aOriginalElement,
 +                            aStr);
 +
@@ -1037,16 +1071,28 @@ diff --git a/dom/base/nsXMLContentSerializer.cpp b/dom/base/nsXMLContentSerializ
    aElement->NodeInfo()->GetName(tagLocalName);
    aElement->NodeInfo()->GetNamespaceURI(tagNamespaceURI);
  
+-#ifdef DEBUG
+-  bool debugNeedToPushNamespace =
+-#endif
+-  ConfirmPrefix(tagPrefix, tagNamespaceURI, aElement, false);
+-  NS_ASSERTION(!debugNeedToPushNamespace, "Can't push namespaces in closing tag!");
 +  bool hideTag = tagNamespaceURI.LowerCaseEqualsLiteral("http://disruptive-innovations.com/zoo/bluegriffon");
 +  if (!hideTag) {
 +    bool forceFormat = false, outputElementEnd;
 +    outputElementEnd = CheckElementEnd(aElement, forceFormat, aStr);
-+
+ 
+-  if ((mDoFormat || forceFormat) && !mDoRaw && !PreLevel()) {
+-
+-    bool lineBreakBeforeClose = LineBreakBeforeClose(content->GetNameSpaceID(), name);
 +    nsIAtom *name = content->NodeInfo()->NameAtom();
-+
+ 
+-    if (mColPos && lineBreakBeforeClose) {
+-      NS_ENSURE_TRUE(AppendNewLineToString(aStr), NS_ERROR_OUT_OF_MEMORY);
 +    if ((mDoFormat || forceFormat) && !PreLevel() && !mDoRaw) {
 +      DecrIndentation(name);
-+    }
+     }
+-    if (!mColPos) {
+-      NS_ENSURE_TRUE(AppendIndentation(aStr), NS_ERROR_OUT_OF_MEMORY);
 +
 +    if (!outputElementEnd) {
 +      PopNameSpaceDeclsFor(aElement);
@@ -1054,26 +1100,16 @@ diff --git a/dom/base/nsXMLContentSerializer.cpp b/dom/base/nsXMLContentSerializ
 +      return NS_OK;
 +    }
 +
- #ifdef DEBUG
--  bool debugNeedToPushNamespace =
++#ifdef DEBUG
 +    bool debugNeedToPushNamespace =
- #endif
--  ConfirmPrefix(tagPrefix, tagNamespaceURI, aElement, false);
--  NS_ASSERTION(!debugNeedToPushNamespace, "Can't push namespaces in closing tag!");
++#endif
 +    ConfirmPrefix(tagPrefix, tagNamespaceURI, aElement, false);
 +    NS_ASSERTION(!debugNeedToPushNamespace, "Can't push namespaces in closing tag!");
- 
--  if ((mDoFormat || forceFormat) && !mDoRaw && !PreLevel()) {
++
 +    if ((mDoFormat || forceFormat) && !mDoRaw && !PreLevel()) {
- 
--    bool lineBreakBeforeClose = LineBreakBeforeClose(content->GetNameSpaceID(), name);
++
 +      bool lineBreakBeforeClose = LineBreakBeforeClose(content->GetNameSpaceID(), name);
- 
--    if (mColPos && lineBreakBeforeClose) {
--      NS_ENSURE_TRUE(AppendNewLineToString(aStr), NS_ERROR_OUT_OF_MEMORY);
--    }
--    if (!mColPos) {
--      NS_ENSURE_TRUE(AppendIndentation(aStr), NS_ERROR_OUT_OF_MEMORY);
++
 +      if (mColPos && lineBreakBeforeClose) {
 +        AppendNewLineToString(aStr);
 +      }
@@ -1112,10 +1148,10 @@ diff --git a/dom/base/nsXMLContentSerializer.cpp b/dom/base/nsXMLContentSerializ
 +    PopNameSpaceDeclsFor(aElement);
  
 -  PopNameSpaceDeclsFor(aElement);
+-
+-  MaybeLeaveFromPreContent(content);
 +    MaybeLeaveFromPreContent(content);
  
--  MaybeLeaveFromPreContent(content);
--
 -  if ((mDoFormat || forceFormat) && !mDoRaw && !PreLevel()
 -      && LineBreakAfterClose(content->GetNameSpaceID(), name)) {
 -    NS_ENSURE_TRUE(AppendNewLineToString(aStr), NS_ERROR_OUT_OF_MEMORY);
@@ -4359,10 +4395,17 @@ diff --git a/toolkit/mozapps/handling/nsContentDispatchChooser.js b/toolkit/moza
 diff --git a/toolkit/toolkit.mozbuild b/toolkit/toolkit.mozbuild
 --- a/toolkit/toolkit.mozbuild
 +++ b/toolkit/toolkit.mozbuild
-@@ -159,17 +159,16 @@ if 'gtk' in CONFIG['MOZ_WIDGET_TOOLKIT']
+@@ -153,23 +153,22 @@ if CONFIG['MOZ_GIO_COMPONENT']:
+ DIRS += [
+     '/toolkit/library/StaticXULComponentsEnd',
+     '/toolkit/library',
+ ]
+ 
+ if 'gtk' in CONFIG['MOZ_WIDGET_TOOLKIT']:
      DIRS += ['/toolkit/system/gnome']
  
- DIRS += ['/addon-sdk']
+-DIRS += ['/addon-sdk']
++# DIRS += ['/addon-sdk']
  
  if CONFIG['ENABLE_MARIONETTE'] or CONFIG['MOZ_WIDGET_TOOLKIT'] not in ('gonk', 'android'):
      DIRS += ['/testing/marionette']
