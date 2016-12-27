@@ -238,17 +238,20 @@ window:root, dialog:root {
 }
 
 :root:not([cleartheme="true"]) menulist menuitem,
+:root:not([cleartheme="true"]) menulist menu,
 :root:not([cleartheme="true"]) toolbarbutton menuitem {
   -moz-appearance: none;
   color: var(--bg-main-foreground-color);
 }
 
 :root:not([cleartheme="true"]) menulist menuitem[disabled="true"],
+:root:not([cleartheme="true"]) menulist menu[disabled="true"],
 :root:not([cleartheme="true"]) toolbarbutton menuitem[disabled="true"] {
   background-color: transparent ! important;
 }
 
-:root:not([cleartheme="true"]) menu[disabled="true"], menuitem[disabled="true"],
+:root:not([cleartheme="true"]) menu[disabled="true"],
+:root:not([cleartheme="true"]) menuitem[disabled="true"],
 :root:not([cleartheme="true"]) menu[_moz-menuactive="true"][disabled="true"],
 :root:not([cleartheme="true"]) menuitem[_moz-menuactive="true"][disabled="true"] {
   color: GrayText ! important;
