@@ -40,6 +40,16 @@ html|select[multiple] > scrollbar {
 slider {
   -moz-appearance: var(--bg-dark-scrollbar-appearance);
   background: var(--bg-dark-background);
+  -moz-appearance: none;
+}
+
+slider[orient="horizontal"] {
+  max-height: 10px;
+  padding-top: 2px;
+}
+slider[orient="vertical"] {
+  max-width: 10px;
+  padding-left: 2px;
 }
 
 /*slider[orient="vertical"] {
@@ -49,11 +59,14 @@ slider {
 /* ..... thumb ..... */
 
 thumb {
-  -moz-appearance: scrollbarthumb-horizontal;
+  /*-moz-appearance: scrollbarthumb-horizontal;*/
+ -moz-appearance: none;
+ border-radius: 9px;
+ background: gray;
 }
 
 thumb[orient="vertical"] {
-  -moz-appearance: scrollbarthumb-vertical;
+  /*-moz-appearance: scrollbarthumb-vertical;*/
 }
 
 /* ..... increment ..... */

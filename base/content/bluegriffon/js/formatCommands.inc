@@ -216,7 +216,7 @@ var cmdAriaRole =
                                   role);
 
     // be kind with the rest of the world
-    NotifierUtils.notify("selection", nodes[0], false);
+    NotifierUtils.notify("selection_strict", nodes[0], false);
 
   }
 };

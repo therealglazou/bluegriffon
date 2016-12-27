@@ -44,6 +44,7 @@
   --bg-main-window-appearance: none;
   
   --bg-dark-scrollbar-appearance: none;
+  --bg-dark-scrollbar: black;
 
   --bg-dark-background: #363d3f;
   --bg-dark-gray: #474D4F;
@@ -236,12 +237,18 @@ window:root {
 }
 
 :root:not([cleartheme="true"]) menulist menuitem,
+:root:not([cleartheme="true"]) menulist menu,
 :root:not([cleartheme="true"]) toolbarbutton menuitem {
   -moz-appearance: none;
   color: var(--bg-main-foreground-color);
 }
 
+:root:not([cleartheme="true"]) menulist menu .menu-right {
+  display: none;
+}
+
 :root:not([cleartheme="true"]) menulist menuitem[disabled="true"],
+:root:not([cleartheme="true"]) menulist menu[disabled="true"],
 :root:not([cleartheme="true"]) toolbarbutton menuitem[disabled="true"] {
   background-color: transparent ! important;
 }
@@ -253,6 +260,7 @@ window:root {
 }
 
 :root:not([cleartheme="true"]) menu[disabled="true"], menuitem[disabled="true"],
+:root:not([cleartheme="true"]) menu[disabled="true"], menu[disabled="true"],
 :root:not([cleartheme="true"]) menu[_moz-menuactive="true"][disabled="true"],
 :root:not([cleartheme="true"]) menuitem[_moz-menuactive="true"][disabled="true"] {
   color: -moz-mac-menutextdisable ! important;

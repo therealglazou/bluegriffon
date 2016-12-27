@@ -475,6 +475,25 @@ function onFontFaceChange(fontFaceMenuList, commandID)
   }
 }
 
+/************** ARIA DROPDOWNS **************/
+
+function InitializeARIARoleDropdown(aPopup)
+{
+  var roles = [];
+  for (var i in kWAI_ARIA_11_ROLES)
+    if (!("abstract" in kWAI_ARIA_11_ROLES[i]))
+      roles.push(i);
+  roles.sort();
+
+  for (var i = 0; i < roles.length; i++) {
+    var role = roles[i];
+    var item = document.createElement("menuitem");
+    item.setAttribute("label", role);
+    item.setAttribute("value", role);
+    aPopup.appendChild(item);
+  }
+}
+
 /************** CLASS MANAGEMENT **************/
 
 function onClassChange(classMenuList, commandID)

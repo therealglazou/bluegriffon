@@ -9,6 +9,7 @@
   <script type="application/javascript" src="chrome://bluegriffon/content/utils/global.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/utils/notifiers.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/js/commands.js"/>
+  <script type="application/javascript" src="chrome://aria/content/aria-roles.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/js/bluegriffon.js"/>
   <script type="application/javascript" src="chrome://global/content/globalOverlay.js"/>
   <script type="application/javascript" src="chrome://global/content/nsDragAndDrop.js"/>

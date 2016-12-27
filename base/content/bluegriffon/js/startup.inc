@@ -42,6 +42,9 @@ function Startup()
   RestoreShortcuts();
   RestorePanels();
 
+  InitializeARIARoleDropdown(gDialog.ARIARolePopup);
+  InitializeARIARoleDropdown(gDialog.ARIARoleStructureBarPopup);
+
   gDialog.structurebar.init();
 
   ResizeEventNotifier.startup();
