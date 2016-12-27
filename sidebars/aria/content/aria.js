@@ -362,10 +362,8 @@ function SetRole(aEvent)
     if (gCurrentElement.hasAttributeNS("http://www.idpf.org/2007/ops", "type")) {
       editor.beginTransaction();
 
-      try {
       var txn = new diRemoveAttributeNSTxn(gCurrentElement, "type", "http://www.idpf.org/2007/ops");
       editor.transactionManager.doTransaction(txn);
-      } catch(e) {alert(e)}
 
       editor.setAttribute(gCurrentElement, "role", role);
       editor.endTransaction();
