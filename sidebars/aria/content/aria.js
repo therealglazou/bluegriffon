@@ -358,18 +358,37 @@ function SetRole(aEvent)
   if (gCurrentElement) {
     var editor = EditorUtils.getCurrentEditor();
     var role = aEvent.originalTarget.value;
+    var dealWithEpubType = Services.prefs.getBoolPref("bluegriffon.aria.epub-type") &&
+                           EditorUtils.isXHTMLDocument();
 
-    if (gCurrentElement.hasAttributeNS("http://www.idpf.org/2007/ops", "type")) {
+    if (dealWithEpubType) {
       editor.beginTransaction();
+      editor.setAttribute(gCurrentElement, "role", role);
 
-      var txn = new diRemoveAttributeNSTxn(gCurrentElement, "type", "http://www.idpf.org/2007/ops");
+      var docElt = EditorUtils.getCurrentDocument().documentElement;
+      if (!docElt.hasAttributeNS("http://www.w3.org/2000/xmlns/", "epub")) {
+        var txn = new diSetAttributeNSTxn(docElt, "xmlns:epub", "http://www.w3.org/2000/xmlns/", "http://www.idpf.org/2007/ops");
+        editor.transactionManager.doTransaction(txn);
+      }
+      var txn = new diSetAttributeNSTxn(gCurrentElement, "type", "http://www.idpf.org/2007/ops", role);
       editor.transactionManager.doTransaction(txn);
 
-      editor.setAttribute(gCurrentElement, "role", role);
       editor.endTransaction();
     }
-    else
-      editor.setAttribute(gCurrentElement, "role", role);
+    else {
+      if (gCurrentElement.hasAttributeNS("http://www.idpf.org/2007/ops", "type")) {
+        editor.beginTransaction();
+        editor.setAttribute(gCurrentElement, "role", role);
+
+        var txn = new diRemoveAttributeNSTxn(gCurrentElement, "type", "http://www.idpf.org/2007/ops");
+        editor.transactionManager.doTransaction(txn);
+
+        editor.endTransaction();
+      }
+      else
+        editor.setAttribute(gCurrentElement, "role", role);
+    }
+
     gDialog.roleMenulist.setAttribute("label", role);
     gDialog.roleMenulist.setAttribute("value", role);
 

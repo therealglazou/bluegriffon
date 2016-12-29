@@ -4,6 +4,8 @@
   <script type="application/javascript" src="chrome://bluegriffon/content/txns/diNodeDeletionTxn.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/txns/diStyleAttrChangeTxn.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/txns/diCommentOrPIChangeTxn.js"/>
+  <script type="application/javascript" src="chrome://bluegriffon/content/txns/diRemoveAttributeNSTxn.js"/>
+  <script type="application/javascript" src="chrome://bluegriffon/content/txns/diSetAttributeNSTxn.js"/>
 
   <script type="application/javascript" src="chrome://bluegriffon/content/utils/dgid.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/utils/global.js"/>

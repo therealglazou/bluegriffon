@@ -18,6 +18,7 @@
       <preference id="pref-show-pi"             name="bluegriffon.display.pi"                 type="bool"/>
       <preference id="pref-absolute-links"      name="clipboard.absoluteLinks"                type="bool"/>
       <preference id="pref-keep-backup"         name="bluegriffon.defaults.backups"           type="bool"/>
+      <preference id="pref-aria-role"           name="bluegriffon.aria.epub-type"             type="bool"/>
     </preferences>
 
     <groupbox>
@@ -64,6 +65,17 @@
                   preference="pref-absolute-links">
         <radio label="&preserveRelative.label;" value="false"/>
         <radio label="&makeAbsolute.label;"     value="true"/>
+      </radiogroup>
+    </groupbox>
+
+    <groupbox>
+      <caption label="&waiAria.label;"/>
+      <radiogroup class="indent"
+                  orient="horizontal"
+                  id="ariaRadiogroup"
+                  preference="pref-aria-role">
+        <radio label="role" value="false"/>
+        <radio label="role, epub:type (XHTML)"     value="true"/>
       </radiogroup>
     </groupbox>
   </prefpane>
