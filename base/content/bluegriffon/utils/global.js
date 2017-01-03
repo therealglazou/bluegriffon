@@ -441,3 +441,10 @@ function ScrollToElement(aElement)
   EditorUtils.getCurrentEditorElement().contentWindow.scrollBy(0, -15);
   return;
 }
+
+function appendPath(aFile, aPath)
+{
+  var pathArray = aPath.split("/");
+  for (var i = 0; i < pathArray.length; i++)
+    aFile.append(pathArray[i]);
+}

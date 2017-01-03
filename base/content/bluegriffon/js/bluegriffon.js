@@ -1235,6 +1235,14 @@ function doSaveTabsBeforeQuit()
     if (1 == closed)
       return false;
   }
+
+  var ebook = document.querySelector("epub2,epub3");
+  if (ebook) {
+    if ("deleteTempDir" in ebook)
+      ebook.deleteTempDir();
+    ebook.parentNode.removeChild(ebook);
+  }
+
   return true;
 }
 
@@ -1940,6 +1948,11 @@ function SaveCurrentTabLocation()
   catch(e) {}
 
   var URL = EditorUtils.getDocumentUrl();
+
+  var ebmAvailable = ("EBookManager" in window);
+  if (ebmAvailable  && EBookManager.isUrlSpecInBook(URL))
+    return;
+
   var lastTabs = "";
   try {
     lastTabs = Services.prefs.getCharPref("bluegriffon.defaults.lastTabs");

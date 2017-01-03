@@ -61,8 +61,14 @@ function Startup()
   }
 
   // let's finish with the url
-  if (url)
-    setTimeout(OpenFile, 100, url, true);
+  if (url) {
+    var ebmAvailable = ("EBookManager" in window);
+    if (ebmAvailable && url.toLowerCase().endsWith(".epub")) {
+      setTimeout(EBookManager.showEbook, 100, UrlUtils.newLocalFile(url), url);
+    }
+    else
+      setTimeout(OpenFile, 100, url, true);
+  }
 
   setTimeout(LoadLastTabs, 1000);
   BlueGriffonQuitHelper.init();

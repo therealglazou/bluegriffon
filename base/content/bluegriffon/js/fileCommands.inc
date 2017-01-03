@@ -1,3 +1,21 @@
+var cmdNewEbook =
+{
+  isCommandEnabled: function(aCommand, dummy)
+  {
+    return true;
+  },
+
+  getCommandStateParams: function(aCommand, aParams, aRefCon) {},
+  doCommandParams: function(aCommand, aParams, aRefCon) {},
+  doCommand: function(aCommand)
+  {
+    var rv = { cancelled: true };
+    window.openDialog("chrome://epub/content/epub/newEbook.xul",
+                      "_blank",
+                      "all,chrome,dialog=no,modal=no",
+                      rv);
+  }
+};
 
 var cmdOpen =
 {
@@ -37,14 +55,46 @@ var cmdOpenFile =
       fp.appendFilters(Components.interfaces.nsIFilePicker.filterHTML);
       fp.appendFilter(gDialog.bundleOpenLocation.getString("PHPfiles"), "*.php");
       fp.appendFilters(Components.interfaces.nsIFilePicker.filterText);
+      var ebmAvailable = ("EBookManager" in window);
+      if (ebmAvailable)
+        fp.appendFilter(document.getElementById("bundleEbookManager").getString("EPUBbooks"),
+                        "*.epub");
       fp.appendFilters(Components.interfaces.nsIFilePicker.filterAll);
   
       if (fp.show() == Components.interfaces.nsIFilePicker.returnOK
           && fp.fileURL.spec
           && fp.fileURL.spec.length > 0)
       {
-        StoreUrlInLocationDB(fp.fileURL.spec);
-        OpenFile(fp.fileURL.spec, true);
+        if (ebmAvailable && fp.fileURL.spec.toLowerCase().endsWith(".epub")) {
+          var windowEnumerator = Services.wm.getEnumerator("bluegriffon");
+          var win = null;
+          while (windowEnumerator.hasMoreElements()) {
+            var w = windowEnumerator.getNext();
+            var ebookElt = w.document.querySelector("epub2,epub3");
+            if (ebookElt) {
+              var ebook = ebookElt.getUserData("ebook");
+              if (fp.file.equals(ebook.packageFile)) {
+                w.focus();
+                return;
+              }
+            }
+            else if (!win)
+              win = w;
+          }
+    
+          if (win) {
+            win.focus();
+            win.EBookManager.showEbook(fp.file, fp.fileURL.spec);
+            window.updateCommands("style");
+            return;
+          }
+          OpenNewWindow(UrlUtils.getIOService().newFileURI(fp.file).QueryInterface(Components.interfaces.nsIURL).spec);
+        }
+        else {
+          if (!ebmAvailable || !EBookManager.isUrlSpecInBook(fp.fileURL.spec))
+            StoreUrlInLocationDB(fp.fileURL.spec);
+          OpenFile(fp.fileURL.spec, true);
+        }
       }
     }
     catch(ex) {
@@ -101,6 +151,7 @@ var cmdSave =
                      false,
                      EditorUtils.getCurrentDocumentMimeType());
         }
+        NotifierUtils.notify("fileSaved", EditorUtils.getDocumentUrl());
         window.content.focus();
         window.updateCommands("style");
         if (result)
@@ -174,8 +225,20 @@ var cmdCloseTab =
   doCommand: function(aCommand)
   {
     var editorElement = EditorUtils.getCurrentEditorElement();
-    if (!editorElement) // sanity check
-      window.close();
+    if (!editorElement) { // sanity check
+      var ebook = document.querySelector("epub2,epub3");
+      if (ebook) {
+        if ("deleteTempDir" in ebook)
+          ebook.deleteTempDir();
+        ebook.parentNode.removeChild(ebook);
+        gDialog.ebm.setAttribute("hidden", "true");
+        gDialog.ebm_splitter.setAttribute("hidden", "true");
+        window.updateCommands("style");
+      }
+      else
+        window.close();
+      return;
+    }
 
     var mode = editorElement.parentNode.getAttribute("previousMode");
     if (mode == "source") {

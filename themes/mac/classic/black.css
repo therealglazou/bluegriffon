@@ -49,7 +49,8 @@
   --bg-dark-background: #363d3f;
   --bg-dark-gray: #474D4F;
   --bg-lighter-dark-gray: #383f41;
-  --bg-dark-border:  #181818;
+  /*--bg-dark-border:  #181818;*/
+  --bg-dark-border:  #474D4F;
   --bg-lighter-border: #494f51;
 
   --bg-list-background: #363d3f;
@@ -277,7 +278,7 @@ window:root {
 }
 
 :root:not([cleartheme="true"]) tree {
-  border: thin solid black;
+  border: thin solid var(--bg-dark-gray);
 }
 
 :root:not([cleartheme="true"]) treechildren::-moz-tree-row {
@@ -302,17 +303,17 @@ window:root {
   color: var(--bg-main-foreground-color);
   background-color: transparent;
   border: 0px none transparent;
-  border-bottom: thin solid black;
+  border-bottom: thin solid var(--bg-dark-gray);
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
 :root:not([cleartheme="true"]) treecol:not(:first-of-type) {
-  -moz-border-start: solid thin black;
+  -moz-border-start: solid thin var(--bg-dark-gray);
 }
 
 :root:not([cleartheme="true"]) treecolpicker {
-  -moz-border-start: thin solid black;
+  -moz-border-start: thin solid var(--bg-dark-gray);
 }
  
 /* ::::: column picker :::::  */
@@ -329,18 +330,27 @@ window:root {
 
 /* LISTBOX */
 
-:root:not([cleartheme="true"]) listheader {
+:root:not([cleartheme="true"]) listbox {
   -moz-appearance: none;
-  background: transparent;
+  background: var(--bg-dark-background);
+  color: var(--bg-main-foreground-color);
+  border: thin solid var(--bg-dark-gray);
+}
+
+:root:not([cleartheme="true"]) listhead,
+:root:not([cleartheme="true"]) listheader,
+:root:not([cleartheme="true"]) listboxbody {
+  -moz-appearance: none;
+  background: var(--bg-dark-background);
   color: var(--bg-main-foreground-color);
   border: none 0px;
 }
 
 :root:not([cleartheme="true"]) listheader:not(:last-of-type) {
-  -moz-border-end: black solid thin;
+  -moz-border-end: var(--bg-dark-gray) solid thin;
 }
 
 :root:not([cleartheme="true"]) listhead {
-  border-bottom: black solid thin;
+  border-bottom: var(--bg-dark-gray) solid thin;
   padding: 2px;
 }

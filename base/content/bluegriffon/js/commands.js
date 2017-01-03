@@ -345,6 +345,7 @@ var ComposerCommands = {
     commandTable.registerCommand("cmd_toggleView",  cmdToggleView);
     commandTable.registerCommand("cmd_fullScreen",  cmdFullScreen);
     commandTable.registerCommand("cmd_new",         cmdNew);
+    commandTable.registerCommand("cmd_newEbook",    cmdNewEbook);
     commandTable.registerCommand("cmd_newWindow",   cmdNewWindow);
     commandTable.registerCommand("cmd_newWizard",   cmdNewWizard);
     commandTable.registerCommand("cmd_renderedHTMLEnabler",    cmdDummyHTML);

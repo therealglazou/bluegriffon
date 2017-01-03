@@ -35,6 +35,8 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
+@import url("chrome://bluegriffon/skin/black.css");
+
 hbox.listboxBg {
   max-height: 21px;
   border-left: thin solid var(--bg-dark-border);
@@ -105,18 +107,31 @@ hbox.listboxBg .listboxBgThrobberButton {
   list-style-image: url("chrome://global/skin/icons/loading_16.png");
 }
 
-hbox.listboxBg .listboxBgDownButton {
+hbox.listboxBg .listboxBgDownButton,
+hbox.listboxBg .listboxBgLeftButton {
   list-style-image: url("chrome://bluegriffon/skin/icons/down.png")
 }
 
-hbox.listboxBg .listboxBgDownButton[disabled] {
+hbox.listboxBg .listboxBgDownButton[disabled],
+hbox.listboxBg .listboxBgLeftButton[disabled] {
   list-style-image: url("chrome://bluegriffon/skin/icons/down-disabled.png")
 }
 
-hbox.listboxBg .listboxBgUpButton {
+hbox.listboxBg .listboxBgUpButton,
+hbox.listboxBg .listboxBgRightButton {
   list-style-image: url("chrome://bluegriffon/skin/icons/up.png")
 }
 
-hbox.listboxBg .listboxBgUpButton[disabled] {
+hbox.listboxBg .listboxBgUpButton[disabled],
+hbox.listboxBg .listboxBgRightButton[disabled] {
   list-style-image: url("chrome://bluegriffon/skin/icons/up-disabled.png")
+}
+
+hbox.listboxBg .listboxBgOrderedButton {
+  list-style-image: url("chrome://epub/content/epub/order.png")
+}
+
+hbox.listboxBg .listboxBgLeftButton image,
+hbox.listboxBg .listboxBgRightButton image {
+  -moz-transform: rotate(90deg);
 }

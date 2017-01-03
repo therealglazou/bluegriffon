@@ -71,6 +71,10 @@ function onChooseFile()
     fp.appendFilters(nsIFilePicker.filterHTML);
     fp.appendFilter(gDialog.bundle.getString("PHPfiles"), "*.php");
     fp.appendFilters(nsIFilePicker.filterText);
+    var ebmAvailable = ("EBookManager" in window.opener);
+    if (ebmAvailable)
+      fp.appendFilter(window.opener.document.getElementById("bundleEbookManager").getString("EPUBbooks"),
+                      "*.epub");
     fp.appendFilters(nsIFilePicker.filterAll);
 
     if (fp.show() == nsIFilePicker.returnOK && fp.fileURL.spec && fp.fileURL.spec.length > 0)
@@ -88,19 +92,31 @@ function OpenFile()
 {
   var filename = gDialog.input.value;
   var inTab = (gDialog.tabOrWindow.value == "tab");
-  InsertLocationInDB(filename);
-  window.opener.OpenFile(filename, inTab);
-
-  if (gDialog.prefs)
-  {
-    var str = Components.classes["@mozilla.org/supports-string;1"]
-                        .createInstance(Components.interfaces.nsISupportsString);
-    str.data = filename;
-    gDialog.prefs.setComplexValue("general.open_location.last_url",
-                         Components.interfaces.nsISupportsString, str);
+  var ebmAvailable = ("EBookManager" in window.opener);
+  if (ebmAvailable && filename.toLowerCase().endsWith(".epub")) {
+    try {
+      var localFile = UrlUtils.newLocalFile(filename);
+      window.opener.EBookManager.showEbook(localFile, filename);
+      // Delay closing slightly to avoid timing bug on Linux.
+      window.close();
+    }
+    catch(e) {}
   }
-  // Delay closing slightly to avoid timing bug on Linux.
-  window.close();
+  else {
+    InsertLocationInDB(filename);
+    window.opener.OpenFile(filename, inTab);
+
+    if (gDialog.prefs)
+    {
+      var str = Components.classes["@mozilla.org/supports-string;1"]
+                          .createInstance(Components.interfaces.nsISupportsString);
+      str.data = filename;
+      gDialog.prefs.setComplexValue("general.open_location.last_url",
+                           Components.interfaces.nsISupportsString, str);
+    }
+    // Delay closing slightly to avoid timing bug on Linux.
+    window.close();
+  }
   return false;
 }
 

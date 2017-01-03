@@ -1,0 +1,30 @@
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+#ebookTabbox {
+  margin-top: 1.5em;
+}
+
+ebook {
+  -moz-box-orient: vertical;
+  -moz-binding: url("chrome://bluegriffon/content/epub/ebook.xml#ebook");
+}
+
+epub2 {
+  -moz-box-orient: vertical;
+  -moz-binding: url("chrome://bluegriffon/content/epub/epub2.xml#epub2");
+}
+
+epub3 {
+  -moz-box-orient: vertical;
+  -moz-binding: url("chrome://bluegriffon/content/epub/epub3.xml#epub3");
+}
+
+tree, richlistbox {
+  margin: 0px;
+}
+
+treechildren::-moz-tree-cell-text(odd)            { color: #404040 }
+treechildren::-moz-tree-cell-text(even)           { color: #404040 }
+
+treechildren::-moz-tree-cell-text(odd, editable)  { color: black }
+treechildren::-moz-tree-cell-text(even, editable) { color: black }

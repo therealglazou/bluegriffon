@@ -1,0 +1,36 @@
+@import url("chrome://bluegriffon/skin/black.css");
+
+#optionalMetadataGridRows > row {
+  -moz-binding: url("chrome://epub/content/epub/metadata2.xml#metadataRow");
+}
+
+.metadata-delete-button {
+  visibility: hidden;
+  list-style-image: url("chrome://global/skin/icons/close.png");
+  -moz-image-region: rect(0, 16px, 16px, 0);
+}
+
+row:hover > .metadata-delete-button {
+  visibility: visible;
+}
+
+.metadata-delete-button:hover {
+  -moz-image-region: rect(0, 32px, 16px, 16px);
+}
+
+.metadata-delete-button:hover:active {
+  -moz-image-region: rect(0, 48px, 16px, 32px);
+}
+
+
+#addMetadataButton {
+  list-style-image: url("chrome://epub/content/epub/plus.png");
+}
+
+#addMetadataButton:hover {
+  list-style-image: url("chrome://epub/content/epub/plus-active.png");
+}
+
+#optionalMetadataGrid {
+  overflow: auto;
+}

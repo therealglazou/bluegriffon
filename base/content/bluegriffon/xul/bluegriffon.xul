@@ -162,6 +162,10 @@
     <vbox flex="1" id="maincontainer">
       <vbox flex="1">
         <box flex="1" id="tabeditorContainer" >
+          <vbox id="ebm" persist="width" hidden="true"/>
+          <splitter id="ebm_splitter" hidden="true" collapse="before">
+            <grippy/>
+          </splitter>
           <vbox id="responsiveContainer" flex="1">
             <tabeditor flex="1" id="tabeditor" visibility="hidden" persist="tabmode">
                 <hbox id="modeTabbox" previousMode="wysiwyg">
@@ -209,10 +213,8 @@
           </vbox>
           <splitter id="deckedPanelsSplitter"
                     collapse="after">
-#ifndef XP_MACOSX
             <grippy/>
-#endif
-            </splitter>
+          </splitter>
           <vbox id="deckedPanels"
                 persist="width">
             <deckedPanelsTabs id="deckedPanelsTabs"/>

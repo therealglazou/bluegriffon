@@ -9,6 +9,7 @@
 
         <menuseparator/>
         <menuitem label="&newWizardMenu.label;"
+                  id="newWizardMenu"
                   command="cmd_newWizard"/>
         <menu id="menu_RecentFiles" accesskey="&filerecentmenu.accesskey;" label="&fileRecentMenu.label;"
               onpopupshowing="RecentPagesHandler.buildRecentPagesMenu();">
