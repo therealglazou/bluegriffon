@@ -1,4 +1,20 @@
+@import url("chrome://bluegriffon/skin/black.css");
+
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+#ebm {
+  overflow: hidden;
+}
+
+#ebm label {
+  color: var(--bg-main-foreground-color);
+}
+
+#ebm tab label,
+#ebm popup label,
+#ebm menupopup label {
+  color: unset;
+}
 
 #ebookTabbox {
   margin-top: 1.5em;
@@ -6,21 +22,32 @@
 
 ebook {
   -moz-box-orient: vertical;
-  -moz-binding: url("chrome://bluegriffon/content/epub/ebook.xml#ebook");
+  -moz-binding: url("chrome://epub/content/epub/ebook.xml#ebook");
 }
 
 epub2 {
   -moz-box-orient: vertical;
-  -moz-binding: url("chrome://bluegriffon/content/epub/epub2.xml#epub2");
+  -moz-binding: url("chrome://epub/content/epub/epub2.xml#epub2");
 }
 
 epub3 {
   -moz-box-orient: vertical;
-  -moz-binding: url("chrome://bluegriffon/content/epub/epub3.xml#epub3");
+  -moz-binding: url("chrome://epub/content/epub/epub3.xml#epub3");
 }
 
-tree, richlistbox {
+#ebm tree,
+#ebm richlistbox {
   margin: 0px;
+}
+
+#ebm tabbox {
+  margin-top: 1.5em;
+}
+
+#ebm grid {
+  margin-left: 1em;
+  margin-right: 1em;
+  font-size: larger;
 }
 
 treechildren::-moz-tree-cell-text(odd)            { color: #404040 }
@@ -28,3 +55,12 @@ treechildren::-moz-tree-cell-text(even)           { color: #404040 }
 
 treechildren::-moz-tree-cell-text(odd, editable)  { color: black }
 treechildren::-moz-tree-cell-text(even, editable) { color: black }
+
+#ebm_splitter {
+  background-color: var(--bg-dark-gray);
+}
+
+>ebm tabpanels {
+  -moz-appearance: none;
+  background-color: transparent;
+}
