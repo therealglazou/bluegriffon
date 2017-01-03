@@ -275,15 +275,23 @@ tree {
 }
 
 :root:not([cleartheme="true"]) treechildren::-moz-tree-cell-text {
-  color: white;
+  color: var(--bg-main-foreground-color);
+}
+
+:root:not([cleartheme="true"]) treechildren::-moz-tree-cell-text(selected) {
+  color: black;
+}
+
+:root:not([cleartheme="true"]) treechildren::-moz-tree-cell-text(hover) {
+  color: black;
 }
 
 :root:not([cleartheme="true"]) treechildren::-moz-tree-row(selected) {
-  background-color: Highlight;
+  /*background-color: Highlight;*/
 }
 
 :root:not([cleartheme="true"]) treechildren::-moz-tree-row(selected, focus) {
-  background-color: Highlight;
+  /*background-color: Highlight;*/
 }
 
 :root:not([cleartheme="true"]) treecol,
