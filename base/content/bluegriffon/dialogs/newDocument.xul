@@ -76,14 +76,13 @@
             <textbox id="pageLanguage" flex="1"
                      oninput="TextboxChanged(this.id);"/>
             <button label="&selectLanguage.label;"
-                    id="selectLanguageButton"
                     oncommand="SelectLanguage(this)"/>
          </hbox>
         </row>
         <row align="center">
           <label value="&charset.label;"
                  control="charsetMenulist" />
-          <menulist id="charsetMenulist" value="utf-8" disabled="true">
+          <menulist id="charsetMenulist" value="utf-8">
             <menupopup id="charsetMenupopup"/>
           </menulist>
         </row>
@@ -91,9 +90,9 @@
           <label value="&direction.label;"
                  control="directionRadio" />
           <radiogroup id="directionRadio" orient="horizontal">
-            <radio label="&unspecified.label;" value="" id="unspecifiedDirection"/>
-            <radio label="&ltr.label;" value="ltr" id="ltrDirection"/>
-            <radio label="&rtl.label;" value="rtl" id="rtlDirection"/>
+            <radio label="&unspecified.label;" value=""/>
+            <radio label="&ltr.label;" value="ltr"/>
+            <radio label="&rtl.label;" value="rtl"/>
           </radiogroup>
         </row>
       </rows>
