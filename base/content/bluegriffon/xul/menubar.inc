@@ -3,32 +3,31 @@
 
     <menu id="fileMenu" label="&fileMenu.label;" accesskey="&fileMenu.accesskey;">
       <menupopup id="fileMenu_popup">
-        <menuitem label="&newMenu.label;" accesskey="&newMenu.accesskey;" key="key_newNavigator"
-                  command="cmd_new"/>
-        <menuitem label="&newOtherCmd.label;"     oncommand="NewDocumentWithOptions(event);"/>
+        <menuitem id="openPageMenuitem" accesskey="&openPage.accesskey;" key="openpagekb" command="cmd_open"/>
+        <menuitem id="openFileMenuitem"                                  key="openfilekb" command="cmd_openFile"/>
 
-        <menuseparator/>
-        <menuitem label="&newWizardMenu.label;"
-                  id="newWizardMenu"
-                  command="cmd_newWizard"/>
         <menu id="menu_RecentFiles" accesskey="&filerecentmenu.accesskey;" label="&fileRecentMenu.label;"
               onpopupshowing="RecentPagesHandler.buildRecentPagesMenu();">
           <menupopup id="menupopup_RecentFiles"
                       oncommand="OpenFile(event.target.getAttribute('value'), true);"/>
             <!-- menuitems appended at runtime -->
         </menu>
+        <menuseparator/>
+        <menuitem id="saveMenuitem"   key="savekb" command="cmd_save"/>
+        <menuitem id="saveAsMenuitem" key="saveaskb" command="cmd_saveAs"/>
 
         <menuseparator/>
+        <menuitem label="&newMenu.label;" accesskey="&newMenu.accesskey;" key="key_newNavigator"
+                  command="cmd_new"/>
+        <menuitem label="&newOtherCmd.label;"     oncommand="NewDocumentWithOptions(event);"/>
+
         <menuitem label="&newWindow.label;" key="key_newWindow"
                   command="cmd_newWindow" />
 
         <menuseparator/>
-        <menuitem id="openPageMenuitem" accesskey="&openPage.accesskey;" key="openpagekb" command="cmd_open"/>
-        <menuitem id="openFileMenuitem"                                  key="openfilekb" command="cmd_openFile"/>
-
-        <menuseparator/>
-        <menuitem id="saveMenuitem"   key="savekb" command="cmd_save"/>
-        <menuitem id="saveAsMenuitem" key="saveaskb" command="cmd_saveAs"/>
+        <menuitem label="&newWizardMenu.label;"
+                  id="newWizardMenu"
+                  command="cmd_newWizard"/>
 
         <menuseparator/>
         <menuitem id="browseMenuitem"
