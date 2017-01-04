@@ -121,6 +121,43 @@ function OpenFile(aURL, aInTab)
   if (!aURL)
     return;
  
+  var ebmAvailable = ("EBookManager" in window);
+  if (ebmAvailable && aURL.toLowerCase().endsWith(".epub")) {
+    var ioService =
+      Components.classes["@mozilla.org/network/io-service;1"]
+                .getService(Components.interfaces.nsIIOService);
+    var fileHandler =
+      ioService.getProtocolHandler("file")
+               .QueryInterface(Components.interfaces.nsIFileProtocolHandler);
+    var file = fileHandler.getFileFromURLSpec(aURL);
+
+    var windowEnumerator = Services.wm.getEnumerator("bluegriffon");
+    var win = null;
+    while (windowEnumerator.hasMoreElements()) {
+      var w = windowEnumerator.getNext();
+      var ebookElt = w.document.querySelector("epub2,epub3");
+      if (ebookElt) {
+        var ebook = ebookElt.getUserData("ebook");
+        if (file.equals(ebook.packageFile)) {
+          w.focus();
+          return;
+        }
+      }
+      else if (!win)
+        win = w;
+    }
+
+    StoreUrlInLocationDB(aURL);
+    if (win) {
+      win.focus();
+      win.EBookManager.showEbook(file, aURL);
+      window.updateCommands("style");
+      return;
+    }
+    OpenNewWindow(aURL);
+    return;
+  }
+
   var alreadyEdited = EditorUtils.isAlreadyEdited(aURL);
   if (alreadyEdited)
   {

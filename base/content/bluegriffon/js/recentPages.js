@@ -41,14 +41,30 @@ Components.utils.import("resource://gre/modules/editorHelper.jsm");
 
 var RecentPagesHandler = {
 
-  appendRecentMenuitem: function(menupopup, title, url, menuIndex)
+  appendRecentMenuitem: function(menupopup, title, url, menuIndex, epubUrls)
   {
+    if (epubUrls.indexOf(url) != -1)
+      return;
+
+    var ioService =
+      Components.classes["@mozilla.org/network/io-service;1"]
+                .getService(Components.interfaces.nsIIOService);
+    var fileHandler =
+      ioService.getProtocolHandler("file")
+               .QueryInterface(Components.interfaces.nsIFileProtocolHandler);
+    var file = fileHandler.getFileFromURLSpec(url);
+    if (!file.exists())
+      return;
+
     if (menupopup)
     {
       var menuItem = document.createElement("menuitem");
       if (menuItem)
       {
         var itemString = "";
+
+        if (url.toLowerCase().endsWith(".epub"))
+          itemString += "📖 ";
   
         // Show "title [url]" or just the URL
         if (title)
@@ -56,7 +72,7 @@ var RecentPagesHandler = {
          itemString += title;
          itemString += " [";
         }
-        itemString += url;
+        itemString += unescape(url);
         if (title)
           itemString += "]";
   
@@ -91,6 +107,18 @@ var RecentPagesHandler = {
     } catch(e) {}
     var menuIndex = 1;
   
+    var windowEnumerator = Services.wm.getEnumerator("bluegriffon");
+    var win = null;
+    var epubUrls = [];
+    while (windowEnumerator.hasMoreElements()) {
+      var w = windowEnumerator.getNext();
+      var ebookElt = w.document.querySelector("epub2,epub3");
+      if (ebookElt) {
+        var ebook = ebookElt.getUserData("ebook");
+        epubUrls.push(ebook.url);
+      }
+    }
+
     for (var i = 0; i < historyCount; i++)
     {
       var url = GetUnicharPref("bluegriffon.history_url_"+i);
@@ -100,15 +128,14 @@ var RecentPagesHandler = {
       {
         // Build the menu
         var title = GetUnicharPref("bluegriffon.history_title_"+i);
-        this.appendRecentMenuitem(popup, title, url, menuIndex);
+        this.appendRecentMenuitem(popup, title, url, menuIndex, epubUrls);
         menuIndex++;
       }
     }
   },
   
-  saveRecentFilesPrefs: function()
+  addUrlAndTitle: function(curUrl, aTitle)
   {
-    var curUrl = UrlUtils.stripPassword(EditorUtils.getDocumentUrl());
     if (!curUrl)
       return;
     var historyCount = 10;
@@ -124,7 +151,7 @@ var RecentPagesHandler = {
         !UrlUtils.isUrlOfBlankDocument(curUrl) &&
         UrlUtils.getScheme(curUrl) != "data")
     {
-      titleArray.push(EditorUtils.getDocumentTitle());
+      titleArray.push(aTitle);
       urlArray.push(curUrl);
     }
   
@@ -150,5 +177,12 @@ var RecentPagesHandler = {
       SetUnicharPref("bluegriffon.history_title_"+i, titleArray[i]);
       SetUnicharPref("bluegriffon.history_url_"+i, urlArray[i]);
     }
+  },
+
+  saveRecentFilesPrefs: function()
+  {
+    var curUrl = UrlUtils.stripPassword(EditorUtils.getDocumentUrl());
+    var title  = EditorUtils.getDocumentTitle();
+    this.addUrlAndTitle(curUrl, title);
   }
 };
