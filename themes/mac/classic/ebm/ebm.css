@@ -59,3 +59,21 @@ treechildren::-moz-tree-cell-text(even, editable) { color: black }
 #ebm_splitter {
   background-color: var(--bg-dark-gray);
 }
+
+#ebmCloseButton {
+  list-style-image: url("chrome://global/skin/icons/close.png");
+  -moz-image-region: rect(0, 16px, 16px, 0);
+  visibility: hidden;
+}
+
+#ebm:hover #ebmCloseButton {
+  visibility: visible;
+}
+
+#ebmCloseButton:hover {
+  -moz-image-region: rect(0, 32px, 16px, 16px) ! important;
+}
+
+#ebmCloseButton:hover:active {
+  -moz-image-region: rect(0, 48px, 16px, 32px) ! important;
+}
