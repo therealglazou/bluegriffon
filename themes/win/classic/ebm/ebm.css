@@ -58,6 +58,7 @@ treechildren::-moz-tree-cell-text(even, editable) { color: black }
 
 #ebm_splitter {
   background-color: var(--bg-dark-gray);
+  border: 0px none;
 }
 
 #ebm tabpanels {
@@ -72,9 +73,12 @@ treechildren::-moz-tree-cell-text(even, editable) { color: black }
 }
 
 #ebmCloseButton {
-  list-style-image: url("chrome://global/skin/icons/close.png");
+  list-style-image: url("chrome://global/skin/icons//close-XPVista7.png");
   -moz-image-region: rect(0, 16px, 16px, 0);
   visibility: hidden;
+  padding: 0px ! important;
+  border: 0px none ! important;
+  -moz-margin-start: 10px;
 }
 
 #ebm:hover #ebmCloseButton {
