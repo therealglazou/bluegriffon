@@ -365,8 +365,8 @@
         <menuitem id="menu_cleanup" command="cmd_cleanup"/>
         <menuseparator/>
         <menuitem label="&addonsMenu.label;"  oncommand="OpenExtensionsManager()"/>
-        <menuseparator/>
-        <menuitem label="&consoleMenu.label;"  oncommand="OpenConsole()"/>
+        <!--menuseparator/-->
+        <!--menuitem label="&consoleMenu.label;"  oncommand="OpenConsole()"/-->
         <menuseparator id="menu_PrefsSeparator"/>
         <menuitem id="menu_preferences"
                   label="&preferences.label;"
@@ -380,7 +380,7 @@
         <menuitem id="menu_mac_hide_others" label="&hideOtherAppsCmdMac.label;" key="key_hideOtherAppsCmdMac"/>
         <menuitem id="menu_mac_show_all" label="&showAllAppsCmdMac.label;"/>
 #endif
-        <menuitem id="menu_inspector" label="DOMI" oncommand="inspectDOMDocument();"/>
+        <!--menuitem id="menu_inspector" label="DOMI" oncommand="inspectDOMDocument();"/-->
 
       </menupopup>
     </menu>
