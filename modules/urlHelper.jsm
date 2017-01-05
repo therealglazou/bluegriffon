@@ -199,7 +199,9 @@ var UrlUtils = {
 
 
     // Get just the file path part of the urls
-    var charset = EditorUtils.getCurrentEditor().documentCharacterSet;
+    var charset = EditorUtils.getCurrentEditor()
+                  ? EditorUtils.getCurrentEditor().documentCharacterSet
+                  : "utf-8";
     var docPath = IOService.newURI(docUrl,   charset, null).path;
     var urlPath = IOService.newURI(inputUrl, charset, null).path;
 
