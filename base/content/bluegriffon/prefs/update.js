@@ -16,7 +16,7 @@ function OnUpdatePaneLoad()
 
 function OpenPrivacyPolicy()
 {
-  loadExternalURL("http://bluegriffon.org/pages/Privacy-Policy");
+  loadExternalURL("http://bluegriffon.org/#privacy");
 }
 
 function loadExternalURL( url )
