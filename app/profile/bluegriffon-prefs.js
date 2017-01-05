@@ -16,6 +16,10 @@ pref("toolbar.customization.usesheet", true); // true for Mac
 pref("toolbar.customization.usesheet", false); // false otherwise
 #endif
 
+/* disable telemetry */
+pref("toolkit.telemetry.enabled", false);
+pref("toolkit.telemetry.archive.enabled", false);
+
 /* main theme */
 pref("bluegriffon.wysiwyg.theme", "black");
 
