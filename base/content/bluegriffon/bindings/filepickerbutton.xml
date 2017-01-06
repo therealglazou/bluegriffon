@@ -110,7 +110,7 @@
                            parseInt(this.getAttribute("mode")));
 
               var w = EditorUtils.getCurrentEditorWindow();
-              var epubElt = w.document.querySelector("epub2,epub3");
+              var epubElt = w.document.querySelector("epub2,epub3,epub31");
               var ebook = epubElt.getUserData("ebook");
               this.fp.displayDirectory = ebook.opfFile.parent.clone();
 

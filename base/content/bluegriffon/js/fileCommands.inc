@@ -70,7 +70,7 @@ var cmdOpenFile =
           var win = null;
           while (windowEnumerator.hasMoreElements()) {
             var w = windowEnumerator.getNext();
-            var ebookElt = w.document.querySelector("epub2,epub3");
+            var ebookElt = w.document.querySelector("epub2,epub3,epub31");
             if (ebookElt) {
               var ebook = ebookElt.getUserData("ebook");
               if (fp.file.equals(ebook.packageFile)) {
@@ -226,7 +226,7 @@ var cmdCloseTab =
   {
     var editorElement = EditorUtils.getCurrentEditorElement();
     if (!editorElement) { // sanity check
-      var ebook = document.querySelector("epub2,epub3");
+      var ebook = document.querySelector("epub2,epub3,epub31");
       if (ebook) {
         if ("deleteTempDir" in ebook)
           ebook.deleteTempDir();

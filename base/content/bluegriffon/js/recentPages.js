@@ -115,7 +115,7 @@ var RecentPagesHandler = {
     var epubUrls = [];
     while (windowEnumerator.hasMoreElements()) {
       var w = windowEnumerator.getNext();
-      var ebookElt = w.document.querySelector("epub2,epub3");
+      var ebookElt = w.document.querySelector("epub2,epub3,epub31");
       if (ebookElt) {
         var ebook = ebookElt.getUserData("ebook");
         epubUrls.push(ebook.url);

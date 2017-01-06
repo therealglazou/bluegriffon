@@ -135,7 +135,7 @@ function OpenFile(aURL, aInTab)
     var win = null;
     while (windowEnumerator.hasMoreElements()) {
       var w = windowEnumerator.getNext();
-      var ebookElt = w.document.querySelector("epub2,epub3");
+      var ebookElt = w.document.querySelector("epub2,epub3,epub31");
       if (ebookElt) {
         var ebook = ebookElt.getUserData("ebook");
         if (file.equals(ebook.packageFile)) {
@@ -1273,7 +1273,7 @@ function doSaveTabsBeforeQuit()
       return false;
   }
 
-  var ebook = document.querySelector("epub2,epub3");
+  var ebook = document.querySelector("epub2,epub3,epub31");
   if (ebook) {
     if ("deleteTempDir" in ebook)
       ebook.deleteTempDir();
