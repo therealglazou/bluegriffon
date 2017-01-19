@@ -52,10 +52,13 @@ var cmdOpenFile =
               gDialog.bundleOpenLocation.getString("chooseFileDialogTitle"),
               Components.interfaces.nsIFilePicker.modeOpen);
       
+      var ebmAvailable = ("EBookManager" in window);
+      if (ebmAvailable)
+        fp.appendFilter(document.getElementById("bundleEbookManager").getString("HTMLorEPUBBooks"),
+                        "*.html; *.htm; *.shtml; *.xhtml; *.epub");
       fp.appendFilters(Components.interfaces.nsIFilePicker.filterHTML);
       fp.appendFilter(gDialog.bundleOpenLocation.getString("PHPfiles"), "*.php");
       fp.appendFilters(Components.interfaces.nsIFilePicker.filterText);
-      var ebmAvailable = ("EBookManager" in window);
       if (ebmAvailable)
         fp.appendFilter(document.getElementById("bundleEbookManager").getString("EPUBbooks"),
                         "*.epub");

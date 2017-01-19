@@ -78,7 +78,7 @@ diFilePicker.prototype = {
   addFileToEbook: function(aFile)
   {
       var w = EditorUtils.getCurrentEditorWindow();
-      var epubElt = w.document.querySelector("epub2,epub3");
+      var epubElt = w.document.querySelector("epub2,epub3,epub31");
       if (!epubElt) return;
       var ebook = epubElt.getUserData("ebook");
       if (!ebook) return;
