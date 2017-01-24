@@ -341,6 +341,7 @@ var ComposerCommands = {
     commandTable.registerCommand("cmd_print",       cmdPrint);
     commandTable.registerCommand("cmd_printSettings", cmdPrintSetup);
     commandTable.registerCommand("cmd_saveAs",      cmdSaveAs);
+    commandTable.registerCommand("cmd_closeEbook",  cmdCloseEbook);
     commandTable.registerCommand("cmd_closeTab",    cmdCloseTab);
     commandTable.registerCommand("cmd_toggleView",  cmdToggleView);
     commandTable.registerCommand("cmd_fullScreen",  cmdFullScreen);

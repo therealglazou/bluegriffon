@@ -240,6 +240,7 @@
   <command id="cmd_save"           label="&saveCmd.label;"           oncommand="goDoCommand('cmd_save')"/>
   <command id="cmd_saveAs"         label="&saveAsCmd.label;"         oncommand="goDoCommand('cmd_saveAs')"/>
   <command id="cmd_closeTab"       label="&closeTabCmd.label;"       oncommand="goDoCommand('cmd_closeTab')"/>
+  <command id="cmd_closeEbook"     label="&closeEbookCmd.label;"     oncommand="goDoCommand('cmd_closeEbook')"/>
 
   <command id="cmd_print"          label="&printCmd.label;"          oncommand="goDoCommand('cmd_print')"/>
   <command id="cmd_printSettings"  label="&printSetupCmd.label;"     oncommand="goDoCommand('cmd_printSettings')"/>

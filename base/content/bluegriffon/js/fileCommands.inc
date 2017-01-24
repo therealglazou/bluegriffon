@@ -273,6 +273,24 @@ var cmdCloseTab =
   }
 }
 
+var cmdCloseEbook =
+{
+  isCommandEnabled: function(aCommand, dummy)
+  {
+    return (null != document.querySelector("epub2,epub3,epub31"));
+  },
+  
+  getCommandStateParams: function(aCommand, aParams, aRefCon) {},
+  doCommandParams: function(aCommand, aParams, aRefCon) {},
+
+  doCommand: function(aCommand)
+  {
+    var ebook = document.querySelector("epub2,epub3,epub31");
+    if (ebook) // sanity check
+      ebook.closeBookOnSave();
+  }
+}
+
 function StoreUrlInLocationDB(url)
 {
   RecentPagesHandler.saveRecentFilesPrefs();
