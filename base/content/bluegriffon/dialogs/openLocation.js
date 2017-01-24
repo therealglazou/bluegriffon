@@ -94,13 +94,41 @@ function OpenFile()
   var inTab = (gDialog.tabOrWindow.value == "tab");
   var ebmAvailable = ("EBookManager" in window.opener);
   if (ebmAvailable && filename.toLowerCase().endsWith(".epub")) {
-    try {
-      var localFile = UrlUtils.newLocalFile(filename);
-      window.opener.EBookManager.showEbook(localFile, filename);
-      // Delay closing slightly to avoid timing bug on Linux.
-      window.close();
+    var ioService =
+      Components.classes["@mozilla.org/network/io-service;1"]
+                .getService(Components.interfaces.nsIIOService);
+    var fileHandler =
+      ioService.getProtocolHandler("file")
+               .QueryInterface(Components.interfaces.nsIFileProtocolHandler);
+    var file = fileHandler.getFileFromURLSpec(filename);
+
+    var windowEnumerator = Services.wm.getEnumerator("bluegriffon");
+    var win = null;
+    while (windowEnumerator.hasMoreElements()) {
+      var w = windowEnumerator.getNext();
+      var ebookElt = w.document.querySelector("epub2,epub3,epub31");
+      if (ebookElt) {
+        var ebook = ebookElt.getUserData("ebook");
+        if (file.equals(ebook.packageFile)) {
+          w.focus();
+          window.close();
+          return;
+        }
+      }
+      else if (!win)
+        win = w;
     }
-    catch(e) {}
+
+    window.opener.StoreUrlInLocationDB(filename);
+    if (win && !win.EditorUtils.getCurrentEditor()) {
+      win.focus();
+      win.EBookManager.showEbook(file, filename);
+      win.updateCommands("style");
+      window.close();
+      return;
+    }
+    window.opener.OpenNewWindow(filename);
+    window.close();
   }
   else {
     InsertLocationInDB(filename);

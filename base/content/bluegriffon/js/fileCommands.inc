@@ -85,10 +85,10 @@ var cmdOpenFile =
               win = w;
           }
     
-          if (win) {
+          if (win && !win.EditorUtils.getCurrentEditor()) {
             win.focus();
             win.EBookManager.showEbook(fp.file, fp.fileURL.spec);
-            window.updateCommands("style");
+            win.updateCommands("style");
             return;
           }
           OpenNewWindow(UrlUtils.getIOService().newFileURI(fp.file).QueryInterface(Components.interfaces.nsIURL).spec);
@@ -230,15 +230,7 @@ var cmdCloseTab =
     var editorElement = EditorUtils.getCurrentEditorElement();
     if (!editorElement) { // sanity check
       var ebook = document.querySelector("epub2,epub3,epub31");
-      if (ebook) {
-        if ("deleteTempDir" in ebook)
-          ebook.deleteTempDir();
-        ebook.parentNode.removeChild(ebook);
-        gDialog.ebm.setAttribute("hidden", "true");
-        gDialog.ebm_splitter.setAttribute("hidden", "true");
-        window.updateCommands("style");
-      }
-      else
+      if (!ebook)
         window.close();
       return;
     }

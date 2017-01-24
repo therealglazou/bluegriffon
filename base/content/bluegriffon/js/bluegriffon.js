@@ -148,10 +148,10 @@ function OpenFile(aURL, aInTab)
     }
 
     StoreUrlInLocationDB(aURL);
-    if (win) {
+    if (win && !win.EditorUtils.getCurrentEditor()) {
       win.focus();
       win.EBookManager.showEbook(file, aURL);
-      window.updateCommands("style");
+      win.updateCommands("style");
       return;
     }
     OpenNewWindow(aURL);
