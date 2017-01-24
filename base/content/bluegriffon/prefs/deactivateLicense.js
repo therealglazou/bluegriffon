@@ -2,7 +2,6 @@ Components.utils.import("resource://gre/modules/Services.jsm");
 
 function Startup()
 {
-  Services.prompt.alert(null, "foo", "gEPUB" in window);
   GetUIElements();
 }
 
