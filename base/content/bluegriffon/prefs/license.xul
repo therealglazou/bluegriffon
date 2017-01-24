@@ -37,7 +37,11 @@
         </row>
       </rows>
     </grid>
-    <editor editortype="html" src="about:blank" style="height: 1px"/>
+    <hbox align="center" id="validityBox" class="indent">
+      <label value="INVALID LICENSE"             id="invalidLicense" style="color: red; font-weight: bold"/>
+      <label value="VALID LICENSE"               id="validBasicLicense" style="font-weight: bold"/>
+      <label value="VALID LICENSE, EPUB EDITION" id="validEPUBLicense" style="font-weight: bold"/>
+    </hbox>
     <hbox align="center">
       <spacer flex="1"/>
       <button label="&deactivate.label;"

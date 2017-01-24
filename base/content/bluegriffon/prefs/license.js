@@ -13,10 +13,31 @@ function CheckDeactivationButton()
     email = Services.prefs.getCharPref("bluegriffon.license.email");
   }
   catch(e) {}
+
+  if ("gValidBasic" in window) {
+    gDialog.invalidLicense.setAttribute("hidden", "true");
+  }
+  else {
+    gDialog.validBasicLicense.setAttribute("hidden", "true");
+  }
+
+  if ("gValidExtended" in window) {
+    gDialog.invalidLicense.setAttribute("hidden", "true");
+    gDialog.validBasicLicense.setAttribute("hidden", "true");
+  }
+  else {
+    gDialog.validEPUBLicense.setAttribute("hidden", "true");
+  }
+
+  if (!gDialog.licenseKeyTextbox.value
+       && !gDialog.licenseInvoiceTextbox.value) {
+    gDialog.invalidLicense.setAttribute("hidden", "true");
+  }
+
   gDialog.deactivateLicenseButton.disabled =
     (!gDialog.licenseKeyTextbox.value
      || !gDialog.licenseInvoiceTextbox.value
-     || !email);
+     || !("gValidBasic" in window));
   gDialog.activateLicenseButton.disabled = !gDialog.deactivateLicenseButton.disabled ||
     !gDialog.licenseKeyTextbox.value ||
     !gDialog.licenseInvoiceTextbox.value;

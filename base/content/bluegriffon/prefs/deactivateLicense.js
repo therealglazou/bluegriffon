@@ -2,6 +2,7 @@ Components.utils.import("resource://gre/modules/Services.jsm");
 
 function Startup()
 {
+  Services.prompt.alert(null, "foo", "gEPUB" in window);
   GetUIElements();
 }
 
@@ -15,7 +16,9 @@ function onAccept()
   gDialog.throbberBox.removeAttribute("hidden");
   var appid = Services.prefs.getCharPref("bluegriffon.updates.id");
 
-  var url = "http://www.bluegriffon-epubedition.com/deac-bg.php?appid=" + appid;
+  var url = ("gEPUB" in window)
+            ? "http://www.bluegriffon-epubedition.com/deac.php?appid=" + appid
+            : "http://www.bluegriffon-epubedition.com/deac-bg.php?appid=" + appid;
 
   var rq = Components.classes["@mozilla.org/xmlextras/xmlhttprequest;1"]
              .createInstance();
@@ -35,7 +38,11 @@ function onAccept()
       Services.prefs.setCharPref("bluegriffon.license.invoice", "");
       Services.prefs.setCharPref("bluegriffon.license.email", "");
 
-      window.close();
+      var appStartup = Components.classes["@mozilla.org/toolkit/app-startup;1"]
+                       .getService(Components.interfaces.nsIAppStartup);
+    
+      appStartup.quit(Components.interfaces.nsIAppStartup.eRestart |
+                      Components.interfaces.nsIAppStartup.eAttemptQuit);
     }
   };
 
