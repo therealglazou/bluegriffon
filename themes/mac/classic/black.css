@@ -49,8 +49,7 @@
   --bg-dark-background: #363d3f;
   --bg-dark-gray: #474D4F;
   --bg-lighter-dark-gray: #383f41;
-  /*--bg-dark-border:  #181818;*/
-  --bg-dark-border:  #474D4F;
+  --bg-dark-border: #474D4F;
   --bg-lighter-border: #494f51;
 
   --bg-list-background: #363d3f;
@@ -59,11 +58,11 @@
   --bg-disabled-foreground-color: #808080;
 }
 
-:root[cleartheme="true"] {
+:root[cleartheme="true"], panel, popup {
   --bg-dark-background: #E0E0E0;
   --bg-dark-gray: #D0D0D0;
   --bg-lighter-dark-gray: #B0B0B0;
-  --bg-dark-border:  #c0c0c0;
+  --bg-dark-border: #c0c0c0;
   --bg-lighter-border: #D0D0D0;
 
   --bg-list-background: white;
@@ -201,7 +200,7 @@ window:root {
   margin: 4px 0px;
   padding: 2px;
   background-color: var(--bg-dark-background);
-  border: thin solid black;
+  border: thin solid var(--bg-dark-border);
 }
 
 :root:not([cleartheme="true"]) menulist .menulist-dropmarker {

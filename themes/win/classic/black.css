@@ -57,7 +57,7 @@
   --bg-disabled-foreground-color: #808080;
 }
 
-:root[cleartheme="true"] {
+:root[cleartheme="true"], panel, popup {
   --bg-dark-background: #E0E0E0;
   --bg-dark-gray: #D0D0D0;
   --bg-lighter-dark-gray: #B0B0B0;
@@ -199,7 +199,7 @@ window:root, dialog:root {
   margin: 4px 0px;
   padding: 2px;
   background-color: var(--bg-dark-background);
-  border: thin solid black;
+  border: thin solid var(--bg-dark-border);
 }
 
 :root:not([cleartheme="true"]) menulist .menulist-dropmarker {
