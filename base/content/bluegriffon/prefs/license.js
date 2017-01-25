@@ -53,9 +53,14 @@ function DeactivateLicense()
 
 function ActivateLicense()
 {
-  var appStartup = Components.classes["@mozilla.org/toolkit/app-startup;1"]
-                   .getService(Components.interfaces.nsIAppStartup);
-
-  appStartup.quit(Components.interfaces.nsIAppStartup.eRestart |
-                  Components.interfaces.nsIAppStartup.eAttemptQuit);
+  var rv = Services.prompt.confirm(window,
+                                   gDialog.activationBundle.getString("confirmRestart"),
+                                   gDialog.activationBundle.getString("activateWarning"));
+  if (rv) {
+    var appStartup = Components.classes["@mozilla.org/toolkit/app-startup;1"]
+                     .getService(Components.interfaces.nsIAppStartup);
+  
+    appStartup.quit(Components.interfaces.nsIAppStartup.eRestart |
+                    Components.interfaces.nsIAppStartup.eAttemptQuit);
+  }
 }
