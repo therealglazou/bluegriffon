@@ -39,7 +39,6 @@
 
         <menuseparator/>
         <menuitem id="closeTabMenuitem" key="closetabkb" command="cmd_closeTab"/>
-        <menuitem id="closeCurrentEbook" command="cmd_closeEbook"/>
 
         <menuseparator id="menu_FileQuitSeparator"/>
         <menuitem id="menu_FileQuitItem"
@@ -381,7 +380,7 @@
         <menuitem id="menu_mac_hide_others" label="&hideOtherAppsCmdMac.label;" key="key_hideOtherAppsCmdMac"/>
         <menuitem id="menu_mac_show_all" label="&showAllAppsCmdMac.label;"/>
 #endif
-        <menuitem id="menu_inspector" label="DOMI" oncommand="inspectDOMDocument();"/>
+        <!--menuitem id="menu_inspector" label="DOMI" oncommand="inspectDOMDocument();"/-->
 
       </menupopup>
     </menu>
