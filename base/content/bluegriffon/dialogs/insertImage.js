@@ -3,6 +3,7 @@ Components.utils.import("resource://gre/modules/editorHelper.jsm");
 Components.utils.import("resource://gre/modules/urlHelper.jsm");
 
 var gNode = null;
+var isAbsoluteRegexp = new RegExp('^([a-z][a-z0-9+.-]*:\/\/|\/\/)', 'i');
 
 function Startup()
 {
@@ -22,12 +23,12 @@ function Startup()
 
   if (url) {
     gDialog.imageURLTextbox.value = url;
+
     LoadImage();
-    MakeRelativeUrl();
     SetFocusToAlt();
   }
 
-  document.documentElement.getButton("accept").setAttribute("disabled", "true");
+  UpdateButtons();
   //window.sizeToContent();
 #ifndef XP_MACOSX
   CenterDialogOnOpener();
@@ -83,8 +84,9 @@ function onAccept()
 
 function LoadImage()
 {
+  var url = gDialog.imageURLTextbox.value.trim();
   gDialog.previewImage.style.backgroundImage = 'url("' +
-    UrlUtils.makeAbsoluteUrl(gDialog.imageURLTextbox.value.trim()) + '")';
+    UrlUtils.makeAbsoluteUrl(url) + '")';
   UpdateButtons();
 }
 
@@ -150,9 +152,30 @@ function InitDialog()
   if (!gNode)
     return;
 
-  gDialog.imageURLTextbox.value = gNode.getAttribute("src");
+  var isAbsolute = new RegExp('^([a-z]+://)', 'i');
+  var url = gNode.getAttribute("src");
+  gDialog.imageURLTextbox.value = url;
+  var isAbsolute = isAbsoluteRegexp.test(url);
+  gDialog.relativeURLCheckbox.checked = !isAbsolute;
   LoadImage();
   gDialog.titleTextbox.value = gNode.getAttribute("title");
   gDialog.alternateTextTextbox.value = gNode.getAttribute("alt");
 }
 
+function LoadImageFromFilePicker()
+{
+  LoadImage();
+
+  var url = gDialog.imageURLTextbox.value.trim();
+  var isAbsolute = isAbsoluteRegexp.test(url);
+  if (!gDialog.relativeURLCheckbox.disabled) {
+    if (gDialog.relativeURLCheckbox.checked) {
+      if (isAbsolute)
+        MakeRelativeUrl();
+    }
+    else {
+      if (!isAbsolute)
+        MakeAbsoluteUrl();
+    }
+  }
+}
