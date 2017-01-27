@@ -302,6 +302,25 @@ var BlueGriffonPrefsObserver = {
         }
       }
     }
+    else if (prefName == "bluegriffon.display.anchors") {
+      var value = Services.prefs.getBoolPref("bluegriffon.display.anchors");
+      var windowEnumerator = Services.wm.getEnumerator("bluegriffon");
+      while (windowEnumerator.hasMoreElements()) {
+        var w = windowEnumerator.getNext();
+        var editors = w.gDialog.tabeditor.mTabpanels.childNodes;
+        for (var i = 0; i < editors.length; i++) {
+          try {
+            var e = editors[i].lastChild;
+            var innerEditor = e.getEditor(e.contentWindow);
+            if (value)
+              innerEditor.addOverrideStyleSheet("chrome://bluegriffon/content/EditorContentAnchors.css");
+            else
+              innerEditor.removeOverrideStyleSheet("chrome://bluegriffon/content/EditorContentAnchors.css");
+          }
+          catch(e) {}
+        }
+      }
+    }
   }
 };
 
