@@ -68,6 +68,7 @@ pref("bluegriffon.spellCheck.suggestions", 10);
 pref("bluegriffon.display.comments", true);
 pref("bluegriffon.display.php", true);
 pref("bluegriffon.display.pi", true);
+pref("bluegriffon.display.anchors", true);
 
 // document preferences
 pref("bluegriffon.author", "");
