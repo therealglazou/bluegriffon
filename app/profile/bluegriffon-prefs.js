@@ -165,7 +165,7 @@ pref("bluegriffon.css.colors.names.enabled", true);
 pref("bluegriffon.css.colors.type", "hex");
 
 // make links absolute when copied
-pref("clipboard.absoluteLinks", true);
+pref("clipboard.absoluteLinks", false);
 
 pref("extensions.venkman.enableChromeFilter", false);
 
