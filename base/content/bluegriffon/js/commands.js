@@ -402,6 +402,7 @@ var ComposerCommands = {
     commandTable.registerCommand("cmd_progress",    cmdInsertProgressCommand);
     commandTable.registerCommand("cmd_meter",       cmdInsertMeterCommand);
     commandTable.registerCommand("cmd_datalist",    cmdInsertDatalistCommand);
+    commandTable.registerCommand("cmd_rebuildTOC",  cmdRebuildTOCCommand);
 
     commandTable.registerCommand("cmd_formInputHidden",  cmdInsertFormInputCommand);
     commandTable.registerCommand("cmd_formInputHidden",  cmdInsertFormInputCommand);

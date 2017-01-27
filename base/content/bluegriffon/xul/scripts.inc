@@ -27,6 +27,7 @@
   <script type="application/javascript" src="chrome://bluegriffon/content/js/html5.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/js/tableResizer.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/js/beautify-html.js"/>
+  <script type="application/javascript" src="chrome://bluegriffon/content/js/rebuildTOC.js"/>
   <script type="application/javascript" src="resource://gre/res/codemirror/themes-list.js"/>
 
   <script type="application/javascript" src="chrome://bluegriffon/content/js/responsive.js"/>

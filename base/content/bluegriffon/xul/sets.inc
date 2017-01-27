@@ -77,6 +77,7 @@
   <command id="cmd_table"            oncommand="goDoCommand('cmd_table')"/>
   <command id="cmd_InsertTable"      oncommand="goDoCommand('cmd_InsertTable')"/>
   <command id="cmd_image"            oncommand="goDoCommand('cmd_image')"/>
+  <command id="cmd_rebuildTOC"       oncommand="goDoCommand('cmd_rebuildTOC')"/>
   <command id="cmd_anchor"           oncommand="goDoCommand('cmd_anchor')"/>
   <command id="cmd_link"             oncommand="goDoCommand('cmd_link')"/>
   <command id="cmd_hr"               oncommand="goDoCommand('cmd_hr')"/>

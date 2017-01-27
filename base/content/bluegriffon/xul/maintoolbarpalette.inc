@@ -33,6 +33,13 @@
                      tooltiptext="&stopButton.tooltip;"
                      command="cmd_stopLoading"/>
 
+      <toolbarbutton id="refreshButton"
+                     label="Rebuild ToC"
+                     class="toolbarbutton-1"
+                     iconsize="smaller"
+                     tooltiptext="Rebuild Table of Contents"
+                     command="cmd_rebuildTOC"/>
+
       <toolbarbutton id="tableButton" class="toolbarbutton-1"
                      label="&tableToolbarCmd.label;" command="cmd_table"
                      tooltiptext="&tableToolbarCmd.tooltip;"/>
