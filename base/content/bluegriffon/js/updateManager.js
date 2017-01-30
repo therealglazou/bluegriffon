@@ -64,11 +64,8 @@ var BGUpdateManager = {
     return this.QueryInterface(iid);
   },
 
-  check: function()
+  generateAppId: function()
   {
-    if (gDialog.updateThrobber)
-      gDialog.updateThrobber.hidden = false;
-
     var prefs = Services.prefs;
     var currentDate = Date.parse(new Date());
 
@@ -88,6 +85,14 @@ var BGUpdateManager = {
       }
       catch(e) {}
     }
+  },
+
+  check: function()
+  {
+    if (gDialog.updateThrobber)
+      gDialog.updateThrobber.hidden = false;
+
+    this.generateAppId();
 
     var lastCheck = 0;
     try {

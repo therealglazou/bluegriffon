@@ -50,6 +50,7 @@ function Startup()
   ResizeEventNotifier.startup();
   EditorScrolledNotifier.startup();
   BGZoomManager.startup();
+  BGUpdateManager.generateAppId();
   BGUpdateManager.check();
   
   initLocalFontFaceMenu(gDialog.FontFacePopup);
