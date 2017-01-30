@@ -2480,7 +2480,29 @@ diff --git a/editor/libeditor/nsHTMLDataTransfer.cpp b/editor/libeditor/nsHTMLDa
 diff --git a/editor/libeditor/nsHTMLEditRules.cpp b/editor/libeditor/nsHTMLEditRules.cpp
 --- a/editor/libeditor/nsHTMLEditRules.cpp
 +++ b/editor/libeditor/nsHTMLEditRules.cpp
-@@ -1388,55 +1388,18 @@ nsHTMLEditRules::WillInsertText(EditActi
+@@ -482,17 +482,20 @@ nsHTMLEditRules::AfterEditInner(EditActi
+          action != EditAction::insertIMEText) )
+     {
+       NS_ENSURE_STATE(mHTMLEditor);
+       res = mHTMLEditor->CollapseAdjacentTextNodes(mDocChangeRange);
+       NS_ENSURE_SUCCESS(res, res);
+     }
+ 
+     // clean up any empty nodes in the selection
+-    res = RemoveEmptyNodes();
++    if ((action != EditAction::insertNode) &&
++        (action != EditAction::htmlPaste) &&
++        (action != EditAction::loadHTML))
++      res = RemoveEmptyNodes();
+     NS_ENSURE_SUCCESS(res, res);
+ 
+     // attempt to transform any unneeded nbsp's into spaces after doing various operations
+     if ((action == EditAction::insertText) ||
+         (action == EditAction::insertIMEText) ||
+         (action == EditAction::deleteSelection) ||
+         (action == EditAction::insertBreak) ||
+         (action == EditAction::htmlPaste ||
+@@ -1388,55 +1391,18 @@ nsHTMLEditRules::WillInsertText(EditActi
      int32_t pos = 0;
      NS_NAMED_LITERAL_STRING(newlineStr, LFSTR);
  
@@ -2538,7 +2560,7 @@ diff --git a/editor/libeditor/nsHTMLEditRules.cpp b/editor/libeditor/nsHTMLEditR
        char specialChars[] = {TAB, nsCRT::LF, 0};
        while (unicodeBuf && (pos != -1) && (pos < (int32_t)inString->Length()))
        {
-@@ -4574,17 +4537,17 @@ nsHTMLEditRules::CreateStyleForInsertTex
+@@ -4574,17 +4540,17 @@ nsHTMLEditRules::CreateStyleForInsertTex
        }
      }
  
@@ -2557,7 +2579,7 @@ diff --git a/editor/libeditor/nsHTMLEditRules.cpp b/editor/libeditor/nsHTMLEditR
      return aSelection->Collapse(node, offset);
    }
  
-@@ -6635,16 +6598,17 @@ nsHTMLEditRules::SplitParagraph(nsIDOMNo
+@@ -6635,16 +6601,17 @@ nsHTMLEditRules::SplitParagraph(nsIDOMNo
      aSelection->Collapse(child,0);
    }
    else
@@ -2575,7 +2597,7 @@ diff --git a/editor/libeditor/nsHTMLEditRules.cpp b/editor/libeditor/nsHTMLEditR
  // ReturnInListItem: do the right thing for returns pressed in list items
  //
  nsresult
-@@ -6706,16 +6670,19 @@ nsHTMLEditRules::ReturnInListItem(Select
+@@ -6706,16 +6673,19 @@ nsHTMLEditRules::ReturnInListItem(Select
      }
      else
      {
@@ -2595,7 +2617,7 @@ diff --git a/editor/libeditor/nsHTMLEditRules.cpp b/editor/libeditor/nsHTMLEditR
                                      offset + 1, getter_AddRefs(pNode));
        NS_ENSURE_SUCCESS(res, res);
  
-@@ -6767,16 +6734,18 @@ nsHTMLEditRules::ReturnInListItem(Select
+@@ -6767,16 +6737,18 @@ nsHTMLEditRules::ReturnInListItem(Select
          if (nodeAtom == nsGkAtoms::dd || nodeAtom == nsGkAtoms::dt) {
            int32_t itemOffset;
            nsCOMPtr<nsIDOMNode> list = nsEditor::GetNodeLocation(aListItem, &itemOffset);
@@ -4661,140 +4683,6 @@ diff --git a/widget/cocoa/VibrancyManager.mm b/widget/cocoa/VibrancyManager.mm
      if (nsCocoaFeatures::OnElCapitanOrLater()) {
        [effectView setMaterial:NSVisualEffectMaterialMenu];
      } else {
-diff --git a/widget/cocoa/ViewRegion.h b/widget/cocoa/ViewRegion.h
-new file mode 100644
---- /dev/null
-+++ b/widget/cocoa/ViewRegion.h
-@@ -0,0 +1,53 @@
-+/* -*- Mode: C++; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
-+/* vim: set ts=8 sts=2 et sw=2 tw=80: */
-+/* This Source Code Form is subject to the terms of the Mozilla Public
-+ * License, v. 2.0. If a copy of the MPL was not distributed with this
-+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
-+
-+#ifndef ViewRegion_h
-+#define ViewRegion_h
-+
-+#include "Units.h"
-+#include "nsTArray.h"
-+
-+@class NSView;
-+
-+namespace mozilla {
-+
-+/**
-+ * Manages a set of NSViews to cover a LayoutDeviceIntRegion.
-+ */
-+class ViewRegion {
-+public:
-+  ~ViewRegion();
-+
-+  mozilla::LayoutDeviceIntRegion Region() { return mRegion; }
-+
-+  /**
-+   * Update the region.
-+   * @param aRegion  The new region.
-+   * @param aCoordinateConverter  The nsChildView to use for converting
-+   *   LayoutDeviceIntRect device pixel coordinates into Cocoa NSRect coordinates.
-+   * @param aContainerView  The view that's going to be the superview of the
-+   *   NSViews which will be created for this region.
-+   * @param aViewCreationCallback  A block that instantiates new NSViews.
-+   * @return  Whether or not the region changed.
-+   */
-+  bool UpdateRegion(const mozilla::LayoutDeviceIntRegion& aRegion,
-+                    const nsChildView& aCoordinateConverter,
-+                    NSView* aContainerView,
-+                    NSView* (^aViewCreationCallback)());
-+
-+  /**
-+   * Return an NSView from the region, if there is any.
-+   */
-+  NSView* GetAnyView() { return mViews.Length() > 0 ? mViews[0] : nil; }
-+
-+private:
-+  mozilla::LayoutDeviceIntRegion mRegion;
-+  nsTArray<NSView*> mViews;
-+};
-+
-+} // namespace mozilla
-+
-+#endif // ViewRegion_h
-diff --git a/widget/cocoa/ViewRegion.mm b/widget/cocoa/ViewRegion.mm
-new file mode 100644
---- /dev/null
-+++ b/widget/cocoa/ViewRegion.mm
-@@ -0,0 +1,71 @@
-+/* -*- Mode: C++; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
-+/* vim: set ts=8 sts=2 et sw=2 tw=80: */
-+/* This Source Code Form is subject to the terms of the Mozilla Public
-+ * License, v. 2.0. If a copy of the MPL was not distributed with this file,
-+ * You can obtain one at http://mozilla.org/MPL/2.0/. */
-+
-+#include "ViewRegion.h"
-+#import <Cocoa/Cocoa.h>
-+
-+using namespace mozilla;
-+
-+ViewRegion::~ViewRegion()
-+{
-+  for (size_t i = 0; i < mViews.Length(); i++) {
-+    [mViews[i] removeFromSuperview];
-+  }
-+}
-+
-+bool
-+ViewRegion::UpdateRegion(const LayoutDeviceIntRegion& aRegion,
-+                         const nsChildView& aCoordinateConverter,
-+                         NSView* aContainerView,
-+                         NSView* (^aViewCreationCallback)())
-+{
-+  if (mRegion == aRegion) {
-+    return false;
-+  }
-+
-+  // We need to construct the required region using as many EffectViews
-+  // as necessary. We try to update the geometry of existing views if
-+  // possible, or create new ones or remove old ones if the number of
-+  // rects in the region has changed.
-+
-+  nsTArray<NSView*> viewsToRecycle;
-+  mViews.SwapElements(viewsToRecycle);
-+  // The mViews array is now empty.
-+
-+  size_t i = 0;
-+  for (auto iter = aRegion.RectIter();
-+       !iter.Done() || i < viewsToRecycle.Length();
-+       i++) {
-+    if (!iter.Done()) {
-+      NSView* view = nil;
-+      NSRect rect = aCoordinateConverter.DevPixelsToCocoaPoints(iter.Get());
-+      if (i < viewsToRecycle.Length()) {
-+        view = viewsToRecycle[i];
-+      } else {
-+        view = aViewCreationCallback();
-+        [aContainerView addSubview:view];
-+
-+        // Now that the view is in the view hierarchy, it'll be kept alive by
-+        // its superview, so we can drop our reference.
-+        [view release];
-+      }
-+      if (!NSEqualRects(rect, [view frame])) {
-+        [view setFrame:rect];
-+      }
-+      [view setNeedsDisplay:YES];
-+      mViews.AppendElement(view);
-+      iter.Next();
-+    } else {
-+      // Our new region is made of fewer rects than the old region, so we can
-+      // remove this view. We only have a weak reference to it, so removing it
-+      // from the view hierarchy will release it.
-+      [viewsToRecycle[i] removeFromSuperview];
-+    }
-+  }
-+
-+  mRegion = aRegion;
-+  return true;
-+}
 diff --git a/widget/cocoa/moz.build b/widget/cocoa/moz.build
 --- a/widget/cocoa/moz.build
 +++ b/widget/cocoa/moz.build
