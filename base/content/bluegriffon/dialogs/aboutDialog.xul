@@ -61,6 +61,7 @@
         windowtype="BlueGriffon:About"
         title="&aboutDialog.title;"
         onload="Startup()"
+        forcecleartheme="true"
         persist="screenX screenY">
 
   <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/global.js"/>
@@ -80,11 +81,7 @@
           <spacer flex="1"/>
           <image src="chrome://bluegriffon/skin/about-logo.png"
                  imagetheming="never"
-#ifdef XP_MACOSX
-                 style="background-color: graytext; border-radius: 15px;"/>
-#else
                  style="border-radius: 15px;"/>
-#endif
           <spacer flex="1"/>
         </hbox>
   
