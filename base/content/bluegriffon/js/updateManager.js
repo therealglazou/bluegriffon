@@ -85,6 +85,8 @@ var BGUpdateManager = {
       }
       catch(e) {}
     }
+
+    return appId;
   },
 
   check: function()
@@ -92,7 +94,9 @@ var BGUpdateManager = {
     if (gDialog.updateThrobber)
       gDialog.updateThrobber.hidden = false;
 
-    this.generateAppId();
+    var prefs = Services.prefs;
+    var currentDate = Date.parse(new Date());
+    var appId = this.generateAppId();
 
     var lastCheck = 0;
     try {
