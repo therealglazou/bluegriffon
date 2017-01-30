@@ -233,3 +233,6 @@ pref("extensions.blocklist.enabled", false);
 
 // ARIA
 pref("bluegriffon.aria.epub-type", false);
+
+// File URI Origin policy
+pref("security.fileuri.strict_origin_policy", false);
