@@ -1203,6 +1203,9 @@ function RebuildFromSource(aDoc, isXML)
 
 function doCloseTab(aTab)
 {
+  if ("responsiveStack" in gDialog)
+    deleteAllChildren(gDialog.responsiveStack);
+
   var tabbox = aTab.parentNode.parentNode.parentNode;
   var tabs = aTab.parentNode;
   var tabpanels = tabbox.parentNode.mTabpanels;
@@ -1228,6 +1231,8 @@ function doCloseTab(aTab)
 #else
     document.title = "BlueGriffon";
 #endif
+    gDialog.responsiveStack.setAttribute("hidden", "true");
+    gDialog.responsiveRuler.setAttribute("style", "display: none");
   }
   window.updateCommands("style");
   NotifierUtils.notify("tabClosed");
