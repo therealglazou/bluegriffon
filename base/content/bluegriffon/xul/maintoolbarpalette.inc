@@ -34,10 +34,10 @@
                      command="cmd_stopLoading"/>
 
       <toolbarbutton id="refreshButton"
-                     label="Rebuild ToC"
+                     label="&tableOfContents.label;"
                      class="toolbarbutton-1"
                      iconsize="smaller"
-                     tooltiptext="Rebuild Table of Contents"
+                     tooltiptext="&tableOfContents.tooltip;"
                      command="cmd_rebuildTOC"/>
 
       <toolbarbutton id="tableButton" class="toolbarbutton-1"
