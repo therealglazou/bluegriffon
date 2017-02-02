@@ -32,7 +32,7 @@ function onFocus()
   gDialog.reds.style.width = "0px";
 
   var doc, source;
-  if (EditorUtils.getCurrentEditorWindow().GetCurrentViewMode() == "wysiwyg") {
+  if (EditorUtils.isWysiwygMode()) {
     doc = EditorUtils.getCurrentDocument();
     source = false;
   }

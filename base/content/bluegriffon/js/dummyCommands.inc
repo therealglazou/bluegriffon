@@ -6,8 +6,8 @@ var cmdDummyHTML =
     return (EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            !EditorUtils.activeViewActive  &&
-            GetCurrentViewMode() == "wysiwyg");
+            !EditorUtils.activeViewActive &&
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -28,7 +28,7 @@ var cmdDummySource =
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
             !EditorUtils.activeViewActive  &&
-            GetCurrentViewMode() == "source");
+            !EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -88,7 +88,7 @@ var cmdMarkupCleaner =
     return (EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -112,7 +112,7 @@ var cmdGotoLinkCommand =
     if (EditorUtils.getCurrentEditorElement() &&
         EditorUtils.isDocumentEditable() &&
         EditorUtils.isEditingRenderedHTML() &&
-        GetCurrentViewMode() == "wysiwyg") {
+        EditorUtils.isWysiwygMode()) {
       var element = EditorUtils.getObjectForProperties(["a"], "href");
       if (element) {
         var url = UrlUtils.makeRelativeUrl(element.getAttribute("href"));
@@ -151,7 +151,7 @@ var cmdEditLinkCommand =
     if (EditorUtils.getCurrentEditorElement() &&
         EditorUtils.isDocumentEditable() &&
         EditorUtils.isEditingRenderedHTML() &&
-        GetCurrentViewMode() == "wysiwyg") {
+        EditorUtils.isWysiwygMode()) {
       var element = EditorUtils.getObjectForProperties(["a"], "href");
       if (element) {
         var url = UrlUtils.makeAbsoluteUrl(element.getAttribute("href"));
@@ -202,7 +202,7 @@ var cmdStructureClimbCommand =
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
             !EditorUtils.activeViewActive  &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -226,7 +226,7 @@ var cmdStructureFirstChildCommand =
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
             !EditorUtils.activeViewActive  &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -271,7 +271,7 @@ var cmdStructureNextCommand =
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
             !EditorUtils.activeViewActive  &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -337,7 +337,7 @@ var cmdStructurePreviousCommand =
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
             !EditorUtils.activeViewActive  &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -402,7 +402,7 @@ var cmdCommentOrPICommand = {
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
             !EditorUtils.activeViewActive  &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},

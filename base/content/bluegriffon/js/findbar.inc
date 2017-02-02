@@ -34,7 +34,7 @@ function ToggleBespinFindCaseSensitivity()
 
 function BespinFind(aForward, aInitial)
 {
-  if (GetCurrentViewMode() == "wysiwyg") {
+  if (EditorUtils.isWysiwygMode()) {
     if (!gDialog.bespinFindTextbox.value) {
       gDialog.bespinFindPrevious.hidden = true;
       gDialog.bespinFindNext.hidden = true;
@@ -118,7 +118,7 @@ function onBespinFindKeypress(aEvent)
   if (aEvent.keyCode == 27 && !aEvent.which) { // ESC key
     gDialog.bespinToolbox1.hidden = true;
     gDialog.bespinToolbox2.hidden = true;
-    if (GetCurrentViewMode() == "source")
+    if (!EditorUtils.isWysiwygMode())
       EditorUtils.getCurrentSourceEditorElement().focus();
     else {
       window.content.focus();
@@ -176,7 +176,7 @@ function BespinKeyPressCallback(aEvent)
 
 function BespinReplace()
 {
-  if (GetCurrentViewMode() == "source") {
+  if (!EditorUtils.isWysiwygMode()) {
     var sourceIframe = EditorUtils.getCurrentSourceEditorElement();
     var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
     if (sourceEditor.lastNeedle && sourceEditor.lastNeedle.from() && sourceEditor.lastNeedle.to()) {
@@ -199,7 +199,7 @@ function BespinReplaceAndFind()
 function BespinReplaceAll()
 {
   var occurences = 0;
-  if (GetCurrentViewMode() == "source") {
+  if (!EditorUtils.isWysiwygMode()) {
     var sourceIframe = EditorUtils.getCurrentSourceEditorElement();
     var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
     sourceEditor.setCursor(0,0);
@@ -266,7 +266,7 @@ function WysiwygShowFindBar()
   gDialog.bespinToolbox1.hidden = false;
   gDialog.bespinFindTextbox.focus();
   var editor = EditorUtils.getCurrentEditor();
-  if (GetCurrentViewMode() == "wysiwyg") {
+  if (EditorUtils.isWysiwygMode()) {
     var text = editor.outputToString("text/plain", 1).trim();
     if (text) {
       gDialog.bespinFindTextbox.value = text;

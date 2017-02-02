@@ -186,6 +186,7 @@
   
     gEditor.clearHistory();
     gEditor.setSelection( { line: startRow, ch: startColumn }, { line: endRow, ch: endColumn } );
+    gEditor.scrollIntoView({ line: endRow, ch: endColumn }, 100);
   }
 
   function findNeedle(aForward, aInitial, aNeedle, aIsCaseSensitive)

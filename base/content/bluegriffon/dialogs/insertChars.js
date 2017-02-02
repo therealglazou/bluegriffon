@@ -130,8 +130,7 @@ function onAccept()
 {
   var char = gDialog.charPreview.getAttribute("value");
   try {
-    var w = EditorUtils.getCurrentEditorWindow();
-    if (w.GetCurrentViewMode() == "wysiwyg")
+    if (EditorUtils.isWysiwygMode())
       EditorUtils.getCurrentEditor().insertText(char);
     else {
       var editorElement = EditorUtils.getCurrentEditorElement();

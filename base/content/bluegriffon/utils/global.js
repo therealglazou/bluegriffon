@@ -437,8 +437,8 @@ function ScrollToElement(aElement)
 {
   if (!aElement)
     return;
-  aElement.scrollIntoView(true);
-  EditorUtils.getCurrentEditorElement().contentWindow.scrollBy(0, -15);
+  aElement.scrollIntoView(false);
+  EditorUtils.getCurrentEditorElement().contentWindow.scrollBy(0, -50);
   return;
 }
 

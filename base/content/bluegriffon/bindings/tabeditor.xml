@@ -360,6 +360,8 @@
                       editor.addEditorMouseObserver(ComposerCommands.selectionListener);
                       editor.transactionManager
                         .AddListener(ComposerCommands.selectionListener);
+                      editor.transactionManager
+                        .AddListener(liveViewTransactionListener);
                     }
                     if (editor &&
                         "ActiveViewManager" in window &&
@@ -632,6 +634,7 @@
               editors.item(i).lastChild.removeAttribute("type");
 
             var newBox = document.createElement("deck");
+            newBox.setAttribute("anonid", "editorDeck");
 
             var iframe = document.createElement("iframe");
             var _self = this;
@@ -641,11 +644,17 @@
             iframe.setAttribute("src", "resource://gre/res/cm2.html");
             newBox.appendChild(iframe);
 
+            var splitter = document.createElement("splitter");
+            splitter.className = "liveViewSplitter";
+            newBox.appendChild(splitter);
+
             var newEditorElement = document.createElement("editor");
             newEditorElement.setAttribute("context", "editorContextMenu");
             newEditorElement.setAttribute("type", "content-primary");
             newBox.appendChild(newEditorElement);
 
+            newEditorElement.addEventListener("focus", function() { WysiwygEditorFocused(); },  true);
+            iframe.addEventListener("focus", function() { SourceEditorFocused(); },  true);
             return newBox;
         ]]>
         </body>
@@ -701,21 +710,56 @@
 
            NotifierUtils.notify("tabSelected");
            var deck = this.getCurrentEditorElement().parentNode;
-           var mode = deck.getAttribute("previousMode");
+           var mode = deck.getAttribute("previousMode") || "wysiwyg";
            deck.selectedIndex = (mode == "source") ? 0 : 1;
            gDialog.bespinToolbox1.hidden = true;
            gDialog.bespinToolbox2.hidden = true;
            if (mode == "source") {
-             gDialog.sourceModeButton.setAttribute("selected", "true");
+             gDialog.liveViewModeButton.removeAttribute("selected");
              gDialog.wysiwygModeButton.removeAttribute("selected");
+             gDialog.sourceModeButton.setAttribute("selected", "true");
+             gDialog.printPreviewModeButton.removeAttribute("selected");
              gDialog.structurebar.style.visibility = "hidden";
              HandlersManager.hideAllHandlers();
              gDialog.tabeditor.enableRulers(false);
              deck.firstChild.focus();
            }
+           else if (mode == "liveview") {
+             gDialog.liveViewModeButton.setAttribute("selected", "true");
+             gDialog.wysiwygModeButton.removeAttribute("selected");
+             gDialog.sourceModeButton.removeAttribute("selected");
+             gDialog.printPreviewModeButton.removeAttribute("selected");
+
+             HandlersManager.hideAllHandlers();
+             gDialog.tabeditor.enableRulers(false);
+
+             var liveviewmode = deck.getAttribute("liveviewmode") || "wysiwyg";
+             if (liveviewmode == "source") {
+               gDialog.structurebar.style.visibility = "hidden";
+             }
+             else {
+               gDialog.structurebar.style.visibility = "";
+               deck.lastElementChild.focus();
+               var selcon = EditorUtils.getSelectionContainer();
+               if (selcon) {
+                 NotifierUtils.notify("selection", selcon.node, true)
+                 gDialog.structurebar.selectionChanged(null, selcon.node,
+                                                       selcon.oneElementSelected);
+               }
+             }
+           }
            else {
              gDialog.tabeditor.enableRulers(true);
-             gDialog.wysiwygModeButton.setAttribute("selected", "true");
+             gDialog.liveViewModeButton.removeAttribute("selected");
+             var wysiwygmedium = deck.getAttribute("wysiwygmedium");
+             if (wysiwygmedium == "print") {
+               gDialog.printPreviewModeButton.setAttribute("selected", "true");
+               gDialog.wysiwygModeButton.removeAttribute("selected");
+             }
+             else {
+               gDialog.wysiwygModeButton.setAttribute("selected", "true");
+               gDialog.printPreviewModeButton.removeAttribute("selected");
+             }
              gDialog.sourceModeButton.removeAttribute("selected");
              gDialog.structurebar.style.visibility = "";
              deck.lastChild.focus();

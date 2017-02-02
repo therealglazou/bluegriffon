@@ -126,7 +126,7 @@ function Inspect()
   if (gMain.EditorUtils)
   {
     var editor = gMain.EditorUtils.getCurrentEditor();
-    var visible = editor && (gMain.GetCurrentViewMode() == "wysiwyg");
+    var visible = editor && (gMain.EditorUtils.isWysiwygMode());
     gDialog.mainBox.style.visibility = visible ? "" : "hidden";
     gMain.document.querySelector("[panelid='panel-scripteditor']").className = visible ? "" : "inactive";
     if (!visible) {

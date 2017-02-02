@@ -587,3 +587,24 @@ toolbarbutton:hover {
   background-color: transparent ! important;
 }
 %endif
+
+/* Live view */
+
+deck[anonid="editorDeck"].liveview {
+  display: -moz-box;
+  -moz-binding: none;
+  -moz-box-flex: 1;
+}
+
+deck[anonid="editorDeck"].liveview > iframe,
+deck[anonid="editorDeck"].liveview > editor {
+  -moz-box-flex: 1;
+}
+
+deck[anonid="editorDeck"] > splitter {
+  background-color: var(--bg-dark-background);
+}
+
+deck[anonid="editorDeck"]:not(.liveview) > splitter {
+  display: none;
+}

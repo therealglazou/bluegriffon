@@ -133,7 +133,7 @@ function Inspect()
 {
   if (gMain && gMain.EditorUtils) {
     var editor = gMain.EditorUtils.getCurrentEditor();
-    var visible = editor && (gMain.GetCurrentViewMode() == "wysiwyg");
+    var visible = editor && (gMain.EditorUtils.isWysiwygMode());
     gDialog.mainBox.style.visibility = visible ? "" : "hidden";
     gMain.document.querySelector("[panelid='panel-aria']").className = visible ? "" : "inactive";
     if (!visible) {

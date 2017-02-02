@@ -96,7 +96,7 @@ var ComposerCommands = {
            EditorUtils.isDocumentEditable() &&
            EditorUtils.isEditingRenderedHTML() &&
            !EditorUtils.activeViewActive  &&
-           (commandID == "cmd_viewModeEnabler" || GetCurrentViewMode() == "wysiwyg"))
+           (commandID == "cmd_viewModeEnabler" || EditorUtils.isWysiwygMode()))
           commandNode.removeAttribute("disabled");
         else
           commandNode.setAttribute("disabled", "true");

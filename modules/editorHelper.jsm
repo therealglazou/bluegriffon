@@ -92,11 +92,29 @@ var EditorUtils = {
            "wysiwyg";
   },
 
+  getLiveViewMode: function()
+  {
+    return this.getCurrentEditorElement().parentNode.getAttribute("liveviewmode") ||
+           "wysiwyg";
+  },
+
+  setLiveViewMode: function(mode)
+  {
+    return this.getCurrentEditorElement().parentNode.setAttribute("liveviewmode", mode);
+  },
+
+  isWysiwygMode: function()
+  {
+    var mode = this.getCurrentViewMode();
+    return (mode == "wysiwyg") ||
+           (mode == "liveview" && this.getLiveViewMode() == "wysiwyg");
+  },
+
   getCurrentSourceEditorElement: function()
   {
     var editorElement = this.getCurrentEditorElement();
     if (editorElement) {
-      return editorElement.previousSibling;
+      return editorElement.parentNode.firstElementChild;
     }
     return null;
   },
@@ -105,7 +123,7 @@ var EditorUtils = {
   {
     var editorElement = this.getCurrentEditorElement();
     if (editorElement) {
-      var bespinIframe = editorElement.previousSibling;
+      var bespinIframe = editorElement.parentNode.firstElementChild;
       var bespinWindow = bespinIframe.contentWindow.wrappedJSObject;
       return bespinWindow;
     }
@@ -116,7 +134,7 @@ var EditorUtils = {
   {
     var editorElement = this.getCurrentEditorElement();
     if (editorElement) {
-      var bespinIframe = editorElement.previousSibling;
+      var bespinIframe = editorElement.parentNode.firstElementChild;
       var bespinEditor = bespinIframe.contentWindow.wrappedJSObject.gEditor;
       return bespinEditor;
     }

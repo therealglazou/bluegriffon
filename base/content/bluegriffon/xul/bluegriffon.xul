@@ -170,6 +170,13 @@
             <tabeditor flex="1" id="tabeditor" visibility="hidden" persist="tabmode">
                 <hbox id="modeTabbox" previousMode="wysiwyg">
                   <spacer flex="1"/>
+                  <label class="multiButton"
+                           id="liveViewModeButton"
+                           value="&dualview.label;"
+                           onclick="ToggleViewMode(this)"
+                           mode="liveview"
+                           observes="cmd_viewModeEnabler"/>
+                  <spacer style="width: 2em"/>
                   <label class="multiButton left"
                            selected="true"
                            id="wysiwygModeButton"

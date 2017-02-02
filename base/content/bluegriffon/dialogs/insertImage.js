@@ -43,7 +43,7 @@ function onAccept()
   var altText = gDialog.alternateTextTextbox.value;
   var longdesc = gDialog.longDescTextbox.value;
 
-  var isWysiwyg = (EditorUtils.getCurrentViewMode() == "wysiwyg");
+  var isWysiwyg = EditorUtils.isWysiwygMode();
   var editor = EditorUtils.getCurrentEditor(); 
   if (gNode && isWysiwyg) {
     editor.beginTransaction();

@@ -36,6 +36,7 @@
  * ***** END LICENSE BLOCK ***** */
 
 Components.utils.import("resource://gre/modules/Services.jsm");
+Components.utils.import("resource://gre/modules/editorHelper.jsm");
 
 var BGZoomManager = {
 
@@ -110,7 +111,7 @@ var BGZoomManager = {
 
   addToSourceViewFontSize: function(aIncrement) {
     var editorElement = EditorUtils.getCurrentEditorElement();
-    var sourceIframe =  editorElement.previousSibling;
+    var sourceIframe =  editorElement.parentNode.firstElementChild;
     var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.getEditableElement();
 
     var fontSize = sourceEditor.ownerDocument
@@ -124,7 +125,7 @@ var BGZoomManager = {
 
   enlarge: function BGZoomManager_enlarge(aMenulist)
   {
-    if (GetCurrentViewMode() == "source") {
+    if (!EditorUtils.isWysiwygMode()) {
       this.addToSourceViewFontSize(+1);
       return;
     }
@@ -150,7 +151,7 @@ var BGZoomManager = {
 
   reduce: function BGZoomManager_reduce(aMenulist)
   {
-    if (GetCurrentViewMode() == "source") {
+    if (!EditorUtils.isWysiwygMode()) {
       this.addToSourceViewFontSize(-1);
       return;
     }
