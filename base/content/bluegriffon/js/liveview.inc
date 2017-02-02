@@ -200,14 +200,13 @@ function MarkSelectionInSourceEditor()
   // are we inside a tag
   if (source.lastIndexOf("<", index) > source.lastIndexOf(">", index)) {
     var found = false;
-    while (!found && index != -1) {
+    while (!found && index <= 0) {
       index = source.lastIndexOf("<", index);
       if (index != -1) {
-        if (source[index + 1] != "/")
-          found = true;
+        found = /[a-zA-Z]/.test(source[index + 1]);
       }
     }
-  
+
     if (found) {
       index = source.indexOf(">", index);
       if (index != -1) {
@@ -220,6 +219,13 @@ function MarkSelectionInSourceEditor()
     }
   }
   else {
+    var lastGtIndex = source.lastIndexOf("<", index);
+    if (lastGtIndex != -1) {
+      var lastGtTag = source.substr(lastGtIndex, 6).toLowerCase();
+      if (lastGtTag == "</body" || lastGtTag == "</html" ||
+          source[lastGtIndex + 1] == "!" || source[lastGtIndex + 1] == "?")
+        return source;
+    }
     // no, not inside a tag...
     source = source.substr(0, index)
              + "<span bluegriffonstandalone='true' bluegriffonsourceselected='true'></span>"

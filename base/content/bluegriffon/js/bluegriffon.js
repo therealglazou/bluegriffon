@@ -1210,36 +1210,39 @@ function RebuildFromSource(aDoc, isXML, aNoReflect)
 
     var elt = editor.document
                 .querySelector("[bluegriffonsourceselected]");
-    if (elt) {
-      if (elt.hasAttribute("bluegriffonstandalone")) {
-        editor.setCaretAfterElement(elt);
-        ScrollToElement(elt);
-        editor.deleteNode(elt);
-      }
-      else {
-        editor.removeAttribute(elt, "bluegriffonsourceselected");
-        if (elt.lastChild) {
-          if (elt.lastChild.nodeType == Node.TEXT_NODE) {
-            selection.collapse(elt.lastChild, elt.lastChild.data.length);
-            ScrollToElement(elt);
-          }
-          else {
-            if (elt.lastChild.nodeType == Node.ELEMENT_NODE) {
-              editor.selectElement(elt.lastChild);
-              ScrollToElement(elt.lastChild);
-            }
-            else {
-              editor.selectElement(elt);
-              ScrollToElement(elt);
-            }
-          }
+    try {
+      if (elt) {
+        if (elt.hasAttribute("bluegriffonstandalone")) {
+          editor.setCaretAfterElement(elt);
+          ScrollToElement(elt);
+          editor.deleteNode(elt);
         }
         else {
-          editor.selectElement(elt);
-          ScrollToElement(elt);
+          editor.removeAttribute(elt, "bluegriffonsourceselected");
+          if (elt.lastChild) {
+            if (elt.lastChild.nodeType == Node.TEXT_NODE) {
+              selection.collapse(elt.lastChild, elt.lastChild.data.length);
+              ScrollToElement(elt);
+            }
+            else {
+              if (elt.lastChild.nodeType == Node.ELEMENT_NODE) {
+                editor.selectElement(elt.lastChild);
+                ScrollToElement(elt.lastChild);
+              }
+              else {
+                editor.selectElement(elt);
+                ScrollToElement(elt);
+              }
+            }
+          }
+          else {
+            editor.selectElement(elt);
+            ScrollToElement(elt);
+          }
         }
       }
     }
+    catch(e) {}
 
     editor.endTransaction();
 
