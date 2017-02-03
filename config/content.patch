@@ -3870,7 +3870,7 @@ diff --git a/netwerk/protocol/res/nsResProtocolHandler.cpp b/netwerk/protocol/re
 diff --git a/parser/htmlparser/nsExpatDriver.cpp b/parser/htmlparser/nsExpatDriver.cpp
 --- a/parser/htmlparser/nsExpatDriver.cpp
 +++ b/parser/htmlparser/nsExpatDriver.cpp
-@@ -957,17 +957,19 @@ nsExpatDriver::HandleError()
+@@ -957,28 +957,30 @@ nsExpatDriver::HandleError()
    }
  
    // If it didn't initialize, we can't do any logging.
@@ -3891,6 +3891,18 @@ diff --git a/parser/htmlparser/nsExpatDriver.cpp b/parser/htmlparser/nsExpatDriv
  
    if (shouldReportError) {
      nsCOMPtr<nsIConsoleService> cs
+       (do_GetService(NS_CONSOLESERVICE_CONTRACTID));  
+     if (cs) {
+-      cs->LogMessage(serr);
++      //cs->LogMessage(serr);
+     }
+   }
+ 
+   return NS_ERROR_HTMLPARSER_STOPPARSING;
+ }
+ 
+ void
+ nsExpatDriver::ParseBuffer(const char16_t *aBuffer,
 diff --git a/parser/htmlparser/nsIExpatSink.idl b/parser/htmlparser/nsIExpatSink.idl
 --- a/parser/htmlparser/nsIExpatSink.idl
 +++ b/parser/htmlparser/nsIExpatSink.idl
