@@ -868,7 +868,7 @@ function onSourceChangeCallback(source)
       var markerClass = lineInfo.markerClass ? lineInfo.markerClass : "";
       var markerClassArray = markerClass.split(" ");
       markerClassArray.splice(markerClassArray.indexOf("error"), 1);
-      sourceEditor.setMarker(sourceEditor.lastErrorLine - 1, null, markerClassArray.join(" "));
+      sourceEditor.addLineClass(sourceEditor.lastErrorLine - 1, null, markerClassArray.join(" "));
       sourceEditor.lastErrorLine = 0;
     }
     var xmlParser = new DOMParser();
@@ -884,7 +884,7 @@ function onSourceChangeCallback(source)
         var markerClassArray = markerClass.split(" ");
         if (-1 == markerClassArray.indexOf("error"))
           markerClassArray.push("error");
-        sourceEditor.setMarker(line - 1, null, markerClassArray.join(" "));
+        sourceEditor.addLineClass(line - 1, null, markerClassArray.join(" "));
         sourceEditor.lastErrorLine = line;
 
         return;
@@ -900,6 +900,9 @@ function ToggleViewMode(aElement)
     return false;
 
   var editorElement = EditorUtils.getCurrentEditorElement();
+  if (!editorElement) // sanity case
+    return false;
+
   var deck = editorElement.parentNode;
   var editor = EditorUtils.getCurrentEditor();
   if (aElement.id == "wysiwygModeButton") {
@@ -978,7 +981,6 @@ function ToggleViewMode(aElement)
 
     NotifierUtils.notify("beforeEnteringSourceMode");
     var source = encoder.encodeToString();
-    sourceIframe.contentWindow.wrappedJSObject.gChangeCallback = onSourceChangeCallback;
 
     var theme = null;
     try {
@@ -988,9 +990,8 @@ function ToggleViewMode(aElement)
     sourceIframe.contentWindow.wrappedJSObject.installCodeMirror(BespinKeyPressCallback,
                                                  BespinChangeCallback,
                                                  BespinActivityCallback,
-                                                 theme,
-                                                 null,
-                                                 EditorUtils);
+                                                 WysiwygEditorFocused,
+                                                 theme);
 
     var lastEditableChild = editor.document.body.lastChild;
     if (lastEditableChild.nodeType == Node.TEXT_NODE)

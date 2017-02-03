@@ -653,7 +653,7 @@
             newEditorElement.setAttribute("type", "content-primary");
             newBox.appendChild(newEditorElement);
 
-            newEditorElement.addEventListener("focus", function() { WysiwygEditorFocused(); },  true);
+            newEditorElement.addEventListener("focus", function() { WysiwygEditorFocused(false); },  true);
             iframe.addEventListener("focus", function() { SourceEditorFocused(); },  true);
             return newBox;
         ]]>

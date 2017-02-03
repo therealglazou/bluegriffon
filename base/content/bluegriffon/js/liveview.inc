@@ -3,7 +3,7 @@ var gUpdateLiveViewTimeOutID = null;
 var gDisableLiveViewUpdates = false;
 var gCancelNextLiveViewUpdate = false;
 
-function WysiwygEditorFocused()
+function WysiwygEditorFocused(aNoFocus)
 {
   try {
     if (!gDisableLiveViewUpdates &&
@@ -52,12 +52,14 @@ function WysiwygEditorFocused()
           var parser = new DOMParser();
           var doc = parser.parseFromString(source, isXML ? "text/xml" : "text/html");
           if (doc.documentElement.nodeName == "parsererror") {
-            var message = doc.documentElement.firstChild.data
-                             .replace( /Location\: chrome\:\/\/bluegriffon\/content\/xul\/bluegriffon.xul/g ,
-                                       ", ");
-            var error = doc.documentElement.lastChild.textContent;
-            window.openDialog("chrome://bluegriffon/content/dialogs/parsingError.xul", "_blank",
-                              "chrome,modal,titlebar", message, error);
+            if (!aNoFocus) {
+              var message = doc.documentElement.firstChild.data
+                               .replace( /Location\: chrome\:\/\/bluegriffon\/content\/xul\/bluegriffon.xul/g ,
+                                         ", ");
+              var error = doc.documentElement.lastChild.textContent;
+              window.openDialog("chrome://bluegriffon/content/dialogs/parsingError.xul", "_blank",
+                                "chrome,modal,titlebar", message, error);
+            }
             gDisableLiveViewUpdates = false;
             return;
           }
@@ -65,13 +67,15 @@ function WysiwygEditorFocused()
 
           RebuildFromSource(doc, isXML, true);
         }
-  
-        EditorUtils.getCurrentEditorWindow().updateCommands("style");
-        EditorUtils.getCurrentEditorWindow().goUpdateCommand("cmd_renderedHTMLEnabler");
-        NotifierUtils.notify("afterLeavingSourceMode");
-        EditorUtils.getCurrentEditorElement().focus();
 
-        EditorUtils.setLiveViewMode("wysiwyg");
+        if (!aNoFocus) {
+          EditorUtils.getCurrentEditorWindow().updateCommands("style");
+          EditorUtils.getCurrentEditorWindow().goUpdateCommand("cmd_renderedHTMLEnabler");
+          NotifierUtils.notify("afterLeavingSourceMode");
+          EditorUtils.getCurrentEditorElement().focus();
+  
+          EditorUtils.setLiveViewMode("wysiwyg");
+        }
 
         gDisableLiveViewUpdates = false;
         gCancelNextLiveViewUpdate = true;
@@ -148,7 +152,6 @@ function _UpdateLiveView()
         encoder.setWrapColumn(flags.maxColumnPref);
   
       var source = encoder.encodeToString();
-      sourceIframe.contentWindow.wrappedJSObject.gChangeCallback = onSourceChangeCallback;
   
       var lastEditableChild = editor.document.body.lastChild;
       if (lastEditableChild.nodeType == Node.TEXT_NODE)
