@@ -74,7 +74,10 @@
 <script>
   var gEditor = null;
   var gChangeCallback = null;
+  var gActivityCallback = null;
+  var gLiveViewCallback = null;
   var gChangeTimer = null;
+  var gLiveViewTimer = null;
   var gTheme  = "light";
 
   var gModificationCount = 0;
@@ -87,8 +90,16 @@
          clearTimeout(gChangeTimer);
          gChangeTimer = null;
        }
+       if (gLiveViewTimer) {
+         clearTimeout(gLiveViewTimer);
+         gLiveViewTimer = null;
+       }
        if (gChangeCallback)
          gChangeTimer = setTimeout(gChangeCallback, 100, gEditor.getValue());
+       if (gLiveViewCallback)
+         gLiveViewTimer = setTimeout(gLiveViewCallback, 1000, true);
+       if (gActivityCallback)
+         gActivityCallback();
      }
 
      gEditor = CodeMirror.fromTextArea(document.getElementById("code"), {
@@ -106,13 +117,10 @@
         indentUnit: 2,
         indentWithTabs: false,
         matchBrackets: true,
-        onChange: changeFunc,
-        onCursorActivity: function() {
-          if (gActivityCallback)
-            gActivityCallback();
-        }
       });
- 
+
+      gEditor.on("cursorActivity", function() { changeFunc(); });
+
       gEditor.on("gutterClick", function(cm, n, gutter, ev) {
         if (ev.shiftKey) {
           var anchor = gEditor.getCursor("anchor");
@@ -156,14 +164,13 @@
   }
 
   var gInstalled = false;
-  function installCodeMirror(aKeyPressCallback, aChangeCallback, aActivityCallback, aTheme, aTagsArray, aEditorUtils) {
+  function installCodeMirror(aKeyPressCallback, aChangeCallback, aActivityCallback, aLiveViewCallback, aTheme) {
     if (gInstalled) return;
     getEditableElement().addEventListener("keypress", aKeyPressCallback, true);
     gChangeCallback = aChangeCallback;
     gActivityCallback = aActivityCallback;
+    gLiveViewCallback = aLiveViewCallback;
     useTheme(aTheme);
-    html_tags = aTagsArray;
-    editorUtils = aEditorUtils;
   }
 
   function markSelection()
@@ -186,6 +193,7 @@
   
     gEditor.clearHistory();
     gEditor.setSelection( { line: startRow, ch: startColumn }, { line: endRow, ch: endColumn } );
+    gEditor.scrollIntoView({ line: endRow, ch: endColumn }, 100);
   }
 
   function findNeedle(aForward, aInitial, aNeedle, aIsCaseSensitive)

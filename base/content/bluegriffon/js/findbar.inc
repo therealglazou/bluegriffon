@@ -34,7 +34,7 @@ function ToggleBespinFindCaseSensitivity()
 
 function BespinFind(aForward, aInitial)
 {
-  if (GetCurrentViewMode() == "wysiwyg") {
+  if (EditorUtils.isWysiwygMode()) {
     if (!gDialog.bespinFindTextbox.value) {
       gDialog.bespinFindPrevious.hidden = true;
       gDialog.bespinFindNext.hidden = true;
@@ -118,7 +118,7 @@ function onBespinFindKeypress(aEvent)
   if (aEvent.keyCode == 27 && !aEvent.which) { // ESC key
     gDialog.bespinToolbox1.hidden = true;
     gDialog.bespinToolbox2.hidden = true;
-    if (GetCurrentViewMode() == "source")
+    if (!EditorUtils.isWysiwygMode())
       EditorUtils.getCurrentSourceEditorElement().focus();
     else {
       window.content.focus();
@@ -148,26 +148,6 @@ function BespinKeyPressCallback(aEvent)
         gDialog.bespinToolbox1.hidden = false;
         gDialog.bespinLineTextbox.focus();
         break;
-      /*case 99: // meta-c XXX Workaround for Copy horked in Bespin0.9+Gecko2
-      case 120: // meta-x XXX
-        {
-          aEvent.preventDefault();
-          var sourceEditor = EditorUtils.getCurrentSourceEditor();
-          var selection = sourceEditor.selectedText;
-          var clipboardSvc = Components.classes["@mozilla.org/widget/clipboard;1"].
-                             getService(Components.interfaces.nsIClipboard);
-          var xferable = Components.classes["@mozilla.org/widget/transferable;1"].
-                         createInstance(Components.interfaces.nsITransferable);
-          xferable.addDataFlavor("text/unicode");
-          var s = Components.classes["@mozilla.org/supports-string;1"].
-                  createInstance(Components.interfaces.nsISupportsString);
-          s.data = selection;
-          xferable.setTransferData("text/unicode", s, selection.length * 2);
-          clipboardSvc.setData(xferable, null, Components.interfaces.nsIClipboard.kGlobalClipboard);
-        }
-        if (aEvent.which == 120)
-          sourceEditor.selectedText = "";
-        break;*/
       default:
         break;
     }
@@ -176,14 +156,13 @@ function BespinKeyPressCallback(aEvent)
 
 function BespinReplace()
 {
-  if (GetCurrentViewMode() == "source") {
+  if (!EditorUtils.isWysiwygMode()) {
     var sourceIframe = EditorUtils.getCurrentSourceEditorElement();
     var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
     if (sourceEditor.lastNeedle && sourceEditor.lastNeedle.from() && sourceEditor.lastNeedle.to()) {
       var end = sourceEditor.lastNeedle.to();
       sourceEditor.lastNeedle.replace(gDialog.bespinReplaceTextbox.value);
       sourceEditor.setCursor(end);
-      //sourceEditor.focus();
     }
   }
   else
@@ -199,7 +178,7 @@ function BespinReplaceAndFind()
 function BespinReplaceAll()
 {
   var occurences = 0;
-  if (GetCurrentViewMode() == "source") {
+  if (!EditorUtils.isWysiwygMode()) {
     var sourceIframe = EditorUtils.getCurrentSourceEditorElement();
     var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
     sourceEditor.setCursor(0,0);
@@ -266,7 +245,7 @@ function WysiwygShowFindBar()
   gDialog.bespinToolbox1.hidden = false;
   gDialog.bespinFindTextbox.focus();
   var editor = EditorUtils.getCurrentEditor();
-  if (GetCurrentViewMode() == "wysiwyg") {
+  if (EditorUtils.isWysiwygMode()) {
     var text = editor.outputToString("text/plain", 1).trim();
     if (text) {
       gDialog.bespinFindTextbox.value = text;
@@ -364,22 +343,30 @@ function ReplaceInWysiwyg()
 
 function BespinChangeCallback()
 {
-  gDialog.tabeditor.showCurrentTabAsModified(EditorUtils.isDocumentModified());    // || IsHTMLSourceChanged());
+  var mode = EditorUtils.getCurrentViewMode();
+  if (mode == "source" ||
+      (mode == "liveview" && EditorUtils.getLiveViewMode() == "source")) {
+    gDialog.tabeditor.showCurrentTabAsModified(EditorUtils.isDocumentModified());    // || IsHTMLSourceChanged());
 
 #ifdef XP_MACOSX
-  gDialog.tabeditor.updateOSXCloseButton();
-  UpdateBadge();
+    gDialog.tabeditor.updateOSXCloseButton();
+    UpdateBadge();
 #endif
+  }
 }
 
 function BespinActivityCallback()
 {
-  ComposerCommands.goUpdateCommand("cmd_BGundo");
-  ComposerCommands.goUpdateCommand("cmd_BGredo");
-  ComposerCommands.goUpdateCommand("cmd_BGcopy");
-  ComposerCommands.goUpdateCommand("cmd_BGcut");
-  ComposerCommands.goUpdateCommand("cmd_BGpaste");
-  ComposerCommands.goUpdateCommand("cmd_BGselectAll");
-  ComposerCommands.goUpdateCommand("cmd_BGpasteNoFormatting");
-  ComposerCommands.goUpdateCommand("cmd_BGdelete");
+  var mode = EditorUtils.getCurrentViewMode();
+  if (mode == "source" ||
+      (mode == "liveview" && EditorUtils.getLiveViewMode() == "source")) {
+    ComposerCommands.goUpdateCommand("cmd_BGundo");
+    ComposerCommands.goUpdateCommand("cmd_BGredo");
+    ComposerCommands.goUpdateCommand("cmd_BGcopy");
+    ComposerCommands.goUpdateCommand("cmd_BGcut");
+    ComposerCommands.goUpdateCommand("cmd_BGpaste");
+    ComposerCommands.goUpdateCommand("cmd_BGselectAll");
+    ComposerCommands.goUpdateCommand("cmd_BGpasteNoFormatting");
+    ComposerCommands.goUpdateCommand("cmd_BGdelete");
+  }
 }

@@ -47,10 +47,14 @@ Components.utils.import("resource://gre/modules/l10nHelper.jsm");
 Components.utils.import("resource://gre/modules/handlersManager.jsm");
 Components.utils.import("resource://gre/modules/screens.jsm");
 Components.utils.import("resource://gre/modules/fileChanges.jsm");
+Components.utils.import("resource://gre/modules/bgQuit.jsm");
+Components.utils.import("resource://gre/modules/AddonManager.jsm");
 
 #include blanks.inc
 
 #include observers.inc
+
+#include liveview.inc
 
 #include startup.inc
 
@@ -826,85 +830,26 @@ function OnKeyPressWhileChangingTag(event)
 }
 
 /************ VIEW MODE ********/
-function GetCurrentViewMode()
-{
-  return EditorUtils.getCurrentEditorElement().parentNode.getAttribute("currentmode") ||
-         "wysiwyg";
-}
-
-function onSourceChangeCallback(source)
-{
-  var doctype = EditorUtils.getCurrentDocument().doctype;
-  var systemId = doctype ? doctype.systemId : null;
-  var isXML = false;
-  switch (systemId) {
-    case "http://www.w3.org/TR/html4/strict.dtd": // HTML 4
-    case "http://www.w3.org/TR/html4/loose.dtd":
-    case "http://www.w3.org/TR/REC-html40/strict.dtd":
-    case "http://www.w3.org/TR/REC-html40/loose.dtd":
-      isXML = false;
-      break;
-    case "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd": // XHTML 1
-    case "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd":
-    case "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd":
-      isXML = true;
-      break;
-    case "":
-    case "about:legacy-compat":
-      isXML = (EditorUtils.getCurrentDocument().documentElement.getAttribute("xmlns") == "http://www.w3.org/1999/xhtml");
-      break;
-    case null:
-      isXML = (EditorUtils.getCurrentDocument().compatMode == "CSS1Compat");
-      break;
-  }
-
-  var editorElement  = EditorUtils.getCurrentEditorElement();
-  var sourceIframe   = editorElement.previousSibling;
-  var sourceEditor   = sourceIframe.contentWindow.wrappedJSObject.gEditor;
-  var sourceDocument = sourceIframe.contentWindow.document;
-
-  if (isXML) {
-    if (sourceEditor.lastErrorLine) {
-      var lineInfo = sourceEditor.lineInfo(sourceEditor.lastErrorLine - 1);
-      var markerClass = lineInfo.markerClass ? lineInfo.markerClass : "";
-      var markerClassArray = markerClass.split(" ");
-      markerClassArray.splice(markerClassArray.indexOf("error"), 1);
-      sourceEditor.setMarker(sourceEditor.lastErrorLine - 1, null, markerClassArray.join(" "));
-      sourceEditor.lastErrorLine = 0;
-    }
-    var xmlParser = new DOMParser();
-    try {
-      var doc = xmlParser.parseFromString(source, "text/xml");
-      if (doc.documentElement.nodeName == "parsererror") {
-        var message = doc.documentElement.firstChild.data.
-          replace( /Location\: chrome\:\/\/bluegriffon\/content\/xul\/bluegriffon.xul/g , ", ");
-        var error = doc.documentElement.lastChild.textContent;
-        var line = parseInt(doc.documentElement.getAttribute("line"));
-        var lineInfo = sourceEditor.lineInfo(line - 1);
-        var markerClass = lineInfo.markerClass ? lineInfo.markerClass : "";
-        var markerClassArray = markerClass.split(" ");
-        if (-1 == markerClassArray.indexOf("error"))
-          markerClassArray.push("error");
-        sourceEditor.setMarker(line - 1, null, markerClassArray.join(" "));
-        sourceEditor.lastErrorLine = line;
-
-        return;
-      }
-    }
-    catch(e) {alert(e)}
-  }
-}
 
 function ToggleViewMode(aElement)
 {
   if (!aElement) // sanity case
     return false;
 
+  var editorElement = EditorUtils.getCurrentEditorElement();
+  if (!editorElement) // sanity case
+    return false;
+
+  var deck = editorElement.parentNode;
   var editor = EditorUtils.getCurrentEditor();
-  if (aElement.id == "wysiwygModeButton")
+  if (aElement.id == "wysiwygModeButton") {
     editor.setMedium("screen");
-  else if (aElement.id == "printPreviewModeButton")
+    deck.removeAttribute("wysiwygmedium");
+  }
+  else if (aElement.id == "printPreviewModeButton") {
     editor.setMedium("print");
+    deck.setAttribute("wysiwygmedium", "print");
+  }
 
   var child = aElement.parentNode.firstChild;
   while (child) {
@@ -916,11 +861,12 @@ function ToggleViewMode(aElement)
   }
 
   var mode =  aElement.getAttribute("mode");
-  if (mode == GetCurrentViewMode())
+  if (mode == EditorUtils.getCurrentViewMode())
     return true;
 
-  var editor = EditorUtils.getCurrentEditor();
-  var editorElement = EditorUtils.getCurrentEditorElement();
+  var sourceIframe = editorElement.parentNode.firstElementChild;
+  var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
+
   editorElement.parentNode.setAttribute("currentmode", mode);
 
   gDialog.bespinToolbox1.hidden = true;
@@ -950,7 +896,7 @@ function ToggleViewMode(aElement)
       break;
   }
 
-  if (mode == "source")
+  if (mode == "source" || mode == "liveview")
   {
     gDialog.structurebar.style.visibility = "hidden";
     HandlersManager.hideAllHandlers();
@@ -972,9 +918,6 @@ function ToggleViewMode(aElement)
 
     NotifierUtils.notify("beforeEnteringSourceMode");
     var source = encoder.encodeToString();
-    var sourceIframe = editorElement.previousSibling;
-    var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
-    sourceIframe.contentWindow.wrappedJSObject.gChangeCallback = onSourceChangeCallback;
 
     var theme = null;
     try {
@@ -984,9 +927,8 @@ function ToggleViewMode(aElement)
     sourceIframe.contentWindow.wrappedJSObject.installCodeMirror(BespinKeyPressCallback,
                                                  BespinChangeCallback,
                                                  BespinActivityCallback,
-                                                 theme,
-                                                 null,
-                                                 EditorUtils);
+                                                 WysiwygEditorFocused,
+                                                 theme);
 
     var lastEditableChild = editor.document.body.lastChild;
     if (lastEditableChild.nodeType == Node.TEXT_NODE)
@@ -1006,11 +948,18 @@ function ToggleViewMode(aElement)
       sourceEditor.setShowPrintMargin(false);
     }*/
     NotifierUtils.notify("afterEnteringSourceMode");
-    editorElement.parentNode.selectedIndex = 0;
 
-    sourceIframe.focus();
-    sourceEditor.refresh();
-    sourceEditor.focus();
+    if (mode == "liveview") {
+      deck.className = "liveview";
+    }
+    else {
+      deck.removeAttribute("class");
+      editorElement.parentNode.selectedIndex = 0;
+      sourceIframe.focus();
+      sourceEditor.refresh();
+      sourceEditor.focus();
+    }
+
     sourceIframe.contentWindow.wrappedJSObject.markSelection();
     sourceIframe.setUserData("oldSource", sourceEditor.getValue(), null);
     sourceIframe.setUserData("lastSaved", "", null);
@@ -1025,8 +974,6 @@ function ToggleViewMode(aElement)
     //   (reinserting entire doc caches all nodes)
     gDialog.tabeditor.enableRulers(true);
 
-    var sourceIframe = editorElement.previousSibling;
-    var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
     if (sourceEditor)
     {
       NotifierUtils.notify("beforeLeavingSourceMode");
@@ -1053,17 +1000,19 @@ function ToggleViewMode(aElement)
             Services.prefs.setBoolPref("bluegriffon.spellCheck.enabled", spellchecking);
             return false;
           }
+          deck.removeAttribute("class");
           gDialog.structurebar.style.visibility = "";
           RebuildFromSource(doc, isXML);
           var lastSaved = sourceIframe.getUserData("lastSaved");
           if (lastSaved == source)
             EditorUtils.getCurrentEditor().resetModificationCount();
         }
-        catch(e) {alert(e)}
+        catch(e) {Services.prompt.alert(null, "ToggleViewMode", e);}
       }
       else {
         NotifierUtils.notify("afterLeavingSourceMode");
 
+        deck.removeAttribute("class");
         editorElement.parentNode.selectedIndex = 1;
         gDialog.structurebar.style.visibility = "";
         window.content.focus();
@@ -1071,7 +1020,12 @@ function ToggleViewMode(aElement)
       sourceIframe.setUserData("lastSaved", "", null);
       Services.prefs.setBoolPref("bluegriffon.spellCheck.enabled", spellchecking);
     }
+    gDialog.liveViewModeButton.removeAttribute("selected");
+    gDialog.wysiwygModeButton.setAttribute("selected", "true");
+    gDialog.sourceModeButton.removeAttribute("selected");
+    gDialog.printPreviewModeButton.removeAttribute("selected");
   }
+
   editorElement.parentNode.setAttribute("previousMode", mode);
   window.updateCommands("style");
   return true;
@@ -1113,63 +1067,63 @@ function CloneElementContents(editor, sourceElt, destElt)
   } while (!stopIt);
 }
 
-function RebuildFromSource(aDoc, isXML)
+function RebuildFromSource(aDoc, isXML, aNoReflect)
 {
-  if (isXML) {
-    var fileExt = UrlUtils.getFileExtension( UrlUtils.getDocumentUrl());
-    var xhtmlExt = (fileExt == "xhtm" || fileExt == "xhtml");
-
-    var styles = aDoc.querySelectorAll("style");
-    var found = false, switchToCDATA = false;
-    for (var i = 0; i < styles.length; i++) {
-      var style = styles[i];
-      var child = style.firstChild;
-      while (child) {
-        var tmp = child.nextSibling;
-
-        if (child.nodeType == Node.COMMENT_NODE) {
-          if (xhtmlExt) {
-            // XHTML document with xhtml extension and HTML comments, offer to
-            // convert to CDATA sections
-            if (!found) {
-              found = true;
+  try {
+    if (isXML) {
+      var fileExt = UrlUtils.getFileExtension( UrlUtils.getDocumentUrl());
+      var xhtmlExt = (fileExt == "xhtm" || fileExt == "xhtml");
   
-              var rv = PromptUtils.confirmWithTitle(
-                                    L10NUtils.getString("HTMLCommentsInXHTMLTitle"),
-                                    L10NUtils.getString("HTMLCommentsInXHTMLMessage"),
-                                    L10NUtils.getString("HTMLCommentsInXHTMLOK"),
-                                    L10NUtils.getString("HTMLCommentsInXHTMLCancel"),
-                                    "");
-              if (rv == 1) { // cancel button
-                child = null;
-                tmp = null;
+      var styles = aDoc.querySelectorAll("style");
+      var found = false, switchToCDATA = false;
+      for (var i = 0; i < styles.length; i++) {
+        var style = styles[i];
+        var child = style.firstChild;
+        while (child) {
+          var tmp = child.nextSibling;
+  
+          if (child.nodeType == Node.COMMENT_NODE) {
+            if (xhtmlExt) {
+              // XHTML document with xhtml extension and HTML comments, offer to
+              // convert to CDATA sections
+              if (!found) {
+                found = true;
+    
+                var rv = PromptUtils.confirmWithTitle(
+                                      L10NUtils.getString("HTMLCommentsInXHTMLTitle"),
+                                      L10NUtils.getString("HTMLCommentsInXHTMLMessage"),
+                                      L10NUtils.getString("HTMLCommentsInXHTMLOK"),
+                                      L10NUtils.getString("HTMLCommentsInXHTMLCancel"),
+                                      "");
+                if (rv == 1) { // cancel button
+                  child = null;
+                  tmp = null;
+                }
+              }
+    
+              if (child) {
+                var e = aDoc.createCDATASection(child.data);
+                style.insertBefore(e, child);
+                style.removeChild(child);
               }
             }
-  
-            if (child) {
-              var e = aDoc.createCDATASection(child.data);
+            else {
+              // if we have a XHTML document with a HTML file extension, the user wants to
+              // preserve the HTML comments :-(
+              var e = aDoc.createTextNode("<!--" + child.data + "-->");
               style.insertBefore(e, child);
               style.removeChild(child);
             }
           }
-          else {
-            // if we have a XHTML document with a HTML file extension, the user wants to
-            // preserve the HTML comments :-(
-            var e = aDoc.createTextNode("<!--" + child.data + "-->");
-            style.insertBefore(e, child);
-            style.removeChild(child);
-          }
+  
+          child = tmp;
         }
-
-        child = tmp;
       }
     }
-  }
-
-  EditorUtils.getCurrentEditorElement().parentNode.selectedIndex = 1;
-  var editor = EditorUtils.getCurrentEditor();
-
-  try {
+  
+    if (!aNoReflect)
+      EditorUtils.getCurrentEditorElement().parentNode.selectedIndex = 1;
+    var editor = EditorUtils.getCurrentEditor();
 
     // make sure everything is aggregated under one single txn
     editor.beginTransaction();
@@ -1191,15 +1145,56 @@ function RebuildFromSource(aDoc, isXML)
     editor.document.documentElement.setAttribute("_moz_hide", value);
 
     MakePhpAndCommentsVisible(editor.document);
+
+    var elt = editor.document
+                .querySelector("[bluegriffonsourceselected]");
+    try {
+      if (elt) {
+        if (elt.hasAttribute("bluegriffonstandalone")) {
+          editor.setCaretAfterElement(elt);
+          ScrollToElement(elt);
+          editor.deleteNode(elt);
+        }
+        else {
+          editor.removeAttribute(elt, "bluegriffonsourceselected");
+          if (elt.lastChild) {
+            if (elt.lastChild.nodeType == Node.TEXT_NODE) {
+              selection.collapse(elt.lastChild, elt.lastChild.data.length);
+              ScrollToElement(elt);
+            }
+            else {
+              if (elt.lastChild.nodeType == Node.ELEMENT_NODE) {
+                editor.selectElement(elt.lastChild);
+                ScrollToElement(elt.lastChild);
+              }
+              else {
+                editor.selectElement(elt);
+                ScrollToElement(elt);
+              }
+            }
+          }
+          else {
+            editor.selectElement(elt);
+            ScrollToElement(elt);
+          }
+        }
+      }
+    }
+    catch(e) {}
+
     editor.endTransaction();
 
     // the window title is updated by DOMTitleChanged event
-  } catch(ex) {
+    if (!aNoReflect) {
+      NotifierUtils.notify("afterLeavingSourceMode");
+      window.content.focus();
+      EditorUtils.getCurrentEditorElement().focus();
+    }
+  } catch(e) {
+    Services.prompt.alert(null, "RebuildFromSource", e);
   }
-  NotifierUtils.notify("afterLeavingSourceMode");
-  window.content.focus();
-  EditorUtils.getCurrentEditorElement().focus();
 }
+
 
 function doCloseTab(aTab)
 {
@@ -1231,8 +1226,10 @@ function doCloseTab(aTab)
 #else
     document.title = "BlueGriffon";
 #endif
-    gDialog.responsiveStack.setAttribute("hidden", "true");
-    gDialog.responsiveRuler.setAttribute("style", "display: none");
+    if ("responsiveStack" in gDialog) {
+      gDialog.responsiveStack.setAttribute("hidden", "true");
+      gDialog.responsiveRuler.setAttribute("style", "display: none");
+    }
   }
   window.updateCommands("style");
   NotifierUtils.notify("tabClosed");
@@ -1426,7 +1423,6 @@ function OnDoubleClick(aEvent)
 #include findbar.inc
 
 #include autoInsertTable.inc
-
 
 function AlignAllPanels()
 {
@@ -1803,6 +1799,11 @@ var gDummySelectionEndNode = null;
 var gDummySelectionStartData = "";
 var gDummySelectionEndData = "";
 
+var gPreservedSelectionStartNode = null;
+var gPreservedSelectionEndNode = null;
+var gPreservedSelectionStartOffset = 0;
+var gPreservedSelectionEndOffset = 0;
+
 function MarkSelection()
 {
   gDummySelectionStartNode = null;
@@ -1819,6 +1820,11 @@ function MarkSelection()
     var endContainer   = range.endContainer;
     var startOffset    = range.startOffset;
     var endOffset      = range.endOffset;
+
+    gPreservedSelectionStartNode   = startContainer;
+    gPreservedSelectionEndNode     = endContainer;
+    gPreservedSelectionStartOffset = startOffset;
+    gPreservedSelectionEndOffset   = endOffset;
 
     if (startContainer.nodeType == Node.TEXT_NODE) {
       var data = startContainer.data;
@@ -1900,6 +1906,10 @@ function UnmarkSelection()
     else if (gDummySelectionStartNode.parentNode) // if not already removed....
       gDummySelectionStartNode.parentNode.removeChild(gDummySelectionStartNode);
   }
+
+  var selection = EditorUtils.getCurrentEditor().selection;
+  selection.collapse(gPreservedSelectionStartNode, gPreservedSelectionStartOffset);
+  selection.extend(gPreservedSelectionEndNode, gPreservedSelectionEndOffset);
 }
 
 function MarkSelectionInAce(aSourceEditor)

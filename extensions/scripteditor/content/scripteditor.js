@@ -134,7 +134,7 @@ function Inspect()
   if (gMain.EditorUtils)
   {
     var editor = gMain.EditorUtils.getCurrentEditor();
-    var visible = editor && (gMain.GetCurrentViewMode() == "wysiwyg");
+    var visible = editor && EditorUtils.isWysiwygMode();
     gDialog.mainBox.style.visibility = visible ? "" : "hidden";
     if (!visible) {
       return;

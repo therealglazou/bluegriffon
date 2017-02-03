@@ -5,7 +5,7 @@ var bgInsertTableCommand =
     return (EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -28,7 +28,7 @@ var bgEditTableCommand =
             EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -51,7 +51,7 @@ var bgSelectTableCommand =
             EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -75,7 +75,7 @@ var bgSelectTableCaptionCommand =
         EditorUtils.getCurrentEditorElement() &&
         EditorUtils.isDocumentEditable() &&
         EditorUtils.isEditingRenderedHTML() &&
-        GetCurrentViewMode() == "wysiwyg") {
+        EditorUtils.isWysiwygMode()) {
       // but do we already have a caption?
       return  (element.firstElementChild
                && element.firstElementChild.nodeName == "caption");
@@ -105,7 +105,7 @@ var bgSelectTableRowCommand =
             EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -129,7 +129,7 @@ var bgsSelectTableColumnCommand =
             EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -153,7 +153,7 @@ var bgSelectTableCellCommand =
             EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -177,7 +177,7 @@ var bgSelectAllTableCellsCommand =
             EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -201,7 +201,7 @@ var bgInsertTableCaptionCommand =
         EditorUtils.getCurrentEditorElement() &&
         EditorUtils.isDocumentEditable() &&
         EditorUtils.isEditingRenderedHTML() &&
-        GetCurrentViewMode() == "wysiwyg") {
+        EditorUtils.isWysiwygMode()) {
       // but do we already have a caption?
       return  (!element.firstElementChild
                || element.firstElementChild.nodeName != "caption");
@@ -235,7 +235,7 @@ var bgInsertTableRowAboveCommand =
             EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -259,7 +259,7 @@ var bgInsertTableRowBelowCommand =
             EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -283,7 +283,7 @@ var bgInsertTableColumnBeforeCommand =
             EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -307,7 +307,7 @@ var bgInsertTableColumnAfterCommand =
             EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -331,7 +331,7 @@ var bgInsertTableCellBeforeCommand =
             EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -355,7 +355,7 @@ var bgInsertTableCellAfterCommand =
             EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -379,7 +379,7 @@ var bgDeleteTableCommand =
             EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -403,7 +403,7 @@ var bgDeleteTableCaptionCommand =
         EditorUtils.getCurrentEditorElement() &&
         EditorUtils.isDocumentEditable() &&
         EditorUtils.isEditingRenderedHTML() &&
-        GetCurrentViewMode() == "wysiwyg") {
+        EditorUtils.isWysiwygMode()) {
       // but do we already have a caption?
       return  (element.firstElementChild
                && element.firstElementChild.nodeName == "caption");
@@ -501,7 +501,7 @@ var bgDeleteTableRowCommand =
             EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -538,7 +538,7 @@ var bgDeleteTableColumnCommand =
             EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -575,7 +575,7 @@ var bgDeleteTableCellCommand =
             EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -599,7 +599,7 @@ var bgDeleteTableCellContentsCommand =
             EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -623,7 +623,7 @@ var bgNormalizeTableCommand =
             EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -646,7 +646,7 @@ var bgJoinTableCellsCommand =
     if (EditorUtils.getCurrentEditorElement() &&
         EditorUtils.isDocumentEditable() &&
         EditorUtils.isEditingRenderedHTML() &&
-        GetCurrentViewMode() == "wysiwyg")
+        EditorUtils.isWysiwygMode())
     {
       try {
         var editor = EditorUtils.getCurrentTableEditor();
@@ -731,7 +731,7 @@ var bgSplitTableCellCommand =
     if (EditorUtils.getCurrentEditorElement() &&
         EditorUtils.isDocumentEditable() &&
         EditorUtils.isEditingRenderedHTML() &&
-        GetCurrentViewMode() == "wysiwyg")
+        EditorUtils.isWysiwygMode())
     {
       var tagNameObj = { value: "" };
       var countObj = { value: 0 };
@@ -789,7 +789,7 @@ var bgConvertToTable =
     if (EditorUtils.getCurrentEditorElement() &&
         EditorUtils.isDocumentEditable() &&
         EditorUtils.isEditingRenderedHTML() &&
-        GetCurrentViewMode() == "wysiwyg")
+        EditorUtils.isWysiwygMode())
     {
       var selection;
       var editor = EditorUtils.getCurrentEditor();
@@ -845,7 +845,7 @@ var bgSelectTableColumnCommand =
             EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},

@@ -279,30 +279,70 @@
                   command="cmd_span"
                   accesskey="&spanCmd.accesskey;"/>
         <menuseparator/>
-        <menuitem label="&styleBoldCmd.label;"        accesskey="&stylebold.accesskey;"         observes="cmd_bold"          type="checkbox"/>
-        <menuitem label="&styleItalicCmd.label;"      accesskey="&styleitalic.accesskey;"       observes="cmd_italic"        type="checkbox"/>
-        <menuitem label="&styleUnderlineCmd.label;"   accesskey="&styleunderline.accesskey;"    observes="cmd_underline"     type="checkbox" key="underlinekb"/>
-        <menuitem label="&styleStrikeThruCmd.label;"  accesskey="&stylestrikethru.accesskey;"   observes="cmd_strikethrough" type="checkbox"/>
-        <menuitem label="&styleSuperscriptCmd.label;" accesskey="&stylesuperscript.accesskey;"  observes="cmd_superscript"   type="checkbox"/>
-        <menuitem label="&styleSubscriptCmd.label;"   accesskey="&stylesubscript.accesskey;"    observes="cmd_subscript"     type="checkbox"/>
-        <menuitem label="&fontFixedWidth.label;"      accesskey="&fontfixedwidth.accesskey;"    observes="cmd_tt"            type="checkbox"/>
-        <menuitem label="&styleNonbreakingCmd.label;" accesskey="&stylenonbreaking.accesskey;"  observes="cmd_nobreak"       type="checkbox"/>
+        <menuitem label="&styleBoldCmd.label;"        accesskey="&stylebold.accesskey;"         observes="cmd_bold"          type="checkbox">
+          <observes element="cmd_renderedHTMLEnabler" attribute="disabled"/>
+        </menuitem>
+        <menuitem label="&styleItalicCmd.label;"      accesskey="&styleitalic.accesskey;"       observes="cmd_italic"        type="checkbox">
+          <observes element="cmd_renderedHTMLEnabler" attribute="disabled"/>
+        </menuitem>
+        <menuitem label="&styleUnderlineCmd.label;"   accesskey="&styleunderline.accesskey;"    observes="cmd_underline"     type="checkbox" key="underlinekb">
+          <observes element="cmd_renderedHTMLEnabler" attribute="disabled"/>
+        </menuitem>
+        <menuitem label="&styleStrikeThruCmd.label;"  accesskey="&stylestrikethru.accesskey;"   observes="cmd_strikethrough" type="checkbox">
+          <observes element="cmd_renderedHTMLEnabler" attribute="disabled"/>
+        </menuitem>
+        <menuitem label="&styleSuperscriptCmd.label;" accesskey="&stylesuperscript.accesskey;"  observes="cmd_superscript"   type="checkbox">
+          <observes element="cmd_renderedHTMLEnabler" attribute="disabled"/>
+        </menuitem>
+        <menuitem label="&styleSubscriptCmd.label;"   accesskey="&stylesubscript.accesskey;"    observes="cmd_subscript"     type="checkbox">
+          <observes element="cmd_renderedHTMLEnabler" attribute="disabled"/>
+        </menuitem>
+        <menuitem label="&fontFixedWidth.label;"      accesskey="&fontfixedwidth.accesskey;"    observes="cmd_tt"            type="checkbox">
+          <observes element="cmd_renderedHTMLEnabler" attribute="disabled"/>
+        </menuitem>
+        <menuitem label="&styleNonbreakingCmd.label;" accesskey="&stylenonbreaking.accesskey;"  observes="cmd_nobreak"       type="checkbox">
+          <observes element="cmd_renderedHTMLEnabler" attribute="disabled"/>
+        </menuitem>
         <menuseparator/>
-        <menuitem label="&styleEm.label;"             accesskey="&styleEm.accesskey;"           observes="cmd_em"            type="checkbox" key="emkb"/>
-        <menuitem label="&styleStrong.label;"         accesskey="&styleStrong.accesskey;"       observes="cmd_strong"        type="checkbox" key="strongkb"/>
-        <menuitem label="&styleCite.label;"           accesskey="&styleCite.accesskey;"         observes="cmd_cite"          type="checkbox"/>
-        <menuitem label="&styleAbbr.label;"           accesskey="&styleAbbr.accesskey;"         observes="cmd_abbr"          type="checkbox"/>
-        <menuitem label="&styleAcronym.label;"        accesskey="&styleAcronym.accesskey;"      observes="cmd_acronym"       type="checkbox"/>
-        <menuitem label="&styleCode.label;"           accesskey="&styleCode.accesskey;"         observes="cmd_code"          type="checkbox" key="codekb"/>
-        <menuitem label="&styleSamp.label;"           accesskey="&styleSamp.accesskey;"         observes="cmd_samp"          type="checkbox"/>
-        <menuitem label="&styleVar.label;"            accesskey="&styleVar.accesskey;"          observes="cmd_var"           type="checkbox"/>
+        <menuitem label="&styleEm.label;"             accesskey="&styleEm.accesskey;"           observes="cmd_em"            type="checkbox" key="emkb">
+          <observes element="cmd_renderedHTMLEnabler" attribute="disabled"/>
+        </menuitem>
+        <menuitem label="&styleStrong.label;"         accesskey="&styleStrong.accesskey;"       observes="cmd_strong"        type="checkbox" key="strongkb">
+          <observes element="cmd_renderedHTMLEnabler" attribute="disabled"/>
+        </menuitem>
+        <menuitem label="&styleCite.label;"           accesskey="&styleCite.accesskey;"         observes="cmd_cite"          type="checkbox">
+          <observes element="cmd_renderedHTMLEnabler" attribute="disabled"/>
+        </menuitem>
+        <menuitem label="&styleAbbr.label;"           accesskey="&styleAbbr.accesskey;"         observes="cmd_abbr"          type="checkbox">
+          <observes element="cmd_renderedHTMLEnabler" attribute="disabled"/>
+        </menuitem>
+        <menuitem label="&styleAcronym.label;"        accesskey="&styleAcronym.accesskey;"      observes="cmd_acronym"       type="checkbox">
+          <observes element="cmd_renderedHTMLEnabler" attribute="disabled"/>
+        </menuitem>
+        <menuitem label="&styleCode.label;"           accesskey="&styleCode.accesskey;"         observes="cmd_code"          type="checkbox" key="codekb">
+          <observes element="cmd_renderedHTMLEnabler" attribute="disabled"/>
+        </menuitem>
+        <menuitem label="&styleSamp.label;"           accesskey="&styleSamp.accesskey;"         observes="cmd_samp"          type="checkbox">
+          <observes element="cmd_renderedHTMLEnabler" attribute="disabled"/>
+        </menuitem>
+        <menuitem label="&styleVar.label;"            accesskey="&styleVar.accesskey;"          observes="cmd_var"           type="checkbox">
+          <observes element="cmd_renderedHTMLEnabler" attribute="disabled"/>
+        </menuitem>
         <menuseparator/>
-        <menuitem id="menu_removeAllStyles"  label="&removeAllStyles.label;"  accesskey="&removeAllStyles.accesskey;"  command="cmd_removeStyles"/>
-        <menuitem id="menu_removeAllLinks"   label="&removeAllLinks.label;"   accesskey="&removeAllLinks.accesskey;"   command="cmd_removeLinks"/>
+        <menuitem id="menu_removeAllStyles"  label="&removeAllStyles.label;"  accesskey="&removeAllStyles.accesskey;"  observes="cmd_removeStyles">
+          <observes element="cmd_renderedHTMLEnabler" attribute="disabled"/>
+        </menuitem>
+        <menuitem id="menu_removeAllLinks"   label="&removeAllLinks.label;"   accesskey="&removeAllLinks.accesskey;"   observes="cmd_removeLinks">
+          <observes element="cmd_renderedHTMLEnabler" attribute="disabled"/>
+        </menuitem>
         <menuseparator />
-        <menuitem label="&listProperties.label;" command="cmd_list"/>
+        <menuitem label="&listProperties.label;" observes="cmd_list">
+          <observes element="cmd_renderedHTMLEnabler" attribute="disabled"/>
+        </menuitem>
         <menuseparator/>
-        <menuitem label="&pageProperties.label;" command="cmd_pageProperties"/>
+        <menuitem label="&pageProperties.label;" observes="cmd_pageProperties">
+          <observes element="cmd_renderedHTMLEnabler" attribute="disabled"/>
+        </menuitem>
       </menupopup>
     </menu>
 
@@ -380,7 +420,7 @@
         <menuitem id="menu_mac_hide_others" label="&hideOtherAppsCmdMac.label;" key="key_hideOtherAppsCmdMac"/>
         <menuitem id="menu_mac_show_all" label="&showAllAppsCmdMac.label;"/>
 #endif
-        <!--menuitem id="menu_inspector" label="DOMI" oncommand="inspectDOMDocument();"/-->
+        <menuitem id="menu_inspector" label="DOMI" oncommand="inspectDOMDocument();"/>
 
       </menupopup>
     </menu>

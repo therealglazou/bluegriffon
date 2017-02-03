@@ -111,7 +111,7 @@ function PanelClosed(aNotification, aPanelId)
 function Inspect()
 {
   var editor = gMain.EditorUtils.getCurrentEditor();
-  var visible = editor && (gMain.GetCurrentViewMode() == "wysiwyg");
+  var visible = editor && (gMain.EditorUtils.isWysiwygMode());
   gDialog.mainBox.style.visibility = visible ? "" : "hidden";
   gMain.document.querySelector("[panelid='panel-stylesheets']").className = visible ? "" : "inactive";
   if (!visible) {

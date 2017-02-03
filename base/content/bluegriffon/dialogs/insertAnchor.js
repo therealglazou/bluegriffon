@@ -50,7 +50,7 @@ function InitDialog()
   }
 
 
-  gIsWysiwyg = (EditorUtils.getCurrentViewMode() == "wysiwyg");
+  gIsWysiwyg = EditorUtils.isWysiwygMode();
   if (!gIsWysiwyg) {
     var source = EditorUtils.getCurrentSourceEditor().getValue();
     var parser = new DOMParser();

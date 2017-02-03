@@ -91,7 +91,7 @@ var AutoInsertTable = {
         newRow.appendChild(newCell);
       }
     }
-    if (GetCurrentViewMode() == "wysiwyg") {
+    if (EditorUtils.isWysiwygMode()) {
       editor.insertElementAtSelection(tableElement, true);
       editor.selection.collapse(firstCell, 0);
       window.content.focus();

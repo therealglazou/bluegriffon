@@ -115,7 +115,7 @@ var cmdSave =
     try {
       var docUrl = EditorUtils.getDocumentUrl();
       return EditorUtils.isDocumentEditable()
-              && (GetCurrentViewMode() == "source"
+              && (!EditorUtils.isWysiwygMode()
                   || EditorUtils.isDocumentModified()
                   || UrlUtils.isUrlOfBlankDocument(docUrl));
     } catch (e) {return false;}
@@ -130,10 +130,10 @@ var cmdSave =
     var editor = EditorUtils.getCurrentEditor();
     if (editor)
       try {
-        var mode = GetCurrentViewMode();
-        if (mode == "source") {
+        var mode = EditorUtils.isWysiwygMode();
+        if (!mode) {
           var editorElement = EditorUtils.getCurrentEditorElement();
-          var sourceIframe = editorElement.previousSibling;
+          var sourceIframe = editorElement.parentNode.firstElementChild;
           var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
           var source = sourceEditor.getValue();
 
@@ -181,10 +181,10 @@ var cmdSaveAs =
     var editor = EditorUtils.getCurrentEditor();
     if (editor)
       try {
-        var mode = GetCurrentViewMode();
-        if (mode == "source") {
+        var mode = EditorUtils.isWysiwygMode();
+        if (!mode) {
           var editorElement = EditorUtils.getCurrentEditorElement();
-          var sourceIframe = editorElement.previousSibling;
+          var sourceIframe = editorElement.parentNode.firstElementChild;
           var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
           var source = sourceEditor.getValue();
 
@@ -235,11 +235,15 @@ var cmdCloseTab =
       return;
     }
 
-    var mode = editorElement.parentNode.getAttribute("previousMode");
-    if (mode == "source") {
-      if (!ToggleViewMode(gDialog.wysiwygModeButton))
-        return;
+    switch (EditorUtils.getCurrentViewMode()) {
+      case "source":
+      case "liveview":
+        if (!ToggleViewMode(gDialog.wysiwygModeButton))
+          return;
+        break;
+      default: break;
     }
+
     if (EditorUtils.isDocumentModified()) {
       var rv = PromptUtils.confirmWithTitle(
                              L10NUtils.getString("FileNotSaved"),

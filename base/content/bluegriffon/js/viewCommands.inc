@@ -67,7 +67,7 @@ var cmdToggleView =
 
   doCommand: function(aCommand)
   {
-    var nextMode = GetCurrentViewMode() === 'wysiwyg'
+    var nextMode = EditorUtils.isWysiwygMode()
                    ? 'source'
                    : 'wysiwyg';
     ToggleViewMode(gDialog[nextMode + 'ModeButton']);

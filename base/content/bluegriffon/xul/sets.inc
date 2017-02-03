@@ -165,6 +165,9 @@
   <command id="cmd_class"        state=""          oncommand="ComposerCommands.doStatefulCommand('cmd_class', event.target.value)"/>
   <command id="cmd_id"           state=""          oncommand="ComposerCommands.doStatefulCommand('cmd_id', event.target.value)"/>
   <command id="cmd_ariaRole"     state=""          oncommand="ComposerCommands.doStatefulCommand('cmd_ariaRole', event.target.value)"/>
+  <command id="cmd_removeStyles"                   oncommand="goDoCommand('cmd_removeStyles')"/>
+  <command id="cmd_removeLinks"                    oncommand="goDoCommand('cmd_removeLinks')"/>
+
   <command id="cmd_renderedHTMLEnabler"/>
   <command id="cmd_renderedSourceEnabler"/>
   <command id="cmd_renderedAllEnabler"/>
@@ -183,9 +186,6 @@
   <command id="cmd_indent"                         oncommand="goDoCommand('cmd_indent')"/>
   <command id="cmd_outdent"                        oncommand="goDoCommand('cmd_outdent')"/>
   <command id="cmd_blockquote"                     oncommand="goDoNoCSSCommand('cmd_blockquote')"/>
-
-  <command id="cmd_removeStyles"                   oncommand="goDoCommand('cmd_removeStyles')"/>
-  <command id="cmd_removeLinks"                    oncommand="goDoCommand('cmd_removeLinks')"/>
 
   <command id="cmd_fontColor"       state=""/>
   <command id="cmd_backgroundColor" state="transparent"/>

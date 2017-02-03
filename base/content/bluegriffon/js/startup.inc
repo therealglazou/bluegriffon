@@ -1,9 +1,3 @@
-Components.utils.import("resource://gre/modules/Services.jsm");
-Components.utils.import("resource://gre/modules/urlHelper.jsm");
-Components.utils.import("resource://gre/modules/editorHelper.jsm");
-Components.utils.import("resource://gre/modules/bgQuit.jsm");
-Components.utils.import("resource://gre/modules/AddonManager.jsm");
-Components.utils.import("resource://gre/modules/fileChanges.jsm");
 
 var gContentWindow = null;
 
@@ -75,6 +69,7 @@ function Startup()
   BlueGriffonQuitHelper.init();
 
   NotifierUtils.addNotifierCallback("selection_strict", BlueGriffon_lookForFileChanges, this);
+  NotifierUtils.addNotifierCallback("selection",        UpdateLiveView, this);
 
   window.addEventListener("sizemodechange", onSizeModeChange, false);
 
