@@ -831,69 +831,6 @@ function OnKeyPressWhileChangingTag(event)
 
 /************ VIEW MODE ********/
 
-function onSourceChangeCallback(source)
-{
-  var doctype = EditorUtils.getCurrentDocument().doctype;
-  var systemId = doctype ? doctype.systemId : null;
-  var isXML = false;
-  switch (systemId) {
-    case "http://www.w3.org/TR/html4/strict.dtd": // HTML 4
-    case "http://www.w3.org/TR/html4/loose.dtd":
-    case "http://www.w3.org/TR/REC-html40/strict.dtd":
-    case "http://www.w3.org/TR/REC-html40/loose.dtd":
-      isXML = false;
-      break;
-    case "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd": // XHTML 1
-    case "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd":
-    case "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd":
-      isXML = true;
-      break;
-    case "":
-    case "about:legacy-compat":
-      isXML = (EditorUtils.getCurrentDocument().documentElement.getAttribute("xmlns") == "http://www.w3.org/1999/xhtml");
-      break;
-    case null:
-      isXML = (EditorUtils.getCurrentDocument().compatMode == "CSS1Compat");
-      break;
-  }
-
-  var editorElement  = EditorUtils.getCurrentEditorElement();
-  var sourceIframe   = editorElement.parentNode.firstElementChild;
-  var sourceEditor   = sourceIframe.contentWindow.wrappedJSObject.gEditor;
-  var sourceDocument = sourceIframe.contentWindow.document;
-
-  if (isXML) {
-    if (sourceEditor.lastErrorLine) {
-      var lineInfo = sourceEditor.lineInfo(sourceEditor.lastErrorLine - 1);
-      var markerClass = lineInfo.markerClass ? lineInfo.markerClass : "";
-      var markerClassArray = markerClass.split(" ");
-      markerClassArray.splice(markerClassArray.indexOf("error"), 1);
-      sourceEditor.addLineClass(sourceEditor.lastErrorLine - 1, null, markerClassArray.join(" "));
-      sourceEditor.lastErrorLine = 0;
-    }
-    var xmlParser = new DOMParser();
-    try {
-      var doc = xmlParser.parseFromString(source, "text/xml");
-      if (doc.documentElement.nodeName == "parsererror") {
-        var message = doc.documentElement.firstChild.data.
-          replace( /Location\: chrome\:\/\/bluegriffon\/content\/xul\/bluegriffon.xul/g , ", ");
-        var error = doc.documentElement.lastChild.textContent;
-        var line = parseInt(doc.documentElement.getAttribute("line"));
-        var lineInfo = sourceEditor.lineInfo(line - 1);
-        var markerClass = lineInfo.markerClass ? lineInfo.markerClass : "";
-        var markerClassArray = markerClass.split(" ");
-        if (-1 == markerClassArray.indexOf("error"))
-          markerClassArray.push("error");
-        sourceEditor.addLineClass(line - 1, null, markerClassArray.join(" "));
-        sourceEditor.lastErrorLine = line;
-
-        return;
-      }
-    }
-    catch(e) {Services.prompt.alert(null, "onSourceChangeCallback", e);}
-  }
-}
-
 function ToggleViewMode(aElement)
 {
   if (!aElement) // sanity case
