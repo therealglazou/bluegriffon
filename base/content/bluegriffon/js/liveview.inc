@@ -71,10 +71,10 @@ function WysiwygEditorFocused(aNoFocus)
         if (!aNoFocus) {
           EditorUtils.getCurrentEditorWindow().updateCommands("style");
           EditorUtils.getCurrentEditorWindow().goUpdateCommand("cmd_renderedHTMLEnabler");
-          NotifierUtils.notify("afterLeavingSourceMode");
           EditorUtils.getCurrentEditorElement().focus();
   
           EditorUtils.setLiveViewMode("wysiwyg");
+          NotifierUtils.notify("afterLeavingSourceMode");
         }
 
         gDisableLiveViewUpdates = false;
