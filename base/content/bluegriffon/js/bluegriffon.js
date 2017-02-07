@@ -910,8 +910,8 @@ function ToggleViewMode(aElement)
       previousmode == "liveview" &&
       EditorUtils.getLiveViewMode() == "wysiwyg") {
     gDialog.liveViewModeButton.removeAttribute("selected");
-    gDialog.sourceModeButton.setAttribute("selected", "true");
-    gDialog.wysiwygModeButton.removeAttribute("selected");
+    gDialog.sourceModeButton.removeAttribute("selected");
+    gDialog.wysiwygModeButton.setAttribute("selected", "true");
     gDialog.printPreviewModeButton.removeAttribute("selected");
 
     editorElement.parentNode.setAttribute("currentmode", mode);
