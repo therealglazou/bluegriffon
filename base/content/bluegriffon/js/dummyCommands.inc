@@ -28,7 +28,8 @@ var cmdDummySource =
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
             !EditorUtils.activeViewActive  &&
-            !EditorUtils.isWysiwygMode());
+            (EditorUtils.getCurrentViewMode() == "source" ||
+             EditorUtils.getCurrentViewMode() == "liveview"));
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},

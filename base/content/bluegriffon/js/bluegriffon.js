@@ -861,11 +861,67 @@ function ToggleViewMode(aElement)
   }
 
   var mode =  aElement.getAttribute("mode");
-  if (mode == EditorUtils.getCurrentViewMode())
+  var previousmode = EditorUtils.getCurrentViewMode();
+  if (mode == previousmode)
     return true;
 
   var sourceIframe = editorElement.parentNode.firstElementChild;
   var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
+
+  // special case, from liveview/source to source
+  if (mode == "source" &&
+      previousmode == "liveview" &&
+      EditorUtils.getLiveViewMode() == "source") {
+    gDialog.liveViewModeButton.removeAttribute("selected");
+    gDialog.sourceModeButton.setAttribute("selected", "true");
+    gDialog.wysiwygModeButton.removeAttribute("selected");
+    gDialog.printPreviewModeButton.removeAttribute("selected");
+
+    editorElement.parentNode.setAttribute("currentmode", mode);
+
+    deck.removeAttribute("class");
+    editorElement.parentNode.selectedIndex = 0;
+    sourceIframe.focus();
+    //sourceEditor.refresh();
+    sourceEditor.focus();
+
+    return;
+  }
+
+  // special case, to liveview/source from source
+  if (previousmode == "source" &&
+      mode == "liveview") {
+    deck.className = "liveview";
+    gDialog.liveViewModeButton.setAttribute("selected", "true");
+    gDialog.sourceModeButton.removeAttribute("selected");
+    gDialog.wysiwygModeButton.removeAttribute("selected");
+    gDialog.printPreviewModeButton.removeAttribute("selected");
+
+    editorElement.parentNode.setAttribute("currentmode", mode);
+    sourceIframe.focus();
+    //sourceEditor.refresh();
+    sourceEditor.focus();
+
+    return;
+  }
+
+  // special case, from liveview/wysiwyg to wysiwyg
+  if (mode == "wysiwyg" &&
+      previousmode == "liveview" &&
+      EditorUtils.getLiveViewMode() == "wysiwyg") {
+    gDialog.liveViewModeButton.removeAttribute("selected");
+    gDialog.sourceModeButton.setAttribute("selected", "true");
+    gDialog.wysiwygModeButton.removeAttribute("selected");
+    gDialog.printPreviewModeButton.removeAttribute("selected");
+
+    editorElement.parentNode.setAttribute("currentmode", mode);
+
+    deck.removeAttribute("class");
+    editorElement.parentNode.selectedIndex = 1;
+    window.content.focus();
+
+    return;
+  }
 
   editorElement.parentNode.setAttribute("currentmode", mode);
 
@@ -972,7 +1028,6 @@ function ToggleViewMode(aElement)
     // Reduce the undo count so we don't use too much memory
     //   during multiple uses of source window 
     //   (reinserting entire doc caches all nodes)
-    gDialog.tabeditor.enableRulers(true);
 
     if (sourceEditor)
     {
@@ -995,8 +1050,21 @@ function ToggleViewMode(aElement)
                               "chrome,modal,titlebar", message, error);
             gDialog.printPreviewModeButton.removeAttribute("selected");
             gDialog.wysiwygModeButton.removeAttribute("selected");
-            gDialog.sourceModeButton.setAttribute("selected", "true");
-            editorElement.parentNode.setAttribute("currentmode", "source");
+            // XXX
+            if (previousmode == "source") {
+              gDialog.sourceModeButton.setAttribute("selected", "true");
+              gDialog.liveViewModeButton.removeAttribute("selected");
+            }
+            else {
+              gDialog.liveViewModeButton.setAttribute("selected", "true");
+              gDialog.sourceModeButton.removeAttribute("selected");
+            }
+
+            sourceIframe.focus();
+            //sourceEditor.refresh();
+            sourceEditor.focus();
+
+            editorElement.parentNode.setAttribute("currentmode", previousmode);
             Services.prefs.setBoolPref("bluegriffon.spellCheck.enabled", spellchecking);
             return false;
           }
@@ -1020,6 +1088,8 @@ function ToggleViewMode(aElement)
       sourceIframe.setUserData("lastSaved", "", null);
       Services.prefs.setBoolPref("bluegriffon.spellCheck.enabled", spellchecking);
     }
+    gDialog.tabeditor.enableRulers(true);
+
     gDialog.liveViewModeButton.removeAttribute("selected");
     gDialog.wysiwygModeButton.setAttribute("selected", "true");
     gDialog.sourceModeButton.removeAttribute("selected");
