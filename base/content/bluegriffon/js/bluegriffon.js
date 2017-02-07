@@ -1007,6 +1007,7 @@ function ToggleViewMode(aElement)
 
     if (mode == "liveview") {
       deck.className = "liveview";
+      window.content.focus();
     }
     else {
       deck.removeAttribute("class");
