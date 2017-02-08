@@ -1053,7 +1053,7 @@ function ToggleViewMode(aElement)
                               "chrome,modal,titlebar", message, error);
             gDialog.printPreviewModeButton.removeAttribute("selected");
             gDialog.wysiwygModeButton.removeAttribute("selected");
-            // XXX
+
             if (previousmode == "source") {
               gDialog.sourceModeButton.setAttribute("selected", "true");
               gDialog.liveViewModeButton.removeAttribute("selected");
