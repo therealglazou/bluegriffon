@@ -68,6 +68,8 @@ function WysiwygEditorFocused(aNoFocus)
           RebuildFromSource(doc, isXML, true);
         }
 
+        gDialog.tabeditor.enableRulers(true);
+        gDialog.structurebar.style.visibility = "";
         if (!aNoFocus) {
           EditorUtils.getCurrentEditorWindow().updateCommands("style");
           EditorUtils.getCurrentEditorWindow().goUpdateCommand("cmd_renderedHTMLEnabler");
@@ -89,6 +91,9 @@ function SourceEditorFocused()
 {
   if (EditorUtils.getCurrentViewMode() == "liveview") {
     if (EditorUtils.getLiveViewMode() != "source") {
+      gDialog.tabeditor.enableRulers(false);
+      gDialog.structurebar.style.visibility = "hidden";
+
       EditorUtils.setLiveViewMode("source");
       EditorUtils.getCurrentEditorWindow().updateCommands("style");
       EditorUtils.getCurrentEditorWindow().goUpdateCommand("cmd_renderedHTMLEnabler");
