@@ -92,11 +92,11 @@ function Troubleshoot()
         return;
       }
 
+      var ok = (rq.responseText == "ok");
       Services.prompt.alert(null,
                             gDialog.activationBundle.getString("fullResetTitle"),
-                            (rq.responseText == "ok")
-                              ? gDialog.activationBundle.getString("fullResetRequested")
-                              : gDialog.activationBundle.getString("fullResetInvalid"));
+                            ok ? gDialog.activationBundle.getString("fullResetRequested")
+                               : gDialog.activationBundle.getString("fullResetInvalid"));
 
       Services.prefs.setCharPref("bluegriffon.license.key", "");
       Services.prefs.setCharPref("bluegriffon.license.invoice", "");
@@ -104,6 +104,14 @@ function Troubleshoot()
 
       gDialog.licenseKeyTextbox.value = "";
       gDialog.licenseInvoiceTextbox.value = "";
+
+      if (ok) {
+        var appStartup = Components.classes["@mozilla.org/toolkit/app-startup;1"]
+                         .getService(Components.interfaces.nsIAppStartup);
+
+        appStartup.quit(Components.interfaces.nsIAppStartup.eRestart |
+                        Components.interfaces.nsIAppStartup.eAttemptQuit);
+      }
     }
   };
 
