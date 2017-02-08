@@ -47,7 +47,7 @@ var TOCrebuilder = {
 
   kMozToc:                 "mozToc",
   kMozTocLength:           6,
-  kMozTocIdPrefix:         "kMozTocIdPrefix",
+  kMozTocIdPrefix:         "mozTocId",
   kMozTocIdPrefixLength:   8,
   kMozTocClassPrefix:      "mozToc",
   kMozTocClassPrefixLength: 6,
