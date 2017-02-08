@@ -68,9 +68,10 @@ function WysiwygEditorFocused(aNoFocus)
           RebuildFromSource(doc, isXML, true);
         }
 
-        gDialog.tabeditor.enableRulers(true);
-        gDialog.structurebar.style.visibility = "";
         if (!aNoFocus) {
+          gDialog.tabeditor.enableRulers(true);
+          gDialog.structurebar.style.visibility = "";
+
           EditorUtils.getCurrentEditorWindow().updateCommands("style");
           EditorUtils.getCurrentEditorWindow().goUpdateCommand("cmd_renderedHTMLEnabler");
           EditorUtils.getCurrentEditorElement().focus();

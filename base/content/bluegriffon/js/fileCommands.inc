@@ -146,6 +146,8 @@ var cmdSave =
             // changed when we leave source mode; b=479
             sourceIframe.setUserData("lastSaved", source, null);
           }
+          sourceIframe.focus();
+          sourceEditor.focus();
         }
         else {
           EditorUtils.cleanup();
@@ -153,9 +155,9 @@ var cmdSave =
                      UrlUtils.isUrlOfBlankDocument(EditorUtils.getDocumentUrl()),
                      false,
                      EditorUtils.getCurrentDocumentMimeType());
+          window.content.focus();
         }
         NotifierUtils.notify("fileSaved", EditorUtils.getDocumentUrl());
-        window.content.focus();
         window.updateCommands("style");
         if (result)
           StoreUrlInLocationDB(EditorUtils.getDocumentUrl());
