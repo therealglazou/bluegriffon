@@ -885,7 +885,7 @@ function ToggleViewMode(aElement)
     //sourceEditor.refresh();
     sourceEditor.focus();
 
-    return;
+    return true;
   }
 
   // special case, to liveview/source from source
@@ -902,7 +902,7 @@ function ToggleViewMode(aElement)
     //sourceEditor.refresh();
     sourceEditor.focus();
 
-    return;
+    return true;
   }
 
   // special case, from liveview/wysiwyg to wysiwyg
@@ -920,7 +920,7 @@ function ToggleViewMode(aElement)
     editorElement.parentNode.selectedIndex = 1;
     window.content.focus();
 
-    return;
+    return true;
   }
 
   editorElement.parentNode.setAttribute("currentmode", mode);
@@ -954,9 +954,11 @@ function ToggleViewMode(aElement)
 
   if (mode == "source" || mode == "liveview")
   {
-    gDialog.structurebar.style.visibility = "hidden";
-    HandlersManager.hideAllHandlers();
-    gDialog.tabeditor.enableRulers(false);
+    if (mode == "source") {
+      gDialog.structurebar.style.visibility = "hidden";
+      HandlersManager.hideAllHandlers();
+      gDialog.tabeditor.enableRulers(false);
+    }
 
     EditorUtils.cleanup();
 
