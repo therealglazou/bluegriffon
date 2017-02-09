@@ -65,16 +65,16 @@
           list-style-image: url(chrome://bluegriffon/skin/caption-buttons.svg#close-white);
         }
 
-        #titlebar-min:-moz-lwtheme {
+        :root[cleartheme="true"] #titlebar-min {
           list-style-image: url(chrome://bluegriffon/skin/caption-buttons.svg#minimize-themes);
         }
-        #titlebar-max:-moz-lwtheme {
+        :root[cleartheme="true"] #titlebar-max {
           list-style-image: url(chrome://bluegriffon/skin/caption-buttons.svg#maximize-themes);
         }
-        #Bluegriffon[sizemode="maximized"] #titlebar-max:-moz-lwtheme {
+        #Bluegriffon[sizemode="maximized"][cleartheme="true"]  #titlebar-max {
           list-style-image: url(chrome://bluegriffon/skin/caption-buttons.svg#restore-themes);
         }
-        #titlebar-close:-moz-lwtheme {
+        :root[cleartheme="true"]  #titlebar-close {
           list-style-image: url(chrome://bluegriffon/skin/caption-buttons.svg#close-themes);
         }
 

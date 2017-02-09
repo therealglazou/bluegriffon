@@ -6,7 +6,7 @@
     g:not(:target) {
       display: none;
     }
-    use:target > g {
+    use:target &gt; g {
       display: initial;
     }
 
@@ -22,10 +22,10 @@
     .highcontrast {
       stroke-width: 1.9px;
     }
-    .highcontrast-hover > g {
+    .highcontrast-hover &gt; g {
       stroke: HighlightText;
     }
-    .white > g {
+    .white &gt; g {
       stroke: #fff;
     }
     .themes {
@@ -34,7 +34,7 @@
     }
 
     .outer-stroke {
-      stroke: #000;
+      stroke: none;
       stroke-width: 3.6;
       opacity: .75;
     }
@@ -81,7 +81,7 @@
   <use id="restore-highcontrast-hover" class="highcontrast-hover" xlink:href="#restore-highcontrast"/>
 
   <g id="close-themes" class="themes">
-    <path d="M1,1 l 10,10 M1,11 l 10,-10" class="outer-stroke" />
+    <path d="M1,1 l 10,10 M1,11 l 10,-10" class="outer-stroke"/>
     <path d="M1.75,1.75 l 8.5,8.5 M1.75,10.25 l 8.5,-8.5"/>
   </g>
   <g id="maximize-themes" class="themes">
