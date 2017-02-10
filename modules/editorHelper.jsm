@@ -244,9 +244,10 @@ var EditorUtils = {
   isDocumentModified: function isDocumentModified()
   {
     try {
-      if (this.getCurrentEditor().documentModified)
-        return true;
-      if (this.getCurrentSourceWindow().GetModificationCount())
+      if (this.isWysiwygMode()) {
+        return this.getCurrentEditor().documentModified;
+      }
+      else if (this.getCurrentSourceWindow().GetModificationCount())
         return true;
     } catch (e) { }
     return false;
