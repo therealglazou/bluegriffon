@@ -1,7 +1,6 @@
 
 var gUpdateLiveViewTimeOutID = null;
 var gDisableLiveViewUpdates = false;
-var gCancelNextLiveViewUpdate = false;
 
 function WysiwygEditorFocused(aNoFocus)
 {
@@ -59,6 +58,7 @@ function WysiwygEditorFocused(aNoFocus)
               var error = doc.documentElement.lastChild.textContent;
               window.openDialog("chrome://bluegriffon/content/dialogs/parsingError.xul", "_blank",
                                 "chrome,modal,titlebar", message, error);
+              sourceEditor.focus();
             }
             gDisableLiveViewUpdates = false;
             return;
@@ -81,7 +81,6 @@ function WysiwygEditorFocused(aNoFocus)
         }
 
         gDisableLiveViewUpdates = false;
-        gCancelNextLiveViewUpdate = true;
       }
     }
   }
@@ -105,10 +104,6 @@ function SourceEditorFocused()
 
 function _UpdateLiveView()
 {
-  if (gCancelNextLiveViewUpdate) {
-    gCancelNextLiveViewUpdate = false;
-    return;
-  }
   if (EditorUtils.getCurrentViewMode() == "liveview" &&
       EditorUtils.getLiveViewMode() == "wysiwyg") {
 
@@ -209,11 +204,16 @@ function MarkSelectionInSourceEditor()
   // are we inside a tag
   if (source.lastIndexOf("<", index) > source.lastIndexOf(">", index)) {
     var found = false;
-    while (!found && index <= 0) {
+    while (!found && index >= 0) {
+      let oldindex = index;
       index = source.lastIndexOf("<", index);
       if (index != -1) {
         found = /[a-zA-Z]/.test(source[index + 1]);
+        if (!found)
+          index--;
       }
+      if (oldindex == index) // sanity case
+        break;
     }
 
     if (found) {

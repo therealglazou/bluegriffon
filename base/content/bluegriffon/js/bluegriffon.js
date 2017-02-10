@@ -923,8 +923,6 @@ function ToggleViewMode(aElement)
     return true;
   }
 
-  editorElement.parentNode.setAttribute("currentmode", mode);
-
   gDialog.bespinToolbox1.hidden = true;
   gDialog.bespinToolbox2.hidden = true;
 
@@ -1025,6 +1023,7 @@ function ToggleViewMode(aElement)
 
     sourceIframe.contentWindow.wrappedJSObject.isXML = isXML;
     EditorUtils.getCurrentSourceWindow().ResetModificationCount();
+    editorElement.parentNode.setAttribute("currentmode", mode);
   }
   else if (mode == "wysiwyg")
   {
@@ -1097,6 +1096,8 @@ function ToggleViewMode(aElement)
     gDialog.wysiwygModeButton.setAttribute("selected", "true");
     gDialog.sourceModeButton.removeAttribute("selected");
     gDialog.printPreviewModeButton.removeAttribute("selected");
+
+    editorElement.parentNode.setAttribute("currentmode", mode);
   }
 
   editorElement.parentNode.setAttribute("previousMode", mode);

@@ -375,7 +375,9 @@ var EditorUtils = {
     }
 
     // make sure we have an element here
-    while (result.node.nodeType != this.nsIDOMNode.ELEMENT_NODE)
+    while (result.node &&
+           result.node.parentNode &&
+           result.node.nodeType != this.nsIDOMNode.ELEMENT_NODE)
       result.node = result.node.parentNode;
 
     // and make sure the element is not a special editor node like
