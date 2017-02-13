@@ -316,8 +316,9 @@ var EditorUtils = {
     var editor = this.getCurrentEditor();
     if (!editor) return null;
 
+    var selection = null;
     try {
-      var selection = editor.selection;
+      selection = editor.selection;
       if (!selection) return null;
     }
     catch (e) { return null; }
@@ -325,7 +326,9 @@ var EditorUtils = {
     var result = { oneElementSelected:false };
 
     if (selection.isCollapsed) {
-      result.node = selection.focusNode;
+      if (!selection.rangeCount) // weirdness...
+        return null;
+      result.node = selection.getRangeAt(0).startContainer;
     }
     else {
       var rangeCount = selection.rangeCount;
