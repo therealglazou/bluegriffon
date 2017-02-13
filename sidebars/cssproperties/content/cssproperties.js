@@ -453,7 +453,7 @@ function ApplyStyles(aStyles, aNoSelectionUpdate, aDoNotBeginTransaction, aCallb
     var property = s.property;
     var value = s.value;
 
-    if (!gInUtils.cssPropertyIsValid(property, value))
+    if (value && !gInUtils.cssPropertyIsValid(property, value))
       continue;
 
     switch (gDialog.cssPolicyMenulist.value) {
