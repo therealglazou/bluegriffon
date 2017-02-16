@@ -164,13 +164,16 @@
   }
 
   var gInstalled = false;
-  function installCodeMirror(aKeyPressCallback, aChangeCallback, aActivityCallback, aLiveViewCallback, aTheme) {
+  function installCodeMirror(aKeyPressCallback, aChangeCallback, aActivityCallback, aLiveViewCallback, aTheme, aZoomFactor) {
     if (gInstalled) return;
+    gInstalled = true;
+
     getEditableElement().addEventListener("keypress", aKeyPressCallback, true);
     gChangeCallback = aChangeCallback;
     gActivityCallback = aActivityCallback;
     gLiveViewCallback = aLiveViewCallback;
     useTheme(aTheme);
+    getEditableElement().style.fontSize = aZoomFactor;
   }
 
   function markSelection()
