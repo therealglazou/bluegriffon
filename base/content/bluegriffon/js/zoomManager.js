@@ -40,8 +40,9 @@ Components.utils.import("resource://gre/modules/editorHelper.jsm");
 
 var BGZoomManager = {
 
-  kZOOM_VALUES:  "toolkit.zoomManager.zoomValues",
-  kDEFAULT_ZOOM: "bluegriffon.zoom.default",
+  kZOOM_VALUES:         "toolkit.zoomManager.zoomValues",
+  kDEFAULT_ZOOM:        "bluegriffon.zoom.default",
+  kDEFAULT_SOURCE_ZOOM: "bluegriffon.source.zoom.default",
 
   zoomValues: function BGZoomManager_zoomValues()
   {
@@ -63,12 +64,35 @@ var BGZoomManager = {
 
   getCurrentZoom: function BGZoomManager_getCurrentZoom()
   {
-    return this.getMarkupDocumentViewer().fullZoom;
+    if (EditorUtils.isWysiwygMode()) {
+      return this.getMarkupDocumentViewer().fullZoom;
+    }
+    else {
+      var editorElement = EditorUtils.getCurrentEditorElement();
+      var sourceIframe =  editorElement.parentNode.firstElementChild;
+      var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.getEditableElement();
+
+      var value = sourceEditor.style.fontSize;
+      if (value)
+        return parseInt(value) / 100;
+    }
+    return 1;
   },
 
   setCurrentZoom: function BGZoomManager_setCurrentZoom(aZoom)
   {
-    this.getMarkupDocumentViewer().fullZoom = aZoom;
+    if (EditorUtils.isWysiwygMode()) {
+      this.getMarkupDocumentViewer().fullZoom = aZoom;
+    }
+    else {
+      var value = Math.round(aZoom * 100) + "%";
+
+      var editorElement = EditorUtils.getCurrentEditorElement();
+      var sourceIframe =  editorElement.parentNode.firstElementChild;
+      var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.getEditableElement();
+  
+      sourceEditor.style.fontSize = value;
+    }
     NotifierUtils.notify("zoomChanged");
   },
 
@@ -103,7 +127,7 @@ var BGZoomManager = {
     if (aMenulist.selectedItem && aMenulist.selectedItem.value)
     {
       this.setCurrentZoom(parseInt(aMenulist.selectedItem.value) / 100);
-      EditorUtils.getCurrentEditorElement().contentWindow.focus();
+      this.focus();
     }
     else
       aMenulist.value = this.getCurrentZoom() * 100 + "%";
@@ -125,10 +149,6 @@ var BGZoomManager = {
 
   enlarge: function BGZoomManager_enlarge(aMenulist)
   {
-    if (!EditorUtils.isWysiwygMode()) {
-      this.addToSourceViewFontSize(+1);
-      return;
-    }
     var zoomValues = this.zoomValues();
     var currentZoom = Math.round(this.getCurrentZoom() * 100) / 100;
     var i = zoomValues.indexOf(currentZoom);
@@ -151,10 +171,6 @@ var BGZoomManager = {
 
   reduce: function BGZoomManager_reduce(aMenulist)
   {
-    if (!EditorUtils.isWysiwygMode()) {
-      this.addToSourceViewFontSize(-1);
-      return;
-    }
     var zoomValues = this.zoomValues();
     var currentZoom = Math.round(this.getCurrentZoom() * 100) / 100;
     var i = zoomValues.indexOf(currentZoom);
@@ -190,7 +206,26 @@ var BGZoomManager = {
       value = Math.floor(this.getCurrentZoom() * 100);
     }
     aMenulist.value = value + "%";
-    EditorUtils.getCurrentEditorElement().contentWindow.focus();
+    this.focus();
+  },
+
+  focus: function()
+  {
+    if (EditorUtils.isWysiwygMode())
+      EditorUtils.getCurrentEditorElement().contentWindow.focus();
+    else {
+      var editorElement = EditorUtils.getCurrentEditorElement();
+      var sourceIframe =  editorElement.parentNode.firstElementChild;
+      var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.getEditableElement();
+
+      sourceIframe.focus();
+      sourceEditor.focus();
+    }
+  },
+
+  onModeSwitch: function()
+  {
+    gDialog["menulist-zoompanel"].value = Math.floor(this.getCurrentZoom() * 100) + "%"; 
   },
 
   startup: function BGZoomManager_startup()
@@ -200,6 +235,8 @@ var BGZoomManager = {
       function() { _self.onTabSelected(); }, this);
     NotifierUtils.addNotifierCallback("tabCreated",
       function() { _self.onTabCreated(); }, this);
+    NotifierUtils.addNotifierCallback("modeSwitch",
+      function() { _self.onModeSwitch(); }, this);
   },
 
   shutdown: function BGZoomManager_shutdown()
@@ -209,6 +246,8 @@ var BGZoomManager = {
       function() { _self.onTabSelected(); }, this);
     NotifierUtils.removeNotifierCallback("tabCreated",
       function() { _self.onTabCreated(); }, this);
+    NotifierUtils.removeNotifierCallback("modeSwitch",
+      function() { _self.onModeSwitch(); }, this);
   },
 
   onTabSelected: function BGZoomManager_onTabSelect()
@@ -227,6 +266,7 @@ var BGZoomManager = {
     {
       defaultZoom = 1;
     }
+
     this.setCurrentZoom(defaultZoom);
     gDialog["menulist-zoompanel"].value = Math.floor(defaultZoom * 100) + "%"; 
   }

@@ -3,7 +3,12 @@
 
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 
-<!DOCTYPE overlay SYSTEM "chrome://bluegriffon/locale/prefs/source.dtd">
+<!DOCTYPE overlay [
+<!ENTITY % sourceDTD SYSTEM "chrome://bluegriffon/locale/prefs/source.dtd" >
+%sourceDTD;
+<!ENTITY % newPageDTD SYSTEM "chrome://bluegriffon/locale/prefs/newPage.dtd" >
+%newPageDTD;
+]>
 
 <overlay
   id     = "sourcePrefsOverlay"
@@ -31,6 +36,19 @@
                   preference="pref-source-theme">
           <menupopup id="sourceThemeMenupopup"/>
         </menulist>
+      </hbox>
+
+      <hbox align="center">
+        <label value="&defaultZoomFactor.label;"/>
+        <scale id="sourceZoomScale"
+               flex="1"
+               min="1" max="300" increment="1"
+               onchange="OnSourceScaleChange(true)"/>
+        <textbox value="100%" id="sourceZoomText"
+                 style="text-align: right"
+                 size="3" maxlength="3"
+                 oninput="OnSourceZoomTextInput(this)"/>
+        <label value="%"/>
       </hbox>
     </groupbox>
 

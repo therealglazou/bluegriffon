@@ -78,6 +78,7 @@ function WysiwygEditorFocused(aNoFocus)
   
           EditorUtils.setLiveViewMode("wysiwyg");
           NotifierUtils.notify("afterLeavingSourceMode");
+          NotifierUtils.notify("modeSwitch");
         }
 
         gDisableLiveViewUpdates = false;
@@ -98,6 +99,7 @@ function SourceEditorFocused()
       EditorUtils.getCurrentEditorWindow().updateCommands("style");
       EditorUtils.getCurrentEditorWindow().goUpdateCommand("cmd_renderedHTMLEnabler");
       NotifierUtils.notify("afterEnteringSourceMode");
+      NotifierUtils.notify("modeSwitch");
     }
   }
 }

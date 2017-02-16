@@ -15,6 +15,10 @@ function OnSourcePaneLoad()
   document.getElementById("sourceThemeMenulist").value = currentTheme;
 
   toggleWrapping();
+
+  var zoom = Math.floor(parseFloat(Services.prefs.getCharPref("bluegriffon.source.zoom.default")) * 100);
+  gDialog.sourceZoomScale.value = zoom;
+  OnSourceScaleChange(false);
 }
 
 function toggleWrapping()
@@ -27,4 +31,19 @@ function toggleWrapping()
       gDialog[wrapArray[i]].removeAttribute("disabled");
     else
       gDialog[wrapArray[i]].setAttribute("disabled", "true");
+}
+
+function OnSourceScaleChange(aChangePref)
+{
+  if (gDialog.sourceZoomText) {
+    gDialog.sourceZoomText.value = gDialog.sourceZoomScale.value;
+    if (aChangePref)
+      Services.prefs.setCharPref("bluegriffon.source.zoom.default", gDialog.sourceZoomScale.value/100);
+  }
+}
+
+function OnSourceZoomTextInput(aElt)
+{
+  var value = parseInt(aElt.value);
+  gDialog.sourceZoomScale.value = value;
 }

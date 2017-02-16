@@ -153,6 +153,7 @@ pref("bluegriffon.source.wrap", true);
 pref("bluegriffon.source.wrap.maxColumn", 80);
 pref("bluegriffon.source.wrap.exclude-languages", true);
 pref("bluegriffon.source.wrap.language-exclusions", "");
+pref("bluegriffon.source.zoom.default", "1");
 
 pref("bluegriffon.toolbar.enabled", true);
 pref("bluegriffon.toolbar.icons", "medium");

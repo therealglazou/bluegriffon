@@ -884,6 +884,7 @@ function ToggleViewMode(aElement)
     sourceIframe.focus();
     //sourceEditor.refresh();
     sourceEditor.focus();
+    NotifierUtils.notify("modeSwitch");
 
     return true;
   }
@@ -901,6 +902,7 @@ function ToggleViewMode(aElement)
     sourceIframe.focus();
     //sourceEditor.refresh();
     sourceEditor.focus();
+    NotifierUtils.notify("modeSwitch");
 
     return true;
   }
@@ -919,6 +921,7 @@ function ToggleViewMode(aElement)
     deck.removeAttribute("class");
     editorElement.parentNode.selectedIndex = 1;
     window.content.focus();
+    NotifierUtils.notify("modeSwitch");
 
     return true;
   }
@@ -980,11 +983,22 @@ function ToggleViewMode(aElement)
       theme = GetPrefs().getCharPref("bluegriffon.source.theme");
     }
     catch(e) {}
+
+    var defaultSourceZoom;
+    try {
+      defaultSourceZoom = parseFloat(Services.prefs.getCharPref("bluegriffon.source.zoom.default"));
+    }
+    catch(e)
+    {
+      defaultSourceZoom = 1;
+    }
+    var zoomFactor = Math.round(defaultSourceZoom * 100) + "%";
     sourceIframe.contentWindow.wrappedJSObject.installCodeMirror(BespinKeyPressCallback,
                                                  BespinChangeCallback,
                                                  BespinActivityCallback,
                                                  WysiwygEditorFocused,
-                                                 theme);
+                                                 theme,
+                                                 zoomFactor);
 
     var lastEditableChild = editor.document.body.lastChild;
     if (lastEditableChild.nodeType == Node.TEXT_NODE)
@@ -1024,6 +1038,8 @@ function ToggleViewMode(aElement)
     sourceIframe.contentWindow.wrappedJSObject.isXML = isXML;
     EditorUtils.getCurrentSourceWindow().ResetModificationCount();
     editorElement.parentNode.setAttribute("currentmode", mode);
+
+    NotifierUtils.notify("modeSwitch");
   }
   else if (mode == "wysiwyg")
   {
@@ -1102,6 +1118,7 @@ function ToggleViewMode(aElement)
 
   editorElement.parentNode.setAttribute("previousMode", mode);
   window.updateCommands("style");
+  NotifierUtils.notify("modeSwitch");
   return true;
 }
 
