@@ -82,7 +82,7 @@ function BespinFind(aForward, aInitial)
     var query = gDialog.bespinFindTextbox.value;
     var isCaseSensitive = gDialog.bespinFindCaseSensitive.checked;
 
-    var found = sourceIframe.contentWindow.wrappedJSObject.findNeedle(aForward, aInitial, query, isCaseSensitive);
+    var found = sourceIframe.contentWindow.wrappedJSObject.findNeedle(aForward, aInitial, query, !isCaseSensitive);
 
     if (!found) {
       //gDialog.bespinFindCaseSensitive.hidden = true;
@@ -185,7 +185,7 @@ function BespinReplaceAll()
     var query = gDialog.bespinFindTextbox.value;
     var isCaseSensitive = gDialog.bespinFindCaseSensitive.checked;
 
-    sourceIframe.contentWindow.wrappedJSObject.findNeedle(true, true, query, isCaseSensitive);
+    sourceIframe.contentWindow.wrappedJSObject.findNeedle(true, true, query, !isCaseSensitive);
 
     //BespinFind(true, false);
 

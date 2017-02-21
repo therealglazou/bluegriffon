@@ -227,6 +227,9 @@
         gEditor.lastNeedle = gEditor.getSearchCursor(aNeedle, { line: line, ch: lineProse.length -1 }, aIsCaseSensitive);
         found = gEditor.lastNeedle.findPrevious();
       }
+
+      if (found)
+        gEditor.setSelection(gEditor.lastNeedle.from(), gEditor.lastNeedle.to());
     }
     else
       gEditor.setSelection(gEditor.lastNeedle.from(), gEditor.lastNeedle.to());
