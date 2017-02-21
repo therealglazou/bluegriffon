@@ -3,9 +3,6 @@ Components.utils.import("resource://gre/modules/editorHelper.jsm");
 Components.utils.import("resource://gre/modules/l10nHelper.jsm");
 Components.utils.import("resource://gre/modules/Services.jsm");
 
-if (typeof com == "undefined") com = {};
-if (typeof com.bluegriffon == "undefined") com.bluegriffon = {};
-
 var cmdOp1Command =
 {
   isCommandEnabled: function(aCommand, dummy)
