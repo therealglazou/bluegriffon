@@ -4022,6 +4022,51 @@ diff --git a/toolkit/components/console/content/consoleBindings.xml b/toolkit/co
              if (scriptError.isFromPrivateWindow)
                return;
  
+diff --git a/toolkit/components/telemetry/TelemetryEnvironment.jsm b/toolkit/components/telemetry/TelemetryEnvironment.jsm
+--- a/toolkit/components/telemetry/TelemetryEnvironment.jsm
++++ b/toolkit/components/telemetry/TelemetryEnvironment.jsm
+@@ -501,17 +501,18 @@ EnvironmentAddonBuilder.prototype = {
+       theme: yield this._getActiveTheme(),
+       activePlugins: this._getActivePlugins(),
+       activeGMPlugins: yield this._getActiveGMPlugins(),
+       activeExperiment: this._getActiveExperiment(),
+       persona: personaId,
+     };
+ 
+     let result = {
+-      changed: !ObjectUtils.deepEqual(addons, this._environment._currentEnvironment.addons),
++      changed: !this._environment._currentEnvironment.addons ||
++               !ObjectUtils.deepEqual(addons, this._environment._currentEnvironment.addons),
+     };
+ 
+     if (result.changed) {
+       this._environment._log.trace("_updateAddons: addons differ");
+       result.oldEnvironment = Cu.cloneInto(this._environment._currentEnvironment, myScope);
+       this._environment._currentEnvironment.addons = addons;
+     }
+ 
+diff --git a/toolkit/components/telemetry/TelemetryStartup.js b/toolkit/components/telemetry/TelemetryStartup.js
+--- a/toolkit/components/telemetry/TelemetryStartup.js
++++ b/toolkit/components/telemetry/TelemetryStartup.js
+@@ -34,16 +34,18 @@ TelemetryStartup.prototype.observe = fun
+     annotateEnvironment();
+     TelemetryEnvironment.registerChangeListener("CrashAnnotator", annotateEnvironment);
+     TelemetryEnvironment.onInitialized().then(() => annotateEnvironment());
+   }
+ }
+ 
+ function annotateEnvironment() {
+   try {
++    if (!("@mozilla.org/toolkit/crash-reporter;1" in Cc))
++      return;
+     let cr = Cc["@mozilla.org/toolkit/crash-reporter;1"]
+       .getService(Ci.nsICrashReporter);
+     let env = JSON.stringify(TelemetryEnvironment.currentEnvironment);
+     cr.annotateCrashReport("TelemetryEnvironment", env);
+   } catch (e) {
+     // crash reporting not built or disabled? Ignore errors
+   }
+ }
 diff --git a/toolkit/content/widgets/menu.xml b/toolkit/content/widgets/menu.xml
 --- a/toolkit/content/widgets/menu.xml
 +++ b/toolkit/content/widgets/menu.xml
