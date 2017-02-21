@@ -2146,7 +2146,7 @@ ftpMozilla.prototype.ftp = {
         tmpFile.leafName = count + '-blankFile';
       }
       var foutstream = Components.classes["@mozilla.org/network/file-output-stream;1"].createInstance(Components.interfaces.nsIFileOutputStream);
-      foutstream.init(tmpFile, 0x04 | 0x08 | 0x20, 0644, 0);
+      foutstream.init(tmpFile, 0x04 | 0x08 | 0x20, parseInt("0644", 8), 0);
       foutstream.write("", 0);
       foutstream.close();
 
@@ -2557,7 +2557,7 @@ ftpDataSocketMozilla.prototype = {
           file              = UrlUtils.newLocalFile(localPath);
           this.fileInstream = Components.classes["@mozilla.org/network/file-input-stream;1"].createInstance();
           this.fileInstream.QueryInterface(Components.interfaces.nsIFileInputStream);
-          this.fileInstream.init(file, 0x01, 0644, 0);
+          this.fileInstream.init(file, 0x01, parseInt("0644", 8), 0);
           this.fileInstream.QueryInterface(Components.interfaces.nsISeekableStream);
           this.fileInstream.seek(0, filePartialBytes);                                      // append or not to append
         } catch (ex) {
@@ -2806,9 +2806,9 @@ dataListener.prototype = {
         this.fileOutstream = Components.classes["@mozilla.org/network/file-output-stream;1"].createInstance(Components.interfaces.nsIFileOutputStream);
 
         if (this.bytesPartial) {
-          this.fileOutstream.init(this.file, 0x04 | 0x10, 0644, 0);
+          this.fileOutstream.init(this.file, 0x04 | 0x10, parseInt("0644", 8), 0);
         } else {
-          this.fileOutstream.init(this.file, 0x04 | 0x08 | 0x20, 0644, 0);
+          this.fileOutstream.init(this.file, 0x04 | 0x08 | 0x20, parseInt("0644", 8), 0);
         }
 
         this.binaryOutstream = Components.classes["@mozilla.org/binaryoutputstream;1"].createInstance(Components.interfaces.nsIBinaryOutputStream);
@@ -3377,7 +3377,7 @@ ftpMozilla.prototype.sftp = {
         tmpFile.leafName = count + '-blankFile';
       }
       var foutstream = Components.classes["@mozilla.org/network/file-output-stream;1"].createInstance(Components.interfaces.nsIFileOutputStream);
-      foutstream.init(tmpFile, 0x04 | 0x08 | 0x20, 0644, 0);
+      foutstream.init(tmpFile, 0x04 | 0x08 | 0x20, parseInt("0644", 8), 0);
       foutstream.write("", 0);
       foutstream.close();
 

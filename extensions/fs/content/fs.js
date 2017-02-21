@@ -219,11 +219,11 @@ function WriteFile(aFilename, aData)
     var file = Components.classes["@mozilla.org/file/directory_service;1"].
                getService(Components.interfaces.nsIProperties).
                get("ProfD", Components.interfaces.nsIFile);
-    file.createUnique(Components.interfaces.nsIFile.NORMAL_FILE_TYPE, 0600);
+    file.createUnique(Components.interfaces.nsIFile.NORMAL_FILE_TYPE, parseInt("0600", 8));
                 
     var stream = Components.classes["@mozilla.org/network/safe-file-output-stream;1"].
                  createInstance(Components.interfaces.nsIFileOutputStream);
-    stream.init(file, 0x04 | 0x08 | 0x20, 0600, 0); // readwrite, create, truncate
+    stream.init(file, 0x04 | 0x08 | 0x20, parseInt("0600", 8), 0); // readwrite, create, truncate
                 
     stream.write(aData, aData.length);
     if (stream instanceof Components.interfaces.nsISafeOutputStream) {
@@ -235,7 +235,7 @@ function WriteFile(aFilename, aData)
     var dir = fp.file.clone();
     dir.append(aFilename);
     if (!dir.exists())
-      dir.create(Components.interfaces.nsIFile.DIRECTORY_TYPE, 0755);
+      dir.create(Components.interfaces.nsIFile.DIRECTORY_TYPE, parseInt("0755", 8));
   
     var sFile = UnzipPackage(file, dir);
     file.remove(false);
@@ -289,7 +289,7 @@ function _installZipEntry(aZipReader, aZipEntry, aDestination, aFile)
   {
     file.append(dirs[i]);
     if (!file.exists())
-      file.create(Components.interfaces.nsIFile.DIRECTORY_TYPE, 0755);
+      file.create(Components.interfaces.nsIFile.DIRECTORY_TYPE, parseInt("0755", 8));
   }
 
   if (!isDirectory)
