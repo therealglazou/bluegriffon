@@ -842,7 +842,7 @@ function ToggleViewMode(aElement)
 
   var deck = editorElement.parentNode;
   var editor = EditorUtils.getCurrentEditor();
-  if (aElement.id == "wysiwygModeButton") {
+  if (aElement.id == "wysiwygModeButton" || aElement.id == "liveViewModeButton") {
     editor.setMedium("screen");
     deck.removeAttribute("wysiwygmedium");
   }
@@ -913,8 +913,14 @@ function ToggleViewMode(aElement)
       EditorUtils.getLiveViewMode() == "wysiwyg") {
     gDialog.liveViewModeButton.removeAttribute("selected");
     gDialog.sourceModeButton.removeAttribute("selected");
-    gDialog.wysiwygModeButton.setAttribute("selected", "true");
-    gDialog.printPreviewModeButton.removeAttribute("selected");
+    if (deck.getAttribute("wysiwygmedium") == "print") {
+      gDialog.printPreviewModeButton.setAttribute("selected", "true");
+      gDialog.wysiwygModeButton.removeAttribute("selected");
+    }
+    else {
+      gDialog.wysiwygModeButton.setAttribute("selected", "true");
+      gDialog.printPreviewModeButton.removeAttribute("selected");
+    }
 
     editorElement.parentNode.setAttribute("currentmode", mode);
 
@@ -1017,7 +1023,6 @@ function ToggleViewMode(aElement)
     else {
       sourceEditor.setShowPrintMargin(false);
     }*/
-    NotifierUtils.notify("afterEnteringSourceMode");
 
     if (mode == "liveview") {
       deck.className = "liveview";
@@ -1039,6 +1044,7 @@ function ToggleViewMode(aElement)
     EditorUtils.getCurrentSourceWindow().ResetModificationCount();
     editorElement.parentNode.setAttribute("currentmode", mode);
 
+    NotifierUtils.notify("afterEnteringSourceMode");
     NotifierUtils.notify("modeSwitch");
   }
   else if (mode == "wysiwyg")
@@ -1096,8 +1102,6 @@ function ToggleViewMode(aElement)
         catch(e) {Services.prompt.alert(null, "ToggleViewMode", e);}
       }
       else {
-        NotifierUtils.notify("afterLeavingSourceMode");
-
         deck.removeAttribute("class");
         editorElement.parentNode.selectedIndex = 1;
         gDialog.structurebar.style.visibility = "";
@@ -1109,15 +1113,22 @@ function ToggleViewMode(aElement)
     gDialog.tabeditor.enableRulers(true);
 
     gDialog.liveViewModeButton.removeAttribute("selected");
-    gDialog.wysiwygModeButton.setAttribute("selected", "true");
+    if (deck.getAttribute("wysiwygmedium") == "print") {
+      gDialog.printPreviewModeButton.setAttribute("selected", "true");
+      gDialog.wysiwygModeButton.removeAttribute("selected");
+    }
+    else {
+      gDialog.wysiwygModeButton.setAttribute("selected", "true");
+      gDialog.printPreviewModeButton.removeAttribute("selected");
+    }
     gDialog.sourceModeButton.removeAttribute("selected");
-    gDialog.printPreviewModeButton.removeAttribute("selected");
 
     editorElement.parentNode.setAttribute("currentmode", mode);
   }
 
   editorElement.parentNode.setAttribute("previousMode", mode);
   window.updateCommands("style");
+  NotifierUtils.notify("afterLeavingSourceMode");
   NotifierUtils.notify("modeSwitch");
   return true;
 }
