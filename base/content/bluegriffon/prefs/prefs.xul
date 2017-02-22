@@ -13,8 +13,13 @@
   type   = "prefwindow"
   title  = "&window.title;"
   onload = "Startup()"
+#ifdef XP_MACOSX
   style="min-width: 600px"
   width="600" height="400"
+#else
+  style="min-width: 800px"
+  width="800" height="400"
+#endif
   persist="screenX screenY width height"
   xmlns:html="http://www.w3.org/1999/xhtml"
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
