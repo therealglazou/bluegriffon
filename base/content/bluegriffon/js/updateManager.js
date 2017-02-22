@@ -44,7 +44,7 @@ var BGUpdateManager = {
   kPREF_UPDATES_ENABLED:  "bluegriffon.updates.check.enabled",
   kPREF_UPDATE_FREQUENCY: "bluegriffon.updates.frequency",
   kPREF_UPDATE_MESSAGE:   "bluegriffon.updates.message",
-  kURL_UPDATE:            "http://bluegriffon.org/pings/bluegriffon_ping_test.php?",
+  kURL_UPDATE:            "http://bluegriffon.org/pings/bluegriffon_ping.php?",
 
   //Interfaces this component implements.
   interfaces: [Components.interfaces.nsIProgressEventSink,
