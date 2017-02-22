@@ -45,7 +45,7 @@ function Startup()
   EditorScrolledNotifier.startup();
   BGZoomManager.startup();
   BGUpdateManager.generateAppId();
-  BGUpdateManager.check();
+  BGUpdateManager.check(false);
   
   initLocalFontFaceMenu(gDialog.FontFacePopup);
 

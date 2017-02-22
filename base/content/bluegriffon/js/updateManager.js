@@ -44,7 +44,7 @@ var BGUpdateManager = {
   kPREF_UPDATES_ENABLED:  "bluegriffon.updates.check.enabled",
   kPREF_UPDATE_FREQUENCY: "bluegriffon.updates.frequency",
   kPREF_UPDATE_MESSAGE:   "bluegriffon.updates.message",
-  kURL_UPDATE:            "http://bluegriffon.org/pings/bluegriffon_ping.php?",
+  kURL_UPDATE:            "http://bluegriffon.org/pings/bluegriffon_ping_test.php?",
 
   //Interfaces this component implements.
   interfaces: [Components.interfaces.nsIProgressEventSink,
@@ -89,7 +89,7 @@ var BGUpdateManager = {
     return appId;
   },
 
-  check: function()
+  check: function(aForceCheck)
   {
     if (gDialog.updateThrobber)
       gDialog.updateThrobber.hidden = false;
@@ -116,9 +116,10 @@ var BGUpdateManager = {
     }
     catch(e) {}
 
-    if (updatesEnabled &&
-        (updateFrequency == "launch" ||
-         (updateFrequency == "onceperday" && currentDate - lastCheck > 24*60*60*1000))) {
+    if (aForceCheck ||
+        (updatesEnabled &&
+          (updateFrequency == "launch" ||
+           (updateFrequency == "onceperday" && currentDate - lastCheck > 24*60*60*1000)))) {
 
       // ok we have to look for an app update...
       var rq = Components.classes["@mozilla.org/xmlextras/xmlhttprequest;1"]
@@ -240,7 +241,7 @@ var BGUpdateManager = {
             && (currentVersion != skipped || ("BlueGriffonIsUpToDate" in window))) {
           var features = "chrome,titlebar,toolbar,modal,centerscreen,dialog=no";
           window.openDialog("chrome://bluegriffon/content/dialogs/updateAvailable.xul", "", features,
-                            null, null, currentVersion);
+                            message ? message : null, homeURL ? homeURL : null, currentVersion);
         }
         else {
           if ("BlueGriffonIsUpToDate" in window)

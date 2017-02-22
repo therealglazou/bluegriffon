@@ -35,7 +35,7 @@ function loadExternalURL( url )
 
 function CheckNow()
 {
-  BGUpdateManager.check();
+  BGUpdateManager.check(true);
 }
 
 function ErrorOnUpdate()

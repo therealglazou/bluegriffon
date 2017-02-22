@@ -1,6 +1,6 @@
 Components.utils.import("resource://gre/modules/Services.jsm");
 
-var DOWNLOAD_URL = "http://bluegriffon.org/pages/Download";
+var DOWNLOAD_URL = "http://bluegriffon.org/#download";
 
 function ShowUpdatePage()
 {
@@ -26,11 +26,10 @@ function Startup()
   }
 
   if (message) {
-    gDialog.warningMessage.firstChild.textContent = message;
-    if (messageURL)
-      DOWNLOAD_URL = messageURL;
-    else
-      gDialog.downloadButton.hidden = true;
+    gDialog.warningMessage2.firstChild.textContent = message;
+  }
+  if (messageURL) {
+    DOWNLOAD_URL = messageURL;
   }
 
 #ifndef XP_MACOSX
