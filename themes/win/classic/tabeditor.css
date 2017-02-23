@@ -167,7 +167,11 @@ tabeditor > tabbox tabpanels {
 
 .tabeditor-tab:hover .tab-close-button {
   visibility: visible;
+%ifdef XP_WIN
   list-style-image: url("chrome://global/skin/icons/close-XPVista7.png");
+%else
+  list-style-image: url("chrome://global/skin/icons/close.svg");
+%endif
   -moz-image-region: rect(0, 16px, 16px, 0);
   -moz-appearance: none;
   padding: 0px ! important;
