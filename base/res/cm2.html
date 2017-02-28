@@ -40,9 +40,17 @@
   <link rel="stylesheet" href="codemirror/theme/zenburn.css"/>
 
   <link rel="stylesheet" href="codemirror/addon/hint/show-hint.css"/>
+  <link rel="stylesheet" href="codemirror/addon/fold/foldgutter.css" />
 
   <script src="codemirror/lib/codemirror.js"></script>
   <script src="codemirror/addon/selection/active-line.js"></script>
+  <script src="codemirror/addon/fold/foldcode.js"></script>
+  <script src="codemirror/addon/fold/foldgutter.js"></script>
+  <script src="codemirror/addon/fold/brace-fold.js"></script>
+  <script src="codemirror/addon/fold/xml-fold.js"></script>
+  <script src="codemirror/addon/fold/indent-fold.js"></script>
+  <script src="codemirror/addon/fold/markdown-fold.js"></script>
+  <script src="codemirror/addon/fold/comment-fold.js"></script>
   <script src="codemirror/addon/fold/xml-fold.js"></script>
   <script src="codemirror/addon/edit/matchtags.js"></script>
   <script src="codemirror/addon/hint/show-hint.js"></script>
@@ -66,6 +74,7 @@
      }
      .CodeMirror-scroll {height: 100% ! important}
      .CodeMirror-gutter {cursor: pointer;}
+     .CodeMirror-gutter-elt { text-align: center; }
    </style>
  </head>
 <body>
@@ -104,7 +113,13 @@
 
      gEditor = CodeMirror.fromTextArea(document.getElementById("code"), {
         mode: "htmlmixed",
-        extraKeys: {"Shift-Space": "autocomplete"},
+        extraKeys: {
+          "'<'": completeAfter,
+          "'/'": completeIfAfterLt,
+          "' '": completeIfInTag,
+          "'='": completeIfInTag,
+          "Shift-Space": "autocomplete"},
+        hintOptions: {schemaInfo: CodeMirror.htmlSchema},
         lineNumbers: true,
         lineWrapping: false,
         value: "",
@@ -117,6 +132,9 @@
         indentUnit: 2,
         indentWithTabs: false,
         matchBrackets: true,
+
+        foldGutter: true,
+        gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
       });
 
       gEditor.on("cursorActivity", function() { changeFunc(); });
@@ -148,6 +166,31 @@
 
       useTheme(gTheme);
   };
+
+  function completeAfter(cm, pred) {
+    var cur = cm.getCursor();
+    if (!pred || pred()) setTimeout(function() {
+      if (!cm.state.completionActive)
+        cm.showHint({completeSingle: false});
+    }, 100);
+    return CodeMirror.Pass;
+  }
+
+  function completeIfAfterLt(cm) {
+    return completeAfter(cm, function() {
+      var cur = cm.getCursor();
+      return cm.getRange(CodeMirror.Pos(cur.line, cur.ch - 1), cur) == "<";
+    });
+  }
+
+  function completeIfInTag(cm) {
+    return completeAfter(cm, function() {
+      var tok = cm.getTokenAt(cm.getCursor());
+      if (tok.type == "string" && (!/['"]/.test(tok.string.charAt(tok.string.length - 1)) || tok.string.length == 1)) return false;
+      var inner = CodeMirror.innerMode(cm.getMode(), tok.state).state;
+      return inner.tagName;
+    });
+  }
 
   function getEditableElement() {
     return document.querySelector(".CodeMirror");

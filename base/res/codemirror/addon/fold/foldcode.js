@@ -61,7 +61,7 @@
   function makeWidget(cm, options) {
     var widget = getOption(cm, options, "widget");
     if (typeof widget == "string") {
-      var text = document.createTextNode(widget);
+      var text = document.createTextNode("++++++");
       widget = document.createElement("span");
       widget.appendChild(text);
       widget.className = "CodeMirror-foldmarker";
