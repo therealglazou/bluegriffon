@@ -95,7 +95,7 @@ tabeditor > tabbox {
   -moz-box-align: center;
   -moz-appearance: none;
   border-radius: 4px 4px 0px 0px;
-  color: #c0c0c0;
+  color: #606060;
   -moz-margin-end: 1px;
   padding: 0 5px;
   min-width: 1px !important;
@@ -110,10 +110,10 @@ tabeditor > tabbox {
 .tabeditor-tab[selected="true"] {
   -moz-user-focus: normal;
   padding: 0 6px 1px;
-  border: thin solid #6d7373;
+  /*border: thin solid #6d7373;
   border-bottom-width: 0px;
   border-left-width: 0px;
-  border-right-width: 0px;
+  border-right-width: 0px;*/
   background-image: linear-gradient(to bottom, var(--bg-dark-gray), var(--bg-lighter-dark-gray));
 }
 
@@ -125,7 +125,7 @@ tabeditor > tabbox {
 
 .tabeditor-tab[selected="true"],
 .tabeditor-tab:hover {
-  color: white;
+  color: var(--bg-main-foreground-color);
 }
 
 .tabeditor-strip {
