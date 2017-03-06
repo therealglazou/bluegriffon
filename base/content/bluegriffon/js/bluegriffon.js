@@ -1692,50 +1692,119 @@ function start_css()
                "chrome,resizable,scrollbars=yes");
 }
 
-function UpdateTabHTMLDialect(aEditorElement)
+function UpdateTabTooltip(aElement)
 {
+  while (aElement && aElement.nodeName != "tab")
+    aElement = aElement.parentNode;
+
+  if (!aElement || aElement.nodeName != "tab")
+    return; // sanity case
+
   var tabeditor = gDialog.tabeditor;
   var tabs      = tabeditor.mTabs.childNodes;
   var editors   = tabeditor.mTabpanels.childNodes;
   var l = editors.length;
   for (var i = 0; i < l; i++)
   {
-    if (editors.item(i).lastChild == aEditorElement)
+    if (tabs.item(i) == aElement)
     {
-      var tab = tabs.item(i);
+      var editorElement = editors.item(i).lastChild;
+      editor = editorElement.getEditor(editorElement.contentWindow);
+  
+      // Do QIs now so editor users won't have to figure out which interface to use
+      // Using "instanceof" does the QI for us.
+      editor instanceof Components.interfaces.nsIEditor;
+      editor instanceof Components.interfaces.nsIPlaintextEditor;
+      editor instanceof Components.interfaces.nsIHTMLEditor;
 
-      var doctype = aEditorElement.contentDocument.doctype;
+      var doctype = editorElement.contentDocument.doctype;
       var systemId = doctype ? doctype.systemId : null;
       switch (systemId) {
         case "http://www.w3.org/TR/html4/strict.dtd": // HTML 4
         case "http://www.w3.org/TR/html4/loose.dtd":
         case "http://www.w3.org/TR/REC-html40/strict.dtd":
         case "http://www.w3.org/TR/REC-html40/loose.dtd":
-          tab.setAttribute("tooltiptext", "HTML 4");
+          gDialog["tab-tooltip-html-dialect"].setAttribute("value", "HTML 4");
           break;
         case "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd": // XHTML 1
         case "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd":
-          tab.setAttribute("tooltiptext", "XHTML 1");
+          gDialog["tab-tooltip-html-dialect"].setAttribute("value", "XHTML 1");
           break;
         case "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd":
-          tab.setAttribute("tooltiptext", "XHTML 1.1");
+          gDialog["tab-tooltip-html-dialect"].setAttribute("value", "XHTML 1.1");
           break;
         case "":
         case "about:legacy-compat":
-          tab.setAttribute("tooltiptext",
-             (aEditorElement.contentDocument.documentElement.getAttribute("xmlns") == "http://www.w3.org/1999/xhtml") ?
+          gDialog["tab-tooltip-html-dialect"].setAttribute("value",
+             (editorElement.contentDocument.documentElement.getAttribute("xmlns") == "http://www.w3.org/1999/xhtml") ?
                "XHTML 5" : "HTML 5");
           break;
         case null:
-	        if (aEditorElement.contentDocument.compatMode == "CSS1Compat")
-	         tab.setAttribute("tooltiptext", "XHTML 5");
+	        if (editorElement.contentDocument.compatMode == "CSS1Compat")
+	         gDialog["tab-tooltip-html-dialect"].setAttribute("value", "XHTML 5");
 	        else
-	         tab.setAttribute("tooltiptext", "HTML 4");
+	         gDialog["tab-tooltip-html-dialect"].setAttribute("value", "HTML 4");
 	        break;
         default: break; // should never happen...
       }
+
+      gDialog["tab-tooltip-title"].setAttribute("value",
+                                       editorElement.contentDocument.title ||
+                                         "(" + L10NUtils.getString("untitled") + ")");
+
+      var location = editorElement.contentDocument.location.toString();
+      if (!UrlUtils.isUrlOfBlankDocument(location))
+        gDialog["tab-tooltip-location"].setAttribute("value",
+                                          UrlUtils.stripUsernamePassword(location));
+      else
+        gDialog["tab-tooltip-location"].setAttribute("value", "");
+
+      function _getMetaElement(aName, aId)
+      {
+        if (aName)
+        {
+          var name = aName.toLowerCase();
+          try {
+            var metanodes = editorElement.contentDocument
+                              .getElementsByTagName("meta");
+            for (var i = 0; i < metanodes.length; i++)
+            {
+              var metanode = metanodes.item(i);
+              if (metanode && metanode.getAttribute("name") == name) {
+                var value = metanode.getAttribute("content")
+                value = value ? value.trim() : "";
+                gDialog[aId].setAttribute("value", value);
+                gDialog[aId].setAttribute("tooltiptext", value);
+                return;
+              }
+            }
+          }
+          catch(e) {}
+        }
+        gDialog[aId].setAttribute("value", "");
+        gDialog[aId].setAttribute("tooltiptext", "");
+      }
+
+      _getMetaElement("author",      "tab-tooltip-author");
+      _getMetaElement("description", "tab-tooltip-description");
+      _getMetaElement("keywords",    "tab-tooltip-keywords");
+
+      var charset = editor.documentCharacterSet.toLowerCase();
+      gDialog["tab-tooltip-charset"].setAttribute("value", charset);
+
+      var docElement = editor.document.documentElement;
+      if (docElement.hasAttribute("lang"))
+        gDialog["tab-tooltip-language"].setAttribute("value", docElement.getAttribute("lang"));
+      else
+        gDialog["tab-tooltip-language"].setAttribute("value", "");
+      if (docElement.hasAttribute("dir"))
+        gDialog["tab-tooltip-text-direction"].setAttribute("value", docElement.getAttribute("dir"));
+      else
+        gDialog["tab-tooltip-text-direction"].setAttribute("value", "");
+
       return;
     }
+
   }          
 
 }

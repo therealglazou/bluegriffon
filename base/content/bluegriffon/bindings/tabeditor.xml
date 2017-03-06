@@ -441,8 +441,6 @@
                         head.insertBefore(meta, head.firstChild);
                       }
 
-                      UpdateTabHTMLDialect(this.mEditor);
-
                       editor.resetModificationCount();
                       editor.transactionManager.clear();
 
@@ -517,6 +515,7 @@
             newTab.setAttribute("flex", 100);
             newTab.setAttribute("crop", "end");
             newTab.setAttribute("busy", "true");
+            newTab.setAttribute("tooltip", "tab-tooltip");
 
             this.mTabpanels.appendChild(newBox);
 

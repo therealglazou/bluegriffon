@@ -158,5 +158,47 @@
     <menuitem id="cmenu_tableProperties"  label="&tableProperties.label;"  accesskey="&tableProperties.accesskey;"  command="cmd_editTable"/>
   </menupopup>
 
+  <tooltip id="tab-tooltip" onpopupshowing="UpdateTabTooltip(document.tooltipNode)">
+    <hbox align="center" id="tab-tooltip-main-info">
+      <label id="tab-tooltip-html-dialect"/>
+      <label id="tab-tooltip-title" flex="1" crop="end"/>
+    </hbox>
+    <grid id="tab-tooltip-grid">
+      <columns>
+        <column/>
+        <column flex="1"/>
+      </columns>
+      <rows>
+        <row align="center">
+          <label value="&pageLocation.label;"/>
+          <label id="tab-tooltip-location"/>
+        </row>
+        <row align="center">
+          <label value="&pageAuthor.label;"/>
+          <label id="tab-tooltip-author"/>
+        </row>
+        <row align="center">
+          <label value="&pageDescription.label;"/>
+          <label id="tab-tooltip-description" crop="end"/>
+        </row>
+        <row align="center">
+          <label value="&pageKeywords.label;"/>
+          <label id="tab-tooltip-keywords" crop="end"/>
+        </row>
+        <row align="center">
+          <label value="&language.label;"/>
+          <label id="tab-tooltip-language"/>
+        </row>
+        <row align="center">
+          <label value="&charset.label;"/>
+          <label id="tab-tooltip-charset"/>
+        </row>
+        <row align="center">
+          <label value="&direction.label;"/>
+          <label id="tab-tooltip-text-direction"/>
+        </row>
+      </rows>
+    </grid>
+  </tooltip>
 </popupset>
 
