@@ -313,9 +313,9 @@ var BlueGriffonPrefsObserver = {
             var e = editors[i].lastChild;
             var innerEditor = e.getEditor(e.contentWindow);
             if (value)
-              innerEditor.addOverrideStyleSheet("chrome://bluegriffon/content/EditorContentAnchors.css");
+              innerEditor.document.documentElement.setAttribute("_moz_showanchors", "true");
             else
-              innerEditor.removeOverrideStyleSheet("chrome://bluegriffon/content/EditorContentAnchors.css");
+              innerEditor.document.documentElement.removeAttribute("_moz_showanchors");
           }
           catch(e) {}
         }

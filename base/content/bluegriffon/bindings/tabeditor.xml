@@ -349,8 +349,11 @@
 
                       editor.addOverrideStyleSheet("chrome://bluegriffon/content/EditorAllTags.css");
                       editor.enableStyleSheet("chrome://bluegriffon/content/EditorAllTags.css", false);
-                      if (Services.prefs.getBoolPref("bluegriffon.display.anchors"))
-                        editor.addOverrideStyleSheet("chrome://bluegriffon/content/EditorContentAnchors.css");
+                      editor.addOverrideStyleSheet("chrome://bluegriffon/content/EditorContentAnchors.css");
+                      if (Services.prefs.getBoolPref("bluegriffon.display.anchors")) {
+                        if (editor.document) // sanity case
+                          editor.document.documentElement.setAttribute("_moz_showanchors", "true");
+                      }
                       editor.addOverrideStyleSheet("chrome://bluegriffon/content/EditorContent.css");
                       editor.addOverrideStyleSheet("chrome://bluegriffon/content/EditorOverride.css");
 
