@@ -60,7 +60,7 @@ var bgSpellingCommand =
                          false); 
     }
     catch(ex) {}
-    window.content.focus();
+    GetWindowContent().focus();
   }
 };
 

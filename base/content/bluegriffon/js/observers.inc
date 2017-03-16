@@ -9,7 +9,7 @@ var gEditorDocumentObserver =
       return;
 
     var editor = EditorUtils.getCurrentEditor();
-    gContentWindow = window.content;
+    gContentWindow = GetWindowContent();
     switch(aTopic)
     {
       case "obs_documentCreated":
@@ -68,7 +68,7 @@ var gEditorDocumentObserver =
         if (editorStatus)
           return; 
 
-        window.content.focus();
+        GetWindowContent().focus();
         
         NotifierUtils.notify("documentCreated");
         break;

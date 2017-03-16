@@ -94,7 +94,7 @@ var AutoInsertTable = {
     if (EditorUtils.isWysiwygMode()) {
       editor.insertElementAtSelection(tableElement, true);
       editor.selection.collapse(firstCell, 0);
-      window.content.focus();
+      GetWindowContent().focus();
     }
     else {
       var src = style_html(tableElement.outerHTML);

@@ -9,7 +9,7 @@ function Startup()
   try {
     if (window.arguments && window.arguments[0]) {
       var cl = window.arguments[0];
-      if (cl && cl instanceof Components.interfaces.nsISupportsArray) {
+      if (cl && cl instanceof Components.interfaces.nsIMutableArray) {
         url = cl.GetElementAt(0).QueryInterface(Components.interfaces.nsISupportsString).data;
         var localFile = UrlUtils.newLocalFile(url);
         if (localFile) { // if localFile is null, then consider it's a remote URL

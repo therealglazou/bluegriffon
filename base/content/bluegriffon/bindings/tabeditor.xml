@@ -531,7 +531,7 @@
 
             var _self = this;
             newEditorElement.addEventListener("load", function(evt) { 
-                if (evt.originalTarget == content.document){ _self.finishInstall(progressListener); } }, true);
+                if (evt.originalTarget == GetWindowContent().document){ _self.finishInstall(progressListener); } }, true);
             newEditorElement.addEventListener("DOMTitleChanged", this.changeTabTitle, false);
 
             newEditorElement.addEventListener("dblclick", function(evt) { OnDoubleClick(evt) }, true);
@@ -706,7 +706,7 @@
              editors.item(i).lastChild.removeAttribute("type");
 
            this.getCurrentEditorElement().setAttribute("type", "content-primary");
-           window.content.focus();
+           GetWindowContent().focus();
 
            window.UpdateWindowTitle();
 

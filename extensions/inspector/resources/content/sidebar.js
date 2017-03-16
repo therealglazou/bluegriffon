@@ -19,7 +19,7 @@ var inspector;
 
 const kObserverServiceContractID  = "@mozilla.org/observer-service;1";
 
-const gNavigator = window.content;
+const gNavigator = GetWindowContent();
 
 //////////////////////////////////////////////////////////////////////////////
 

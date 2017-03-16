@@ -59,7 +59,7 @@ var ComposerCommands = {
     if (this.mComposerJSCommandControllerID)
     {
       try { 
-        controller = window.content.controllers.getControllerById(this.mComposerJSCommandControllerID);
+        controller = GetWindowContent().controllers.getControllerById(this.mComposerJSCommandControllerID);
       } catch (e) {}
     }
     if (!controller)

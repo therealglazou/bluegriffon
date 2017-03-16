@@ -789,7 +789,7 @@ function OnKeyPressWhileChangingTag(event)
     if (newTag.toLowerCase() == element.nodeName.toLowerCase())
     {
       // nothing to do
-      window.content.focus();
+      GetWindowContent().focus();
       return;
     }
 
@@ -815,7 +815,7 @@ function OnKeyPressWhileChangingTag(event)
         editor.deleteNode(element);
         editor.selectElement(newElt);
 
-        window.content.focus();
+        GetWindowContent().focus();
       }
     }
     catch (e) {}
@@ -825,7 +825,7 @@ function OnKeyPressWhileChangingTag(event)
   }
   else if (keyCode == 27) {
     // if the user hits Escape, we discard the changes
-    window.content.focus();
+    GetWindowContent().focus();
   }
 }
 
@@ -926,7 +926,7 @@ function ToggleViewMode(aElement)
 
     deck.removeAttribute("class");
     editorElement.parentNode.selectedIndex = 1;
-    window.content.focus();
+    GetWindowContent().focus();
     NotifierUtils.notify("modeSwitch");
 
     return true;
@@ -1026,7 +1026,7 @@ function ToggleViewMode(aElement)
 
     if (mode == "liveview") {
       deck.className = "liveview";
-      window.content.focus();
+      GetWindowContent().focus();
     }
     else {
       deck.removeAttribute("class");
@@ -1105,7 +1105,7 @@ function ToggleViewMode(aElement)
         deck.removeAttribute("class");
         editorElement.parentNode.selectedIndex = 1;
         gDialog.structurebar.style.visibility = "";
-        window.content.focus();
+        GetWindowContent().focus();
       }
       sourceIframe.setUserData("lastSaved", "", null);
       Services.prefs.setBoolPref("bluegriffon.spellCheck.enabled", spellchecking);
@@ -1175,7 +1175,7 @@ function RebuildFromSource(aDoc, isXML, aNoReflect)
     if (isXML) {
       var fileExt = UrlUtils.getFileExtension( UrlUtils.getDocumentUrl());
       var xhtmlExt = (fileExt == "xhtm" || fileExt == "xhtml");
-  
+
       var styles = aDoc.querySelectorAll("style");
       var found = false, switchToCDATA = false;
       for (var i = 0; i < styles.length; i++) {
@@ -1222,7 +1222,6 @@ function RebuildFromSource(aDoc, isXML, aNoReflect)
         }
       }
     }
-  
     if (!aNoReflect)
       EditorUtils.getCurrentEditorElement().parentNode.selectedIndex = 1;
     var editor = EditorUtils.getCurrentEditor();
@@ -1235,6 +1234,7 @@ function RebuildFromSource(aDoc, isXML, aNoReflect)
     CloneElementContents(editor, aDoc.querySelector("head"), editor.document.querySelector("head"));
     // clone body
     CloneElementContents(editor, aDoc.querySelector("body"), editor.document.body);
+
 
     var valueArray = [];
     if (!Services.prefs.getBoolPref("bluegriffon.display.comments"))
@@ -1289,7 +1289,7 @@ function RebuildFromSource(aDoc, isXML, aNoReflect)
     // the window title is updated by DOMTitleChanged event
     if (!aNoReflect) {
       NotifierUtils.notify("afterLeavingSourceMode");
-      window.content.focus();
+      GetWindowContent().focus();
       EditorUtils.getCurrentEditorElement().focus();
     }
   } catch(e) {

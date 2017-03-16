@@ -155,7 +155,7 @@ var cmdSave =
                      UrlUtils.isUrlOfBlankDocument(EditorUtils.getDocumentUrl()),
                      false,
                      EditorUtils.getCurrentDocumentMimeType());
-          window.content.focus();
+          GetWindowContent().focus();
         }
         NotifierUtils.notify("fileSaved", EditorUtils.getDocumentUrl());
         window.updateCommands("style");
@@ -207,7 +207,7 @@ var cmdSaveAs =
                      false,
                      EditorUtils.getCurrentDocumentMimeType());
         }
-        window.content.focus();
+        GetWindowContent().focus();
         if (result) {
           StoreUrlInLocationDB(EditorUtils.getDocumentUrl());
         }

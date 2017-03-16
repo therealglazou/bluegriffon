@@ -102,7 +102,7 @@ var cmdMarkupCleaner =
               "chrome,close,titlebar,modal");
     }
     catch(ex) {}
-    window.content.focus();
+    GetWindowContent().focus();
   }
 };
 

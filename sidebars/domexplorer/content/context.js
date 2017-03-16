@@ -165,7 +165,7 @@ function onElementsTreeModified(aEvent)
           editor.deleteNode(target);
           editor.selectElement(newElt);
   
-          window.content.focus();
+          GetWindowContent().focus();
         }
       }
       catch (e) {}

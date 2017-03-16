@@ -121,7 +121,7 @@ function onBespinFindKeypress(aEvent)
     if (!EditorUtils.isWysiwygMode())
       EditorUtils.getCurrentSourceEditorElement().focus();
     else {
-      window.content.focus();
+      GetWindowContent().focus();
     }
   }
 }
@@ -268,7 +268,7 @@ function CloseFindBar()
 {
   gDialog.bespinToolbox1.hidden = true;
   gDialog.bespinToolbox2.hidden = true;
-  window.content.focus();
+  GetWindowContent().focus();
 }
 
 function ReplaceInWysiwyg()

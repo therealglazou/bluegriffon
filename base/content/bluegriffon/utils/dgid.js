@@ -79,3 +79,7 @@ function ApplyWysiwygThemeChange(aDocument, aValue)
   }
 }
 
+function GetWindowContent()
+{
+  return EditorUtils.getCurrentEditorElement().contentWindow;
+}
