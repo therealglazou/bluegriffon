@@ -7919,6 +7919,31 @@ diff --git a/widget/cocoa/nsScreenManagerCocoa.mm b/widget/cocoa/nsScreenManager
 +  
 +    NS_OBJC_END_TRY_ABORT_BLOCK_NSRESULT;
 +}
+diff --git a/widget/gtk/mozgtk/mozgtk.c b/widget/gtk/mozgtk/mozgtk.c
+--- a/widget/gtk/mozgtk/mozgtk.c
++++ b/widget/gtk/mozgtk/mozgtk.c
+@@ -159,19 +159,21 @@ STUB(gtk_clipboard_get)
+ STUB(gtk_clipboard_request_contents)
+ STUB(gtk_clipboard_request_text)
+ STUB(gtk_clipboard_set_can_store)
+ STUB(gtk_clipboard_set_with_data)
+ STUB(gtk_clipboard_store)
+ STUB(gtk_color_selection_dialog_get_color_selection)
+ STUB(gtk_color_selection_dialog_get_type)
+ STUB(gtk_color_selection_dialog_new)
++STUB(gtk_color_selection_get_current_alpha)
+ STUB(gtk_color_selection_get_current_color)
+ STUB(gtk_color_selection_get_type)
+ STUB(gtk_color_selection_set_current_color)
++STUB(gtk_color_selection_set_has_opacity_control)
+ STUB(gtk_combo_box_get_active)
+ STUB(gtk_combo_box_get_type)
+ STUB(gtk_combo_box_new)
+ STUB(gtk_combo_box_new_with_entry)
+ STUB(gtk_combo_box_set_active)
+ STUB(gtk_combo_box_text_get_type)
+ STUB(gtk_combo_box_text_new)
+ STUB(gtk_container_add)
 diff --git a/widget/gtk/nsColorPicker.cpp b/widget/gtk/nsColorPicker.cpp
 --- a/widget/gtk/nsColorPicker.cpp
 +++ b/widget/gtk/nsColorPicker.cpp
