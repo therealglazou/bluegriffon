@@ -10,12 +10,19 @@ include $(topsrcdir)/config/rules.mk
 MOZ_PKG_REMOVALS = $(srcdir)/removed-files.in
 
 MOZ_PKG_MANIFEST = $(srcdir)/package-manifest.in
+MOZ_PKG_DUPEFLAGS = -f $(srcdir)/allowed-dupes.mn
 
 # Some files have been already bundled with xulrunner
 ifndef MOZ_MULET
 MOZ_PKG_FATAL_WARNINGS = 1
 else
 DEFINES += -DMOZ_MULET
+endif
+
+# When packaging an artifact build not all xpt files expected by the
+# packager will be present.
+ifdef MOZ_ARTIFACT_BUILDS
+MOZ_PKG_FATAL_WARNINGS =
 endif
 
 DEFINES += -DMOZ_APP_NAME=$(MOZ_APP_NAME) -DPREF_DIR=$(PREF_DIR)
@@ -43,15 +50,16 @@ ifdef NSS_DISABLE_DBM
 DEFINES += -DNSS_DISABLE_DBM=1
 endif
 
+ifdef MOZ_ARTIFACT_BUILDS
+DEFINES += -DMOZ_ARTIFACT_BUILDS=1
+endif
+
 DEFINES += -DJAREXT=
 
 ifdef MOZ_ANGLE_RENDERER
 DEFINES += -DMOZ_ANGLE_RENDERER=$(MOZ_ANGLE_RENDERER)
 ifdef MOZ_D3DCOMPILER_VISTA_DLL
 DEFINES += -DMOZ_D3DCOMPILER_VISTA_DLL=$(MOZ_D3DCOMPILER_VISTA_DLL)
-endif
-ifdef MOZ_D3DCOMPILER_XP_DLL
-DEFINES += -DMOZ_D3DCOMPILER_XP_DLL=$(MOZ_D3DCOMPILER_XP_DLL)
 endif
 endif
 
@@ -88,8 +96,6 @@ MOZ_PKG_MAC_ICON=branding/disk.icns
 MOZ_PKG_MAC_EXTRA=--symlink '/Applications:/ '
 endif
 
-INSTALL_SDK = 1
-
 include $(topsrcdir)/toolkit/mozapps/installer/signing.mk
 include $(topsrcdir)/toolkit/mozapps/installer/packager.mk
 
@@ -121,22 +127,16 @@ DEFINES += -DMOZ_ICU_VERSION=$(MOZ_ICU_VERSION)
 ifdef MOZ_SYSTEM_ICU
 DEFINES += -DMOZ_SYSTEM_ICU
 endif
-ifdef MOZ_SHARED_ICU
-DEFINES += -DMOZ_SHARED_ICU
+ifdef MOZ_ICU_DATA_ARCHIVE
+DEFINES += -DMOZ_ICU_DATA_ARCHIVE
 endif
 DEFINES += -DMOZ_ICU_DBG_SUFFIX=$(MOZ_ICU_DBG_SUFFIX)
+DEFINES += -DICU_DATA_FILE=$(ICU_DATA_FILE)
 ifdef CLANG_CXX
 DEFINES += -DCLANG_CXX
 endif
 ifdef CLANG_CL
 DEFINES += -DCLANG_CL
-endif
-ifeq (x86,$(CPU_ARCH))
-ifdef _MSC_VER
-ifndef CLANG_CL
-DEFINES += -DWOW_HELPER
-endif
-endif
 endif
 
 
