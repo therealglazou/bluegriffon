@@ -116,30 +116,9 @@ function OpenTabFromPreviousSession(aReason, aContext)
   }
 }
 
-function InitShortcutDB()
-{
-  // create the SQLite table if it does not exist already
-  var file = Components.classes["@mozilla.org/file/directory_service;1"]
-                       .getService(Components.interfaces.nsIProperties)
-                       .get("ProfD", Components.interfaces.nsIFile);
-  file.append("shortcuts.sqlite");
-
-  var storageService = Components.classes["@mozilla.org/storage/service;1"]
-                          .getService(Components.interfaces.mozIStorageService);
-  var dbConn = storageService.openDatabase(file);
-  dbConn.executeSimpleSQL("CREATE TABLE IF NOT EXISTS 'shortcuts' ('id' INTEGER PRIMARY KEY NOT NULL, \
-'selector' VARCHAR NOT NULL DEFAULT '', \
-'modifiers' VARCHAR NOT NULL DEFAULT '', \
-'key' VARCHAR NOT NULL DEFAULT '')");
-
-  dbConn.close();
-}
-
 function RestoreShortcuts()
 {
   try {
-    InitShortcutDB();
-
     var file = Components.classes["@mozilla.org/file/directory_service;1"]
                          .getService(Components.interfaces.nsIProperties)
                          .get("ProfD", Components.interfaces.nsIFile);
