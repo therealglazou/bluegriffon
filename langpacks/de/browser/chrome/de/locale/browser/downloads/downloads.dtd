@@ -19,24 +19,26 @@
 
      For example, in English, a long string would be:
 
-     59 minutes, 59 seconds remaining - 1022 of 1023 KB
+     59m 59s left - 1022 of 1023 KB (120.5 KB/sec)
 
-     That's 50 characters, so we set the width at 50ch.
+     Since Downloads Panel is redesigned to show the detail string including
+     the hovering case for an item or an action button.
+     Bug 1328519 is for discussing the detail rule of `downloadDetails.width`.
      -->
 <!ENTITY downloadDetails.width            "57ch">
 
-<!-- LOCALIZATION NOTE (downloadsSummary.minWidth):
+<!-- LOCALIZATION NOTE (downloadsSummary.minWidth2):
      Minimum width for the main description of the downloads summary,
      which is displayed at the bottom of the Downloads Panel if the
      number of downloads exceeds the limit that the panel can display.
 
-     A good rule of thumb here is to look at the otherDownloads2 string
+     A good rule of thumb here is to look at the otherDownloads3 string
      in downloads.properties, and make a reasonable estimate of its
      maximum length. For English, this seems like a reasonable limit:
 
-     + 999 weitere Downloads
+     999 files downloading
 
-     that's 23 characters, so we set the minimum width to 23ch.
+     that's 21 characters, so we set the minimum width to 21ch.
      -->
 <!ENTITY downloadsSummary.minWidth2       "23ch">
 
@@ -45,7 +47,6 @@
 <!ENTITY cmd.resume.label                 "Fortsetzen">
 <!ENTITY cmd.resume.accesskey             "o">
 <!ENTITY cmd.cancel.label                 "Abbrechen">
-<!ENTITY cmd.cancel.accesskey             "b">
 <!-- LOCALIZATION NOTE (cmd.show.label, cmd.show.accesskey, cmd.showMac.label,
      cmd.showMac.accesskey):
      The show and showMac commands are never shown together, thus they can share
@@ -62,24 +63,31 @@
 <!ENTITY cmd.copyDownloadLink.accesskey   "D">
 <!ENTITY cmd.removeFromHistory.label      "Aus Chronik entfernen">
 <!ENTITY cmd.removeFromHistory.accesskey  "e">
-<!ENTITY cmd.clearList.label              "Liste leeren">
-<!ENTITY cmd.clearList.accesskey          "L">
+<!ENTITY cmd.clearList2.label             "Schnellzugriffsliste leeren">
+<!ENTITY cmd.clearList2.accesskey         "S">
 <!ENTITY cmd.clearDownloads.label         "Liste leeren">
 <!ENTITY cmd.clearDownloads.accesskey     "L">
-<!-- LOCALIZATION NOTE (cmd.unblock.label):
-     This command may be shown in the context menu, as a menu button item, or as
-     a text link when malware or potentially unwanted downloads are blocked.
-     Note: This string doesn't exist in the UI yet.  See bug 1053890.
+<!-- LOCALIZATION NOTE (cmd.unblock2.label):
+     This command is shown in the context menu when downloads are blocked.
      -->
-<!ENTITY cmd.unblock.label                "Sperre aufheben">
-<!ENTITY cmd.unblock.accesskey            "h">
+<!ENTITY cmd.unblock2.label                "Zugriff erlauben">
+<!ENTITY cmd.unblock2.accesskey            "a">
 <!-- LOCALIZATION NOTE (cmd.removeFile.label):
-     This command may be shown in the context menu or as a menu button label
-     when malware or potentially unwanted downloads are blocked.
-     Note: This string doesn't exist in the UI yet.  See bug 1053890.
+     This is the tooltip of the action button shown when malware is blocked.
      -->
 <!ENTITY cmd.removeFile.label             "Datei löschen">
-<!ENTITY cmd.removeFile.accesskey         "c">
+<!-- LOCALIZATION NOTE (cmd.chooseUnblock.tooltip):
+     This is the tooltip of the action button shown when potentially unwanted
+     downloads are blocked. This opens a dialog where the user can choose
+     whether to unblock or remove the download. Removing is the default option.
+     -->
+<!ENTITY cmd.chooseUnblock.label          "Datei löschen oder Download erlauben">
+<!-- LOCALIZATION NOTE (cmd.chooseOpen.tooltip):
+     This is the tooltip of the action button shown when uncommon downloads are
+     blocked.This opens a dialog where the user can choose whether to open the
+     file or remove the download. Opening is the default option.
+     -->
+<!ENTITY cmd.chooseOpen.label             "Datei öffnen oder löschen">
 
 <!-- LOCALIZATION NOTE (blocked.label):
      Shown as a tag before the file name for some types of blocked downloads.
@@ -102,6 +110,8 @@
 <!ENTITY downloadsHistory.label           "Alle Downloads anzeigen">
 <!ENTITY downloadsHistory.accesskey       "w">
 
+<!ENTITY openDownloadsFolder.label       "Ordner &quot;Downloads&quot; öffnen">
+
 <!ENTITY clearDownloadsButton.label       "Liste leeren">
 <!ENTITY clearDownloadsButton.tooltip     "Entfernt abgeschlossene, abgebrochene und fehlgeschlagene Downloads aus der Liste">
 
@@ -121,3 +131,28 @@
      results in the Downloads view.
      -->
 <!ENTITY downloadsListNoMatch.label       "Keine übereinstimmenden Downloads gefunden">
+
+
+<!-- LOCALIZATION NOTE (cancelDownload.label):
+     Displayed when hovering a download which is able to be cancelled by users,
+     indicates that it's possible to cancel and stop the download.
+     -->
+<!ENTITY cancelDownload.label             "Cancel Download">
+
+<!-- LOCALIZATION NOTE (openFile.label):
+     Displayed when hovering a complete download, indicates that it's possible to
+     open the file using an app available in the system.
+     -->
+<!ENTITY openFile.label                   "Open File">
+
+<!-- LOCALIZATION NOTE (retryDownload.label):
+     Displayed when hovering a download which is able to be retried by users,
+     indicates that it's possible to download this file again.
+     -->
+<!ENTITY retryDownload.label              "Retry Download">
+
+<!-- LOCALIZATION NOTE (showMoreInformation.label):
+     Displayed when hovering a blocked download, indicates that it's possible to
+     show more information for user to take the next action.
+     -->
+<!ENTITY showMoreInformation.label        "Show more information">

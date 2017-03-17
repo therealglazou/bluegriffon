@@ -19,6 +19,9 @@
 <!ENTITY fileNotFound.title "Fájl nem található">
 <!ENTITY fileNotFound.longDesc "<ul><li>Lehet, hogy a fájlt átnevezték, eltávolították vagy áthelyezték?</li><li>Nincs elgépelés, kis- és nagybetű eltérés stb. a címben?</li><li>Rendelkezik a megfelelő hozzáférési jogokkal a kért fájlhoz?</li></ul>">
 
+<!ENTITY fileAccessDenied.title "A fájl elérése megtagadva">
+<!ENTITY fileAccessDenied.longDesc "<ul> <li>Lehet hogy törölve lett, át lett helyezve, vagy a fájljogosultságok megakadályozzák a hozzáférést.</li> </ul>">
+
 <!ENTITY generic.title "A kérés nem teljesíthető">
 <!ENTITY generic.longDesc "<p>Jelenleg nem áll rendelkezésre további információ a problémáról vagy hibáról.</p>">
 
@@ -38,9 +41,7 @@
 <!ENTITY contentEncodingError.longDesc "<p>A megtekinteni kívánt oldal nem jeleníthető meg, mert érvénytelen vagy nem támogatott tömörítési formátumot használ.</p><ul><li>Lépjen kapcsolatba a webhely üzemeltetőjével, és értesítse a problémáról.</li></ul>">
 
 <!ENTITY unsafeContentType.title "Nem biztonságos fájltípus">
-<!ENTITY unsafeContentType.longDesc "<ul> 
-<li>Értesítse a webhely tulajdonosait erről a problémáról.</li> 
-</ul>">
+<!ENTITY unsafeContentType.longDesc "<ul> <li>Értesítse a webhely tulajdonosait erről a problémáról.</li> </ul>">
 
 <!ENTITY netReset.title "Kapcsolat megszakítva">
 <!ENTITY netReset.longDesc "<p>A hálózati kapcsolat megszakadt a kapcsolatfelvétel közben. Próbálja újra.</p>">
@@ -67,20 +68,21 @@
 <!ENTITY nssFailure2.longDesc2 "<p>A megtekinteni kívánt oldal nem jeleníthető meg, mert a kapott adatok hitelessége nem ellenőrizhető.</p><ul><li>Lépjen kapcsolatba a webhely üzemeltetőjével, és értesítse a problémáról.</li></ul>">
 
 <!ENTITY nssBadCert.title "A biztonságos kapcsolat sikertelen">
-<!ENTITY nssBadCert.longDesc2 "<ul> 
-<li>Ezt okozhatja a kiszolgáló nem megfelelő beállítása, de az is lehet, hogy valaki megpróbál a kiszolgáló nevében fellépni.</li> 
-<li>Ha korábban már sikeresen kapcsolódott ehhez a kiszolgálóhoz, akkor lehet, hogy a hiba csak ideiglenes, és később újra próbálkozhat.</li> 
-</ul>">
+<!ENTITY nssBadCert.longDesc2 "<ul> <li>Ezt okozhatja a kiszolgáló nem megfelelő beállítása, de az is lehet, hogy valaki megpróbál a kiszolgáló nevében fellépni.</li> <li>Ha korábban már sikeresen kapcsolódott ehhez a kiszolgálóhoz, akkor lehet, hogy a hiba csak ideiglenes, és később újra próbálkozhat.</li> </ul>">
 
 <!ENTITY securityOverride.linkText "Vagy hozzáadhat egy kivételt…">
-<!ENTITY securityOverride.warningContent "<p>Ne adjon hozzá kivételt, ha nem teljesen megbízható internetkapcsolatot használ, vagy ha nem szokta látni ezt a figyelmeztetést ennél a kiszolgálónál.</p>
-<p>Ha még mindig fel akarja venni ezt a webhelyet a kivételek közé, megteheti haladó titkosítási beállítások között.</p>">
+<!ENTITY securityOverride.warningContent "<p>Ne adjon hozzá kivételt, ha nem teljesen megbízható internetkapcsolatot használ, vagy ha nem szokta látni ezt a figyelmeztetést ennél a kiszolgálónál.</p><p>Ha még mindig fel akarja venni ezt a webhelyet a kivételek közé, megteheti haladó titkosítási beállítások között.</p>">
 
 <!ENTITY cspBlocked.title "Blokkolva a tartalombiztonsági irányelv szerint">
 <!ENTITY cspBlocked.longDesc "<p>A böngésző nem engedte meg, hogy az oldalt ezen a módon betöltse, mert az oldal tartalombiztonsági irányelve ezt tiltja.</p>">
 
-<!ENTITY corruptedContentError.title "Sérült tartalom hiba">
-<!ENTITY corruptedContentError.longDesc "<p>A megtekinteni kívánt oldal nem jeleníthető meg, mert az adatátvitel közben hiba történt.</p><ul><li>Lépjen kapcsolatba a webhely üzemeltetőjével, és értesítse a problémáról.</li></ul>">
+<!ENTITY corruptedContentErrorv2.title "Sérült tartalom hiba">
+<!ENTITY corruptedContentErrorv2.longDesc "<p>A megtekinteni kívánt oldal nem jeleníthető meg, mert az adatátvitel közben hiba történt.</p><ul><li>Lépjen kapcsolatba a webhely üzemeltetőjével, és értesítse a problémáról.</li></ul>">
 
 <!ENTITY remoteXUL.title "Távoli XUL">
 <!ENTITY remoteXUL.longDesc "<p><ul><li>Értesítse a webhely tulajdonosait erről a problémáról.</li></ul></p>">
+
+<!ENTITY inadequateSecurityError.title "A kapcsolat nem biztonságos">
+<!-- LOCALIZATION NOTE (inadequateSecurityError.longDesc) - Do not translate
+     "NS_ERROR_NET_INADEQUATE_SECURITY". -->
+<!ENTITY inadequateSecurityError.longDesc "<p><span class='hostname'></span> olyan biztonsági technológiát használ, amely elavult, és sérülékeny a támadásokkal szemben. Egy támadó könnyen felfedhet olyan információkat, amelyeket biztonságosnak gondol. A weboldal rendszergazdájának ki kell javítania a kiszolgálót, mielőtt meglátogathatja az oldalt.</p><p>Hibakód: NS_ERROR_NET_INADEQUATE_SECURITY</p>">

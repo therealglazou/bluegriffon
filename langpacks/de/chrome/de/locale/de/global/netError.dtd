@@ -19,6 +19,9 @@
 <!ENTITY fileNotFound.title "Datei nicht gefunden">
 <!ENTITY fileNotFound.longDesc "<ul><li>Könnte der Eintrag umbenannt, gelöscht oder verschoben worden sein?</li><li>Enthält die Adresse einen Rechtschreib-, Groß-/Kleinschreibungs- oder anderen Schreibfehler?</li><li>Haben Sie ausreichende Zugriffsrechte für den angeforderten Eintrag?</li></ul>">
 
+<!ENTITY fileAccessDenied.title "Zugriff auf die Datei wurde verweigert">
+<!ENTITY fileAccessDenied.longDesc "<ul><li>Sie wurde möglicherweise entfernt, verschoben, oder Dateiberechtigungen könnten den Zugriff verhindern.</li></ul>">
+
 <!ENTITY generic.title "Anfrage konnte nicht fertiggestellt werden">
 <!ENTITY generic.longDesc "<p>Weitere Informationen zu diesem Problem oder Fehler sind momentan nicht verfügbar.</p>">
 
@@ -84,8 +87,13 @@
 <!ENTITY cspBlocked.title "Durch Inhaltsicherheitsrichtlinie (CSP) blockiert">
 <!ENTITY cspBlocked.longDesc "<p>Der Browser hat das Laden dieser Seite auf diese Art blockiert, weil diese Seite eine Inhaltsicherheitsrichtlinie (Content Security Policy) hat, das nicht erlaubt.</p>">
 
-<!ENTITY corruptedContentError.title "Fehler: Beschädigte Inhalte">
-<!ENTITY corruptedContentError.longDesc "<p>Die Seite, die Sie anzusehen versuchen, kann nicht angezeigt werden, da ein Fehler in der Datenübertragung festgestellt wurde.</p><ul><li>Bitte kontaktieren Sie die Website-Betreiber, um sie über dieses Problem zu verständigen.</li></ul>">
+<!ENTITY corruptedContentErrorv2.title "Fehler: Beschädigte Inhalte">
+<!ENTITY corruptedContentErrorv2.longDesc "<p>Die Seite, die Sie anzusehen versuchen, kann nicht angezeigt werden, da ein Fehler in der Datenübertragung festgestellt wurde.</p><ul><li>Bitte kontaktieren Sie die Website-Betreiber, um sie über dieses Problem zu verständigen.</li></ul>">
 
 <!ENTITY remoteXUL.title "Externes XUL">
 <!ENTITY remoteXUL.longDesc "<p><ul><li>Bitte kontaktieren Sie die Inhaber der Website, um sie über dieses Problem zu informieren.</li></ul></p>">
+
+<!ENTITY inadequateSecurityError.title "Diese Verbindung ist nicht sicher">
+<!-- LOCALIZATION NOTE (inadequateSecurityError.longDesc) - Do not translate
+     "NS_ERROR_NET_INADEQUATE_SECURITY". -->
+<!ENTITY inadequateSecurityError.longDesc "<p><span class='hostname'></span> verwendet Sicherheitstechnologie, welche veraltet und verwundbar ist. Ein Angreifer könnte leicht Informationen entschlüsseln, welche Sie für sicher hielten. Der Website-Administrator muss dieses Problem auf dem Server beheben, bevor Sie die Seite aufrufen können.</p><p>Fehlercode: NS_ERROR_NET_INADEQUATE_SECURITY</p>">

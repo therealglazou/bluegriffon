@@ -19,6 +19,9 @@
 <!ENTITY fileNotFound.title "Filen kan inte hittas">
 <!ENTITY fileNotFound.longDesc "<ul><li>Kan den ha fått ett annat namn, tagits bort eller flyttats?</li><li>Finns det stavfel eller andra typografiska fel i adressen?</li><li>Har du tillräckliga rättigheter till den efterfrågade posten?</li></ul>">
 
+<!ENTITY fileAccessDenied.title "Åtkomst till filen nekades">
+<!ENTITY fileAccessDenied.longDesc "<ul><li>Det kan ha tagits bort, flyttats eller filrättigheter kan hindra tillgång.</li></ul>">
+
 <!ENTITY generic.title "Kan inte fullborda förfrågan">
 <!ENTITY generic.longDesc "<p>Ytterligare information om det här problemet eller felet finns för närvarande inte.</p>">
 
@@ -38,15 +41,13 @@
 <!ENTITY contentEncodingError.longDesc "<p>Sidan kan inte visas eftersom den använder en typ av komprimering som är ogiltig eller som inte stöds.</p><ul><li>Kontakta webbplatsens ägare och informera dem om detta problem.</li></ul>">
 
 <!ENTITY unsafeContentType.title "Osäker filtyp">
-<!ENTITY unsafeContentType.longDesc "<ul> 
-<li>Kontakta webbplatsens ägare för att informera dem om detta problem.</li> 
-</ul>">
+<!ENTITY unsafeContentType.longDesc "<ul> <li>Kontakta webbplatsens ägare för att informera dem om detta problem.</li> </ul>">
 
 <!ENTITY netReset.title "Anslutningen avbröts">
 <!ENTITY netReset.longDesc "<p>Nätverkslänken avbröts under anslutningsförsöket. Försök igen.</p>">
 
 <!ENTITY netTimeout.title "Anslutningen avbröts">
-<!ENTITY netTimeout.longDesc "<p>Den efterfrågade platsen svarade inte på anslutningsförsöket och webbläsaren har slutat vänta på ett svar.</p><ul><li>Kan servern vara utsatt för en stor belastning eller ett tillfälligt avbrott?  Försök igen senare.</li><li>Kan du inte heller besöka andra webbplatser? Kontrollera datorns nätverksanslutning.</li><li>Är datorn eller nätverket skyddat av en brandvägg eller proxy?  Felaktiga inställningar kan påverka webbläsning.</li><li>Har du fortfarande problem? Rådfråga nätverksadministratören eller internetleverantören för ytterligare hjälp.</li></ul>">
+<!ENTITY netTimeout.longDesc "<p>Den efterfrågade webbplatsen svarade inte på anslutningsförsöket och webbläsaren har slutat vänta på ett svar.</p><ul><li>Kan servern vara utsatt för en stor belastning eller ett tillfälligt avbrott?  Försök igen senare.</li><li>Kan du inte heller besöka andra webbplatser? Kontrollera datorns nätverksanslutning.</li><li>Är datorn eller nätverket skyddat av en brandvägg eller proxy?  Felaktiga inställningar kan påverka webbläsning.</li><li>Har du fortfarande problem? Rådfråga nätverksadministratören eller internetleverantören för ytterligare hjälp.</li></ul>">
 
 <!ENTITY unknownProtocolFound.title "Okänt protokoll">
 <!ENTITY unknownProtocolFound.longDesc "<p>Den angivna adressen specificerar ett protokoll (t.ex. <q>wxyz://</q>) som webbläsaren inte känner till, så webbläsaren kan inte ansluta till platsen.</p><ul><li>Försöker du komma åt multimedia eller andra icke-textbaserade tjänster? Kontrollera om platsen har särskilda krav.</li><li>Vissa protokoll kan kräva tredjepartsprogram eller insticksmoduler för att webbläsaren ska kunna känna igen dem.</li></ul>">
@@ -67,20 +68,21 @@
 <!ENTITY nssFailure2.longDesc2 "<p>Sidan du försöker se kan inte visas eftersom den mottagna datans autenticitet inte kan verifieras.</p><ul><li>Kontakta webbplatsens ägare och informera dem om detta problem.</li></ul>">
 
 <!ENTITY nssBadCert.title "Säker anslutning misslyckades">
-<!ENTITY nssBadCert.longDesc2 "<ul> 
-<li>Detta kan bero på ett problem med serverns konfiguration, eller så kanske någon annan felaktigt utger sig för att vara servern.</li> 
-<li>Om du tidigare utan problem har anslutit till den här servern kanske felet är tillfälligt och du kan försöka igen senare.</li> 
-</ul>">
+<!ENTITY nssBadCert.longDesc2 "<ul> <li>Detta kan bero på ett problem med serverns konfiguration, eller så kanske någon annan felaktigt utger sig för att vara servern.</li> <li>Om du tidigare utan problem har anslutit till den här servern kanske felet är tillfälligt och du kan försöka igen senare.</li> </ul>">
 
 <!ENTITY securityOverride.linkText "Eller så kan du lägga till ett undantag ...">
-<!ENTITY securityOverride.warningContent "<p>Du ska inte lägga till ett undantag om du använder en internetanslutning som du inte har ett fullständigt förtroende för eller om du inte är vana att se en varning för den här servern.</p> 
-<p>Om du fortfarande vill lägga till ett undantag för den här webbplatsen, kan du göra det i dina avancerade krypteringsinställningar.</p>">
+<!ENTITY securityOverride.warningContent "<p>Du ska inte lägga till ett undantag om du använder en internetanslutning som du inte har ett fullständigt förtroende för eller om du inte är vana att se en varning för den här servern.</p> <p>Om du fortfarande vill lägga till ett undantag för den här webbplatsen, kan du göra det i dina avancerade krypteringsinställningar.</p>">
 
 <!ENTITY cspBlocked.title "Blockerad av säkerhetspolicyn för innehåll">
 <!ENTITY cspBlocked.longDesc "<p>Webbläsaren hindrade den här sidan från att laddas på detta sätt eftersom sidan har en säkerhetspolicy för innehåll som inte tillåter det.</p>">
 
-<!ENTITY corruptedContentError.title "Skadat innehåll">
-<!ENTITY corruptedContentError.longDesc "<p>Sidan du försöker se kan inte visas på grund av att ett fel i dataöverföringen upptäcktes.</p><ul><li>Kontakta ägarna till webbplatsen för att informera dem om detta problem.</li></ul>">
+<!ENTITY corruptedContentErrorv2.title "Skadat innehåll">
+<!ENTITY corruptedContentErrorv2.longDesc "<p>Sidan du försöker se kan inte visas på grund av att ett fel i dataöverföringen upptäcktes.</p><ul><li>Kontakta ägarna till webbplatsen för att informera dem om detta problem.</li></ul>">
 
 <!ENTITY remoteXUL.title "Extern XUL">
 <!ENTITY remoteXUL.longDesc "<p><ul><li>Kontakta ägaren av webbplatsen för att informera dem om detta problem.</li></ul></p>">
+
+<!ENTITY inadequateSecurityError.title "Din anslutning är inte säker">
+<!-- LOCALIZATION NOTE (inadequateSecurityError.longDesc) - Do not translate
+     "NS_ERROR_NET_INADEQUATE_SECURITY". -->
+<!ENTITY inadequateSecurityError.longDesc "<p><span class='hostname'></span> använder säkerhetsteknologi som är föråldrad och sårbara för angrepp. En angripare kan lätt avslöja information som du tänkt ska vara säker. Webbplatsens administratör måste laga servern innan du kan besöka webbplatsen.</p><p>Felkod: NS_ERROR_NET_INADEQUATE_SECURITY</p>">

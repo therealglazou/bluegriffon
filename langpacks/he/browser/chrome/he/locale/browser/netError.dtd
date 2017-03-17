@@ -32,16 +32,32 @@
 <li>בדוק אם הקובץ הועבר, שינה שם או נמחק.</li> 
 </ul>">
 
+<!ENTITY fileAccessDenied.title "הגישה לקובץ נדחתה">
+<!ENTITY fileAccessDenied.longDesc "
+<ul>
+  <li>יתכן שהקובץ הוסר, הועבר או שההרשאות מונעות את הגישה אליו.</li>
+</ul>
+">
 
 <!ENTITY generic.title "שגיאה כללית">
 <!ENTITY generic.longDesc "<p>&brandShortName; אינו יכול לטעון דף זה מסיבה לא ידועה.</p>">
 
+<!ENTITY captivePortal.title "כניסה לרשת">
+<!ENTITY captivePortal.longDesc2 "
+<p>עליך להתחבר לרשת זו כדי לגלוש באינטרנט.</p>
+">
+
+<!ENTITY openPortalLoginPage.label2 "פתיחת דף התחברות לרשת">
+
 <!ENTITY malformedURI.title "כתובת לא חוקית">
-<!ENTITY malformedURI.longDesc "<ul> 
-<li>כתובות אתרים מכתבות בדרך־כלל בתבנית של 
-<strong>http://www.example.com/</strong></li> 
-<li>ודא שאתה משתמש בלוכסן קדמי (&quot;<strong>/</strong>&quot;).</li> 
-</ul>">
+<!ENTITY malformedURI.longDesc "
+<ul>
+  <li>כתובות אתרים נכתבות בדרך־כלל בתבנית
+    <strong>http://www.example.com/‎</strong></li>
+  <li>נא לוודא שהלוכסנים הם קדמיים (למשל
+    <strong>/</strong>).</li>
+</ul>
+">
 
 <!ENTITY netInterrupt.title "החיבור הופסק">
 <!ENTITY netInterrupt.longDesc "&sharedLongDesc;">
@@ -115,11 +131,11 @@
 </ul>
 ">
 
-<!ENTITY nssBadCert.title "קישור מאובטח נכשל">
-<!ENTITY nssBadCert.longDesc2 "<ul> 
-<li>תופעה זו יכולה להיות בעיה בהגדרה בשרת או שמדובר בשרת שמנסה להתחזות לשרת אחר. </li> 
-<li>אם התחברת לשרת זה בהצלחה בעבר, ייתכן שהשגיאה זמנית, וכדאי שתנסה שוב מאוחר יותר.</li> 
-</ul>">
+<!ENTITY certerror.longpagetitle1 "החיבור שלך אינו בטוח">
+<!-- Localization note (certerror.introPara) - The text content of the span tag
+will be replaced at runtime with the name of the server to which the user
+was trying to connect. -->
+<!ENTITY certerror.introPara "הבעלים של <span class='hostname'/> הגדירו את האתר שלהם בצורה לקויה.  על מנת להגן על המידע שלך מפני גניבה, &brandShortName; לא התחבר לאתר זה.">
 
 <!ENTITY sharedLongDesc "<ul> 
 <li>האתר איננו זמין כרגע או שהוא עמוס מדי. אנא נסה שוב בעוד מספר רגעים.</li> 
@@ -127,49 +143,17 @@
 <li>אם המחשב או הרשת שלך מוגנים באמצעות חומת אש או שרת מתווך, ודא כי &brandShortName; מורשה לגישה לרשת.</li> 
 </ul>">
 
-<!ENTITY malwareBlocked.title "חשד לאתר תוקף!">
-<!ENTITY malwareBlocked.longDesc "<p>אתרים תוקפים מנסים להתקין תוכנות שגונבות מידע פרטי, משתמשות במחשב שלך לתקיפת אחרים או לגרום נזק למערכת שלך.</p> 
-<p>בעלי אתרים המאמינים כי האתר שלהם דווח בטעות בתור אתר תוקף יכולים <a href='http://www.stopbadware.org/home/reviewinfo' >לבקש בדיקה חוזרת</a>.</p>">
-
-<!ENTITY unwantedBlocked.title "אתר הפצת תכנה חשוד!">
-<!ENTITY unwantedBlocked.longDesc "
-<p>עמודים המפיצים ומנסים להתקין תכנה עשויים להיות מטעים ולהשפיע על המערכת שלך בדרכים בלתי צפויות.</p>
-">
-
-<!ENTITY phishingBlocked.title "חשד לזיוף ברשת!">
-<!ENTITY phishingBlocked.longDesc "<p>הכנסת מידע אישי לדף זה יכולה להסתיים בגניבת זהות או הונאה אחרת.</p> 
-<p>סוגי זיוף אלו משמשים להונאת משתמשים ומוכרים גם בתור &quot;מתקפות דיוג&quot;, בהן נוכלים שותלים דפים והודעות דואר אלקטרוני המהווים חיקוי של מקורות שאתה סומך עליהם.</p>">
-
-<!ENTITY forbiddenBlocked.title "אתר אסור">
-<!ENTITY forbiddenBlocked.longDesc "<p>&brandShortName; חסם את הטעינה של דף זה מאחר שהדפדפן הוגדר לחסום זאת.</p>">
-
 <!ENTITY cspBlocked.title "נחסם בהתאם למדיניות האבטחה של התוכן">
 <!ENTITY cspBlocked.longDesc "<p>&brandShortName; מונע מדף זה להיטען בצורה זו מאחר שהדף כולל מדיניות אבטחת תוכן שמונעת זאת.</p>">
 
-<!ENTITY corruptedContentError.title "שגיאת תוכן פגום">
-<!ENTITY corruptedContentError.longDesc "<p>הדף שאתה מנסה לצפות בו אינו יכול להיות מוצג בגלל שהתגלתה שגיאה בהעברת הנתונים.</p><ul><li>אנא צור קשר עם בעלי האתר והודע על הבעיה הזאת.</li></ul>">
+<!ENTITY corruptedContentErrorv2.title "שגיאת תוכן פגום">
+<!ENTITY corruptedContentErrorv2.longDesc "<p>לא ניתן להציג דף זה מכיון שאותרה שגיאה בתעבורת הנתונים.</p><ul><li>נא ליצור קשר עם בעלי האתר כדי לדווח להם על בעיה זו.</li></ul>">
 
 
-<!ENTITY securityOverride.linkText "באפשרותך גם להוסיף חריגה…">
-<!ENTITY securityOverride.getMeOutOfHereButton "תוציא אותי מכאן!">
-<!ENTITY securityOverride.exceptionButtonLabel "הוסף חריגה…">
-
-<!-- LOCALIZATION NOTE (securityOverride.warningContent) - Do not translate the
-contents of the <button> tags. It uses strings already defined above. The
-button is included here (instead of netError.xhtml) because it exposes
-functionality specific to firefox. -->
-
-<!ENTITY securityOverride.warningContent "<p>מומלץ שלא להוסיף חריגה אם אתה משתמש בחיבור רשת בלתי מהימן לחלוטין או אם אינך רגיל לראות אזהרות עבור שרת זה.</p> 
- 
-<button id='getMeOutOfHereButton'>&securityOverride.getMeOutOfHereButton;</button> 
-<button id='exceptionDialogButton'>&securityOverride.exceptionButtonLabel;</button>">
+<!ENTITY securityOverride.exceptionButtonLabel "הוספת חריגה…">
 
 <!ENTITY errorReporting.automatic2 "דיווח על תקלות מסוג זה מסייע ל־Mozilla לזהות ולחסום אתרים מסוכנים">
 <!ENTITY errorReporting.learnMore "מידע נוסף…">
-<!ENTITY errorReporting.sending "הדיווח נשלח כעת">
-<!ENTITY errorReporting.sent "שליחת הדיווח הושלמה">
-<!ENTITY errorReporting.report "דיווח">
-<!ENTITY errorReporting.tryAgain "נסה שוב">
 
 <!ENTITY remoteXUL.title "XUL מרוחק">
 <!ENTITY remoteXUL.longDesc "<p><ul><li>פנה אל בעלי האתר כדי ליידע אותם על הבעיה.</li></ul></p>">
@@ -179,10 +163,28 @@ functionality specific to firefox. -->
      "SSL_ERROR_UNSUPPORTED_VERSION". -->
 <!ENTITY sslv3Used.longDesc2 "מידע מתקדם: SSL_ERROR_UNSUPPORTED_VERSION">
 
-<!ENTITY weakCryptoUsed.title "החיבור שלך אינו בטוח">
-<!-- LOCALIZATION NOTE (weakCryptoUsed.longDesc2) - Do not translate
-     "SSL_ERROR_NO_CYPHER_OVERLAP". -->
-<!ENTITY weakCryptoUsed.longDesc2 "מידע מתקדם: SSL_ERROR_NO_CYPHER_OVERLAP">
-<!ENTITY weakCryptoAdvanced.title "מתקדם">
-<!ENTITY weakCryptoAdvanced.longDesc "האתר בכתובת <span class='hostname'></span> משתמש בטכנולוגית אבטחה שאינה עדכנית וחשופה להתקפות. תוקף יכול בקלות לחשוף מידע שלכאורה אמור היה להיות מוגן.">
-<!ENTITY weakCryptoAdvanced.override "(לא בטוח) לנסות לטעון את <span class='hostname'></span> עם אבטחה לא עדכנית">
+<!-- LOCALIZATION NOTE (certerror.wrongSystemTime2,
+                        certerror.wrongSystemTimeWithoutReference) - The <span id='..' />
+     tags will be injected with actual values, please leave them unchanged. -->
+
+<!ENTITY certerror.pagetitle1  "חיבור בלתי מאובטח">
+<!ENTITY certerror.whatShouldIDo.badStsCertExplanation "אתר זה משתמש ב־HTTP
+Strict Transport Security (HSTS) כדי לציין ש־&brandShortName; יוכל
+להתחבר אליו
+באופן מאובטח בלבד. כתוצאה מכך, לא ניתן להוסיף חריגה עבור אישור זה.">
+<!ENTITY certerror.copyToClipboard.label "העתקת טקסט ללוח">
+
+<!ENTITY inadequateSecurityError.title "החיבור שלך אינו בטוח">
+<!-- LOCALIZATION NOTE (inadequateSecurityError.longDesc) - Do not translate
+     "NS_ERROR_NET_INADEQUATE_SECURITY". -->
+<!ENTITY inadequateSecurityError.longDesc "<p>האתר בכתובת <span class='hostname'></span> משתמש בטכנולוגית אבטחה שאינה עדכנית וחשופה להתקפות. תוקף יכול בקלות לחשוף מידע שלכאורה אמור היה להיות מוגן. על מנהל האתר לתקן את השרת לפני שיהיה ניתן לבקר באתר זה.</p><p>קוד שגיאה: NS_ERROR_NET_INADEQUATE_SECURITY</p>">
+
+<!ENTITY prefReset.longDesc "נראה שהגדרות אבטחת הרשת שלך עשוי לגרום לכך. האם ברצונך לשחזר להגדרות ברירת מחדל?">
+<!ENTITY prefReset.label "שחזור הגדרות בררת המחדל">
+
+
+<!-- LOCALIZATION NOTE (certerror.wrongSystemTime2,
+                        certerror.wrongSystemTimeWithoutReference) - The <span id='..' />
+     tags will be injected with actual values, please leave them unchanged. -->
+<!ENTITY certerror.wrongSystemTime2 "<p> &brandShortName; did not connect to <span id='wrongSystemTime_URL'/> because your computer’s clock appears to show the wrong time and this is preventing a secure connection.</p> <p>Your computer is set to <span id='wrongSystemTime_systemDate'/>, when it should be <span id='wrongSystemTime_actualDate'/>. To fix this problem, change your date and time settings to match the correct time.</p>">
+<!ENTITY certerror.wrongSystemTimeWithoutReference "<p>&brandShortName; did not connect to <span id='wrongSystemTimeWithoutReference_URL'/> because your computer’s clock appears to show the wrong time and this is preventing a secure connection.</p> <p>Your computer is set to <span id='wrongSystemTimeWithoutReference_systemDate'/>. To fix this problem, change your date and time settings to match the correct time.</p>">

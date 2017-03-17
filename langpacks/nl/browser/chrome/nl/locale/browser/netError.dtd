@@ -39,11 +39,24 @@
 </ul>
 ">
 
+<!ENTITY fileAccessDenied.title "Toegang tot het bestand is geweigerd">
+<!ENTITY fileAccessDenied.longDesc "
+<ul>
+  <li>Het kan zijn verwijderd, verplaatst, of bestandsmachtigingen kunnen toegang tegengaan.</li>
+</ul>
+">
 
 <!ENTITY generic.title "Oei.">
 <!ENTITY generic.longDesc "
 <p>&brandShortName; kan om de een of andere reden deze pagina niet laden.</p>
 ">
+
+<!ENTITY captivePortal.title "Aanmelden bij netwerk">
+<!ENTITY captivePortal.longDesc2 "
+<p>U moet zich aanmelden bij dit netwerk voordat u toegang hebt tot het internet.</p>
+">
+
+<!ENTITY openPortalLoginPage.label2 "Aanmeldingspagina voor netwerk openen">
 
 <!ENTITY malformedURI.title "Het adres is niet geldig">
 <!ENTITY malformedURI.longDesc "
@@ -139,15 +152,11 @@
 </ul>
 ">
 
-<!ENTITY nssBadCert.title "Beveiligde verbinding mislukt">
-<!ENTITY nssBadCert.longDesc2 "
-<ul>
-  <li>Dit kan een probleem met de serverconfiguratie zijn, of iemand probeert deze
-    server na te bootsen.</li>
-  <li>Als u in het verleden wel met succes verbinding hebt gemaakt met deze server, dan
-    is de fout wellicht tijdelijk en kunt u het later nogmaals proberen.</li>
-</ul>
-">
+<!ENTITY certerror.longpagetitle1 "Uw verbinding is niet beveiligd">
+<!-- Localization note (certerror.introPara) - The text content of the span tag
+will be replaced at runtime with the name of the server to which the user
+was trying to connect. -->
+<!ENTITY certerror.introPara "De eigenaar van <span class='hostname'/> heeft zijn of haar website niet juist geconfigureerd. Om uw gegevens tegen diefstal te beschermen, heeft &brandShortName; geen verbinding met deze website gemaakt.">
 
 <!ENTITY sharedLongDesc "
 <ul>
@@ -163,27 +172,13 @@
 <!ENTITY cspBlocked.title "Geblokkeerd door inhoudbeveiligingsbeleid">
 <!ENTITY cspBlocked.longDesc "<p>&brandShortName; heeft voorkomen dat de pagina op deze manier werd geladen, omdat de pagina een inhoudbeveiligingsbeleid heeft dat dit niet toestaat.</p>">
 
-<!ENTITY corruptedContentError.title "Beschadigde-inhoudsfout">
-<!ENTITY corruptedContentError.longDesc "<p>De pagina die u wilt bekijken kan niet worden weergegeven, omdat er een fout in de gegevensoverdracht is gedetecteerd.</p><ul><li>Neem contact op met de website-eigenaars om ze over dit probleem te informeren.</li></ul>">
+<!ENTITY corruptedContentErrorv2.title "Beschadigde-inhoudsfout">
+<!ENTITY corruptedContentErrorv2.longDesc "<p>De pagina die u wilt bekijken kan niet worden weergegeven, omdat er een fout in de gegevensoverdracht is gedetecteerd.</p><ul><li>Neem contact op met de website-eigenaars om ze over dit probleem te informeren.</li></ul>">
 
 
-<!ENTITY securityOverride.linkText "Of u kunt een uitzondering toevoegen…">
-<!ENTITY securityOverride.getMeOutOfHereButton "Haal me hier vandaan!">
 <!ENTITY securityOverride.exceptionButtonLabel "Uitzondering toevoegen…">
 
-<!-- LOCALIZATION NOTE (securityOverride.warningContent) - Do not translate the
-contents of the <button> tags. It uses strings already defined above. The
-button is included here (instead of netError.xhtml) because it exposes
-functionality specific to firefox. -->
-
-<!ENTITY securityOverride.warningContent "
-<p>U kunt beter geen uitzondering toevoegen als u een internetverbinding gebruikt die u niet volledig vertrouwt, of als u normaal gesproken geen waarschuwing krijgt voor deze server.</p>
-
-<button id='getMeOutOfHereButton'>&securityOverride.getMeOutOfHereButton;</button>
-<button id='exceptionDialogButton'>&securityOverride.exceptionButtonLabel;</button>
-">
-
-<!ENTITY errorReporting.automatic2 "Rapporteer fouten als deze om Mozilla te helpen kwaadwillende websites te herkennen en te blokkeren">
+<!ENTITY errorReporting.automatic2 "Fouten als deze rapporteren om Mozilla te helpen kwaadwillende websites te herkennen en te blokkeren">
 <!ENTITY errorReporting.learnMore "Meer info…">
 
 <!ENTITY remoteXUL.title "Remote XUL">
@@ -194,10 +189,23 @@ functionality specific to firefox. -->
      "SSL_ERROR_UNSUPPORTED_VERSION". -->
 <!ENTITY sslv3Used.longDesc2 "Geavanceerde info: SSL_ERROR_UNSUPPORTED_VERSION">
 
-<!ENTITY weakCryptoUsed.title "Uw verbinding is niet beveiligd">
-<!-- LOCALIZATION NOTE (weakCryptoUsed.longDesc2) - Do not translate
-     "SSL_ERROR_NO_CYPHER_OVERLAP". -->
-<!ENTITY weakCryptoUsed.longDesc2 "Geavanceerde info: SSL_ERROR_NO_CYPHER_OVERLAP">
-<!ENTITY weakCryptoAdvanced.title "Geavanceerd">
-<!ENTITY weakCryptoAdvanced.longDesc "<span class='hostname'></span> gebruikt verouderde beveiligingstechnologie die kwetsbaar is voor aanvallen. Een aanvaller kan eenvoudig gegevens onthullen waarvan u dacht dat deze veilig waren.">
-<!ENTITY weakCryptoAdvanced.override "(Niet beveiligd) <span class='hostname'></span> proberen te laden via verouderde beveiliging">
+<!-- LOCALIZATION NOTE (certerror.wrongSystemTime2,
+                        certerror.wrongSystemTimeWithoutReference) - The <span id='..' />
+     tags will be injected with actual values, please leave them unchanged. -->
+<!ENTITY certerror.wrongSystemTime2 "<p> &brandShortName; heeft geen verbinding met <span id='wrongSystemTime_URL'/> gemaakt, omdat de klok van uw computer de verkeerde tijd lijkt aan te geven, en dit voorkomt een beveiligde verbinding.</p> <p>Uw computer is ingesteld op <span id='wrongSystemTime_systemDate'/>, terwijl dit <span id='wrongSystemTime_actualDate'/> zou moeten zijn. Wijzig uw datum- en tijdinstellingen naar de juiste tijd om dit probleem te verhelpen.</p>">
+<!ENTITY certerror.wrongSystemTimeWithoutReference "<p>&brandShortName; heeft geen verbinding met <span id='wrongSystemTimeWithoutReference_URL'/> gemaakt, omdat de klok van uw computer de verkeerde tijd lijkt aan te geven, en dit voorkomt een beveiligde verbinding.</p> <p>Uw computer is ingesteld op <span id='wrongSystemTimeWithoutReference_systemDate'/>. Wijzig uw datum- en tijdinstellingen naar de juiste tijd om dit probleem te verhelpen.</p>">
+
+<!ENTITY certerror.pagetitle1  "Niet-beveiligde verbinding">
+<!ENTITY certerror.whatShouldIDo.badStsCertExplanation "Deze website maakt gebruik
+van HTTP Strict Transport Security (HSTS) om aan te geven dat &brandShortName;
+alleen een beveiligde verbinding mag maken. Hierdoor is het niet mogelijk om een
+uitzondering voor dit certificaat toe te voegen.">
+<!ENTITY certerror.copyToClipboard.label "Tekst naar klembord kopiëren">
+
+<!ENTITY inadequateSecurityError.title "Uw verbinding is niet beveiligd">
+<!-- LOCALIZATION NOTE (inadequateSecurityError.longDesc) - Do not translate
+     "NS_ERROR_NET_INADEQUATE_SECURITY". -->
+<!ENTITY inadequateSecurityError.longDesc "<p><span class='hostname'></span> gebruikt verouderde beveiligingstechnologie die kwetsbaar is voor aanvallen. Een aanvaller kan eenvoudig gegevens onthullen waarvan u dacht dat deze veilig waren. De websitebeheerder dient eerst de server in orde te maken voordat u de website kunt bezoeken.</p><p>Foutcode: NS_ERROR_NET_INADEQUATE_SECURITY</p>">
+
+<!ENTITY prefReset.longDesc "Het lijkt erop dat dit door uw netwerkbeveiligingsinstellingen wordt veroorzaakt. Wilt u de standaardinstellingen herstellen?">
+<!ENTITY prefReset.label "Standaardinstellingen herstellen">

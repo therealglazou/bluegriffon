@@ -19,9 +19,11 @@
 
      For example, in English, a long string would be:
 
-     59 minutes, 59 seconds remaining - 1022 of 1023 KB
+     59m 59s left - 1022 of 1023 KB (120.5 KB/sec)
 
-     That's 50 characters, so we set the width at 50ch.
+     Since Downloads Panel is redesigned to show the detail string including
+     the hovering case for an item or an action button.
+     Bug 1328519 is for discussing the detail rule of `downloadDetails.width`.
      -->
 <!ENTITY downloadDetails.width            "50ch">
 
@@ -30,11 +32,11 @@
      which is displayed at the bottom of the Downloads Panel if the
      number of downloads exceeds the limit that the panel can display.
 
-     A good rule of thumb here is to look at the otherDownloads2 string
+     A good rule of thumb here is to look at the otherDownloads3 string
      in downloads.properties, and make a reasonable estimate of its
      maximum length. For English, this seems like a reasonable limit:
 
-     + 999 other downloads
+     999 files downloading
 
      that's 21 characters, so we set the minimum width to 21ch.
      -->
@@ -45,7 +47,6 @@
 <!ENTITY cmd.resume.label                 "继续">
 <!ENTITY cmd.resume.accesskey             "R">
 <!ENTITY cmd.cancel.label                 "取消">
-<!ENTITY cmd.cancel.accesskey             "C">
 <!-- LOCALIZATION NOTE (cmd.show.label, cmd.show.accesskey, cmd.showMac.label,
      cmd.showMac.accesskey):
      The show and showMac commands are never shown together, thus they can share
@@ -62,22 +63,55 @@
 <!ENTITY cmd.copyDownloadLink.accesskey   "L">
 <!ENTITY cmd.removeFromHistory.label      "从历史记录中移除">
 <!ENTITY cmd.removeFromHistory.accesskey  "e">
-<!ENTITY cmd.clearList.label              "清空列表">
-<!ENTITY cmd.clearList.accesskey          "a">
+<!ENTITY cmd.clearList2.label             "清空预览面板">
+<!ENTITY cmd.clearList2.accesskey         "a">
 <!ENTITY cmd.clearDownloads.label         "清除下载记录">
 <!ENTITY cmd.clearDownloads.accesskey     "D">
-<!-- LOCALIZATION NOTE (cmd.unblock.label):
-     This command may be shown in the context menu, as a menu button item, or as
-     a text link when malware or potentially unwanted downloads are blocked.
+<!-- LOCALIZATION NOTE (cmd.unblock2.label):
+     This command is shown in the context menu when downloads are blocked.
      -->
-<!ENTITY cmd.unblock.label                "解除拦截">
-<!ENTITY cmd.unblock.accesskey            "U">
+<!ENTITY cmd.unblock2.label               "允许下载">
+<!ENTITY cmd.unblock2.accesskey           "o">
 <!-- LOCALIZATION NOTE (cmd.removeFile.label):
-     This command may be shown in the context menu or as a menu button label
-     when malware or potentially unwanted downloads are blocked.
+     This is the tooltip of the action button shown when malware is blocked.
      -->
 <!ENTITY cmd.removeFile.label             "移除文件">
-<!ENTITY cmd.removeFile.accesskey         "m">
+<!-- LOCALIZATION NOTE (cmd.chooseUnblock.tooltip):
+     This is the tooltip of the action button shown when potentially unwanted
+     downloads are blocked. This opens a dialog where the user can choose
+     whether to unblock or remove the download. Removing is the default option.
+     -->
+<!ENTITY cmd.chooseUnblock.label          "移除文件或允许下载">
+<!-- LOCALIZATION NOTE (cmd.chooseOpen.tooltip):
+     This is the tooltip of the action button shown when uncommon downloads are
+     blocked.This opens a dialog where the user can choose whether to open the
+     file or remove the download. Opening is the default option.
+     -->
+<!ENTITY cmd.chooseOpen.label             "打开或移除文件">
+
+<!-- LOCALIZATION NOTE (showMoreInformation.label):
+     Displayed when hovering a blocked download, indicates that it's possible to
+     show more information for user to take the next action.
+     -->
+<!ENTITY showMoreInformation.label        "显示更多信息">
+
+<!-- LOCALIZATION NOTE (openFile.label):
+     Displayed when hovering a complete download, indicates that it's possible to
+     open the file using an app available in the system.
+     -->
+<!ENTITY openFile.label                   "打开文件">
+
+<!-- LOCALIZATION NOTE (retryDownload.label):
+     Displayed when hovering a download which is able to be retried by users,
+     indicates that it's possible to download this file again.
+     -->
+<!ENTITY retryDownload.label              "重试下载">
+
+<!-- LOCALIZATION NOTE (cancelDownload.label):
+     Displayed when hovering a download which is able to be cancelled by users,
+     indicates that it's possible to cancel and stop the download.
+     -->
+<!ENTITY cancelDownload.label             "取消下载">
 
 <!-- LOCALIZATION NOTE (blocked.label):
      Shown as a tag before the file name for some types of blocked downloads.
@@ -100,6 +134,8 @@
 <!ENTITY downloadsHistory.label           "显示全部下载项">
 <!ENTITY downloadsHistory.accesskey       "S">
 
+<!ENTITY openDownloadsFolder.label       "打开下载文件夹">
+
 <!ENTITY clearDownloadsButton.label       "清除下载项">
 <!ENTITY clearDownloadsButton.tooltip     "清除已完成、已取消及失败的下载项">
 
@@ -112,7 +148,7 @@
 <!-- LOCALIZATION NOTE (downloadsPanelEmpty.label):
      This string is shown when there are no items in the Downloads Panel.
      -->
-<!ENTITY downloadsPanelEmpty.label        "没有本次会话的下载项。">
+<!ENTITY downloadsPanelEmpty.label        "本次浏览中还未下载文件。">
 
 <!-- LOCALIZATION NOTE (downloadsListNoMatch.label):
      This string is shown when some search terms are specified, but there are no

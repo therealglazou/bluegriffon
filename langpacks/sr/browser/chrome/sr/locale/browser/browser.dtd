@@ -1,10 +1,10 @@
 <!-- This Source Code Form is subject to the terms of the Mozilla Public
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
-   
+
 <!-- LOCALIZATION NOTE : FILE This file contains the browser main menu items -->
-<!-- LOCALIZATION NOTE : FILE Do not translate commandkeys -->
- 
+<!-- LOCALIZATION NOTE : FILE Do not translate commandkeys --> 
+
 <!-- LOCALIZATION NOTE (mainWindow.title): DONT_TRANSLATE -->
 <!ENTITY mainWindow.title "&brandFullName;">
 <!-- LOCALIZATION NOTE (mainWindow.titlemodifier) : DONT_TRANSLATE -->
@@ -40,6 +40,12 @@ can reach it easily. -->
 <!ENTITY  pinTab.accesskey                   "а">
 <!ENTITY  unpinTab.label                     "Откачи језичак">
 <!ENTITY  unpinTab.accesskey                 "т">
+<!ENTITY  sendTabToDevice.label              "Пошаљи језичак на уређај">
+<!ENTITY  sendTabToDevice.accesskey          "у">
+<!ENTITY  sendPageToDevice.label             "Пошаљи страницу на уређај">
+<!ENTITY  sendPageToDevice.accesskey         "у">
+<!ENTITY  sendLinkToDevice.label             "Пошаљи везу на уређај">
+<!ENTITY  sendLinkToDevice.accesskey         "у">
 <!ENTITY  moveToNewWindow.label              "Премести у нови прозор">
 <!ENTITY  moveToNewWindow.accesskey          "н">
 <!ENTITY  bookmarkAllTabs.label              "Забележи све језичке…">
@@ -105,13 +111,12 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY fullScreenCmd.macCommandKey "f">
 <!ENTITY showAllTabsCmd.label "Прикажи све језичке">
 <!ENTITY showAllTabsCmd.accesskey "П">
+<!ENTITY toggleReaderMode.key "Р">
 
 <!ENTITY fxaSignIn.label "Пријави се на &syncBrand.shortName.label;">
 <!ENTITY fxaSignedIn.tooltip "Отвори &syncBrand.shortName.label; поставке">
 <!ENTITY fxaSignInError.label "Поново се повежи на &syncBrand.shortName.label;">
 <!ENTITY fxaUnverified.label "Потврдите налог">
-<!ENTITY syncStartPanel2.heading "&syncBrand.shortName.label; омогућен">
-<!ENTITY syncStartPanel2.subTitle "&brandShortName; ће започети синхронизацију моментално.">
 
 
 <!ENTITY fullScreenMinimize.tooltip "Умањи">
@@ -130,6 +135,7 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY fullscreenWarning.beforeDomain.label "">
 <!ENTITY fullscreenWarning.afterDomain.label "је сада у приказу преко целог екрана">
 <!ENTITY fullscreenWarning.generic.label "Овај документ се приказује преко целог екрана">
+
 <!-- LOCALIZATION NOTE (exitDOMFullscreen.button,
      exitDOMFullscreenMac.button): the "escape" button on PC keyboards
      is uppercase, while on Mac keyboards it is lowercase -->
@@ -137,6 +143,15 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY exitDOMFullscreenMac.button "Изађи из приказа преко целог екрана (esc)">
 <!ENTITY leaveDOMFullScreen.label "Обустави приказ преко целог екрана">
 <!ENTITY leaveDOMFullScreen.accesskey "к">
+
+<!-- LOCALIZATION NOTE (pointerlockWarning.beforeDomain.label,
+     pointerlockWarning.afterDomain.label): these two strings are used
+     respectively before and after the domain requiring pointerlock.
+     Localizers can use one of them, or both, to better adapt this
+     sentence to their language. -->
+<!ENTITY pointerlockWarning.beforeDomain.label "">
+<!ENTITY pointerlockWarning.afterDomain.label "управља са вашим показивачем. Притисните Esc да преузмете контролу.">
+<!ENTITY pointerlockWarning.generic.label "Овај документ управља са вашим показивачем. Притисните Esc да преузмете контролу.">
 
 <!ENTITY closeWindow.label "Затвори прозор">
 <!ENTITY closeWindow.accesskey "З">
@@ -146,7 +161,6 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY bookmarkThisPageCmd.label "Забележи ову страницу">
 <!ENTITY editThisBookmarkCmd.label "Уреди ову забелешку">
 <!ENTITY bookmarkThisPageCmd.commandkey "d">
-<!ENTITY markPageCmd.commandkey "l">
 <!-- LOCALIZATION NOTE (findShareServices.label):
   -  Use the unicode ellipsis char, \u2026,
   -  or use "..." if \u2026 doesn't suit traditions in your locale. -->
@@ -169,8 +183,13 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY addCurPagesCmd.label "Забележи све језичке…">
 <!ENTITY showAllBookmarks2.label "Прикажи све забелешке">
 <!ENTITY recentBookmarks.label "Недавно забележене">
-<!ENTITY unsortedBookmarksCmd.label "Неразврстане забелешке">
+<!ENTITY otherBookmarksCmd.label "Остале забелешке">
+<!ENTITY mobileBookmarksCmd.label "Мобилне забелешке">
 <!ENTITY bookmarksToolbarChevron.tooltip "Прикажи још забелешки">
+<!ENTITY showRecentlyBookmarked.label     "Прикажи недавно забележене">
+<!ENTITY showRecentlyBookmarked.accesskey "н">
+<!ENTITY hideRecentlyBookmarked.label     "Сакриј недавно забележене">
+<!ENTITY hideRecentlyBookmarked.accesskey "н">
 
 <!ENTITY backCmd.label                "Назад">
 <!ENTITY backButton.tooltip           "Назад за једну страну">
@@ -188,33 +207,34 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY printButton.tooltip          "Штампај ову страницу">
 
 <!ENTITY urlbar.viewSiteInfo.label                      "Погледај информације сајта">
-<!-- LOCALIZATION NOTE: all of the following urlbar NotificationAnchor.label strings are
-     used to provide accessible labels to users of assistive technology like screenreaders.
-     It is not possible to see them visually in the UI. -->
-<!ENTITY urlbar.defaultNotificationAnchor.label         "Прикажи обавештење">
-<!ENTITY urlbar.geolocationNotificationAnchor.label     "Прикажи захтев за локацију">
-<!ENTITY urlbar.addonsNotificationAnchor.label          "Прикажи поруку за инсталацију додатка">
-<!ENTITY urlbar.indexedDBNotificationAnchor.label       "Прикажи поруке за складиштење ван мреже">
-<!ENTITY urlbar.loginFillNotificationAnchor.label       "Управљај са информацијама за пријаву">
-<!ENTITY urlbar.passwordNotificationAnchor.label        "Обележите ако желите да снимите вашу лозинку">
-<!ENTITY urlbar.webappsNotificationAnchor.label         "Прикажи поруку за инсталацију апликације">
-<!ENTITY urlbar.pluginsNotificationAnchor.label         "Управљај употребом додатака на овој страници">
-<!ENTITY urlbar.webNotsNotificationAnchor3.label        "Промените да ли сајт може да приказује обавештења">
 
-<!ENTITY urlbar.webRTCShareDevicesNotificationAnchor.label      "Управљајте дељењем ваше камере и/или микрофона са сајтом">
-<!ENTITY urlbar.webRTCSharingDevicesNotificationAnchor.label    "Делите вашу камеру и/или микрофон са сајтом">
-<!ENTITY urlbar.webRTCShareMicrophoneNotificationAnchor.label   "Управљајте дељењем вашег микрофона са сајтом">
-<!ENTITY urlbar.webRTCSharingMicrophoneNotificationAnchor.label "Делите ваш микрофон са сајтом">
-<!ENTITY urlbar.webRTCShareScreenNotificationAnchor.label       "Управљајте дељењем вашег прозора или екрана са сајтом">
-<!ENTITY urlbar.webRTCSharingScreenNotificationAnchor.label     "Делите ваш прозор или екран са сајтом">
+<!ENTITY urlbar.defaultNotificationAnchor.tooltip         "Отвори панел са порукама">
+<!ENTITY urlbar.geolocationNotificationAnchor.tooltip     "Отвори панел за захтев локације">
+<!ENTITY urlbar.addonsNotificationAnchor.tooltip          "Отвори панел са инсталацијом додатака">
+<!ENTITY urlbar.indexedDBNotificationAnchor.tooltip       "Отвори панел за ванмрежно складиште">
+<!ENTITY urlbar.passwordNotificationAnchor.tooltip        "Отвори панел за снимање лозинке">
+<!ENTITY urlbar.pluginsNotificationAnchor.tooltip         "Управљајте додацима">
+<!ENTITY urlbar.webNotificationAnchor.tooltip             "Промените да ли сајт може да приказује обавештења">
 
-<!ENTITY urlbar.pointerLockNotificationAnchor.label     "Одлучите да ли сајт може да сакрије показивач">
-<!ENTITY urlbar.servicesNotificationAnchor.label        "Прикажи поруку за инсталацију сервиса">
-<!ENTITY urlbar.translateNotificationAnchor.label       "Преведи ову страницу">
-<!ENTITY urlbar.translatedNotificationAnchor.label      "Управљајте превођењем странице">
-<!ENTITY urlbar.emeNotificationAnchor.label             "Управљајте употребом DRM софтвера">
+<!ENTITY urlbar.webRTCShareDevicesNotificationAnchor.tooltip      "Управљајте дељењем ваше камере и/или микрофона са сајтом">
+<!ENTITY urlbar.webRTCShareMicrophoneNotificationAnchor.tooltip   "Управљајте дељењем вашег микрофона са сајтом">
+<!ENTITY urlbar.webRTCShareScreenNotificationAnchor.tooltip       "Управљајте дељењем вашег прозора или екрана са сајтом">
+
+<!ENTITY urlbar.servicesNotificationAnchor.tooltip        "Отвори панел за инсалацију порука">
+<!ENTITY urlbar.translateNotificationAnchor.tooltip       "Преведи ову страницу">
+<!ENTITY urlbar.translatedNotificationAnchor.tooltip      "Управљајте превођењем странице">
+<!ENTITY urlbar.emeNotificationAnchor.tooltip             "Управљајте употребом DRM софтвера">
+
+<!ENTITY urlbar.cameraBlocked.tooltip            "Блокирали сте камеру за овај веб сајт.">
+<!ENTITY urlbar.microphoneBlocked.tooltip        "Блокирали сте микрофон за овај веб сајт.">
+<!ENTITY urlbar.screenBlocked.tooltip            "Блокирали сте дељење екрана за овај веб сајт.">
+<!ENTITY urlbar.geolocationBlocked.tooltip       "Блокирали сте локацију за овај веб сајт.">
+<!ENTITY urlbar.indexedDBBlocked.tooltip         "Блокирали сте складиште за овај веб сајт.">
+<!ENTITY urlbar.webNotificationsBlocked.tooltip  "Блокирали сте обавештења за овај веб сајт.">
 
 <!ENTITY urlbar.openHistoryPopup.tooltip                "Прикажи историјат">
+
+<!ENTITY urlbar.zoomReset.tooltip     "Ресетуј ниво увеличавање">
 
 <!ENTITY searchItem.title             "Претрага">
 
@@ -225,9 +245,12 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY bookmarksCmd.commandkey "b">
 
 <!ENTITY bookmarksMenuButton.label          "Забелешке">
-<!ENTITY bookmarksMenuButton.unsorted.label "Неразврстане забелешке">
+<!ENTITY bookmarksMenuButton.other.label "Остале забелешке">
+<!ENTITY bookmarksMenuButton.mobile.label "Мобилне забелешке">
 <!ENTITY viewBookmarksSidebar2.label        "Прикажи у бочној палети">
 <!ENTITY viewBookmarksToolbar.label         "Прикажи траку са забелешкама">
+
+<!ENTITY containersMenu.label "Контејнери">
 
 <!-- LOCALIZATION NOTE (bookmarksSidebarGtkCmd.commandkey): This command
   -  key should not contain the letters A-F, since these are reserved
@@ -255,92 +278,13 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY webDeveloperMenu.label       "Програмер">
 <!ENTITY webDeveloperMenu.accesskey   "г">
 
-<!ENTITY devToolsCmd.keycode          "VK_F12">
-<!ENTITY devToolsCmd.keytext          "F12">
-
-<!ENTITY devtoolsServiceWorkers.label      "Service Workers">
-<!ENTITY devtoolsServiceWorkers.accesskey  "k">
-
-<!ENTITY devtoolsConnect.label        "Connect…">
-<!ENTITY devtoolsConnect.accesskey    "e">
-
-<!ENTITY errorConsoleCmd.label        "Error Console">
-<!ENTITY errorConsoleCmd.accesskey    "C">
-
-<!ENTITY remoteWebConsoleCmd.label    "Remote Web Console">
-
-<!ENTITY browserConsoleCmd.label      "Browser Console">
-<!ENTITY browserConsoleCmd.commandkey "j">
-<!ENTITY browserConsoleCmd.accesskey  "B">
-
 <!ENTITY inspectContextMenu.label     "Испитај елеменат">
 <!ENTITY inspectContextMenu.accesskey "И">
-
-<!ENTITY responsiveDesignTool.label   "Responsive Design View">
-<!ENTITY responsiveDesignTool.accesskey "R">
-<!ENTITY responsiveDesignTool.commandkey "M">
-
-<!ENTITY eyedropper.label   "Eyedropper">
-<!ENTITY eyedropper.accesskey "Y">
-
-<!-- LOCALIZATION NOTE (scratchpad.label): This menu item label appears
-  -  in the Tools menu. See bug 653093.
-  -  The Scratchpad is intended to provide a simple text editor for creating
-  -  and evaluating bits of JavaScript code for the purposes of function
-  -  prototyping, experimentation and convenient scripting.
-  -
-  -  It's quite possible that you won't have a good analogue for the word
-  -  "Scratchpad" in your locale. You should feel free to find a close
-  -  approximation to it or choose a word (or words) that means
-  -  "simple discardable text editor". -->
-<!ENTITY scratchpad.label             "Scratchpad">
-<!ENTITY scratchpad.accesskey         "s">
-<!ENTITY scratchpad.keycode           "VK_F4">
-<!ENTITY scratchpad.keytext           "F4">
-
-<!-- LOCALIZATION NOTE (browserToolboxMenu.label): This is the label for the
-  -  application menu item that opens the browser toolbox UI in the Tools menu. -->
-<!ENTITY browserToolboxMenu.label     "Browser Toolbox">
-<!ENTITY browserToolboxMenu.accesskey "e">
-<!ENTITY browserToolboxCmd.commandkey "i">
-
-<!-- LOCALIZATION NOTE (browserContentToolboxMenu.label): This is the label for the
-  -  application menu item that opens the browser content toolbox UI in the Tools menu.
-  -  This toolbox allows to debug the chrome of the content process in multiprocess builds.  -->
-<!ENTITY browserContentToolboxMenu.label     "Browser Content Toolbox">
-<!ENTITY browserContentToolboxMenu.accesskey "x">
-
-<!ENTITY devToolbarCloseButton.tooltiptext "Close Developer Toolbar">
-<!ENTITY devToolbarMenu.label              "Developer Toolbar">
-<!ENTITY devToolbarMenu.accesskey          "v">
-<!ENTITY webide.label                      "WebIDE">
-<!ENTITY webide.accesskey                  "W">
-<!ENTITY webide.keycode                    "VK_F8">
-<!ENTITY webide.keytext                    "F8">
-<!ENTITY devToolbar.keycode                "VK_F2">
-<!ENTITY devToolbar.keytext                "F2">
-<!ENTITY devToolboxMenuItem.label          "Toggle Tools">
-<!ENTITY devToolboxMenuItem.accesskey      "T">
-<!ENTITY devToolboxMenuItem.keytext        "I">
-
-<!ENTITY devToolbarToolsButton.tooltip     "Toggle developer tools">
-<!ENTITY devToolbarOtherToolsButton.label  "More Tools">
-
-<!ENTITY getMoreDevtoolsCmd.label        "Get More Tools">
-<!ENTITY getMoreDevtoolsCmd.accesskey    "M">
 
 <!ENTITY fileMenu.label         "Датотека"> 
 <!ENTITY fileMenu.accesskey       "Д">
 <!ENTITY newUserContext.label             "Нови језичак">
 <!ENTITY newUserContext.accesskey         "ј">
-<!ENTITY userContextPersonal.label        "Лични">
-<!ENTITY userContextPersonal.accesskey    "Л">
-<!ENTITY userContextWork.label            "Пословни">
-<!ENTITY userContextWork.accesskey        "П">
-<!ENTITY userContextBanking.label         "Банкарство">
-<!ENTITY userContextBanking.accesskey     "Б">
-<!ENTITY userContextShopping.label        "Куповина">
-<!ENTITY userContextShopping.accesskey    "К">
 <!ENTITY newNavigatorCmd.label        "Нови прозор">
 <!ENTITY newNavigatorCmd.key        "N">
 <!ENTITY newNavigatorCmd.accesskey      "Н">
@@ -411,21 +355,29 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY appMenuHelp.tooltip "Отвори мени за помоћ">
 
 <!ENTITY appMenuRemoteTabs.label "Синхронизовани језичци">
-<!ENTITY appMenuRemoteTabs.fetching.label "Преузимам синхронизоване језичке…">
 <!-- LOCALIZATION NOTE (appMenuRemoteTabs.notabs.label): This is shown beneath
      the name of a device when that device has no open tabs -->
 <!ENTITY appMenuRemoteTabs.notabs.label "Нема отворених језичака">
+<!-- LOCALIZATION NOTE (appMenuRemoteTabs.showMore.label, appMenuRemoteTabs.showMore.tooltip):
+     This is shown after the tabs list if we can display more tabs by clicking on the button -->
+<!ENTITY appMenuRemoteTabs.showMore.label "Покажи више">
+<!ENTITY appMenuRemoteTabs.showMore.tooltip "Прикажи више језичака са овог уређаја">
+<!-- LOCALIZATION NOTE (appMenuRemoteTabs.showAll.label, appMenuRemoteTabs.showAll.tooltip):
+     This is shown after the tabs list if we can all the remaining tabs by clicking on the button -->
+<!ENTITY appMenuRemoteTabs.showAll.label "Прикажи све">
+<!ENTITY appMenuRemoteTabs.showAll.tooltip "Прикажи све језичке са овог уређаја">
 <!-- LOCALIZATION NOTE (appMenuRemoteTabs.tabsnotsyncing.label): This is shown
      when Sync is configured but syncing tabs is disabled. -->
 <!ENTITY appMenuRemoteTabs.tabsnotsyncing.label "Укључите синхронизацију језичака да видите листу језичака са других уређаја.">
 <!-- LOCALIZATION NOTE (appMenuRemoteTabs.noclients.label): This is shown
      when Sync is configured but this appears to be the only device attached to
      the account. We also show links to download Firefox for android/ios. -->
-<!ENTITY appMenuRemoteTabs.noclients.label "Пријавите се на Firefox са других уређаја да видите њихове језичке.">
+<!ENTITY appMenuRemoteTabs.noclients.title "Нема синхронизованих језичака…">
+<!ENTITY appMenuRemoteTabs.noclients.subtitle "Желите да овде видите језичке са осталих уређаја?">
 <!ENTITY appMenuRemoteTabs.openprefs.label "Поставке синхронизације">
 <!ENTITY appMenuRemoteTabs.notsignedin.label "Пријавите се да видите листу језичака са других уређаја.">
 <!ENTITY appMenuRemoteTabs.signin.label "Пријави се на Sync">
-<!ENTITY appMenuRemoteTabs.sidebar.label "Прикажи траку са синхронизованим језичцима">
+<!ENTITY appMenuRemoteTabs.sidebar.label "Прикажи траку са син. језичцима">
 
 <!ENTITY customizeMenu.addToToolbar.label "Додај траци">
 <!ENTITY customizeMenu.addToToolbar.accesskey "Д">
@@ -450,6 +402,8 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY openCmd.commandkey           "l">
 <!ENTITY urlbar.placeholder2          "Претражи или унеси адресу">
 <!ENTITY urlbar.accesskey             "d">
+<!-- LOCALIZATION NOTE (urlbar.extension.label): Used to indicate that a selected autocomplete entry is provided by an extension. -->
+<!ENTITY urlbar.extension.label       "Екстензија:">
 <!ENTITY urlbar.switchToTab.label     "Премести на језичак:">
 
 <!ENTITY urlbar.searchSuggestionsNotification.question "Да ли желите да побољшате искуство са предлозима претраге?">
@@ -484,11 +438,11 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY searchFocus.commandkey2      "e">
 <!ENTITY searchFocusUnix.commandkey   "j">
 
-<!-- LOCALIZATION NOTE (contentSearchInput.label, contentSearchSubmit.label):
-     These are set as the aria-label attribute for the search input box and
-     submit button in the in-content search UI, to be used by screen readers. -->
+<!-- LOCALIZATION NOTE (contentSearchInput.label):
+     This is set as the aria-label attribute for the search input box in the
+     in-content search UI, to be used by screen readers. -->
 <!ENTITY contentSearchInput.label     "Упит претраге">
-<!ENTITY contentSearchSubmit.label    "Пошаљи претрагу">
+<!ENTITY contentSearchSubmit.tooltip  "Пошаљи претрагу">
 
 <!-- LOCALIZATION NOTE (searchFor.label, searchWith.label):
      These two strings are used to build the header above the list of one-click
@@ -514,6 +468,7 @@ These should match what Safari and other Apple applications use on OS X Lion. --
      This string won't wrap, so if the translated string is longer,
      consider translating it as if it said only "Search Settings". -->
 <!ENTITY changeSearchSettings.button  "Промени поставке претраге">
+<!ENTITY changeSearchSettings.tooltip "Промени поставке претраге">
 
 <!ENTITY searchInNewTab.label         "Претражи у новом језичку">
 <!ENTITY searchInNewTab.accesskey     "ј">
@@ -632,19 +587,23 @@ items are mutually exclusive. -->
 <!ENTITY mediaMute.accesskey         "г">
 <!ENTITY mediaUnmute.label           "Пусти тон">
 <!ENTITY mediaUnmute.accesskey       "т">
-<!ENTITY mediaPlaybackRate.label     "Брзина пуштања">
-<!ENTITY mediaPlaybackRate.accesskey "Б">
-<!ENTITY mediaPlaybackRate050x.label "Споро (0.5×)">
-<!ENTITY mediaPlaybackRate050x.accesskey "С">
-<!ENTITY mediaPlaybackRate100x.label "Нормално">
-<!ENTITY mediaPlaybackRate100x.accesskey "Н">
-<!ENTITY mediaPlaybackRate150x.label "Брзо (1.5×)">
-<!ENTITY mediaPlaybackRate150x.accesskey "Б">
-<!-- LOCALIZATION NOTE: "Ludicrous Speed" is a reference to the
+<!ENTITY mediaPlaybackRate2.label     "Брзина пуштања">
+<!ENTITY mediaPlaybackRate2.accesskey "п">
+<!ENTITY mediaPlaybackRate050x2.label "Споро (0.5×)">
+<!ENTITY mediaPlaybackRate050x2.accesskey "С">
+<!ENTITY mediaPlaybackRate100x2.label "Нормално">
+<!ENTITY mediaPlaybackRate100x2.accesskey "Н">
+<!ENTITY mediaPlaybackRate125x2.label "Брзо (1.25×)">
+<!ENTITY mediaPlaybackRate125x2.accesskey "Б">
+<!ENTITY mediaPlaybackRate150x2.label "Брже (1.5×)">
+<!ENTITY mediaPlaybackRate150x2.accesskey "ж">
+<!-- LOCALIZATION NOTE: "Ludicrous" is a reference to the
 movie "Space Balls" and is meant to say that this speed is very
 fast. -->
-<!ENTITY mediaPlaybackRate200x.label "Ludicrous Speed (2×)">
-<!ENTITY mediaPlaybackRate200x.accesskey "L">
+<!ENTITY mediaPlaybackRate200x2.label "Дупло брже (2×)">
+<!ENTITY mediaPlaybackRate200x2.accesskey "е">
+<!ENTITY mediaLoop.label             "Понављај">
+<!ENTITY mediaLoop.accesskey         "ј">
 <!-- LOCALIZATION NOTE: The access keys for "Show Controls" and
 "Hide Controls" are the same because the two context-menu
 items are mutually exclusive. -->
@@ -752,7 +711,7 @@ you can use these alternative items. Otherwise, their values should be empty.  -
 <!ENTITY identity.connectionSecure "Безбедна веза">
 <!ENTITY identity.connectionNotSecure "Веза није безбедна">
 <!ENTITY identity.connectionFile "Ова страница се складишти на рачунару.">
-<!ENTITY identity.connectionVerified1 "Безбедно сте повезани на овај сајт, којим управља:">
+<!ENTITY identity.connectionVerified2 "Безбедно сте повезани на овај сајт, који је у власништву:">
 <!ENTITY identity.connectionInternal "Ово је безбедна &brandShortName; страница.">
 <!ENTITY identity.insecureLoginForms2 "Пријаве које су унесене на овој страници су можда угрожене.">
 
@@ -787,17 +746,19 @@ you can use these alternative items. Otherwise, their values should be empty.  -
 
 <!ENTITY identity.permissions "Дозволе">
 <!ENTITY identity.permissionsEmpty "Овом сајту нису додељене никакве специјалне дозволе.">
+<!ENTITY identity.permissionsReloadHint "Можда ћете морати поново учитати страницу да примените промене.">
 
 <!-- Name for the tabs toolbar as spoken by screen readers.
      The word "toolbar" is appended automatically and should not be contained below! -->
 <!ENTITY tabsToolbar.label "Језичци прегледача">
 
-<!-- LOCALIZATION NOTE (syncTabsMenu3.label): This appears in the history menu and history panel -->
+<!-- LOCALIZATION NOTE (syncTabsMenu3.label): This appears in the history menu -->
 <!ENTITY syncTabsMenu3.label     "Синхронизовани језичци">
 
 <!ENTITY syncedTabs.sidebar.label              "Синхронизовани језичци">
-<!ENTITY syncedTabs.sidebar.fetching.label     "Преузимам синхронизоване језичке…">
 <!ENTITY syncedTabs.sidebar.noclients.label    "Пријавите се на Firefox са других уређаја да видите њихове језичке.">
+<!ENTITY syncedTabs.sidebar.noclients.title    "Нема синхронизованих језичака…">
+<!ENTITY syncedTabs.sidebar.noclients.subtitle "Желите да овде видите језичке са осталих уређаја?">
 <!ENTITY syncedTabs.sidebar.notsignedin.label  "Пријавите се да видите листу језичака са других уређаја.">
 <!ENTITY syncedTabs.sidebar.notabs.label       "Нема отворених језичака">
 <!ENTITY syncedTabs.sidebar.openprefs.label    "Отвори &syncBrand.shortName.label; поставке">
@@ -805,10 +766,25 @@ you can use these alternative items. Otherwise, their values should be empty.  -
      when Sync is configured but syncing tabs is disabled. -->
 <!ENTITY syncedTabs.sidebar.tabsnotsyncing.label       "Укључите синхронизацију језичака да видите листу језичака са других уређаја.">
 
-<!ENTITY syncedTabs.context.openTab.label                   "Отвори овај језичак">
-<!ENTITY syncedTabs.context.openTab.accesskey               "О">
-<!ENTITY syncedTabs.context.bookmarkSingleTab.label         "Забележи овај језичак…">
-<!ENTITY syncedTabs.context.bookmarkSingleTab.accesskey     "З">
+<!-- LOCALIZATION NOTE (syncedTabs.context.open.accesskey,
+                        syncedTabs.context.openAllInTabs.accesskey):
+     These access keys are identical because their associated menu items are
+     mutually exclusive -->
+<!ENTITY syncedTabs.context.open.label                       "Отвори">
+<!ENTITY syncedTabs.context.open.accesskey                   "О">
+<!ENTITY syncedTabs.context.openInNewTab.label               "Отвори у новом језичку">
+<!ENTITY syncedTabs.context.openInNewTab.accesskey           "ј">
+<!ENTITY syncedTabs.context.openInNewWindow.label            "Отвори у новом прозору">
+<!ENTITY syncedTabs.context.openInNewWindow.accesskey        "н">
+<!ENTITY syncedTabs.context.openInNewPrivateWindow.label     "Отвори у новом приватном прозору">
+<!ENTITY syncedTabs.context.openInNewPrivateWindow.accesskey "п">
+<!ENTITY syncedTabs.context.bookmarkSingleTab.label          "Забележи овај језичак…">
+<!ENTITY syncedTabs.context.bookmarkSingleTab.accesskey      "З">
+<!ENTITY syncedTabs.context.copy.label                       "Копирај">
+<!ENTITY syncedTabs.context.copy.accesskey                   "К">
+
+<!ENTITY syncedTabs.context.openAllInTabs.label              "Отвори све у језичцима">
+<!ENTITY syncedTabs.context.openAllInTabs.accesskey          "ч">
 
 
 <!ENTITY syncBrand.shortName.label    "Sync">
@@ -821,25 +797,7 @@ you can use these alternative items. Otherwise, their values should be empty.  -
 <!ENTITY syncReAuthItem.accesskey     "ж">
 <!ENTITY syncToolbarButton.label      "Sync">
 
-<!ENTITY socialToolbar.title        "Друштвена трака">
-
-<!ENTITY social.ok.label       "У реду">
-<!ENTITY social.ok.accesskey   "У">
-
-<!ENTITY social.toggleSidebar.label "Прикажи палету">
-<!ENTITY social.toggleSidebar.accesskey "П">
-
 <!ENTITY social.addons.label "Управљање сервисима…">
-
-<!ENTITY social.toggleNotifications.label "Прикажи обавештења на радној површини">
-<!ENTITY social.toggleNotifications.accesskey "о">
-
-<!ENTITY social.activated.description "Сервиси од <label/> су омогућени. Можете да промените поставке за сервисе у <label class='text-link'>Управљачу додацима</label>.">
-<!ENTITY social.activated.undo.label "Упс, поништи ово!">
-<!ENTITY social.activated.undo.accesskey "У">
-<!ENTITY social.learnMore.label "Сазнајте више…">
-<!ENTITY social.learnMore.accesskey "С">
-<!ENTITY social.closeNotificationItem.label "Не сад">
 
 <!ENTITY social.directory.label "Фасцикла активација">
 <!ENTITY social.directory.text "Можете активирати сервисе за дељење из фасцикле.">
@@ -860,15 +818,6 @@ you can use these alternative items. Otherwise, their values should be empty.  -
 <!ENTITY customizeMode.lwthemes.menuManage.accessKey "У">
 <!ENTITY customizeMode.lwthemes.menuGetMore "Набавите теме">
 <!ENTITY customizeMode.lwthemes.menuGetMore.accessKey "Н">
-
-<!ENTITY social.chatBar.commandkey "c">
-<!ENTITY social.chatBar.label "Разговори">
-<!ENTITY social.chatBar.accesskey "Р">
-
-<!ENTITY social.markpageMenu.accesskey "с">
-<!ENTITY social.markpageMenu.label "Сачувај страницу…">
-<!ENTITY social.marklinkMenu.accesskey "в">
-<!ENTITY social.marklinkMenu.label "Сачувај везу…">
 
 <!ENTITY getUserMedia.selectCamera.label "Камера за дељење:">
 <!ENTITY getUserMedia.selectCamera.accesskey "К">
@@ -903,8 +852,6 @@ you can use these alternative items. Otherwise, their values should be empty.  -
 <!ENTITY trackingContentBlocked.block.label "Омогући заштиту">
 <!ENTITY trackingContentBlocked.block.accesskey "з">
 <!ENTITY trackingContentBlocked.disabled.message "Заштита од праћења је онемогућена">
-
-<!ENTITY pointerLock.notification.message "Притисните ESC да га поново прикажете.">
 
 <!ENTITY pluginNotification.showAll.label "Прикажи све">
 <!ENTITY pluginNotification.showAll.accesskey "С">

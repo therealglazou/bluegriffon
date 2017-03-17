@@ -18,9 +18,11 @@
 
      For example, in English, a long string would be:
 
-     59 minutes, 59 seconds remaining - 1022 of 1023 KB
+     59m 59s left - 1022 of 1023 KB (120.5 KB/sec)
 
-     That's 50 characters, so we set the width at 50ch.
+     Since Downloads Panel is redesigned to show the detail string including
+     the hovering case for an item or an action button.
+     Bug 1328519 is for discussing the detail rule of `downloadDetails.width`.
      -->
 
 <!ENTITY downloadDetails.width            "50ch">
@@ -29,11 +31,11 @@
      which is displayed at the bottom of the Downloads Panel if the
      number of downloads exceeds the limit that the panel can display.
 
-     A good rule of thumb here is to look at the otherDownloads2 string
+     A good rule of thumb here is to look at the otherDownloads3 string
      in downloads.properties, and make a reasonable estimate of its
      maximum length. For English, this seems like a reasonable limit:
 
-     + 999 other downloads
+     999 files downloading
 
      that's 21 characters, so we set the minimum width to 21ch.
      -->
@@ -45,7 +47,6 @@
 <!ENTITY cmd.resume.label                 "Folytatás">
 <!ENTITY cmd.resume.accesskey             "F">
 <!ENTITY cmd.cancel.label                 "Mégse">
-<!ENTITY cmd.cancel.accesskey             "M">
 <!-- LOCALIZATION NOTE (cmd.show.label, cmd.show.accesskey, cmd.showMac.label,
      cmd.showMac.accesskey):
      The show and showMac commands are never shown together, thus they can share
@@ -62,22 +63,47 @@
 <!ENTITY cmd.copyDownloadLink.accesskey   "L">
 <!ENTITY cmd.removeFromHistory.label      "Törlés az előzményekből">
 <!ENTITY cmd.removeFromHistory.accesskey  "e">
-<!ENTITY cmd.clearList.label              "Lista törlése">
-<!ENTITY cmd.clearList.accesskey          "i">
+<!ENTITY cmd.clearList2.label             "Előnézeti panel törlése">
+<!ENTITY cmd.clearList2.accesskey         "t">
 <!ENTITY cmd.clearDownloads.label         "Letöltések törlése">
 <!ENTITY cmd.clearDownloads.accesskey     "L">
-<!-- LOCALIZATION NOTE (cmd.unblock.label):
-     This command may be shown in the context menu, as a menu button item, or as
-     a text link when malware or potentially unwanted downloads are blocked.
+<!-- LOCALIZATION NOTE (cmd.unblock2.label):
+     This command is shown in the context menu when downloads are blocked.
      -->
-<!ENTITY cmd.unblock.label                "Blokkolás feloldása">
-<!ENTITY cmd.unblock.accesskey            "f">
+<!ENTITY cmd.unblock2.label               "Letöltés engedélyezése">
+<!ENTITY cmd.unblock2.accesskey           "L">
 <!-- LOCALIZATION NOTE (cmd.removeFile.label):
-     This command may be shown in the context menu or as a menu button label
-     when malware or potentially unwanted downloads are blocked.
+     This is the tooltip of the action button shown when malware is blocked.
      -->
 <!ENTITY cmd.removeFile.label             "Fájl eltávolítása">
-<!ENTITY cmd.removeFile.accesskey         "e">
+<!-- LOCALIZATION NOTE (cmd.chooseUnblock.tooltip):
+     This is the tooltip of the action button shown when potentially unwanted
+     downloads are blocked. This opens a dialog where the user can choose
+     whether to unblock or remove the download. Removing is the default option.
+     -->
+<!ENTITY cmd.chooseUnblock.label          "Fájl eltávolítása vagy letöltés engedélyezése">
+<!-- LOCALIZATION NOTE (cmd.chooseOpen.tooltip):
+     This is the tooltip of the action button shown when uncommon downloads are
+     blocked.This opens a dialog where the user can choose whether to open the
+     file or remove the download. Opening is the default option.
+     -->
+<!ENTITY cmd.chooseOpen.label             "Megnyitás vagy fájl eltávolítása">
+<!-- LOCALIZATION NOTE (showMoreInformation.label):
+     Displayed when hovering a blocked download, indicates that it's possible to
+     show more information for user to take the next action.
+     -->
+<!-- LOCALIZATION NOTE (openFile.label):
+     Displayed when hovering a complete download, indicates that it's possible to
+     open the file using an app available in the system.
+     -->
+<!-- LOCALIZATION NOTE (retryDownload.label):
+     Displayed when hovering a download which is able to be retried by users,
+     indicates that it's possible to download this file again.
+     -->
+<!-- LOCALIZATION NOTE (cancelDownload.label):
+     Displayed when hovering a download which is able to be cancelled by users,
+     indicates that it's possible to cancel and stop the download.
+     -->
 <!-- LOCALIZATION NOTE (blocked.label):
      Shown as a tag before the file name for some types of blocked downloads.
      Note: This string doesn't exist in the UI yet.  See bug 1053890.
@@ -100,6 +126,8 @@
 <!ENTITY downloadsHistory.label           "Minden letöltés megjelenítése">
 <!ENTITY downloadsHistory.accesskey       "M">
 
+<!ENTITY openDownloadsFolder.label       "Letöltési mappa megnyitása">
+
 <!ENTITY clearDownloadsButton.label       "Letöltések törlése">
 <!ENTITY clearDownloadsButton.tooltip     "Törli a befejezett, megszakított és meghiúsult letöltéseket">
 <!-- LOCALIZATION NOTE (downloadsListEmpty.label):
@@ -119,3 +147,28 @@
      -->
 
 <!ENTITY downloadsListNoMatch.label       "Nem találhatók illeszkedő letöltések.">
+
+
+<!-- LOCALIZATION NOTE (cancelDownload.label):
+     Displayed when hovering a download which is able to be cancelled by users,
+     indicates that it's possible to cancel and stop the download.
+     -->
+<!ENTITY cancelDownload.label             "Cancel Download">
+
+<!-- LOCALIZATION NOTE (openFile.label):
+     Displayed when hovering a complete download, indicates that it's possible to
+     open the file using an app available in the system.
+     -->
+<!ENTITY openFile.label                   "Open File">
+
+<!-- LOCALIZATION NOTE (retryDownload.label):
+     Displayed when hovering a download which is able to be retried by users,
+     indicates that it's possible to download this file again.
+     -->
+<!ENTITY retryDownload.label              "Retry Download">
+
+<!-- LOCALIZATION NOTE (showMoreInformation.label):
+     Displayed when hovering a blocked download, indicates that it's possible to
+     show more information for user to take the next action.
+     -->
+<!ENTITY showMoreInformation.label        "Show more information">

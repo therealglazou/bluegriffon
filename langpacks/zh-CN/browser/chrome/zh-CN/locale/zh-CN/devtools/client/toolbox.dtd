@@ -10,43 +10,6 @@
 <!ENTITY toggleToolboxF12.keycode          "VK_F12">
 <!ENTITY toggleToolboxF12.keytext          "F12">
 
-<!ENTITY toolboxCloseButton.tooltip    "关闭开发者工具">
-<!ENTITY toolboxOptionsButton.key      "O">
-<!ENTITY toolboxNextTool.key           "]">
-<!ENTITY toolboxPreviousTool.key       "[">
-
-<!-- LOCALIZATION NOTE :
-fullZoomEnlargeCmd.commandkey, fullZoomEnlargeCmd.commandkey2,
-fullZoomEnlargeCmd.commandkey3, fullZoomReduceCmd.commandkey,
-fullZoomReduceCmd.commandkey2, fullZoomResetCmd.commandkey,
-and fullZoomResetCmd.commandkey2 should all match the corresponding
-values from browser.dtd.  -->
-<!ENTITY fullZoomEnlargeCmd.commandkey  "+">
-<!ENTITY fullZoomEnlargeCmd.commandkey2 "=">
-<!ENTITY fullZoomEnlargeCmd.commandkey3 "">
-
-<!ENTITY fullZoomReduceCmd.commandkey   "-">
-<!ENTITY fullZoomReduceCmd.commandkey2  "">
-
-<!ENTITY fullZoomResetCmd.commandkey    "0">
-<!ENTITY fullZoomResetCmd.commandkey2   "">
-
-<!ENTITY toolboxReload.key             "r">
-<!-- This key is used with the accel+shift modifiers to minimize the toolbox -->
-<!ENTITY toolboxToggleMinimize.key     "U">
-
-<!ENTITY toolboxToggle.key             "d">
-<!-- LOCALIZATION NOTE (toolboxFramesButton): This is the label for
-  -  the iframes menu list that appears only when the document has some.
-  -  It allows you to switch the context of the whole toolbox. -->
-<!ENTITY toolboxFramesTooltip          "选择一个 iframe 作为当前的目标文档">
-
-<!-- LOCALIZATION NOTE (toolboxNoAutoHideButton): This is the label for
-  -  the button to force the popups/panels to stay visible on blur.
-  -  This is only visible in the browser toolbox as it is meant for
-  -  addon developers and Firefox contributors. -->
-<!ENTITY toolboxNoAutoHideTooltip      "禁用自动隐藏弹窗">
-
 <!-- LOCALIZATION NOTE (browserToolboxErrorMessage): This is the label
   -  shown next to error details when the Browser Toolbox is unable to open. -->
 <!ENTITY browserToolboxErrorMessage          "打开浏览器工具箱时出错：">
@@ -63,7 +26,7 @@ values from browser.dtd.  -->
   -  for the checkbox option to show user agent styles in the Inspector
   -  panel. -->
 <!ENTITY options.showUserAgentStyles.label "显示浏览器样式">
-<!ENTITY options.showUserAgentStyles.tooltip "启用此选项将显示由浏览器加载的默认样式。">
+<!ENTITY options.showUserAgentStyles.tooltip "启用此选项将显示由浏览器载入的默认样式。">
 
 <!-- LOCALIZATION NOTE (options.collapseAttrs.label): This is the label
   -  for the checkbox option to enable collapse attributes in the Inspector
@@ -83,7 +46,7 @@ values from browser.dtd.  -->
 
 <!-- LOCALIZATION NOTE (options.defaultColorUnit.authored): This is used in the
   -  'Default color unit' dropdown list and is visible in the options panel. -->
-<!ENTITY options.defaultColorUnit.authored "同原始单元">
+<!ENTITY options.defaultColorUnit.authored "按原单位">
 
 <!-- LOCALIZATION NOTE (options.defaultColorUnit.hex): This is used in the
   -  'Default color unit' dropdown list and is visible in the options panel. -->
@@ -105,7 +68,7 @@ values from browser.dtd.  -->
 <!-- LOCALIZATION NOTE (options.context.triggersPageRefresh): This is the
   -  triggers page refresh footnote under the advanced settings group in the
   -  options panel and is used for settings that trigger page reload. -->
-<!ENTITY options.context.triggersPageRefresh  "* 仅限当前会话，重新载入页面">
+<!ENTITY options.context.triggersPageRefresh  "* 仅限当前会话，将重新载入当前页面">
 
 <!-- LOCALIZATION NOTE (options.enableChrome.label4): This is the label for the
   -  checkbox that toggles chrome debugging, i.e. devtools.chrome.enabled
@@ -117,7 +80,7 @@ values from browser.dtd.  -->
   -  checkbox that toggles remote debugging, i.e. devtools.debugger.remote-enabled
   -  boolean preference in about:config, in the options panel. -->
 <!ENTITY options.enableRemote.label3    "启用远程调试">
-<!ENTITY options.enableRemote.tooltip   "打开此选项将允许开发者工具调试远端 Firefox 实例，比如 Firefox OS">
+<!ENTITY options.enableRemote.tooltip2  "打开此选项将允许开发者工具调试远端 Firefox 实例，比如 Firefox OS">
 
 <!-- LOCALIZATION NOTE (options.enableWorkers.label): This is the label for the
   -  checkbox that toggles worker debugging, i.e. devtools.debugger.workers
@@ -129,13 +92,13 @@ values from browser.dtd.  -->
   -  options.disableJavaScript.tooltip): This is the options panel label and
   -  tooltip for the checkbox that toggles JavaScript on or off. -->
 <!ENTITY options.disableJavaScript.label     "禁用 JavaScript *">
-<!ENTITY options.disableJavaScript.tooltip   "启用这个选项将对当前标签页禁用 JavaScript 。如果关闭了该标签页或者工具箱，则这个设置就不再有效。">
+<!ENTITY options.disableJavaScript.tooltip   "启用这个选项将对当前标签页禁用 JavaScript。如果关闭了该标签页或者工具箱，则这个设置就不再有效。">
 
-<!-- LOCALIZATION NOTE (options.disableCache.label2,
-  -  options.disableCache.tooltip2): This is the options panel label and
-  -  tooltip for the checkbox that toggles the cache on or off. -->
-<!ENTITY options.disableCache.label2     "禁用缓存（工具箱打开时）">
-<!ENTITY options.disableCache.tooltip2   "开启此选项将在有工具箱打开时禁用所有标签页的缓存。">
+<!-- LOCALIZATION NOTE (options.disableHTTPCache.label,
+  -  options.disableHTTPCache.tooltip): This is the options panel label and
+  -  tooltip for the checkbox that toggles the HTTP cache on or off. -->
+<!ENTITY options.disableHTTPCache.label     "禁用 HTTP 缓存（工具箱打开时）">
+<!ENTITY options.disableHTTPCache.tooltip   "开启此选项将对所有已打开工具箱的标签页禁用 HTTP 缓存。Service Worker 不会受此选项影响。">
 
 <!-- LOCALIZATION NOTE (options.enableServiceWorkersHTTP.label,
   -  options.enableServiceWorkersHTTP.tooltip): This is the options panel label and
@@ -143,10 +106,10 @@ values from browser.dtd.  -->
 <!ENTITY options.enableServiceWorkersHTTP.label     "启用 Service Workers over HTTP（在工具箱打开时）">
 <!ENTITY options.enableServiceWorkersHTTP.tooltip   "开启此选项时，将对所有标签页在工具箱打开时启用 Service Workers over HTTP。">
 
-<!-- LOCALIZATION NOTE (options.selectDefaultTools.label): This is the label for
+<!-- LOCALIZATION NOTE (options.selectDefaultTools.label2): This is the label for
   -  the heading of group of checkboxes corresponding to the default developer
   -  tools. -->
-<!ENTITY options.selectDefaultTools.label     "默认的 Firefox 开发者工具">
+<!ENTITY options.selectDefaultTools.label2    "默认的开发者工具">
 
 <!-- LOCALIZATION NOTE (options.selectAdditionalTools.label): This is the label for
   -  the heading of group of checkboxes corresponding to the developer tools
@@ -171,8 +134,8 @@ values from browser.dtd.  -->
 
 <!-- LOCALIZATION NOTE (options.usedeveditiontheme.*) Options under the
   -  toolbox for enabling and disabling the Developer Edition browser theme. -->
-<!ENTITY options.usedeveditiontheme.label   "使用开发者版本的浏览器主题">
-<!ENTITY options.usedeveditiontheme.tooltip "切换使用开发者版本的浏览器主题。">
+<!ENTITY options.usedeveditiontheme.label   "使用开发者版的浏览器主题">
+<!ENTITY options.usedeveditiontheme.tooltip "切换使用开发者版的浏览器主题。">
 
 <!-- LOCALIZATION NOTE (options.webconsole.label): This is the label for the
   -  heading of the group of Web Console preferences in the options panel. -->
@@ -182,6 +145,15 @@ values from browser.dtd.  -->
    - label for the checkbox that toggles timestamps in the Web Console -->
 <!ENTITY options.timestampMessages.label      "启用时间戳">
 <!ENTITY options.timestampMessages.tooltip    "如果启用此选项，Web 控制台中的命令和输出将显示时间戳">
+
+<!-- LOCALIZATION NOTE (options.debugger.label): This is the label for the
+  -  heading of the group of Debugger preferences in the options panel. -->
+<!ENTITY options.debugger.label            "调试器">
+
+<!-- LOCALIZATION NOTE (options.sourceMap.label): This is the
+   - label for the checkbox that toggles source maps in the Debugger -->
+<!ENTITY options.sourceMaps.label      "启用源映射">
+<!ENTITY options.sourceMaps.tooltip    "如果您启用此选项，来源将在调试器和控制台中映射。">
 
 <!-- LOCALIZATION NOTE (options.styleeditor.label): This is the label for the
   -  heading of the group of Style Editor preferences in the options
@@ -197,6 +169,21 @@ values from browser.dtd.  -->
    - label for the checkbox that toggles autocompletion of css in the Style Editor -->
 <!ENTITY options.stylesheetAutocompletion.label      "自动补全 CSS">
 <!ENTITY options.stylesheetAutocompletion.tooltip    "在样式编辑器中自动补全您输入的 CSS 属性、值和选择器">
+
+<!-- LOCALIZATION NOTE (options.screenshot.label): This is the label for the
+   -  heading of the group of Screenshot preferences in the options
+   -  panel. -->
+<!ENTITY options.screenshot.label            "截图行为">
+
+<!-- LOCALIZATION NOTE (options.screenshot.clipboard.label): This is the
+   - label for the checkbox that toggles screenshot to clipboard feature. -->
+<!ENTITY options.screenshot.clipboard.label      "截图到剪贴板">
+<!ENTITY options.screenshot.clipboard.tooltip    "直接将截图保存到剪贴板">
+
+<!-- LOCALIZATION NOTE (options.screenshot.audio.label): This is the
+   - label for the checkbox that toggles the camera shutter audio for screenshot tool -->
+<!ENTITY options.screenshot.audio.label      "播放相机快门声">
+<!ENTITY options.screenshot.audio.tooltip    "拍摄截图时播放相机快门声">
 
 <!-- LOCALIZATION NOTE (options.commonprefs): This is the label for the heading
       of all preferences that affect both the Web Console and the Network
@@ -227,9 +214,8 @@ values from browser.dtd.  -->
 <!ENTITY options.sourceeditor.autoclosebrackets.tooltip "自动插入关闭括号">
 <!ENTITY options.sourceeditor.expandtab.label           "使用空格缩进">
 <!ENTITY options.sourceeditor.expandtab.tooltip         "使用空格而非制表符缩进">
-<!ENTITY options.sourceeditor.tabsize.label             "缩进尺寸">
+<!ENTITY options.sourceeditor.tabsize.label             "制表符尺寸">
 <!ENTITY options.sourceeditor.tabsize.accesskey         "T">
 <!ENTITY options.sourceeditor.keybinding.label          "按键绑定">
 <!ENTITY options.sourceeditor.keybinding.accesskey      "K">
 <!ENTITY options.sourceeditor.keybinding.default.label  "默认设置">
-

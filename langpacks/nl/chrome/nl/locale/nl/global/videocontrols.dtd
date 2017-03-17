@@ -5,10 +5,11 @@
 <!ENTITY playButton.playLabel "Afspelen">
 <!ENTITY playButton.pauseLabel "Pauzeren">
 <!ENTITY muteButton.muteLabel "Dempen">
-<!ENTITY muteButton.unmuteLabel "Dempen uitschakelen">
+<!ENTITY muteButton.unmuteLabel "Dempen opheffen">
 <!ENTITY fullscreenButton.enterfullscreenlabel "Volledig scherm">
 <!ENTITY fullscreenButton.exitfullscreenlabel "Volledig scherm verlaten">
 <!ENTITY castingButton.castingLabel "Casten naar scherm">
+<!ENTITY closedCaption.off "Uit">
 
 <!ENTITY stats.media "Media">
 <!ENTITY stats.size "Grootte">
@@ -36,3 +37,13 @@ the 5 minute mark in a 6 hour long video, #1 would be "5:00" and #2 would be
 "6:00:00", result string would be "5:00 of 6:00:00 elapsed".
 -->
 <!ENTITY scrubberScale.nameFormat "#1 van #2 verstreken">
+
+<!-- LOCALIZATION NOTE (positionAndDuration.nameFormat): the #1 string is the current
+media position, and the #2 string is the total duration. For example, when at
+the 5 minute mark in a 6 hour long video, #1 would be "5:00" and #2 would be
+"6:00:00", result string would be "5:00 / 6:00:00".
+Note that #2 is not always available. For example, when at the 5 minute mark in an
+unknown duration video, #1 would be "5:00" and the string which is surrounded by
+<span> would be deleted, result string would be "5:00".
+-->
+<!ENTITY positionAndDuration.nameFormat "#1<span> / #2</span>">

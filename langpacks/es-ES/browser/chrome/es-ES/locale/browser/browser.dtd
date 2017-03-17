@@ -20,6 +20,12 @@
 <!ENTITY pinTab.accesskey "F">
 <!ENTITY unpinTab.label "Soltar pestaña">
 <!ENTITY unpinTab.accesskey "ñ">
+<!ENTITY sendTabToDevice.label "Enviar pestaña al dispositivo">
+<!ENTITY sendTabToDevice.accesskey "v">
+<!ENTITY sendPageToDevice.label "Enviar página al dispositivo">
+<!ENTITY sendPageToDevice.accesskey "v">
+<!ENTITY sendLinkToDevice.label "Enviar enlace al dispositivo">
+<!ENTITY sendLinkToDevice.accesskey "v">
 <!ENTITY moveToNewWindow.label "Mover a una nueva ventana">
 <!ENTITY moveToNewWindow.accesskey "V">
 <!ENTITY bookmarkAllTabs.label "Añadir pestañas a marcadores…">
@@ -74,12 +80,11 @@
 <!ENTITY fullScreenCmd.macCommandKey "f">
 <!ENTITY showAllTabsCmd.label "Mostrar todas las pestañas">
 <!ENTITY showAllTabsCmd.accesskey "A">
+<!ENTITY toggleReaderMode.key "R">
 <!ENTITY fxaSignIn.label "Conectarse a &syncBrand.shortName.label;">
 <!ENTITY fxaSignedIn.tooltip "Abrir preferencias de &syncBrand.shortName.label;">
 <!ENTITY fxaSignInError.label "Reconectar a &syncBrand.shortName.label;">
 <!ENTITY fxaUnverified.label "Verifique su cuenta">
-<!ENTITY syncStartPanel2.heading "&syncBrand.shortName.label; activado">
-<!ENTITY syncStartPanel2.subTitle "&brandShortName; comenzará a sincronizar en breves momentos.">
 <!ENTITY fullScreenMinimize.tooltip "Minimizar">
 <!ENTITY fullScreenRestore.tooltip "Restaurar">
 <!ENTITY fullScreenClose.tooltip "Cerrar">
@@ -94,6 +99,9 @@
 <!ENTITY exitDOMFullscreenMac.button "Salir de pantalla completa (esc)">
 <!ENTITY leaveDOMFullScreen.label "Salir de la pantalla completa">
 <!ENTITY leaveDOMFullScreen.accesskey "p">
+<!ENTITY pointerlockWarning.beforeDomain.label "">
+<!ENTITY pointerlockWarning.afterDomain.label "tiene el control de su puntero. Pulse Esc para recuperar el control.">
+<!ENTITY pointerlockWarning.generic.label "Este documento tiene el control del puntero. Pulse Esc para recuperar el control.">
 <!ENTITY closeWindow.label "Cerrar ventana">
 <!ENTITY closeWindow.accesskey "v">
 <!ENTITY bookmarksMenu.label "Marcadores">
@@ -101,7 +109,6 @@
 <!ENTITY bookmarkThisPageCmd.label "Añadir esta página a marcadores">
 <!ENTITY editThisBookmarkCmd.label "Editar este marcador">
 <!ENTITY bookmarkThisPageCmd.commandkey "d">
-<!ENTITY markPageCmd.commandkey "l">
 <!ENTITY findShareServices.label "Encontrar más servicios de compartición…">
 <!ENTITY sharePageCmd.label "Compartir esta página">
 <!ENTITY sharePageCmd.commandkey "S">
@@ -119,8 +126,13 @@
 <!ENTITY subscribeToPageMenuitem.label "Suscribirse a esta página…">
 <!ENTITY addCurPagesCmd.label "Añadir pestañas a marcadores…">
 <!ENTITY showAllBookmarks2.label "Mostrar todos los marcadores">
-<!ENTITY unsortedBookmarksCmd.label "Marcadores sin ordenar">
+<!ENTITY recentBookmarks.label "Añadidos recientemente">
+<!ENTITY otherBookmarksCmd.label "Otros marcadores">
 <!ENTITY bookmarksToolbarChevron.tooltip "Mostrar más marcadores">
+<!ENTITY showRecentlyBookmarked.label "Mostrar últimos añadidos a marcadores">
+<!ENTITY showRecentlyBookmarked.accesskey "o">
+<!ENTITY hideRecentlyBookmarked.label "Ocultar los últimos añadidos a marcadores">
+<!ENTITY hideRecentlyBookmarked.accesskey "O">
 <!ENTITY backCmd.label "Anterior">
 <!ENTITY backButton.tooltip "Ir a la página anterior">
 <!ENTITY forwardCmd.label "Siguiente">
@@ -136,35 +148,37 @@
 <!ENTITY printButton.label "Imprimir">
 <!ENTITY printButton.tooltip "Imprimir esta página">
 <!ENTITY urlbar.viewSiteInfo.label "Ver información del sitio">
-<!ENTITY urlbar.defaultNotificationAnchor.label "Ver una notificación">
-<!ENTITY urlbar.geolocationNotificationAnchor.label "Ver la petición de ubicación">
-<!ENTITY urlbar.addonsNotificationAnchor.label "Ver el mensaje de instalación del complemento">
-<!ENTITY urlbar.indexedDBNotificationAnchor.label "Ver el mensaje de almacenamiento de aplicaciones sin conexión">
-<!ENTITY urlbar.loginFillNotificationAnchor.label "Administrar su información de inicio de sesión">
-<!ENTITY urlbar.passwordNotificationAnchor.label "Marque si quiere guardar su contraseña">
-<!ENTITY urlbar.webappsNotificationAnchor.label "Ver el mensaje de instalación de aplicaciones">
-<!ENTITY urlbar.pluginsNotificationAnchor.label "Administrar uso de plugins en esta página">
-<!ENTITY urlbar.webNotsNotificationAnchor3.label "Cambiar si puede recibir notificaciones del sitio">
-<!ENTITY urlbar.webRTCShareDevicesNotificationAnchor.label "Administrar compartición de su cámara o micrófono con el sitio">
-<!ENTITY urlbar.webRTCSharingDevicesNotificationAnchor.label "Está compartiendo su cámara o micrófono con el sitio">
-<!ENTITY urlbar.webRTCShareMicrophoneNotificationAnchor.label "Administrar compartición de su micrófono con el sitio">
-<!ENTITY urlbar.webRTCSharingMicrophoneNotificationAnchor.label "Está compartiendo su micrófono con el sitio">
-<!ENTITY urlbar.webRTCShareScreenNotificationAnchor.label "Administrar compartición de sus ventanas o pantalla con el sitio">
-<!ENTITY urlbar.webRTCSharingScreenNotificationAnchor.label "Está compartiendo una ventana o su pantalla con el sitio">
-<!ENTITY urlbar.pointerLockNotificationAnchor.label "Cambiar si el sitio puede ocultar el puntero">
-<!ENTITY urlbar.servicesNotificationAnchor.label "Ver el mensaje de instalación de servicio">
-<!ENTITY urlbar.translateNotificationAnchor.label "Traducir esta página">
-<!ENTITY urlbar.translatedNotificationAnchor.label "Administrar traducción de la página">
-<!ENTITY urlbar.emeNotificationAnchor.label "Administrar uso del software DRM">
+<!ENTITY urlbar.defaultNotificationAnchor.tooltip "Abrir panel de mensajes">
+<!ENTITY urlbar.geolocationNotificationAnchor.tooltip "Abrir panel de peticiones de ubicación">
+<!ENTITY urlbar.addonsNotificationAnchor.tooltip "Abrir el panel de mensajes de instalación de complementos">
+<!ENTITY urlbar.indexedDBNotificationAnchor.tooltip "Abrir panel de mensajes de almacenamiento sin conexión">
+<!ENTITY urlbar.passwordNotificationAnchor.tooltip "Abrir el panel de mensajes de contraseñas">
+<!ENTITY urlbar.pluginsNotificationAnchor.tooltip "Administrar uso de plugins">
+<!ENTITY urlbar.webNotificationAnchor.tooltip "Cambiar si puede recibir notificaciones del sitio">
+<!ENTITY urlbar.webRTCShareDevicesNotificationAnchor.tooltip "Administrar la compartición de su cámara o micrófono con el sitio">
+<!ENTITY urlbar.webRTCShareMicrophoneNotificationAnchor.tooltip "Administrar la compartición de su micrófono con el sitio">
+<!ENTITY urlbar.webRTCShareScreenNotificationAnchor.tooltip "Administrar la compartición de sus ventanas o pantalla con el sitio">
+<!ENTITY urlbar.servicesNotificationAnchor.tooltip "Abrir panel de mensajes de instalación">
+<!ENTITY urlbar.translateNotificationAnchor.tooltip "Traducir esta página">
+<!ENTITY urlbar.translatedNotificationAnchor.tooltip "Administrar traducción de páginas">
+<!ENTITY urlbar.emeNotificationAnchor.tooltip "Administrar uso de software DRM">
+<!ENTITY urlbar.cameraBlocked.tooltip "Ha bloqueado su cámara para este sitio web.">
+<!ENTITY urlbar.microphoneBlocked.tooltip "Ha bloqueado su micrófono para este sitio web.">
+<!ENTITY urlbar.screenBlocked.tooltip "Ha impedido que este sitio web comparta su pantalla.">
+<!ENTITY urlbar.geolocationBlocked.tooltip "Ha bloqueado la información de ubicación para este sitio web.">
+<!ENTITY urlbar.indexedDBBlocked.tooltip "Ha bloqueado el almacenamiento de datos para este sitio web.">
+<!ENTITY urlbar.webNotificationsBlocked.tooltip "Ha bloqueado las notificaciones para este sitio web.">
 <!ENTITY urlbar.openHistoryPopup.tooltip "Mostrar historial">
+<!ENTITY urlbar.zoomReset.tooltip "Restablecer nivel de aumento">
 <!ENTITY searchItem.title "Buscar">
 <!ENTITY homeButton.label "Inicio">
 <!ENTITY bookmarksButton.label "Marcadores">
 <!ENTITY bookmarksCmd.commandkey "b">
 <!ENTITY bookmarksMenuButton.label "Marcadores">
-<!ENTITY bookmarksMenuButton.unsorted.label "Marcadores sin ordenar">
+<!ENTITY bookmarksMenuButton.other.label "Otros marcadores">
 <!ENTITY viewBookmarksSidebar2.label "Ver el panel lateral de marcadores">
 <!ENTITY viewBookmarksToolbar.label "Ver la barra de marcadores">
+<!ENTITY containersMenu.label "Contenedores">
 <!ENTITY bookmarksGtkCmd.commandkey "o">
 <!ENTITY bookmarksWinCmd.commandkey "i">
 <!ENTITY historyButton.label "Historial">
@@ -182,62 +196,12 @@
 <!ENTITY addons.commandkey "A">
 <!ENTITY webDeveloperMenu.label "Desarrollador web">
 <!ENTITY webDeveloperMenu.accesskey "W">
-<!ENTITY devToolsCmd.keycode "VK_F12">
-<!ENTITY devToolsCmd.keytext "F12">
-<!ENTITY devtoolsServiceWorkers.label "Service Workers">
-<!ENTITY devtoolsServiceWorkers.accesskey "k">
-<!ENTITY devtoolsConnect.label "Conectar…">
-<!ENTITY devtoolsConnect.accesskey "e">
-<!ENTITY errorConsoleCmd.label "Consola de errores">
-<!ENTITY errorConsoleCmd.accesskey "n">
-<!ENTITY remoteWebConsoleCmd.label "Consola web remota">
-<!ENTITY browserConsoleCmd.label "Consola del navegador">
-<!ENTITY browserConsoleCmd.commandkey "j">
-<!ENTITY browserConsoleCmd.accesskey "C">
 <!ENTITY inspectContextMenu.label "Inspeccionar elemento">
 <!ENTITY inspectContextMenu.accesskey "l">
-<!ENTITY responsiveDesignTool.label "Vista de diseño adaptable">
-<!ENTITY responsiveDesignTool.accesskey "V">
-<!ENTITY responsiveDesignTool.commandkey "M">
-<!ENTITY eyedropper.label "Selector de color">
-<!ENTITY eyedropper.accesskey "S">
-<!ENTITY scratchpad.label "Borrador">
-<!ENTITY scratchpad.accesskey "o">
-<!ENTITY scratchpad.keycode "VK_F4">
-<!ENTITY scratchpad.keytext "F4">
-<!ENTITY browserToolboxMenu.label "Caja de herramientas del navegador">
-<!ENTITY browserToolboxMenu.accesskey "h">
-<!ENTITY browserToolboxCmd.commandkey "i">
-<!ENTITY browserContentToolboxMenu.label "Caja de herramientas de contenido del navegador">
-<!ENTITY browserContentToolboxMenu.accesskey "h">
-<!ENTITY devToolbarCloseButton.tooltiptext "Cerrar la barra de desarrolladores">
-<!ENTITY devToolbarMenu.label "Barra de desarrolladores">
-<!ENTITY devToolbarMenu.accesskey "B">
-<!ENTITY webide.label "WebIDE">
-<!ENTITY webide.accesskey "W">
-<!ENTITY webide.keycode "VK_F8">
-<!ENTITY webide.keytext "F8">
-<!ENTITY devToolbar.keycode "VK_F2">
-<!ENTITY devToolbar.keytext "F2">
-<!ENTITY devToolboxMenuItem.label "Mostrar herramientas">
-<!ENTITY devToolboxMenuItem.accesskey "M">
-<!ENTITY devToolboxMenuItem.keytext "I">
-<!ENTITY devToolbarToolsButton.tooltip "Activar las herramientas para desarrolladores">
-<!ENTITY devToolbarOtherToolsButton.label "Más herramientas">
-<!ENTITY getMoreDevtoolsCmd.label "Obtener más herramientas">
-<!ENTITY getMoreDevtoolsCmd.accesskey "h">
 <!ENTITY fileMenu.label "Archivo">
 <!ENTITY fileMenu.accesskey "A">
-<!ENTITY newUserContext.label "Nueva pestaña contenedor">
-<!ENTITY newUserContext.accesskey "C">
-<!ENTITY userContextPersonal.label "Personal">
-<!ENTITY userContextPersonal.accesskey "P">
-<!ENTITY userContextWork.label "Trabajo">
-<!ENTITY userContextWork.accesskey "T">
-<!ENTITY userContextBanking.label "Banca">
-<!ENTITY userContextBanking.accesskey "B">
-<!ENTITY userContextShopping.label "Compras">
-<!ENTITY userContextShopping.accesskey "C">
+<!ENTITY newUserContext.label "Nueva pestaña contenedora">
+<!ENTITY newUserContext.accesskey "v">
 <!ENTITY newNavigatorCmd.label "Nueva ventana">
 <!ENTITY newNavigatorCmd.key "N">
 <!ENTITY newNavigatorCmd.accesskey "N">
@@ -299,10 +263,10 @@
 <!ENTITY appMenuHistory.viewSidebar.label "Ver panel lateral del historial">
 <!ENTITY appMenuHelp.tooltip "Abrir menú de ayuda">
 <!ENTITY appMenuRemoteTabs.label "Pestañas sincronizadas">
-<!ENTITY appMenuRemoteTabs.fetching.label "Recuperando pestañas sincronizadas…">
 <!ENTITY appMenuRemoteTabs.notabs.label "No hay pestañas abiertas">
 <!ENTITY appMenuRemoteTabs.tabsnotsyncing.label "Active la sincronización de pestañas para ver una lista de las mismas de sus otros dispositivos.">
-<!ENTITY appMenuRemoteTabs.noclients.label "Inicie sesión en Firefox desde sus otros dispositivos para ver sus pestañas aquí.">
+<!ENTITY appMenuRemoteTabs.noclients.title "No hay pestañas sincronizadas… ¡aún!">
+<!ENTITY appMenuRemoteTabs.noclients.subtitle "¿Quiere ver sus pestañas de otros dispositivos aquí?">
 <!ENTITY appMenuRemoteTabs.openprefs.label "Preferencias de Sync">
 <!ENTITY appMenuRemoteTabs.notsignedin.label "Inicie sesión para ver una lista de pestañas de sus otros dispositivos.">
 <!ENTITY appMenuRemoteTabs.signin.label "Inicie sesión en Sync">
@@ -324,6 +288,7 @@
 <!ENTITY openCmd.commandkey "l">
 <!ENTITY urlbar.placeholder2 "Término de búsqueda o dirección">
 <!ENTITY urlbar.accesskey "d">
+<!ENTITY urlbar.extension.label "Extensión:">
 <!ENTITY urlbar.switchToTab.label "Cambiar a la pestaña:">
 <!ENTITY urlbar.searchSuggestionsNotification.question "¿Le gustaría mejorar su experiencia de búsqueda con sugerencias?">
 <!ENTITY urlbar.searchSuggestionsNotification.learnMore "Saber más…">
@@ -336,13 +301,14 @@
 <!ENTITY searchFocus.commandkey2 "e">
 <!ENTITY searchFocusUnix.commandkey "j">
 <!ENTITY contentSearchInput.label "Criterios de búsqueda">
-<!ENTITY contentSearchSubmit.label "Enviar búsqueda">
+<!ENTITY contentSearchSubmit.tooltip "Enviar búsqueda">
 <!ENTITY searchFor.label "Buscar ">
 <!ENTITY searchWith.label " con:">
 <!ENTITY search.label "Buscar ">
 <!ENTITY searchAfter.label "">
 <!ENTITY searchWithHeader.label "Buscar con:">
 <!ENTITY changeSearchSettings.button "Cambiar configuración de búsqueda">
+<!ENTITY changeSearchSettings.tooltip "Cambiar configuración de búsqueda">
 <!ENTITY searchInNewTab.label "Buscar en una pestaña nueva">
 <!ENTITY searchInNewTab.accesskey "B">
 <!ENTITY searchSetAsDefault.label "Establecer como buscador predeterminado">
@@ -360,7 +326,7 @@
 <!ENTITY openFrameCmd.label "Abrir el marco en una ventana nueva">
 <!ENTITY openFrameCmd.accesskey "e">
 <!ENTITY openLinkCmdInContainerTab.label "Abrir enlace en pestaña de contenedor nueva.">
-<!ENTITY openLinkCmdInContainerTab.accesskey "C">
+<!ENTITY openLinkCmdInContainerTab.accesskey "A">
 <!ENTITY showOnlyThisFrameCmd.label "Mostrar sólo este marco">
 <!ENTITY showOnlyThisFrameCmd.accesskey "o">
 <!ENTITY reloadCmd.commandkey "r">
@@ -448,16 +414,20 @@
 <!ENTITY mediaMute.accesskey "S">
 <!ENTITY mediaUnmute.label "Restaurar sonido">
 <!ENTITY mediaUnmute.accesskey "s">
-<!ENTITY mediaPlaybackRate.label "Velocidad de reproducción">
-<!ENTITY mediaPlaybackRate.accesskey "l">
-<!ENTITY mediaPlaybackRate050x.label "Cámara lenta (0.5×)">
-<!ENTITY mediaPlaybackRate050x.accesskey "m">
-<!ENTITY mediaPlaybackRate100x.label "Velocidad normal">
-<!ENTITY mediaPlaybackRate100x.accesskey "N">
-<!ENTITY mediaPlaybackRate150x.label "Alta velocidad (1.5×)">
-<!ENTITY mediaPlaybackRate150x.accesskey "v">
-<!ENTITY mediaPlaybackRate200x.label "Velocidad de la luz (2×)">
-<!ENTITY mediaPlaybackRate200x.accesskey "L">
+<!ENTITY mediaPlaybackRate2.label "Velocidad de reproducción">
+<!ENTITY mediaPlaybackRate2.accesskey "V">
+<!ENTITY mediaPlaybackRate050x2.label "Lento (0.5×)">
+<!ENTITY mediaPlaybackRate050x2.accesskey "L">
+<!ENTITY mediaPlaybackRate100x2.label "Normal">
+<!ENTITY mediaPlaybackRate100x2.accesskey "N">
+<!ENTITY mediaPlaybackRate125x2.label "Rápido (1.25×)">
+<!ENTITY mediaPlaybackRate125x2.accesskey "R">
+<!ENTITY mediaPlaybackRate150x2.label "Más rápido (1.5×)">
+<!ENTITY mediaPlaybackRate150x2.accesskey "M">
+<!ENTITY mediaPlaybackRate200x2.label "Rapidísimo (2×)">
+<!ENTITY mediaPlaybackRate200x2.accesskey "a">
+<!ENTITY mediaLoop.label "Repetir">
+<!ENTITY mediaLoop.accesskey "R">
 <!ENTITY mediaShowControls.label "Mostrar controles">
 <!ENTITY mediaShowControls.accesskey "C">
 <!ENTITY mediaHideControls.label "Ocultar controles">
@@ -533,7 +503,7 @@
 <!ENTITY identity.connectionSecure "Conexión segura">
 <!ENTITY identity.connectionNotSecure "La conexión no es segura">
 <!ENTITY identity.connectionFile "Esta página se guarda en su equipo.">
-<!ENTITY identity.connectionVerified1 "Está conectado de forma segura a este sitio, mantenido por:">
+<!ENTITY identity.connectionVerified2 "Está conectado de forma segura a este sitio, propiedad de:">
 <!ENTITY identity.connectionInternal "Esta es una página segura de &brandShortName;.">
 <!ENTITY identity.insecureLoginForms2 "Los inicios de sesión introducidos en esta página podrían verse comprometidos.">
 <!ENTITY identity.activeBlocked "&brandShortName; ha bloqueado partes de esta página que no son seguras.">
@@ -560,19 +530,31 @@
 <!ENTITY identity.moreInfoLinkText2 "Más información">
 <!ENTITY identity.permissions "Permisos">
 <!ENTITY identity.permissionsEmpty "No ha concedido ningún permiso especial a este sitio.">
+<!ENTITY identity.permissionsReloadHint "Puede que necesite recargar la página para que se apliquen los cambios.">
 <!ENTITY tabsToolbar.label "Pestañas del navegador">
 <!ENTITY syncTabsMenu3.label "Pestañas sincronizadas">
 <!ENTITY syncedTabs.sidebar.label "Pestañas sincronizadas">
-<!ENTITY syncedTabs.sidebar.fetching.label "Recuperando pestañas sincronizadas…">
 <!ENTITY syncedTabs.sidebar.noclients.label "Inicie sesión en Firefox desde sus otros dispositivos para ver sus pestañas aquí.">
+<!ENTITY syncedTabs.sidebar.noclients.title "No hay pestañas sincronizadas… ¡aún!">
+<!ENTITY syncedTabs.sidebar.noclients.subtitle "¿Quiere ver sus pestañas de otros dispositivos aquí?">
 <!ENTITY syncedTabs.sidebar.notsignedin.label "Inicie sesión para ver una lista de pestañas de sus otros dispositivos.">
 <!ENTITY syncedTabs.sidebar.notabs.label "No hay pestañas abiertas">
 <!ENTITY syncedTabs.sidebar.openprefs.label "Abrir preferencias de &syncBrand.shortName.label;">
 <!ENTITY syncedTabs.sidebar.tabsnotsyncing.label "Active la sincronización de pestañas para ver una lista de las mismas de sus otros dispositivos.">
-<!ENTITY syncedTabs.context.openTab.label "Abrir esta pestaña">
-<!ENTITY syncedTabs.context.openTab.accesskey "A">
+<!ENTITY syncedTabs.context.open.label "Abrir">
+<!ENTITY syncedTabs.context.open.accesskey "A">
+<!ENTITY syncedTabs.context.openInNewTab.label "Abrir en una pestaña nueva">
+<!ENTITY syncedTabs.context.openInNewTab.accesskey "e">
+<!ENTITY syncedTabs.context.openInNewWindow.label "Abrir en una ventana nueva">
+<!ENTITY syncedTabs.context.openInNewWindow.accesskey "n">
+<!ENTITY syncedTabs.context.openInNewPrivateWindow.label "Abrir en una nueva ventana privada">
+<!ENTITY syncedTabs.context.openInNewPrivateWindow.accesskey "b">
 <!ENTITY syncedTabs.context.bookmarkSingleTab.label "Añadir a marcadores esta pestaña…">
 <!ENTITY syncedTabs.context.bookmarkSingleTab.accesskey "m">
+<!ENTITY syncedTabs.context.copy.label "Copiar">
+<!ENTITY syncedTabs.context.copy.accesskey "C">
+<!ENTITY syncedTabs.context.openAllInTabs.label "Abrir todo en pestañas">
+<!ENTITY syncedTabs.context.openAllInTabs.accesskey "A">
 <!ENTITY syncBrand.shortName.label "Sync">
 <!ENTITY syncSignIn.label "Conectarse a &syncBrand.shortName.label;…">
 <!ENTITY syncSignIn.accesskey "Y">
@@ -581,20 +563,7 @@
 <!ENTITY syncReAuthItem.label "Reconectar a &syncBrand.shortName.label;…">
 <!ENTITY syncReAuthItem.accesskey "R">
 <!ENTITY syncToolbarButton.label "Sync">
-<!ENTITY socialToolbar.title "Botón de la barra de herramientas social">
-<!ENTITY social.ok.label "Aceptar">
-<!ENTITY social.ok.accesskey "A">
-<!ENTITY social.toggleSidebar.label "Mostrar barra lateral">
-<!ENTITY social.toggleSidebar.accesskey "s">
 <!ENTITY social.addons.label "Administrar servicios…">
-<!ENTITY social.toggleNotifications.label "Mostrar notificaciones de escritorio">
-<!ENTITY social.toggleNotifications.accesskey "n">
-<!ENTITY social.activated.description "Los servicios de <label/> han sido activados. Puede cambiar la configuración de estos servicios en el <label class='text-link'>administrador de complementos</label>.">
-<!ENTITY social.activated.undo.label "¡Uy! Deshacer esto">
-<!ENTITY social.activated.undo.accesskey "U">
-<!ENTITY social.learnMore.label "Saber más…">
-<!ENTITY social.learnMore.accesskey "m">
-<!ENTITY social.closeNotificationItem.label "No ahora">
 <!ENTITY social.directory.label "Directorio de activaciones">
 <!ENTITY social.directory.text "Puede activar servicios de compartición del directorio.">
 <!ENTITY social.directory.button "¡Llévame allí!">
@@ -613,13 +582,6 @@
 <!ENTITY customizeMode.lwthemes.menuManage.accessKey "M">
 <!ENTITY customizeMode.lwthemes.menuGetMore "Conseguir más temas">
 <!ENTITY customizeMode.lwthemes.menuGetMore.accessKey "C">
-<!ENTITY social.chatBar.commandkey "c">
-<!ENTITY social.chatBar.label "Enfocar conversaciones">
-<!ENTITY social.chatBar.accesskey "c">
-<!ENTITY social.markpageMenu.accesskey "d">
-<!ENTITY social.markpageMenu.label "Guardar página en…">
-<!ENTITY social.marklinkMenu.accesskey "G">
-<!ENTITY social.marklinkMenu.label "Guardar enlace como">
 <!ENTITY getUserMedia.selectCamera.label "Cámara para compartir:">
 <!ENTITY getUserMedia.selectCamera.accesskey "C">
 <!ENTITY getUserMedia.selectMicrophone.label "Micrófono para compartir:">
@@ -645,7 +607,6 @@
 <!ENTITY trackingContentBlocked.block.label "Activar protección">
 <!ENTITY trackingContentBlocked.block.accesskey "A">
 <!ENTITY trackingContentBlocked.disabled.message "La protección contra rastreo está desactivada">
-<!ENTITY pointerLock.notification.message "Presiona ESC (Escape) en cualquier momento para mostrarlo de nuevo.">
 <!ENTITY pluginNotification.showAll.label "Mostrar todo">
 <!ENTITY pluginNotification.showAll.accesskey "M">
 <!ENTITY pluginActivateNow.label "Permitir ahora">
@@ -670,3 +631,14 @@
 <!ENTITY panicButton.thankyou.buttonlabel "¡Gracias!">
 <!ENTITY emeLearnMoreContextMenu.label "Más información sobre DRM…">
 <!ENTITY emeLearnMoreContextMenu.accesskey "D">
+
+<!-- LOCALIZATION NOTE (appMenuRemoteTabs.showAll.label, appMenuRemoteTabs.showAll.tooltip):
+     This is shown after the tabs list if we can all the remaining tabs by clicking on the button -->
+<!ENTITY appMenuRemoteTabs.showAll.label "Show All">
+<!ENTITY appMenuRemoteTabs.showAll.tooltip "Show all tabs from this device">
+<!-- LOCALIZATION NOTE (appMenuRemoteTabs.showMore.label, appMenuRemoteTabs.showMore.tooltip):
+     This is shown after the tabs list if we can display more tabs by clicking on the button -->
+<!ENTITY appMenuRemoteTabs.showMore.label "Show More">
+<!ENTITY appMenuRemoteTabs.showMore.tooltip "Show more tabs from this device">
+<!ENTITY bookmarksMenuButton.mobile.label "Mobile Bookmarks">
+<!ENTITY mobileBookmarksCmd.label "Mobile Bookmarks">

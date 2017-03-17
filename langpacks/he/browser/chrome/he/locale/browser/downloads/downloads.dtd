@@ -19,9 +19,11 @@
 
      For example, in English, a long string would be:
 
-     59 minutes, 59 seconds remaining - 1022 of 1023 KB
+     59m 59s left - 1022 of 1023 KB (120.5 KB/sec)
 
-     That's 50 characters, so we set the width at 50ch.
+     Since Downloads Panel is redesigned to show the detail string including
+     the hovering case for an item or an action button.
+     Bug 1328519 is for discussing the detail rule of `downloadDetails.width`.
      -->
 <!ENTITY downloadDetails.width            "50ch">
 
@@ -30,11 +32,11 @@
      which is displayed at the bottom of the Downloads Panel if the
      number of downloads exceeds the limit that the panel can display.
 
-     A good rule of thumb here is to look at the otherDownloads2 string
+     A good rule of thumb here is to look at the otherDownloads3 string
      in downloads.properties, and make a reasonable estimate of its
      maximum length. For English, this seems like a reasonable limit:
 
-     + 999 other downloads
+     999 files downloading
 
      that's 21 characters, so we set the minimum width to 21ch.
      -->
@@ -45,7 +47,6 @@
 <!ENTITY cmd.resume.label                 "המשך">
 <!ENTITY cmd.resume.accesskey             "מ">
 <!ENTITY cmd.cancel.label                 "ביטול">
-<!ENTITY cmd.cancel.accesskey             "ב">
 <!-- LOCALIZATION NOTE (cmd.show.label, cmd.show.accesskey, cmd.showMac.label,
      cmd.showMac.accesskey):
      The show and showMac commands are never shown together, thus they can share
@@ -61,23 +62,56 @@
 <!ENTITY cmd.copyDownloadLink.label       "העתקת כתובת הורדה">
 <!ENTITY cmd.copyDownloadLink.accesskey   "ע">
 <!ENTITY cmd.removeFromHistory.label      "הסרה מההיסטוריה">
-<!ENTITY cmd.removeFromHistory.accesskey  "e">
-<!ENTITY cmd.clearList.label              "מחיקת רשימה">
-<!ENTITY cmd.clearList.accesskey          "מ">
+<!ENTITY cmd.removeFromHistory.accesskey  "ט">
+<!ENTITY cmd.clearList2.label             "ניקוי חלונית תצוגה מקדימה">
+<!ENTITY cmd.clearList2.accesskey         "ח">
 <!ENTITY cmd.clearDownloads.label         "ניקוי רשימת ההורדות">
 <!ENTITY cmd.clearDownloads.accesskey     "ה">
-<!-- LOCALIZATION NOTE (cmd.unblock.label):
-     This command may be shown in the context menu, as a menu button item, or as
-     a text link when malware or potentially unwanted downloads are blocked.
+<!-- LOCALIZATION NOTE (cmd.unblock2.label):
+     This command is shown in the context menu when downloads are blocked.
      -->
-<!ENTITY cmd.unblock.label                "הסרת חסימה">
-<!ENTITY cmd.unblock.accesskey            "ס">
+<!ENTITY cmd.unblock2.label               "אפשר הורדה">
+<!ENTITY cmd.unblock2.accesskey           "א">
 <!-- LOCALIZATION NOTE (cmd.removeFile.label):
-     This command may be shown in the context menu or as a menu button label
-     when malware or potentially unwanted downloads are blocked.
+     This is the tooltip of the action button shown when malware is blocked.
      -->
 <!ENTITY cmd.removeFile.label             "הסרת קובץ">
-<!ENTITY cmd.removeFile.accesskey         "ס">
+<!-- LOCALIZATION NOTE (cmd.chooseUnblock.tooltip):
+     This is the tooltip of the action button shown when potentially unwanted
+     downloads are blocked. This opens a dialog where the user can choose
+     whether to unblock or remove the download. Removing is the default option.
+     -->
+<!ENTITY cmd.chooseUnblock.label          "הסרת קובץ או אפשור ההורדה">
+<!-- LOCALIZATION NOTE (cmd.chooseOpen.tooltip):
+     This is the tooltip of the action button shown when uncommon downloads are
+     blocked.This opens a dialog where the user can choose whether to open the
+     file or remove the download. Opening is the default option.
+     -->
+<!ENTITY cmd.chooseOpen.label             "פתיחה או הסרת קובץ">
+
+<!-- LOCALIZATION NOTE (showMoreInformation.label):
+     Displayed when hovering a blocked download, indicates that it's possible to
+     show more information for user to take the next action.
+     -->
+<!ENTITY showMoreInformation.label        "הצגת מידע נוסף">
+
+<!-- LOCALIZATION NOTE (openFile.label):
+     Displayed when hovering a complete download, indicates that it's possible to
+     open the file using an app available in the system.
+     -->
+<!ENTITY openFile.label                   "פתיחת קובץ">
+
+<!-- LOCALIZATION NOTE (retryDownload.label):
+     Displayed when hovering a download which is able to be retried by users,
+     indicates that it's possible to download this file again.
+     -->
+<!ENTITY retryDownload.label              "הורדה מחדש">
+
+<!-- LOCALIZATION NOTE (cancelDownload.label):
+     Displayed when hovering a download which is able to be cancelled by users,
+     indicates that it's possible to cancel and stop the download.
+     -->
+<!ENTITY cancelDownload.label             "ביטול הורדה">
 
 <!-- LOCALIZATION NOTE (blocked.label):
      Shown as a tag before the file name for some types of blocked downloads.
@@ -97,8 +131,10 @@
      downloads fit in the available space, or when there are no downloads in
      the panel at all.
      -->
-<!ENTITY downloadsHistory.label           "הצגת כול ההורדות">
+<!ENTITY downloadsHistory.label           "הצגת כל ההורדות">
 <!ENTITY downloadsHistory.accesskey       "ה">
+
+<!ENTITY openDownloadsFolder.label       "פתיחת תיקיית ההורדות">
 
 <!ENTITY clearDownloadsButton.label       "ניקוי הורדות">
 <!ENTITY clearDownloadsButton.tooltip     "ניקוי ההורדות שהושלמו, בוטלו ונכשלו">

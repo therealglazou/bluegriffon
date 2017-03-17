@@ -29,15 +29,26 @@
   <li>Verificare se il file è stato spostato, rinominato o rimosso.</li>
 </ul>
 ">
+<!ENTITY fileAccessDenied.title "Accesso negato al file">
+<!ENTITY fileAccessDenied.longDesc "
+<ul>
+  <li>Il file potrebbe essere stato rimosso o spostato, oppure non si possiedono le autorizzazioni necessarie per aprirlo.</li>
+</ul>
+">
 <!ENTITY generic.title "Oops.">
 <!ENTITY generic.longDesc "
 <p>Per qualche motivo &brandShortName; non è in grado di caricare questa pagina.</p>
 ">
+<!ENTITY captivePortal.title "Accedi alla rete">
+<!ENTITY captivePortal.longDesc2 "
+<p>È necessario accedere alla rete per navigare in Internet.</p>
+">
+<!ENTITY openPortalLoginPage.label2 "Apri la pagina di accesso alla rete">
 <!ENTITY malformedURI.title "L’indirizzo non è valido">
 <!ENTITY malformedURI.longDesc "
 <ul>
   <li>Gli indirizzi internet normalmente si scrivono nella forma <strong>http://www.example.com/</strong></li>
-  <li>Verificare se si stanno utilizzando le barre corrette (ad esempio <strong>/</strong>).</li>
+  <li>Verificare di aver utilizzato le barre corrette <strong>/</strong>.</li>
 </ul>
 ">
 <!ENTITY netInterrupt.title "La connessione è stata interrotta">
@@ -87,7 +98,7 @@
   <li>Questo problema spesso è causato dal blocco o dal rifiuto dei cookie.</li>
 </ul>
 ">
-<!ENTITY unknownSocketType.title "Risposta inattesa del server">
+<!ENTITY unknownSocketType.title "Risposta imprevista del server">
 <!ENTITY unknownSocketType.longDesc "
 <ul>
   <li>Verificare che nel sistema sia installato il Personal Security Manager.</li>
@@ -100,40 +111,32 @@
   <li>La pagina che si sta cercando di visualizzare non può essere mostrata in quanto non è possibile verificare l’autenticità dei dati ricevuti.</li>
   <li>Contattare il responsabile del sito web per informarlo del problema.</li>
 </ul>">
-<!ENTITY nssBadCert.title "Connessione sicura non riuscita">
-<!ENTITY nssBadCert.longDesc2 "
-<ul>
-  <li>Potrebbe trattarsi di un problema nella configurazione del server oppure di un tentativo da parte di qualcuno di sostituirsi al server stesso.</li>
-  <li>Se è stato possibile connettersi a questo server in passato, il problema potrebbe essere solo temporaneo. Si consiglia di riprovare in seguito.</li>
-</ul>">
+<!ENTITY certerror.longpagetitle1 "Questa connessione non è sicura">
+<!ENTITY certerror.introPara "Il gestore di <span class='hostname'/> ha configurato il sito in modo non corretto. Per evitare potenziali furti di informazioni &brandShortName; ha interrotto la connessione.">
 <!ENTITY sharedLongDesc "
 <ul>
-  <li>Il sito potrebbe non essere disponibile o sovraccarico. Riprovare fra qualche momento.</li>
+  <li>Il sito potrebbe essere non disponibile o sovraccarico. Riprovare fra qualche istante.</li>
   <li>Se non è possibile caricare alcuna pagina, controllare la connessione di rete del computer.</li>
   <li>Se il computer o la rete sono protetti da un firewall o un proxy, assicurarsi che &brandShortName; abbia i permessi per accedere al web.</li>
 </ul>
 ">
 <!ENTITY cspBlocked.title "Bloccato dai criteri sulla sicurezza dei contenuti">
 <!ENTITY cspBlocked.longDesc "<p>&brandShortName; ha bloccato il caricamento della pagina con questa modalità in quanto include dei criteri sulla sicurezza dei contenuti che lo impediscono.</p>  ">
-<!ENTITY corruptedContentError.title "Errore contenuto danneggiato">
-<!ENTITY corruptedContentError.longDesc "<p>La pagina richiesta non può essere visualizzata a causa di un errore rilevato durante la trasmissione dei dati.</p><ul><li>Contattare il proprietario del sito web e segnalare il problema.</li></ul>">
-<!ENTITY securityOverride.linkText "Oppure è possibile aggiungere un’eccezione…">
-<!ENTITY securityOverride.getMeOutOfHereButton "Allontanarsi da questo sito">
+<!ENTITY corruptedContentErrorv2.title "Errore contenuto danneggiato">
+<!ENTITY corruptedContentErrorv2.longDesc "<p>La pagina richiesta non può essere visualizzata a causa di un errore rilevato durante la trasmissione dei dati.</p><ul><li>Contattare il proprietario del sito web e segnalare il problema.</li></ul>">
 <!ENTITY securityOverride.exceptionButtonLabel "Aggiungi eccezione…">
-<!ENTITY securityOverride.warningContent "
-<p>È sconsigliato aggiungere un’eccezione nel caso in cui si stia utilizzando una connessione non completamente affidabile oppure se è la prima volta che questi avvisi di sicurezza appaiono con questo server.</p>
-
-<button id='getMeOutOfHereButton'>&securityOverride.getMeOutOfHereButton;</button>
-<button id='exceptionDialogButton'>&securityOverride.exceptionButtonLabel;</button>
-">
 <!ENTITY errorReporting.automatic2 "Segnala errori come questo per aiutare Mozilla a identificare e bloccare siti dannosi">
 <!ENTITY errorReporting.learnMore "Ulteriori informazioni…">
 <!ENTITY remoteXUL.title "XUL remoto">
 <!ENTITY remoteXUL.longDesc "<p><ul><li>Contattare l’amministratore del sito web e segnalare il problema.</li></ul></p>">
 <!ENTITY sslv3Used.title "Impossibile stabilire una connessione sicura">
 <!ENTITY sslv3Used.longDesc2 "Informazioni avanzate: SSL_ERROR_UNSUPPORTED_VERSION">
-<!ENTITY weakCryptoUsed.title "Questa connessione non è sicura">
-<!ENTITY weakCryptoUsed.longDesc2 "Informazioni avanzate: SSL_ERROR_NO_CYPHER_OVERLAP">
-<!ENTITY weakCryptoAdvanced.title "Avanzate">
-<!ENTITY weakCryptoAdvanced.longDesc "<span class='hostname'></span> utilizza protocolli di sicurezza obsoleti e vulnerabili. Questo potrebbe consentire a malintenzionati di intercettare e leggere informazioni che l’utente considera sicure.">
-<!ENTITY weakCryptoAdvanced.override "(Non sicuro) Prova a caricare <span class='hostname'></span> utilizzando protocolli di sicurezza obsoleti">
+<!ENTITY certerror.wrongSystemTime2 "<p>Non è possibile connettersi a <span id='wrongSystemTime_URL'/> in quanto l’orologio del sistema sembra impostato su un valore errato e questo impedisce di stabilire una connessione sicura.</p> <p>L’ora impostata nel computer è <span id='wrongSystemTime_systemDate'/>, mentre dovrebbe essere <span id='wrongSystemTime_actualDate'/>. Per risolvere il problema impostare correttamente la data e l’ora del computer.</p>">
+<!ENTITY certerror.wrongSystemTimeWithoutReference "<p>Non è possibile connettersi a <span id='wrongSystemTimeWithoutReference_URL'/> in quanto l’orologio del sistema sembra impostato su un valore errato e questo impedisce di stabilire una connessione sicura.</p> <p>L’ora impostata nel computer è <span id='wrongSystemTimeWithoutReference_systemDate'/>. Per risolvere il problema impostare correttamente la data e l’ora del computer.</p>">
+<!ENTITY certerror.pagetitle1 "Connessione non sicura">
+<!ENTITY certerror.whatShouldIDo.badStsCertExplanation "Questo sito utilizza il protocollo HSTS (HTTP Strict Transport Security) per garantire che la connessione con &brandShortName; avvenga esclusivamente in modo sicuro. Per questo motivo non è possibile aggiungere un’eccezione per questo certificato.">
+<!ENTITY certerror.copyToClipboard.label "Copia il testo negli appunti">
+<!ENTITY inadequateSecurityError.title "Connessione non sicura">
+<!ENTITY inadequateSecurityError.longDesc "<p><span class='hostname'></span> utilizza una tecnologia di sicurezza obsoleta e vulnerabile. Un tentativo di attacco potrebbe facilmente compromettere informazioni considerate sicure. L’amministratore del sito web deve aggiornare la configurazione del server prima di poterlo visitare.</p><p>Codice di errore: NS_ERROR_NET_INADEQUATE_SECURITY</p>">
+<!ENTITY prefReset.longDesc "Sembra che il problema sia causato dalle impostazioni di sicurezza della rete. Ripristinare le impostazioni predefinite?">
+<!ENTITY prefReset.label "Ripristina impostazioni predefinite">

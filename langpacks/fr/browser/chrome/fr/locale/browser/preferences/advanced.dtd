@@ -4,16 +4,16 @@
 
 <!-- Note: each tab panel must contain unique accesskeys -->
 
-<!ENTITY generalTab.label               "Général">
+<!ENTITY generalTab.label                "Général">
 
-<!ENTITY accessibility.label            "Accessibilité">
+<!ENTITY accessibility.label             "Accessibilité">
 
 <!ENTITY useCursorNavigation.label       "Toujours utiliser les touches de navigation pour se déplacer à l’intérieur d’une page">
 <!ENTITY useCursorNavigation.accesskey   "T">
-<!ENTITY searchStartTyping.label         "Lancer la recherche lors de la saisie de texte">
-<!ENTITY searchStartTyping.accesskey     "c">
-<!ENTITY blockAutoRefresh.label          "Prévenir lorsque des sites web tentent de rediriger ou de recharger la page">
-<!ENTITY blockAutoRefresh.accesskey      "P">
+<!ENTITY searchOnStartTyping.label       "Lancer la recherche lors de la saisie de texte">
+<!ENTITY searchOnStartTyping.accesskey   "c">
+<!ENTITY blockAutoReload.label           "Prévenir lorsque des sites web tentent de rediriger ou de recharger la page">
+<!ENTITY blockAutoReload.accesskey       "P">
 <!ENTITY useOnScreenKeyboard.label       "Afficher un clavier virtuel lorsque nécessaire">
 <!ENTITY useOnScreenKeyboard.accesskey   "A">
 
@@ -25,8 +25,8 @@
 <!ENTITY useSmoothScrolling.accesskey    "s">
 <!ENTITY allowHWAccel.label              "Utiliser l’accélération graphique matérielle si disponible">
 <!ENTITY allowHWAccel.accesskey          "n">
-<!ENTITY checkSpelling.label             "Vérifier l’orthographe lors de la frappe">
-<!ENTITY checkSpelling.accesskey         "V">
+<!ENTITY checkUserSpelling.label         "Vérifier l’orthographe lors de la frappe">
+<!ENTITY checkUserSpelling.accesskey     "V">
 
 <!ENTITY dataChoicesTab.label            "Données collectées">
 
@@ -36,14 +36,14 @@
 <!ENTITY healthReportLearnMore.label     "En savoir plus">
 
 <!ENTITY telemetryDesc.label             "Envoie des informations sur les performances, le matériel, l’utilisation et les personnalisations à &vendorShortName; pour aider à améliorer &brandShortName;">
-<!ENTITY enableTelemetryData.label       "Envoyer des données supplémentaires (c.à.d. des données télémétriques)">
+<!ENTITY enableTelemetryData.label       "Envoyer des données supplémentaires (c.-à-d. des données télémétriques)">
 <!ENTITY enableTelemetryData.accesskey   "E">
 <!ENTITY telemetryLearnMore.label        "En savoir plus">
 
-<!ENTITY crashReporterDesc.label         "&brandShortName; envoie des rapports de plantage pour aider &vendorShortName; à rendre votre navigateur plus stable et sécurisé">
-<!ENTITY enableCrashReporter.label       "Activer les rapports de plantage">
-<!ENTITY enableCrashReporter.accesskey   "t">
-<!ENTITY crashReporterLearnMore.label    "En savoir plus">
+<!ENTITY crashReporterDesc2.label         "Les rapports de plantages aident &vendorShortName; à corriger les problèmes et à rendre votre navigateur plus stable et sécurisé">
+<!ENTITY alwaysSubmitCrashReports.label   "Autoriser &brandShortName; à envoyer pour vous les rapports de plantages en attente">
+<!ENTITY alwaysSubmitCrashReports.accesskey "u">
+<!ENTITY crashReporterLearnMore.label     "En savoir plus">
 
 <!ENTITY networkTab.label                "Réseau">
 
@@ -56,6 +56,14 @@
 <!ENTITY httpCache.label                 "Contenu web en cache">
 
 <!ENTITY offlineStorage2.label           "Contenu web et données utilisateur hors connexion">
+
+<!--  Site Data section manages sites using Storage API and is under Network -->
+<!ENTITY siteData.label                  "Données des sites">
+<!ENTITY clearSiteData.label             "Effacer toutes les données">
+<!ENTITY clearSiteData.accesskey         "f">
+<!ENTITY siteDataSettings.label          "Paramètres…">
+<!ENTITY siteDataSettings.accesskey      "a">
+<!ENTITY siteDataLearnMoreLink.label     "En savoir plus">
 
 <!-- LOCALIZATION NOTE:
   The entities limitCacheSizeBefore.label and limitCacheSizeAfter.label appear on a single
@@ -75,19 +83,13 @@
 
 <!ENTITY updateTab.label                 "Mises à jour">
 
-<!ENTITY updateApp.label                 "Mises à jour de &brandShortName; :">
-<!-- Note either updateAuto1 is used or (updateAutoMetro and updateAutoDesktop),
-     so re-using accesss key in updateAuto1 is OK. updateAutoDesktop can be found
-     in preferences.properties -->
+<!ENTITY updateApplication.label         "Mises à jour de &brandShortName;">
 <!ENTITY updateAuto1.label               "Installer automatiquement les mises à jour (recommandé pour votre sécurité)">
 <!ENTITY updateAuto1.accesskey           "A">
-<!ENTITY updateCheck.label               "Vérifier l’existence de mises à jour mais me laisser décider de leur installation">
-<!ENTITY updateCheck.accesskey           "C">
+<!ENTITY updateCheckChoose.label         "Vérifier l’existence de mises à jour, mais vous laisser décider de leur installation">
+<!ENTITY updateCheckChoose.accesskey     "C">
 <!ENTITY updateManual.label              "Ne jamais vérifier les mises à jour (déconseillé, cela représente un risque de sécurité)">
 <!ENTITY updateManual.accesskey          "N">
-
-<!ENTITY updateAutoAddonWarn.label       "Me prévenir si cela désactive certains de mes modules">
-<!ENTITY updateAutoAddonWarn.accesskey   "M">
 
 <!ENTITY updateHistory.label             "Afficher l’historique des mises à jour">
 <!ENTITY updateHistory.accesskey         "h">
@@ -95,14 +97,14 @@
 <!ENTITY useService.label                "Utiliser un service en arrière-plan pour installer les mises à jour">
 <!ENTITY useService.accesskey            "s">
 
-<!ENTITY updateOthers.label              "Mettre à jour automatiquement :">
+<!ENTITY autoUpdateOthers.label          "Mettre à jour automatiquement">
 <!ENTITY enableSearchUpdate.label        "les moteurs de recherche">
 <!ENTITY enableSearchUpdate.accesskey    "r">
 
-<!ENTITY offlineNotify.label             "Avertir lorsqu’un site souhaite conserver des données pour une utilisation hors connexion">
-<!ENTITY offlineNotify.accesskey         "T">
-<!ENTITY offlineNotifyExceptions.label   "Exceptions…">
-<!ENTITY offlineNotifyExceptions.accesskey "x">
+<!ENTITY offlineStorageNotify.label               "Avertir lorsqu’un site souhaite conserver des données pour une utilisation hors connexion">
+<!ENTITY offlineStorageNotify.accesskey           "T">
+<!ENTITY offlineStorageNotifyExceptions.label     "Exceptions…">
+<!ENTITY offlineStorageNotifyExceptions.accesskey "x">
 
 <!ENTITY offlineAppsList2.label          "Les sites suivants sont autorisés à stocker des données pour une utilisation hors connexion :">
 <!ENTITY offlineAppsList.height          "7em">
@@ -111,12 +113,12 @@
 <!ENTITY offlineAppRemove.confirm        "Supprimer les données hors connexion">
 
 <!ENTITY certificateTab.label            "Certificats">
-<!ENTITY certSelection.label             "Requêtes">
-<!ENTITY certSelection.description       "Lorsqu’un serveur demande mon certificat personnel :">
-<!ENTITY certs.auto                      "en sélectionner un automatiquement">
-<!ENTITY certs.auto.accesskey            "e">
-<!ENTITY certs.ask                       "me demander à chaque fois">
-<!ENTITY certs.ask.accesskey             "m">
+<!ENTITY certPersonal.label              "Requêtes">
+<!ENTITY certPersonal.description        "Lorsqu’un serveur demande votre certificat personnel :">
+<!ENTITY selectCerts.auto                "en sélectionner un automatiquement">
+<!ENTITY selectCerts.auto.accesskey      "e">
+<!ENTITY selectCerts.ask                 "vous demander à chaque fois">
+<!ENTITY selectCerts.ask.accesskey       "v">
 <!ENTITY enableOCSP.label                "Interroger le répondeur OCSP pour confirmer la validité de vos certificats">
 <!ENTITY enableOCSP.accesskey            "I">
 <!ENTITY viewCerts.label                 "Afficher les certificats">

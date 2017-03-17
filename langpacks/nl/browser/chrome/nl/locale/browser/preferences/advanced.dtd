@@ -8,12 +8,12 @@
 
 <!ENTITY accessibility.label             "Toegankelijkheid">
 
-<!ENTITY useCursorNavigation.label       "Altijd de pijltoetsen gebruiken om te navigeren binnen pagina’s">
+<!ENTITY useCursorNavigation.label       "Altijd de pijltoetsen gebruiken om binnen pagina’s te navigeren">
 <!ENTITY useCursorNavigation.accesskey   "o">
-<!ENTITY searchStartTyping.label         "Naar tekst zoeken wanneer ik begin met typen">
-<!ENTITY searchStartTyping.accesskey     "t">
-<!ENTITY blockAutoRefresh.label          "Mij waarschuwen wanneer websites proberen de pagina door te sturen of te herladen">
-<!ENTITY blockAutoRefresh.accesskey      "b">
+<!ENTITY searchOnStartTyping.label       "Naar tekst zoeken wanneer u begint met typen">
+<!ENTITY searchOnStartTyping.accesskey   "t">
+<!ENTITY blockAutoReload.label           "Waarschuwen wanneer websites proberen de pagina door te sturen of te herladen">
+<!ENTITY blockAutoReload.accesskey       "b">
 <!ENTITY useOnScreenKeyboard.label       "Een schermtoetsenbord tonen wanneer nodig">
 <!ENTITY useOnScreenKeyboard.accesskey   "c">
 
@@ -25,8 +25,8 @@
 <!ENTITY useSmoothScrolling.accesskey    "e">
 <!ENTITY allowHWAccel.label              "Hardwareversnelling gebruiken wanneer beschikbaar">
 <!ENTITY allowHWAccel.accesskey          "v">
-<!ENTITY checkSpelling.label             "Mijn spelling controleren tijdens het typen">
-<!ENTITY checkSpelling.accesskey         "s">
+<!ENTITY checkUserSpelling.label         "Uw spelling controleren tijdens het typen">
+<!ENTITY checkUserSpelling.accesskey     "s">
 
 <!ENTITY dataChoicesTab.label            "Gegevenskeuzes">
 
@@ -40,10 +40,10 @@
 <!ENTITY enableTelemetryData.accesskey   "T">
 <!ENTITY telemetryLearnMore.label        "Meer info">
 
-<!ENTITY crashReporterDesc.label         "&brandShortName; verzendt crashrapporten om &vendorShortName; te helpen uw browser stabieler en veiliger te maken">
-<!ENTITY enableCrashReporter.label       "Crashreporter inschakelen">
-<!ENTITY enableCrashReporter.accesskey   "C">
-<!ENTITY crashReporterLearnMore.label    "Meer info">
+<!ENTITY crashReporterDesc2.label         "Crashrapporten helpen &vendorShortName; problemen te verhelpen en maken uw browser stabieler en veiliger">
+<!ENTITY alwaysSubmitCrashReports.label   "&brandShortName; toestaan namens u achterstallige crashrapporten te verzenden">
+<!ENTITY alwaysSubmitCrashReports.accesskey "c">
+<!ENTITY crashReporterLearnMore.label     "Meer info">
 
 <!ENTITY networkTab.label                "Netwerk">
 
@@ -56,6 +56,14 @@
 <!ENTITY httpCache.label                 "Gebufferde webinhoud">
 
 <!ENTITY offlineStorage2.label           "Offline webinhoud en gebruikersgegevens">
+
+<!--  Site Data section manages sites using Storage API and is under Network -->
+<!ENTITY siteData.label                  "Websitegegevens">
+<!ENTITY clearSiteData.label             "Alle gegevens wissen">
+<!ENTITY clearSiteData.accesskey         "l">
+<!ENTITY siteDataSettings.label          "Instellingen…">
+<!ENTITY siteDataSettings.accesskey      "s">
+<!ENTITY siteDataLearnMoreLink.label     "Meer info">
 
 <!-- LOCALIZATION NOTE:
   The entities limitCacheSizeBefore.label and limitCacheSizeAfter.label appear on a single
@@ -75,16 +83,13 @@
 
 <!ENTITY updateTab.label                 "Update">
 
-<!ENTITY updateApp.label                 "&brandShortName;-updates:">
+<!ENTITY updateApplication.label         "&brandShortName;-updates">
 <!ENTITY updateAuto1.label               "Updates automatisch installeren (aanbevolen: verbeterde beveiliging)">
 <!ENTITY updateAuto1.accesskey           "U">
-<!ENTITY updateCheck.label               "Controleren op updates, maar mij laten kiezen of ik deze wil installeren">
-<!ENTITY updateCheck.accesskey           "C">
+<!ENTITY updateCheckChoose.label         "Controleren op updates, maar u laten kiezen of u deze wilt installeren">
+<!ENTITY updateCheckChoose.accesskey     "C">
 <!ENTITY updateManual.label              "Nooit controleren op updates (niet aanbevolen: beveiligingsrisico)">
 <!ENTITY updateManual.accesskey          "N">
-
-<!ENTITY updateAutoAddonWarn.label       "Mij waarschuwen als dit een van mijn add-ons zal uitschakelen">
-<!ENTITY updateAutoAddonWarn.accesskey   "w">
 
 <!ENTITY updateHistory.label             "Updategeschiedenis tonen">
 <!ENTITY updateHistory.accesskey         "d">
@@ -92,14 +97,14 @@
 <!ENTITY useService.label                "Een achtergrondservice gebruiken om updates te installeren">
 <!ENTITY useService.accesskey            "a">
 
-<!ENTITY updateOthers.label              "Automatisch bijwerken:">
+<!ENTITY autoUpdateOthers.label          "Automatisch bijwerken">
 <!ENTITY enableSearchUpdate.label        "Zoekmachines">
 <!ENTITY enableSearchUpdate.accesskey    "Z">
 
-<!ENTITY offlineNotify.label             "Mij vertellen wanneer een website vraagt gegevens op te slaan voor offlinegebruik">
-<!ENTITY offlineNotify.accesskey         "e">
-<!ENTITY offlineNotifyExceptions.label   "Uitzonderingen…">
-<!ENTITY offlineNotifyExceptions.accesskey "U">
+<!ENTITY offlineStorageNotify.label               "Vertellen wanneer een website vraagt gegevens op te slaan voor offlinegebruik">
+<!ENTITY offlineStorageNotify.accesskey           "e">
+<!ENTITY offlineStorageNotifyExceptions.label     "Uitzonderingen…">
+<!ENTITY offlineStorageNotifyExceptions.accesskey "U">
 
 <!ENTITY offlineAppsList2.label          "De volgende websites hebben toestemming om gegevens op te slaan voor offlinegebruik:">
 <!ENTITY offlineAppsList.height          "7em">
@@ -108,12 +113,12 @@
 <!ENTITY offlineAppRemove.confirm        "Offlinegegevens verwijderen">
 
 <!ENTITY certificateTab.label            "Certificaten">
-<!ENTITY certSelection.label             "Aanvragen">
-<!ENTITY certSelection.description       "Wanneer een server om mijn persoonlijke certificaat vraagt:">
-<!ENTITY certs.auto                      "Er automatisch een selecteren">
-<!ENTITY certs.auto.accesskey            "a">
-<!ENTITY certs.ask                       "Mij elke keer vragen">
-<!ENTITY certs.ask.accesskey             "e">
+<!ENTITY certPersonal.label              "Aanvragen">
+<!ENTITY certPersonal.description        "Wanneer een server om uw persoonlijke certificaat vraagt:">
+<!ENTITY selectCerts.auto                "Er automatisch een selecteren">
+<!ENTITY selectCerts.auto.accesskey      "a">
+<!ENTITY selectCerts.ask                 "Elke keer vragen">
+<!ENTITY selectCerts.ask.accesskey       "E">
 <!ENTITY enableOCSP.label                "OCSP-responderservers vragen om de huidige geldigheid van certificaten te bevestigen">
 <!ENTITY enableOCSP.accesskey            "v">
 <!ENTITY viewCerts.label                 "Certificaten bekijken">

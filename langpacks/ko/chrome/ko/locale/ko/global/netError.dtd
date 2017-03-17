@@ -19,6 +19,9 @@
 <!ENTITY fileNotFound.title "파일을 찾을 수 없음">
 <!ENTITY fileNotFound.longDesc "<ul><li>해당 항목의 이름이 바뀌거나, 이동되거나, 재배치되지는 않았습니까?</li><li>주소 상에 철자, 대소문자 구분을 비롯한 오타가 없습니까?</li><li>해당 요청 항목에 대한 충분한 접근 권한을 가지고 있습니까?</li></ul>">
 
+<!ENTITY fileAccessDenied.title "파일 접근이 거부됨">
+<!ENTITY fileAccessDenied.longDesc "<ul><li>삭제 또는 이동되었거나 파일 권한이 접근을 막고 있습니다.</li></ul>">
+
 <!ENTITY generic.title "요청을 완료할 수 없음">
 <!ENTITY generic.longDesc "<p>현재 이 문제 또는 오류에 대한 추가적인 정보를 사용할 수 없습니다.</p>">
 
@@ -70,21 +73,6 @@
 <!ENTITY nssBadCert.title "보안 연결 실패">
 <!ENTITY nssBadCert.longDesc2 "<ul><li>현재 웹 서버 설정에 문제가 있거나 누군가가 원래 접속하려던 진짜 서버처럼 가장하고 있을 가능성이 있습니다.</li><li>만약 이전에 이 웹 서버에 정상적으로 접속을 한적이 있다면, 일시적인 문제일 수 있으니 나중에 다시 접속해 보시기 바랍니다.</li></ul>">
 
-<!ENTITY malwareBlocked.title "공격 의심 사이트!">
-<!ENTITY malwareBlocked.longDesc "<p>공격 사이트가 개인 정보를 탈취하거나, 다른 컴퓨터를 공격하기 위해 사용자 컴퓨터를 이용하거나, 사용자 시스템에 손상 입히는데 사용할 악성 프로그램을 설치하려고 합니다.</p><p>만약 사용자가 공격 사이트로 지정된 웹 사이트의 소유자이고 잘못 등록되어 있다면 <a href='http://www.stopbadware.org/home/reviewinfo'>확인 요청</a>을 하실 수 있습니다.</p>">
-
-<!ENTITY unwantedBlocked.title "원하지않는 소프트웨어 의심 사이트!">
-<!ENTITY unwantedBlocked.longDesc "
-<p>원하지않는 소프트웨어 페이지가 의도하지 않은 방법으로 시스템을 속이거나 영향을 미칠 수 있는 소프트웨어를 설치하려고 합니다.</p>
-">
-
-<!ENTITY phishingBlocked.title "위조 의심 사이트!">
-<!ENTITY phishingBlocked.longDesc "<p>현재 페이지에 개인 정보나 금융 정보를 입력하면 개인 정보 유출과 같은 신원 도난이나 유출한 개인 정보를 이용한 사기를 당할 수 있습니다.</p><p>이런 종류의 위조 웹 사이트들은 피싱 (Phishing) 공격을 하는 것으로 알려져있는데, 사용자가 신뢰할만한 사이트의 웹 페이지와 전자 메일 주소를 거의 원본에 가깝게 위조해서, 마치 신뢰된 웹 사이트에서 개인 정보 입력을 요구하는 것처럼 위장하여 사용자를 속입니다.</p>">
-
-<!ENTITY forbiddenBlocked.title "금지된 사이트">
-<!ENTITY forbiddenBlocked.longDesc "<p>차단되도록 설정되어서 브라우저가 이 페이지를 로딩하지 않았습니다.</p>
-">
-
 <!ENTITY securityOverride.linkText "예외를 설정할 수 있습니다…">
 <!ENTITY securityOverride.warningContent "
 <p>완전히 신뢰하지 못하는 인터넷 연결을 사용하고 있거나 서버로부터의 경고에 익숙하지 않다면 예외를 설정해서는 안됩니다.</p>
@@ -94,8 +82,13 @@
 <!ENTITY cspBlocked.title "콘텐츠 보안 정책에 의한 차단">
 <!ENTITY cspBlocked.longDesc "<p>이 페이지는 콘텐츠 보안 정책에서 허락하지 않는 방법으로 로딩되어 브라우저가 차단했습니다.</p>">
 
-<!ENTITY corruptedContentError.title "손상된 콘텐츠 오류">
-<!ENTITY corruptedContentError.longDesc "<p>이 페이지는 전송 데이터에 오류가 감지되어서 표시할 수 없습니다.</p><ul><li>웹 사이트 관리자에게 본 문제점을 알려 주시기 바랍니다.</li></ul>">
+<!ENTITY corruptedContentErrorv2.title "잘못된 콘텐츠 오류">
+<!ENTITY corruptedContentErrorv2.longDesc "<p>데이터 전송에 오류가 발생하여서 페이지를 표시할 수 없습니다.</p><ul><li>이 문제를 웹사이트 소유자에게 알려주세요.</li></ul>">
 
 <!ENTITY remoteXUL.title "원격 XUL">
 <!ENTITY remoteXUL.longDesc "<p><ul><li>현재 문제를 해결하려면 웹 사이트 관리자에게 연락하시기 바랍니다.</li></ul></p>">
+
+<!ENTITY inadequateSecurityError.title "연결이 안전하지 않음">
+<!-- LOCALIZATION NOTE (inadequateSecurityError.longDesc) - Do not translate
+     "NS_ERROR_NET_INADEQUATE_SECURITY". -->
+<!ENTITY inadequateSecurityError.longDesc "<p><span class='hostname'></span>가 사용하는 보안 기술은 오래되어서 공격에 노출될 수 있습니다. 안전하다고 생각된 정보가 공격자에 의해 쉽게 노출될 수 있습니다. 사이트를 방문하기 전에 웹사이트의 관리자가 서버를 고쳐야 합니다.</p><p>오류 코드: NS_ERROR_NET_INADEQUATE_SECURITY</p>">

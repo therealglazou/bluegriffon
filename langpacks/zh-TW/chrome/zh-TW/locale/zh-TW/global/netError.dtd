@@ -19,6 +19,9 @@
 <!ENTITY fileNotFound.title "找不到檔案">
 <!ENTITY fileNotFound.longDesc "<ul><li>或許此項目已被改名或刪除了？</li><li>是否有拼錯字、大小寫錯誤？</li><li>您有存取該項目的權限嗎？</li></ul>">
 
+<!ENTITY fileAccessDenied.title "對檔案的存取要求已被拒絕">
+<!ENTITY fileAccessDenied.longDesc "<ul><li>可能是檔案被刪除、移動了，或存取權限不足。</li></ul>">
+
 <!ENTITY generic.title "無法完成要求">
 <!ENTITY generic.longDesc "<p>沒有關於此問題或錯誤的詳細解說資訊。</p>">
 
@@ -69,7 +72,7 @@
 <!ENTITY nssFailure2.longDesc2 "<p>因為無法驗證已接收資料的真實性，無法顯示您嘗試檢視的頁面。</p><ul><li>請向網站擁有者回報此問題。</li></ul>">
 
 <!ENTITY nssBadCert.title "安全連線失敗">
-<!ENTITY nssBadCert.longDesc2 "<ul> <li>可能是伺服器上的組態設定造成的，或是有人嘗試假造該伺服器。</li> <li>若您以前可以與該伺服器正常連線，那麼這個錯誤可能只是暫時的，您可以稍後再試試看。</li> </ul>">
+<!ENTITY nssBadCert.longDesc2 "<ul><li>可能是伺服器設定問題造成，或是有人嘗試偽裝成該伺服器。</li><li>若您以前可以與該伺服器正常連線，那麼這個錯誤可能只是暫時的，請稍候再試試看。</li> </ul>">
 
 <!ENTITY securityOverride.linkText "或者您也可以新增例外網站…">
 <!ENTITY securityOverride.warningContent "<p>您不應該在連線至無法完全信任的網路，或是以前沒有遇到警告的情況下新增此伺服器的例外。</p>
@@ -78,9 +81,13 @@
 <!ENTITY cspBlocked.title "已依內容安全政策封鎖">
 <!ENTITY cspBlocked.longDesc "<p>瀏覽器阻止了這個頁面載入，因為這個頁面有個內容安全政策不允許其以這種方式載入。</p>">
 
-<!ENTITY corruptedContentError.title "內容毀損錯誤">
-<!ENTITY corruptedContentError.longDesc "<p>因為在資料傳輸過程當中偵測到錯誤，無法顯示您正要檢視的頁面。</p><ul><li>請通知網站管理者以讓他們知道這個問題。</li></ul>">
+<!ENTITY corruptedContentErrorv2.title "內容毀損錯誤">
+<!ENTITY corruptedContentErrorv2.longDesc "<p>因為在資料傳輸過程當中偵測到錯誤，無法顯示您正要檢視的頁面。</p><ul><li>請通知網站管理者以讓他們知道這個問題。</li></ul>">
 
 <!ENTITY remoteXUL.title "遠端 XUL">
 <!ENTITY remoteXUL.longDesc "<p><ul><li>請聯絡網站管理員以通知他們這個問題。</li></ul></p>">
 
+<!ENTITY inadequateSecurityError.title "您的連線並不安全">
+<!-- LOCALIZATION NOTE (inadequateSecurityError.longDesc) - Do not translate
+     "NS_ERROR_NET_INADEQUATE_SECURITY". -->
+<!ENTITY inadequateSecurityError.longDesc "<p><span class='hostname'></span> 使用過時的安全性技術，容易遭受攻擊。攻擊者可以簡單地得知您認為安全的資訊。網站管理員修正伺服器設定後您才能連線至此網站。</p><p>錯誤代碼: NS_ERROR_NET_INADEQUATE_SECURITY</p>">

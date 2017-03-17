@@ -58,6 +58,9 @@ protection et votre sécurité.</p>
 </ul>
 ">
 
+<!ENTITY fileAccessDenied.title "L’accès au fichier a été refusé">
+<!ENTITY fileAccessDenied.longDesc "<ul><li>Il a peut-être été supprimé, déplacé ou les permissions associées au fichier ne permettent pas d’y accéder.</li></ul>">
+
 <!ENTITY generic.title "La requête ne peut aboutir">
 <!ENTITY generic.longDesc "
 <p>Pour une raison inconnue, le navigateur ne peut pas charger cette page.</p>
@@ -90,9 +93,7 @@ pendant le transfert d’informations. Veuillez réessayer.</p>
 </ul>
 ">
 
-
 <!ENTITY netOffline.title "Mode hors connexion">
-
 <!ENTITY netOffline.longDesc2 "<p>Le navigateur est en mode hors connexion et ne peut pas se connecter à l’adresse indiquée.</p>
 <ul>
   <li>L’ordinateur est-il connecté au réseau ?</li>
@@ -105,15 +106,14 @@ pendant le transfert d’informations. Veuillez réessayer.</p>
 <p>La page que vous essayez de voir ne peut être affichée car elle utilise un
 type de compression invalide ou non pris en charge.</p>
 <ul>
-  <li>Veuillez contacter le webmestre du site pour l’informer de ce problème.</li>
+  <li>Veuillez contacter les propriétaires du site web pour les informer de ce problème.</li>
 </ul>
 ">
 
 <!ENTITY unsafeContentType.title "Type de fichier non sûr">
 <!ENTITY unsafeContentType.longDesc "
 <ul>
-  <li>Veuillez contacter les propriétaires du site web pour les informer de ce
-  problème.</li>
+  <li>Veuillez contacter les propriétaires du site web pour les informer de ce problème.</li>
 </ul>">
 
 <!ENTITY netReset.title "La connexion a été réinitialisée">
@@ -194,9 +194,13 @@ refusé la connexion.</p>
 <!ENTITY cspBlocked.title "Bloqué par une stratégie de sécurité de contenu">
 <!ENTITY cspBlocked.longDesc "<p>Le navigateur a empêché le chargement de cette page de cette manière car la page a une stratégie de sécurité de contenu qui ne le permet pas.</p>">
 
-<!ENTITY corruptedContentError.title "Erreur due à un contenu corrompu">
-<!ENTITY corruptedContentError.longDesc "<p>La page que vous essayez de voir ne peut pas être affichée car une erreur dans la transmission de données a été détectée.</p><ul><li>Veuillez contacter les propriétaires du site web pour les informer de ce problème.</li></ul>">
-
+<!ENTITY corruptedContentErrorv2.title "Erreur due à un contenu corrompu">
+<!ENTITY corruptedContentErrorv2.longDesc "<p>La page que vous essayez de voir ne peut pas être affichée car une erreur dans la transmission de données a été détectée.</p><ul><li>Veuillez contacter les propriétaires du site web pour les informer de ce problème.</li></ul>">
 
 <!ENTITY remoteXUL.title "XUL distant">
 <!ENTITY remoteXUL.longDesc "<p><ul><li>Veuillez contacter les propriétaires du site web pour les informer de ce problème.</li></ul></p>">
+
+<!ENTITY inadequateSecurityError.title "La connexion n’est pas sécurisée">
+<!-- LOCALIZATION NOTE (inadequateSecurityError.longDesc) - Do not translate
+     "NS_ERROR_NET_INADEQUATE_SECURITY". -->
+<!ENTITY inadequateSecurityError.longDesc "<p><span class='hostname'></span> fait appel à des technologies de sécurisation obsolètes et vulnérables aux attaques. Un attaquant pourrait facilement révéler des informations que vous pensiez être sécurisées. L’administrateur du site web devra d’abord corriger le serveur avant que vous puissiez visiter le site.</p><p>Code d’erreur : NS_ERROR_NET_INADEQUATE_SECURITY</p>">

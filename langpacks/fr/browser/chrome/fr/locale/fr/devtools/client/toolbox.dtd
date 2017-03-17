@@ -10,46 +10,9 @@
 <!ENTITY toggleToolboxF12.keycode          "VK_F12">
 <!ENTITY toggleToolboxF12.keytext          "F12">
 
-<!ENTITY toolboxCloseButton.tooltip    "Fermer les outils de développement">
-<!ENTITY toolboxOptionsButton.key      "O">
-<!ENTITY toolboxNextTool.key           "]">
-<!ENTITY toolboxPreviousTool.key       "[">
-
-<!-- LOCALIZATION NOTE :
-fullZoomEnlargeCmd.commandkey, fullZoomEnlargeCmd.commandkey2,
-fullZoomEnlargeCmd.commandkey3, fullZoomReduceCmd.commandkey,
-fullZoomReduceCmd.commandkey2, fullZoomResetCmd.commandkey,
-and fullZoomResetCmd.commandkey2 should all match the corresponding
-values from browser.dtd.  -->
-<!ENTITY fullZoomEnlargeCmd.commandkey  "+">
-<!ENTITY fullZoomEnlargeCmd.commandkey2 "=">
-<!ENTITY fullZoomEnlargeCmd.commandkey3 "">
-
-<!ENTITY fullZoomReduceCmd.commandkey   "-">
-<!ENTITY fullZoomReduceCmd.commandkey2  "">
-
-<!ENTITY fullZoomResetCmd.commandkey    "0">
-<!ENTITY fullZoomResetCmd.commandkey2   "">
-
-<!ENTITY toolboxReload.key             "r">
-<!-- This key is used with the accel+shift modifiers to minimize the toolbox -->
-<!ENTITY toolboxToggleMinimize.key     "U">
-
-<!ENTITY toolboxToggle.key             "d">
-<!-- LOCALIZATION NOTE (toolboxFramesButton): This is the label for
-  -  the iframes menu list that appears only when the document has some.
-  -  It allows you to switch the context of the whole toolbox. -->
-<!ENTITY toolboxFramesTooltip          "Sélectionner un iframe en tant que document cible">
-
-<!-- LOCALIZATION NOTE (toolboxNoAutoHideButton): This is the label for
-  -  the button to force the popups/panels to stay visible on blur.
-  -  This is only visible in the browser toolbox as it is meant for
-  -  addon developers and Firefox contributors. -->
-<!ENTITY toolboxNoAutoHideTooltip      "Désactiver le masquage automatique des popups">
-
 <!-- LOCALIZATION NOTE (browserToolboxErrorMessage): This is the label
   -  shown next to error details when the Browser Toolbox is unable to open. -->
-<!ENTITY browserToolboxErrorMessage    "Une erreur s’est produite lors de l’ouverture de la boîte à outils du navigateur :">
+<!ENTITY browserToolboxErrorMessage          "Une erreur s’est produite lors de l’ouverture de la boîte à outils du navigateur :">
 
 <!-- LOCALIZATION NOTE (options.context.advancedSettings): This is the label for
   -  the heading of the advanced settings group in the options panel. -->
@@ -117,7 +80,7 @@ values from browser.dtd.  -->
   -  checkbox that toggles remote debugging, i.e. devtools.debugger.remote-enabled
   -  boolean preference in about:config, in the options panel. -->
 <!ENTITY options.enableRemote.label3    "Activer le débogage distant">
-<!ENTITY options.enableRemote.tooltip  "Activer cette option permettra de déboguer grâce aux outils de développement des instances distantes de Firefox telles que Firefox OS">
+<!ENTITY options.enableRemote.tooltip2  "Activer cette option permettra de déboguer grâce aux outils de développement, une instance distante telle que Firefox OS">
 
 <!-- LOCALIZATION NOTE (options.enableWorkers.label): This is the label for the
   -  checkbox that toggles worker debugging, i.e. devtools.debugger.workers
@@ -131,11 +94,11 @@ values from browser.dtd.  -->
 <!ENTITY options.disableJavaScript.label     "Désactiver JavaScript *">
 <!ENTITY options.disableJavaScript.tooltip   "Activer cette option désactivera JavaScript pour l’onglet courant. Ce paramètre sera oublié à la fermeture de l’onglet ou de la boîte à outils.">
 
-<!-- LOCALIZATION NOTE (options.disableCache.label2,
-  -  options.disableCache.tooltip2): This is the options panel label and
-  -  tooltip for the checkbox that toggles the cache on or off. -->
-<!ENTITY options.disableCache.label2     "Désactiver le cache (lorsque la boîte à outils est ouverte)">
-<!ENTITY options.disableCache.tooltip2   "Activer cette option désactivera le cache pour l’ensemble des onglets dans lesquels la boîte à outils est ouverte.">
+<!-- LOCALIZATION NOTE (options.disableHTTPCache.label,
+  -  options.disableHTTPCache.tooltip): This is the options panel label and
+  -  tooltip for the checkbox that toggles the HTTP cache on or off. -->
+<!ENTITY options.disableHTTPCache.label     "Désactiver le cache HTTP (lorsque la boîte à outils est ouverte)">
+<!ENTITY options.disableHTTPCache.tooltip   "Activer cette option désactivera le cache HTTP pour l’ensemble des onglets dans lesquels la boîte à outils est ouverte. Cette option n’a aucun effet sur les service workers.">
 
 <!-- LOCALIZATION NOTE (options.enableServiceWorkersHTTP.label,
   -  options.enableServiceWorkersHTTP.tooltip): This is the options panel label and
@@ -143,12 +106,12 @@ values from browser.dtd.  -->
 <!ENTITY options.enableServiceWorkersHTTP.label     "Activer les Service Workers via HTTP (lorsque la boîte à outils est ouverte)">
 <!ENTITY options.enableServiceWorkersHTTP.tooltip   "Activer cette option activera les Service Workers via HTTP pour tous les onglets où la boîte à outils est ouverte.">
 
-<!-- LOCALIZATION NOTE (options.selectDefaultTools.label): This is the label for
+<!-- LOCALIZATION NOTE (options.selectDefaultTools.label2): This is the label for
   -  the heading of group of checkboxes corresponding to the default developer
   -  tools. -->
-<!ENTITY options.selectDefaultTools.label     "Outils de développement par défaut">
+<!ENTITY options.selectDefaultTools.label2    "Outils de développement par défaut">
 
-<!-- LOCALIZATION NOTE (options.selectDefaultTools.label): This is the label for
+<!-- LOCALIZATION NOTE (options.selectAdditionalTools.label): This is the label for
   -  the heading of group of checkboxes corresponding to the developer tools
   -  added by add-ons. This heading is hidden when there is no developer tool
   -  installed by add-ons. -->
@@ -164,7 +127,7 @@ values from browser.dtd.  -->
   -  for the target of the toolbox. -->
 <!ENTITY options.toolNotSupported.label  "* Non géré pour la cible actuelle de la boîte à outils">
 
-<!-- LOCALIZATION NOTE (options.selectDevToolsTheme2.label): This is the label for
+<!-- LOCALIZATION NOTE (options.selectDevToolsTheme.label2): This is the label for
   -  the heading of the radiobox corresponding to the theme of the developer
   -  tools. -->
 <!ENTITY options.selectDevToolsTheme.label2   "Thèmes">
@@ -183,6 +146,15 @@ values from browser.dtd.  -->
 <!ENTITY options.timestampMessages.label      "Activer l’horodatage">
 <!ENTITY options.timestampMessages.tooltip    "Si vous activez cette option, les commandes et les sorties dans la console web afficheront l’horodatage">
 
+<!-- LOCALIZATION NOTE (options.debugger.label): This is the label for the
+  -  heading of the group of Debugger preferences in the options panel. -->
+<!ENTITY options.debugger.label            "Débogueur">
+
+<!-- LOCALIZATION NOTE (options.sourceMap.label): This is the
+   - label for the checkbox that toggles source maps in the Debugger -->
+<!ENTITY options.sourceMaps.label      "Activer les liens vers les sources">
+<!ENTITY options.sourceMaps.tooltip    "Si vous activez cette option, les sources seront accessibles depuis le débogueur et la console">
+
 <!-- LOCALIZATION NOTE (options.styleeditor.label): This is the label for the
   -  heading of the group of Style Editor preferences in the options
   -  panel. -->
@@ -198,9 +170,24 @@ values from browser.dtd.  -->
 <!ENTITY options.stylesheetAutocompletion.label      "Compléter automatiquement le CSS">
 <!ENTITY options.stylesheetAutocompletion.tooltip    "Compléter automatiquement les propriétés, valeurs et sélecteurs CSS dans l’éditeur de style lors de la saisie">
 
-<!-- LOCALICATION NOTE (options.commonprefs): This is the label for the heading
-  -  of all preferences that affect both the Web Console and the Network
-  -  Monitor -->
+<!-- LOCALIZATION NOTE (options.screenshot.label): This is the label for the
+   -  heading of the group of Screenshot preferences in the options
+   -  panel. -->
+<!ENTITY options.screenshot.label            "Comportement pour les captures d’écran">
+
+<!-- LOCALIZATION NOTE (options.screenshot.clipboard.label): This is the
+   - label for the checkbox that toggles screenshot to clipboard feature. -->
+<!ENTITY options.screenshot.clipboard.label      "Enregistrer dans le presse-papiers">
+<!ENTITY options.screenshot.clipboard.tooltip    "Enregistrer directement la capture d’écran dans le presse-papiers">
+
+<!-- LOCALIZATION NOTE (options.screenshot.audio.label): This is the
+   - label for the checkbox that toggles the camera shutter audio for screenshot tool -->
+<!ENTITY options.screenshot.audio.label      "Jouer un son d’obturateur d’appareil photo">
+<!ENTITY options.screenshot.audio.tooltip    "Activer le son d’un obturateur d’appareil photo lors de la capture d’écran">
+
+<!-- LOCALIZATION NOTE (options.commonprefs): This is the label for the heading
+      of all preferences that affect both the Web Console and the Network
+      Monitor -->
 <!ENTITY options.commonPrefs.label           "Préférences générales">
 
 <!-- LOCALIZATION NOTE (options.enablePersistentLogs.label): This is the
@@ -227,7 +214,7 @@ values from browser.dtd.  -->
 <!ENTITY options.sourceeditor.autoclosebrackets.tooltip "Insérer automatiquement les parenthèses et les accolades fermantes">
 <!ENTITY options.sourceeditor.expandtab.label           "Indenter à l’aide d’espaces">
 <!ENTITY options.sourceeditor.expandtab.tooltip         "Utiliser des espaces à la place du caractère tabulation">
-<!ENTITY options.sourceeditor.tabsize.label             "Taille de la tabulation">
+<!ENTITY options.sourceeditor.tabsize.label             "Taille des tabulations">
 <!ENTITY options.sourceeditor.tabsize.accesskey         "T">
 <!ENTITY options.sourceeditor.keybinding.label          "Raccourcis clavier">
 <!ENTITY options.sourceeditor.keybinding.accesskey      "R">

@@ -6,10 +6,10 @@
 <!ENTITY accessibility.label "Accessibilità">
 <!ENTITY useCursorNavigation.label "Utilizza sempre i tasti direzione per navigare nelle pagine">
 <!ENTITY useCursorNavigation.accesskey "U">
-<!ENTITY searchStartTyping.label "Cerca nel testo quando si digita qualcosa">
-<!ENTITY searchStartTyping.accesskey "e">
-<!ENTITY blockAutoRefresh.label "Avvisa se un sito web cerca di reindirizzare o ricaricare la pagina">
-<!ENTITY blockAutoRefresh.accesskey "w">
+<!ENTITY searchOnStartTyping.label "Cerca nel testo quando si digita qualcosa">
+<!ENTITY searchOnStartTyping.accesskey "e">
+<!ENTITY blockAutoReload.label "Avvisa se un sito web cerca di reindirizzare o ricaricare la pagina">
+<!ENTITY blockAutoReload.accesskey "w">
 <!ENTITY useOnScreenKeyboard.label "Visualizza una tastiera touch quando necessario">
 <!ENTITY useOnScreenKeyboard.accesskey "s">
 <!ENTITY browsing.label "Navigazione">
@@ -19,20 +19,20 @@
 <!ENTITY useSmoothScrolling.accesskey "a">
 <!ENTITY allowHWAccel.label "Utilizza l’accelerazione hardware quando disponibile">
 <!ENTITY allowHWAccel.accesskey "h">
-<!ENTITY checkSpelling.label "Controllo ortografico durante la digitazione">
-<!ENTITY checkSpelling.accesskey "C">
+<!ENTITY checkUserSpelling.label "Controllo ortografico durante la digitazione">
+<!ENTITY checkUserSpelling.accesskey "C">
 <!ENTITY dataChoicesTab.label "Condivisione dati">
 <!ENTITY healthReportDesc.label "Analizza le prestazioni del browser e condividi informazioni con &vendorShortName; sullo stato di integrità del software">
 <!ENTITY enableHealthReport.label "Attiva analisi integrità di &brandShortName;">
 <!ENTITY enableHealthReport.accesskey "v">
 <!ENTITY healthReportLearnMore.label "Ulteriori informazioni">
 <!ENTITY telemetryDesc.label "Condividi con &vendorShortName; informazioni relative a prestazioni, utilizzo, hardware e personalizzazioni del browser per contribuire al miglioramento di &brandShortName;">
-<!ENTITY telemetryLearnMore.label "Ulteriori informazioni">
-<!ENTITY crashReporterDesc.label "Invia a &vendorShortName; segnalazioni relative ad arresti anomali di &brandShortName; per migliorarne la stabilità e la sicurezza">
-<!ENTITY enableCrashReporter.label "Attiva segnalazione arresti anomali">
-<!ENTITY enableCrashReporter.accesskey "s">
 <!ENTITY enableTelemetryData.label "Condividi ulteriori dati (telemetria)">
 <!ENTITY enableTelemetryData.accesskey "t">
+<!ENTITY telemetryLearnMore.label "Ulteriori informazioni">
+<!ENTITY crashReporterDesc2.label "Le segnalazioni di arresto anomalo permettono a &vendorShortName; di risolvere i problemi del browser e renderlo più stabile e sicuro">
+<!ENTITY alwaysSubmitCrashReports.label "Consenti a &brandShortName; di inviare automaticamente le segnalazioni di arresto anomalo in sospeso">
+<!ENTITY alwaysSubmitCrashReports.accesskey "s">
 <!ENTITY crashReporterLearnMore.label "Ulteriori informazioni">
 <!ENTITY networkTab.label "Rete">
 <!ENTITY connection.label "Connessione">
@@ -41,6 +41,12 @@
 <!ENTITY connectionSettings.accesskey "z">
 <!ENTITY httpCache.label "Contenuti web in cache">
 <!ENTITY offlineStorage2.label "Dati non in linea e informazioni utente">
+<!ENTITY siteData.label "Dati dei siti web">
+<!ENTITY clearSiteData.label "Elimina tutti i dati">
+<!ENTITY clearSiteData.accesskey "m">
+<!ENTITY siteDataSettings.label "Impostazioni…">
+<!ENTITY siteDataSettings.accesskey "o">
+<!ENTITY siteDataLearnMoreLink.label "Ulteriori informazioni">
 <!ENTITY limitCacheSizeBefore.label "Limita la cache a">
 <!ENTITY limitCacheSizeBefore.accesskey "L">
 <!ENTITY limitCacheSizeAfter.label "MB di spazio">
@@ -51,38 +57,36 @@
 <!ENTITY overrideSmartCacheSize.label "Non utilizzare la gestione automatica della cache">
 <!ENTITY overrideSmartCacheSize.accesskey "N">
 <!ENTITY updateTab.label "Aggiornamenti">
-<!ENTITY updateApp.label "Aggiornamenti di &brandShortName;:">
+<!ENTITY updateApplication.label "Aggiornamenti di &brandShortName;">
 <!ENTITY updateAuto1.label "Installa automaticamente aggiornamenti (consigliato: maggiore sicurezza)">
 <!ENTITY updateAuto1.accesskey "s">
-<!ENTITY updateCheck.label "Controlla aggiornamenti ma permetti all’utente di scegliere se installarli">
-<!ENTITY updateCheck.accesskey "r">
+<!ENTITY updateCheckChoose.label "Controlla aggiornamenti ma permetti all’utente di scegliere se installarli">
+<!ENTITY updateCheckChoose.accesskey "C">
 <!ENTITY updateManual.label "Non cercare aggiornamenti (non consigliato: rischi per la sicurezza)">
 <!ENTITY updateManual.accesskey "N">
-<!ENTITY updateAutoAddonWarn.label "Avvisa se verranno disattivati dei componenti aggiuntivi">
-<!ENTITY updateAutoAddonWarn.accesskey "A">
 <!ENTITY updateHistory.label "Mostra cronologia aggiornamenti">
 <!ENTITY updateHistory.accesskey "o">
 <!ENTITY useService.label "Utilizza un servizio di sistema per installare gli aggiornamenti">
 <!ENTITY useService.accesskey "U">
-<!ENTITY updateOthers.label "Aggiorna automaticamente:">
+<!ENTITY autoUpdateOthers.label "Aggiorna automaticamente">
 <!ENTITY enableSearchUpdate.label "Motori di ricerca">
 <!ENTITY enableSearchUpdate.accesskey "M">
-<!ENTITY offlineNotify.label "Avvisa quando un sito web richiede di salvare dati per l’utilizzo non in linea">
-<!ENTITY offlineNotify.accesskey "A">
-<!ENTITY offlineNotifyExceptions.label "Eccezioni…">
-<!ENTITY offlineNotifyExceptions.accesskey "E">
+<!ENTITY offlineStorageNotify.label "Avvisa quando un sito web richiede di salvare dati per l’utilizzo non in linea">
+<!ENTITY offlineStorageNotify.accesskey "A">
+<!ENTITY offlineStorageNotifyExceptions.label "Eccezioni…">
+<!ENTITY offlineStorageNotifyExceptions.accesskey "E">
 <!ENTITY offlineAppsList2.label "I seguenti siti web hanno il permesso di salvare dati per l’utilizzo non in linea:">
 <!ENTITY offlineAppsList.height "7em">
 <!ENTITY offlineAppsListRemove.label "Rimuovi…">
 <!ENTITY offlineAppsListRemove.accesskey "R">
 <!ENTITY offlineAppRemove.confirm "Rimozione dati non in linea">
 <!ENTITY certificateTab.label "Certificati">
-<!ENTITY certSelection.label "Richieste">
-<!ENTITY certSelection.description "Quando un sito web richiede il certificato personale:">
-<!ENTITY certs.auto "Selezionane uno automaticamente">
-<!ENTITY certs.auto.accesskey "S">
-<!ENTITY certs.ask "Chiedi ogni volta">
-<!ENTITY certs.ask.accesskey "C">
+<!ENTITY certPersonal.label "Richieste">
+<!ENTITY certPersonal.description "Quando un sito web richiede il certificato personale:">
+<!ENTITY selectCerts.auto "Selezionane uno automaticamente">
+<!ENTITY selectCerts.auto.accesskey "S">
+<!ENTITY selectCerts.ask "Chiedi ogni volta">
+<!ENTITY selectCerts.ask.accesskey "C">
 <!ENTITY enableOCSP.label "Interroga risponditori OCSP per confermare la validità attuale dei certificati">
 <!ENTITY enableOCSP.accesskey "O">
 <!ENTITY viewCerts.label "Mostra certificati">

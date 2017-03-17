@@ -10,43 +10,6 @@
 <!ENTITY toggleToolboxF12.keycode          "VK_F12">
 <!ENTITY toggleToolboxF12.keytext          "F12">
 
-<!ENTITY toolboxCloseButton.tooltip    "Zapri razvojna orodja">
-<!ENTITY toolboxOptionsButton.key      "O">
-<!ENTITY toolboxNextTool.key           "]">
-<!ENTITY toolboxPreviousTool.key       "[">
-
-<!-- LOCALIZATION NOTE :
-fullZoomEnlargeCmd.commandkey, fullZoomEnlargeCmd.commandkey2,
-fullZoomEnlargeCmd.commandkey3, fullZoomReduceCmd.commandkey,
-fullZoomReduceCmd.commandkey2, fullZoomResetCmd.commandkey,
-and fullZoomResetCmd.commandkey2 should all match the corresponding
-values from browser.dtd.  -->
-<!ENTITY fullZoomEnlargeCmd.commandkey  "+">
-<!ENTITY fullZoomEnlargeCmd.commandkey2 "=">
-<!ENTITY fullZoomEnlargeCmd.commandkey3 "">
-
-<!ENTITY fullZoomReduceCmd.commandkey   "-">
-<!ENTITY fullZoomReduceCmd.commandkey2  "">
-
-<!ENTITY fullZoomResetCmd.commandkey    "0">
-<!ENTITY fullZoomResetCmd.commandkey2   "">
-
-<!ENTITY toolboxReload.key             "r">
-<!-- This key is used with the accel+shift modifiers to minimize the toolbox -->
-<!ENTITY toolboxToggleMinimize.key     "U">
-
-<!ENTITY toolboxToggle.key             "d">
-<!-- LOCALIZATION NOTE (toolboxFramesButton): This is the label for
-  -  the iframes menu list that appears only when the document has some.
-  -  It allows you to switch the context of the whole toolbox. -->
-<!ENTITY toolboxFramesTooltip          "Izberi iframe kot ciljni dokument">
-
-<!-- LOCALIZATION NOTE (toolboxNoAutoHideButton): This is the label for
-  -  the button to force the popups/panels to stay visible on blur.
-  -  This is only visible in the browser toolbox as it is meant for
-  -  addon developers and Firefox contributors. -->
-<!ENTITY toolboxNoAutoHideTooltip      "Onemogoči samodejno skrivanje pojavnih oken">
-
 <!-- LOCALIZATION NOTE (browserToolboxErrorMessage): This is the label
   -  shown next to error details when the Browser Toolbox is unable to open. -->
 <!ENTITY browserToolboxErrorMessage          "Napaka pri odpiranju razvojnih orodij brskalnika:">
@@ -117,7 +80,7 @@ values from browser.dtd.  -->
   -  checkbox that toggles remote debugging, i.e. devtools.debugger.remote-enabled
   -  boolean preference in about:config, in the options panel. -->
 <!ENTITY options.enableRemote.label3    "Omogoči oddaljeno razhroščevanje">
-<!ENTITY options.enableRemote.tooltip   "Če vključite to možnost, boste omogočili razhroščevanje oddaljenega primerka Firefoxa, npr. Firefox OS">
+<!ENTITY options.enableRemote.tooltip2  "Vklop te možnosti bo razvojnim orodjem omogočil razhroščevanje oddaljenega primerka (npr. OS-a Firefox)">
 
 <!-- LOCALIZATION NOTE (options.enableWorkers.label): This is the label for the
   -  checkbox that toggles worker debugging, i.e. devtools.debugger.workers
@@ -131,11 +94,11 @@ values from browser.dtd.  -->
 <!ENTITY options.disableJavaScript.label     "Onemogoči JavaScript *">
 <!ENTITY options.disableJavaScript.tooltip   "Če vključite to možnost, boste onemogočili JavaScript v trenutnem zavihku. Če zaprete zavihek ali razvojna orodja, bo nastavitev pozabljena.">
 
-<!-- LOCALIZATION NOTE (options.disableCache.label2,
-  -  options.disableCache.tooltip2): This is the options panel label and
-  -  tooltip for the checkbox that toggles the cache on or off. -->
-<!ENTITY options.disableCache.label2     "Onemogoči predpomnilnik (ko so razvojna orodja odprta)">
-<!ENTITY options.disableCache.tooltip2   "Če vključite to možnost, boste onemogočili predpomnilnik v vseh zavihkih, ki imajo odprta razvojna orodja.">
+<!-- LOCALIZATION NOTE (options.disableHTTPCache.label,
+  -  options.disableHTTPCache.tooltip): This is the options panel label and
+  -  tooltip for the checkbox that toggles the HTTP cache on or off. -->
+<!ENTITY options.disableHTTPCache.label     "Onemogoči predpomnilnik HTTP (ko so razvojna orodja odprta)">
+<!ENTITY options.disableHTTPCache.tooltip   "Vklop te možnosti bo onemogočil predpomnilnik HTTP za vse zavihke, ki imajo odrta razvojna orodja. Ta možnost ne vpliva na Service Workerje.">
 
 <!-- LOCALIZATION NOTE (options.enableServiceWorkersHTTP.label,
   -  options.enableServiceWorkersHTTP.tooltip): This is the options panel label and
@@ -143,10 +106,10 @@ values from browser.dtd.  -->
 <!ENTITY options.enableServiceWorkersHTTP.label     "Omogoči Service Workerje preko HTTP (ko so razvojna orodja odprta)">
 <!ENTITY options.enableServiceWorkersHTTP.tooltip   "Če vključite to možnost, boste omogočili Service Workerje preko HTTP v vseh zavihkih, ki imajo odprta razvojna orodja.">
 
-<!-- LOCALIZATION NOTE (options.selectDefaultTools.label): This is the label for
+<!-- LOCALIZATION NOTE (options.selectDefaultTools.label2): This is the label for
   -  the heading of group of checkboxes corresponding to the default developer
   -  tools. -->
-<!ENTITY options.selectDefaultTools.label     "Privzeta razvojna orodja za Firefox">
+<!ENTITY options.selectDefaultTools.label2    "Privzeta razvojna orodja">
 
 <!-- LOCALIZATION NOTE (options.selectAdditionalTools.label): This is the label for
   -  the heading of group of checkboxes corresponding to the developer tools
@@ -183,10 +146,19 @@ values from browser.dtd.  -->
 <!ENTITY options.timestampMessages.label      "Omogoči časovne žige">
 <!ENTITY options.timestampMessages.tooltip    "Če vključite to možnost, bodo ukazi in izpisi v spletni konzoli prikazovali časovni žig">
 
+<!-- LOCALIZATION NOTE (options.debugger.label): This is the label for the
+  -  heading of the group of Debugger preferences in the options panel. -->
+<!ENTITY options.debugger.label            "Razhroščevalnik">
+
+<!-- LOCALIZATION NOTE (options.sourceMap.label): This is the
+   - label for the checkbox that toggles source maps in the Debugger -->
+<!ENTITY options.sourceMaps.label      "Omogoči preslikave virov">
+<!ENTITY options.sourceMaps.tooltip    "Če vključite to možnost, bodo viri v Razhroščevalniku in Konzoli preslikani.">
+
 <!-- LOCALIZATION NOTE (options.styleeditor.label): This is the label for the
   -  heading of the group of Style Editor preferences in the options
   -  panel. -->
-<!ENTITY options.styleeditor.label            "Urejevalik sloga">
+<!ENTITY options.styleeditor.label            "Urejevalnik sloga">
 
 <!-- LOCALIZATION NOTE (options.stylesheetSourceMaps.label): This is the
    - label for the checkbox that toggles showing original sources in the Style Editor -->
@@ -197,6 +169,21 @@ values from browser.dtd.  -->
    - label for the checkbox that toggles autocompletion of css in the Style Editor -->
 <!ENTITY options.stylesheetAutocompletion.label      "Samodokončaj CSS">
 <!ENTITY options.stylesheetAutocompletion.tooltip    "Med pisanjem v Urejevalniku sloga samodejno dokončaj lastnosti, vrednosti in izbirnike CSS">
+
+<!-- LOCALIZATION NOTE (options.screenshot.label): This is the label for the
+   -  heading of the group of Screenshot preferences in the options
+   -  panel. -->
+<!ENTITY options.screenshot.label            "Posnetki zaslona">
+
+<!-- LOCALIZATION NOTE (options.screenshot.clipboard.label): This is the
+   - label for the checkbox that toggles screenshot to clipboard feature. -->
+<!ENTITY options.screenshot.clipboard.label      "Shrani v odložišče">
+<!ENTITY options.screenshot.clipboard.tooltip    "Shrani posnetek zaslona v odložišče">
+
+<!-- LOCALIZATION NOTE (options.screenshot.audio.label): This is the
+   - label for the checkbox that toggles the camera shutter audio for screenshot tool -->
+<!ENTITY options.screenshot.audio.label      "Predvajaj zvok zaslonke kamere">
+<!ENTITY options.screenshot.audio.tooltip    "Ob zajemanju posnetka zaslona omogoči zvok kamere">
 
 <!-- LOCALIZATION NOTE (options.commonprefs): This is the label for the heading
       of all preferences that affect both the Web Console and the Network
@@ -233,4 +220,3 @@ simbole platforme Gecko">
 <!ENTITY options.sourceeditor.keybinding.label          "Bližnjice tipk">
 <!ENTITY options.sourceeditor.keybinding.accesskey      "K">
 <!ENTITY options.sourceeditor.keybinding.default.label  "Privzeto">
-

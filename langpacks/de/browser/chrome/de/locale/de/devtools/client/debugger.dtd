@@ -50,14 +50,6 @@
   -  button that toggles all breakpoints for all sources. -->
 <!ENTITY debuggerUI.sources.toggleBreakpoints "Alle Haltepunkte aktivieren/deaktivieren">
 
-<!-- LOCALIZATION NOTE (debuggerUI.sources.togglePromiseDebugger): This is the
-  -  tooltip for the button that toggles the promise debugger. -->
-<!ENTITY debuggerUI.sources.togglePromiseDebugger "Promise-Debugger umschalten">
-
-<!-- LOCALIZATION NOTE (debuggerUI.startTracing): This is the text displayed in
-  - the button to start execution tracing. -->
-<!ENTITY debuggerUI.startTracing "Ablauf aufzeichnen">
-
 <!-- LOCALIZATION NOTE (debuggerUI.clearButton): This is the label for
   -  the button that clears the collected tracing data in the tracing tab. -->
 <!ENTITY debuggerUI.clearButton "Leeren">
@@ -73,7 +65,7 @@
 
 <!-- LOCALIZATION NOTE (debuggerUI.ignoreCaughtExceptions): This is the label for the
   -  checkbox that toggles ignoring caught exceptions. -->
-<!ENTITY debuggerUI.ignoreCaughtExceptions     "Auftretende Ausnahmefehler ignorieren">
+<!ENTITY debuggerUI.ignoreCaughtExceptions     "Abgefangene Ausnahmefehler ignorieren">
 <!ENTITY debuggerUI.ignoreCaughtExceptions.accesskey "g">
 
 <!-- LOCALIZATION NOTE (debuggerUI.showPanesOnInit): This is the label for the
@@ -159,13 +151,18 @@
 <!-- LOCALIZATION NOTE (debuggerUI.seMenuBreak): This is the text that
   -  appears in the source editor context menu for adding a breakpoint. -->
 <!ENTITY debuggerUI.seMenuBreak         "Haltepunkt hinzufügen">
-<!ENTITY debuggerUI.seMenuBreak.key     "H">
+<!ENTITY debuggerUI.seMenuBreak.key     "B">
 
 <!-- LOCALIZATION NOTE (debuggerUI.seMenuCondBreak): This is the text that
   -  appears in the source editor context menu for adding a conditional
   -  breakpoint. -->
 <!ENTITY debuggerUI.seMenuCondBreak     "Bedingten Haltepunkt hinzufügen">
 <!ENTITY debuggerUI.seMenuCondBreak.key "B">
+
+<!-- LOCALIZATION NOTE (debuggerUI.seMenuBreak): This is the text that
+  -  appears in the source editor context menu for editing a breakpoint. -->
+<!ENTITY debuggerUI.seEditMenuCondBreak     "Bedingten Haltepunkt bearbeiten">
+<!ENTITY debuggerUI.seEditMenuCondBreak.key "B">
 
 <!-- LOCALIZATION NOTE (debuggerUI.tabs.*): This is the text that
   -  appears in the debugger's side pane tabs. -->
@@ -189,20 +186,16 @@
 <!-- LOCALIZATION NOTE (debuggerUI.removeWatch): This is the text that
   -  appears in the watch expressions context menu for removing all expressions. -->
 <!ENTITY debuggerUI.removeAllWatch      "Alle zu beobachtenden Ausdrücke entfernen">
-<!ENTITY debuggerUI.removeAllWatch.key  "e">
+<!ENTITY debuggerUI.removeAllWatch.key  "E">
 <!ENTITY debuggerUI.removeAllWatch.accesskey "e">
 
 <!-- LOCALIZATION NOTE (debuggerUI.stepping): These are the keycodes that
   -  control the stepping commands in the debugger (continue, step over,
   -  step in and step out). -->
 <!ENTITY debuggerUI.stepping.resume1    "VK_F8">
-<!ENTITY debuggerUI.stepping.resume2    "VK_SLASH">
 <!ENTITY debuggerUI.stepping.stepOver1  "VK_F10">
-<!ENTITY debuggerUI.stepping.stepOver2  "VK_QUOTE">
 <!ENTITY debuggerUI.stepping.stepIn1    "VK_F11">
-<!ENTITY debuggerUI.stepping.stepIn2    "VK_SEMICOLON">
 <!ENTITY debuggerUI.stepping.stepOut1   "VK_F11">
-<!ENTITY debuggerUI.stepping.stepOut2   "VK_SEMICOLON">
 
 <!-- LOCALIZATION NOTE (debuggerUI.context.newTab):  This is the label
   -  for the Open in New Tab menu item displayed in the context menu of the

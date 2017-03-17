@@ -39,11 +39,20 @@
 </ul>
 ">
 
+<!ENTITY fileAccessDenied.title "파일 접근 거부됨">
+<!ENTITY fileAccessDenied.longDesc "
+<ul>
+  <li>삭제, 이동 또는 권한이 없어서 접근할 수 없습니다.</li>
+</ul>
+">
 
 <!ENTITY generic.title "이런.">
 <!ENTITY generic.longDesc "
 <p>&brandShortName;가 어떠한 이유로 인하여 현재 페이지를 읽을 수 없습니다.</p>
 ">
+
+<!ENTITY captivePortal.title "네트워크에 로그인">
+
 
 <!ENTITY malformedURI.title "주소가 유효하지 않음">
 <!ENTITY malformedURI.longDesc "
@@ -139,15 +148,11 @@
 </ul>
 ">
 
-<!ENTITY nssBadCert.title "보안 연결 실패">
-<!ENTITY nssBadCert.longDesc2 "
-<ul>
-  <li>현재 웹 서버 설정에 문제가 있거나
-    누군가가 원래 접속하려던 진짜 서버처럼 가장하고 있을 가능성이 있습니다.</li>
-  <li>만약 이전에 이 웹 서버에 정상적으로 접속을 한적이 있다면,
-    일시적인 문제일 수 있으니 나중에 다시 접속해 보시기 바랍니다.</li>
-</ul>
-">
+<!ENTITY certerror.longpagetitle1 "연결이 안전하지 않음">
+<!-- Localization note (certerror.introPara) - The text content of the span tag
+will be replaced at runtime with the name of the server to which the user
+was trying to connect. -->
+<!ENTITY certerror.introPara "<span class='hostname'/>의 소유자가 웹사이트를 적절히 설정하지 않았습니다. 정보가 도난당하는 것을 막기 위해서 &brandShortName;가 웹사이트에 연결하지 않았습니다.">
 
 <!ENTITY sharedLongDesc "
 <ul>
@@ -163,25 +168,11 @@
 <!ENTITY cspBlocked.title "콘텐츠 보안 정책에 의한 차단">
 <!ENTITY cspBlocked.longDesc "<p>이 페이지는 콘텐츠 보안 정책에서 허락하지 않는 방법으로 로딩되어 &brandShortName;가 차단했습니다.</p>">
 
-<!ENTITY corruptedContentError.title "콘텐츠 전송 오류">
-<!ENTITY corruptedContentError.longDesc "<p>이 페이지는 전송 데이터에 오류가 감지되어서 표시할 수 없습니다.</p><ul><li>웹 사이트 관리자에게 본 문제점을 알려 주시기 바랍니다.</li></ul>">
+<!ENTITY corruptedContentErrorv2.title "손상된 콘텐츠 오류">
+<!ENTITY corruptedContentErrorv2.longDesc "<p>데이터 전송에 오류가 발생하여서 페이지를 표시할 수 없습니다.</p><ul><li>이 문제를 웹사이트 소유자에게 알려주세요.</li></ul>">
 
 
-<!ENTITY securityOverride.linkText "예외 추가…">
-<!ENTITY securityOverride.getMeOutOfHereButton "페이지 나가기">
 <!ENTITY securityOverride.exceptionButtonLabel "예외 추가…">
-
-<!-- LOCALIZATION NOTE (securityOverride.warningContent) - Do not translate the
-contents of the <button> tags. It uses strings already defined above. The
-button is included here (instead of netError.xhtml) because it exposes
-functionality specific to firefox. -->
-
-<!ENTITY securityOverride.warningContent "
-<p>여러분이 완전히 신뢰할 수 없는 인터넷 연결을 사용하는 중이거나 이 서버에서 예전에 이러한 경고를 본 적이 없는 경우에는 예외로 추가해서는 안 됩니다.</p>
-
-<button id='getMeOutOfHereButton'>&securityOverride.getMeOutOfHereButton;</button>
-<button id='exceptionDialogButton'>&securityOverride.exceptionButtonLabel;</button>
-">
 
 <!ENTITY errorReporting.automatic2 "오류 보고서를 보내면 멜웨어 사이트를 차단하거나 그 오류를 분석하는데 도움이 됩니다.">
 <!ENTITY errorReporting.learnMore "더 알아보기…">
@@ -194,10 +185,28 @@ functionality specific to firefox. -->
      "SSL_ERROR_UNSUPPORTED_VERSION". -->
 <!ENTITY sslv3Used.longDesc2 "고급 정보: SSL_ERROR_UNSUPPORTED_VERSION">
 
-<!ENTITY weakCryptoUsed.title "연결이 안전하지 않음">
-<!-- LOCALIZATION NOTE (weakCryptoUsed.longDesc2) - Do not translate
-     "SSL_ERROR_NO_CYPHER_OVERLAP". -->
-<!ENTITY weakCryptoUsed.longDesc2 "고급 정보: SSL_ERROR_NO_CYPHER_OVERLAP">
-<!ENTITY weakCryptoAdvanced.title "고급">
-<!ENTITY weakCryptoAdvanced.longDesc "<span class='hostname'></span>에서 사용하는 보안 기술이 오래되었고 공격에 취약합니다. 안전하다고 생각하는 정보가 공격에 의해 쉽게 노출될 수 있습니다.">
-<!ENTITY weakCryptoAdvanced.override "(안전하지 않음) 오래된 보안을 이용해서 <span class='hostname'></span> 로딩 시도">
+<!-- LOCALIZATION NOTE (certerror.wrongSystemTime2,
+                        certerror.wrongSystemTimeWithoutReference) - The <span id='..' />
+     tags will be injected with actual values, please leave them unchanged. -->
+<!ENTITY certerror.wrongSystemTime2 "<p>사용자 컴퓨터의 시계가 맞지 않기 때문에 보안 연결을 할 수 없어서 &brandShortName;가 <span id='wrongSystemTime_URL'/>에 연결하지 않았습니다.</p> <p><span id='wrongSystemTime_actualDate'/>여야 하지만 <span id='wrongSystemTime_systemDate'/>로 설정되어 있습니다. 올바른 날짜와 시간을 설정해 주세요.</p>">
+<!ENTITY certerror.wrongSystemTimeWithoutReference "<p>사용자 컴퓨터의 시계가 맞지 않기 때문에 보안 연결을 할 수 없어서 &brandShortName;가 <span id='wrongSystemTimeWithoutReference_URL'/>에 연결하지 않았습니다.</p> <p><span id='wrongSystemTimeWithoutReference_systemDate'/>로 설정되어 있습니다. 올바른 날짜와 시간을 설정해 주세요.</p>">
+
+<!ENTITY certerror.pagetitle1  "안전하지 않은 연결">
+<!ENTITY certerror.whatShouldIDo.badStsCertExplanation "이 사이트는 &brandShortName;가 안전한 경우에만 
+연결함을 명시하기 위해서 HTTP Strict Transport Security (HSTS)를 사용합니다.
+그래서 이 인증서에 예외를 추가할 수 없습니다.">
+<!ENTITY certerror.copyToClipboard.label "클립보드에 텍스트 복사">
+
+<!ENTITY inadequateSecurityError.title "연결이 안전하지 않음">
+<!-- LOCALIZATION NOTE (inadequateSecurityError.longDesc) - Do not translate
+     "NS_ERROR_NET_INADEQUATE_SECURITY". -->
+<!ENTITY inadequateSecurityError.longDesc "<p><span class='hostname'></span>이 오래되어서 공격에 안전하지 않은 보안 기술을 사용하고 있습니다. 사용자가 안전하다고 여길 수 있는 정보를 공격자가 쉽게 탈취할 수 있습니다. 사용자가 사이트에 방문하기 위해서는 웹사이트 관리자가 서버를 고쳐야 합니다.</p><p>오류 코드: NS_ERROR_NET_INADEQUATE_SECURITY</p>">
+
+<!ENTITY prefReset.longDesc "네트워크 보안 설정 때문에 이러한 현상이 발생한 것으로 보입니다. 기본 설정으로 되돌리겠습니까?">
+<!ENTITY prefReset.label "기본 설정으로 되돌리기">
+
+<!ENTITY captivePortal.longDesc2 "
+<p>You must log in to this network before you can access the Internet.</p>
+">
+
+<!ENTITY openPortalLoginPage.label2 "Open Network Login Page">

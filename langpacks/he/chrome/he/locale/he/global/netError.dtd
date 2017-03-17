@@ -19,6 +19,9 @@
 <!ENTITY fileNotFound.title "קובץ לא נמצא">
 <!ENTITY fileNotFound.longDesc "<ul><li>האם ייתכן שהפריט הוסר, שינה מיקום, או שינה שם?</li><li>האם ישנה שגיאת איות, שגיאת רישיות, או שגיאות טופוגרפיות אחרות בכתובת?</li><li>האם יש לך הרשאות גישה מספיקות אל הפריט המבוקש?</li></ul>">
 
+<!ENTITY fileAccessDenied.title "הגישה לקובץ נדחתה">
+<!ENTITY fileAccessDenied.longDesc "<ul><li>יתכן שהקובץ הוסר, הועבר או שההרשאות מונעות את הגישה אליו.</li></ul>">
+
 <!ENTITY generic.title "לא ניתן להשלים את הבקשה">
 <!ENTITY generic.longDesc "<p>מידע נוסף על בעיה או שגיאה זו אינו זמין כעת.</p>">
 
@@ -75,34 +78,20 @@
 <li>אם התחברת לשרת זה בהצלחה בעבר, ייתכן השגיאה זמנית, וכדאי שתנסה שוב מאוחר יותר.</li> 
 </ul>">
 
-<!ENTITY malwareBlocked.title "חשד לאתר תוקף!">
-<!ENTITY malwareBlocked.longDesc "<p>אתרים תוקפים מנסים להתקין תוכנות שגונבות מידע פרטי, משתמשות במחשב שלך לתקיפת אחרים או סתם גורמות לנזק למערכת שלך.</p> 
-<p>בעלי אתרים המאמינים כי האתר שלהם דווח בטעות בתור אתר תוקף יכולים <a href='http://www.stopbadware.org/home/reviewinfo' >לבקש בדיקה חוזרת</a>.</p>">
-
-
-<!ENTITY phishingBlocked.title "חשד לזיוף ברשת!">
-<!ENTITY phishingBlocked.longDesc "<p>הכנסת מידע אישי לדף זה יכולה להסתיים בגניבת זהות או הונאה אחרת.</p> 
-<p>סוגי זיוף אלו משמשים להונאת משתמשים ומוכרים גם בתור &quot;מתקפות דיוג&quot;, בהן נוכלים שותלים דפים והודעות דואר אלקטרוני המהווים חיקוי של מקורות שאתה סומך עליהם.</p>">
+<!ENTITY securityOverride.linkText "או להוסיף חריגה…">
+<!ENTITY securityOverride.warningContent "<p>רצוי להימנע מהוספת חריגה אם חיבור האינטרנט אינו מהימן במלואו או שבעבר לא הופיעו אזהרות לגבי שרת זה.</p>
+<p>כדי להוסיף חריגה עבור אתר זה בכל זאת, יש לעבור להגדרות ההצפנה המתקדמות.</p>">
 
 <!ENTITY cspBlocked.title "נחסם בהתאם למדיניות האבטחה של התוכן">
 <!ENTITY cspBlocked.longDesc "<p>הדפדפן מונע מדף זה להיטען בדרך זו מאחר שמדיניות אבטחת התוכן מונעת זאת.</p>">
 
-<!ENTITY corruptedContentError.title "שגיאת תוכן פגום">
-<!ENTITY corruptedContentError.longDesc "<p>הדף שאתה מנסה לצפות בו אינו יכול להיות מוצג בגלל שהתגלתה שגיאה בהעברת הנתונים.</p><ul><li>אנא צור קשר עם בעלי האתר והודע על בעיה זו.</li></ul>">
+<!ENTITY corruptedContentErrorv2.title "שגיאת תוכן פגום">
+<!ENTITY corruptedContentErrorv2.longDesc "<p>לא ניתן להציג דף זה מכיון שאותרה שגיאה בתעבורת הנתונים.</p><ul><li>נא ליצור קשר עם בעלי האתר כדי לדווח להם על בעיה זו.</li></ul>">
 
 <!ENTITY remoteXUL.title "XUL מרוחק">
 <!ENTITY remoteXUL.longDesc "<p><ul><li>רצוי לפנות אל בעלי האתר וליידע אותם על הבעיה.</li></ul></p>">
 
-<!-- Include app-specific error messages - do not change this in localization!
-     Some applications might override netErrorApp.dtd with their specific version,
-     this inclusion needs to be intact for that approach to work correctly.
-     Please, try to keep this at the end of the file. -->
-<!ENTITY % netErrorAppDTD SYSTEM "chrome://global/locale/netErrorApp.dtd">
-%netErrorAppDTD;
-
-
-<!ENTITY securityOverride.linkText "Or you can add an exception…">
-<!ENTITY securityOverride.warningContent "
-<p>You should not add an exception if you are using an internet connection that you do not trust completely or if you are not used to seeing a warning for this server.</p>
-<p>If you still wish to add an exception for this site, you can do so in your advanced encryption settings.</p>
-">
+<!ENTITY inadequateSecurityError.title "החיבור שלך אינו בטוח">
+<!-- LOCALIZATION NOTE (inadequateSecurityError.longDesc) - Do not translate
+     "NS_ERROR_NET_INADEQUATE_SECURITY". -->
+<!ENTITY inadequateSecurityError.longDesc "<p>האתר בכתובת <span class='hostname'></span> משתמש בטכנולוגית אבטחה שאינה עדכנית וחשופה להתקפות. תוקף יכול בקלות לחשוף מידע שלכאורה אמור היה להיות מוגן. על מנהל האתר לתקן את השרת לפני שיהיה ניתן לבקר באתר זה.</p><p>קוד שגיאה: NS_ERROR_NET_INADEQUATE_SECURITY</p>">

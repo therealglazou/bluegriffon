@@ -1,3 +1,6 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 <!ENTITY addons.windowTitle                   "Gestionnaire de modules complémentaires">
 
 <!ENTITY search.placeholder                   "Rechercher dans tous les modules">
@@ -17,11 +20,16 @@
 <!ENTITY installAddonFromFile.accesskey       "I">
 <!ENTITY toolsMenu.tooltip                    "Outils pour tous les modules">
 
+<!ENTITY getThemes.description                "Vous cherchez à personnaliser votre navigateur ?">
+<!ENTITY getThemes.learnMore                  "Faites votre choix parmi des milliers de thèmes.">
+
 <!ENTITY cmd.back.tooltip                     "Reculer d’une page">
 <!ENTITY cmd.forward.tooltip                  "Avancer d’une page">
 
 <!ENTITY showUnsignedExtensions.button.label  "Certaines extensions n’ont pas pu être vérifiées">
 <!ENTITY showAllExtensions.button.label       "Afficher toutes les extensions">
+<!ENTITY debugAddons.label                    "Déboguer des modules">
+<!ENTITY debugAddons.accesskey                "b">
 
 <!-- global warnings -->
 <!ENTITY warning.safemode.label                    "Tous les modules complémentaires ont été désactivés par le mode sans échec.">
@@ -31,10 +39,6 @@
 <!ENTITY warning.updatesecurity.label              "La vérification de mises à jour de sécurité pour les modules complémentaires est désactivée. Vous avez peut-être des modules complémentaires non sûrs.">
 <!ENTITY warning.updatesecurity.enable.label       "Activer">
 <!ENTITY warning.updatesecurity.enable.tooltip     "Activer la vérification de mises à jour de sécurité pour les modules complémentaires">
-
-<!-- global informations -->
-<!ENTITY info.plugincheck.label "Vérifier si les plugins sont à jour">
-<!ENTITY info.plugincheck.tooltip "Vérifier si les plugins sont à jour">
 
 <!-- categories / views -->
 <!ENTITY view.search.label                    "Rechercher">
@@ -47,8 +51,17 @@
 <!ENTITY updates.checkForUpdates.accesskey    "R">
 <!ENTITY updates.viewUpdates.label            "Afficher les mises à jour récentes">
 <!ENTITY updates.viewUpdates.accesskey        "A">
+<!-- LOCALIZATION NOTE (updates.updateAddonsAutomatically.label): This menu item
+     is a checkbox that toggles the default global behavior for add-on update
+     checking. -->
 <!ENTITY updates.updateAddonsAutomatically.label     "Mettre à jour les modules automatiquement">
 <!ENTITY updates.updateAddonsAutomatically.accesskey "M">
+<!-- LOCALIZATION NOTE (updates.resetUpdatesToAutomatic.label, updates.resetUpdatesToManual.label):
+     Specific addons can have custom update checking behaviors ("Manually",
+     "Automatically", "Use default global behavior"). These menu items reset the
+     update checking behavior for all add-ons to the default global behavior
+     (which itself is either "Automatically" or "Manually", controlled by the
+     updates.updateAddonsAutomatically.label menu item). -->
 <!ENTITY updates.resetUpdatesToAutomatic.label       "Activer la mise à jour automatique pour tous les modules">
 <!ENTITY updates.resetUpdatesToAutomatic.accesskey   "c">
 <!ENTITY updates.resetUpdatesToManual.label          "Désactiver la mise à jour automatique pour tous les modules">
@@ -93,8 +106,6 @@
 <!ENTITY cmd.installAddon.accesskey           "I">
 <!ENTITY cmd.uninstallAddon.label             "Supprimer">
 <!ENTITY cmd.uninstallAddon.accesskey         "S">
-<!ENTITY debugAddons.label                    "Déboguer des modules">
-<!ENTITY debugAddons.accesskey                "b">
 <!ENTITY cmd.showPreferencesWin.label         "Options">
 <!ENTITY cmd.showPreferencesWin.tooltip       "Modifier les options de ce module complémentaire">
 <!ENTITY cmd.showPreferencesUnix.label        "Préférences">
@@ -102,6 +113,7 @@
 <!ENTITY cmd.contribute.label                 "Contribuer">
 <!ENTITY cmd.contribute.accesskey             "C">
 <!ENTITY cmd.contribute.tooltip               "Contribuer au développement de ce module complémentaire">
+
 <!ENTITY cmd.showReleaseNotes.label           "Afficher les notes de version">
 <!ENTITY cmd.showReleaseNotes.tooltip         "Afficher les notes de version pour cette mise à jour">
 <!ENTITY cmd.hideReleaseNotes.label           "Masquer les notes de version">
@@ -237,3 +249,6 @@
 <!ENTITY disabledUnsigned.devInfo.start "Les développeurs souhaitant faire vérifier leurs modules complémentaires peuvent obtenir davantage d’informations en lisant notre ">
 <!ENTITY disabledUnsigned.devInfo.linkToManual "manuel">
 <!ENTITY disabledUnsigned.devInfo.end ".">
+
+<!ENTITY pluginDeprecation.description "Quelque chose semble manquer ? Certains plugins ne sont plus pris en charge par &brandShortName;.">
+<!ENTITY pluginDeprecation.learnMore "En savoir plus.">

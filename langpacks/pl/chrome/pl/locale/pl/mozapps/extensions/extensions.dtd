@@ -22,6 +22,9 @@
 
 <!ENTITY toolsMenu.tooltip                    "Narzędzia dla wszystkich dodatków">
 
+<!ENTITY getThemes.description "Szukasz sposobu na personalizację przeglądarki?">
+<!ENTITY getThemes.learnMore "Wybieraj spośród tysięcy motywów.">
+
 <!ENTITY cmd.back.tooltip                     "Przejdź jedną stronę do przodu">
 <!ENTITY cmd.forward.tooltip                  "Przejdź jedną stronę wstecz">
 
@@ -30,7 +33,6 @@
 <!ENTITY debugAddons.label "Debuguj dodatki">
 <!ENTITY debugAddons.accesskey "i">
 
-<!-- global warnings -->
 <!ENTITY warning.safemode.label                    "Wszystkie dodatki zostały wyłączone przez tryb awaryjny">
 <!ENTITY warning.checkcompatibility.label          "Sprawdzanie zgodności dodatków jest wyłączone. Dodatki mogą być niezgodne.">
 <!ENTITY warning.checkcompatibility.enable.label   "Włącz">
@@ -39,38 +41,22 @@
 <!ENTITY warning.updatesecurity.enable.label       "Włącz">
 <!ENTITY warning.updatesecurity.enable.tooltip     "Włącz sprawdzanie bezpieczeństwa aktualizacji dodatków">
 
-<!-- global informations -->
-<!ENTITY info.plugincheck.label                 "Sprawdź, czy zainstalowane wtyczki są aktualne">
-<!ENTITY info.plugincheck.tooltip               "Sprawdź, czy zainstalowane wtyczki są aktualne">
-
-<!-- categories / views -->
-<!-- LOCALIZATION NOTE: These should match the header-* entries in extensions.properties -->
 <!ENTITY view.search.label                    "Szukaj">
 <!ENTITY view.discover.label                  "Pobierz dodatki">
 <!ENTITY view.recentUpdates.label             "Ostatnie aktualizacje">
 <!ENTITY view.availableUpdates.label          "Dostępne aktualizacje">
 
-<!-- addon updates -->
 <!ENTITY updates.checkForUpdates.label        "Znajdź aktualizacje">
 <!ENTITY updates.checkForUpdates.accesskey    "n">
 <!ENTITY updates.viewUpdates.label            "Wyświetl ostatnie aktualizacje">
 <!ENTITY updates.viewUpdates.accesskey        "W">
-<!-- LOCALIZATION NOTE (updates.updateAddonsAutomatically.label): This menu item
-     is a checkbox that toggles the default global behavior for add-on update
-     checking. -->
 <!ENTITY updates.updateAddonsAutomatically.label     "Aktualizuj dodatki automatycznie">
 <!ENTITY updates.updateAddonsAutomatically.accesskey "A">
-<!-- LOCALIZATION NOTE (updates.resetUpdatesToAutomatic.label, updates.resetUpdatesToManual.label):
-     Specific addons can have custom update checking behaviors ("Manually",
-     "Automatically", "Use default global behavior"). These menu items reset the
-     update checking behavior for all add-ons to the default global behavior
-     (which itself is either "Automatically" or "Manually", controlled by the
-     updates.updateAddonsAutomatically.label menu item). -->
 <!ENTITY updates.resetUpdatesToAutomatic.label       "Przestaw wszystkie dodatki na automatyczną aktualizację">
 <!ENTITY updates.resetUpdatesToAutomatic.accesskey   "P">
 <!ENTITY updates.resetUpdatesToManual.label          "Przestaw wszystkie dodatki na ręczną aktualizację">
 <!ENTITY updates.resetUpdatesToManual.accesskey      "P">
-<!ENTITY updates.updating.label               "Aktualizacja dodatków">
+<!ENTITY updates.updating.label "Aktualizowanie dodatków…">
 <!ENTITY updates.installed.label "Dodatki zostały uaktualnione.">
 <!ENTITY updates.downloaded.label             "Pobrano aktualizacje dodatków.">
 <!ENTITY updates.restart.label                "Uruchom ponownie, by dokończyć instalację">
@@ -79,7 +65,6 @@
 <!ENTITY updates.updateSelected.label         "Zainstaluj aktualizacje">
 <!ENTITY updates.updateSelected.tooltip       "Zainstaluj aktualizacje z tej listy">
 
-<!-- addon actions -->
 <!ENTITY cmd.showDetails.label                "Wyświetl więcej informacji">
 <!ENTITY cmd.showDetails.accesskey            "W">
 <!ENTITY cmd.findUpdates.label                "Znajdź aktualizacje">
@@ -123,16 +108,10 @@
 <!ENTITY cmd.hideReleaseNotes.label           "Ukryj informacje o wydaniu">
 <!ENTITY cmd.hideReleaseNotes.tooltip         "Ukryj informacje o wydaniu tej aktualizacji">
 
-<!-- discovery view -->
-<!-- LOCALIZATION NOTE (discover.title,discover.description,discover.footer):
-     Displayed in the center of the Get Add-ons view, see bug 601143 for mockups. -->
 <!ENTITY discover.title                       "Czym są dodatki?">
-<!ENTITY discover.description2                "Dodatki to programy, które pozwalają dostosować program &brandShortName; do upodobań użytkownika dzięki nowej funkcjonalności lub innemu wyglądowi.
- Wypróbuj panel boczny oszczędzający czas, powiadomienia o pogodzie albo nowy motyw graficzny.">
-<!ENTITY discover.footer                      "Kiedy dostępne jest połączenie z Internetem, ten panel będzie
- wyświetlał najnowsze i najpopularniejsze dodatki, które warto wypróbować.">
+<!ENTITY discover.description2                "Dodatki to programy, które pozwalają dostosować program &brandShortName; do upodobań użytkownika dzięki nowej funkcjonalności lub innemu wyglądowi. Wypróbuj panel boczny oszczędzający czas, powiadomienia o pogodzie albo nowy motyw graficzny.">
+<!ENTITY discover.footer                      "Kiedy dostępne jest połączenie z Internetem, ten panel będzie wyświetlał najnowsze i najpopularniejsze dodatki, które warto wypróbować.">
 
-<!-- detail view -->
 <!ENTITY detail.version.label                 "Wersja">
 <!ENTITY detail.lastupdated.label             "Ostatnia aktualizacja">
 <!ENTITY detail.creator.label                 "Twórca">
@@ -162,14 +141,11 @@
 <!ENTITY detail.showPreferencesUnix.accesskey "P">
 <!ENTITY detail.showPreferencesUnix.tooltip   "Zmień preferencje związane z tym dodatkiem">
 
-<!-- ratings -->
 <!ENTITY rating2.label                         "Ocena">
 
-<!-- download/install progress -->
 <!ENTITY progress.pause.tooltip               "Wstrzymaj">
 <!ENTITY progress.cancel.tooltip              "Anuluj">
 
-<!-- list sorting -->
 <!ENTITY sort.name.label                      "Nazwa">
 <!ENTITY sort.name.tooltip                    "Sortuj według nazwy">
 <!ENTITY sort.dateUpdated.label               "Ostatnia aktualizacja">
@@ -189,14 +165,7 @@
 <!ENTITY addon.details.label                  "Więcej">
 <!ENTITY addon.details.tooltip                "Wyświetl więcej informacji o tym dodatku">
 <!ENTITY addon.unknownDate                    "nieznana">
-<!-- LOCALIZATION NOTE (addon.disabled.postfix): This is used in a normal list
-     to signify that an add-on is disabled, in the form
-     "<Addon name> <1.0> (disabled)" -->
 <!ENTITY addon.disabled.postfix               "(wyłączony)">
-<!-- LOCALIZATION NOTE (addon.update.postfix): This is used in the available
-     updates list to signify that an item is an update, in the form
-     "<Addon name> <1.1> Update". It is fine to use constructs like brackets if
-     necessary -->
 <!ENTITY addon.update.postfix                 "(aktualizacja)">
 <!ENTITY addon.undoAction.label               "Cofnij">
 <!ENTITY addon.undoAction.tooltip "Cofnij tę czynność">
@@ -239,3 +208,6 @@
 <!ENTITY disabledUnsigned.devInfo.start "Programiści zainteresowani weryfikacją swoich dodatków mogą skorzystać z ">
 <!ENTITY disabledUnsigned.devInfo.linkToManual "dokumentacji">
 <!ENTITY disabledUnsigned.devInfo.end ".">
+
+<!ENTITY pluginDeprecation.description "Czegoś tutaj brakuje? Niektóre wtyczki nie są już obsługiwane w programie &brandShortName;.">
+<!ENTITY pluginDeprecation.learnMore "Więcej informacji">

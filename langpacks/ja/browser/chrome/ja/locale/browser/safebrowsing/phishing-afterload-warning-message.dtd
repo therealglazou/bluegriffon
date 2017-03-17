@@ -2,36 +2,31 @@
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 
-<!-- (^^; ユーザのホームページではなく検索エンジンのホームへのリンク -->
+<!-- (^^; ユーザーのホームページではなく検索エンジンのホームへのリンク -->
 <!ENTITY safeb.palm.accept.label	"スタートページに戻る"><!-- en-US: Get me out of here! -->
 <!ENTITY safeb.palm.decline.label	"この警告を無視する">
-<!ENTITY safeb.palm.notforgery.label2	"誤警告を報告..."><!-- en-US: This isn't a web forgery -->
+<!-- Localization note (safeb.palm.notdeceptive.label) - Label of the Help menu
+  item. Either this or reportDeceptiveSiteMenu.label from report-phishing.dtd is
+  shown. -->
+<!ENTITY safeb.palm.notdeceptive.label	"詐欺サイトの誤報告を指摘...">
+<!-- Localization note (safeb.palm.notdeceptive.accesskey) - Because
+  safeb.palm.notdeceptive.label and reportDeceptiveSiteMenu.title from
+  report-phishing.dtd are never shown at the same time, the same accesskey can
+  be used for them. -->
+<!ENTITY safeb.palm.notdeceptive.accesskey "d">
 <!ENTITY safeb.palm.reportPage.label	"このサイトがブロックされる理由">
-<!ENTITY safeb.palm.whyForbidden.label	"このサイトがブロックされる理由">
 
 <!ENTITY safeb.blocked.malwarePage.title	"攻撃サイトとして報告されています！">
 <!-- Localization note (safeb.blocked.malwarePage.shortDesc) - Please don't translate the contents of the <span id="malware_sitename"/> tag.  It will be replaced at runtime with a domain name (e.g. www.badsite.com) -->
-<!ENTITY safeb.blocked.malwarePage.shortDesc	"この Web ページ (<span id='malware_sitename'/>) は攻撃サイトであると報告されており、セキュリティ設定に従いブロックされました。">
-<!ENTITY safeb.blocked.malwarePage.longDesc	"<p>攻撃サイトはあなたの個人情報を盗んだり、コンピュータを乗っ取って他のコンピュータへの攻撃に利用したり、あなたのシステムを破壊するためのプログラムをインストールしようとします。</p><p>一部の攻撃サイトでは意図的に有害なソフトウェアを配布していますが、多くの場合は運営者が知らずにまたは許可なく有害なソフトウェアの配布に不正利用されています。</p>">
+<!ENTITY safeb.blocked.malwarePage.shortDesc	"<span id='malware_sitename'/> のウェブページは攻撃サイトとして報告されており、セキュリティ設定に従いブロックされています。">
+<!ENTITY safeb.blocked.malwarePage.longDesc	"<p>攻撃サイトはあなたの個人情報を盗んだり、コンピューターを乗っ取って他のコンピューターへの攻撃に利用したり、あなたのシステムを破壊するためのプログラムをインストールしようとします。</p><p>一部の攻撃サイトは意図的に有害なソフトウェアを配布していますが、多くの場合は運営者が知らずにまたは許可なく有害なソフトウェアの配布に不正利用されています。</p>">
 
-<!ENTITY safeb.blocked.unwantedPage.title	"望ましくないソフトウェアサイトとして報告されています！">
+<!ENTITY safeb.blocked.unwantedPage.title	"望ましくないソフトウェアページとして報告されています！">
 <!-- Localization note (safeb.blocked.unwantedPage.shortDesc) - Please don't translate the contents of the <span id="unwanted_sitename"/> tag.  It will be replaced at runtime with a domain name (e.g. www.badsite.com) -->
-<!ENTITY safeb.blocked.unwantedPage.shortDesc	"この Web ページ (<span id='unwanted_sitename'/>) は望ましくないソフトウェアサイトであると報告されており、セキュリティ設定に従いブロックされました。">
-<!ENTITY safeb.blocked.unwantedPage.longDesc	"<p>望ましくないソフトウェアサイトは、システムに深刻な影響を与える紛らわしいソフトウェアを、想定外の方法でインストールしようとします。</p>">
+<!ENTITY safeb.blocked.unwantedPage.shortDesc	"<span id='unwanted_sitename'/> のウェブページは望ましくないソフトウェアを含むページとして報告されており、セキュリティ設定に従いブロックされています。">
+<!ENTITY safeb.blocked.unwantedPage.longDesc	"<p>望ましくないソフトウェアサイトは、システムに深刻な影響を与える偽装されたソフトウェアを、想定外の方法でインストールしようとします。</p>">
 
-<!ENTITY safeb.blocked.phishingPage.title	"偽装サイトとして報告されています！">
-<!-- Localization note (safeb.blocked.phishingPage.shortDesc) - Please don't translate the contents of the <span id="phishing_sitename"/> tag. It will be replaced at runtime with a domain name (e.g. www.badsite.com) -->
-<!ENTITY safeb.blocked.phishingPage.shortDesc	"この Web ページ (<span id='phishing_sitename'/>) は偽装サイト(フィッシング詐欺サイト)であると報告されており、セキュリティ設定に従いブロックされました。">
-<!ENTITY safeb.blocked.phishingPage.longDesc	"<p>偽装サイトではあなたが信頼しているサイトに見せかけた偽のページを作り、利用者の個人情報やクレジットカード番号などを盗み取ろうとします。</p><p>このページで個人情報を入力してしまうと、なりすましや詐欺などの被害に遭う恐れがあります。</p>">
-
-<!ENTITY safeb.blocked.forbiddenPage.title2	"ブロックサイト">
-<!-- Localization note (safeb.blocked.forbiddenPage.shortDesc2) - Please don't translate the contents of the <span id="forbidden_sitename"/> tag.  It will be replaced at runtime with a domain name (e.g. www.badsite.com) -->
-<!ENTITY safeb.blocked.forbiddenPage.shortDesc2 "Web ページ (<span id='forbidden_sitename'/>) の読み込みは、管理プロファイルによりブロックされています。">
-
-<!ENTITY safeb.blocked.phishingPage.longDesc2 "<p>Deceptive sites are designed to trick you into doing something dangerous, like installing software, or revealing your personal information, like passwords, phone numbers or credit cards.</p><p>Entering any information on this web page may result in identity theft or other fraud.</p>">
+<!ENTITY safeb.blocked.phishingPage.title2 	"詐欺サイトとして報告されています！">
 <!-- Localization note (safeb.blocked.phishingPage.shortDesc2) - Please don't translate the contents of the <span id="phishing_sitename"/> tag. It will be replaced at runtime with a domain name (e.g. www.badsite.com) -->
-<!ENTITY safeb.blocked.phishingPage.shortDesc2 "This web page at <span id='phishing_sitename'/> has been reported as a deceptive site and has been blocked based on your security preferences.">
-
-<!ENTITY safeb.blocked.phishingPage.title2 "Deceptive Site!">
-<!-- Localization note (safeb.palm.notdeceptive.label) - Label of the Help menu item. -->
-<!ENTITY safeb.palm.notdeceptive.label "This isn't a deceptive site…">
+<!ENTITY safeb.blocked.phishingPage.shortDesc2	"<span id='phishing_sitename'/> のウェブページは詐欺サイトとして報告されており、セキュリティ設定に従いブロックされています。">
+<!ENTITY safeb.blocked.phishingPage.longDesc2	"<p>詐欺サイトには、望ましくないソフトウェアをインストールさせようとしたり、パスワードや電話番号、クレジットカード番号などの個人情報を盗み取ろうとする危険な仕掛けがあります。</p><p>このページで個人情報を入力してしまうと、なりすましや詐欺などの被害に遭う恐れがあります。</p>">

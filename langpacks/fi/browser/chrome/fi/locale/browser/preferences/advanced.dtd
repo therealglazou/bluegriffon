@@ -10,10 +10,10 @@
 
 <!ENTITY useCursorNavigation.label       "Liiku sivuilla nuolinäppäimillä">
 <!ENTITY useCursorNavigation.accesskey   "s">
-<!ENTITY searchStartTyping.label         "Ala etsiä tekstistä heti kirjoitettaessa">
-<!ENTITY searchStartTyping.accesskey     "A">
-<!ENTITY blockAutoRefresh.label          "Varoita, kun sivustot yrittävät päivittää sivua tai uudelleenohjata toiselle sivulle">
-<!ENTITY blockAutoRefresh.accesskey      "r">
+<!ENTITY searchOnStartTyping.label       "Ala etsiä tekstistä heti kirjoitettaessa">
+<!ENTITY searchOnStartTyping.accesskey   "A">
+<!ENTITY blockAutoReload.label           "Varoita, kun sivustot yrittävät päivittää sivua tai uudelleenohjata toiselle sivulle">
+<!ENTITY blockAutoReload.accesskey       "r">
 <!ENTITY useOnScreenKeyboard.label       "Näytä kosketusnäppäimistö tarvittaessa">
 <!ENTITY useOnScreenKeyboard.accesskey   "N">
 
@@ -25,8 +25,8 @@
 <!ENTITY useSmoothScrolling.accesskey    "e">
 <!ENTITY allowHWAccel.label              "Käytä laitteistokiihdytystä jos mahdollista">
 <!ENTITY allowHWAccel.accesskey          "K">
-<!ENTITY checkSpelling.label             "Oikolue käyttäjän kirjoitukset">
-<!ENTITY checkSpelling.accesskey         "l">
+<!ENTITY checkUserSpelling.label         "Oikolue käyttäjän kirjoitukset">
+<!ENTITY checkUserSpelling.accesskey     "l">
 
 <!ENTITY dataChoicesTab.label            "Kerätyt tiedot">
 
@@ -40,10 +40,10 @@
 <!ENTITY enableTelemetryData.accesskey   "k">
 <!ENTITY telemetryLearnMore.label        "Lue lisää">
 
-<!ENTITY crashReporterDesc.label         "&brandShortName; lähettää tiedot kaatumisista &vendorShortName;lle, jotta voimme tehdä selaimestasi vakaamman ja turvallisen">
-<!ENTITY enableCrashReporter.label       "Kaatumisilmoitukset käytössä">
-<!ENTITY enableCrashReporter.accesskey   "i">
-<!ENTITY crashReporterLearnMore.label    "Lue lisää">
+<!ENTITY crashReporterDesc2.label         "Kaatumisilmoitusten ansiosta &vendorShortName; voi korjata ongelmia ja tehdä selaimestasi vakaamman ja turvallisemman">
+<!ENTITY alwaysSubmitCrashReports.label   "Salli, että &brandShortName; lähettää lähettämättömät kaatumisilmoitukset puolestasi">
+<!ENTITY alwaysSubmitCrashReports.accesskey "S">
+<!ENTITY crashReporterLearnMore.label     "Lue lisää">
 
 <!ENTITY networkTab.label                "Verkko">
 
@@ -57,6 +57,14 @@
 
 <!ENTITY offlineStorage2.label           "Yhteydetöntä tilaa varten tallennetut tiedot">
 
+<!--  Site Data section manages sites using Storage API and is under Network -->
+<!ENTITY siteData.label                  "Sivustojen tallentamat tiedot">
+<!ENTITY clearSiteData.label             "Tyhjennä kaikki tiedot">
+<!ENTITY clearSiteData.accesskey         "k">
+<!ENTITY siteDataSettings.label          "Asetukset…">
+<!ENTITY siteDataSettings.accesskey      "e">
+<!ENTITY siteDataLearnMoreLink.label     "Lue lisää">
+
 <!-- LOCALIZATION NOTE:
   The entities limitCacheSizeBefore.label and limitCacheSizeAfter.label appear on a single
   line in preferences as follows:
@@ -65,7 +73,7 @@
 -->
 <!ENTITY limitCacheSizeBefore.label      "Rajoita väliaikaistiedostojen viemä tila">
 <!ENTITY limitCacheSizeBefore.accesskey  "R">
-<!ENTITY limitCacheSizeAfter.label       "Mt:un">
+<!ENTITY limitCacheSizeAfter.label       "megatavuun">
 <!ENTITY clearCacheNow.label             "Tyhjennä heti">
 <!ENTITY clearCacheNow.accesskey         "T">
 <!ENTITY clearOfflineAppCacheNow.label   "Tyhjennä heti">
@@ -75,16 +83,13 @@
 
 <!ENTITY updateTab.label                 "Päivitys">
 
-<!ENTITY updateApp.label                 "&brandShortName;in päivitykset:">
+<!ENTITY updateApplication.label         "&brandShortName;in päivitykset">
 <!ENTITY updateAuto1.label               "Asenna päivitykset automaattisesti (suositeltu: turvallisin)">
 <!ENTITY updateAuto1.accesskey           "A">
-<!ENTITY updateCheck.label               "Hae päivityksiä, mutta minä päätän asennetaanko ne">
-<!ENTITY updateCheck.accesskey           "H">
+<!ENTITY updateCheckChoose.label         "Hae päivityksiä, mutta minä päätän asennetaanko ne">
+<!ENTITY updateCheckChoose.accesskey     "H">
 <!ENTITY updateManual.label              "Älä hae päivityksiä (ei suositeltu: turvallisuusriski)">
 <!ENTITY updateManual.accesskey          "Ä">
-
-<!ENTITY updateAutoAddonWarn.label       "Varoita, jos päivitys poistaa käytöstä lisäosia">
-<!ENTITY updateAutoAddonWarn.accesskey   "V">
 
 <!ENTITY updateHistory.label             "Näytä päivityshistoria">
 <!ENTITY updateHistory.accesskey         "N">
@@ -92,28 +97,28 @@
 <!ENTITY useService.label                "Asenna päivitykset taustalla toimivalla palvelulla">
 <!ENTITY useService.accesskey            "u">
 
-<!ENTITY updateOthers.label              "Päivitä automaattisesti:">
+<!ENTITY autoUpdateOthers.label          "Automaattinen päivitys">
 <!ENTITY enableSearchUpdate.label        "Hakukoneet">
 <!ENTITY enableSearchUpdate.accesskey    "k">
 
-<!ENTITY offlineNotify.label             "Näytä ilmoitus, kun sivusto pyytää lupaa tallentaa tietoa yhteydetöntä tilaa varten">
-<!ENTITY offlineNotify.accesskey         "N">
-<!ENTITY offlineNotifyExceptions.label   "Poikkeukset…">
-<!ENTITY offlineNotifyExceptions.accesskey "P">
+<!ENTITY offlineStorageNotify.label               "Näytä ilmoitus, kun sivusto pyytää lupaa tallentaa tietoa yhteydetöntä tilaa varten">
+<!ENTITY offlineStorageNotify.accesskey           "N">
+<!ENTITY offlineStorageNotifyExceptions.label     "Poikkeukset…">
+<!ENTITY offlineStorageNotifyExceptions.accesskey "P">
 
-<!ENTITY offlineAppsList2.label          "Seuraavilla verkkosivustoilla on lupa tallentaa tietoja yhteydetöntä tilaa varten:">
+<!ENTITY offlineAppsList2.label          "Seuraavilla sivustoilla on lupa tallentaa tietoja yhteydetöntä tilaa varten:">
 <!ENTITY offlineAppsList.height          "7em">
 <!ENTITY offlineAppsListRemove.label     "Poista…">
 <!ENTITY offlineAppsListRemove.accesskey "s">
 <!ENTITY offlineAppRemove.confirm        "Poista yhteydetöntä tilaa varten tallennetut tiedot">
 
 <!ENTITY certificateTab.label            "Varmenteet">
-<!ENTITY certSelection.label             "Pyynnöt">
-<!ENTITY certSelection.description       "Sivuston pyytäessä varmennettani:">
-<!ENTITY certs.auto                      "Valitse sellainen automaattisesti">
-<!ENTITY certs.auto.accesskey            "V">
-<!ENTITY certs.ask                       "Kysy joka kerta">
-<!ENTITY certs.ask.accesskey             "K">
+<!ENTITY certPersonal.label              "Pyynnöt">
+<!ENTITY certPersonal.description        "Sivuston pyytäessä varmennettani:">
+<!ENTITY selectCerts.auto                "Valitse sellainen automaattisesti">
+<!ENTITY selectCerts.auto.accesskey      "V">
+<!ENTITY selectCerts.ask                 "Kysy joka kerta">
+<!ENTITY selectCerts.ask.accesskey       "K">
 <!ENTITY enableOCSP.label                "Vahvista varmenteiden kelpoisuus OCSP-vastaajapalvelimilta">
 <!ENTITY enableOCSP.accesskey            "C">
 <!ENTITY viewCerts.label                 "Näytä varmenteet">

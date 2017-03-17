@@ -10,10 +10,10 @@
 
 <!ENTITY useCursorNavigation.label       "Kurzorbillentyűk használata az oldalon belüli navigációhoz">
 <!ENTITY useCursorNavigation.accesskey   "c">
-<!ENTITY searchStartTyping.label         "Szöveg keresése a keresett szó beírásának elkezdésétől">
-<!ENTITY searchStartTyping.accesskey     "d">
-<!ENTITY blockAutoRefresh.label          "Figyelmeztetés, ha a webhely átirányítja vagy frissíti az oldalt">
-<!ENTITY blockAutoRefresh.accesskey      "w">
+
+
+
+
 <!ENTITY useOnScreenKeyboard.label       "Érintőbillentyűzet megjelenítése, ha szükséges">
 <!ENTITY useOnScreenKeyboard.accesskey   "r">
 
@@ -25,8 +25,8 @@
 <!ENTITY useSmoothScrolling.accesskey    "F">
 <!ENTITY allowHWAccel.label              "Hardveres gyorsítás használata, ha lehetséges">
 <!ENTITY allowHWAccel.accesskey          "r">
-<!ENTITY checkSpelling.label             "Helyesírás-ellenőrzés beírás közben">
-<!ENTITY checkSpelling.accesskey         "H">
+
+
 
 <!ENTITY dataChoicesTab.label            "Adatküldések">
 
@@ -36,14 +36,14 @@
 <!ENTITY healthReportLearnMore.label     "További tudnivalók">
 
 <!ENTITY telemetryDesc.label             "Adatokat küld a &vendorShortName;nak a böngésző teljesítményéről, a hardverről, a felhasználásról és az egyéni beállításokról, hogy a &brandShortName; jobb lehessen.">
-<!ENTITY enableTelemetryData.label       "További adatok (például Telemetria) megosztása">
-<!ENTITY enableTelemetryData.accesskey   "T">
+
+
 <!ENTITY telemetryLearnMore.label        "További tudnivalók">
 
-<!ENTITY crashReporterDesc.label         "A &brandShortName; hibajelentéseket küld, hogy a &vendorShortName; stabilabbá és biztonságosabbá tehesse a böngészőjét">
-<!ENTITY enableCrashReporter.label       "Hibajelentő bekapcsolása ">
-<!ENTITY enableCrashReporter.accesskey   "o">
-<!ENTITY crashReporterLearnMore.label    "További tudnivalók">
+<!ENTITY crashReporterDesc2.label         "Az összeomlási jelentések segítenek abban, hogy a &vendorShortName; javítsa a problémákat, és a böngésző stabilabb és biztonságosabb legyen">
+<!ENTITY alwaysSubmitCrashReports.label   "A &brandShortName; a háttérben küldhet összeomlási jelentéseket az Ön nevében">
+<!ENTITY alwaysSubmitCrashReports.accesskey "c">
+<!ENTITY crashReporterLearnMore.label     "További tudnivalók">
 
 <!ENTITY networkTab.label                "Hálózat">
 
@@ -56,6 +56,12 @@
 <!ENTITY httpCache.label                 "Gyorsítótárazott webtartalom">
 
 <!ENTITY offlineStorage2.label           "Offline webtartalom és felhasználói adatok">
+<!--  Site Data section manages sites using Storage API and is under Network -->
+
+
+
+
+
 <!-- LOCALIZATION NOTE:
   The entities limitCacheSizeBefore.label and limitCacheSizeAfter.label appear on a single
   line in preferences as follows:
@@ -75,16 +81,12 @@
 
 <!ENTITY updateTab.label                 "Frissítés">
 
-<!ENTITY updateApp.label                 "&brandShortName; frissítések:">
 <!ENTITY updateAuto1.label               "Frissítések automatikus telepítése (ez ajánlott a maximális biztonság érdekében)">
 <!ENTITY updateAuto1.accesskey           "a">
-<!ENTITY updateCheck.label               "Frissítések keresése, de a telepítés kézzel történik">
-<!ENTITY updateCheck.accesskey           "k">
+
+
 <!ENTITY updateManual.label              "Ne legyen frissítve (nem ajánlott a biztonsági kockázat miatt">
 <!ENTITY updateManual.accesskey          "N">
-
-<!ENTITY updateAutoAddonWarn.label       "Figyelmeztetés, ha a kiegészítők elérhetetlenek lesznek emiatt">
-<!ENTITY updateAutoAddonWarn.accesskey   "F">
 
 <!ENTITY updateHistory.label             "Frissítési előzmények megjelenítése">
 <!ENTITY updateHistory.accesskey         "z">
@@ -92,14 +94,12 @@
 <!ENTITY useService.label                "Háttérben futó szolgáltatás intézze a frissítést">
 <!ENTITY useService.accesskey            "H">
 
-<!ENTITY updateOthers.label              "Automatikus frissítés:">
 <!ENTITY enableSearchUpdate.label        "Keresőszolgáltatások">
 <!ENTITY enableSearchUpdate.accesskey    "e">
 
-<!ENTITY offlineNotify.label             "Figyelmeztetés, ha a webhely adatokat akar tárolni kapcsolat nélküli használatra">
-<!ENTITY offlineNotify.accesskey         "w">
-<!ENTITY offlineNotifyExceptions.label   "Kivételek…">
-<!ENTITY offlineNotifyExceptions.accesskey "K">
+
+<!ENTITY offlineStorageNotifyExceptions.label     "Kivételek…">
+<!ENTITY offlineStorageNotifyExceptions.accesskey "K">
 
 <!ENTITY offlineAppsList2.label          "A következő webhelyek tárolhatnak adatokat kapcsolat nélküli használatra:">
 <!ENTITY offlineAppsList.height          "7em">
@@ -108,15 +108,45 @@
 <!ENTITY offlineAppRemove.confirm        "Kapcsolat nélküli adatok eltávolítása">
 
 <!ENTITY certificateTab.label            "Tanúsítványok">
-<!ENTITY certSelection.label             "Kérések">
-<!ENTITY certSelection.description       "Ha a kiszolgáló elkéri a személyes tanúsítványt:">
-<!ENTITY certs.auto                      "Automatikus választás">
-<!ENTITY certs.auto.accesskey            "u">
-<!ENTITY certs.ask                       "Megerősítés minden alkalommal">
-<!ENTITY certs.ask.accesskey             "M">
+<!ENTITY certPersonal.label              "Kérések">
+
+<!ENTITY selectCerts.auto                "Automatikus választás">
+
+
+
 <!ENTITY enableOCSP.label                "Az OCSP válaszoló kiszolgálók lekérdezése a tanúsítványok érvényességének megerősítéséhez">
 <!ENTITY enableOCSP.accesskey            "C">
 <!ENTITY viewCerts.label                 "Tanúsítványkezelő">
 <!ENTITY viewCerts.accesskey             "T">
 <!ENTITY viewSecurityDevices.label       "Adatvédelmi eszközök">
 <!ENTITY viewSecurityDevices.accesskey   "d">
+
+
+<!ENTITY autoUpdateOthers.label          "Automatically Update">
+<!ENTITY blockAutoReload.accesskey       "b">
+<!ENTITY blockAutoReload.label           "Warn you when websites try to redirect or reload the page">
+<!ENTITY certPersonal.description        "When a server requests your personal certificate:">
+<!ENTITY checkUserSpelling.accesskey     "t">
+<!ENTITY checkUserSpelling.label         "Check your spelling as you type">
+<!ENTITY clearSiteData.accesskey         "l">
+<!ENTITY clearSiteData.label             "Clear All Data">
+<!ENTITY enableTelemetryData.accesskey   "T">
+<!ENTITY enableTelemetryData.label       "Share Additional Data (i.e., Telemetry)">
+<!ENTITY offlineStorageNotify.accesskey           "T">
+
+<!ENTITY offlineStorageNotify.label               "Tell you when a website asks to store data for offline use">
+<!ENTITY searchOnStartTyping.accesskey   "x">
+<!ENTITY searchOnStartTyping.label       "Search for text when you start typing">
+<!ENTITY selectCerts.ask                 "Ask you every time">
+<!ENTITY selectCerts.ask.accesskey       "A">
+<!ENTITY selectCerts.auto.accesskey      "S">
+
+<!--  Site Data section manages sites using Storage API and is under Network -->
+<!ENTITY siteData.label                  "Site Data">
+<!ENTITY siteDataLearnMoreLink.label     "Learn more">
+<!ENTITY siteDataSettings.accesskey      "i">
+<!ENTITY siteDataSettings.label          "Settings…">
+
+<!ENTITY updateApplication.label         "&brandShortName; Updates">
+<!ENTITY updateCheckChoose.accesskey     "C">
+<!ENTITY updateCheckChoose.label         "Check for updates, but let you choose whether to install them">

@@ -19,6 +19,9 @@
 <!ENTITY fileNotFound.title "Datoteke ni mogoče najti">
 <!ENTITY fileNotFound.longDesc "<ul><li>Morda je bila želena datoteka preimenovana, izbrisana ali prestavljena.</li><li>Je njeno ime napačno črkovano, napisano z nepravilnimi velikimi in malimi črkami ali kako drugače narobe napisano?</li><li>Imate ustrezna dovoljenja za dostop do želene datoteke?</li></ul>">
 
+<!ENTITY fileAccessDenied.title "Dostop do datoteke je bil zavrnjen">
+<!ENTITY fileAccessDenied.longDesc "<ul><li>Morda je bila odstranjena, premaknjena ali pa dovoljenja datoteke preprečujejo dostop.</li></ul>">
+
 <!ENTITY generic.title "Zahteve ni mogoče izpolniti">
 <!ENTITY generic.longDesc "<p>Trenutno ni na voljo dodatnih podatkov o tem problemu oziroma o tej napaki.</p>">
 
@@ -40,7 +43,7 @@
 <!ENTITY unsafeContentType.title "Nevarni datotečni tip">
 <!ENTITY unsafeContentType.longDesc "
 <ul> 
-<li>Obrnite se na lastnike spletne strani in jih obvestite o težavi.</li> 
+<li>O napaki obvestite lastnike spletne strani.</li> 
 </ul>
 ">
 
@@ -66,34 +69,13 @@
 <!ENTITY unknownSocketType.longDesc "<p>Stran je na mrežno zahtevo odgovorila na nepričakovan način in brskalnik ne more nadaljevati.</p>">
 
 <!ENTITY nssFailure2.title "Varna povezava ni uspela">
-<!ENTITY nssFailure2.longDesc2 "<p>Strani, ki si jo želite ogledati, ni mogoče prikazati, ker ni mogoče preveriti pristnosti prejetih podatkov.</p><ul><li>Obrnite se na lastnike spletne strani in jih obvestite o težavi.</li></ul>">
+<!ENTITY nssFailure2.longDesc2 "<p>Strani, ki si jo želite ogledati, ni mogoče prikazati, ker ni mogoče preveriti pristnosti prejetih podatkov.</p><ul><li>O napaki obvestite lastnike spletne strani.</li></ul>">
 
 <!ENTITY nssBadCert.title "Varna povezava ni uspela">
 <!ENTITY nssBadCert.longDesc2 "<ul> 
 <li>Težava se lahko nahaja v nastavitvah strežnika ali pa se kdo poskuša lažno predstaviti z njim.</li> 
 <li>Če ste se v preteklosti že uspešno povezali na ta strežnik, je napaka morda samo začasna, zato lahko ponovno poskusite kasneje.</li> 
 </ul>
-">
-
-<!ENTITY malwareBlocked.title "Prijavljena napadalna stran!">
-<!ENTITY malwareBlocked.longDesc "
-<p>Napadalne strani poskušajo namestiti programe za krajo osebnih podatkov, uporabijo vaš računalnik za napad na druge ali poškodujejo vaš sistem.</p> 
-<p>Lastniki spletnih strani, ki so bile po njihovem mnenju zmotno prijavljene kot napadalne, lahko <a href='http://www.stopbadware.org/home/reviewinfo' >zahtevajo pregled</a>.</p>
-">
-
-<!ENTITY unwantedBlocked.title "Morebitna stran z neželeno programsko opremo!">
-<!ENTITY unwantedBlocked.longDesc "
-<p>Strani z neželeno programsko opremo poskušajo namestiti programsko opremo, ki je lahko zavajajoča in lahko neželeno vpliva na vaš sistem.</p>
-">
-
-<!ENTITY phishingBlocked.title "Morebitna spletna prevara!">
-<!ENTITY phishingBlocked.longDesc "
-<p>Vnos osebnih podatkov na tej strani lahko pripelje do kraje identitete ali drugih zlorab.</p> 
-<p>Tovrstne spletne prevare se uporabljajo v zlorabah, znanih kot ribarjenje, kjer zlonamerne spletne strani ali elektronska pošta oponašajo vire, ki jim zaupate.</p>
-">
-
-<!ENTITY forbiddenBlocked.title "Prepovedana stran">
-<!ENTITY forbiddenBlocked.longDesc "<p>Brskalnik je preprečil nalaganje te strani, ker je nastavljen, da jo zavrača.</p>
 ">
 
 <!ENTITY securityOverride.linkText "Lahko pa dodate izjemo …">
@@ -105,8 +87,13 @@
 <!ENTITY cspBlocked.title "Zavrnjeno zaradi varnostne politike vsebine">
 <!ENTITY cspBlocked.longDesc "<p>Brskalnik je preprečil nalaganje strani v taki obliki, ker tako določa varnostna politika vsebine strani.</p>">
 
-<!ENTITY corruptedContentError.title "Okvara vsebine">
-<!ENTITY corruptedContentError.longDesc "<p>Strani, ki si jo želite ogledati, ni mogoče prikazati, ker je bila med prenosom podatkov odkrita napaka.</p> <ul><li>O napaki obvestite lastnike spletne strani.</li></ul>">
+<!ENTITY corruptedContentErrorv2.title "Napaka zaradi pokvarjene vsebine">
+<!ENTITY corruptedContentErrorv2.longDesc "<p>Strani, ki si jo želite ogledati, ni mogoče prikazati, ker je bila zaznana napaka v prenosu podatkov.</p><ul><li>O napaki obvestite lastnike spletne strani.</li></ul>">
 
 <!ENTITY remoteXUL.title "Oddaljeni XUL">
-<!ENTITY remoteXUL.longDesc "<p><ul><li>Obrnite se na lastnike spletne strani in jih obvestite o težavi.</li></ul></p>">
+<!ENTITY remoteXUL.longDesc "<p><ul><li>O napaki obvestite lastnike spletne strani.</li></ul></p>">
+
+<!ENTITY inadequateSecurityError.title "Vaša povezava ni varna">
+<!-- LOCALIZATION NOTE (inadequateSecurityError.longDesc) - Do not translate
+     "NS_ERROR_NET_INADEQUATE_SECURITY". -->
+<!ENTITY inadequateSecurityError.longDesc "<p><span class='hostname'></span> uporablja varnostno tehnologijo, ki je zastarela in ranljiva. Napadalec lahko zlahka razkrije podatke, ki naj bi bili zaščiteni. Preden lahko obiščete to stran, bo moral njen skrbnik popraviti strežnik.</p><p>Koda napake: NS_ERROR_NET_INADEQUATE_SECURITY</p>">

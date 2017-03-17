@@ -44,6 +44,7 @@ locale domexplorer "$i" sidebars/domexplorer/
 locale scripteditor "$i" sidebars/scripteditor/
 locale stylesheets "$i" sidebars/stylesheets/
 locale tipoftheday "$i" extensions/tipoftheday/
+locale aria "$i" sidebars/aria/
 " > bluegriffon/chrome.manifest
     rm -f foo
     cd ..

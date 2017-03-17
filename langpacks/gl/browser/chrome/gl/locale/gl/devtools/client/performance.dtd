@@ -11,11 +11,6 @@
   - A good criteria is the language in which you'd find the best
   - documentation on web development on the web. -->
 
-<!-- LOCALIZATION NOTE (performanceUI.startRecording/performanceUI.stopRecording): These are
-  -  the labels shown on the main recording buttons to start/stop recording. -->
-<!ENTITY performanceUI.startRecording "Comezar a gravación do rendemento">
-<!ENTITY performanceUI.stopRecording  "Deter a gravación do rendemento">
-
 <!-- LOCALIZATION NOTE (performanceUI.bufferStatusTooltip): This string
   -  is displayed as the tooltip for the buffer capacity during a recording. -->
 <!ENTITY performanceUI.bufferStatusTooltip "O analizador garda mostras nun búfer circular, e unha vez que o búfer alcanza o seu límite de gravación, as novas mostras comezan a sobrescribir as do principio da gravación.">
@@ -35,20 +30,12 @@
 <!ENTITY performanceUI.bufferStatusFull "O búfer está cheo. As mostras máis antigas estanse a sobrescribir.">
 
 <!-- LOCALIZATION NOTE (performanceUI.loadingNotice): This is the label shown
-  -  in the call list view while loading a profile. -->
+  -  in the details view while the profiler is unavailable, for example, while
+  -  in Private Browsing mode. -->
+
+<!-- LOCALIZATION NOTE (performanceUI.loadingNotice): This is the label shown
+  -  in the details view while loading a profile. -->
 <!ENTITY performanceUI.loadingNotice "Cargando…">
-
-<!-- LOCALIZATION NOTE (performanceUI.recordButton): This string is displayed
-  -  on a button that starts a new profile. -->
-<!ENTITY performanceUI.recordButton.tooltip "Activar/desactivar o estado dunha gravación de rendemento.">
-
-<!-- LOCALIZATION NOTE (performanceUI.importButton): This string is displayed
-  -  on a button that opens a dialog to import a saved profile data file. -->
-<!ENTITY performanceUI.importButton "Importar…">
-
-<!-- LOCALIZATION NOTE (performanceUI.clearButton): This string is displayed
-  -  on a button that removes all the recordings. -->
-<!ENTITY performanceUI.clearButton "Limpar">
 
 <!-- LOCALIZATION NOTE (performanceUI.toolbar.*): These strings are displayed
   -  in the toolbar on buttons that select which view is currently shown. -->
@@ -105,6 +92,10 @@
 <!ENTITY performanceUI.showPlatformData             "Amosar os datos da plataforma Gecko">
 <!ENTITY performanceUI.showPlatformData.tooltiptext "Amosar os datos da plataforma permite que os informes do analizador de JavaScript inclúan os símbolos da plataforma Gecko.">
 
+<!-- LOCALIZATION NOTE (performanceUI.showJITOptimizations): This string
+  -  is displayed next to a checkbox determining whether or not JIT optimization data
+  -  should be displayed. -->
+
 <!-- LOCALIZATION NOTE (performanceUI.flattenTreeRecursion): This is the
   -  label for the checkbox that toggles the flattening of tree recursion in inspected
   -  functions in the profiler. -->
@@ -128,16 +119,6 @@
   -  is recorded. -->
 <!ENTITY performanceUI.enableFramerate             "Gravar framerate">
 <!ENTITY performanceUI.enableFramerate.tooltiptext "Gravar a frecuencia de imaxes durante a análise.">
-
-<!-- LOCALIZATION NOTE (performanceUI.enableJITOptimizations): This string
-  -  is displayed next to a checkbox determining whether or not JIT optimization data
-  -  should be recorded. -->
-<!ENTITY performanceUI.enableJITOptimizations             "Gravar optimizacións JIT">
-<!ENTITY performanceUI.enableJITOptimizations.tooltiptext "Gravar os datos de optimización JIT tomados en cada marco JavaScript.">
-
-<!-- LOCALIZATION NOTE (performanceUI.JITOptimizationsTitle): This string
-  -  is displayed as the title of the JIT Optimizations panel. -->
-<!ENTITY performanceUI.JITOptimizationsTitle "Optimizacións JIT">
 
 <!-- LOCALIZATION NOTE (performanceUI.console.recordingNoticeStart/recordingNoticeEnd):
   -  This string is displayed when a recording is selected that started via console.profile.

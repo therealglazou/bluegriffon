@@ -39,11 +39,24 @@
 </ul>
 ">
 
+<!ENTITY fileAccessDenied.title "Zugriff auf die Datei wurde verweigert">
+<!ENTITY fileAccessDenied.longDesc "
+<ul>
+  <li>Sie wurde möglicherweise entfernt, verschoben, oder Dateiberechtigungen könnten den Zugriff verhindern.</li>
+</ul>
+">
 
 <!ENTITY generic.title "Fehler: Anfrage konnte nicht ausgeführt werden">
 <!ENTITY generic.longDesc "
 <p>&brandShortName; konnte die Seite aus unbekanntem Grund nicht laden.</p>
 ">
+
+<!ENTITY captivePortal.title "Anmeldung beim Netzwerk">
+<!ENTITY captivePortal.longDesc "
+<p>Dieses Netzwerk benötigt eventuell Ihre Anmeldung für den Internetzugriff.</p>
+">
+
+<!ENTITY openPortalLoginPage.label "Anmeldeseite öffnen">
 
 <!ENTITY malformedURI.title "Fehler: Ungültige Adresse">
 <!ENTITY malformedURI.longDesc "
@@ -139,15 +152,11 @@
 </ul>
 ">
 
-<!ENTITY nssBadCert.title "Sichere Verbindung fehlgeschlagen">
-<!ENTITY nssBadCert.longDesc2 "
-<ul>
-  <li>Dies könnte ein Problem mit der Konfiguration des Servers sein oder jemand, der vorgibt, 
-	der Server zu sein.</li>
-  <li>Falls Sie früher bereits erfolgreich eine Verbindung zu dem Server aufgebaut haben, 
-	könnte dies ein vorübergehender Fehler sein. Versuchen Sie es in diesem Fall später noch einmal.</li>
-</ul>
-">
+<!ENTITY certerror.longpagetitle1 "Diese Verbindung ist nicht sicher">
+<!-- Localization note (certerror.introPara) - The text content of the span tag
+will be replaced at runtime with the name of the server to which the user
+was trying to connect. -->
+<!ENTITY certerror.introPara "Der Inhaber von <span class='hostname'/> hat die Website nicht richtig konfiguriert. &brandShortName; hat keine Verbindung mit dieser Website aufgebaut, um Ihre Informationen vor Diebstahl zu schützen.">
 
 <!ENTITY sharedLongDesc "
 <ul>
@@ -163,25 +172,11 @@
 <!ENTITY cspBlocked.title "Blockiert von der Inhaltsicherheitsrichtlinie (CSP)">
 <!ENTITY cspBlocked.longDesc "<p>&brandShortName; hat diese Webseite daran gehindert, auf diese Weise geladen zu werden, weil die Webseite eine Inhaltsicherheitsrichtlinie (Content Security Policy) hat, die dies nicht erlaubt.</p>">
 
-<!ENTITY corruptedContentError.title "Fehler: Beschädigte Inhalte">
-<!ENTITY corruptedContentError.longDesc "<p>Die Seite, die Sie anzusehen versuchen, kann nicht angezeigt werden, da ein Fehler in der Datenübertragung festgestellt wurde.</p><ul><li>Bitte kontaktieren Sie die Website-Betreiber, um sie über dieses Problem zu verständigen.</li></ul>">
+<!ENTITY corruptedContentErrorv2.title "Fehler: Beschädigte Inhalte">
+<!ENTITY corruptedContentErrorv2.longDesc "<p>Die Seite, die Sie anzusehen versuchen, kann nicht angezeigt werden, da ein Fehler in der Datenübertragung festgestellt wurde.</p><ul><li>Bitte kontaktieren Sie die Website-Betreiber, um sie über dieses Problem zu verständigen.</li></ul>">
 
 
-<!ENTITY securityOverride.linkText "Oder Sie können eine Ausnahme hinzufügen…">
-<!ENTITY securityOverride.getMeOutOfHereButton "Website verlassen!">
 <!ENTITY securityOverride.exceptionButtonLabel "Ausnahme hinzufügen…">
-
-<!-- LOCALIZATION NOTE (securityOverride.warningContent) - Do not translate the
-contents of the <button> tags. It uses strings already defined above. The
-button is included here (instead of netError.xhtml) because it exposes
-functionality specific to firefox. -->
-
-<!ENTITY securityOverride.warningContent "
-<p>Sie sollten keine Ausnahme hinzufügen, wenn Sie nicht absolutes Vertrauen in die Sicherheit Ihrer aktuellen Verbindung haben oder wenn Sie bisher keine Warnung für diesen Server erhalten haben.</p>
-
-<button id='getMeOutOfHereButton'>&securityOverride.getMeOutOfHereButton;</button>
-<button id='exceptionDialogButton'>&securityOverride.exceptionButtonLabel;</button>
-">
 
 <!ENTITY errorReporting.automatic2 "Fehler an Mozilla melden, um beim Identifizieren und Blockieren böswilliger Websites zu helfen">
 <!ENTITY errorReporting.learnMore "Weitere Informationen…">
@@ -201,3 +196,27 @@ functionality specific to firefox. -->
 <!ENTITY weakCryptoAdvanced.title "Erweitert">
 <!ENTITY weakCryptoAdvanced.longDesc "<span class='hostname'></span> verwendet Sicherheitstechnologie, welche veraltet und verwundbar ist. Ein Angreifer könnte leicht Informationen entschlüsseln, welche Sie für sicher hielten.">
 <!ENTITY weakCryptoAdvanced.override "(Nicht sicher) <span class='hostname'></span> mit veralteter Sicherheitstechnologie laden">
+
+<!-- LOCALIZATION NOTE (certerror.wrongSystemTime2,
+                        certerror.wrongSystemTimeWithoutReference) - The <span id='..' />
+     tags will be injected with actual values, please leave them unchanged. -->
+<!ENTITY certerror.wrongSystemTime2 "<p> &brandShortName; konnte mit <span id='wrongSystemTime_URL'/> keine gesicherte Verbindung aufbauen, da Ihr Computer ein falsches Datum oder eine falsche Uhrzeit zu verwenden scheint.</p> <p>Auf Ihrem Computer ist es der <span id='wrongSystemTime_systemDate'/>, während es der <span id='wrongSystemTime_actualDate'/> sein sollte. Korrigieren Sie Datum und Uhrzeit auf Ihrem Computer auf die richtigen Werte, um das Problem zu beheben.</p>">
+<!ENTITY certerror.wrongSystemTimeWithoutReference "<p>&brandShortName; konnte mit <span id='wrongSystemTimeWithoutReference_URL'/> keine gesicherte Verbindung aufbauen, da Ihr Computer ein falsches Datum oder eine falsche Uhrzeit zu verwenden scheint.</p> <p>Auf Ihrem Computer ist es der <span id='wrongSystemTime_systemDate'/>. Korrigieren Sie Datum und Uhrzeit auf Ihrem Computer auf die richtigen Werte, um das Problem zu beheben.</p>">
+
+<!ENTITY certerror.pagetitle1  "Nicht gesicherte Verbindung">
+<!ENTITY certerror.whatShouldIDo.badStsCertExplanation "Diese Website verwendet HTTP Strict Transport Security (HSTS), um mitzuteilen, dass &brandShortName; nur über gesicherte Verbindungen mit ihr kommunizieren soll. Daher ist es nicht möglich, eine Ausnahme für dieses Zertifikat anzulegen.">
+<!ENTITY certerror.copyToClipboard.label "In Zwischenablage kopieren">
+
+<!ENTITY inadequateSecurityError.title "Diese Verbindung ist nicht sicher">
+<!-- LOCALIZATION NOTE (inadequateSecurityError.longDesc) - Do not translate
+     "NS_ERROR_NET_INADEQUATE_SECURITY". -->
+<!ENTITY inadequateSecurityError.longDesc "<p><span class='hostname'></span> verwendet Sicherheitstechnologie, welche veraltet und verwundbar ist. Ein Angreifer könnte leicht Informationen entschlüsseln, welche Sie für sicher hielten. Der Website-Administrator muss dieses Problem auf dem Server beheben, bevor Sie die Seite aufrufen können.</p><p>Fehlercode: NS_ERROR_NET_INADEQUATE_SECURITY</p>">
+
+<!ENTITY prefReset.longDesc "Dies könnte durch die Netzwerk-Sicherheitseinstellungen verursacht werden. Sollen die Standardeinstellungen wiederhergestellt werden?">
+<!ENTITY prefReset.label "Standardeinstellungen wiederherstellen">
+
+<!ENTITY captivePortal.longDesc2 "
+<p>You must log in to this network before you can access the Internet.</p>
+">
+
+<!ENTITY openPortalLoginPage.label2 "Open Network Login Page">

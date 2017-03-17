@@ -19,9 +19,11 @@
 
      For example, in English, a long string would be:
 
-     59 minutes, 59 seconds remaining - 1022 of 1023 KB
+     59m 59s left - 1022 of 1023 KB (120.5 KB/sec)
 
-     That's 50 characters, so we set the width at 50ch.
+     Since Downloads Panel is redesigned to show the detail string including
+     the hovering case for an item or an action button.
+     Bug 1328519 is for discussing the detail rule of `downloadDetails.width`.
      -->
 <!ENTITY downloadDetails.width            "50ch">
 
@@ -30,11 +32,11 @@
      which is displayed at the bottom of the Downloads Panel if the
      number of downloads exceeds the limit that the panel can display.
 
-     A good rule of thumb here is to look at the otherDownloads2 string
+     A good rule of thumb here is to look at the otherDownloads3 string
      in downloads.properties, and make a reasonable estimate of its
      maximum length. For English, this seems like a reasonable limit:
 
-     + 999 other downloads
+     999 files downloading
 
      that's 21 characters, so we set the minimum width to 21ch.
      -->
@@ -42,17 +44,16 @@
 
 <!ENTITY cmd.pause.label                  "Pozastavit">
 <!ENTITY cmd.pause.accesskey              "P">
-<!ENTITY cmd.resume.label                 "Obnovit">
-<!ENTITY cmd.resume.accesskey             "O">
+<!ENTITY cmd.resume.label                 "Pokračovat">
+<!ENTITY cmd.resume.accesskey             "o">
 <!ENTITY cmd.cancel.label                 "Zrušit">
-<!ENTITY cmd.cancel.accesskey             "Z">
 <!-- LOCALIZATION NOTE (cmd.show.label, cmd.show.accesskey, cmd.showMac.label,
      cmd.showMac.accesskey):
      The show and showMac commands are never shown together, thus they can share
      the same access key (though the two access keys can also be different).
      -->
 <!ENTITY cmd.show.label                   "Otevřít složku">
-<!ENTITY cmd.show.accesskey               "s">
+<!ENTITY cmd.show.accesskey               "l">
 <!ENTITY cmd.showMac.label                "Zobrazit ve Finderu">
 <!ENTITY cmd.showMac.accesskey            "F">
 <!ENTITY cmd.retry.label                  "Opakovat">
@@ -62,22 +63,55 @@
 <!ENTITY cmd.copyDownloadLink.accesskey   "K">
 <!ENTITY cmd.removeFromHistory.label      "Odebrat z historie">
 <!ENTITY cmd.removeFromHistory.accesskey  "d">
-<!ENTITY cmd.clearList.label              "Smazat seznam">
-<!ENTITY cmd.clearList.accesskey          "m">
+<!ENTITY cmd.clearList2.label             "Smazat panel náhledu">
+<!ENTITY cmd.clearList2.accesskey         "m">
 <!ENTITY cmd.clearDownloads.label         "Smazat stahování">
 <!ENTITY cmd.clearDownloads.accesskey     "S">
-<!-- LOCALIZATION NOTE (cmd.unblock.label):
-     This command may be shown in the context menu, as a menu button item, or as
-     a text link when malware or potentially unwanted downloads are blocked.
+<!-- LOCALIZATION NOTE (cmd.unblock2.label):
+     This command is shown in the context menu when downloads are blocked.
      -->
-<!ENTITY cmd.unblock.label                "Odblokovat">
-<!ENTITY cmd.unblock.accesskey            "O">
+<!ENTITY cmd.unblock2.label               "Povolit stažení">
+<!ENTITY cmd.unblock2.accesskey           "o">
 <!-- LOCALIZATION NOTE (cmd.removeFile.label):
-     This command may be shown in the context menu or as a menu button label
-     when malware or potentially unwanted downloads are blocked.
+     This is the tooltip of the action button shown when malware is blocked.
      -->
 <!ENTITY cmd.removeFile.label             "Odebrat soubor">
-<!ENTITY cmd.removeFile.accesskey         "d">
+<!-- LOCALIZATION NOTE (cmd.chooseUnblock.tooltip):
+     This is the tooltip of the action button shown when potentially unwanted
+     downloads are blocked. This opens a dialog where the user can choose
+     whether to unblock or remove the download. Removing is the default option.
+     -->
+<!ENTITY cmd.chooseUnblock.label          "Odebrat soubor nebo povolit stažení">
+<!-- LOCALIZATION NOTE (cmd.chooseOpen.tooltip):
+     This is the tooltip of the action button shown when uncommon downloads are
+     blocked.This opens a dialog where the user can choose whether to open the
+     file or remove the download. Opening is the default option.
+     -->
+<!ENTITY cmd.chooseOpen.label             "Otevřít nebo odebrat soubor">
+
+<!-- LOCALIZATION NOTE (showMoreInformation.label):
+     Displayed when hovering a blocked download, indicates that it's possible to
+     show more information for user to take the next action.
+     -->
+<!ENTITY showMoreInformation.label        "Zobrazit více informací">
+
+<!-- LOCALIZATION NOTE (openFile.label):
+     Displayed when hovering a complete download, indicates that it's possible to
+     open the file using an app available in the system.
+     -->
+<!ENTITY openFile.label                   "Otevřít soubor">
+
+<!-- LOCALIZATION NOTE (retryDownload.label):
+     Displayed when hovering a download which is able to be retried by users,
+     indicates that it's possible to download this file again.
+     -->
+<!ENTITY retryDownload.label              "Opakovat stahování">
+
+<!-- LOCALIZATION NOTE (cancelDownload.label):
+     Displayed when hovering a download which is able to be cancelled by users,
+     indicates that it's possible to cancel and stop the download.
+     -->
+<!ENTITY cancelDownload.label             "Zrušit stahování">
 
 <!-- LOCALIZATION NOTE (blocked.label):
      Shown as a tag before the file name for some types of blocked downloads.
@@ -99,6 +133,8 @@
      -->
 <!ENTITY downloadsHistory.label           "Zobrazit všechna stahování">
 <!ENTITY downloadsHistory.accesskey       "v">
+
+<!ENTITY openDownloadsFolder.label       "Otevřít složku se staženými soubory">
 
 <!ENTITY clearDownloadsButton.label       "Smazat stahování">
 <!ENTITY clearDownloadsButton.tooltip     "Smaže dokončená, zrušená či neúspěšná stahování">

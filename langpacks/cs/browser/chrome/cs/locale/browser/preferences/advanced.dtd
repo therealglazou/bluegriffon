@@ -8,12 +8,12 @@
 
 <!ENTITY accessibility.label             "Přístupnost">
 
-<!ENTITY useCursorNavigation.label       "Používat kurzorové klávesy pro pohyb ve stránce">
+<!ENTITY useCursorNavigation.label       "Používat kurzorové klávesy pro pohyb po stránce">
 <!ENTITY useCursorNavigation.accesskey   "P">
-<!ENTITY searchStartTyping.label         "Psaním vyhledávat text na stránce">
-<!ENTITY searchStartTyping.accesskey     "s">
-<!ENTITY blockAutoRefresh.label          "Varovat, pokud se stránka pokouší o přesměrování nebo obnovení">
-<!ENTITY blockAutoRefresh.accesskey      "r">
+<!ENTITY searchOnStartTyping.label       "Psaním vyhledávat text na stránce">
+<!ENTITY searchOnStartTyping.accesskey   "s">
+<!ENTITY blockAutoReload.label           "Varovat, pokud se stránka pokouší o přesměrování nebo obnovení">
+<!ENTITY blockAutoReload.accesskey       "r">
 <!ENTITY useOnScreenKeyboard.label       "V případě potřeby zobrazit dotykovou klávesnici">
 <!ENTITY useOnScreenKeyboard.accesskey   "d">
 
@@ -25,8 +25,8 @@
 <!ENTITY useSmoothScrolling.accesskey    "e">
 <!ENTITY allowHWAccel.label              "Použít hardwarovou akceleraci, je-li dostupná">
 <!ENTITY allowHWAccel.accesskey          "h">
-<!ENTITY checkSpelling.label             "Při psaní kontrolovat pravopis">
-<!ENTITY checkSpelling.accesskey         "k">
+<!ENTITY checkUserSpelling.label         "Při psaní kontrolovat pravopis">
+<!ENTITY checkUserSpelling.accesskey     "k">
 
 <!ENTITY dataChoicesTab.label            "Možnosti hlášení">
 
@@ -40,22 +40,30 @@
 <!ENTITY enableTelemetryData.accesskey   "S">
 <!ENTITY telemetryLearnMore.label        "Zjistit více">
 
-<!ENTITY crashReporterDesc.label         "Odesílá hlášení o pádu prohlížeče &brandShortName; a pomáhá organizaci &vendorShortName; vylepšit jeho stabilitu a bezpečnost.">
-<!ENTITY enableCrashReporter.label       "Povolit hlášení pádů">
-<!ENTITY enableCrashReporter.accesskey   "h">
-<!ENTITY crashReporterLearnMore.label    "Zjistit více">
+<!ENTITY crashReporterDesc2.label         "Hlášení o pádech pomáhají &vendorShortName; opravovat chyby a dělat váš prohlížeč stabilnějším a bezpečnějším">
+<!ENTITY alwaysSubmitCrashReports.label   "Povolit aplikaci &brandShortName; odesílat nevyřízená hlášení o pádech za vás">
+<!ENTITY alwaysSubmitCrashReports.accesskey "c">
+<!ENTITY crashReporterLearnMore.label     "Zjistit více">
 
 <!ENTITY networkTab.label                "Síť">
 
 <!ENTITY connection.label                "Připojení">
 
-<!ENTITY connectionDesc.label            "Konfigurovat připojení aplikace &brandShortName; k Internetu">
-<!ENTITY connectionSettings.label        "Nastavení připojení…">
-<!ENTITY connectionSettings.accesskey    "p">
+<!ENTITY connectionDesc.label            "Konfigurovat připojení aplikace &brandShortName; k internetu">
+<!ENTITY connectionSettings.label        "Nastavení…">
+<!ENTITY connectionSettings.accesskey    "a">
 
 <!ENTITY httpCache.label                 "Mezipaměť webových stránek">
 
 <!ENTITY offlineStorage2.label           "Offline obsah a uživatelská data">
+
+<!--  Site Data section manages sites using Storage API and is under Network -->
+<!ENTITY siteData.label                  "Data stránek">
+<!ENTITY clearSiteData.label             "Vymazat data">
+<!ENTITY clearSiteData.accesskey         "V">
+<!ENTITY siteDataSettings.label          "Nastavení…">
+<!ENTITY siteDataSettings.accesskey      "s">
+<!ENTITY siteDataLearnMoreLink.label     "Zjistit více">
 
 <!-- LOCALIZATION NOTE:
   The entities limitCacheSizeBefore.label and limitCacheSizeAfter.label appear on a single
@@ -75,16 +83,13 @@
 
 <!ENTITY updateTab.label                 "Aktualizace">
 
-<!ENTITY updateApp.label                 "Aktualizace aplikace &brandShortName;:">
+<!ENTITY updateApplication.label         "Aktualizace aplikace &brandShortName;">
 <!ENTITY updateAuto1.label               "Instalovat aktualizace automaticky (doporučováno z důvodu vyšší bezpečnosti)">
 <!ENTITY updateAuto1.accesskey           "I">
-<!ENTITY updateCheck.label               "Vyhledávat aktualizace, ale zeptat se, zda mají být nainstalovány">
-<!ENTITY updateCheck.accesskey           "e">
+<!ENTITY updateCheckChoose.label         "Vyhledávat aktualizace, ale zeptat se, zda mají být nainstalovány">
+<!ENTITY updateCheckChoose.accesskey     "e">
 <!ENTITY updateManual.label              "Nikdy nevyhledávat aktualizace (nedoporučováno z důvodu rizika ohrožení)">
 <!ENTITY updateManual.accesskey          "N">
-
-<!ENTITY updateAutoAddonWarn.label       "Upozornit, pokud by aktualizace zakázala některé doplňky">
-<!ENTITY updateAutoAddonWarn.accesskey   "U">
 
 <!ENTITY updateHistory.label             "Zobrazit historii aktualizací">
 <!ENTITY updateHistory.accesskey         "b">
@@ -92,14 +97,14 @@
 <!ENTITY useService.label                "K instalaci aktualizací použít službu na pozadí">
 <!ENTITY useService.accesskey            "s">
 
-<!ENTITY updateOthers.label              "Automaticky aktualizovat:">
+<!ENTITY autoUpdateOthers.label          "Automaticky aktualizovat">
 <!ENTITY enableSearchUpdate.label        "Vyhledávací moduly">
 <!ENTITY enableSearchUpdate.accesskey    "h">
 
-<!ENTITY offlineNotify.label             "Upozornit, pokud server chce uložit offline obsah">
-<!ENTITY offlineNotify.accesskey         "U">
-<!ENTITY offlineNotifyExceptions.label   "Výjimky…">
-<!ENTITY offlineNotifyExceptions.accesskey "k">
+<!ENTITY offlineStorageNotify.label               "Upozornit, pokud server chce uložit offline obsah">
+<!ENTITY offlineStorageNotify.accesskey           "U">
+<!ENTITY offlineStorageNotifyExceptions.label     "Výjimky…">
+<!ENTITY offlineStorageNotifyExceptions.accesskey "k">
 
 <!ENTITY offlineAppsList2.label          "Následující servery mají povoleno ukládat offline obsah:">
 <!ENTITY offlineAppsList.height          "7em">
@@ -108,12 +113,12 @@
 <!ENTITY offlineAppRemove.confirm        "Smazat offline obsah">
 
 <!ENTITY certificateTab.label            "Certifikáty">
-<!ENTITY certSelection.label             "Požadavky">
-<!ENTITY certSelection.description       "Pokud server vyžaduje osobní certifikát:">
-<!ENTITY certs.auto                      "Zvolit automaticky">
-<!ENTITY certs.auto.accesskey            "a">
-<!ENTITY certs.ask                       "Vždy se zeptat">
-<!ENTITY certs.ask.accesskey             "d">
+<!ENTITY certPersonal.label              "Požadavky">
+<!ENTITY certPersonal.description        "Pokud server vyžaduje váš osobní certifikát:">
+<!ENTITY selectCerts.auto                "Vybrat jeden automaticky">
+<!ENTITY selectCerts.auto.accesskey      "a">
+<!ENTITY selectCerts.ask                 "Vždy se zeptat">
+<!ENTITY selectCerts.ask.accesskey       "d">
 <!ENTITY enableOCSP.label                "Aktuální platnost certifikátů ověřovat na serverech OCSP">
 <!ENTITY enableOCSP.accesskey            "p">
 <!ENTITY viewCerts.label                 "Certifikáty">

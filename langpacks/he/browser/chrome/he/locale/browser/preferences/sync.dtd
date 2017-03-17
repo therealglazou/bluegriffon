@@ -2,30 +2,11 @@
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 
-<!-- The page shown when not logged in... -->
-<!ENTITY setupButton.label          "התקנת &syncBrand.fullName.label;">
-<!ENTITY setupButton.accesskey      "ה">
-<!ENTITY weaveDesc.label            "&syncBrand.fullName.label; מאפשר לך לגשת להיסטוריה, לסימניות, לססמאות וללשוניות הפתוחות שלך מכל המכשירים שברשותך.">
-
 <!-- The page shown when logged in... -->
 
-<!-- Login error feedback -->
-<!ENTITY updatePass.label             "עדכון">
-<!ENTITY resetPass.label              "איפוס">
-
-<!-- Manage Account -->
-<!ENTITY manageAccount.label          "ניהול חשבון">
-<!ENTITY manageAccount.accesskey      "נ">
-<!ENTITY changePassword2.label        "שינוי ססמה…">
-<!ENTITY myRecoveryKey.label          "מפתח השחזור שלי">
-<!ENTITY resetSync2.label             "איפוס Sync…">
-
-<!ENTITY pairDevice.label             "שיוך התקן">
-
-<!ENTITY syncMy.label               "סנכרן">
 <!ENTITY engine.bookmarks.label     "סימניות">
 <!ENTITY engine.bookmarks.accesskey "ס">
-<!ENTITY engine.tabs.label          "לשוניות">
+<!ENTITY engine.tabs.label2         "פתיחת לשוניות">
 <!ENTITY engine.tabs.accesskey      "ל">
 <!ENTITY engine.history.label       "היסטוריה">
 <!ENTITY engine.history.accesskey   "ה">
@@ -37,21 +18,17 @@
 <!ENTITY engine.addons.accesskey    "ת">
 
 <!-- Device Settings -->
-<!ENTITY syncDeviceName.label       "שם ההתקן:">
-<!ENTITY syncDeviceName.accesskey   "ש">
 <!ENTITY fxaSyncDeviceName.label       "שם התקן">
 <!ENTITY changeSyncDeviceName.label "שינוי שם התקן…">
+<!ENTITY changeSyncDeviceName.accesskey "ש">
 <!ENTITY cancelChangeSyncDeviceName.label "ביטול">
+<!ENTITY cancelChangeSyncDeviceName.accesskey "ב">
 <!ENTITY saveChangeSyncDeviceName.label "שמירה">
-<!ENTITY unlinkDevice.label           "נתק התקן זה">
+<!ENTITY saveChangeSyncDeviceName.accesskey "ש">
 
 <!-- Footer stuff -->
 <!ENTITY prefs.tosLink.label        "תנאי שימוש">
-<!ENTITY prefs.ppLink.label         "מדיניות פרטיות">
-
-<!-- Firefox Accounts stuff -->
 <!ENTITY fxaPrivacyNotice.link.label "הצהרת פרטיות">
-<!ENTITY determiningAcctStatus.label     "קביעת מצב החשבון שלך…">
 
 <!-- LOCALIZATION NOTE (signedInUnverified.beforename.label,
 signedInUnverified.aftername.label): these two string are used respectively
@@ -71,55 +48,39 @@ both, to better adapt this sentence to their language.
 
 <!ENTITY notSignedIn.label           "לא מחובר לחשבון.">
 <!ENTITY signIn.label                "כניסה">
+<!ENTITY signIn.accesskey            "כ">
 <!ENTITY profilePicture.tooltip      "שינוי תמונת פרופיל">
 <!ENTITY verifiedManage.label        "ניהול חשבון">
+<!ENTITY verifiedManage.accesskey    "נ">
 <!ENTITY disconnect.label            "התנתקות…">
+<!ENTITY disconnect.accesskey        "ת">
 <!ENTITY verify.label                "אימות דואר אלקטרוני">
+<!ENTITY verify.accesskey            "א">
 <!ENTITY forget.label                "לשכוח מכתובת דואר אלקטרוני זו">
-
-<!ENTITY welcome.description "גישה ללשוניות שלך, סימניות, ססמאות ועוד בכל מקום עם &brandShortName; שלך.">
-<!ENTITY welcome.signIn.label "כניסה">
-<!ENTITY welcome.createAccount.label "יצירת חשבון">
-
-<!ENTITY welcome.useOldSync.label "משתמשים בגרסה ישנה יותר של Sync?">
+<!ENTITY forget.accesskey            "ש">
 
 <!ENTITY signedOut.caption            "קחו את הרשת עמכם">
 <!ENTITY signedOut.description        "סנכרון הסימניות, ההיסטוריה, הלשוניות, הססמאות, ההרחבות, וההעדפות בין כל מכשיריך.">
 <!ENTITY signedOut.accountBox.title   "התחברות עם &syncBrand.fxAccount.label;">
 <!ENTITY signedOut.accountBox.create  "יצירת חשבון">
+<!ENTITY signedOut.accountBox.create.accesskey  "צ">
 <!ENTITY signedOut.accountBox.signin  "כניסה">
+<!ENTITY signedOut.accountBox.signin.accesskey  "כ">
 
 <!ENTITY signedIn.engines.label       "סנכרון בין התקנים">
-
-<!-- LOCALIZATION NOTE (mobilePromo2.*): the following strings will be used to
-     create a single sentence with active links.
-     The resulting sentence in English is: "Sync to your mobile device.
-     Download Firefox for Android or Firefox for iOS." -->
-
-<!ENTITY mobilePromo2.start            "כדי לסנכרן את ההתקנים הניידים שלך, נא להוריד את ">
-<!-- LOCALIZATION NOTE (mobilePromo2.androidLink): This is a link title that links to https://www.mozilla.org/firefox/android/ -->
-<!ENTITY mobilePromo2.androidLink      "Firefox for Android">
-
-<!-- LOCALIZATION NOTE (mobilePromo2.iOSBefore): This is text displayed between mobilePromo2.androidLink and mobilePromo2.iosLink -->
-<!ENTITY mobilePromo2.iOSBefore         " או ">
-<!-- LOCALIZATION NOTE (mobilePromo2.iOSLink): This is a link title that links to https://www.mozilla.org/firefox/ios/ -->
-<!ENTITY mobilePromo2.iOSLink          "Firefox for iOS">
-
-<!ENTITY mobilePromo2.end              ".">
-
-<!-- LOCALIZATION NOTE (mobilePromo3.androidLink): This is a link title that links to https://www.mozilla.org/firefox/android/ -->
-<!ENTITY mobilePromo3.androidLink      "Android">
-
-<!ENTITY mobilePromo3.end              " to sync with your mobile device.">
-
-<!-- LOCALIZATION NOTE (mobilePromo3.iOSBefore): This is text displayed between mobilePromo3.androidLink and mobilePromo3.iosLink -->
-<!ENTITY mobilePromo3.iOSBefore         " or ">
-<!-- LOCALIZATION NOTE (mobilePromo3.iOSLink): This is a link title that links to https://www.mozilla.org/firefox/ios/ -->
-<!ENTITY mobilePromo3.iOSLink          "iOS">
 
 <!-- LOCALIZATION NOTE (mobilePromo3.*): the following strings will be used to
      create a single sentence with active links.
      The resulting sentence in English is: "Download Firefox for
      Android or iOS to sync with your mobile device." -->
 
-<!ENTITY mobilePromo3.start            "Download Firefox for ">
+<!ENTITY mobilePromo3.start            "הורידו את Firefox עבור ">
+<!-- LOCALIZATION NOTE (mobilePromo3.androidLink): This is a link title that links to https://www.mozilla.org/firefox/android/ -->
+<!ENTITY mobilePromo3.androidLink      "Android">
+
+<!-- LOCALIZATION NOTE (mobilePromo3.iOSBefore): This is text displayed between mobilePromo3.androidLink and mobilePromo3.iosLink -->
+<!ENTITY mobilePromo3.iOSBefore         " או ">
+<!-- LOCALIZATION NOTE (mobilePromo3.iOSLink): This is a link title that links to https://www.mozilla.org/firefox/ios/ -->
+<!ENTITY mobilePromo3.iOSLink          "iOS">
+
+<!ENTITY mobilePromo3.end              " כדי להסתנכרן עם המכשירים הניידים שלכם.">

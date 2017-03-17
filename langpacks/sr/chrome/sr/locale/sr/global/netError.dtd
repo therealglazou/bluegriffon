@@ -19,6 +19,9 @@
 <!ENTITY fileNotFound.title "Датотека није пронађена">
 <!ENTITY fileNotFound.longDesc "<ul> <li>Проверите коришћење великих/малих слова или неке друге грешке у куцању.</li> <li>Проверите да ли је датотека премештена, преименована или избрисана.</li> </ul>">
 
+<!ENTITY fileAccessDenied.title "Приступ датотеци је одбијен">
+<!ENTITY fileAccessDenied.longDesc "<ul><li>Можда је уклоњена, премештена или немате приступ датотеци.</li></ul>">
+
 <!ENTITY generic.title "Захтев није могао да буде обрађен">
 <!ENTITY generic.longDesc "<p>Додатни подаци о овом проблему или грешци тренутно нису доступни.</p>">
 
@@ -84,8 +87,13 @@
 <!ENTITY cspBlocked.title "Блокирано због полисе о безбедности садржаја">
 <!ENTITY cspBlocked.longDesc "<p>Прегледач је спречио ову страницу да се учита на овај начин, јер страница има полису о безбедности садржаја која то онемогућава.</p>">
 
-<!ENTITY corruptedContentError.title "Грешка услед оштећеног садржаја">
-<!ENTITY corruptedContentError.longDesc "<p>Страница коју желите да погледате не може бити приказана услед грешке у преносу података.</p><ul><li>Обратите се власницима веб странице и обавестите их о проблему.</li></ul>">
+<!ENTITY corruptedContentErrorv2.title "Грешка оштећеног садржаја">
+<!ENTITY corruptedContentErrorv2.longDesc "<p>Страница коју желите да погледате не може бити приказана због грешке у преносу података.</p><ul><li>Обратите се власницима веб странице и обавестите их о проблему.</li></ul>">
 
 <!ENTITY remoteXUL.title "Удаљени XUL">
 <!ENTITY remoteXUL.longDesc "<p><ul><li>Обавестите власнике веб сајта о овом проблему.</li></ul></p>">
+
+<!ENTITY inadequateSecurityError.title "Веза није сугурна">
+<!-- LOCALIZATION NOTE (inadequateSecurityError.longDesc) - Do not translate
+     "NS_ERROR_NET_INADEQUATE_SECURITY". -->
+<!ENTITY inadequateSecurityError.longDesc "<p><span class='hostname'></span> користи технологију за безбедност која је застарела и рањива је на нападе. Нападач лако може да открије информације за које сте мислили да су сигурне. Администратор веб сајта ће морати да поправи сервер пре него што посетите овај сајт.</p><p>Код грешке: NS_ERROR_NET_INADEQUATE_SECURITY</p>">
