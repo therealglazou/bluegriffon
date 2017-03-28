@@ -19,11 +19,7 @@ The Open Source next-generation Web Editor based on the rendering engine of Fire
 
 * update the mozilla tree
 
-  if you want to build the bluegriffon-ng branch, you need to `cd bluegriffon; git checkout bluegriffon-ng; cd ..`
-
-  if you want to build the bg2 branch, you need to `cd bluegriffon; git checkout bg2; cd ..`
-
-  ``hg update -r `cat bluegriffon/config/mozilla_central_revision.txt```
+  ```hg update -r `cat bluegriffon/config/mozilla_central_revision.txt```
 
   `patch -p 1 < bluegriffon/config/content.patch`
 
@@ -35,15 +31,17 @@ The Open Source next-generation Web Editor based on the rendering engine of Fire
 * Windows: Windows 10 Pro with Visual Studio Community 2015
 * Linux: Ubuntu 16.04.1 LTS
 
-## To build the master branch
-
-`make client.mk build_all`
-
-You can after that type `make package`in the object directory to package the application for distribution.
-
-## To build the `bluegriffon-ng` or the `bg2` branch
+## Build BlueGriffon
 
 `./mach build`
+
+## Run BlueGriffon in a temporary profile
+
+`./mach run`
+
+## Package the build
+
+`./mach package`
 
 ## Want to contribute to BlueGriffon?
 
