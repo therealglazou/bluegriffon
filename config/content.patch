@@ -7096,6 +7096,33 @@ diff --git a/rdf/base/nsRDFContentSink.cpp b/rdf/base/nsRDFContentSink.cpp
    *_retval = true;
    return NS_OK;
  }
+diff --git a/toolkit/components/passwordmgr/nsLoginManagerPrompter.js b/toolkit/components/passwordmgr/nsLoginManagerPrompter.js
+--- a/toolkit/components/passwordmgr/nsLoginManagerPrompter.js
++++ b/toolkit/components/passwordmgr/nsLoginManagerPrompter.js
+@@ -1415,20 +1415,21 @@ LoginManagerPrompter.prototype = {
+     propBag.setProperty("timesUsedIncrement", 1);
+     this._pwmgr.modifyLogin(login, propBag);
+   },
+ 
+   /**
+    * Given a content DOM window, returns the chrome window and browser it's in.
+    */
+   _getChromeWindow(aWindow) {
+-    let windows = Services.wm.getEnumerator(null);
++    let windows = Services.wm.getEnumerator("bluegriffon");
+     while (windows.hasMoreElements()) {
+       let win = windows.getNext();
+-      let browser = win.gBrowser.getBrowserForContentWindow(aWindow);
++      // let browser = win.gBrowser.getBrowserForContentWindow(aWindow);
++      let browser = win.EditorUtils.getCurrentTabEditor();
+       if (browser) {
+         return { win, browser };
+       }
+     }
+     return null;
+   },
+ 
+   _getNotifyWindow() {
 diff --git a/toolkit/components/telemetry/TelemetryStartup.js b/toolkit/components/telemetry/TelemetryStartup.js
 --- a/toolkit/components/telemetry/TelemetryStartup.js
 +++ b/toolkit/components/telemetry/TelemetryStartup.js
@@ -7501,6 +7528,28 @@ diff --git a/toolkit/mozapps/handling/nsContentDispatchChooser.js b/toolkit/moza
    QueryInterface: XPCOMUtils.generateQI([Ci.nsIContentDispatchChooser])
  };
  
+diff --git a/toolkit/mozapps/installer/packager.mk b/toolkit/mozapps/installer/packager.mk
+--- a/toolkit/mozapps/installer/packager.mk
++++ b/toolkit/mozapps/installer/packager.mk
+@@ -48,17 +48,17 @@ stage-package: $(MOZ_PKG_MANIFEST) $(MOZ
+ 		$(if $(MOZ_PACKAGER_MINIFY_JS),--minify-js \
+ 		  $(addprefix --js-binary ,$(JS_BINARY)) \
+ 		) \
+ 		$(if $(JARLOG_DIR),$(addprefix --jarlog ,$(wildcard $(JARLOG_FILE_AB_CD)))) \
+ 		$(if $(OPTIMIZEJARS),--optimizejars) \
+ 		$(if $(DISABLE_JAR_COMPRESSION),--disable-compression) \
+ 		$(MOZ_PKG_MANIFEST) $(DIST) $(DIST)/$(MOZ_PKG_DIR)$(if $(MOZ_PKG_MANIFEST),,$(_BINPATH)) \
+ 		$(if $(filter omni,$(MOZ_PACKAGER_FORMAT)),$(if $(NON_OMNIJAR_FILES),--non-resource $(NON_OMNIJAR_FILES)))
+-	$(PYTHON) $(MOZILLA_DIR)/toolkit/mozapps/installer/find-dupes.py $(DEFINES) $(ACDEFINES) $(MOZ_PKG_DUPEFLAGS) $(DIST)/$(MOZ_PKG_DIR)
++#	$(PYTHON) $(MOZILLA_DIR)/toolkit/mozapps/installer/find-dupes.py $(DEFINES) $(ACDEFINES) $(MOZ_PKG_DUPEFLAGS) $(DIST)/$(MOZ_PKG_DIR)
+ ifndef MOZ_THUNDERBIRD
+ 	# Package mozharness
+ 	$(call py_action,test_archive, \
+ 		mozharness \
+ 		$(ABS_DIST)/$(PKG_PATH)$(MOZHARNESS_PACKAGE))
+ endif # MOZ_THUNDERBIRD
+ ifdef MOZ_PACKAGE_JSSHELL
+ 	# Package JavaScript Shell
 diff --git a/toolkit/toolkit.mozbuild b/toolkit/toolkit.mozbuild
 --- a/toolkit/toolkit.mozbuild
 +++ b/toolkit/toolkit.mozbuild
