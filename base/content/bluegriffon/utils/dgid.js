@@ -36,6 +36,8 @@
  * ***** END LICENSE BLOCK ***** */
 
 // we store all globals in a gDialog object for convenience
+Components.utils.import("resource://gre/modules/Services.jsm");
+
 var gDialog = {};
 
 function GetUIElements()
@@ -46,4 +48,38 @@ function GetUIElements()
     var elt = elts.item(i);
     gDialog[ elt.getAttribute("id") ] = elt;
   }
+}
+
+document.documentElement
+        .setAttribute("rtl",
+                      Components.classes["@mozilla.org/chrome/chrome-registry;1"]
+                        .getService(Components.interfaces.nsIXULChromeRegistry)
+                        .isLocaleRTL("global"));
+
+if (Services.prefs.getCharPref("bluegriffon.wysiwyg.theme") == "black" &&
+    window.document.documentElement.getAttribute("forcecleartheme") != "true")
+  window.document.documentElement.removeAttribute("cleartheme");
+else
+  window.document.documentElement.setAttribute("cleartheme", "true");
+
+function ApplyWysiwygThemeChange(aDocument, aValue)
+{
+  var iframes = aDocument.querySelectorAll("iframe");
+  for (var i = 0; i < iframes.length; i++) {
+    var root = iframes[i].contentDocument.documentElement;
+    if (aValue == "black" &&
+        root.getAttribute("forcecleartheme") != "true")
+      root.removeAttribute("cleartheme");
+    else
+      root.setAttribute("cleartheme", "true");
+    if (root.id)
+      iframes[i].contentDocument.persist(root.id, "cleartheme");
+
+    ApplyWysiwygThemeChange(iframes[i].contentDocument, aValue)
+  }
+}
+
+function GetWindowContent()
+{
+  return EditorUtils.getCurrentEditorElement().contentWindow;
 }

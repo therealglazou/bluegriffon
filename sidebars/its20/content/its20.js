@@ -36,9 +36,9 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-Components.utils.import("resource://app/modules/editorHelper.jsm");
-Components.utils.import("resource://app/modules/urlHelper.jsm");
-Components.utils.import("resource://app/modules/prompterHelper.jsm");
+Components.utils.import("resource://gre/modules/editorHelper.jsm");
+Components.utils.import("resource://gre/modules/urlHelper.jsm");
+Components.utils.import("resource://gre/modules/prompterHelper.jsm");
 
 const kIOServiceCID       = "@mozilla.org/network/io-service;1";
 const kFileInputStreamCID = "@mozilla.org/network/file-input-stream;1";
@@ -144,8 +144,9 @@ function Inspect()
   if (gMain && gMain.EditorUtils)
   {
     var editor = gMain.EditorUtils.getCurrentEditor();
-    var visible = editor && (gMain.GetCurrentViewMode() == "wysiwyg");
+    var visible = editor && (gMain.EditorUtils.isWysiwygMode());
     gDialog.mainBox.style.visibility = visible ? "" : "hidden";
+    gMain.document.querySelector("[panelid='panel-its20']").className = visible ? "" : "inactive";
     if (visible) {
       var node = EditorUtils.getSelectionContainer().node;
       if (node) {
@@ -201,13 +202,6 @@ function SelectionChanged(aArgs, aElt, aOneElementSelected)
   }
   // else // we still need to reflow
 
-  // show the selection's container in the info box
-  gDialog.currentElementBox.setAttribute("value",
-       "<" + gCurrentElement.localName +
-       (gCurrentElement.id ? " id='" + gCurrentElement.id + "'" : "") +
-       (gCurrentElement.className ? " class='" + gCurrentElement.className + "'" : "") +
-       ">" +
-       gCurrentElement.innerHTML.substr(0, 100));
   gLastElement = gCurrentElement;
 }
 

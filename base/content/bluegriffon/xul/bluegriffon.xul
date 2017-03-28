@@ -43,34 +43,46 @@
 #include overlays.inc
 
 <!DOCTYPE window [
-  <!ENTITY % tabEditorDTD    SYSTEM "chrome://bluegriffon/locale/tabeditor.dtd" >
-  <!ENTITY % bluegriffonDTD  SYSTEM "chrome://bluegriffon/locale/bluegriffon.dtd" >
-  <!ENTITY % findbarDTD      SYSTEM "chrome://bluegriffon/locale/findbar.dtd" >
-  <!ENTITY % structurebarDTD SYSTEM "chrome://bluegriffon/locale/structurebar.dtd" >
-  <!ENTITY % ariaDTD         SYSTEM "chrome://bluegriffon/locale/aria.dtd" >
-  <!ENTITY % baseMenuOverlayDTD SYSTEM "chrome://browser/locale/baseMenuOverlay.dtd">
-  <!ENTITY % brandDTD        SYSTEM "chrome://branding/locale/brand.dtd" >
   <!ENTITY % editMenuDTD     SYSTEM "chrome://global/locale/editMenuOverlay.dtd" >
   %editMenuDTD;
+  <!ENTITY % tabEditorDTD    SYSTEM "chrome://bluegriffon/locale/tabeditor.dtd" >
   %tabEditorDTD;
-  %baseMenuOverlayDTD;
+  <!ENTITY % bluegriffonDTD  SYSTEM "chrome://bluegriffon/locale/bluegriffon.dtd" >
   %bluegriffonDTD;
+  <!ENTITY % findbarDTD      SYSTEM "chrome://bluegriffon/locale/findbar.dtd" >
   %findbarDTD;
+  <!ENTITY % structurebarDTD SYSTEM "chrome://bluegriffon/locale/structurebar.dtd" >
   %structurebarDTD;
+  <!ENTITY % ariaDTD         SYSTEM "chrome://bluegriffon/locale/aria.dtd" >
   %ariaDTD;
+  <!ENTITY % brandDTD        SYSTEM "chrome://branding/locale/brand.dtd" >
   %brandDTD;
+  <!ENTITY % baseMenuOverlayDTD SYSTEM "chrome://browser/locale/baseMenuOverlay.dtd">
+  %baseMenuOverlayDTD;
+  <!ENTITY % pagePropertiesDTD SYSTEM "chrome://bluegriffon/locale/pageProperties.dtd" >
+  %pagePropertiesDTD;
 ]>            
 
 <window
   id         = "Bluegriffon"
   windowtype = "bluegriffon"
+  fullscreenbutton="true"
   title      = "&window.title;"
-  width      = "900"
-  height     = "600"
-  persist    ="screenX screenY width height"
+  width      = "960"
+  height     = "640"
+  persist    = "screenX screenY width height"
   onload     = "Startup()"
   onunload   = "Shutdown()"
+  iconsize   = "medium"
   onclose    = "return onClose()"
+#ifdef CAN_DRAW_IN_TITLEBAR
+#ifdef XP_WIN
+        chromemargin="0,2,2,2"
+#else
+        chromemargin="0,5,5,5"
+#endif
+        tabsintitlebar="true"
+#endif
   xmlns      = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
   xmlns:html = "http://www.w3.org/1999/xhtml">
 
@@ -79,6 +91,31 @@
 #include sets.inc
 #include popups.inc
 
+#ifdef CAN_DRAW_IN_TITLEBAR
+<vbox id="titlebar">
+  <hbox id="titlebar-content" flex="1">
+    <spacer id="titlebar-spacer" flex="1"/>
+    <label id="titleInTitlebar" value="BlueGriffon" flex="1" crop="center"/>
+    <spacer id="titlebar-spacer2" flex="1"/>
+    <hbox id="titlebar-buttonbox-container">
+      <hbox id="titlebar-buttonbox">
+        <toolbarbutton class="titlebar-button" id="titlebar-min" oncommand="window.minimize();"/>
+        <toolbarbutton class="titlebar-button" id="titlebar-max" oncommand="onTitlebarMaxClick();"/>
+        <toolbarbutton class="titlebar-button" id="titlebar-close" oncommand="if (doSaveTabsBeforeQuit()) window.close()"/>
+      </hbox>
+    </hbox>
+#ifdef XP_MACOSX
+    <!-- OS X does not natively support RTL for its titlebar items, so we prevent this secondary
+         buttonbox from reversing order in RTL by forcing an LTR direction. -->
+    <hbox id="titlebar-secondary-buttonbox" dir="ltr">
+      <hbox class="private-browsing-indicator"/>
+      <hbox id="titlebar-fullscreen-button"/>
+    </hbox>
+#endif
+  </hbox>
+</vbox>
+#endif
+
 #include menubar.inc
 
   <toolbox class="toolbox-top" id="MainToolbox" context="main-toolbar-context-menu">
@@ -86,118 +123,123 @@
     <toolbar id="MainToolbar" class="toolbar-primary chromeclass-toolbar" align="center"
              toolbarname="Main"
              fullscreentoolbar="true"
-             persist="iconsize,mode"
+             persist="iconsize,mode,hidden"
              iconsize="small"
              mode="icons"
-             customizable="true"
 #ifdef XP_MACOSX
-             defaultset="newButton,openButton,saveButton,stopButton,spacer,tableButton,tableLayoutButton,imageButton,thumbnailButton,anchorButton,linkButton,domexplorerButton,cssButton,csseditorButton,svgEditMainToolbarButton,videoButton,audioButton,formButton,mathmlButton,its20Button,spacer,browseButton,spring,throbber-box"/>
+             defaultset="newButton,openButton,saveButton,stopButton,spacer,tableButton,tableLayoutButton,imageButton,thumbnailButton,anchorButton,linkButton,domexplorerButton,cssButton,csseditorButton,svgEditMainToolbarButton,videoButton,audioButton,formButton,refreshButton,mathmlButton,its20Button,spacer,browseButton,spacer,putterButton,mvButton,cssEditorButton"/>
 #else
-             defaultset="newButton,spacer,openButton,spacer,saveButton,stopButton,spacer,tableButton,tableLayoutButton,imageButton,thumbnailButton,anchorButton,linkButton,domexplorerButton,cssButton,csseditorButton,svgEditMainToolbarButton,videoButton,audioButton,formButton,mathmlButton,its20Button,spacer,browseButton,spring,throbber-box,spacer"/>
+             defaultset="newButton,spacer,openButton,spacer,saveButton,stopButton,spacer,tableButton,tableLayoutButton,imageButton,thumbnailButton,anchorButton,linkButton,domexplorerButton,cssButton,csseditorButton,svgEditMainToolbarButton,videoButton,audioButton,formButton,refreshButton,mathmlButton,its20Button,spacer,browseButton,spacer,putterButton,mvButton,cssEditorButton"/>
 #endif
     <toolbarset id="customMainToolbars" context="main-toolbar-context-menu"/>
   </toolbox>
 
-  <toolbox class="toolbox-top" id="FormatToolbox" mode="full">
+  <toolbox id="FormatMenulistsToolbox" mode="full">
+#include formatmenulistsbarpalette.inc
+    <toolbar id="FormatMenulistsToolbar"
+             toolbarname="Menulists"
+             fullscreentoolbar="true"
+             persist="iconsize,mode"
+             iconsize="small"
+             mode="full"
+             context="format-menulists-toolbar-context-menu"
+             customizable="true"
+             defaultset="spacer,ParagraphSelectBox,IdButtonsBox,ClassButtonsBox,FontFaceSelectBox,ARIARoleSelectBox"/>
+    <toolbarset id="customFormatMenulistsToolbars" context="format-toolbar-context-menu"/>
+  </toolbox>
+  <hbox id="horizContainer" flex="1">
+  <toolbox id="FormatToolbox" mode="full">
 #include formatbarpalette.inc
-    <toolbar id="FormatToolbar" class="chromeclass-toolbar"
+    <toolbar id="FormatToolbar"
              toolbarname="&formatToolbar.name;"
              fullscreentoolbar="true"
              persist="iconsize,mode"
              iconsize="small"
              mode="full"
-             align="center"
-             context="format-toolbar-context-menu"
-             customizable="true"
-             defaultset="spacer,ParagraphSelectBox,separator,EncapsulateSelect,separator,emButton,strongButton,codeButton,separator,boldButton,italicButton,underlineButton,separator,ulButton,olButton,dtButton,ddButton,separator,align-left-button,align-center-button,align-right-button,align-justify-button,separator,indentButton,outdentButton,separator,blockquoteButton,separator,dirLtrButton,dirRtlButton"/>
-    <toolbar id="FormatToolbar2" class="chromeclass-toolbar"
-             toolbarname="&formatToolbar2.name;"
-             fullscreentoolbar="true"
-             persist="iconsize,mode"
-             iconsize="small"
-             mode="full"
-             align="center"
-             context="format-toolbar-context-menu"
-             customizable="true"
-             defaultset="spacer,IdButtonsBox,ClassButtonsBox,separator,ColorsBox,FontFaceSelectBox,separator,ARIARoleSelectBox"/>
-    <toolbarset id="customFormatToolbars" context="format-toolbar-context-menu"/>
+	     sizemode="normal"
+	     fullscreenbutton="true"
+             defaultset="EncapsulateSelect,separator,emButton,strongButton,codeButton,separator,boldButton,italicButton,underlineButton,separator,ulButton,olButton,dtButton,ddButton,separator,align-left-button,align-center-button,align-right-button,align-justify-button,separator,indentButton,outdentButton,separator,blockquoteButton,separator,dirLtrButton,dirRtlButton"/>
   </toolbox>
 
     <vbox flex="1" id="maincontainer">
       <vbox flex="1">
         <box flex="1" id="tabeditorContainer" >
-          <tabeditor flex="1" id="tabeditor" visibility="hidden" persist="tabmode"/>
-            <splitter id="deckedPanelsSplitter"
-                      collapse="after">
-#ifndef XP_MACOSX
-              <grippy/>
-#endif
-            </splitter>
-            <vbox id="deckedPanels" style="background-color: #e2e2e2;"
-                  persist="width">
-              <deckedPanelsTabs id="deckedPanelsTabs"/>
-              <iframe id="deckPanelsIframe"
-                      type="chrome"
-                      flex="1"/>
-            </vbox>
+          <vbox id="ebm" persist="width" hidden="true"/>
+          <splitter id="ebm_splitter" hidden="true" collapse="before">
+            <grippy/>
+          </splitter>
+          <vbox id="responsiveContainer" flex="1">
+            <tabeditor flex="1" id="tabeditor" visibility="hidden" persist="tabmode">
+                <hbox id="modeTabbox" previousMode="wysiwyg">
+                  <spacer flex="1"/>
+                  <label class="multiButton"
+                           id="liveViewModeButton"
+                           value="&dualview.label;"
+                           onclick="ToggleViewMode(this)"
+                           mode="liveview"
+                           observes="cmd_viewModeEnabler"/>
+                  <spacer style="width: 2em"/>
+                  <label class="multiButton left"
+                           selected="true"
+                           id="wysiwygModeButton"
+                           value="&wysiwygMode.label;"
+                           onclick="ToggleViewMode(this)"
+                           mode="wysiwyg"
+                           observes="cmd_viewModeEnabler"/>
+                  <label class="multiButton center"
+                           id="sourceModeButton"
+                           value="&sourceMode.label;"
+                           onclick="ToggleViewMode(this)"
+                           mode="source"
+                           observes="cmd_viewModeEnabler"/>
+                  <label class="multiButton right"
+                           id="printPreviewModeButton"
+                           value="&printMode.label;"
+                           onclick="ToggleViewMode(this)"
+                           mode="wysiwyg"
+                           observes="cmd_viewModeEnabler"/>
+                  <spacer flex="1"/>
+                  <hbox id="zoomPanel">
+                    <spinbuttons onup="BGZoomManager.enlarge(this.nextSibling)"
+                                 ondown="BGZoomManager.reduce(this.nextSibling)"/>
+                    <menulist id="menulist-zoompanel"
+                              observes="cmd_renderedAllEnabler"
+                              editable="true"
+                              tooltiptext="&setZoomFactor.label;"
+                              value="100%"
+                              sizetopopup="none"
+                              onkeyup="BGZoomManager.onKeyUp(event, this)"
+                              oncommand="BGZoomManager.applyZoomValue(this)">
+                      <menupopup id="menupopup-zoompanel"
+                                 onpopupshowing="BGZoomManager.fillZoomValues(this)">
+                        <menuitem label="dummy"/>
+                      </menupopup>
+                    </menulist>
+          
+                  </hbox>
+                </hbox>
+            </tabeditor>
+          </vbox>
+          <splitter id="deckedPanelsSplitter"
+                    collapse="after">
+            <grippy/>
+          </splitter>
+          <vbox id="deckedPanels"
+                persist="width">
+            <deckedPanelsTabs id="deckedPanelsTabs"/>
+            <iframe id="deckPanelsIframe"
+                    type="chrome"
+                    flex="1"/>
+          </vbox>
         </box>
 #include findbar.inc
         <iframe id="parserIframe" src="about:blank" hidden="true" type="content"/>
       </vbox>
-      <hbox align="center" id="helperButtons">
-#ifdef XP_MACOSX
-        <tabs id="modeTabbox" previousMode="wysiwyg" flex="1">
-          <tab
-                   selected="true"
-                   id="wysiwygModeButton"
-                   label="&wysiwygMode.label;"
-                   oncommand="ToggleViewMode(this)"
-                   mode="wysiwyg"
-                   observes="cmd_viewModeEnabler"/>
-          <tab
-                   id="sourceModeButton"
-                   label="&sourceMode.label;"
-                   oncommand="ToggleViewMode(this)"
-                   mode="source"
-                   observes="cmd_viewModeEnabler"/>
-          <tab
-                   id="printPreviewModeButton"
-                   label="&printMode.label;"
-                   oncommand="ToggleViewMode(this)"
-                   mode="wysiwyg"
-                   observes="cmd_viewModeEnabler"/>
-       </tabs>
-#else
-        <hbox id="modeTabbox" previousMode="wysiwyg" flex="1">
-          <spacer flex="1"/>
-          <label class="multiButton left"
-                   selected="true"
-                   id="wysiwygModeButton"
-                   value="&wysiwygMode.label;"
-                   onclick="ToggleViewMode(this)"
-                   mode="wysiwyg"
-                   observes="cmd_viewModeEnabler"/>
-          <label class="multiButton"
-                   id="sourceModeButton"
-                   value="&sourceMode.label;"
-                   onclick="ToggleViewMode(this)"
-                   mode="source"
-                   observes="cmd_viewModeEnabler"/>
-          <label class="multiButton right"
-                   id="printPreviewModeButton"
-                   value="&printMode.label;"
-                   onclick="ToggleViewMode(this)"
-                   mode="wysiwyg"
-                   observes="cmd_viewModeEnabler"/>
-          <spacer flex="1"/>
-        </hbox>
-#endif
-      </hbox>
       <structurebar id="structurebar" orient="horizontal">
         <spacer id="structbarflexer" flex="1"/>
       </structurebar>
     </vbox>
-
+</hbox>
 #ifdef TOOLBAR_CUSTOMIZATION_SHEET
   <panel id="customizeToolbarSheetPopup" noautohide="true">
     <iframe id="customizeToolbarSheetIFrame"
@@ -210,30 +252,10 @@
 
 #include autoInsertTable.inc
 
-  <statusbar id="statusbar">
+  <statusbar id="statusbar" style="-moz-appearance: none">
     <deck flex="1" id="statusbarDeck">
       <hbox id="editorBar" align="center">
-        <label id="editorBarLabel" value="&getAddOns.label;"
-               onclick="OpenAddonsSite()"/>
         <spacer flex="1"/>
-        <statusbarpanel id="zoomPanel">
-          <spinbuttons onup="BGZoomManager.enlarge(this.nextSibling)"
-                       ondown="BGZoomManager.reduce(this.nextSibling)"/>
-          <menulist id="menulist-zoompanel"
-                    observes="cmd_renderedHTMLEnabler"
-                    editable="true"
-                    tooltiptext="&setZoomFactor.label;"
-                    value="100%"
-                    sizetopopup="none"
-                    onkeyup="BGZoomManager.onKeyUp(event, this)"
-                    oncommand="BGZoomManager.applyZoomValue(this)">
-            <menupopup id="menupopup-zoompanel"
-                       onpopupshowing="BGZoomManager.fillZoomValues(this)">
-              <menuitem label="dummy"/>
-            </menupopup>
-          </menulist>
-
-        </statusbarpanel>
       </hbox>
       <hbox id="progressBar" align="center">
         <statusbarpanel id="status" label="" crop="end" flex="1"/>

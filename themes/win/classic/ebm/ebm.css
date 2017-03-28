@@ -1,0 +1,99 @@
+@import url("chrome://bluegriffon/skin/black.css");
+
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+#ebm {
+  overflow: hidden;
+}
+
+#ebm label {
+  color: var(--bg-main-foreground-color);
+}
+
+#ebm tab label,
+#ebm popup label,
+#ebm menupopup label {
+  color: unset;
+}
+
+#ebookTabbox {
+  margin-top: 1.5em;
+}
+
+ebook {
+  -moz-box-orient: vertical;
+  -moz-binding: url("chrome://epub/content/epub/ebook.xml#ebook");
+}
+
+epub2 {
+  -moz-box-orient: vertical;
+  -moz-binding: url("chrome://epub/content/epub/epub2.xml#epub2");
+}
+
+epub3 {
+  -moz-box-orient: vertical;
+  -moz-binding: url("chrome://epub/content/epub/epub3.xml#epub3");
+}
+
+epub31 {
+  -moz-box-orient: vertical;
+  -moz-binding: url("chrome://epub/content/epub/epub31.xml#epub31");
+}
+
+#ebm tree,
+#ebm richlistbox {
+  margin: 0px;
+}
+
+#ebm tabbox {
+  margin-top: 1.5em;
+}
+
+#ebm grid {
+  margin-left: 1em;
+  margin-right: 1em;
+  font-size: larger;
+}
+
+treechildren::-moz-tree-cell-text(odd)            { color: #404040 }
+treechildren::-moz-tree-cell-text(even)           { color: #404040 }
+
+treechildren::-moz-tree-cell-text(odd, editable)  { color: black }
+treechildren::-moz-tree-cell-text(even, editable) { color: black }
+
+#ebm_splitter {
+  background-color: var(--bg-dark-gray);
+  border: 0px none;
+}
+
+#ebm tabpanels {
+  -moz-appearance: none;
+  background-color: transparent;
+  border: 0px none;
+}
+
+#ebm tabs spacer {
+  -moz-box-flex: 1;
+  border: 0px none;
+}
+
+#ebmCloseButton {
+  list-style-image: url("chrome://global/skin/icons//close-XPVista7.png");
+  -moz-image-region: rect(0, 16px, 16px, 0);
+  visibility: hidden;
+  padding: 0px ! important;
+  border: 0px none ! important;
+  -moz-margin-start: 10px;
+}
+
+#ebm:hover #ebmCloseButton {
+  visibility: visible;
+}
+
+#ebmCloseButton:hover {
+  -moz-image-region: rect(0, 32px, 16px, 16px) ! important;
+}
+
+#ebmCloseButton:hover:active {
+  -moz-image-region: rect(0, 48px, 16px, 32px) ! important;
+}

@@ -1,6 +1,7 @@
-Components.utils.import("resource://app/modules/editorHelper.jsm");
-Components.utils.import("resource://app/modules/cssInspector.jsm");
-Components.utils.import("resource://app/modules/prompterHelper.jsm");
+Components.utils.import("resource://gre/modules/editorHelper.jsm");
+Components.utils.import("resource://gre/modules/cssInspector.jsm");
+Components.utils.import("resource://gre/modules/prompterHelper.jsm");
+Components.utils.import("resource://gre/modules/Services.jsm");
 
 var gNode = null;
 var gTable = null;
@@ -11,6 +12,10 @@ function DataChanged()
 {
   gDataChanged = true;
   document.documentElement.getButton("extra1").disabled = false;
+
+#ifndef XP_MACOSX
+  CenterDialogOnOpener();
+#endif
 }
 
 function Startup()
@@ -25,7 +30,12 @@ function Startup()
   document.documentElement.getButton("extra1").disabled = true;
 
   InitTableData(gNode);
-  InitCellsData(gNode);
+
+  var editor = EditorUtils.getCurrentEditor();
+  editor instanceof Components.interfaces.nsITableEditor;
+  var selection = editor.selection;
+  var cells = GetSelectedCells(selection);
+  InitCellsData(cells[0]);
 }
 
 function onCssPolicyChange(aElt)
@@ -457,7 +467,7 @@ function InitCellsData(aNode)
   gDialog.cellsVAlignMenulist.value = vAlign;
 
   var bg = CssInspector.getCascadedValue(ruleset, "background-color");
-  gDialog.bgColorColorpicker.color = bg;
+  gDialog.bgColorColorpicker.color = bg ? bg : "white";
 
   gDialog.cellsHeadersCheckbox.checked = (aNode.nodeName.toLowerCase() == "th");
 
@@ -600,7 +610,7 @@ function UpdateColumns(editor)
 
       // now find the enclosing thead/tbody/tfoot
       var enclosing = c;
-      while (enclosing && !(enclosing instanceof Components.interfaces.nsIDOMHTMLTableSectionElement))
+      while (enclosing && !(enclosing instanceof HTMLTableSectionElement))
         enclosing = enclosing.parentNode;
       if (!enclosing) // sanity check
         return; // uuuh well should never happen
@@ -915,7 +925,7 @@ function NextRow()
   }
   var editor = EditorUtils.getCurrentEditor();
   //var cells = row.querySelectorAll("td,th");
-  var cells = collectDescendants(row, "td").join(collectDescendants(row, "th"));
+  var cells = collectDescendants(row, "td").concat(collectDescendants(row, "th"));
   var selection = editor.selection;
   selection.removeAllRanges();
   for (var i = 0; i < cells.length; i++) {
@@ -1070,7 +1080,7 @@ function PreviousRow()
   }
   var editor = EditorUtils.getCurrentEditor();
   //var cells = row.querySelectorAll("td,th");
-  var cells = collectDescendants(row, "td").join(collectDescendants(row, "th"));
+  var cells = collectDescendants(row, "td").concat(collectDescendants(row, "th"));
   var selection = editor.selection;
   selection.removeAllRanges();
   for (var i = 0; i < cells.length; i++) {

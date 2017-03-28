@@ -18,11 +18,13 @@
      units.
 
      For example, in English, a long string would be:
-     toolkit/locales/en-US/chrome/mozapps/downloads/downloads.properties 참고함
-     59 minutes, 59 seconds remaining - 1022 of 1023 KB
-     59시간 59분 남음 - 1023 / 1022 KB 
-     That's 50 characters, so we set the width at 50ch.
-     한글이 2ch이면 33ch -->
+
+     59m 59s left - 1022 of 1023 KB (120.5 KB/sec)
+
+     Since Downloads Panel is redesigned to show the detail string including
+     the hovering case for an item or an action button.
+     Bug 1328519 is for discussing the detail rule of `downloadDetails.width`.
+     -->
 <!ENTITY downloadDetails.width            "33ch">
 
 <!-- LOCALIZATION NOTE (downloadsSummary.minWidth2):
@@ -30,14 +32,14 @@
      which is displayed at the bottom of the Downloads Panel if the
      number of downloads exceeds the limit that the panel can display.
 
-     A good rule of thumb here is to look at the otherDownloads string
+     A good rule of thumb here is to look at the otherDownloads3 string
      in downloads.properties, and make a reasonable estimate of its
      maximum length. For English, this seems like a reasonable limit:
 
-     +999 other downloads
-     다운로드 항목 999개 더 있음
+     999 files downloading
+
      that's 21 characters, so we set the minimum width to 21ch.
-     한글이 2ch이면 29ch -->
+     -->
 <!ENTITY downloadsSummary.minWidth2       "29ch">
 
 <!ENTITY cmd.pause.label                  "중단">
@@ -45,7 +47,6 @@
 <!ENTITY cmd.resume.label                 "계속">
 <!ENTITY cmd.resume.accesskey             "R">
 <!ENTITY cmd.cancel.label                 "취소">
-<!ENTITY cmd.cancel.accesskey             "C">
 <!-- LOCALIZATION NOTE (cmd.show.label, cmd.show.accesskey, cmd.showMac.label,
      cmd.showMac.accesskey):
      The show and showMac commands are never shown together, thus they can share
@@ -62,10 +63,44 @@
 <!ENTITY cmd.copyDownloadLink.accesskey   "L">
 <!ENTITY cmd.removeFromHistory.label      "기록에서 삭제">
 <!ENTITY cmd.removeFromHistory.accesskey  "e">
-<!ENTITY cmd.clearList.label              "목록 전체 삭제">
-<!ENTITY cmd.clearList.accesskey          "a">
+<!ENTITY cmd.clearList2.label             "미리보기 창 비우기">
+<!ENTITY cmd.clearList2.accesskey         "a">
 <!ENTITY cmd.clearDownloads.label         "다운로드 항목 지우기">
 <!ENTITY cmd.clearDownloads.accesskey     "D">
+<!-- LOCALIZATION NOTE (cmd.unblock2.label):
+     This command is shown in the context menu when downloads are blocked.
+     -->
+<!ENTITY cmd.unblock2.label               "다운로드 허용">
+<!ENTITY cmd.unblock2.accesskey           "o">
+<!-- LOCALIZATION NOTE (cmd.removeFile.label):
+     This is the tooltip of the action button shown when malware is blocked.
+     -->
+<!ENTITY cmd.removeFile.label             "파일 없애기">
+<!-- LOCALIZATION NOTE (cmd.chooseUnblock.tooltip):
+     This is the tooltip of the action button shown when potentially unwanted
+     downloads are blocked. This opens a dialog where the user can choose
+     whether to unblock or remove the download. Removing is the default option.
+     -->
+<!ENTITY cmd.chooseUnblock.label          "파일을 삭제하거나 다운로드 허용">
+<!-- LOCALIZATION NOTE (cmd.chooseOpen.tooltip):
+     This is the tooltip of the action button shown when uncommon downloads are
+     blocked.This opens a dialog where the user can choose whether to open the
+     file or remove the download. Opening is the default option.
+     -->
+<!ENTITY cmd.chooseOpen.label             "열거나 파일 삭제">
+
+<!-- LOCALIZATION NOTE (blocked.label):
+     Shown as a tag before the file name for some types of blocked downloads.
+     Note: This string doesn't exist in the UI yet.  See bug 1053890.
+     -->
+<!ENTITY blocked.label                    "차단">
+
+<!-- LOCALIZATION NOTE (learnMore.label):
+     Shown as a text link for some types of blocked downloads, for example
+     malware, when there is an associated explanation page on the Mozilla site.
+     Note: This string doesn't exist in the UI yet.  See bug 1053890.
+     -->
+<!ENTITY learnMore.label                  "더 알아보기">
 
 <!-- LOCALIZATION NOTE (downloadsHistory.label, downloadsHistory.accesskey):
      This string is shown at the bottom of the Downloads Panel when all the
@@ -74,6 +109,8 @@
      -->
 <!ENTITY downloadsHistory.label           "다운로드 항목 모두 보기">
 <!ENTITY downloadsHistory.accesskey       "S">
+
+<!ENTITY openDownloadsFolder.label       "다운로드 폴더 열기">
 
 <!ENTITY clearDownloadsButton.label       "다운로드 항목 지우기">
 <!ENTITY clearDownloadsButton.tooltip     "완료, 취소, 그리고 실패한 다운로드 항목 지우기">
@@ -84,8 +121,38 @@
      -->
 <!ENTITY downloadsListEmpty.label         "다운로드 항목이 없습니다.">
 
+<!-- LOCALIZATION NOTE (downloadsPanelEmpty.label):
+     This string is shown when there are no items in the Downloads Panel.
+     -->
+<!ENTITY downloadsPanelEmpty.label        "이 세션에는 다운로드 항목이 없습니다.">
+
 <!-- LOCALIZATION NOTE (downloadsListNoMatch.label):
      This string is shown when some search terms are specified, but there are no
      results in the Downloads view.
      -->
 <!ENTITY downloadsListNoMatch.label       "일치하는 다운로드 항목이 없습니다.">
+
+
+<!-- LOCALIZATION NOTE (cancelDownload.label):
+     Displayed when hovering a download which is able to be cancelled by users,
+     indicates that it's possible to cancel and stop the download.
+     -->
+<!ENTITY cancelDownload.label             "Cancel Download">
+
+<!-- LOCALIZATION NOTE (openFile.label):
+     Displayed when hovering a complete download, indicates that it's possible to
+     open the file using an app available in the system.
+     -->
+<!ENTITY openFile.label                   "Open File">
+
+<!-- LOCALIZATION NOTE (retryDownload.label):
+     Displayed when hovering a download which is able to be retried by users,
+     indicates that it's possible to download this file again.
+     -->
+<!ENTITY retryDownload.label              "Retry Download">
+
+<!-- LOCALIZATION NOTE (showMoreInformation.label):
+     Displayed when hovering a blocked download, indicates that it's possible to
+     show more information for user to take the next action.
+     -->
+<!ENTITY showMoreInformation.label        "Show more information">

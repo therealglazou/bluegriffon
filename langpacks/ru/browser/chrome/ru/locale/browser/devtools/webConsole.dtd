@@ -2,80 +2,62 @@
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 
-<!-- LOCALIZATION NOTE : FILE The correct localization of this file might be to
-  - keep it in English, or another language commonly spoken among web developers.
-  - You want to make that choice consistent across the developer tools.
-  - A good criteria is the language in which you'd find the best
-  - documentation on web development on the web. -->
-
-<!ENTITY window.title "Web Console">
-<!ENTITY browserConsole.title "Browser Console">
-
-<!ENTITY networkPanel.requestURLColon             "Request URL:">
-<!ENTITY networkPanel.requestMethodColon          "Request Method:">
-<!ENTITY networkPanel.statusCodeColon             "Status Code:">
-
-<!ENTITY networkPanel.requestHeaders              "Request Headers">
-<!ENTITY networkPanel.requestCookie               "Sent Cookie">
-<!ENTITY networkPanel.requestBody                 "Request Body">
-<!ENTITY networkPanel.requestFormData             "Sent Form Data">
-
-<!ENTITY networkPanel.responseHeaders             "Response Headers">
-<!ENTITY networkPanel.responseCookie              "Received Cookie">
-<!ENTITY networkPanel.responseBody                "Response Body">
-<!ENTITY networkPanel.responseBodyCached          "Cached Data">
-<!ENTITY networkPanel.responseBodyUnknownType     "Unknown Content Type">
-<!ENTITY networkPanel.responseNoBody              "No Response Body">
-<!ENTITY networkPanel.responseImage               "Received Image">
-<!ENTITY networkPanel.responseImageCached         "Cached Image">
-
-<!-- LOCALIZATION NOTE (saveBodies.label): You can see this string in the Web
-   - Console context menu. -->
-<!ENTITY saveBodies.label     "Log Request and Response Bodies">
-<!ENTITY saveBodies.accesskey "L">
-
-<!-- LOCALIZATION NOTE (openURL.label): You can see this string in the Web
-   - Console context menu. -->
-<!ENTITY openURL.label     "Open URL in New Tab">
-<!ENTITY openURL.accesskey "T">
-
-<!-- LOCALIZATION NOTE (btnPageNet.label): This string is used for the menu
-  -  button that allows users to toggle the network logging output.
-  -  This string and the following strings toggle various kinds of output
-  -  filters. -->
-<!ENTITY btnPageNet.label   "Net">
-<!ENTITY btnPageNet.tooltip "Log network access">
-<!ENTITY btnPageCSS.label   "CSS">
-<!ENTITY btnPageCSS.tooltip "Log CSS parsing errors">
-<!ENTITY btnPageJS.label    "JS">
-<!ENTITY btnPageJS.tooltip  "Log JavaScript exceptions">
-
-<!-- LOCALIZATION NOTE (btnPageLogging): This is used as the text of the
-  -  the toolbar. It shows or hides messages that the web developer inserted on
-  -  the page for debugging purposes, using calls such console.log() and
-  -  console.error(). -->
-<!ENTITY btnPageLogging.label   "Logging">
-<!ENTITY btnPageLogging.tooltip "Log messages sent to the window.console object">
-<!ENTITY btnConsoleErrors       "Errors">
-<!ENTITY btnConsoleInfo         "Info">
-<!ENTITY btnConsoleWarnings     "Warnings">
-<!ENTITY btnConsoleLog          "Log">
-
-<!ENTITY filterOutput.placeholder "Filter output">
-<!ENTITY btnClear.label        "Clear">
-<!ENTITY btnClear.tooltip      "Clear the Web Console output">
-
-<!ENTITY fullZoomEnlargeCmd.commandkey  "+">
-<!ENTITY fullZoomEnlargeCmd.commandkey2 "="> <!-- + is above this key on many keyboards -->
+<!ENTITY window.title "Веб-консоль">
+<!ENTITY browserConsole.title "Консоль браузера">
+<!ENTITY networkPanel.requestURLColon "URL запроса:">
+<!ENTITY networkPanel.requestMethodColon "Метод запроса:">
+<!ENTITY networkPanel.statusCodeColon "Код состояния:">
+<!ENTITY networkPanel.requestHeaders "Заголовки запроса">
+<!ENTITY networkPanel.requestCookie "Отправленная кука">
+<!ENTITY networkPanel.requestBody "Тело запроса">
+<!ENTITY networkPanel.requestFormData "Отправленные данные формы">
+<!ENTITY networkPanel.responseHeaders "Заголовки ответа">
+<!ENTITY networkPanel.responseCookie "Полученная кука">
+<!ENTITY networkPanel.responseBody "Тело ответа">
+<!ENTITY networkPanel.responseBodyCached "Кэшированные данные">
+<!ENTITY networkPanel.responseBodyUnknownType "Неизвестный тип содержимого">
+<!ENTITY networkPanel.responseNoBody "Нет тела запроса">
+<!ENTITY networkPanel.responseImage "Полученное изображение">
+<!ENTITY networkPanel.responseImageCached "Кэшированное изображение">
+<!ENTITY saveBodies.label "Сохранять в лог содержимое запроса и ответа">
+<!ENTITY saveBodies.accesskey "х">
+<!ENTITY openURL.label "Открыть URL в новой вкладке">
+<!ENTITY openURL.accesskey "ы">
+<!ENTITY btnPageNet.label "Сеть">
+<!ENTITY btnPageNet.tooltip "Вести лог доступа к сети">
+<!ENTITY btnPageNet.accesskey "е">
+<!ENTITY btnPageNet.accesskeyMacOSX "е">
+<!ENTITY btnPageCSS.label "CSS">
+<!ENTITY btnPageCSS.tooltip2 "Вести лог ошибок и предупреждений CSS">
+<!ENTITY btnPageCSS.accesskey "C">
+<!ENTITY btnPageJS.label "JS">
+<!ENTITY btnPageJS.tooltip "Вести лог исключений JavaScript">
+<!ENTITY btnPageJS.accesskey "J">
+<!ENTITY btnPageSecurity.label "Защита">
+<!ENTITY btnPageSecurity.tooltip "Вести лог ошибок и предупреждений защиты">
+<!ENTITY btnPageSecurity.accesskey "а">
+<!ENTITY btnPageLogging.label "Журнал">
+<!ENTITY btnPageLogging.tooltip "Сообщения лога отправленные в объект window.console">
+<!ENTITY btnPageLogging.accesskey3 "н">
+<!ENTITY btnConsoleErrors "Ошибки">
+<!ENTITY btnConsoleInfo "Инфо">
+<!ENTITY btnConsoleWarnings "Предупреждения">
+<!ENTITY btnConsoleLog "Лог">
+<!ENTITY btnConsoleXhr "XHR">
+<!ENTITY btnConsoleReflows "Reflows">
+<!ENTITY filterOutput.placeholder "Вывод фильтра">
+<!ENTITY btnClear.label "Очистить">
+<!ENTITY btnClear.tooltip "Очистить вывод веб-консоли">
+<!ENTITY btnClear.accesskey "и">
+<!ENTITY fullZoomEnlargeCmd.commandkey "+">
+<!ENTITY fullZoomEnlargeCmd.commandkey2 "=">
 <!ENTITY fullZoomEnlargeCmd.commandkey3 "">
-
-<!ENTITY fullZoomReduceCmd.commandkey   "-">
-<!ENTITY fullZoomReduceCmd.commandkey2  "">
-
-<!ENTITY fullZoomResetCmd.commandkey    "0">
-<!ENTITY fullZoomResetCmd.commandkey2   "">
-
-<!ENTITY copyURLCmd.label     "Copy Link Location">
-<!ENTITY copyURLCmd.accesskey "a">
-
-<!ENTITY closeCmd.key  "W">
+<!ENTITY fullZoomReduceCmd.commandkey "-">
+<!ENTITY fullZoomReduceCmd.commandkey2 "">
+<!ENTITY fullZoomResetCmd.commandkey "0">
+<!ENTITY fullZoomResetCmd.commandkey2 "">
+<!ENTITY copyURLCmd.label "Копировать адрес ссылки">
+<!ENTITY copyURLCmd.accesskey "о">
+<!ENTITY closeCmd.key "W">
+<!ENTITY findCmd.key "F">
+<!ENTITY clearOutputCtrl.key "L">

@@ -1,0 +1,38 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+@import url("chrome://inspector/content/extensions/titledSplitter.css");
+
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+*[hide="true"] {
+  visibility: hidden;
+}
+
+domi-panelset {
+  -moz-binding: url("chrome://inspector/content/inspector.xml#panelset");
+  display: -moz-box;
+}
+
+domi-panel {
+  -moz-binding: url("chrome://inspector/content/inspector.xml#panel");
+  display: -moz-box;
+}
+
+#ppsViewerPopupset {
+  display: none;
+}
+
+.tree-list > treecol,
+.tree-list > .tree-columns > treecol {
+  -moz-binding: none;
+  background-color: transparent !important;
+  margin: 0px !important;
+  border: none !important;
+  padding: 0px !important;
+}
+
+.tree-nocolpicker > .tree-columns > .tree-columnpicker {
+  visibility: collapse;
+}

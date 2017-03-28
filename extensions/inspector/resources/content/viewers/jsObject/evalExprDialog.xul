@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+
+<!DOCTYPE dialog [
+  <!ENTITY % dtd1 SYSTEM "chrome://inspector/locale/inspector.dtd"> %dtd1;
+  <!ENTITY % dtd2 SYSTEM "chrome://inspector/locale/viewers/jsObject.dtd"> %dtd2;
+]>
+
+<?xml-stylesheet href="chrome://inspector/skin"?>
+
+<dialog id="winEvalExpr"
+        title="&evaluateDialog.title;"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        ondialogaccept="return execute();"
+        buttonlabelaccept="&jsExecute.label;"
+        style="width: 30em;">
+
+  <script type="application/javascript"
+          src="chrome://inspector/content/viewers/jsObject/evalExprDialog.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/jsutil/xpcom/XPCU.js"/>
+
+  <stringbundle id="strings"
+                src="chrome://inspector/locale/inspector.properties"/>
+
+  <description>&jsEval.desc;</description>
+
+  <textbox id="txfExprInput"/>
+
+  <groupbox>
+    <caption label="&inspectReturn.label;"/>
+    <radiogroup id="inspect-return-location">
+      <radio id="inspect-existing-window" label="&inspectReturnExisting.label;"
+             selected="true"/>
+      <radio id="inspect-new-window" label="&inspectReturnNew.label;"/>
+    </radiogroup>
+  </groupbox>
+
+</dialog>

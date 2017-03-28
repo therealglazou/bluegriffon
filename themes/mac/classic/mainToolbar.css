@@ -1,14 +1,42 @@
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
 
 #MainToolbox > toolbar{
-  padding: 4px;
+  -moz-padding-start: 2em;
 }
 
 #MainToolbox toolbarbutton,
 #CustomizeToolbarWindow toolbarbutton,
 #CustomizeToolbarSheet toolbarbutton {
-  -moz-image-region: rect(0px 32px 32px 0px);
+  /*-moz-image-region: rect(0px 32px 32px 0px);*/
   -moz-box-orient: vertical;
 }
+
+#MainToolbox .toolbarbutton-icon {
+  height: 12px;
+  width:  12px;
+}
+:root[iconsize="medium"] #MainToolbox .toolbarbutton-icon {
+  height: 16px;
+  width:  16px;
+}
+:root[iconsize="large"] #MainToolbox .toolbarbutton-icon {
+  height: 24px;
+  width: 24px;
+}
+
+/* smaller icons */
+
+:root[iconsize="medium"] #MainToolbox toolbarbutton[iconsize="smaller"] .toolbarbutton-icon {
+  height: 12px;
+  width:  12px;
+}
+:root[iconsize="large"] #MainToolbox toolbarbutton[iconsize="smaller"] .toolbarbutton-icon {
+  height: 16px;
+  width:  16px;
+}
+
+/* end smaller icons */
 
 #MainToolbox .toolbarbutton-icon {
   margin: 2px;
@@ -31,46 +59,40 @@
   padding: 4px;
 }
 
-#MainToolbox toolbarbutton:hover,
-#MainToolbox toolbarbutton:hover:active {
-  -moz-image-region: rect(32px 32px 64px 0px);
-}
-
-#MainToolbox toolbarbutton[disabled="true"]
-{
-  -moz-image-region: rect(64px 32px 96px 0px);
-}
-
 #newButton {
-  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/new.png");
+  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/plus.svg");
 }
 
 #openButton {
-  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/open.png");
+  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/open.svg");
+}
+
+#refreshButton {
+  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/refresh.svg");
 }
 
 #stopButton {
-  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/stop.png");
+  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/stop.svg");
 }
 
 #tableButton {
-  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/table.png");
+  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/table.svg");
 }
 
 #saveButton {
-  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/save.png");
+  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/save.svg");
 }
 
 #imageButton {
-  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/image.png");
+  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/image.svg");
 }
 
 #anchorButton {
-  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/anchor.png");
+  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/anchor.svg");
 }
 
 #linkButton {
-  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/link.png");
+  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/link.svg");
 }
 
 #cssButton {
@@ -78,103 +100,19 @@
 }
 
 #videoButton {
-  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/video.png");
+  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/video.svg");
 }
 
 #audioButton {
-  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/audio.png");
+  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/audio.svg");
 }
 
 #browseButton {
-  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/browser.png");
+  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/browse.svg");
 }
 
 #formButton {
-  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/form.png");
-}
-
-#domexplorerButton {
-  list-style-image: url("chrome://domexplorer/skin/domexplorer.png");
-}
-
-#its20Button {
-  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/translate.png");
-}
-
-/************ SMALL ICONS **************/
-
-#MainToolbox > toolbar[iconsize="small"] toolbarbutton {
-  -moz-image-region: rect(0px 24px 24px 0px);
-}
-
-#MainToolbox > toolbar[iconsize="small"] toolbarbutton:hover,
-#MainToolbox > toolbar[iconsize="small"] toolbarbutton:hover:active {
-  -moz-image-region: rect(24px 24px 48px 0px);
-}
-
-#MainToolbox > toolbar[iconsize="small"] toolbarbutton[disabled="true"]
-{
-  -moz-image-region: rect(48px 24px 72px 0px);
-}
-
-#MainToolbox > toolbar[iconsize="small"] #newButton {
-  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/small/new.png");
-}
-
-#MainToolbox > toolbar[iconsize="small"] #openButton {
-  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/small/open.png");
-}
-
-#MainToolbox > toolbar[iconsize="small"] #stopButton {
-  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/small/stop.png");
-}
-
-#MainToolbox > toolbar[iconsize="small"] #tableButton {
-  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/small/table.png");
-}
-
-#MainToolbox > toolbar[iconsize="small"] #saveButton {
-  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/small/save.png");
-}
-
-#MainToolbox > toolbar[iconsize="small"] #imageButton {
-  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/small/image.png");
-}
-
-#MainToolbox > toolbar[iconsize="small"] #anchorButton {
-  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/small/anchor.png");
-}
-
-#MainToolbox > toolbar[iconsize="small"] #linkButton {
-  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/small/link.png");
-}
-
-#MainToolbox > toolbar[iconsize="small"] #cssButton {
-  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/small/css.png");
-}
-
-#MainToolbox > toolbar[iconsize="small"] #videoButton {
-  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/small/video.png");
-}
-
-#MainToolbox > toolbar[iconsize="small"] #audioButton {
-  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/small/audio.png");
-}
-
-#MainToolbox > toolbar[iconsize="small"] #browseButton {
-  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/small/browser.png");
-}
-
-#MainToolbox > toolbar[iconsize="small"] #formButton {
-  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/small/form.png");
-}
-
-#MainToolbox > toolbar[iconsize="small"] #domexplorerButton {
-  list-style-image: url("chrome://domexplorer/skin/small/domexplorer.png");
-}
-
-#MainToolbox > toolbar[iconsize="small"] #its20Button {
-  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/small/translate.png");
+  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/form.svg");
 }
 
 /***************** THROBBER **************/
@@ -196,10 +134,178 @@
 }
 
 #MainToolbox toolbarseparator {
-  height: 32px;
+  height: 16px;
   background-color: transparent;
 }
 
 #MainToolbox[iconsize="small"] toolbarseparator {
-  height: 24px;
+  height: 16px;
+}
+
+
+/* ----- PRIMARY TOOLBAR BUTTONS ----- */
+
+.toolbarbutton-1:not([type="menu-button"]),
+.toolbarbutton-1 > .toolbarbutton-menubutton-button,
+.toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker,
+#restore-button {
+  -moz-box-orient: vertical;
+  -moz-appearance: none;
+  height: 16px;
+  padding: 0;
+  border: 0;
+}
+
+.toolbarbutton-1:not([type="menu-button"]):-moz-lwtheme,
+.toolbarbutton-1 > .toolbarbutton-menubutton-button:-moz-lwtheme,
+.toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker:-moz-lwtheme,
+#restore-button:-moz-lwtheme {
+  -moz-appearance: none;
+  padding: 0 3px;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-radius: 3px;
+  background: -moz-linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.2)) repeat-x;
+  background-origin: border-box;
+  box-shadow: inset 0 1px rgba(255,255,255,0.3), 0 1px rgba(255,255,255,0.2);
+}
+
+.toolbarbutton-1:not([type="menu-button"]):-moz-lwtheme-darktext,
+.toolbarbutton-1 > .toolbarbutton-menubutton-button:-moz-lwtheme-darktext,
+.toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker:-moz-lwtheme-darktext,
+#restore-button:-moz-lwtheme-darktext {
+  background-image: -moz-linear-gradient(rgba(255,255,255,0.3), rgba(50,50,50,0.2) 50%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.13));
+}
+
+.toolbarbutton-1[type="menu-button"] {
+  padding: 0;
+}
+
+.toolbarbutton-1 > .toolbarbutton-menubutton-button,
+.toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker {
+  margin: 0;
+}
+
+.toolbarbutton-1 {
+  margin: 0 2px;
+}
+
+toolbar:not([mode="icons"]) .toolbarbutton-1:not([type="menu-button"]),
+toolbar:not([mode="icons"]) .toolbarbutton-1 > .toolbarbutton-menubutton-button,
+toolbar:not([mode="icons"]) .toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker,
+toolbar:not([mode="icons"]) #restore-button {
+  -moz-appearance: none;
+  padding: 0;
+  height: auto;
+  border: none;
+  box-shadow: none;
+  background: none;
+}
+
+.toolbarbutton-1:not([type="menu-button"]),
+.toolbarbutton-1 > .toolbarbutton-menubutton-button,
+#restore-button {
+  min-width: 28px;
+}
+
+toolbar:not([mode="icons"]) .toolbarbutton-1:not([type="menu-button"]),
+toolbar:not([mode="icons"]) .toolbarbutton-1 > .toolbarbutton-menubutton-button,
+toolbar:not([mode="icons"]) #restore-button {
+  min-width: 0;
+}
+
+.toolbarbutton-1:not(:-moz-any(#back-button, #forward-button, #reload-button, #stop-button, #home-button, #print-button, #downloads-button, #history-button, #bookmarks-button, #bookmarks-menu-button, #new-tab-button, #new-window-button, #cut-button, #copy-button, #paste-button, #fullscreen-button, #zoom-out-button, #zoom-in-button, #sync-button, #feed-button, #alltabs-button, #tabview-button)) > .toolbarbutton-icon,
+.toolbarbutton-1 > .toolbarbutton-menubutton-button > .toolbarbutton-icon {
+  margin: 2px;
+}
+
+.toolbarbutton-1[disabled="true"] > .toolbarbutton-icon,
+.toolbarbutton-1[type="menu-button"] > .toolbarbutton-menubutton-button[disabled="true"] > .toolbarbutton-icon,
+#restore-button[disabled="true"] > .toolbarbutton-icon {
+  opacity: .4;
+}
+
+@media (-moz-mac-lion-theme) {
+  .toolbarbutton-1[disabled="true"] > .toolbarbutton-icon,
+  .toolbarbutton-1[type="menu-button"] > .toolbarbutton-menubutton-button[disabled="true"] > .toolbarbutton-icon,
+  #restore-button[disabled="true"] > .toolbarbutton-icon,
+  .toolbarbutton-1[disabled="true"] > .toolbarbutton-menu-dropmarker,
+  .toolbarbutton-1[disabled="true"] > .toolbarbutton-menubutton-dropmarker,
+  .toolbarbutton-1:not(:hover):-moz-window-inactive > .toolbarbutton-icon,
+  .toolbarbutton-1:not(:hover):-moz-window-inactive > .toolbarbutton-icon,
+  #restore-button:not(:hover):-moz-window-inactive > .toolbarbutton-icon,
+  .toolbarbutton-1:not(:hover):-moz-window-inactive > .toolbarbutton-menu-dropmarker,
+  .toolbarbutton-1:not(:hover):-moz-window-inactive > .toolbarbutton-menubutton-dropmarker {
+    opacity: .5;
+  }
+
+  .toolbarbutton-1:-moz-window-inactive[disabled="true"] > .toolbarbutton-icon,
+  .toolbarbutton-1:-moz-window-inactive[type="menu-button"] > .toolbarbutton-menubutton-button[disabled="true"] > .toolbarbutton-icon,
+  #restore-button:-moz-window-inactive[disabled="true"] > .toolbarbutton-icon {
+    opacity: .25;
+  }
+}
+
+.toolbarbutton-1 > .toolbarbutton-menu-dropmarker,
+.toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker {
+  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/toolbarbutton-dropmarker-lion.png");
+}
+
+.toolbarbutton-1 > .toolbarbutton-menu-dropmarker {
+  -moz-margin-end: 1px;
+}
+
+.toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker {
+  width: 14px;
+  padding-top: 2px;
+  -moz-border-start: none !important;
+}
+
+toolbar:not([mode="icons"]) .toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker {
+  width: auto;
+  padding-top: 0;
+}
+
+.toolbarbutton-1 > .toolbarbutton-menubutton-button:-moz-locale-dir(rtl),
+.toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker:-moz-locale-dir(ltr) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.toolbarbutton-1 > .toolbarbutton-menubutton-button:-moz-locale-dir(ltr),
+.toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker:-moz-locale-dir(rtl) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+toolbar:not([mode="icons"]) .toolbarbutton-1:not([open="true"]) > .toolbarbutton-menubutton-dropmarker {
+  opacity: .7;
+}
+
+.toolbarbutton-1 > .toolbarbutton-text,
+.toolbarbutton-1 > .toolbarbutton-menubutton-button > .toolbarbutton-text {
+  margin: 2px 0 0;
+}
+
+toolbar[mode="icons"] .toolbarbutton-1:not([type="menu-button"]):not([disabled="true"]):active:hover:-moz-lwtheme,
+toolbar[mode="icons"] .toolbarbutton-1:not([type="menu-button"])[open="true"]:-moz-lwtheme,
+toolbar[mode="icons"] .toolbarbutton-1:not([disabled="true"]) > .toolbarbutton-menubutton-button:active:hover:-moz-lwtheme,
+toolbar[mode="icons"] .toolbarbutton-1[open="true"] > .toolbarbutton-menubutton-dropmarker:-moz-lwtheme,
+toolbar[mode="icons"] #restore-button:not([disabled="true"]):active:hover:-moz-lwtheme {
+  text-shadow: 0 1px rgba(255, 255, 255, .4);
+  background-color: rgba(0,0,0,0.2);
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.6), 0 1px rgba(255,255,255,0.2);
+}
+
+toolbar[mode="icons"] .toolbarbutton-1:not([type="menu-button"]):not(#fullscreen-button)[checked="true"]:-moz-lwtheme {
+  background-color: rgba(0,0,0,0.4);
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.7), 0 1px rgba(255,255,255,0.2);
+}
+
+toolbar[mode="icons"] .toolbarbutton-1:not([type="menu-button"]):not(#fullscreen-button)[checked="true"]:not([disabled="true"]):active:hover:-moz-lwtheme {
+  background-color: rgba(0, 0, 0, 0.6);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.8), 0 1px rgba(255, 255, 255, 0.2);
+}
+
+toolbar[mode="icons"] .toolbarbutton-1 > menupopup {
+  margin-top: 1px;
 }

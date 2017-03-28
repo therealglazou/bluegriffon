@@ -10,9 +10,6 @@
 <!ENTITY certmgr.tab.ca                       "Hitelesítésszolgáltatók">
 <!ENTITY certmgr.tab.orphan2                  "Egyebek">
 
-<!ENTITY certmgr.ca.builtins                  "Beépített tanúsító központok">
-<!ENTITY certmgr.ca.mycas                     "Saját tanúsító központok">
-
 <!ENTITY certmgr.mine                         "A következő szervezetektől vannak Önt azonosító tanúsítványok:">
 <!ENTITY certmgr.others                       "A következő embereket lehet azonosítani a meglevő tanúsítványokkal:">
 <!ENTITY certmgr.websites2                    "A következő kiszolgálókat lehet azonosítani a meglevő tanúsítványokkal:">
@@ -27,43 +24,29 @@
 <!ENTITY certmgr.pending.label                "Tanúsítvány ellenőrzése folyamatban…">
 <!ENTITY certmgr.subjectinfo.label            "Tulajdonos">
 <!ENTITY certmgr.issuerinfo.label             "Kibocsátó">
-<!ENTITY certmgr.validity.label               "Érvényesség" >
+<!ENTITY certmgr.periodofvalidity.label       "Érvényesség időtartama" >
 <!ENTITY certmgr.fingerprints.label           "Ujjlenyomatok">
 <!ENTITY certmgr.certdetail.title             "Tanúsítvány részletek">
 <!ENTITY certmgr.certdetail.cn                "Általános név (CN)">
 <!ENTITY certmgr.certdetail.o                 "Szervezet (O)">
 <!ENTITY certmgr.certdetail.ou                "Szervezeti egység (OU)">
 <!ENTITY certmgr.certdetail.serialnumber      "Sorozatszám">
+<!ENTITY certmgr.certdetail.sha256fingerprint "SHA256-ujjlenyomat">
 <!ENTITY certmgr.certdetail.sha1fingerprint   "SHA1-ujjlenyomat">
-<!ENTITY certmgr.certdetail.md5fingerprint    "MD5-ujjlenyomat">
 
-<!ENTITY certmgr.editcert.title               "Biztonsági tanúsítványok beállításainak szerkesztése">
 <!ENTITY certmgr.editcacert.title             "Hitelesítésszolgáltató tanúsítványa megbízhatóságának beállítása">
-<!ENTITY certmgr.editsslcert.title            "Webhely tanúsítványa megbízhatóságának beállítása">
 <!ENTITY certmgr.editcert.edittrust           "Megbízhatósági beállítások megadása:">
 <!ENTITY certmgr.editcert.trustssl            "Ez a tanúsítvány használható webhelyek azonosítására.">
 <!ENTITY certmgr.editcert.trustemail          "Ez a tanúsítvány használható elektronikus levelek feladóinak azonosítására.">
 <!ENTITY certmgr.editcert.trustobjsign        "Ez a tanúsítvány használható szoftverkészítők azonosítására.">
-<!ENTITY certmgr.editsslcert.edittrust        "Tanúsítvány megbízhatósági beállításának megadása:">
-<!ENTITY certmgr.editsslcert.dotrust          "Tanúsítvány megbízhatóságának kinyilvánítása.">
-<!ENTITY certmgr.editsslcert.donttrust        "Tanúsítvány megbízhatatlanságának kinyilvánítása.">
-<!ENTITY certmgr.editemailcert.title          "E-mail tanúsítvány megbízhatóságának beállítása">
-<!ENTITY certmgr.editemailcert.edittrust      "Tanúsítvány megbízhatósági beállításának megadása:">
-<!ENTITY certmgr.editemailcert.dotrust        "Tanúsítvány megbízhatóságának kinyilvánítása.">
-<!ENTITY certmgr.editemailcert.donttrust      "Tanúsítvány megbízhatatlanságának kinyilvánítása.">
 
 <!ENTITY certmgr.deletecert.title             "Tanúsítvány törlése">
-<!ENTITY certmgr.deletecert.beforename        "A következő tanúsítvány törlését kezdeményezte:">
-<!ENTITY certmgr.deletecert.aftername         "Biztosan törli ezt a tanúsítványt?">
-<!ENTITY certmgr.deleteusercert.title         "Saját tanúsítvány törlése">
-<!ENTITY certmgr.deleteusercert.beforename    "A következő tanúsítvány törlését kezdeményezte:">
-<!ENTITY certmgr.deleteusercert.aftername     "Amennyiben letörli ezt a tanúsítványt, a vele titkosított elektronikus leveleket nem fogja tudni elolvasni.">
 
 <!ENTITY certmgr.certname                     "Tanúsítvány neve">
 <!ENTITY certmgr.certserver                   "Kiszolgáló">
 <!ENTITY certmgr.override_lifetime            "Élettartam">
 <!ENTITY certmgr.tokenname                    "Adatvédelmi eszköz">
-<!ENTITY certmgr.issued                       "Kiadás dátuma">
+<!ENTITY certmgr.begins                       "Kezdődik">
 <!ENTITY certmgr.expires                      "Lejárat dátuma">
 <!ENTITY certmgr.email                        "E-mail cím">
 <!ENTITY certmgr.serial                       "Sorozatszám">
@@ -74,10 +57,6 @@
 <!ENTITY certmgr.view2.accesskey              "M">
 <!ENTITY certmgr.edit3.label                  "Bizalom szerkesztése…">
 <!ENTITY certmgr.edit3.accesskey              "B">
-<!ENTITY certmgr.editca.label                 "Hitelesítésszolgáltató megbízhatóságának megadása">
-<!ENTITY certmgr.editca.accesskey             "i">
-<!ENTITY certmgr.add.label                    "Hozzáadás">
-<!ENTITY certmgr.add.accesskey                "H">
 <!ENTITY certmgr.export.label                 "Exportálás…">
 <!ENTITY certmgr.export.accesskey             "x">
 <!ENTITY certmgr.delete2.label                "Törlés…">
@@ -95,7 +74,7 @@
 <!ENTITY certmgr.fields.label                 "Mezőérték">
 <!ENTITY certmgr.fields.accesskey             "e">
 <!ENTITY certmgr.hierarchy.label              "Tanúsítványhierarchia">
-<!ENTITY certmgr.hierarchy.accesskey          "h">
+<!ENTITY certmgr.hierarchy.accesskey2         "H">
 <!ENTITY certmgr.addException.label           "Kivétel hozzáadása…">
 <!ENTITY certmgr.addException.accesskey       "h">
 

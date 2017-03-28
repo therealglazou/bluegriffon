@@ -13,7 +13,13 @@
   type   = "prefwindow"
   title  = "&window.title;"
   onload = "Startup()"
+#ifdef XP_MACOSX
   style="min-width: 600px"
+  width="600" height="400"
+#else
+  style="min-width: 800px"
+  width="800" height="400"
+#endif
   persist="screenX screenY width height"
   xmlns:html="http://www.w3.org/1999/xhtml"
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
@@ -22,9 +28,15 @@
     <stringbundle id="bundleRegions"      src="chrome://global/locale/regionNames.properties"/>
     <stringbundle id="bundleLanguages"    src="chrome://global/locale/languageNames.properties"/>
     <stringbundle id="updaterBundle"      src="chrome://bluegriffon/locale/prefs/update.properties"/>
-    <stringbundle id="shortcutsBundle"      src="chrome://bluegriffon/locale/prefs/shortcuts.properties"/>
+    <stringbundle id="shortcutsBundle"    src="chrome://bluegriffon/locale/prefs/shortcuts.properties"/>
+    <stringbundle id="activationBundle"   src="chrome://bluegriffon/locale/prefs/license.properties"/>
   </stringbundleset>
 
+  <prefpane id="licensePrefPane"
+            label="&license.title;"
+            onpaneload="OnLicensePaneLoad()"
+            image="chrome://bluegriffon/skin/prefs/bluegriffon.png"
+            src="chrome://bluegriffon/content/prefs/license.xul"/>
   <prefpane id="generalPrefPane"
             label="&general.title;"
             image="chrome://bluegriffon/skin/prefs/general.png"
@@ -75,13 +87,14 @@
   <script type="application/javascript" src="chrome://bluegriffon/content/utils/dgid.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/prefs/prefs.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/prefs/newPage.js"/>
-  <script type="application/javascript" src="resource://app/res/cm2/themes-list.js"/>
+  <script type="application/javascript" src="resource://gre/res/codemirror/themes-list.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/prefs/source.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/prefs/update.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/prefs/styles.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/prefs/advanced.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/prefs/shortcuts.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/prefs/file.js"/>
+  <script type="application/javascript" src="chrome://bluegriffon/content/prefs/license.js"/>
 #ifdef XP_MACOSX
   <script type="application/javascript" src="chrome://bluegriffon/content/prefs/osx.js"/>
 #endif

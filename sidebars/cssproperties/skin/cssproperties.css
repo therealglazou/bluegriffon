@@ -35,21 +35,25 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-
+@import url("chrome://bluegriffon/skin/black.css");
 
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 @namespace html url("http://www.w3.org/1999/xhtml");
 
+page {
+  -moz-appearance: none;
+  background-color: transparent;
+  color: var(--bg-main-foreground-color);
+}
+
 #mainBox {
-%ifdef XP_MACOSX
-  font-size: smaller;
-%endif
   margin: 0px;
   padding: 0px;
 }
 
 #propertiesBox {
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 #mainBoxHeader {
@@ -57,34 +61,20 @@
   padding-right: 2em;
   padding-top: 1em;
   padding-bottom: 1em;
+  overflow-x: hidden;
 }
 
 #cssPolicyBox {
-%ifdef XP_MACOSX
-  background-image: -moz-linear-gradient(#d0d0d0, silver);
-%endif
   margin-bottom: 0.5em;
-  border-radius: 5px;
 }
 
 #sectionHeaderContext {
   background-color: white;
 }
-#sectionHeaderContext menuitem {
-  font-size: smaller;
-}
 
 #warningBox > vbox {
   margin-left: 5px;
   margin-right: 5px;
-}
-
-#currentElementBox {
-  font-family: -moz-fixed;
-  padding: 0.5em;
-  border: thin solid gray;
-  border-radius: 5px;
-  font-size: larger;
 }
 
 #classPicker, #IDPicker {
@@ -97,36 +87,48 @@
 }
 
 hbox.csspropertiesHeader {
-  border-top: thin solid silver;
+  background-color: transparent ! important;
+  color: var(--bg-main-foreground-color);
+  border-top: 2px solid var(--bg-dark-border);
+  -moz-border-top-colors: var(--bg-dark-border) var(--bg-lighter-border);
   padding-left: 3px;
-  background-color: #dee4ea;
-%ifndef XP_MACOSX
+  padding-top: 2px;
+  padding-bottom: 2px;
+  text-transform: uppercase;
   font-weight: bold;
-%endif
+  transition: color 0.5s;
+}
 
+:root[cleartheme="true"] hbox.csspropertiesHeader {
+  font-weight: normal;
 }
 
 hbox.csspropertiesHeader > image {
   list-style-image: url("chrome://cssproperties/skin/filter.png");
   -moz-transform: rotate(-90deg);
-  -moz-transition: -moz-transform 0.2s;
+  transition: -moz-transform 0.5s, filter 0.5s;
+  filter: grayscale(100%) contrast(600%);
 }
 
 hbox.csspropertiesHeader:-moz-locale-dir(rtl) > image {
   -moz-transform: rotate(+90deg) ;
 }
 
+hbox.csspropertiesHeader[open="true"] {
+  color: #00abff;
+}
+
 hbox.csspropertiesHeader[open="true"] > image {
   -moz-transform: rotate(0deg) !important;
+  filter: none;
 }
 
 .section {
-  -moz-transition: height 0.5s, opacity 0.5s;
+  transition: height 0.5s, opacity 0.5s;
   height: 0px;
   opacity: 0;
   overflow: hidden;
   padding: 1em;
-  background-color: white;
 }
 
 hbox.csspropertiesHeader[open="true"] + .section {
@@ -144,7 +146,7 @@ menulist:not(#cssPolicyMenulist):not(#listStyleTypeMenulist) {
 }
 
 .listboxBg {
-  -moz-box-align: center;
+  /*-moz-box-align: center;*/
 }
 
 rotator {
@@ -184,4 +186,107 @@ ecolorpicker {
 
 #p1_point.grabbing, #p2_point.grabbing {
   cursor: -moz-grabbing;
+}
+
+cssproperty {
+  -moz-binding: url("chrome://cssproperties/content/cssproperty.xml#cssPropertyBinding");
+  display: -moz-grid-line;
+  -moz-box-orient: horizontal;
+  -moz-box-align: baseline;
+}
+
+csslength {
+  -moz-binding: url("chrome://cssproperties/content/cssproperty.xml#csslengthBinding");
+}
+
+cssident {
+  -moz-binding: url("chrome://cssproperties/content/cssproperty.xml#multibuttonBinding");
+}
+
+csscolor {
+  -moz-binding: url("chrome://cssproperties/content/cssproperty.xml#csscolorBinding");
+}
+
+l10n {
+  display: none;
+}
+
+listbox, richlistbox {
+  background-color: var(--bg-list-background);
+  color: var(--bg-main-foreground-color);
+  border: var(--bg-dark-border) solid thin;
+  -moz-appearance: none;
+}
+
+:root[cleartheme="true"] listbox,
+:root[cleartheme="true"] richlistbox {
+   background-color: white;
+ }
+
+hbox.listboxBg {
+  background-color: var(--bg-dark-background);
+  color: white;
+  border-color: var(--bg-dark-border);
+}
+
+hbox.listboxBg > * {
+  background-color: transparent;
+  color: var(--bg-main-foreground-color);
+  border-right: thin solid var(--bg-dark-border);
+}
+
+hbox.listboxBg > *:last-child {
+  border-right: 0px none;
+}
+
+/* colorpicker box */
+
+html|input[type="color"] {
+  border: 0px none;
+  margin: 0px;
+  padding: 0px;
+  background-color: transparent ! important;
+}
+
+html|input[type="color"]::-moz-color-swatch {
+  border: 4px solid #858585;
+  -moz-border-top-colors: #858585 transparent transparent #858585;
+  -moz-border-bottom-colors: #858585 transparent transparent #858585;
+  -moz-border-left-colors: #858585 transparent transparent #858585;
+  -moz-border-right-colors: #858585 transparent transparent #858585;
+  min-width: 24px;
+  max-width: 24px;
+  min-height: 24px;
+  max-height: 24px;
+  background-clip: padding-box;
+  border-radius: 24px;
+  margin: 0px;
+  padding: 0px;
+}
+
+/******* id alert *****/
+
+#idAlert {
+  background-color: orange;
+  padding: 16px;
+  overflow: hidden;
+  max-height: 0px;
+  transition: max-height ease-in 1s;
+}
+
+#idAlert[open="true"] {
+  max-height: 1000px;
+}
+
+#idAlert > description {
+  font-size: larger;
+  font-weight: bold;
+  color: black;
+}
+
+/* menulists */
+menulist html|*.menulist-editable-input,
+textbox html|*.numberbox-input,
+menulist:not(#cssPolicyMenulist) .menulist-label {
+  color: #00abff ! important;
 }

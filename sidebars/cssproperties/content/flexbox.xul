@@ -38,27 +38,22 @@
               <hbox align="center">
                 <hbox align="center">
                   <toolbarbutton class="multibutton" tooltiptext="&startBoxAlign.label;" value="flex-start" property="align-items" type="checkbox"
-                                 image="chrome://cssproperties/skin/flexbox/alignItemsFlexStart.png"
                                  id="startBoxAlignButton" group="align-items"
                                  oncommand="ToggleProperty(this)"/>
                   <toolbarbutton class="multibutton" tooltiptext="&centerBoxAlign.label;" value="center" property="align-items" type="checkbox"
-                                 image="chrome://cssproperties/skin/flexbox/alignItemsFlexCenter.png"
                                  id="centerBoxAlignButton" group="align-items"
                                  oncommand="ToggleProperty(this)"/>
                   <toolbarbutton class="multibutton" tooltiptext="&endBoxAlign.label;" value="flex-end" property="align-items" type="checkbox"
-                                 image="chrome://cssproperties/skin/flexbox/alignItemsFlexEnd.png"
                                  id="endBoxAlignButton" group="align-items"
                                  oncommand="ToggleProperty(this)"/>
                 </hbox>
                 <hbox>
                   <toolbarbutton class="multibutton" tooltiptext="&baselineBoxAlign.label;" value="baseline" property="align-items" type="checkbox"
-                                 image="chrome://cssproperties/skin/flexbox/alignItemsFlexBaseline.png"
                                  id="baselineBoxAlignButton" group="align-items"
                                  oncommand="ToggleProperty(this)"/>
                 </hbox>
                 <hbox>
                   <toolbarbutton class="multibutton" tooltiptext="&stretchBoxAlign.label;" value="stretch" property="align-items" type="checkbox"
-                                 image="chrome://cssproperties/skin/flexbox/alignItemsFlexStretch.png"
                                  id="stretchBoxAlignButton" group="align-items"
                                  oncommand="ToggleProperty(this)"/>
                 </hbox>
@@ -70,27 +65,22 @@
               <hbox align="center">
                 <hbox align="center">
                   <toolbarbutton class="multibutton" tooltiptext="&startBoxAlign.label;" value="flex-start" property="align-self" type="checkbox"
-                                 image="chrome://cssproperties/skin/flexbox/alignItemsFlexStart.png"
                                  id="startSelfAlignButton" group="align-self"
                                  oncommand="ToggleProperty(this)"/>
                   <toolbarbutton class="multibutton" tooltiptext="&centerBoxAlign.label;" value="center" property="align-self" type="checkbox"
-                                 image="chrome://cssproperties/skin/flexbox/alignItemsFlexCenter.png"
                                  id="centerSelfAlignButton" group="align-self"
                                  oncommand="ToggleProperty(this)"/>
                   <toolbarbutton class="multibutton" tooltiptext="&endBoxAlign.label;" value="flex-end" property="align-self" type="checkbox"
-                                 image="chrome://cssproperties/skin/flexbox/alignItemsFlexEnd.png"
                                  id="endSelfAlignButton" group="align-self"
                                  oncommand="ToggleProperty(this)"/>
                 </hbox>
                 <hbox>
                   <toolbarbutton class="multibutton" tooltiptext="&baselineBoxAlign.label;" value="baseline" property="align-self" type="checkbox"
-                                 image="chrome://cssproperties/skin/flexbox/alignItemsFlexBaseline.png"
                                  id="baselineSelfAlignButton" group="align-self"
                                  oncommand="ToggleProperty(this)"/>
                 </hbox>
                 <hbox>
                   <toolbarbutton class="multibutton" tooltiptext="&stretchBoxAlign.label;" value="stretch" property="align-self" type="checkbox"
-                                 image="chrome://cssproperties/skin/flexbox/alignItemsFlexStretch.png"
                                  id="stretchSelfAlignButton" group="align-self"
                                  oncommand="ToggleProperty(this)"/>
                 </hbox>
@@ -204,6 +194,7 @@
               <label value="&flexBasis.label;"/>
               <hbox align="center">
 	              <menulist sizetopopup="none" editable="true" id="flexBasisMenulist" property="flex-basis"
+                           bgtype="csslength" units='% px pt cm in mm pc em ex rem ch'
 	                        checkimageratio="true"
 	                        oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'auto', false);"
 	                        oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'auto', false)">
@@ -213,8 +204,6 @@
 	                  <menuitem label="&autoWidth.label;" value="auto"/>
 	                </menupopup>
 	              </menulist>
-	              <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
-	                           ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', false)"/>
               </hbox>
             </row>
 

@@ -2,13 +2,8 @@
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 
-<!-- LOCALIZATION NOTE : FILE The correct localization of this file might be to
-  - keep it in English, or another language commonly spoken among web developers.
-  - You want to make that choice consistent across the developer tools.
-  - A good criteria is the language in which you'd find the best
-  - documentation on web development on the web. -->
-
 <!ENTITY window.title "Konsola WWW">
+<!ENTITY browserConsole.title "Konsola przeglądarki">
 
 <!ENTITY networkPanel.requestURLColon             "URL żądania:">
 <!ENTITY networkPanel.requestMethodColon          "Metoda żądania:">
@@ -20,22 +15,22 @@
 <!ENTITY networkPanel.requestFormData             "Przesłane dane formularzy">
 
 <!ENTITY networkPanel.responseHeaders             "Nagłówki odpowiedzi">
-<!ENTITY networkPanel.responseCookie              "Ciasteczko z odpowiedzi">
+<!ENTITY networkPanel.responseCookie              "Ciasteczko z odpowiedzi">
 <!ENTITY networkPanel.responseBody                "Zawartość odpowiedzi">
-<!ENTITY networkPanel.responseBodyCached          "Dane z pamięci podręcznej">
+<!ENTITY networkPanel.responseBodyCached          "Dane z pamięci podręcznej">
 <!ENTITY networkPanel.responseBodyUnknownType     "Nieznany typ zawartości">
-<!ENTITY networkPanel.responseNoBody              "Brak zawartości w odpowiedzi">
+<!ENTITY networkPanel.responseNoBody              "Brak zawartości w odpowiedzi">
 <!ENTITY networkPanel.responseImage               "Odebrany obrazek">
-<!ENTITY networkPanel.responseImageCached         "Obrazek z pamięci podręcznej">
+<!ENTITY networkPanel.responseImageCached         "Obrazek z pamięci podręcznej">
 
 <!-- LOCALIZATION NOTE (saveBodies.label): You can see this string in the Web
    - Console context menu. -->
-<!ENTITY saveBodies.label     "Zapisz zawartość żądania i odpowiedzi">
+<!ENTITY saveBodies.label     "Zapisz zawartość żądania i odpowiedzi">
 <!ENTITY saveBodies.accesskey "s">
 
 <!-- LOCALIZATION NOTE (openURL.label): You can see this string in the Web
    - Console context menu. -->
-<!ENTITY openURL.label     "Otwórz adres URL w nowej karcie">
+<!ENTITY openURL.label     "Otwórz adres URL w nowej karcie">
 <!ENTITY openURL.accesskey "k">
 
 <!-- LOCALIZATION NOTE (btnPageNet.label): This string is used for the menu
@@ -44,25 +39,37 @@
   -  filters. -->
 <!ENTITY btnPageNet.label   "Sieć">
 <!ENTITY btnPageNet.tooltip "Zapisuj połączenia sieciowe">
+<!ENTITY btnPageNet.accesskey "S">
+<!-- LOCALIZATION NOTE (btnPageNet.accesskeyMacOSX): This string is used as
+  -  access key for the menu button that allows users to toggle the network
+  -  logging output. On MacOSX accesskeys are available with Ctrl-*. Please make
+  -  sure you do not use the following letters: A, E, N and P. These are used
+  -  for editing commands in text inputs. -->
+<!ENTITY btnPageNet.accesskeyMacOSX "S">
 <!ENTITY btnPageCSS.label   "CSS">
-<!ENTITY btnPageCSS.tooltip "Zapisuj błędy przetwarzania CSS">
+<!ENTITY btnPageCSS.tooltip2 "Zapisuj błędy i ostrzeżenia CSS">
+<!ENTITY btnPageCSS.accesskey "C">
 <!ENTITY btnPageJS.label    "JS">
 <!ENTITY btnPageJS.tooltip  "Zapisuj wyjątki JavaScriptu">
+<!ENTITY btnPageJS.accesskey "J">
+<!ENTITY btnPageSecurity.label "Bezpieczeństwo">
+<!ENTITY btnPageSecurity.tooltip "Zapisuj wyjątki i ostrzeżenia bezpieczeństwa">
+<!ENTITY btnPageSecurity.accesskey "B">
 
-<!-- LOCALIZATION NOTE (btnPageLogging): This is used as the text of the
-  -  the toolbar. It shows or hides messages that the web developer inserted on
-  -  the page for debugging purposes, using calls such console.log() and
-  -  console.error(). -->
-<!ENTITY btnPageLogging.label   "Wpisy dziennika">
+<!ENTITY btnPageLogging.label "Dziennik">
 <!ENTITY btnPageLogging.tooltip "Wpisy dziennika wysłane do obiektu „console”">
+<!ENTITY btnPageLogging.accesskey3 "d">
 <!ENTITY btnConsoleErrors       "Błędy">
-<!ENTITY btnConsoleInfo         "Info">
+<!ENTITY btnConsoleInfo "Informacje">
 <!ENTITY btnConsoleWarnings     "Ostrzeżenia">
-<!ENTITY btnConsoleLog          "Dziennik">
+<!ENTITY btnConsoleLog "Wpisy dziennika">
+<!ENTITY btnConsoleXhr "XHR">
+<!ENTITY btnConsoleReflows "Reflows">
 
-<!ENTITY filterBox.placeholder "Filtr">
+<!ENTITY filterOutput.placeholder "Filtruj wyjście">
 <!ENTITY btnClear.label        "Wyczyść">
 <!ENTITY btnClear.tooltip      "Wyczyść wyjście konsoli WWW">
+<!ENTITY btnClear.accesskey "W">
 
 <!ENTITY fullZoomEnlargeCmd.commandkey  "+">
 <!ENTITY fullZoomEnlargeCmd.commandkey2 "="> <!-- + is above this key on many keyboards -->
@@ -77,8 +84,6 @@
 <!ENTITY copyURLCmd.label     "Kopiuj adres odnośnika">
 <!ENTITY copyURLCmd.accesskey "a">
 
-<!ENTITY browserConsole.title "Browser Console">
-
 <!ENTITY closeCmd.key  "W">
-
-<!ENTITY filterOutput.placeholder "Filter output">
+<!ENTITY findCmd.key          "F">
+<!ENTITY clearOutputCtrl.key "L">

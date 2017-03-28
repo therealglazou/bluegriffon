@@ -37,7 +37,7 @@
 
 var EXPORTED_SYMBOLS = ["UrlUtils"];
 
-Components.utils.import("resource://app/modules/editorHelper.jsm");
+Components.utils.import("resource://gre/modules/editorHelper.jsm");
 
 var UrlUtils = {
 
@@ -137,7 +137,7 @@ var UrlUtils = {
 
   isUrlOfBlankDocument: function isUrlOfBlankDocument(urlString)
   {
-    const kDATA_URL_PREFIX = "resource://app/res";
+    const kDATA_URL_PREFIX = "resource://gre/res";
     return (urlString.substr(0, kDATA_URL_PREFIX.length) == kDATA_URL_PREFIX);
   },
 
@@ -166,7 +166,7 @@ var UrlUtils = {
     return aText && /^http:\/\/|^https:\/\/|^file:\/\/|^ftp:\/\/|^about:|^mailto:|^news:|^snews:|^telnet:|^ldap:|^ldaps:|^gopher:|^finger:|^javascript:/i.test(aText);
   },
 
-  makeRelativeUrl: function makeRelativeUrl(aURLString)
+  makeRelativeUrl: function makeRelativeUrl(aURLString, aDocURL)
   {
     var inputUrl = aURLString.trim();
     if (!inputUrl)
@@ -174,7 +174,7 @@ var UrlUtils = {
 
     // Get the filespec relative to current document's location
     // NOTE: Can't do this if file isn't saved yet!
-    var docUrl = this.getDocumentBaseUrl();
+    var docUrl = aDocURL ? aDocURL : this.getDocumentBaseUrl();
     var docScheme = this.getScheme(docUrl);
 
     // Can't relativize if no doc scheme (page hasn't been saved)
@@ -199,7 +199,9 @@ var UrlUtils = {
 
 
     // Get just the file path part of the urls
-    var charset = EditorUtils.getCurrentEditor().documentCharacterSet;
+    var charset = EditorUtils.getCurrentEditor()
+                  ? EditorUtils.getCurrentEditor().documentCharacterSet
+                  : "utf-8";
     var docPath = IOService.newURI(docUrl,   charset, null).path;
     var urlPath = IOService.newURI(inputUrl, charset, null).path;
 
@@ -292,7 +294,7 @@ var UrlUtils = {
     return urlPath;
   },
 
-  makeAbsoluteUrl: function makeAbsoluteUrl(url)
+  makeAbsoluteUrlFrom: function (url, docUrl)
   {
     var resultUrl = url.trim();
     if (!resultUrl)
@@ -304,7 +306,6 @@ var UrlUtils = {
     if (urlScheme)
       return resultUrl;
 
-    var docUrl = this.getDocumentBaseUrl();
     var docScheme = this.getScheme(docUrl);
 
     // Can't relativize if no doc scheme (page hasn't been saved)
@@ -329,9 +330,15 @@ var UrlUtils = {
     return absoluteUrl;
   },
 
+  makeAbsoluteUrl: function (url)
+  {
+    var docUrl = this.getDocumentBaseUrl();
+    return this.makeAbsoluteUrlFrom(url, docUrl);
+  },
+
   getDocumentBaseUrl: function getDocumentBaseUrl()
   {
-    Components.utils.import("resource://app/modules/editorHelper.jsm");
+    Components.utils.import("resource://gre/modules/editorHelper.jsm");
     try {
       var docUrl;
 

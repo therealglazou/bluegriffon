@@ -56,16 +56,6 @@ bluegriffon/extensions/svg-edit/Makefile
 bluegriffon/extensions/op1/Makefile
 bluegriffon/extensions/gfd/Makefile
 bluegriffon/extensions/fs/Makefile
-bluegriffon/extensions/tipoftheday/Makefile
-bluegriffon/stubs/Makefile
-bluegriffon/stubs/csseditor/Makefile
-bluegriffon/stubs/eyedropper/Makefile
-bluegriffon/stubs/fullscreen/Makefile
-bluegriffon/stubs/mathml2/Makefile
-bluegriffon/stubs/snippets/Makefile
-bluegriffon/stubs/tableLayout/Makefile
-bluegriffon/stubs/templatesManager2/Makefile
-bluegriffon/stubs/thumbnailer/Makefile
 bluegriffon/sidebars/cssproperties/Makefile
 bluegriffon/sidebars/domexplorer/Makefile
 bluegriffon/sidebars/scripteditor/Makefile

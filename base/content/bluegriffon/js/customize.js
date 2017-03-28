@@ -51,6 +51,9 @@ function CustomizeToolbar(id)
   customizePopup = document.getElementById("CustomizeFormatToolbar");
   if (customizePopup)
     customizePopup.setAttribute("disabled", "true");
+  customizePopup = document.getElementById("CustomizeFormatMenulistsToolbar");
+  if (customizePopup)
+    customizePopup.setAttribute("disabled", "true");
 
   var customizeURL = "chrome://global/content/customizeToolbar.xul";
 
@@ -104,6 +107,9 @@ function ToolboxCustomizeDone(aToolboxChanged)
   customizePopup = document.getElementById("CustomizeFormatToolbar");
   if (customizePopup)
     customizePopup.removeAttribute("disabled");
+  customizePopup = document.getElementById("CustomizeFormatMenulistsToolbar");
+  if (customizePopup)
+    customizePopup.removeAttribute("disabled");
 
   // make sure our toolbar buttons have the correct enabled state restored to them...
   if (this.UpdateMainToolbar != undefined)
@@ -146,4 +152,5 @@ function InstallCustomizationDoneCallbacks()
 {
   gDialog.MainToolbox.customizeDone   = ToolboxCustomizeDone;
   gDialog.FormatToolbox.customizeDone = ToolboxCustomizeDone;
+  gDialog.FormatMenulistsToolbox.customizeDone = ToolboxCustomizeDone;
 }

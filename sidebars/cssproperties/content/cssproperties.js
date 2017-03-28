@@ -35,11 +35,12 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-Components.utils.import("resource://app/modules/editorHelper.jsm");
-Components.utils.import("resource://app/modules/urlHelper.jsm");
-Components.utils.import("resource://app/modules/cssHelper.jsm");
-Components.utils.import("resource://app/modules/cssInspector.jsm");
-Components.utils.import("resource://app/modules/prompterHelper.jsm");
+Components.utils.import("resource://gre/modules/editorHelper.jsm");
+Components.utils.import("resource://gre/modules/urlHelper.jsm");
+Components.utils.import("resource://gre/modules/cssHelper.jsm");
+Components.utils.import("resource://gre/modules/cssInspector.jsm");
+Components.utils.import("resource://gre/modules/prompterHelper.jsm");
+Components.utils.import("resource://gre/modules/Services.jsm");
 
 var gMain = null;
 var gCurrentElement = null;
@@ -76,8 +77,11 @@ function Startup()
 
   if (!gMain)
     return;
-  
-  gMain.NotifierUtils.addNotifierCallback("selection",
+
+  gDialog.allTree.addEventListener("DOMAttrModified", onAllTreeModified, true);
+  gDialog.variablesTree.addEventListener("DOMAttrModified", onVariablesTreeModified, true);
+
+  gMain.NotifierUtils.addNotifierCallback("selection_strict",
                                           SelectionChanged,
                                           window);
   gMain.NotifierUtils.addNotifierCallback("tabClosed",
@@ -115,6 +119,10 @@ function Shutdown()
 {
   if (gMain)
   {
+
+    gDialog.allTree.removeEventListener("DOMAttrModified", onAllTreeModified, true);
+    gDialog.variablesTree.removeEventListener("DOMAttrModified", onVariablesTreeModified, true);
+
     gMain.NotifierUtils.removeNotifierCallback("selection",
                                                SelectionChanged,
                                                window);
@@ -142,8 +150,9 @@ function Inspect()
   if (gMain && gMain.EditorUtils)
   {
     var editor = gMain.EditorUtils.getCurrentEditor();
-    var visible = editor && (gMain.GetCurrentViewMode() == "wysiwyg");
+    var visible = editor && (gMain.EditorUtils.isWysiwygMode());
     gDialog.mainBox.style.visibility = visible ? "" : "hidden";
+    gMain.document.querySelector("[panelid='panel-cssproperties']").className = visible ? "" : "inactive";
     if (visible) {
       var node = EditorUtils.getSelectionContainer().node;
       if (node) {
@@ -177,6 +186,8 @@ function SelectionChanged(aArgs, aElt, aOneElementSelected)
     return;
   }
 
+  gDialog.idAlert.removeAttribute("open");
+
   gCurrentElement = aElt;
   deleteAllChildren(gDialog.classPickerPopup);
   gDialog.classPicker.value =  "";
@@ -196,27 +207,18 @@ function SelectionChanged(aArgs, aElt, aOneElementSelected)
 
   var inspector = Components.classes["@mozilla.org/inspector/dom-utils;1"]
                     .getService(Components.interfaces.inIDOMUtils);
-  var state;
   var dynamicPseudo = "";
   if (gDialog.hoverStateCheckbox.checked) {
-    state = inspector.getContentState(gCurrentElement);
-    inspector.setContentState(gCurrentElement, state | 4); // NS_EVENT_STATE_HOVER
+    inspector.addPseudoClassLock(gCurrentElement, ":hover");
     dynamicPseudo = "hover";
   }
   var ruleset = CssInspector.getCSSStyleRules(aElt, false, dynamicPseudo);
   if (gDialog.hoverStateCheckbox.checked) {
-    inspector.setContentState(gCurrentElement.ownerDocument.documentElement, 4); // NS_EVENT_STATE_HOVER
-    var display = gCurrentElement.style.display;
+    inspector.clearPseudoClassLocks(gCurrentElement);
   }
   for (var i = 0; i < gIniters.length; i++)
     gIniters[i](aElt, ruleset);
 
-  gDialog.currentElementBox.setAttribute("value",
-       "<" + gCurrentElement.localName +
-       (gCurrentElement.id ? " id='" + gCurrentElement.id + "'" : "") +
-       (gCurrentElement.className ? " class='" + gCurrentElement.className + "'" : "") +
-       ">" +
-       gCurrentElement.innerHTML.substr(0, 100));
 }
 
 function CheckClass(aElt)
@@ -319,18 +321,77 @@ function RestoreSelection()
   gSavedSelection = null;
 }
 
-function ApplyStyles(aStyles)
+var gIdAlertStyles = null;
+var gIdNoSelectionUpdate = false;
+var gIdCurrentElement = null;
+
+function ShowIdAlert(aStyles, aNoSelectionUpdate)
 {
+  gIdAlertStyles = aStyles;
+  gIdNoSelectionUpdate = aNoSelectionUpdate;
+  gIdCurrentElement = gCurrentElement;
+
+  gDialog.idAlertTextbox.value = "";
+  gDialog.idAlertButton.setAttribute("disabled", "true");
+
+  gDialog.idAlert.setAttribute("open", "true");
+  gDialog.idAlertTextbox.focus();
+}
+
+function CheckIdFromIdAlert(aElt)
+{
+  var value = aElt.value;
+  if (!value || null == value.match( gXmlNAMERegExp )) {
+    gDialog.idAlertButton.setAttribute("disabled", "true");
+    return;
+  }
+
+  gDialog.idAlertButton.removeAttribute("disabled");
+}
+
+function CheckReturnInIdAlert(aElt, aEvent)
+{
+  if (aEvent.which == 13 &&
+      !gDialog.idAlertButton.hasAttribute("disabled")) {
+    ApplyIdFromIdAlert();
+  }
+}
+
+function ApplyIdFromIdAlert()
+{
+  var value = gDialog.idAlertTextbox.value;
+  var editor = EditorUtils.getCurrentEditor();
+
+  editor.beginTransaction();
+  var elt = value ? editor.document.getElementById(value) : null;
+  if (elt && elt != gIdCurrentElement) {
+    editor.removeAttribute(elt, "id");
+  }
+  editor.setAttribute(gIdCurrentElement, "id", value);
+  gCurrentElement = gIdCurrentElement;
+  gDialog.idAlert.setAttribute("hidden", "true");
+  gDialog.idAlert.removeAttribute("open");
+  ApplyStyles(gIdAlertStyles, gIdNoSelectionUpdate, true);
+  setTimeout(function() {gDialog.idAlert.removeAttribute("hidden");}, 1000);
+  EditorUtils.getCurrentEditorWindow().content.focus();
+}
+
+function ApplyStyles(aStyles, aNoSelectionUpdate, aDoNotBeginTransaction, aCallback)
+{
+  gDialog.idAlert.removeAttribute("open");
+
   var className;
   var editor = EditorUtils.getCurrentEditor();
   if (gDialog.hoverStateCheckbox.checked && gDialog.cssPolicyMenulist.value == "inline")
     gDialog.cssPolicyMenulist.value = "id";
-  var cssPolicy = gPrefs.getCharPref("bluegriffon.css.policy"); 
+  var cssPolicy = gPrefs.getCharPref("bluegriffon.css.policy");
   switch (gDialog.cssPolicyMenulist.value) {
     case "id":
       // if the element has no ID, ask for one...
-      if (gCurrentElement.id)
-        editor.beginTransaction();
+      if (gCurrentElement.id) {
+        if (!aDoNotBeginTransaction)
+          editor.beginTransaction();
+      }
       else if (cssPolicy == "automatic") {
         var prefix = gPrefs.getCharPref("bluegriffon.css.prefix");
         var id = prefix + new Date().valueOf() +
@@ -339,38 +400,8 @@ function ApplyStyles(aStyles)
         editor.setAttribute(gCurrentElement, "id", id);
       }
       else {
-        var result = {};
-        var valid = false;
-
-        while (!valid) {
-          if (!PromptUtils.prompt(window,
-                                  gDialog.csspropertiesBundle.getString("EnterAnId"),
-                                  gDialog.csspropertiesBundle.getString("EnterUniqueId"),
-                                  result)) {
-            Inspect();
-            return;
-          }
-          valid = (null != result.value.match( gXmlNAMERegExp ));
-        }
-        var id = result.value;
-        var elt = id ? editor.document.getElementById(id) : null;
-        var rv = 0;
-        if (elt && elt != gCurrentElement)
-          rv = PromptUtils.confirmWithTitle(
-                                 L10NUtils.getString("IdAlreadyTaken"),
-                                 L10NUtils.getString("RemoveIdFromElement"),
-                                 L10NUtils.getString("YesRemoveId"),
-                                 L10NUtils.getString("NoCancel"),
-                                 null);
-        if (rv == 1) {
-          Inspect();
-          return;
-        }
-        editor.beginTransaction();
-        if (elt && elt != gCurrentElement) {
-          editor.removeAttribute(elt, "id");
-        }
-        editor.setAttribute(gCurrentElement, "id", result.value);
+        ShowIdAlert(aStyles, aNoSelectionUpdate);
+        return;
       }
       break;
 
@@ -415,13 +446,15 @@ function ApplyStyles(aStyles)
       editor.beginTransaction();
       break;
   }
-
   SaveSelection();
   var elt = gCurrentElement;
   for (var i = 0; i < aStyles.length; i++) {
     var s = aStyles[i];
     var property = s.property;
     var value = s.value;
+
+    if (value && !gInUtils.cssPropertyIsValid(property, value))
+      continue;
 
     switch (gDialog.cssPolicyMenulist.value) {
 
@@ -453,8 +486,12 @@ function ApplyStyles(aStyles)
     }
   }
   editor.endTransaction();
-  SelectionChanged(null, elt, true);
+  if (!aNoSelectionUpdate)
+    SelectionChanged(null, elt, true);
   RestoreSelection();
+
+  if (aCallback)
+    aCallback();
 }
 
 function FindLastEditableStyleSheet(aQuery)
@@ -463,6 +500,7 @@ function FindLastEditableStyleSheet(aQuery)
   var headElt = doc.querySelector("head");
   var child = headElt.lastElementChild;
   var found = false;
+  var sheet = null;
   while (!found && child) {
     var name = child.localName;
     if (name == "style" ||
@@ -590,23 +628,28 @@ function ApplyStyleChangesToStylesheets(editor,           // the current editor
   //= EditorUtils.getCurrentTabEditor().mResponsiveRuler.currentQuery;
   var inspector = Components.classes["@mozilla.org/inspector/dom-utils;1"]
                     .getService(Components.interfaces.inIDOMUtils);
-  var state;
   var dynamicPseudo = "";
   if (gDialog.hoverStateCheckbox.checked) {
-    state = inspector.getContentState(gCurrentElement);
-    inspector.setContentState(gCurrentElement, state | 4); // NS_EVENT_STATE_HOVER
+    inspector.addPseudoClassLock(gCurrentElement, ":hover");
     aIdent += ":hover";
     dynamicPseudo = "hover";
   }
   var ruleset = CssInspector.getCSSStyleRules(aElement, true, dynamicPseudo);
   if (gDialog.hoverStateCheckbox.checked) {
-    inspector.setContentState(gCurrentElement.ownerDocument.documentElement, state | 4);
+    inspector.clearPseudoClassLocks(gCurrentElement);
   }
 
   var whereToInsert;
   switch (query) {
     case "":
-      whereToInsert = FindWhereToInsertRuleForScreen(ruleset, property, value, aDelimitor, aRegExpDelimitor, aIdent);
+      if ("ResponsiveRulerHelper" in gMain) {
+        if (gMain.ResponsiveRulerHelper.hasSelectedMediaQuery())
+          whereToInsert = gMain.ResponsiveInsertionHelper.findWhereToInsertRuleForSelectedMQ(ruleset, property, value, aDelimitor, aRegExpDelimitor, aIdent);
+        else
+          whereToInsert = FindWhereToInsertRuleForScreen(ruleset, property, value, aDelimitor, aRegExpDelimitor, aIdent);
+      }
+      else
+        whereToInsert = FindWhereToInsertRuleForScreen(ruleset, property, value, aDelimitor, aRegExpDelimitor, aIdent);
       if (whereToInsert.sheet) {
         if (whereToInsert.rule) {
           if (value) {
@@ -980,4 +1023,13 @@ function IsSheetOnlyForPrint(aSheet)
 
   var media = aSheet.media.mediaText || "";
   return (media == "print");
+}
+
+RegisterIniter(CssPropertyBindingsIniter);
+
+function CssPropertyBindingsIniter(aElt, aRuleset)
+{
+	var boundElts = document.querySelectorAll("cssproperty");
+	for (var i = 0; i < boundElts.length; i++)
+	  boundElts[i].update(aElt, aRuleset);
 }

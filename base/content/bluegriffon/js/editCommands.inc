@@ -12,7 +12,7 @@ var cmdBgFindCommand =
 
   doCommand: function(aCommand)
   {
-    var isSource = (GetCurrentViewMode() == "source");
+    var isSource = !EditorUtils.isWysiwygMode();
     WysiwygShowFindBar();
     gDialog.bespinLineLabel.hidden = !isSource;
     gDialog.bespinLineTextbox.hidden = !isSource;
@@ -44,7 +44,7 @@ var bgSpellingCommand =
     return (EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -60,7 +60,7 @@ var bgSpellingCommand =
                          false); 
     }
     catch(ex) {}
-    window.content.focus();
+    GetWindowContent().focus();
   }
 };
 
@@ -70,7 +70,7 @@ var cmdCopyHTMLCodeCommand = {
     var isHTMLView = (EditorUtils.getCurrentEditorElement() &&
                       EditorUtils.isDocumentEditable() &&
                       EditorUtils.isEditingRenderedHTML() &&
-                      GetCurrentViewMode() == "wysiwyg");
+                      EditorUtils.isWysiwygMode());
     if (isHTMLView) {
       var editor = EditorUtils.getCurrentEditor();
       var selection = editor.selection;
@@ -123,7 +123,7 @@ var cmdBGCopyCommand =
       if (EditorUtils.getCurrentEditorElement()
           && EditorUtils.isDocumentEditable()
           && EditorUtils.isEditingRenderedHTML()) {
-        if (GetCurrentViewMode() == "source") {
+        if (!EditorUtils.isWysiwygMode()) {
           var sourceIframe = EditorUtils.getCurrentSourceEditorElement();
           var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
           return sourceEditor.somethingSelected();
@@ -145,7 +145,7 @@ var cmdBGCopyCommand =
 
   doCommand: function(aCommand)
   {
-    if (GetCurrentViewMode() == "source") {
+    if (!EditorUtils.isWysiwygMode()) {
       var sourceIframe = EditorUtils.getCurrentSourceEditorElement();
       var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
       var text = sourceEditor.getSelection();
@@ -176,7 +176,7 @@ var cmdBGCutCommand =
       if (EditorUtils.getCurrentEditorElement()
           && EditorUtils.isDocumentEditable()
           && EditorUtils.isEditingRenderedHTML()) {
-        if (GetCurrentViewMode() == "source") {
+        if (!EditorUtils.isWysiwygMode()) {
           var sourceIframe = EditorUtils.getCurrentSourceEditorElement();
           var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
           return sourceEditor.somethingSelected();
@@ -198,7 +198,7 @@ var cmdBGCutCommand =
 
   doCommand: function(aCommand)
   {
-    if (GetCurrentViewMode() == "source") {
+    if (!EditorUtils.isWysiwygMode()) {
       var sourceIframe = EditorUtils.getCurrentSourceEditorElement();
       var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
       var text = sourceEditor.getSelection();
@@ -248,7 +248,7 @@ var cmdBGPasteCommand =
 
   doCommand: function(aCommand)
   {
-    if (GetCurrentViewMode() == "source") {
+    if (!EditorUtils.isWysiwygMode()) {
       var sourceIframe = EditorUtils.getCurrentSourceEditorElement();
       var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
       var text = sourceEditor.getSelection();
@@ -286,7 +286,7 @@ var cmdBGUndoCommand =
       if (EditorUtils.getCurrentEditorElement()
           && EditorUtils.isDocumentEditable()
           && EditorUtils.isEditingRenderedHTML()) {
-        if (GetCurrentViewMode() == "source") {
+        if (!EditorUtils.isWysiwygMode()) {
           var sourceIframe = EditorUtils.getCurrentSourceEditorElement();
           var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
           return (0 < sourceEditor.historySize().undo);
@@ -310,7 +310,7 @@ var cmdBGUndoCommand =
 
   doCommand: function(aCommand)
   {
-    if (GetCurrentViewMode() == "source") {
+    if (!EditorUtils.isWysiwygMode()) {
       var sourceIframe = EditorUtils.getCurrentSourceEditorElement();
       var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
       sourceEditor.undo();
@@ -330,7 +330,7 @@ var cmdBGRedoCommand =
       if (EditorUtils.getCurrentEditorElement()
           && EditorUtils.isDocumentEditable()
           && EditorUtils.isEditingRenderedHTML()) {
-        if (GetCurrentViewMode() == "source") {
+        if (!EditorUtils.isWysiwygMode()) {
           var sourceIframe = EditorUtils.getCurrentSourceEditorElement();
           var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
           return (0 < sourceEditor.historySize().redo);
@@ -354,7 +354,7 @@ var cmdBGRedoCommand =
 
   doCommand: function(aCommand)
   {
-    if (GetCurrentViewMode() == "source") {
+    if (!EditorUtils.isWysiwygMode()) {
       var sourceIframe = EditorUtils.getCurrentSourceEditorElement();
       var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
       sourceEditor.redo();
@@ -386,7 +386,7 @@ var cmdBGselectAllCommand =
 
   doCommand: function(aCommand)
   {
-    if (GetCurrentViewMode() == "source") {
+    if (!EditorUtils.isWysiwygMode()) {
       var sourceIframe = EditorUtils.getCurrentSourceEditorElement();
       var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
       sourceEditor.selectAll();
@@ -406,7 +406,7 @@ var cmdBGpasteNoFormattingCommand =
       if (EditorUtils.getCurrentEditorElement()
           && EditorUtils.isDocumentEditable()
           && EditorUtils.isEditingRenderedHTML()
-          && GetCurrentViewMode() != "source") {
+          && EditorUtils.isWysiwygMode()) {
         var editor = EditorUtils.getCurrentEditor();
         editor instanceof Components.interfaces.nsIEditor;
         return editor.canPaste(Components.interfaces.nsIClipboard.kGlobalClipboard);
@@ -424,7 +424,7 @@ var cmdBGpasteNoFormattingCommand =
 
   doCommand: function(aCommand)
   {
-    if (GetCurrentViewMode() != "source") {
+    if (EditorUtils.isWysiwygMode()) {
       var editor = EditorUtils.getCurrentEditor();
       editor instanceof Components.interfaces.nsIEditor;
       editor.pasteNoFormatting(Components.interfaces.nsIClipboard.kGlobalClipboard);
@@ -439,7 +439,7 @@ var cmdBGdeleteCommand =
     if (EditorUtils.getCurrentEditorElement()
         && EditorUtils.isDocumentEditable()
         && EditorUtils.isEditingRenderedHTML()
-        && (GetCurrentViewMode() != "source")) {
+        && EditorUtils.isWysiwygMode()) {
       var editor = EditorUtils.getCurrentEditor();
       editor instanceof Components.interfaces.nsIEditor;
       return editor.canCut();
@@ -457,7 +457,7 @@ var cmdBGdeleteCommand =
 
   doCommand: function(aCommand)
   {
-    if (GetCurrentViewMode() != "source") {
+    if (EditorUtils.isWysiwygMode()) {
       var editor = EditorUtils.getCurrentEditor();
       editor instanceof Components.interfaces.nsIEditor;
       editor.deleteSelection(Components.interfaces.nsIEditor.ePrevious, Components.interfaces.nsIEditor.eStrip);

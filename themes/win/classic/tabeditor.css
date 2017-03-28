@@ -37,17 +37,145 @@
 
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 
-.tabeditor-tab .tab-close-button {
-  visibility: hidden;
-  list-style-image: url("chrome://global/skin/icons/close.png");
-  -moz-image-region: rect(0, 16px, 16px, 0);
+#Bluegriffon .tabeditor-tab[selected="true"] {
+  background-color: -moz-mac-chrome-active;
+}
+/* ----- INACTIVE WINDOW ----- */
+
+#Bluegriffon:not([active="true"]) .tabeditor-strip {
+  background-color: #e2e2e2;
+}
+
+#Bluegriffon:-moz-window-inactive .tabeditor-tab {
+  color: #575757;
+}
+
+#Bluegriffon:-moz-window-inactive .tabeditor-tab[selected="true"] {
+  background-color: -moz-mac-chrome-inactive;
+}
+
+
+
+/* ::::: tabeditor ::::: */
+
+tabeditor > tabbox {
+  margin: 0;
+}
+
+.tab-icon-image {
+  width: 16px;
+  height: 16px;
+  list-style-image: url("chrome://global/skin/tree/item-grayscale.png");
+  opacity: 0.6;
+  margin-top: 2px;
+  -moz-margin-end: 1em;
+}
+
+.tabeditor-tab[selected="true"] > .tab-icon-image {
+  list-style-image: url("chrome://global/skin/tree/item.png");
+}
+
+.tabeditor-tab[busy] > .tab-icon-image {
+  list-style-image: url("chrome://global/skin/icons/loading_16.png") !important;
+}
+
+.tabeditor-tab:hover > .tab-icon-image,
+.tabeditor-tab[selected="true"] > .tab-icon-image {
+  opacity: 1;
+}
+
+.tab-text {
+  margin-top: 3px;
+  margin-bottom: 0;
+  font: message-box;
+  font-weight: bold;
+  text-shadow: none;
+}
+
+.tabeditor-tab {
+  -moz-box-align: center;
   -moz-appearance: none;
+  border-radius: 4px 4px 0px 0px;
+  color: #606060;
+  -moz-margin-end: 1px;
+  padding: 0 5px;
+  min-width: 1px !important;
+  text-align: left;
+  height: 24px;
+  background-image: linear-gradient(to bottom, var(--bg-dark-gray), var(--bg-lighter-dark-gray));
+  border: 0px none !important;
+}
+
+.tabeditor-tab:not([selected="true"]):hover {
+  background-image: linear-gradient(to bottom, var(--bg-dark-gray), var(--bg-dark-gray));
+}
+
+.tabeditor-tab[selected="true"] {
+  -moz-user-focus: normal;
+  padding: 0 6px 1px;
+  /*border: thin solid #6d7373;
+  border-bottom-width: 0px;
+  border-left-width: 0px;
+  border-right-width: 0px;*/
+}
+
+.tabeditor-tab[selected="true"]:focus > .tab-text {
+/*  outline: 2px solid #4F8EC9;
+  outline-offset: -2px;
+  outline-radius: 3px;*/
+}
+
+.tabeditor-tab[selected="true"],
+.tabeditor-tab:hover {
+  color: var(--bg-main-foreground-color);
+}
+
+.tabeditor-strip {
+  margin-top: -1px;
+  border-bottom: 1px solid #404040;
+  background-color: #9B9B9B;
+}
+
+.tabeditor-tabs {
   border: none;
-  padding: 0px;
+  -moz-box-pack: left;
+  -moz-box-align: left;
+  /* background: url("chrome://bluegriffon/skin/tabeditor-tabs-bkgnd.png") repeat-x;*/ /*FORMER THEME*/
+  height: 25px;
+  margin-bottom: 0;
+}
+
+.tabs-left, .tabs-right {
+  -moz-box-flex: 1;
+  display: -moz-box;
+  width: 3px;
+  border: none 0px;
+}
+
+.tabeditor-tabs[overflow="true"] .tabs-left {
+  display: none;
+}
+
+tabeditor > tabbox tabpanels {
+  -moz-appearance: none !important;
+  border: 0px none;
+}
+
+.tabeditor-tab .tab-icon {
+  visibility: hidden;
 }
 
 .tabeditor-tab:hover .tab-close-button {
   visibility: visible;
+%ifdef XP_WIN
+  list-style-image: url("chrome://global/skin/icons/close-XPVista7.png");
+%else
+  list-style-image: url("chrome://global/skin/icons/close.svg");
+%endif
+  -moz-image-region: rect(0, 16px, 16px, 0);
+  -moz-appearance: none;
+  padding: 0px ! important;
+  border: 0px none ! important;
 }
 
 .tabeditor-tab .tab-close-button:hover {
@@ -62,37 +190,42 @@
   -moz-binding: url("chrome://bluegriffon/content/bindings/tab.xml#bluegriffon-editortab");
 }
 
-.tabeditor-tab {
-  -moz-appearance: none;
-  background-color: rgb(216, 213, 196);
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
+.tabeditor-tab .toolbarbutton-icon {
+  padding: 0px;
 }
 
-.tabeditor-tab[selected="true"] {
-  background-color: transparent;
+.tabeditor-tab .toolbarbutton-text {
+  display: none;
 }
 
-tabeditor-tab  .tab-text {
-  margin-left: 1em;
-}
-
-.tabeditor-tab[modified="true"]  .tab-text {
-  text-shadow: 0 1px 0 rgba(255, 0, 0, 0.4);
-}
-
-.tabs-left, .tabs-right {
-  -moz-box-flex: 1;
-  display: -moz-box;
-  width: 3px;
+.tabeditor-tab[modified="true"] {
+   border-bottom: red solid thin ! important;
 }
 
 tabeditor[tabmode="left"] .tabs-left {
-  width: 8px;
-  -moz-box-flex: 0;
+  width: 8px !important;
+  -moz-box-flex: 0 !important;
 }
 
 tabeditor[tabmode="right"] .tabs-right {
   max-width: 8px !important;
   -moz-box-flex: 0 ! important;
 }
+
+#newDocumentButton {
+  -moz-appearance: none;
+  padding: 0 6px 1px;
+  opacity: 0.5;
+  border: thin solid transparent;
+  border-bottom-width: 0px;
+  border-left-width: 0px;
+  border-right-width: 0px;
+}
+
+#newDocumentButton:hover {
+  opacity: 1;
+  border-color: #6d7373;
+  background-image: linear-gradient(to bottom, var(--bg-dark-gray), var(--bg-lighter-dark-gray));
+  border-radius: 4px 4px 0px 0px;
+}
+

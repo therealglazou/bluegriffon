@@ -1,0 +1,119 @@
+/* ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1/GPL 2.0/LGPL 2.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is BlueGriffon.
+ *
+ * The Initial Developer of the Original Code is
+ * Disruptive Innovations SARL.
+ * Portions created by the Initial Developer are Copyright (C) 2006
+ * the Initial Developer. All Rights Reserved.
+ *
+ * Contributor(s):
+ *   Daniel Glazman <daniel.glazman@disruptive-innovations.com>, Original author
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU General Public License Version 2 or later (the "GPL"), or
+ * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+ * in which case the provisions of the GPL or the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of either the GPL or the LGPL, and not to allow others to
+ * use your version of this file under the terms of the MPL, indicate your
+ * decision by deleting the provisions above and replace them with the notice
+ * and other provisions required by the GPL or the LGPL. If you do not delete
+ * the provisions above, a recipient may use your version of this file under
+ * the terms of any one of the MPL, the GPL or the LGPL.
+ *
+ * ***** END LICENSE BLOCK ***** */
+
+@import url("chrome://bluegriffon/skin/black.css");
+
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+@namespace html url("http://www.w3.org/1999/xhtml");
+
+page {
+  -moz-appearance: none;
+  background-color: transparent;
+  color: var(--bg-main-foreground-color);
+}
+
+#mainBox {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+hbox.csspropertiesHeader {
+  background-color: transparent ! important;
+  color: var(--bg-main-foreground-color);
+  border-top: 2px solid var(--bg-dark-border);
+  -moz-border-top-colors: var(--bg-dark-border) var(--bg-lighter-border);
+  padding-left: 3px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: color 0.5s;
+}
+
+:root[cleartheme="true"] hbox.csspropertiesHeader {
+  font-weight: normal;
+}
+
+hbox.csspropertiesHeader > image {
+  list-style-image: url("chrome://cssproperties/skin/filter.png");
+  -moz-transform: rotate(-90deg);
+  transition: -moz-transform 0.5s, filter 0.5s;
+  filter: grayscale(100%) contrast(600%);
+}
+
+hbox.csspropertiesHeader:-moz-locale-dir(rtl) > image {
+  -moz-transform: rotate(+90deg) ;
+}
+
+hbox.csspropertiesHeader[open="true"] {
+  color: #00abff;
+}
+
+hbox.csspropertiesHeader[open="true"] > image {
+  -moz-transform: rotate(0deg) !important;
+  filter: none;
+}
+
+.section {
+  padding: 1em;
+  height: auto;
+  overflow: visible;
+}
+
+.section:last-child {
+  border-bottom: thin solid gray;
+}
+
+.aria-id {
+  -moz-binding: url("chrome://aria/content/aria.xml#aria-id");
+}
+
+.aria-string {
+  -moz-binding: url("chrome://aria/content/aria.xml#aria-string");
+}
+
+.aria-tokens {
+  -moz-binding: url("chrome://aria/content/aria.xml#aria-tokens");
+}
+
+.aria-token-list {
+  -moz-binding: url("chrome://aria/content/aria.xml#aria-token-list");
+}
+
+.aria-integer {
+  -moz-binding: url("chrome://aria/content/aria.xml#aria-integer");
+}

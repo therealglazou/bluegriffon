@@ -35,8 +35,8 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-Components.utils.import("resource://app/modules/editorHelper.jsm");
-Components.utils.import("resource://app/modules/prompterHelper.jsm");
+Components.utils.import("resource://gre/modules/editorHelper.jsm");
+Components.utils.import("resource://gre/modules/prompterHelper.jsm");
 
 // tocHeadersArray is the array containing the pairs tag/class
 // defining TOC entries
@@ -155,6 +155,10 @@ function Startup()
       tocHeadersArray[index - 1] = [ tag, className ];
     }
   }
+
+#ifndef XP_MACOSX
+  CenterDialogOnOpener();
+#endif
 }
 
 

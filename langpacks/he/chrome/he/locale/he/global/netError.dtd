@@ -19,6 +19,9 @@
 <!ENTITY fileNotFound.title "קובץ לא נמצא">
 <!ENTITY fileNotFound.longDesc "<ul><li>האם ייתכן שהפריט הוסר, שינה מיקום, או שינה שם?</li><li>האם ישנה שגיאת איות, שגיאת רישיות, או שגיאות טופוגרפיות אחרות בכתובת?</li><li>האם יש לך הרשאות גישה מספיקות אל הפריט המבוקש?</li></ul>">
 
+<!ENTITY fileAccessDenied.title "הגישה לקובץ נדחתה">
+<!ENTITY fileAccessDenied.longDesc "<ul><li>יתכן שהקובץ הוסר, הועבר או שההרשאות מונעות את הגישה אליו.</li></ul>">
+
 <!ENTITY generic.title "לא ניתן להשלים את הבקשה">
 <!ENTITY generic.longDesc "<p>מידע נוסף על בעיה או שגיאה זו אינו זמין כעת.</p>">
 
@@ -38,11 +41,9 @@
 <!ENTITY contentEncodingError.longDesc "<p>לא ניתן להציג את הדף שאתה מנסה לראות מכיוון שהוא משתמש בסוג דחיסה לא חוקי או לא ידוע.</p><ul><li> אנא צור קשר עם בעלי האתר כדי ליידע אותם על בעיה זו.</li></ul>">
 
 <!ENTITY unsafeContentType.title "קובץ מסוכן לפתיחה">
-<!ENTITY unsafeContentType.longDesc "
-<ul>
-  <li>בבקשה צור קשר עם בעלי האתר כדי ליידע אותם על בעיה זו.</li>
-</ul>
-">
+<!ENTITY unsafeContentType.longDesc "<ul> 
+<li>בבקשה צור קשר עם בעלי האתר כדי ליידע אותם על בעיה זו.</li> 
+</ul>">
 
 <!ENTITY netReset.title "החיבור הופסק">
 <!ENTITY netReset.longDesc "<p>הקישור לאתר הופסק בעת הסדרת ההתקשרות. אנא נסה שוב</p>">
@@ -50,8 +51,8 @@
 <!ENTITY netTimeout.title "תם הזמן המוקצב ברשת">
 <!ENTITY netTimeout.longDesc "<p>האתר המבוקש לא הגיב לבקשת התחברות והדפדפן הפסיק להמתין לתגובה.</p><ul><li>האם ייתכן שהשרת חווה עומסים גבוהים או הפסקה זמנית? נסה שוב מאוחר יותר.</li><li>האם אין ביכולתך לגלוש באתרים אחרים? בדוק את הגדרות החיבור לרשת של המחשב.</li><li>האם המחשב או הרשת שלך מוגנים על־ידי חומת אש או שרת מתווך? הגדרות לא נכונות עלולות להפריע לגלישה באינטרנט.</li><li>עדיין נתקל בבעיות? היוועץ במנהל הרשת או בספק האינטרנט שלך לקבלת עזרה.</li></ul>">
 
-<!ENTITY protocolNotFound.title "פרוטוקול לא מוכר">
-<!ENTITY protocolNotFound.longDesc "<p>הכתובת ציינה פרוטוקול (לדוגמה: <q>wxyz://</q>) שהדפדפן אינו מזהה, ולכן הדפדפן אינו יכול להתחבר לאתר כראוי.</p><ul><li>האם אתה מנסה לגשת לשירות מולטימדיה או לשירות אחר שאינו מבוסס טקסט? בדוק את האתר לדרישות נוספות.</li><li>ייתכן שפרוטוקולים מסוימים ידרשו תוספים או תוכנות צד־שלישי לפני שהדפדפן יוכל לזהות אותם.</li></ul>">
+<!ENTITY unknownProtocolFound.title "פרוטוקול לא מוכר">
+<!ENTITY unknownProtocolFound.longDesc "<p>הכתובת ציינה פרוטוקול (לדוגמה: <q>wxyz://</q>) שהדפדפן אינו מזהה, ולכן הדפדפן אינו יכול להתחבר לאתר כראוי.</p><ul><li>האם אתה מנסה לגשת לשירות מולטימדיה או לשירות אחר שאינו מבוסס טקסט? בדוק אם קיימות לאתר דרישות נוספות.</li><li>פרוטוקולים מסויימים עשויים לדרוש שימוש ביישומי צד־שלישי או בתוספים חיצוניים לפני שהדפדפן יוכל לזהות אותם.</li></ul>">
 
 <!ENTITY proxyConnectFailure.title "השרת המתווך דחה את ההתחברות">
 <!ENTITY proxyConnectFailure.longDesc "<p>הדפדפן מוגדר להשתמש בשרת מתווך, אולם השרת המתווך דחה את ההתחברות.</p><ul><li> האם הגדרות שרת המתווך של הדפדפן מוגדרות כראוי? בדוק את ההגדרות ונסה שוב.</li><li>האם שירות השרת המתווך מאפשר חיבורים מרשת זו?</li><li>עדיין נתקל בבעיות? היוועץ במנהל הרשת או בספק האינטרנט שלך לקבלת עזרה.</li></ul>">
@@ -66,42 +67,31 @@
 <!ENTITY unknownSocketType.longDesc "<p>האתר הגיב לבקשה מהרשת באופן בלתי צפוי, והדפדפן אינו יכול להמשיך.</p>">
 
 <!ENTITY nssFailure2.title "קישור מאובטח נכשל">
-<!ENTITY nssFailure2.longDesc "
-<ul>
-  <li>האתר שאתה מנסה לגשת אליו לא ניתן להצגה מאחר ולא ניתן לוודא את האותנטיות של המידע שהתקבל.</li>
-  <li>בבקשה צור קשר עם בעלי האתר ודווח להם על בעיה זו. ניתן גם להשתמש בפקודת הדיווח על אתרים פגומים הממוקמת בתפריט העזרה.</li>
+<!ENTITY nssFailure2.longDesc2 "<ul> 
+<li>האתר שאתה מנסה לגשת אליו לא ניתן להצגה מאחר ולא ניתן לוודא את האותנטיות של המידע שהתקבל.</li> 
+<li>בבקשה צור קשר עם בעלי האתר ודווח להם על בעיה זו. ניתן גם להשתמש בפקודת הדיווח על אתרים פגומים הממוקמת בתפריט העזרה.</li> 
 </ul>">
 
 <!ENTITY nssBadCert.title "התקשרות מאובטחת נכשלה">
-<!ENTITY nssBadCert.longDesc2 "<ul>
-<li>תופעה זו יכולה להיות בעיה בהגדרה בשרת או שמדובר בשרת שמנסה להתחזות לשרת אחר. </li>
-<li>אם התחברת לשרת זה בהצלחה בעבר, ייתכן השגיאה זמנית, וכדאי שתנסה שוב מאוחר יותר.</li>
+<!ENTITY nssBadCert.longDesc2 "<ul> 
+<li>תופעה זו יכולה להיות בעיה בהגדרה בשרת או שמדובר בשרת שמנסה להתחזות לשרת אחר. </li> 
+<li>אם התחברת לשרת זה בהצלחה בעבר, ייתכן השגיאה זמנית, וכדאי שתנסה שוב מאוחר יותר.</li> 
 </ul>">
 
-<!ENTITY malwareBlocked.title "חשד לאתר תוקף!">
-<!ENTITY malwareBlocked.longDesc "
-<p>אתרים תוקפים מנסים להתקין תוכנות שגונבות מידע פרטי, משתמשות במחשב שלך לתקיפת אחרים או סתם גורמות לנזק למערכת שלך.</p>
-<p>בעלי אתרים המאמינים כי האתר שלהם דווח בטעות בתור אתר תוקף יכולים <a href='http://www.stopbadware.org/home/reviewinfo' >לבקש בדיקה חוזרת</a>.</p>
-">
+<!ENTITY securityOverride.linkText "או להוסיף חריגה…">
+<!ENTITY securityOverride.warningContent "<p>רצוי להימנע מהוספת חריגה אם חיבור האינטרנט אינו מהימן במלואו או שבעבר לא הופיעו אזהרות לגבי שרת זה.</p>
+<p>כדי להוסיף חריגה עבור אתר זה בכל זאת, יש לעבור להגדרות ההצפנה המתקדמות.</p>">
 
-<!ENTITY phishingBlocked.title "חשד לזיוף ברשת!">
-<!ENTITY phishingBlocked.longDesc "<p>הכנסת מידע אישי לדף זה יכולה להסתיים בגניבת זהות או הונאה אחרת.</p>
-<p>סוגי זיוף אלו משמשים להונאת משתמשים ומוכרים גם בתור &quot;מתקפות דיוג&quot;, בהן נוכלים שותלים דפים והודעות דואר אלקטרוני המהווים חיקוי של מקורות שאתה סומך עליהם.</p>
- ">
+<!ENTITY cspBlocked.title "נחסם בהתאם למדיניות האבטחה של התוכן">
+<!ENTITY cspBlocked.longDesc "<p>הדפדפן מונע מדף זה להיטען בדרך זו מאחר שמדיניות אבטחת התוכן מונעת זאת.</p>">
 
-<!ENTITY cspFrameAncestorBlocked.title "נחסם בהתאם למדיניות האבטחה של התוכן">
-<!ENTITY cspFrameAncestorBlocked.longDesc "<p>הדפדפן מונע מדף זה להיטען בדרך זו מאחר שמדיניות אבטחת התוכן מונעת זאת.</p>">
-
-<!ENTITY corruptedContentError.title "שגיאת תוכן פגום">
-<!ENTITY corruptedContentError.longDesc "<p>הדף שאתה מנסה לצפות בו אינו יכול להיות מוצג בגלל שהתגלתה שגיאה בהעברת הנתונים.</p><ul><li>אנא צור קשר עם בעלי האתר והודע על בעיה זו.</li></ul>">
+<!ENTITY corruptedContentErrorv2.title "שגיאת תוכן פגום">
+<!ENTITY corruptedContentErrorv2.longDesc "<p>לא ניתן להציג דף זה מכיון שאותרה שגיאה בתעבורת הנתונים.</p><ul><li>נא ליצור קשר עם בעלי האתר כדי לדווח להם על בעיה זו.</li></ul>">
 
 <!ENTITY remoteXUL.title "XUL מרוחק">
 <!ENTITY remoteXUL.longDesc "<p><ul><li>רצוי לפנות אל בעלי האתר וליידע אותם על הבעיה.</li></ul></p>">
 
-<!-- Include app-specific error messages - do not change this in localization!
-     Some applications might override netErrorApp.dtd with their specific version,
-     this inclusion needs to be intact for that approach to work correctly.
-     Please, try to keep this at the end of the file. -->
-<!ENTITY % netErrorAppDTD SYSTEM "chrome://global/locale/netErrorApp.dtd">
-%netErrorAppDTD;
-
+<!ENTITY inadequateSecurityError.title "החיבור שלך אינו בטוח">
+<!-- LOCALIZATION NOTE (inadequateSecurityError.longDesc) - Do not translate
+     "NS_ERROR_NET_INADEQUATE_SECURITY". -->
+<!ENTITY inadequateSecurityError.longDesc "<p>האתר בכתובת <span class='hostname'></span> משתמש בטכנולוגית אבטחה שאינה עדכנית וחשופה להתקפות. תוקף יכול בקלות לחשוף מידע שלכאורה אמור היה להיות מוגן. על מנהל האתר לתקן את השרת לפני שיהיה ניתן לבקר באתר זה.</p><p>קוד שגיאה: NS_ERROR_NET_INADEQUATE_SECURITY</p>">

@@ -1,0 +1,22 @@
+/*
+ * this file will contain, after route through the preprocessor, minimal styles for
+ * all UI in the CSS properties panel
+ */
+
+%filter substitution
+
+label.text-link {
+  cursor: help;
+}
+
+label.text-link {
+  color: var(--bg-main-foreground-color) ! important;
+}
+
+%include font-style.inc
+%include font-weight.inc
+%include text-align.inc
+%include text-decoration.inc
+%include writing-mode.inc
+%include float.inc
+%include flexbox.inc

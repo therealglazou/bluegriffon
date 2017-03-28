@@ -261,7 +261,6 @@
               lSpring.setAttribute("y", "7");
               lSpring.setAttribute("width", leftReal*zoom + "px");
               lSpring.setAttribute("height", "1");
-              lSpring.setAttribute("style", "fill: gray;stroke-width:1px; stroke:gray");
               g.appendChild(lSpring);
             }
             var rightProperty = aSource.style.right;
@@ -273,7 +272,6 @@
               rSpring.setAttribute("y", "7");
               rSpring.setAttribute("width", rightReal*zoom + "px");
               rSpring.setAttribute("height", "1");
-              rSpring.setAttribute("style", "fill: gray;stroke-width:1px; stroke:gray");
               g.appendChild(rSpring);
             }
           }
@@ -285,7 +283,6 @@
           r.setAttribute("height", "16");
           r.setAttribute("anonid", "ruler");
           r.setAttribute("tooltiptext", "ruler");
-          r.setAttribute("style", "fill: white; stroke-width: 1px; stroke: gray");
           g.appendChild(r);
 
           var t = document.createElementNS(this.kSVG_NS, "text");
@@ -301,8 +298,8 @@
           lH.setAttribute("y", "0");
           lH.setAttribute("width", "3px");
           lH.setAttribute("height", "16");
-          lH.setAttribute("style", "fill: gray; cursor: w-resize");
-          lH.setAttribute("class", "hruler-separator");
+          lH.setAttribute("style", "cursor: w-resize");
+          lH.setAttribute("class", "ruler-separator");
           lH.setAttribute("pos", aPos);
           lH.setAttribute("size", aSize);
           lH.setAttribute("ruler-separator-position", "left");
@@ -314,8 +311,8 @@
           rH.setAttribute("y", "0");
           rH.setAttribute("width", "3px");
           rH.setAttribute("height", "16");
-          rH.setAttribute("style", "fill: gray; cursor: e-resize");
-          rH.setAttribute("class", "hruler-separator");
+          rH.setAttribute("style", "cursor: e-resize");
+          rH.setAttribute("class", "ruler-separator");
           rH.setAttribute("pos", aPos);
           rH.setAttribute("size", aSize);
           rH.setAttribute("ruler-separator-position", "right");
@@ -337,7 +334,7 @@
       <handler event="mousedown">
         <![CDATA[
           var elt = event.originalTarget;
-          if (elt.getAttribute("class") != "hruler-separator")
+          if (elt.getAttribute("class") != "ruler-separator")
             return; 
 
           this.mRulerSeparatorPosition = elt.getAttribute("ruler-separator-position");
@@ -591,7 +588,6 @@
               tSpring.setAttribute("x", "7");
               tSpring.setAttribute("height", topReal*zoom + "px");
               tSpring.setAttribute("width", "1");
-              tSpring.setAttribute("style", "fill: gray;stroke-width:1px; stroke:gray");
               g.appendChild(tSpring);
             }
             var bottomProperty = aSource.style.bottom;
@@ -603,7 +599,6 @@
               bSpring.setAttribute("x", "7");
               bSpring.setAttribute("height", bottomReal*zoom + "px");
               bSpring.setAttribute("width", "1");
-              bSpring.setAttribute("style", "fill: gray;stroke-width:1px; stroke:gray");
               g.appendChild(bSpring);
             }
           }
@@ -615,7 +610,6 @@
           r.setAttribute("width", "16");
           r.setAttribute("anonid", "ruler");
           r.setAttribute("tooltiptext", "ruler");
-          r.setAttribute("style", "fill: white; stroke-width: 1px; stroke: gray");
           g.appendChild(r);
 
           var t = document.createElementNS(this.kSVG_NS, "text");
@@ -632,8 +626,8 @@
           lH.setAttribute("x", "0");
           lH.setAttribute("height", "3px");
           lH.setAttribute("width", "16");
-          lH.setAttribute("style", "fill: gray; cursor: n-resize");
-          lH.setAttribute("class", "hruler-separator");
+          lH.setAttribute("style", "cursor: n-resize");
+          lH.setAttribute("class", "ruler-separator");
           lH.setAttribute("pos", aPos);
           lH.setAttribute("size", aSize);
           lH.setAttribute("ruler-separator-position", "top");
@@ -645,8 +639,8 @@
           rH.setAttribute("x", "0");
           rH.setAttribute("height", "3px");
           rH.setAttribute("width", "16");
-          rH.setAttribute("style", "fill: gray; cursor: s-resize");
-          rH.setAttribute("class", "hruler-separator");
+          rH.setAttribute("style", "cursor: s-resize");
+          rH.setAttribute("class", "ruler-separator");
           rH.setAttribute("pos", aPos);
           rH.setAttribute("size", aSize);
           rH.setAttribute("ruler-separator-position", "bottom");
@@ -668,7 +662,7 @@
       <handler event="mousedown">
         <![CDATA[
           var elt = event.originalTarget;
-          if (elt.getAttribute("class") != "hruler-separator")
+          if (elt.getAttribute("class") != "ruler-separator")
             return; 
 
           this.mRulerSeparatorPosition = elt.getAttribute("ruler-separator-position");

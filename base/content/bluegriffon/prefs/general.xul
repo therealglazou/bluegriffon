@@ -11,7 +11,10 @@
 
   <prefpane id="generalPrefPane">
     <preferences>
+      <preference id="pref-iconsize"       name="bluegriffon.toolbar.icons" type="string"/>
+      <preference id="pref-wysiwygTheme"   name="bluegriffon.wysiwyg.theme" type="string"/>
       <preference id="pref-tabmode"        name="bluegriffon.tabs.position" type="string"/>
+      <preference id="pref-maintoolbar"    name="bluegriffon.toolbar.enabled" type="bool"/>
       <preference id="pref-showIDs"        name="bluegriffon.structurebar.id.show" type="bool"/>
       <preference id="pref-showClasses"    name="bluegriffon.structurebar.class.show" type="bool"/>
       <preference id="pref-showLangs"      name="bluegriffon.structurebar.lang.show" type="bool"/>
@@ -19,6 +22,30 @@
       <preference id="pref-spellCheck"     name="bluegriffon.spellCheck.enabled" type="bool"/>
       <preference id="pref-suggestions"    name="bluegriffon.spellCheck.suggestions" type="int"/>
     </preferences>
+
+    <groupbox>
+      <caption label="&theme.label;"/>
+      <radiogroup id="wysiwygThemeRadiogroup"
+                  orient="horizontal"
+                  preference="pref-wysiwygTheme">
+        <radio label="Black" value="black"/>
+        <radio label="Light" value="light"/>
+      </radiogroup>
+    </groupbox>
+
+    <groupbox>
+      <caption label="&mainToolbar.label;"/>
+      <checkbox id="mainToolbarVisibilityCheckbox"
+                preference="pref-maintoolbar"
+                label="&mainToolbarEnabled.label;"/>
+      <radiogroup id="wysiwygIconSizeRadiogroup"
+                  orient="horizontal"
+                  preference="pref-iconsize">
+        <radio label="&toolbarIconSizeSmall.label;" value="small"/>
+        <radio label="&toolbarIconSizeMedium.label;" value="medium"/>
+        <radio label="&toolbarIconSizeLarge.label;" value="large"/>
+      </radiogroup>
+    </groupbox>
 
     <groupbox>
       <caption label="&tabPosition.label;"/>

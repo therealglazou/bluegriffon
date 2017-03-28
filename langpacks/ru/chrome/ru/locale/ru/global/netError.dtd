@@ -2,103 +2,97 @@
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 
-<!ENTITY loadError.label "Page Load Error">
-<!ENTITY retry.label "Try Again">
+<!ENTITY loadError.label "Ошибка загрузки страницы">
+<!ENTITY retry.label "Попробовать снова">
 
 <!-- Specific error messages -->
 
-<!ENTITY connectionFailure.title "Failed to Connect">
-<!ENTITY connectionFailure.longDesc "<p>Though the site seems valid, the browser was unable to establish a connection.</p><ul><li>Could the site be temporarily unavailable? Try again later.</li><li>Are you unable to browse other sites?  Check the computer's network connection.</li><li>Is your computer or network protected by a firewall or proxy? Incorrect settings can interfere with Web browsing.</li></ul>">
+<!ENTITY connectionFailure.title "Ошибка соединения">
+<!ENTITY connectionFailure.longDesc "<p>Браузеру не удалось установить соединение с указанным сайтом, хотя тот, скорее всего, существует.</p><ul><li>Возможно, сайт временно недоступен, в этом случае подождите некоторое время и попробуйте снова.</li><li>Если вам не удалось открыть другие сайты, проверьте настройки соединения компьютера с сетью.</li><li>Если ваш компьютер или локальная сеть защищены межсетевым экраном или прокси-сервером, проверьте их, так как неверные настройки могут помешать просмотру веб-сайтов.</li></ul>">
 
-<!ENTITY deniedPortAccess.title "Port Restricted for Security Reasons">
-<!ENTITY deniedPortAccess.longDesc "<p>The requested address specified a port (e.g. <q>mozilla.org:80</q> for port 80 on mozilla.org) normally used for purposes <em>other</em> than Web browsing. The browser has canceled the request for your protection and security.</p>">
+<!ENTITY deniedPortAccess.title "В целях безопасности обращение к порту было заблокировано">
+<!ENTITY deniedPortAccess.longDesc "<p>Для запрошенного адреса указан порт (пример: <q>mozilla.org:80</q> это порт 80 на сайте mozilla.org) который, как правило, <em>не используется</em> для работы с веб-сайтами. В целях безопасности браузер отменил данный запрос.</p>">
 
-<!ENTITY dnsNotFound.title "Address Not Found">
-<!ENTITY dnsNotFound.longDesc "<p>The browser could not find the host server for the provided address.</p><ul><li>Did you make a mistake when typing the domain? (e.g. <q><strong>ww</strong>.mozilla.org</q> instead of <q><strong>www</strong>.mozilla.org</q>)</li><li>Are you certain this domain address exists?  Its registration may have expired.</li><li>Are you unable to browse other sites?  Check your network connection and DNS server settings.</li><li>Is your computer or network protected by a firewall or proxy?  Incorrect settings can interfere with Web browsing.</li></ul>">
+<!ENTITY dnsNotFound.title "Адрес не найден">
+<!ENTITY dnsNotFound.longDesc "<p>Адрес (URL) не соответствует ни одному из известных сайтов и не может быть загружен.</p><ul><li>Возможно, вы сделали ошибку при наборе имени домена? (например, <q><strong>ww</strong>.mozilla.org</q> вместо <q><strong>www</strong>.mozilla.org</q>)</li><li>Возможно, такой домен уже не существует, так как срок его регистрация мог истечь.</li><li>Если вам также не удалось открыть другие сайты, проверьте настройки вашего соединения с сетью и адрес DNS сервера.</li><li>Если ваш компьютер или локальная сеть защищены межсетевым экраном или прокси-сервером, проверьте их, так как неверные настройки могут помешать просмотру веб-сайтов.</li></ul>">
 
-<!ENTITY fileNotFound.title "File Not Found">
-<!ENTITY fileNotFound.longDesc "<ul><li>Could the item have been renamed, removed, or relocated?</li><li>Is there a spelling, capitalization, or other typographical error in the address?</li><li>Do you have sufficient access permissions to the requested item?</li></ul>">
+<!ENTITY fileNotFound.title "Файл не найден">
+<!ENTITY fileNotFound.longDesc "<ul><li>Возможно, файл был переименован, удалён или перемещён?</li><li> Проверьте, не допустили ли вы в имени файла орфографическую ошибку, неверно указали регистр или совершили какую-либо ещё ошибку в адресе.</li><li> Проверьте, имеется ли у вас достаточно прав для просмотра запрошенного файла.</li></ul>">
 
-<!ENTITY generic.title "Cannot Complete Request">
-<!ENTITY generic.longDesc "<p>Additional information about this problem or error is currently unavailable.</p>">
+<!ENTITY fileAccessDenied.title "В доступе к файлу отказано">
+<!ENTITY fileAccessDenied.longDesc "<ul><li>Возможно, что он был удалён или перемещён, или разрешения на файл не дают получить к нему доступ.</li></ul>">
 
-<!ENTITY malformedURI.title "Invalid Address">
-<!ENTITY malformedURI.longDesc "<p>The provided address is not in a recognized format. Please check the location bar for mistakes and try again.</p>">
+<!ENTITY generic.title "Невозможно завершить запрос">
+<!ENTITY generic.longDesc "<p>Дополнительная информация об этой ошибке в данное время недоступна.</p>">
 
-<!ENTITY netInterrupt.title "Data Transfer Interrupted">
-<!ENTITY netInterrupt.longDesc "<p>The browser connected successfully, but the connection was interrupted while transferring information.  Please try again.</p><ul><li>Are you unable to browse other sites? Check the computer's network connection.</li><li>Still having trouble? Consult your network administrator or Internet provider for assistance.</li></ul>">
+<!ENTITY malformedURI.title "Некорректный адрес">
+<!ENTITY malformedURI.longDesc "<p>Синтаксис указанного адреса некорректен. Проверьте адрес на наличие ошибок и попробуйте снова.</p>">
 
-<!ENTITY notCached.title "Document Expired">
-<!ENTITY notCached.longDesc "<p>The requested document is not available in the browser's cache.</p><ul><li>As a security precaution, the browser does not automatically re-request sensitive documents.</li><li>Click Try Again to re-request the document from the website.</li></ul>">
+<!ENTITY netInterrupt.title "Передача данных прервана">
+<!ENTITY netInterrupt.longDesc "<p>Браузер успешно произвёл соединение, но оно было прервано при передаче информации. Пожалуйста, попробуйте снова.</p><ul><li>Если вам не удалось открыть другие сайты, проверьте настройки соединения компьютера с сетью.</li><li>Если у вас имеются другие проблемы, проконсультируйтесь с вашим системным администратором или Интернет-провайдером.</li></ul>">
 
-<!ENTITY netOffline.title "Offline Mode">
-<!ENTITY netOffline.longDesc2 "<p>The browser is operating in its offline mode and cannot connect to the requested item.</p><ul><li>Is the computer connected to an active network?</li><li>Press &quot;Try Again&quot; to switch to online mode and reload the page.</li></ul>">
+<!ENTITY notCached.title "Документ просрочен">
+<!ENTITY notCached.longDesc "<p>Запрошенный документ недоступен в кэше браузера.</p><ul><li>В целях безопасности браузер не производит автоматический повторный запрос важных документов.</li><li>Нажмите «Попробовать снова», чтобы повторно запросить документ с веб-сайта.</li></ul>">
 
-<!ENTITY contentEncodingError.title "Content Encoding Error">
-<!ENTITY contentEncodingError.longDesc "<p>The page you are trying to view cannot be shown because it uses an invalid or unsupported form of compression.</p><ul><li>Please contact the website owners to inform them of this problem.</li></ul>">
+<!ENTITY netOffline.title "Автономный режим">
+<!ENTITY netOffline.longDesc2 "<p>Браузер работает в автономном режиме и не может соединиться с запрошенным сайтом.</p><ul><li>Компьютер подсоединён к работающей сети?</li><li>Нажмите «Попробовать снова», чтобы подключиться к сети и перезагрузить страницу.</li></ul>">
 
-<!ENTITY unsafeContentType.title "Unsafe File Type">
+<!ENTITY contentEncodingError.title "Ошибка в типе содержимого">
+<!ENTITY contentEncodingError.longDesc "<p>Страница, которую вы пытаетесь просмотреть, не может быть показана, так как она использует неверную или неподдерживаемую форму компрессии.</p><ul><li>Пожалуйста, свяжитесь с владельцами веб-сайта и проинформируйте их об этой проблеме.</li></ul> ">
+
+<!ENTITY unsafeContentType.title "Небезопасный тип файла">
 <!ENTITY unsafeContentType.longDesc "
 <ul>
-  <li>Please contact the website owners to inform them of this problem.</li>
+   <li>Пожалуйста, свяжитесь с владельцами веб-сайта и проинформируйте их об этой проблеме.</li>
 </ul>
 ">
 
-<!ENTITY netReset.title "Connection Interrupted">
-<!ENTITY netReset.longDesc "<p>The network link was interrupted while negotiating a connection. Please try again.</p>">
+<!ENTITY netReset.title "Соединение прервано">
+<!ENTITY netReset.longDesc "<p>Связь с сайтом было оборвана на этапе установления соединения. Пожалуйста, попробуйте снова.</p>">
 
-<!ENTITY netTimeout.title "Network Timeout">
-<!ENTITY netTimeout.longDesc "<p>The requested site did not respond to a connection request and the browser has stopped waiting for a reply.</p><ul><li>Could the server be experiencing high demand or a temporary outage?  Try again later.</li><li>Are you unable to browse other sites? Check the computer's network connection.</li><li>Is your computer or network protected by a firewall or proxy?  Incorrect settings can interfere with Web browsing.</li><li>Still having trouble? Consult your network administrator or Internet provider for assistance.</li></ul>">
+<!ENTITY netTimeout.title "Время ожидания соединения истекло">
+<!ENTITY netTimeout.longDesc "<p>Истекло время ожидания во время попытки соединиться с указанным сайтом.</p><ul><li>Возможно, сервер сайта перегружен или временно недоступен. Подождите некоторое время и попробуйте снова.</li><li>Если вам не удалось открыть другие сайты, проверьте настройки соединения компьютера с сетью.</li><li>Если ваш компьютер или локальная сеть защищены межсетевым экраном или прокси-сервером, проверьте их, так как неверные настройки могут помешать просмотру веб-сайтов.</li><li>Если у вас имеются другие проблемы, проконсультируйтесь с вашим системным администратором или Интернет-провайдером.</li></ul>">
 
-<!ENTITY protocolNotFound.title "Unknown Protocol">
-<!ENTITY protocolNotFound.longDesc "<p>The address specifies a protocol (e.g. <q>wxyz://</q>) the browser does not recognize, so the browser cannot properly connect to the site.</p><ul><li>Are you trying to access multimedia or other non-text services? Check the site for extra requirements.</li><li>Some protocols may require third-party software or plugins before the browser can recognize them.</li></ul>">
+<!ENTITY unknownProtocolFound.title "Неизвестный протокол">
+<!ENTITY unknownProtocolFound.longDesc "<p>Адрес начинается с протокола, неизвестного браузеру (вроде <q>wxyz://</q>), поэтому браузер не может соединиться с сайтом.</p><ul><li>Если вы соединяетесь с сайтом, на котором имеются мультимедиа или другие нетекстовые сервисы, проверьте требования сайта к необходимому программному обеспечению.</li><li>Некоторые протоколы могут потребовать установки стороннего программного обеспечения или плагинов для браузера перед тем, как браузер сможет их распознать.</li></ul>">
 
-<!ENTITY proxyConnectFailure.title "Proxy Server Refused Connection">
-<!ENTITY proxyConnectFailure.longDesc "<p>The browser is configured to use a proxy server, but the proxy refused a connection.</p><ul><li>Is the browser's proxy configuration correct? Check the settings and try again.</li><li>Does the proxy service allow connections from this network?</li><li>Still having trouble? Consult your network administrator or Internet provider for assistance.</li></ul>">
+<!ENTITY proxyConnectFailure.title "Прокси-сервер отказал в соединении">
+<!ENTITY proxyConnectFailure.longDesc "<p>Браузер настроен на использование прокси-сервера, однако прокси-сервер отказал в соединении.</p><ul><li>Проверьте настройки прокси-сервера в браузере и попробуйте снова.</li><li> Проверьте, разрешает ли прокси-сервер соединения из этой сети.</li><li>Если у вас имеются другие проблемы, проконсультируйтесь с вашим системным администратором или Интернет-провайдером.</li></ul>">
 
-<!ENTITY proxyResolveFailure.title "Proxy Server Not Found">
-<!ENTITY proxyResolveFailure.longDesc "<p>The browser is configured to use a proxy server, but the proxy could not be found.</p><ul><li>Is the browser's proxy configuration correct? Check the settings and try again.</li><li>Is the computer connected to an active network?</li><li>Still having trouble? Consult your network administrator or Internet provider for assistance.</li></ul>">
+<!ENTITY proxyResolveFailure.title "Не найден прокси-сервер">
+<!ENTITY proxyResolveFailure.longDesc "<p>Браузер настроен на использование прокси-сервера, однако прокси-сервер не может быть найден.</p><ul><li>Проверьте настройки прокси-сервера в браузере и попробуйте снова.</li><li>Проверьте, подсоединен ли компьютер к активной сети.</li><li>Если у вас имеются другие проблемы, проконсультируйтесь с вашим системным администратором или Интернет-провайдером.</li></ul>">
 
-<!ENTITY redirectLoop.title "Redirect Loop">
-<!ENTITY redirectLoop.longDesc "<p>The browser has stopped trying to retrieve the requested item. The site is redirecting the request in a way that will never complete.</p><ul><li>Have you disabled or blocked cookies required by this site?</li><li><em>NOTE</em>: If accepting the site's cookies does not resolve the problem, it is likely a server configuration issue and not your computer.</li></ul>">
+<!ENTITY redirectLoop.title "Ошибка перенаправления">
+<!ENTITY redirectLoop.longDesc "<p>Браузер прекратил попытки загрузки страницы, так как сайт перенаправляет запрос таким образом, что он никогда не завершится.</p><ul><li>Возможно, вы отключили или заблокировали куки, требуемые этим сайтом.</li><li><em>Примечание</em>: Если разрешение принятия кук сайта не решает проблему, то, по всей вероятности, это проблема на сервере, а не на вашем компьютере.</li></ul>">
 
-<!ENTITY unknownSocketType.title "Incorrect Response">
-<!ENTITY unknownSocketType.longDesc "<p>The site responded to the network request in an unexpected way and the browser cannot continue.</p>">
+<!ENTITY unknownSocketType.title "Некорректный ответ">
+<!ENTITY unknownSocketType.longDesc "<p>Сайт ответил на запрос неожиданным образом и браузер не может обработать его ответ.</p>">
 
-<!ENTITY nssFailure2.title "Secure Connection Failed">
-<!ENTITY nssFailure2.longDesc "<p>The page you are trying to view cannot be shown because the authenticity of the received data could not be verified.</p><ul><li>Please contact the website owners to inform them of this problem.</li></ul>">
+<!ENTITY nssFailure2.title "Ошибка при установлении защищённого соединения">
+<!ENTITY nssFailure2.longDesc2 "<p>Страница, которую вы пытаетесь просмотреть, не может быть отображена, так как достоверность полученных данных не может быть проверена.</p><ul><li>Пожалуйста, свяжитесь с владельцами веб-сайта и проинформируйте их об этой проблеме.</li></ul>">
 
-<!ENTITY nssBadCert.title "Secure Connection Failed">
+<!ENTITY nssBadCert.title "Ошибка при установлении защищённого соединения">
 <!ENTITY nssBadCert.longDesc2 "<ul>
-<li>This could be a problem with the server's configuration, or it could be someone trying to impersonate the server.</li>
-<li>If you have connected to this server successfully in the past, the error may be temporary, and you can try again later.</li>
-</ul>
+<li>Это может быть проблемой с конфигурацией сервера или же кто-то пытается подменить нужный вам сервер другим.</li>
+<li>Если в прошлом вы успешно соединялись с этим сервером, то, возможно, эта ошибка является временной. Попробуйте зайти позже.</li>
+</ul>">
+
+<!ENTITY securityOverride.linkText "Или же вы можете добавить исключение…">
+<!ENTITY securityOverride.warningContent "
+<p>Вам не следует добавлять исключение, если вы используете соединение с Интернетом, которому не полностью доверяете, или если вы обычно не видите предупреждения при соединении с этим сервером.</p>
+<p>Если вы всё же хотите добавить исключение для данного сайта, вы можете сделать это в дополнительных настройках шифрования.</p>
 ">
 
-<!ENTITY malwareBlocked.title "Suspected Attack Site!">
-<!ENTITY malwareBlocked.longDesc "
-<p>Attack sites try to install programs that steal private information, use your computer to attack others, or damage your system.</p>
-<p>Website owners who believe their site has been reported as an attack site in error may <a href='http://www.stopbadware.org/home/reviewinfo' >request a review</a>.</p>
-">
+<!ENTITY cspBlocked.title "Заблокировано политикой защиты содержимого">
+<!ENTITY cspBlocked.longDesc "<p>Браузер заблокировал данный способ загрузки этой страницы, так как страница имеет политику защиты содержимого, которая это запрещает.</p>">
 
-<!ENTITY phishingBlocked.title "Suspected Web Forgery!">
-<!ENTITY phishingBlocked.longDesc "
-<p>Entering any personal information on this page may result in identity theft or other fraud.</p>
-<p>These types of web forgeries are used in scams known as phishing attacks, in which fraudulent web pages and emails are used to imitate sources you may trust.</p>
-">
+<!ENTITY corruptedContentErrorv2.title "Ошибка искажения содержимого">
+<!ENTITY corruptedContentErrorv2.longDesc "<p>Страница, которую вы пытаетесь просмотреть, не может быть показана, так как была обнаружена ошибка при передаче данных.</p><ul><li>Пожалуйста, свяжитесь с владельцами веб-сайта и проинформируйте их об этой проблеме.</li></ul>">
 
-<!ENTITY cspFrameAncestorBlocked.title "Blocked by Content Security Policy">
-<!ENTITY cspFrameAncestorBlocked.longDesc "<p>The browser prevented this page from loading in this way because the page has a content security policy that disallows it.</p>">
+<!ENTITY remoteXUL.title "Удалённый XUL">
+<!ENTITY remoteXUL.longDesc "<p><ul><li>Пожалуйста, свяжитесь с владельцами веб-сайта, чтобы проинформировать их об этой проблеме.</li></ul></p>">
 
-<!ENTITY corruptedContentError.title "Corrupted Content Error">
-<!ENTITY corruptedContentError.longDesc "<p>The page you are trying to view cannot be shown because an error in the data transmission was detected.</p><ul><li>Please contact the website owners to inform them of this problem.</li></ul>">
-
-<!ENTITY remoteXUL.title "Remote XUL">
-<!ENTITY remoteXUL.longDesc "<p><ul><li>Please contact the website owners to inform them of this problem.</li></ul></p>">
-
-<!-- Include app-specific error messages - do not change this in localization!
-     Some applications might override netErrorApp.dtd with their specific version,
-     this inclusion needs to be intact for that approach to work correctly.
-     Please, try to keep this at the end of the file. -->
-<!ENTITY % netErrorAppDTD SYSTEM "chrome://global/locale/netErrorApp.dtd">
-%netErrorAppDTD;
+<!ENTITY inadequateSecurityError.title "Ваше соединение не защищено">
+<!-- LOCALIZATION NOTE (inadequateSecurityError.longDesc) - Do not translate
+     "NS_ERROR_NET_INADEQUATE_SECURITY". -->
+<!ENTITY inadequateSecurityError.longDesc "<p><span class='hostname'></span> использует защитную технологию, которая является устаревшей и уязвимой для атаки. Злоумышленник может легко выявить информацию, которая, как вы думали, находится в безопасности. Для того, чтобы вы смогли посетить веб-сайт, администратор веб-сайта должен сначала исправить его сервер.</p><p>Код ошибки: NS_ERROR_NET_INADEQUATE_SECURITY</p>">

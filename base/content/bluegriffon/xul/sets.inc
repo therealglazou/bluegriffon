@@ -26,7 +26,7 @@
 
 #ifdef XP_MACOSX
   <key id="key_preferencesCmdMac" key="&preferencesCmdMac.commandkey;" modifiers="accel"/>
-  <key id="key_hideThisAppCmdMac" key="&hideThisAppCmdMac.commandkey;" modifiers="accel"/>
+  <key id="key_hideThisAppCmdMac" key="&hideThisAppCmdMac2.commandkey;" modifiers="accel"/>
   <key id="key_hideOtherAppsCmdMac" key="&hideOtherAppsCmdMac.commandkey;" modifiers="accel,alt"/>
 #endif
 
@@ -75,7 +75,9 @@
 
   <command id="cmd_list"             oncommand="goDoCommand('cmd_list')"/>
   <command id="cmd_table"            oncommand="goDoCommand('cmd_table')"/>
+  <command id="cmd_InsertTable"      oncommand="goDoCommand('cmd_InsertTable')"/>
   <command id="cmd_image"            oncommand="goDoCommand('cmd_image')"/>
+  <command id="cmd_rebuildTOC"       oncommand="goDoCommand('cmd_rebuildTOC')"/>
   <command id="cmd_anchor"           oncommand="goDoCommand('cmd_anchor')"/>
   <command id="cmd_link"             oncommand="goDoCommand('cmd_link')"/>
   <command id="cmd_hr"               oncommand="goDoCommand('cmd_hr')"/>
@@ -131,6 +133,7 @@
   <command id="cmd_editLink"          oncommand="goDoCommand('cmd_editLink')"/>
 
   <command id="cmd_toggleView"        oncommand="goDoCommand('cmd_toggleView')"/>
+  <command id="cmd_cleanup"           oncommand="goDoCommand('cmd_cleanup')" label="&markupCleanerCmd.label;" accesskey="&markupcleaner.accesskey;"/>
 </commandset>
 
 <commandset id="composerStyleMenuItems"
@@ -162,6 +165,9 @@
   <command id="cmd_class"        state=""          oncommand="ComposerCommands.doStatefulCommand('cmd_class', event.target.value)"/>
   <command id="cmd_id"           state=""          oncommand="ComposerCommands.doStatefulCommand('cmd_id', event.target.value)"/>
   <command id="cmd_ariaRole"     state=""          oncommand="ComposerCommands.doStatefulCommand('cmd_ariaRole', event.target.value)"/>
+  <command id="cmd_removeStyles"                   oncommand="goDoCommand('cmd_removeStyles')"/>
+  <command id="cmd_removeLinks"                    oncommand="goDoCommand('cmd_removeLinks')"/>
+
   <command id="cmd_renderedHTMLEnabler"/>
   <command id="cmd_renderedSourceEnabler"/>
   <command id="cmd_renderedAllEnabler"/>
@@ -180,9 +186,6 @@
   <command id="cmd_indent"                         oncommand="goDoCommand('cmd_indent')"/>
   <command id="cmd_outdent"                        oncommand="goDoCommand('cmd_outdent')"/>
   <command id="cmd_blockquote"                     oncommand="goDoNoCSSCommand('cmd_blockquote')"/>
-
-  <command id="cmd_removeStyles"                   oncommand="goDoCommand('cmd_removeStyles')"/>
-  <command id="cmd_removeLinks"                    oncommand="goDoCommand('cmd_removeLinks')"/>
 
   <command id="cmd_fontColor"       state=""/>
   <command id="cmd_backgroundColor" state="transparent"/>
@@ -238,6 +241,7 @@
   <command id="cmd_save"           label="&saveCmd.label;"           oncommand="goDoCommand('cmd_save')"/>
   <command id="cmd_saveAs"         label="&saveAsCmd.label;"         oncommand="goDoCommand('cmd_saveAs')"/>
   <command id="cmd_closeTab"       label="&closeTabCmd.label;"       oncommand="goDoCommand('cmd_closeTab')"/>
+  <command id="cmd_closeEbook"     label="&closeEbookCmd.label;"     oncommand="goDoCommand('cmd_closeEbook')"/>
 
   <command id="cmd_print"          label="&printCmd.label;"          oncommand="goDoCommand('cmd_print')"/>
   <command id="cmd_printSettings"  label="&printSetupCmd.label;"     oncommand="goDoCommand('cmd_printSettings')"/>
@@ -246,13 +250,6 @@
   <command id="cmd_bgfindagain"    label="&findAgainCmd.label;"      accesskey="&findAgainCmd.accesskey;" oncommand="goDoCommand('cmd_bgfindagain')"/>
   <command id="cmd_replace"        label="&replaceCmd.label;"        accesskey="&replaceCmd.accesskey;" oncommand="goDoCommand('cmd_replace')"/>
   <command id="cmd_browse"                                           oncommand="goDoCommand('cmd_browse')"/>
-</commandset>
-
-<commandset id="composerEditMenuItems"
-            commandupdater="true"
-            events="create, mode_switch"
-            oncommandupdate="ComposerCommands.goUpdateComposerMenuItems(this)">
-  <command id="cmd_cleanup"         oncommand="goDoCommand('cmd_cleanup')"      label="&markupCleanerCmd.label;" accesskey="&markupcleaner.accesskey;"/>
 </commandset>
 
 <commandset id="composerTableMenuItems"
@@ -266,7 +263,6 @@
   <command id="cmd_SelectColumn"        oncommand="goDoCommand('cmd_SelectColumn')"/>
   <command id="cmd_SelectCell"          oncommand="goDoCommand('cmd_SelectCell')"/>
   <command id="cmd_SelectAllCells"      oncommand="goDoCommand('cmd_SelectAllCells')"/>
-  <command id="cmd_InsertTable"         oncommand="goDoCommand('cmd_InsertTable')"/>
   <command id="cmd_InsertTableCaption"  oncommand="goDoCommand('cmd_InsertTableCaption')"/>
   <command id="cmd_InsertRowAbove"      oncommand="goDoCommand('cmd_InsertRowAbove')"/>
   <command id="cmd_InsertRowBelow"      oncommand="goDoCommand('cmd_InsertRowBelow')"/>

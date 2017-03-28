@@ -1,9 +1,23 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/.  -->
 <!ENTITY aboutDialog.title          "À propos de &brandFullName;">
+
+<!-- LOCALIZATION NOTE (update.checkForUpdatesButton.*, update.updateButton.*):
+# Only one button is present at a time.
+# The button when displayed is located directly under the Firefox version in
+# the about dialog (see bug 596813 for screenshots).
+-->
+<!ENTITY update.checkForUpdatesButton.label       "Rechercher des mises à jour">
+<!ENTITY update.checkForUpdatesButton.accesskey   "R">
+<!ENTITY update.updateButton.label2               "Redémarrer &brandShortName; pour appliquer la mise à jour">
+<!ENTITY update.updateButton.accesskey            "R">
+
 
 <!-- LOCALIZATION NOTE (warningDesc.version): This is a warning about the experimental nature of Nightly and Aurora builds. It is only shown in those versions. -->
 <!ENTITY warningDesc.version        "&brandShortName; est expérimental et peut être instable.">
 <!-- LOCALIZATION NOTE (warningDesc.telemetryDesc): This is a notification that Nightly/Aurora builds automatically send Telemetry data back to Mozilla. It is only shown in those versions. "It" refers to brandShortName. -->
-<!ENTITY warningDesc.telemetryDesc  "Il envoie automatiquement des informations sur les performances, le matériel, l'utilisation et les personnalisations à &vendorShortName; pour aider à améliorer &brandShortName;.">
+<!ENTITY warningDesc.telemetryDesc  "Il envoie automatiquement des informations sur les performances, le matériel, l’utilisation et les personnalisations à &vendorShortName; pour aider à améliorer &brandShortName;.">
 
 <!-- LOCALIZATION NOTE (community.exp.*) This paragraph is shown in "experimental" builds, i.e. Nightly and Aurora builds, instead of the other "community.*" strings below. -->
 <!ENTITY community.exp.start        "">
@@ -12,7 +26,7 @@
 <!ENTITY community.exp.middle       " est une ">
 <!-- LOCALIZATION NOTE (community.exp.creditslink): This is a link title that links to about:credits. -->
 <!ENTITY community.exp.creditsLink  "communauté mondiale">
-<!ENTITY community.exp.end          " de contributeurs qui travaillent ensemble pour garder Internet ouvert, public et accessible à tous.">
+<!ENTITY community.exp.end          " de contributeurs qui travaillent ensemble pour garder le Web ouvert, public et accessible à tous.">
 
 <!ENTITY community.start2           "&brandShortName; est conçu par ">
 <!-- LOCALIZATION NOTE (community.mozillaLink): This is a link title that links to http://www.mozilla.org/. -->
@@ -20,30 +34,36 @@
 <!ENTITY community.middle2          ", une communauté mondiale de ">
 <!-- LOCALIZATION NOTE (community.creditsLink): This is a link title that links to about:credits. -->
 <!ENTITY community.creditsLink      "contributeurs">
-<!ENTITY community.end3             " qui travaillent ensemble pour garder Internet ouvert, public et accessible à tous.">
+<!ENTITY community.end3             " qui travaillent ensemble pour garder le Web ouvert, public et accessible à tous.">
 
-<!ENTITY contribute.start           "Ça vous intéresse ? ">
-<!-- LOCALIZATION NOTE (contribute.getInvolvedLink): This is a link title that links to http://www.mozilla.org/contribute/. -->
-<!ENTITY contribute.getInvolvedLink "Participez !">
-<!ENTITY contribute.end             "">
+<!ENTITY helpus.start               "Vous souhaitez aider ? Vous pouvez ">
+<!-- LOCALIZATION NOTE (helpus.donateLink): This is a link title that links to https://sendto.mozilla.org/page/contribute/Give-Now?source=mozillaorg_default_footer&ref=firefox_about&utm_campaign=firefox_about&utm_source=firefox&utm_medium=referral&utm_content=20140929_FireFoxAbout. -->
+<!ENTITY helpus.donateLink          "faire un don">
+<!ENTITY helpus.middle              " ou bien ">
+<!-- LOCALIZATION NOTE (helpus.getInvolvedLink): This is a link title that links to http://www.mozilla.org/contribute/. -->
+<!ENTITY helpus.getInvolvedLink     "participer">
+<!ENTITY helpus.end                 ".">
+
+<!ENTITY releaseNotes.link          "Notes de version">
 
 <!-- LOCALIZATION NOTE (bottomLinks.license): This is a link title that links to about:license. -->
 <!ENTITY bottomLinks.license        "Informations de licence">
 
 <!-- LOCALIZATION NOTE (bottomLinks.rights): This is a link title that links to about:rights. -->
-<!ENTITY bottomLinks.rights         "Droits de l'utilisateur">
+<!ENTITY bottomLinks.rights         "Droits de l’utilisateur">
 
-<!-- LOCALIZATION NOTE (bottomLinks.privacy): This is a link title that links to http://www.mozilla.com/legal/privacy/. -->
+<!-- LOCALIZATION NOTE (bottomLinks.privacy): This is a link title that links to https://www.mozilla.org/legal/privacy/. -->
 <!ENTITY bottomLinks.privacy        "Politique de confidentialité">
 
 <!-- LOCALIZATION NOTE (update.checkingForUpdates): try to make the localized text short (see bug 596813 for screenshots). -->
 <!ENTITY update.checkingForUpdates  "Recherche de mises à jour…">
-<!-- LOCALIZATION NOTE (update.checkingAddonCompat): try to make the localized text short (see bug 596813 for screenshots). -->
-<!ENTITY update.checkingAddonCompat "Vérification de la compatibilité des modules…">
 <!-- LOCALIZATION NOTE (update.noUpdatesFound): try to make the localized text short (see bug 596813 for screenshots). -->
 <!ENTITY update.noUpdatesFound      "&brandShortName; est à jour">
 <!-- LOCALIZATION NOTE (update.adminDisabled): try to make the localized text short (see bug 596813 for screenshots). -->
 <!ENTITY update.adminDisabled       "Les mises à jour sont désactivées par votre administrateur système">
+<!-- LOCALIZATION NOTE (update.otherInstanceHandlingUpdates): try to make the localized text short -->
+<!ENTITY update.otherInstanceHandlingUpdates "&brandShortName; est mis à jour par une autre instance">
+<!ENTITY update.restarting          "Redémarrage…">
 
 <!-- LOCALIZATION NOTE (update.failed.start,update.failed.linkText,update.failed.end):
      update.failed.start, update.failed.linkText, and update.failed.end all go into
@@ -61,7 +81,17 @@
 <!ENTITY update.manual.start        "Mises à jour disponibles à ">
 <!ENTITY update.manual.end          "">
 
-<!-- LOCALIZATION NOTE (update.downloading.start,update.downloading.end): update.downloading.start and
+<!-- LOCALIZATION NOTE (update.unsupported.start,update.unsupported.linkText,update.unsupported.end):
+     update.unsupported.start, update.unsupported.linkText, and
+     update.unsupported.end all go into one line with linkText being wrapped in
+     an anchor that links to a site to provide additional information regarding
+     why the system is no longer supported. As this is all in one line, try to
+     make the localized text short (see bug 843497 for screenshots). -->
+<!ENTITY update.unsupported.start    "La dernière version n’est pas disponible pour votre système. ">
+<!ENTITY update.unsupported.linkText "En savoir plus">
+<!ENTITY update.unsupported.end      "">
+
+<!-- LOCALIZATION NOTE (update.downloading.start,update.downloading.end): update.downloading.start and 
      update.downloading.end all go into one line, with the amount downloaded inserted in between. As this
      is all in one line, try to make the localized text short (see bug 596813 for screenshots). The — is
      the "em dash" (long dash).

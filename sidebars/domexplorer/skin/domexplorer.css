@@ -35,18 +35,41 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
+@import url("chrome://bluegriffon/skin/black.css");
+
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+@namespace html url("http://www.w3.org/1999/xhtml");
+
 #elementsTree {
   margin: 4px;
+  border: thin solid black;
 }
 
 #tabbox {
-  margin-bottom: 4px;
+  margin-top: 4px;
 }
 
 #attributesTree, #cssTree {
   margin: 0px;
+  border: thin solid black;
 }
 
 #structureBarContextMenu {
   -moz-appearance: menupopup;
+}
+
+page {
+  -moz-appearance: none;
+  background-color: transparent;
+  color: white;
+}
+
+tabs {
+  color: black;
+}
+
+tabpanels {
+  -moz-appearance: none;
+  padding-left: 0px;
+  padding-right: 0px;
 }

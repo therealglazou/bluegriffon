@@ -1,0 +1,73 @@
+@import url("chrome://bluegriffon/skin/black.css");
+
+dialog {
+  -moz-appearance: none;
+  /* make the rule important to override cssproperties transparency here */
+  background-color: var(--bg-dark-gray) ! important;
+  color: var(--bg-main-foreground-color);
+}
+
+#optionalMetadataGridRows > row.metadata {
+  -moz-binding: url("chrome://epub/content/epub/metadata3.xml#optionalMetadataRow");
+}
+
+#mandatoryMetadataGridRows > row.metadata {
+  -moz-binding: url("chrome://epub/content/epub/metadata3.xml#mandatoryMetadataRow");
+}
+
+row.property {
+  -moz-binding: url("chrome://epub/content/epub/metadata3.xml#propertyRow");
+}
+
+.metadata-delete-button {
+  visibility: hidden;
+  list-style-image: url("chrome://global/skin/icons/close.png");
+  -moz-image-region: rect(0, 16px, 16px, 0);
+  margin: 0px;
+}
+
+.metadata-add-button {
+  visibility: hidden;
+  margin: 0px;
+}
+
+row:hover .metadata-delete-button,
+row:hover .metadata-add-button {
+  visibility: visible;
+}
+
+.metadata-delete-button:hover {
+  -moz-image-region: rect(0, 32px, 16px, 16px);
+}
+
+.metadata-delete-button:hover:active {
+  -moz-image-region: rect(0, 48px, 16px, 32px);
+}
+
+.metadata-add-button {
+  list-style-image: url("chrome://epub/content/epub/plus.png");
+}
+
+.metadata-add-button:hover {
+  list-style-image: url("chrome://epub/content/epub/plus-active.png");
+}
+
+#addMetadataButton {
+  list-style-image: url("chrome://epub/content/epub/plus.png");
+}
+
+#addMetadataButton:hover {
+  list-style-image: url("chrome://epub/content/epub/plus-active.png");
+}
+
+#mainBox {
+  overflow: auto;
+}
+
+#mandatoryMetadataTree {
+  margin: 0px;
+}
+
+.invisible {
+  visibility: hidden;
+}

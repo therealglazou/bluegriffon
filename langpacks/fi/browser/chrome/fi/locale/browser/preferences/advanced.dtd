@@ -1,3 +1,7 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
 <!-- Note: each tab panel must contain unique accesskeys -->
 
 <!ENTITY generalTab.label                "Yleiset">
@@ -6,10 +10,12 @@
 
 <!ENTITY useCursorNavigation.label       "Liiku sivuilla nuolinäppäimillä">
 <!ENTITY useCursorNavigation.accesskey   "s">
-<!ENTITY searchStartTyping.label         "Ala etsiä tekstistä heti kirjoitettaessa">
-<!ENTITY searchStartTyping.accesskey     "A">
-<!ENTITY blockAutoRefresh.label          "Varoita, kun sivustot yrittävät päivittää sivua tai uudelleenohjata toiselle sivulle">
-<!ENTITY blockAutoRefresh.accesskey      "r">
+<!ENTITY searchOnStartTyping.label       "Ala etsiä tekstistä heti kirjoitettaessa">
+<!ENTITY searchOnStartTyping.accesskey   "A">
+<!ENTITY blockAutoReload.label           "Varoita, kun sivustot yrittävät päivittää sivua tai uudelleenohjata toiselle sivulle">
+<!ENTITY blockAutoReload.accesskey       "r">
+<!ENTITY useOnScreenKeyboard.label       "Näytä kosketusnäppäimistö tarvittaessa">
+<!ENTITY useOnScreenKeyboard.accesskey   "N">
 
 <!ENTITY browsing.label                  "Selaus">
 
@@ -19,18 +25,25 @@
 <!ENTITY useSmoothScrolling.accesskey    "e">
 <!ENTITY allowHWAccel.label              "Käytä laitteistokiihdytystä jos mahdollista">
 <!ENTITY allowHWAccel.accesskey          "K">
-<!ENTITY checkSpelling.label             "Oikolue käyttäjän kirjoitukset">
-<!ENTITY checkSpelling.accesskey         "l">
-<!ENTITY doNotTrack.label                "Ilmoita sivustoille, etten halua niiden seuraavan minua">
-<!ENTITY doNotTrack.accesskey            "I">
+<!ENTITY checkUserSpelling.label         "Oikolue käyttäjän kirjoitukset">
+<!ENTITY checkUserSpelling.accesskey     "l">
 
-<!ENTITY systemDefaults.label            "Järjestelmän oletukset">
-<!ENTITY alwaysCheckDefault.label        "&brandShortName; tarkistaa käynnistyessään, onko se oletusselain"><!--XXX-->
-<!ENTITY alwaysCheckDefault.accesskey    "F">
-<!ENTITY checkNow.label                  "Tarkista heti">
-<!ENTITY checkNow.accesskey              "T">
-<!ENTITY submitCrashes.label             "Lähetä kaatumisilmoitus">
-<!ENTITY submitCrashes.accesskey         "ä">
+<!ENTITY dataChoicesTab.label            "Kerätyt tiedot">
+
+<!ENTITY healthReportDesc.label          "Antaa sinulle tietoa selaimesi suorituskyvystä ja jakaa tiedot selaimesi tilasta &vendorShortName;n kanssa">
+<!ENTITY enableHealthReport.label        "&brandShortName;in terveydentilaraportti käytössä">
+<!ENTITY enableHealthReport.accesskey    "F">
+<!ENTITY healthReportLearnMore.label     "Lue lisää">
+
+<!ENTITY telemetryDesc.label             "Lähetä &vendorShortName;lle tietoja selaimen suorituskyvystä, käytöstä, muokkauksista ja käytetystä laitteistosta auttaaksesi meitä kehittämään &brandShortName;ia">
+<!ENTITY enableTelemetryData.label       "Jaa muita tietoja (so. kaukomittaustietoja)">
+<!ENTITY enableTelemetryData.accesskey   "k">
+<!ENTITY telemetryLearnMore.label        "Lue lisää">
+
+<!ENTITY crashReporterDesc2.label         "Kaatumisilmoitusten ansiosta &vendorShortName; voi korjata ongelmia ja tehdä selaimestasi vakaamman ja turvallisemman">
+<!ENTITY alwaysSubmitCrashReports.label   "Salli, että &brandShortName; lähettää lähettämättömät kaatumisilmoitukset puolestasi">
+<!ENTITY alwaysSubmitCrashReports.accesskey "S">
+<!ENTITY crashReporterLearnMore.label     "Lue lisää">
 
 <!ENTITY networkTab.label                "Verkko">
 
@@ -40,7 +53,17 @@
 <!ENTITY connectionSettings.label        "Asetukset…">
 <!ENTITY connectionSettings.accesskey    "A">
 
-<!ENTITY offlineStorage.label            "Yhteydetöntä tilaa varten tallennetut tiedot">
+<!ENTITY httpCache.label                 "Välimuistissa oleva verkkosisältö">
+
+<!ENTITY offlineStorage2.label           "Yhteydetöntä tilaa varten tallennetut tiedot">
+
+<!--  Site Data section manages sites using Storage API and is under Network -->
+<!ENTITY siteData.label                  "Sivustojen tallentamat tiedot">
+<!ENTITY clearSiteData.label             "Tyhjennä kaikki tiedot">
+<!ENTITY clearSiteData.accesskey         "k">
+<!ENTITY siteDataSettings.label          "Asetukset…">
+<!ENTITY siteDataSettings.accesskey      "e">
+<!ENTITY siteDataLearnMoreLink.label     "Lue lisää">
 
 <!-- LOCALIZATION NOTE:
   The entities limitCacheSizeBefore.label and limitCacheSizeAfter.label appear on a single
@@ -50,108 +73,55 @@
 -->
 <!ENTITY limitCacheSizeBefore.label      "Rajoita väliaikaistiedostojen viemä tila">
 <!ENTITY limitCacheSizeBefore.accesskey  "R">
-<!ENTITY limitCacheSizeAfter.label       "Mt:uun">
+<!ENTITY limitCacheSizeAfter.label       "megatavuun">
 <!ENTITY clearCacheNow.label             "Tyhjennä heti">
 <!ENTITY clearCacheNow.accesskey         "T">
+<!ENTITY clearOfflineAppCacheNow.label   "Tyhjennä heti">
+<!ENTITY clearOfflineAppCacheNow.accesskey "y">
 <!ENTITY overrideSmartCacheSize.label    "Ohita automaattinen väliaikatiedostojen hallinta">
 <!ENTITY overrideSmartCacheSize.accesskey "h">
 
 <!ENTITY updateTab.label                 "Päivitys">
 
-<!ENTITY autoCheck.label                 "Hae päivityksiä väliajoin:">
-<!ENTITY enableAppUpdate.label           "&brandShortName;iin">
-<!ENTITY enableAppUpdate.accesskey       "F">
-<!ENTITY enableAddonsUpdate2.label       "Lisäosat">
-<!ENTITY enableAddonsUpdate2.accesskey   "L">
-<!ENTITY enableSearchUpdate.label        "Hakukoneisiin">
-<!ENTITY enableSearchUpdate.accesskey    "H">
-<!ENTITY whenUpdatesFound.label          "Kun päivitys &brandShortName;iin löytyy:">
-<!ENTITY askMe.label                     "Kysy, mitä tehdään">
-<!ENTITY askMe.accesskey                 "K">
-<!ENTITY modeAutomatic.label             "Lataa ja asenna päivitys automaattisesti">
-<!ENTITY modeAutomatic.accesskey         "L">
-<!ENTITY modeAutoAddonWarn.label         "Varoita, jos päivitys poistaa käytöstä lisäosia">
-<!ENTITY modeAutoAddonWarn.accesskey     "V">
+<!ENTITY updateApplication.label         "&brandShortName;in päivitykset">
+<!ENTITY updateAuto1.label               "Asenna päivitykset automaattisesti (suositeltu: turvallisin)">
+<!ENTITY updateAuto1.accesskey           "A">
+<!ENTITY updateCheckChoose.label         "Hae päivityksiä, mutta minä päätän asennetaanko ne">
+<!ENTITY updateCheckChoose.accesskey     "H">
+<!ENTITY updateManual.label              "Älä hae päivityksiä (ei suositeltu: turvallisuusriski)">
+<!ENTITY updateManual.accesskey          "Ä">
+
 <!ENTITY updateHistory.label             "Näytä päivityshistoria">
 <!ENTITY updateHistory.accesskey         "N">
 
-<!ENTITY offlineNotify.label             "Näytä ilmoitus, kun sivusto pyytää lupaa tallentaa tietoa yhteydetöntä tilaa varten">
-<!ENTITY offlineNotify.accesskey         "N">
-<!ENTITY offlineNotifyExceptions.label   "Poikkeukset…">
-<!ENTITY offlineNotifyExceptions.accesskey "P">
+<!ENTITY useService.label                "Asenna päivitykset taustalla toimivalla palvelulla">
+<!ENTITY useService.accesskey            "u">
 
-<!ENTITY offlineAppsList.label           "Seuraavat verkkosivustot ovat tallentaneet tietoja yhteydetöntä tilaa varten:">
+<!ENTITY autoUpdateOthers.label          "Automaattinen päivitys">
+<!ENTITY enableSearchUpdate.label        "Hakukoneet">
+<!ENTITY enableSearchUpdate.accesskey    "k">
+
+<!ENTITY offlineStorageNotify.label               "Näytä ilmoitus, kun sivusto pyytää lupaa tallentaa tietoa yhteydetöntä tilaa varten">
+<!ENTITY offlineStorageNotify.accesskey           "N">
+<!ENTITY offlineStorageNotifyExceptions.label     "Poikkeukset…">
+<!ENTITY offlineStorageNotifyExceptions.accesskey "P">
+
+<!ENTITY offlineAppsList2.label          "Seuraavilla sivustoilla on lupa tallentaa tietoja yhteydetöntä tilaa varten:">
 <!ENTITY offlineAppsList.height          "7em">
 <!ENTITY offlineAppsListRemove.label     "Poista…">
 <!ENTITY offlineAppsListRemove.accesskey "s">
 <!ENTITY offlineAppRemove.confirm        "Poista yhteydetöntä tilaa varten tallennetut tiedot">
 
-<!ENTITY encryptionTab.label             "Salaus">
-
-<!ENTITY protocols.label                 "Yhteyskäytännöt">
-<!ENTITY useSSL3.label                   "Salli SSL 3.0 -turvakäytäntö">
-<!ENTITY useSSL3.accesskey               "3">
-<!ENTITY useTLS1.label                   "Salli TLS 1.0 -turvakäytäntö">
-<!ENTITY useTLS1.accesskey               "1">
-<!ENTITY certificates.label              "Varmenteet">
-<!ENTITY certSelection.description       "Sivuston pyytäessä varmennettani:">
-<!ENTITY certs.auto                      "Valitse sellainen automaattisesti">
-<!ENTITY certs.auto.accesskey            "V">
-<!ENTITY certs.ask                       "Kysy joka kerta">
-<!ENTITY certs.ask.accesskey             "K">
+<!ENTITY certificateTab.label            "Varmenteet">
+<!ENTITY certPersonal.label              "Pyynnöt">
+<!ENTITY certPersonal.description        "Sivuston pyytäessä varmennettani:">
+<!ENTITY selectCerts.auto                "Valitse sellainen automaattisesti">
+<!ENTITY selectCerts.auto.accesskey      "V">
+<!ENTITY selectCerts.ask                 "Kysy joka kerta">
+<!ENTITY selectCerts.ask.accesskey       "K">
+<!ENTITY enableOCSP.label                "Vahvista varmenteiden kelpoisuus OCSP-vastaajapalvelimilta">
+<!ENTITY enableOCSP.accesskey            "C">
 <!ENTITY viewCerts.label                 "Näytä varmenteet">
 <!ENTITY viewCerts.accesskey             "N">
-<!ENTITY viewCRLs.label                  "Sulkulistat">
-<!ENTITY viewCRLs.accesskey              "S">
-<!ENTITY verify2.label                   "Varmennus">
-<!ENTITY verify2.accesskey               "m">
 <!ENTITY viewSecurityDevices.label       "Turvallisuuslaitteet">
 <!ENTITY viewSecurityDevices.accesskey   "T">
-
-<!ENTITY clearOfflineAppCacheNow.accesskey "N">
-<!ENTITY clearOfflineAppCacheNow.label   "Clear Now">
-<!ENTITY crashReporterDesc.label         "&brandShortName; submits crash reports to help &vendorShortName; make your browser more stable and secure">
-<!ENTITY crashReporterLearnMore.label    "Learn More">
-
-<!ENTITY crashReporterSection.label      "Crash Reporter">
-
-<!ENTITY dataChoicesTab.label            "Data Choices">
-<!ENTITY enableCrashReporter.accesskey   "C">
-<!ENTITY enableCrashReporter.label       "Enable Crash Reporter">
-<!ENTITY enableHealthReport.accesskey    "R">
-<!ENTITY enableHealthReport.label        "Enable &brandShortName; Health Report">
-<!ENTITY enableTelemetry.accesskey       "T">
-<!ENTITY enableTelemetry.label           "Enable Telemetry">
-<!ENTITY healthReportDesc.label          "Helps you understand your browser performance and shares data with &vendorShortName; about your browser health">
-<!ENTITY healthReportLearnMore.label     "Learn More">
-
-<!ENTITY healthReportSection.label       "&brandShortName; Health Report">
-
-<!ENTITY httpCache.label                 "Cached Web Content">
-<!ENTITY isDefault.label                 "&brandShortName; is currently your default browser">
-
-<!ENTITY offlineAppsList2.label          "The following websites are allowed to store data for offline use:">
-
-<!ENTITY offlineStorage2.label           "Offline Web Content and User Data">
-<!ENTITY setDefault.accesskey            "d">
-<!ENTITY setDefault.label                "Make &brandShortName; the default browser">
-<!ENTITY telemetryDesc.label             "Shares performance, usage, hardware and customization data about your browser with &vendorShortName; to help us make &brandShortName; better">
-<!ENTITY telemetryLearnMore.label        "Learn More">
-
-<!ENTITY telemetrySection.label          "Telemetry">
-
-<!ENTITY updateApp.label                 "&brandShortName; updates:">
-<!ENTITY updateAuto.accesskey            "A">
-<!ENTITY updateAuto.label                "Automatically install updates (recommended: improved security)">
-<!ENTITY updateAutoAddonWarn.accesskey   "W">
-
-<!ENTITY updateAutoAddonWarn.label       "Warn me if this will disable any of my add-ons">
-<!ENTITY updateCheck.accesskey           "C">
-<!ENTITY updateCheck.label               "Check for updates, but let me choose whether to install them">
-<!ENTITY updateManual.accesskey          "N">
-<!ENTITY updateManual.label              "Never check for updates (not recommended: security risk)">
-
-<!ENTITY updateOthers.label              "Automatically update:">
-<!ENTITY useService.accesskey            "b">
-
-<!ENTITY useService.label                "Use a background service to install updates">

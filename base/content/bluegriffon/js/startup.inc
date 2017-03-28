@@ -1,9 +1,3 @@
-Components.utils.import("resource://gre/modules/Services.jsm");
-Components.utils.import("resource://app/modules/urlHelper.jsm");
-Components.utils.import("resource://app/modules/editorHelper.jsm");
-Components.utils.import("resource://app/modules/bgQuit.jsm");
-Components.utils.import("resource://gre/modules/AddonManager.jsm");
-Components.utils.import("resource://gre/modules/fileChanges.jsm");
 
 var gContentWindow = null;
 
@@ -15,7 +9,7 @@ function Startup()
   try {
     if (window.arguments && window.arguments[0]) {
       var cl = window.arguments[0];
-      if (cl && cl instanceof Components.interfaces.nsISupportsArray) {
+      if (cl && cl instanceof Components.interfaces.nsIMutableArray) {
         url = cl.GetElementAt(0).QueryInterface(Components.interfaces.nsISupportsString).data;
         var localFile = UrlUtils.newLocalFile(url);
         if (localFile) { // if localFile is null, then consider it's a remote URL
@@ -42,14 +36,16 @@ function Startup()
   RestoreShortcuts();
   RestorePanels();
 
-  InstallCustomizationDoneCallbacks();
+  InitializeARIARoleDropdown(gDialog.ARIARolePopup);
+  InitializeARIARoleDropdown(gDialog.ARIARoleStructureBarPopup);
 
   gDialog.structurebar.init();
 
   ResizeEventNotifier.startup();
   EditorScrolledNotifier.startup();
   BGZoomManager.startup();
-  BGUpdateManager.check();
+  BGUpdateManager.generateAppId();
+  BGUpdateManager.check(false);
   
   initLocalFontFaceMenu(gDialog.FontFacePopup);
 
@@ -60,24 +56,25 @@ function Startup()
   }
 
   // let's finish with the url
-  if (url)
-    setTimeout(OpenFile, 100, url, true);
+  if (url) {
+    var ebmAvailable = ("EBookManager" in window);
+    if (ebmAvailable && url.toLowerCase().endsWith(".epub")) {
+      setTimeout(EBookManager.showEbook, 100, UrlUtils.newLocalFile(url), url);
+    }
+    else
+      setTimeout(OpenFile, 100, url, true);
+  }
 
   setTimeout(LoadLastTabs, 1000);
   BlueGriffonQuitHelper.init();
 
-  if (document.getElementById("tipoftheday"))
-    document.getElementById("tipoftheday").launch(null);
-
-  AddonManager.getAddonByID("{f13b157f-b174-47e7-a34d-4815ddfdfeb8}",
-    function(addon) { if(addon) document.getElementById("venkmanMenuitem").hidden = false; } );
-
-  AddonManager.getAddonByID("inspector@mozilla.org",
-    function(addon) { if(addon) document.getElementById("menu_inspector").hidden = false; } );
-
   NotifierUtils.addNotifierCallback("selection_strict", BlueGriffon_lookForFileChanges, this);
+  NotifierUtils.addNotifierCallback("selection",        UpdateLiveView, this);
 
   window.addEventListener("sizemodechange", onSizeModeChange, false);
+
+  if ("ActiveViewManager" in window)
+    ActiveViewManager.init();
 }
 
 var gLookingForFileChangesTimeout = null;

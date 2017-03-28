@@ -1,3 +1,21 @@
+var cmdNewEbook =
+{
+  isCommandEnabled: function(aCommand, dummy)
+  {
+    return true;
+  },
+
+  getCommandStateParams: function(aCommand, aParams, aRefCon) {},
+  doCommandParams: function(aCommand, aParams, aRefCon) {},
+  doCommand: function(aCommand)
+  {
+    var rv = { cancelled: true };
+    window.openDialog("chrome://epub/content/epub/newEbook.xul",
+                      "_blank",
+                      "all,chrome,dialog=no,modal=no",
+                      rv);
+  }
+};
 
 var cmdOpen =
 {
@@ -34,17 +52,52 @@ var cmdOpenFile =
               gDialog.bundleOpenLocation.getString("chooseFileDialogTitle"),
               Components.interfaces.nsIFilePicker.modeOpen);
       
+      var ebmAvailable = ("EBookManager" in window);
+      if (ebmAvailable)
+        fp.appendFilter(document.getElementById("bundleEbookManager").getString("HTMLorEPUBBooks"),
+                        "*.html; *.htm; *.shtml; *.xhtml; *.epub");
       fp.appendFilters(Components.interfaces.nsIFilePicker.filterHTML);
       fp.appendFilter(gDialog.bundleOpenLocation.getString("PHPfiles"), "*.php");
       fp.appendFilters(Components.interfaces.nsIFilePicker.filterText);
+      if (ebmAvailable)
+        fp.appendFilter(document.getElementById("bundleEbookManager").getString("EPUBbooks"),
+                        "*.epub");
       fp.appendFilters(Components.interfaces.nsIFilePicker.filterAll);
   
       if (fp.show() == Components.interfaces.nsIFilePicker.returnOK
           && fp.fileURL.spec
           && fp.fileURL.spec.length > 0)
       {
-        StoreUrlInLocationDB(fp.fileURL.spec);
-        OpenFile(fp.fileURL.spec, true);
+        if (ebmAvailable && fp.fileURL.spec.toLowerCase().endsWith(".epub")) {
+          var windowEnumerator = Services.wm.getEnumerator("bluegriffon");
+          var win = null;
+          while (windowEnumerator.hasMoreElements()) {
+            var w = windowEnumerator.getNext();
+            var ebookElt = w.document.querySelector("epub2,epub3,epub31");
+            if (ebookElt) {
+              var ebook = ebookElt.getUserData("ebook");
+              if (fp.file.equals(ebook.packageFile)) {
+                w.focus();
+                return;
+              }
+            }
+            else if (!win)
+              win = w;
+          }
+    
+          if (win && !win.EditorUtils.getCurrentEditor()) {
+            win.focus();
+            win.EBookManager.showEbook(fp.file, fp.fileURL.spec);
+            win.updateCommands("style");
+            return;
+          }
+          OpenNewWindow(UrlUtils.getIOService().newFileURI(fp.file).QueryInterface(Components.interfaces.nsIURL).spec);
+        }
+        else {
+          if (!ebmAvailable || !EBookManager.isUrlSpecInBook(fp.fileURL.spec))
+            StoreUrlInLocationDB(fp.fileURL.spec);
+          OpenFile(fp.fileURL.spec, true);
+        }
       }
     }
     catch(ex) {
@@ -62,7 +115,7 @@ var cmdSave =
     try {
       var docUrl = EditorUtils.getDocumentUrl();
       return EditorUtils.isDocumentEditable()
-              && (GetCurrentViewMode() == "source"
+              && (!EditorUtils.isWysiwygMode()
                   || EditorUtils.isDocumentModified()
                   || UrlUtils.isUrlOfBlankDocument(docUrl));
     } catch (e) {return false;}
@@ -77,14 +130,14 @@ var cmdSave =
     var editor = EditorUtils.getCurrentEditor();
     if (editor)
       try {
-        var mode = GetCurrentViewMode();
-        if (mode == "source") {
+        var mode = EditorUtils.isWysiwygMode();
+        if (!mode) {
           var editorElement = EditorUtils.getCurrentEditorElement();
-          var sourceIframe = editorElement.previousSibling;
+          var sourceIframe = editorElement.parentNode.firstElementChild;
           var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
           var source = sourceEditor.getValue();
 
-          result = FileUtils.saveSourceDocument(source,
+          result = BGFileHelper.saveSourceDocument(source,
                      UrlUtils.isUrlOfBlankDocument(EditorUtils.getDocumentUrl()),
                      false,
                      EditorUtils.getCurrentDocumentMimeType());
@@ -93,15 +146,18 @@ var cmdSave =
             // changed when we leave source mode; b=479
             sourceIframe.setUserData("lastSaved", source, null);
           }
+          sourceIframe.focus();
+          sourceEditor.focus();
         }
         else {
           EditorUtils.cleanup();
-          result = FileUtils.saveDocument(
+          result = BGFileHelper.saveDocument(
                      UrlUtils.isUrlOfBlankDocument(EditorUtils.getDocumentUrl()),
                      false,
                      EditorUtils.getCurrentDocumentMimeType());
+          GetWindowContent().focus();
         }
-        window.content.focus();
+        NotifierUtils.notify("fileSaved", EditorUtils.getDocumentUrl());
         window.updateCommands("style");
         if (result)
           StoreUrlInLocationDB(EditorUtils.getDocumentUrl());
@@ -127,14 +183,14 @@ var cmdSaveAs =
     var editor = EditorUtils.getCurrentEditor();
     if (editor)
       try {
-        var mode = GetCurrentViewMode();
-        if (mode == "source") {
+        var mode = EditorUtils.isWysiwygMode();
+        if (!mode) {
           var editorElement = EditorUtils.getCurrentEditorElement();
-          var sourceIframe = editorElement.previousSibling;
+          var sourceIframe = editorElement.parentNode.firstElementChild;
           var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
           var source = sourceEditor.getValue();
 
-          result = FileUtils.saveSourceDocument(source,
+          result = BGFileHelper.saveSourceDocument(source,
                      true,
                      false,
                      EditorUtils.getCurrentDocumentMimeType());
@@ -146,14 +202,15 @@ var cmdSaveAs =
         }
         else {
           EditorUtils.cleanup();
-          result = FileUtils.saveDocument(
+          result = BGFileHelper.saveDocument(
                      true,
                      false,
                      EditorUtils.getCurrentDocumentMimeType());
         }
-        window.content.focus();
-        if (result)
+        GetWindowContent().focus();
+        if (result) {
           StoreUrlInLocationDB(EditorUtils.getDocumentUrl());
+        }
       }
       catch (e) {}
     return result;
@@ -173,14 +230,22 @@ var cmdCloseTab =
   doCommand: function(aCommand)
   {
     var editorElement = EditorUtils.getCurrentEditorElement();
-    if (!editorElement) // sanity check
-      window.close();
-
-    var mode = editorElement.parentNode.getAttribute("previousMode");
-    if (mode == "source") {
-      if (!ToggleViewMode(gDialog.wysiwygModeButton))
-        return;
+    if (!editorElement) { // sanity check
+      var ebook = document.querySelector("epub2,epub3,epub31");
+      if (!ebook)
+        window.close();
+      return;
     }
+
+    switch (EditorUtils.getCurrentViewMode()) {
+      case "source":
+      case "liveview":
+        if (!ToggleViewMode(gDialog.wysiwygModeButton))
+          return;
+        break;
+      default: break;
+    }
+
     if (EditorUtils.isDocumentModified()) {
       var rv = PromptUtils.confirmWithTitle(
                              L10NUtils.getString("FileNotSaved"),
@@ -203,6 +268,24 @@ var cmdCloseTab =
     SaveCurrentTabLocation();
     doCloseTab(EditorUtils.getCurrentTabEditor().selectedTab);
     return rv;
+  }
+}
+
+var cmdCloseEbook =
+{
+  isCommandEnabled: function(aCommand, dummy)
+  {
+    return (null != document.querySelector("epub2,epub3,epub31"));
+  },
+  
+  getCommandStateParams: function(aCommand, aParams, aRefCon) {},
+  doCommandParams: function(aCommand, aParams, aRefCon) {},
+
+  doCommand: function(aCommand)
+  {
+    var ebook = document.querySelector("epub2,epub3,epub31");
+    if (ebook) // sanity check
+      ebook.closeBookOnSave();
   }
 }
 

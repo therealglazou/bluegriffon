@@ -44,7 +44,7 @@ include $(DEPTH)/config/autoconf.mk
 
 APP_VERSION = $(shell cat $(srcdir)/../config/version.txt)
 CODE_NAME = $(shell cat $(srcdir)/../config/codename.txt)
-GRE_BUILDID = $(shell $(PYTHON) $(topsrcdir)/config/printconfigsetting.py $(LIBXUL_DIST)/bin/platform.ini Build BuildID)
+GRE_BUILDID = $(shell $(PYTHON) $(topsrcdir)/config/printconfigsetting.py $(DIST)/bin/platform.ini Build BuildID)
 
 DEFINES += \
 	-DAPP_NAME=$(MOZ_APP_DISPLAYNAME) \
@@ -57,105 +57,6 @@ ifneq (,$(filter mac cocoa, $(MOZ_WIDGET_TOOLKIT)))
 DEFINES += -DTOOLBAR_CUSTOMIZATION_SHEET
 endif
 
-_FILES = \
-	$(srcdir)/res/cm2.html \
-	$(srcdir)/res/scripteditor.html \
-	$(srcdir)/res/csseditor.html \
-	$(srcdir)/res/html_transitional.html \
-	$(srcdir)/res/html_strict.html \
-	$(srcdir)/res/xhtml_transitional.xhtml \
-	$(srcdir)/res/xhtml_strict.xhtml \
-	$(srcdir)/res/html5.html \
-	$(srcdir)/res/xhtml5.xhtml \
-	$(srcdir)/res/xhtml11.xhtml \
-	$(srcdir)/res/polyglot.xhtml \
-	$(srcdir)/res/rotatorCenterBG.png \
-	$(srcdir)/res/rotate_icon.png \
-	$(srcdir)/res/reset-fonts-grids.css \
-	$(srcdir)/res/base-min.css \
-	$(NULL)
-
-_CM2_RESOURCE_FILES = \
-	$(srcdir)/res/cm2/changes.js \
-	$(srcdir)/res/cm2/clike.js \
-	$(srcdir)/res/cm2/clojure.js \
-	$(srcdir)/res/cm2/cobalt.css \
-	$(srcdir)/res/cm2/codemirror.css \
-	$(srcdir)/res/cm2/codemirror.js \
-	$(srcdir)/res/cm2/coffeescript.js \
-	$(srcdir)/res/cm2/css.js \
-	$(srcdir)/res/cm2/dialog.css \
-	$(srcdir)/res/cm2/dialog.js \
-	$(srcdir)/res/cm2/diff.js \
-	$(srcdir)/res/cm2/eclipse.css \
-	$(srcdir)/res/cm2/elegant.css \
-	$(srcdir)/res/cm2/emacs.js \
-	$(srcdir)/res/cm2/foldcode.js \
-	$(srcdir)/res/cm2/foldtag.js \
-	$(srcdir)/res/cm2/foldtag.css \
-	$(srcdir)/res/cm2/formatting.js \
-	$(srcdir)/res/cm2/gfm.js \
-	$(srcdir)/res/cm2/groovy.js \
-	$(srcdir)/res/cm2/haskell.js \
-	$(srcdir)/res/cm2/htmlembedded.js \
-	$(srcdir)/res/cm2/htmlmixed.js \
-	$(srcdir)/res/cm2/index.html \
-	$(srcdir)/res/cm2/javascript-hint.js \
-	$(srcdir)/res/cm2/javascript.js \
-	$(srcdir)/res/cm2/jinja2.js \
-	$(srcdir)/res/cm2/light.css \
-	$(srcdir)/res/cm2/lua.js \
-	$(srcdir)/res/cm2/markdown.js \
-	$(srcdir)/res/cm2/monokai.css \
-	$(srcdir)/res/cm2/neat.css \
-	$(srcdir)/res/cm2/night.css \
-	$(srcdir)/res/cm2/ntriples.js \
-	$(srcdir)/res/cm2/overlay.js \
-	$(srcdir)/res/cm2/pascal.js \
-	$(srcdir)/res/cm2/perl.js \
-	$(srcdir)/res/cm2/php.js \
-	$(srcdir)/res/cm2/plsql.js \
-	$(srcdir)/res/cm2/python.js \
-	$(srcdir)/res/cm2/r.js \
-	$(srcdir)/res/cm2/rst.js \
-	$(srcdir)/res/cm2/ruby.js \
-	$(srcdir)/res/cm2/rubyblue.css \
-	$(srcdir)/res/cm2/runmode.js \
-	$(srcdir)/res/cm2/rust.js \
-	$(srcdir)/res/cm2/scheme.js \
-	$(srcdir)/res/cm2/search.js \
-	$(srcdir)/res/cm2/searchcursor.js \
-	$(srcdir)/res/cm2/simple-hint.css \
-	$(srcdir)/res/cm2/simple-hint.js \
-	$(srcdir)/res/cm2/smalltalk.js \
-	$(srcdir)/res/cm2/sparql.js \
-	$(srcdir)/res/cm2/spec.js \
-	$(srcdir)/res/cm2/stex.js \
-	$(srcdir)/res/cm2/tiddlywiki.js \
-	$(srcdir)/res/cm2/themes-list.js \
-	$(srcdir)/res/cm2/velocity.js \
-	$(srcdir)/res/cm2/vim.js \
-	$(srcdir)/res/cm2/xml.js \
-	$(srcdir)/res/cm2/xmlpure.js \
-	$(srcdir)/res/cm2/yaml.js \
-	$(srcdir)/res/cm2/code-completion.css \
-	$(srcdir)/res/cm2/code-completion.js \
-	$(srcdir)/res/cm2/css-completion.js \
-	$(srcdir)/res/cm2/html-completion.js \
-	$(srcdir)/res/cm2/pophtmlmixed.js \
-	$(srcdir)/res/cm2/poptags.js \
-	$(srcdir)/res/cm2/jquery.min.js \
-	$(NULL)
-
-libs::
-	$(INSTALL) $(_FILES) $(DIST)/bin/res
-	mkdir -p $(DIST)/bin/res/cm2
-	$(INSTALL) $(_CM2_RESOURCE_FILES) $(DIST)/bin/res/cm2
-
-install::
-	$(SYSINSTALL) $(IFLAGS1) $(_FILES) $(DESTDIR)$(mozappdir)/res
-	mkdir -p $(DESTDIR)$(mozappdir)/res/resources/cm2
-	$(INSTALL) $(_CM2_RESOURCE_FILES) $(DESTDIR)$(mozappdir)/res/resources/cm2
 
 include $(topsrcdir)/config/rules.mk
 

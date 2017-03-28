@@ -10,7 +10,7 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-Components.utils.import("resource://app/modules/printHelper.jsm");
+Components.utils.import("resource://gre/modules/printHelper.jsm");
 
 //-----------------------------------------------------------------------------------
 var cmdPrint =
@@ -27,12 +27,12 @@ var cmdPrint =
 
   doCommand: function(aCommand)
   {
-    if (GetCurrentViewMode() == "wysiwyg")
+    if (EditorUtils.isWysiwygMode())
       PrintHelper.print(EditorUtils.getCurrentEditorElement().contentWindow);
     else {
 	    var editorElement = EditorUtils.getCurrentEditorElement();
 	    if (editorElement) {
-	      var sourceIframe = editorElement.previousSibling;
+	      var sourceIframe = editorElement.parentNode.firstElementChild;
 	      var sourceWindow = sourceIframe.contentWindow;
 
         PrintHelper.print(sourceWindow);

@@ -1,0 +1,122 @@
+<?xml version="1.0"?>
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+
+<!DOCTYPE overlay SYSTEM "chrome://inspector/locale/viewers/dom.dtd">
+
+<overlay id="ovDOMViewerPopup"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <popupset id="ppsViewerPopupset">
+    <menupopup id="ppViewerContext-dom">
+      <menuitem id="item:findPp"
+                label="&cmdShowFindDialog.label;"
+                accesskey="&cmdShowFindDialog.accesskey;"
+                key="key:find"
+                observes="cmd:find"/>
+
+      <menuitem id="item:findAgainPp"
+                label="&cmdFindAgain.label;"
+                accesskey="&cmdFindAgain.accesskey;"
+                key="key:findAgain"
+                observes="cmd:findAgain"/>
+
+      <menuseparator/>
+
+      <menuitem id="item:toggleAttributes" hidden="true"
+                class="menuitem-iconic"
+                type="checkbox"
+                label="&cmdToggleAttributes.label;"
+                accesskey="&cmdToggleAttributes.accesskey;"
+                observes="cmd:toggleAttributes"/>
+
+      <menuitem id="item:toggleAnonPp"
+                class="menuitem-iconic"
+                type="checkbox"
+                label="&cmdToggleAnonContent.label;"
+                accesskey="&cmdToggleAnonContent.accesskey;"
+                observes="cmd:toggleAnon"/>
+
+      <menuitem id="item:toggleAccessibleNodesPp"
+                class="menuitem-iconic"
+                type="checkbox"
+                label="&cmdToggleAccessibleNodes.label;"
+                accesskey="&cmdToggleAccessibleNodes.accesskey;"
+                observes="cmd:toggleAccessibleNodes"/>
+
+      <menuitem id="item:toggleWhitespaceNodesPp"
+                class="menuitem-iconic"
+                type="checkbox"
+                label="&cmdToggleWhitespaceNodes.label;"
+                accesskey="&cmdToggleWhitespaceNodes.accesskey;"
+                observes="cmd:toggleWhitespaceNodes"/>
+
+      <menuitem id="item:toggleProcessingInstructionsPp"
+                class="menuitem-iconic"
+                type="checkbox"
+                label="&cmdToggleProcessingInstructions.label;"
+                accesskey="&cmdToggleProcessingInstructions.accesskey;"
+                observes="cmd:toggleProcessingInstructions"/>
+
+    </menupopup>
+  </popupset>
+
+  <menupopup id="mppEdit">
+
+    <menuseparator/>
+
+    <menuitem id="item:findMpp"
+              label="&cmdShowFindDialog.label;"
+              accesskey="&cmdShowFindDialog.accesskey;"
+              key="key:find"
+              observes="cmd:find"/>
+
+    <menuitem id="item:findAgainMpp"
+              label="&cmdFindAgain.label;"
+              accesskey="&cmdFindAgain.accesskey;"
+              key="key:findAgain"
+              observes="cmd:findAgain"/>
+
+    <menuseparator/>
+
+    <menuitem id="item:selectByClick"
+              label="&cmdSelectByClick.label;"
+              accesskey="&cmdSelectByClick.accesskey;"
+              observes="cmd:selectByClick"
+              type="checkbox"/>
+
+  </menupopup>
+
+  <menupopup id="mppView">
+    <menuitem id="item:toggleAnonMpp"
+              class="menuitem-iconic"
+              type="checkbox"
+              label="&cmdToggleAnonContent.label;"
+              accesskey="&cmdToggleAnonContent.accesskey;"
+              observes="cmd:toggleAnon"/>
+
+    <menuitem id="item:toggleAccessibleNodesMpp"
+              class="menuitem-iconic"
+              type="checkbox"
+              label="&cmdToggleAccessibleNodes.label;"
+              accesskey="&cmdToggleAccessibleNodes.accesskey;"
+              observes="cmd:toggleAccessibleNodes"/>
+
+    <menuitem id="item:toggleWhitespaceNodesMpp"
+              class="menuitem-iconic"
+              type="checkbox"
+              label="&cmdToggleWhitespaceNodes.label;"
+              accesskey="&cmdToggleWhitespaceNodes.accesskey;"
+              observes="cmd:toggleWhitespaceNodes"/>
+
+    <menuitem id="item:toggleProcessingInstructionsMpp"
+              class="menuitem-iconic"
+              type="checkbox"
+              label="&cmdToggleProcessingInstructions.label;"
+              accesskey="&cmdToggleProcessingInstructions.accesskey;"
+              observes="cmd:toggleProcessingInstructions"/>
+  </menupopup>
+
+</overlay>

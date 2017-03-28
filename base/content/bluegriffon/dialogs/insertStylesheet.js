@@ -1,4 +1,4 @@
-Components.utils.import("resource://app/modules/editorHelper.jsm");
+Components.utils.import("resource://gre/modules/editorHelper.jsm");
 
 var gDoc = null;
 var gEditor = null;
@@ -9,6 +9,10 @@ function Startup()
   gEditor = EditorUtils.getCurrentEditor();
   gDoc = gEditor.document;
   ListStylesheets();
+
+#ifndef XP_MACOSX
+  CenterDialogOnOpener();
+#endif
 }
 
 function ListStylesheets()

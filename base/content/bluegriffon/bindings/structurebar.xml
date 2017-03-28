@@ -141,8 +141,17 @@
               text += " ." + node.getAttribute("class").replace( / /g, ".");
             if (!isBlueGriffonNS && showLang && node.hasAttribute("lang"))
               text += " :lang(" + node.getAttribute("lang") + ")";
-            if (!isBlueGriffonNS && showRole && node.hasAttribute("role"))
-              text += " :role(" + node.getAttribute("role") + ")";
+            if (!isBlueGriffonNS && showRole) {
+              if (node.hasAttribute("role"))
+                text += " :role(" + node.getAttribute("role") + ")";
+              else {
+                var lookForEpubType = Services.prefs.getBoolPref("bluegriffon.aria.epub-type") &&
+                                      EditorUtils.isXHTMLDocument() &&
+                                      node.hasAttributeNS("http://www.idpf.org/2007/ops", "type");
+                if (lookForEpubType)
+                  text += " :role(" + node.getAttributeNS("http://www.idpf.org/2007/ops", "type") + ")";
+              }
+            }
             text += (isBlueGriffonNS ? "" : ">")
 
             newLabel.setAttribute("label",     text);
@@ -171,8 +180,6 @@
       <method name="init">
         <body>
         <![CDATA[
-          var isRTL = Components.classes["@mozilla.org/chrome/chrome-registry;1"].getService(Components.interfaces.nsIXULChromeRegistry).isLocaleRTL("global");
-          this.setAttribute("rtl", isRTL);
           NotifierUtils.addNotifierCallback("selection_strict", this.selectionChanged, this);
         ]]>
         </body>

@@ -4,6 +4,7 @@
 <!ENTITY addons.windowTitle                   "附加元件管理員">
 
 <!ENTITY search.placeholder                   "搜尋所有附加元件">
+<!ENTITY search.buttonlabel                   "搜尋">
 <!-- LOCALIZATION NOTE (search.commandKey):
      The search command key should match findOnCmd.commandkey from browser.dtd -->
 <!ENTITY search.commandkey                    "f">
@@ -19,8 +20,16 @@
 <!ENTITY installAddonFromFile.accesskey       "I">
 <!ENTITY toolsMenu.tooltip                    "所有附加元件的工具">
 
+<!ENTITY getThemes.description                "想要個人化您的瀏覽器嗎？">
+<!ENTITY getThemes.learnMore                  "從數以千計的佈景主題挑選一套。">
+
 <!ENTITY cmd.back.tooltip                     "回到上一頁">
 <!ENTITY cmd.forward.tooltip                  "前進下一頁">
+
+<!ENTITY showUnsignedExtensions.button.label  "無法驗證某些擴充套件">
+<!ENTITY showAllExtensions.button.label       "顯示所有擴充套件">
+<!ENTITY debugAddons.label                    "附加元件除錯">
+<!ENTITY debugAddons.accesskey                "B">
 
 <!-- global warnings -->
 <!ENTITY warning.safemode.label                    "所有附加元件於安全模式中都已停用。">
@@ -30,10 +39,6 @@
 <!ENTITY warning.updatesecurity.label              "已停止檢查附加元件安全性，更新程式可能不安全。">
 <!ENTITY warning.updatesecurity.enable.label       "啟用">
 <!ENTITY warning.updatesecurity.enable.tooltip     "啟用附加元件更新安全檢查">
-
-<!-- global informations -->
-<!ENTITY info.plugincheck.label                 "檢查您是否使用最新版本的外掛程式">
-<!ENTITY info.plugincheck.tooltip               "檢查您是否使用最新版本的外掛程式">
 
 <!-- categories / views -->
 <!ENTITY view.search.label                    "搜尋">
@@ -90,6 +95,13 @@
 <!ENTITY cmd.enableTheme.accesskey            "W">
 <!ENTITY cmd.disableTheme.label               "停用佈景主題">
 <!ENTITY cmd.disableTheme.accesskey           "W">
+<!ENTITY cmd.askToActivate.label              "啟用時詢問">
+<!ENTITY cmd.askToActivate.tooltip            "每次使用此附加元件時詢問">
+<!ENTITY cmd.alwaysActivate.label             "總是啟用">
+<!ENTITY cmd.alwaysActivate.tooltip           "總是使用此附加元件">
+<!ENTITY cmd.neverActivate.label              "永不啟用">
+<!ENTITY cmd.neverActivate.tooltip            "永不使用此附加元件">
+<!ENTITY cmd.stateMenu.tooltip                "在此附加元件執行時變更">
 <!ENTITY cmd.installAddon.label               "安裝">
 <!ENTITY cmd.installAddon.accesskey           "I">
 <!ENTITY cmd.uninstallAddon.label             "移除">
@@ -209,3 +221,33 @@
 
 <!ENTITY settings.path.button.label           "瀏覽…">
 
+<!-- LOCALIZATION NOTE (experiment.info.label): The strings related to
+     experiments are present on the "Experiments" tab of the add-ons manager.
+     This tab won't be displayed unless an Experiment add-on is installed.
+     Install https://people.mozilla.org/~gszorc/dummy-experiment-addon.xpi
+     to cause this tab to appear. -->
+<!ENTITY experiment.info.label "這是什麼？Telemetry 會不定時安裝執行實驗內容。">
+<!ENTITY experiment.info.learnmore "更多資訊">
+<!ENTITY experiment.info.learnmore.accesskey "L">
+<!ENTITY experiment.info.changetelemetry "Telemetry 選項">
+<!ENTITY experiment.info.changetelemetry.accesskey "T">
+
+<!ENTITY setting.learnmore "更多資訊…">
+
+<!ENTITY disabledUnsigned.heading "某些附加元件已被停用">
+<!-- LOCALIZATION NOTE (disabledUnsigned.description.start, disabledUnsigned.description.findAddonsLink, disabledUnsigned.description.end):
+     These entities form a sentence, with
+     disabledUnsigned.description.findAddonsLink being a link to an external site. -->
+<!ENTITY disabledUnsigned.description.start "以下原件尚未經過驗證，無法在 &brandShortName; 使用。您可以">
+<!ENTITY disabledUnsigned.description.findAddonsLink "看看有沒有其他的替代方案">
+<!ENTITY disabledUnsigned.description.end "或是請開發者申請驗證。">
+<!ENTITY disabledUnsigned.learnMore "了解我們為了保護您的線上安全作了哪些努力。">
+<!-- LOCALIZATION NOTE (disabledUnsigned.devInfo.start, disabledUnsigned.devInfo.linkToManual, disabledUnsigned.devInfo.end):
+     These entities form a sentence, with disabledUnsigned.devInfo.linkToManual
+     being a link to an external site. -->
+<!ENTITY disabledUnsigned.devInfo.start "有興趣想要驗證附加元件的開發者可繼續閱讀我們的">
+<!ENTITY disabledUnsigned.devInfo.linkToManual "驗證指南">
+<!ENTITY disabledUnsigned.devInfo.end "。">
+
+<!ENTITY pluginDeprecation.description "少了點東西嗎？&brandShortName; 已不再支援某些外掛程式。">
+<!ENTITY pluginDeprecation.learnMore "了解更多。">

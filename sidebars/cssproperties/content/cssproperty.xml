@@ -1,0 +1,430 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE bindings [
+  <!ENTITY % csspropertiesDTD SYSTEM "chrome://cssproperties/locale/cssproperties.dtd" >
+  %csspropertiesDTD;
+]>
+
+<bindings id="csspropertyBindings"
+          xmlns="http://www.mozilla.org/xbl"
+          xmlns:html="http://www.w3.org/1999/xhtml"
+          xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+          xmlns:xbl="http://www.mozilla.org/xbl">
+
+   <binding id="cssPropertyBinding">
+     <content>
+       <xul:label xbl:inherits="tooltiptext=property"
+                  anonid="label"/>
+       <xul:spacer anonid="spacer" flex="1"/>
+       <xul:vbox anonid="vbox">
+         <xul:hbox align="center" anonid="valueBox">
+           <children/>
+         </xul:hbox>
+       </xul:vbox>
+     </content>
+    <implementation>
+      <field name="_property"></field>
+      <field name="_lengthUnits">"% px mm cm in pt pc em ex ch rem vh vew vmin wmax"</field>
+      <field name="_propertyClean"></field>
+      <field name="elements">[]</field>
+      <field name="_L10N">{}</field>
+      <field name="_l10nRE">/([a-zA-Z\-]+)\=([^=]+)/</field>
+
+      <constructor>
+        <![CDATA[
+          this._property = this.getAttribute("property").toLowerCase();
+          this._propertyClean = this._property.replace(/\-/g, ""); 
+          
+          var box = this.getChild("valueBox");
+          box.id = this._propertyClean + "0";
+  
+          this.parseL10N();
+          var label = this.getChild("label");
+          if (this._property in this._L10N)
+            label.setAttribute("value", this._L10N[this._property]);
+          else
+            label.setAttribute("value", this._property + ":");
+
+          if ("url" in this._L10N) {
+            label.className = "text-link";
+            label.setAttribute("href", this._L10N["url"]);
+          }
+          if (this.getAttribute("flexingspacer") != "true")
+            this.getChild("spacer").setAttribute("hidden", "true");
+          this.parseGrammar();
+        ]]>
+      </constructor>
+
+      <method name="update">
+        <parameter name="aElt"/>
+        <parameter name="aRuleset"/>
+        <body><![CDATA[
+          var value = CssInspector.getCascadedValue(aRuleset, this._property);
+          var valueArray = value.split(" ");
+          var elts = this.getChild("vbox").querySelectorAll("csslength,cssident,csscolor");
+          for (var i = 0; i < elts.length; i++)
+            elts[i].update(value, valueArray);
+        ]]></body>
+      </method>
+
+      <method name="parseL10N">
+        <body><![CDATA[
+          // parse the L10N definitions
+          this._L10N = {};
+          var l10nElt = this.querySelector("l10n");
+          if (l10nElt) {
+            var l10nSourceArray = l10nElt.textContent.split(/\r\n|\r|\n/);
+            for (var i = 0; i < l10nSourceArray.length; i++) {
+              var l10nLine = l10nSourceArray[i];
+              var match = l10nLine.match(this._l10nRE);
+              if (match) {
+                this._L10N[match[1]] = match[2];
+              }
+            }
+            // remove the now useless l10n node from the tree 
+            l10nElt.parentNode.removeChild(l10nElt);
+          }
+        ]]></body>
+      </method>
+
+      <method name="parseGrammar">
+        <body><![CDATA[
+          Components.utils.import("resource://gre/modules/cssInspector.jsm");
+        
+          var grammar = this.getAttribute("grammar").toLowerCase();
+          var parser = new CSSParser();
+          parser._init();
+          parser.mPreserveWS       = false;
+          parser.mPreserveComments = false;
+          parser.mPreservedTokens = [];
+          parser.mScanner.init(grammar);
+
+          var token = parser.getToken(true, true);
+          var inGroup = false;
+          var currentHost = null;
+          var groupId = 0;
+
+          while (token.isNotNull()) {
+            if (token.isFunction("ulength(") || token.isFunction("length(")) {
+              var unsigned = token.isFunction("ulength(");
+              // here, we need a string or just the closing parenthesis
+              token = parser.getToken(true, true);
+              if (!token.isString() && !token.isSymbol(")"))
+                this.error(property, "string expected in length()");
+              var excludedUnits = "";
+              if (token.isString()) {
+                // look for closing parenthesis
+                token = parser.getToken(true, true);
+                if (!token.isSymbol(")"))
+                  this.error(property, "closing parenthesis expected");
+              }
+              var allUnitsArray = this._lengthUnits.split(" ");
+              var excludedUnitsArray = excludedUnits.substr(1, token.value.length - 2).split(" ");
+              var unitsArray = allUnitsArray.filter(
+                function(e) {return (excludedUnitsArray.indexOf(e) == -1);}
+              );
+
+              var csslength = document.createElement("csslength");
+              csslength.setAttribute("units", unitsArray.join(" "));
+              csslength.setAttribute("extraunits", "");
+              csslength.setAttribute("editable", "true");
+              csslength.setAttribute("property", this._property);
+              csslength.setAttribute("unsigned", unsigned);
+              this.getChild("valueBox").appendChild(csslength);
+
+              if (!inGroup)
+                currentHost = csslength;
+              this.elements.push(csslength);
+            }
+            else if (token.isFunction("color(")) {
+              token = parser.getToken(true, true);
+              if (!token.isIdent("true") && !token.isIdent("false"))
+                this.error(property, "expecting a boolean as parameter of color()");
+              var allowTransparency = token.isIdent("true");
+              token = parser.getToken(true, true);
+              if (!token.isSymbol(")"))
+                this.error(property, "closing parenthesis expected");
+
+              var csscolor = document.createElement("csscolor");
+              csscolor.setAttribute("showTransparency", allowTransparency);
+              csscolor.setAttribute("property", this._property);
+              csscolor.setAttribute("propertyClean", this._propertyClean);
+              csscolor.setAttribute("color", allowTransparency ? "transparent" : "black");
+              if (this.hasAttribute("fouredges"))
+                csscolor.setAttribute("fouredges", this.getAttribute("fouredges"));
+              if (this.hasAttribute("fouredgescontrol"))
+                csscolor.setAttribute("fouredgescontrol", this.getAttribute("fouredgescontrol"));
+              this.getChild("valueBox").appendChild(csscolor);
+              this.elements.push(csscolor);
+            }
+            else if (token.isSymbol("[")) {
+              inGroup = true;
+              groupId++;
+              currentHost = this.createHostIfNeeded(null, groupId);
+            }
+            else if (token.isSymbol("]")) {
+              inGroup = false;
+              currentHost = null;
+            }
+            else if (token.isIdent("_")) {
+              if (currentHost.localName == "csslength") {
+                currentHost.addSeparator();
+              }
+              else {
+                // we don't increment groupId
+                currentHost = this.createHostIfNeeded(null, groupId);
+              }
+            }
+            else if (token.isIdent("__")) {
+              var box = this.getChild("valueBox");
+              box.removeAttribute("anonid");
+              var parent = this.getChild("vbox");
+              box = document.createElement("hbox");
+              box.setAttribute("anonid", "valueBox");
+              groupId++;
+              box.id = this._propertyClean + groupId;
+              this.getChild("vbox").appendChild(box);
+              currentHost = null;
+            }
+            else if (token.isIdent()) {
+              var label = (token.value in this._L10N)
+                            ? this._L10N[token.value]
+                            : token.value;
+              if (currentHost && currentHost.localName == "csslength")
+                currentHost.addExtraUnit(label, token.value);
+              else {
+                if (!currentHost)
+                  groupId++;
+                currentHost = this.createHostIfNeeded(currentHost, groupId);
+
+                var button = document.createElement("cssident");
+                button.className = "multibutton";
+                button.setAttribute("label", label);
+                button.setAttribute("value", token.value);
+                button.setAttribute("tooltiptext", token.value);
+                button.setAttribute("property", this._property);
+                button.setAttribute("type", "checkbox");
+                button.setAttribute("id", token.value.replace(/\-/g, "") + this._propertyClean + "Button");
+                button.setAttribute("group", currentHost.getAttribute("group"));
+                if (inGroup)
+                  button.setAttribute("agregator", currentHost.getAttribute("group"));
+                currentHost.appendChild(button);
+                button.init(this);
+              this.elements.push(button);
+              }
+            }
+
+            token = parser.getToken(true, true);
+          }
+        ]]></body>
+      </method>
+
+      <method name="error">
+        <parameter name="aProperty"/>
+        <parameter name="aMessage"/>
+        <body><![CDATA[
+          throw "Error in " + aProperty + "'s XUL widget: " + aMessage;
+        ]]></body>
+      </method>
+
+      <method name="getChild">
+        <parameter name="aChildName"/>
+        <body><![CDATA[
+          return document.getAnonymousElementByAttribute(this, "anonid", aChildName);
+        ]]></body>
+      </method>
+
+      <method name="createHostIfNeeded">
+        <parameter name="aCurrentHost"/>
+        <parameter name="groupId"/>
+        <body><![CDATA[
+          var currentHost = aCurrentHost;
+          if(!currentHost) {
+            currentHost = document.createElement("hbox");
+            currentHost.setAttribute("align", "center");
+            currentHost.setAttribute("group", this._propertyClean + groupId);
+            this.getChild("valueBox").appendChild(currentHost);
+          }
+          return currentHost;
+        ]]></body>
+      </method>
+    </implementation>
+  </binding>
+
+  <binding id="csslengthBinding">
+    <content>
+      <xul:menulist xbl:inherits="editable,property,bgtype,units,unsigned" anonid="menulist" sizetopopup="none" bgtype="csslength">
+        <xul:menupopup anonid="popup"/>
+      </xul:menulist>
+    </content>
+    <implementation>
+      <method name="getChild">
+        <parameter name="aChildName"/>
+        <body><![CDATA[
+          return document.getAnonymousElementByAttribute(this, "anonid", aChildName);
+        ]]></body>
+      </method>
+
+      <method name="addExtraUnit">
+        <parameter name="aLabel"/>
+        <parameter name="aValue"/>
+        <body><![CDATA[
+          var extraunits = this.getAttribute("extraunits");
+          this.setAttribute("extraunits", (extraunits ? extraunits + " " : "") + aValue);
+
+          var popup = this.getChild("popup");
+          if (!popup.querySelector("menuseparator")) {
+            var menuseparator = document.createElement("menuseparator");
+            popup.appendChild(menuseparator);
+          }
+
+          var item = document.createElement("menuitem");
+          item.setAttribute("label", aLabel);
+          item.setAttribute("value", aValue);
+          popup.appendChild(item);
+        ]]></body>
+      </method>
+
+      <method name="update">
+        <parameter name="aValue"/>
+        <parameter name="aValueArray"/>
+        <body><![CDATA[
+          // check if we have a numeric value
+          var units = this.getAttribute("units").replace( / /g, "|");
+          var r = new RegExp( "([+-]?[0-9]*\\.[0-9]+|[+-]?[0-9]+)(" + units + ")*", "");
+          if (aValue.match( r ) || this.getAttribute("extraunits").indexOf(aValue) != -1) {
+            this.getChild("menulist").value = aValue;
+          }
+          else {
+            this.getChild("menulist").value = "";
+          }
+        ]]></body>
+      </method>
+
+      <method name="addSeparator">
+        <body><![CDATA[
+          var menuseparator = document.createElement("menuseparator");
+          this.getChild("popup").appendChild(menuseparator);
+        ]]></body>
+      </method>
+
+      <method name="handleCommand">
+        <body><![CDATA[
+          onLengthMenulistCommand(this.getChild("menulist"),
+                                  this.getAttribute("units"),
+                                  this.getAttribute("extraunits"),
+                                  !(this.getAttribute("unsigned") == "true"))
+        ]]></body>
+      </method>
+    </implementation>
+
+    <handlers>
+      <handler event="command">
+        <![CDATA[
+          this.handleCommand();
+        ]]>
+      </handler>
+      <handler event="input">
+        <![CDATA[
+          this.handleCommand();
+        ]]>
+      </handler>
+      <handler event="popupshowing">
+        <![CDATA[
+          PopulateLengths(this.getChild("popup"), this.getAttribute("units"));
+        ]]>
+      </handler>
+    </handlers>
+  </binding>
+
+  <binding id="multibuttonBinding"
+           extends="chrome://global/content/bindings/toolbarbutton.xml#toolbarbutton">
+    <implementation>
+      <field name="propertyElement">null</field>f
+      <method name="init">
+        <parameter name="aElt"/>
+        <body><![CDATA[
+          this.propertyElement = aElt;
+        ]]></body>
+      </method>
+
+      <method name="update">
+        <parameter name="aValue"/>
+        <parameter name="aValueArray"/>
+        <body><![CDATA[
+          if (aValueArray.indexOf(this.getAttribute("value")) != -1)
+            this.setAttribute("checked", "true");
+          else
+            this.removeAttribute("checked");
+        ]]></body>
+      </method>
+    </implementation>
+
+    <handlers>
+      <handler event="command">
+        <![CDATA[
+          var checked   = this.hasAttribute("checked");
+          var value = (this.hasAttribute("value") ? this.getAttribute("value") : this.value);
+          if (!checked &&
+              (this.nodeName.toLowerCase() == "checkbox" || this.getAttribute("type") == "checkbox"))
+            value = "";
+          var property  = this.getAttribute("property");
+          var group     = this.getAttribute("group");
+          var agregator = this.getAttribute("agregator");
+        
+          for (var i = 0; i < this.propertyElement.elements.length; i++) {
+            var e = this.propertyElement.elements[i];
+            if (e != this) {
+              if (agregator
+                  && e.getAttribute("agregator") == agregator
+                  && e.hasAttribute("checked")) {
+                value = value + (value ? " " : "") + (e.hasAttribute("value") ? e.getAttribute("value") : e.value);
+              }
+              else {
+                if (e.getAttribute("group") != group || !agregator)
+                  e.removeAttribute("checked");
+              }
+            }
+          }
+          ApplyStyles([ { property: property, value: value} ]);
+        ]]>
+      </handler>
+    </handlers>
+  </binding>
+
+  <binding id="csscolorBinding">
+    <content>
+#ifndef XP_MACOSX
+      <xul:ecolorpicker anonid="picker"
+                        xbl:inherits="property,colorObjectId=propertyClean,showTransparency,color,fouredges,fouredgescontrol"
+                        oncommand="SetColor(this, this.color)"/>
+#else
+      <html:input anonid="picker"
+                  type="color"
+                  xbl:inherits="property,value=color,showTransparency,fouredges,fouredgescontrol"
+                  oninput="SetColor(this, this.value)"/>
+#endif
+    </content>
+    <implementation>
+      <method name="getChild">
+        <parameter name="aChildName"/>
+        <body><![CDATA[
+          return document.getAnonymousElementByAttribute(this, "anonid", aChildName);
+        ]]></body>
+      </method>
+
+      <method name="update">
+        <parameter name="aValue"/>
+        <parameter name="aValueArray"/>
+        <body><![CDATA[
+#ifdef XP_MACOSX
+          this.getChild("picker").value = aValue ? aValue : "white";
+          this.getChild("picker").setAttribute("value", aValue ? aValue : "white");
+#else
+          this.getChild("picker").color = aValue;
+#endif
+        ]]></body>
+      </method>
+    </implementation>
+  </binding>
+</bindings>

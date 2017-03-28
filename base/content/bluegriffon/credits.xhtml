@@ -49,13 +49,45 @@
 >
 
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      forcecleartheme="true">
   <head>
     <title>&brandFullName; Credits</title>
 
     <style>
+      :root {
+      
+        --bg-main-window-appearance: none;
+        
+        --bg-dark-scrollbar-appearance: none;
+      
+        --bg-dark-background: #363d3f;
+        --bg-dark-gray: #474D4F;
+        --bg-lighter-dark-gray: #383f41;
+        --bg-dark-border:  #181818;
+        --bg-lighter-border: #494f51;
+      
+        --bg-list-background: #363d3f;
+      
+        --bg-main-foreground-color: white;
+      }
+      
+      :root[cleartheme="true"],
+      root[forcecleartheme="true"]  {
+        --bg-dark-background: #E0E0E0;
+        --bg-dark-gray: #D0D0D0;
+        --bg-lighter-dark-gray: #B0B0B0;
+        --bg-dark-border:  #c0c0c0;
+        --bg-lighter-border: #D0D0D0;
+      
+        --bg-list-background: white;
+      
+        --bg-main-foreground-color: black;
+      }
+
       html {
-        background-color: transparent;
+        background-color: var(--bg-dark-background);
+        color: var(--bg-main-foreground-color);
       }
 
       * {
@@ -102,7 +134,7 @@
       .creditsGroup {
         margin-bottom: 4em;
         text-align: center;
-        border: thin solid gray;
+        border: thin solid var(--bg-dark-border);
         border-radius: 11px;
       }
 
@@ -132,7 +164,6 @@
       }
 
       a {
-        color: blue;
         text-decoration: underline;
         cursor: pointer;
       }
@@ -174,9 +205,6 @@
   <body>
 
     <div id="creditsBox">
-        <div>
-          <img src="chrome://bluegriffon/content/DI.png"/>
-        </div>
 
         <div class="creditsGroup">
           <h3>&credit.leads;</h3>
@@ -276,6 +304,10 @@
                 <td>gl (Galego)</td>
                 <td>Enrique Estévez</td>
               </tr>
+              <tr>
+                <td>ru (Русский)</td>
+                <td>AVB</td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -286,7 +318,7 @@
           &brandFullName; &tm.part0; <a href="http://disruptive-innovations.com">Disruptive Innovations SAS</a>.
         </p>
         <p class="footnote">
-          BlueGriffon is copyright &copy;1998-2013 by its
+          BlueGriffon is copyright &copy;1998-2017 by its
           contributors,
           according to terms set out in the
           <a href="http://www.mozilla.org/MPL/MPL-1.1.html">Mozilla Public License</a>
@@ -298,8 +330,8 @@
           University of California. All Rights Reserved.</p>
 
         <p class="footnote">
-          Many icons inside BlueGriffon borrowed from <a href="http://tango.freedesktop.org/Tango_Desktop_Project">The
-          Tango Desktop Project</a>, released in the public domain.</p>
+          Main toolbar's icons inside BlueGriffon borrowed from
+          <a>http://free-icon-rainbow.com/</a>. Icons free even for commercial use and available in SVG..</p>
 
         <p class="footnote">
           Some icons inside BlueGriffon borrowed from <a href="http://www.iconarchive.com/show/glaze-icons-by-mart.html">The

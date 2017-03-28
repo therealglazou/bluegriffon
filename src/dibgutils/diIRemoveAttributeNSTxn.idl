@@ -1,0 +1,21 @@
+
+
+#include "nsISupports.idl"
+#include "domstubs.idl"
+
+interface nsIDOMNode;
+
+/**
+ *
+ */
+[scriptable, uuid(4A2E41F8-CC56-446F-BB10-9DCF5A30795A)]
+interface diIRemoveAttributeNSTxn: nsISupports
+{
+
+
+  nsIDOMNode getNode();
+  wstring getAttributeName();
+  wstring getOldData();
+  wstring getAttributeNS();
+};
+

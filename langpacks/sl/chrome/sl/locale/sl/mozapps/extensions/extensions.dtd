@@ -1,13 +1,17 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 <!ENTITY addons.windowTitle                   "Upravitelj dodatkov">
 
 <!ENTITY search.placeholder                   "Išči po vseh dodatkih">
+<!ENTITY search.buttonlabel                   "Išči">
 <!-- LOCALIZATION NOTE (search.commandKey):
      The search command key should match findOnCmd.commandkey from browser.dtd -->
 <!ENTITY search.commandkey                    "f">
 
 <!ENTITY loading.label                        "Nalaganje …">
 <!ENTITY listEmpty.installed.label            "Nimate nameščenega nobenega dodatka te vrste.">
-<!ENTITY listEmpty.availableUpdates.label     "Posodobitve niso na voljo">
+<!ENTITY listEmpty.availableUpdates.label     "Ni novih posodobitev">
 <!ENTITY listEmpty.recentUpdates.label        "Nedavno niste posodobili nobenih dodatkov">
 <!ENTITY listEmpty.findUpdates.label          "Poišči posodobitve">
 <!ENTITY listEmpty.search.label               "Ustreznih dodatkov ni bilo mogoče najti">
@@ -16,8 +20,16 @@
 <!ENTITY installAddonFromFile.accesskey       "I">
 <!ENTITY toolsMenu.tooltip                    "Orodja za vse dodatke">
 
+<!ENTITY getThemes.description                "Želite brskalnik prilagoditi svojemu okusu?">
+<!ENTITY getThemes.learnMore                  "Izbirajte med tisoči tem.">
+
 <!ENTITY cmd.back.tooltip                     "Pojdi eno stran nazaj">
 <!ENTITY cmd.forward.tooltip                  "Pojdi eno stran naprej">
+
+<!ENTITY showUnsignedExtensions.button.label  "Nekaterih razširitev ni bilo mogoče potrditi">
+<!ENTITY showAllExtensions.button.label       "Prikaži vse razširitve">
+<!ENTITY debugAddons.label                    "Dodatki za razhroščevanje">
+<!ENTITY debugAddons.accesskey                "D">
 
 <!-- global warnings -->
 <!ENTITY warning.safemode.label                    "Zaradi dela v varnem načinu so vsi dodatki onemogočeni.">
@@ -27,10 +39,6 @@
 <!ENTITY warning.updatesecurity.label              "Preverjanje, ali je posodobitev dodatkov varna, je onemogočeno. Posodobitve lahko ogrozijo vaš sistem.">
 <!ENTITY warning.updatesecurity.enable.label       "Omogoči">
 <!ENTITY warning.updatesecurity.enable.tooltip     "Omogoči preverjanje, ali je posodobitev dodatka varna">
-
-<!-- global informations -->
-<!ENTITY info.plugincheck.label                 "Preverite, ali so vsi vaši vstavki posodobljeni">
-<!ENTITY info.plugincheck.tooltip               "Preverite, ali so vsi vaši vstavki posodobljeni">
 
 <!-- categories / views -->
 <!ENTITY view.search.label                    "Iskanje">
@@ -87,6 +95,13 @@
 <!ENTITY cmd.enableTheme.accesskey            "t">
 <!ENTITY cmd.disableTheme.label               "Sleci temo">
 <!ENTITY cmd.disableTheme.accesskey           "t">
+<!ENTITY cmd.askToActivate.label              "Vprašaj pred uporabo">
+<!ENTITY cmd.askToActivate.tooltip            "Pred vsako uporabo vprašaj za dovoljenje">
+<!ENTITY cmd.alwaysActivate.label             "Vedno omogoči">
+<!ENTITY cmd.alwaysActivate.tooltip           "Vedno uporabljaj ta dodatek">
+<!ENTITY cmd.neverActivate.label              "Nikoli ne omogočaj">
+<!ENTITY cmd.neverActivate.tooltip            "Nikoli ne uporabljaj tega dodatka">
+<!ENTITY cmd.stateMenu.tooltip                "Spremeni med uporabo dodatka">
 <!ENTITY cmd.installAddon.label               "Namesti">
 <!ENTITY cmd.installAddon.accesskey           "i">
 <!ENTITY cmd.uninstallAddon.label             "Odstrani">
@@ -110,7 +125,6 @@
 <!ENTITY discover.title                       "Kaj so dodatki?">
 <!ENTITY discover.description2                "Dodatki so programi, ki omogočajo prilagajanje brskalnika &brandShortName; vašim potrebam
   z dodajanjem zmogljivosti in spreminjanjem videza. Poskusite stranske vrstice, prikaz vremena ali tematsko obarvan &brandShortName;.">
-  
 <!ENTITY discover.footer                      "Ko ste povezani na internet, vam ta odsek ponuja
   nekatere izbrane in najbolj priljubljene dodatke.">
 
@@ -146,7 +160,7 @@
 
 
 <!-- ratings -->
-<!ENTITY rating2.label                         "Ocena">
+<!ENTITY rating2.label                        "Ocena">
 
 <!-- download/install progress -->
 <!ENTITY progress.pause.tooltip               "Ustavi">
@@ -206,3 +220,34 @@
 <!ENTITY eula.accept                          "Sprejmi in namesti …">
 
 <!ENTITY settings.path.button.label           "Brskaj…">
+
+<!-- LOCALIZATION NOTE (experiment.info.label): The strings related to
+     experiments are present on the "Experiments" tab of the add-ons manager.
+     This tab won't be displayed unless an Experiment add-on is installed.
+     Install https://people.mozilla.org/~gszorc/dummy-experiment-addon.xpi
+     to cause this tab to appear. -->
+<!ENTITY experiment.info.label "Kaj je to? Telemetrija lahko občasno namešča ali izvaja poskuse.">
+<!ENTITY experiment.info.learnmore "Več o tem">
+<!ENTITY experiment.info.learnmore.accesskey "V">
+<!ENTITY experiment.info.changetelemetry "Nastavitve telemetrije">
+<!ENTITY experiment.info.changetelemetry.accesskey "T">
+
+<!ENTITY setting.learnmore "Več o tem …">
+
+<!ENTITY disabledUnsigned.heading "Nekateri dodatki so bili onemogočeni">
+<!-- LOCALIZATION NOTE (disabledUnsigned.description.start, disabledUnsigned.description.findAddonsLink, disabledUnsigned.description.end):
+     These entities form a sentence, with
+     disabledUnsigned.description.findAddonsLink being a link to an external site. -->
+<!ENTITY disabledUnsigned.description.start "Naslednji dodatki niso bili potrjeni za uporabo v &brandShortName;u. Lahko ">
+<!ENTITY disabledUnsigned.description.findAddonsLink "jih nadomestite">
+<!ENTITY disabledUnsigned.description.end " ali zaprosite razvijalca, da jih potrdi.">
+<!ENTITY disabledUnsigned.learnMore "Več o naših prizadevanjih za večjo varnost na spletu.">
+<!-- LOCALIZATION NOTE (disabledUnsigned.devInfo.start, disabledUnsigned.devInfo.linkToManual, disabledUnsigned.devInfo.end):
+     These entities form a sentence, with disabledUnsigned.devInfo.linkToManual
+     being a link to an external site. -->
+<!ENTITY disabledUnsigned.devInfo.start "Razvijalcem, ki želijo potrditi svoje dodatke, priporočamo branje našega ">
+<!ENTITY disabledUnsigned.devInfo.linkToManual "priročnika">
+<!ENTITY disabledUnsigned.devInfo.end ".">
+
+<!ENTITY pluginDeprecation.description "Pogrešate kaj? Nekateri vtičniki niso več podprti v &brandShortName;u.">
+<!ENTITY pluginDeprecation.learnMore "Več o tem.">

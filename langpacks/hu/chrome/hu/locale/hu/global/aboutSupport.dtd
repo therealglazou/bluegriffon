@@ -3,13 +3,17 @@
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 
 <!ENTITY aboutSupport.pageTitle "Hibakeresési információ">
-
 <!-- LOCALIZATION NOTE (aboutSupport.pageSubtitle): don't change the 'supportLink' id. -->
-<!ENTITY aboutSupport.pageSubtitle "
-  Ez az oldal problémakeresésnél használható technikai információkat tartalmaz.
-   Ha a &brandShortName; programmal kapcsolatos gyakori kérdésekre keresi a választ, akkor
-  nézze meg a <a id='supportLink'>támogató weboldalunkat</a>.
-">
+
+<!ENTITY aboutSupport.pageSubtitle "  Ez az oldal problémakeresésnél használható technikai információkat tartalmaz. Ha a &brandShortName; programmal kapcsolatos gyakori kérdésekre keresi a választ, akkor nézze meg a <a id='supportLink'>támogató weboldalunkat</a>.">
+
+<!ENTITY aboutSupport.crashes.title "Hibajelentések">
+<!-- LOCALIZATION NOTE (aboutSupport.crashes.id):
+This is likely the same like id.heading in crashes.dtd. -->
+<!ENTITY aboutSupport.crashes.id "Jelentésazonosító">
+<!ENTITY aboutSupport.crashes.sendDate "Elküldve">
+<!ENTITY aboutSupport.crashes.allReports "Minden hibajelentés">
+<!ENTITY aboutSupport.crashes.noConfig "Ez az alkalmazás nincs a hibajelentések megjelenítésére beállítva.">
 
 <!ENTITY aboutSupport.extensionsTitle "Kiterjesztések">
 <!ENTITY aboutSupport.extensionName "Név">
@@ -17,9 +21,25 @@
 <!ENTITY aboutSupport.extensionVersion "Verzió">
 <!ENTITY aboutSupport.extensionId "Azonosító">
 
+<!ENTITY aboutSupport.experimentsTitle "Kísérleti funkciók">
+<!ENTITY aboutSupport.experimentName "Név">
+<!ENTITY aboutSupport.experimentId "Azonosító">
+<!ENTITY aboutSupport.experimentDescription "Leírás">
+<!ENTITY aboutSupport.experimentActive "Aktív">
+<!ENTITY aboutSupport.experimentEndDate "Záró dátum">
+<!ENTITY aboutSupport.experimentHomepage "Honlap">
+<!ENTITY aboutSupport.experimentBranch "Ág">
+
 <!ENTITY aboutSupport.appBasicsTitle "Alkalmazás alapadatai">
 <!ENTITY aboutSupport.appBasicsName "Név">
 <!ENTITY aboutSupport.appBasicsVersion "Verzió">
+<!ENTITY aboutSupport.appBasicsBuildID "Build az.">
+<!-- LOCALIZATION NOTE (aboutSupport.appBasicsUpdateChannel, aboutSupport.appBasicsUpdateHistory, aboutSupport.appBasicsShowUpdateHistory):
+"Update" is a noun here, not a verb. -->
+
+<!ENTITY aboutSupport.appBasicsUpdateChannel "Frissítési csatorna">
+<!ENTITY aboutSupport.appBasicsUpdateHistory "Frissítési előzmények">
+<!ENTITY aboutSupport.appBasicsShowUpdateHistory "Frissítési előzmények megjelenítése">
 
 <!ENTITY aboutSupport.appBasicsProfileDir "Profilkönyvtár">
 <!-- LOCALIZATION NOTE (aboutSupport.appBasicsProfileDirWinMac):
@@ -30,27 +50,47 @@ Windows/Mac use the term "Folder" instead of "Directory" -->
 <!ENTITY aboutSupport.appBasicsEnabledPlugins "Engedélyezett bővítmények">
 <!ENTITY aboutSupport.appBasicsBuildConfig "Build konfiguráció">
 <!ENTITY aboutSupport.appBasicsUserAgent "User Agent">
-<!ENTITY aboutSupport.appBasicsCrashIDs "Összeomlás-bejelentés">
+<!ENTITY aboutSupport.appBasicsOS "OS">
 <!ENTITY aboutSupport.appBasicsMemoryUse "Memóriahasználat">
+<!ENTITY aboutSupport.appBasicsPerformance "Teljesítmény">
+<!-- LOCALIZATION NOTE the term "Service Workers" should not be translated. -->
+
+<!ENTITY aboutSupport.appBasicsServiceWorkers "Regisztrált Service Workers">
+
+<!ENTITY aboutSupport.appBasicsProfiles "Profilok">
+
+<!ENTITY aboutSupport.appBasicsMultiProcessSupport "Több folyamatú ablakok">
+
+
+
+<!ENTITY aboutSupport.appBasicsSafeMode "Csökkentett mód">
 
 <!ENTITY aboutSupport.showDir.label "Könyvtár megnyitása">
 <!-- LOCALIZATION NOTE (aboutSupport.showMac.label): This is the Mac-specific
 variant of aboutSupport.showDir.label.  This allows us to use the preferred
 "Finder" terminology on Mac. -->
 <!ENTITY aboutSupport.showMac.label "Megjelenítés a Finderben">
-<!-- LOCALIZATION NOTE (aboutSupport.showWin.label): This is the Windows-specific
+<!-- LOCALIZATION NOTE (aboutSupport.showWin2.label): This is the Windows-specific
 variant of aboutSupport.showDir.label. -->
-<!ENTITY aboutSupport.showWin.label "Mappa megjelenítése">
+<!ENTITY aboutSupport.showWin2.label "Mappa megnyitása">
 
 <!ENTITY aboutSupport.modifiedKeyPrefsTitle "Fontos, módosított beállítások">
 <!ENTITY aboutSupport.modifiedPrefsName "Név">
 <!ENTITY aboutSupport.modifiedPrefsValue "Érték">
-
 <!-- LOCALIZATION NOTE (aboutSupport.userJSTitle, aboutSupport.userJSDescription): user.js is the name of the preference override file being checked. -->
+
 <!ENTITY aboutSupport.userJSTitle "user.js beállítások">
 <!ENTITY aboutSupport.userJSDescription "Profilmappája tartalmaz egy <a id='prefs-user-js-link'>user.js fájlt</a>, amely nem a &brandShortName; által létrehozott beállításokat is tartalmaz.">
 
+<!ENTITY aboutSupport.lockedKeyPrefsTitle "Fontos zárolt beállítások">
+<!ENTITY aboutSupport.lockedPrefsName "Név">
+<!ENTITY aboutSupport.lockedPrefsValue "Érték">
+
 <!ENTITY aboutSupport.graphicsTitle "Grafika">
+
+<!ENTITY aboutSupport.placeDatabaseTitle "Helyek adatbázisa">
+<!ENTITY aboutSupport.placeDatabaseIntegrity "Sértetlenség">
+<!ENTITY aboutSupport.placeDatabaseVerifyIntegrity "Sértetlenség ellenőrzése">
 
 <!ENTITY aboutSupport.jsTitle "JavaScript">
 <!ENTITY aboutSupport.jsIncrementalGC "Inkrementális GC">
@@ -66,3 +106,37 @@ variant of aboutSupport.showDir.label. -->
 
 <!ENTITY aboutSupport.copyTextToClipboard.label "Szöveg másolása a vágólapra">
 <!ENTITY aboutSupport.copyRawDataToClipboard.label "Nyers adatok másolása a vágólapra">
+
+<!ENTITY aboutSupport.sandboxTitle "Sandbox">
+
+
+
+
+
+
+
+
+
+<!ENTITY aboutSupport.safeModeTitle "Biztonságos mód kipróbálása">
+<!ENTITY aboutSupport.restartInSafeMode.label "Újraindítás letiltott kiegészítőkkel…">
+
+<!ENTITY aboutSupport.graphicsFeaturesTitle "Képességek">
+<!ENTITY aboutSupport.graphicsDiagnosticsTitle "Diagnosztika">
+<!ENTITY aboutSupport.graphicsFailureLogTitle "Hibanapló">
+<!ENTITY aboutSupport.graphicsGPU1Title "1. GPU">
+<!ENTITY aboutSupport.graphicsGPU2Title "2. GPU">
+<!ENTITY aboutSupport.graphicsDecisionLogTitle "Döntésnapló">
+<!ENTITY aboutSupport.graphicsCrashGuardsTitle "Összeomlásvédelem által letiltott funkciók">
+<!ENTITY aboutSupport.graphicsWorkaroundsTitle "Kerülő eljárások">
+
+
+<!ENTITY aboutSupport.appBasicsKeyGoogle "Google Key">
+<!ENTITY aboutSupport.appBasicsKeyMozilla "Mozilla Location Service Key">
+<!ENTITY aboutSupport.sandboxSyscallAge "Seconds Ago">
+<!ENTITY aboutSupport.sandboxSyscallArgs "Arguments">
+<!ENTITY aboutSupport.sandboxSyscallIndex "#">
+<!ENTITY aboutSupport.sandboxSyscallLogTitle "Rejected System Calls">
+<!ENTITY aboutSupport.sandboxSyscallNumber "Syscall">
+<!ENTITY aboutSupport.sandboxSyscallPID "PID">
+<!ENTITY aboutSupport.sandboxSyscallProcType "Process Type">
+<!ENTITY aboutSupport.sandboxSyscallTID "TID">

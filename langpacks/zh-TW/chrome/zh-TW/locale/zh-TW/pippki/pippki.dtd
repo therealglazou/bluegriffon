@@ -3,52 +3,27 @@
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 
 <!-- Values for changepassword.xul -->
-<!ENTITY setPassword.title  "更改主控密碼">
+<!ENTITY setPassword.title  "變更主控密碼">
 <!ENTITY setPassword.tokenName.label "安全裝置">
 <!ENTITY setPassword.oldPassword.label "目前密碼:">
 <!ENTITY setPassword.newPassword.label "新密碼:">
 <!ENTITY setPassword.reenterPassword.label "新密碼 (再輸入一次):">
-<!ENTITY setPassword.meter.label "密碼安全品質測量計">
-<!ENTITY setPassword.meter.loading "載入中">
+<!ENTITY setPassword.meter.label "密碼品質測量計">
 
 <!-- Values for resetpassword.xul -->
 <!ENTITY resetPasswordButtonLabel "重設">
 <!ENTITY resetPassword.title  "重設主控密碼">
-<!ENTITY resetPassword.text  "如果您重設了您的主控密碼，所有您已儲存的網頁、電子郵件密碼、表單資料、個人憑證，和私密金鑰等等資訊都會被清除。您確定您要重設您的主控密碼嗎？">
-
-<!-- Values for getpassword.xul -->
-<!ENTITY getPassword.title  "輸入主控密碼">
-<!ENTITY getPassword.tokenName2.label "安全裝置:">
-<!ENTITY getPassword.password.label "密碼:">
-
-<!-- These should be common -->
-<!ENTITY piperror.title "錯誤">
-<!ENTITY pipalert.title "錯誤 - 無法復原">
-
-<!-- Prefs panel strings -->
-<!ENTITY pref.security.general.lHeader "安全資訊">
-<!ENTITY pref.security.general.rHeader "一般安全性設定">
-<!ENTITY pref.security.general.header "一般安全性設定">
-<!ENTITY pref.security.general.level.title "安全等級">
-<!ENTITY pref.security.general.paranoid.label "使用高度安全性設定">
-<!ENTITY pref.security.general.certificates.title "憑證">
-<!ENTITY pref.security.general.manageCert.label "管理憑證">
+<!ENTITY resetPassword.text  "如果您要重設主控密碼，您所有的網頁與電子郵件密碼、表單資料、個人憑證、私密金鑰等資訊都會被清除。您確定要重設主控密碼嗎？">
 
 <!-- Downloading a cert -->
-<!ENTITY downloadCert.title "下載憑證中">
+<!ENTITY downloadCert.title "下載憑證">
 <!ENTITY downloadCert.message1 "您被要求信任一個新憑證機構 (CA)。">
 <!ENTITY downloadCert.trustSSL "信任此憑證機構以識別網站。">
 <!ENTITY downloadCert.trustEmail "信任此憑證機構以識別郵件用戶。">
 <!ENTITY downloadCert.trustObjSign "信任此憑證機構以識別軟體製造商。">
-<!ENTITY downloadCert.message3 "在信任此憑證機構前，您應該確認它的憑證及政策程序 (如果有的話)。">
+<!ENTITY downloadCert.message3 "在信任此憑證機構前，您應該確認它的憑證及政策程序（如果有的話）。">
 <!ENTITY downloadCert.viewCert.label "檢視">
-<!ENTITY downloadCert.viewPolicy.label "政策">
-<!ENTITY downloadCert.viewCert.text "檢驗憑證機構憑證">
-<!ENTITY downloadCert.viewPolicy.text "檢驗憑證機構與程序">
-
-<!-- Certificate Exists in database -->
-<!ENTITY caCertExists.title "憑證已存在">
-<!ENTITY caCertExists.message "該憑證已存在。">
+<!ENTITY downloadCert.viewCert.text "檢查憑證機構的憑證">
 
 <!-- Strings for the SSL client auth ask dialog -->
 <!ENTITY clientAuthAsk.title "使用者識別需求">
@@ -56,48 +31,21 @@
 <!ENTITY clientAuthAsk.message2 "選擇一項憑證以做為識別:">
 <!ENTITY clientAuthAsk.message3 "所選憑證細節:">
 
-<!-- Strings for the cert picker dialog -->
-<!ENTITY certPicker.title "選取憑證">
-<!ENTITY certPicker.info  "憑證:">
-<!ENTITY certPicker.detailsLabel "所選憑證細節:">
-
 <!ENTITY pkcs12.setpassword.title  "選擇憑證備份密碼">
 <!ENTITY pkcs12.setpassword.message  "在此設定的憑證備份密碼可保護您要建立的備份。 您必須設定此密碼以繼續備份。">
 <!ENTITY pkcs12.setpassword.label1 "憑證備份密碼:">
 <!ENTITY pkcs12.setpassword.label2 "憑證備份密碼 (再輸入一次):">
-<!ENTITY pkcs12.setpassword.reminder "重要:如果您忘了您的憑證備份密碼，您會無法回存備份。請把它記錄在安全的地方。">
-
-<!ENTITY pkcs12.getpassword.title  "密碼對話視窗">
-<!ENTITY pkcs12.getpassword.message "請輸入用來加密此憑證備份的密碼。">
+<!ENTITY pkcs12.setpassword.reminder "重要: 如果您忘了憑證備份密碼，將會無法回存備份。請多備一份到安全的地方。">
 
 <!ENTITY chooseToken.title  "選擇 Token 對話窗">
 <!ENTITY chooseToken.message1 "請選擇一個 Token">
-
-<!ENTITY escrowWarn.title "複製加密金鑰">
-<!ENTITY escrowWarn.message1 "重要:此憑證機構要求備份您的加密私密金鑰。">
-<!ENTITY escrowWarn.benefit1 "好處是您如果您弄丟了您的私密金鑰，您可以從憑證機構那裡複製回來。">
-<!ENTITY escrowWarn.message2 "但是，您的加密私密金鑰會被憑證機構存起來，而且有可能會在未經您的同意下被拿去做壞事。">
-<!ENTITY examineCert.label "檢視憑證">
-<!ENTITY examineCert.accesskey "V">
-
-<!ENTITY serverCrlNextupdate.message "請尋求您的系統管理者協助">
 
 <!-- Strings for the CreateCertInfo dialog  -->
 <!ENTITY createCertInfo.title "產生私密金鑰">
 <!ENTITY createCertInfo.msg1 "製造金鑰中… 請稍待幾分鐘…">
 <!ENTITY createCertInfo.msg2 "請稍候…">
 
-<!-- Form Signing confirmation prompt -->
-<!ENTITY formSigning.title "文字簽署要求">
-<!ENTITY formSigning.cert "簽署憑證中">
-<!ENTITY formSigning.confirmPassword "為了確認您同意使用您選擇的憑證簽署此文字訊息，請輸入您的主控密碼:">
-
 <!-- Strings for protectedAuth dialog -->
 <!ENTITY protectedAuth.title "被保護的 Token 鑑別">
 <!ENTITY protectedAuth.msg "請鑑別此 Token，鑑別方法會隨 Token 類型而不同。">
 <!ENTITY protectedAuth.tokenName.label "Token:">
-
-<!ENTITY certErrorDlg.title "安全連線失敗">
-<!ENTITY certErrorDlg.info1 "這可能是伺服器設定錯誤造成的問題，也有可能是有人試圖假冒其身分。">
-<!ENTITY certErrorDlg.info2 "若您曾經成功連線到此伺服器，這個錯誤可能是暫時的，您可以稍候再試一次。">
-

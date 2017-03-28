@@ -3,28 +3,35 @@
 
     <menu id="fileMenu" label="&fileMenu.label;" accesskey="&fileMenu.accesskey;">
       <menupopup id="fileMenu_popup">
-        <menuitem label="&newMenu.label;" accesskey="&newMenu.accesskey;" key="key_newNavigator"
-                  command="cmd_new"/>
-        <menuitem label="&newWizardMenu.label;"
-                  command="cmd_newWizard"/>
+        <menuitem id="openPageMenuitem" accesskey="&openPage.accesskey;" key="openpagekb" command="cmd_open"/>
+        <menuitem id="openFileMenuitem"                                  key="openfilekb" command="cmd_openFile"/>
+
         <menu id="menu_RecentFiles" accesskey="&filerecentmenu.accesskey;" label="&fileRecentMenu.label;"
               onpopupshowing="RecentPagesHandler.buildRecentPagesMenu();">
           <menupopup id="menupopup_RecentFiles"
                       oncommand="OpenFile(event.target.getAttribute('value'), true);"/>
             <!-- menuitems appended at runtime -->
         </menu>
+        <menuseparator/>
+        <menuitem id="saveMenuitem"   key="savekb" command="cmd_save"/>
+        <menuitem id="saveAsMenuitem" key="saveaskb" command="cmd_saveAs"/>
 
         <menuseparator/>
+        <menuitem label="&newMenu.label;" accesskey="&newMenu.accesskey;" key="key_newNavigator"
+                  command="cmd_new"/>
+        <menuitem label="&newOtherCmd.label;"     oncommand="NewDocumentWithOptions(event);"/>
+
         <menuitem label="&newWindow.label;" key="key_newWindow"
                   command="cmd_newWindow" />
 
         <menuseparator/>
-        <menuitem id="openPageMenuitem" accesskey="&openPage.accesskey;" key="openpagekb" command="cmd_open"/>
-        <menuitem id="openFileMenuitem"                                  key="openfilekb" command="cmd_openFile"/>
+        <menuitem label="&newWizardMenu.label;"
+                  id="newWizardMenu"
+                  command="cmd_newWizard"/>
 
         <menuseparator/>
-        <menuitem id="saveMenuitem"   key="savekb" command="cmd_save"/>
-        <menuitem id="saveAsMenuitem" key="saveaskb" command="cmd_saveAs"/>
+        <menuitem id="browseMenuitem"
+                  label="&browseToolbarCmd.label;" command="cmd_browse"/>
 
         <menuseparator/>
         <menuitem id="printSettingsMenuitem" command="cmd_printSettings"/>
@@ -137,9 +144,6 @@
         <menuitem label="&imageToolbarCmd.label;"
                   command="cmd_image"
                   accesskey="&imageToolbarCmd.key;"/>
-        <menuitem label="&tableToolbarCmd.label;"
-                  command="cmd_InsertTable"
-                  accesskey="&tableToolbarCmd.key;"/>
         <menuitem label="&linkToolbarCmd.label;"
                   command="cmd_link"
                   accesskey="&linkToolbarCmd.key;"/>
@@ -149,7 +153,12 @@
         <menuitem label="&hrToolbarCmd.label;"
                   command="cmd_hr"
                   accesskey="&hrToolbarCmd.key;"/>
-        <menu label="&formToolbarCmd.label;">
+        <menuitem id="videoMenuitem"
+                  label="&videoToolbarCmd.label;" command="cmd_video"/>
+        <menuitem id="audioMenuitem"
+                  label="&audioToolbarCmd.label;" command="cmd_audio"/>
+
+        <menu label="&formToolbarCmd.label;" id="formMenu">
             <menupopup>
               <menuitem label="&formToolbarCmd.label;"
                         accesskey="&formToolbarCmd.key;"
@@ -270,30 +279,70 @@
                   command="cmd_span"
                   accesskey="&spanCmd.accesskey;"/>
         <menuseparator/>
-        <menuitem label="&styleBoldCmd.label;"        accesskey="&stylebold.accesskey;"         observes="cmd_bold"          type="checkbox"/>
-        <menuitem label="&styleItalicCmd.label;"      accesskey="&styleitalic.accesskey;"       observes="cmd_italic"        type="checkbox"/>
-        <menuitem label="&styleUnderlineCmd.label;"   accesskey="&styleunderline.accesskey;"    observes="cmd_underline"     type="checkbox" key="underlinekb"/>
-        <menuitem label="&styleStrikeThruCmd.label;"  accesskey="&stylestrikethru.accesskey;"   observes="cmd_strikethrough" type="checkbox"/>
-        <menuitem label="&styleSuperscriptCmd.label;" accesskey="&stylesuperscript.accesskey;"  observes="cmd_superscript"   type="checkbox"/>
-        <menuitem label="&styleSubscriptCmd.label;"   accesskey="&stylesubscript.accesskey;"    observes="cmd_subscript"     type="checkbox"/>
-        <menuitem label="&fontFixedWidth.label;"      accesskey="&fontfixedwidth.accesskey;"    observes="cmd_tt"            type="checkbox"/>
-        <menuitem label="&styleNonbreakingCmd.label;" accesskey="&stylenonbreaking.accesskey;"  observes="cmd_nobreak"       type="checkbox"/>
+        <menuitem label="&styleBoldCmd.label;"        accesskey="&stylebold.accesskey;"         observes="cmd_bold"          type="checkbox">
+          <observes element="cmd_renderedHTMLEnabler" attribute="disabled"/>
+        </menuitem>
+        <menuitem label="&styleItalicCmd.label;"      accesskey="&styleitalic.accesskey;"       observes="cmd_italic"        type="checkbox">
+          <observes element="cmd_renderedHTMLEnabler" attribute="disabled"/>
+        </menuitem>
+        <menuitem label="&styleUnderlineCmd.label;"   accesskey="&styleunderline.accesskey;"    observes="cmd_underline"     type="checkbox" key="underlinekb">
+          <observes element="cmd_renderedHTMLEnabler" attribute="disabled"/>
+        </menuitem>
+        <menuitem label="&styleStrikeThruCmd.label;"  accesskey="&stylestrikethru.accesskey;"   observes="cmd_strikethrough" type="checkbox">
+          <observes element="cmd_renderedHTMLEnabler" attribute="disabled"/>
+        </menuitem>
+        <menuitem label="&styleSuperscriptCmd.label;" accesskey="&stylesuperscript.accesskey;"  observes="cmd_superscript"   type="checkbox">
+          <observes element="cmd_renderedHTMLEnabler" attribute="disabled"/>
+        </menuitem>
+        <menuitem label="&styleSubscriptCmd.label;"   accesskey="&stylesubscript.accesskey;"    observes="cmd_subscript"     type="checkbox">
+          <observes element="cmd_renderedHTMLEnabler" attribute="disabled"/>
+        </menuitem>
+        <menuitem label="&fontFixedWidth.label;"      accesskey="&fontfixedwidth.accesskey;"    observes="cmd_tt"            type="checkbox">
+          <observes element="cmd_renderedHTMLEnabler" attribute="disabled"/>
+        </menuitem>
+        <menuitem label="&styleNonbreakingCmd.label;" accesskey="&stylenonbreaking.accesskey;"  observes="cmd_nobreak"       type="checkbox">
+          <observes element="cmd_renderedHTMLEnabler" attribute="disabled"/>
+        </menuitem>
         <menuseparator/>
-        <menuitem label="&styleEm.label;"             accesskey="&styleEm.accesskey;"           observes="cmd_em"            type="checkbox" key="emkb"/>
-        <menuitem label="&styleStrong.label;"         accesskey="&styleStrong.accesskey;"       observes="cmd_strong"        type="checkbox" key="strongkb"/>
-        <menuitem label="&styleCite.label;"           accesskey="&styleCite.accesskey;"         observes="cmd_cite"          type="checkbox"/>
-        <menuitem label="&styleAbbr.label;"           accesskey="&styleAbbr.accesskey;"         observes="cmd_abbr"          type="checkbox"/>
-        <menuitem label="&styleAcronym.label;"        accesskey="&styleAcronym.accesskey;"      observes="cmd_acronym"       type="checkbox"/>
-        <menuitem label="&styleCode.label;"           accesskey="&styleCode.accesskey;"         observes="cmd_code"          type="checkbox" key="codekb"/>
-        <menuitem label="&styleSamp.label;"           accesskey="&styleSamp.accesskey;"         observes="cmd_samp"          type="checkbox"/>
-        <menuitem label="&styleVar.label;"            accesskey="&styleVar.accesskey;"          observes="cmd_var"           type="checkbox"/>
+        <menuitem label="&styleEm.label;"             accesskey="&styleEm.accesskey;"           observes="cmd_em"            type="checkbox" key="emkb">
+          <observes element="cmd_renderedHTMLEnabler" attribute="disabled"/>
+        </menuitem>
+        <menuitem label="&styleStrong.label;"         accesskey="&styleStrong.accesskey;"       observes="cmd_strong"        type="checkbox" key="strongkb">
+          <observes element="cmd_renderedHTMLEnabler" attribute="disabled"/>
+        </menuitem>
+        <menuitem label="&styleCite.label;"           accesskey="&styleCite.accesskey;"         observes="cmd_cite"          type="checkbox">
+          <observes element="cmd_renderedHTMLEnabler" attribute="disabled"/>
+        </menuitem>
+        <menuitem label="&styleAbbr.label;"           accesskey="&styleAbbr.accesskey;"         observes="cmd_abbr"          type="checkbox">
+          <observes element="cmd_renderedHTMLEnabler" attribute="disabled"/>
+        </menuitem>
+        <menuitem label="&styleAcronym.label;"        accesskey="&styleAcronym.accesskey;"      observes="cmd_acronym"       type="checkbox">
+          <observes element="cmd_renderedHTMLEnabler" attribute="disabled"/>
+        </menuitem>
+        <menuitem label="&styleCode.label;"           accesskey="&styleCode.accesskey;"         observes="cmd_code"          type="checkbox" key="codekb">
+          <observes element="cmd_renderedHTMLEnabler" attribute="disabled"/>
+        </menuitem>
+        <menuitem label="&styleSamp.label;"           accesskey="&styleSamp.accesskey;"         observes="cmd_samp"          type="checkbox">
+          <observes element="cmd_renderedHTMLEnabler" attribute="disabled"/>
+        </menuitem>
+        <menuitem label="&styleVar.label;"            accesskey="&styleVar.accesskey;"          observes="cmd_var"           type="checkbox">
+          <observes element="cmd_renderedHTMLEnabler" attribute="disabled"/>
+        </menuitem>
         <menuseparator/>
-        <menuitem id="menu_removeAllStyles"  label="&removeAllStyles.label;"  accesskey="&removeAllStyles.accesskey;"  command="cmd_removeStyles"/>
-        <menuitem id="menu_removeAllLinks"   label="&removeAllLinks.label;"   accesskey="&removeAllLinks.accesskey;"   command="cmd_removeLinks"/>
+        <menuitem id="menu_removeAllStyles"  label="&removeAllStyles.label;"  accesskey="&removeAllStyles.accesskey;"  observes="cmd_removeStyles">
+          <observes element="cmd_renderedHTMLEnabler" attribute="disabled"/>
+        </menuitem>
+        <menuitem id="menu_removeAllLinks"   label="&removeAllLinks.label;"   accesskey="&removeAllLinks.accesskey;"   observes="cmd_removeLinks">
+          <observes element="cmd_renderedHTMLEnabler" attribute="disabled"/>
+        </menuitem>
         <menuseparator />
-        <menuitem label="&listProperties.label;" command="cmd_list"/>
+        <menuitem label="&listProperties.label;" observes="cmd_list">
+          <observes element="cmd_renderedHTMLEnabler" attribute="disabled"/>
+        </menuitem>
         <menuseparator/>
-        <menuitem label="&pageProperties.label;" command="cmd_pageProperties"/>
+        <menuitem label="&pageProperties.label;" observes="cmd_pageProperties">
+          <observes element="cmd_renderedHTMLEnabler" attribute="disabled"/>
+        </menuitem>
       </menupopup>
     </menu>
 
@@ -348,24 +397,7 @@
 
     <menu id="panelsMenu" label="&panelsMenu.label;" accesskey="&panelsMenu.accesskey;"
           oncommand="start_panel(event.originalTarget)">
-      <menupopup id="panelsMenuPopup"
-                 onpopupshowing="UpdatePanelsStatusInMenu()">
-#ifdef XP_UNIX
-#ifdef XP_MACOSX
-        <menuitem label="&alignPanels.label;"
-                  oncommand="AlignAllPanels();"/>
-#endif
-#else
-        <menuitem label="&alignPanels.label;"
-                  oncommand="AlignAllPanels();"/>
-#endif
-        <menu label="&deckMenu.label;" id="deckMenu">
-          <menupopup id="deckMenupopup"
-                     onpopupshowing="UpdateDeckMenu()"
-                     oncommand="DeckOrUndeckPanel(event);"/>
-        </menu>
-        <menuseparator id="beforeAllPanelsMenuseparator"/>
-      </menupopup>
+      <menupopup id="panelsMenuPopup"/>
     </menu>
 
     <menu id="toolsMenu" label="&toolsMenu.label;" accesskey="&toolsMenu.accesskey;">
@@ -373,8 +405,8 @@
         <menuitem id="menu_cleanup" command="cmd_cleanup"/>
         <menuseparator/>
         <menuitem label="&addonsMenu.label;"  oncommand="OpenExtensionsManager()"/>
-        <menuseparator/>
-        <menuitem label="&consoleMenu.label;"  oncommand="OpenConsole()"/>
+        <!--menuseparator/-->
+        <!--menuitem label="&consoleMenu.label;"  oncommand="OpenConsole()"/-->
         <menuseparator id="menu_PrefsSeparator"/>
         <menuitem id="menu_preferences"
                   label="&preferences.label;"
@@ -384,14 +416,12 @@
                   oncommand="OpenPreferences()"/>
 #ifdef XP_MACOSX
         <menuitem id="menu_mac_services" label="&servicesMenuMac.label;"/>
-        <menuitem id="menu_mac_hide_app" label="&hideThisAppCmdMac.label;" key="key_hideThisAppCmdMac"/>
+        <menuitem id="menu_mac_hide_app" label="&hideThisAppCmdMac2.label;" key="key_hideThisAppCmdMac"/>
         <menuitem id="menu_mac_hide_others" label="&hideOtherAppsCmdMac.label;" key="key_hideOtherAppsCmdMac"/>
         <menuitem id="menu_mac_show_all" label="&showAllAppsCmdMac.label;"/>
 #endif
-        <menuitem label="Venkman" id="venkmanMenuitem"
-                  hidden="true"
-                  oncommand="start_venkman()"/>
-        <menuitem id="menu_inspector" label="DOMI" oncommand="inspectDOMDocument();" hidden="true"/>
+        <!--menuitem id="menu_inspector" label="DOMI" oncommand="inspectDOMDocument();"/-->
+
       </menupopup>
     </menu>
 
@@ -411,8 +441,10 @@
         <menuitem label="&qa.label;"
                   oncommand="loadExternalURL('http://bugzilla.bluegriffon.org')"/>
         <menuseparator/>
-        <menuitem label="&addons.label;"
-                  oncommand="loadExternalURL('http://bluegriffon.com')"/>
+        <menuitem label="&buyUsersManual.label;"
+                  oncommand="loadExternalURL('http://bluegriffon.com/#manual')"/>
+        <menuitem label="&buyLicense.label;"
+                  oncommand="loadExternalURL('http://bluegriffon.com/#buy')"/>
       </menupopup>
     </menu>
 

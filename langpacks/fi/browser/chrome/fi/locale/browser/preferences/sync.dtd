@@ -1,27 +1,12 @@
-<!-- The page shown when not logged in... -->
-<!ENTITY setupButton.label          "Määritä &syncBrand.fullName.label; -palvelun asetukset">
-<!ENTITY setupButton.accesskey      "M">
-<!ENTITY weaveDesc.label            "&syncBrand.fullName.label; -palvelun avulla sivuhistoriasi, kirjanmerkkisi, salasanasi ja avoimet välilehtesi ovat saatavilla kaikissa laitteissasi.">
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 
 <!-- The page shown when logged in... -->
 
-<!-- Login error feedback -->
-<!ENTITY updatePass.label             "Päivitä">
-<!ENTITY resetPass.label              "Palauta">
-
-<!-- Manage Account -->
-<!ENTITY manageAccount.label          "Hallinnoi tiliä">
-<!ENTITY manageAccount.accesskey      "H">
-<!ENTITY viewQuota.label              "Näytä tilavaraus">
-<!ENTITY changePassword.label         "Vaihda salasana">
-<!ENTITY mySyncKey.label              "Synkronointiavaimesi">
-<!ENTITY resetSync.label              "Aloita synkronointi alusta">
-<!ENTITY addDevice.label              "Liitä laite">
-
-<!ENTITY syncMy.label               "Synkronoi">
 <!ENTITY engine.bookmarks.label     "Kirjanmerkit">
 <!ENTITY engine.bookmarks.accesskey "K">
-<!ENTITY engine.tabs.label          "Välilehdet">
+<!ENTITY engine.tabs.label2         "Avoimet välilehdet">
 <!ENTITY engine.tabs.accesskey      "V">
 <!ENTITY engine.history.label       "Sivuhistoria">
 <!ENTITY engine.history.accesskey   "S">
@@ -29,25 +14,73 @@
 <!ENTITY engine.passwords.accesskey "a">
 <!ENTITY engine.prefs.label         "Asetukset">
 <!ENTITY engine.prefs.accesskey     "e">
+<!ENTITY engine.addons.label        "Lisäosat">
+<!ENTITY engine.addons.accesskey    "i">
 
 <!-- Device Settings -->
-<!ENTITY syncComputerName.label       "Laitteen nimi:">
-<!ENTITY syncComputerName.accesskey   "L">
-<!ENTITY deactivateDevice.label       "Irrota laite palvelusta">
+<!ENTITY fxaSyncDeviceName.label       "Laitteen nimi">
+<!ENTITY changeSyncDeviceName.label "Muuta laitteen nimeä…">
+<!ENTITY changeSyncDeviceName.accesskey "M">
+<!ENTITY cancelChangeSyncDeviceName.label "Peruuta">
+<!ENTITY cancelChangeSyncDeviceName.accesskey "P">
+<!ENTITY saveChangeSyncDeviceName.label "Tallenna">
+<!ENTITY saveChangeSyncDeviceName.accesskey "T">
 
 <!-- Footer stuff -->
 <!ENTITY prefs.tosLink.label        "Käyttöehdot">
-<!ENTITY prefs.ppLink.label         "Tietosuojakäytäntö">
+<!ENTITY fxaPrivacyNotice.link.label "Tietosuojakäytäntö">
 
-<!ENTITY changePassword2.label        "Change Password…">
-<!ENTITY engine.addons.accesskey    "A">
-<!ENTITY engine.addons.label        "Add-ons">
-<!ENTITY myRecoveryKey.label          "My Recovery Key">
+<!-- LOCALIZATION NOTE (signedInUnverified.beforename.label,
+signedInUnverified.aftername.label): these two string are used respectively
+before and after the account email address. Localizers can use one of them, or
+both, to better adapt this sentence to their language.
+-->
+<!ENTITY signedInUnverified.beforename.label "Sähköpostiosoitetta">
+<!ENTITY signedInUnverified.aftername.label "ei ole vahvistettu.">
 
-<!ENTITY pairDevice.label             "Pair a Device">
-<!ENTITY resetSync2.label             "Reset Sync…">
-<!ENTITY syncDeviceName.accesskey   "c">
+<!-- LOCALIZATION NOTE (signedInLoginFailure.beforename.label,
+signedInLoginFailure.aftername.label): these two string are used respectively
+before and after the account email address. Localizers can use one of them, or
+both, to better adapt this sentence to their language.
+-->
+<!ENTITY signedInLoginFailure.beforename.label "Kirjaudu sisään palauttaaksesi osoitteen">
+<!ENTITY signedInLoginFailure.aftername.label "yhteyden">
 
-<!-- Device Settings -->
-<!ENTITY syncDeviceName.label       "Device Name:">
-<!ENTITY unlinkDevice.label           "Unlink This Device">
+<!ENTITY notSignedIn.label           "Et ole kirjautunut sisään.">
+<!ENTITY signIn.label                "Kirjaudu sisään">
+<!ENTITY signIn.accesskey            "r">
+<!ENTITY profilePicture.tooltip      "Vaihda kuva">
+<!ENTITY verifiedManage.label        "Hallinnoi tiliä">
+<!ENTITY verifiedManage.accesskey    "H">
+<!ENTITY disconnect.label            "Katkaise yhteys…">
+<!ENTITY disconnect.accesskey        "y">
+<!ENTITY verify.label                "Vahvista sähköpostiosoite">
+<!ENTITY verify.accesskey            "V">
+<!ENTITY forget.label                "Unohda sähköpostiosoite">
+<!ENTITY forget.accesskey            "U">
+
+<!ENTITY signedOut.caption            "Pidä oma selain aina mukanasi">
+<!ENTITY signedOut.description        "Synkronoi kirjanmerkit, sivuhistoria, välilehdet, salasanat, lisäosat ja asetukset kaikilla laitteillasi.">
+<!ENTITY signedOut.accountBox.title   "Yhdistä &syncBrand.fxAccount.label;in">
+<!ENTITY signedOut.accountBox.create  "Luo tili">
+<!ENTITY signedOut.accountBox.create.accesskey  "L">
+<!ENTITY signedOut.accountBox.signin  "Kirjaudu sisään">
+<!ENTITY signedOut.accountBox.signin.accesskey  "i">
+
+<!ENTITY signedIn.engines.label       "Synkronoi kaikki laitteesi">
+
+<!-- LOCALIZATION NOTE (mobilePromo3.*): the following strings will be used to
+     create a single sentence with active links.
+     The resulting sentence in English is: "Download Firefox for
+     Android or iOS to sync with your mobile device." -->
+
+<!ENTITY mobilePromo3.start            "Lataa Firefox ">
+<!-- LOCALIZATION NOTE (mobilePromo3.androidLink): This is a link title that links to https://www.mozilla.org/firefox/android/ -->
+<!ENTITY mobilePromo3.androidLink      "Androidille">
+
+<!-- LOCALIZATION NOTE (mobilePromo3.iOSBefore): This is text displayed between mobilePromo3.androidLink and mobilePromo3.iosLink -->
+<!ENTITY mobilePromo3.iOSBefore         " tai ">
+<!-- LOCALIZATION NOTE (mobilePromo3.iOSLink): This is a link title that links to https://www.mozilla.org/firefox/ios/ -->
+<!ENTITY mobilePromo3.iOSLink          "iOS:lle">
+
+<!ENTITY mobilePromo3.end              " ja synkronoi tietosi kannettavalle laitteellesi.">

@@ -10,14 +10,11 @@
 <!ENTITY certmgr.tab.ca                       "Organisaties">
 <!ENTITY certmgr.tab.orphan2                  "Overige">
 
-<!ENTITY certmgr.ca.builtins                  "Ingebouwde CA’s">
-<!ENTITY certmgr.ca.mycas                     "CA’s beheerd door u">
-
 <!ENTITY certmgr.mine                         "U hebt certificaten van deze organisaties, die u identificeren:">
 <!ENTITY certmgr.others                       "U hebt certificaten gearchiveerd die deze personen identificeren:">
 <!ENTITY certmgr.websites2                    "U hebt certificaten gearchiveerd die deze servers identificeren:">
-<!ENTITY certmgr.cas                          "U hebt certificaten gearchiveerd die deze certificatieautoriteiten identificeren:">
-<!ENTITY certmgr.orphans                      "U hebt certificaten gearchiveerd die niet passen in één van de andere categorieën:">
+<!ENTITY certmgr.cas                          "U hebt certificaten gearchiveerd die deze certificaatautoriteiten identificeren:">
+<!ENTITY certmgr.orphans                      "U hebt certificaten gearchiveerd die niet in een van de andere categorieën passen:">
 
 <!ENTITY certmgr.detail.general_tab.title     "Algemeen">
 <!ENTITY certmgr.detail.general_tab.accesskey "A">
@@ -27,43 +24,29 @@
 <!ENTITY certmgr.pending.label                "Certificaat aan het verifiëren…">
 <!ENTITY certmgr.subjectinfo.label            "Uitgegeven aan">
 <!ENTITY certmgr.issuerinfo.label             "Uitgegeven door">
-<!ENTITY certmgr.validity.label               "Geldigheid">
+<!ENTITY certmgr.periodofvalidity.label       "Geldigheidsduur" >
 <!ENTITY certmgr.fingerprints.label           "Vingerafdrukken">
 <!ENTITY certmgr.certdetail.title             "Detail van certificaat">
 <!ENTITY certmgr.certdetail.cn                "Algemene naam (CN)">
 <!ENTITY certmgr.certdetail.o                 "Organisatie (O)">
 <!ENTITY certmgr.certdetail.ou                "Organisatorische eenheid (OU)">
 <!ENTITY certmgr.certdetail.serialnumber      "Serienummer">
+<!ENTITY certmgr.certdetail.sha256fingerprint "SHA-256-vingerafdruk">
 <!ENTITY certmgr.certdetail.sha1fingerprint   "SHA1-vingerafdruk">
-<!ENTITY certmgr.certdetail.md5fingerprint    "MD5-vingerafdruk">
 
-<!ENTITY certmgr.editcert.title               "Beveiligingscertificaatinstellingen bewerken">
 <!ENTITY certmgr.editcacert.title             "CA-certificaat-vertrouwensinstellingen bewerken">
-<!ENTITY certmgr.editsslcert.title            "Websitecertificaat-vertrouwensinstellingen bewerken">
 <!ENTITY certmgr.editcert.edittrust           "Vertrouwensinstellingen bewerken:">
 <!ENTITY certmgr.editcert.trustssl            "Dit certificaat kan websites identificeren.">
 <!ENTITY certmgr.editcert.trustemail          "Dit certificaat kan e-mailgebruikers identificeren.">
-<!ENTITY certmgr.editcert.trustobjsign        "Dit certificaat kan makers van programmatuur identificeren.">
-<!ENTITY certmgr.editsslcert.edittrust        "Certificaat-vertrouwensinstellingen bewerken:">
-<!ENTITY certmgr.editsslcert.dotrust          "De echtheid van dit certificaat vertrouwen.">
-<!ENTITY certmgr.editsslcert.donttrust        "De echtheid van dit certificaat wantrouwen.">
-<!ENTITY certmgr.editemailcert.title          "E-mailcertificaat-vertrouwensinstellingen bewerken">
-<!ENTITY certmgr.editemailcert.edittrust      "Certificaat-vertrouwensinstellingen bewerken:">
-<!ENTITY certmgr.editemailcert.dotrust        "De echtheid van dit certificaat vertrouwen.">
-<!ENTITY certmgr.editemailcert.donttrust      "De echtheid van dit certificaat wantrouwen.">
+<!ENTITY certmgr.editcert.trustobjsign        "Dit certificaat kan softwaremakers identificeren.">
 
 <!ENTITY certmgr.deletecert.title             "Certificaat verwijderen">
-<!ENTITY certmgr.deletecert.beforename        "U hebt gevraagd dit certificaat te verwijderen:">
-<!ENTITY certmgr.deletecert.aftername         "Weet u zeker dat u dit certificaat wilt verwijderen?">
-<!ENTITY certmgr.deleteusercert.title         "Uw certificaat verwijderen">
-<!ENTITY certmgr.deleteusercert.beforename    "U hebt gevraagd dit certificaat te verwijderen:">
-<!ENTITY certmgr.deleteusercert.aftername     "Als u dit certificaat hebt verwijderd, zult u geen mail kunnen lezen die ermee is versleuteld.">
 
 <!ENTITY certmgr.certname                     "Certificaatnaam">
 <!ENTITY certmgr.certserver                   "Server">
 <!ENTITY certmgr.override_lifetime            "Levensduur">
 <!ENTITY certmgr.tokenname                    "Beveiligingsapparaat">
-<!ENTITY certmgr.issued                       "Uitgegeven op">
+<!ENTITY certmgr.begins                       "Begint op">
 <!ENTITY certmgr.expires                      "Verloopt op">
 <!ENTITY certmgr.email                        "E-mailadres">
 <!ENTITY certmgr.serial                       "Serienummer">
@@ -74,10 +57,6 @@
 <!ENTITY certmgr.view2.accesskey              "W">
 <!ENTITY certmgr.edit3.label                  "Vertrouwen bewerken…">
 <!ENTITY certmgr.edit3.accesskey              "b">
-<!ENTITY certmgr.editca.label                 "CA-vertrouwen bewerken">
-<!ENTITY certmgr.editca.accesskey             "A">
-<!ENTITY certmgr.add.label                    "Toevoegen">
-<!ENTITY certmgr.add.accesskey                "T">
 <!ENTITY certmgr.export.label                 "Exporteren…">
 <!ENTITY certmgr.export.accesskey             "x">
 <!ENTITY certmgr.delete2.label                "Verwijderen…">
@@ -95,7 +74,7 @@
 <!ENTITY certmgr.fields.label                 "Veldwaarde">
 <!ENTITY certmgr.fields.accesskey             "V">
 <!ENTITY certmgr.hierarchy.label              "Certificaathiërarchie">
-<!ENTITY certmgr.hierarchy.accesskey          "C">
+<!ENTITY certmgr.hierarchy.accesskey2         "C">
 <!ENTITY certmgr.addException.label           "Uitzondering toevoegen…">
 <!ENTITY certmgr.addException.accesskey       "U">
 

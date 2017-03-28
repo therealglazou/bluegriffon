@@ -38,7 +38,7 @@
  *
  * ***** END LICENSE BLOCK ***** */
  
-Components.utils.import("resource://app/modules/editorHelper.jsm");
+Components.utils.import("resource://gre/modules/editorHelper.jsm");
 
 var gMisspelledWord;
 var gSpellChecker = null;
@@ -113,6 +113,10 @@ function Startup()
   //  no misspelled word is found
   //  (different message when used for the first time)
   gFirstTime = false;
+
+#ifndef XP_MACOSX
+  CenterDialogOnOpener();
+#endif
 }
 
 function SetElementEnabledById(aId, aEnabled)

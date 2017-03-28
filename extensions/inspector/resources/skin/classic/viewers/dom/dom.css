@@ -1,0 +1,58 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+@import url("chrome://inspector/skin");
+
+/* :::::::: node type color coding :::::::: */
+
+treechildren::-moz-tree-cell-text(ACCESSIBLE_NODE) {
+  font-weight: bold;
+}
+
+treechildren::-moz-tree-cell-text(ELEMENT_NODE) {
+  color: #000000;
+}
+
+treechildren::-moz-tree-cell-text(ATTRIBUTE_NODE) {
+  color: #556b2f;
+}
+
+treechildren::-moz-tree-cell-text(CDATA_SECTION_NODE),
+treechildren::-moz-tree-cell-text(TEXT_NODE) {
+  color: #0000AA;
+}
+
+treechildren::-moz-tree-cell-text(COMMENT_NODE) {
+  color: #228b22;
+}
+
+treechildren::-moz-tree-cell-text(DOCUMENT_NODE) {
+  color: #800080;
+}
+
+treechildren::-moz-tree-cell-text(DOCUMENT_TYPE_NODE) {
+  color: #606000;
+}
+
+treechildren::-moz-tree-cell-text(PROCESSING_INSTRUCTION_NODE) {
+  color: #808080;
+}
+
+treechildren::-moz-tree-cell-text(anonymous) {
+  color: #ff0000;
+}
+
+treechildren::-moz-tree-cell-text(selected, focus) {
+  color: #FFFFFF;
+}
+
+/* :::::::: drag and drop insertion indicators :::::::: */
+
+treechildren::-moz-tree-column(dnd-insert-before) {
+  border-left: 2px solid #000000;
+}
+
+treechildren::-moz-tree-column(dnd-insert-after) {
+  border-right: 2px solid #000000;
+}

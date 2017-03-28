@@ -7,6 +7,7 @@
 
 <bindings id="textshadowitemBindings"
    xmlns="http://www.mozilla.org/xbl"
+   xmlns:html="http://www.w3.org/1999/xhtml"
    xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
    xmlns:xbl="http://www.mozilla.org/xbl">
 
@@ -22,18 +23,26 @@
            extends="chrome://global/content/bindings/richlistbox.xml#richlistitem">
 
     <content>
-      <xul:grid oncommand="ReapplyBoxShadows()" oninput="ReapplyBoxShadows()">
+      <xul:grid>
         <xul:columns><xul:column/><xul:column/><xul:column/><xul:column/></xul:columns>
         <xul:rows>
           <xul:row align="center">
             <xul:label value="&colorTextShadow.label;"/>
             <xul:hbox>
+#ifndef XP_MACOSX
               <xul:ecolorpicker anonid="color"
                                 color="black"
                                 colorObjectId="BoxShadowColor"
                                 windowTitle="&colorTextShadow.title;"
                                 showTransparency="true"
                                 oncommand="ReapplyBoxShadows()"/>
+#else
+              <html:input anonid="color"
+                          type="color"
+                          title="&colorTextShadow.title;"
+                          showTransparency="true"
+                          oninput="ReapplyBoxShadows()"/>
+#endif
             </xul:hbox>
             <xul:checkbox label="&inset.label;" anonid="inset"/>
           </xul:row>
@@ -41,48 +50,44 @@
             <xul:label value="&offsetXTextShadow.label;"/>
             <xul:hbox>
               <xul:menulist editable="true" anonid="offsetX"
-                            oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', true)"
-                            oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', true)">
+                            bgtype="csslength" units='% px pt cm in mm pc em ex rem ch'
+                            oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', false); ReapplyBoxShadows()"
+                            oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', false); ReapplyBoxShadows()">
                 <xul:menupopup
                            onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')"/>
               </xul:menulist>
-              <xul:spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
-                               ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true)"/>
             </xul:hbox>
             <xul:label value="&offsetYTextShadow.label;"/>
             <xul:hbox>
               <xul:menulist editable="true" anonid="offsetY"
-                            oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', true)"
-                            oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', true)">
+                            bgtype="csslength" units='% px pt cm in mm pc em ex rem ch'
+                            oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', false); ReapplyBoxShadows()"
+                            oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', false); ReapplyBoxShadows()">
                 <xul:menupopup
                            onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')"/>
               </xul:menulist>
-              <xul:spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
-                               ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true)"/>
             </xul:hbox>
           </xul:row>
           <xul:row align="center">
             <xul:label value="&blurRadiusTextShadow.label;"/>
             <xul:hbox>
               <xul:menulist editable="true" anonid="blurRadius"
-                            oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', false)"
-                            oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', false)">
+                            bgtype="csslength" units='% px pt cm in mm pc em ex rem ch' unsigned="true"
+                            oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', true); ReapplyBoxShadows()"
+                            oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', true); ReapplyBoxShadows()">
                 <xul:menupopup
                            onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')"/>
               </xul:menulist>
-              <xul:spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
-                               ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', false)"/>
-            </xul:hbox>
+             </xul:hbox>
             <xul:label value="&spreadRadiusBoxShadow.label;"/>
             <xul:hbox>
               <xul:menulist editable="true" anonid="spreadRadius"
-                            oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', false)"
-                            oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', false)">
+                            bgtype="csslength" units='% px pt cm in mm pc em ex rem ch'
+                            oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', false); ReapplyBoxShadows()"
+                            oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', false); ReapplyBoxShadows()">
                 <xul:menupopup
                            onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')"/>
               </xul:menulist>
-              <xul:spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
-                               ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', false)"/>
             </xul:hbox>
           </xul:row>
         </xul:rows>
@@ -113,12 +118,20 @@
       <property name="color">
         <getter>
         <![CDATA[
+#ifndef XP_MACOSX
           return this.getChild("color").color;
+#else
+          return this.getChild("color").value;
+#endif
         ]]>
         </getter>
         <setter>
         <![CDATA[
+#ifndef XP_MACOSX
           this.getChild("color").color = val;
+#else
+          this.getChild("color").value = val;
+#endif
         ]]>
         </setter>
       </property>

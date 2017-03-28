@@ -1,0 +1,377 @@
+<?xml version="1.0"?>
+
+<bindings id="ariaBindings"
+   xmlns="http://www.mozilla.org/xbl"
+   xmlns:html="http://www.w3.org/1999/xhtml"
+   xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+   xmlns:xbl="http://www.mozilla.org/xbl">
+
+  <binding id="aria-id">
+    <content>
+      <xul:menulist anonid="menulist" xbl:inherits="value" flex="1"
+                    editable="true"
+                    oncommand="this.parentNode.assignAttribute(event)"
+                    onchange="this.parentNode.assignAttribute(event)">
+        <xul:menupopup anonid="popup">
+          <xul:menuitem label="" value=""/>
+          <xul:menuseparator anonid="separator"/>
+        </xul:menupopup>
+      </xul:menulist>
+    </content>
+    <implementation>
+      <constructor>
+        <![CDATA[
+          this.populateIDs(this.getChild("popup"));
+        ]]>
+      </constructor>
+
+      <method name="getChild">
+        <parameter name="aChildName"/>
+        <body><![CDATA[
+          return document.getAnonymousElementByAttribute(this, "anonid", aChildName);
+        ]]></body>
+      </method>
+
+      <property name="value">
+        <getter>
+        <![CDATA[
+          return this.getAttribute("menulist").value;
+        ]]>
+        </getter>
+        <setter>
+        <![CDATA[
+          this.getChild("menulist").value = val;
+        ]]>
+        </setter>
+      </property>
+
+      <method name="populateIDs">
+        <parameter name="aElt"/>
+        <body><![CDATA[
+          Components.utils.import("resource://gre/modules/cssHelper.jsm");
+
+          var child = this.getChild("separator").nextElementSibling;
+          while (child) {
+            var tmp = child.nextSibling;
+            this.getChild("popup").removeChild(child);
+            child = tmp;
+          }
+
+          try {
+          var eltWithIdList =  EditorUtils.getCurrentEditor().document.querySelectorAll("[id]");
+          var idList = [];
+          for (var i = 0; i < eltWithIdList.length; i++)
+            idList.push(eltWithIdList[i].id);
+
+          if (idList && idList.length)
+          {
+            var idListLength = idList.length;
+
+            idList.sort();
+
+            var previousId = "";
+            for (var index = 0; index < idListLength; index++)
+            {
+              var idEntry = idList[index];
+              if (idEntry != previousId && idEntry != gCurrentElement.id)
+              {
+                previousId = idEntry;
+
+                var menuEntry = document.createElement("menuitem");
+                menuEntry.setAttribute("label",   idEntry);
+                menuEntry.setAttribute("value",   idEntry);
+                aElt.appendChild(menuEntry);
+              }
+            }
+          }
+          } catch(e) {alert(e)}
+        ]]></body>
+      </method>
+
+      <method name="assignAttribute">
+        <parameter name="aEvent"/>
+        <body><![CDATA[
+          var value = aEvent.originalTarget.value;
+          if (value)
+            EditorUtils.getCurrentEditor().setAttribute(gCurrentElement,
+                                                        this.getAttribute("aria-attribute"),
+                                                        value);
+          else
+            EditorUtils.getCurrentEditor().removeAttribute(gCurrentElement,
+                                                           this.getAttribute("aria-attribute"));
+        ]]></body>
+      </method>
+    </implementation>
+  </binding>
+
+  <binding id="aria-string">
+    <content>
+      <xul:textbox anonid="textbox" xbl:inherits="value" flex="1"
+                   onchange="this.parentNode.assignAttribute(event)"/>
+    </content>
+    <implementation>
+      <method name="getChild">
+        <parameter name="aChildName"/>
+        <body><![CDATA[
+          return document.getAnonymousElementByAttribute(this, "anonid", aChildName);
+        ]]></body>
+      </method>
+
+      <property name="value">
+        <getter>
+        <![CDATA[
+          return this.getAttribute("textbox").value;
+        ]]>
+        </getter>
+        <setter>
+        <![CDATA[
+          this.getChild("textbox").value = val;
+        ]]>
+        </setter>
+      </property>
+
+      <method name="assignAttribute">
+        <parameter name="aEvent"/>
+        <body><![CDATA[
+          var value = aEvent.originalTarget.value;
+          if (value)
+            EditorUtils.getCurrentEditor().setAttribute(gCurrentElement,
+                                                        this.getAttribute("aria-attribute"),
+                                                        value);
+          else
+            EditorUtils.getCurrentEditor().removeAttribute(gCurrentElement,
+                                                           this.getAttribute("aria-attribute"));
+        ]]></body>
+      </method>
+    </implementation>
+  </binding>
+
+  <binding id="aria-tokens">
+    <content>
+      <xul:menulist anonid="menulist" xbl:inherits="value" flex="1"
+                    sizetopopup="none"
+                    oncommand="this.parentNode.assignAttribute(event)">
+        <xul:menupopup anonid="popup"/>
+      </xul:menulist>
+    </content>
+    <implementation>
+      <constructor>
+        <![CDATA[
+          this.populate(this.getChild("popup"));
+        ]]>
+      </constructor>
+
+      <method name="getChild">
+        <parameter name="aChildName"/>
+        <body><![CDATA[
+          return document.getAnonymousElementByAttribute(this, "anonid", aChildName);
+        ]]></body>
+      </method>
+
+      <property name="value">
+        <getter>
+        <![CDATA[
+          return this.getAttribute("menulist").value;
+        ]]>
+        </getter>
+        <setter>
+        <![CDATA[
+          this.getChild("menulist").value = val;
+        ]]>
+        </setter>
+      </property>
+
+      <method name="populate">
+        <parameter name="aElt"/>
+        <body><![CDATA[
+          var def = this.getAttribute("default");
+          if (def) {
+            var menuEntry = document.createElement("menuitem");
+            menuEntry.setAttribute("label",   def ? "(" + def + ")" : "");
+            menuEntry.setAttribute("value",   "");
+            aElt.appendChild(menuEntry);
+
+            var menuSeparator = document.createElement("menuseparator");
+            aElt.appendChild(menuSeparator);
+          }
+
+          var list = this.getAttribute("values").split("|");
+
+          if (list)
+          {
+            for (var index = 0; index < list.length; index++)
+            {
+              var idEntry = list[index];
+              menuEntry = document.createElement("menuitem");
+              menuEntry.setAttribute("label",   idEntry);
+              menuEntry.setAttribute("value",   idEntry);
+              aElt.appendChild(menuEntry);
+            }
+          }
+        ]]></body>
+      </method>
+
+      <method name="assignAttribute">
+        <parameter name="aEvent"/>
+        <body><![CDATA[
+          var value = aEvent.originalTarget.value;
+          if (value)
+            EditorUtils.getCurrentEditor().setAttribute(gCurrentElement,
+                                                        this.getAttribute("aria-attribute"),
+                                                        aEvent.originalTarget.value);
+          else
+            EditorUtils.getCurrentEditor().removeAttribute(gCurrentElement,
+                                                           this.getAttribute("aria-attribute"));
+        ]]></body>
+      </method>
+    </implementation>
+  </binding>
+
+  <binding id="aria-token-list">
+    <content>
+      <xul:vbox anonid="vbox" flex="1"
+                oncommand="this.parentNode.assignAttribute(event)"/>
+    </content>
+    <implementation>
+      <constructor>
+        <![CDATA[
+          this.populate(this.getChild("vbox"));
+        ]]>
+      </constructor>
+
+      <method name="getChild">
+        <parameter name="aChildName"/>
+        <body><![CDATA[
+          return document.getAnonymousElementByAttribute(this, "anonid", aChildName);
+        ]]></body>
+      </method>
+
+      <property name="value">
+        <getter>
+        <![CDATA[
+          return this.getAttribute("menulist").value;
+        ]]>
+        </getter>
+        <setter>
+        <![CDATA[
+          this.getChild("menulist").value = val;
+        ]]>
+        </setter>
+      </property>
+
+      <method name="populate">
+        <parameter name="aElt"/>
+        <body><![CDATA[
+          var list = this.getAttribute("values").split("|");
+          var currentValues = this.getAttribute("value").split(" ");
+          var defaultValues = this.getAttribute("default").split(" ");
+          if (list)
+          {
+            for (var index = 0; index < list.length; index++)
+            {
+              var idEntry = list[index];
+              var menuEntry = document.createElement("checkbox");
+              menuEntry.setAttribute("label",   idEntry);
+              menuEntry.setAttribute("value",   idEntry);
+              if (currentValues.length && currentValues[0] != "") {
+                if (currentValues.indexOf(idEntry) != -1)
+                  menuEntry.setAttribute("checked", "true");
+              }
+              else if (defaultValues.indexOf(idEntry) != -1) {
+                menuEntry.setAttribute("checked", "true");
+                menuEntry.setAttribute("indeterminate", "true");
+              }
+              aElt.appendChild(menuEntry);
+            }
+          }
+        ]]></body>
+      </method>
+
+      <method name="assignAttribute">
+        <parameter name="aEvent"/>
+        <body><![CDATA[
+          var checkboxes = aEvent.originalTarget.parentNode.querySelectorAll("checkbox");;
+          var values = [];
+          for (var i = 0; i < checkboxes.length; i++) {
+            var c = checkboxes[i];
+            c.removeAttribute("indeterminate");
+            if (c.checked) {
+              // hack to make sure the back-from-indeterminate state is flushed
+              c.checked = false;
+              values.push(c.getAttribute("value"));
+              c.checked = true;
+            }
+          }
+          var value = values.join(" ");
+          if (value)
+            EditorUtils.getCurrentEditor().setAttribute(gCurrentElement,
+                                                        this.getAttribute("aria-attribute"),
+                                                        value);
+          else
+            EditorUtils.getCurrentEditor().removeAttribute(gCurrentElement,
+                                                           this.getAttribute("aria-attribute"));
+        ]]></body>
+      </method>
+    </implementation>
+  </binding>
+
+  <binding id="aria-integer">
+    <content>
+      <xul:textbox type="number" anonid="textbox" flex="1"
+                   xbl:inherits="min,value,decimalplaces"
+                   onchange="this.parentNode.assignAttribute(event)"
+                   ondown="this.parentNode.assignAttribute(event)"
+                   onup="this.parentNode.assignAttribute(event)"
+                   />
+    </content>
+    <implementation>
+      <constructor>
+        <![CDATA[
+          this.init(this.getChild("textbox"));
+        ]]>
+      </constructor>
+
+      <method name="getChild">
+        <parameter name="aChildName"/>
+        <body><![CDATA[
+          return document.getAnonymousElementByAttribute(this, "anonid", aChildName);
+        ]]></body>
+      </method>
+
+      <property name="value">
+        <getter>
+        <![CDATA[
+          return this.getAttribute("textbox").value;
+        ]]>
+        </getter>
+        <setter>
+        <![CDATA[
+          this.getChild("textbox").value = val;
+        ]]>
+        </setter>
+      </property>
+
+      <method name="init">
+        <parameter name="aElt"/>
+        <body><![CDATA[
+          var textbox = this.getAttribute("textbox");
+        ]]></body>
+      </method>
+
+      <method name="assignAttribute">
+        <parameter name="aEvent"/>
+        <body><![CDATA[
+          var value = aEvent.originalTarget.value;
+          if (value)
+            EditorUtils.getCurrentEditor().setAttribute(gCurrentElement,
+                                                        this.getAttribute("aria-attribute"),
+                                                        value);
+          else
+            EditorUtils.getCurrentEditor().removeAttribute(gCurrentElement,
+                                                           this.getAttribute("aria-attribute"));
+        ]]></body>
+      </method>
+    </implementation>
+  </binding>
+
+</bindings>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+#filter substitution
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+  <Description about="urn:mozilla:install-manifest">
+
+    <em:id>remote-debugger@mozilla.org</em:id>
+    <em:version>@MOZILLA_VERSION_U@</em:version>
+    <em:type>2</em:type>
+    <em:bootstrap>true</em:bootstrap>
+
+    <em:targetApplication>
+      <Description>
+        <em:id>toolkit@mozilla.org</em:id>
+        <em:minVersion>@MOZILLA_VERSION_U@</em:minVersion>
+        <em:maxVersion>@MOZILLA_VERSION_U@</em:maxVersion>
+      </Description>
+    </em:targetApplication>
+
+    <em:name>Remote Developer Tools Server</em:name>
+    <em:description>Access for the Firefox Web Developer Tools</em:description>
+    <em:creator>Philipp Kewisch</em:creator>
+    <em:optionsURL>chrome://dbgserver/content/options.xul</em:optionsURL>
+  </Description>
+</RDF>

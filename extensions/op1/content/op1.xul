@@ -15,8 +15,7 @@
         width      = "730"
         height     = "730"
         onload     = "Startup()"
-        onfocus    = "onFocus()"
-        onunload   = "onClose()">
+        onfocus    = "onFocus()">
 
   <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/global.js"/>
   <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/dgid.js"/>
@@ -25,10 +24,14 @@
 
   <stringbundle id="a11yBundle" src="chrome://op1/locale/a11yFirstStep.properties" />
 
+  <keyset>
+    <key keycode="VK_ESCAPE" oncommand="window.close()"/>
+  </keyset>
+
   <hbox align="center">
-    <image src="chrome://op1/skin/opquast.png"
+    <image src="chrome://op1/skin/logo-opquast-bleu2.svg"
            id="opquastLogo"
-           onclick="dontFocus=true; loadExternalURL('https://checklists.opquast.com/fr/accessibilityfirststep/')" />
+           onclick="dontFocus=true; loadExternalURL('http://checklists.opquast.com/en/accessibility-first-step/')" />
     <spacer flex="1" />
     <hbox id="outerBox" tooltiptext="&filterAll.label;" onclick="Show(event, '')">
         <hbox id="greens"  tooltiptext="&filterPassed.label;" onclick="Show(event, 'passed')"/>

@@ -35,10 +35,10 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-Components.utils.import("resource://app/modules/editorHelper.jsm");
-Components.utils.import("resource://app/modules/cssHelper.jsm");
-Components.utils.import("resource://app/modules/cssInspector.jsm");
-Components.utils.import("resource://app/modules/prompterHelper.jsm");
+Components.utils.import("resource://gre/modules/editorHelper.jsm");
+Components.utils.import("resource://gre/modules/cssHelper.jsm");
+Components.utils.import("resource://gre/modules/cssInspector.jsm");
+Components.utils.import("resource://gre/modules/prompterHelper.jsm");
 
 var gMain = null;
 var gCurrentElement = null;
@@ -81,6 +81,12 @@ function Startup()
   gMain.NotifierUtils.addNotifierCallback("panelClosed",
                                           PanelClosed,
                                           window);
+  gMain.NotifierUtils.addNotifierCallback("afterEnteringSourceMode",
+                                          Inspect,
+                                          window);
+  gMain.NotifierUtils.addNotifierCallback("afterLeavingSourceMode",
+                                          Inspect,
+                                          window);
   Inspect();
   if (gMain && gMain.EditorUtils && gIsPanelActive &&
       gMain.EditorUtils.getCurrentEditor()) {
@@ -113,6 +119,12 @@ function Shutdown()
     gMain.NotifierUtils.removeNotifierCallback("panelClosed",
                                                 PanelClosed,
                                                 window);
+    gMain.NotifierUtils.removeNotifierCallback("afterEnteringSourceMode",
+                                               Inspect,
+                                               window);
+    gMain.NotifierUtils.removeNotifierCallback("afterLeavingSourceMode",
+                                               Inspect,
+                                               window);
     gDialog.elementsTree.removeEventListener("DOMAttrModified", onElementsTreeModified, true);
     gDialog.attributesTree.removeEventListener("DOMAttrModified", onAttributesTreeModified, true);
     gDialog.cssTree.removeEventListener("DOMAttrModified", onCssTreeModified, true);
@@ -124,7 +136,13 @@ function Inspect()
   if (gMain && gMain.EditorUtils)
   {
     var editor = gMain.EditorUtils.getCurrentEditor();
-    gDialog.mainBox.style.visibility = editor ? "" : "hidden";
+    var visible = editor && (gMain.EditorUtils.isWysiwygMode());
+    gDialog.mainBox.style.visibility = visible ? "" : "hidden";
+    gMain.document.querySelector("[panelid='panel-domexplorer']").className = visible ? "" : "inactive";
+    if (!visible) {
+      return;
+    }
+
     if (editor) {
       var node = gMain.EditorUtils.getSelectionContainer().node;
       if (node) {

@@ -1,5 +1,4 @@
 DIRS += ['dibgutils']
-toolkit = CONFIG['MOZ_WIDGET_TOOLKIT']
 
-if toolkit == 'cocoa':
+if CONFIG['MOZ_WIDGET_TOOLKIT'] in ('cocoa'):
     DIRS += ['diOSIntegration.mac']

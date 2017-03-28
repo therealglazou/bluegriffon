@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE overlay [
+  <!ENTITY % csspropertiesDTD SYSTEM "chrome://cssproperties/locale/cssproperties.dtd">
+  %csspropertiesDTD;
+]>
+
+<overlay id="variablesOverlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/x-javascript"  src="chrome://cssproperties/content/variables.js" />
+
+  <vbox id="propertiesBox">
+    <hbox align="center"
+          class="csspropertiesHeader"
+          context="sectionHeaderContext"
+          id="variablesSectionHeader"
+          onclick="ToggleSection(event, this)"
+          position="29">
+      <image />
+      <label value="&variablesSectionHeader.label;"/>
+    </hbox>
+  
+    <vbox class="section"
+          id="variablesSection"
+          position="30">
+      <tree id="variablesTree"
+            flex="1"
+            editable="true"
+            persist="height"
+            style="margin: 0px; min-width: 200px; height: 200px"
+            treelines="true"
+            onselect="UpdateVariableButtons()">
+        <treecols>
+          <treecol id="variablesPropertyCol"
+                   flex="1"
+                   label="Variable"
+                   primary="true"
+                   persist="width ordinal hidden"/>
+          <splitter class="tree-splitter"/>
+          <treecol id="variablesValueCol"
+                   label="Value"
+                   flex="1" 
+                   persist="width ordinal hidden"/>
+        </treecols>
+      </tree>
+      <hbox id="allTreeToolbox" class="listboxBg">
+        <toolbarbutton class="listboxBgPlusButton"
+                       id="PlusVariableButton"
+                       oncommand="AddVariable()"/>
+        <toolbarbutton class="listboxBgMinusButton"
+                       disabled="true"
+                       id="MinusVariableButton"
+                       oncommand="DeleteVariable()"/>
+        <toolbarbutton class="listboxBgConfigButton"
+                       disabled="true"
+                       id="ConfigVariableButton"
+                       oncommand="ModifyVariable()"/>
+        <spacer flex="1"/>
+      </hbox>
+    </vbox>
+  </vbox>
+</overlay>

@@ -24,7 +24,7 @@ $(function() {
           return(null);
 
       var inputStream = Components.classes["@mozilla.org/network/file-input-stream;1"].createInstance(Components.interfaces.nsIFileInputStream);
-      inputStream.init(file, 0x01, 00004, null);
+      inputStream.init(file, 0x01, parseInt("00004", 8), null);
       var sInputStream = Components.classes["@mozilla.org/scriptableinputstream;1"].createInstance(Components.interfaces.nsIScriptableInputStream);
       sInputStream.init(inputStream);
       svgCanvas.setSvgString(sInputStream.
@@ -40,10 +40,10 @@ $(function() {
           return;
 
               if (!file.exists())
-          file.create(0, 0664);
+          file.create(0, parseInt("0664", 8));
 
         var out = Components.classes["@mozilla.org/network/file-output-stream;1"].createInstance(Components.interfaces.nsIFileOutputStream);
-        out.init(file, 0x20 | 0x02, 00004,null);
+        out.init(file, 0x20 | 0x02, parseInt("00004", 8),null);
         out.write(str, str.length);
         out.flush();
         out.close();

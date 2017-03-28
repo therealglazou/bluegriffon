@@ -1,4 +1,4 @@
-Components.utils.import("resource://app/modules/editorHelper.jsm");
+Components.utils.import("resource://gre/modules/editorHelper.jsm");
 
 function UpdateStructureBarContextMenu()
 {
@@ -165,7 +165,7 @@ function onElementsTreeModified(aEvent)
           editor.deleteNode(target);
           editor.selectElement(newElt);
   
-          window.content.focus();
+          GetWindowContent().focus();
         }
       }
       catch (e) {}

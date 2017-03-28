@@ -36,27 +36,23 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-
+@import url("chrome://bluegriffon/skin/black.css");
 
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 @namespace html url("http://www.w3.org/1999/xhtml");
 
-#mainBox {
-  margin: 0px;
-  margin-top: 4px;
-  padding: 0px;
+page {
+  -moz-appearance: none;
+  background-color: transparent;
+  color: var(--bg-main-foreground-color);
 }
 
-#currentElementBox {
-  font-family: -moz-fixed;
-  padding: 0.5em;
-  border: 2px inset silver;
-  border-radius: 5px;
-  font-size: larger;
-  background-color: #505050;
-  color: white;
-  font-weight: bold;
-  margin-bottom: 4px;
+#mainBox {
+  margin: 0px;
+  padding: 0px;
+  padding-top: 4px;
+  background-color: var(--bg-dark-gray);
+  color: var(--bg-main-foreground-color);
 }
 
 #propertiesBox {
@@ -71,42 +67,58 @@
   display: -moz-box;
 }
 
+#locationTabbox {
+  margin: 0px;
+}
+
+tabs {
+  color: black;
+}
+
 #tabpanels {
   padding-left: 1px;
   padding-right: 1px;
+  -moz-appearance: none;
+  background-color: transparent;
 }
 
 hbox.csspropertiesHeader {
-  border-top: thin solid silver;
+  border-top: 2px solid var(--bg-dark-border);
+  -moz-border-top-colors: var(--bg-dark-border) var(--bg-lighter-border);
   padding-left: 3px;
-  background-color: #dee4ea;
-%ifndef XP_MACOSX
+  padding-top: 2px;
+  padding-bottom: 2px;
+  text-transform: uppercase;
   font-weight: bold;
-%endif
-
+  transition: color 0.5s;
 }
 
 hbox.csspropertiesHeader > image {
   list-style-image: url("chrome://cssproperties/skin/filter.png");
   -moz-transform: rotate(-90deg);
-  -moz-transition: -moz-transform 0.2s;
+  transition: -moz-transform 0.5s, filter 0.5s;
+  filter: grayscale(100%) contrast(600%);
 }
 
 hbox.csspropertiesHeader:-moz-locale-dir(rtl) > image {
   -moz-transform: rotate(+90deg) ;
 }
 
+hbox.csspropertiesHeader[open="true"] {
+  color: #00abff;
+}
+
 hbox.csspropertiesHeader[open="true"] > image {
   -moz-transform: rotate(0deg) !important;
+  filter: none;
 }
 
 .section {
-  -moz-transition: height 0.5s, opacity 0.5s;
+  transition: height 0.5s, opacity 0.5s;
   height: 0px;
   opacity: 0;
   overflow: hidden;
   padding: 1em;
-  background-color: white;
 }
 
 hbox.csspropertiesHeader[open="true"] + .section {
@@ -123,7 +135,7 @@ hbox.csspropertiesHeader[open="true"] + .section {
 }
 
 .section:last-child {
-  border-bottom: thin solid gray;
+  border-bottom: thin solid var(--bg-dark-background);
 }
 
 .deleteRuleButton {
@@ -150,6 +162,9 @@ hbox.csspropertiesHeader[open="true"] + .section {
 #paramsBox,
 #rulesBox {
   margin: 0px;
+  -moz-appearance: none;
+  background-color: var(--bg-list-background);
+  border: thin solid var(--bg-dark-border);
 }
 
 #rulesetsBox listcell:last-of-type {
@@ -181,4 +196,21 @@ listitem.ancestor:not([selected]) {
 #annotatorsRefWarningLabel {
   color: red;
   font-weight: bold;
+}
+
+.multibutton {
+  text-shadow: none;
+}
+
+listheader {
+  -moz-appearance: none;
+  background-color: transparent;
+  border: 0px none transparent;
+  border-bottom: thin solid var(--bg-dark-border);
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+listheader:not(:last-of-type) {
+  -moz-border-end: var(--bg-dark-border) thin solid;
 }

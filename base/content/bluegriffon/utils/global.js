@@ -35,9 +35,9 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-Components.utils.import("resource://app/modules/cssHelper.jsm");
-Components.utils.import("resource://app/modules/editorHelper.jsm");
-Components.utils.import("resource://app/modules/l10nHelper.jsm");
+Components.utils.import("resource://gre/modules/cssHelper.jsm");
+Components.utils.import("resource://gre/modules/editorHelper.jsm");
+Components.utils.import("resource://gre/modules/l10nHelper.jsm");
 
 const kWINDOWMEDIATOR_CID = "@mozilla.org/appshell/window-mediator;1";
 
@@ -437,15 +437,14 @@ function ScrollToElement(aElement)
 {
   if (!aElement)
     return;
+  aElement.scrollIntoView(false);
+  EditorUtils.getCurrentEditorElement().contentWindow.scrollBy(0, -50);
+  return;
+}
 
-  var x = 0;
-  var y = 0;
-  while (aElement) {
-    x += aElement.offsetLeft;
-    y += aElement.offsetTop;
-    aElement = aElement.offsetParent;
-  }
-  var editorElt = EditorUtils.getCurrentEditorElement();
-  y = Math.max(0, y - editorElt.boxObject.height/2);
-  editorElt.contentWindow.scrollTo(x, y);
+function appendPath(aFile, aPath)
+{
+  var pathArray = aPath.split("/");
+  for (var i = 0; i < pathArray.length; i++)
+    aFile.append(pathArray[i]);
 }

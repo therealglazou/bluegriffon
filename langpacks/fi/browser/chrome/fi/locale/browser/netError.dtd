@@ -1,8 +1,14 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
 <!ENTITY % brandDTD SYSTEM "chrome://branding/locale/brand.dtd">
 %brandDTD;
 
 <!ENTITY loadError.label "Sivun lataamisvirhe">
 <!ENTITY retry.label "Yritä uudestaan">
+<!ENTITY returnToPreviousPage.label "Palaa">
+<!ENTITY advanced.label "Yksityiskohdat">
 
 <!-- Specific error messages -->
 
@@ -15,12 +21,12 @@
 <!ENTITY dnsNotFound.title "Palvelinta ei löytynyt">
 <!ENTITY dnsNotFound.longDesc "
 <ul>
-  <li>Tarkista osoite kirjoitusvirheiden varalta: esim. 
+  <li>Tarkista osoite kirjoitusvirheiden varalta: esim.
     <strong>ww</strong>.mozilla.org oikean muodon,
     <strong>www</strong>.mozilla.org, sijaan</li>
-  <li>Jos muutkaan sivustot eivät toimi, tarkista 
+  <li>Jos muutkaan sivustot eivät toimi, tarkista
     tietokoneen verkkoasetukset.</li>
-  <li>Jos tietokone tai verkko on suojattu palomuurilla tai välityspalvelin on 
+  <li>Jos tietokone tai verkko on suojattu palomuurilla tai välityspalvelin on
     käytössä, tarkista että &brandShortName;in verkkoyhteyttä ei estetä.</li>
 </ul>
 ">
@@ -33,17 +39,26 @@
 </ul>
 ">
 
+<!ENTITY fileAccessDenied.title "Tiedoston käyttö estettiin">
+<!ENTITY fileAccessDenied.longDesc "
+<ul>
+  <li>Tiedosto on voitu poistaa tai siirtää, tai ehkä siihen ei ole käyttöoikeutta.</li>
+</ul>
+">
 
 <!ENTITY generic.title "Verkkopyyntöä ei kyetä toteuttamaan">
 <!ENTITY generic.longDesc "
 <p>&brandShortName; ei kykene lataamaan sivua jostain syystä.</p>
 ">
 
+<!ENTITY captivePortal.title "Kirjaudu verkkoon">
+
+
 <!ENTITY malformedURI.title "Virheellinen osoite">
 <!ENTITY malformedURI.longDesc "
 <ul>
   <li>Verkko-osoitteet ovat yleensä muotoa
-    <strong>http://www.esimerkki.com/</strong></li>
+    <strong>http://www.example.com/</strong></li>
   <li>Tarkista, että olet käyttänyt kauttaviivoja (siis
     <strong>/</strong>-merkkiä).</li>
 </ul>
@@ -52,15 +67,13 @@
 <!ENTITY netInterrupt.title "Tiedonsiirto keskeytyi">
 <!ENTITY netInterrupt.longDesc "&sharedLongDesc;">
 
+<!ENTITY notCached.title "Dokumentti on vanhentunut">
+<!ENTITY notCached.longDesc "<p>Pyydettyä dokumenttia ei ole tallennettu &brandShortName;in väliaikaistiedostoihin.</p><ul><li>Turvallisuusvarotoimena &brandShortName; ei automaattisesti lataa uudelleen luottamuksellisia dokumentteja.</li><li>Napsauta alta Yritä uudestaan ladataksesi dokumentin sivustolta uudestaan.</li></ul>">
+
 <!ENTITY netOffline.title "Yhteydettömässä tilassa">
-<!-- LOCALIZATION NOTE (netOffline.overrideLongDesc) - This string should
-     indicate that "Work Offline" is a menu item without being too specific,
-     since it could be in either the normal menu (Mac/Linux) or the Firefox button
-     menu (Windows).
--->
-<!ENTITY netOffline.overrideLongDesc "
+<!ENTITY netOffline.longDesc2 "
 <ul>
-  <li>Poista valinta kohdasta &quot;Työskentele yhteydettömässä tilassa&quot; ja yritä uudestaan.</li>
+  <li>Siirry yhteystilaan ja lataa sivu uudestaan valitsemalla &quot;Yritä uudelleen&quot;.</li>
 </ul>
 ">
 
@@ -84,8 +97,8 @@
 <!ENTITY netTimeout.title "Yhteyden aikakatkaisu">
 <!ENTITY netTimeout.longDesc "&sharedLongDesc;">
 
-<!ENTITY protocolNotFound.title "Osoitetta ei ymmärretty">
-<!ENTITY protocolNotFound.longDesc "
+<!ENTITY unknownProtocolFound.title "Osoitetta ei ymmärretty">
+<!ENTITY unknownProtocolFound.longDesc "
 <ul>
   <li>Osoitteen avaaminen voi vaatia uuden ohjelman asentamista.</li>
 </ul>
@@ -95,7 +108,7 @@
 <!ENTITY proxyConnectFailure.longDesc "
 <ul>
   <li>Tarkista, että välityspalvelinasetukset ovat oikein.</li>
-  <li>Varmista verkon ylläpidolta, että välityspalvelin on 
+  <li>Varmista verkon ylläpidolta, että välityspalvelin on
     toimintakunnossa.</li>
 </ul>
 ">
@@ -105,7 +118,7 @@
 <ul>
   <li>Tarkista, että välityspalvelinasetukset ovat oikein.</li>
   <li>Varmista, että tietokoneesi verkkoyhteys on toimintakunnossa.</li>
-  <li>Jos tietokone tai verkko on suojattu palomuurilla tai välityspalvelin on 
+  <li>Jos tietokone tai verkko on suojattu palomuurilla tai välityspalvelin on
     käytössä, tarkista että &brandShortName;in verkkoyhteyttä ei estetä.</li>
 </ul>
 ">
@@ -121,83 +134,80 @@
 <!ENTITY unknownSocketType.title "Odottamaton vastaus palvelimelta">
 <!ENTITY unknownSocketType.longDesc "
 <ul>
-  <li>Tarkista, että tietokoneelle on asennettu Mozillan Personal Security 
+  <li>Tarkista, että tietokoneelle on asennettu Mozillan Personal Security
     Manager.</li>
   <li>Virhe voi johtua palvelimen epästandardeista asetuksista.</li>
 </ul>
 ">
 
 <!ENTITY nssFailure2.title "Suojatun yhteyden muodostaminen epäonnistui">
-<!ENTITY nssFailure2.longDesc "
+<!ENTITY nssFailure2.longDesc2 "
 <ul>
   <li>Avattavaa sivua ei voida näyttää, koska vastaanotetun datan alkuperää ei kyetty varmentamaan.</li>
-  <li>Ilmoitathan ongelmasta sivuston omistajalle. Vaihtoehtoisesti ilmoita sivusto Mozillalle Ohje-valikon toiminnolla Ilmoita viallinen sivusto.</li>
+  <li>Ilmoitathan ongelmasta sivuston omistajalle.</li>
 </ul>
 ">
 
-<!ENTITY nssBadCert.title "Suojatun yhteyden muodostaminen epäonnistui">
-<!ENTITY nssBadCert.longDesc2 "
-<ul>
-  <li>Ongelma voi johtua palvelimen asetuksista tai jonkin toisen palvelimen 
-    vilpillisestä yrityksestä tekeytyä palvelimeksi.</li>
-  <li>Jos yhteyden muodostuminen palvelimeen on aiemmin onnistunut, vika voi
-    olla väliaikainen. Yritä tällöin myöhemmin uudestaan.</li>
-</ul>
-">
+<!ENTITY certerror.longpagetitle1 "Yhteys ei ole suojattu">
+<!-- Localization note (certerror.introPara) - The text content of the span tag
+will be replaced at runtime with the name of the server to which the user
+was trying to connect. -->
+<!ENTITY certerror.introPara "Sivuston <span class='hostname'/> omistaja on määrittänyt sivustonsa asetukset väärin. &brandShortName; ei muodostanut yhteyttä sivustoon suojellakseen tietojasi varkaudelta.">
 
 <!ENTITY sharedLongDesc "
 <ul>
-  <li>Sivusto voi olla väliaikaisesti saavuttamattomissa tai kovan rasituksen 
+  <li>Sivusto voi olla väliaikaisesti saavuttamattomissa tai kovan rasituksen
     alaisena. Yritä hetken kuluttua uudestaan.</li>
-  <li>Jos mitkään sivustot eivät toimi, tarkista tietokoneen 
+  <li>Jos mitkään sivustot eivät toimi, tarkista tietokoneen
     verkkoasetukset.</li>
-  <li>Jos tietokone tai verkko on suojattu palomuurilla tai välityspalvelin on 
+  <li>Jos tietokone tai verkko on suojattu palomuurilla tai välityspalvelin on
     käytössä, tarkista että &brandShortName;in verkkoyhteyttä ei estetä.</li>
 </ul>
 ">
 
-<!ENTITY malwareBlocked.title "Epäilty hyökkäyssivusto!">
-<!ENTITY malwareBlocked.longDesc "
-<p>Hyökkäyssivustot yrittävät asentaa tietokoneellesi ohjelmia, jotka keräävät henkilötietoja, käyttävät tietokonettasi toisiin tietokoneisiin kohdistuviin hyökkäyksiin tai muuten vahingoittavat tietokonettasi.</p>
-<p>Sivuston omistajat, joiden sivusto on virheellisesti ilmoitettu hyökkäyssivustoksi, voivat <a href='http://www.stopbadware.org/home/reviewinfo' >anoa sivuston tilan tarkistamista</a>.</p>
-">
+<!ENTITY cspBlocked.title "Sisällön tietosuojakäytännön estämä">
+<!ENTITY cspBlocked.longDesc "<p>&brandShortName; esti tämän sivun latautumisen tässä yhteydessä, koska sivun sisällön tietosuojakäytäntö kieltää sen.</p>">
 
-<!ENTITY phishingBlocked.title "Epäilty huijaussivusto!">
-<!ENTITY phishingBlocked.longDesc "
-<p>Henkilötietojen kirjoittaminen tälle sivulle voi johtaa identiteettivarkauteen tai johonkin muuhun petokseen.</p>
-<p>Tämän tyyppiset verkkohuijaukset ovat osa phishing- tai khalastushuijauksia, joissa sivuilla tai sähköposteilla yritetään jäljitellä mahdollisesti luottamiesi toimijoiden viestintää.</p>
-">
+<!ENTITY corruptedContentErrorv2.title "Sisältö vioittunut -virhe">
+<!ENTITY corruptedContentErrorv2.longDesc "<p>Avattavaa sivua ei voida näyttää, koska tiedonsiirrossa tapahtui virhe.</p><ul><li>Ilmoitathan ongelmasta sivuston omistajalle.</li></ul>">
 
-<!ENTITY cspFrameAncestorBlocked.title "Sisällön tietosuojakäytännön estämä">
-<!ENTITY cspFrameAncestorBlocked.longDesc "<p>&brandShortName; esti tämän sivun latautumisen tässä yhteydessä, koska sivun sisällön tietosuojakäytäntö kieltää sen.</p>">
 
-<!ENTITY securityOverride.linkText "Tai lisää poikkeussääntö…">
-<!ENTITY securityOverride.getMeOutOfHereButton "Siirry pois sivulta">
 <!ENTITY securityOverride.exceptionButtonLabel "Lisää poikkeus…">
 
-<!-- LOCALIZATION NOTE (securityOverride.warningContent) - Do not translate the
-contents of the <button> tags. It uses strings already defined above. The
-button is included here (instead of netError.xhtml) because it exposes
-functionality specific to firefox. -->
+<!ENTITY errorReporting.automatic2 "Ilmoita tällaisista virheistä auttaaksesi Mozillaa tunnistamaan ja estämään haitallisia sivustoja">
+<!ENTITY errorReporting.learnMore "Lue lisää…">
 
-<!ENTITY securityOverride.warningContent "
-<p>Älä lisää poikkeussääntöä jos et ole aivan varma käyttämäsi Internet-yhteyden turvallisuudesta, tai jos et ole aikaisemmin nähnyt vastaavaa varoitusta tälle palvelimelle.</p>
+<!ENTITY remoteXUL.title "XUL-koodia etänä">
+<!ENTITY remoteXUL.longDesc "<p><ul><li>Ilmoitathan ongelmasta sivuston omistajalle.</li></ul></p>">
 
-<button id='getMeOutOfHereButton'>&securityOverride.getMeOutOfHereButton;</button>
-<button id='exceptionDialogButton'>&securityOverride.exceptionButtonLabel;</button>
+<!ENTITY sslv3Used.title "Ei voitu muodostaa suojattua yhteyttä">
+<!-- LOCALIZATION NOTE (sslv3Used.longDesc2) - Do not translate
+     "SSL_ERROR_UNSUPPORTED_VERSION". -->
+<!ENTITY sslv3Used.longDesc2 "Lisätiedot: SSL_ERROR_UNSUPPORTED_VERSION">
+
+<!-- LOCALIZATION NOTE (certerror.wrongSystemTime2,
+                        certerror.wrongSystemTimeWithoutReference) - The <span id='..' />
+     tags will be injected with actual values, please leave them unchanged. -->
+<!ENTITY certerror.wrongSystemTime2 "<p> &brandShortName; ei yhdistänyt osoitteeseen <span id='wrongSystemTime_URL'/>, koska tietokoneesi kello näyttää olevan väärässä ajassa ja koska tämä estää suojatun yhteyden muodostamisen.</p> <p>Tietokoneesi mukaan kello on <span id='wrongSystemTime_systemDate'/>, kun sen pitäisi olla <span id='wrongSystemTime_actualDate'/>. Voit korjata ongelman asettamalla kellon oikeaan aikaan tietokoneen aika-asetuksista.</p>">
+<!ENTITY certerror.wrongSystemTimeWithoutReference "<p> &brandShortName; ei yhdistänyt osoitteeseen <span id='wrongSystemTimeWithoutReference_URL'/>, koska tietokoneesi kello näyttää olevan väärässä ajassa ja koska tämä estää suojatun yhteyden muodostamisen.</p> <p>Tietokoneesi mukaan kello on <span id='wrongSystemTimeWithoutReference_systemDate'/>. Voit korjata ongelman asettamalla kellon oikeaan aikaan tietokoneen aika-asetuksista.</p>">
+
+<!ENTITY certerror.pagetitle1  "Suojaamaton yhteys">
+<!ENTITY certerror.whatShouldIDo.badStsCertExplanation "Tämä sivusto määrää
+käyttäen HTTP Strict Transport Security (HSTS) -ominaisuutta, että
+&brandShortName; saa muodostaa siihen vain suojatun yhteyden. Tämän takia
+tälle varmenteelle ei voi luoda poikkeusta.">
+<!ENTITY certerror.copyToClipboard.label "Kopioi teksti leikepöydälle">
+
+<!ENTITY inadequateSecurityError.title "Yhteys ei ole suojattu">
+<!-- LOCALIZATION NOTE (inadequateSecurityError.longDesc) - Do not translate
+     "NS_ERROR_NET_INADEQUATE_SECURITY". -->
+<!ENTITY inadequateSecurityError.longDesc "<p><span class='hostname'></span> käyttää suojaustekniikkaa, joka on vanhentunut ja haavoittuvainen hyökkäyksille. Hyökkääjä voisi helposti lukea tietoja, joiden luulit olevan suojattuja. Sivuston ylläpitäjän täytyy korjata tämä ongelma ennen kuin voit käydä sivustolla.</p><p>Virhekoodi: NS_ERROR_NET_INADEQUATE_SECURITY</p>">
+
+<!ENTITY prefReset.longDesc "Vaikuttaa siltä, että verkon turvallisuusasetukset aiheuttavat tämän. Haluatko palauttaa oletusasetukset?">
+<!ENTITY prefReset.label "Palauta oletusasetukset">
+
+<!ENTITY captivePortal.longDesc2 "
+<p>You must log in to this network before you can access the Internet.</p>
 ">
 
-<!ENTITY corruptedContentError.longDesc "<p>The page you are trying to view cannot be shown because an error in the data transmission was detected.</p><ul><li>Please contact the website owners to inform them of this problem.</li></ul>">
-
-<!ENTITY corruptedContentError.title "Corrupted Content Error">
-<!ENTITY netOffline.longDesc2 "
-<ul>
-  <li>Press &quot;Try Again&quot; to switch to online mode and reload the page.</li>
-</ul>
-">
-<!ENTITY notCached.longDesc "<p>The requested document is not available in &brandShortName;'s cache.</p><ul><li>As a security precaution, &brandShortName; does not automatically re-request sensitive documents.</li><li>Click Try Again to re-request the document from the website.</li></ul>">
-
-<!ENTITY notCached.title "Document Expired">
-<!ENTITY remoteXUL.longDesc "<p><ul><li>Please contact the website owners to inform them of this problem.</li></ul></p>">
-
-<!ENTITY remoteXUL.title "Remote XUL">
+<!ENTITY openPortalLoginPage.label2 "Open Network Login Page">

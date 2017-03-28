@@ -1,0 +1,54 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+.titled-splitter {
+  border: 1px solid #000000;
+  background-color: #5B7693;
+  cursor: default;
+}
+
+box[orient="vertical"] > .titled-splitter {
+  cursor: default;
+}
+
+.titledsplitter-container {
+  padding-bottom: 2px;
+}
+
+.titledsplitter-dragbar {
+  border-top: 1px solid #92ABC9;
+  min-height: 2px;
+  cursor: n-resize;
+}
+
+.titledsplitter-titlebox {
+  padding: 0px 5px 0px 5px;
+}
+
+.titledsplitter-text {
+  margin: 0px !important;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.titledsplitter-closebutton {
+  -moz-binding: none;
+  margin: 1px;
+  border: 1px outset #C7D0D9;
+  -moz-border-radius: 0px !important;
+  padding: 2px;
+  min-width: 0px;
+  background-color: #C7D0D9;
+}
+
+.titledsplitter-closeimage {
+  list-style-image: url("chrome://inspector/skin/titledsplitter-close.gif");
+}
+
+.titledsplitter-closebutton:hover:active {
+  border-style: inset;
+  padding: 3px 1px 1px 3px;
+}
+
+

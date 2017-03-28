@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/listboxBg.css" type="text/css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/bluegriffon.css" type="text/css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/bluegriffonDialogs.css" type="text/css"?>
+
+<!DOCTYPE window [
+  <!ENTITY % editorDTD       SYSTEM "chrome://markdown/locale/markdown.dtd" >
+  <!ENTITY % findbarDTD      SYSTEM "chrome://bluegriffon/locale/findbar.dtd" >
+  %editorDTD;
+  %findbarDTD;
+]>            
+
+<window title="&window.title;"
+        id="bluegriffonMarkdown"
+        windowtype="BlueGriffon:Markdown"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        buttons="accept,cancel"
+        onload="Startup()"
+        style="height: auto"
+        ondialogaccept="return onAccept()"
+        persist="screenX screenY width height"
+        width="600"
+        height="300"
+        screenX="24" screenY="24">
+
+  <!-- Methods common to all editor dialogs -->
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/dgid.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/global.js"/>
+
+  <script type="application/x-javascript" src="chrome://markdown/content/markdown.js"/>
+  <script type="application/x-javascript" src="chrome://markdown/content/js-markdown-extra.js"/>
+
+  <keyset id="mainKeySet">
+    <key id="findkb"              key="&findCmd.key;"          observes="cmd_bgfind"    modifiers="accel"/>
+    <key id="replacekb"           key="&replaceCmd.key;"       observes="cmd_replace"   modifiers="accel"/>
+  </keyset>
+
+  <commandset id="mainCommandSet">
+    <command id="cmd_bgfind"         label="&findCmd.label;"           accesskey="&findCmd.accesskey;"   />
+    <command id="cmd_replace"        label="&replaceCmd.label;"        accesskey="&replaceCmd.accesskey;"/>
+  </commandset>
+
+  <keyset>
+    <key keycode="VK_ESCAPE" oncommand="window.close()"/>
+  </keyset>
+
+  <iframe id="bespinIframe"
+          flex="1"/>
+
+#include ../../../base/content/bluegriffon/xul/findbar.inc
+
+  <hbox>
+    <spacer flex="1"/>
+    <button label="&commitChanges.label;"
+            oncommand="CommitChanges()"/>
+  </hbox>
+</window>

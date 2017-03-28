@@ -36,7 +36,7 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-Components.utils.import("resource://app/modules/editorHelper.jsm");
+Components.utils.import("resource://gre/modules/editorHelper.jsm");
 
 var gSpellChecker;
 var gWordToAdd;
@@ -69,6 +69,10 @@ function Startup()
   // Select the supplied word if it is already in the list
   SelectWordToAddInList();
   SetTextboxFocus(gDialog.WordInput);
+
+#ifndef XP_MACOSX
+  CenterDialogOnOpener();
+#endif
 }
 
 function ValidateWordToAdd()

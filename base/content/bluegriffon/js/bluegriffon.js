@@ -38,19 +38,23 @@
 Components.utils.import("resource://gre/modules/InlineSpellChecker.jsm");
 Components.utils.import("resource://gre/modules/Services.jsm");
 
-Components.utils.import("resource://app/modules/urlHelper.jsm");
-Components.utils.import("resource://app/modules/prompterHelper.jsm");
-Components.utils.import("resource://app/modules/editorHelper.jsm");
-Components.utils.import("resource://app/modules/cssHelper.jsm");
-Components.utils.import("resource://app/modules/fileHelper.jsm");
-Components.utils.import("resource://app/modules/l10nHelper.jsm");
-Components.utils.import("resource://app/modules/handlersManager.jsm");
-Components.utils.import("resource://app/modules/screens.jsm");
-Components.utils.import("resource://app/modules/fileChanges.jsm");
+Components.utils.import("resource://gre/modules/urlHelper.jsm");
+Components.utils.import("resource://gre/modules/prompterHelper.jsm");
+Components.utils.import("resource://gre/modules/editorHelper.jsm");
+Components.utils.import("resource://gre/modules/cssHelper.jsm");
+Components.utils.import("resource://gre/modules/fileHelper.jsm");
+Components.utils.import("resource://gre/modules/l10nHelper.jsm");
+Components.utils.import("resource://gre/modules/handlersManager.jsm");
+Components.utils.import("resource://gre/modules/screens.jsm");
+Components.utils.import("resource://gre/modules/fileChanges.jsm");
+Components.utils.import("resource://gre/modules/bgQuit.jsm");
+Components.utils.import("resource://gre/modules/AddonManager.jsm");
 
 #include blanks.inc
 
 #include observers.inc
+
+#include liveview.inc
 
 #include startup.inc
 
@@ -84,7 +88,7 @@ function GetPreferredNewDocumentURL()
 {
   var url = window["kHTML_TRANSITIONAL"];
   try {
-    urlId = Services.prefs.getCharPref("bluegriffon.defaults.doctype");
+    var urlId = Services.prefs.getCharPref("bluegriffon.defaults.doctype");
     url = window[urlId]; 
   }
   catch(e) {}
@@ -121,6 +125,43 @@ function OpenFile(aURL, aInTab)
   if (!aURL)
     return;
  
+  var ebmAvailable = ("EBookManager" in window);
+  if (ebmAvailable && aURL.toLowerCase().endsWith(".epub")) {
+    var ioService =
+      Components.classes["@mozilla.org/network/io-service;1"]
+                .getService(Components.interfaces.nsIIOService);
+    var fileHandler =
+      ioService.getProtocolHandler("file")
+               .QueryInterface(Components.interfaces.nsIFileProtocolHandler);
+    var file = fileHandler.getFileFromURLSpec(aURL);
+
+    var windowEnumerator = Services.wm.getEnumerator("bluegriffon");
+    var win = null;
+    while (windowEnumerator.hasMoreElements()) {
+      var w = windowEnumerator.getNext();
+      var ebookElt = w.document.querySelector("epub2,epub3,epub31");
+      if (ebookElt) {
+        var ebook = ebookElt.getUserData("ebook");
+        if (file.equals(ebook.packageFile)) {
+          w.focus();
+          return;
+        }
+      }
+      else if (!win)
+        win = w;
+    }
+
+    StoreUrlInLocationDB(aURL);
+    if (win && !win.EditorUtils.getCurrentEditor()) {
+      win.focus();
+      win.EBookManager.showEbook(file, aURL);
+      win.updateCommands("style");
+      return;
+    }
+    OpenNewWindow(aURL);
+    return;
+  }
+
   var alreadyEdited = EditorUtils.isAlreadyEdited(aURL);
   if (alreadyEdited)
   {
@@ -128,7 +169,7 @@ function OpenFile(aURL, aInTab)
     var editor = alreadyEdited.editor;
     var index  = alreadyEdited.index;
     win.document.getElementById("tabeditor").selectedIndex = index;
-    win.document.getElementById("tabeditor").mTabpanels.selectedPanel = editor;
+    win.document.getElementById("tabeditor").mTabpanels.selectedPanel = editor.parentNode;
 
     // nothing else to do here...
     win.focus();
@@ -174,8 +215,9 @@ function AboutComposer()
     win.focus();
     return;
   }
-  window.open('chrome://bluegriffon/content/dialogs/aboutDialog.xul',"_blank",
-              "chrome,resizable,scrollbars=yes");
+  /*window.openDialog(,"_blank",
+                    "chrome,modal,dialog=no,titlebar,centerscreen");*/
+  OpenAppModalWindow(window, 'chrome://bluegriffon/content/dialogs/aboutDialog.xul', "aboutDialog", true); 
 }
 
 function OpenConsole()
@@ -220,7 +262,7 @@ function UpdateWindowTitle(aEditorElement)
 
     // Append just the 'leaf' filename to the Doc. Title for the window caption
     var docUrl = doc.QueryInterface(Components.interfaces.nsIDOMHTMLDocument).URL;
-    if (docUrl && !UrlUtils.isUrlOfBlankDocument(docUrl))
+    if (docUrl && !UrlUtils.isUrlOfBlankDocument(docUrl) && docUrl != "about:blank")
     {
       var scheme = UrlUtils.getScheme(docUrl);
       var filename = UrlUtils.getFilename(docUrl);
@@ -232,31 +274,18 @@ function UpdateWindowTitle(aEditorElement)
 
     // Set window title with
     var titleModifier = L10NUtils.getString("titleModifier");
-    document.title    = L10NUtils.getBundle()
-                                 .formatStringFromName("titleFormat",
-                                                       [windowTitle, titleModifier],
-                                                       2);
+    var title = L10NUtils.getBundle()
+                         .formatStringFromName("titleFormat",
+                                               [windowTitle, titleModifier],
+                                               2);
+#ifdef CAN_DRAW_IN_TITLEBAR
+    gDialog.titleInTitlebar.setAttribute("value", title);
+#else
+    document.title = title;
+#endif
     return windowTitle;                                                       
   } catch (e) { }
   return "";
-}
-
-function ApplyDirectTextColorChange(aColor)
-{
-    var editor = EditorUtils.getCurrentEditor();
-    var isCSSEnabled = editor.isCSSEnabled;
-    editor.isCSSEnabled = true;
-    editor.setInlineProperty('font', 'color', aColor)
-    editor.isCSSEnabled = isCSSEnabled;
-}
-
-function ApplyDirectBackgroundColorChange(aColor)
-{
-    var editor = EditorUtils.getCurrentEditor();
-    var isCSSEnabled = editor.isCSSEnabled;
-    editor.isCSSEnabled = true;
-    editor.setBackgroundColor(aColor)
-    editor.isCSSEnabled = isCSSEnabled;
 }
 
 function onParagraphFormatChange(paraMenuList, commandID)
@@ -410,16 +439,6 @@ const kFixedFontFaceMenuItems = 7; // number of fixed font face menuitems
 
 function initLocalFontFaceMenu(menuPopup)
 {
-  // fill in the menu only once...
-  var callingId = menuPopup.parentNode.id;
-
-  if(!BlueGriffonVars.fontMenuOk)
-    BlueGriffonVars.fontMenuOk = {};
-  if (BlueGriffonVars.fontMenuOk[callingId ] &&
-      menuPopup.childNodes.length != kFixedFontFaceMenuItems)
-    return;
-  BlueGriffonVars.fontMenuOk[callingId ] = callingId ;
-
   if (!BlueGriffonVars.localFonts)
   {
     // Build list of all local fonts once per editor
@@ -433,6 +452,18 @@ function initLocalFontFaceMenu(menuPopup)
     catch(e) { }
   }
   
+  if (!menuPopup)
+    return;
+  // fill in the menu only once...
+  var callingId = menuPopup.parentNode.id;
+
+  if(!BlueGriffonVars.fontMenuOk)
+    BlueGriffonVars.fontMenuOk = {};
+  if (BlueGriffonVars.fontMenuOk[callingId ] &&
+      menuPopup.childNodes.length != kFixedFontFaceMenuItems)
+    return;
+  BlueGriffonVars.fontMenuOk[callingId ] = callingId ;
+
   var useRadioMenuitems = (menuPopup.parentNode.localName == "menu"); // don't do this for menulists  
   if (menuPopup.childNodes.length == kFixedFontFaceMenuItems) 
   {
@@ -482,6 +513,25 @@ function onFontFaceChange(fontFaceMenuList, commandID)
         break;
       }
     }
+  }
+}
+
+/************** ARIA DROPDOWNS **************/
+
+function InitializeARIARoleDropdown(aPopup)
+{
+  var roles = [];
+  for (var i in kWAI_ARIA_11_ROLES)
+    if (!("abstract" in kWAI_ARIA_11_ROLES[i]))
+      roles.push(i);
+  roles.sort();
+
+  for (var i = 0; i < roles.length; i++) {
+    var role = roles[i];
+    var item = document.createElement("menuitem");
+    item.setAttribute("label", role);
+    item.setAttribute("value", role);
+    aPopup.appendChild(item);
   }
 }
 
@@ -739,7 +789,7 @@ function OnKeyPressWhileChangingTag(event)
     if (newTag.toLowerCase() == element.nodeName.toLowerCase())
     {
       // nothing to do
-      window.content.focus();
+      GetWindowContent().focus();
       return;
     }
 
@@ -765,7 +815,7 @@ function OnKeyPressWhileChangingTag(event)
         editor.deleteNode(element);
         editor.selectElement(newElt);
 
-        window.content.focus();
+        GetWindowContent().focus();
       }
     }
     catch (e) {}
@@ -775,93 +825,31 @@ function OnKeyPressWhileChangingTag(event)
   }
   else if (keyCode == 27) {
     // if the user hits Escape, we discard the changes
-    window.content.focus();
+    GetWindowContent().focus();
   }
 }
 
 /************ VIEW MODE ********/
-function GetCurrentViewMode()
-{
-  return EditorUtils.getCurrentEditorElement().parentNode.getAttribute("currentmode") ||
-         "wysiwyg";
-}
-
-function onSourceChangeCallback(source)
-{
-  var doctype = EditorUtils.getCurrentDocument().doctype;
-  var systemId = doctype ? doctype.systemId : null;
-  var isXML = false;
-  switch (systemId) {
-    case "http://www.w3.org/TR/html4/strict.dtd": // HTML 4
-    case "http://www.w3.org/TR/html4/loose.dtd":
-    case "http://www.w3.org/TR/REC-html40/strict.dtd":
-    case "http://www.w3.org/TR/REC-html40/loose.dtd":
-      isXML = false;
-      break;
-    case "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd": // XHTML 1
-    case "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd":
-    case "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd":
-      isXML = true;
-      break;
-    case "":
-      isXML = (EditorUtils.getCurrentDocument().documentElement.getAttribute("xmlns") == "http://www.w3.org/1999/xhtml");
-      break;
-    case null:
-      isXML = (EditorUtils.getCurrentDocument().compatMode == "CSS1Compat");
-      break;
-  }
-
-  var editorElement  = EditorUtils.getCurrentEditorElement();
-  var sourceIframe   = editorElement.previousSibling;
-  var sourceEditor   = sourceIframe.contentWindow.wrappedJSObject.gEditor;
-  var sourceDocument = sourceIframe.contentWindow.document;
-
-  if (isXML) {
-    if (sourceEditor.lastErrorLine) {
-      var lineInfo = sourceEditor.lineInfo(sourceEditor.lastErrorLine - 1);
-      var markerClass = lineInfo.markerClass ? lineInfo.markerClass : "";
-      var markerClassArray = markerClass.split(" ");
-      markerClassArray.splice(markerClassArray.indexOf("error"), 1);
-      sourceEditor.setMarker(sourceEditor.lastErrorLine - 1, null, markerClassArray.join(" "));
-      sourceEditor.lastErrorLine = 0;
-    }
-    var xmlParser = new DOMParser();
-    try {
-      var doc = xmlParser.parseFromString(source, "text/xml");
-      if (doc.documentElement.nodeName == "parsererror") {
-        var message = doc.documentElement.firstChild.data.
-          replace( /Location\: chrome\:\/\/bluegriffon\/content\/xul\/bluegriffon.xul/g , ", ");
-        var error = doc.documentElement.lastChild.textContent;
-        var line = parseInt(doc.documentElement.getAttribute("line"));
-        var lineInfo = sourceEditor.lineInfo(line - 1);
-        var markerClass = lineInfo.markerClass ? lineInfo.markerClass : "";
-        var markerClassArray = markerClass.split(" ");
-        if (-1 == markerClassArray.indexOf("error"))
-          markerClassArray.push("error");
-        sourceEditor.setMarker(line - 1, null, markerClassArray.join(" "));
-        sourceEditor.lastErrorLine = line;
-
-        return;
-      }
-    }
-    catch(e) {alert(e)}
-  }
-}
 
 function ToggleViewMode(aElement)
 {
   if (!aElement) // sanity case
     return false;
 
-  var editor = EditorUtils.getCurrentEditor();
-  if (aElement.id == "wysiwygModeButton")
-    editor.setMedium("screen");
-  else if (aElement.id == "printPreviewModeButton")
-    editor.setMedium("print");
+  var editorElement = EditorUtils.getCurrentEditorElement();
+  if (!editorElement) // sanity case
+    return false;
 
-  var mode =  aElement.getAttribute("mode");
-  if (mode == GetCurrentViewMode())
-    return true;
+  var deck = editorElement.parentNode;
+  var editor = EditorUtils.getCurrentEditor();
+  if (aElement.id == "wysiwygModeButton" || aElement.id == "liveViewModeButton") {
+    editor.setMedium("screen");
+    deck.removeAttribute("wysiwygmedium");
+  }
+  else if (aElement.id == "printPreviewModeButton") {
+    editor.setMedium("print");
+    deck.setAttribute("wysiwygmedium", "print");
+  }
 
   var child = aElement.parentNode.firstChild;
   while (child) {
@@ -872,9 +860,77 @@ function ToggleViewMode(aElement)
     child = child.nextSibling;
   }
 
-  var editor = EditorUtils.getCurrentEditor();
-  var editorElement = EditorUtils.getCurrentEditorElement();
-  editorElement.parentNode.setAttribute("currentmode", mode);
+  var mode =  aElement.getAttribute("mode");
+  var previousmode = EditorUtils.getCurrentViewMode();
+  if (mode == previousmode)
+    return true;
+
+  var sourceIframe = editorElement.parentNode.firstElementChild;
+  var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
+
+  // special case, from liveview/source to source
+  if (mode == "source" &&
+      previousmode == "liveview" &&
+      EditorUtils.getLiveViewMode() == "source") {
+    gDialog.liveViewModeButton.removeAttribute("selected");
+    gDialog.sourceModeButton.setAttribute("selected", "true");
+    gDialog.wysiwygModeButton.removeAttribute("selected");
+    gDialog.printPreviewModeButton.removeAttribute("selected");
+
+    editorElement.parentNode.setAttribute("currentmode", mode);
+
+    deck.removeAttribute("class");
+    editorElement.parentNode.selectedIndex = 0;
+    sourceIframe.focus();
+    //sourceEditor.refresh();
+    sourceEditor.focus();
+    NotifierUtils.notify("modeSwitch");
+
+    return true;
+  }
+
+  // special case, to liveview/source from source
+  if (previousmode == "source" &&
+      mode == "liveview") {
+    deck.className = "liveview";
+    gDialog.liveViewModeButton.setAttribute("selected", "true");
+    gDialog.sourceModeButton.removeAttribute("selected");
+    gDialog.wysiwygModeButton.removeAttribute("selected");
+    gDialog.printPreviewModeButton.removeAttribute("selected");
+
+    editorElement.parentNode.setAttribute("currentmode", mode);
+    sourceIframe.focus();
+    //sourceEditor.refresh();
+    sourceEditor.focus();
+    NotifierUtils.notify("modeSwitch");
+
+    return true;
+  }
+
+  // special case, from liveview/wysiwyg to wysiwyg
+  if (mode == "wysiwyg" &&
+      previousmode == "liveview" &&
+      EditorUtils.getLiveViewMode() == "wysiwyg") {
+    gDialog.liveViewModeButton.removeAttribute("selected");
+    gDialog.sourceModeButton.removeAttribute("selected");
+    if (deck.getAttribute("wysiwygmedium") == "print") {
+      gDialog.printPreviewModeButton.setAttribute("selected", "true");
+      gDialog.wysiwygModeButton.removeAttribute("selected");
+    }
+    else {
+      gDialog.wysiwygModeButton.setAttribute("selected", "true");
+      gDialog.printPreviewModeButton.removeAttribute("selected");
+    }
+
+    editorElement.parentNode.setAttribute("currentmode", mode);
+
+    deck.removeAttribute("class");
+    editorElement.parentNode.selectedIndex = 1;
+    GetWindowContent().focus();
+    NotifierUtils.notify("modeSwitch");
+
+    return true;
+  }
 
   gDialog.bespinToolbox1.hidden = true;
   gDialog.bespinToolbox2.hidden = true;
@@ -895,6 +951,7 @@ function ToggleViewMode(aElement)
       isXML = true;
       break;
     case "":
+    case "about:legacy-compat":
       isXML = (EditorUtils.getCurrentDocument().documentElement.getAttribute("xmlns") == "http://www.w3.org/1999/xhtml");
       break;
     case null:
@@ -902,11 +959,13 @@ function ToggleViewMode(aElement)
       break;
   }
 
-  if (mode == "source")
+  if (mode == "source" || mode == "liveview")
   {
-    gDialog.structurebar.style.visibility = "hidden";
-    HandlersManager.hideAllHandlers();
-    gDialog.tabeditor.enableRulers(false);
+    if (mode == "source") {
+      gDialog.structurebar.style.visibility = "hidden";
+      HandlersManager.hideAllHandlers();
+      gDialog.tabeditor.enableRulers(false);
+    }
 
     EditorUtils.cleanup();
 
@@ -924,21 +983,28 @@ function ToggleViewMode(aElement)
 
     NotifierUtils.notify("beforeEnteringSourceMode");
     var source = encoder.encodeToString();
-    var sourceIframe = editorElement.previousSibling;
-    var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
-    sourceIframe.contentWindow.wrappedJSObject.gChangeCallback = onSourceChangeCallback;
 
     var theme = null;
     try {
       theme = GetPrefs().getCharPref("bluegriffon.source.theme");
     }
     catch(e) {}
+
+    var defaultSourceZoom;
+    try {
+      defaultSourceZoom = parseFloat(Services.prefs.getCharPref("bluegriffon.source.zoom.default"));
+    }
+    catch(e)
+    {
+      defaultSourceZoom = 1;
+    }
+    var zoomFactor = Math.round(defaultSourceZoom * 100) + "%";
     sourceIframe.contentWindow.wrappedJSObject.installCodeMirror(BespinKeyPressCallback,
                                                  BespinChangeCallback,
                                                  BespinActivityCallback,
+                                                 WysiwygEditorFocused,
                                                  theme,
-                                                 null,
-                                                 EditorUtils);
+                                                 zoomFactor);
 
     var lastEditableChild = editor.document.body.lastChild;
     if (lastEditableChild.nodeType == Node.TEXT_NODE)
@@ -957,28 +1023,36 @@ function ToggleViewMode(aElement)
     else {
       sourceEditor.setShowPrintMargin(false);
     }*/
-    NotifierUtils.notify("afterEnteringSourceMode");
-    editorElement.parentNode.selectedIndex = 0;
 
-    sourceIframe.focus();
-    sourceEditor.refresh();
-    sourceEditor.focus();
+    if (mode == "liveview") {
+      deck.className = "liveview";
+      GetWindowContent().focus();
+    }
+    else {
+      deck.removeAttribute("class");
+      editorElement.parentNode.selectedIndex = 0;
+      sourceIframe.focus();
+      sourceEditor.refresh();
+      sourceEditor.focus();
+    }
+
     sourceIframe.contentWindow.wrappedJSObject.markSelection();
     sourceIframe.setUserData("oldSource", sourceEditor.getValue(), null);
     sourceIframe.setUserData("lastSaved", "", null);
 
     sourceIframe.contentWindow.wrappedJSObject.isXML = isXML;
     EditorUtils.getCurrentSourceWindow().ResetModificationCount();
+    editorElement.parentNode.setAttribute("currentmode", mode);
+
+    NotifierUtils.notify("afterEnteringSourceMode");
+    NotifierUtils.notify("modeSwitch");
   }
   else if (mode == "wysiwyg")
   {
     // Reduce the undo count so we don't use too much memory
     //   during multiple uses of source window 
     //   (reinserting entire doc caches all nodes)
-    gDialog.tabeditor.enableRulers(true);
 
-    var sourceIframe = editorElement.previousSibling;
-    var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
     if (sourceEditor)
     {
       NotifierUtils.notify("beforeLeavingSourceMode");
@@ -1000,32 +1074,62 @@ function ToggleViewMode(aElement)
                               "chrome,modal,titlebar", message, error);
             gDialog.printPreviewModeButton.removeAttribute("selected");
             gDialog.wysiwygModeButton.removeAttribute("selected");
-            gDialog.sourceModeButton.setAttribute("selected", "true");
-            editorElement.parentNode.setAttribute("currentmode", "source");
+
+            if (previousmode == "source") {
+              gDialog.sourceModeButton.setAttribute("selected", "true");
+              gDialog.liveViewModeButton.removeAttribute("selected");
+            }
+            else {
+              gDialog.liveViewModeButton.setAttribute("selected", "true");
+              gDialog.sourceModeButton.removeAttribute("selected");
+            }
+
+            sourceIframe.focus();
+            //sourceEditor.refresh();
+            sourceEditor.focus();
+
+            editorElement.parentNode.setAttribute("currentmode", previousmode);
             Services.prefs.setBoolPref("bluegriffon.spellCheck.enabled", spellchecking);
             return false;
           }
+          deck.removeAttribute("class");
           gDialog.structurebar.style.visibility = "";
           RebuildFromSource(doc, isXML);
           var lastSaved = sourceIframe.getUserData("lastSaved");
           if (lastSaved == source)
             EditorUtils.getCurrentEditor().resetModificationCount();
         }
-        catch(e) {alert(e)}
+        catch(e) {Services.prompt.alert(null, "ToggleViewMode", e);}
       }
       else {
-        NotifierUtils.notify("afterLeavingSourceMode");
-
+        deck.removeAttribute("class");
         editorElement.parentNode.selectedIndex = 1;
         gDialog.structurebar.style.visibility = "";
-        window.content.focus();
+        GetWindowContent().focus();
       }
       sourceIframe.setUserData("lastSaved", "", null);
       Services.prefs.setBoolPref("bluegriffon.spellCheck.enabled", spellchecking);
     }
+    gDialog.tabeditor.enableRulers(true);
+
+    gDialog.liveViewModeButton.removeAttribute("selected");
+    if (deck.getAttribute("wysiwygmedium") == "print") {
+      gDialog.printPreviewModeButton.setAttribute("selected", "true");
+      gDialog.wysiwygModeButton.removeAttribute("selected");
+    }
+    else {
+      gDialog.wysiwygModeButton.setAttribute("selected", "true");
+      gDialog.printPreviewModeButton.removeAttribute("selected");
+    }
+    gDialog.sourceModeButton.removeAttribute("selected");
+
+    editorElement.parentNode.setAttribute("currentmode", mode);
   }
+
   editorElement.parentNode.setAttribute("previousMode", mode);
   window.updateCommands("style");
+  NotifierUtils.notify("afterLeavingSourceMode");
+  NotifierUtils.notify("modeSwitch");
   return true;
 }
 
@@ -1046,12 +1150,12 @@ function CloneElementContents(editor, sourceElt, destElt)
       editor.insertNode(destChild, destElt, destElt.childNodes.length);
     }
     else if (sourceChild.nodeType == Node.TEXT_NODE) {
-      t = editor.document.createTextNode(sourceChild.data);
+      var t = editor.document.createTextNode(sourceChild.data);
       editor.insertNode(t, destElt, destElt.childNodes.length);
     }
     else if (sourceChild.nodeType == Node.COMMENT_NODE) {
-      t = editor.document.createComment(sourceChild.data);
-      editor.insertNode(t, destElt, destElt.childNodes.length);
+      var c = editor.document.createComment(sourceChild.data);
+      editor.insertNode(c, destElt, destElt.childNodes.length);
     }
 
     sourceChild = sourceChild.nextSibling;
@@ -1065,63 +1169,62 @@ function CloneElementContents(editor, sourceElt, destElt)
   } while (!stopIt);
 }
 
-function RebuildFromSource(aDoc, isXML)
+function RebuildFromSource(aDoc, isXML, aNoReflect)
 {
-  if (isXML) {
-    var fileExt = UrlUtils.getFileExtension( UrlUtils.getDocumentUrl());
-    var xhtmlExt = (fileExt == "xhtm" || fileExt == "xhtml");
+  try {
+    if (isXML) {
+      var fileExt = UrlUtils.getFileExtension( UrlUtils.getDocumentUrl());
+      var xhtmlExt = (fileExt == "xhtm" || fileExt == "xhtml");
 
-    var styles = aDoc.querySelectorAll("style");
-    var found = false, switchToCDATA = false;
-    for (var i = 0; i < styles.length; i++) {
-      var style = styles[i];
-      var child = style.firstChild;
-      while (child) {
-        var tmp = child.nextSibling;
-
-        if (child.nodeType == Node.COMMENT_NODE) {
-          if (xhtmlExt) {
-            // XHTML document with xhtml extension and HTML comments, offer to
-            // convert to CDATA sections
-            if (!found) {
-              found = true;
+      var styles = aDoc.querySelectorAll("style");
+      var found = false, switchToCDATA = false;
+      for (var i = 0; i < styles.length; i++) {
+        var style = styles[i];
+        var child = style.firstChild;
+        while (child) {
+          var tmp = child.nextSibling;
   
-              var rv = PromptUtils.confirmWithTitle(
-                                    L10NUtils.getString("HTMLCommentsInXHTMLTitle"),
-                                    L10NUtils.getString("HTMLCommentsInXHTMLMessage"),
-                                    L10NUtils.getString("HTMLCommentsInXHTMLOK"),
-                                    L10NUtils.getString("HTMLCommentsInXHTMLCancel"),
-                                    "");
-              if (rv == 1) { // cancel button
-                child = null;
-                tmp = null;
+          if (child.nodeType == Node.COMMENT_NODE) {
+            if (xhtmlExt) {
+              // XHTML document with xhtml extension and HTML comments, offer to
+              // convert to CDATA sections
+              if (!found) {
+                found = true;
+    
+                var rv = PromptUtils.confirmWithTitle(
+                                      L10NUtils.getString("HTMLCommentsInXHTMLTitle"),
+                                      L10NUtils.getString("HTMLCommentsInXHTMLMessage"),
+                                      L10NUtils.getString("HTMLCommentsInXHTMLOK"),
+                                      L10NUtils.getString("HTMLCommentsInXHTMLCancel"),
+                                      "");
+                if (rv == 1) { // cancel button
+                  child = null;
+                  tmp = null;
+                }
+              }
+    
+              if (child) {
+                var e = aDoc.createCDATASection(child.data);
+                style.insertBefore(e, child);
+                style.removeChild(child);
               }
             }
-  
-            if (child) {
-              var e = aDoc.createCDATASection(child.data);
+            else {
+              // if we have a XHTML document with a HTML file extension, the user wants to
+              // preserve the HTML comments :-(
+              var e = aDoc.createTextNode("<!--" + child.data + "-->");
               style.insertBefore(e, child);
               style.removeChild(child);
             }
           }
-          else {
-            // if we have a XHTML document with a HTML file extension, the user wants to
-            // preserve the HTML comments :-(
-            var e = aDoc.createTextNode("<!--" + child.data + "-->");
-            style.insertBefore(e, child);
-            style.removeChild(child);
-          }
+  
+          child = tmp;
         }
-
-        child = tmp;
       }
     }
-  }
-
-  EditorUtils.getCurrentEditorElement().parentNode.selectedIndex = 1;
-  var editor = EditorUtils.getCurrentEditor();
-
-  try {
+    if (!aNoReflect)
+      EditorUtils.getCurrentEditorElement().parentNode.selectedIndex = 1;
+    var editor = EditorUtils.getCurrentEditor();
 
     // make sure everything is aggregated under one single txn
     editor.beginTransaction();
@@ -1131,6 +1234,7 @@ function RebuildFromSource(aDoc, isXML)
     CloneElementContents(editor, aDoc.querySelector("head"), editor.document.querySelector("head"));
     // clone body
     CloneElementContents(editor, aDoc.querySelector("body"), editor.document.body);
+
 
     var valueArray = [];
     if (!Services.prefs.getBoolPref("bluegriffon.display.comments"))
@@ -1143,18 +1247,62 @@ function RebuildFromSource(aDoc, isXML)
     editor.document.documentElement.setAttribute("_moz_hide", value);
 
     MakePhpAndCommentsVisible(editor.document);
+
+    var elt = editor.document
+                .querySelector("[bluegriffonsourceselected]");
+    try {
+      if (elt) {
+        if (elt.hasAttribute("bluegriffonstandalone")) {
+          editor.setCaretAfterElement(elt);
+          ScrollToElement(elt);
+          editor.deleteNode(elt);
+        }
+        else {
+          editor.removeAttribute(elt, "bluegriffonsourceselected");
+          if (elt.lastChild) {
+            if (elt.lastChild.nodeType == Node.TEXT_NODE) {
+              selection.collapse(elt.lastChild, elt.lastChild.data.length);
+              ScrollToElement(elt);
+            }
+            else {
+              if (elt.lastChild.nodeType == Node.ELEMENT_NODE) {
+                editor.selectElement(elt.lastChild);
+                ScrollToElement(elt.lastChild);
+              }
+              else {
+                editor.selectElement(elt);
+                ScrollToElement(elt);
+              }
+            }
+          }
+          else {
+            editor.selectElement(elt);
+            ScrollToElement(elt);
+          }
+        }
+      }
+    }
+    catch(e) {}
+
     editor.endTransaction();
 
     // the window title is updated by DOMTitleChanged event
-  } catch(ex) {
+    if (!aNoReflect) {
+      NotifierUtils.notify("afterLeavingSourceMode");
+      GetWindowContent().focus();
+      EditorUtils.getCurrentEditorElement().focus();
+    }
+  } catch(e) {
+    Services.prompt.alert(null, "RebuildFromSource", e);
   }
-  NotifierUtils.notify("afterLeavingSourceMode");
-  window.content.focus();
-  EditorUtils.getCurrentEditorElement().focus();
 }
+
 
 function doCloseTab(aTab)
 {
+  if ("responsiveStack" in gDialog)
+    deleteAllChildren(gDialog.responsiveStack);
+
   var tabbox = aTab.parentNode.parentNode.parentNode;
   var tabs = aTab.parentNode;
   var tabpanels = tabbox.parentNode.mTabpanels;
@@ -1171,9 +1319,19 @@ function doCloseTab(aTab)
     tabbox.parentNode.mHruler.setAttribute("disabled", "true");
     tabbox.parentNode.mVruler.setAttribute("disabled", "true");
     tabbox.parentNode.setAttribute("visibility", "hidden");
-    if (gDialog.structurebar)
-      gDialog.structurebar.className = "hidden";
+    if (gDialog.structurebar) {
+      //gDialog.structurebar.className = "hidden";
+      gDialog.structurebar.style.visibility = "hidden";
+    }
+#ifdef CAN_DRAW_IN_TITLEBAR
+    gDialog.titleInTitlebar.setAttribute("value", "BlueGriffon");
+#else
     document.title = "BlueGriffon";
+#endif
+    if ("responsiveStack" in gDialog) {
+      gDialog.responsiveStack.setAttribute("hidden", "true");
+      gDialog.responsiveRuler.setAttribute("style", "display: none");
+    }
   }
   window.updateCommands("style");
   NotifierUtils.notify("tabClosed");
@@ -1218,6 +1376,14 @@ function doSaveTabsBeforeQuit()
     if (1 == closed)
       return false;
   }
+
+  var ebook = document.querySelector("epub2,epub3,epub31");
+  if (ebook) {
+    if ("deleteTempDir" in ebook)
+      ebook.deleteTempDir();
+    ebook.parentNode.removeChild(ebook);
+  }
+
   return true;
 }
 
@@ -1236,7 +1402,7 @@ function OpenPreferences()
   if (w)
     w.focus();
   else {
-    var features = "chrome,titlebar,toolbar,centerscreen,dialog=yes,resizable=yes";
+    var features = "chrome,titlebar,toolbar,centerscreen,dialog=no,resizable=yes";
     window.openDialog("chrome://bluegriffon/content/prefs/prefs.xul", "Preferences", features);
   }
 }
@@ -1360,7 +1526,6 @@ function OnDoubleClick(aEvent)
 
 #include autoInsertTable.inc
 
-
 function AlignAllPanels()
 {
   ScreenUtils.alignPanelsForWindow(window);
@@ -1369,21 +1534,6 @@ function AlignAllPanels()
 
 function UpdateDeckMenu()
 {
-  deleteAllChildren(gDialog.deckMenupopup);
-  var child = gDialog.beforeAllPanelsMenuseparator.nextSibling;
-  while (child) {
-    if (child.getAttribute("checked") == "true") {
-      var item = document.createElement("menuitem");
-      item.setAttribute("label", child.getAttribute("label"));
-      item.setAttribute("panel", child.getAttribute("panel"));
-      item.setAttribute("type",  "checkbox");
-      if (child.getAttribute("decked") == "true")
-        item.setAttribute("checked", "true");
-      gDialog.deckMenupopup.appendChild(item);
-    }
-
-    child = child.nextSibling;
-  }
 }
 
 function DeckOrUndeckPanel(aEvent)
@@ -1411,7 +1561,7 @@ function DeckOrUndeckPanel(aEvent)
 
 function UpdatePanelsStatusInMenu()
 {
-  var child = gDialog.beforeAllPanelsMenuseparator.nextSibling;
+  var child = gDialog.panelsMenuPopup.firstElementChild;
   if ("UNIX" == gSYSTEM) {
     while(child) {
       var w1, w2 = null;
@@ -1520,8 +1670,8 @@ function OnClick(aEvent)
 {
   // this is necessary to be able to select for instance video elements
   var target = aEvent.explicitOriginalTarget;
-  if (target && (target instanceof Components.interfaces.nsIDOMHTMLVideoElement
-                 || target instanceof Components.interfaces.nsIDOMHTMLAudioElement
+  if (target && (target instanceof HTMLVideoElement
+                 || target instanceof HTMLAudioElement
                  || target instanceof Components.interfaces.nsIDOMHTMLSelectElement)) {
     EditorUtils.getCurrentEditor().selectElement(target);
   }
@@ -1542,49 +1692,119 @@ function start_css()
                "chrome,resizable,scrollbars=yes");
 }
 
-function UpdateTabHTMLDialect(aEditorElement)
+function UpdateTabTooltip(aElement)
 {
+  while (aElement && aElement.nodeName != "tab")
+    aElement = aElement.parentNode;
+
+  if (!aElement || aElement.nodeName != "tab")
+    return; // sanity case
+
   var tabeditor = gDialog.tabeditor;
   var tabs      = tabeditor.mTabs.childNodes;
   var editors   = tabeditor.mTabpanels.childNodes;
   var l = editors.length;
   for (var i = 0; i < l; i++)
   {
-    if (editors.item(i).lastChild == aEditorElement)
+    if (tabs.item(i) == aElement)
     {
-      var tab = tabs.item(i);
+      var editorElement = editors.item(i).lastChild;
+      editor = editorElement.getEditor(editorElement.contentWindow);
+  
+      // Do QIs now so editor users won't have to figure out which interface to use
+      // Using "instanceof" does the QI for us.
+      editor instanceof Components.interfaces.nsIEditor;
+      editor instanceof Components.interfaces.nsIPlaintextEditor;
+      editor instanceof Components.interfaces.nsIHTMLEditor;
 
-      var doctype = aEditorElement.contentDocument.doctype;
+      var doctype = editorElement.contentDocument.doctype;
       var systemId = doctype ? doctype.systemId : null;
       switch (systemId) {
         case "http://www.w3.org/TR/html4/strict.dtd": // HTML 4
         case "http://www.w3.org/TR/html4/loose.dtd":
         case "http://www.w3.org/TR/REC-html40/strict.dtd":
         case "http://www.w3.org/TR/REC-html40/loose.dtd":
-          tab.setAttribute("tooltiptext", "HTML 4");
+          gDialog["tab-tooltip-html-dialect"].setAttribute("value", "HTML 4");
           break;
         case "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd": // XHTML 1
         case "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd":
-          tab.setAttribute("tooltiptext", "XHTML 1");
+          gDialog["tab-tooltip-html-dialect"].setAttribute("value", "XHTML 1");
           break;
         case "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd":
-          tab.setAttribute("tooltiptext", "XHTML 1.1");
+          gDialog["tab-tooltip-html-dialect"].setAttribute("value", "XHTML 1.1");
           break;
         case "":
-          tab.setAttribute("tooltiptext",
-             (aEditorElement.contentDocument.documentElement.getAttribute("xmlns") == "http://www.w3.org/1999/xhtml") ?
+        case "about:legacy-compat":
+          gDialog["tab-tooltip-html-dialect"].setAttribute("value",
+             (editorElement.contentDocument.documentElement.getAttribute("xmlns") == "http://www.w3.org/1999/xhtml") ?
                "XHTML 5" : "HTML 5");
           break;
         case null:
-	        if (aEditorElement.contentDocument.compatMode == "CSS1Compat")
-	         tab.setAttribute("tooltiptext", "XHTML 5");
+	        if (editorElement.contentDocument.compatMode == "CSS1Compat")
+	         gDialog["tab-tooltip-html-dialect"].setAttribute("value", "XHTML 5");
 	        else
-	         tab.setAttribute("tooltiptext", "HTML 4");
+	         gDialog["tab-tooltip-html-dialect"].setAttribute("value", "HTML 4");
 	        break;
         default: break; // should never happen...
       }
+
+      gDialog["tab-tooltip-title"].setAttribute("value",
+                                       editorElement.contentDocument.title ||
+                                         "(" + L10NUtils.getString("untitled") + ")");
+
+      var location = editorElement.contentDocument.location.toString();
+      if (!UrlUtils.isUrlOfBlankDocument(location))
+        gDialog["tab-tooltip-location"].setAttribute("value",
+                                          UrlUtils.stripUsernamePassword(location));
+      else
+        gDialog["tab-tooltip-location"].setAttribute("value", "");
+
+      function _getMetaElement(aName, aId)
+      {
+        if (aName)
+        {
+          var name = aName.toLowerCase();
+          try {
+            var metanodes = editorElement.contentDocument
+                              .getElementsByTagName("meta");
+            for (var i = 0; i < metanodes.length; i++)
+            {
+              var metanode = metanodes.item(i);
+              if (metanode && metanode.getAttribute("name") == name) {
+                var value = metanode.getAttribute("content")
+                value = value ? value.trim() : "";
+                gDialog[aId].setAttribute("value", value);
+                gDialog[aId].setAttribute("tooltiptext", value);
+                return;
+              }
+            }
+          }
+          catch(e) {}
+        }
+        gDialog[aId].setAttribute("value", "");
+        gDialog[aId].setAttribute("tooltiptext", "");
+      }
+
+      _getMetaElement("author",      "tab-tooltip-author");
+      _getMetaElement("description", "tab-tooltip-description");
+      _getMetaElement("keywords",    "tab-tooltip-keywords");
+
+      var charset = editor.documentCharacterSet.toLowerCase();
+      gDialog["tab-tooltip-charset"].setAttribute("value", charset);
+
+      var docElement = editor.document.documentElement;
+      if (docElement.hasAttribute("lang"))
+        gDialog["tab-tooltip-language"].setAttribute("value", docElement.getAttribute("lang"));
+      else
+        gDialog["tab-tooltip-language"].setAttribute("value", "");
+      if (docElement.hasAttribute("dir"))
+        gDialog["tab-tooltip-text-direction"].setAttribute("value", docElement.getAttribute("dir"));
+      else
+        gDialog["tab-tooltip-text-direction"].setAttribute("value", "");
+
       return;
     }
+
   }          
 
 }
@@ -1628,6 +1848,8 @@ function ToggleAllTagsMode()
 
 function UpdateViewMenu()
 {
+  if (!("tabeditor" in gDialog))
+    return;
   var tab = gDialog.tabeditor.selectedTab;
   if (tab) {
     if (tab.hasAttribute("alltags")) {
@@ -1748,6 +1970,11 @@ var gDummySelectionEndNode = null;
 var gDummySelectionStartData = "";
 var gDummySelectionEndData = "";
 
+var gPreservedSelectionStartNode = null;
+var gPreservedSelectionEndNode = null;
+var gPreservedSelectionStartOffset = 0;
+var gPreservedSelectionEndOffset = 0;
+
 function MarkSelection()
 {
   gDummySelectionStartNode = null;
@@ -1764,6 +1991,11 @@ function MarkSelection()
     var endContainer   = range.endContainer;
     var startOffset    = range.startOffset;
     var endOffset      = range.endOffset;
+
+    gPreservedSelectionStartNode   = startContainer;
+    gPreservedSelectionEndNode     = endContainer;
+    gPreservedSelectionStartOffset = startOffset;
+    gPreservedSelectionEndOffset   = endOffset;
 
     if (startContainer.nodeType == Node.TEXT_NODE) {
       var data = startContainer.data;
@@ -1845,6 +2077,10 @@ function UnmarkSelection()
     else if (gDummySelectionStartNode.parentNode) // if not already removed....
       gDummySelectionStartNode.parentNode.removeChild(gDummySelectionStartNode);
   }
+
+  var selection = EditorUtils.getCurrentEditor().selection;
+  selection.collapse(gPreservedSelectionStartNode, gPreservedSelectionStartOffset);
+  selection.extend(gPreservedSelectionEndNode, gPreservedSelectionEndOffset);
 }
 
 function MarkSelectionInAce(aSourceEditor)
@@ -1935,6 +2171,11 @@ function SaveCurrentTabLocation()
   catch(e) {}
 
   var URL = EditorUtils.getDocumentUrl();
+
+  var ebmAvailable = ("EBookManager" in window);
+  if (ebmAvailable  && EBookManager.isUrlSpecInBook(URL))
+    return;
+
   var lastTabs = "";
   try {
     lastTabs = Services.prefs.getCharPref("bluegriffon.defaults.lastTabs");
@@ -1982,6 +2223,14 @@ function ShowUpdates()
 
 function CheckForUpdates(aPopup)
 {
+  // If there's an active update, substitute its name into the label
+  // we show for this item, otherwise display a generic label.
+  function getStringWithUpdateName(s, a, key) {
+    if (a && a.name)
+      return s.formatStringFromName(key, [a.name], 1);
+    return s.formatStringFromName(key, ["..."], 1);
+  }
+
   var item = aPopup.querySelector("#menu_updates");
   if (item) {
     // copied from buildHelpMenu in mozilla/browser/base/content/utilityOverlay.js
@@ -2004,14 +2253,6 @@ function CheckForUpdates(aPopup)
       Services.strings
               .createBundle("chrome://bluegriffon/locale/updates.properties");
     var activeUpdate = um.activeUpdate;
-
-    // If there's an active update, substitute its name into the label
-    // we show for this item, otherwise display a generic label.
-    function getStringWithUpdateName(key) {
-      if (activeUpdate && activeUpdate.name)
-        return strings.formatStringFromName(key, [activeUpdate.name], 1);
-      return strings.formatStringFromName(key, ["..."], 1);
-    }
 
     // By default, show "Check for Updates..."
     var key = "update.checkInsideButton";
@@ -2049,22 +2290,6 @@ function onFontColorChange()
     if (button)
     {
       // No color set - get color set on page or other defaults
-      if (!color || color == "mixed")
-        color = "transparent";
-      button.color = color;
-    }
-  }
-}
-
-function onBackgroundColorChange()
-{
-  var commandNode = document.getElementById("cmd_highlight");
-  if (commandNode)
-  {
-    var color = commandNode.getAttribute("state");
-    var button = document.getElementById("BackgroundColorColorpicker");
-    if (button)
-    {
       if (!color || color == "mixed")
         color = "transparent";
       button.color = color;
@@ -2161,3 +2386,10 @@ function CloseAllTabsButOne()
 }
 
 #include phpAndComments.inc
+
+function onTitlebarMaxClick() {
+  if (window.windowState == window.STATE_MAXIMIZED)
+    window.restore();
+  else
+    window.maximize();
+}

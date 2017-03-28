@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+
+<!DOCTYPE overlay SYSTEM "chrome://inspector/locale/tasksOverlay.dtd" >
+
+<overlay id="eInspectorTasksOverlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <overlaytarget id="scripts-overlay-target">
+    <script type="application/javascript"
+            src="chrome://inspector/content/hooks.js"/>
+    <script type="application/javascript"><![CDATA[
+      function inspectorWindowLoad()
+      {
+        setTimeout(initWindowMediator, 0);
+
+        // ChatZilla currently fails to id its mainmenu popup, so we can't
+        // just do this the clean way.  We need to move the menu_inspector
+        // menuitem from the script overlaytarget to the popup.
+        var domiItem = document.getElementById(":inspector");
+        var jsc = document.getElementById(":jsconsole");
+        jsc.parentNode.insertBefore(domiItem, jsc.nextSibling);
+      }
+
+      function initWindowMediator()
+      {
+        var Cc = Components.classes;
+        var Ci = Components.interfaces;
+        // Load the Window DataSource so that browser windows opened subsequent
+        // to DOM Inspector show up in the DOM Inspector's window list.
+        var windowDS = Cc["@mozilla.org/rdf/datasource;1?name=window-mediator"]
+                         .getService(Ci.nsIWindowDataSource);
+      }
+
+      window.addEventListener("load", inspectorWindowLoad, false);
+    ]]></script>
+
+    <menuitem id=":inspector" command="cmd_inspector"
+              key="key_inspectPage" label="&inspectorTaskCmd.label;"
+              accesskey="&inspectorTaskCmd.accesskey;"/>
+  </overlaytarget>
+
+  <commandset id="tasksCommands">
+    <command id="cmd_inspector"
+             oncommand="inspectDOMDocument(document);"/>
+  </commandset>
+
+  <keyset id="tasksKeys">
+    <key id="key_inspectApp" key="&inspectorTaskCmd.commandkey;"
+         modifiers="accel,shift" command="cmd_inspector"/>
+  </keyset>
+
+</overlay>

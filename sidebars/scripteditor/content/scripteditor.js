@@ -35,9 +35,9 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-Components.utils.import("resource://app/modules/prompterHelper.jsm");
-Components.utils.import("resource://app/modules/editorHelper.jsm");
-Components.utils.import("resource://app/modules/urlHelper.jsm");
+Components.utils.import("resource://gre/modules/prompterHelper.jsm");
+Components.utils.import("resource://gre/modules/editorHelper.jsm");
+Components.utils.import("resource://gre/modules/urlHelper.jsm");
 
 var gMain = null;
 const disabledUI = ["ProjectPlusButton", "ProjectMinusButton", "ProjectConfigButton",
@@ -126,8 +126,9 @@ function Inspect()
   if (gMain.EditorUtils)
   {
     var editor = gMain.EditorUtils.getCurrentEditor();
-    var visible = editor && (gMain.GetCurrentViewMode() == "wysiwyg");
+    var visible = editor && (gMain.EditorUtils.isWysiwygMode());
     gDialog.mainBox.style.visibility = visible ? "" : "hidden";
+    gMain.document.querySelector("[panelid='panel-scripteditor']").className = visible ? "" : "inactive";
     if (!visible) {
       return;
     }
@@ -170,6 +171,7 @@ function Inspect()
       item.setAttribute("class", "listitem-iconic " + (hasSrc ? "external" : "embedded"));
       item.setAttribute("crop",  hasSrc ? "center" : "end");
       item.setAttribute("scriptsrc", url);
+      item.setAttribute("imagetheming", "never");
 
       gDialog.scriptLists.appendChild(item);
     }
@@ -338,13 +340,12 @@ function GetFileContents(aSpec)
   fstream.init(file, -1, 0, 0);
   cstream.init(fstream, "UTF-8", 0, 0); // you can use another encoding here if you wish
   
-  let (str = {}) {
-    let read = 0;
-    do { 
-      read = cstream.readString(0xffffffff, str); // read as much as we can and put it in str.value
-      data += str.value;
-    } while (read != 0);
-  }
+  var str = {};
+  var read = 0;
+  do { 
+    read = cstream.readString(0xffffffff, str); // read as much as we can and put it in str.value
+    data += str.value;
+  } while (read != 0);
   cstream.close(); // this closes fstream
   return data;
 }
@@ -356,7 +357,7 @@ function SaveFileContents(aSpec, aSource)
                  createInstance(Components.interfaces.nsIFileOutputStream);
   
   // use 0x02 | 0x10 to open file for appending.
-  foStream.init(file, 0x02 | 0x08 | 0x20, 0666, 0); 
+  foStream.init(file, 0x02 | 0x08 | 0x20, 0x1b6, 0);
   // write, create, truncate
   // In a c file operation, we have no need to set file mode with or operation,
   // directly using "r" or "w" usually.

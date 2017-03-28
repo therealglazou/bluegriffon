@@ -10,29 +10,24 @@
 a replacement for the standard security certificate errors produced
 by NSS/PSM via netError.xhtml. -->
 
-<!ENTITY certerror.pagetitle  "Nedůvěryhodné připojení">
-<!ENTITY certerror.longpagetitle "Toto připojení není důvěryhodné">
+<!ENTITY certerror.pagetitle1  "Nezabezpečené připojení">
+<!ENTITY certerror.longpagetitle1 "Vaše připojení není zabezpečené">
 
-<!-- Localization note (certerror.introPara1) - The string "#1" will
-be replaced at runtime with the name of the server to which the user
+<!-- Localization note (certerror.introPara) - The text content of the span tag
+will be replaced at runtime with the name of the server to which the user
 was trying to connect. -->
-<!ENTITY certerror.introPara1 "Požádali jste &brandShortName; o zabezpečené připojení k serveru <b>#1</b>, ale nelze ověřit, že tomu tak skutečně je.">
+<!ENTITY certerror.introPara "Majitel serveru <span class='hostname'/> nakonfiguroval své webové stránky nesprávně. Abychom chránili vaše informace před odcizením, &brandShortName; se k této webové stránce nepřipojil.">
+<!ENTITY certerror.returnToPreviousPage.label "Přejít zpět">
+<!ENTITY certerror.learnMore "Zjistit více…">
+<!ENTITY certerror.advanced.label "Rozšířené">
 
-<!ENTITY certerror.introPara2 "Pokud je požadováno zabezpečené připojení, měl by server předložit důvěryhodnou identifikaci a tím prokázat, že se připojujete na správné místo. Nicméně, identita tohoto serveru nemohla být ověřena.">
+<!ENTITY certerror.whatShouldIDo.badStsCertExplanation "Tento server používá HTTP
+Strict Transport Security (HSTS), čímž určuje, že se má &brandShortName; připojovat
+pouze zabezpečeně. Z tohoto důvodu není možné přidat pro tento certifikát výjimku.">
 
-<!ENTITY certerror.whatShouldIDo.heading "Co mám teď dělat?">
-<!ENTITY certerror.whatShouldIDo.content "Pokud se k tomuto serveru obvykle připojujete bez problému, může tato chyba znamenat, že se za tento server někdo snaží vydávat, a neměli byste pokračovat.">
-
-
-<!ENTITY certerror.getMeOutOfHere.label "Rychle odsud pryč!">
-
-<!ENTITY certerror.expert.heading "Vím, o co se jedná">
-<!ENTITY certerror.expert.content "Pokud chápete rizika, můžete &brandShortName; požádat o výjimku a začít identifikaci tohoto serveru důvěřovat. <b>I když tomuto serveru důvěřujete, může tato chyba znamenat, že vám někdo odposlouchává připojení.</b>">
-
-
-
+<!ENTITY certerror.expert.content "Pokud víte, co se děje, můžete &brandShortName; požádat o výjimku a začít identifikaci tohoto serveru důvěřovat. <b>I když tomuto serveru důvěřujete, může tato chyba znamenat, že někdo manipuluje s tímto připojením.</b>">
 <!ENTITY certerror.expert.contentPara2 "Nepřidávejte výjimku, pokud si nejste jisti, že tento server má dobrý důvod nepoužívat důvěryhodnou identifikaci.">
-
 <!ENTITY certerror.addException.label "Přidat výjimku…">
+<!ENTITY certerror.copyToClipboard.label "Zkopírovat text do schránky">
 
-<!ENTITY certerror.technical.heading "Technické detaily">
+<!ENTITY errorReporting.automatic "Hlásit chyby jako je tato a pomoci tak organizaci Mozilla identifikovat chybně nastavené servery">

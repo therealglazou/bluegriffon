@@ -1,6 +1,6 @@
-Components.utils.import("resource://app/modules/cssHelper.jsm");
-Components.utils.import("resource://app/modules/editorHelper.jsm");
-Components.utils.import("resource://app/modules/urlHelper.jsm");
+Components.utils.import("resource://gre/modules/cssHelper.jsm");
+Components.utils.import("resource://gre/modules/editorHelper.jsm");
+Components.utils.import("resource://gre/modules/urlHelper.jsm");
 
 var gDoc = null;
 var gNode = null;
@@ -15,6 +15,10 @@ function Startup()
   GetUIElements();
 
   InitDialog();
+
+#ifndef XP_MACOSX
+  CenterDialogOnOpener();
+#endif
 }
 
 function InitDialog()
@@ -37,6 +41,7 @@ function InitDialog()
       gIsXml = true;
       break;
     case "":
+    case "about:legacy-compat":
       gIsXml = (EditorUtils.getCurrentDocument().documentElement.getAttribute("xmlns") == "http://www.w3.org/1999/xhtml");
       break;
     case null:
@@ -45,7 +50,7 @@ function InitDialog()
   }
 
 
-  gIsWysiwyg = (EditorUtils.getCurrentViewMode() == "wysiwyg");
+  gIsWysiwyg = EditorUtils.isWysiwygMode();
   if (!gIsWysiwyg) {
     var source = EditorUtils.getCurrentSourceEditor().getValue();
     var parser = new DOMParser();

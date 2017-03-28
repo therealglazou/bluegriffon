@@ -8,25 +8,25 @@
 <!ENTITY muteButton.unmuteLabel "Zapnout zvuk">
 <!ENTITY fullscreenButton.enterfullscreenlabel "Celá obrazovka">
 <!ENTITY fullscreenButton.exitfullscreenlabel "Ukončit režim celé obrazovky">
+<!ENTITY castingButton.castingLabel "Přehrát na obrazovce">
+<!ENTITY closedCaption.off "Vypnuto">
 
 <!ENTITY stats.media "Média">
 <!ENTITY stats.size "Velikost">
 <!ENTITY stats.activity "Aktivita">
-<!ENTITY stats.activityPaused "Zastaveno">
+<!ENTITY stats.activityPaused "Pozastaveno">
 <!ENTITY stats.activityPlaying "Přehrávání">
 <!ENTITY stats.activityEnded "Ukončeno">
 <!ENTITY stats.activitySeeking "(vyhledávání)">
 <!ENTITY stats.volume "Hlasitost">
-<!ENTITY stats.channels "Kanály">
-<!ENTITY stats.sampleRate "Vzorkovací frekvence">
-<!ENTITY stats.framesParsed "Zpracované rámy">
-<!ENTITY stats.framesDecoded "Dekódované rámy">
-<!ENTITY stats.framesPresented "Prezentované rámy">
-<!ENTITY stats.framesPainted "Vykreslené rámy">
+<!ENTITY stats.framesParsed "Zpracované snímky">
+<!ENTITY stats.framesDecoded "Dekódované snímky">
+<!ENTITY stats.framesPresented "Prezentované snímky">
+<!ENTITY stats.framesPainted "Vykreslené snímky">
 
 <!ENTITY error.aborted "Nahrávání videa zastaveno.">
 <!ENTITY error.network "Přehrávání videa selhalo z důvodu chyby sítě.">
-<!ENTITY error.decode "Video nelze přehrát, protože soubor je pokažený.">
+<!ENTITY error.decode "Video nelze přehrát, protože soubor je poškozen.">
 <!ENTITY error.srcNotSupported "Formát nebo typ MIME videa není podporovaný.">
 <!ENTITY error.noSource2 "Nebylo nalezeno žádné video s podporovaným formátem a typem MIME.">
 <!ENTITY error.generic "Přehrávání videa selhalo z důvodu neznámé chyby.">
@@ -37,3 +37,13 @@ the 5 minute mark in a 6 hour long video, #1 would be "5:00" and #2 would be
 "6:00:00", result string would be "5:00 of 6:00:00 elapsed".
 -->
 <!ENTITY scrubberScale.nameFormat "uplynulo #1 z #2">
+
+<!-- LOCALIZATION NOTE (positionAndDuration.nameFormat): the #1 string is the current
+media position, and the #2 string is the total duration. For example, when at
+the 5 minute mark in a 6 hour long video, #1 would be "5:00" and #2 would be
+"6:00:00", result string would be "5:00 / 6:00:00".
+Note that #2 is not always avaiable. For example, when at the 5 minute mark in an
+unknown duration video, #1 would be "5:00" and string which is surrounded by <span>
+would be deleted, result string would be "5:00".
+-->
+<!ENTITY positionAndDuration.nameFormat "#1<span> / #2</span>">

@@ -1,4 +1,4 @@
-Components.utils.import("resource://app/modules/editorHelper.jsm");
+Components.utils.import("resource://gre/modules/editorHelper.jsm");
 
 var cmdGfdCommand =
 {
@@ -7,7 +7,7 @@ var cmdGfdCommand =
     return (EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},

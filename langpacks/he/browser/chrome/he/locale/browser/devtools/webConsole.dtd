@@ -8,6 +8,8 @@
   - A good criteria is the language in which you'd find the best
   - documentation on web development on the web. -->
 
+<!ENTITY window.title "מסוף רשת">
+
 <!ENTITY networkPanel.requestURL                  "כתובת הבקשה">
 <!ENTITY networkPanel.requestMethod               "שיטת הבקשה">
 <!ENTITY networkPanel.statusCode                  "קוד מצב">
@@ -25,39 +27,57 @@
 <!ENTITY networkPanel.responseImage               "תמונה שהתקבלה">
 <!ENTITY networkPanel.responseImageCached         "תמונה במטמון">
 
-
-<!ENTITY browserConsole.title "Browser Console">
-<!ENTITY btnClear.label        "Clear">
-<!ENTITY btnClear.tooltip      "Clear the Web Console output">
-<!ENTITY btnConsoleErrors       "Errors">
-<!ENTITY btnConsoleInfo         "Info">
-<!ENTITY btnConsoleLog          "Log">
-<!ENTITY btnConsoleWarnings     "Warnings">
-<!ENTITY btnPageCSS.label   "CSS">
-<!ENTITY btnPageCSS.tooltip "Log CSS parsing errors">
-<!ENTITY btnPageJS.label    "JS">
-<!ENTITY btnPageJS.tooltip  "Log JavaScript exceptions">
-
-<!-- LOCALIZATION NOTE (btnPageLogging): This is used as the text of the
-  -  the toolbar. It shows or hides messages that the web developer inserted on
-  -  the page for debugging purposes, using calls such console.log() and
-  -  console.error(). -->
-<!ENTITY btnPageLogging.label   "Logging">
-<!ENTITY btnPageLogging.tooltip "Log messages sent to the window.console object">
+<!-- LOCALIZATION NOTE (saveBodies.label): You can see this string in the Web
+   - Console context menu. -->
+<!ENTITY saveBodies.label     "רישום גוף הבקשה והתשובה">
+<!ENTITY saveBodies.accesskey "ר">
 
 <!-- LOCALIZATION NOTE (btnPageNet.label): This string is used for the menu
   -  button that allows users to toggle the network logging output.
   -  This string and the following strings toggle various kinds of output
   -  filters. -->
-<!ENTITY btnPageNet.label   "Net">
-<!ENTITY btnPageNet.tooltip "Log network access">
+<!ENTITY btnPageNet.label   "רשת">
+<!ENTITY btnPageNet.tooltip "רישום גישה לרשת">
+<!ENTITY btnPageCSS.label   "CSS">
+<!ENTITY btnPageCSS.tooltip "רישום שגיאות פענוח CSS">
+<!ENTITY btnPageJS.label    "JS">
+<!ENTITY btnPageJS.tooltip  "רישום חריגות JavaScript">
 
-<!ENTITY closeCmd.key  "W">
-<!ENTITY copyURLCmd.accesskey "a">
+<!-- LOCALIZATION NOTE (btnPageLogging): This is used as the text of the
+  -  the toolbar. It shows or hides messages that the web developer inserted on
+  -  the page for debugging purposes, using calls such console.log() and
+  -  console.error(). -->
+<!ENTITY btnPageLogging.label   "רישום">
+<!ENTITY btnPageLogging.tooltip "רישום הודעות שנשלחות לעצם window.console">
+<!ENTITY btnConsoleErrors       "שגיאות">
+<!ENTITY btnConsoleInfo         "מידע">
+<!ENTITY btnConsoleWarnings     "אזהרות">
+<!ENTITY btnConsoleLog          "רישום">
 
-<!ENTITY copyURLCmd.label     "Copy Link Location">
+<!-- LOCALIZATION NOTE (btnPosition.label): The label shown for the menu which
+  -  allows the user to toggle between the Web Console positioning types. -->
+<!ENTITY btnPosition.label     "מיקום">
 
-<!ENTITY filterOutput.placeholder "Filter output">
+<!-- LOCALIZATION NOTE (btnPosition.tooltip): The tooltip shown when the user
+  -  hovers the Position button in the Web Console toolbar. -->
+<!ENTITY btnPosition.tooltip   "ממקם את מסוף הרשת מעל או מתחת למסמך">
+
+<!-- LOCALIZATION NOTE (positionMenu.above): When this option is selected the
+  -  Web Console interface is displayed above the web page. -->
+<!ENTITY positionMenu.above    "מעל">
+
+<!-- LOCALIZATION NOTE (positionMenu.below): When this option is selected the
+  -  Web Console interface is displayed below the web page. -->
+<!ENTITY positionMenu.below    "מתחת">
+
+<!-- LOCALIZATION NOTE (positionMenu.window): When this option is selected the
+  -  Web Console interface is displayed in a floating panel. -->
+<!ENTITY positionMenu.window   "חלון">
+
+<!ENTITY filterBox.placeholder "סינון">
+<!ENTITY btnClear.label        "מחיקה">
+<!ENTITY btnClear.tooltip      "מחיקת פלט מסוף הרשת">
+<!ENTITY btnClose.tooltip      "סגירת מסוף הרשת">
 
 <!ENTITY fullZoomEnlargeCmd.commandkey  "+">
 <!ENTITY fullZoomEnlargeCmd.commandkey2 "="> <!-- + is above this key on many keyboards -->
@@ -68,6 +88,34 @@
 
 <!ENTITY fullZoomResetCmd.commandkey    "0">
 <!ENTITY fullZoomResetCmd.commandkey2   "">
+
+<!ENTITY copyURLCmd.label     "העתקת מיקום קישור">
+<!ENTITY copyURLCmd.accesskey "ע">
+
+<!ENTITY closeCmd.key         "W">
+<!ENTITY findCmd.key          "F">
+<!ENTITY clearOutputCtrl.key  "L">
+
+<!ENTITY browserConsole.title "Browser Console">
+<!ENTITY btnClear.accesskey    "r">
+<!ENTITY btnConsoleReflows      "Reflows">
+<!ENTITY btnConsoleXhr          "XHR">
+<!ENTITY btnPageCSS.accesskey "C">
+<!ENTITY btnPageCSS.tooltip2 "Log CSS errors and warnings">
+<!ENTITY btnPageJS.accesskey  "J">
+<!ENTITY btnPageLogging.accesskey3 "L">
+<!ENTITY btnPageNet.accesskey "N">
+<!-- LOCALIZATION NOTE (btnPageNet.accesskeyMacOSX): This string is used as
+  -  access key for the menu button that allows users to toggle the network
+  -  logging output. On MacOSX accesskeys are available with Ctrl-*. Please make
+  -  sure you do not use the following letters: A, E, N and P. These are used
+  -  for editing commands in text inputs. -->
+<!ENTITY btnPageNet.accesskeyMacOSX "t">
+<!ENTITY btnPageSecurity.accesskey "u">
+<!ENTITY btnPageSecurity.label "Security">
+<!ENTITY btnPageSecurity.tooltip "Log security errors and warnings">
+
+<!ENTITY filterOutput.placeholder "Filter output">
 <!ENTITY networkPanel.requestMethodColon          "Request Method:">
 
 <!ENTITY networkPanel.requestURLColon             "Request URL:">
@@ -78,17 +126,3 @@
 <!-- LOCALIZATION NOTE (openURL.label): You can see this string in the Web
    - Console context menu. -->
 <!ENTITY openURL.label     "Open URL in New Tab">
-<!ENTITY saveBodies.accesskey "L">
-
-<!-- LOCALIZATION NOTE (saveBodies.label): You can see this string in the Web
-   - Console context menu. -->
-<!ENTITY saveBodies.label     "Log Request and Response Bodies">
-
-
-<!-- LOCALIZATION NOTE : FILE The correct localization of this file might be to
-  - keep it in English, or another language commonly spoken among web developers.
-  - You want to make that choice consistent across the developer tools.
-  - A good criteria is the language in which you'd find the best
-  - documentation on web development on the web. -->
-
-<!ENTITY window.title "Web Console">

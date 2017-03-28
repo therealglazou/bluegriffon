@@ -5,7 +5,8 @@ var cmdInsertOrEditTableCommand =
   {
     return (EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
-            EditorUtils.isEditingRenderedHTML());
+            EditorUtils.isEditingRenderedHTML() && 
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -13,7 +14,7 @@ var cmdInsertOrEditTableCommand =
 
   doCommand: function(aCommand)
   {
-    if (GetCurrentViewMode() == "wysiwyg") {
+    if (EditorUtils.isWysiwygMode()) {
       var element = EditorUtils.getObjectForProperties(
             ["table", "thead", "tfoot", "tbody", "tr", "th", "td", "caption"]);
       if (element) {
@@ -36,7 +37,8 @@ var cmdInsertImageCommand =
   {
     return (EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
-            EditorUtils.isEditingRenderedHTML());
+            EditorUtils.isEditingRenderedHTML() && 
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -44,7 +46,7 @@ var cmdInsertImageCommand =
 
   doCommand: function(aCommand)
   {
-    var element = (GetCurrentViewMode() == "wysiwyg")
+    var element = (EditorUtils.isWysiwygMode())
                   ? EditorUtils.getObjectForProperties(["img"])
                   : null;
     window.openDialog("chrome://bluegriffon/content/dialogs/insertImage.xul","_blank",
@@ -58,7 +60,8 @@ var cmdInsertAnchorCommand =
   {
     return (EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
-            EditorUtils.isEditingRenderedHTML());
+            EditorUtils.isEditingRenderedHTML() && 
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -66,7 +69,7 @@ var cmdInsertAnchorCommand =
 
   doCommand: function(aCommand)
   {
-    var element = (GetCurrentViewMode() == "wysiwyg")
+    var element = (EditorUtils.isWysiwygMode())
                   ? EditorUtils.getObjectForProperties(["a"])
                   : null;
     window.openDialog("chrome://bluegriffon/content/dialogs/insertAnchor.xul","_blank",
@@ -81,7 +84,7 @@ var cmdInsertLinkCommand =
     return (EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -102,7 +105,7 @@ var cmdCssPanelCommand =
     return (EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -121,7 +124,7 @@ var cmdDomExplorerPanelCommand =
     return (EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -140,7 +143,7 @@ var cmdInsertVideoCommand =
     return (EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -161,7 +164,7 @@ var cmdInsertAudioCommand =
     return (EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -182,7 +185,7 @@ var cmdInsertHRCommand =
     return (EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -203,7 +206,7 @@ var cmdInsertHTMLCommand =
     return (EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -223,7 +226,7 @@ var cmdInsertFormCommand =
     return (EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -244,7 +247,7 @@ var cmdInsertFormInputCommand =
     return (EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -269,7 +272,7 @@ var cmdInsertFieldsetCommand =
     return (EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -290,7 +293,7 @@ var cmdInsertLabelCommand =
     return (EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -311,7 +314,7 @@ var cmdInsertButtonCommand =
     return (EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -332,7 +335,7 @@ var cmdInsertSelectCommand =
     return (EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -353,7 +356,7 @@ var cmdInsertTextareaCommand =
     return (EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -374,7 +377,7 @@ var cmdInsertKeygenCommand =
     return (EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -395,7 +398,7 @@ var cmdInsertOutputCommand =
     return (EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -416,7 +419,7 @@ var cmdInsertProgressCommand =
     return (EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -437,7 +440,7 @@ var cmdInsertMeterCommand =
     return (EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -458,7 +461,7 @@ var cmdInsertDatalistCommand =
     return (EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -479,7 +482,7 @@ var cmdStylesheetsCommand =
     return (EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -498,7 +501,7 @@ var cmdSpanCommand =
     return (EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -518,7 +521,7 @@ var cmdBlockquoteCommand =
     return (EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -534,3 +537,25 @@ var cmdBlockquoteCommand =
   }
 };
 
+var cmdRebuildTOCCommand =
+{
+  isCommandEnabled: function(aCommand, dummy)
+  {
+    return (EditorUtils.getCurrentEditorElement() &&
+            EditorUtils.isDocumentEditable() &&
+            EditorUtils.isEditingRenderedHTML() &&
+            EditorUtils.isWysiwygMode());
+  },
+
+
+  getCommandStateParams: function(aCommand, aParams, aRefCon) {},
+  doCommandParams: function(aCommand, aParams, aRefCon) {},
+
+  doCommand: function(aCommand)
+  {
+    if (EditorUtils.getCurrentDocument().getElementById("mozToc"))
+      TOCrebuilder.rebuild();
+    else
+      CreateOrUpdateTableOfContents();
+  }
+};

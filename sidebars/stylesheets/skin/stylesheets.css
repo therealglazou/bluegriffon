@@ -1,12 +1,21 @@
+@import url("chrome://bluegriffon/skin/black.css");
+
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+@namespace html url("http://www.w3.org/1999/xhtml");
+
+#insertStylesheetDialog {
+  -moz-appearance: none;
+  background-color: transparent;
+  color: var(--bg-main-foreground-color);
+}
+
 #contentsTree {
-  margin: 0px;
-  margin-top: 4px;
+  margin: 4px 8px 0px 8px;
   min-width: 200px;
   height: 200px;
 }
 
-treechildren::-moz-tree-checkbox(checked)
-{
-    /* css for checked cells */
-    list-style-image: url("chrome://global/skin/checkbox/cbox-check.gif");
+#UrlsToolbox {
+  margin: 0px 8px 8px 8px;
 }
+

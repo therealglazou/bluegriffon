@@ -27,83 +27,68 @@
         <grid>
           <columns><column/><column/></columns>
           <rows>
-            <row align="center" animatable="false">
-              <label value="&tableLayout.label;"/>
-              <hbox align="center">
-                <toolbarbutton class="multibutton"
-                               value="auto" property="table-layout" type="checkbox" group="table-layout"
-                               id="autoTableLayoutButton" label="&autoTableLayout.label;"
-                               oncommand="ToggleProperty(this)"/>
-                <toolbarbutton class="multibutton"
-                               value="fixed" property="table-layout" type="checkbox" group="table-layout"
-                               id="fixedTableLayoutButton" label="&fixedTableLayout.label;"
-                               oncommand="ToggleProperty(this)"/>
-              </hbox>
-            </row>
+            <cssproperty property="table-layout"
+                         grammar="auto | fixed">
+              <l10n>
+                table-layout=&tableLayout.label;
+                url=https://developer.mozilla.org/en-US/docs/Web/CSS/table-layout
+                auto=&autoTableLayout.label;
+                fixed=&fixedTableLayout.label;
+              </l10n>
+            </cssproperty>
 
-            <row align="center" animatable="false">
-              <label value="&captionSide.label;"/>
-              <hbox align="center">
-                <toolbarbutton class="multibutton"
-                               value="top" property="caption-side" type="checkbox" group="caption-side"
-                               id="topCaptionSideButton" label="&topCaptionSide.label;"
-                               oncommand="ToggleProperty(this)"/>
-                <toolbarbutton class="multibutton"
-                               value="bottom" property="caption-side" type="checkbox" group="caption-side"
-                               id="bottomCaptionSideButton" label="&bottomCaptionSide.label;"
-                               oncommand="ToggleProperty(this)"/>
-              </hbox>
-            </row>
+            <cssproperty property="caption-side"
+                         grammar="top | bottom">
+              <l10n>
+                caption-side=&captionSide.label;
+                url=https://developer.mozilla.org/en-US/docs/Web/CSS/caption-side
+                top=&topCaptionSide.label;
+                bottom=&bottomCaptionSide.label;
+              </l10n>
+            </cssproperty>
 
-            <row align="center" animatable="false">
-              <label value="&borderCollapse.label;"/>
-              <hbox align="center">
-                <toolbarbutton class="multibutton"
-                               value="collapse" property="border-collapse" type="checkbox" group="border-collapse"
-                               id="collapseBorderCollapseButton" label="&collapseBorderCollapse.label;"
-                               oncommand="ToggleProperty(this)"/>
-                <toolbarbutton class="multibutton"
-                               value="separate" property="border-collapse" type="checkbox" group="border-collapse"
-                               id="separateBorderCollapseButton" label="&separateBorderCollapse.label;"
-                               oncommand="ToggleProperty(this)"/>
-              </hbox>
-            </row>
+            <cssproperty property="border-collapse"
+                         grammar="collapse | separate">
+              <l10n>
+                border-collapse=&borderCollapse.label;
+                url=https://developer.mozilla.org/en-US/docs/Web/CSS/border-collapse
+                collapse=&collapseBorderCollapse.label;
+                separate=&separateBorderCollapse.label;
+              </l10n>
+            </cssproperty>
 
             <row align="center">
-              <label value="&borderSpacing.label;"/>
+              <label value="&borderSpacing.label;"
+                     class="text-link"
+                     href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-spacing"
+                     tooltiptext="border-spacing"/>
               <hbox align="center">
                 <menulist editable="true" id="borderSpacingHMenulist" sizetopopup="none"
+                          bgtype="csslength" units='% px pt cm in mm pc em ex rem ch'
                           oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', false); ApplyBorderSpacing()"
                           oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', false); ApplyBorderSpacing()">
                   <menupopup onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')"/>
                 </menulist>
-                <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch'); ApplyBorderSpacing()"
-                                 ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', false); ApplyBorderSpacing()"/>
               </hbox>
               <hbox align="center">
                 <menulist editable="true" id="borderSpacingVMenulist" sizetopopup="none"
+                          bgtype="csslength" units='% px pt cm in mm pc em ex rem ch'
                           oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', false); ApplyBorderSpacing()"
                           oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', false); ApplyBorderSpacing()">
                   <menupopup onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')"/>
                 </menulist>
-                <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch'); ApplyBorderSpacing()"
-                                 ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', false); ApplyBorderSpacing()"/>
               </hbox>
             </row>
 
-            <row align="center" animatable="false">
-              <label value="&emptyCells.label;"/>
-              <hbox align="center">
-                <toolbarbutton class="multibutton"
-                               value="show" property="empty-cells" type="checkbox" group="empty-cells"
-                               id="showEmptyCellsButton" label="&showEmptyCells.label;"
-                               oncommand="ToggleProperty(this)"/>
-                <toolbarbutton class="multibutton"
-                               value="hide" property="empty-cells" type="checkbox" group="empty-cells"
-                               id="hideEmptyCellsButton" label="&hideEmptyCells.label;"
-                               oncommand="ToggleProperty(this)"/>
-              </hbox>
-            </row>
+            <cssproperty property="empty-cells"
+                         grammar="show | hide">
+              <l10n>
+                empty-cells=&emptyCells.label;
+                url=https://developer.mozilla.org/en-US/docs/Web/CSS/empty-cells
+                show=&showEmptyCells.label;
+                hide=&hideEmptyCells.label;
+              </l10n>
+            </cssproperty>
           </rows>
         </grid>
       </vbox>

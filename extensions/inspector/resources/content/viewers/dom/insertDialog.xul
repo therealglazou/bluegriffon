@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/.
+-->
+<!DOCTYPE dialog SYSTEM "chrome://inspector/locale/viewers/dom.dtd">
+<?xml-stylesheet type="text/css" href="chrome://global/skin"?>
+
+<dialog id="InsertNode"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        title="&insertNode.title;"
+        buttons="accept,cancel"
+        ondialogaccept="dialog.accept();">
+  <script type="application/javascript"
+          src="chrome://inspector/content/viewers/dom/insertDialog.js"/>
+  <grid>
+    <columns>
+      <column/>
+      <column flex="1"/>
+    </columns>
+    <rows>
+      <row align="center">
+        <label value="&nodeType.label;"
+               accesskey="&nodeType.accesskey;"
+               control="ml_nodeType"/>
+        <menulist id="ml_nodeType" oncommand="dialog.updateType();">
+          <menupopup id="mp_nodetypes">
+            <menuitem label="&nodeType.element.label;"
+                      id="mi_Element"
+                      value="element"/>
+            <menuitem label="&nodeType.text.label;"
+                      id="mi_Text"
+                      value="text"/>
+          </menupopup>
+        </menulist>
+      </row>
+	    <rows id="row_element">
+	      <row align="center">
+         <label value="&namespaceURI.label;"
+                accesskey="&namespaceURI.accesskey;"
+                control="ml_namespace"/>
+	        <menulist id="ml_namespace" oncommand="dialog.updateNamespace();">
+	          <menupopup id="mp_namespaces">
+	            <!-- This must be first, and must have the value attribute set to
+	                 "" in order for it to work properly -->
+	            <menuitem label="&namespaceTitle.null.label;"
+	                      id="mi_NullNS"
+	                      value=""/>
+	            <menuitem label="&namespaceTitle.XMLNS.label;"
+	                      id="mi_XMLNSNS"
+	                      value="http://www.w3.org/2000/xmlns/"/>
+	            <menuitem label="&namespaceTitle.XML.label;"
+	                      id="mi_XMLNS"
+	                      value="http://www.w3.org/XML/1998/namespace"/>
+	            <menuitem label="&namespaceTitle.XHTML.label;"
+	                      id="mi_XHTMLNS"
+	                      value="http://www.w3.org/1999/xhtml"/>
+	            <menuitem label="&namespaceTitle.XLink.label;"
+	                      id="mi_XLinkNS"
+	                      value="http://www.w3.org/1999/xlink"/>
+	            <menuitem label="&namespaceTitle.XSLT.label;"
+	                      id="mi_XSLTNS"
+	                      value="http://www.w3.org/1999/XSL/Transform"/>
+	            <menuitem label="&namespaceTitle.XBL.label;"
+	                      id="mi_XBLNS"
+	                      value="http://www.mozilla.org/xbl"/>
+	            <menuitem label="&namespaceTitle.MathML.label;"
+	                      id="mi_MathMLNS"
+	                      value="http://www.w3.org/1998/Math/MathML"/>
+	            <menuitem label="&namespaceTitle.RDF.label;"
+	                      id="mi_RDFNS"
+	                      value="http://www.w3.org/1999/02/22-rdf-syntax-ns"/>
+	            <menuitem label="&namespaceTitle.XUL.label;"
+	                      id="mi_XULNS"
+	                      value="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"/>
+	            <menuitem label="&namespaceTitle.SVG.label;"
+	                      id="mi_SVGNS"
+	                      value="http://www.w3.org/2000/svg"/>
+	            <menuitem label="&namespaceTitle.XMLEvents.label;"
+	                      id="mi_XMLEventsNS"
+	                      value="http://www.w3.org/2001/xml-events"/>
+	            <!-- Value set onload -->
+	            <menuitem label="&namespaceTitle.default.label;"
+	                      id="mi_namespace"/>
+	            <!-- Value set onload -->
+	            <menuitem label="&namespaceTitle.custom.label;"
+	                      id="mi_custom"/>
+	          </menupopup>
+	        </menulist>
+	      </row>
+	      <row>
+	        <spacer/>
+	        <textbox id="tx_namespace" oninput="dialog.updateCustom();"/>
+	      </row>
+	      <row>
+         <label value="&tagName.label;"
+                accesskey="&tagName.accesskey;"
+                control="tx_tagName"/>
+	        <textbox id="tx_tagName" oninput="dialog.toggleAccept()"/>
+	      </row>
+	    </rows>
+      <row id="row_text" flex="1">
+        <label value="&nodeValue.label;"
+               accesskey="&nodeValue.accesskey;"
+               control="tx_nodeValue"/>
+        <textbox id="tx_nodeValue" multiline="true"/>
+      </row>
+    </rows>
+  </grid>
+</dialog>

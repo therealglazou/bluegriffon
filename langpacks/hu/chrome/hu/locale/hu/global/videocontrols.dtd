@@ -8,6 +8,8 @@
 <!ENTITY muteButton.unmuteLabel "Hang be">
 <!ENTITY fullscreenButton.enterfullscreenlabel "Teljes képernyős üzemmód">
 <!ENTITY fullscreenButton.exitfullscreenlabel "Kilépés a teljes képernyős módból">
+<!ENTITY castingButton.castingLabel "Képernyőre vetítés">
+<!ENTITY closedCaption.off "Ki">
 
 <!ENTITY stats.media "Média">
 <!ENTITY stats.size "Méret">
@@ -17,8 +19,6 @@
 <!ENTITY stats.activityEnded "Vége">
 <!ENTITY stats.activitySeeking "(keres)">
 <!ENTITY stats.volume "Hangerő">
-<!ENTITY stats.channels "Csatornák">
-<!ENTITY stats.sampleRate "Mintavételi ráta">
 <!ENTITY stats.framesParsed "Beolvasott képkockák">
 <!ENTITY stats.framesDecoded "Dekódolt képkockák">
 <!ENTITY stats.framesPresented "Prezentált képkockák">
@@ -30,10 +30,20 @@
 <!ENTITY error.srcNotSupported "A videó formátuma vagy MIME-típusa nem támogatott.">
 <!ENTITY error.noSource2 "Nincs támogatott formátumú vagy MIME-típusú videó.">
 <!ENTITY error.generic "A videólejátszás leállt ismeretlen hiba miatt.">
-
 <!-- LOCALIZATION NOTE (scrubberScale.nameFormat): the #1 string is the current
 media position, and the #2 string is the total duration. For example, when at
 the 5 minute mark in a 6 hour long video, #1 would be "5:00" and #2 would be
 "6:00:00", result string would be "5:00 of 6:00:00 elapsed".
 -->
+
 <!ENTITY scrubberScale.nameFormat "#1 / #2 eltelt">
+<!-- LOCALIZATION NOTE (positionAndDuration.nameFormat): the #1 string is the current
+media position, and the #2 string is the total duration. For example, when at
+the 5 minute mark in a 6 hour long video, #1 would be "5:00" and #2 would be
+"6:00:00", result string would be "5:00 / 6:00:00".
+Note that #2 is not always available. For example, when at the 5 minute mark in an
+unknown duration video, #1 would be "5:00" and the string which is surrounded by
+<span> would be deleted, result string would be "5:00".
+-->
+
+<!ENTITY positionAndDuration.nameFormat "#1<span> / #2</span>">

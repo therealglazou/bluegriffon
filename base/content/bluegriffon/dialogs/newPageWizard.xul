@@ -40,6 +40,7 @@
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 <?xml-stylesheet href="chrome://bluegriffon/skin/newPageWizard.css" type="text/css"?>
 <?xml-stylesheet href="chrome://bluegriffon/skin/listboxBg.css" type="text/css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/bluegriffonDialogs.css" type="text/css"?>
 
 <!DOCTYPE wizard [
   <!ENTITY % pagePropertiesDTD SYSTEM "chrome://bluegriffon/locale/newPageWizard.dtd" >
@@ -54,6 +55,7 @@
         title="&window.title;"
         onload="Startup()"
         onunload="Shutdown()"
+        forcecleartheme = "true"
         onwizardfinish="return CreateNewDocument();"
         height="350" width="550"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"

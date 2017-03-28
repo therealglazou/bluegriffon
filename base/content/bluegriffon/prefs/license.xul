@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<!DOCTYPE overlay SYSTEM "chrome://bluegriffon/locale/prefs/license.dtd">
+
+<overlay
+  id     = "licensePrefsOverlay"
+  xmlns  = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <prefpane id="licensePrefPane">
+    <preferences>
+      <preference id="pref-license-invoice" name="bluegriffon.license.invoice" type="string"/>
+      <preference id="pref-license-key"     name="bluegriffon.license.key"   type="string"/>
+    </preferences>
+
+    <description style="height: 3em; font-weight: bold">&warning1.label;</description>
+    <description style="height: 3em; font-weight: bold">&warning2.label;</description>
+    <grid>
+      <columns>
+        <column/>
+        <column flex="1"/>
+      </columns>
+      <rows>
+        <row align="center">
+          <label value="&licenseKey.label;"/>
+          <textbox id="licenseKeyTextbox"
+                   oninput="CheckDeactivationButton()"
+                   preference="pref-license-key"/>
+        </row>
+        <row align="center">
+          <label value="&licenseInvoice.label;"/>
+          <textbox id="licenseInvoiceTextbox"
+                   oninput="CheckDeactivationButton()"
+                   preference="pref-license-invoice"/>
+        </row>
+      </rows>
+    </grid>
+    <hbox align="center" id="validityBox" class="indent" style="margin-top: 1em">
+      <label value="INVALID LICENSE"             id="invalidLicense" style="color: red; font-weight: bold"/>
+      <label value="VALID LICENSE"               id="validBasicLicense" style="font-weight: bold"/>
+      <label value="VALID LICENSE, EPUB EDITION" id="validEPUBLicense" style="font-weight: bold"/>
+    </hbox>
+    <hbox align="center">
+      <spacer flex="1"/>
+      <button label="&deactivate.label;"
+              id="deactivateLicenseButton"
+              oncommand="DeactivateLicense();"/>
+      <button label="&activate.label;" disabled="true"
+              id="activateLicenseButton"
+              oncommand="ActivateLicense();"/>
+    </hbox>
+    <vbox style="margin: 1em; height: 20em">
+      <description>&helpNeeded.label;</description>
+      <hbox>
+        <spacer flex="1"/>
+        <button label="&troubleshoot.label;"
+                id="troubleshootButton"
+                oncommand="Troubleshoot();"/>
+      </hbox>
+    </vbox>
+  </prefpane>
+
+</overlay>

@@ -9,6 +9,7 @@
   - documentation on web development on the web. -->
 
 <!ENTITY window.title "Webová konzola">
+<!ENTITY browserConsole.title "Konzola prohlížeče">
 
 <!ENTITY networkPanel.requestURLColon "URL požadavku:">
 <!ENTITY networkPanel.requestMethodColon "Metoda požadavku:">
@@ -44,10 +45,22 @@
   -  filters. -->
 <!ENTITY btnPageNet.label "Síť">
 <!ENTITY btnPageNet.tooltip "Žurnál přístupu k síti">
+<!ENTITY btnPageNet.accesskey "S">
+<!-- LOCALIZATION NOTE (btnPageNet.accesskeyMacOSX): This string is used as
+  -  access key for the menu button that allows users to toggle the network
+  -  logging output. On MacOSX accesskeys are available with Ctrl-*. Please make
+  -  sure you do not use the following letters: A, E, N and P. These are used
+  -  for editing commands in text inputs. -->
+<!ENTITY btnPageNet.accesskeyMacOSX "t">
 <!ENTITY btnPageCSS.label "CSS">
-<!ENTITY btnPageCSS.tooltip "Žurnál chyb parsování CSS">
+<!ENTITY btnPageCSS.tooltip2 "Zajistí logování chyb a varování v CSS">
+<!ENTITY btnPageCSS.accesskey "C">
 <!ENTITY btnPageJS.label "JS">
 <!ENTITY btnPageJS.tooltip "Žurnál výjimek JavaScriptu">
+<!ENTITY btnPageJS.accesskey  "J">
+<!ENTITY btnPageSecurity.label "Bezpečnost">
+<!ENTITY btnPageSecurity.tooltip "Žurnál bezpečnostních chyb a varování">
+<!ENTITY btnPageSecurity.accesskey "B">
 
 <!-- LOCALIZATION NOTE (btnPageLogging): This is used as the text of the
   -  the toolbar. It shows or hides messages that the web developer inserted on
@@ -55,14 +68,18 @@
   -  console.error(). -->
 <!ENTITY btnPageLogging.label "Žurnál">
 <!ENTITY btnPageLogging.tooltip "Žurnál zpráv zaslaných objektem „console“">
+<!ENTITY btnPageLogging.accesskey3 "u">
 <!ENTITY btnConsoleErrors "Chyby">
 <!ENTITY btnConsoleInfo "Info">
 <!ENTITY btnConsoleWarnings "Varování">
 <!ENTITY btnConsoleLog "Žurnál">
+<!ENTITY btnConsoleXhr          "XHR">
+<!ENTITY btnConsoleReflows      "Přeformátování">
 
-<!ENTITY filterBox.placeholder "Filtr">
+<!ENTITY filterOutput.placeholder "Filtr výstupu">
 <!ENTITY btnClear.label "Vymazat">
 <!ENTITY btnClear.tooltip "Vymaže obsah webové konzoly">
+<!ENTITY btnClear.accesskey    "V">
 
 <!ENTITY fullZoomEnlargeCmd.commandkey "+">
 <!ENTITY fullZoomEnlargeCmd.commandkey2 "="> <!-- + is above this key on many keyboards -->
@@ -77,8 +94,6 @@
 <!ENTITY copyURLCmd.label "Kopírovat adresu odkazu">
 <!ENTITY copyURLCmd.accesskey "K">
 
-<!ENTITY browserConsole.title "Browser Console">
-
-<!ENTITY closeCmd.key  "W">
-
-<!ENTITY filterOutput.placeholder "Filter output">
+<!ENTITY closeCmd.key         "W">
+<!ENTITY findCmd.key          "F">
+<!ENTITY clearOutputCtrl.key  "L">

@@ -57,6 +57,7 @@
 
     <content>
       <xul:toolbarbutton xbl:inherits="disabled,tooltiptext=title"
+                         imagetheming="never"
                          anonid="button" />
       <children/>
     </content>
@@ -95,6 +96,46 @@
 
       <constructor>
         <![CDATA[
+          Components.utils.import("resource://gre/modules/Services.jsm");
+          Components.utils.import("resource://gre/modules/editorHelper.jsm");
+          Components.utils.import("resource://gre/modules/filePicker.jsm");
+
+          var w = EditorUtils.getCurrentEditorWindow();
+          if (w &&
+              "EBookManager" in w &&
+              w.EBookManager.isUrlSpecInBook(EditorUtils.getDocumentUrl())) {
+            try {
+              this.fp = new diFilePicker();
+              this.fp.init(window, this.getAttribute("title"),
+                           parseInt(this.getAttribute("mode")));
+
+              var w = EditorUtils.getCurrentEditorWindow();
+              var epubElt = w.document.querySelector("epub2,epub3,epub31");
+              var ebook = epubElt.getUserData("ebook");
+              this.fp.displayDirectory = ebook.opfFile.parent.clone();
+
+              var filters = this.getAttribute("filters");
+              if (filters) {
+                var filtersArray = filters.split(",");
+                for (var i = 0; i < filtersArray.length; i++) {
+                  var f = filtersArray[i];
+                  switch (f) {
+                    case "filterAll":     this.fp.appendFilters(this.nsIFP.filterAll); break;
+                    case "filterHTML":    this.fp.appendFilters(this.nsIFP.filterHTML); break;
+                    case "filterText":    this.fp.appendFilters(this.nsIFP.filterText); break;
+                    case "filterImages":  this.fp.appendFilters(this.nsIFP.filterImages); break;
+                    case "filterAudio":   this.fp.appendFilters(this.nsIFP.filterAudio); break;
+                    case "filterVideo":   this.fp.appendFilters(this.nsIFP.filterVideo); break;
+                    default:              this.fp.appendFilter(f, f);
+                  }
+                }
+              }
+            }
+            catch(e) {}
+
+            return;
+          }
+
           try {
             this.fp = Components.classes["@mozilla.org/filepicker;1"].
                         createInstance(this.nsIFP);

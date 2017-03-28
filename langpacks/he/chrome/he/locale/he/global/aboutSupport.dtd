@@ -6,8 +6,16 @@
 
 <!-- LOCALIZATION NOTE (aboutSupport.pageSubtitle): don't change the 'supportLink' id. -->
 <!ENTITY aboutSupport.pageSubtitle "   דף זה מכיל מידע טכני שאולי שימושי עבורך 
-   כשתנסה לפתור בעיות. אם אתה מחפש תשובות לשאלות נפוצות
-   על &brandShortName;, עבור ל<a id='supportLink'>אתר התמיכה</a>.">
+כשתנסה לפתור בעיות. אם אתה מחפש תשובות לשאלות נפוצות 
+על &brandShortName;, עבור ל<a id='supportLink'>אתר התמיכה</a>.">
+
+<!ENTITY aboutSupport.crashes.title "דיווחי קריסות">
+<!-- LOCALIZATION NOTE (aboutSupport.crashes.id):
+This is likely the same like id.heading in crashes.dtd. -->
+<!ENTITY aboutSupport.crashes.id "קוד דיווח">
+<!ENTITY aboutSupport.crashes.sendDate "נשלח">
+<!ENTITY aboutSupport.crashes.allReports "כל דיווחי הקריסות">
+<!ENTITY aboutSupport.crashes.noConfig "יישום זה לא הוגדר להציג דיווחי קריסות.">
 
 <!ENTITY aboutSupport.extensionsTitle "הרחבות">
 <!ENTITY aboutSupport.extensionName "שם">
@@ -15,9 +23,25 @@
 <!ENTITY aboutSupport.extensionVersion "גרסה">
 <!ENTITY aboutSupport.extensionId "מזהה">
 
+<!ENTITY aboutSupport.experimentsTitle "תכונות ניסיוניות">
+<!ENTITY aboutSupport.experimentName "שם">
+<!ENTITY aboutSupport.experimentId "מזהה">
+<!ENTITY aboutSupport.experimentDescription "תיאור">
+<!ENTITY aboutSupport.experimentActive "פעיל">
+<!ENTITY aboutSupport.experimentEndDate "תאריך סיום">
+<!ENTITY aboutSupport.experimentHomepage "דף הבית">
+<!ENTITY aboutSupport.experimentBranch "ענף">
+
 <!ENTITY aboutSupport.appBasicsTitle "מידע יישום בסיסי">
 <!ENTITY aboutSupport.appBasicsName "שם">
 <!ENTITY aboutSupport.appBasicsVersion "גרסה">
+<!ENTITY aboutSupport.appBasicsBuildID "מזהה גרסה">
+
+<!-- LOCALIZATION NOTE (aboutSupport.appBasicsUpdateChannel, aboutSupport.appBasicsUpdateHistory, aboutSupport.appBasicsShowUpdateHistory):
+"Update" is a noun here, not a verb. -->
+<!ENTITY aboutSupport.appBasicsUpdateChannel "ערוץ עדכונים">
+<!ENTITY aboutSupport.appBasicsUpdateHistory "היסטוריית עדכונים">
+<!ENTITY aboutSupport.appBasicsShowUpdateHistory "הצגת היסטוריית עדכונים">
 
 <!ENTITY aboutSupport.appBasicsProfileDir "תיקיית פרופיל">
 <!-- LOCALIZATION NOTE (aboutSupport.appBasicsProfileDirWinMac):
@@ -28,23 +52,45 @@ Windows/Mac use the term "Folder" instead of "Directory" -->
 <!ENTITY aboutSupport.appBasicsEnabledPlugins "תוספים חיצוניים פעילים">
 <!ENTITY aboutSupport.appBasicsBuildConfig "הגדרות בנייה">
 <!ENTITY aboutSupport.appBasicsUserAgent "סוכן משתמש">
-<!ENTITY aboutSupport.appBasicsCrashIDs "דיווחי קריסה">
+<!ENTITY aboutSupport.appBasicsOS "מערכת הפעלה">
 <!ENTITY aboutSupport.appBasicsMemoryUse "שימוש בזכרון">
+<!ENTITY aboutSupport.appBasicsPerformance "ביצועים">
+
+<!-- LOCALIZATION NOTE the term "Service Workers" should not be translated. -->
+<!ENTITY aboutSupport.appBasicsServiceWorkers "Service Workers רשומים">
+
+<!ENTITY aboutSupport.appBasicsProfiles "פרופילים">
+
+<!ENTITY aboutSupport.appBasicsMultiProcessSupport "חלונות מרובי תהליכים">
+
+<!ENTITY aboutSupport.appBasicsSafeMode "מצב בטוח">
 
 <!ENTITY aboutSupport.showDir.label "פתיחת תיקייה">
 <!-- LOCALIZATION NOTE (aboutSupport.showMac.label): This is the Mac-specific
 variant of aboutSupport.showDir.label.  This allows us to use the preferred
 "Finder" terminology on Mac. -->
 <!ENTITY aboutSupport.showMac.label "הצגה ב־Finder">
-<!-- LOCALIZATION NOTE (aboutSupport.showWin.label): This is the Windows-specific
+<!-- LOCALIZATION NOTE (aboutSupport.showWin2.label): This is the Windows-specific
 variant of aboutSupport.showDir.label. -->
-<!ENTITY aboutSupport.showWin.label "הצגת תיקייה">
+<!ENTITY aboutSupport.showWin2.label "פתיחת תיקייה">
 
 <!ENTITY aboutSupport.modifiedKeyPrefsTitle "העדפות חשובות ששונו">
 <!ENTITY aboutSupport.modifiedPrefsName "שם">
 <!ENTITY aboutSupport.modifiedPrefsValue "ערך">
 
+<!-- LOCALIZATION NOTE (aboutSupport.userJSTitle, aboutSupport.userJSDescription): user.js is the name of the preference override file being checked. -->
+<!ENTITY aboutSupport.userJSTitle "העדפות user.js">
+<!ENTITY aboutSupport.userJSDescription "תיקיית הפרופיל שלך מכילה <a id='prefs-user-js-link'>קובץ user.js</a>, שכולל העדפות שלא נוצרו בידי &brandShortName;.">
+
+<!ENTITY aboutSupport.lockedKeyPrefsTitle "העדפות נעולות חשובות">
+<!ENTITY aboutSupport.lockedPrefsName "שם">
+<!ENTITY aboutSupport.lockedPrefsValue "ערך">
+
 <!ENTITY aboutSupport.graphicsTitle "גרפיקה">
+
+<!ENTITY aboutSupport.placeDatabaseTitle "מסד נתוני מיקום">
+<!ENTITY aboutSupport.placeDatabaseIntegrity "תקינות">
+<!ENTITY aboutSupport.placeDatabaseVerifyIntegrity "וידוא תקינות">
 
 <!ENTITY aboutSupport.jsTitle "JavaScript">
 <!ENTITY aboutSupport.jsIncrementalGC "איסוף זבל מצטבר">
@@ -58,13 +104,31 @@ variant of aboutSupport.showDir.label. -->
 <!ENTITY aboutSupport.installationHistoryTitle "היסטוריית התקנות">
 <!ENTITY aboutSupport.updateHistoryTitle "היסטוריית עדכונים">
 
-<!ENTITY aboutSupport.copyToClipboard.label "העתק הכול ללוח">
+<!ENTITY aboutSupport.copyTextToClipboard.label "העתקת טקסט ללוח">
+<!ENTITY aboutSupport.copyRawDataToClipboard.label "העתקת נתונים גולמיים ללוח">
+
+<!ENTITY aboutSupport.sandboxTitle "ארגז חול">
+
+<!ENTITY aboutSupport.safeModeTitle "לנסות במצב בטוח">
+<!ENTITY aboutSupport.restartInSafeMode.label "הפעלה מחדש עם תוספות מנוטרלות…">
+
+<!ENTITY aboutSupport.graphicsFeaturesTitle "תכונות">
+<!ENTITY aboutSupport.graphicsDiagnosticsTitle "אבחון">
+<!ENTITY aboutSupport.graphicsFailureLogTitle "יומן תקלות">
+<!ENTITY aboutSupport.graphicsGPU1Title "GPU #1">
+<!ENTITY aboutSupport.graphicsGPU2Title "GPU #2">
+<!ENTITY aboutSupport.graphicsDecisionLogTitle "יומן החלטות">
+<!ENTITY aboutSupport.graphicsCrashGuardsTitle "תכונות מנוטרלות של מגן הקריסות">
+<!ENTITY aboutSupport.graphicsWorkaroundsTitle "מעקפים">
 
 
-<!ENTITY aboutSupport.copyRawDataToClipboard.label "Copy raw data to clipboard">
-
-<!ENTITY aboutSupport.copyTextToClipboard.label "Copy text to clipboard">
-<!ENTITY aboutSupport.userJSDescription "Your profile folder contains a <a id='prefs-user-js-link'>user.js file</a>, which includes preferences that were not created by &brandShortName;.">
-
-<!-- LOCALIZATION NOTE (aboutSupport.userJSTitle, aboutSupport.userJSDescription): user.js is the name of the preference override file being checked. -->
-<!ENTITY aboutSupport.userJSTitle "user.js Preferences">
+<!ENTITY aboutSupport.appBasicsKeyGoogle "Google Key">
+<!ENTITY aboutSupport.appBasicsKeyMozilla "Mozilla Location Service Key">
+<!ENTITY aboutSupport.sandboxSyscallAge "Seconds Ago">
+<!ENTITY aboutSupport.sandboxSyscallArgs "Arguments">
+<!ENTITY aboutSupport.sandboxSyscallIndex "#">
+<!ENTITY aboutSupport.sandboxSyscallLogTitle "Rejected System Calls">
+<!ENTITY aboutSupport.sandboxSyscallNumber "Syscall">
+<!ENTITY aboutSupport.sandboxSyscallPID "PID">
+<!ENTITY aboutSupport.sandboxSyscallProcType "Process Type">
+<!ENTITY aboutSupport.sandboxSyscallTID "TID">

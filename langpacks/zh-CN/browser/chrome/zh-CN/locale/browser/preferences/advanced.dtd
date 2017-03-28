@@ -6,14 +6,16 @@
 
 <!ENTITY generalTab.label                "常规">
 
-<!ENTITY accessibility.label             "可用性">
+<!ENTITY accessibility.label             "无障碍环境">
 
-<!ENTITY useCursorNavigation.label       "始终使用光标键在页面内导航">
+<!ENTITY useCursorNavigation.label       "始终使用方向键在页面内导航">
 <!ENTITY useCursorNavigation.accesskey   "c">
-<!ENTITY searchStartTyping.label         "即时查找输入的文本">
-<!ENTITY searchStartTyping.accesskey     "x">
-<!ENTITY blockAutoRefresh.label          "当网站试图重定向或重新载入页面时发出警告">
-<!ENTITY blockAutoRefresh.accesskey      "b">
+<!ENTITY searchOnStartTyping.label       "直接输入则开始搜索文本">
+<!ENTITY searchOnStartTyping.accesskey   "x">
+<!ENTITY blockAutoReload.label           "当网站试图重定向或重新载入页面时发出警告">
+<!ENTITY blockAutoReload.accesskey       "b">
+<!ENTITY useOnScreenKeyboard.label       "在需要时显示触摸键盘">
+<!ENTITY useOnScreenKeyboard.accesskey   "k">
 
 <!ENTITY browsing.label                  "浏览">
 
@@ -23,47 +25,45 @@
 <!ENTITY useSmoothScrolling.accesskey    "m">
 <!ENTITY allowHWAccel.label              "自动启用硬件加速">
 <!ENTITY allowHWAccel.accesskey          "r">
-<!ENTITY checkSpelling.label             "输入时即检查拼写">
-<!ENTITY checkSpelling.accesskey         "t">
+<!ENTITY checkUserSpelling.label         "在您输入时检查拼写">
+<!ENTITY checkUserSpelling.accesskey     "t">
 
-<!ENTITY systemDefaults.label            "系统默认值">
-<!ENTITY alwaysCheckDefault.label        "启动时总是检查并确认 &brandShortName; 为默认浏览器"><!--XXX-->
-<!ENTITY alwaysCheckDefault.accesskey    "w">
-<!ENTITY setDefault.label                "让 &brandShortName; 成为默认浏览器">
-<!ENTITY setDefault.accesskey            "d">
-<!ENTITY isDefault.label                 "&brandShortName; 目前是您的默认浏览器">
+<!ENTITY dataChoicesTab.label            "数据反馈">
 
-<!ENTITY dataChoicesTab.label            "数据选择权">
-
-<!ENTITY healthReportSection.label       "&brandShortName; 健康报告">
-<!ENTITY healthReportDesc.label          "帮助你了解浏览器的性能并与 &vendorShortName; 分享你的浏览器健康状况">
+<!ENTITY healthReportDesc.label          "帮助您了解浏览器的工作性能，并与 &vendorShortName; 分享您的浏览器健康状况。">
 <!ENTITY enableHealthReport.label        "启用 &brandShortName; 健康报告">
 <!ENTITY enableHealthReport.accesskey    "R">
 <!ENTITY healthReportLearnMore.label     "详细了解">
 
-<!ENTITY telemetrySection.label          "遥测技术">
-<!ENTITY telemetryDesc.label             "与 &vendorShortName; 分享您浏览器的工作性能、使用方式、硬件设备和有关定制的数据，帮助我们改进 &brandShortName; 让它变得更好。">
-<!ENTITY enableTelemetry.label           "启用遥测">
-<!ENTITY enableTelemetry.accesskey       "T">
+<!ENTITY telemetryDesc.label             "与 &vendorShortName; 分享您使用 &vendorShortName; 浏览器的工作性能、使用方式、硬件设备和有关自定义的数据，帮助我们改进 &brandShortName;，让它变得更好。">
+<!ENTITY enableTelemetryData.label       "分享其他数据（也叫“遥测”功能）">
+<!ENTITY enableTelemetryData.accesskey   "T">
 <!ENTITY telemetryLearnMore.label        "详细了解">
 
-<!ENTITY crashReporterSection.label      "崩溃报告程序">
-<!ENTITY crashReporterDesc.label         "&brandShortName; 提交崩溃报告可以帮助 &vendorShortName; 改进浏览器，让它变得更加稳定和安全">
-<!ENTITY enableCrashReporter.label       "启用崩溃报告">
-<!ENTITY enableCrashReporter.accesskey   "C">
-<!ENTITY crashReporterLearnMore.label    "详细了解">
+<!ENTITY crashReporterDesc2.label         "崩溃报告可以帮助 &vendorShortName; 修复问题，使浏览器更加稳定和安全">
+<!ENTITY alwaysSubmitCrashReports.label   "允许 &brandShortName; 为您自动反馈还未提交的崩溃报告">
+<!ENTITY alwaysSubmitCrashReports.accesskey "c">
+<!ENTITY crashReporterLearnMore.label     "详细了解">
 
 <!ENTITY networkTab.label                "网络">
 
 <!ENTITY connection.label                "连接">
 
-<!ENTITY connectionDesc.label            "配置 &brandShortName; 如何连接至因特网">
+<!ENTITY connectionDesc.label            "配置 &brandShortName; 如何连接至国际互联网">
 <!ENTITY connectionSettings.label        "设置…">
 <!ENTITY connectionSettings.accesskey    "e">
 
 <!ENTITY httpCache.label                 "网络内容缓存">
 
 <!ENTITY offlineStorage2.label           "离线 Web 内容和用户数据">
+
+<!--  Site Data section manages sites using Storage API and is under Network -->
+<!ENTITY siteData.label                  "网站数据">
+<!ENTITY clearSiteData.label             "清除所有数据">
+<!ENTITY clearSiteData.accesskey         "l">
+<!ENTITY siteDataSettings.label          "设置…">
+<!ENTITY siteDataSettings.accesskey      "i">
+<!ENTITY siteDataLearnMoreLink.label     "详细了解">
 
 <!-- LOCALIZATION NOTE:
   The entities limitCacheSizeBefore.label and limitCacheSizeAfter.label appear on a single
@@ -83,56 +83,45 @@
 
 <!ENTITY updateTab.label                 "更新">
 
-<!ENTITY updateApp.label                 "&brandShortName; 更新：">
-<!ENTITY updateAuto.label                "自动安装更新（推荐：提升安全性）">
-<!ENTITY updateAuto.accesskey            "A">
-<!ENTITY updateCheck.label               "检查更新，但是让我选择是否安装">
-<!ENTITY updateCheck.accesskey           "C">
-<!ENTITY updateManual.label              "不检查更新（不推荐：安全风险）">
+<!ENTITY updateApplication.label         "&brandShortName; 更新">
+<!ENTITY updateAuto1.label               "自动安装更新（推荐：可提升安全性）">
+<!ENTITY updateAuto1.accesskey           "A">
+<!ENTITY updateCheckChoose.label         "检查更新，但是由您选择是否安装">
+<!ENTITY updateCheckChoose.accesskey     "C">
+<!ENTITY updateManual.label              "不检查更新（不推荐：存在安全风险）">
 <!ENTITY updateManual.accesskey          "N">
-
-<!ENTITY updateAutoAddonWarn.label       "如果将禁用任何附加组件，警告我">
-<!ENTITY updateAutoAddonWarn.accesskey   "W">
 
 <!ENTITY updateHistory.label             "显示更新历史">
 <!ENTITY updateHistory.accesskey         "p">
 
-<!ENTITY useService.label                "使用后台服务来安装更新">
+<!ENTITY useService.label                "使用一项系统服务以静默安装更新">
 <!ENTITY useService.accesskey            "b">
 
-<!ENTITY updateOthers.label              "自动更新：">
+<!ENTITY autoUpdateOthers.label          "自动更新">
 <!ENTITY enableSearchUpdate.label        "搜索引擎">
 <!ENTITY enableSearchUpdate.accesskey    "E">
 
-<!ENTITY offlineNotify.label             "网站请求保存数据供离线使用时通知我">
-<!ENTITY offlineNotify.accesskey         "T">
-<!ENTITY offlineNotifyExceptions.label   "例外…">
-<!ENTITY offlineNotifyExceptions.accesskey "x">
+<!ENTITY offlineStorageNotify.label               "网站请求保存数据供离线使用时通知您">
+<!ENTITY offlineStorageNotify.accesskey           "T">
+<!ENTITY offlineStorageNotifyExceptions.label     "例外…">
+<!ENTITY offlineStorageNotifyExceptions.accesskey "x">
 
-<!ENTITY offlineAppsList2.label          "以下网站被允许存储供离线使用的数据：">
+<!ENTITY offlineAppsList2.label          "以下网站已被允许存储供离线使用的数据：">
 <!ENTITY offlineAppsList.height          "7em">
 <!ENTITY offlineAppsListRemove.label     "移除…">
 <!ENTITY offlineAppsListRemove.accesskey "R">
 <!ENTITY offlineAppRemove.confirm        "移除脱机数据">
 
-<!ENTITY encryptionTab.label             "加密">
-
-<!ENTITY protocols.label                 "协议">
-<!ENTITY useSSL3.label                   "使用 SSL 3.0">
-<!ENTITY useSSL3.accesskey               "3">
-<!ENTITY useTLS1.label                   "使用 TLS 1.0">
-<!ENTITY useTLS1.accesskey               "1">
-<!ENTITY certificates.label              "证书">
-<!ENTITY certSelection.description       "当某个服务器请求我的个人证书：">
-<!ENTITY certs.auto                      "自动选择一个">
-<!ENTITY certs.auto.accesskey            "l">
-<!ENTITY certs.ask                       "每次均询问">
-<!ENTITY certs.ask.accesskey             "i">
+<!ENTITY certificateTab.label            "证书">
+<!ENTITY certPersonal.label              "请求">
+<!ENTITY certPersonal.description        "当某个服务器请求您的个人证书时：">
+<!ENTITY selectCerts.auto                "自动选择一个">
+<!ENTITY selectCerts.auto.accesskey      "S">
+<!ENTITY selectCerts.ask                 "每次均询问我">
+<!ENTITY selectCerts.ask.accesskey       "A">
+<!ENTITY enableOCSP.label                "查询 OCSP 响应服务器，以确认证书当前是否有效">
+<!ENTITY enableOCSP.accesskey            "Q">
 <!ENTITY viewCerts.label                 "查看证书">
-<!ENTITY viewCerts.accesskey             "s">
-<!ENTITY viewCRLs.label                  "撤销列表">
-<!ENTITY viewCRLs.accesskey              "R">
-<!ENTITY verify2.label                   "验证">
-<!ENTITY verify2.accesskey               "V">
+<!ENTITY viewCerts.accesskey             "C">
 <!ENTITY viewSecurityDevices.label       "安全设备">
-<!ENTITY viewSecurityDevices.accesskey   "y">
+<!ENTITY viewSecurityDevices.accesskey   "D">

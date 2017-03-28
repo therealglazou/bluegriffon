@@ -35,11 +35,12 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-Components.utils.import("resource://app/modules/colourPickerHelper.jsm");
-Components.utils.import("resource://app/modules/urlHelper.jsm");
-Components.utils.import("resource://app/modules/editorHelper.jsm");
-Components.utils.import("resource://app/modules/l10nHelper.jsm");
-Components.utils.import("resource://app/modules/cssHelper.jsm");
+Components.utils.import("resource://gre/modules/colourPickerHelper.jsm");
+Components.utils.import("resource://gre/modules/urlHelper.jsm");
+Components.utils.import("resource://gre/modules/editorHelper.jsm");
+Components.utils.import("resource://gre/modules/l10nHelper.jsm");
+Components.utils.import("resource://gre/modules/cssHelper.jsm");
+Components.utils.import("resource://gre/modules/Services.jsm");
 
 var gFpb = null;     // file picker
 var gPreview = null; // preview iframe for colors
@@ -69,13 +70,13 @@ function ReadFileContents(aFile)
   fstream.init(aFile, -1, 0, 0);
   cstream.init(fstream, "UTF-8", 0, 0); // you can use another encoding here if you wish
   
-  let (str = {}) {
-    let read = 0;
-    do { 
-      read = cstream.readString(0xffffffff, str); // read as much as we can and put it in str.value
-      data += str.value;
-    } while (read != 0);
-  }
+  let str = {};
+  let read = 0;
+  do { 
+    read = cstream.readString(0xffffffff, str); // read as much as we can and put it in str.value
+    data += str.value;
+  } while (read != 0);
+
   cstream.close(); // this closes fstream
   
   return data;
@@ -238,15 +239,17 @@ function EnableUserDefinedColorsControls()
   gDialog.visitedLinksPreview.style.textDecoration = underline ? "underline" : "none";
   
   SetEnabledElement(gDialog.backgroundColorColorpickerLabel, enabled);
-  SetEnabledElement(gDialog.backgroundColorColorpicker, enabled);
   SetEnabledElement(gDialog.textColorColorpickerLabel, enabled);
-  SetEnabledElement(gDialog.textColorColorpicker, enabled);
   SetEnabledElement(gDialog.linksColorColorpickerLabel, enabled);
-  SetEnabledElement(gDialog.linksColorColorpicker, enabled);
   SetEnabledElement(gDialog.activeLinksColorColorpickerLabel, enabled);
-  SetEnabledElement(gDialog.activeLinksColorColorpicker, enabled);
   SetEnabledElement(gDialog.visitedLinksColorColorpickerLabel, enabled);
-  SetEnabledElement(gDialog.visitedLinksColorColorpicker, enabled);
+
+  gDialog.backgroundColorColorpicker.disabled = !enabled;
+  gDialog.textColorColorpicker.disabled = !enabled;
+  gDialog.linksColorColorpicker.disabled = !enabled;
+  gDialog.activeLinksColorColorpicker.disabled = !enabled;
+  gDialog.visitedLinksColorColorpicker.disabled = !enabled;
+
   SetEnabledElement(gDialog.textPreview, enabled);
   SetEnabledElement(gDialog.linksPreview, enabled);
   SetEnabledElement(gDialog.activeLinksPreview, enabled);
@@ -416,21 +419,22 @@ function Apply()
   
       var file = Components.classes["@mozilla.org/file/directory_service;1"].  
                            getService(Components.interfaces.nsIProperties).  
-                           get("CurProcD", Components.interfaces.nsIFile);    
+                           get("GreD", Components.interfaces.nsIFile);    
       file.append("res");
       var resetFontsGridsFile = file.clone();
       resetFontsGridsFile.append("reset-fonts-grids.css");
       var baseMinFile = file.clone();
       baseMinFile.append("base-min.css");
       
-      var styleElt = doc.createElement("style");
-      styleElt.setAttribute("type", "text/css");
-      styleElt.textContent = ReadFileContents(resetFontsGridsFile); 
-      EditorUtils.getHeadElement().appendChild(styleElt);
-      styleElt = doc.createElement("style");
-      styleElt.setAttribute("type", "text/css");
-      styleElt.textContent = ReadFileContents(baseMinFile);
-      EditorUtils.getHeadElement().appendChild(styleElt);
+      var sElt = doc.createElement("style");
+      sElt.setAttribute("type", "text/css");
+      sElt.textContent = ReadFileContents(resetFontsGridsFile); 
+      EditorUtils.getHeadElement().appendChild(sElt);
+
+      var styleElt2 = doc.createElement("style");
+      styleElt2.setAttribute("type", "text/css");
+      styleElt2.textContent = ReadFileContents(baseMinFile);
+      EditorUtils.getHeadElement().appendChild(styleElt2);
   
       var docId    = gDialog.LayoutTypeMenulist.value;
       var docClass = gDialog.LayoutSubtypeMenulist.value;
@@ -618,6 +622,10 @@ function Apply()
       prefs.setBoolPref("bluegriffon.display.use_system_colors", !gDialog.userDefinedColors.checked)
     if (gDialog.userDefinedColors.checked)
     {
+      var styleElt3 = doc.createElement("style");
+      styleElt3.setAttribute("type", "text/css");
+      EditorUtils.getHeadElement().appendChild(styleElt3);
+
       var bgColor      = gDialog.backgroundColorColorpicker.color;
       var fgColor      = gDialog.textColorColorpicker.color;
       var linksColor   = gDialog.linksColorColorpicker.color;
@@ -634,8 +642,7 @@ function Apply()
                                       value: bgColor,
                                       priority: false }]);
       CssUtils.addRuleForSelector(editor, doc, "body",
-                                  [ {
-                                      property: "color",
+                                  [ { property: "color",
                                       value: fgColor,
                                       priority: false } ] );
       CssUtils.addRuleForSelector(editor, doc, ":link",
@@ -718,7 +725,7 @@ function Apply()
                                     true, true);
     }
   }
-  catch(e) {}
+  catch(e) { Services.prompt.alert(null, "bar", e)}
 
   window.close();
 }
@@ -759,4 +766,5 @@ function CreateNewDocument()
 function DocumentCreated()
 {
   Apply();
+  window.close();
 }

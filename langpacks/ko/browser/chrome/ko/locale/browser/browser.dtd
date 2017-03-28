@@ -1,5 +1,5 @@
-<!-- This Source Code Form is subject to the terms of the Mozilla Public        
-   - License, v. 2.0. If a copy of the MPL was not distributed with this        
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 
 <!-- LOCALIZATION NOTE : FILE This file contains the browser main menu items -->
@@ -15,15 +15,23 @@
                                                                 inside the private browsing mode -->
 <!ENTITY mainWindow.titlePrivateBrowsingSuffix "(사생활 보호 모드)">
 
-<!-- Tab context menu -->
-<!ENTITY reloadTab.label                   "현재 탭 새로 고침">
-<!ENTITY reloadTab.accesskey               "R">
-<!ENTITY reloadAllTabs.label               "전체 탭 새로 고침">
-<!ENTITY reloadAllTabs.accesskey           "A">
-<!ENTITY closeOtherTabs.label "다른 탭 모두 닫기">
-<!ENTITY closeOtherTabs.accesskey "o">
+<!ENTITY appmenu.tooltip                     "메뉴 열기">
+<!ENTITY navbarOverflow.label                "더 많은 도구…">
 
-<!-- LOCALIZATION NOTE (pinAppTab.label, unpinAppTab.label): "Pin" is being
+<!-- Tab context menu -->
+<!ENTITY  reloadTab.label                    "현재 탭 새로 고침">
+<!ENTITY  reloadTab.accesskey                "R">
+<!ENTITY  reloadAllTabs.label                "전체 탭 새로 고침">
+<!ENTITY  reloadAllTabs.accesskey            "A">
+<!-- LOCALIZATION NOTE (closeTabsToTheEnd.label): This should indicate the
+direction in which tabs are closed, i.e. locales that use RTL mode should say
+left instead of right. -->
+<!ENTITY  closeTabsToTheEnd.label            "오른쪽에 있는 탭 모두 닫기">
+<!ENTITY  closeTabsToTheEnd.accesskey        "i">
+<!ENTITY  closeOtherTabs.label               "다른 탭 모두 닫기">
+<!ENTITY  closeOtherTabs.accesskey           "o">
+
+<!-- LOCALIZATION NOTE (pinTab.label, unpinTab.label): "Pin" is being
 used as a metaphor for expressing the fact that these tabs are "pinned" to the
 left edge of the tabstrip. Really we just want the string to express the idea
 that this is a lightweight and reversible action that keeps your tab where you
@@ -32,25 +40,30 @@ can reach it easily. -->
 <!ENTITY  pinTab.accesskey                   "P">
 <!ENTITY  unpinTab.label                     "일반 탭으로">
 <!ENTITY  unpinTab.accesskey                 "b">
-<!ENTITY  moveToGroup.label                  "그룹 이동">
-<!ENTITY  moveToGroup.accesskey              "M">
-<!ENTITY  moveToNewGroup.label               "새 그룹">
+<!ENTITY  sendTabToDevice.label              "탭을 기기로 보내기">
+<!ENTITY  sendTabToDevice.accesskey          "D">
+<!ENTITY  sendPageToDevice.label             "페이지를 기기로 보내기">
+<!ENTITY  sendPageToDevice.accesskey         "D">
+<!ENTITY  sendLinkToDevice.label             "링크를 기기로 보내기">
+<!ENTITY  sendLinkToDevice.accesskey         "D">
 <!ENTITY  moveToNewWindow.label              "새 창으로 이동">
 <!ENTITY  moveToNewWindow.accesskey          "W">
 <!ENTITY  bookmarkAllTabs.label              "모든 탭 북마크…">
 <!ENTITY  bookmarkAllTabs.accesskey          "T">
-<!ENTITY  undoCloseTab.label                 "닫은 탭 다시 열기">
+<!ENTITY  undoCloseTab.label                 "닫았던 탭 다시 열기">
 <!ENTITY  undoCloseTab.accesskey             "U">
 <!ENTITY  closeTab.label                     "탭 닫기">
 <!ENTITY  closeTab.accesskey                 "c">
 
-<!ENTITY listAllTabs.label "탭 전체 목록">
+<!ENTITY  listAllTabs.label      "탭 전체 목록">
 
 <!ENTITY tabCmd.label "새 탭">
 <!ENTITY tabCmd.accesskey "T">
 <!ENTITY tabCmd.commandkey "t">
+<!-- LOCALIZATION NOTE (openLocationCmd.label): "Open Location" is only
+displayed on OS X, and only on windows that aren't main browser windows, or
+when there are no windows but Firefox is still running. -->
 <!ENTITY openLocationCmd.label "주소 열기…">
-<!ENTITY openLocationCmd.accesskey "L">
 <!ENTITY openFileCmd.label "파일 열기…">
 <!ENTITY openFileCmd.accesskey "O">
 <!ENTITY openFileCmd.commandkey "o">
@@ -68,12 +81,16 @@ can reach it easily. -->
 <!ENTITY menubarCmd.label "메뉴 모음">
 <!ENTITY menubarCmd.accesskey "M">
 <!ENTITY navbarCmd.label "주소창 모음">
-<!ENTITY navbarCmd.accesskey "N">
 <!ENTITY personalbarCmd.label "북마크 모음">
 <!ENTITY personalbarCmd.accesskey "B">
 <!ENTITY bookmarksToolbarItem.label "북마크 모음 항목">
-<!ENTITY addonBarCmd.label "부가 기능 모음">
-<!ENTITY addonBarCmd.accesskey "A">
+
+<!ENTITY toolbarContextMenu.reloadAllTabs.label "모든 탭 다시 읽기">
+<!ENTITY toolbarContextMenu.reloadAllTabs.accesskey "A">
+<!ENTITY toolbarContextMenu.bookmarkAllTabs.label "모든 탭 북마크…">
+<!ENTITY toolbarContextMenu.bookmarkAllTabs.accesskey "T">
+<!ENTITY toolbarContextMenu.undoCloseTab.label " 닫은 탭 다시 열기">
+<!ENTITY toolbarContextMenu.undoCloseTab.accesskey "U">
 
 <!ENTITY pageSourceCmd.label "소스 보기">
 <!ENTITY pageSourceCmd.accesskey "o">
@@ -81,17 +98,26 @@ can reach it easily. -->
 <!ENTITY pageInfoCmd.label "페이지 정보">
 <!ENTITY pageInfoCmd.accesskey "I">
 <!ENTITY pageInfoCmd.commandkey "i">
-<!-- LOCALIZATION NOTE (enterFullScreenCmd.label, exitFullScreenCmd.label):     
+<!ENTITY mirrorTabCmd.label "탭 미러링">
+<!ENTITY mirrorTabCmd.accesskey "m">
+<!-- LOCALIZATION NOTE (enterFullScreenCmd.label, exitFullScreenCmd.label):
 These should match what Safari and other Apple applications use on OS X Lion. -->
-<!ENTITY enterFullScreenCmd.label  "전체 화면으로 표시">
-<!ENTITY enterFullScreenCmd.accesskey  "F">
-<!ENTITY exitFullScreenCmd.label   "원래 화면으로 복구">
-<!ENTITY exitFullScreenCmd.accesskey   "F">
+<!ENTITY enterFullScreenCmd.label "전체 화면으로 표시">
+<!ENTITY enterFullScreenCmd.accesskey "F">
+<!ENTITY exitFullScreenCmd.label "원래 화면으로 복구">
+<!ENTITY exitFullScreenCmd.accesskey "F">
 <!ENTITY fullScreenCmd.label "전체 화면">
 <!ENTITY fullScreenCmd.accesskey "F">
 <!ENTITY fullScreenCmd.macCommandKey "f">
 <!ENTITY showAllTabsCmd.label "모든 탭 표시">
 <!ENTITY showAllTabsCmd.accesskey "A">
+<!ENTITY toggleReaderMode.key "R">
+
+<!ENTITY fxaSignIn.label "&syncBrand.shortName.label;에 로그인">
+<!ENTITY fxaSignedIn.tooltip "&syncBrand.shortName.label; 설정 열기">
+<!ENTITY fxaSignInError.label "&syncBrand.shortName.label;에 다시 연결">
+<!ENTITY fxaUnverified.label "계정 확인">
+
 
 <!ENTITY fullScreenMinimize.tooltip "최소화">
 <!ENTITY fullScreenRestore.tooltip "복구">
@@ -100,13 +126,32 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY fullScreenAutohide.accesskey "H">
 <!ENTITY fullScreenExit.label "원래 화면으로 복구">
 <!ENTITY fullScreenExit.accesskey "F">
-<!ENTITY fullscreenAllowButton.label   "허가">
-<!ENTITY fullscreenExitButton.label    "거부">
-<!ENTITY fullscreenApproval.value  "전체 화면 표시 모드를 허가합니까?">
 
-<!ENTITY fullscreenExitHint.value  "ESC 키를 누르면, 전체 화면 표시 모드를 종료합니다.">
-<!ENTITY leaveDOMFullScreen.label  "전체 화면 표시 모드 종료">
-<!ENTITY leaveDOMFullScreen.accesskey  "u">
+<!-- LOCALIZATION NOTE (fullscreenWarning.beforeDomain.label,
+     fullscreenWarning.afterDomain.label): these two strings are used
+     respectively before and after the domain requiring fullscreen.
+     Localizers can use one of them, or both, to better adapt this
+     sentence to their language. -->
+<!ENTITY fullscreenWarning.beforeDomain.label "">
+<!ENTITY fullscreenWarning.afterDomain.label "이 전체화면 표시 모드임">
+<!ENTITY fullscreenWarning.generic.label "이 문서는 전체 화면 표시 모드임">
+
+<!-- LOCALIZATION NOTE (exitDOMFullscreen.button,
+     exitDOMFullscreenMac.button): the "escape" button on PC keyboards
+     is uppercase, while on Mac keyboards it is lowercase -->
+<!ENTITY exitDOMFullscreen.button "전체 화면 표시 모드 종료(Esc)">
+<!ENTITY exitDOMFullscreenMac.button "전체 화면 표시 모드 종료(esc)">
+<!ENTITY leaveDOMFullScreen.label "전체 화면 표시 모드 종료">
+<!ENTITY leaveDOMFullScreen.accesskey "u">
+
+<!-- LOCALIZATION NOTE (pointerlockWarning.beforeDomain.label,
+     pointerlockWarning.afterDomain.label): these two strings are used
+     respectively before and after the domain requiring pointerlock.
+     Localizers can use one of them, or both, to better adapt this
+     sentence to their language. -->
+<!ENTITY pointerlockWarning.beforeDomain.label "">
+<!ENTITY pointerlockWarning.afterDomain.label "사이트가 포인터를 제어하려 합니다. 다시 제어하려면 ESC를 누르세요.">
+<!ENTITY pointerlockWarning.generic.label "이 문서가 포인터를 제어하려 합니다. 다시 제어하려면 ESC를 누르세요.">
 
 <!ENTITY closeWindow.label "창 닫기">
 <!ENTITY closeWindow.accesskey "d">
@@ -114,80 +159,113 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY bookmarksMenu.label "북마크">
 <!ENTITY bookmarksMenu.accesskey "B">
 <!ENTITY bookmarkThisPageCmd.label "현재 페이지 북마크에 추가">
+<!ENTITY editThisBookmarkCmd.label "이 북마크 편집">
 <!ENTITY bookmarkThisPageCmd.commandkey "d">
-<!ENTITY sharePageCmd.commandkey "l">
+<!-- LOCALIZATION NOTE (findShareServices.label):
+  -  Use the unicode ellipsis char, \u2026,
+  -  or use "..." if \u2026 doesn't suit traditions in your locale. -->
+<!ENTITY findShareServices.label "더 많은 공유 서비스 찾기…">
+<!ENTITY sharePageCmd.label "현재 페이지 공유">
+<!ENTITY sharePageCmd.commandkey "S">
+<!ENTITY sharePageCmd.accesskey "s">
+<!-- LOCALIZATION NOTE (shareLink.accesskey): must be different than the following share access keys -->
+<!ENTITY shareLink.label "이 링크 공유">
+<!ENTITY shareLink.accesskey "h">
+<!ENTITY shareImage.label "이 이미지 공유">
+<!ENTITY shareImage.accesskey "r">
+<!ENTITY shareSelect.label "선택 내용 공유">
+<!ENTITY shareSelect.accesskey "r">
+<!ENTITY shareVideo.label "이 동영상 공유">
+<!ENTITY shareVideo.accesskey "r">
+<!ENTITY feedsMenu2.label "현재 페이지 구독하기">
 <!ENTITY subscribeToPageMenupopup.label "현재 페이지 구독하기">
 <!ENTITY subscribeToPageMenuitem.label "현재 페이지 구독하기…">
 <!ENTITY addCurPagesCmd.label "모든 탭 북마크 추가…">
 <!ENTITY showAllBookmarks2.label "모든 북마크 보기">
-<!ENTITY unsortedBookmarksCmd.label "미분류 북마크">
+<!ENTITY recentBookmarks.label "최근 북마크됨">
+<!ENTITY otherBookmarksCmd.label "다른 북마크">
 <!ENTITY bookmarksToolbarChevron.tooltip "북마크 계속 보기">
+<!ENTITY showRecentlyBookmarked.label     "최근 한 북마크 보이기">
+<!ENTITY showRecentlyBookmarked.accesskey "h">
+<!ENTITY hideRecentlyBookmarked.label     "최근 한 북마크 숨기기">
+<!ENTITY hideRecentlyBookmarked.accesskey "H">
 
 <!ENTITY backCmd.label                "뒤로">
-<!ENTITY backCmd.accesskey            "B">
 <!ENTITY backButton.tooltip           "한 페이지 뒤로 가기">
 <!ENTITY forwardCmd.label             "앞으로">
-<!ENTITY forwardCmd.accesskey         "F">
 <!ENTITY forwardButton.tooltip        "한 페이지 앞으로 가기">
 <!ENTITY backForwardButtonMenu.tooltip "오른쪽 클릭 혹은 풀다운으로 방문 기록 보기">
 <!ENTITY backForwardButtonMenuMac.tooltip "방문 기록 내려 보기">
 <!ENTITY reloadCmd.label              "새로 고침">
-<!ENTITY reloadCmd.accesskey          "R">
 <!ENTITY reloadButton.tooltip         "현재 페이지 새로 고침">
 <!ENTITY stopCmd.label                "중지">
-<!ENTITY stopCmd.accesskey            "S">
 <!ENTITY stopCmd.macCommandKey        ".">
 <!ENTITY stopButton.tooltip           "이 페이지 읽기 중지">
 <!ENTITY goEndCap.tooltip             "주소 표시줄에 있는 주소로 접속하기">
-<!ENTITY printButton.tooltip          "현재 페이지 인쇄">
 <!ENTITY printButton.label            "인쇄">
+<!ENTITY printButton.tooltip          "현재 페이지 인쇄">
 
-<!ENTITY backForwardItem.title        "뒤로/앞으로">
-<!ENTITY locationItem.title           "주소">
+<!ENTITY urlbar.viewSiteInfo.label                      "사이트 정보 보기">
+
+<!ENTITY urlbar.defaultNotificationAnchor.tooltip         "메시지 패널 열기">
+<!ENTITY urlbar.geolocationNotificationAnchor.tooltip     "위치 요청 패널 열기">
+<!ENTITY urlbar.addonsNotificationAnchor.tooltip          "부가기능 설치 메시지 패널 열기">
+<!ENTITY urlbar.indexedDBNotificationAnchor.tooltip       "오프라인 저장소 메시지 패널 열기">
+<!ENTITY urlbar.passwordNotificationAnchor.tooltip        "저장된 비밀번호 메시지 패널 열기">
+<!ENTITY urlbar.pluginsNotificationAnchor.tooltip         "플러그인 사용 관리">
+<!ENTITY urlbar.webNotificationAnchor.tooltip             "사이트에서 알림을 수신할지 변경">
+
+<!ENTITY urlbar.webRTCShareDevicesNotificationAnchor.tooltip      "사이트에서 카메라와 마이크를 사용할지 관리">
+<!ENTITY urlbar.webRTCShareMicrophoneNotificationAnchor.tooltip   "사이트에서 마이크를 사용할지 관리">
+<!ENTITY urlbar.webRTCShareScreenNotificationAnchor.tooltip       "사이트에서 창이나 화면을 공유할지를 관리">
+
+<!ENTITY urlbar.servicesNotificationAnchor.tooltip        "설치 메시지 패널 열기">
+<!ENTITY urlbar.translateNotificationAnchor.tooltip       "페이지 번역">
+<!ENTITY urlbar.translatedNotificationAnchor.tooltip      "페이지 번역 관리">
+<!ENTITY urlbar.emeNotificationAnchor.tooltip             "DRM 소프트웨어 사용 관리">
+
+<!ENTITY urlbar.cameraBlocked.tooltip            "이 사이트에서 카메라 사용을 차단하였습니다.">
+<!ENTITY urlbar.microphoneBlocked.tooltip        "이 사이트에서 마이크 사용을 차단하였습니다.">
+<!ENTITY urlbar.screenBlocked.tooltip            "이 사이트에서 화면 공유를 차단하였습니다.">
+<!ENTITY urlbar.geolocationBlocked.tooltip       "이 사이트에서 위치 정보 사용을 차단하였습니다.">
+<!ENTITY urlbar.indexedDBBlocked.tooltip         "이 사이트에서 데이터 저장소 사용을 차단하였습니다.">
+<!ENTITY urlbar.webNotificationsBlocked.tooltip  "이 사이트에서 알림 사용을 차단하였습니다.">
+
+<!ENTITY urlbar.openHistoryPopup.tooltip                "방문 목록 보기">
+
+<!ENTITY urlbar.zoomReset.tooltip     "처음 크기로">
+
 <!ENTITY searchItem.title             "검색">
-<!ENTITY throbberItem.title           "실행 색인기">
-<!ENTITY bookmarksItem.title          "북마크">
 
-<!-- Toolbar items -->
-<!ENTITY appMenuButton.label          "메뉴">
-<!ENTITY appMenuButton.tooltip        "&brandShortName; 메뉴 열기">
+<!-- Toolbar items --> 
 <!ENTITY homeButton.label             "홈">
 
-<!ENTITY tabGroupsButton.label        "탭 그룹">
-<!ENTITY tabGroupsButton.tooltip      "탭 그룹으로 보기">
-
-<!ENTITY feedButton.label             "구독하기">
-<!ENTITY feedButton.tooltip           "페이지 구독하기…">
-
 <!ENTITY bookmarksButton.label          "북마크">
-<!ENTITY bookmarksButton.tooltip        "북마크 표시">
 <!ENTITY bookmarksCmd.commandkey "b">
 
 <!ENTITY bookmarksMenuButton.label          "북마크">
-<!ENTITY bookmarksMenuButton.tooltip        "북마크 표시">
-<!ENTITY bookmarksMenuButton.unsorted.label "미분류 북마크">
-<!ENTITY viewBookmarksSidebar.label         "탐색창에 표시">
+<!ENTITY bookmarksMenuButton.other.label "다른 북마크">
+<!ENTITY viewBookmarksSidebar2.label        "북마크 탐색창 보기">
 <!ENTITY viewBookmarksToolbar.label         "도구 모음에 표시">
 
-<!-- LOCALIZATION NOTE (bookmarksSidebarGtkCmd.commandkey): This command        
+<!ENTITY containersMenu.label "컨테이너">
+
+<!-- LOCALIZATION NOTE (bookmarksSidebarGtkCmd.commandkey): This command
   -  key should not contain the letters A-F, since these are reserved
   -  shortcut keys on Linux. -->
-<!ENTITY bookmarksGtkCmd.commandkey	"o">
-<!ENTITY bookmarksWinCmd.commandkey	"i">
+<!ENTITY bookmarksGtkCmd.commandkey "o">
+<!ENTITY bookmarksWinCmd.commandkey "i">
 
 <!ENTITY historyButton.label            "방문 기록">
-<!ENTITY historyButton.tooltip          "방문 사이트 목록 표시">
 <!ENTITY historySidebarCmd.commandKey   "h">
 
 <!ENTITY toolsMenu.label              "도구">
-<!ENTITY toolsMenu.accesskey          "T">
+<!ENTITY toolsMenu.accesskey          "T"> 
 
 <!ENTITY keywordfield.label           "검색 항목에 키워드 지정…">
 <!ENTITY keywordfield.accesskey       "K">
-<!ENTITY search.label                 "웹 검색">
-<!ENTITY search.accesskey             "S">
+
 <!ENTITY downloads.label              "다운로드">
-<!ENTITY downloads.tooltip            "진행 중인 다운로드 상태 표시">
 <!ENTITY downloads.accesskey          "D">
 <!ENTITY downloads.commandkey         "j">
 <!ENTITY downloadsUnix.commandkey     "y">
@@ -198,103 +276,60 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY webDeveloperMenu.label       "웹 개발 도구">
 <!ENTITY webDeveloperMenu.accesskey   "W">
 
-<!ENTITY devtoolsConnect.label        "연결…">
-<!ENTITY devtoolsConnect.accesskey    "e">
-
-<!ENTITY errorConsoleCmd.label        "오류 정보">
-<!ENTITY errorConsoleCmd.accesskey    "C">
-<!ENTITY errorConsoleCmd.commandkey   "j">
-
-<!ENTITY remoteWebConsoleCmd.label    "원격 웹 콘솔">
-
 <!ENTITY inspectContextMenu.label     "요소 검사">
 <!ENTITY inspectContextMenu.accesskey "Q">
 
-<!ENTITY responsiveDesignTool.label   "반응형 웹 디자인 보기">
-<!ENTITY responsiveDesignTool.accesskey "R">
-<!ENTITY responsiveDesignTool.commandkey "M">
-
-<!-- LOCALIZATION NOTE (scratchpad.label) : This menu item label appears
-   - in the Tools menu. See bug 653093.
-   - The Scratchpad is intended to provide a simple text editor for creating
-   - and evaluating bits of JavaScript code for the purposes of function
-   - prototyping, experimentation and convenient scripting.
-   -
-   - It 's quite possible that you won't have a good analogue for the word
-   - "Scratchpad"in your locale. You should feel free to find a close
-   - approximation to it or choose a word (or words) that means
-   - "simple discardable text editor"-->
-<!ENTITY scratchpad.label             "스크래치 패드">
-<!ENTITY scratchpad.accesskey         "s">
-<!ENTITY scratchpad.keycode           "VK_F4">
-<!ENTITY scratchpad.keytext           "F4">
-
-<!ENTITY devToolbarCloseButton.tooltiptext "개발자 도구 모음 닫기">
-<!ENTITY devToolbarMenu.label              "개발자 도구 모음">
-<!ENTITY devToolbarMenu.accesskey          "v">
-<!ENTITY devToolbar.keycode                "VK_F2">
-<!ENTITY devToolbar.keytext                "F2">
-<!ENTITY devToolboxMenuItem.label          "개발자 도구">
-<!ENTITY devToolboxMenuItem.accesskey      "T">
-
-<!ENTITY devToolbarToolsButton.tooltip     "개발자 도구 시작">
-<!ENTITY devToolbarOtherToolsButton.label  "도구 더 보기">
-
-<!ENTITY getMoreDevtoolsCmd.label        "기타 도구">
-<!ENTITY getMoreDevtoolsCmd.accesskey    "M">
-
-<!ENTITY fileMenu.label         "파일">
+<!ENTITY fileMenu.label         "파일"> 
 <!ENTITY fileMenu.accesskey       "F">
+<!ENTITY newUserContext.label             "새 포함 탭">
+<!ENTITY newUserContext.accesskey         "C">
 <!ENTITY newNavigatorCmd.label        "새 창">
 <!ENTITY newNavigatorCmd.key        "N">
 <!ENTITY newNavigatorCmd.accesskey      "N">
 <!ENTITY newPrivateWindow.label     "새 사생활 보호 모드">
 <!ENTITY newPrivateWindow.accesskey "W">
+<!ENTITY newNonRemoteWindow.label   "e10s가 아닌 새 창">
 
-<!ENTITY editMenu.label         "편집">
-<!ENTITY editMenu.accesskey       "E">
-<!ENTITY undoCmd.label            "실행 취소">
-<!ENTITY undoCmd.key            "Z">
-<!ENTITY undoCmd.accesskey          "U">
-<!ENTITY redoCmd.label            "실행 반복">
-<!ENTITY redoCmd.key            "Y">
-<!ENTITY redoCmd.accesskey          "R">
-<!ENTITY cutCmd.label           "잘라내기">
-<!ENTITY cutCmd.key             "X">
-<!ENTITY cutCmd.accesskey         "t">
-<!ENTITY copyCmd.label            "복사">
-<!ENTITY copyCmd.key            "C">
-<!ENTITY copyCmd.accesskey          "C">
-<!ENTITY pasteCmd.label           "붙여넣기">
-<!ENTITY pasteCmd.key           "V">
-<!ENTITY pasteCmd.accesskey         "P">
-<!ENTITY deleteCmd.label          "삭제">
-<!ENTITY deleteCmd.key            "D">
-<!ENTITY deleteCmd.accesskey        "D">
-<!ENTITY selectAllCmd.label         "모두 선택">
-<!ENTITY selectAllCmd.key         "A">
-<!ENTITY selectAllCmd.accesskey       "A">
+<!ENTITY editMenu.label         "편집"> 
+<!ENTITY editMenu.accesskey       "E"> 
+<!ENTITY undoCmd.label            "실행 취소">  
+<!ENTITY undoCmd.key            "Z">  
+<!ENTITY undoCmd.accesskey          "U"> 
+<!ENTITY redoCmd.label            "실행 반복">  
+<!ENTITY redoCmd.key            "Y">  
+<!ENTITY redoCmd.accesskey          "R"> 
+<!ENTITY cutCmd.label           "잘라내기">  
+<!ENTITY cutCmd.key             "X">  
+<!ENTITY cutCmd.accesskey         "t"> 
+<!ENTITY copyCmd.label            "복사">  
+<!ENTITY copyCmd.key            "C">  
+<!ENTITY copyCmd.accesskey          "C"> 
+<!ENTITY pasteCmd.label           "붙여넣기">  
+<!ENTITY pasteCmd.key           "V">  
+<!ENTITY pasteCmd.accesskey         "P"> 
+<!ENTITY deleteCmd.label          "삭제">  
+<!ENTITY deleteCmd.key            "D">  
+<!ENTITY deleteCmd.accesskey        "D"> 
+<!ENTITY selectAllCmd.label         "모두 선택">  
+<!ENTITY selectAllCmd.key         "A">  
+<!ENTITY selectAllCmd.accesskey       "A"> 
 <!ENTITY preferencesCmd2.label       "설정…">
 <!ENTITY preferencesCmd2.accesskey     "O">
 <!ENTITY preferencesCmdUnix.label       "환경 설정">
-<!ENTITY preferencesCmdUnix.accesskey     "n">
+<!ENTITY preferencesCmdUnix.accesskey     "n"> 
 
 <!ENTITY clearRecentHistory.label               "사용 기록 삭제">
 
 <!ENTITY privateBrowsingCmd.commandkey          "P">
 
-<!ENTITY viewMenu.label         "보기">
-<!ENTITY viewMenu.accesskey       "V">
-<!ENTITY viewTabGroups.label            "탭 그룹…">
-<!ENTITY viewTabGroups.accesskey        "G">
-<!ENTITY viewToolbarsMenu.label       "도구 모음">
-<!ENTITY viewToolbarsMenu.accesskey     "T">
+<!ENTITY viewMenu.label         "보기"> 
+<!ENTITY viewMenu.accesskey       "V"> 
+<!ENTITY viewToolbarsMenu.label       "도구 모음"> 
+<!ENTITY viewToolbarsMenu.accesskey     "T"> 
 <!ENTITY viewSidebarMenu.label "탐색창">
 <!ENTITY viewSidebarMenu.accesskey "e">
-<!ENTITY viewCustomizeToolbar.label       "사용자 지정…">
+<!ENTITY viewCustomizeToolbar.label       "사용자 지정…"> 
 <!ENTITY viewCustomizeToolbar.accesskey     "C">
-<!ENTITY viewTabsOnTop.label            "탭 항상 위로">
-<!ENTITY viewTabsOnTop.accesskey        "T">
 
 <!ENTITY historyMenu.label "이동">
 <!ENTITY historyMenu.accesskey "s">
@@ -303,25 +338,71 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY historyUndoWindowMenu.label "최근에 닫은 창">
 <!ENTITY historyRestoreLastSession.label "이전 세션 복원">
 
-<!ENTITY historyHomeCmd.label "홈 페이지">
 <!ENTITY showAllHistoryCmd2.label "방문 기록 보기">
 <!ENTITY showAllHistoryCmd.commandkey "H">
 
-<!ENTITY appMenuEdit.label "편집">
 <!ENTITY appMenuCustomize.label "사용자 설정">
-<!ENTITY appMenuToolbarLayout.label "도구 모음 배치…">
-<!ENTITY appMenuSidebars.label "탐색창">
-<!ENTITY appMenuFind.label "찾기…">
-<!ENTITY appMenuUnsorted.label "미분류 북마크">
-<!ENTITY appMenuWebDeveloper.label "개발자 도구">
-<!ENTITY appMenuGettingStarted.label "시작하기">
-<!ENTITY appMenuSafeMode.label "안전모드로 시작…">
-<!ENTITY appMenuSafeMode.accesskey "R">
+<!ENTITY appMenuCustomize.tooltip "메뉴와 도구 상자 사용자 설정">
+<!ENTITY appMenuCustomizeExit.label "사용자 설정 종료">
+<!ENTITY appMenuCustomizeExit.tooltip "사용자 설정 완료">
+<!ENTITY appMenuHistory.label "방문 기록">
+<!ENTITY appMenuHistory.showAll.label "방문 기록 보기">
+<!ENTITY appMenuHistory.clearRecent.label "최근 방문 기록 삭제…">
+<!ENTITY appMenuHistory.restoreSession.label "이전 세션 복원">
+<!ENTITY appMenuHistory.viewSidebar.label "방문 기록 탐색창 보기">
+<!ENTITY appMenuHelp.tooltip "도움말 메뉴 열기">
+
+<!ENTITY appMenuRemoteTabs.label "동기화된 탭">
+<!-- LOCALIZATION NOTE (appMenuRemoteTabs.notabs.label): This is shown beneath
+     the name of a device when that device has no open tabs -->
+<!ENTITY appMenuRemoteTabs.notabs.label "열린 탭이 없음">
+<!-- LOCALIZATION NOTE (appMenuRemoteTabs.tabsnotsyncing.label): This is shown
+     when Sync is configured but syncing tabs is disabled. -->
+<!ENTITY appMenuRemoteTabs.tabsnotsyncing.label "다른 기기의 탭 목록을 보려면 탭 동기화를 켜십시오.">
+<!-- LOCALIZATION NOTE (appMenuRemoteTabs.noclients.label): This is shown
+     when Sync is configured but this appears to be the only device attached to
+     the account. We also show links to download Firefox for android/ios. -->
+<!ENTITY appMenuRemoteTabs.noclients.title "아직 동기화된 탭이 없습니다!">
+<!ENTITY appMenuRemoteTabs.noclients.subtitle "다른 기기에서도 여기에서 열린 탭을 사용하시겠습니까?">
+<!ENTITY appMenuRemoteTabs.openprefs.label "Sync 설정">
+<!ENTITY appMenuRemoteTabs.notsignedin.label "다른 기기의 탭 목록을 보기 위해서 로그인 하세요.">
+<!ENTITY appMenuRemoteTabs.signin.label "Sync에 로그인">
+<!ENTITY appMenuRemoteTabs.sidebar.label "동기화한 탭 탐색창 보이기">
+
+<!ENTITY customizeMenu.addToToolbar.label "도구 상자에 추가">
+<!ENTITY customizeMenu.addToToolbar.accesskey "A">
+<!ENTITY customizeMenu.addToPanel.label "메뉴에 추가">
+<!ENTITY customizeMenu.addToPanel.accesskey "M">
+<!ENTITY customizeMenu.moveToToolbar.label "도구 상자로 옮기기">
+<!ENTITY customizeMenu.moveToToolbar.accesskey "o">
+<!-- LOCALIZATION NOTE (customizeMenu.moveToPanel.accesskey) can appear on the
+     same context menu as menubarCmd and personalbarCmd, so they should have
+     different access keys. customizeMenu.moveToToolbar and 
+     customizeMenu.moveToPanel are mutually exclusive, so can share access
+     keys.  -->
+<!ENTITY customizeMenu.moveToPanel.label "메뉴로 옮기기">
+<!ENTITY customizeMenu.moveToPanel.accesskey "o">
+<!ENTITY customizeMenu.removeFromToolbar.label "도구 상자에서 제거">
+<!ENTITY customizeMenu.removeFromToolbar.accesskey "R">
+<!ENTITY customizeMenu.removeFromMenu.label "메뉴에서 제거">
+<!ENTITY customizeMenu.removeFromMenu.accesskey "R">
+<!ENTITY customizeMenu.addMoreItems.label "더 많은 아이템 추가…">
+<!ENTITY customizeMenu.addMoreItems.accesskey "A">
 
 <!ENTITY openCmd.commandkey           "l">
 <!ENTITY urlbar.placeholder2          "검색어나 주소 입력">
 <!ENTITY urlbar.accesskey             "d">
+<!-- LOCALIZATION NOTE (urlbar.extension.label): Used to indicate that a selected autocomplete entry is provided by an extension. -->
+<!ENTITY urlbar.extension.label       "확장기능:">
 <!ENTITY urlbar.switchToTab.label     "탭 전환:">
+
+<!ENTITY urlbar.searchSuggestionsNotification.question "추천기능을 이용해서 검색 경험을 향상시키시겠습니까?">
+<!ENTITY urlbar.searchSuggestionsNotification.learnMore "자세히 보기…">
+<!ENTITY urlbar.searchSuggestionsNotification.learnMore.accesskey "l">
+<!ENTITY urlbar.searchSuggestionsNotification.disable "아니요">
+<!ENTITY urlbar.searchSuggestionsNotification.disable.accesskey "n">
+<!ENTITY urlbar.searchSuggestionsNotification.enable "예">
+<!ENTITY urlbar.searchSuggestionsNotification.enable.accesskey "y">
 
 <!-- 
   Comment duplicated from browser-sets.inc:
@@ -347,7 +428,42 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY searchFocus.commandkey2      "e">
 <!ENTITY searchFocusUnix.commandkey   "j">
 
-<!ENTITY tabView.commandkey           "e">
+<!-- LOCALIZATION NOTE (contentSearchInput.label):
+     This is set as the aria-label attribute for the search input box in the
+     in-content search UI, to be used by screen readers. -->
+<!ENTITY contentSearchInput.label     "검색 질의어">
+<!ENTITY contentSearchSubmit.tooltip  "검색하기">
+
+<!-- LOCALIZATION NOTE (searchFor.label, searchWith.label):
+     These two strings are used to build the header above the list of one-click
+     search providers:  "Search for <used typed keywords> with:" -->
+<!ENTITY searchFor.label              "">
+<!ENTITY searchWith.label             "를 여기서 검색:">
+
+<!-- LOCALIZATION NOTE (search.label, searchAfter.label):
+     This string is used to build the header above the list of one-click search
+     providers when a one off engine has been selected.  The searchAfter text is
+     intentionally left empty for en-US and can be used by other localizations to
+     display a string after the search engine name.  This string will be displayed
+     as:  "Search <selected engine name><searchAfter.label text>" -->
+<!ENTITY search.label                 "">
+<!ENTITY searchAfter.label            "에서 검색">
+
+<!-- LOCALIZATION NOTE (searchWithHeader.label):
+     The wording of this string should be as close as possible to
+     searchFor.label and searchWith.label. This string will be used instead of
+     them when the user has not typed any keyword. -->
+<!ENTITY searchWithHeader.label       "여기서 검색:">
+<!-- LOCALIZATION NOTE (changeSearchSettings.button):
+     This string won't wrap, so if the translated string is longer,
+     consider translating it as if it said only "Search Settings". -->
+<!ENTITY changeSearchSettings.button  "검색 설정 바꾸기">
+<!ENTITY changeSearchSettings.tooltip "검색 설정 바꾸기">
+
+<!ENTITY searchInNewTab.label         "새 탭에서 검색">
+<!ENTITY searchInNewTab.accesskey     "T">
+<!ENTITY searchSetAsDefault.label     "기본 검색 엔진으로 설정">
+<!ENTITY searchSetAsDefault.accesskey "D">
 
 <!ENTITY openLinkCmdInTab.label       "새 탭에 링크 열기">
 <!ENTITY openLinkCmdInTab.accesskey   "T">
@@ -361,6 +477,8 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY openFrameCmdInTab.accesskey  "T">
 <!ENTITY openFrameCmd.label           "새 창에 프레임 열기">
 <!ENTITY openFrameCmd.accesskey       "W">
+<!ENTITY openLinkCmdInContainerTab.label "새 포함 탭에서 링크 열기">
+<!ENTITY openLinkCmdInContainerTab.accesskey "C">
 <!ENTITY showOnlyThisFrameCmd.label     "이 프레임만 보이기">
 <!ENTITY showOnlyThisFrameCmd.accesskey "S">
 <!ENTITY reloadCmd.commandkey         "r">
@@ -385,6 +503,8 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY viewImageCmd.accesskey       "I">
 <!ENTITY viewImageInfoCmd.label       "이미지 정보 보기">
 <!ENTITY viewImageInfoCmd.accesskey   "f">
+<!ENTITY viewImageDescCmd.label       "설명 보기">
+<!ENTITY viewImageDescCmd.accesskey   "D">
 <!ENTITY viewVideoCmd.label           "동영상 보기">
 <!ENTITY viewVideoCmd.accesskey       "I">
 <!ENTITY viewBGImageCmd.label         "배경 이미지 보기">
@@ -392,7 +512,6 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY setDesktopBackgroundCmd.label      "배경으로 지정…">
 <!ENTITY setDesktopBackgroundCmd.accesskey  "S">
 <!ENTITY bookmarkPageCmd2.label       "북마크에 추가">
-<!ENTITY bookmarkPageCmd2.accesskey   "m">
 <!ENTITY bookmarkThisLinkCmd.label      "링크를 북마크에 추가">
 <!ENTITY bookmarkThisLinkCmd.accesskey  "L">
 <!ENTITY bookmarkThisFrameCmd.label      "프레임을 북마크에 추가">
@@ -420,6 +539,8 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY emailImageCmd.accesskey      "a">
 <!ENTITY emailVideoCmd.label          "동영상 보내기…">
 <!ENTITY emailVideoCmd.accesskey      "a">
+<!ENTITY castVideoCmd.label           "동영상 기기로 보내기">
+<!ENTITY castVideoCmd.accesskey       "e">
 <!ENTITY emailAudioCmd.label          "오디오 보내기…">
 <!ENTITY emailAudioCmd.accesskey      "a">
 <!ENTITY playPluginCmd.label          "현재 플러그인 활성화">
@@ -431,7 +552,7 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY copyImageCmd.label           "이미지 주소 복사">
 <!ENTITY copyImageCmd.accesskey       "o">
 <!ENTITY copyImageContentsCmd.label   "이미지 복사">
-<!ENTITY copyImageContentsCmd.accesskey  "y">
+<!ENTITY copyImageContentsCmd.accesskey  "y"> 
 <!ENTITY copyVideoURLCmd.label        "동영상 주소 복사">
 <!ENTITY copyVideoURLCmd.accesskey    "o">
 <!ENTITY copyAudioURLCmd.label        "오디오 주소 복사">
@@ -456,6 +577,23 @@ items are mutually exclusive. -->
 <!ENTITY mediaMute.accesskey         "M">
 <!ENTITY mediaUnmute.label           "소리켜기">
 <!ENTITY mediaUnmute.accesskey       "m">
+<!ENTITY mediaPlaybackRate2.label     "재생 속도">
+<!ENTITY mediaPlaybackRate2.accesskey "d">
+<!ENTITY mediaPlaybackRate050x2.label "느리게 (0.5×)">
+<!ENTITY mediaPlaybackRate050x2.accesskey "S">
+<!ENTITY mediaPlaybackRate100x2.label "보통">
+<!ENTITY mediaPlaybackRate100x2.accesskey "N">
+<!ENTITY mediaPlaybackRate125x2.label "빠르게 (1.25×)">
+<!ENTITY mediaPlaybackRate125x2.accesskey "F">
+<!ENTITY mediaPlaybackRate150x2.label "더 빠르게 (1.5×)">
+<!ENTITY mediaPlaybackRate150x2.accesskey "a">
+<!-- LOCALIZATION NOTE: "Ludicrous" is a reference to the
+movie "Space Balls" and is meant to say that this speed is very
+fast. -->
+<!ENTITY mediaPlaybackRate200x2.label "매우 빠르게 (2×)">
+<!ENTITY mediaPlaybackRate200x2.accesskey "L">
+<!ENTITY mediaLoop.label             "반복">
+<!ENTITY mediaLoop.accesskey         "L">
 <!-- LOCALIZATION NOTE: The access keys for "Show Controls" and
 "Hide Controls" are the same because the two context-menu
 items are mutually exclusive. -->
@@ -502,32 +640,24 @@ you can use these alternative items. Otherwise, their values should be empty.  -
 <!ENTITY fullZoom.label                 "크기 조정">
 <!ENTITY fullZoom.accesskey             "Z">
 
-<!ENTITY newTabButton.tooltip           "새 탭 열기">
-<!ENTITY newWindowButton.tooltip        "새 창 열기">
 <!ENTITY sidebarCloseButton.tooltip     "탐색창 닫기">
 
-<!ENTITY cutButton.tooltip              "잘라내기">
-<!ENTITY copyButton.tooltip             "복사">
-<!ENTITY pasteButton.tooltip            "붙여넣기">
-
-<!ENTITY fullScreenButton.tooltip       "윈도우를 화면 전체에 표시합니다.">
-
-<!ENTITY zoomOutButton.tooltip          "축소">
-<!ENTITY zoomInButton.tooltip           "확대">
-<!ENTITY zoomControls.label             "크기 조정">
-
-<!ENTITY quitApplicationCmdWin.label       "종료">
-<!ENTITY quitApplicationCmdWin.accesskey   "x">
+<!ENTITY quitApplicationCmdWin2.label       "종료">
+<!ENTITY quitApplicationCmdWin2.accesskey   "x">
+<!ENTITY quitApplicationCmdWin2.tooltip     "&brandShorterName; 종료">
 <!ENTITY goBackCmd.commandKey "[">
 <!ENTITY goForwardCmd.commandKey "]">
-<!ENTITY quitApplicationCmd.label       "종료">
+<!ENTITY quitApplicationCmd.label       "종료"> 
 <!ENTITY quitApplicationCmd.accesskey   "Q">
-<!ENTITY quitApplicationCmdMac.label    "&brandShortName; 종료">
-<!ENTITY quitApplicationCmdMac.key      "Q">
+<!ENTITY quitApplicationCmdMac2.label   "&brandShorterName; 종료">
+<!-- LOCALIZATION NOTE(quitApplicationCmdUnix.key): This keyboard shortcut is used by both Linux and OSX builds. -->
+<!ENTITY quitApplicationCmdUnix.key     "Q">
 
-<!ENTITY closeCmd.label                 "닫기">
-<!ENTITY closeCmd.key                   "W">
+<!ENTITY closeCmd.label                 "닫기">  
+<!ENTITY closeCmd.key                   "W">  
 <!ENTITY closeCmd.accesskey             "C">
+
+<!ENTITY toggleMuteCmd.key              "M">
 
 <!ENTITY pageStyleMenu.label "문서 스타일">
 <!ENTITY pageStyleMenu.accesskey "y">
@@ -560,102 +690,213 @@ you can use these alternative items. Otherwise, their values should be empty.  -
 <!ENTITY findAgainCmd.accesskey "g">
 <!ENTITY findAgainCmd.commandkey "g">
 <!ENTITY findAgainCmd.commandkey2 "VK_F3">
+<!ENTITY findSelectionCmd.commandkey "e">
 
 <!ENTITY spellAddDictionaries.label "사전 추가…">
 <!ENTITY spellAddDictionaries.accesskey "A">
 
 <!ENTITY editBookmark.done.label                     "완료">
-<!ENTITY editBookmark.cancel.label                   "취소">
 <!ENTITY editBookmark.removeBookmark.accessKey       "R">
 
-<!ENTITY identity.unverifiedsite2 "이 웹 사이트는 신원 정보를 제공하지 않습니다.">
-<!ENTITY identity.connectedTo "접속 사이트:">
-<!-- Localization note (identity.runBy) : This string appears between a
-domain name (above) and an organization name (below). E.g.
+<!ENTITY identity.connectionSecure "안전한 연결">
+<!ENTITY identity.connectionNotSecure "안전하지 않은 연결">
+<!ENTITY identity.connectionFile "이 페이지는 사용자의 컴퓨터에 저장됩니다.">
+<!ENTITY identity.connectionVerified2 "안전하게 사이트에 연결되었습니다. 소유자:">
+<!ENTITY identity.connectionInternal "안전한 &brandShortName; 페이지입니다.">
+<!ENTITY identity.insecureLoginForms2 "이 페이지에 입력된 로그인 정보는 노출될 수 있습니다.">
 
-example.com
-which is run by
-Example Enterprises, Inc.
+<!-- Strings for connection state warnings. -->
+<!ENTITY identity.activeBlocked "&brandShortName;가 안전하지 않은 페이지의 일부를 차단했습니다.">
+<!ENTITY identity.passiveLoaded "페이지의 일부(이미지 등)가 안전하지 않습니다.">
+<!ENTITY identity.activeLoaded "이 페이지의 보호를 비활성화 하였습니다.">
+<!ENTITY identity.weakEncryption "이 페이지는 약한 암호화를 사용합니다.">
 
-The layout of the identity dialog prevents combining this into a single string with
-substitution variables.  If it is difficult to translate the sense of the string
-with that structure, consider a translation which ignores the preceding domain and
-just addresses the organization to follow, e.g. "This site is run by " -->
-<!ENTITY identity.runBy "이 사이트는 아래 단체에 의하여 운영됩니다.">
+<!-- Strings for connection state warnings in the subview. -->
+<!ENTITY identity.description.insecure "이 사이트의 연결이 보호되지 않습니다. 전송하는 정보(비밀번호, 메시지, 신용 카드 번호 등)를 다른사람이 볼 수 있습니다.">
+<!ENTITY identity.description.insecureLoginForms "이 페이지에 입력한 로그인 정보는 안전하지 않고 손상될 수 있습니다.">
+<!ENTITY identity.description.weakCipher "이 사이트의 연결이 약한 암호화를 사용하고 있어서 보호되지 않습니다.">
+<!ENTITY identity.description.weakCipher2 "다른 사람이 정보를 보거나 웹사이트의 동작을 바꿀 수 있습니다.">
+<!ENTITY identity.description.activeBlocked "&brandShortName;가 안전하지 않은 페이지의 일부분을 차단했습니다.">
+<!ENTITY identity.description.passiveLoaded "연결이 안전하지 않아서 사용자가 공유하는 정보를 다른 사람이 볼 수 있습니다.">
+<!ENTITY identity.description.passiveLoaded2 "이 웹사이트는 안전하지 않은 컨텐츠(이미지 등)을 포함하고 있습니다.">
+<!ENTITY identity.description.passiveLoaded3 "&brandShortName;가 일부 컨텐츠를 차단했지만 아직 안전하지 않은 컨텐츠(이미지 등)가 있습니다.">
+<!ENTITY identity.description.activeLoaded "이 웹사이트는 안전하지 않은 컨텐츠(스크립트 등)를 포함하고 있고 사용자의 연결이 보호되지 않습니다.">
+<!ENTITY identity.description.activeLoaded2 "이 사이트에 공유하는 정보(비밀번호, 메시지, 신용 카드 번호 등)를 다른사람이 볼 수 있습니다.">
 
-<!ENTITY identity.moreInfoLinkText "자세히 보기…">
+<!ENTITY identity.enableMixedContentBlocking.label "보호 켜기">
+<!ENTITY identity.enableMixedContentBlocking.accesskey "E">
+<!ENTITY identity.disableMixedContentBlocking.label "지금부터 보호 끄기">
+<!ENTITY identity.disableMixedContentBlocking.accesskey "D">
+<!ENTITY identity.learnMore "자세히 보기">
+
+<!ENTITY identity.removeCertException.label "예외 제거">
+<!ENTITY identity.removeCertException.accesskey "R">
+
+<!ENTITY identity.moreInfoLinkText2 "더 보기">
+
+<!ENTITY identity.permissions "권한">
+<!ENTITY identity.permissionsEmpty "이 사이트를 특별한 권한으로 승인하지 않았습니다.">
+<!ENTITY identity.permissionsReloadHint "이 페이지를 다시 읽어들여야 바뀐 점이 올라올 때도 있습니다.">
 
 <!-- Name for the tabs toolbar as spoken by screen readers.
      The word "toolbar" is appended automatically and should not be contained below! -->
 <!ENTITY tabsToolbar.label "브라우저 탭">
 
-<!-- LOCALIZATION NOTE (syncTabsMenu.label): This appears in the history menu -->
-<!ENTITY syncTabsMenu2.label     "다른 기기에 저장된 탭 정보">
+<!-- LOCALIZATION NOTE (syncTabsMenu3.label): This appears in the history menu -->
+<!ENTITY syncTabsMenu3.label     "동기화한 탭">
 
-<!ENTITY syncBrand.shortName.label  "동기화">
+<!ENTITY syncedTabs.sidebar.label              "동기화한 탭">
+<!ENTITY syncedTabs.sidebar.noclients.label    "다른 기기의 탭을 이곳에서도 보려면 그 기기의 Firefox에 로그인하십시오.">
+<!ENTITY syncedTabs.sidebar.noclients.title    "아직 동기화된 탭이 없습니다!">
+<!ENTITY syncedTabs.sidebar.noclients.subtitle "다른 기기에서도 여기에서 열린 탭을 사용하시겠습니까?">
+<!ENTITY syncedTabs.sidebar.notsignedin.label  "다른 기기의 탭 목록을 보기 위해서 로그인 하세요.">
+<!ENTITY syncedTabs.sidebar.notabs.label       "열린 탭이 없음">
+<!ENTITY syncedTabs.sidebar.openprefs.label    "&syncBrand.shortName.label; 설정 열기">
+<!-- LOCALIZATION NOTE (syncedTabs.sidebar.tabsnotsyncing.label): This is shown
+     when Sync is configured but syncing tabs is disabled. -->
+<!ENTITY syncedTabs.sidebar.tabsnotsyncing.label       "다른 기기의 탭 목록을 보려면 탭 동기화를 켜십시오.">
 
-<!ENTITY syncSetup.label              "&syncBrand.shortName.label; 설정…">
-<!ENTITY syncSetup.accesskey          "Y">
+<!-- LOCALIZATION NOTE (syncedTabs.context.open.accesskey,
+                        syncedTabs.context.openAllInTabs.accesskey):
+     These access keys are identical because their associated menu items are
+     mutually exclusive -->
+<!ENTITY syncedTabs.context.open.label                       "열기">
+<!ENTITY syncedTabs.context.open.accesskey                   "O">
+<!ENTITY syncedTabs.context.openInNewTab.label               "새 탭에서 열기">
+<!ENTITY syncedTabs.context.openInNewTab.accesskey           "w">
+<!ENTITY syncedTabs.context.openInNewWindow.label            "새 창에서 열기">
+<!ENTITY syncedTabs.context.openInNewWindow.accesskey        "N">
+<!ENTITY syncedTabs.context.openInNewPrivateWindow.label     "새 사생활 보호 창에서 열기">
+<!ENTITY syncedTabs.context.openInNewPrivateWindow.accesskey "P">
+<!ENTITY syncedTabs.context.bookmarkSingleTab.label          "이 탭 북마크…">
+<!ENTITY syncedTabs.context.bookmarkSingleTab.accesskey      "B">
+<!ENTITY syncedTabs.context.copy.label                       "복사">
+<!ENTITY syncedTabs.context.copy.accesskey                   "C">
+
+<!ENTITY syncedTabs.context.openAllInTabs.label              "탭에서 모두 열기">
+<!ENTITY syncedTabs.context.openAllInTabs.accesskey          "O">
+
+
+<!ENTITY syncBrand.shortName.label    "동기화">
+
+<!ENTITY syncSignIn.label             "&syncBrand.shortName.label;에 로그인…">
+<!ENTITY syncSignIn.accesskey         "Y">
 <!ENTITY syncSyncNowItem.label        "동기화하기">
 <!ENTITY syncSyncNowItem.accesskey    "S">
+<!ENTITY syncReAuthItem.label         "&syncBrand.shortName.label;에 다시 연결…">
+<!ENTITY syncReAuthItem.accesskey     "R">
 <!ENTITY syncToolbarButton.label      "동기화">
 
-<!ENTITY addonBarCloseButton.tooltip  "부가 기능 모음 닫기">
-<!ENTITY toggleAddonBarCmd.key        "/">
+<!ENTITY social.addons.label "서비스 관리…">
 
-<!ENTITY socialToolbar.title        "소셜 도구 모음 버튼">
-<!ENTITY social.notLoggedIn.label   "로그인 안 됨">
+<!ENTITY social.directory.label "활성화 목록">
+<!ENTITY social.directory.text "이 목록에서 공유 서비스를 활성화할 수 있습니다.">
+<!ENTITY social.directory.button "!">
+<!ENTITY social.directory.introText "&brandShortName;에 더할 서비스를 누르세요.">
+<!ENTITY social.directory.viewmore.text "더 보기">
 
-<!ENTITY social.ok.label       "확인">
-<!ENTITY social.ok.accesskey   "O">
-
-<!ENTITY social.toggleSidebar.label "사이드바 보기">
-<!ENTITY social.toggleSidebar.accesskey "s">
-
-<!ENTITY social.toggleNotifications.label "바탕화면 표시">
-<!ENTITY social.toggleNotifications.accesskey "n">
-
-<!ENTITY social.activated.undobutton.label "실행 취소">
-<!ENTITY social.activated.undobutton.accesskey "U">
-
-<!ENTITY social.chatBar.commandkey "c">
-<!ENTITY social.chatBar.label "채팅 창">
-<!ENTITY social.chatBar.accesskey "c">
+<!ENTITY customizeMode.menuAndToolbars.header2 "부가적인 도구와 기능">
+<!ENTITY customizeMode.menuAndToolbars.empty "다른 도구를 찾으십니까?">
+<!ENTITY customizeMode.menuAndToolbars.emptyLink "수천 개의 부가기능에서 고르기">
+<!ENTITY customizeMode.restoreDefaults "기본값으로 복원">
+<!ENTITY customizeMode.toolbars "도구 모음 보이거나 숨기기">
+<!ENTITY customizeMode.titlebar "제목창">
+<!ENTITY customizeMode.lwthemes "테마">
+<!ENTITY customizeMode.lwthemes.myThemes "내 테마">
+<!ENTITY customizeMode.lwthemes.recommended "추천">
+<!ENTITY customizeMode.lwthemes.menuManage "관리">
+<!ENTITY customizeMode.lwthemes.menuManage.accessKey "M">
+<!ENTITY customizeMode.lwthemes.menuGetMore "더 많은 테마 구하기">
+<!ENTITY customizeMode.lwthemes.menuGetMore.accessKey "G">
 
 <!ENTITY getUserMedia.selectCamera.label "공유할 카메라:">
 <!ENTITY getUserMedia.selectCamera.accesskey "C">
 <!ENTITY getUserMedia.selectMicrophone.label "공유할 마이크:">
 <!ENTITY getUserMedia.selectMicrophone.accesskey "M">
+<!ENTITY getUserMedia.audioCapture.label "탭의 소리는 공유됩니다.">
+<!ENTITY getUserMedia.allWindowsShared.message "화면에 표시되어 있는 모든 창을 공유합니다.">
 
-<!ENTITY webrtcIndicatorButton.label "카메라 / 마이크 접근">
-<!ENTITY webrtcIndicatorButton.tooltip "현재 카메라나 마이크를 공유하는 사이트 표시">
+<!ENTITY trackingProtection.title "추적 보호">
+<!ENTITY trackingProtection.detectedBlocked3 "&brandShortName;가 사용자의 탐색을 추적할 수 있는 페이지의 부분을 차단하였습니다.">
+<!ENTITY trackingProtection.detectedNotBlocked3 "이 사이트는 사용자의 탐색을 추적할 수 있는 요소를 포함하고 있습니다. 보호 기능이 꺼져 있습니다.">
+<!ENTITY trackingProtection.notDetected3 "페이지에서 추적을 하는 요소를 발견하지 못했습니다.">
+<!-- LOCALIZATION NOTE (trackingProtection.unblock.label, trackingProtection.unblock.accesskey):
+     The associated button with this label and accesskey is only shown when opening the control
+     center while looking at a site with trackers in NON-private browsing mode. -->
+<!ENTITY trackingProtection.unblock.label "이 사이트의 보호 비활성화">
+<!ENTITY trackingProtection.unblock.accesskey "D">
+<!-- LOCALIZATION NOTE (trackingProtection.unblockPrivate.label, trackingProtection.unblockPrivate.accesskey):
+     The associated button with this label and accesskey is only shown when opening the control
+     center while looking at a site with trackers in PRIVATE browsing mode. -->
+<!ENTITY trackingProtection.unblockPrivate.label "이 세션의 보호 비활성화">
+<!ENTITY trackingProtection.unblockPrivate.accesskey "D">
+<!ENTITY trackingProtection.block2.label "보호 활성화">
+<!ENTITY trackingProtection.block2.accesskey "E">
 
-<!ENTITY mixedContentBlocked.helplink "자세히 보기">
-<!ENTITY mixedContentBlocked.moreinfo "대부분의 웹 사이트는 이 콘텐츠를 차단하더라도 여전히 잘 돌아갑니다.">
+<!ENTITY trackingContentBlocked.message "추적">
+<!ENTITY trackingContentBlocked.moreinfo "이 페이지에서 여러분의 온라인 활동을 추적하는 부분을 차단했습니다.">
+<!ENTITY trackingContentBlocked.learnMore "더 알아보기">
+<!ENTITY trackingContentBlocked.options "설정">
+<!ENTITY trackingContentBlocked.unblock2.label "이 사이트에서는 보호 풀기">
+<!ENTITY trackingContentBlocked.unblock2.accesskey "D">
+<!ENTITY trackingContentBlocked.block.label "보호 켜기">
+<!ENTITY trackingContentBlocked.block.accesskey "E">
+<!ENTITY trackingContentBlocked.disabled.message "추적 보호 풀림">
 
+<!ENTITY pluginNotification.showAll.label "모두 보기">
+<!ENTITY pluginNotification.showAll.accesskey "S">
 
-<!ENTITY browserConsoleCmd.label      "Browser Console">
-<!ENTITY mediaPlaybackRate.accesskey "l">
-<!ENTITY mediaPlaybackRate.label     "Play Speed">
-<!ENTITY mediaPlaybackRate050x.accesskey "S">
-<!ENTITY mediaPlaybackRate050x.label "Slow Motion (0.5×)">
-<!ENTITY mediaPlaybackRate100x.accesskey "N">
-<!ENTITY mediaPlaybackRate100x.label "Normal Speed">
-<!ENTITY mediaPlaybackRate150x.accesskey "H">
-<!ENTITY mediaPlaybackRate150x.label "High Speed (1.5×)">
-<!ENTITY mediaPlaybackRate200x.accesskey "L">
-<!-- LOCALIZATION NOTE: "Ludicrous Speed" is a reference to the
-movie "Space Balls" and is meant to say that this speed is very
-fast. -->
-<!ENTITY mediaPlaybackRate200x.label "Ludicrous Speed (2×)">
+<!-- LOCALIZATION NOTE (pluginActivateNow.label, pluginActivateAlways.label, pluginBlockNow.label): These should be the same as the matching strings in browser.properties -->
+<!ENTITY pluginActivateNow.label "지금만 허가">
+<!ENTITY pluginActivateAlways.label "허가하고 기억">
+<!ENTITY pluginBlockNow.label "플러그인 차단">
 
-<!ENTITY pointerLock.notification.message "Press ESC at any time to show it again.">
+<!-- LOCALIZATION NOTE: (pluginNotification.width): This is used to determine the
+     width of the plugin popup notification that can appear if a plugin has been
+     blocked on a page. Should be wide enough to fit the pluginActivateNow.label
+     and pluginActivateAlways.label strings above on a single line. This must be
+     a CSS length value. -->
+<!ENTITY pluginNotification.width "28em">
 
-<!ENTITY social.activated.description "Services from <label/> have been enabled. You can change your settings for services in the <label class='text-link'>Add-on Manager</label>.">
-<!ENTITY social.activated.undo.accesskey "U">
-<!ENTITY social.activated.undo.label "Oops, undo this!">
+<!ENTITY uiTour.infoPanel.close "닫기">
 
-<!ENTITY social.addons.label "Manage Services…">
-<!ENTITY social.closeNotificationItem.label "Not Now">
-<!ENTITY social.learnMore.accesskey "l">
-<!ENTITY social.learnMore.label "Learn more…">
+<!ENTITY appMenuSidebars.label         "탐색창">
+
+<!-- LOCALIZATION NOTE: (panicButton.view.mainTimeframeDesc, panicButton.view.5min, panicButton.view.2hr, panicButton.view.day):
+     The .mainTimeframeDesc string combined with any of the 3 others is meant to form a complete sentence, e.g. "Forget the last: Five minutes".
+     Please ensure that this remains the case in the translation. -->
+<!ENTITY panicButton.view.mainTimeframeDesc       "지난 시간을 삭제합니다:">
+<!ENTITY panicButton.view.5min                    "5분">
+<!ENTITY panicButton.view.2hr                     "2시간">
+<!ENTITY panicButton.view.day                     "24시간">
+
+<!-- LOCALIZATION NOTE: (panicButton.view.mainLabel, panicButton.view.deleteCookies, panicButton.view.deleteHistory, panicButton.view.deleteTabsAndWindows, panicButton.view.openNewWindow):
+     The .mainActionDesc string combined with any of the 4 others is meant to form a complete sentence, e.g. "Proceeding will: Delete Recent Cookies".
+     Note also that the deleteCookies, deleteHistory and deleteTabsAndWindows strings include <html:strong> tags for emphasis on the words "Cookies", "History", "Tabs" and "Windows".
+     The translation should do the same. -->
+<!ENTITY panicButton.view.mainActionDesc          "다음을 진행합니다:">
+<!ENTITY panicButton.view.deleteCookies           "최근 <html:strong>쿠키</html:strong> 삭제">
+<!ENTITY panicButton.view.deleteHistory           "최근 <html:strong>방문기록</html:strong> 삭제">
+<!ENTITY panicButton.view.deleteTabsAndWindows    "모든 <html:strong>탭</html:strong>과 <html:strong>창</html:strong> 닫기">
+<!ENTITY panicButton.view.openNewWindow           "빈 새로운 창 열기">
+
+<!ENTITY panicButton.view.undoWarning             "이 작업은 취소할 수 없습니다.">
+<!ENTITY panicButton.view.forgetButton            "삭제!">
+
+<!ENTITY panicButton.thankyou.msg1                "최근 방문기록이 삭제되었습니다.">
+<!ENTITY panicButton.thankyou.msg2                "안전한 브라우징!">
+<!ENTITY panicButton.thankyou.buttonlabel         "감사합니다!">
+
+<!ENTITY emeLearnMoreContextMenu.label            "DRM에 대해 더 알아보기…">
+<!ENTITY emeLearnMoreContextMenu.accesskey        "D">
+
+<!-- LOCALIZATION NOTE (appMenuRemoteTabs.showAll.label, appMenuRemoteTabs.showAll.tooltip):
+     This is shown after the tabs list if we can all the remaining tabs by clicking on the button -->
+<!ENTITY appMenuRemoteTabs.showAll.label "Show All">
+<!ENTITY appMenuRemoteTabs.showAll.tooltip "Show all tabs from this device">
+<!-- LOCALIZATION NOTE (appMenuRemoteTabs.showMore.label, appMenuRemoteTabs.showMore.tooltip):
+     This is shown after the tabs list if we can display more tabs by clicking on the button -->
+<!ENTITY appMenuRemoteTabs.showMore.label "Show More">
+<!ENTITY appMenuRemoteTabs.showMore.tooltip "Show more tabs from this device">
+<!ENTITY bookmarksMenuButton.mobile.label "Mobile Bookmarks">
+<!ENTITY mobileBookmarksCmd.label "Mobile Bookmarks">

@@ -35,13 +35,16 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
+@import url("chrome://bluegriffon/skin/black.css");
+
 hbox.listboxBg {
   max-height: 21px;
-  background-image: url("chrome://bluegriffon/skin/listboxBg.png");
-  border-left: thin solid silver;
-  border-right: thin solid silver;
-  border-bottom: thin solid silver;
+  border-left: thin solid var(--bg-dark-border);
+  border-right: thin solid var(--bg-dark-border);
+  border-bottom: thin solid var(--bg-dark-border);
   margin: 0px;
+  background-color: var(--bg-dark-background);
+  color: white;
 }
 
 hbox.listboxBg toolbarbutton {
@@ -49,21 +52,22 @@ hbox.listboxBg toolbarbutton {
   max-height: 21px;
   min-height: 21px;
   padding: 0px 3px; margin: 0px;
-  border-right: thin solid silver;
+  border-right: thin solid var(--bg-dark-border);
   font-weight: bold;
 }
 
 hbox.listboxBg spacer[flex="1"] ~ toolbarbutton {
-  border-left: thin solid silver;
+  border-left: thin solid var(--bg-dark-border);
   border-right: 0px none;
 }
 
-hbox.listboxBg toolbarbutton:not([disabled]):active:hover {
-  background-image: url("chrome://bluegriffon/skin/listboxBgActive.png");
-}
 
 listbox.listboxBg {
   margin: 0px;
+  background-color: var(--bg-dark-background);
+  color: white;
+  border: var(--bg-dark-border) solid thin;
+  -moz-appearance: none;
 }
 
 hbox.listboxBg .toolbarbutton-menu-dropmarker,
@@ -103,18 +107,31 @@ hbox.listboxBg .listboxBgThrobberButton {
   list-style-image: url("chrome://global/skin/icons/loading_16.png");
 }
 
-hbox.listboxBg .listboxBgDownButton {
+hbox.listboxBg .listboxBgDownButton,
+hbox.listboxBg .listboxBgLeftButton {
   list-style-image: url("chrome://bluegriffon/skin/icons/down.png")
 }
 
-hbox.listboxBg .listboxBgDownButton[disabled] {
+hbox.listboxBg .listboxBgDownButton[disabled],
+hbox.listboxBg .listboxBgLeftButton[disabled] {
   list-style-image: url("chrome://bluegriffon/skin/icons/down-disabled.png")
 }
 
-hbox.listboxBg .listboxBgUpButton {
+hbox.listboxBg .listboxBgUpButton,
+hbox.listboxBg .listboxBgRightButton {
   list-style-image: url("chrome://bluegriffon/skin/icons/up.png")
 }
 
-hbox.listboxBg .listboxBgUpButton[disabled] {
+hbox.listboxBg .listboxBgUpButton[disabled],
+hbox.listboxBg .listboxBgRightButton[disabled] {
   list-style-image: url("chrome://bluegriffon/skin/icons/up-disabled.png")
+}
+
+hbox.listboxBg .listboxBgOrderedButton {
+  list-style-image: url("chrome://epub/content/epub/order.png")
+}
+
+hbox.listboxBg .listboxBgLeftButton image,
+hbox.listboxBg .listboxBgRightButton image {
+  -moz-transform: rotate(90deg);
 }

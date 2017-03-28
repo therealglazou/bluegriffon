@@ -1,4 +1,4 @@
-Components.utils.import("resource://app/modules/editorHelper.jsm");
+Components.utils.import("resource://gre/modules/editorHelper.jsm");
 
 const kSPEEDS = [1, 10, 50, 100, 150, 250, 350, 500, 750, 1000];
 var dontFocus = false;
@@ -32,7 +32,7 @@ function onFocus()
   gDialog.reds.style.width = "0px";
 
   var doc, source;
-  if (EditorUtils.getCurrentEditorWindow().GetCurrentViewMode() == "wysiwyg") {
+  if (EditorUtils.isWysiwygMode()) {
     doc = EditorUtils.getCurrentDocument();
     source = false;
   }
@@ -61,6 +61,7 @@ function onFocus()
           isXML = true;
           break;
         case "":
+        case "about:legacy-compat":
           isXML = (EditorUtils.getCurrentDocument().documentElement.getAttribute("xmlns") == "http://www.w3.org/1999/xhtml");
           break;
       }

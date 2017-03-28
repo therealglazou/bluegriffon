@@ -39,7 +39,7 @@ var cmdClass =
     return (EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function (aCommandName, aParams, aRefcon)
@@ -112,7 +112,7 @@ var cmdId =
     return (EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function (aCommandName, aParams, aRefcon)
@@ -176,7 +176,7 @@ var cmdAriaRole =
     return (EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function (aCommandName, aParams, aRefcon)
@@ -187,7 +187,17 @@ var cmdAriaRole =
     var selContainer = EditorUtils.getSelectionContainer();
     if (selContainer)
     {
-      var role = selContainer.node.getAttribute("role");
+      var hasRole = selContainer.node.hasAttribute("role");
+      var role = "";
+      if (hasRole)
+        role = selContainer.node.getAttribute("role");
+      else {
+        var lookForEpubType = Services.prefs.getBoolPref("bluegriffon.aria.epub-type") &&
+                              EditorUtils.isXHTMLDocument() &&
+                              selContainer.node.hasAttributeNS("http://www.idpf.org/2007/ops", "type");
+        if (lookForEpubType)
+          role = selContainer.node.getAttributeNS("http://www.idpf.org/2007/ops", "type");
+      }
       if (role)
       {
         aParams.setCStringValue("state_attribute", role);
@@ -201,25 +211,56 @@ var cmdAriaRole =
   doCommandParams: function(aCommandName, aParams, aRefCon)
   {
     var role = aParams.getCStringValue("state_attribute");
-
+    var dealWithEpubType = Services.prefs.getBoolPref("bluegriffon.aria.epub-type") &&
+                           EditorUtils.isXHTMLDocument();
+  
     function functor(aNode) {
       var editor = arguments[1][1];
       var r = arguments[1][2];
-      if (r)
-        editor.setAttribute(aNode, "role", r);
-      else
-        editor.removeAttribute(aNode, "role");
+      if (r) {
+        if (dealWithEpubType) {
+          editor.beginTransaction();
+          editor.setAttribute(aNode, "role", r);
+  
+          var docElt = EditorUtils.getCurrentDocument().documentElement;
+          if (!docElt.hasAttributeNS("http://www.w3.org/2000/xmlns/", "epub")) {
+            var txn = new diSetAttributeNSTxn(docElt, "xmlns:epub", "http://www.w3.org/2000/xmlns/", "http://www.idpf.org/2007/ops");
+            editor.transactionManager.doTransaction(txn);
+          }
+          var txn = new diSetAttributeNSTxn(aNode, "type", "http://www.idpf.org/2007/ops", r);
+          editor.transactionManager.doTransaction(txn);
+  
+          editor.endTransaction();
+        }
+        else
+          editor.setAttribute(aNode, "role", r);
+      }
+      else {
+        if (dealWithEpubType) {
+          editor.beginTransaction();
+  
+          editor.removeAttribute(aNode, "role");
+  
+          var txn = new diRemoveAttributeNSTxn(aNode, "type", "http://www.idpf.org/2007/ops");
+          editor.transactionManager.doTransaction(txn);
+  
+          editor.endTransaction();
+        }
+        else
+          editor.removeAttribute(aNode, "role");
+      }
     }
-
+  
     var nodes = ApplyToNodesArray(functor,
                                   EditorUtils.getCurrentEditor(),
                                   role);
-
+  
     // be kind with the rest of the world
-    NotifierUtils.notify("selection", nodes[0], false);
-
+    NotifierUtils.notify("selection_strict", nodes[0], false);
+  
   }
 };
+
 
 var cmdPagePropertiesCommand =
 {
@@ -228,7 +269,7 @@ var cmdPagePropertiesCommand =
     return (EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -241,7 +282,7 @@ var cmdPagePropertiesCommand =
               "chrome,close,titlebar,modal");
     }
     catch(ex) {}
-    window.content.focus();
+    GetWindowContent().focus();
   }
 };
 
@@ -254,7 +295,7 @@ var cmdEditListCommand =
             EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},

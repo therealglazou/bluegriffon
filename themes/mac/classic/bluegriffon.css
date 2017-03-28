@@ -37,13 +37,23 @@
 
 @import url("chrome://bluegriffon/content/bindings/structurebar.css");
 @import url("chrome://bluegriffon/skin/structurebar.css");
-@import url("chrome://bluegriffon/skin/mainToolbar.css");
 @import url("chrome://bluegriffon/skin/formatToolbar.css");
+@import url("chrome://bluegriffon/skin/mainToolbar.css");
+
+@import url("chrome://bluegriffon/skin/black.css");
 
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 @namespace svg url("http://www.w3.org/2000/svg");
 @namespace html url("http://www.w3.org/1999/xhtml");
 
+#FormatToolbox toolbar {
+  -moz-box-orient: vertical;
+}
+
+toolbar {
+  -moz-appearance: none;
+}
+  
 tabeditor {
   -moz-binding: url('chrome://bluegriffon/content/bindings/tabeditor.xml#tabeditor');
 }
@@ -54,8 +64,14 @@ tabeditor[visibility="hidden"]  tabpanels
   visibility: hidden;
 }
 
-tabeditor[visibility="hidden"] {
-  background-color: rgb(128,128,128);
+#maincontainer {
+  margin-left: -1px;
+  border-left: thin solid var(--bg-dark-border);
+  border-top: 2px solid var(--bg-dark-border);
+  -moz-border-top-colors: var(--bg-dark-border) var(--bg-lighter-border);
+  border-bottom: thin solid var(--bg-dark-border);
+  background-color: var(--bg-dark-background) ! important;
+  padding-top: 6px;
 }
 
 sourceeditor {
@@ -95,7 +111,6 @@ vruler {
 }
 
 #helperButtons {
-  border-right: threedshadow 1px solid;
   padding: 2px;
 }
 
@@ -137,18 +152,24 @@ grippy[disabled="true"] {
 }
 
 
-#modeTabbox {
-  /*margin-bottom: 2em;*/
-}
-
+/******** multibuttons ********/
 .multiButton {
+  color: var(--bg-main-foreground-color);
   -moz-appearance: none;
   height: 12pt;
-  font-size: smaller;
-  padding: 0px;
+  padding: 4px 8px;
   margin: 0px;
+  margin-top: 8px;
   min-width: 40px;
-  font-size: 8pt;
+  font-weight: bold;
+  border: thin solid #6d7373;
+  border-bottom-width: 0px;
+  border-left-width: 0px;
+  border-right-width: 0px;
+  background-color: var(--bg-dark-gray);
+}
+
+:root[cleartheme="true"] .multiButton {
   border-top: 2px solid #ddd;
   border-left: 2px solid #ddd;
   border-right: 2px solid #ddd;
@@ -158,37 +179,87 @@ grippy[disabled="true"] {
   -moz-border-left-colors:#aaa #dedede ;
   -moz-border-bottom-colors:#aaa #dedede ;
   background-color: #fafafa;
+  font-weight: normal;
 }
 
-.multiButton.left,
-.multiButton:not(.left):not(.right):not(.center) {
-  border-top-left-radius: 2px;
-  border-bottom-left-radius: 2px;
+.multiButton:hover {
+  color: var(--bg-main-foreground-color);
 }
 
-.multiButton.right,
-.multiButton:not(.left):not(.right):not(.center) {
-  border-top-right-radius: 2px;
-  border-bottom-right-radius: 2px;
-}
-
-.multiButton:not([disabled]):active,
-.multiButton[selected="true"]:not([disabled]),
-.multiButton[checked="true"]:not([disabled]) {
-  -moz-border-top-colors:#aaa #ddd ;
-  -moz-border-right-colors:#aaa #ddd ;
-  -moz-border-left-colors:#aaa #ddd ;
-  -moz-border-bottom-colors:#aaa #ddd ;
-  background-color: #bbb;
-  color: black;
+.multiButton:hover:active {
+  color: var(--bg-main-foreground-color) ! important;
 }
 
 .multiButton[disabled] {
   opacity: 0.5;
 }
 
-.multiButton:not([label]) image {
+/* RTL */
+
+window[rtl="false"] .multiButton.center,
+window[rtl="false"] .multiButton.left {
+  border-right-width: 1px;
+}
+
+window[rtl="false"] .multiButton.left,
+window[rtl="false"] .multiButton:not(.left):not(.right):not(.center) {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+window[rtl="false"] .multiButton.right,
+window[rtl="false"] .multiButton:not(.left):not(.right):not(.center) {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+window[rtl="false"] .multiButton:not([disabled]):active,
+window[rtl="false"] .multiButton[selected="true"]:not([disabled]),
+window[rtl="false"] .multiButton[checked="true"]:not([disabled]) {
+  color: #00abff;
+}
+
+
+window[rtl="false"] .multiButton:not([label]) image {
   margin-left: 6px;
+}
+
+/* LTR */
+
+window[rtl="true"] .multiButton.center,
+window[rtl="true"] .multiButton.left {
+  border-left-width: 1px;
+}
+
+window[rtl="true"] .multiButton.left,
+window[rtl="true"] .multiButton:not(.left):not(.right):not(.center) {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+window[rtl="true"] .multiButton.right,
+window[rtl="true"] .multiButton:not(.left):not(.right):not(.center) {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+window[rtl="true"] .multiButton:not([disabled]):active,
+window[rtl="true"] .multiButton[selected="true"]:not([disabled]),
+window[rtl="true"] .multiButton[checked="true"]:not([disabled]) {
+  color: #00abff;
+}
+
+
+window[rtl="false"] .multiButton:not([label]) image {
+  margin-right: 6px;
+}
+
+/* cleartheme */
+
+/* END MULTIBUTTON */
+
+toolbox {
+  overflow: hidden;
 }
 
 #bespinToolbox1, #bespinToolbox2 {
@@ -226,6 +297,7 @@ grippy[disabled="true"] {
   -moz-appearance: none ! important;
   border: 0px none !important;
   background-color: transparent ! important;
+  color: black;
 }
 
 #bespinFindTextbox .textbox-search-clear,
@@ -314,24 +386,9 @@ panel[floating="true"] {
   -moz-binding: url("chrome://bluegriffon/content/bindings/floatingpanel.xml#floatingpanel");
   -moz-appearance: none; 
   background-color: rgba(96,96,96,0.9);
-  color: white;
+  color: var(--bg-main-foreground-color);
   border-radius: 5px;
-  -moz-transition: opacity 0.5s;
-}
-
-/* link to add-ons */
-
-#editorBarLabel {
-  text-decoration: underline;
-  color: darkblue;
-}
-
-#editorBarLabel:hover {
-  color: blue;
-}
-
-#editorBarLabel:hover:active {
-  color: red;
+  transition: opacity 0.5s;
 }
 
 #menu_updates[loading="true"] {
@@ -355,48 +412,161 @@ deckedPanelsTabs  {
   -moz-binding: url("chrome://bluegriffon/content/bindings/deckedPanelsTabs.xml#deckedPanelsTabs");
   overflow: hidden;
   -moz-box-orient: horizontal;
-  background: url("chrome://bluegriffon/skin/tabeditor-tabs-bkgnd.png") repeat-x;
   height: 25px;
   padding: 0px;
   padding-left: 4px;
   margin: 0px;
 }
 
+#deckPanelsIframe {
+  background-color: var(--bg-dark-gray);
+}
+
 deckedPanelsTabs > label {
+  -moz-box-align: center;
+  -moz-appearance: none;
+  border-radius: 4px 4px 0px 0px;
+  color: graytext;
+  padding: 2px 10px;
   margin: 0px;
-  margin-top: 4px;
-  background-color: #b0b0b0;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 10px;
-  padding-right: 10px;
-  border: thin solid gray;
-  border-bottom: none 0px;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
-  border-width: 2px;
-  box-shadow: 1px -1px 3px gray,
-              inset 0px -1px 1px gray;
-}
-
-deckedPanelsTabs > label:not([selected="true"]):hover {
-  background-color: transparent;
-  background-image: linear-gradient(0deg, #ededed, #b0b0b0);
-}
-
-deckedPanelsTabs > label:not([selected="true"]):hover:active {
-  background: #ededed;
+  margin-right: 1px;
+  min-width: 1px !important;
+  text-align: left;
+  height: 24px;
+  border: thin solid transparent;
+  border-bottom-width: 0px;
+  border-left-width: 0px;
+  border-right-width: 0px;
+  background-color: var(--bg-dark-gray);
 }
 
 deckedPanelsTabs > label[selected="true"] {
-  margin: 0px;
-  margin-top: 4px;
-  background-color: #ededed;
-  box-shadow: 1px -1px 3px gray;
+  color: var(--bg-main-foreground-color);
+  -moz-user-focus: normal;
+  border-top: thin solid #6d7373;
+}
+
+deckedPanelsTabs > label:hover {
+  color: var(--bg-main-foreground-color);
 }
 
 /* COLOR AND BGCOLOR PICKERS */
 
 ecolorpicker {
   -moz-binding: url("chrome://bluegriffon/content/bindings/ecolorpicker.xml#ecolorpicker");
+}
+
+/* TOOLBARS and editing area*/
+
+toolbar {
+  border-right: thin solid var(--bg-dark-border);
+  border-top: 2px solid var(--bg-dark-border);
+  -moz-border-top-colors: var(--bg-dark-border) var(--bg-lighter-border);
+  background-color: var(--bg-dark-background) ! important;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+toolbar:not(#FormatMenulistsToolbar):last-of-type:not(#MainToolbar) {
+  border-bottom: thin solid var(--bg-dark-border);
+}
+
+toolbarseparator {
+  background-image: none ! important;
+  border-bottom: thin dotted #494949;
+}
+
+/* MENULISTS */
+
+:root:not([cleartheme="true"]) menulist {
+  -moz-appearance: none;
+  padding-left: 3px;
+  padding-right: 3px;
+  background-color: var(--bg-dark-background);
+  padding-left: 3px;
+  border: thin solid var(--bg-dark-border);
+  color: var(--bg-main-foreground-color);
+}
+
+:root:not([cleartheme="true"]) menulist .menulist-dropmarker {
+  -moz-appearance: none;
+  display: -moz-box;
+  background: transparent;
+  border: none 0px;
+}
+
+:root:not([cleartheme="true"]) menulist html|*.menulist-editable-input {
+  color: var(--bg-main-foreground-color);
+}
+
+menulist[disabled="true"],
+menulist[disabled="true"] html|*.menulist-editable-input,
+menulist html|*.menulist-editable-input::-moz-placeholder  {
+  color: graytext;
+}
+
+menulist html|*.menulist-editable-input::-moz-placeholder  {
+  font-style: italic;
+}
+
+menulist[editable="true"] {
+  margin-top: 5px;
+  margin-bottom: 3px
+}
+
+#status {
+  color: silver;
+  text-shadow: none;
+}
+
+/* Live view */
+
+deck[anonid="editorDeck"].liveview {
+  display: -moz-box;
+  -moz-binding: none;
+  -moz-box-flex: 1;
+}
+
+deck[anonid="editorDeck"].liveview > iframe,
+deck[anonid="editorDeck"].liveview > editor {
+  -moz-box-flex: 1;
+}
+
+deck[anonid="editorDeck"] > splitter {
+  background-color: var(--bg-dark-background);
+}
+
+deck[anonid="editorDeck"]:not(.liveview) > splitter {
+  display: none;
+}
+
+/* TAB TOOLTIP */
+
+#tab-tooltip {
+  max-width: 600px;
+  min-width: 300px;
+  background-color: yellow;
+}
+
+#tab-tooltip-main-info {
+  padding: 1em;
+  border-bottom: 2px ridge silver;
+}
+
+#tab-tooltip-grid {
+  margin: 1em;
+}
+
+#tab-tooltip-title {
+  font-size: larger;
+  font-weight: bold;
+  /*padding: 6px;*/
+}
+
+#tab-tooltip-html-dialect {
+  font-weight: bold;
+  background-color: darkgrey;
+  border: 2px groove darkgrey;
+  border-radius: 4px;
+  padding: 4px;
 }

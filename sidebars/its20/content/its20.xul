@@ -76,16 +76,13 @@
   <popupset id="popupset"/>
 
   <vbox id="mainBox" flex="1" style="visibility: hidden">
-    <tabbox flex="1">
+    <tabbox flex="1" id="locationTabbox">
       <tabs>
         <tab label="&locally.label;"/>
         <tab label="&globally.label;"/>
       </tabs>
       <tabpanels flex="1" id="tabpanels">
-        <vbox id="propertiesBox">
-		      <label id="currentElementBox"
-		             crop="end"/>
-        </vbox>
+        <vbox id="propertiesBox"/>
       </tabpanels>
     </tabbox>
     <hbox id="loadingBox" loads="0" align="center">

@@ -45,46 +45,26 @@
 <overlay id="csspropertiesOverlay"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
-  <toolbarpalette id="ComposerToolbarPalette">
-    <toolbarbutton id="cssButton" class="toolbarbutton-1"
-                   label="&cssToolbarCmd.label;" command="cmd_css"
-                   tooltiptext="&cssToolbarCmd.tooltip;"/>
-  
-  </toolbarpalette>
-
   <menupopup id="panelsMenuPopup">
     <menuitem id="panel-cssproperties-menuitem"
               panel="panel-cssproperties"
               label="&cssproperties.label;"
               windowType="BlueGriffon:CSSProperties"
+              decked="true"
               url="chrome://cssproperties/content/cssproperties.xul"
               type="checkbox"/>
   </menupopup>
 
-#ifdef XP_MACOSX
   <panelset id="panels">
     <panel id="panel-cssproperties"
            floating="true"
            width="300"
            height="600"
+           decked="true"
            label="&cssproperties.label;">
       <iframe type="chrome"
               flex="1"/>
     </panel>
   </panelset>
-#else
-#ifndef XP_UNIX
-  <panelset id="panels">
-    <panel id="panel-cssproperties"
-           width="300"
-           height="600"
-           floating="true"
-           label="&cssproperties.label;">
-      <iframe type="chrome"
-              flex="1"/>
-    </panel>
-  </panelset>
-#endif
-#endif
 </overlay>         
 

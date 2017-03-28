@@ -10,10 +10,6 @@
 
 <!ENTITY useCursorNavigation.label       "Utilizar sempre as teclas de desprazamento para navegar nas páxinas">
 <!ENTITY useCursorNavigation.accesskey   "c">
-<!ENTITY searchStartTyping.label         "Buscar o texto ao comezar a escribir">
-<!ENTITY searchStartTyping.accesskey     "B">
-<!ENTITY blockAutoRefresh.label          "Avisar cando os sitios tenten redireccionar ou recargar a páxina">
-<!ENTITY blockAutoRefresh.accesskey      "v">
 
 <!ENTITY browsing.label                  "Navegación">
 
@@ -23,35 +19,20 @@
 <!ENTITY useSmoothScrolling.accesskey    "m">
 <!ENTITY allowHWAccel.label              "Usar a aceleración por hardware cando estea dispoñíbel">
 <!ENTITY allowHWAccel.accesskey          "r">
-<!ENTITY checkSpelling.label             "Comprobar a ortografía ao escribir">
-<!ENTITY checkSpelling.accesskey         "t">
-
-<!ENTITY systemDefaults.label            "Configuración predeterminada">
-<!ENTITY alwaysCheckDefault.label        "Verificar sempre se &brandShortName; é o navegador predeterminado ao comezar."><!--XXX-->
-<!ENTITY alwaysCheckDefault.accesskey    "n">
-<!ENTITY setDefault.label                "Facer do &brandShortName; o navegador predeterminado">
-<!ENTITY setDefault.accesskey            "d">
-<!ENTITY isDefault.label                 "&brandShortName; xa é o navegador predeterminado">
 
 <!ENTITY dataChoicesTab.label            "Datos">
 
-<!ENTITY healthReportSection.label       "Informe de saúde do &brandShortName;">
 <!ENTITY healthReportDesc.label          "Axúdalle a entender o rendemento do seu navegador e comparte datos con &vendorShortName; sobre a saúde do seu navegador">
 <!ENTITY enableHealthReport.label        "Activar o informe de saúde do &brandShortName;">
 <!ENTITY enableHealthReport.accesskey    "r">
 <!ENTITY healthReportLearnMore.label     "Obter máis información">
 
-<!ENTITY telemetrySection.label          "Telemetría">
 <!ENTITY telemetryDesc.label             "Comparte datos de rendemento, uso, hardware e personalizacións sobre o seu navegador con &vendorShortName; para axudarnos a mellorar &brandShortName;">
-<!ENTITY enableTelemetry.label           "Activar a telemetría">
-<!ENTITY enableTelemetry.accesskey       "t">
+<!ENTITY enableTelemetryData.label       "Compartir datos adicionais (p.e., Telemetría)">
+<!ENTITY enableTelemetryData.accesskey   "t">
 <!ENTITY telemetryLearnMore.label        "Obter máis información">
 
-<!ENTITY crashReporterSection.label      "Informador de erros">
-<!ENTITY crashReporterDesc.label         "&brandShortName; envía informes de erro para axudar a &vendorShortName; a facer o seu navegador máis estábel e seguro">
-<!ENTITY enableCrashReporter.label       "Activar o informador de erros">
-<!ENTITY enableCrashReporter.accesskey   "c">
-<!ENTITY crashReporterLearnMore.label    "Obter máis información">
+<!ENTITY crashReporterLearnMore.label     "Obter máis información">
 
 <!ENTITY networkTab.label                "Rede">
 
@@ -65,6 +46,8 @@
 
 <!ENTITY offlineStorage2.label           "Datos do usuario e contido web sen conexión">
 
+<!--  Site Data section manages sites using Storage API and is under Network -->
+
 <!-- LOCALIZATION NOTE:
   The entities limitCacheSizeBefore.label and limitCacheSizeAfter.label appear on a single
   line in preferences as follows:
@@ -74,25 +57,19 @@
 <!ENTITY limitCacheSizeBefore.label      "Limitar a caché a">
 <!ENTITY limitCacheSizeBefore.accesskey  "L">
 <!ENTITY limitCacheSizeAfter.label       "MB de espazo">
-<!ENTITY clearCacheNow.label             "Limpar agora">
-<!ENTITY clearCacheNow.accesskey         "m">
-<!ENTITY clearOfflineAppCacheNow.label   "Limpar agora">
+<!ENTITY clearCacheNow.label             "Borrar agora">
+<!ENTITY clearCacheNow.accesskey         "B">
+<!ENTITY clearOfflineAppCacheNow.label   "Borrar agora">
 <!ENTITY clearOfflineAppCacheNow.accesskey "g">
 <!ENTITY overrideSmartCacheSize.label    "Sobrescribir a xestión automática da caché">
 <!ENTITY overrideSmartCacheSize.accesskey "o">
 
 <!ENTITY updateTab.label                 "Actualizar">
 
-<!ENTITY updateApp.label                 "Actualizacións do &brandShortName;:">
-<!ENTITY updateAuto.label                "Instalar actualizacións automaticamente (recomendado para a súa seguranza)">
-<!ENTITY updateAuto.accesskey            "a">
-<!ENTITY updateCheck.label               "Buscar actualizacións, pero permitirme escoller se quero instalalas">
-<!ENTITY updateCheck.accesskey           "c">
+<!ENTITY updateAuto1.label               "Instalar actualizacións automaticamente (recomendado: mellora a seguranza)">
+<!ENTITY updateAuto1.accesskey           "a">
 <!ENTITY updateManual.label              "Non buscar actualizacións (non recomendado: risco de seguranza)">
 <!ENTITY updateManual.accesskey          "N">
-
-<!ENTITY updateAutoAddonWarn.label       "Avisarme se isto desactiva algúns dos complementos">
-<!ENTITY updateAutoAddonWarn.accesskey   "v">
 
 <!ENTITY updateHistory.label             "Amosar historial de actualización">
 <!ENTITY updateHistory.accesskey         "z">
@@ -100,14 +77,9 @@
 <!ENTITY useService.label                "Usar un servizo en segundo plano para instalar as actualizacións">
 <!ENTITY useService.accesskey            "g">
 
-<!ENTITY updateOthers.label              "Actualizar automaticamente:">
 <!ENTITY enableSearchUpdate.label        "Buscadores">
 <!ENTITY enableSearchUpdate.accesskey    "B">
 
-<!ENTITY offlineNotify.label             "Informarme cando un sitio web solicita o almacenamento de datos para a utilización sen conexión">
-<!ENTITY offlineNotify.accesskey         "t">
-<!ENTITY offlineNotifyExceptions.label   "Excepcións…">
-<!ENTITY offlineNotifyExceptions.accesskey "E">
 
 <!ENTITY offlineAppsList2.label          "Os seguintes sitios web poden almacenar datos para a utilización sen conexión:">
 <!ENTITY offlineAppsList.height          "7em">
@@ -115,24 +87,48 @@
 <!ENTITY offlineAppsListRemove.accesskey "R">
 <!ENTITY offlineAppRemove.confirm        "Retirar datos sen conexión">
 
-<!ENTITY encryptionTab.label             "Cifrado">
-
-<!ENTITY protocols.label                 "Protocolos">
-<!ENTITY useSSL3.label                   "Usar SSL 3.0">
-<!ENTITY useSSL3.accesskey               "3">
-<!ENTITY useTLS1.label                   "Usar TLS 1.0">
-<!ENTITY useTLS1.accesskey               "1">
-<!ENTITY certificates.label              "Certificados">
-<!ENTITY certSelection.description       "Cando un servidor solicita o meu certificado persoal:">
-<!ENTITY certs.auto                      "Escoller un automaticamente">
-<!ENTITY certs.auto.accesskey            "l">
-<!ENTITY certs.ask                       "Preguntarme cada vez">
-<!ENTITY certs.ask.accesskey             "g">
+<!ENTITY certificateTab.label            "Certificados">
+<!ENTITY enableOCSP.label                "Consultar aos servidores OCSP responder para confirmar a validez dos certificados">
+<!ENTITY enableOCSP.accesskey            "u">
 <!ENTITY viewCerts.label                 "Ver certificados">
 <!ENTITY viewCerts.accesskey             "s">
-<!ENTITY viewCRLs.label                  "Listas de revogación">
-<!ENTITY viewCRLs.accesskey              "R">
-<!ENTITY verify2.label                   "Validación">
-<!ENTITY verify2.accesskey               "V">
 <!ENTITY viewSecurityDevices.label       "Dispositivos de seguranza">
 <!ENTITY viewSecurityDevices.accesskey   "D">
+
+<!ENTITY alwaysSubmitCrashReports.accesskey "c">
+<!ENTITY alwaysSubmitCrashReports.label   "Allow &brandShortName; to send backlogged crash reports on your behalf">
+
+<!ENTITY autoUpdateOthers.label          "Automatically Update">
+<!ENTITY blockAutoReload.accesskey       "b">
+<!ENTITY blockAutoReload.label           "Warn you when websites try to redirect or reload the page">
+<!ENTITY certPersonal.description        "When a server requests your personal certificate:">
+<!ENTITY certPersonal.label              "Requests">
+<!ENTITY checkUserSpelling.accesskey     "t">
+<!ENTITY checkUserSpelling.label         "Check your spelling as you type">
+<!ENTITY clearSiteData.accesskey         "l">
+<!ENTITY clearSiteData.label             "Clear All Data">
+
+<!ENTITY crashReporterDesc2.label         "Crash reports help &vendorShortName; fix problems and make your browser more stable and secure">
+<!ENTITY offlineStorageNotify.accesskey           "T">
+
+<!ENTITY offlineStorageNotify.label               "Tell you when a website asks to store data for offline use">
+<!ENTITY offlineStorageNotifyExceptions.accesskey "x">
+<!ENTITY offlineStorageNotifyExceptions.label     "Exceptions…">
+<!ENTITY searchOnStartTyping.accesskey   "x">
+<!ENTITY searchOnStartTyping.label       "Search for text when you start typing">
+<!ENTITY selectCerts.ask                 "Ask you every time">
+<!ENTITY selectCerts.ask.accesskey       "A">
+<!ENTITY selectCerts.auto                "Select one automatically">
+<!ENTITY selectCerts.auto.accesskey      "S">
+
+<!--  Site Data section manages sites using Storage API and is under Network -->
+<!ENTITY siteData.label                  "Site Data">
+<!ENTITY siteDataLearnMoreLink.label     "Learn more">
+<!ENTITY siteDataSettings.accesskey      "i">
+<!ENTITY siteDataSettings.label          "Settings…">
+
+<!ENTITY updateApplication.label         "&brandShortName; Updates">
+<!ENTITY updateCheckChoose.accesskey     "C">
+<!ENTITY updateCheckChoose.label         "Check for updates, but let you choose whether to install them">
+<!ENTITY useOnScreenKeyboard.accesskey   "k">
+<!ENTITY useOnScreenKeyboard.label       "Show a touch keyboard when necessary">

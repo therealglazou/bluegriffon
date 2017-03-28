@@ -47,6 +47,7 @@
 <dialog id="openLocation"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         title="&window.title;"
+        forcecleartheme = "true"
         onload="Startup()"
         ondialogaccept="OpenFile()"
         style="width: 40em;"
@@ -66,7 +67,8 @@
     <separator class="thin"/>
     <hbox align="center">
       <textbox flex="1" id="dialog.input"
-               type="autocomplete" autocompletesearch="bluegriffonlocation-autocomplete"/>
+               type="autocomplete" completeselectedindex="true"
+               autocompletesearch="bluegriffonlocation-autocomplete"/>
       <button label="&chooseFile.label;"
               accesskey="&chooseFile.accesskey;"
               oncommand="onChooseFile()"/>

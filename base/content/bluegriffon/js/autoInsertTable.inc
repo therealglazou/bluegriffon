@@ -28,7 +28,9 @@ var AutoInsertTable = {
     gDialog.AutoInsertTable_r1c2.className = "selected";
     gDialog.AutoInsertTable_r2c1.className = "selected";
     gDialog.AutoInsertTable_r2c2.className = "selected";
-    gDialog.AutoInsertTableSizeLabel.setAttribute("label", "2x2");
+    gDialog.AutoInsertTableSizeLabel.setAttribute("value", "2 x 2");
+    gDialog.AutoInsertTableSheetPopup.removeAttribute("width");
+    gDialog.AutoInsertTableSheetPopup.removeAttribute("height");
   },
 
   selectArea: function(cell)
@@ -50,9 +52,9 @@ var AutoInsertTable = {
     for (var i = 0; i < cells.length; i++)
       cells[i].className = "";
   
-    for (i = row; i > 0; i--)
+    for (var i = row; i > 0; i--)
     {
-      anyCell = document.getElementById("AutoInsertTable_r"+i+"c"+this.mColumn);
+      var anyCell = document.getElementById("AutoInsertTable_r"+i+"c"+this.mColumn);
       while (anyCell)
       {
         anyCell.setAttribute("class", "selected");
@@ -89,10 +91,10 @@ var AutoInsertTable = {
         newRow.appendChild(newCell);
       }
     }
-    if (GetCurrentViewMode() == "wysiwyg") {
+    if (EditorUtils.isWysiwygMode()) {
       editor.insertElementAtSelection(tableElement, true);
       editor.selection.collapse(firstCell, 0);
-      window.content.focus();
+      GetWindowContent().focus();
     }
     else {
       var src = style_html(tableElement.outerHTML);

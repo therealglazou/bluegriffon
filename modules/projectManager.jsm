@@ -35,7 +35,7 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-Components.utils.import("resource://app/modules/fireFtp.jsm");
+Components.utils.import("resource://gre/modules/fireFtp.jsm");
 
 var EXPORTED_SYMBOLS = ["ProjectManager"];
 

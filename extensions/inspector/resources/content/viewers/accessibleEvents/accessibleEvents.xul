@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<!DOCTYPE page [
+  <!ENTITY % dtd1 SYSTEM "chrome://inspector/locale/inspector.dtd"> %dtd1;
+  <!ENTITY % dtd2 SYSTEM "chrome://inspector/locale/viewers/accessibleEvents.dtd"> %dtd2;
+]>
+
+<?xml-stylesheet href="chrome://inspector/skin/viewers/accessibleEvents/accessibleEvents.css"?>
+
+<page id="winAccessibleEvents"
+      xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/javascript"
+          src="chrome://inspector/content/jsutil/xul/inBaseTreeView.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/jsutil/xul/inDataTreeView.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/jsutil/xpcom/XPCU.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/jsutil/events/ObserverManager.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/viewers/accessibleEvents/accessibleEvents.js"/>
+
+  <stringbundle id="accessiblePropsBundle"
+                src="chrome://inspector/locale/viewers/accessibleEvents.properties"/>
+
+  <tabbox flex="1">
+    <tabs>
+      <tab label="&eventList.label;"/>
+      <tab label="&watchedEvents.label;"/>
+    </tabs>
+    <tabpanels flex="1">
+
+      <!-- Event list -->
+      <vbox>
+        <label value="&handledEvents.label;" control="olAccessibleEvents"/>
+        <tree id="olAccessibleEvents"
+              flex="1"
+              onselect="viewer.onItemSelected()">
+
+          <treecols>
+            <treecol id="olcEventType"
+                     label="&eventType.label;"
+                     primary="true"
+                     persist="width,hidden,ordinal"
+                     flex="2"/>
+            <splitter class="tree-splitter"/>
+            <treecol id="olcEventTargetRole"
+                     label="&eventTargetRole.label;"
+                     hidden="true"
+                     persist="width,hidden,ordinal"
+                     flex="1"/>
+            <splitter class="tree-splitter"/>
+            <treecol id="olcEventTargetName"
+                     label="&eventTargetName.label;"
+                     hidden="true"
+                     persist="width,hidden,ordinal"
+                     flex="2"/>
+            <splitter class="tree-splitter"/>
+            <treecol id="olcEventTargetNodeName"
+                     label="&eventTargetNodeName.label;"
+                     persist="width,hidden,ordinal"
+                     flex="1"/>
+            <splitter class="tree-splitter"/>
+            <treecol id="olcEventTargetNodeID"
+                     label="&eventTargetNodeID.label;"
+                     persist="width,hidden,ordinal"
+                     flex="1"/>
+            <splitter class="tree-splitter"/>
+            <treecol id="olcEventTime"
+                     label="&eventTime.label;"
+                     persist="width,hidden,ordinal"
+                     flex="1"/>
+          </treecols>
+          <treechildren id="olbAccessibleEvents"
+                        alternatingbackground="true"/>
+        </tree>
+        <hbox align="end">
+          <button label="&clearEventList.label;"
+                  oncommand="viewer.clearEventsList();"/>
+        </hbox>
+      </vbox>
+
+      <!-- Watched events -->
+      <vbox>
+        <vbox flex="1">
+          <label value="&chooseEventsToWatch.label;" control="watchEventList"/>
+          <tree id="watchEventList"
+                flex="1"
+                editable="true"
+                onselect="viewer.onWatchViewItemSelected();"
+                onkeypress="viewer.onWatchViewKeyPressed(event);"
+                seltype="single">
+            <treecols>
+              <treecol id="welEventType"
+                       label="&eventType.label;"
+                       primary="true"
+                       persist="width,hidden,ordinal"
+                       flex="1"/>
+              <splitter class="tree-splitter"/>
+              <treecol id="welIsWatched"
+                       label="&isWatched.label;"
+                       type="checkbox"
+                       editable="true"
+                       persist="width,hidden,ordinal"/>
+              <splitter class="tree-splitter"/>
+              <treecol id="welIsHandlerEnabled"
+                       label="&isHandlerEnabled.label;"
+                       type="checkbox"
+                       editable="true"
+                       persist="width,hidden,ordinal"
+                       hidden="true"/>
+            </treecols>
+            <treechildren/>
+          </tree>
+        </vbox>
+        <hbox align="right">
+          <button label="&watchAll.label;"
+                  oncommand="viewer.watchAllEvents(true);"/>
+          <button label="&watchNone.label;"
+                  oncommand="viewer.watchAllEvents(false);"/>
+        </hbox>
+        <splitter state="collapsed" collapse="after" persist="state"
+                  resizebefore="farthest" id="welSplitter">
+          <toolbarbutton label="&editHandler.label;" id="welGrippyButton"
+                         oncommand="viewer.toggleHandlerEditor(this.parentNode);"/>
+        </splitter>
+        <vbox>
+          <hbox align="baseline">
+            <label control="welHandlerEditor"
+                   id="welHandlerEditorLabel"
+                   flex="1">&handlerEditorNoEvent.label;</label>
+            <checkbox id="welHandlerState" hidden="true"
+                      oncommand="viewer.onWatchViewHandlerStateChanged(this.checked);"
+                      flex="1"/>
+            <toolbarbutton label="&contextHelp.label;"
+                           oncommand="viewer.showWatchViewHandlerHelp();"/>
+          </hbox>
+          <textbox id="welHandlerEditor" multiline="true" rows="8" flex="1"/>
+        </vbox>
+      </vbox>
+    </tabpanels>
+  </tabbox>
+
+</page>
+

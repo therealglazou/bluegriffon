@@ -1,0 +1,37 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+domi-panel[disabled="true"] > .viewer-pane-box-1 {
+  visibility: collapse;
+}
+
+.viewer-menu, .viewer-list {
+  -moz-user-focus: normal;
+}
+
+.viewer-list {
+  list-style-image: url("chrome://inspector/skin/iconViewerList.gif");
+}
+
+.viewer-list[disabled="true"] {
+  list-style-image: url("chrome://inspector/skin/iconViewerList-dis.gif");
+}
+
+.viewer-menu {
+  list-style-image: url("chrome://inspector/skin/iconViewerMenu.gif");
+}
+
+.viewer-menu[disabled="true"] {
+  list-style-image: url("chrome://inspector/skin/iconViewerMenu-dis.gif");
+}
+
+.viewer-menu > .toolbarbutton-menu-dropmarker {
+  display: none;   
+}
+
+.viewer-pane-toolbox {
+  border-top: none;
+  border-bottom: none;
+}
+

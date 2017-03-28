@@ -1,0 +1,691 @@
+JAR_MANIFESTS += ['jar.mn']
+
+RESOURCE_FILES += [
+  'res/base-min.css',
+  'res/cm2.html',
+  'res/csseditor.html',
+  'res/html5.html',
+  'res/html_strict.html',
+  'res/html_transitional.html',
+  'res/markdowneditor.html',
+  'res/polyglot.xhtml',
+  'res/reset-fonts-grids.css',
+  'res/rotate_icon.png',
+  'res/rotatorCenterBG.png',
+  'res/scripteditor.html',
+  'res/xhtml11.xhtml',
+  'res/xhtml5.xhtml',
+  'res/xhtml_strict.html',
+  'res/xhtml_strict.xhtml',
+  'res/xhtml_transitional.html',
+  'res/xhtml_transitional.xhtml',
+]
+
+RESOURCE_FILES.codemirror += [
+  "res/codemirror/themes-list.js",
+]
+
+RESOURCE_FILES.codemirror.addon.comment += [
+  "res/codemirror/addon/comment/comment.js",
+  "res/codemirror/addon/comment/continuecomment.js",
+]
+
+RESOURCE_FILES.codemirror.addon.dialog += [
+  "res/codemirror/addon/dialog/dialog.css",
+  "res/codemirror/addon/dialog/dialog.js",
+]
+
+RESOURCE_FILES.codemirror.addon.display += [
+  "res/codemirror/addon/display/fullscreen.css",
+  "res/codemirror/addon/display/fullscreen.js",
+  "res/codemirror/addon/display/panel.js",
+  "res/codemirror/addon/display/placeholder.js",
+  "res/codemirror/addon/display/rulers.js",
+]
+
+RESOURCE_FILES.codemirror.addon.edit += [
+  "res/codemirror/addon/edit/closebrackets.js",
+  "res/codemirror/addon/edit/closetag.js",
+  "res/codemirror/addon/edit/continuelist.js",
+  "res/codemirror/addon/edit/matchbrackets.js",
+  "res/codemirror/addon/edit/matchtags.js",
+  "res/codemirror/addon/edit/trailingspace.js",
+]
+
+RESOURCE_FILES.codemirror.addon.fold += [
+  "res/codemirror/addon/fold/brace-fold.js",
+  "res/codemirror/addon/fold/comment-fold.js",
+  "res/codemirror/addon/fold/foldcode.js",
+  "res/codemirror/addon/fold/foldgutter.css",
+  "res/codemirror/addon/fold/foldgutter.js",
+  "res/codemirror/addon/fold/indent-fold.js",
+  "res/codemirror/addon/fold/markdown-fold.js",
+  "res/codemirror/addon/fold/xml-fold.js",
+]
+
+RESOURCE_FILES.codemirror.addon.hint += [
+  "res/codemirror/addon/hint/anyword-hint.js",
+  "res/codemirror/addon/hint/css-hint.js",
+  "res/codemirror/addon/hint/html-hint.js",
+  "res/codemirror/addon/hint/javascript-hint.js",
+  "res/codemirror/addon/hint/show-hint.css",
+  "res/codemirror/addon/hint/show-hint.js",
+  "res/codemirror/addon/hint/sql-hint.js",
+  "res/codemirror/addon/hint/xml-hint.js",
+]
+
+RESOURCE_FILES.codemirror.addon.lint += [
+  "res/codemirror/addon/lint/coffeescript-lint.js",
+  "res/codemirror/addon/lint/css-lint.js",
+  "res/codemirror/addon/lint/javascript-lint.js",
+  "res/codemirror/addon/lint/json-lint.js",
+  "res/codemirror/addon/lint/lint.css",
+  "res/codemirror/addon/lint/lint.js",
+  "res/codemirror/addon/lint/yaml-lint.js",
+]
+
+RESOURCE_FILES.codemirror.addon.merge += [
+  "res/codemirror/addon/merge/merge.css",
+  "res/codemirror/addon/merge/merge.js",
+]
+
+RESOURCE_FILES.codemirror.addon.mode += [
+  "res/codemirror/addon/mode/loadmode.js",
+  "res/codemirror/addon/mode/multiplex.js",
+  "res/codemirror/addon/mode/multiplex_test.js",
+  "res/codemirror/addon/mode/overlay.js",
+  "res/codemirror/addon/mode/simple.js",
+]
+
+RESOURCE_FILES.codemirror.addon.runmode += [
+  "res/codemirror/addon/runmode/colorize.js",
+  "res/codemirror/addon/runmode/runmode-standalone.js",
+  "res/codemirror/addon/runmode/runmode.js",
+  "res/codemirror/addon/runmode/runmode.node.js",
+]
+
+RESOURCE_FILES.codemirror.addon.scroll += [
+  "res/codemirror/addon/scroll/annotatescrollbar.js",
+  "res/codemirror/addon/scroll/scrollpastend.js",
+  "res/codemirror/addon/scroll/simplescrollbars.css",
+  "res/codemirror/addon/scroll/simplescrollbars.js",
+]
+
+RESOURCE_FILES.codemirror.addon.search += [
+  "res/codemirror/addon/search/match-highlighter.js",
+  "res/codemirror/addon/search/matchesonscrollbar.css",
+  "res/codemirror/addon/search/matchesonscrollbar.js",
+  "res/codemirror/addon/search/search.js",
+  "res/codemirror/addon/search/searchcursor.js",
+]
+
+RESOURCE_FILES.codemirror.addon.selection += [
+  "res/codemirror/addon/selection/active-line.js",
+  "res/codemirror/addon/selection/mark-selection.js",
+  "res/codemirror/addon/selection/selection-pointer.js",
+]
+
+RESOURCE_FILES.codemirror.addon.tern += [
+  "res/codemirror/addon/tern/tern.css",
+  "res/codemirror/addon/tern/tern.js",
+  "res/codemirror/addon/tern/worker.js",
+]
+
+RESOURCE_FILES.codemirror.addon.wrap += [
+  "res/codemirror/addon/wrap/hardwrap.js",
+]
+
+RESOURCE_FILES.codemirror.lib += [
+  "res/codemirror/lib/codemirror.css",
+  "res/codemirror/lib/codemirror.js",
+]
+
+RESOURCE_FILES.codemirror.mode.apl += [
+  "res/codemirror/mode/apl/apl.js",
+  "res/codemirror/mode/apl/index.html",
+]
+
+RESOURCE_FILES.codemirror.mode.asciiarmor += [
+  "res/codemirror/mode/asciiarmor/asciiarmor.js",
+  "res/codemirror/mode/asciiarmor/index.html",
+]
+
+RESOURCE_FILES.codemirror.mode.asterisk += [
+  "res/codemirror/mode/asterisk/asterisk.js",
+  "res/codemirror/mode/asterisk/index.html",
+]
+
+RESOURCE_FILES.codemirror.mode.clike += [
+  "res/codemirror/mode/clike/clike.js",
+  "res/codemirror/mode/clike/index.html",
+  "res/codemirror/mode/clike/scala.html",
+]
+
+RESOURCE_FILES.codemirror.mode.clojure += [
+  "res/codemirror/mode/clojure/clojure.js",
+  "res/codemirror/mode/clojure/index.html",
+]
+
+RESOURCE_FILES.codemirror.mode.cmake += [
+  "res/codemirror/mode/cmake/cmake.js",
+  "res/codemirror/mode/cmake/index.html",
+]
+
+RESOURCE_FILES.codemirror.mode.cobol += [
+  "res/codemirror/mode/cobol/cobol.js",
+  "res/codemirror/mode/cobol/index.html",
+]
+
+RESOURCE_FILES.codemirror.mode.coffeescript += [
+  "res/codemirror/mode/coffeescript/coffeescript.js",
+  "res/codemirror/mode/coffeescript/index.html",
+]
+
+RESOURCE_FILES.codemirror.mode.commonlisp += [
+  "res/codemirror/mode/commonlisp/commonlisp.js",
+  "res/codemirror/mode/commonlisp/index.html",
+]
+
+RESOURCE_FILES.codemirror.mode.css += [
+  "res/codemirror/mode/css/css.js",
+  "res/codemirror/mode/css/index.html",
+  "res/codemirror/mode/css/less.html",
+  "res/codemirror/mode/css/less_test.js",
+  "res/codemirror/mode/css/scss.html",
+  "res/codemirror/mode/css/scss_test.js",
+  "res/codemirror/mode/css/test.js",
+]
+
+RESOURCE_FILES.codemirror.mode.cypher += [
+  "res/codemirror/mode/cypher/cypher.js",
+  "res/codemirror/mode/cypher/index.html",
+]
+
+RESOURCE_FILES.codemirror.mode.d += [
+  "res/codemirror/mode/d/d.js",
+  "res/codemirror/mode/d/index.html",
+]
+
+RESOURCE_FILES.codemirror.mode.dart += [
+  "res/codemirror/mode/dart/dart.js",
+  "res/codemirror/mode/dart/index.html",
+]
+
+RESOURCE_FILES.codemirror.mode.diff += [
+  "res/codemirror/mode/diff/diff.js",
+  "res/codemirror/mode/diff/index.html",
+]
+
+RESOURCE_FILES.codemirror.mode.django += [
+  "res/codemirror/mode/django/django.js",
+  "res/codemirror/mode/django/index.html",
+]
+
+RESOURCE_FILES.codemirror.mode.dockerfile += [
+  "res/codemirror/mode/dockerfile/dockerfile.js",
+  "res/codemirror/mode/dockerfile/index.html",
+]
+
+RESOURCE_FILES.codemirror.mode.dtd += [
+  "res/codemirror/mode/dtd/dtd.js",
+  "res/codemirror/mode/dtd/index.html",
+]
+
+RESOURCE_FILES.codemirror.mode.dylan += [
+  "res/codemirror/mode/dylan/dylan.js",
+  "res/codemirror/mode/dylan/index.html",
+]
+
+RESOURCE_FILES.codemirror.mode.ebnf += [
+  "res/codemirror/mode/ebnf/ebnf.js",
+  "res/codemirror/mode/ebnf/index.html",
+]
+
+RESOURCE_FILES.codemirror.mode.ecl += [
+  "res/codemirror/mode/ecl/ecl.js",
+  "res/codemirror/mode/ecl/index.html",
+]
+
+RESOURCE_FILES.codemirror.mode.eiffel += [
+  "res/codemirror/mode/eiffel/eiffel.js",
+  "res/codemirror/mode/eiffel/index.html",
+]
+
+RESOURCE_FILES.codemirror.mode.erlang += [
+  "res/codemirror/mode/erlang/erlang.js",
+  "res/codemirror/mode/erlang/index.html",
+]
+
+RESOURCE_FILES.codemirror.mode.forth += [
+  "res/codemirror/mode/forth/forth.js",
+  "res/codemirror/mode/forth/index.html",
+]
+
+RESOURCE_FILES.codemirror.mode.fortran += [
+  "res/codemirror/mode/fortran/fortran.js",
+  "res/codemirror/mode/fortran/index.html",
+]
+
+RESOURCE_FILES.codemirror.mode.gas += [
+  "res/codemirror/mode/gas/gas.js",
+  "res/codemirror/mode/gas/index.html",
+]
+
+RESOURCE_FILES.codemirror.mode.gfm += [
+  "res/codemirror/mode/gfm/gfm.js",
+  "res/codemirror/mode/gfm/index.html",
+  "res/codemirror/mode/gfm/test.js",
+]
+
+RESOURCE_FILES.codemirror.mode.gherkin += [
+  "res/codemirror/mode/gherkin/gherkin.js",
+  "res/codemirror/mode/gherkin/index.html",
+]
+
+RESOURCE_FILES.codemirror.mode.go += [
+  "res/codemirror/mode/go/go.js",
+  "res/codemirror/mode/go/index.html",
+]
+
+RESOURCE_FILES.codemirror.mode.groovy += [
+  "res/codemirror/mode/groovy/groovy.js",
+  "res/codemirror/mode/groovy/index.html",
+]
+
+RESOURCE_FILES.codemirror.mode.haml += [
+  "res/codemirror/mode/haml/haml.js",
+  "res/codemirror/mode/haml/index.html",
+  "res/codemirror/mode/haml/test.js",
+]
+
+RESOURCE_FILES.codemirror.mode.handlebars += [
+  "res/codemirror/mode/handlebars/handlebars.js",
+  "res/codemirror/mode/handlebars/index.html",
+]
+
+RESOURCE_FILES.codemirror.mode.haskell += [
+  "res/codemirror/mode/haskell/haskell.js",
+  "res/codemirror/mode/haskell/index.html",
+]
+
+RESOURCE_FILES.codemirror.mode.haxe += [
+  "res/codemirror/mode/haxe/haxe.js",
+  "res/codemirror/mode/haxe/index.html",
+]
+
+RESOURCE_FILES.codemirror.mode.htmlembedded += [
+  "res/codemirror/mode/htmlembedded/htmlembedded.js",
+  "res/codemirror/mode/htmlembedded/index.html",
+]
+
+RESOURCE_FILES.codemirror.mode.htmlmixed += [
+  "res/codemirror/mode/htmlmixed/htmlmixed.js",
+  "res/codemirror/mode/htmlmixed/index.html",
+]
+
+RESOURCE_FILES.codemirror.mode.http += [
+  "res/codemirror/mode/http/http.js",
+  "res/codemirror/mode/http/index.html",
+]
+
+RESOURCE_FILES.codemirror.mode.idl += [
+  "res/codemirror/mode/idl/idl.js",
+  "res/codemirror/mode/idl/index.html",
+]
+
+RESOURCE_FILES.codemirror.mode.jade += [
+  "res/codemirror/mode/jade/index.html",
+  "res/codemirror/mode/jade/jade.js",
+]
+
+RESOURCE_FILES.codemirror.mode.javascript += [
+  "res/codemirror/mode/javascript/index.html",
+  "res/codemirror/mode/javascript/javascript.js",
+  "res/codemirror/mode/javascript/json-ld.html",
+  "res/codemirror/mode/javascript/test.js",
+  "res/codemirror/mode/javascript/typescript.html",
+]
+
+RESOURCE_FILES.codemirror.mode.jinja2 += [
+  "res/codemirror/mode/jinja2/index.html",
+  "res/codemirror/mode/jinja2/jinja2.js",
+]
+
+RESOURCE_FILES.codemirror.mode.julia += [
+  "res/codemirror/mode/julia/index.html",
+  "res/codemirror/mode/julia/julia.js",
+]
+
+RESOURCE_FILES.codemirror.mode.kotlin += [
+  "res/codemirror/mode/kotlin/index.html",
+  "res/codemirror/mode/kotlin/kotlin.js",
+]
+
+RESOURCE_FILES.codemirror.mode.livescript += [
+  "res/codemirror/mode/livescript/index.html",
+  "res/codemirror/mode/livescript/livescript.js",
+]
+
+RESOURCE_FILES.codemirror.mode.lua += [
+  "res/codemirror/mode/lua/index.html",
+  "res/codemirror/mode/lua/lua.js",
+]
+
+RESOURCE_FILES.codemirror.mode.markdown += [
+  "res/codemirror/mode/markdown/index.html",
+  "res/codemirror/mode/markdown/markdown.js",
+  "res/codemirror/mode/markdown/test.js",
+]
+
+RESOURCE_FILES.codemirror.mode.mirc += [
+  "res/codemirror/mode/mirc/index.html",
+  "res/codemirror/mode/mirc/mirc.js",
+]
+
+RESOURCE_FILES.codemirror.mode.mllike += [
+  "res/codemirror/mode/mllike/index.html",
+  "res/codemirror/mode/mllike/mllike.js",
+]
+
+RESOURCE_FILES.codemirror.mode.modelica += [
+  "res/codemirror/mode/modelica/index.html",
+  "res/codemirror/mode/modelica/modelica.js",
+]
+
+RESOURCE_FILES.codemirror.mode.mumps += [
+  "res/codemirror/mode/mumps/index.html",
+  "res/codemirror/mode/mumps/mumps.js",
+]
+
+RESOURCE_FILES.codemirror.mode.nginx += [
+  "res/codemirror/mode/nginx/index.html",
+  "res/codemirror/mode/nginx/nginx.js",
+]
+
+RESOURCE_FILES.codemirror.mode.ntriples += [
+  "res/codemirror/mode/ntriples/index.html",
+  "res/codemirror/mode/ntriples/ntriples.js",
+]
+
+RESOURCE_FILES.codemirror.mode.octave += [
+  "res/codemirror/mode/octave/index.html",
+  "res/codemirror/mode/octave/octave.js",
+]
+
+RESOURCE_FILES.codemirror.mode.pascal += [
+  "res/codemirror/mode/pascal/index.html",
+  "res/codemirror/mode/pascal/pascal.js",
+]
+
+RESOURCE_FILES.codemirror.mode.pegjs += [
+  "res/codemirror/mode/pegjs/index.html",
+  "res/codemirror/mode/pegjs/pegjs.js",
+]
+
+RESOURCE_FILES.codemirror.mode.perl += [
+  "res/codemirror/mode/perl/index.html",
+  "res/codemirror/mode/perl/perl.js",
+]
+
+RESOURCE_FILES.codemirror.mode.php += [
+  "res/codemirror/mode/php/index.html",
+  "res/codemirror/mode/php/php.js",
+  "res/codemirror/mode/php/test.js",
+]
+
+RESOURCE_FILES.codemirror.mode.pig += [
+  "res/codemirror/mode/pig/index.html",
+  "res/codemirror/mode/pig/pig.js",
+]
+
+RESOURCE_FILES.codemirror.mode.properties += [
+  "res/codemirror/mode/properties/index.html",
+  "res/codemirror/mode/properties/properties.js",
+]
+
+RESOURCE_FILES.codemirror.mode.puppet += [
+  "res/codemirror/mode/puppet/index.html",
+  "res/codemirror/mode/puppet/puppet.js",
+]
+
+RESOURCE_FILES.codemirror.mode.python += [
+  "res/codemirror/mode/python/index.html",
+  "res/codemirror/mode/python/python.js",
+]
+
+RESOURCE_FILES.codemirror.mode.q += [
+  "res/codemirror/mode/q/index.html",
+  "res/codemirror/mode/q/q.js",
+]
+
+RESOURCE_FILES.codemirror.mode.r += [
+  "res/codemirror/mode/r/index.html",
+  "res/codemirror/mode/r/r.js",
+]
+
+RESOURCE_FILES.codemirror.mode.rpm += [
+  "res/codemirror/mode/rpm/index.html",
+  "res/codemirror/mode/rpm/rpm.js",
+]
+
+RESOURCE_FILES.codemirror.mode.rpm.changes += [
+  "res/codemirror/mode/rpm/changes/index.html",
+]
+
+RESOURCE_FILES.codemirror.mode.rst += [
+  "res/codemirror/mode/rst/index.html",
+  "res/codemirror/mode/rst/rst.js",
+]
+
+RESOURCE_FILES.codemirror.mode.ruby += [
+  "res/codemirror/mode/ruby/index.html",
+  "res/codemirror/mode/ruby/ruby.js",
+  "res/codemirror/mode/ruby/test.js",
+]
+
+RESOURCE_FILES.codemirror.mode.rust += [
+  "res/codemirror/mode/rust/index.html",
+  "res/codemirror/mode/rust/rust.js",
+]
+
+RESOURCE_FILES.codemirror.mode.sass += [
+  "res/codemirror/mode/sass/index.html",
+  "res/codemirror/mode/sass/sass.js",
+]
+
+RESOURCE_FILES.codemirror.mode.scheme += [
+  "res/codemirror/mode/scheme/index.html",
+  "res/codemirror/mode/scheme/scheme.js",
+]
+
+RESOURCE_FILES.codemirror.mode.shell += [
+  "res/codemirror/mode/shell/index.html",
+  "res/codemirror/mode/shell/shell.js",
+  "res/codemirror/mode/shell/test.js",
+]
+
+RESOURCE_FILES.codemirror.mode.sieve += [
+  "res/codemirror/mode/sieve/index.html",
+  "res/codemirror/mode/sieve/sieve.js",
+]
+
+RESOURCE_FILES.codemirror.mode.slim += [
+  "res/codemirror/mode/slim/index.html",
+  "res/codemirror/mode/slim/slim.js",
+  "res/codemirror/mode/slim/test.js",
+]
+
+RESOURCE_FILES.codemirror.mode.smalltalk += [
+  "res/codemirror/mode/smalltalk/index.html",
+  "res/codemirror/mode/smalltalk/smalltalk.js",
+]
+
+RESOURCE_FILES.codemirror.mode.smarty += [
+  "res/codemirror/mode/smarty/index.html",
+  "res/codemirror/mode/smarty/smarty.js",
+]
+
+RESOURCE_FILES.codemirror.mode.solr += [
+  "res/codemirror/mode/solr/index.html",
+  "res/codemirror/mode/solr/solr.js",
+]
+
+RESOURCE_FILES.codemirror.mode.soy += [
+  "res/codemirror/mode/soy/index.html",
+  "res/codemirror/mode/soy/soy.js",
+]
+
+RESOURCE_FILES.codemirror.mode.sparql += [
+  "res/codemirror/mode/sparql/index.html",
+  "res/codemirror/mode/sparql/sparql.js",
+]
+
+RESOURCE_FILES.codemirror.mode.spreadsheet += [
+  "res/codemirror/mode/spreadsheet/index.html",
+  "res/codemirror/mode/spreadsheet/spreadsheet.js",
+]
+
+RESOURCE_FILES.codemirror.mode.sql += [
+  "res/codemirror/mode/sql/index.html",
+  "res/codemirror/mode/sql/sql.js",
+]
+
+RESOURCE_FILES.codemirror.mode.stex += [
+  "res/codemirror/mode/stex/index.html",
+  "res/codemirror/mode/stex/stex.js",
+  "res/codemirror/mode/stex/test.js",
+]
+
+RESOURCE_FILES.codemirror.mode.stylus += [
+  "res/codemirror/mode/stylus/index.html",
+  "res/codemirror/mode/stylus/stylus.js",
+]
+
+RESOURCE_FILES.codemirror.mode.tcl += [
+  "res/codemirror/mode/tcl/index.html",
+  "res/codemirror/mode/tcl/tcl.js",
+]
+
+RESOURCE_FILES.codemirror.mode.textile += [
+  "res/codemirror/mode/textile/index.html",
+  "res/codemirror/mode/textile/test.js",
+  "res/codemirror/mode/textile/textile.js",
+]
+
+RESOURCE_FILES.codemirror.mode.tiddlywiki += [
+  "res/codemirror/mode/tiddlywiki/index.html",
+  "res/codemirror/mode/tiddlywiki/tiddlywiki.css",
+  "res/codemirror/mode/tiddlywiki/tiddlywiki.js",
+]
+
+RESOURCE_FILES.codemirror.mode.tiki += [
+  "res/codemirror/mode/tiki/index.html",
+  "res/codemirror/mode/tiki/tiki.css",
+  "res/codemirror/mode/tiki/tiki.js",
+]
+
+RESOURCE_FILES.codemirror.mode.toml += [
+  "res/codemirror/mode/toml/index.html",
+  "res/codemirror/mode/toml/toml.js",
+]
+
+RESOURCE_FILES.codemirror.mode.tornado += [
+  "res/codemirror/mode/tornado/index.html",
+  "res/codemirror/mode/tornado/tornado.js",
+]
+
+RESOURCE_FILES.codemirror.mode.troff += [
+  "res/codemirror/mode/troff/index.html",
+  "res/codemirror/mode/troff/troff.js",
+]
+
+RESOURCE_FILES.codemirror.mode.turtle += [
+  "res/codemirror/mode/turtle/index.html",
+  "res/codemirror/mode/turtle/turtle.js",
+]
+
+RESOURCE_FILES.codemirror.mode.vb += [
+  "res/codemirror/mode/vb/index.html",
+  "res/codemirror/mode/vb/vb.js",
+]
+
+RESOURCE_FILES.codemirror.mode.vbscript += [
+  "res/codemirror/mode/vbscript/index.html",
+  "res/codemirror/mode/vbscript/vbscript.js",
+]
+
+RESOURCE_FILES.codemirror.mode.velocity += [
+  "res/codemirror/mode/velocity/index.html",
+  "res/codemirror/mode/velocity/velocity.js",
+]
+
+RESOURCE_FILES.codemirror.mode.verilog += [
+  "res/codemirror/mode/verilog/index.html",
+  "res/codemirror/mode/verilog/test.js",
+  "res/codemirror/mode/verilog/verilog.js",
+]
+
+RESOURCE_FILES.codemirror.mode.xml += [
+  "res/codemirror/mode/xml/index.html",
+  "res/codemirror/mode/xml/test.js",
+  "res/codemirror/mode/xml/xml.js",
+]
+
+RESOURCE_FILES.codemirror.mode.xquery += [
+  "res/codemirror/mode/xquery/index.html",
+  "res/codemirror/mode/xquery/test.js",
+  "res/codemirror/mode/xquery/xquery.js",
+]
+
+RESOURCE_FILES.codemirror.mode.yaml += [
+  "res/codemirror/mode/yaml/index.html",
+  "res/codemirror/mode/yaml/yaml.js",
+]
+
+RESOURCE_FILES.codemirror.mode.z80 += [
+  "res/codemirror/mode/z80/index.html",
+  "res/codemirror/mode/z80/z80.js",
+]
+
+RESOURCE_FILES.codemirror.theme += [
+  "res/codemirror/theme/3024-day.css",
+  "res/codemirror/theme/3024-night.css",
+  "res/codemirror/theme/ambiance-mobile.css",
+  "res/codemirror/theme/ambiance.css",
+  "res/codemirror/theme/base16-dark.css",
+  "res/codemirror/theme/base16-light.css",
+  "res/codemirror/theme/blackboard.css",
+  "res/codemirror/theme/cobalt.css",
+  "res/codemirror/theme/colorforth.css",
+  "res/codemirror/theme/eclipse.css",
+  "res/codemirror/theme/elegant.css",
+  "res/codemirror/theme/erlang-dark.css",
+  "res/codemirror/theme/lesser-dark.css",
+  "res/codemirror/theme/liquibyte.css",
+  "res/codemirror/theme/mbo.css",
+  "res/codemirror/theme/mdn-like.css",
+  "res/codemirror/theme/midnight.css",
+  "res/codemirror/theme/monokai.css",
+  "res/codemirror/theme/neat.css",
+  "res/codemirror/theme/neo.css",
+  "res/codemirror/theme/night.css",
+  "res/codemirror/theme/paraiso-dark.css",
+  "res/codemirror/theme/paraiso-light.css",
+  "res/codemirror/theme/pastel-on-dark.css",
+  "res/codemirror/theme/rubyblue.css",
+  "res/codemirror/theme/solarized.css",
+  "res/codemirror/theme/the-matrix.css",
+  "res/codemirror/theme/tomorrow-night-bright.css",
+  "res/codemirror/theme/tomorrow-night-eighties.css",
+  "res/codemirror/theme/twilight.css",
+  "res/codemirror/theme/vibrant-ink.css",
+  "res/codemirror/theme/xq-dark.css",
+  "res/codemirror/theme/xq-light.css",
+  "res/codemirror/theme/zenburn.css",
+]
+
+if CONFIG['MOZ_WIDGET_TOOLKIT'] in ('windows', 'cocoa'):
+    DEFINES['CAN_DRAW_IN_TITLEBAR'] = 1
+
+if CONFIG['BG_RELEASE']:
+    DEFINES['BG_RELEASE'] = 1

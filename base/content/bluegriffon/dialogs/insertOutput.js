@@ -1,4 +1,4 @@
-Components.utils.import("resource://app/modules/editorHelper.jsm");
+Components.utils.import("resource://gre/modules/editorHelper.jsm");
 
 var gNode = null;
 var gEditor = null;
@@ -19,6 +19,10 @@ function Startup()
     gDialog.forMenulist.appendItem(ids[i], ids[i]);
 
   InitDialog();
+
+#ifndef XP_MACOSX
+  CenterDialogOnOpener();
+#endif
 }
 
 function onAccept()

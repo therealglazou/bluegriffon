@@ -5,7 +5,7 @@ var bgInsertTableCommand =
     return (EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -15,7 +15,7 @@ var bgInsertTableCommand =
   {
     // reset the table insertion panel
     AutoInsertTable.reset();
-    gDialog.AutoInsertTableSheetPopup.openPopup(gDialog["tableButton"], "after_start", 0, 0, false);
+    gDialog.AutoInsertTableSheetPopup.openPopup(EditorUtils.getCurrentTabEditor(), "at_pointer", 0, 0, false);
   }
 };
 
@@ -28,7 +28,7 @@ var bgEditTableCommand =
             EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -51,7 +51,7 @@ var bgSelectTableCommand =
             EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -62,7 +62,7 @@ var bgSelectTableCommand =
     try {
       EditorUtils.getCurrentTableEditor().selectTable();
     } catch(e) {}
-    window.content.focus();
+    GetWindowContent().focus();
   }
 };
 
@@ -75,7 +75,7 @@ var bgSelectTableCaptionCommand =
         EditorUtils.getCurrentEditorElement() &&
         EditorUtils.isDocumentEditable() &&
         EditorUtils.isEditingRenderedHTML() &&
-        GetCurrentViewMode() == "wysiwyg") {
+        EditorUtils.isWysiwygMode()) {
       // but do we already have a caption?
       return  (element.firstElementChild
                && element.firstElementChild.nodeName == "caption");
@@ -92,7 +92,7 @@ var bgSelectTableCaptionCommand =
     try {
       EditorUtils.getCurrentEditor().selectElement(element.firstElementChild);
     } catch(e) {}
-    window.content.focus();
+    GetWindowContent().focus();
   }
 };
 
@@ -105,7 +105,7 @@ var bgSelectTableRowCommand =
             EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -116,7 +116,7 @@ var bgSelectTableRowCommand =
     try {
       EditorUtils.getCurrentTableEditor().selectTableRow();
     } catch(e) {}
-    window.content.focus();
+    GetWindowContent().focus();
   }
 };
 
@@ -129,7 +129,7 @@ var bgsSelectTableColumnCommand =
             EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -140,7 +140,7 @@ var bgsSelectTableColumnCommand =
     try {
       EditorUtils.getCurrentTableEditor().selectTableColumn();
     } catch(e) {}
-    window.content.focus();
+    GetWindowContent().focus();
   }
 };
 
@@ -153,7 +153,7 @@ var bgSelectTableCellCommand =
             EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -164,7 +164,7 @@ var bgSelectTableCellCommand =
     try {
       EditorUtils.getCurrentTableEditor().selectTableCell();
     } catch(e) {}
-    window.content.focus();
+    GetWindowContent().focus();
   }
 };
 
@@ -177,7 +177,7 @@ var bgSelectAllTableCellsCommand =
             EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -188,7 +188,7 @@ var bgSelectAllTableCellsCommand =
     try {
       EditorUtils.getCurrentTableEditor().selectAllTableCells();
     } catch(e) {}
-    window.content.focus();
+    GetWindowContent().focus();
   }
 };
 
@@ -201,7 +201,7 @@ var bgInsertTableCaptionCommand =
         EditorUtils.getCurrentEditorElement() &&
         EditorUtils.isDocumentEditable() &&
         EditorUtils.isEditingRenderedHTML() &&
-        GetCurrentViewMode() == "wysiwyg") {
+        EditorUtils.isWysiwygMode()) {
       // but do we already have a caption?
       return  (!element.firstElementChild
                || element.firstElementChild.nodeName != "caption");
@@ -222,7 +222,7 @@ var bgInsertTableCaptionCommand =
       EditorUtils.getCurrentEditor().insertNode(caption, element, 0);
       EditorUtils.getCurrentEditor().selectElement(brNode);
     } catch(e) {}
-    window.content.focus();
+    GetWindowContent().focus();
   }
 };
 
@@ -235,7 +235,7 @@ var bgInsertTableRowAboveCommand =
             EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -246,7 +246,7 @@ var bgInsertTableRowAboveCommand =
     try {
       EditorUtils.getCurrentTableEditor().insertTableRow(1, false);
     } catch(e) {}
-    window.content.focus();
+    GetWindowContent().focus();
   }
 };
 
@@ -259,7 +259,7 @@ var bgInsertTableRowBelowCommand =
             EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -270,7 +270,7 @@ var bgInsertTableRowBelowCommand =
     try {
       EditorUtils.getCurrentTableEditor().insertTableRow(1, true);
     } catch(e) {}
-    window.content.focus();
+    GetWindowContent().focus();
   }
 };
 
@@ -283,7 +283,7 @@ var bgInsertTableColumnBeforeCommand =
             EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -294,7 +294,7 @@ var bgInsertTableColumnBeforeCommand =
     try {
       EditorUtils.getCurrentTableEditor().insertTableColumn(1, false);
     } catch(e) {}
-    window.content.focus();
+    GetWindowContent().focus();
   }
 };
 
@@ -307,7 +307,7 @@ var bgInsertTableColumnAfterCommand =
             EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -318,7 +318,7 @@ var bgInsertTableColumnAfterCommand =
     try {
       EditorUtils.getCurrentTableEditor().insertTableColumn(1, true);
     } catch(e) {}
-    window.content.focus();
+    GetWindowContent().focus();
   }
 };
 
@@ -331,7 +331,7 @@ var bgInsertTableCellBeforeCommand =
             EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -342,7 +342,7 @@ var bgInsertTableCellBeforeCommand =
     try {
       EditorUtils.getCurrentTableEditor().insertTableCell(1, false);
     } catch(e) {}
-    window.content.focus();
+    GetWindowContent().focus();
   }
 };
 
@@ -355,7 +355,7 @@ var bgInsertTableCellAfterCommand =
             EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -366,7 +366,7 @@ var bgInsertTableCellAfterCommand =
     try {
       EditorUtils.getCurrentTableEditor().insertTableCell(1, true);
     } catch(e) {}
-    window.content.focus();
+    GetWindowContent().focus();
   }
 };
 
@@ -379,7 +379,7 @@ var bgDeleteTableCommand =
             EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -390,7 +390,7 @@ var bgDeleteTableCommand =
     try {
       EditorUtils.getCurrentTableEditor().deleteTable();
     } catch(e) {}
-    window.content.focus();
+    GetWindowContent().focus();
   }
 };
 
@@ -403,7 +403,7 @@ var bgDeleteTableCaptionCommand =
         EditorUtils.getCurrentEditorElement() &&
         EditorUtils.isDocumentEditable() &&
         EditorUtils.isEditingRenderedHTML() &&
-        GetCurrentViewMode() == "wysiwyg") {
+        EditorUtils.isWysiwygMode()) {
       // but do we already have a caption?
       return  (element.firstElementChild
                && element.firstElementChild.nodeName == "caption");
@@ -420,7 +420,7 @@ var bgDeleteTableCaptionCommand =
     try {
       EditorUtils.getCurrentEditor().deleteNode(element.firstElementChild);
     } catch(e) {}
-    window.content.focus();
+    GetWindowContent().focus();
   }
 };
 
@@ -501,7 +501,7 @@ var bgDeleteTableRowCommand =
             EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -525,7 +525,7 @@ var bgDeleteTableRowCommand =
         rows = GetNumberOfContiguousSelectedRows();
       }
     } finally { editor.endTransaction(); }
-    window.content.focus();
+    GetWindowContent().focus();
   }
 };
 
@@ -538,7 +538,7 @@ var bgDeleteTableColumnCommand =
             EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -562,7 +562,7 @@ var bgDeleteTableColumnCommand =
         columns = GetNumberOfContiguousSelectedColumns();
       }
     } finally { editor.endTransaction(); }
-    window.content.focus();
+    GetWindowContent().focus();
   }
 };
 
@@ -575,7 +575,7 @@ var bgDeleteTableCellCommand =
             EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -586,7 +586,7 @@ var bgDeleteTableCellCommand =
     try {
       EditorUtils.getCurrentTableEditor().deleteTableCell(1);   
     } catch (e) {}
-    window.content.focus();
+    GetWindowContent().focus();
   }
 };
 
@@ -599,7 +599,7 @@ var bgDeleteTableCellContentsCommand =
             EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -610,7 +610,7 @@ var bgDeleteTableCellContentsCommand =
     try {
       EditorUtils.getCurrentTableEditor().deleteTableCellContents();   
     } catch (e) {}
-    window.content.focus();
+    GetWindowContent().focus();
   }
 };
 
@@ -623,7 +623,7 @@ var bgNormalizeTableCommand =
             EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -635,7 +635,7 @@ var bgNormalizeTableCommand =
     try {
       EditorUtils.getCurrentTableEditor().normalizeTable(null);   
     } catch (e) {}
-    window.content.focus();
+    GetWindowContent().focus();
   }
 };
 
@@ -646,7 +646,7 @@ var bgJoinTableCellsCommand =
     if (EditorUtils.getCurrentEditorElement() &&
         EditorUtils.isDocumentEditable() &&
         EditorUtils.isEditingRenderedHTML() &&
-        GetCurrentViewMode() == "wysiwyg")
+        EditorUtils.isWysiwygMode())
     {
       try {
         var editor = EditorUtils.getCurrentTableEditor();
@@ -696,7 +696,7 @@ var bgJoinTableCellsCommand =
     try {
       EditorUtils.getCurrentTableEditor().joinTableCells(false);
     } catch (e) {alert(e)}
-    window.content.focus();
+    GetWindowContent().focus();
   }
 };
 
@@ -731,7 +731,7 @@ var bgSplitTableCellCommand =
     if (EditorUtils.getCurrentEditorElement() &&
         EditorUtils.isDocumentEditable() &&
         EditorUtils.isEditingRenderedHTML() &&
-        GetCurrentViewMode() == "wysiwyg")
+        EditorUtils.isWysiwygMode())
     {
       var tagNameObj = { value: "" };
       var countObj = { value: 0 };
@@ -765,7 +765,7 @@ var bgSplitTableCellCommand =
     try {
       EditorUtils.getCurrentTableEditor().splitTableCell();
     } catch (e) {}
-    window.content.focus();
+    GetWindowContent().focus();
   }
 };
 
@@ -789,7 +789,7 @@ var bgConvertToTable =
     if (EditorUtils.getCurrentEditorElement() &&
         EditorUtils.isDocumentEditable() &&
         EditorUtils.isEditingRenderedHTML() &&
-        GetCurrentViewMode() == "wysiwyg")
+        EditorUtils.isWysiwygMode())
     {
       var selection;
       var editor = EditorUtils.getCurrentEditor();
@@ -832,7 +832,7 @@ var bgConvertToTable =
   doCommand: function(aCommand)
   {
     window.openDialog("chrome://bluegriffon/content/dialogs/convertToTable.xul","_blank", "chrome,close,titlebar,modal")
-    window.content.focus();
+    GetWindowContent().focus();
   }
 };
 
@@ -845,7 +845,7 @@ var bgSelectTableColumnCommand =
             EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isWysiwygMode());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -856,7 +856,7 @@ var bgSelectTableColumnCommand =
     try {
       EditorUtils.getCurrentTableEditor().selectTableColumn();
     } catch(e) {}
-    window.content.focus();
+    GetWindowContent().focus();
   }
 };
 

@@ -36,10 +36,10 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-Components.utils.import("resource://app/modules/cssHelper.jsm");
-Components.utils.import("resource://app/modules/editorHelper.jsm");
-Components.utils.import("resource://app/modules/urlHelper.jsm");
-Components.utils.import("resource://app/modules/l10nHelper.jsm");
+Components.utils.import("resource://gre/modules/cssHelper.jsm");
+Components.utils.import("resource://gre/modules/editorHelper.jsm");
+Components.utils.import("resource://gre/modules/urlHelper.jsm");
+Components.utils.import("resource://gre/modules/l10nHelper.jsm");
 
 var gDocUrlScheme = null;
 
@@ -171,7 +171,7 @@ function SerializeITSDocToFile(aDoc, aLinkElement)
                  createInstance(Components.interfaces.nsIFileOutputStream);
   
   // use 0x02 | 0x10 to open file for appending.
-  foStream.init(localFile, 0x02 | 0x08 | 0x20, 0666, 0); 
+  foStream.init(localFile, 0x02 | 0x08 | 0x20, 0x1b6, 0);
   // write, create, truncate
   // In a c file operation, we have no need to set file mode with or operation,
   // directly using "r" or "w" usually.
@@ -477,7 +477,7 @@ function NewITS20File(aContents)
                              createInstance(Components.interfaces.nsIFileOutputStream);
     
     // use 0x02 | 0x10 to open file for appending.
-    foStream.init(file, 0x02 | 0x08 | 0x20, 0666, 0); 
+    foStream.init(file, 0x02 | 0x08 | 0x20, 0x1b6, 0);
     // write, create, truncate
     // In a c file operation, we have no need to set file mode with or operation,
     // directly using "r" or "w" usually.

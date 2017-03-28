@@ -3,6 +3,7 @@
       <toolbarbutton id="newButton"  class="toolbarbutton-1"
                      label="&newMenu.label;"
                      type="menu-button"
+                     iconsize="smaller"
                      oncommand="NewDocument(event);"
                      tooltiptext="&newToolbarCmd.tooltip;">
         <menupopup>
@@ -28,8 +29,16 @@
       <toolbarbutton id="stopButton"
                      label="&stopButton.label;"
                      class="toolbarbutton-1"
+                     iconsize="smaller"
                      tooltiptext="&stopButton.tooltip;"
                      command="cmd_stopLoading"/>
+
+      <toolbarbutton id="refreshButton"
+                     label="&tableOfContents.label;"
+                     class="toolbarbutton-1"
+                     iconsize="smaller"
+                     tooltiptext="&tableOfContents.tooltip;"
+                     command="cmd_rebuildTOC"/>
 
       <toolbarbutton id="tableButton" class="toolbarbutton-1"
                      label="&tableToolbarCmd.label;" command="cmd_table"

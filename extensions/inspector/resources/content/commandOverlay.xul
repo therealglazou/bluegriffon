@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+
+<!DOCTYPE overlay [
+  <!ENTITY % dtd1 SYSTEM "chrome://inspector/locale/inspector.dtd"> %dtd1;
+]>
+
+<overlay id="ovCommandsMain"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <commandset id="cmdsGlobalCommands">
+
+    <command id="cmdGotoURL"
+             ontextentered="inspector.gotoTypedURL();"
+             oncommand="inspector.gotoTypedURL();"/>
+
+    <command id="cmdEnterLocation"
+             oncommand="inspector.enterLocation();"/>
+    <command id="cmdSave" oncommand="inspector.save();"/>
+    <command id="cmdClose" oncommand="inspector.exit();"/>
+
+    <command id="cmdShowPrefsDialog"
+             oncommand="inspector.showPrefsDialog();"/>
+
+    <command id="cmdToggleDocument"
+             oncommand="inspector.toggleBrowser(true);"/>
+
+    <command id="cmdFlashOnSelect"
+             viewer="dom accessibleTree"
+             oncommand="inspector.toggleFlashOnSelect();"/>
+
+    <!-- These implement the editing commands needed by the top-level
+         inspectors.  See editingOverlay.xul for more information. -->
+    <command id="cmdEditUndo" global="true"
+             oncommand="inspector.doViewerCommand('cmdEditUndo');"/>
+    <command id="cmdEditRedo" global="true"
+             oncommand="inspector.doViewerCommand('cmdEditRedo');"/>
+    <command id="cmdEditCut" global="true"
+             oncommand="inspector.doViewerCommand('cmdEditCut');"/>
+    <command id="cmdEditCopy" global="true"
+             oncommand="inspector.doViewerCommand('cmdEditCopy');"/>
+    <command id="cmdEditPaste" global="true"
+             oncommand="inspector.doViewerCommand('cmdEditPaste');"/>
+    <command id="cmdEditInsert" global="true"
+             oncommand="inspector.doViewerCommand('cmdEditInsert');"/>
+    <command id="cmdEditEdit" global="true"
+             oncommand="inspector.doViewerCommand('cmdEditEdit');"/>
+    <command id="cmdEditDelete" global="true"
+             oncommand="inspector.doViewerCommand('cmdEditDelete');"/>
+    <command id="cmdEditInspectInNewWindow" global="true"
+             oncommand="inspector.doViewerCommand('cmdEditInspectInNewWindow');"/>
+
+  </commandset>
+
+</overlay>

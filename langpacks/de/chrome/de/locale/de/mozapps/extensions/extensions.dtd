@@ -1,6 +1,10 @@
-<!ENTITY addons.windowTitle                   "Add-ons-Manager">
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+<!ENTITY addons.windowTitle                   "Add-ons-Verwaltung">
 
 <!ENTITY search.placeholder                   "Alle Add-ons durchsuchen">
+<!ENTITY search.buttonlabel                   "Suchen">
 <!-- LOCALIZATION NOTE (search.commandKey):
      The search command key should match findOnCmd.commandkey from browser.dtd -->
 <!ENTITY search.commandkey                    "f">
@@ -16,11 +20,19 @@
 <!ENTITY installAddonFromFile.accesskey       "A">
 <!ENTITY toolsMenu.tooltip                    "Tools für alle Add-ons">
 
+<!ENTITY getThemes.description                "Wollen Sie Ihren Browser anpassen?">
+<!ENTITY getThemes.learnMore                  "Wählen Sie aus Tausenden von Themes.">
+
 <!ENTITY cmd.back.tooltip                     "Eine Seite zurück">
 <!ENTITY cmd.forward.tooltip                  "Eine Seite vor">
 
+<!ENTITY showUnsignedExtensions.button.label  "Einige Erweiterungen konnten nicht verifiziert werden.">
+<!ENTITY showAllExtensions.button.label       "Alle Erweiterungen anzeigen">
+<!ENTITY debugAddons.label                    "Add-ons debuggen">
+<!ENTITY debugAddons.accesskey                "b">
+
 <!-- global warnings -->
-<!ENTITY warning.safemode.label                    "Alle Add-ons wurden durch den SafeMode deaktiviert.">
+<!ENTITY warning.safemode.label                    "Alle Add-ons wurden durch den Abgesicherten Modus deaktiviert.">
 <!ENTITY warning.checkcompatibility.label          "Die Addon-Kompatibilitäts-Prüfung ist deaktiviert. Sie könnten inkompatible Add-ons haben.">
 <!ENTITY warning.checkcompatibility.enable.label   "Aktivieren">
 <!ENTITY warning.checkcompatibility.enable.tooltip "Addon-Kompatibilitäts-Prüfung aktivieren">
@@ -28,13 +40,9 @@
 <!ENTITY warning.updatesecurity.enable.label       "Aktivieren">
 <!ENTITY warning.updatesecurity.enable.tooltip     "Überprüfung auf Sicherheitsupdates für Add-ons aktivieren">
 
-<!-- global informations -->
-<!ENTITY info.plugincheck.label                 "Überprüfen Sie, ob Ihre Plugins aktuell sind">
-<!ENTITY info.plugincheck.tooltip               "Überprüfen Sie, ob Ihre Plugins aktuell sind">
-
 <!-- categories / views -->
 <!ENTITY view.search.label                    "Suchen">
-<!ENTITY view.discover.label                  "Add-ons suchen">
+<!ENTITY view.discover.label                  "Add-ons entdecken">
 <!ENTITY view.recentUpdates.label             "Zuletzt durchgeführte Updates">
 <!ENTITY view.availableUpdates.label          "Verfügbare Updates">
 
@@ -87,6 +95,13 @@
 <!ENTITY cmd.enableTheme.accesskey            "T">
 <!ENTITY cmd.disableTheme.label               "Theme ablegen">
 <!ENTITY cmd.disableTheme.accesskey           "T">
+<!ENTITY cmd.askToActivate.label              "Nachfragen, ob aktiviert werden soll">
+<!ENTITY cmd.askToActivate.tooltip            "Jedes Mal nachfragen, ob das Add-on aktiviert werden soll">
+<!ENTITY cmd.alwaysActivate.label             "Immer aktivieren">
+<!ENTITY cmd.alwaysActivate.tooltip           "Dieses Add-on immer verwenden">
+<!ENTITY cmd.neverActivate.label              "Nie aktivieren">
+<!ENTITY cmd.neverActivate.tooltip            "Dieses Add-on nie verwenden">
+<!ENTITY cmd.stateMenu.tooltip                "Ändern, wann das Add-on verwendet wird">
 <!ENTITY cmd.installAddon.label               "Installieren">
 <!ENTITY cmd.installAddon.accesskey           "I">
 <!ENTITY cmd.uninstallAddon.label             "Entfernen">
@@ -121,7 +136,7 @@ einige der besten und populärsten Add-ons zum Ausprobieren anbieten.">
 <!ENTITY detail.homepage.label                "Homepage">
 <!ENTITY detail.numberOfDownloads.label       "Downloads">
 
-<!ENTITY detail.contributions.description     "Der Entwickler dieses Add-ons bittet Sie, dass sie die Entwicklung unterstützen, indem Sie einen kleinen Betrag spenden.">
+<!ENTITY detail.contributions.description     "Der Entwickler dieses Add-ons bittet Sie, dass Sie die Entwicklung unterstützen, indem Sie einen kleinen Betrag spenden.">
 
 <!ENTITY detail.updateType                    "Automatische Updates">
 <!ENTITY detail.updateDefault.label           "Standard">
@@ -206,3 +221,34 @@ einige der besten und populärsten Add-ons zum Ausprobieren anbieten.">
 <!ENTITY eula.accept                          "Akzeptieren und installieren…">
 
 <!ENTITY settings.path.button.label           "Durchsuchen…">
+
+<!-- LOCALIZATION NOTE (experiment.info.label): The strings related to
+     experiments are present on the "Experiments" tab of the add-ons manager.
+     This tab won't be displayed unless an Experiment add-on is installed.
+     Install https://people.mozilla.org/~gszorc/dummy-experiment-addon.xpi
+     to cause this tab to appear. -->
+<!ENTITY experiment.info.label "Telemetrie darf von Zeit zu Zeit Experimente installieren und laufen lassen.">
+<!ENTITY experiment.info.learnmore "Weitere Informationen">
+<!ENTITY experiment.info.learnmore.accesskey "W">
+<!ENTITY experiment.info.changetelemetry "Telemetrie-Einstellungen">
+<!ENTITY experiment.info.changetelemetry.accesskey "T">
+
+<!ENTITY setting.learnmore "Weitere Informationen…">
+
+<!ENTITY disabledUnsigned.heading "Einige Add-ons wurden deaktiviert">
+<!-- LOCALIZATION NOTE (disabledUnsigned.description.start, disabledUnsigned.description.findAddonsLink, disabledUnsigned.description.end):
+     These entities form a sentence, with
+     disabledUnsigned.description.findAddonsLink being a link to an external site. -->
+<!ENTITY disabledUnsigned.description.start "Die folgenden Add-ons wurden nicht für die Verwendung in &brandShortName; verifiziert. Sie können ">
+<!ENTITY disabledUnsigned.description.findAddonsLink "nach Alternativen suchen">
+<!ENTITY disabledUnsigned.description.end " oder die Entwickler bitten, sie verifizieren zu lassen.">
+<!ENTITY disabledUnsigned.learnMore "Erfahren Sie mehr über unsere Aktivitäten, um Ihre Sicherheit online zu erhalten.">
+<!-- LOCALIZATION NOTE (disabledUnsigned.devInfo.start, disabledUnsigned.devInfo.linkToManual, disabledUnsigned.devInfo.end):
+     These entities form a sentence, with disabledUnsigned.devInfo.linkToManual
+     being a link to an external site. -->
+<!ENTITY disabledUnsigned.devInfo.start "An der Verifizierung ihrer Add-ons interessierte Entwickler können mehr dazu in unserer ">
+<!ENTITY disabledUnsigned.devInfo.linkToManual "Anleitung">
+<!ENTITY disabledUnsigned.devInfo.end " erfahren.">
+
+<!ENTITY pluginDeprecation.description "Fehlt etwas? Einige Plugins werden nicht mehr von &brandShortName; unterstützt.">
+<!ENTITY pluginDeprecation.learnMore "Weitere Informationen">

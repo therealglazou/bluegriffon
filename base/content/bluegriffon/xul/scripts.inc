@@ -4,16 +4,18 @@
   <script type="application/javascript" src="chrome://bluegriffon/content/txns/diNodeDeletionTxn.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/txns/diStyleAttrChangeTxn.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/txns/diCommentOrPIChangeTxn.js"/>
+  <script type="application/javascript" src="chrome://bluegriffon/content/txns/diRemoveAttributeNSTxn.js"/>
+  <script type="application/javascript" src="chrome://bluegriffon/content/txns/diSetAttributeNSTxn.js"/>
 
   <script type="application/javascript" src="chrome://bluegriffon/content/utils/dgid.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/utils/global.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/utils/notifiers.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/js/commands.js"/>
+  <script type="application/javascript" src="chrome://aria/content/aria-roles.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/js/bluegriffon.js"/>
   <script type="application/javascript" src="chrome://global/content/globalOverlay.js"/>
   <script type="application/javascript" src="chrome://global/content/nsDragAndDrop.js"/>
   <script type="application/javascript" src="chrome://global/content/nsTransferable.js"/>
-  <script type="application/javascript" src="chrome://bluegriffon/content/js/customize.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/js/colourPickerHelper.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/js/zoomManager.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/js/recentPages.js"/>
@@ -22,10 +24,10 @@
   <script type="application/javascript" src="chrome://bluegriffon/content/js/recentPages.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/js/updateManager.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/js/rotate.js"/>
-  <script type="application/javascript" src="chrome://bluegriffon/content/js/cssRotations.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/js/html5.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/js/tableResizer.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/js/beautify-html.js"/>
-  <script type="application/javascript" src="resource://app/res/cm2/themes-list.js"/>
+  <script type="application/javascript" src="chrome://bluegriffon/content/js/rebuildTOC.js"/>
+  <script type="application/javascript" src="resource://gre/res/codemirror/themes-list.js"/>
 
-  <script type="application/javascript" src="chrome://venkman/content/venkman-overlay.js"/>
+  <script type="application/javascript" src="chrome://bluegriffon/content/js/responsive.js"/>

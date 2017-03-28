@@ -61,24 +61,156 @@ var NoDefault = false;
 
 var gMode = 0; // 0=colorpicker, 1=blender
 
+// from http://dev.w3.org/csswg/css-color-4/#named-colors
 var namedColorsArray = [
-  { name:"aqua",     value:"#00ffff" },
-  { name:"black",    value:"#000000" },
-  { name:"blue",     value:"#0000ff" },
-  { name:"fuchsia",  value:"#ff00ff" },
-  { name:"gray",     value:"#808080" },
-  { name:"green",    value:"#008000" },
-  { name:"lime",     value:"#00ff00" },
-  { name:"maroon",   value:"#800000" },
-  { name:"navy",     value:"#000080" },
-  { name:"olive",    value:"#808000" },
-  { name:"orange",   value:"#FFA500" },    
-  { name:"purple",   value:"#800080" },
-  { name:"red",      value:"#ff0000" },
-  { name:"silver",   value:"#c0c0c0" },
-  { name:"teal",     value:"#008080" },
-  { name:"white",    value:"#ffffff" },
-  { name:"yellow",   value:"#ffff00" }
+  { name: "aliceblue", value: "#f0f8ff" },
+  { name: "antiquewhite", value: "#faebd7" },
+  { name: "aqua", value: "#00ffff" },
+  { name: "aquamarine", value: "#7fffd4" },
+  { name: "azure", value: "#f0ffff" },
+  { name: "beige", value: "#f5f5dc" },
+  { name: "bisque", value: "#ffe4c4" },
+  { name: "black", value: "#000000" },
+  { name: "blanchedalmond", value: "#ffebcd" },
+  { name: "blue", value: "#0000ff" },
+  { name: "blueviolet", value: "#8a2be2" },
+  { name: "brown", value: "#a52a2a" },
+  { name: "burlywood", value: "#deb887" },
+  { name: "cadetblue", value: "#5f9ea0" },
+  { name: "chartreuse", value: "#7fff00" },
+  { name: "chocolate", value: "#d2691e" },
+  { name: "coral", value: "#ff7f50" },
+  { name: "cornflowerblue", value: "#6495ed" },
+  { name: "cornsilk", value: "#fff8dc" },
+  { name: "crimson", value: "#dc143c" },
+  { name: "cyan", value: "#00ffff" },
+  { name: "darkblue", value: "#00008b" },
+  { name: "darkcyan", value: "#008b8b" },
+  { name: "darkgoldenrod", value: "#b8860b" },
+  { name: "darkgray", value: "#a9a9a9" },
+  { name: "darkgreen", value: "#006400" },
+  { name: "darkgrey", value: "#a9a9a9" },
+  { name: "darkkhaki", value: "#bdb76b" },
+  { name: "darkmagenta", value: "#8b008b" },
+  { name: "darkolivegreen", value: "#556b2f" },
+  { name: "darkorange", value: "#ff8c00" },
+  { name: "darkorchid", value: "#9932cc" },
+  { name: "darkred", value: "#8b0000" },
+  { name: "darksalmon", value: "#e9967a" },
+  { name: "darkseagreen", value: "#8fbc8f" },
+  { name: "darkslateblue", value: "#483d8b" },
+  { name: "darkslategray", value: "#2f4f4f" },
+  { name: "darkslategrey", value: "#2f4f4f" },
+  { name: "darkturquoise", value: "#00ced1" },
+  { name: "darkviolet", value: "#9400d3" },
+  { name: "deeppink", value: "#ff1493" },
+  { name: "deepskyblue", value: "#00bfff" },
+  { name: "dimgray", value: "#696969" },
+  { name: "dimgrey", value: "#696969" },
+  { name: "dodgerblue", value: "#1e90ff" },
+  { name: "firebrick", value: "#b22222" },
+  { name: "floralwhite", value: "#fffaf0" },
+  { name: "forestgreen", value: "#228b22" },
+  { name: "fuchsia", value: "#ff00ff" },
+  { name: "gainsboro", value: "#dcdcdc" },
+  { name: "ghostwhite", value: "#f8f8ff" },
+  { name: "gold", value: "#ffd700" },
+  { name: "goldenrod", value: "#daa520" },
+  { name: "gray", value: "#808080" },
+  { name: "green", value: "#008000" },
+  { name: "greenyellow", value: "#adff2f" },
+  { name: "grey", value: "#808080" },
+  { name: "honeydew", value: "#f0fff0" },
+  { name: "hotpink", value: "#ff69b4" },
+  { name: "indianred", value: "#cd5c5c" },
+  { name: "indigo", value: "#4b0082" },
+  { name: "ivory", value: "#fffff0" },
+  { name: "khaki", value: "#f0e68c" },
+  { name: "lavender", value: "#e6e6fa" },
+  { name: "lavenderblush", value: "#fff0f5" },
+  { name: "lawngreen", value: "#7cfc00" },
+  { name: "lemonchiffon", value: "#fffacd" },
+  { name: "lightblue", value: "#add8e6" },
+  { name: "lightcoral", value: "#f08080" },
+  { name: "lightcyan", value: "#e0ffff" },
+  { name: "lightgoldenrodyellow", value: "#fafad2" },
+  { name: "lightgray", value: "#d3d3d3" },
+  { name: "lightgreen", value: "#90ee90" },
+  { name: "lightgrey", value: "#d3d3d3" },
+  { name: "lightpink", value: "#ffb6c1" },
+  { name: "lightsalmon", value: "#ffa07a" },
+  { name: "lightseagreen", value: "#20b2aa" },
+  { name: "lightskyblue", value: "#87cefa" },
+  { name: "lightslategray", value: "#778899" },
+  { name: "lightslategrey", value: "#778899" },
+  { name: "lightsteelblue", value: "#b0c4de" },
+  { name: "lightyellow", value: "#ffffe0" },
+  { name: "lime", value: "#00ff00" },
+  { name: "limegreen", value: "#32cd32" },
+  { name: "linen", value: "#faf0e6" },
+  { name: "magenta", value: "#ff00ff" },
+  { name: "maroon", value: "#800000" },
+  { name: "mediumaquamarine", value: "#66cdaa" },
+  { name: "mediumblue", value: "#0000cd" },
+  { name: "mediumorchid", value: "#ba55d3" },
+  { name: "mediumpurple", value: "#9370db" },
+  { name: "mediumseagreen", value: "#3cb371" },
+  { name: "mediumslateblue", value: "#7b68ee" },
+  { name: "mediumspringgreen", value: "#00fa9a" },
+  { name: "mediumturquoise", value: "#48d1cc" },
+  { name: "mediumvioletred", value: "#c71585" },
+  { name: "midnightblue", value: "#191970" },
+  { name: "mintcream", value: "#f5fffa" },
+  { name: "mistyrose", value: "#ffe4e1" },
+  { name: "moccasin", value: "#ffe4b5" },
+  { name: "navajowhite", value: "#ffdead" },
+  { name: "navy", value: "#000080" },
+  { name: "oldlace", value: "#fdf5e6" },
+  { name: "olive", value: "#808000" },
+  { name: "olivedrab", value: "#6b8e23" },
+  { name: "orange", value: "#ffa500" },
+  { name: "orangered", value: "#ff4500" },
+  { name: "orchid", value: "#da70d6" },
+  { name: "palegoldenrod", value: "#eee8aa" },
+  { name: "palegreen", value: "#98fb98" },
+  { name: "paleturquoise", value: "#afeeee" },
+  { name: "palevioletred", value: "#db7093" },
+  { name: "papayawhip", value: "#ffefd5" },
+  { name: "peachpuff", value: "#ffdab9" },
+  { name: "peru", value: "#cd853f" },
+  { name: "pink", value: "#ffc0cb" },
+  { name: "plum", value: "#dda0dd" },
+  { name: "powderblue", value: "#b0e0e6" },
+  { name: "purple", value: "#800080" },
+  { name: "rebeccapurple", value: "#663399" },
+  { name: "red", value: "#ff0000" },
+  { name: "rosybrown", value: "#bc8f8f" },
+  { name: "royalblue", value: "#4169e1" },
+  { name: "saddlebrown", value: "#8b4513" },
+  { name: "salmon", value: "#fa8072" },
+  { name: "sandybrown", value: "#f4a460" },
+  { name: "seagreen", value: "#2e8b57" },
+  { name: "seashell", value: "#fff5ee" },
+  { name: "sienna", value: "#a0522d" },
+  { name: "silver", value: "#c0c0c0" },
+  { name: "skyblue", value: "#87ceeb" },
+  { name: "slateblue", value: "#6a5acd" },
+  { name: "slategray", value: "#708090" },
+  { name: "slategrey", value: "#708090" },
+  { name: "snow", value: "#fffafa" },
+  { name: "springgreen", value: "#00ff7f" },
+  { name: "steelblue", value: "#4682b4" },
+  { name: "tan", value: "#d2b48c" },
+  { name: "teal", value: "#008080" },
+  { name: "thistle", value: "#d8bfd8" },
+  { name: "tomato", value: "#ff6347" },
+  { name: "turquoise", value: "#40e0d0" },
+  { name: "violet", value: "#ee82ee" },
+  { name: "wheat", value: "#f5deb3" },
+  { name: "white", value: "#ffffff" },
+  { name: "whitesmoke", value: "#f5f5f5" },
+  { name: "yellow", value: "#ffff00" },
+  { name: "yellowgreen", value: "#9acd32" }
   ];
 
 const kHEX_COLOR_MATCH_REGEXP = /#([0-9a-f][0-9a-f])([0-9a-f][0-9a-f])([0-9a-f][0-9a-f])/i;
@@ -146,12 +278,12 @@ function StartUp()
   // SetWindowLocation();
   var colorBoxes = gDialog.colorBoxes;
   var colors = new Array('00','33','66','99','CC','FF');
-  for (i = 5; i >= 0; i--) {
+  for (var i = 5; i >= 0; i--) {
   	var hbox;
-    for (j = 5; j >= 0; j--) {
+    for (var j = 5; j >= 0; j--) {
       hbox = document.createElement("hbox");
       colorBoxes.appendChild(hbox);
-    	for (k= 5; k >= 0; k--) {
+      for (var k= 5; k >= 0; k--) {
         var box = document.createElement("box");
         box.className = "colorBox";
         box.style.backgroundColor = "#" + colors[i]+colors[j]+colors[k];
@@ -189,13 +321,28 @@ function StartUp()
   Blend();
 }
 
+function PopulateColorNames()
+{
+  if (gDialog.nameColour.itemCount)
+    return;
+  namedColorsArray.forEach(
+    function(obj, index, array) {
+      var item = gDialog.nameColour.appendItem(obj.name, obj.value, obj.value);
+      item.setAttribute("src", "chrome://bluegriffon/content/colourBox.png");
+      var img = document.getAnonymousElementByAttribute(item, "class", "menu-iconic-icon");
+      img.setAttribute("style", "border: rgb(218,218,218) thin solid; background-color: " + obj.value);
+    }
+  );
+
+}
+
 // * utility function to convert predefined HTML4 color names
 //   into their #rrggbb equivalent and back
 function getHexColorFromColorName(color)
 {
   color = color.toLowerCase();
   for (var i=0; i< namedColorsArray.length; i++) {
-    if (color == namedColorsArray[i].name) {
+    if (color.toLowerCase() == namedColorsArray[i].name.toLowerCase()) {
       return namedColorsArray[i].value;
     }
   }
@@ -206,7 +353,7 @@ function getColorNameFromHexColor(color)
 {
   color = color.toLowerCase();
   for (var i=0; i< namedColorsArray.length; i++) {
-    if (color == namedColorsArray[i].value) {
+    if (color.toLowerCase() == namedColorsArray[i].value.toLowerCase()) {
       return namedColorsArray[i].name;
     }
   }
@@ -403,8 +550,7 @@ function redisplayBrightness()
    var h = colours.getHue();
    var s = colours.getSaturation();
    satSlider.setHSB(h, s, 255);
-   sat.setAttribute("style",
-     sat.getAttribute("style") + ";background-color: #" + satSlider.getHex());
+   sat.style.backgroundColor = "#" + satSlider.getHex();
 }
 
 function redisplaySaturation()
@@ -413,8 +559,7 @@ function redisplaySaturation()
    var h = colours.getHue();
    var b = colours.getBrightness();
    satSlider.setHSB(h, 1, b);
-   sat.setAttribute("style",
-     sat.getAttribute("style") + ";background-color: #" + satSlider.getHex());
+   sat.style.backgroundColor = "#" + satSlider.getHex();
 }
 
 function redisplaySwatches()
@@ -445,25 +590,25 @@ function redisplayRGBValues()
 
 function redisplayHSBValues()
 {
-  var h = Math.round(colours.getHue());
-  var s = Math.round(colours.getSaturation() * 100);
-  var b = Math.round(colours.getBrightness());
+  try {
+    var h = Math.round(colours.getHue());
+    var s = Math.round(colours.getSaturation() * 100);
+    var b = Math.round(colours.getBrightness());
 
-  gDialog.hue.value        = h;
-  gDialog.saturation.value = s;
-  gDialog.brightness.value = b;
+    gDialog.hue.value        = h;
+    gDialog.saturation.value = s;
+    gDialog.brightness.value = b;
 
-  computeOffsets(gDialog.hueAndSaturationCrosshair.parentNode);
+    computeOffsets(gDialog.hueAndSaturationCrosshair.parentNode);
 
-  var arrow = gDialog.brightnessArrow;
-  arrow.setAttribute("style",
-    arrow.getAttribute("style") + ";left: " + (b/255*200 + 2) + "px");
+    var arrow = gDialog.brightnessArrow;
+    arrow.style.left = (b/255*200 + 2) + "px";
 
-  var crosshair = gDialog.hueAndSaturationCrosshair;
-  crosshair.setAttribute("style",
-    crosshair.getAttribute("style") + ";left: " + (h/360*200 + 4) + "px"
-                                    + ";top:  " + ((100-s)/100*200 +4) + "px");
-
+    var crosshair = gDialog.hueAndSaturationCrosshair;
+    crosshair.style.left = (h/360*200 + 4) + "px";
+    crosshair.style.top  = ((100-s)/100*200 +4) + "px";
+  }
+  catch(e){}
 }
 
 
@@ -649,7 +794,7 @@ function objColour()
 // Returns the decimal value of a hex character
 function hex2dec(hex)
 {
-   return hexChars.indexOf(hex);
+   return hexChars.indexOf(hex.toUpperCase());
 }
 
 // return the hexidecimal value of a decimal digit from 1-16

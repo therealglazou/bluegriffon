@@ -1,0 +1,356 @@
+/* ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1/GPL 2.0/LGPL 2.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is BlueGriffon.
+ *
+ * The Initial Developer of the Original Code is
+ * Disruptive Innovations SAS.
+ * Portions created by the Initial Developer are Copyright (C) 2016
+ * the Initial Developer. All Rights Reserved.
+ *
+ * Contributor(s):
+ *   Daniel Glazman <daniel.glazman@disruptive-innovations.com>, Original author
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU General Public License Version 2 or later (the "GPL"), or
+ * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+ * in which case the provisions of the GPL or the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of either the GPL or the LGPL, and not to allow others to
+ * use your version of this file under the terms of the MPL, indicate your
+ * decision by deleting the provisions above and replace them with the notice
+ * and other provisions required by the GPL or the LGPL. If you do not delete
+ * the provisions above, a recipient may use your version of this file under
+ * the terms of any one of the MPL, the GPL or the LGPL.
+ *
+ * ***** END LICENSE BLOCK ***** */
+
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+@namespace svg url("http://www.w3.org/2000/svg");
+@namespace html url("http://www.w3.org/1999/xhtml");
+
+:root {
+
+  --bg-main-window-appearance: none;
+  
+  --bg-dark-scrollbar-appearance: none;
+  --bg-dark-scrollbar: black;
+
+  --bg-dark-background: #363d3f;
+  --bg-dark-gray: #474D4F;
+  --bg-lighter-dark-gray: #383f41;
+  --bg-dark-border: #474D4F;
+  --bg-lighter-border: #494f51;
+
+  --bg-list-background: #363d3f;
+
+  --bg-main-foreground-color: white;
+  --bg-disabled-foreground-color: #808080;
+}
+
+:root[cleartheme="true"], panel, popup {
+  --bg-dark-background: #E0E0E0;
+  --bg-dark-gray: #D0D0D0;
+  --bg-lighter-dark-gray: #B0B0B0;
+  --bg-dark-border: #c0c0c0;
+  --bg-lighter-border: #D0D0D0;
+
+  --bg-list-background: white;
+
+  --bg-main-foreground-color: black;
+  --bg-disabled-foreground-color: #808080;
+}
+
+:root[cleartheme="true"] image:not(.checkbox-check):not(.radio-check) {
+  filter: invert(80%);
+}
+
+*[imagetheming="never"] image,
+image[imagetheming="never"] {
+  filter: none ! important;
+}
+
+window:root {
+  -moz-appearance: var(--bg-main-window-appearance);
+  background-color: var(--bg-dark-background);
+}
+
+#titleInTitlebar {
+  color: var(--bg-main-foreground-color);
+  text-align: center;
+}
+
+%ifdef CAN_DRAW_IN_TITLEBAR
+:root:not([chromemargin]) > #titlebar,
+:root[inFullscreen] > #titlebar,
+:root[inFullscreen] .titlebar-placeholder,
+:root:not([tabsintitlebar]) .titlebar-placeholder {
+  display: none;
+}
+
+#titlebar {
+  -moz-binding: url("chrome://global/content/bindings/general.xml#windowdragbox");
+
+%ifdef XP_MACOSX
+  -moz-window-dragging: drag;
+%endif
+}
+
+#titlebar-spacer,
+#titlebar-spacer2 {
+  pointer-events: none;
+}
+
+:root[tabsintitlebar] #titlebar-buttonbox {
+  position: relative;
+}
+
+#titlebar-buttonbox {
+  -moz-appearance: -moz-window-button-box;
+}
+
+%ifdef XP_MACOSX
+#titlebar-fullscreen-button {
+  -moz-appearance: -moz-mac-fullscreen-button;
+}
+
+/* Because these buttons don't move, they should always be aligned the same,
+ * left and right were deprecated, so we have to do work to get it to mean that: */
+#titlebar-buttonbox-container:-moz-locale-dir(ltr) {
+  -moz-box-align: start;
+}
+
+#titlebar-buttonbox-container:-moz-locale-dir(rtl) {
+  -moz-box-align: end;
+}
+
+/* Fullscreen and caption buttons don't move with RTL on OS X so override the automatic ordering. */
+#titlebar-secondary-buttonbox:-moz-locale-dir(ltr),
+#titlebar-buttonbox-container:-moz-locale-dir(rtl),
+.titlebar-placeholder[type="fullscreen-button"]:-moz-locale-dir(ltr),
+.titlebar-placeholder[type="caption-buttons"]:-moz-locale-dir(rtl) {
+  -moz-box-ordinal-group: 1000;
+}
+
+#titlebar-secondary-buttonbox:-moz-locale-dir(rtl),
+#titlebar-buttonbox-container:-moz-locale-dir(ltr),
+.titlebar-placeholder[type="caption-buttons"]:-moz-locale-dir(ltr),
+.titlebar-placeholder[type="fullscreen-button"]:-moz-locale-dir(rtl) {
+  -moz-box-ordinal-group: 0;
+}
+%else
+/* On non-OSX, these should be start-aligned */
+#titlebar-buttonbox-container {
+  -moz-box-align: start;
+}
+%endif
+
+%if !defined(MOZ_WIDGET_GTK) && !defined(MOZ_WIDGET_QT)
+#TabsToolbar > .private-browsing-indicator {
+  -moz-box-ordinal-group: 1000;
+}
+%endif
+
+%ifdef XP_WIN
+:root[sizemode="maximized"] #titlebar-buttonbox {
+  -moz-appearance: -moz-window-button-box-maximized;
+}
+%endif
+
+%endif
+
+#titlebar {
+  margin: 4px 8px;
+}
+
+:root:not([cleartheme="true"]) menulist,
+:root:not([cleartheme="true"]) textbox[type="number"] {
+  -moz-appearance: none;
+  padding-left: 3px;
+  padding-right: 3px;
+  background-color: var(--bg-dark-background);
+  padding-left: 3px;
+  border: thin solid var(--bg-dark-border);
+  color: var(--bg-main-foreground-color);
+}
+
+:root:not([cleartheme="true"]) menulist[disabled="true"],
+:root:not([cleartheme="true"]) textbox[type="number"][disabled="true"] {
+  color: var(--bg-disabled-foreground-color);
+}
+
+:root:not([cleartheme="true"]) textbox[type="number"] .numberbox-input-box {
+  -moz-appearance: none;
+  border: none 0px;
+  background-color: transparent;
+}
+
+:root:not([cleartheme="true"]) textbox:not([type="number"]) {
+  -moz-appearance: none;
+  color: var(--bg-main-foreground-color);
+  margin: 4px 0px;
+  padding: 2px;
+  background-color: var(--bg-dark-background);
+  border: thin solid var(--bg-dark-border);
+}
+
+:root:not([cleartheme="true"]) menulist .menulist-dropmarker {
+  -moz-appearance: none;
+  display: -moz-box;
+  background: transparent;
+  border: none 0px;
+}
+
+:root:not([cleartheme="true"]) menulist html|*.menulist-editable-input {
+  color: var(--bg-main-foreground-color);
+}
+
+:root:not([cleartheme="true"]) menulist[disabled="true"],
+:root:not([cleartheme="true"]) menulist[disabled="true"] html|*.menulist-editable-input,
+:root:not([cleartheme="true"]) menulist html|*.menulist-editable-input::-moz-placeholder  {
+  color: graytext;
+}
+
+:root:not([cleartheme="true"]) menulist html|*.menulist-editable-input::-moz-placeholder  {
+  font-style: italic;
+}
+
+:root:not([cleartheme="true"]) menulist[editable="true"] {
+  margin-top: 5px;
+  margin-bottom: 3px
+}
+
+:root:not([cleartheme="true"]) menulist menupopup,
+:root:not([cleartheme="true"]) toolbarbutton menupopup {
+  -moz-appearance: none;
+  color: var(--bg-main-foreground-color);
+  background-color: var(--bg-dark-background);
+}
+
+:root:not([cleartheme="true"]) menulist menuitem,
+:root:not([cleartheme="true"]) menulist menu,
+:root:not([cleartheme="true"]) toolbarbutton menuitem {
+  -moz-appearance: none;
+  color: var(--bg-main-foreground-color);
+}
+
+:root:not([cleartheme="true"]) menulist menu .menu-right {
+  display: none;
+}
+
+:root:not([cleartheme="true"]) menulist menuitem[disabled="true"],
+:root:not([cleartheme="true"]) menulist menu[disabled="true"],
+:root:not([cleartheme="true"]) toolbarbutton menuitem[disabled="true"] {
+  background-color: transparent ! important;
+}
+
+:root:not([cleartheme="true"]) menulist menuseparator,
+:root:not([cleartheme="true"]) toolbarbutton menuseparator {
+  -moz-appearance: none;
+  border-bottom: silver thin solid;
+}
+
+:root:not([cleartheme="true"]) menu[disabled="true"], menuitem[disabled="true"],
+:root:not([cleartheme="true"]) menu[disabled="true"], menu[disabled="true"],
+:root:not([cleartheme="true"]) menu[_moz-menuactive="true"][disabled="true"],
+:root:not([cleartheme="true"]) menuitem[_moz-menuactive="true"][disabled="true"] {
+  color: -moz-mac-menutextdisable ! important;
+}
+
+:root:not([cleartheme="true"]) html|*.menulist-editable-input {
+  color: var(--bg-main-foreground-color);
+}
+
+:root:not([cleartheme="true"]) tree,
+:root:not([cleartheme="true"]) treechildren {
+  -moz-appearance: none;
+  background-color: var(--bg-dark-background);
+}
+
+:root:not([cleartheme="true"]) tree {
+  border: thin solid var(--bg-dark-gray);
+}
+
+:root:not([cleartheme="true"]) treechildren::-moz-tree-row {
+  background-color: var(--bg-dark-background);
+}
+
+:root:not([cleartheme="true"]) treechildren::-moz-tree-cell-text {
+  color: var(--bg-main-foreground-color);
+}
+
+:root:not([cleartheme="true"]) treechildren::-moz-tree-row(selected) {
+  background-color: Highlight;
+}
+
+:root:not([cleartheme="true"]) treechildren::-moz-tree-row(selected, focus) {
+  background-color: Highlight;
+}
+
+:root:not([cleartheme="true"]) treecol,
+:root:not([cleartheme="true"]) treecolpicker {
+  -moz-appearance: none;
+  color: var(--bg-main-foreground-color);
+  background-color: transparent;
+  border: 0px none transparent;
+  border-bottom: thin solid var(--bg-dark-gray);
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+:root:not([cleartheme="true"]) treecol:not(:first-of-type) {
+  -moz-border-start: solid thin var(--bg-dark-gray);
+}
+
+:root:not([cleartheme="true"]) treecolpicker {
+  -moz-border-start: thin solid var(--bg-dark-gray);
+}
+ 
+/* ::::: column picker :::::  */
+
+:root:not([cleartheme="true"]) .tree-columnpicker-icon {
+  list-style-image: url("chrome://bluegriffon/skin/icons/columnpicker.gif");
+}
+
+:root:not([cleartheme="true"]) treechildren::-moz-tree-checkbox(checked)
+{
+    /* css for checked cells */
+    list-style-image: url("chrome://bluegriffon/skin/icons/cbox-check.gif");
+}
+
+/* LISTBOX */
+
+:root:not([cleartheme="true"]) listbox {
+  -moz-appearance: none;
+  background: var(--bg-dark-background);
+  color: var(--bg-main-foreground-color);
+  border: thin solid var(--bg-dark-gray);
+}
+
+:root:not([cleartheme="true"]) listhead,
+:root:not([cleartheme="true"]) listheader,
+:root:not([cleartheme="true"]) listboxbody {
+  -moz-appearance: none;
+  background: var(--bg-dark-background);
+  color: var(--bg-main-foreground-color);
+  border: none 0px;
+}
+
+:root:not([cleartheme="true"]) listheader:not(:last-of-type) {
+  -moz-border-end: var(--bg-dark-gray) solid thin;
+}
+
+:root:not([cleartheme="true"]) listhead {
+  border-bottom: var(--bg-dark-gray) solid thin;
+  padding: 2px;
+}

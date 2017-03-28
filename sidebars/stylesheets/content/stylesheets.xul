@@ -80,11 +80,12 @@
                      tooltiptext="&modify.tooltip;"
                      disabled="true" type="menu"
                      id="ConfigButton">
-        <menupopup>
+        <menupopup onpopupshowing="UpdateConfigMenu()">
           <menuitem label="&editMenu.label;" 
                     oncommand="UpdateStylesheet()"/>
-           <menuitem label="&styleCode.label;" 
-                    oncommand="OpenStylesheet()"/>
+           <menuitem label="&styleCode.label;"
+                     id="styleCodeMenuitem"
+                     oncommand="OpenStylesheet()"/>
         </menupopup>
       </toolbarbutton>
       <spacer flex="1"/>

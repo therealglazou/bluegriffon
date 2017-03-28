@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<!DOCTYPE page [
+  <!ENTITY % dtd1 SYSTEM "chrome://inspector/locale/inspector.dtd"> %dtd1;
+  <!ENTITY % dtd2 SYSTEM "chrome://inspector/locale/viewers/jsObject.dtd"> %dtd2;
+]>
+
+<?xml-stylesheet href="chrome://inspector/skin/inspector.css"?>
+<?xul-overlay href="chrome://inspector/content/editingOverlay.xul"?>
+
+<overlay xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/javascript"
+          src="chrome://inspector/content/utils.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/jsutil/xpcom/XPCU.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/jsutil/events/ObserverManager.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/hooks.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/jsutil/commands/baseCommands.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/jsutil/xul/inBaseTreeView.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/viewers/jsObject/jsObjectViewer.js"/>
+
+  <stringbundle id="inspector-bundle"
+                src="chrome://inspector/locale/inspector.properties"/>
+
+  <commandset id="cmdsEditingExtras"/>
+  <commandset id="cmdsJSObjectViewer">
+    <command id="cmdCopyValue" oncommand="viewer.cmdCopyValue();"/>
+    <command id="cmdEvalExpr" oncommand="viewer.cmdEvalExpr();"/>
+  </commandset>
+
+  <menupopup id="popupContext">
+    <!-- mnEditInspectInNewWindow is overlaid by editingOverlay.xul -->
+    <menuitem id="mnEditInspectInNewWindow"/>
+    <menuseparator/>
+    <menuitem label="&jsCopyValue.label;" command="cmdCopyValue"/>
+    <menuitem label="&jsEval.label;" command="cmdEvalExpr"/>
+  </menupopup>
+
+  <tree id="treeJSObject" flex="1" context="popupContext"
+        onselect="viewer.onTreeSelectionChange();">
+    <treecols>
+      <treecol id="colProp" flex="1" primary="true"
+               label="&jsProperty.label;"/>
+      <splitter class="tree-splitter"/>
+      <treecol id="colVal" flex="1" label="&jsValue.label;"/>
+    </treecols>
+
+    <treechildren id="trchJSObject"/>
+  </tree>
+</overlay>

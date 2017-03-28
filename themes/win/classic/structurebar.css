@@ -35,10 +35,6 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-.selected {
-  font-weight: bold;
-}
-
 .hidden {
   display: none;
 }
@@ -46,19 +42,13 @@
 structurebar {
   margin-bottom: 4px;
   margin-top: 4px;
-  font-size: 12px;
 }
 
-structure toolbarbutton {
-  -moz-appearance: none;
-  padding: 0px 12px;
-  margin: 0px;
-  max-height: 20px;
-  height: 20px;
+:root:not([cleartheme="true"]) structurebar toolbarbutton {
+  font-weight: bold;
 }
 
-structurebar[rtl="false"] toolbarbutton {
-  -moz-appearance: none;
+window[rtl="false"] structurebar toolbarbutton {
   margin-left: 0px;
   margin-right: 0px;
 
@@ -68,78 +58,202 @@ structurebar[rtl="false"] toolbarbutton {
 
   height: 20px;
 
-  color: black;
-  font-weight: bold;
-
   background-image: url("chrome://bluegriffon/skin/structurebar/ltr/structureArrow.png"),
-                    url("chrome://bluegriffon/skin/structurebar/ltr/structureBorder.png"),
-                    -moz-linear-gradient(rgb(255, 255, 255), rgb(192, 192, 192), rgb(204, 204, 204));
+                    url("chrome://bluegriffon/skin/structurebar/ltr/structureBorder.png");
   background-repeat: no-repeat, repeat-x;
   background-position: top left;
+  background-color: var(--bg-dark-gray);
 }
 
-structurebar toolbarbutton:hover:not([checked="true"]) {
-  color: #606060;
+structurebar toolbarbutton {
+  color: #c0c0c0;
+  -moz-appearance: none;
 }
 
-structurebar[rtl="false"] toolbarbutton:first-of-type {
+structurebar toolbarbutton:hover {
+  color: white;
+}
+
+structurebar toolbarbutton[checked="true"] {
+  color: #00abff;
+}
+
+window[rtl="false"] structurebar toolbarbutton:first-of-type {
   margin-left: 12px;
   padding-left: 8px;
   background-image: url("chrome://bluegriffon/skin/structurebar/ltr/structureBoxLeft.png"),
-                    url("chrome://bluegriffon/skin/structurebar/ltr/structureBorder.png"),
-                    -moz-linear-gradient(rgb(255, 255, 255), rgb(192, 192, 192), rgb(204, 204, 204));
-  background-repeat: no-repeat, repeat-x, repeat-x;
+                    url("chrome://bluegriffon/skin/structurebar/ltr/structureBorder.png");
+  background-repeat: no-repeat, repeat-x;
 }
 
-structurebar[rtl="false"] toolbarbutton:last-of-type {
+window[rtl="false"] structurebar toolbarbutton:last-of-type {
   background-image: url("chrome://bluegriffon/skin/structurebar/ltr/structureArrow.png"),
                     url("chrome://bluegriffon/skin/structurebar/ltr/structureArrowRight.png"),
-                    url("chrome://bluegriffon/skin/structurebar/ltr/structureBorder.png"),
-                    -moz-linear-gradient(rgb(255, 255, 255), rgb(192, 192, 192), rgb(204, 204, 204));
-  background-repeat: no-repeat, no-repeat, repeat-x, repeat-x;
+                    url("chrome://bluegriffon/skin/structurebar/ltr/structureBorder.png");
+  background-repeat: no-repeat, no-repeat, repeat-x;
   background-position: top left, top right;
   padding-right: 12px;
-  margin-right: 12px;
 }
 
-structurebar[rtl="false"] toolbarbutton:only-of-type {
+window[rtl="false"] structurebar toolbarbutton:only-of-type {
   background-image: url("chrome://bluegriffon/skin/structurebar/ltr/structureBoxLeft.png"),
                     url("chrome://bluegriffon/skin/structurebar/ltr/structureArrowRight.png"),
-                    url("chrome://bluegriffon/skin/structurebar/ltr/structureBorder.png"),
-                    -moz-linear-gradient(rgb(255, 255, 255), rgb(192, 192, 192), rgb(204, 204, 204));
-  background-repeat: no-repeat, no-repeat, repeat-x, repeat-x;
+                    url("chrome://bluegriffon/skin/structurebar/ltr/structureBorder.png");
+  background-repeat: no-repeat, no-repeat, repeat-x;
   background-position: top left, top right;
   padding-right: 12px;
 }
 
-structurebar[rtl="false"] toolbarbutton[checked="true"]:not(:first-of-type) {
+window[rtl="false"] structurebar toolbarbutton[checked="true"]:not(:first-of-type) {
   background-image: url("chrome://bluegriffon/skin/structurebar/ltr/structureArrowSelected.png"),
                     url("chrome://bluegriffon/skin/structurebar/ltr/structureArrowRight.png"),
-                    url("chrome://bluegriffon/skin/structurebar/ltr/structureBorder.png"),
-                    -moz-linear-gradient(#303030, #606060, #303030);
-  color: white ! important;
-  padding: 0px 12px ! important;
-  margin: 0px;
-  margin-right: 12px;
+                    url("chrome://bluegriffon/skin/structurebar/ltr/structureBorder.png");
 }
 
-structurebar[rtl="false"] toolbarbutton[checked="true"]:first-of-type {
+window[rtl="false"] structurebar toolbarbutton[checked="true"]:first-of-type {
   background-image: url("chrome://bluegriffon/skin/structurebar/ltr/structureBoxLeftSelected.png"),
                     url("chrome://bluegriffon/skin/structurebar/ltr/structureArrowRight.png"),
-                    url("chrome://bluegriffon/skin/structurebar/ltr/structureBorder.png"),
-                    -moz-linear-gradient(#303030, #606060, #303030);
-  background-repeat: no-repeat, no-repeat, repeat-x, repeat-x;
+                    url("chrome://bluegriffon/skin/structurebar/ltr/structureBorder.png");
+  background-repeat: no-repeat, no-repeat, repeat-x;
   background-position: top left, top right;
-  color: white ! important;
-  padding: 0px 12px ! important;
-  margin: 0px;
-  margin-left: 12px;
 }
 
 /************* RTL *************/
 
-structurebar[rtl="true"] toolbarbutton {
-  -moz-appearance: none;
+window[rtl="true"] structurebar toolbarbutton {
+  margin-left: 0px;
+  margin-right: 0px;
+
+  padding-right: 12px;
+
+  border: none 0px;
+
+  height: 20px;
+
+  background-image: url("chrome://bluegriffon/skin/structurebar/rtl/structureArrow.png"),
+                    url("chrome://bluegriffon/skin/structurebar/rtl/structureBorder.png");
+  background-repeat: no-repeat, repeat-x;
+  background-position: top right;
+}
+
+window[rtl="true"] structurebar toolbarbutton:first-of-type {
+  margin-right: 12px;
+  padding-left: 8px;
+  background-image: url("chrome://bluegriffon/skin/structurebar/rtl/structureBoxLeft.png"),
+                    url("chrome://bluegriffon/skin/structurebar/rtl/structureBorder.png");
+  background-repeat: no-repeat, repeat-x;
+  background-position: top right;
+}
+
+window[rtl="true"] structurebar toolbarbutton:last-of-type {
+  background-image: url("chrome://bluegriffon/skin/structurebar/rtl/structureArrow.png"),
+                    url("chrome://bluegriffon/skin/structurebar/rtl/structureArrowRight.png"),
+                    url("chrome://bluegriffon/skin/structurebar/rtl/structureBorder.png");
+  background-repeat: no-repeat, no-repeat, repeat-x;
+  background-position: top right, top left;
+  padding-left: 12px;
+  margin-left: 12px;
+}
+
+window[rtl="true"] structurebar toolbarbutton:only-of-type {
+  background-image: url("chrome://bluegriffon/skin/structurebar/rtl/structureBoxLeft.png"),
+                    url("chrome://bluegriffon/skin/structurebar/rtl/structureArrowRight.png"),
+                    url("chrome://bluegriffon/skin/structurebar/rtl/structureBorder.png");
+  background-repeat: no-repeat, no-repeat, repeat-x;
+  background-position: top right, top left;
+  padding-left: 12px;
+}
+
+window[rtl="true"] structurebar toolbarbutton[checked="true"]:not(:first-of-type) {
+  background-image: url("chrome://bluegriffon/skin/structurebar/rtl/structureArrowSelected.png"),
+                    url("chrome://bluegriffon/skin/structurebar/rtl/structureArrowRight.png"),
+                    url("chrome://bluegriffon/skin/structurebar/rtl/structureBorder.png");
+}
+
+window[rtl="true"] structurebar toolbarbutton[checked="true"]:first-of-type {
+  background-image: url("chrome://bluegriffon/skin/structurebar/rtl/structureBoxLeftSelected.png"),
+                    url("chrome://bluegriffon/skin/structurebar/rtl/structureArrowRight.png"),
+                    url("chrome://bluegriffon/skin/structurebar/rtl/structureBorder.png");
+  background-repeat: no-repeat, no-repeat, repeat-x;
+  background-position: top right, top left;
+}
+
+/****** CLEAR THEME *****/
+
+window[rtl="false"][cleartheme="true"] structurebar toolbarbutton {
+  margin-left: 0px;
+  margin-right: 0px;
+
+  padding-left: 12px;
+
+  border: none 0px;
+
+  height: 20px;
+
+  color: black;
+
+  background-image: url("chrome://bluegriffon/skin/structurebar/cleartheme/ltr/structureArrow.png"),
+                    url("chrome://bluegriffon/skin/structurebar/cleartheme/ltr/structureBorder.png"),
+                    -moz-linear-gradient(rgb(255, 255, 255), rgb(192, 192, 192), rgb(204, 204, 204));
+  background-repeat: no-repeat, repeat-x;
+  background-position: top left;
+  background-color: transparent;
+}
+
+:root[cleartheme="true"] structurebar toolbarbutton:hover:not([checked="true"]) {
+  color: #606060;
+}
+
+window[rtl="false"][cleartheme="true"] structurebar toolbarbutton:first-of-type {
+  margin-left: 12px;
+  padding-left: 8px;
+  background-image: url("chrome://bluegriffon/skin/structurebar/cleartheme/ltr/structureBoxLeft.png"),
+                    url("chrome://bluegriffon/skin/structurebar/cleartheme/ltr/structureBorder.png"),
+                    -moz-linear-gradient(rgb(255, 255, 255), rgb(192, 192, 192), rgb(204, 204, 204));
+  background-repeat: no-repeat, repeat-x, repeat-x;
+}
+
+window[rtl="false"][cleartheme="true"] structurebar toolbarbutton:last-of-type {
+  background-image: url("chrome://bluegriffon/skin/structurebar/cleartheme/ltr/structureArrow.png"),
+                    url("chrome://bluegriffon/skin/structurebar/cleartheme/ltr/structureArrowRight.png"),
+                    url("chrome://bluegriffon/skin/structurebar/cleartheme/ltr/structureBorder.png"),
+                    -moz-linear-gradient(rgb(255, 255, 255), rgb(192, 192, 192), rgb(204, 204, 204));
+  background-repeat: no-repeat, no-repeat, repeat-x, repeat-x;
+  background-position: top left, top right;
+  padding-right: 12px;
+}
+
+window[rtl="false"][cleartheme="true"] structurebar toolbarbutton:only-of-type {
+  background-image: url("chrome://bluegriffon/skin/structurebar/cleartheme/ltr/structureBoxLeft.png"),
+                    url("chrome://bluegriffon/skin/structurebar/cleartheme/ltr/structureArrowRight.png"),
+                    url("chrome://bluegriffon/skin/structurebar/cleartheme/ltr/structureBorder.png"),
+                    -moz-linear-gradient(rgb(255, 255, 255), rgb(192, 192, 192), rgb(204, 204, 204));
+  background-repeat: no-repeat, no-repeat, repeat-x, repeat-x;
+  background-position: top left, top right;
+  padding-right: 12px;
+}
+
+window[rtl="false"][cleartheme="true"] structurebar toolbarbutton[checked="true"]:not(:first-of-type) {
+  background-image: url("chrome://bluegriffon/skin/structurebar/cleartheme/ltr/structureArrowSelected.png"),
+                    url("chrome://bluegriffon/skin/structurebar/cleartheme/ltr/structureArrowRight.png"),
+                    url("chrome://bluegriffon/skin/structurebar/cleartheme/ltr/structureBorder.png"),
+                    -moz-linear-gradient(#303030, #606060, #303030);
+  color: white ! important;
+}
+
+window[rtl="false"][cleartheme="true"] structurebar toolbarbutton[checked="true"]:first-of-type {
+  background-image: url("chrome://bluegriffon/skin/structurebar/cleartheme/ltr/structureBoxLeftSelected.png"),
+                    url("chrome://bluegriffon/skin/structurebar/cleartheme/ltr/structureArrowRight.png"),
+                    url("chrome://bluegriffon/skin/structurebar/cleartheme/ltr/structureBorder.png"),
+                    -moz-linear-gradient(#303030, #606060, #303030);
+  background-repeat: no-repeat, no-repeat, repeat-x, repeat-x;
+  background-position: top left, top right;
+  color: white ! important;
+}
+
+/************* RTL *************/
+
+:root[cleartheme="true"] structurebar[rtl="true"] toolbarbutton {
   margin-left: 0px;
   margin-right: 0px;
 
@@ -150,29 +264,25 @@ structurebar[rtl="true"] toolbarbutton {
   height: 20px;
 
   color: black;
-  font-weight: bold;
 
-  background-image: url("chrome://bluegriffon/skin/structurebar/rtl/structureArrow.png"),
-                    url("chrome://bluegriffon/skin/structurebar/rtl/structureBorder.png"),
+  background-image: url("chrome://bluegriffon/skin/structurebar/cleartheme/rtl/structureArrow.png"),
+                    url("chrome://bluegriffon/skin/structurebar/cleartheme/rtl/structureBorder.png"),
                     -moz-linear-gradient(rgb(255, 255, 255), rgb(192, 192, 192), rgb(204, 204, 204));
   background-repeat: no-repeat, repeat-x;
-  background-position: top right;
-}
-
-structurebar[rtl="true"] toolbarbutton:first-of-type {
+  background-position: towindow[rtl="true"][cleartheme="true"] structurebar[rtl="true"] toolbarbutton:first-of-type {
   margin-right: 12px;
   padding-left: 8px;
-  background-image: url("chrome://bluegriffon/skin/structurebar/rtl/structureBoxLeft.png"),
-                    url("chrome://bluegriffon/skin/structurebar/rtl/structureBorder.png"),
+  background-image: url("chrome://bluegriffon/skin/structurebar/cleartheme/rtl/structureBoxLeft.png"),
+                    url("chrome://bluegriffon/skin/structurebar/cleartheme/rtl/structureBorder.png"),
                     -moz-linear-gradient(rgb(255, 255, 255), rgb(192, 192, 192), rgb(204, 204, 204));
   background-repeat: no-repeat, repeat-x, repeat-x;
   background-position: top right;
 }
 
-structurebar[rtl="true"] toolbarbutton:last-of-type {
-  background-image: url("chrome://bluegriffon/skin/structurebar/rtl/structureArrow.png"),
-                    url("chrome://bluegriffon/skin/structurebar/rtl/structureArrowRight.png"),
-                    url("chrome://bluegriffon/skin/structurebar/rtl/structureBorder.png"),
+window[rtl="true"][cleartheme="true"] structurebar toolbarbutton:last-of-type {
+  background-image: url("chrome://bluegriffon/skin/structurebar/cleartheme/rtl/structureArrow.png"),
+                    url("chrome://bluegriffon/skin/structurebar/cleartheme/rtl/structureArrowRight.png"),
+                    url("chrome://bluegriffon/skin/structurebar/cleartheme/rtl/structureBorder.png"),
                     -moz-linear-gradient(rgb(255, 255, 255), rgb(192, 192, 192), rgb(204, 204, 204));
   background-repeat: no-repeat, no-repeat, repeat-x, repeat-x;
   background-position: top right, top left;
@@ -180,37 +290,30 @@ structurebar[rtl="true"] toolbarbutton:last-of-type {
   margin-left: 12px;
 }
 
-structurebar[rtl="true"] toolbarbutton:only-of-type {
-  background-image: url("chrome://bluegriffon/skin/structurebar/rtl/structureBoxLeft.png"),
-                    url("chrome://bluegriffon/skin/structurebar/rtl/structureArrowRight.png"),
-                    url("chrome://bluegriffon/skin/structurebar/rtl/structureBorder.png"),
+window[rtl="true"][cleartheme="true"] structurebar toolbarbutton:only-of-type {
+  background-image: url("chrome://bluegriffon/skin/structurebar/cleartheme/rtl/structureBoxLeft.png"),
+                    url("chrome://bluegriffon/skin/structurebar/cleartheme/rtl/structureArrowRight.png"),
+                    url("chrome://bluegriffon/skin/structurebar/cleartheme/rtl/structureBorder.png"),
                     -moz-linear-gradient(rgb(255, 255, 255), rgb(192, 192, 192), rgb(204, 204, 204));
   background-repeat: no-repeat, no-repeat, repeat-x, repeat-x;
   background-position: top right, top left;
   padding-left: 12px;
 }
 
-structurebar[rtl="true"] toolbarbutton[checked="true"]:not(:first-of-type) {
-  background-image: url("chrome://bluegriffon/skin/structurebar/rtl/structureArrowSelected.png"),
-                    url("chrome://bluegriffon/skin/structurebar/rtl/structureArrowRight.png"),
-                    url("chrome://bluegriffon/skin/structurebar/rtl/structureBorder.png"),
+window[rtl="true"][cleartheme="true"] structurebar toolbarbutton[checked="true"]:not(:first-of-type) {
+  background-image: url("chrome://bluegriffon/skin/structurebar/cleartheme/rtl/structureArrowSelected.png"),
+                    url("chrome://bluegriffon/skin/structurebar/cleartheme/rtl/structureArrowRight.png"),
+                    url("chrome://bluegriffon/skin/structurebar/cleartheme/rtl/structureBorder.png"),
                     -moz-linear-gradient(#303030, #606060, #303030);
   color: white ! important;
-  padding: 0px 12px ! important;
-  margin: 0px;
-  margin-left: 12px;
 }
 
-structurebar[rtl="true"] toolbarbutton[checked="true"]:first-of-type {
-  background-image: url("chrome://bluegriffon/skin/structurebar/rtl/structureBoxLeftSelected.png"),
-                    url("chrome://bluegriffon/skin/structurebar/rtl/structureArrowRight.png"),
-                    url("chrome://bluegriffon/skin/structurebar/rtl/structureBorder.png"),
+window[rtl="true"][cleartheme="true"] structurebar toolbarbutton[checked="true"]:first-of-type {
+  background-image: url("chrome://bluegriffon/skin/structurebar/cleartheme/rtl/structureBoxLeftSelected.png"),
+                    url("chrome://bluegriffon/skin/structurebar/cleartheme/rtl/structureArrowRight.png"),
+                    url("chrome://bluegriffon/skin/structurebar/cleartheme/rtl/structureBorder.png"),
                     -moz-linear-gradient(#303030, #606060, #303030);
   background-repeat: no-repeat, no-repeat, repeat-x, repeat-x;
   background-position: top right, top left;
   color: white ! important;
-  padding: 0px 12px ! important;
-  margin: 0px;
-  margin-left: 12px;
-  margin-right: 12px;
 }

@@ -3,11 +3,6 @@ RegisterIniter(ColorsSectionIniter);
 function ColorsSectionIniter(aElt, aRuleset)
 {
   deleteAllChildren(gDialog.backgroundsRichlistbox);
-  var color = CssInspector.getCascadedValue(aRuleset, "color");
-  gDialog.colorColorpicker.color = color;
-
-  var bgColor = CssInspector.getCascadedValue(aRuleset, "background-color");
-  gDialog.bgColorColorpicker.color = bgColor;
 
   var bgImages = CssInspector.getCascadedValue(aRuleset, "background-image");
   var parsedImages = CssInspector.parseBackgroundImages(bgImages);
@@ -112,7 +107,7 @@ function OnBackgroundSelect(aElt)
 function DeleteBackground()
 {
   var item = gDialog.backgroundsRichlistbox.selectedItem;
-  if (!item) return; // sanity check
+  if (!item || !item.parentNode) return; // sanity check
   item.parentNode.removeChild(item);
   SetEnabledElement(gDialog.removeBackgroundButton, (gDialog.backgroundsRichlistbox.itemCount != 0));
   ReapplyBackgrounds();
@@ -131,6 +126,11 @@ function BackgroundImageSelected()
   item.applyBackgroundImage(gDialog.imageURLTextbox.value);
 }
 
+function ReapplyBackgroundsCallback()
+{
+  SelectionChanged(null, gCurrentElement, true);
+}
+
 function ReapplyBackgrounds()
 {
   var items = gDialog.backgroundsRichlistbox.querySelectorAll("richlistitem");
@@ -144,8 +144,9 @@ function ReapplyBackgrounds()
                   property: "background-image",
                   value: bgImages.join(", ")
                 }
-              ]);
-  SelectionChanged(null, gCurrentElement, true);
+              ],
+              false, false,
+              ReapplyBackgroundsCallback);
 }
 
 function RepaintGradient()
@@ -194,7 +195,8 @@ function RepaintGradient()
     if (i)
       str += ", ";
     var s = stops[i];
-    str += s.color + (s.offset ? " " + s.offset : "");
+    str += s.color;
+    str += (s.offset ? " " + s.offset : "");
   }
   str += ")";
   gDialog.linearGradientPreview.style.backgroundImage = str;
@@ -233,13 +235,13 @@ function AddColorStopToLinearGradient()
   e.className = "colorstopitem";
   gDialog.colorStopsRichlistbox.appendChild(e);
   UpdateColorStopsRichlistbox();
-  e.openEditor();
 }
 
 function DeleteColorStopFromLinearGradient()
 {
   gDialog.colorStopsRichlistbox.removeChild(gDialog.colorStopsRichlistbox.selectedItem);
   UpdateColorStopsRichlistbox();
+  RepaintGradient();
 }
 
 function FlushBackgroundProperties(aEvent)
@@ -249,9 +251,8 @@ function FlushBackgroundProperties(aEvent)
     target = target.parentNode; 
   var property = target.getAttribute("property");
   var valueArray = [];
+  var anonid = target.getAttribute("anonid");
   if (property == "background-repeat") {
-    var anonid = target.getAttribute("anonid");
-  
     var items = document.querySelectorAll("richlistitem.backgrounditem");
     for (var i = 0; i < items.length; i++) {
       var vx = items[i].getChild("backgrounditem-repeatx").value.trim().toLowerCase();
@@ -286,12 +287,14 @@ function FlushBackgroundProperties(aEvent)
       valueArray.pop();
     else
       break;
-  ApplyStyles([
-                {
-                  property: property,
-                  value: valueArray.join(", ")
-                }
-              ]);
+  var value = valueArray.join(", ");
+  if (CSS.supports(property, value))
+    ApplyStyles([
+                  {
+                    property: property,
+                    value: value
+                  }
+                ]);
 }
 
 function ToggleRelativeOrAbsoluteBackgroundImage()

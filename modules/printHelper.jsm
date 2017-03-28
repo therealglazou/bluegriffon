@@ -17,7 +17,7 @@ var EXPORTED_SYMBOLS = ["PrintHelper"];
 var gPrintSettingsAreGlobal = false;
 var gSavePrintSettings = false;
 
-PrintHelper = {
+var PrintHelper = {
 
   showPageSetup: function (aWindow)
   {

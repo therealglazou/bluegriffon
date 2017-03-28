@@ -35,7 +35,7 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-Components.utils.import("resource://app/modules/urlHelper.jsm");
+Components.utils.import("resource://gre/modules/urlHelper.jsm");
 
 const nsIFilePicker = Components.interfaces.nsIFilePicker;
 
@@ -71,6 +71,10 @@ function onChooseFile()
     fp.appendFilters(nsIFilePicker.filterHTML);
     fp.appendFilter(gDialog.bundle.getString("PHPfiles"), "*.php");
     fp.appendFilters(nsIFilePicker.filterText);
+    var ebmAvailable = ("EBookManager" in window.opener);
+    if (ebmAvailable)
+      fp.appendFilter(window.opener.document.getElementById("bundleEbookManager").getString("EPUBbooks"),
+                      "*.epub");
     fp.appendFilters(nsIFilePicker.filterAll);
 
     if (fp.show() == nsIFilePicker.returnOK && fp.fileURL.spec && fp.fileURL.spec.length > 0)
@@ -88,19 +92,59 @@ function OpenFile()
 {
   var filename = gDialog.input.value;
   var inTab = (gDialog.tabOrWindow.value == "tab");
-  InsertLocationInDB(filename);
-  window.opener.OpenFile(filename, inTab);
+  var ebmAvailable = ("EBookManager" in window.opener);
+  if (ebmAvailable && filename.toLowerCase().endsWith(".epub")) {
+    var ioService =
+      Components.classes["@mozilla.org/network/io-service;1"]
+                .getService(Components.interfaces.nsIIOService);
+    var fileHandler =
+      ioService.getProtocolHandler("file")
+               .QueryInterface(Components.interfaces.nsIFileProtocolHandler);
+    var file = fileHandler.getFileFromURLSpec(filename);
 
-  if (gDialog.prefs)
-  {
-    var str = Components.classes["@mozilla.org/supports-string;1"]
-                        .createInstance(Components.interfaces.nsISupportsString);
-    str.data = filename;
-    gDialog.prefs.setComplexValue("general.open_location.last_url",
-                         Components.interfaces.nsISupportsString, str);
+    var windowEnumerator = Services.wm.getEnumerator("bluegriffon");
+    var win = null;
+    while (windowEnumerator.hasMoreElements()) {
+      var w = windowEnumerator.getNext();
+      var ebookElt = w.document.querySelector("epub2,epub3,epub31");
+      if (ebookElt) {
+        var ebook = ebookElt.getUserData("ebook");
+        if (file.equals(ebook.packageFile)) {
+          w.focus();
+          window.close();
+          return;
+        }
+      }
+      else if (!win)
+        win = w;
+    }
+
+    window.opener.StoreUrlInLocationDB(filename);
+    if (win && !win.EditorUtils.getCurrentEditor()) {
+      win.focus();
+      win.EBookManager.showEbook(file, filename);
+      win.updateCommands("style");
+      window.close();
+      return;
+    }
+    window.opener.OpenNewWindow(filename);
+    window.close();
   }
-  // Delay closing slightly to avoid timing bug on Linux.
-  window.close();
+  else {
+    InsertLocationInDB(filename);
+    window.opener.OpenFile(filename, inTab);
+
+    if (gDialog.prefs)
+    {
+      var str = Components.classes["@mozilla.org/supports-string;1"]
+                          .createInstance(Components.interfaces.nsISupportsString);
+      str.data = filename;
+      gDialog.prefs.setComplexValue("general.open_location.last_url",
+                           Components.interfaces.nsISupportsString, str);
+    }
+    // Delay closing slightly to avoid timing bug on Linux.
+    window.close();
+  }
   return false;
 }
 

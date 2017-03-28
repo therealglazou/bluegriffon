@@ -1,8 +1,11 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 <!-- rights.locale-direction instead of the usual local.dir entity, so RTL can skip translating page. -->
 <!ENTITY rights.locale-direction "ltr">
 <!ENTITY rights.pagetitle       "about:rights">
 <!ENTITY rights.intro-header    "Tietoa oikeuksistasi">
-<!ENTITY rights.intro "&brandFullName; on ilmainen, avoimen lähdekoodin ohjelmisto, jonka tekijäyhteisö koostuu tuhansista ympäri maailmaa asuvista ihmisistä. Seuraavat seikat oikeuksistasi ohjelmaan on syytä tietää:">
+<!ENTITY rights.intro "&brandFullName; on ilmainen, avoimen lähdekoodin ohjelmisto, jonka tekijäyhteisö koostuu tuhansista ympäri maailmaa asuvista ihmisistä. Seuraavat seikat on hyvä tietää:">
 
 <!-- Note on pointa / pointb / pointc form:
      These points each have an embedded link in the HTML, so each point is
@@ -16,7 +19,7 @@
 <!ENTITY rights.intro-point1b "Mozillan julkisen lisenssin (Mozilla Public License)">
 <!ENTITY rights.intro-point1c " ehdoilla. Lisenssissä annetaan sinulle oikeus käyttää, kopioida ja levittää &brandShortName;ia. Sinulla on myös halutessasi oikeus muokata ja muuttaa &brandShortName;in lähdekoodia omien tarpeittesi mukaisesti. Mozillan julkinen lisenssi antaa sinulle myös oikeuden levittää näitä muokkaamiasi versioita.">
 
-<!ENTITY rights.intro-point2-a "Mozilla ei anna sinulle oikeuksia missään muodossa Mozilla, Firefox tai muihin tavaramerkkeihin tai logoihin. Voit lukea tarkempia lisätietoja tavaramerkeistä ">
+<!ENTITY rights.intro-point2-a "Sinulle ei anneta minkään muotoisia tavaramerkki- tai lisenssioikeuksia Mozilla-säätiön tai muun tahon tavaramerkkeihin, joihin lukeutuu Firefox-nimi ja -logo. Voit lukea tarkempia lisätietoja tavaramerkeistä ">
 <!ENTITY rights.intro-point2-b "täältä">
 <!ENTITY rights.intro-point2-c ".">
 
@@ -25,8 +28,8 @@
 
 <!-- point 3 text for official branded builds -->
 <!ENTITY rights2.intro-point3a "">
-<!ENTITY rights2.intro-point3b "&brandShortName;in tietosuojakäytännössä">
-<!ENTITY rights.intro-point3c "selvitetään mihin käytämme &brandShortName;ista &vendorShortName;lle lähetetyt palautteet ja käyttäjien henkilökohtaiset tiedot.">
+<!ENTITY rights2.intro-point3b "&brandShortName;in tietosuojakäytännössä ">
+<!ENTITY rights.intro-point3c "kuvataan, mihin tarkoituksiin käytämme &brandShortName;ista &vendorShortName;lle lähetetyt palautteet ja käyttäjätiedot.">
 
 <!-- point 3 text for unbranded builds -->
 <!ENTITY rights.intro-point3-unbranded "Kaikki tämän tuotteen käyvät tietosuojakäytänteet tulisi luetteloida tässä.">
@@ -37,11 +40,14 @@
 <!ENTITY rights.intro-point4c ".">
 
 <!-- point 4 text for unbranded builds -->
-<!ENTITY rights.intro-point4a-unbranded "Jos tämän tuote käyttää toiminnassaan hyväkseen verkkopohjaisia palveluja, niiden palveluehdot tulisi linkittää ">
+<!ENTITY rights.intro-point4a-unbranded "Jos tämä tuote käyttää toiminnassaan hyväkseen verkkopohjaisia palveluja, niiden palveluehdot tulisi linkittää ">
 <!ENTITY rights.intro-point4b-unbranded "verkkosivustopalvelut">
 <!ENTITY rights.intro-point4c-unbranded "-osioon.">
 
 <!ENTITY rights2.webservices-header "&brandFullName;in verkkopohjaiset tietopalvelut">
+
+<!-- point 5 -->
+<!ENTITY rights.intro-point5 "&brandShortName; lataa kolmansilta osapuolilta salauksen purkumoduuleja voidakseen toistaa tietyntyyppistä videosisältöä.">
 
 <!-- Note that this paragraph references a couple of entities from
      preferences/security.dtd, so that we can refer to text the user sees in
@@ -50,14 +56,14 @@
 <!-- intro paragraph for branded builds -->
 <!ENTITY rights2.webservices-a "&brandFullName;käyttää hyväkseen verkkopohjaisia tietopalveluita (&quot;palveluita&quot;) joidenkin tämän &brandShortName;in binääriversion ominaisuuksien toteuttamiseen kuten alla ehdoissa määritellään. Jos et halua käyttää näitä palveluita tai alla määritellyt ehdot eivät ole hyväksyttäviä, voit poistaa omaisuuden tai palvelut käytöstä. Ohjeet, kuinka tämä tehdään löytyvät ">
 <!ENTITY rights2.webservices-b "täältä">
-<!ENTITY rights2.webservices-c ".">
+<!ENTITY rights3.webservices-c ". Muut ominaisuudet ja palvelut voi poistaa päältä ohjelman asetuksista.">
 
 <!-- safe browsing points for branded builds -->
 <!ENTITY rights.safebrowsing-a "SafeBrowsing: ">
 <!ENTITY rights.safebrowsing-b "Safe Browsing -toiminnon ottaminen pois päältä ei ole suositeltua, koska se voi johtaa ei-turvallisilla sivuilla käyntiin. Jos haluat ottaa tämän ominaisuuden pois päältä kokonaan, tee seuraavasti:">
 <!ENTITY rights.safebrowsing-term1 "Avaa ohjelman asetukset">
 <!ENTITY rights.safebrowsing-term2 "Valitse Turvallisuus-paneeli">
-<!ENTITY rights.safebrowsing-term3 "Poista valinnat kohdista &quot;&blockAttackSites.label;&quot; ja &quot;&blockWebForgeries.label;&quot;">
+<!ENTITY rights2.safebrowsing-term3 "Poista valinta kohdasta &quot;&enableSafeBrowsing.label;&quot;">
 <!ENTITY rights.safebrowsing-term4 "Safe Browsing -toiminto on nyt otettu pois päältä">
 
 <!-- location aware browsing points for branded builds -->

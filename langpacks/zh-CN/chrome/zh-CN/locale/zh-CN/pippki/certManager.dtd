@@ -5,19 +5,16 @@
 <!ENTITY certmgr.title                       "证书管理器">
 
 <!ENTITY certmgr.tab.mine                     "您的证书">
-<!ENTITY certmgr.tab.others2                  "人">
+<!ENTITY certmgr.tab.others2                  "个人">
 <!ENTITY certmgr.tab.websites3                "服务器">
 <!ENTITY certmgr.tab.ca                       "证书机构">
 <!ENTITY certmgr.tab.orphan2                  "其他">
 
-<!ENTITY certmgr.ca.builtins                  "内建CA">
-<!ENTITY certmgr.ca.mycas                     "您管理的CA">
-
-<!ENTITY certmgr.mine                         "您有这些组织用于标识您的证书:">
-<!ENTITY certmgr.others                       "您有标识这些人的证书文件:">
-<!ENTITY certmgr.websites2                    "您保存着用于标识下列服务器的证书:">
-<!ENTITY certmgr.cas                          "您有标识这些证书机构的证书文件: ">
-<!ENTITY certmgr.orphans                      "您文件中的证书不符合其他任何种类:">
+<!ENTITY certmgr.mine                         "您有这些组织用来识别您的证书：">
+<!ENTITY certmgr.others                       "您用来识别这些人的证书文件：">
+<!ENTITY certmgr.websites2                    "您用来识别这些服务器的证书：">
+<!ENTITY certmgr.cas                          "您有识别这些证书颁发机构的证书文件：">
+<!ENTITY certmgr.orphans                      "您的不符合其他任何种类的文件中的证书：">
 
 <!ENTITY certmgr.detail.general_tab.title     "常规">
 <!ENTITY certmgr.detail.general_tab.accesskey "G">
@@ -25,45 +22,31 @@
 <!ENTITY certmgr.detail.prettyprint_tab.accesskey "D">
 
 <!ENTITY certmgr.pending.label                "正在核实证书…">
-<!ENTITY certmgr.subjectinfo.label            "发行给">
-<!ENTITY certmgr.issuerinfo.label             "发行者">
-<!ENTITY certmgr.validity.label               "有效性" >
+<!ENTITY certmgr.subjectinfo.label            "颁发给">
+<!ENTITY certmgr.issuerinfo.label             "颁发者">
+<!ENTITY certmgr.periodofvalidity.label       "有效期" >
 <!ENTITY certmgr.fingerprints.label           "指纹">
 <!ENTITY certmgr.certdetail.title             "证书细节">
 <!ENTITY certmgr.certdetail.cn                "通用名(CN)">
 <!ENTITY certmgr.certdetail.o                 "组织">
 <!ENTITY certmgr.certdetail.ou                "组织单元">
 <!ENTITY certmgr.certdetail.serialnumber      "序列号">
-<!ENTITY certmgr.certdetail.sha1fingerprint   "SHA1指纹">
-<!ENTITY certmgr.certdetail.md5fingerprint    "MD5指纹">
+<!ENTITY certmgr.certdetail.sha256fingerprint "SHA-256 指纹">
+<!ENTITY certmgr.certdetail.sha1fingerprint   "SHA1 指纹">
 
-<!ENTITY certmgr.editcert.title               "编辑安全证书设置">
 <!ENTITY certmgr.editcacert.title             "编辑CA证书信任设置">
-<!ENTITY certmgr.editsslcert.title            "编辑web站点证书信任设置">
-<!ENTITY certmgr.editcert.edittrust           "编辑信任设置:">
-<!ENTITY certmgr.editcert.trustssl            "此证书可以标识web站点。">
+<!ENTITY certmgr.editcert.edittrust           "编辑信任设置：">
+<!ENTITY certmgr.editcert.trustssl            "此证书可以标识网站。">
 <!ENTITY certmgr.editcert.trustemail          "此证书可以标识电子邮件用户。">
 <!ENTITY certmgr.editcert.trustobjsign        "此证书可以标识软件制造者。">
-<!ENTITY certmgr.editsslcert.edittrust        "编辑证书信任设置">
-<!ENTITY certmgr.editsslcert.dotrust          "信任此证书的认证。">
-<!ENTITY certmgr.editsslcert.donttrust        "不信任此证书的认证。">
-<!ENTITY certmgr.editemailcert.title          "编辑邮件证书信任设置">
-<!ENTITY certmgr.editemailcert.edittrust      "编辑证书信任设置">
-<!ENTITY certmgr.editemailcert.dotrust        "信任此证书的真实性。">
-<!ENTITY certmgr.editemailcert.donttrust      "不要信任此证书的真实性。">
 
 <!ENTITY certmgr.deletecert.title             "删除证书">
-<!ENTITY certmgr.deletecert.beforename        "您已请求删除此证书: ">
-<!ENTITY certmgr.deletecert.aftername         "确定要删除此证书吗？">
-<!ENTITY certmgr.deleteusercert.title         "删除您的证书">
-<!ENTITY certmgr.deleteusercert.beforename    "您已请求删除此证书:">
-<!ENTITY certmgr.deleteusercert.aftername     "一旦您删除了此证书，您将无法阅读用它加密的邮件了。">
 
 <!ENTITY certmgr.certname                     "证书名称">
 <!ENTITY certmgr.certserver                   "服务器">
 <!ENTITY certmgr.override_lifetime            "生命周期">
 <!ENTITY certmgr.tokenname                    "安全设备">
-<!ENTITY certmgr.issued                       "签发日期">
+<!ENTITY certmgr.begins                       "起始时间">
 <!ENTITY certmgr.expires                      "过期时间">
 <!ENTITY certmgr.email                        "电子邮件地址">
 <!ENTITY certmgr.serial                       "序列号">
@@ -74,10 +57,6 @@
 <!ENTITY certmgr.view2.accesskey              "V">
 <!ENTITY certmgr.edit3.label                  "编辑信任…">
 <!ENTITY certmgr.edit3.accesskey              "E">
-<!ENTITY certmgr.editca.label                 "编辑CA信任">
-<!ENTITY certmgr.editca.accesskey             "d">
-<!ENTITY certmgr.add.label                    "添加">
-<!ENTITY certmgr.add.accesskey                "A">
 <!ENTITY certmgr.export.label                 "导出…">
 <!ENTITY certmgr.export.accesskey             "x">
 <!ENTITY certmgr.delete2.label                "删除…">
@@ -95,14 +74,14 @@
 <!ENTITY certmgr.fields.label                 "字段值">
 <!ENTITY certmgr.fields.accesskey             "V">
 <!ENTITY certmgr.hierarchy.label              "证书结构">
-<!ENTITY certmgr.hierarchy.accesskey          "C">
+<!ENTITY certmgr.hierarchy.accesskey2         "H">
 <!ENTITY certmgr.addException.label           "添加例外…">
 <!ENTITY certmgr.addException.accesskey       "x">
 
 <!ENTITY exceptionMgr.title                   "添加安全例外">
 <!ENTITY exceptionMgr.exceptionButton.label   "确认安全例外">
 <!ENTITY exceptionMgr.exceptionButton.accesskey "C">
-<!ENTITY exceptionMgr.supplementalWarning     "合法的银行、商店以及其他公共站点不会让您如此操作。">
+<!ENTITY exceptionMgr.supplementalWarning     "合法的银行、电商以及其他公共站点不会要求您如此操作。">
 <!ENTITY exceptionMgr.certlocation.caption2   "服务器">
 <!ENTITY exceptionMgr.certlocation.url        "地址:">
 <!ENTITY exceptionMgr.certlocation.download   "获取证书">

@@ -38,8 +38,8 @@
 var EXPORTED_SYMBOLS = ["EditorUtils"];
 
 Components.utils.import("resource://gre/modules/Services.jsm");
-Components.utils.import("resource://app/modules/urlHelper.jsm");
-//Components.utils.import("resource://app/modules/cssHelper.jsm");
+Components.utils.import("resource://gre/modules/urlHelper.jsm");
+//Components.utils.import("resource://gre/modules/cssHelper.jsm");
 
 var EditorUtils = {
 
@@ -92,11 +92,29 @@ var EditorUtils = {
            "wysiwyg";
   },
 
+  getLiveViewMode: function()
+  {
+    return this.getCurrentEditorElement().parentNode.getAttribute("liveviewmode") ||
+           "wysiwyg";
+  },
+
+  setLiveViewMode: function(mode)
+  {
+    return this.getCurrentEditorElement().parentNode.setAttribute("liveviewmode", mode);
+  },
+
+  isWysiwygMode: function()
+  {
+    var mode = this.getCurrentViewMode();
+    return (mode == "wysiwyg") ||
+           (mode == "liveview" && this.getLiveViewMode() == "wysiwyg");
+  },
+
   getCurrentSourceEditorElement: function()
   {
     var editorElement = this.getCurrentEditorElement();
     if (editorElement) {
-      return editorElement.previousSibling;
+      return editorElement.parentNode.firstElementChild;
     }
     return null;
   },
@@ -105,7 +123,7 @@ var EditorUtils = {
   {
     var editorElement = this.getCurrentEditorElement();
     if (editorElement) {
-      var bespinIframe = editorElement.previousSibling;
+      var bespinIframe = editorElement.parentNode.firstElementChild;
       var bespinWindow = bespinIframe.contentWindow.wrappedJSObject;
       return bespinWindow;
     }
@@ -116,7 +134,7 @@ var EditorUtils = {
   {
     var editorElement = this.getCurrentEditorElement();
     if (editorElement) {
-      var bespinIframe = editorElement.previousSibling;
+      var bespinIframe = editorElement.parentNode.firstElementChild;
       var bespinEditor = bespinIframe.contentWindow.wrappedJSObject.gEditor;
       return bespinEditor;
     }
@@ -194,7 +212,7 @@ var EditorUtils = {
 
   isAlreadyEdited: function isAlreadyEdited(aURL)
   {
-    Components.utils.import("resource://app/modules/urlHelper.jsm");
+    Components.utils.import("resource://gre/modules/urlHelper.jsm");
     // blank documents are never "already edited"...
     if (UrlUtils.isUrlOfBlankDocument(aURL))
       return null;
@@ -226,9 +244,10 @@ var EditorUtils = {
   isDocumentModified: function isDocumentModified()
   {
     try {
-      if (this.getCurrentEditor().documentModified)
-        return true;
-      if (this.getCurrentSourceWindow().GetModificationCount())
+      if (this.isWysiwygMode()) {
+        return this.getCurrentEditor().documentModified;
+      }
+      else if (this.getCurrentSourceWindow().GetModificationCount())
         return true;
     } catch (e) { }
     return false;
@@ -297,8 +316,9 @@ var EditorUtils = {
     var editor = this.getCurrentEditor();
     if (!editor) return null;
 
+    var selection = null;
     try {
-      var selection = editor.selection;
+      selection = editor.selection;
       if (!selection) return null;
     }
     catch (e) { return null; }
@@ -306,7 +326,9 @@ var EditorUtils = {
     var result = { oneElementSelected:false };
 
     if (selection.isCollapsed) {
-      result.node = selection.focusNode;
+      if (!selection.rangeCount) // weirdness...
+        return null;
+      result.node = selection.getRangeAt(0).startContainer;
     }
     else {
       var rangeCount = selection.rangeCount;
@@ -356,7 +378,9 @@ var EditorUtils = {
     }
 
     // make sure we have an element here
-    while (result.node.nodeType != this.nsIDOMNode.ELEMENT_NODE)
+    while (result.node &&
+           result.node.parentNode &&
+           result.node.nodeType != this.nsIDOMNode.ELEMENT_NODE)
       result.node = result.node.parentNode;
 
     // and make sure the element is not a special editor node like
@@ -537,7 +561,7 @@ var EditorUtils = {
   {
     try {
       var aDOMHTMLDoc = this.getCurrentEditor().document.QueryInterface(Components.interfaces.nsIDOMHTMLDocument);
-      return aDOMHTMLDoc.URL;
+      return aDOMHTMLDoc.location.toString();
     }
     catch (e) {}
     return "";
@@ -580,6 +604,7 @@ var EditorUtils = {
         isXML = true;
         break;
       case "":
+      case "about:legacy-compat":
         isXML = (doc.documentElement.getAttribute("xmlns") == "http://www.w3.org/1999/xhtml");
         break;
       case null:

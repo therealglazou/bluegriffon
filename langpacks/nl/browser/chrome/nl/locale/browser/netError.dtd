@@ -7,6 +7,8 @@
 
 <!ENTITY loadError.label "Probleem bij het laden van de pagina">
 <!ENTITY retry.label "Opnieuw proberen">
+<!ENTITY returnToPreviousPage.label "Terug">
+<!ENTITY advanced.label "Geavanceerd">
 
 <!-- Specific error messages -->
 
@@ -20,12 +22,12 @@
 <!ENTITY dnsNotFound.longDesc "
 <ul>
   <li>Controleer het adres op typefouten, zoals
-    <strong>ww</strong>.voorbeeld.com in plaats van
-    <strong>www</strong>.voorbeeld.com</li>
-  <li>Controleer uw netwerkverbinding als u geen enkele pagina kunt
-    laden.</li>
-  <li>Verzeker u ervan dat &brandShortName; toegang heeft tot het web als uw 
-    computer of netwerk is beveiligd door een firewall of proxyserver.</li>
+    <strong>ww</strong>.example.com in plaats van
+    <strong>www</strong>.example.com</li>
+  <li>Als u geen enkele pagina kunt laden, controleer dan de netwerkverbinding
+    van uw computer.</li>
+  <li>Als uw computer of netwerk wordt beveiligd door een firewall of proxy,
+    zorg er dan voor dat &brandShortName; toegang heeft tot het web.</li>
 </ul>
 ">
 
@@ -37,17 +39,30 @@
 </ul>
 ">
 
+<!ENTITY fileAccessDenied.title "Toegang tot het bestand is geweigerd">
+<!ENTITY fileAccessDenied.longDesc "
+<ul>
+  <li>Het kan zijn verwijderd, verplaatst, of bestandsmachtigingen kunnen toegang tegengaan.</li>
+</ul>
+">
 
 <!ENTITY generic.title "Oei.">
 <!ENTITY generic.longDesc "
-<p>&brandShortName; kan om één of andere reden deze pagina niet laden.</p>
+<p>&brandShortName; kan om de een of andere reden deze pagina niet laden.</p>
 ">
+
+<!ENTITY captivePortal.title "Aanmelden bij netwerk">
+<!ENTITY captivePortal.longDesc2 "
+<p>U moet zich aanmelden bij dit netwerk voordat u toegang hebt tot het internet.</p>
+">
+
+<!ENTITY openPortalLoginPage.label2 "Aanmeldingspagina voor netwerk openen">
 
 <!ENTITY malformedURI.title "Het adres is niet geldig">
 <!ENTITY malformedURI.longDesc "
 <ul>
   <li>Webadressen worden doorgaans geschreven als
-    <strong>http://www.voorbeeld.com/</strong></li>
+    <strong>http://www.example.com/</strong></li>
   <li>Let erop dat u voorwaartse slashes gebruikt (d.i.
     <strong>/</strong>).</li>
 </ul>
@@ -57,26 +72,26 @@
 <!ENTITY netInterrupt.longDesc "&sharedLongDesc;">
 
 <!ENTITY notCached.title "Document verlopen">
-<!ENTITY notCached.longDesc "<p>Het opgevraagde document is niet beschikbaar in de buffer van &brandShortName;.</p><ul><li>Als veiligheidsvoorzorgsmaatregel vraagt &brandShortName; gevoelige documenten niet automatisch opnieuw op.</li><li>Klik op Opnieuw proberen om het document opnieuw van de website op te vragen.</li></ul>">
+<!ENTITY notCached.longDesc "<p>Het opgevraagde document is niet beschikbaar in de buffer van &brandShortName;.</p><ul><li>Als beveiligingsmaatregel vraagt &brandShortName; gevoelige documenten niet automatisch opnieuw op.</li><li>Klik op Opnieuw proberen om het document opnieuw van de website op te vragen.</li></ul>">
 
 <!ENTITY netOffline.title "Offlinemodus">
 <!ENTITY netOffline.longDesc2 "
 <ul>
-  <li>Druk op “Opnieuw proberen” om naar de onlinemodus over te schakelen en vernieuw de pagina.</li>
+  <li>Klik op ‘Opnieuw proberen’ om naar de onlinemodus over te schakelen en vernieuw de pagina.</li>
 </ul>
 ">
 
 <!ENTITY contentEncodingError.title "Inhoudcoderingsfout">
 <!ENTITY contentEncodingError.longDesc "
 <ul>
-  <li>Neem contact op met de website-eigenaars om ze te informeren over dit probleem.</li>
+  <li>Neem contact op met de website-eigenaars om ze over dit probleem te informeren.</li>
 </ul>
 ">
 
 <!ENTITY unsafeContentType.title "Onveilig bestandstype">
 <!ENTITY unsafeContentType.longDesc "
 <ul>
-  <li>Neem contact op met de website-eigenaars om ze te informeren over dit probleem.</li>
+  <li>Neem contact op met de website-eigenaars om ze over dit probleem te informeren.</li>
 </ul>
 ">
 
@@ -86,8 +101,8 @@
 <!ENTITY netTimeout.title "De wachttijd voor de verbinding is verstreken">
 <!ENTITY netTimeout.longDesc "&sharedLongDesc;">
 
-<!ENTITY protocolNotFound.title "Het adres werd niet begrepen">
-<!ENTITY protocolNotFound.longDesc "
+<!ENTITY unknownProtocolFound.title "Het adres werd niet begrepen">
+<!ENTITY unknownProtocolFound.longDesc "
 <ul>
   <li>Misschien moet u andere software installeren om dit adres te openen.</li>
 </ul>
@@ -106,9 +121,9 @@
 <!ENTITY proxyResolveFailure.longDesc "
 <ul>
   <li>Controleer of uw proxyinstellingen juist zijn.</li>
-  <li>Verzeker u ervan dat uw computer op een werkend netwerk is aangesloten.</li>
-  <li>Verzeker u ervan dat &brandShortName; toegang heeft tot het web als uw 
-    computer of netwerk is beveiligd door een firewall of proxyserver.</li>
+  <li>Controleer of uw computer een werkende netwerkverbinding heeft.</li>
+  <li>Als uw computer of netwerk wordt beveiligd door een firewall of proxy,
+    zorg er dan voor dat &brandShortName; toegang heeft tot het web.</li>
 </ul>
 ">
 
@@ -123,74 +138,74 @@
 <!ENTITY unknownSocketType.title "Onverwacht antwoord van server">
 <!ENTITY unknownSocketType.longDesc "
 <ul>
-  <li>Verzeker u ervan dat de persoonlijke beveiligingsbeheerder is geïnstalleerd op
-    uw systeem.</li>
+  <li>Zorg ervoor dat de persoonlijke beveiligingsbeheerder op uw systeem
+    is geïnstalleerd.</li>
   <li>Dit kan het gevolg zijn van een niet-standaard configuratie van de server.</li>
 </ul>
 ">
 
 <!ENTITY nssFailure2.title "Beveiligde verbinding mislukt">
-<!ENTITY nssFailure2.longDesc "
+<!ENTITY nssFailure2.longDesc2 "
 <ul>
   <li>De pagina die u wilt bekijken kan niet worden weergegeven, omdat de echtheid van de ontvangen gegevens niet kon worden geverifieerd.</li>
-  <li>Neem contact op met de website-eigenaars om ze te informeren over dit probleem. U kunt ook de opdracht in het helpmenu gebruiken om deze defecte website te rapporteren.</li>
+  <li>Neem contact op met de website-eigenaars om ze over dit probleem te informeren.</li>
 </ul>
 ">
 
-<!ENTITY nssBadCert.title "Beveiligde verbinding mislukt">
-<!ENTITY nssBadCert.longDesc2 "
-<ul>
-  <li>Dit kan een probleem met de serverconfiguratie zijn, of iemand probeert deze
-    server na te bootsen.</li>
-  <li>Als u in het verleden wel met succes verbinding hebt gemaakt met deze server, dan
-    is de fout wellicht tijdelijk en kunt u het later nogmaals proberen.</li>
-</ul>
-">
+<!ENTITY certerror.longpagetitle1 "Uw verbinding is niet beveiligd">
+<!-- Localization note (certerror.introPara) - The text content of the span tag
+will be replaced at runtime with the name of the server to which the user
+was trying to connect. -->
+<!ENTITY certerror.introPara "De eigenaar van <span class='hostname'/> heeft zijn of haar website niet juist geconfigureerd. Om uw gegevens tegen diefstal te beschermen, heeft &brandShortName; geen verbinding met deze website gemaakt.">
 
 <!ENTITY sharedLongDesc "
 <ul>
   <li>Misschien is de website tijdelijk niet beschikbaar of overbelast. Probeer het 
     over enkele ogenblikken opnieuw.</li>
-  <li>Controleer uw netwerkverbinding als u geen enkele pagina kunt laden.</li>
-  <li>Verzeker u ervan dat &brandShortName; toegang heeft tot het web als uw 
-    computer of netwerk is beveiligd door een firewall of proxyserver.</li>
+  <li>Als u geen enkele pagina kunt laden, controleer dan de netwerkverbinding
+    van uw computer.</li>
+  <li>Als uw computer of netwerk wordt beveiligd door een firewall of proxy,
+    zorg er dan voor dat &brandShortName; toegang heeft tot het web.</li>
 </ul>
 ">
 
-<!ENTITY malwareBlocked.title "Vermoedelijke aanvalsite!">
-<!ENTITY malwareBlocked.longDesc "
-<p>Aanvalsites proberen programma’s te installeren die privégegevens stelen, uw computer gebruiken om anderen aan te vallen, of uw systeem beschadigen.</p>
-<p>Website-eigenaars die menen dat hun website ten onrechte is gerapporteerd als een aanvalsite kunnen om een <a href='http://www.stopbadware.org/home/reviewinfo' >herbeoordeling vragen</a>.</p>
-">
+<!ENTITY cspBlocked.title "Geblokkeerd door inhoudbeveiligingsbeleid">
+<!ENTITY cspBlocked.longDesc "<p>&brandShortName; heeft voorkomen dat de pagina op deze manier werd geladen, omdat de pagina een inhoudbeveiligingsbeleid heeft dat dit niet toestaat.</p>">
 
-<!ENTITY phishingBlocked.title "Vermoedelijke webvervalsing!">
-<!ENTITY phishingBlocked.longDesc "
-<p>Het invoeren van persoonlijke gegevens op deze pagina kan leiden tot diefstal van identiteitsgegevens of andere fraude.</p>
-<p>Dit soort webvervalsingen wordt gebruikt in e-mailscams die bekend staan als phishingaanvallen, waarbij frauduleuze webpagina’s en e-mails worden gebruikt om bronnen die u misschien vertrouwt na te bootsen.</p>
-">
-
-<!ENTITY cspFrameAncestorBlocked.title "Geblokkeerd door inhoudbeveiligingsbeleid">
-<!ENTITY cspFrameAncestorBlocked.longDesc "<p>&brandShortName; heeft voorkomen dat de pagina op deze manier werd geladen, omdat de pagina een inhoudbeveiligingsbeleid heeft dat dit niet toestaat.</p>">
-
-<!ENTITY corruptedContentError.title "Beschadigde-inhoudsfout">
-<!ENTITY corruptedContentError.longDesc "<p>De pagina die u wilt bekijken kan niet worden weergegeven, omdat er een fout in de gegevensoverdracht is gedetecteerd.</p><ul><li>Neem contact op met de website-eigenaars om ze te informeren over dit probleem.</li></ul>">
+<!ENTITY corruptedContentErrorv2.title "Beschadigde-inhoudsfout">
+<!ENTITY corruptedContentErrorv2.longDesc "<p>De pagina die u wilt bekijken kan niet worden weergegeven, omdat er een fout in de gegevensoverdracht is gedetecteerd.</p><ul><li>Neem contact op met de website-eigenaars om ze over dit probleem te informeren.</li></ul>">
 
 
-<!ENTITY securityOverride.linkText "Of u kunt een uitzondering toevoegen…">
-<!ENTITY securityOverride.getMeOutOfHereButton "Haal me hier vandaan!">
 <!ENTITY securityOverride.exceptionButtonLabel "Uitzondering toevoegen…">
 
-<!-- LOCALIZATION NOTE (securityOverride.warningContent) - Do not translate the
-contents of the <button> tags. It uses strings already defined above. The
-button is included here (instead of netError.xhtml) because it exposes
-functionality specific to firefox. -->
-
-<!ENTITY securityOverride.warningContent "
-<p>U kunt beter geen uitzondering toevoegen als u een internetverbinding gebruikt die u niet volledig vertrouwt, of als u normaal gesproken geen waarschuwing krijgt voor deze server.</p>
-
-<button id='getMeOutOfHereButton'>&securityOverride.getMeOutOfHereButton;</button>
-<button id='exceptionDialogButton'>&securityOverride.exceptionButtonLabel;</button>
-">
+<!ENTITY errorReporting.automatic2 "Fouten als deze rapporteren om Mozilla te helpen kwaadwillende websites te herkennen en te blokkeren">
+<!ENTITY errorReporting.learnMore "Meer info…">
 
 <!ENTITY remoteXUL.title "Remote XUL">
-<!ENTITY remoteXUL.longDesc "<p><ul><li>Neem contact op met de website-eigenaars om ze te informeren over dit probleem.</li></ul></p>">
+<!ENTITY remoteXUL.longDesc "<p><ul><li>Neem contact op met de website-eigenaars om ze over dit probleem te informeren.</li></ul></p>">
+
+<!ENTITY sslv3Used.title "Kan geen beveiligde verbinding maken">
+<!-- LOCALIZATION NOTE (sslv3Used.longDesc2) - Do not translate
+     "SSL_ERROR_UNSUPPORTED_VERSION". -->
+<!ENTITY sslv3Used.longDesc2 "Geavanceerde info: SSL_ERROR_UNSUPPORTED_VERSION">
+
+<!-- LOCALIZATION NOTE (certerror.wrongSystemTime2,
+                        certerror.wrongSystemTimeWithoutReference) - The <span id='..' />
+     tags will be injected with actual values, please leave them unchanged. -->
+<!ENTITY certerror.wrongSystemTime2 "<p> &brandShortName; heeft geen verbinding met <span id='wrongSystemTime_URL'/> gemaakt, omdat de klok van uw computer de verkeerde tijd lijkt aan te geven, en dit voorkomt een beveiligde verbinding.</p> <p>Uw computer is ingesteld op <span id='wrongSystemTime_systemDate'/>, terwijl dit <span id='wrongSystemTime_actualDate'/> zou moeten zijn. Wijzig uw datum- en tijdinstellingen naar de juiste tijd om dit probleem te verhelpen.</p>">
+<!ENTITY certerror.wrongSystemTimeWithoutReference "<p>&brandShortName; heeft geen verbinding met <span id='wrongSystemTimeWithoutReference_URL'/> gemaakt, omdat de klok van uw computer de verkeerde tijd lijkt aan te geven, en dit voorkomt een beveiligde verbinding.</p> <p>Uw computer is ingesteld op <span id='wrongSystemTimeWithoutReference_systemDate'/>. Wijzig uw datum- en tijdinstellingen naar de juiste tijd om dit probleem te verhelpen.</p>">
+
+<!ENTITY certerror.pagetitle1  "Niet-beveiligde verbinding">
+<!ENTITY certerror.whatShouldIDo.badStsCertExplanation "Deze website maakt gebruik
+van HTTP Strict Transport Security (HSTS) om aan te geven dat &brandShortName;
+alleen een beveiligde verbinding mag maken. Hierdoor is het niet mogelijk om een
+uitzondering voor dit certificaat toe te voegen.">
+<!ENTITY certerror.copyToClipboard.label "Tekst naar klembord kopiëren">
+
+<!ENTITY inadequateSecurityError.title "Uw verbinding is niet beveiligd">
+<!-- LOCALIZATION NOTE (inadequateSecurityError.longDesc) - Do not translate
+     "NS_ERROR_NET_INADEQUATE_SECURITY". -->
+<!ENTITY inadequateSecurityError.longDesc "<p><span class='hostname'></span> gebruikt verouderde beveiligingstechnologie die kwetsbaar is voor aanvallen. Een aanvaller kan eenvoudig gegevens onthullen waarvan u dacht dat deze veilig waren. De websitebeheerder dient eerst de server in orde te maken voordat u de website kunt bezoeken.</p><p>Foutcode: NS_ERROR_NET_INADEQUATE_SECURITY</p>">
+
+<!ENTITY prefReset.longDesc "Het lijkt erop dat dit door uw netwerkbeveiligingsinstellingen wordt veroorzaakt. Wilt u de standaardinstellingen herstellen?">
+<!ENTITY prefReset.label "Standaardinstellingen herstellen">

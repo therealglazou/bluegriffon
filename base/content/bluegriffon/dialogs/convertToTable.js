@@ -36,7 +36,7 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-Components.utils.import("resource://app/modules/editorHelper.jsm");
+Components.utils.import("resource://gre/modules/editorHelper.jsm");
 
 var gIndex;
 var gCommaIndex = "0";
@@ -72,6 +72,10 @@ function Startup()
 
   // Set initial enable state on character input and "collapse" checkbox
   SelectCharacter(gIndex);
+
+#ifndef XP_MACOSX
+  CenterDialogOnOpener();
+#endif
 }
 
 function InputSepCharacter()
@@ -285,85 +289,19 @@ function onAccept()
   // Default table attributes should be same as those used in nsHTMLEditor::CreateElementWithDefaults()
   // (Default width="100%" is used in EdInsertTable.js)
   str = "<table border=\"1\" width=\"100%\" cellpadding=\"2\" cellspacing=\"2\">\n<tr><td>" + str + "</tr>\n</table>\n";
-
-  editor.beginTransaction();
   
-  // Delete the selection -- makes it easier to find where table will insert
-  var nodeBeforeTable = null;
-  var nodeAfterTable = null;
-  try {
-    editor.deleteSelection(0);
-
-    var anchorNodeBeforeInsert = editor.selection.anchorNode;
-    var offset = editor.selection.anchorOffset;
-    if (anchorNodeBeforeInsert.nodeType == Node.TEXT_NODE)
-    {
-      // Text was split. Table should be right after the first or before 
-      nodeBeforeTable = anchorNodeBeforeInsert.previousSibling;
-      nodeAfterTable = anchorNodeBeforeInsert;
-    }
-    else
-    {
-      // Table should be inserted right after node pointed to by selection
-      if (offset > 0)
-        nodeBeforeTable = anchorNodeBeforeInsert.childNodes.item(offset - 1);
-
-      nodeAfterTable = anchorNodeBeforeInsert.childNodes.item(offset);
-    }
-  
-    editor.insertHTML(str);
-  } catch (e) {}
-
-  var table = null;
-  if (nodeAfterTable)
-  {
-    var previous = nodeAfterTable.previousSibling;
-    if (previous && previous.nodeName.toLowerCase() == "table")
-      table = previous;
-  }
-  if (!table && nodeBeforeTable)
-  {
-    var next = nodeBeforeTable.nextSibling;
-    if (next && next.nodeName.toLowerCase() == "table")
-      table = next;
-  }
-
-  if (table)
-  {
-    // Fixup table only if pref is set
-    var prefs = GetPrefs();
-    var firstRow;
-    try {
-      if (prefs && prefs.getBoolPref("editor.table.maintain_structure") )
-        editor.normalizeTable(table);
-
-      firstRow = editor.getFirstRow(table);
-    } catch(e) {}
-
-    // Put caret in first cell
-    if (firstRow)
-    {
-      var node2 = firstRow.firstChild;
-      do {
-        if (node2.nodeName.toLowerCase() == "td" ||
-            node2.nodeName.toLowerCase() == "th")
-        {
-          try { 
-            editor.selection.collapse(node2, 0);
-          } catch(e) {}
-          break;
-        }
-        node2 = node.nextSibling;
-      } while (node2);
-    }
-  }
-
-  editor.endTransaction();
+  editor.insertHTML(str);
 
   // Save persisted attributes
   gDialog.sepRadioGroup.setAttribute("index", gIndex);
   if (gIndex == gOtherIndex)
     gDialog.sepRadioGroup.setAttribute("character", sepCharacter);
 
+  return true;
+}
+
+function onCancel()
+{
+  window.close();
   return true;
 }

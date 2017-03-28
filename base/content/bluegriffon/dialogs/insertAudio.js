@@ -1,6 +1,6 @@
-Components.utils.import("resource://app/modules/editorHelper.jsm");
-Components.utils.import("resource://app/modules/urlHelper.jsm");
-Components.utils.import("resource://app/modules/prompterHelper.jsm");
+Components.utils.import("resource://gre/modules/editorHelper.jsm");
+Components.utils.import("resource://gre/modules/urlHelper.jsm");
+Components.utils.import("resource://gre/modules/prompterHelper.jsm");
 
 var gDoc = null;
 var gNode = null;
@@ -27,6 +27,10 @@ function Startup()
   }
   InitDialog();
   CheckURL('urlTextbox', 'relativeURLCheckbox');
+
+#ifndef XP_MACOSX
+  CenterDialogOnOpener();
+#endif
 }
 
 function InitDialog()

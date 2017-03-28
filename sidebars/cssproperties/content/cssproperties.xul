@@ -38,6 +38,7 @@
    - ***** END LICENSE BLOCK ***** -->
 
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://cssproperties/content/styles/cssproperties.css" type="text/css"?>
 <?xml-stylesheet href="chrome://cssproperties/skin/cssproperties.css" type="text/css"?>
 <?xml-stylesheet href="chrome://bluegriffon/skin/listboxBg.css" type="text/css"?>
 <?xml-stylesheet href="chrome://bluegriffon/skin/bluegriffonDialogs.css" type="text/css"?>
@@ -49,6 +50,7 @@
 <?xul-overlay href="chrome://cssproperties/content/colors.xul"?>
 <?xul-overlay href="chrome://cssproperties/content/geometry.xul"?>
 <?xul-overlay href="chrome://cssproperties/content/position.xul"?>
+<?xul-overlay href="chrome://cssproperties/content/images.xul"?>
 <?xul-overlay href="chrome://cssproperties/content/borders.xul"?>
 <?xul-overlay href="chrome://cssproperties/content/shadows.xul"?>
 <?xul-overlay href="chrome://cssproperties/content/lists.xul"?>
@@ -58,6 +60,8 @@
 <?xul-overlay href="chrome://cssproperties/content/columns.xul"?>
 <?xul-overlay href="chrome://cssproperties/content/tables.xul"?>
 <?xul-overlay href="chrome://cssproperties/content/misc.xul"?>
+<?xul-overlay href="chrome://cssproperties/content/variables.xul"?>
+<?xul-overlay href="chrome://cssproperties/content/all.xul"?>
 
 <!DOCTYPE page [
   <!ENTITY % csspropertiesDTD SYSTEM "chrome://cssproperties/locale/cssproperties.dtd">
@@ -82,18 +86,28 @@
   <script type="application/x-javascript"  src="chrome://cssproperties/content/cssproperties.js"/>
   <script type="application/x-javascript"  src="chrome://cssproperties/content/common.js"/>
 
-  <stringbundle id="csspropertiesBundle"   src="chrome://cssproperties/locale/cssproperties.properties"/>
-  <stringbundle id="backgrounditemBundle"  src="chrome://cssproperties/locale/backgrounditem.properties"/>
-  <stringbundle id="bluegriffonBundle"     src="chrome://cssproperties/locale/bluegriffon.properties"/>
+  <stringbundleset id="bundleset">
+    <stringbundle id="csspropertiesBundle"   src="chrome://cssproperties/locale/cssproperties.properties"/>
+    <stringbundle id="backgrounditemBundle"  src="chrome://cssproperties/locale/backgrounditem.properties"/>
+    <stringbundle id="bluegriffonBundle"     src="chrome://cssproperties/locale/bluegriffon.properties"/>
+  </stringbundleset>
 
   <panelset id="csspropertiesPanelset" />
 
   <vbox id="mainBox" flex="1" style="visibility: hidden">
+    <vbox id="idAlert">
+      <description>Please enter an ID:</description>
+      <hbox align="center">
+        <textbox id="idAlertTextbox"
+                 onkeypress="CheckReturnInIdAlert(this, event)"
+                 oninput="CheckIdFromIdAlert(this)"/>
+        <button id="idAlertButton" label="ok"
+                oncommand="ApplyIdFromIdAlert()"/>
+      </hbox>
+    </vbox>
     <vbox id="mainBoxHeader">
-      <label id="currentElementBox"
-             crop="end"/>
       <label value="&applyStyles.label;"/>
-      <hbox id="cssPolicyBox" align="center">
+      <hbox id="cssPolicyBox" align="center" class="indent">
         <menulist id="cssPolicyMenulist" oncommand="onCssPolicyChange(this)">
           <menupopup>
             <menuitem label="&modifyID.label;"        value="id"/>

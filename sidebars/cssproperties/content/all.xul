@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE overlay [
+  <!ENTITY % csspropertiesDTD SYSTEM "chrome://cssproperties/locale/cssproperties.dtd">
+  %csspropertiesDTD;
+]>
+
+<overlay id="allOverlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/x-javascript"  src="chrome://cssproperties/content/all.js" />
+
+  <vbox id="propertiesBox">
+    <hbox align="center"
+          class="csspropertiesHeader"
+          context="sectionHeaderContext"
+          id="allSectionHeader"
+          onclick="ToggleSection(event, this)"
+          position="33">
+      <image />
+      <label value="&allSectionHeader.label;"/>
+    </hbox>
+  
+    <vbox class="section"
+          id="allSection"
+          position="34">
+      <tree id="allTree"
+            flex="1"
+            editable="true"
+            persist="height"
+            style="margin: 0px; min-width: 200px; height: 200px"
+            treelines="true"
+            onselect="UpdateAllButtons()">
+        <treecols>
+          <treecol id="propertyCol"
+                   flex="1"
+                   label="Property"
+                   primary="true"
+                   persist="width ordinal hidden"/>
+          <splitter class="tree-splitter"/>
+          <treecol id="valueCol"
+                   label="Value"
+                   flex="1" 
+                   persist="width ordinal hidden"/>
+        </treecols>
+      </tree>
+      <hbox id="allTreeToolbox" class="listboxBg">
+        <toolbarbutton class="listboxBgPlusButton"
+                       tooltiptext="&addCSS.tooltip;"
+                       id="PlusCSSButton"
+                       oncommand="AddCSS()"/>
+        <toolbarbutton class="listboxBgMinusButton"
+                       disabled="true"
+                       id="MinusCSSButton"
+                       tooltiptext="&removeCSS.tooltip;"
+                       oncommand="DeleteCSS()"/>
+        <toolbarbutton class="listboxBgConfigButton"
+                       tooltiptext="&modifyCSS.tooltip;"
+                       disabled="true"
+                       id="ConfigCSSButton"
+                       oncommand="ModifyCSS()"/>
+        <spacer flex="1"/>
+      </hbox>
+    </vbox>
+  </vbox>
+</overlay>

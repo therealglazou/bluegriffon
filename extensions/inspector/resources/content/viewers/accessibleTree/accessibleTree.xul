@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<!DOCTYPE page [
+  <!ENTITY % dtd1 SYSTEM "chrome://inspector/locale/inspector.dtd"> %dtd1;
+  <!ENTITY % dtd2 SYSTEM "chrome://inspector/locale/viewers/accessibleTree.dtd"> %dtd2;
+]>
+
+<?xml-stylesheet href="chrome://inspector/skin/viewers/accessibleTree/accessibleTree.css"?>
+
+<?xul-overlay href="chrome://inspector/content/editingOverlay.xul"?>
+
+<page id="winAccessibleTree"
+      xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/javascript"
+          src="chrome://inspector/content/hooks.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/utils.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/jsutil/xul/inBaseTreeView.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/jsutil/xpcom/XPCU.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/jsutil/events/ObserverManager.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/jsutil/commands/baseCommands.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/viewers/accessibleTree/accessibleTree.js"/>
+
+  <commandset id="cmdsAccTreeViewer">
+    <command id="cmdEvalJS" oncommand="viewer.cmdEvalJS();"/>
+  </commandset>
+  <commandset id="cmdsEditingExtras"/>
+
+  <popupset>
+    <menupopup id="popupContext">
+      <menuitem id="mnEditInspectInNewWindow"/>
+      <menuseparator/>
+      <menuitem label="&evaluateJS.label;" observes="cmdEvalJS"/>
+    </menupopup>
+  </popupset>
+
+  <tree id="olAccessibleTree" class="plain" treelines="true" flex="1"
+        onselect="viewer.onItemSelected()"
+        context="popupContext">
+    <treecols>
+      <treecol id="olcRole"
+               label="&role.label;"
+               persist="width,hidden,ordinal"
+               primary="true"
+               flex="1"/>
+      <splitter class="tree-splitter"/>
+      <treecol id="olcName"
+               label="&name.label;"
+               persist="width,hidden,ordinal"
+               flex="1"/>
+      <splitter class="tree-splitter"/>
+      <treecol id="olcNodeName"
+               label="&nodeName.label;"
+               persist="width,hidden,ordinal"
+               flex="1"/>
+    </treecols>
+    <treechildren id="olbAccessibleTree"
+                  alternatingbackground="true"/>
+  </tree>
+
+</page>
+

@@ -46,7 +46,9 @@
 
 var EXPORTED_SYMBOLS = ["CssInspector", "CSSParser"];
 
-Components.utils.import("resource://app/modules/fileChanges.jsm");
+Components.utils.import("resource://gre/modules/cssProperties.jsm");
+Components.utils.import("resource://gre/modules/fileChanges.jsm");
+Components.utils.import("resource://gre/modules/Services.jsm");
 
 const kCHARSET_RULE_MISSING_SEMICOLON = "Missing semicolon at the end of @charset rule";
 const kCHARSET_RULE_CHARSET_IS_STRING = "The charset in the @charset rule should be a string";
@@ -92,339 +94,6 @@ const kCSS_VENDOR_VALUES = {
                            "gecko1.9.2": FilterRadialGradient }
 };
 
-const kCSS_VENDOR_PREFIXES = { "lastUpdate": 1362671406, "properties": [
-  { "gecko": "", "webkit": "", "presto": "", "trident": "-ms-accelerator", "status": "P" },
-  { "gecko": "", "webkit": "", "presto": "-wap-accesskey", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-align-content", "presto": "", "trident": "", "status": "" },
-  { "gecko": "align-items", "webkit": "-webkit-align-items", "presto": "", "trident": "", "status": "" },
-  { "gecko": "align-self", "webkit": "-webkit-align-self", "presto": "", "trident": "", "status": "" },
-  { "gecko": "animation", "webkit": "-webkit-animation", "presto": "", "trident": "animation", "status": "WD" },
-  { "gecko": "animation-delay", "webkit": "-webkit-animation-delay", "presto": "", "trident": "animation-delay", "status": "WD" },
-  { "gecko": "animation-direction", "webkit": "-webkit-animation-direction", "presto": "", "trident": "animation-direction", "status": "WD" },
-  { "gecko": "animation-duration", "webkit": "-webkit-animation-duration", "presto": "", "trident": "animation-duration", "status": "WD" },
-  { "gecko": "animation-fill-mode", "webkit": "-webkit-animation-fill-mode", "presto": "", "trident": "animation-fill-mode", "status": "ED" },
-  { "gecko": "animation-iteration-count", "webkit": "-webkit-animation-iteration-count", "presto": "", "trident": "animation-iteration-count", "status": "WD" },
-  { "gecko": "animation-name", "webkit": "-webkit-animation-name", "presto": "", "trident": "animation-name", "status": "WD" },
-  { "gecko": "animation-play-state", "webkit": "-webkit-animation-play-state", "presto": "", "trident": "animation-play-state", "status": "WD" },
-  { "gecko": "animation-timing-function", "webkit": "-webkit-animation-timing-function", "presto": "", "trident": "animation-timing-function", "status": "WD" },
-  { "gecko": "", "webkit": "-webkit-app-region", "presto": "", "trident": "", "status": "" },
-  { "gecko": "-moz-appearance", "webkit": "-webkit-appearance", "presto": "", "trident": "", "status": "CR" },
-  { "gecko": "", "webkit": "-webkit-aspect-ratio", "presto": "", "trident": "", "status": "" },
-  { "gecko": "backface-visibility", "webkit": "-webkit-backface-visibility", "presto": "", "trident": "backface-visibility", "status": "WD" },
-  { "gecko": "", "webkit": "-webkit-background-blend-mode", "presto": "", "trident": "", "status": "" },
-  { "gecko": "background-clip", "webkit": "-webkit-background-clip", "presto": "background-clip", "trident": "background-clip", "status": "WD" },
-  { "gecko": "", "webkit": "-webkit-background-composite", "presto": "", "trident": "", "status": "" },
-  { "gecko": "-moz-background-inline-policy", "webkit": "", "presto": "", "trident": "", "status": "P" },
-  { "gecko": "background-origin", "webkit": "-webkit-background-origin", "presto": "background-origin", "trident": "background-origin", "status": "WD" },
-  { "gecko": "", "webkit": "background-position-x", "presto": "", "trident": "-ms-background-position-x", "status": "" },
-  { "gecko": "", "webkit": "background-position-y", "presto": "", "trident": "-ms-background-position-y", "status": "" },
-  { "gecko": "background-size", "webkit": "-webkit-background-size", "presto": "background-size", "trident": "background-size", "status": "WD" },
-  { "gecko": "", "webkit": "", "presto": "", "trident": "-ms-behavior", "status": "" },
-  { "gecko": "-moz-binding", "webkit": "", "presto": "", "trident": "", "status": "P" },
-  { "gecko": "", "webkit": "-webkit-blend-mode", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "", "trident": "-ms-block-progression", "status": "" },
-  { "gecko": "", "webkit": "-webkit-border-after", "presto": "", "trident": "", "status": "ED" },
-  { "gecko": "", "webkit": "-webkit-border-after-color", "presto": "", "trident": "", "status": "ED" },
-  { "gecko": "", "webkit": "-webkit-border-after-style", "presto": "", "trident": "", "status": "ED" },
-  { "gecko": "", "webkit": "-webkit-border-after-width", "presto": "", "trident": "", "status": "ED" },
-  { "gecko": "", "webkit": "-webkit-border-before", "presto": "", "trident": "", "status": "ED" },
-  { "gecko": "", "webkit": "-webkit-border-before-color", "presto": "", "trident": "", "status": "ED" },
-  { "gecko": "", "webkit": "-webkit-border-before-style", "presto": "", "trident": "", "status": "ED" },
-  { "gecko": "", "webkit": "-webkit-border-before-width", "presto": "", "trident": "", "status": "ED" },
-  { "gecko": "-moz-border-bottom-colors", "webkit": "", "presto": "", "trident": "", "status": "P" },
-  { "gecko": "border-bottom-left-radius", "webkit": "-webkit-border-bottom-left-radius", "presto": "border-bottom-left-radius", "trident": "border-bottom-left-radius", "status": "WD" },
-  { "gecko": "border-bottom-right-radius", "webkit": "-webkit-border-bottom-right-radius", "presto": "border-bottom-right-radius", "trident": "border-bottom-right-radius", "status": "WD" },
-  { "gecko": "-moz-border-end", "webkit": "-webkit-border-end", "presto": "", "trident": "", "status": "ED" },
-  { "gecko": "-moz-border-end-color", "webkit": "-webkit-border-end-color", "presto": "", "trident": "", "status": "ED" },
-  { "gecko": "-moz-border-end-style", "webkit": "-webkit-border-end-style", "presto": "", "trident": "", "status": "ED" },
-  { "gecko": "-moz-border-end-width", "webkit": "-webkit-border-end-width", "presto": "", "trident": "", "status": "ED" },
-  { "gecko": "", "webkit": "-webkit-border-fit", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-border-horizontal-spacing", "presto": "", "trident": "", "status": "" },
-  { "gecko": "border-image", "webkit": "-webkit-border-image", "presto": "-o-border-image", "trident": "", "status": "WD" },
-  { "gecko": "-moz-border-left-colors", "webkit": "", "presto": "", "trident": "", "status": "P" },
-  { "gecko": "border-radius", "webkit": "-webkit-border-radius", "presto": "border-radius", "trident": "border-radius", "status": "WD" },
-  { "gecko": "-moz-border-right-colors", "webkit": "", "presto": "", "trident": "", "status": "P" },
-  { "gecko": "-moz-border-start", "webkit": "-webkit-border-start", "presto": "", "trident": "", "status": "ED" },
-  { "gecko": "-moz-border-start-color", "webkit": "-webkit-border-start-color", "presto": "", "trident": "", "status": "ED" },
-  { "gecko": "-moz-border-start-style", "webkit": "-webkit-border-start-style", "presto": "", "trident": "", "status": "ED" },
-  { "gecko": "-moz-border-start-width", "webkit": "-webkit-border-start-width", "presto": "", "trident": "", "status": "ED" },
-  { "gecko": "-moz-border-top-colors", "webkit": "", "presto": "", "trident": "", "status": "P" },
-  { "gecko": "border-top-left-radius", "webkit": "-webkit-border-top-left-radius", "presto": "border-top-left-radius", "trident": "border-top-left-radius", "status": "WD" },
-  { "gecko": "border-top-right-radius", "webkit": "-webkit-border-top-right-radius", "presto": "border-top-right-radius", "trident": "border-top-right-radius", "status": "WD" },
-  { "gecko": "", "webkit": "-webkit-border-vertical-spacing", "presto": "", "trident": "", "status": "" },
-  { "gecko": "-moz-box-align", "webkit": "-webkit-box-align", "presto": "", "trident": "", "status": "WD" },
-  { "gecko": "", "webkit": "-webkit-box-decoration-break", "presto": "box-decoration-break", "trident": "", "status": "WD" },
-  { "gecko": "-moz-box-direction", "webkit": "-webkit-box-direction", "presto": "", "trident": "", "status": "WD" },
-  { "gecko": "-moz-box-flex", "webkit": "-webkit-box-flex", "presto": "", "trident": "", "status": "WD" },
-  { "gecko": "", "webkit": "-webkit-box-flex-group", "presto": "", "trident": "", "status": "WD" },
-  { "gecko": "", "webkit": "-webkit-box-lines", "presto": "", "trident": "", "status": "WD" },
-  { "gecko": "-moz-box-ordinal-group", "webkit": "-webkit-box-ordinal-group", "presto": "", "trident": "", "status": "WD" },
-  { "gecko": "-moz-box-orient", "webkit": "-webkit-box-orient", "presto": "", "trident": "", "status": "WD" },
-  { "gecko": "-moz-box-pack", "webkit": "-webkit-box-pack", "presto": "", "trident": "", "status": "WD" },
-  { "gecko": "", "webkit": "-webkit-box-reflect", "presto": "", "trident": "", "status": "" },
-  { "gecko": "box-shadow", "webkit": "-webkit-box-shadow", "presto": "box-shadow", "trident": "box-shadow", "status": "WD" },
-  { "gecko": "-moz-box-sizing", "webkit": "-webkit-box-sizing", "presto": "box-sizing", "trident": "box-sizing", "status": "CR" },
-  { "gecko": "caption-side", "webkit": "-epub-caption-side", "presto": "caption-side", "trident": "caption-side", "status": "" },
-  { "gecko": "clip-path", "webkit": "-webkit-clip-path", "presto": "clip-path", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-color-correction", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-column-axis", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-column-break-after", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-column-break-before", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-column-break-inside", "presto": "", "trident": "", "status": "" },
-  { "gecko": "-moz-column-count", "webkit": "-webkit-column-count", "presto": "column-count", "trident": "column-count", "status": "CR" },
-  { "gecko": "-moz-column-fill", "webkit": "", "presto": "column-fill", "trident": "column-fill", "status": "CR" },
-  { "gecko": "-moz-column-gap", "webkit": "-webkit-column-gap", "presto": "column-gap", "trident": "column-gap", "status": "CR" },
-  { "gecko": "", "webkit": "-webkit-column-progression", "presto": "", "trident": "", "status": "" },
-  { "gecko": "-moz-column-rule", "webkit": "-webkit-column-rule", "presto": "column-rule", "trident": "column-rule", "status": "CR" },
-  { "gecko": "-moz-column-rule-color", "webkit": "-webkit-column-rule-color", "presto": "column-rule-color", "trident": "column-rule-color", "status": "CR" },
-  { "gecko": "-moz-column-rule-style", "webkit": "-webkit-column-rule-style", "presto": "column-rule-style", "trident": "column-rule-style", "status": "CR" },
-  { "gecko": "-moz-column-rule-width", "webkit": "-webkit-column-rule-width", "presto": "column-rule-width", "trident": "column-rule-width", "status": "CR" },
-  { "gecko": "", "webkit": "-webkit-column-span", "presto": "column-span", "trident": "column-span", "status": "CR" },
-  { "gecko": "-moz-column-width", "webkit": "-webkit-column-width", "presto": "column-width", "trident": "column-width", "status": "CR" },
-  { "gecko": "-moz-columns", "webkit": "-webkit-columns", "presto": "columns", "trident": "columns", "status": "CR" },
-  { "gecko": "", "webkit": "", "presto": "", "trident": "-ms-content-zoom-chaining", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "", "trident": "-ms-content-zoom-limit", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "", "trident": "-ms-content-zoom-limit-max", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "", "trident": "-ms-content-zoom-limit-min", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "", "trident": "-ms-content-zoom-snap", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "", "trident": "-ms-content-zoom-snap-points", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "", "trident": "-ms-content-zoom-snap-type", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "", "trident": "-ms-content-zooming", "status": "" },
-  { "gecko": "", "webkit": "-webkit-cursor-visibility", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-dashboard-region", "presto": "-apple-dashboard-region", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "-o-device-pixel-ratio", "trident": "", "status": "" },
-  { "gecko": "filter", "webkit": "-webkit-filter", "presto": "filter", "trident": "-ms-filter", "status": "" },
-  { "gecko": "flex", "webkit": "-webkit-flex", "presto": "", "trident": "-ms-flex", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "", "trident": "-ms-flex-align", "status": "" },
-  { "gecko": "flex-basis", "webkit": "-webkit-flex-basis", "presto": "", "trident": "", "status": "" },
-  { "gecko": "flex-direction", "webkit": "-webkit-flex-direction", "presto": "", "trident": "-ms-flex-direction", "status": "" },
-  { "gecko": "", "webkit": "-webkit-flex-flow", "presto": "", "trident": "", "status": "" },
-  { "gecko": "flex-grow", "webkit": "-webkit-flex-grow", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "", "trident": "-ms-flex-order", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "", "trident": "-ms-flex-pack", "status": "" },
-  { "gecko": "flex-shrink", "webkit": "-webkit-flex-shrink", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-flex-wrap", "presto": "", "trident": "-ms-flex-wrap", "status": "" },
-  { "gecko": "-moz-float-edge", "webkit": "", "presto": "", "trident": "", "status": "P" },
-  { "gecko": "", "webkit": "-webkit-flow-from", "presto": "", "trident": "-ms-flow-from", "status": "" },
-  { "gecko": "", "webkit": "-webkit-flow-into", "presto": "", "trident": "-ms-flow-into", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "-o-focus-opacity", "trident": "", "status": "" },
-  { "gecko": "-moz-font-feature-settings", "webkit": "-webkit-font-feature-settings", "presto": "", "trident": "font-feature-settings", "status": "" },
-  { "gecko": "", "webkit": "-webkit-font-kerning", "presto": "", "trident": "", "status": "" },
-  { "gecko": "-moz-font-language-override", "webkit": "", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-font-size-delta", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-font-smoothing", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-font-variant-ligatures", "presto": "", "trident": "", "status": "" },
-  { "gecko": "-moz-force-broken-image-icon", "webkit": "", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-grid-after", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-grid-auto-flow", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-grid-before", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-grid-column", "presto": "", "trident": "-ms-grid-column", "status": "WD" },
-  { "gecko": "", "webkit": "", "presto": "", "trident": "-ms-grid-column-align", "status": "WD" },
-  { "gecko": "", "webkit": "", "presto": "", "trident": "-ms-grid-column-span", "status": "WD" },
-  { "gecko": "", "webkit": "-webkit-grid-columns", "presto": "", "trident": "-ms-grid-columns", "status": "WD" },
-  { "gecko": "", "webkit": "-webkit-grid-end", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-grid-row", "presto": "", "trident": "-ms-grid-row", "status": "WD" },
-  { "gecko": "", "webkit": "", "presto": "", "trident": "-ms-grid-row-align", "status": "WD" },
-  { "gecko": "", "webkit": "", "presto": "", "trident": "-ms-grid-row-span", "status": "WD" },
-  { "gecko": "", "webkit": "-webkit-grid-rows", "presto": "", "trident": "-ms-grid-rows", "status": "WD" },
-  { "gecko": "", "webkit": "-webkit-grid-start", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "", "trident": "-ms-high-contrast-adjust", "status": "" },
-  { "gecko": "", "webkit": "-webkit-highlight", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-hyphenate-character", "presto": "", "trident": "", "status": "WD" },
-  { "gecko": "", "webkit": "-webkit-hyphenate-limit-after", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-hyphenate-limit-before", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "", "trident": "-ms-hyphenate-limit-chars", "status": "" },
-  { "gecko": "", "webkit": "-webkit-hyphenate-limit-lines", "presto": "", "trident": "-ms-hyphenate-limit-lines", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "", "trident": "-ms-hyphenate-limit-zone", "status": "" },
-  { "gecko": "-moz-hyphens", "webkit": "-epub-hyphens", "presto": "", "trident": "-ms-hyphens", "status": "WD" },
-  { "gecko": "-moz-image-region", "webkit": "", "presto": "", "trident": "", "status": "P" },
-  { "gecko": "ime-mode", "webkit": "", "presto": "", "trident": "-ms-ime-mode", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "-wap-input-format", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "-wap-input-required", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "", "trident": "-ms-interpolation-mode", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "-xv-interpret-as", "trident": "", "status": "" },
-  { "gecko": "justify-content", "webkit": "-webkit-justify-content", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "", "trident": "-ms-layout-flow", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "", "trident": "-ms-layout-grid", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "", "trident": "-ms-layout-grid-char", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "", "trident": "-ms-layout-grid-line", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "", "trident": "-ms-layout-grid-mode", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "", "trident": "-ms-layout-grid-type", "status": "" },
-  { "gecko": "", "webkit": "-webkit-line-align", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-line-box-contain", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-line-break", "presto": "", "trident": "line-break", "status": "" },
-  { "gecko": "", "webkit": "-webkit-line-clamp", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-line-grid", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-line-snap", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "-o-link", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "-o-link-source", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-locale", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-logical-height", "presto": "", "trident": "", "status": "ED" },
-  { "gecko": "", "webkit": "-webkit-logical-width", "presto": "", "trident": "", "status": "ED" },
-  { "gecko": "", "webkit": "-webkit-margin-after", "presto": "", "trident": "", "status": "ED" },
-  { "gecko": "", "webkit": "-webkit-margin-after-collapse", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-margin-before", "presto": "", "trident": "", "status": "ED" },
-  { "gecko": "", "webkit": "-webkit-margin-before-collapse", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-margin-bottom-collapse", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-margin-collapse", "presto": "", "trident": "", "status": "" },
-  { "gecko": "-moz-margin-end", "webkit": "-webkit-margin-end", "presto": "", "trident": "", "status": "ED" },
-  { "gecko": "-moz-margin-start", "webkit": "-webkit-margin-start", "presto": "", "trident": "", "status": "ED" },
-  { "gecko": "", "webkit": "-webkit-margin-top-collapse", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-marquee", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "-wap-marquee-dir", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-marquee-direction", "presto": "", "trident": "", "status": "WD" },
-  { "gecko": "", "webkit": "-webkit-marquee-increment", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "-wap-marquee-loop", "trident": "", "status": "WD" },
-  { "gecko": "", "webkit": "-webkit-marquee-repetition", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-marquee-speed", "presto": "-wap-marquee-speed", "trident": "", "status": "WD" },
-  { "gecko": "", "webkit": "-webkit-marquee-style", "presto": "-wap-marquee-style", "trident": "", "status": "WD" },
-  { "gecko": "mask", "webkit": "-webkit-mask", "presto": "mask", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-mask-box-image", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-mask-box-image-outset", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-mask-box-image-repeat", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-mask-box-image-slice", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-mask-box-image-source", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-mask-box-image-width", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-mask-clip", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-mask-composite", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-mask-image", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-mask-origin", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-mask-position", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-mask-position-x", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-mask-position-y", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-mask-repeat", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-mask-repeat-x", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-mask-repeat-y", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-mask-size", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-max-logical-height", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-max-logical-width", "presto": "", "trident": "", "status": "ED" },
-  { "gecko": "", "webkit": "-webkit-min-logical-height", "presto": "", "trident": "", "status": "ED" },
-  { "gecko": "", "webkit": "-webkit-min-logical-width", "presto": "", "trident": "", "status": "ED" },
-  { "gecko": "", "webkit": "", "presto": "-o-mini-fold", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-nbsp-mode", "presto": "", "trident": "", "status": "P" },
-  { "gecko": "", "webkit": "", "presto": "-o-object-fit", "trident": "", "status": "ED" },
-  { "gecko": "", "webkit": "", "presto": "-o-object-position", "trident": "", "status": "ED" },
-  { "gecko": "opacity", "webkit": "-webkit-opacity", "presto": "opacity", "trident": "opacity", "status": "WD" },
-  { "gecko": "order", "webkit": "-webkit-order", "presto": "", "trident": "", "status": "" },
-  { "gecko": "-moz-orient", "webkit": "", "presto": "", "trident": "", "status": "" },
-  { "gecko": "-moz-outline-radius", "webkit": "", "presto": "", "trident": "", "status": "P" },
-  { "gecko": "-moz-outline-radius-bottomleft", "webkit": "", "presto": "", "trident": "", "status": "P" },
-  { "gecko": "-moz-outline-radius-bottomright", "webkit": "", "presto": "", "trident": "", "status": "P" },
-  { "gecko": "-moz-outline-radius-topleft", "webkit": "", "presto": "", "trident": "", "status": "P" },
-  { "gecko": "-moz-outline-radius-topright", "webkit": "", "presto": "", "trident": "", "status": "P" },
-  { "gecko": "", "webkit": "-webkit-overflow-scrolling", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "", "trident": "-ms-overflow-style", "status": "CR" },
-  { "gecko": "overflow-x", "webkit": "overflow-x", "presto": "overflow-x", "trident": "-ms-overflow-x", "status": "WD" },
-  { "gecko": "overflow-y", "webkit": "overflow-y", "presto": "overflow-y", "trident": "-ms-overflow-y", "status": "WD" },
-  { "gecko": "", "webkit": "-webkit-padding-after", "presto": "", "trident": "", "status": "ED" },
-  { "gecko": "", "webkit": "-webkit-padding-before", "presto": "", "trident": "", "status": "ED" },
-  { "gecko": "-moz-padding-end", "webkit": "-webkit-padding-end", "presto": "", "trident": "", "status": "ED" },
-  { "gecko": "-moz-padding-start", "webkit": "-webkit-padding-start", "presto": "", "trident": "", "status": "ED" },
-  { "gecko": "perspective", "webkit": "-webkit-perspective", "presto": "", "trident": "perspective", "status": "WD" },
-  { "gecko": "perspective-origin", "webkit": "-webkit-perspective-origin", "presto": "", "trident": "perspective-origin", "status": "WD" },
-  { "gecko": "", "webkit": "-webkit-perspective-origin-x", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-perspective-origin-y", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "-xv-phonemes", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-print-color-adjust", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "", "trident": "-ms-progress-appearance", "status": "" },
-  { "gecko": "", "webkit": "-webkit-region-break-after", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-region-break-before", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-region-break-inside", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-region-overflow", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-rtl-ordering", "presto": "", "trident": "", "status": "P" },
-  { "gecko": "", "webkit": "-webkit-ruby-position", "presto": "", "trident": "ruby-position", "status": "CR" },
-  { "gecko": "-moz-script-level", "webkit": "", "presto": "", "trident": "", "status": "" },
-  { "gecko": "-moz-script-min-size", "webkit": "", "presto": "", "trident": "", "status": "" },
-  { "gecko": "-moz-script-size-multiplier", "webkit": "", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "", "trident": "-ms-scroll-chaining", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "", "trident": "-ms-scroll-limit", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "", "trident": "-ms-scroll-limit-x-max", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "", "trident": "-ms-scroll-limit-x-min", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "", "trident": "-ms-scroll-limit-y-max", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "", "trident": "-ms-scroll-limit-y-min", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "", "trident": "-ms-scroll-rails", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "", "trident": "-ms-scroll-snap-points-x", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "", "trident": "-ms-scroll-snap-points-y", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "", "trident": "-ms-scroll-snap-type", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "", "trident": "-ms-scroll-snap-x", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "", "trident": "-ms-scroll-snap-y", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "", "trident": "-ms-scroll-translation", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "scrollbar-arrow-color", "trident": "-ms-scrollbar-arrow-color", "status": "P" },
-  { "gecko": "", "webkit": "", "presto": "scrollbar-base-color", "trident": "-ms-scrollbar-base-color", "status": "P" },
-  { "gecko": "", "webkit": "", "presto": "scrollbar-darkshadow-color", "trident": "-ms-scrollbar-darkshadow-color", "status": "P" },
-  { "gecko": "", "webkit": "", "presto": "scrollbar-face-color", "trident": "-ms-scrollbar-face-color", "status": "P" },
-  { "gecko": "", "webkit": "", "presto": "scrollbar-highlight-color", "trident": "-ms-scrollbar-highlight-color", "status": "P" },
-  { "gecko": "", "webkit": "", "presto": "scrollbar-shadow-color", "trident": "-ms-scrollbar-shadow-color", "status": "P" },
-  { "gecko": "", "webkit": "", "presto": "scrollbar-track-color", "trident": "-ms-scrollbar-track-color", "status": "P" },
-  { "gecko": "", "webkit": "-webkit-shape-inside", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-shape-margin", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-shape-outside", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-shape-padding", "presto": "", "trident": "", "status": "" },
-  { "gecko": "-moz-stack-sizing", "webkit": "", "presto": "", "trident": "", "status": "P" },
-  { "gecko": "", "webkit": "-webkit-svg-shadow", "presto": "", "trident": "", "status": "" },
-  { "gecko": "-moz-tab-size", "webkit": "tab-size", "presto": "-o-tab-size", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "-o-table-baseline", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-tap-highlight-color", "presto": "", "trident": "", "status": "P" },
-  { "gecko": "-moz-text-align-last", "webkit": "-webkit-text-align-last", "presto": "", "trident": "-ms-text-align-last", "status": "WD" },
-  { "gecko": "", "webkit": "", "presto": "", "trident": "-ms-text-autospace", "status": "WD" },
-  { "gecko": "-moz-text-blink", "webkit": "", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-epub-text-combine", "presto": "", "trident": "", "status": "" },
-  { "gecko": "-moz-text-decoration-color", "webkit": "", "presto": "", "trident": "", "status": "" },
-  { "gecko": "-moz-text-decoration-line", "webkit": "-webkit-text-decoration-line", "presto": "", "trident": "", "status": "" },
-  { "gecko": "-moz-text-decoration-style", "webkit": "-webkit-text-decoration-style", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-text-decorations-in-effect", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-epub-text-emphasis", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-epub-text-emphasis-color", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-text-emphasis-position", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-epub-text-emphasis-style", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-text-fill-color", "presto": "", "trident": "", "status": "P" },
-  { "gecko": "", "webkit": "", "presto": "", "trident": "-ms-text-justify", "status": "WD" },
-  { "gecko": "", "webkit": "", "presto": "", "trident": "-ms-text-kashida-space", "status": "P" },
-  { "gecko": "", "webkit": "-epub-text-orientation", "presto": "", "trident": "", "status": "" },
-  { "gecko": "text-overflow", "webkit": "text-overflow", "presto": "text-overflow", "trident": "-ms-text-overflow", "status": "WD" },
-  { "gecko": "", "webkit": "-webkit-text-security", "presto": "", "trident": "", "status": "P" },
-  { "gecko": "-moz-text-size-adjust", "webkit": "-webkit-text-size-adjust", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-text-stroke", "presto": "", "trident": "", "status": "P" },
-  { "gecko": "", "webkit": "-webkit-text-stroke-color", "presto": "", "trident": "", "status": "P" },
-  { "gecko": "", "webkit": "-webkit-text-stroke-width", "presto": "", "trident": "", "status": "P" },
-  { "gecko": "text-transform", "webkit": "-epub-text-transform", "presto": "text-transform", "trident": "text-transform", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "", "trident": "-ms-text-underline-position", "status": "P" },
-  { "gecko": "", "webkit": "", "presto": "", "trident": "-ms-touch-action", "status": "" },
-  { "gecko": "", "webkit": "-webkit-touch-callout", "presto": "", "trident": "", "status": "P" },
-  { "gecko": "-moz-transform", "webkit": "-webkit-transform", "presto": "-o-transform", "trident": "transform", "status": "WD" },
-  { "gecko": "transform-origin", "webkit": "-webkit-transform-origin", "presto": "-o-transform-origin", "trident": "transform-origin", "status": "WD" },
-  { "gecko": "", "webkit": "-webkit-transform-origin-x", "presto": "", "trident": "", "status": "P" },
-  { "gecko": "", "webkit": "-webkit-transform-origin-y", "presto": "", "trident": "", "status": "P" },
-  { "gecko": "", "webkit": "-webkit-transform-origin-z", "presto": "", "trident": "", "status": "P" },
-  { "gecko": "transform-style", "webkit": "-webkit-transform-style", "presto": "", "trident": "transform-style", "status": "WD" },
-  { "gecko": "transition", "webkit": "-webkit-transition", "presto": "-o-transition", "trident": "transition", "status": "WD" },
-  { "gecko": "transition-delay", "webkit": "-webkit-transition-delay", "presto": "-o-transition-delay", "trident": "transition-delay", "status": "WD" },
-  { "gecko": "transition-duration", "webkit": "-webkit-transition-duration", "presto": "-o-transition-duration", "trident": "transition-duration", "status": "WD" },
-  { "gecko": "transition-property", "webkit": "-webkit-transition-property", "presto": "-o-transition-property", "trident": "transition-property", "status": "WD" },
-  { "gecko": "transition-timing-function", "webkit": "-webkit-transition-timing-function", "presto": "-o-transition-timing-function", "trident": "transition-timing-function", "status": "WD" },
-  { "gecko": "", "webkit": "-webkit-user-drag", "presto": "", "trident": "", "status": "P" },
-  { "gecko": "-moz-user-focus", "webkit": "", "presto": "", "trident": "", "status": "P" },
-  { "gecko": "-moz-user-input", "webkit": "", "presto": "", "trident": "", "status": "P" },
-  { "gecko": "-moz-user-modify", "webkit": "-webkit-user-modify", "presto": "", "trident": "", "status": "P" },
-  { "gecko": "-moz-user-select", "webkit": "-webkit-user-select", "presto": "", "trident": "-ms-user-select", "status": "P" },
-  { "gecko": "", "webkit": "", "presto": "-xv-voice-balance", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "-xv-voice-duration", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "-xv-voice-pitch", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "-xv-voice-pitch-range", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "-xv-voice-rate", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "-xv-voice-stress", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "-xv-voice-volume", "trident": "", "status": "" },
-  { "gecko": "-moz-window-shadow", "webkit": "", "presto": "", "trident": "", "status": "P" },
-  { "gecko": "word-break", "webkit": "-epub-word-break", "presto": "", "trident": "-ms-word-break", "status": "WD" },
-  { "gecko": "word-wrap", "webkit": "word-wrap", "presto": "word-wrap", "trident": "-ms-word-wrap", "status": "WD" },
-  { "gecko": "", "webkit": "-webkit-wrap", "presto": "", "trident": "", "status": "" },
-  { "gecko": "", "webkit": "-webkit-wrap-flow", "presto": "", "trident": "-ms-wrap-flow", "status": "" },
-  { "gecko": "", "webkit": "", "presto": "", "trident": "-ms-wrap-margin", "status": "" },
-  { "gecko": "", "webkit": "-webkit-wrap-through", "presto": "", "trident": "-ms-wrap-through", "status": "" },
-  { "gecko": "", "webkit": "-epub-writing-mode", "presto": "writing-mode", "trident": "-ms-writing-mode", "status": "ED" },
-  { "gecko": "", "webkit": "zoom", "presto": "", "trident": "-ms-zoom", "status": "" }]
-};
-
 const kCSS_PREFIXED_VALUE = [
   {"gecko": "-moz-box", "webkit": "-moz-box", "presto": "", "trident": "", "generic": "box"}
 ];
@@ -444,33 +113,44 @@ var CssInspector = {
   prefixesForProperty: function(aProperty)
   {
     if (!this.mVENDOR_PREFIXES) {
+      var useBlink = true;
       var useGecko = true;
+      var useServo = true;
+      var useVivliostyle = true;
+      var useWeasyprint = true;
       var useWebkit = true;
-      var usePresto = true;
-      var useTrident = true;
       try {
         var prefs = Components.classes["@mozilla.org/preferences-service;1"]
                        .getService(Components.interfaces.nsIPrefBranch);
       
+        useBlink   = prefs.getBoolPref("bluegriffon.css.support.blink");
         useGecko   = prefs.getBoolPref("bluegriffon.css.support.gecko");
+        useServo   = prefs.getBoolPref("bluegriffon.css.support.servo");
+        useVivliostyle  = prefs.getBoolPref("bluegriffon.css.support.vivliostyle");
+        useWeasyprint   = prefs.getBoolPref("bluegriffon.css.support.weasyprint");
         useWebkit  = prefs.getBoolPref("bluegriffon.css.support.webkit");
-        usePresto  = prefs.getBoolPref("bluegriffon.css.support.presto");
-        useTrident = prefs.getBoolPref("bluegriffon.css.support.trident");
       }
       catch(e) {}
 
       this.mVENDOR_PREFIXES = {};
-      for (var i = 0; i < kCSS_VENDOR_PREFIXES.properties.length; i++) {
-        var p = kCSS_VENDOR_PREFIXES.properties[i];
-        if (p.gecko && (p.webkit || p.presto || p.trident)) {
+      for (var i in kCSS_PROPERTIES.properties) {
+        var p = kCSS_PROPERTIES.properties[i];
+        if (p.gecko || p.blink || p.servo || p.vivliostyle || p.weasyprint || p.webkit) {
           var o = {};
-          if (useGecko) o[p.gecko] = true;
-          if (useWebkit && p.webkit)  o[p.webkit] = true;
-          if (usePresto && p.presto)  o[p.presto] = true;
-          if (useTrident && p.trident) o[p.trident] = true;
+          if (!p.gecko)
+            p.gecko = i;
+          o.generic = i;
+          if (useGecko)                        o.gecko = p.gecko
+          if (useBlink && p.blink)             o.blink = p.blink
+          if (useServo && p.servo)             o.servo = p.servo
+          if (useWebkit && p.webkit)           o.webkit = p.webkit
+          if (useVivliostyle && p.vivliostyle) o.vivliostyle = p.vivliostyle;
+          if (useWeasyprint && p.weasyprint)   o.weasyprint = p.weasyprint;
+
           this.mVENDOR_PREFIXES[p.gecko] = [];
           for (var j in o)
-            this.mVENDOR_PREFIXES[p.gecko].push(j)
+            if (this.mVENDOR_PREFIXES[p.gecko].indexOf(o[j]) == -1)
+              this.mVENDOR_PREFIXES[p.gecko].push(o[j]);
         }
       }
     }
@@ -523,7 +203,7 @@ var CssInspector = {
                    createInstance(Components.interfaces.nsIFileOutputStream);
     
     // use 0x02 | 0x10 to open file for appending.
-    foStream.init(localFile, 0x02 | 0x08 | 0x20, 0666, 0); 
+    foStream.init(localFile, 0x02 | 0x08 | 0x20, 0x1b6, 0);
     // write, create, truncate
     // In a c file operation, we have no need to set file mode with or operation,
     // directly using "r" or "w" usually.
@@ -1544,7 +1224,11 @@ CSSScanner.prototype = {
   },
 
   startsWithIdent: function(aFirstChar, aSecondChar) {
-    var code = aFirstChar.charCodeAt(0);
+    if (aFirstChar == "-" && aSecondChar == "-" &&
+       this.mPos+1 < this.mString.length &&
+       this.isIdentStart(this.mString.charAt(this.mPos+1)))
+      return true;
+
     return this.isIdentStart(aFirstChar) ||
            (aFirstChar == "-" && this.isIdentStart(aSecondChar));
   },
@@ -2625,6 +2309,7 @@ CSSParser.prototype = {
             if (token.isSymbol(")")) {
               var value = new jscsspVariable(kJscsspVARIABLE_VALUE, aSheet);
               valueText += "var(" + name + ")";
+              value.value = "var(" + name + ")";
               value.name = name;
               values.push(value);
             }
@@ -2856,7 +2541,7 @@ CSSParser.prototype = {
         values.push(token.value);
 
         else if (token.isFunction("url(")) {
-        var token = this.getToken(true, true);
+        token = this.getToken(true, true);
         var urlContent = this.parseURL(token);
         if (urlContent)
           values.push("url(" + urlContent);
@@ -3428,7 +3113,7 @@ CSSParser.prototype = {
                        || token.isDimension()
                        || token.isPercentage())) {
             fSize = token.value;
-            var token = this.getToken(false, false);
+            token = this.getToken(false, false);
             if (token.isSymbol("/")) {
               token = this.getToken(false, false);
               if (!fLineHeight &&
@@ -4960,22 +4645,24 @@ jscsspDeclaration.prototype = {
   kUNMODIFIED_COMMA_SEPARATED_PROPERTIES: {
     "text-shadow": true,
     "box-shadow": true,
-    "-moz-transition": true,
-    "-moz-transition-property": true,
-    "-moz-transition-duration": true,
-    "-moz-transition-timing-function": true,
-    "-moz-transition-delay": true,
+    "transition": true,
+    "transition-property": true,
+    "transition-duration": true,
+    "transition-timing-function": true,
+    "transition-delay": true,
     "src": true,
     "-moz-font-feature-settings": true
   },
 
   cssText: function() {
-    var prefixes = CssInspector.prefixesForProperty(this.property);
+    var prefixes = this.property.startsWith("--")
+                   ? [ this.property ]
+                   : CssInspector.prefixesForProperty(this.property);
 
     var rv = "";
     if (this.property in this.kUNMODIFIED_COMMA_SEPARATED_PROPERTIES) {
       if (prefixes) {
-        rv = "";
+        rv = "\n";
         for (var propertyIndex = 0; propertyIndex < prefixes.length; propertyIndex++) {
           var property = prefixes[propertyIndex];
           rv += (propertyIndex ? gTABS : "") + property + ": ";
@@ -4989,10 +4676,10 @@ jscsspDeclaration.prototype = {
     }
 
     if (prefixes) {
-      rv = "";
+      rv = "\n";
       for (var propertyIndex = 0; propertyIndex < prefixes.length; propertyIndex++) {
         var property = prefixes[propertyIndex];
-        rv += (propertyIndex ? gTABS : "") + property + ": ";
+        rv += gTABS + property + ": ";
         var separator = (property in this.kCOMMA_SEPARATED) ? ", " : " ";
         for (var i = 0; i < this.values.length; i++)
           if (this.values[i].cssText() != null)
@@ -5035,7 +4722,7 @@ jscsspDeclaration.prototype = {
             if (paren != -1)
               kwd = v.substr(0, paren);
             if (kwd in kCSS_VENDOR_VALUES) {
-              functor = kCSS_VENDOR_VALUES[kwd][j];
+              var functor = kCSS_VENDOR_VALUES[kwd][j];
               if (functor) {
                 v = (typeof functor == "string") ? functor : functor(v, j);
                 if (!v) {
@@ -5289,10 +4976,10 @@ jscsspStyleRule.prototype = {
     for (var i = 0; i < this.declarations.length; i++) {
       var declText = this.declarations[i].cssText();
       if (declText)
-        rv += gTABS + this.declarations[i].cssText() ;
+        rv += declText;
     }
     gTABS = preservedGTABS;
-    return rv + gTABS + "\n}";
+    return rv + "\n" + gTABS + "}";
   },
 
   setCssText: function(val) {
@@ -5427,10 +5114,7 @@ function jscsspVariable(aType, aSheet)
 
 jscsspVariable.prototype = {
   cssText: function() {
-    if (this.type == kJscsspVARIABLE_VALUE)
-      return this.resolveVariable(this.name, this.parentRule, this.parentStyleSheet);
-    else
-      return this.value;
+    return this.value;
   },
 
   setCssText: function(val) {

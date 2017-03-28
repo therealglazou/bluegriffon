@@ -1,0 +1,198 @@
+<?xml version="1.0"?>
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+
+<!DOCTYPE page [
+  <!ENTITY % dtd1 SYSTEM "chrome://inspector/locale/inspector.dtd"> %dtd1;
+  <!ENTITY % dtd2 SYSTEM "chrome://inspector/locale/viewers/dom.dtd"> %dtd2;
+]>
+
+<?xul-overlay href="chrome://inspector/content/editingOverlay.xul"?>
+
+<?xml-stylesheet href="chrome://inspector/skin/viewers/dom/dom.css"?>
+
+<page id="winDOMViewer"
+      orient="vertical"
+      xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/javascript"
+          src="chrome://inspector/content/utils.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/hooks.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/jsutil/xpcom/XPCU.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/jsutil/system/PrefUtils.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/jsutil/events/ObserverManager.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/jsutil/commands/baseCommands.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/viewers/dom/dom.js"/>
+
+  <!-- ============================ COMMANDS ============================= -->
+
+  <commandset id="cmdsEditing"/>
+  <commandset id="cmdsEditingExtras"/>
+
+  <commandset>
+    <command id="cmdInspectBrowser"
+             oncommand="viewer.cmdInspectBrowser()"/>
+
+    <command id="cmdCopyXML"
+             oncommand="viewer.cmdCopySelectedXML()"/>
+
+    <command id="cmdBlink"
+             oncommand="viewer.cmdBlink()"/>
+
+    <command id="cmdShowPseudoClasses"
+             oncommand="viewer.cmdShowPseudoClasses()"/>
+
+    <command id="cmdEditPasteBefore"
+             oncommand="viewer.pane.panelset.execCommand('cmdEditPasteBefore');"/>
+    <command id="cmdEditPasteReplace"
+             oncommand="viewer.pane.panelset.execCommand('cmdEditPasteReplace');"/>
+    <command id="cmdEditPasteFirstChild"
+             oncommand="viewer.pane.panelset.execCommand('cmdEditPasteFirstChild');"/>
+    <command id="cmdEditPasteLastChild"
+             oncommand="viewer.pane.panelset.execCommand('cmdEditPasteLastChild');"/>
+    <command id="cmdEditPasteAsParent"
+             oncommand="viewer.pane.panelset.execCommand('cmdEditPasteAsParent');"/>
+
+    <command id="cmdEditInsertAfter"
+             oncommand="viewer.pane.panelset.execCommand('cmdEditInsertAfter');"/>
+    <command id="cmdEditInsertBefore"
+             oncommand="viewer.pane.panelset.execCommand('cmdEditInsertBefore');"/>
+    <command id="cmdEditInsertFirstChild"
+             oncommand="viewer.pane.panelset.execCommand('cmdEditInsertFirstChild');"/>
+    <command id="cmdEditInsertLastChild"
+             oncommand="viewer.pane.panelset.execCommand('cmdEditInsertLastChild');"/>
+
+  </commandset>
+
+  <!--============================= POPUPS ============================== -->
+
+  <popupset id="psPopups">
+    <menupopup id="ppDOMContext"
+               onpopupshowing="viewer.onPopupShowing(event.target)">
+      <menuitem id="mnEditInspectInNewWindow"/>
+      <menuitem id="mnInspectBrowser"
+                label="&cmdInspectBrowser.label;"
+                accesskey="&cmdInspectBrowser.accesskey;"
+                checkvalid="true"
+                command="cmdInspectBrowser"/>
+      <menuseparator/>
+      <menuitem id="mnEditCut"/>
+      <menuitem id="mnEditCopy"/>
+      <menu id="mnEditPasteMenu"
+            label="&mnEditPasteMenu.label;"
+            accesskey="&mnEditPasteMenu.accesskey;">
+        <menupopup>
+          <!-- keep older functionality of paste command for paste menu in DOM
+               Nodes viewer -->
+          <menuitem id="mnEditPasteAfter"
+                    label="&mnEditPasteAfter.label;"
+                    accesskey="&mnEditPasteAfter.accesskey;"
+                    command="cmdEditPaste"
+                    key="keyEditPaste"/>
+          <!-- other paste commands -->
+          <menuitem id="mnEditPasteBefore"
+                    label="&mnEditPasteBefore.label;"
+                    accesskey="&mnEditPasteBefore.accesskey;"
+                    command="cmdEditPasteBefore"/>
+          <menuitem id="mnEditPasteReplace"
+                    label="&mnEditPasteReplace.label;"
+                    accesskey="&mnEditPasteReplace.accesskey;"
+                    command="cmdEditPasteReplace"/>
+          <menuitem id="mnEditPasteFirstChild"
+                    label="&mnEditPasteFirstChild.label;"
+                    accesskey="&mnEditPasteFirstChild.accesskey;"
+                    command="cmdEditPasteFirstChild"/>
+          <menuitem id="mnEditPasteLastChild"
+                    label="&mnEditPasteLastChild.label;"
+                    accesskey="&mnEditPasteLastChild.accesskey;"
+                    command="cmdEditPasteLastChild"/>
+          <menuitem id="mnEditPasteAsParent"
+                    label="&mnEditPasteAsParent.label;"
+                    accesskey="&mnEditPasteAsParent.accesskey;"
+                    command="cmdEditPasteAsParent"/>
+        </menupopup>
+      </menu>
+      <menuseparator/>
+      <menu id="mnEditInsertMenu"
+            label="&mnEditInsertMenu.label;"
+            accesskey="&mnEditInsertMenu.accesskey;">
+        <menupopup>
+          <menuitem id="mnEditInsertAfter"
+                    label="&mnEditInsertAfter.label;"
+                    accesskey="&mnEditInsertAfter.accesskey;"
+                    command="cmdEditInsertAfter"/>
+          <menuitem id="mnEditInsertBefore"
+                    label="&mnEditInsertBefore.label;"
+                    accesskey="&mnEditInsertBefore.accesskey;"
+                    command="cmdEditInsertBefore"/>
+          <menuitem id="mnEditInsertFirstChild"
+                    label="&mnEditInsertFirstChild.label;"
+                    accesskey="&mnEditInsertFirstChild.accesskey;"
+                    command="cmdEditInsertFirstChild"/>
+          <menuitem id="mnEditInsertLastChild"
+                    label="&mnEditInsertLastChild.label;"
+                    accesskey="&mnEditInsertLastChild.accesskey;"
+                    command="cmdEditInsertLastChild"/>
+        </menupopup>
+      </menu>
+      <menuitem id="mnEditDelete"/>
+      <menuseparator/>
+      <menuitem id="mnCopyXML"
+                label="&cmdCopyXML.label;"
+                accesskey="&cmdCopyXML.accesskey;"
+                command="cmdCopyXML"/>
+      <menuseparator/>
+      <menuitem id="mnBlink"
+                label="&cmdBlink.label;"
+                accesskey="&cmdBlink.accesskey;"
+                checkvalid="true"
+                command="cmdBlink"/>
+      <menuitem id="mnShowPseudoClasses"
+                label="&cmdShowPseudoClasses.label;"
+                accesskey="&cmdShowPseudoClasses.accesskey;"
+                command="cmdShowPseudoClasses"/>
+    </menupopup>
+  </popupset>
+
+  <tree id="trDOMTree" class="plain" treelines="true" flex="1"
+        enableColumnDrag="true"
+        contextmenu="ppDOMContext"
+        onselect="viewer.onTreeSelectionChange(event);">
+    <treecols>
+      <!-- These labels don't need to be localized since they are defined by
+           DOM APIs -->
+      <treecol id="colNodeName" label="nodeName" primary="true"
+               persist="width,hidden,ordinal" flex="3"/>
+      <splitter class="tree-splitter"/>
+      <treecol id="colLocalName" label="localName" hidden="true"
+               persist="width,hidden,ordinal" flex="1"/>
+      <splitter class="tree-splitter"/>
+      <treecol id="colPrefix" label="prefix" hidden="true"
+               persist="width,hidden,ordinal" flex="1"/>
+      <splitter class="tree-splitter"/>
+      <treecol id="colNamespaceURI" label="namespaceURI" hidden="true"
+               persist="width,hidden,ordinal" flex="1"/>
+      <splitter class="tree-splitter"/>
+      <treecol id="colNodeType" label="nodeType" hidden="true"
+               persist="width,hidden,ordinal" flex="1"/>
+      <splitter class="tree-splitter"/>
+      <treecol id="colNodeValue" label="nodeValue" hidden="true"
+               persist="width,hidden,ordinal" flex="1"/>
+      <splitter class="tree-splitter"/>
+      <treecol id="col@id" label="id" persist="width,hidden,ordinal"
+               flex="1"/>
+      <splitter class="tree-splitter"/>
+      <treecol id="col@class" label="class" persist="width,hidden,ordinal"
+               flex="1"/>
+    </treecols>
+    <treechildren id="trDOMTreeBody"/>
+  </tree>
+</page>

@@ -1,10 +1,10 @@
 <!-- This Source Code Form is subject to the terms of the Mozilla Public
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
-
 <!ENTITY addons.windowTitle                   "Hantera tillägg">
 
 <!ENTITY search.placeholder                   "Sök bland alla tillägg">
+<!ENTITY search.buttonlabel                   "Sök">
 <!-- LOCALIZATION NOTE (search.commandKey):
      The search command key should match findOnCmd.commandkey from browser.dtd -->
 <!ENTITY search.commandkey                    "f">
@@ -20,8 +20,16 @@
 <!ENTITY installAddonFromFile.accesskey       "I">
 <!ENTITY toolsMenu.tooltip                    "Verktyg för alla tillägg">
 
+<!ENTITY getThemes.description                "Funderar du på att anpassa din webbläsare?">
+<!ENTITY getThemes.learnMore                  "Välj bland tusentals teman.">
+
 <!ENTITY cmd.back.tooltip                     "Gå bakåt en sida">
 <!ENTITY cmd.forward.tooltip                  "Gå framåt en sida">
+
+<!ENTITY showUnsignedExtensions.button.label  "Vissa utökningar kunde inte verifieras">
+<!ENTITY showAllExtensions.button.label       "Visa alla utökningar">
+<!ENTITY debugAddons.label                    "Felsök tillägg">
+<!ENTITY debugAddons.accesskey                "s">
 
 <!-- global warnings -->
 <!ENTITY warning.safemode.label                    "Alla tillägg är inaktiverade i felsäkert läge.">
@@ -31,10 +39,6 @@
 <!ENTITY warning.updatesecurity.label              "Säkerhetskontroll av tilläggsuppdateringar är inaktiverat. Du är sårbar för skadliga uppdateringar.">
 <!ENTITY warning.updatesecurity.enable.label       "Aktivera">
 <!ENTITY warning.updatesecurity.enable.tooltip     "Aktiverar säkerhetskontroll av tilläggsuppdateringar">
-
-<!-- global informations -->
-<!ENTITY info.plugincheck.label                 "Kontrollera om dina instickmoduler är uppdaterade">
-<!ENTITY info.plugincheck.tooltip               "Kontrollera om dina instickmoduler är uppdaterade">
 
 <!-- categories / views -->
 <!ENTITY view.search.label                    "Sök">
@@ -91,6 +95,13 @@
 <!ENTITY cmd.enableTheme.accesskey            "ä">
 <!ENTITY cmd.disableTheme.label               "Sluta använd tema">
 <!ENTITY cmd.disableTheme.accesskey           "ä">
+<!ENTITY cmd.askToActivate.label              "Fråga efter aktivering">
+<!ENTITY cmd.askToActivate.tooltip            "Fråga varje gång efter aktivering">
+<!ENTITY cmd.alwaysActivate.label             "Aktivera alltid">
+<!ENTITY cmd.alwaysActivate.tooltip           "Använd alltid det här tillägget">
+<!ENTITY cmd.neverActivate.label              "Aktivera aldrig">
+<!ENTITY cmd.neverActivate.tooltip            "Använd aldrig det här tillägget">
+<!ENTITY cmd.stateMenu.tooltip                "Välj när tillägget ska användas">
 <!ENTITY cmd.installAddon.label               "Installera">
 <!ENTITY cmd.installAddon.accesskey           "I">
 <!ENTITY cmd.uninstallAddon.label             "Ta bort">
@@ -112,10 +123,8 @@
 <!-- LOCALIZATION NOTE (discover.title,discover.description,discover.footer):
      Displayed in the center of the Get Add-ons view, see bug 601143 for mockups. -->
 <!ENTITY discover.title                       "Vad är tillägg?">
-<!ENTITY discover.description2                "Tillägg är program som gör att du kan anpassa &brandShortName; med
-  extra funktionalitet eller utseende. Prova ett tidsbesparande sidofält, en väderrapportör eller ett annat utseende till &brandShortName;.">
-<!ENTITY discover.footer                      "När du är ansluten till internet kommer den här panelen att visa
-  några av de bästa och mest populära tilläggen som du kan prova.">
+<!ENTITY discover.description2                "Tillägg är program som gör att du kan anpassa &brandShortName; med extra funktionalitet eller utseende. Prova ett tidsbesparande sidofält, en väderrapportör eller ett annat utseende till &brandShortName;.">
+<!ENTITY discover.footer                      "När du är ansluten till internet kommer den här panelen att visa några av de bästa och mest populära tilläggen som du kan testa.">
 
 <!-- detail view -->
 <!ENTITY detail.version.label                 "Version">
@@ -128,11 +137,11 @@
 
 <!ENTITY detail.updateType                    "Automatiska uppdateringar">
 <!ENTITY detail.updateDefault.label           "Standard">
-<!ENTITY detail.updateDefault.tooltip         "Installerar uppdateringar automatiskt endast om det är standard">
+<!ENTITY detail.updateDefault.tooltip         "Installera uppdateringar automatiskt endast om det är standard">
 <!ENTITY detail.updateAutomatic.label         "På">
 <!ENTITY detail.updateAutomatic.tooltip       "Installerar uppdateringar automatiskt">
 <!ENTITY detail.updateManual.label            "Av">
-<!ENTITY detail.updateManual.tooltip          "Installerar inte uppdateringar automatiskt">
+<!ENTITY detail.updateManual.tooltip          "Installera inte uppdateringar automatiskt">
 <!ENTITY detail.home                          "Webbplats">
 <!ENTITY detail.repository                    "Tilläggets profil">
 <!ENTITY detail.size                          "Storlek">
@@ -203,9 +212,40 @@
 
 <!ENTITY addon.createdBy.label                "Av ">
 
-<!ENTITY eula.title                       "Licensavtal för slutanvändare">
-<!ENTITY eula.width                       "560px">
-<!ENTITY eula.height                      "400px">
-<!ENTITY eula.accept                      "Acceptera och installera…">
+<!ENTITY eula.title                           "Licensavtal för slutanvändare">
+<!ENTITY eula.width                           "560px">
+<!ENTITY eula.height                          "400px">
+<!ENTITY eula.accept                          "Acceptera och installera…">
 
 <!ENTITY settings.path.button.label           "Bläddra…">
+
+<!-- LOCALIZATION NOTE (experiment.info.label): The strings related to
+     experiments are present on the "Experiments" tab of the add-ons manager.
+     This tab won't be displayed unless an Experiment add-on is installed.
+     Install https://people.mozilla.org/~gszorc/dummy-experiment-addon.xpi
+     to cause this tab to appear. -->
+<!ENTITY experiment.info.label "Vad är detta? Telemetri kan installera och köra experiment då och då.">
+<!ENTITY experiment.info.learnmore "Läs mer">
+<!ENTITY experiment.info.learnmore.accesskey "L">
+<!ENTITY experiment.info.changetelemetry "Telemetri-inställningar">
+<!ENTITY experiment.info.changetelemetry.accesskey "T">
+
+<!ENTITY setting.learnmore "Läs mer…">
+
+<!ENTITY disabledUnsigned.heading "Vissa tillägg har inaktiverats">
+<!-- LOCALIZATION NOTE (disabledUnsigned.description.start, disabledUnsigned.description.findAddonsLink, disabledUnsigned.description.end):
+     These entities form a sentence, with
+     disabledUnsigned.description.findAddonsLink being a link to an external site. -->
+<!ENTITY disabledUnsigned.description.start "Följande tillägg har inte verifierats för användning i &brandShortName;. Du kan ">
+<!ENTITY disabledUnsigned.description.findAddonsLink "hitta ersättare">
+<!ENTITY disabledUnsigned.description.end " eller fråga utvecklaren för att få dem verifierade.">
+<!ENTITY disabledUnsigned.learnMore "Läs mer om vår strävan för att hjälpa till att hålla dig säker på nätet.">
+<!-- LOCALIZATION NOTE (disabledUnsigned.devInfo.start, disabledUnsigned.devInfo.linkToManual, disabledUnsigned.devInfo.end):
+     These entities form a sentence, with disabledUnsigned.devInfo.linkToManual
+     being a link to an external site. -->
+<!ENTITY disabledUnsigned.devInfo.start "Utvecklare som är intresserade av att få sina tillägg verifierade kan fortsätta genom att läsa vår ">
+<!ENTITY disabledUnsigned.devInfo.linkToManual "handbok">
+<!ENTITY disabledUnsigned.devInfo.end ".">
+
+<!ENTITY pluginDeprecation.description "Saknar du något? Vissa insticksmoduler stöds inte längre av &brandShortName;.">
+<!ENTITY pluginDeprecation.learnMore "Läs mer.">

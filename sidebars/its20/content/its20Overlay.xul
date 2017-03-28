@@ -52,46 +52,26 @@
     <command id="cmd_its20"            oncommand="goDoCommand('cmd_its20')"/>
   </commandset>
 
-  <toolbarpalette id="ComposerToolbarPalette">
-    <toolbarbutton id="its20Button" class="toolbarbutton-1"
-                   label="&its20.label;" command="cmd_its20"
-                   tooltiptext="&its20.label;"/>
-  
-  </toolbarpalette>
-
   <menupopup id="panelsMenuPopup">
     <menuitem id="panel-its20-menuitem"
               panel="panel-its20"
               label="&its20.label;"
+              decked="true"
               windowType="BlueGriffon:its20"
               url="chrome://its20/content/its20.xul"
               type="checkbox"/>
   </menupopup>
 
-#ifdef XP_MACOSX
   <panelset id="panels">
     <panel id="panel-its20"
            floating="true"
            width="300"
            height="600"
+           decked="true"
            label="&its20.label;">
       <iframe type="chrome"
               flex="1"/>
     </panel>
   </panelset>
-#else
-#ifndef XP_UNIX
-  <panelset id="panels">
-    <panel id="panel-its20"
-           floating="true"
-           width="300"
-           height="600"
-           label="&its20.label;">
-      <iframe type="chrome"
-              flex="1"/>
-    </panel>
-  </panelset>
-#endif
-#endif
 </overlay>         
 

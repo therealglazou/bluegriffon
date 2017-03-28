@@ -1,0 +1,27 @@
+EXTRA_JS_MODULES += [
+  'bgQuit.jsm',
+  'colourPickerHelper.jsm',
+  'cssHelper.jsm',
+  'cssInspector.jsm',
+  'cssProperties.jsm',
+  'editorHelper.jsm',
+  'fileChanges.jsm',
+  'fileHelper.jsm',
+  'filePicker.jsm',
+  'fireFtp.jsm',
+  'handlersManager.jsm',
+  'l10nHelper.jsm',
+  'printHelper.jsm',
+  'projectManager.jsm',
+  'prompterHelper.jsm',
+  'urlHelper.jsm',
+]
+
+EXTRA_PP_JS_MODULES += [
+    'screens.jsm',
+]
+
+if CONFIG['MOZ_WIDGET_TOOLKIT'] in ('windows', 'gtk2', 'gtk3'):
+    EXTRA_JS_MODULES += [
+        'unicodeHelper.jsm',
+    ]

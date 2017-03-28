@@ -50,15 +50,34 @@
     </resources>
 
     <content>
+#ifndef XP_MACOSX
       <xul:hbox class="colorpicker-button-colorbox" anonid="colorbox" flex="1" xbl:inherits="disabled"/>
+#else
+      <html:input class="colorpicker-button-colorbox" 
+                  anonid="colorbox"
+                  type="color"
+                  oninput="this.parentNode.update(this.value)"/>
+#endif
     </content>
 
     <implementation>
       <constructor>
         try {
-          Components.utils.import("resource://app/modules/colourPickerHelper.jsm");
+          Components.utils.import("resource://gre/modules/colourPickerHelper.jsm");
         } catch (e) {}
+#ifdef XP_MACOSX
+        var colorpicker = this.getChild("colorbox");
+        if (this.hasAttribute("color")) colorpicker.setAttribute("value", this.getAttribute("color"));
+        if (this.hasAttribute("showTransparency")) colorpicker.setAttribute("showTransparency", this.getAttribute("showTransparency"));
+#endif
       </constructor>
+
+      <method name="getChild">
+        <parameter name="aChildName"/>
+        <body><![CDATA[
+          return document.getAnonymousElementByAttribute(this, "anonid", aChildName);
+        ]]></body>
+      </method>
 
       <property name="mColorBox"
                 readonly="true"
@@ -66,7 +85,19 @@
 
       <property name="color"
                 onget="return this.getAttribute('color');"
-                onset="this.setAttribute('color', val); this.mColorBox.style.backgroundColor = val;"/>
+#ifndef XP_MACOSX
+                onset="this.setAttribute('color', val); this.setAttribute('tooltiptext', val); this.mColorBox.style.backgroundColor = val;"/>
+#else
+                onset="this.getChild('colorbox').value = val; this.setAttribute('color', val); this.setAttribute('tooltiptext', val); this.mColorBox.style.backgroundColor = val;"/>
+#endif
+
+      <property name="disabled"
+                onget="return this.getAttribute('disabled');"
+#ifndef XP_MACOSX
+                onset="SetEnabledElement(this, !val)"/>
+#else
+                onset="SetEnabledElement(this.getChild('colorbox'), !val); SetEnabledElement(this, !val)"/>
+#endif
 
       <property name="shownColor"
                 onget="return this.mColorBox.style.backgroundColor;"/>
@@ -85,12 +116,30 @@
             this.color = currentColor;
             this.mColorBox.style.backgroundColor = currentColor;
             this.setAttribute("color", currentColor);
+            this.setAttribute("tooltiptext", currentColor);
           }
         ]]>
         </body>
       </method>
+
+#ifdef XP_MACOSX
+      <method name="update">
+        <parameter name="aValue"/>
+        <body>
+        <![CDATA[
+          this.color = aValue;
+          if (this.hasAttribute("oncommand")) {
+            var fn = new Function(this.getAttribute("oncommand"));
+            fn.call(this) == false;
+          }
+        ]]>
+        </body>
+      </method>
+#endif
+
     </implementation>
 
+#ifndef XP_MACOSX
     <handlers>
       <handler event="click" phase="capturing">
         <![CDATA[
@@ -106,7 +155,7 @@
         ]]>
       </handler>
     </handlers>
-
+#endif
   </binding>
 
 </bindings>

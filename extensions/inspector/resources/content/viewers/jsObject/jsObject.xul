@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+
+<?xul-overlay href="chrome://inspector/content/viewers/jsObject/jsObjectViewer.xul"?>
+
+<page id="winJSObject"
+      xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/javascript"
+          src="chrome://inspector/content/viewers/jsObject/jsObject.js"/>
+
+  <stringbundle id="inspector-bundle"/>
+  <commandset id="cmdsEditingExtras"/>
+  <commandset id="cmdsJSObjectViewer"/>
+
+  <popupset>
+    <menupopup id="popupContext"/>
+  </popupset>
+  <tree id="treeJSObject" treelines="true" class="plain"/>
+</page>

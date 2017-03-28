@@ -9,6 +9,8 @@ The Open Source next-generation Web Editor based on the rendering engine of Fire
 
   `hg clone http://hg.mozilla.org/mozilla-central bluegriffon-source`
 
+  Warning: on Windows, it's HIGHLY recommended to have both Windows and Visual Studio in the same locale, preferably en-US. If for instance you have a fr-FR Windows10 and a en-US VS, build will miserably fail...
+
 * get BlueGriffon's tree through:
 
   `cd bluegriffon-source`
@@ -25,7 +27,13 @@ The Open Source next-generation Web Editor based on the rendering engine of Fire
 
   `patch -p 1 < bluegriffon/config/content.patch`
 
-* create a `.mozconfig` file inside your `bluegriffon-source` directory.The  settings I am using on a daily basis on OS X (Yosemite) can be found in `bluegriffon/config/mozconfig.macosx`
+* create a `.mozconfig` file inside your `bluegriffon-source` directory. The  settings I am using on a daily basis on OS X (Sierra) can be found in `bluegriffon/config/mozconfig.macosx`
+
+## My own builds
+
+* OS X: OS X 10.12.1 with Xcode version 7.3 (7D175)
+* Windows: Windows 10 Pro with Visual Studio Community 2015
+* Linux: Ubuntu 16.04.1 LTS
 
 ## To build the master branch
 

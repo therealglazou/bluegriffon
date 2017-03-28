@@ -7,14 +7,6 @@
     <menuitem id="revertTabContextMenu"           label="&revert.label;" oncommand="RevertTab()" />
   </menupopup>
 
-  <menupopup id="main-toolbar-context-menu">
-    <menuitem oncommand="CustomizeToolbar('MainToolbox');" id="CustomizeMainToolbar" label="&customizeToolbar.label;" accesskey="&customizeToolbar.accesskey;"/>
-  </menupopup>
-
-  <menupopup id="format-toolbar-context-menu">
-    <menuitem oncommand="CustomizeToolbar('FormatToolbox');" id="CustomizeFormatToolbar" label="&customizeToolbar.label;" accesskey="&customizeToolbar.accesskey;"/>
-  </menupopup>
-
   <menupopup id="structureBarContextMenu"
          onpopupshowing="UpdateStructureBarContextMenu()">
     <menuitem label="&resetElementLanguage.label;"
@@ -68,79 +60,6 @@
                    onpopupshowing="onARIARoleChangeStructureBar('cmd_ariaRole')">
           <menuitem label="&noARIArole.label;" type="checkbox" value=""/>
           <menuseparator/>
-          <menuitem label="alert" value="alert" tooltiptext="&alertRole.label;" type="checkbox"/>
-          <menuitem label="alertdialog" value="alertdialog" tooltiptext="&alertdialogRole.label;" type="checkbox"/>
-          <menuitem label="application" value="application" tooltiptext="&applicationRole.label;" type="checkbox"/>
-          <menuitem label="article" value="article" tooltiptext="&articleRole.label;" type="checkbox"/>
-          <menuitem label="banner" value="banner" tooltiptext="&bannerRole.label;" type="checkbox"/>
-          <menuitem label="button" value="button" tooltiptext="&buttonRole.label;" type="checkbox"/>
-          <menuitem label="checkbox" value="checkbox" tooltiptext="&checkboxRole.label;" type="checkbox"/>
-          <menuitem label="columnheader" value="columnheader" tooltiptext="&columnheaderRole.label;" type="checkbox"/>
-          <menuitem label="combobox" value="combobox" tooltiptext="&comboboxRole.label;" type="checkbox"/>
-          <menuitem label="command" value="command" tooltiptext="&commandRole.label;" type="checkbox"/>
-          <menuitem label="complementary" value="complementary" tooltiptext="&complementaryRole.label;" type="checkbox"/>
-          <menuitem label="composite" value="composite" tooltiptext="&compositeRole.label;" type="checkbox"/>
-          <menuitem label="contentinfo" value="contentinfo" tooltiptext="&contentinfoRole.label;" type="checkbox"/>
-          <menuitem label="definition" value="definition" tooltiptext="&definitionRole.label;" type="checkbox"/>
-          <menuitem label="dialog" value="dialog" tooltiptext="&dialogRole.label;" type="checkbox"/>
-          <menuitem label="directory" value="directory" tooltiptext="&directoryRole.label;" type="checkbox"/>
-          <menuitem label="document" value="document" tooltiptext="&documentRole.label;" type="checkbox"/>
-          <menuitem label="form" value="form" tooltiptext="&formRole.label;" type="checkbox"/>
-          <menuitem label="grid" value="grid" tooltiptext="&gridRole.label;" type="checkbox"/>
-          <menuitem label="gridcell" value="gridcell" tooltiptext="&gridcellRole.label;" type="checkbox"/>
-          <menuitem label="group" value="group" tooltiptext="&groupRole.label;" type="checkbox"/>
-          <menuitem label="heading" value="heading" tooltiptext="&headingRole.label;" type="checkbox"/>
-          <menuitem label="img" value="img" tooltiptext="&imgRole.label;" type="checkbox"/>
-          <menuitem label="input" value="input" tooltiptext="&inputRole.label;" type="checkbox"/>
-          <menuitem label="landmark" value="landmark" tooltiptext="&landmarkRole.label;" type="checkbox"/>
-          <menuitem label="link" value="link" tooltiptext="&linkRole.label;" type="checkbox"/>
-          <menuitem label="list" value="list" tooltiptext="&listRole.label;" type="checkbox"/>
-          <menuitem label="listbox" value="listbox" tooltiptext="&listboxRole.label;" type="checkbox"/>
-          <menuitem label="listitem" value="listitem" tooltiptext="&listitemRole.label;" type="checkbox"/>
-          <menuitem label="log" value="log" tooltiptext="&logRole.label;" type="checkbox"/>
-          <menuitem label="main" value="main" tooltiptext="&mainRole.label;" type="checkbox"/>
-          <menuitem label="marquee" value="marquee" tooltiptext="&marqueeRole.label;" type="checkbox"/>
-          <menuitem label="math" value="math" tooltiptext="&mathRole.label;" type="checkbox"/>
-          <menuitem label="menu" value="menu" tooltiptext="&menuRole.label;" type="checkbox"/>
-          <menuitem label="menubar" value="menubar" tooltiptext="&menubarRole.label;" type="checkbox"/>
-          <menuitem label="menuitem" value="menuitem" tooltiptext="&menuitemRole.label;" type="checkbox"/>
-          <menuitem label="menuitemcheckbox" value="menuitemcheckbox" tooltiptext="&menuitemcheckboxRole.label;" type="checkbox"/>
-          <menuitem label="menuitemradio" value="menuitemradio" tooltiptext="&menuitemradioRole.label;" type="checkbox"/>
-          <menuitem label="navigation" value="navigation" tooltiptext="&navigationRole.label;" type="checkbox"/>
-          <menuitem label="note" value="note" tooltiptext="&noteRole.label;" type="checkbox"/>
-          <menuitem label="option" value="option" tooltiptext="&optionRole.label;" type="checkbox"/>
-          <menuitem label="presentation" value="presentation" tooltiptext="&presentationRole.label;" type="checkbox"/>
-          <menuitem label="progressbar" value="progressbar" tooltiptext="&progressbarRole.label;" type="checkbox"/>
-          <menuitem label="radio" value="radio" tooltiptext="&radioRole.label;" type="checkbox"/>
-          <menuitem label="radiogroup" value="radiogroup" tooltiptext="&radiogroupRole.label;" type="checkbox"/>
-          <menuitem label="range" value="range" tooltiptext="&rangeRole.label;" type="checkbox"/>
-          <menuitem label="region" value="region" tooltiptext="&regionRole.label;" type="checkbox"/>
-          <menuitem label="roletype" value="roletype" tooltiptext="&roletypeRole.label;" type="checkbox"/>
-          <menuitem label="row" value="row" tooltiptext="&rowRole.label;" type="checkbox"/>
-          <menuitem label="rowgroup" value="rowgroup" tooltiptext="&rowgroupRole.label;" type="checkbox"/>
-          <menuitem label="rowheader" value="rowheader" tooltiptext="&rowheaderRole.label;" type="checkbox"/>
-          <menuitem label="scrollbar" value="scrollbar" tooltiptext="&scrollbarRole.label;" type="checkbox"/>
-          <menuitem label="search" value="search" tooltiptext="&searchRole.label;" type="checkbox"/>
-          <menuitem label="section" value="section" tooltiptext="&sectionRole.label;" type="checkbox"/>
-          <menuitem label="sectionhead" value="sectionhead" tooltiptext="&sectionheadRole.label;" type="checkbox"/>
-          <menuitem label="select" value="select" tooltiptext="&selectRole.label;" type="checkbox"/>
-          <menuitem label="separator" value="separator" tooltiptext="&separatorRole.label;" type="checkbox"/>
-          <menuitem label="slider" value="slider" tooltiptext="&sliderRole.label;" type="checkbox"/>
-          <menuitem label="spinbutton" value="spinbutton" tooltiptext="&spinbuttonRole.label;" type="checkbox"/>
-          <menuitem label="status" value="status" tooltiptext="&statusRole.label;" type="checkbox"/>
-          <menuitem label="structure" value="structure" tooltiptext="&structureRole.label;" type="checkbox"/>
-          <menuitem label="tab" value="tab" tooltiptext="&tabRole.label;" type="checkbox"/>
-          <menuitem label="tablist" value="tablist" tooltiptext="&tablistRole.label;" type="checkbox"/>
-          <menuitem label="tabpanel" value="tabpanel" tooltiptext="&tabpanelRole.label;" type="checkbox"/>
-          <menuitem label="textbox" value="textbox" tooltiptext="&textboxRole.label;" type="checkbox"/>
-          <menuitem label="timer" value="timer" tooltiptext="&timerRole.label;" type="checkbox"/>
-          <menuitem label="toolbar" value="toolbar" tooltiptext="&toolbarRole.label;" type="checkbox"/>
-          <menuitem label="tooltip" value="tooltip" tooltiptext="&tooltipRole.label;" type="checkbox"/>
-          <menuitem label="tree" value="tree" tooltiptext="&treeRole.label;" type="checkbox"/>
-          <menuitem label="treegrid" value="treegrid" tooltiptext="&treegridRole.label;" type="checkbox"/>
-          <menuitem label="treeitem" value="treeitem" tooltiptext="&treeitemRole.label;" type="checkbox"/>
-          <menuitem label="widget" value="widget" tooltiptext="&widgetRole.label;" type="checkbox"/>
-          <menuitem label="window" value="window" tooltiptext="&windowRole.label;" type="checkbox"/>
         </menupopup>
      </menu>
   </menupopup>
@@ -239,5 +158,47 @@
     <menuitem id="cmenu_tableProperties"  label="&tableProperties.label;"  accesskey="&tableProperties.accesskey;"  command="cmd_editTable"/>
   </menupopup>
 
+  <tooltip id="tab-tooltip" onpopupshowing="UpdateTabTooltip(document.tooltipNode)">
+    <hbox align="center" id="tab-tooltip-main-info">
+      <label id="tab-tooltip-html-dialect"/>
+      <label id="tab-tooltip-title" flex="1" crop="end"/>
+    </hbox>
+    <grid id="tab-tooltip-grid">
+      <columns>
+        <column/>
+        <column flex="1"/>
+      </columns>
+      <rows>
+        <row align="center">
+          <label value="&pageLocation.label;"/>
+          <label id="tab-tooltip-location"/>
+        </row>
+        <row align="center">
+          <label value="&pageAuthor.label;"/>
+          <label id="tab-tooltip-author"/>
+        </row>
+        <row align="center">
+          <label value="&pageDescription.label;"/>
+          <label id="tab-tooltip-description" crop="end"/>
+        </row>
+        <row align="center">
+          <label value="&pageKeywords.label;"/>
+          <label id="tab-tooltip-keywords" crop="end"/>
+        </row>
+        <row align="center">
+          <label value="&language.label;"/>
+          <label id="tab-tooltip-language"/>
+        </row>
+        <row align="center">
+          <label value="&charset.label;"/>
+          <label id="tab-tooltip-charset"/>
+        </row>
+        <row align="center">
+          <label value="&direction.label;"/>
+          <label id="tab-tooltip-text-direction"/>
+        </row>
+      </rows>
+    </grid>
+  </tooltip>
 </popupset>
 

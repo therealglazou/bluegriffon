@@ -30,8 +30,12 @@
           <columns><column/><column/><column/><column/><column/></columns>
           <rows>
             <row align="center" animatable="true">
-              <label value="&width.label;"/>
+              <label value="&width.label;"
+                     class="text-link"
+                     href="https://developer.mozilla.org/en-US/docs/Web/CSS/width"
+                     tooltiptext="width"/>
               <menulist sizetopopup="none" editable="true" id="widthMenulist" property="width"
+                        bgtype="csslength" units='% px pt cm in mm pc em ex rem ch'
                         checkimageratio="true"
                         oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'auto', false);"
                         oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'auto', false)">
@@ -41,16 +45,18 @@
                   <menuitem label="&autoWidth.label;" value="auto"/>
                 </menupopup>
               </menulist>
-              <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
-                           ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', false)"/>
               <spacer flex="1"/>
               <checkbox label="&preserveImageRatio.label;"
                         id="preserveImageRatioCheckbox"/>
             </row>
 
             <row align="center" animatable="true">
-              <label value="&height.label;"/>
+              <label value="&height.label;"
+                     class="text-link"
+                     href="https://developer.mozilla.org/en-US/docs/Web/CSS/height"
+                     tooltiptext="height"/>
               <menulist sizetopopup="none" editable="true" id="heightMenulist" property="height"
+                        bgtype="csslength" units='% px pt cm in mm pc em ex rem ch'
                         checkimageratio="true"
                         oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'auto', false)"
                         oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'auto', false)">
@@ -60,65 +66,71 @@
                   <menuitem label="&autoHeight.label;" value="auto"/>
                 </menupopup>
               </menulist>
-              <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
-                           ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', false)"/>
               <spacer flex="1"/>
               <button label="&getNaturalSize.label;" id="getNaturalSizeButton"
                       oncommand="GetNaturalSize()"/>
             </row>
 
             <row align="center" animatable="true">
-              <label value="&minWidth.label;"/>
+              <label value="&minWidth.label;"
+                     class="text-link"
+                     href="https://developer.mozilla.org/en-US/docs/Web/CSS/min-width"
+                     tooltiptext="min-width"/>
               <menulist sizetopopup="none" editable="true" id="minWidthMenulist" property="min-width"
+                        bgtype="csslength" units='% px pt cm in mm pc em ex rem ch'
                         oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'none', false)"
                         oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'none', false)">
                 <menupopup id="minWidthMenupopup"
                            onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
                 </menupopup>
               </menulist>
-              <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
-                           ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', false)"/>
-                <label value="&maxWidth.label;"/>
-                <hbox align="center">
-                  <menulist sizetopopup="none" editable="true" id="maxWidthMenulist" property="max-width"
-                            oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'none', false)"
-                            oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'none', false)">
-                    <menupopup id="maxWidthMenupopup"
-                               onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
-                      <menuseparator/>
-                      <menuitem label="&noneMaxWidth.label;" value="none"/>
-                    </menupopup>
-                  </menulist>
-                  <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
-                               ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', false)"/>
-                </hbox>
+              <label value="&maxWidth.label;"
+                   class="text-link"
+                   href="https://developer.mozilla.org/en-US/docs/Web/CSS/max-width"
+                   tooltiptext="max-width"/>
+              <hbox align="center">
+                <menulist sizetopopup="none" editable="true" id="maxWidthMenulist" property="max-width"
+                          bgtype="csslength" units='% px pt cm in mm pc em ex rem ch'
+                          oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'none', false)"
+                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'none', false)">
+                  <menupopup id="maxWidthMenupopup"
+                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
+                    <menuseparator/>
+                    <menuitem label="&noneMaxWidth.label;" value="none"/>
+                  </menupopup>
+                </menulist>
+              </hbox>
             </row>
 
             <row align="center" animatable="true">
-              <label value="&minHeight.label;"/>
+              <label value="&minHeight.label;"
+                     class="text-link"
+                     href="https://developer.mozilla.org/en-US/docs/Web/CSS/min-height"
+                     tooltiptext="min-height"/>
               <menulist sizetopopup="none" editable="true" id="minHeightMenulist" property="min-height"
+                        bgtype="csslength" units='% px pt cm in mm pc em ex rem ch'
                         oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'none', false)"
                         oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'none', false)">
                 <menupopup id="minHeightMenupopup"
                            onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
                 </menupopup>
               </menulist>
-              <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
-                           ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', false)"/>
-                <label value="&maxHeight.label;"/>
-                <hbox align="center">
-                  <menulist sizetopopup="none" editable="true" id="maxHeightMenulist" property="max-height"
-                            oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'none', false)"
-                            oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'none', false)">
-                    <menupopup id="maxHeightMenupopup"
-                               onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
-                      <menuseparator/>
-                      <menuitem label="&noneMaxHeight.label;" value="none"/>
-                    </menupopup>
-                  </menulist>
-                  <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
-                               ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', false)"/>
-                </hbox>
+              <label value="&maxHeight.label;"
+                     class="text-link"
+                     href="https://developer.mozilla.org/en-US/docs/Web/CSS/max-height"
+                     tooltiptext="max-height"/>
+              <hbox align="center">
+                <menulist sizetopopup="none" editable="true" id="maxHeightMenulist" property="max-height"
+                          bgtype="csslength" units='% px pt cm in mm pc em ex rem ch'
+                          oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'none', false)"
+                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'none', false)">
+                  <menupopup id="maxHeightMenupopup"
+                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
+                    <menuseparator/>
+                    <menuitem label="&noneMaxHeight.label;" value="none"/>
+                  </menupopup>
+                </menulist>
+              </hbox>
             </row>
 
           </rows>
@@ -127,9 +139,13 @@
         <vbox id="geometry-margin-box" animatable="true">
 
           <hbox align="center">
-            <label value="&margins.label;"/>
+            <label value="&margins.label;"
+                     class="text-link"
+                     href="https://developer.mozilla.org/en-US/docs/Web/CSS/margin"
+                     tooltiptext="margin"/>
             <spacer flex="1"/>
             <menulist sizetopopup="none" editable="true" id="marginTopMenulist" property="margin-top"
+                      bgtype="csslength" units='% px pt cm in mm pc em ex rem ch' unsigned="true"
                       oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'auto', true)"
                       oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'auto', true)">
               <menupopup id="marginTopMenupopup"
@@ -138,14 +154,13 @@
                 <menuitem label="&autoMargin.label;" value="auto"/>
               </menupopup>
             </menulist>
-            <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
-                         ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true)"/>
             <spacer flex="1"/>
             <label value="&margins.label;" style="visibility: hidden"/>
           </hbox>
 
           <hbox align="center">
             <menulist sizetopopup="none" editable="true" id="marginLeftMenulist" property="margin-left"
+                      bgtype="csslength" units='% px pt cm in mm pc em ex rem ch' unsigned="true"
                       oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'auto', true)"
                       oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'auto', true)">
               <menupopup id="marginLeftMenupopup"
@@ -154,52 +169,51 @@
                 <menuitem label="&autoMargin.label;" value="auto"/>
               </menupopup>
             </menulist>
-            <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
-                         ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true)"/>
             <vbox flex="1" id="geometry-padding-box">
               <hbox align="center">
-                <label value="&paddings.label;"/>
+                <label value="&paddings.label;"
+                     class="text-link"
+                     href="https://developer.mozilla.org/en-US/docs/Web/CSS/padding"
+                     tooltiptext="padding"/>
                 <spacer flex="1"/>
                 <menulist sizetopopup="none" editable="true" id="paddingTopMenulist" property="padding-top"
+                      bgtype="csslength" units='% px pt cm in mm pc em ex rem ch'
                           oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', false)"
                           oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', false)">
                   <menupopup id="paddingTopMenupopup"
                              onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
                   </menupopup>
                 </menulist>
-                <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
-                             ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', false)"/>
                 <spacer flex="1"/>
                 <label value="&paddings.label;" style="visibility: hidden"/>
               </hbox>
               <hbox align="center">
                 <menulist sizetopopup="none" editable="true" id="paddingLeftMenulist" property="padding-left"
+                          bgtype="csslength" units='% px pt cm in mm pc em ex rem ch'
                           oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', false)"
                           oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', false)">
                   <menupopup id="paddingLeftMenupopup"
                              onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
                   </menupopup>
                 </menulist>
-                <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
-                             ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', false)"/>
                 <vbox id="geometry-content-box" flex="1" align="center">
                   <spacer flex="1"/>
                   <label value="&contentArea.label;"/>
                   <spacer flex="1"/>
                 </vbox>
                 <menulist sizetopopup="none" editable="true" id="paddingRightMenulist" property="padding-right"
+                          bgtype="csslength" units='% px pt cm in mm pc em ex rem ch'
                           oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', false)"
                           oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', false)">
                   <menupopup id="paddingRightMenupopup"
                              onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
                   </menupopup>
                 </menulist>
-                <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
-                             ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', false)"/>
               </hbox>
               <hbox align="center">
                 <spacer flex="1"/>
                     <menulist sizetopopup="none" editable="true" id="paddingBottomMenulist" property="padding-bottom"
+                              bgtype="csslength" units='% px pt cm in mm pc em ex rem ch'
                               fouredges="padding-top,padding-left,padding-right"
                               fouredgescontrol="useSameFourPaddingsCheckbox"
                               oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', false)"
@@ -208,8 +222,6 @@
                                  onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
                       </menupopup>
                     </menulist>
-                    <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
-                                 ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', false)"/>
                 <spacer flex="1"/>
               </hbox>
               <hbox align="center">
@@ -220,6 +232,7 @@
               </hbox>
             </vbox>
             <menulist sizetopopup="none" editable="true" id="marginRightMenulist" property="margin-right"
+                      bgtype="csslength" units='% px pt cm in mm pc em ex rem ch' unsigned="true"
                       oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'auto', true)"
                       oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'auto', true)">
               <menupopup id="marginRightMenupopup"
@@ -228,13 +241,12 @@
                 <menuitem label="&autoMargin.label;" value="auto"/>
               </menupopup>
             </menulist>
-            <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
-                         ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true)"/>
           </hbox>
 
           <hbox align="center">
             <spacer flex="1"/>
             <menulist sizetopopup="none" editable="true" id="marginBottomMenulist" property="margin-bottom"
+                      bgtype="csslength" units='% px pt cm in mm pc em ex rem ch' unsigned="true"
                       fouredges="margin-top,margin-left,margin-right"
                       fouredgescontrol="useSameFourMarginsCheckbox"
                       oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'auto', true)"
@@ -245,8 +257,6 @@
                 <menuitem label="&autoMargin.label;" value="auto"/>
               </menupopup>
             </menulist>
-            <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
-                         ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true)"/>
             <spacer flex="1"/>
           </hbox>
           <hbox align="center">

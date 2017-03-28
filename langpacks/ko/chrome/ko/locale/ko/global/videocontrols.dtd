@@ -8,6 +8,8 @@
 <!ENTITY muteButton.unmuteLabel "소리 켜기">
 <!ENTITY fullscreenButton.enterfullscreenlabel "전체 화면 표시">
 <!ENTITY fullscreenButton.exitfullscreenlabel "전체 화면 표시 해제">
+<!ENTITY castingButton.castingLabel "화면으로 출력">
+<!ENTITY closedCaption.off "끔">
 
 <!ENTITY stats.media "미디어">
 <!ENTITY stats.size "크기">
@@ -17,8 +19,6 @@
 <!ENTITY stats.activityEnded "완료">
 <!ENTITY stats.activitySeeking "(찾는 중)">
 <!ENTITY stats.volume "음량">
-<!ENTITY stats.channels "채널">
-<!ENTITY stats.sampleRate "샘플링 비율">
 <!ENTITY stats.framesParsed "파싱된 프레임">
 <!ENTITY stats.framesDecoded "디코딩 프레임">
 <!ENTITY stats.framesPresented "제시된 프레임">
@@ -37,3 +37,13 @@ the 5 minute mark in a 6 hour long video, #1 would be "5:00" and #2 would be
 "6:00:00", result string would be "5:00 of 6:00:00 elapsed".
 -->
 <!ENTITY scrubberScale.nameFormat "#1 / #2">
+
+<!-- LOCALIZATION NOTE (positionAndDuration.nameFormat): the #1 string is the current
+media position, and the #2 string is the total duration. For example, when at
+the 5 minute mark in a 6 hour long video, #1 would be "5:00" and #2 would be
+"6:00:00", result string would be "5:00 / 6:00:00".
+Note that #2 is not always avaiable. For example, when at the 5 minute mark in an
+unknown duration video, #1 would be "5:00" and string which is surrounded by <span>
+would be deleted, result string would be "5:00".
+-->
+<!ENTITY positionAndDuration.nameFormat "#1<span> / #2</span>">

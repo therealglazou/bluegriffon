@@ -9,6 +9,7 @@
   - documentation on web development on the web. -->
 
 <!ENTITY window.title "Console web">
+<!ENTITY browserConsole.title "Console du navigateur">
 
 <!ENTITY networkPanel.requestURLColon             "URL de la requête :">
 <!ENTITY networkPanel.requestMethodColon          "Méthode de la requête :">
@@ -44,10 +45,22 @@
   -  filters. -->
 <!ENTITY btnPageNet.label   "Réseau">
 <!ENTITY btnPageNet.tooltip "Journaliser les accès réseau">
+<!ENTITY btnPageNet.accesskey "R">
+<!-- LOCALIZATION NOTE (btnPageNet.accesskeyMacOSX): This string is used as
+  -  access key for the menu button that allows users to toggle the network
+  -  logging output. On MacOSX accesskeys are available with Ctrl-*. Please make
+  -  sure you do not use the following letters: A, E, N and P. These are used
+  -  for editing commands in text inputs. -->
+<!ENTITY btnPageNet.accesskeyMacOSX "R">
 <!ENTITY btnPageCSS.label   "CSS">
-<!ENTITY btnPageCSS.tooltip "Journaliser les erreurs d'analyse CSS">
+<!ENTITY btnPageCSS.tooltip2 "Journaliser les avertissements et les erreurs CSS">
+<!ENTITY btnPageCSS.accesskey "C">
 <!ENTITY btnPageJS.label    "JS">
 <!ENTITY btnPageJS.tooltip  "Journaliser les exceptions JavaScript">
+<!ENTITY btnPageJS.accesskey  "J">
+<!ENTITY btnPageSecurity.label "Sécurité">
+<!ENTITY btnPageSecurity.tooltip "Journaliser les avertissements et les erreurs de sécurité">
+<!ENTITY btnPageSecurity.accesskey "S">
 
 <!-- LOCALIZATION NOTE (btnPageLogging): This is used as the text of the
   -  the toolbar. It shows or hides messages that the web developer inserted on
@@ -55,14 +68,18 @@
   -  console.error(). -->
 <!ENTITY btnPageLogging.label   "Journal">
 <!ENTITY btnPageLogging.tooltip "Journaliser les messages envoyés à l'objet « console »">
+<!ENTITY btnPageLogging.accesskey3 "u">
 <!ENTITY btnConsoleErrors       "Erreurs">
 <!ENTITY btnConsoleInfo         "Info">
 <!ENTITY btnConsoleWarnings     "Avertissements">
 <!ENTITY btnConsoleLog          "Log">
+<!ENTITY btnConsoleXhr          "XHR">
+<!ENTITY btnConsoleReflows      "Reflows">
 
-<!ENTITY filterBox.placeholder "Filtrer">
+<!ENTITY filterOutput.placeholder "Filtrer">
 <!ENTITY btnClear.label        "Vider la console">
 <!ENTITY btnClear.tooltip      "Vider la console web">
+<!ENTITY btnClear.accesskey    "V">
 
 <!ENTITY fullZoomEnlargeCmd.commandkey  "+">
 <!ENTITY fullZoomEnlargeCmd.commandkey2 "="> <!-- + is above this key on many keyboards -->
@@ -77,8 +94,6 @@
 <!ENTITY copyURLCmd.label     "Copier l'adresse du lien">
 <!ENTITY copyURLCmd.accesskey "a">
 
-<!ENTITY browserConsole.title "Browser Console">
-
-<!ENTITY closeCmd.key  "W">
-
-<!ENTITY filterOutput.placeholder "Filter output">
+<!ENTITY closeCmd.key         "W">
+<!ENTITY findCmd.key          "F">
+<!ENTITY clearOutputCtrl.key  "L">

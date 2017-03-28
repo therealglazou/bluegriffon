@@ -101,7 +101,7 @@ function ApplyPropertyFromMenulist(aElt)
 function IncreaseLength(aElt, aUnitsString, aCallback)
 {
   var value;
-  var menulist = aElt.previousSibling;
+  var menulist = aElt;
   if (menulist.selectedItem)
     value = menulist.selectedItem.value;
   else
@@ -137,7 +137,7 @@ function IncreaseLength(aElt, aUnitsString, aCallback)
 function DecreaseLength(aElt, aUnitsString, aAllowNegative, aCallback)
 {
   var value;
-  var menulist = aElt.previousSibling;
+  var menulist = aElt;
   if (menulist.selectedItem)
     value = menulist.selectedItem.value;
   else
@@ -201,15 +201,14 @@ function InitLocalFontFaceMenu(menuPopup)
       var itemNode = document.createElementNS(BlueGriffonVars.kXUL_NS, "menuitem");
       itemNode.setAttribute("label", BlueGriffonVars.localFonts[i]);
       itemNode.setAttribute("value", BlueGriffonVars.localFonts[i]);
-      itemNode.setAttribute("style", "font-family: " + BlueGriffonVars.localFonts[i]);
+      itemNode.setAttribute("style", "font-family: \"" + BlueGriffonVars.localFonts[i] + "\"");
       menuPopup.appendChild(itemNode);
     }
   }
 }
 
-function SetColor(aElt)
+function SetColor(aElt, color)
 {
-  var color = aElt.color;
   var toApply = [
                   {
                     property: aElt.getAttribute("property"),

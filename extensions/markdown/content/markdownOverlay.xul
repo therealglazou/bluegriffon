@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE overlay [
+  <!ENTITY % markdownOverlayDTD SYSTEM "chrome://markdown/locale/markdownOverlay.dtd">
+  %markdownOverlayDTD;
+]>
+
+<overlay id="markdownOverlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/x-javascript"  src="chrome://markdown/content/markdownOverlay.js"/>
+
+  <menupopup id="insertMenuPopup">
+    <menuitem label="&markdownMenu.label;"
+              command="cmd_insertMarkdown"/>
+  </menupopup>
+
+  <commandset id="composerMenuItems">
+    <command id="cmd_insertMarkdown" oncommand="goDoCommand('cmd_insertMarkdown')"/>
+  </commandset>
+</overlay>         
+

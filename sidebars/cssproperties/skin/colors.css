@@ -56,7 +56,6 @@
 
 richlistitem.backgrounditem {
   -moz-binding: url("chrome://cssproperties/content/backgrounditem.xml#backgrounditem");
-  border-bottom: gray thin solid;
 }
 
 richlistitem.colorstopitem {
@@ -80,7 +79,12 @@ richlistitem.colorstopitem {
   padding: 0.5em;
   font-size: smaller;
   -moz-appearance: none;
-  background-color: #f0f0f0;
+  background-color: var(--bg-dark-background);
+  border: thin solid rgba(128,128,128,50);
+}
+
+#linearGradientPropertiesTabs {
+  color: black;
 }
 
 #linearGradientPreview {

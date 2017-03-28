@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+
+<!DOCTYPE dialog [
+  <!ENTITY % dtd1 SYSTEM
+    "chrome://inspector/locale/viewers/accessibleEventsHandlerHelpDialog.dtd">
+  %dtd1;
+]>
+
+<?xml-stylesheet href="chrome://inspector/skin"?>
+
+<dialog id="winEvalJS"
+        title="&helpDialog.title;"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        buttons="accept"
+        style="width: 30em;">
+
+  <description>&general.descr;</description>
+  <description>&helpers.descr;</description>
+  <grid>
+    <columns>
+      <column/>
+      <column flex="1"/>
+    </columns>
+    <rows>
+      <row>
+        <description value="event"/>
+        <description>&event.descr;</description>
+      </row>
+      <row>
+        <description value="target"/>
+        <description>&target.descr;</description>
+      </row>
+      <row>
+        <description value="accRetrieval"/>
+        <description>&accRetrieval.descr;</description>
+      </row>
+      <row>
+        <description value="output(string)"/>
+        <description>&output.descr;</description>
+      </row>
+      <row>
+        <description value="outputAttrs(accessible)"/>
+        <description>&outputAttrs.descr;</description>
+      </row>
+      <row>
+        <description value="outputRole(accessible)"/>
+        <description>&outputRole.descr;</description>
+      </row>
+      <row>
+        <description value="outputStates(accessible)"/>
+        <description>&outputStates.descr;</description>
+      </row>
+      <row>
+        <description value="outputTree(accessible, hightlightList)"/>
+        <description>&outputTree.descr;</description>
+      </row>
+      <row>
+        <description value="outputDOMAttrs(accessible)"/>
+        <description>&outputDOMAttrs.descr;</description>
+      </row>
+    </rows>
+  </grid>
+
+</dialog>

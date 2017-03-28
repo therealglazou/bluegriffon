@@ -11,9 +11,6 @@ function GeometrySectionIniter(aElt, aRuleset)
   gDialog.marginRightMenulist.style.visibility = (afm ? "hidden": "");
   gDialog.marginLeftMenulist.style.visibility = (afm ? "hidden": "");
   gDialog.marginTopMenulist.style.visibility = (afm ? "hidden": "");
-  gDialog.marginRightMenulist.nextElementSibling.style.visibility = afm ? "hidden": "";
-  gDialog.marginLeftMenulist.nextElementSibling.style.visibility = afm ? "hidden": "";
-  gDialog.marginTopMenulist.nextElementSibling.style.visibility = afm ? "hidden": "";
   gDialog.marginTopMenulist.value = mt;
   gDialog.marginBottomMenulist.value = mb;
   gDialog.marginLeftMenulist.value = ml;
@@ -28,9 +25,6 @@ function GeometrySectionIniter(aElt, aRuleset)
   gDialog.paddingRightMenulist.style.visibility = (afp ? "hidden" : "");
   gDialog.paddingLeftMenulist.style.visibility = (afp ? "hidden" : "");
   gDialog.paddingTopMenulist.style.visibility = (afp ? "hidden" : "");
-  gDialog.paddingRightMenulist.nextElementSibling.style.visibility = (afp ? "hidden" : "");
-  gDialog.paddingLeftMenulist.nextElementSibling.style.visibility = (afp ? "hidden" : "");
-  gDialog.paddingTopMenulist.nextElementSibling.style.visibility = (afp ? "hidden" : "");
   gDialog.paddingTopMenulist.value = pt;
   gDialog.paddingBottomMenulist.value = pb;
   gDialog.paddingLeftMenulist.value = pl;
@@ -64,9 +58,6 @@ function ToggleFourEdges(aCheckbox, aPrefix)
   gDialog[aPrefix + "RightMenulist"].style.visibility = (checked ? "hidden": "");
   gDialog[aPrefix + "LeftMenulist"].style.visibility = (checked ? "hidden": "");
   gDialog[aPrefix + "TopMenulist"].style.visibility = (checked ? "hidden": "");
-  gDialog[aPrefix + "RightMenulist"].nextElementSibling.style.visibility = (checked ? "hidden": "");
-  gDialog[aPrefix + "LeftMenulist"].nextElementSibling.style.visibility = (checked ? "hidden": "");
-  gDialog[aPrefix + "TopMenulist"].nextElementSibling.style.visibility = (checked ? "hidden": "");
   if (checked) {
     var value = gDialog[aPrefix + "BottomMenulist"].value;
     gDialog[aPrefix + "RightMenulist"].value= value;

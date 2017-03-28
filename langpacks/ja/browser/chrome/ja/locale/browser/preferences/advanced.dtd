@@ -4,50 +4,58 @@
 
 <!-- Note: each tab panel must contain unique accesskeys -->
 
-<!ENTITY generalTab.label			"一般">
+<!ENTITY generalTab.label                "一般">
 
-<!ENTITY accessibility.label			"アクセシビリティ">
+<!ENTITY accessibility.label             "アクセシビリティ">
 
-<!ENTITY useCursorNavigation.label		"ページ中の移動にカーソルを使用する (キャレットブラウズモード)"><!-- en-US: Always use the cursor keys to navigate within pages -->
-<!ENTITY useCursorNavigation.accesskey		"c">
-<!ENTITY searchStartTyping.label		"キー入力時に検索を開始する">
-<!ENTITY searchStartTyping.accesskey		"x">
-<!ENTITY blockAutoRefresh.label			"Web ページが自動的に転送や再読み込みさせようとしたときに警告する">
-<!ENTITY blockAutoRefresh.accesskey		"b">
+<!ENTITY useCursorNavigation.label       "ページ中の移動にカーソルを使用する (キャレットブラウズモード)"><!-- en-US: Always use the cursor keys to navigate within pages -->
+<!ENTITY useCursorNavigation.accesskey   "c">
+<!ENTITY searchStartTyping.label         "キー入力時に検索を開始する">
+<!ENTITY searchStartTyping.accesskey     "x">
+<!ENTITY blockAutoRefresh.label          "ウェブページが自動的に転送や再読み込みさせようとしたときに警告する">
+<!ENTITY blockAutoRefresh.accesskey      "b">
+<!ENTITY useOnScreenKeyboard.label       "必要であればタッチキーボードを表示する">
+<!ENTITY useOnScreenKeyboard.accesskey   "k">
 
-<!ENTITY browsing.label				"ブラウズ">
+<!ENTITY browsing.label                  "ブラウズ">
 
-<!ENTITY useAutoScroll.label			"自動スクロール機能を使用する">
-<!ENTITY useAutoScroll.accesskey		"a">
-<!ENTITY useSmoothScrolling.label		"スムーズスクロール機能を使用する">
-<!ENTITY useSmoothScrolling.accesskey		"m">
-<!ENTITY allowHWAccel.label			"ハードウェアアクセラレーション機能を使用する (可能な場合)">
-<!ENTITY allowHWAccel.accesskey			"r">
-<!ENTITY checkSpelling.label			"自動スペルチェック機能を使用する">
-<!ENTITY checkSpelling.accesskey		"t">
+<!ENTITY useAutoScroll.label             "自動スクロール機能を使用する">
+<!ENTITY useAutoScroll.accesskey         "a">
+<!ENTITY useSmoothScrolling.label        "スムーズスクロール機能を使用する">
+<!ENTITY useSmoothScrolling.accesskey    "m">
+<!ENTITY allowHWAccel.label              "ハードウェアアクセラレーション機能を使用する (可能な場合)">
+<!ENTITY allowHWAccel.accesskey          "r">
+<!ENTITY checkSpelling.label             "自動スペルチェック機能を使用する">
+<!ENTITY checkSpelling.accesskey         "t">
 
-<!ENTITY systemDefaults.label			"既定のブラウザ">
-<!ENTITY alwaysCheckDefault.label		"起動時に &brandShortName; が既定のブラウザであるか確認する"><!--XXX-->
-<!ENTITY alwaysCheckDefault.accesskey		"w">
-<!ENTITY setDefault.label			"&brandShortName; を既定のブラウザに設定する">
-<!ENTITY setDefault.accesskey			"d">
-<!ENTITY isDefault.label			"&brandShortName; は既定のブラウザに設定されています">
-<!ENTITY submitCrashes.label			"クラッシュレポートを送信する">
-<!ENTITY submitCrashes.accesskey		"S">
-<!ENTITY submitTelemetry.label			"パフォーマンス情報を送信する">
-<!ENTITY submitTelemetry.accesskey		"P">
+<!ENTITY dataChoicesTab.label            "データの選択">
 
-<!ENTITY networkTab.label			"ネットワーク">
+<!ENTITY healthReportDesc.label          "パフォーマンス情報の取得と、ブラウザーの健康状態を &vendorShortName; と共有するのに役立ちます">
+<!ENTITY enableHealthReport.label        "&brandShortName; ヘルスレポートを有効にする">
+<!ENTITY enableHealthReport.accesskey    "R">
+<!ENTITY healthReportLearnMore.label     "詳細">
 
-<!ENTITY connection.label			"接続">
+<!ENTITY telemetryDesc.label             "&brandShortName; をよりよいものにするため、パフォーマンス情報、使用状況、ハードウェア情報、設定したデータを &vendorShortName; と共有します。">
+<!ENTITY enableTelemetryData.label       "追加データを共有する (パフォーマンス情報など)">
+<!ENTITY enableTelemetryData.accesskey   "T">
+<!ENTITY telemetryLearnMore.label        "詳細">
 
-<!ENTITY connectionDesc.label			"インターネット接続に使用するプロキシを設定します。">
-<!ENTITY connectionSettings.label		"接続設定...">
-<!ENTITY connectionSettings.accesskey		"e">
+<!ENTITY crashReporterDesc2.label         "クラッシュレポートは、問題を解決と、ブラウザーをより安定した安全なものにするのに役立ちます">
+<!ENTITY alwaysSubmitCrashReports.label   "&brandShortName; に、あなたに代わって未送信のクラッシュレポートを送信するのを許可する">
+<!ENTITY alwaysSubmitCrashReports.accesskey "c">
+<!ENTITY crashReporterLearnMore.label     "詳細">
 
-<!ENTITY httpCache.label			"キャッシュされた Web ページ">
+<!ENTITY networkTab.label                "ネットワーク">
 
-<!ENTITY offlineStorage2.label			"オフライン Web ページとユーザデータ">
+<!ENTITY connection.label                "接続">
+
+<!ENTITY connectionDesc.label            "インターネット接続に使用するプロキシを設定します。">
+<!ENTITY connectionSettings.label        "接続設定...">
+<!ENTITY connectionSettings.accesskey    "e">
+
+<!ENTITY httpCache.label                 "キャッシュされたウェブページ">
+
+<!ENTITY offlineStorage2.label           "オフラインウェブページとユーザーデータ">
 
 <!-- LOCALIZATION NOTE:
   The entities limitCacheSizeBefore.label and limitCacheSizeAfter.label appear on a single
@@ -55,89 +63,89 @@
 
   &limitCacheSizeBefore.label [textbox for cache size in MB] &limitCacheSizeAfter.label;
 -->
-<!ENTITY limitCacheSizeBefore.label		"ページキャッシュとして ">
-<!ENTITY limitCacheSizeBefore.accesskey		"L">
-<!ENTITY limitCacheSizeAfter.label		"MB まで使用する">
-<!ENTITY clearCacheNow.label			"今すぐ消去">
-<!ENTITY clearCacheNow.accesskey		"C">
-<!ENTITY clearOfflineAppCacheNow.label		"今すぐ消去">
-<!ENTITY clearOfflineAppCacheNow.accesskey	"N">
-<!ENTITY overrideSmartCacheSize.label		"キャッシュサイズを制限する">
-<!ENTITY overrideSmartCacheSize.accesskey	"O">
+<!ENTITY limitCacheSizeBefore.label      "ページキャッシュとして ">
+<!ENTITY limitCacheSizeBefore.accesskey  "L">
+<!ENTITY limitCacheSizeAfter.label       "MB まで使用する">
+<!ENTITY clearCacheNow.label             "今すぐ消去">
+<!ENTITY clearCacheNow.accesskey         "C">
+<!ENTITY clearOfflineAppCacheNow.label   "今すぐ消去">
+<!ENTITY clearOfflineAppCacheNow.accesskey "N">
+<!ENTITY overrideSmartCacheSize.label    "キャッシュサイズを変更する">
+<!ENTITY overrideSmartCacheSize.accesskey "O">
 
-<!ENTITY updateTab.label			"更新">
+<!ENTITY updateTab.label                 "更新">
 
-<!ENTITY updateApp.label			"&brandShortName; の更新:">
-<!ENTITY updateAuto.label			"自動的に更新をインストールする (推奨: セキュリティ向上)">
-<!ENTITY updateAuto.accesskey			"A">
-<!ENTITY updateCheck.label			"更新の確認は行うが、インストールするかどうかを選択する">
-<!ENTITY updateCheck.accesskey			"C">
-<!ENTITY updateManual.label			"更新の確認は行わない (非推奨: セキュリティリスク)">
-<!ENTITY updateManual.accesskey			"N">
+<!ENTITY updateApp.label                 "&brandShortName; の更新:">
+<!ENTITY updateAuto1.label               "更新を自動的にインストールする (推奨: セキュリティ向上)">
+<!ENTITY updateAuto1.accesskey           "A">
+<!ENTITY updateCheck.label               "更新の確認は行うが、インストールするかどうかを選択する">
+<!ENTITY updateCheck.accesskey           "C">
+<!ENTITY updateManual.label              "更新の確認は行わない (非推奨: セキュリティリスク)">
+<!ENTITY updateManual.accesskey          "N">
 
-<!ENTITY updateAutoAddonWarn.label		"更新によりアドオンが無効化される場合は警告する">
-<!ENTITY updateAutoAddonWarn.accesskey		"W">
+<!ENTITY updateHistory.label             "更新履歴を表示...">
+<!ENTITY updateHistory.accesskey         "p">
 
-<!ENTITY updateHistory.label			"更新履歴を表示...">
-<!ENTITY updateHistory.accesskey		"p">
+<!ENTITY useService.label                "更新のインストールにバックグラウンドサービスを使用する">
+<!ENTITY useService.accesskey            "b">
 
-<!ENTITY useService.label			"更新のインストールにバックグラウンドサービスを使用する">
-<!ENTITY useService.accesskey			"b">
+<!ENTITY updateOthers.label              "次のソフトウェアを自動的に更新する:">
+<!ENTITY enableSearchUpdate.label        "検索エンジン">
+<!ENTITY enableSearchUpdate.accesskey    "E">
 
-<!ENTITY updateOthers.label			"次のソフトウェアを自動的に更新する:">
-<!ENTITY enableSearchUpdate.label		"検索エンジン">
-<!ENTITY enableSearchUpdate.accesskey		"E">
+<!ENTITY offlineNotify.label             "ウェブサイトがオフライン作業用データの保存を求めてきたときに知らせる">
+<!ENTITY offlineNotify.accesskey         "T">
+<!ENTITY offlineNotifyExceptions.label   "例外サイト...">
+<!ENTITY offlineNotifyExceptions.accesskey "x">
 
-<!ENTITY offlineNotify.label			"Web サイトがオフライン作業用データの保存を求めてきたときに知らせる">
-<!ENTITY offlineNotify.accesskey		"T">
-<!ENTITY offlineNotifyExceptions.label		"例外サイト...">
-<!ENTITY offlineNotifyExceptions.accesskey	"x">
+<!ENTITY offlineAppsList2.label          "オフライン作業用のデータの保存を許可しているウェブサイト:">
+<!ENTITY offlineAppsList.height          "7em">
+<!ENTITY offlineAppsListRemove.label     "削除...">
+<!ENTITY offlineAppsListRemove.accesskey "R">
+<!ENTITY offlineAppRemove.confirm        "オフライン作業用データの削除">
 
-<!ENTITY offlineAppsList2.label			"オフライン作業用のデータの保存を許可している Web サイト:">
-<!ENTITY offlineAppsList.height			"7em"><!-- en-US: 7em -->
-<!ENTITY offlineAppsListRemove.label		"削除...">
-<!ENTITY offlineAppsListRemove.accesskey	"R">
-<!ENTITY offlineAppRemove.confirm		"オフライン作業用データの削除">
+<!ENTITY certificateTab.label            "証明書">
+<!ENTITY certSelection.label             "要求">
+<!ENTITY certSelection.description       "サーバーが個人証明書を要求したとき:">
+<!ENTITY certs.auto                      "自動的に選択する">
+<!ENTITY certs.auto.accesskey            "S">
+<!ENTITY certs.ask                       "毎回自分で選択する">
+<!ENTITY certs.ask.accesskey             "A">
+<!ENTITY enableOCSP.label                "OCSP レスポンダーサーバーに問い合わせて証明書の現在の正当性を確認する">
+<!ENTITY enableOCSP.accesskey            "Q">
+<!ENTITY viewCerts.label                 "証明書を表示...">
+<!ENTITY viewCerts.accesskey             "C">
+<!ENTITY viewSecurityDevices.label       "セキュリティデバイス...">
+<!ENTITY viewSecurityDevices.accesskey   "D">
 
-<!ENTITY encryptionTab.label			"暗号化">
 
-<!ENTITY protocols.label			"プロトコル">
-<!ENTITY useSSL3.label				"SSL 3.0 を使用する">
-<!ENTITY useSSL3.accesskey			"3">
-<!ENTITY useTLS1.label				"TLS 1.0 を使用する">
-<!ENTITY useTLS1.accesskey			"1">
-<!ENTITY certificates.label			"証明書">
-<!ENTITY certSelection.description		"サーバが個人証明書を要求したとき:">
-<!ENTITY certs.auto				"自動的に選択する">
-<!ENTITY certs.auto.accesskey			"l">
-<!ENTITY certs.ask				"毎回自分で選択する">
-<!ENTITY certs.ask.accesskey			"i">
-<!ENTITY viewCerts.label			"証明書を表示...">
-<!ENTITY viewCerts.accesskey			"s">
-<!ENTITY viewCRLs.label				"失効リスト...">
-<!ENTITY viewCRLs.accesskey			"R">
-<!ENTITY verify2.label				"検証...">
-<!ENTITY verify2.accesskey			"V">
-<!ENTITY viewSecurityDevices.label		"セキュリティデバイス...">
-<!ENTITY viewSecurityDevices.accesskey		"y">
+<!ENTITY autoUpdateOthers.label          "Automatically Update">
+<!ENTITY blockAutoReload.accesskey       "b">
+<!ENTITY blockAutoReload.label           "Warn you when websites try to redirect or reload the page">
+<!ENTITY certPersonal.description        "When a server requests your personal certificate:">
+<!ENTITY certPersonal.label              "Requests">
+<!ENTITY checkUserSpelling.accesskey     "t">
+<!ENTITY checkUserSpelling.label         "Check your spelling as you type">
+<!ENTITY clearSiteData.accesskey         "l">
+<!ENTITY clearSiteData.label             "Clear All Data">
+<!ENTITY offlineStorageNotify.accesskey           "T">
 
-<!ENTITY crashReporterDesc.label         "&brandShortName; submits crash reports to help &vendorShortName; make your browser more stable and secure">
-<!ENTITY crashReporterLearnMore.label    "Learn More">
+<!ENTITY offlineStorageNotify.label               "Tell you when a website asks to store data for offline use">
+<!ENTITY offlineStorageNotifyExceptions.accesskey "x">
+<!ENTITY offlineStorageNotifyExceptions.label     "Exceptions…">
+<!ENTITY searchOnStartTyping.accesskey   "x">
+<!ENTITY searchOnStartTyping.label       "Search for text when you start typing">
+<!ENTITY selectCerts.ask                 "Ask you every time">
+<!ENTITY selectCerts.ask.accesskey       "A">
+<!ENTITY selectCerts.auto                "Select one automatically">
+<!ENTITY selectCerts.auto.accesskey      "S">
 
-<!ENTITY crashReporterSection.label      "Crash Reporter">
+<!--  Site Data section manages sites using Storage API and is under Network -->
+<!ENTITY siteData.label                  "Site Data">
+<!ENTITY siteDataLearnMoreLink.label     "Learn more">
+<!ENTITY siteDataSettings.accesskey      "i">
+<!ENTITY siteDataSettings.label          "Settings…">
 
-<!ENTITY dataChoicesTab.label            "Data Choices">
-<!ENTITY enableCrashReporter.accesskey   "C">
-<!ENTITY enableCrashReporter.label       "Enable Crash Reporter">
-<!ENTITY enableHealthReport.accesskey    "R">
-<!ENTITY enableHealthReport.label        "Enable &brandShortName; Health Report">
-<!ENTITY enableTelemetry.accesskey       "T">
-<!ENTITY enableTelemetry.label           "Enable Telemetry">
-<!ENTITY healthReportDesc.label          "Helps you understand your browser performance and shares data with &vendorShortName; about your browser health">
-<!ENTITY healthReportLearnMore.label     "Learn More">
-
-<!ENTITY healthReportSection.label       "&brandShortName; Health Report">
-<!ENTITY telemetryDesc.label             "Shares performance, usage, hardware and customization data about your browser with &vendorShortName; to help us make &brandShortName; better">
-<!ENTITY telemetryLearnMore.label        "Learn More">
-
-<!ENTITY telemetrySection.label          "Telemetry">
+<!ENTITY updateApplication.label         "&brandShortName; Updates">
+<!ENTITY updateCheckChoose.accesskey     "C">
+<!ENTITY updateCheckChoose.label         "Check for updates, but let you choose whether to install them">

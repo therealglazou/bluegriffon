@@ -1,5 +1,14 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 <!ENTITY addons.windowTitle                   "Lisäosien hallinta">
+
 <!ENTITY search.placeholder                   "Hae lisäosista">
+<!ENTITY search.buttonlabel                   "Hae">
+<!-- LOCALIZATION NOTE (search.commandKey):
+     The search command key should match findOnCmd.commandkey from browser.dtd -->
+<!ENTITY search.commandkey                    "f">
+
 <!ENTITY loading.label                        "Ladataan…">
 <!ENTITY listEmpty.installed.label            "Tämän tyyppisiä lisäosia ei ole asennettuna">
 <!ENTITY listEmpty.availableUpdates.label     "Päivityksiä ei löytynyt">
@@ -11,8 +20,16 @@
 <!ENTITY installAddonFromFile.accesskey       "A">
 <!ENTITY toolsMenu.tooltip                    "Työkaluja kaikille lisäosille">
 
+<!ENTITY getThemes.description                "Mietitkö, miten muokata selaimesta omanlaisesi?">
+<!ENTITY getThemes.learnMore                  "Valitse tuhansista teemoista.">
+
 <!ENTITY cmd.back.tooltip                     "Edellinen sivu">
 <!ENTITY cmd.forward.tooltip                  "Seuraava sivu">
+
+<!ENTITY showUnsignedExtensions.button.label  "Joitain laajennuksia ei voitu varmentaa">
+<!ENTITY showAllExtensions.button.label       "Näytä kaikki laajennukset">
+<!ENTITY debugAddons.label                    "Jäljitä lisäosien virheitä">
+<!ENTITY debugAddons.accesskey                "J">
 
 <!-- global warnings -->
 <!ENTITY warning.safemode.label                    "Kaikki lisäosat on poistettu käytöstä vikasietotilassa.">
@@ -26,11 +43,6 @@
 <!-- categories / views -->
 <!ENTITY view.search.label                    "Etsi">
 <!ENTITY view.discover.label                  "Lataa lisäosia">
-<!ENTITY view.locales.label                   "Kielet">
-<!ENTITY view.searchengines.label             "Hakukoneet">
-<!ENTITY view.features.label                  "Laajennukset">
-<!ENTITY view.appearance2.label               "Ulkonäkö">
-<!ENTITY view.plugins.label                   "Liitännäiset">
 <!ENTITY view.recentUpdates.label             "Tuoreet päivitykset">
 <!ENTITY view.availableUpdates.label          "Saatavilla olevat päivitykset">
 
@@ -83,6 +95,13 @@
 <!ENTITY cmd.enableTheme.accesskey            "t">
 <!ENTITY cmd.disableTheme.label               "Lopeta teeman käyttö">
 <!ENTITY cmd.disableTheme.accesskey           "l">
+<!ENTITY cmd.askToActivate.label              "Kysy käynnistetäänkö">
+<!ENTITY cmd.askToActivate.tooltip            "Kysy aina käytetäänkö liitännäistä">
+<!ENTITY cmd.alwaysActivate.label             "Käynnistä aina">
+<!ENTITY cmd.alwaysActivate.tooltip           "Käytä aina liitännäistä">
+<!ENTITY cmd.neverActivate.label              "Älä käynnistä koskaan">
+<!ENTITY cmd.neverActivate.tooltip            "Älä koskaan käytä liitännäistä">
+<!ENTITY cmd.stateMenu.tooltip                "Muokkaa liitännäisen käynnistysasetuksia">
 <!ENTITY cmd.installAddon.label               "Asenna">
 <!ENTITY cmd.installAddon.accesskey           "A">
 <!ENTITY cmd.uninstallAddon.label             "Poista">
@@ -142,7 +161,7 @@
 
 
 <!-- ratings -->
-<!ENTITY rating2.label                         "Arvosana:">
+<!ENTITY rating2.label                        "Arvosana:">
 
 <!-- download/install progress -->
 <!ENTITY progress.pause.tooltip               "Pysäytä">
@@ -201,12 +220,35 @@
 <!ENTITY eula.height                          "400px">
 <!ENTITY eula.accept                          "Hyväksy ja asenna…">
 
+<!ENTITY settings.path.button.label           "Selaa…">
 
-<!-- global informations -->
-<!ENTITY info.plugincheck.label                 "Check to see if your plugins are up to date">
-<!ENTITY info.plugincheck.tooltip               "Check to see if your plugins are up to date">
-<!-- LOCALIZATION NOTE (search.commandKey):
-     The search command key should match findOnCmd.commandkey from browser.dtd -->
-<!ENTITY search.commandkey                    "f">
+<!-- LOCALIZATION NOTE (experiment.info.label): The strings related to
+     experiments are present on the "Experiments" tab of the add-ons manager.
+     This tab won't be displayed unless an Experiment add-on is installed.
+     Install https://people.mozilla.org/~gszorc/dummy-experiment-addon.xpi
+     to cause this tab to appear. -->
+<!ENTITY experiment.info.label "Mikä tämä on? Kaukomittaus voi asentaa ja suorittaa testejä aika ajoin.">
+<!ENTITY experiment.info.learnmore "Lue lisää">
+<!ENTITY experiment.info.learnmore.accesskey "L">
+<!ENTITY experiment.info.changetelemetry "Kaukomittauksen asetukset">
+<!ENTITY experiment.info.changetelemetry.accesskey "K">
 
-<!ENTITY settings.path.button.label           "Browse…">
+<!ENTITY setting.learnmore "Lue lisää…">
+
+<!ENTITY disabledUnsigned.heading "Jotkin lisäosat on otettu pois päältä">
+<!-- LOCALIZATION NOTE (disabledUnsigned.description.start, disabledUnsigned.description.findAddonsLink, disabledUnsigned.description.end):
+     These entities form a sentence, with
+     disabledUnsigned.description.findAddonsLink being a link to an external site. -->
+<!ENTITY disabledUnsigned.description.start "Seuraavia lisäosia ei ole varmennettu käytettäväksi &brandShortName;issa. Voit ">
+<!ENTITY disabledUnsigned.description.findAddonsLink "etsiä korvaavia lisäosia">
+<!ENTITY disabledUnsigned.description.end " tai pyytää kehittäjää varmentamaan ne.">
+<!ENTITY disabledUnsigned.learnMore "Lue lisää tavoista, joilla yritämme auttaa sinua pysymään turvassa verkossa.">
+<!-- LOCALIZATION NOTE (disabledUnsigned.devInfo.start, disabledUnsigned.devInfo.linkToManual, disabledUnsigned.devInfo.end):
+     These entities form a sentence, with disabledUnsigned.devInfo.linkToManual
+     being a link to an external site. -->
+<!ENTITY disabledUnsigned.devInfo.start "Kehittäjät, joita kiinnostaa lisäosansa varmentaminen voivat lukea ">
+<!ENTITY disabledUnsigned.devInfo.linkToManual "käsikirjamme">
+<!ENTITY disabledUnsigned.devInfo.end ".">
+
+<!ENTITY pluginDeprecation.description "Puuttuuko jotain? &brandShortName; ei enää tue joitain liitännäisiä.">
+<!ENTITY pluginDeprecation.learnMore "Lue lisää.">

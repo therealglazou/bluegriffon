@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<!DOCTYPE window [
+  <!ENTITY % dtd1 SYSTEM "chrome://inspector/locale/inspector.dtd"> %dtd1;
+]>
+
+<?xul-overlay href="chrome://inspector/content/inspectorOverlay.xul"?>
+<?xul-overlay href="chrome://inspector/content/toolboxOverlay.xul"?>
+<?xul-overlay href="chrome://inspector/content/popupOverlay.xul"?>
+<?xul-overlay href="chrome://inspector/content/commandOverlay.xul"?>
+<?xul-overlay href="chrome://inspector/content/keysetOverlay.xul"?>
+<?xul-overlay href="chrome://inspector/content/statusbarOverlay.xul"?>
+
+<?xul-overlay href="chrome://global/content/globalOverlay.xul"?>
+
+<?xml-stylesheet href="chrome://inspector/skin/inspectorWindow.css"?>
+
+<window id="winInspectorMain" title="&Inspector.title;"
+        width="640" height="480"
+        persist="screenX screenY width height sizemode"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  
+  <stringbundleset id="stringbundleset">
+    <stringbundle id="inspector-bundle" 
+                  src="chrome://inspector/locale/inspector.properties"/>
+  </stringbundleset>
+  <popupset id="aTooltipSet"/>
+  
+  <popupset id="ppsGlobalPopupset"/>
+  <popupset id="ppsViewerPopupset"/>
+  
+  <keyset id="ksGlobalKeyset"/>
+  <commandset id="cmdsGlobalCommands"/>
+
+  <commandset id="tasksCommands">
+    <command id="cmd_quit"/>
+  </commandset>
+
+  <commandset id="baseMenuCommandSet"/>
+
+  <keyset id="tasksKeys">
+    <key id="key_saveInspector" key="&saveCmd.key;" command="cmdSave"
+         modifiers="accel"/>
+    <key id="key_closeInspector" key="&closeCmd.key;" command="cmdClose"
+         modifiers="accel"/>
+    <key id="key_quit"/>
+  </keyset>
+
+  <keyset id="baseMenuKeyset"/>
+
+  <toolbox id="tbxInsToolbox">
+    <menubar id="mbrInspectorMain"/>
+    <toolbar id="tbInspectorPrimary"/>
+  </toolbox>
+
+  <vbox id="bxInspectorMain" flex="1"/>
+</window>

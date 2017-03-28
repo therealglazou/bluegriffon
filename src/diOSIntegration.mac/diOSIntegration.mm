@@ -58,7 +58,7 @@ diOSIntegration::~diOSIntegration()
 {
 }
 
-NS_IMPL_ISUPPORTS1(diOSIntegration, diIOSIntegration)
+NS_IMPL_ISUPPORTS(diOSIntegration, diIOSIntegration)
 
 NS_IMETHODIMP
 diOSIntegration::SetDocumentEdited(nsIBaseWindow *aWindow, bool aIsEdited) 

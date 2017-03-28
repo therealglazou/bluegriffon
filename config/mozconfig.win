@@ -6,37 +6,31 @@
 
 ac_add_options  --enable-application=bluegriffon
 
-# Copy files from C:\Program Files\Microsoft Visual Studio 9.0\VC\redist\x86\Microsoft.VC90.CRT
-# to a new directory which has no whitespace in its path, and indicates this path
-# into this variable:
-#WIN32_REDIST_DIR=/c/apps/vc9_redist
-
 mk_add_options MOZ_UPDATER=1
 
-# Comment out the following lines for an optimized build
-mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/../../bin/opt/official1.7
+# Comment out and adapt the following lines for an optimized build
+mk_add_options MOZ_OBJDIR=../../bin/opt/trunk
 ac_add_options --enable-optimize
 ac_add_options --disable-debug
+ac_add_options --enable-strip
 
-# Comment out the following lines for a debug build
-#mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/binaries-debug
+# Comment out and adapt the following lines for a debug build
+#mk_add_options MOZ_OBJDIR=../../bin/debug/bg-ng
 #ac_add_options --disable-optimize
 #ac_add_options --enable-debug
 
-# If you have Vista, comment the following line
-#ac_add_options --disable-vista-sdk-requirements
-
 ac_add_options --disable-tests
-ac_add_options --disable-javaxpcom
-ac_add_options --disable-activex
-ac_add_options --disable-activex-scripting
 ac_add_options --disable-crashreporter
 ac_add_options --enable-jemalloc
-ac_add_options --enable-webm
 ac_add_options --disable-webrtc
 ac_add_options --disable-dbm
 ac_add_options --disable-updater
 ac_add_options --disable-update-packaging
 
+ac_add_options --enable-chrome-format=jar
+
 mk_add_options MOZ_MAKE_FLAGS="-j8"
+
+ac_add_options --enable-media-navigator
+mk_add_options MOZ_MEDIA_NAVIGATOR=1
 

@@ -1,0 +1,4 @@
+JAR_MANIFESTS += ['jar.mn']
+
+if CONFIG['MOZ_WIDGET_TOOLKIT'] in ('windows', 'cocoa'):
+    DEFINES['CAN_DRAW_IN_TITLEBAR'] = 1

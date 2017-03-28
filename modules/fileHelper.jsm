@@ -37,15 +37,16 @@
 
 Components.utils.import("resource://gre/modules/Services.jsm");
 
-Components.utils.import("resource://app/modules/urlHelper.jsm");
-Components.utils.import("resource://app/modules/prompterHelper.jsm");
-Components.utils.import("resource://app/modules/editorHelper.jsm");
-Components.utils.import("resource://app/modules/l10nHelper.jsm");
-Components.utils.import("resource://app/modules/handlersManager.jsm");
+Components.utils.import("resource://gre/modules/urlHelper.jsm");
+Components.utils.import("resource://gre/modules/prompterHelper.jsm");
+Components.utils.import("resource://gre/modules/editorHelper.jsm");
+Components.utils.import("resource://gre/modules/l10nHelper.jsm");
+Components.utils.import("resource://gre/modules/handlersManager.jsm");
+Components.utils.import("resource://gre/modules/fileChanges.jsm");
 
-var EXPORTED_SYMBOLS = ["FileUtils"];
+var EXPORTED_SYMBOLS = ["BGFileHelper"];
 
-var FileUtils = {
+var BGFileHelper = {
 
   kLAST_FILE_LOCATION_PREFIX: "bluegriffon.lastFileLocation.",
 
@@ -144,7 +145,7 @@ var FileUtils = {
                      createInstance(Components.interfaces.nsIFileOutputStream);
       
       // use 0x02 | 0x10 to open file for appending.
-      foStream.init(destinationLocation, 0x02 | 0x08 | 0x20, 0666, 0); 
+      foStream.init(destinationLocation, 0x02 | 0x08 | 0x20, 0x1b6, 0);
       // write, create, truncate
       // In a c file operation, we have no need to set file mode with or operation,
       // directly using "r" or "w" usually.
@@ -159,6 +160,7 @@ var FileUtils = {
   
     if (success)
     {
+      FileChangeUtils.notifyFileModifiedByBlueGriffon(urlstring);
       try {
         if (doUpdateURI)
         {
@@ -173,7 +175,8 @@ var FileUtils = {
         // Update window title to show possibly different filename
         // This also covers problem that after undoing a title change,
         //   window title loses the extra [filename] part that this adds
-        EditorUtils.getCurrentEditorWindow().UpdateWindowTitle();
+        var newTitle = EditorUtils.getCurrentEditorWindow().UpdateWindowTitle();
+        EditorUtils.getCurrentTabEditor().selectedTab.label = newTitle;
   
         if (!aSaveCopy) {
           editor.resetModificationCount();
@@ -289,7 +292,7 @@ var FileUtils = {
                      createInstance(Components.interfaces.nsIFileOutputStream);
       
       // use 0x02 | 0x10 to open file for appending.
-      foStream.init(destinationLocation, 0x02 | 0x08 | 0x20, 0666, 0); 
+      foStream.init(destinationLocation, 0x02 | 0x08 | 0x20, 0x1b6, 0);
       encoder.encodeToStream(foStream);
       foStream.close(); // this closes foStream
     }
@@ -301,6 +304,7 @@ var FileUtils = {
     if (success)
     {
       try {
+        FileChangeUtils.notifyFileModifiedByBlueGriffon(urlstring);
         if (doUpdateURI)
         {
            // If a local file, we must create a new uri from nsILocalFile
@@ -314,7 +318,8 @@ var FileUtils = {
         // Update window title to show possibly different filename
         // This also covers problem that after undoing a title change,
         //   window title loses the extra [filename] part that this adds
-        EditorUtils.getCurrentEditorWindow().UpdateWindowTitle();
+        var newTitle = EditorUtils.getCurrentEditorWindow().UpdateWindowTitle();
+        EditorUtils.getCurrentTabEditor().selectedTab.label = newTitle;
   
         if (!aSaveCopy) {
           editor.resetModificationCount();
@@ -394,7 +399,9 @@ var FileUtils = {
     if (aDoSaveAsText || aEditorType == "text")
       promptString = L10NUtils.getString("ExportToText");
     else
-      promptString = L10NUtils.getString("SaveDocumentAs")
+      promptString = L10NUtils.getString("SaveDocumentAs");
+
+    promptString += " : " + EditorUtils.getDocumentTitle();
   
     fp.init(EditorUtils.getCurrentEditorWindow(), promptString, this.nsIFilePicker.modeSave);
   
@@ -625,8 +632,8 @@ var FileUtils = {
   setSaveAndPublishUI: function(urlstring)
   {
     // Be sure enabled state of toolbar buttons are correct
-    goUpdateCommand("cmd_save");
-    goUpdateCommand("cmd_publish");
+    EditorUtils.getCurrentEditorWindow().goUpdateCommand("cmd_save");
+    EditorUtils.getCurrentEditorWindow().goUpdateCommand("cmd_publish");
   }
 };
 

@@ -12,6 +12,7 @@
         onload = "Startup()"
         buttons="accept,cancel"
         style="height: auto"
+        forcecleartheme = "true"
         ondialogaccept="return onAccept();"
         persist="screenX screenY">
 
@@ -66,30 +67,32 @@
       <rows>
         <row align="center">
           <label value="&alignment.label;"/>
-          <toolbarbutton class="multibutton"
-                         type="checkbox"
-                         id="leftAlignButton"
-                         label="&left.label;"
-                         value="left"
-                         oncommand="ToggleAlignment(this)"/>
-          <toolbarbutton class="multibutton"
-                         type="checkbox"
-                         id="centerAlignButton"
-                         label="&center.label;"
-                         value="center"
-                         oncommand="ToggleAlignment(this)"/>
-          <toolbarbutton class="multibutton"
-                         type="checkbox"
-                         id="rightAlignButton"
-                         label="&right.label;"
-                         value="right"
-                         oncommand="ToggleAlignment(this)"/>
+          <hbox align="center">
+            <toolbarbutton class="multibutton"
+                           type="checkbox"
+                           id="leftAlignButton"
+                           label="&left.label;"
+                           value="left"
+                           oncommand="ToggleAlignment(this)"/>
+            <toolbarbutton class="multibutton"
+                           type="checkbox"
+                           id="centerAlignButton"
+                           label="&center.label;"
+                           value="center"
+                           oncommand="ToggleAlignment(this)"/>
+            <toolbarbutton class="multibutton"
+                           type="checkbox"
+                           id="rightAlignButton"
+                           label="&right.label;"
+                           value="right"
+                           oncommand="ToggleAlignment(this)"/>
+          </hbox>
         </row>
         <row align="center">
           <label value="&color.label;"/>
           <hbox align="center">
             <ecolorpicker id="colorColorpicker"
-                          color="black"
+                          color="white"
                           colorObjectId="BackgroundColor"
                           windowTitle="&hrColor.label;"
                           showTransparency="false"/>

@@ -2,18 +2,18 @@
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 
-<!-- Note: each tab panel must contain unique accesskeys -->
-
 <!ENTITY generalTab.label                "Ogólne">
 
 <!ENTITY accessibility.label             "Dostępność">
 
 <!ENTITY useCursorNavigation.label       "Zawsze używaj klawiszy kursora do nawigacji po stronach">
 <!ENTITY useCursorNavigation.accesskey   "g">
-<!ENTITY searchStartTyping.label         "Rozpoczynaj wyszukiwanie podczas wpisywania tekstu">
-<!ENTITY searchStartTyping.accesskey     "r">
-<!ENTITY blockAutoRefresh.label          "Ostrzegaj, jeśli witryny próbują przekierować lub odświeżyć stronę">
-<!ENTITY blockAutoRefresh.accesskey      "w">
+<!ENTITY searchOnStartTyping.label "Rozpoczynaj wyszukiwanie podczas wpisywania tekstu">
+<!ENTITY searchOnStartTyping.accesskey "R">
+<!ENTITY blockAutoReload.label "Ostrzegaj, jeśli witryny próbują przekierować lub odświeżyć stronę">
+<!ENTITY blockAutoReload.accesskey "w">
+<!ENTITY useOnScreenKeyboard.label "Wyświetlanie klawiatury ekranowej, gdy zachodzi taka potrzeba">
+<!ENTITY useOnScreenKeyboard.accesskey "e">
 
 <!ENTITY browsing.label                  "Przeglądanie">
 
@@ -21,55 +21,45 @@
 <!ENTITY useAutoScroll.accesskey         "y">
 <!ENTITY useSmoothScrolling.label        "Używaj płynnego przewijania">
 <!ENTITY useSmoothScrolling.accesskey    "n">
-<!ENTITY allowHWAccel.label              "Korzystaj z akceleracji sprzętowej, jeśli jest dostępna">
+<!ENTITY allowHWAccel.label "Korzystaj ze sprzętowego przyspieszania, jeśli jest dostępne">
 <!ENTITY allowHWAccel.accesskey          "K">
-<!ENTITY checkSpelling.label             "Sprawdzaj pisownię podczas wprowadzania tekstu">
-<!ENTITY checkSpelling.accesskey         "i">
+<!ENTITY checkUserSpelling.label "Sprawdzaj pisownię podczas wprowadzania tekstu">
+<!ENTITY checkUserSpelling.accesskey "i">
 
-<!ENTITY systemDefaults.label  		 "Ustawienia systemowe">
-<!ENTITY alwaysCheckDefault.label      	 "Przy uruchamianiu sprawdzaj, czy &brandShortName; jest domyślną przeglądarką">
-<!ENTITY alwaysCheckDefault.accesskey  	 "c">
-<!ENTITY setDefault.label                "Ustaw program &brandShortName; jako domyślną przeglądarkę">
-<!ENTITY setDefault.accesskey            "s">
-<!ENTITY isDefault.label                 "&brandShortName; jest obecnie domyślną przeglądarką">
+<!ENTITY dataChoicesTab.label "Udostępniane dane">
 
-<!ENTITY dataChoicesTab.label            "Udostępnianie danych">
+<!ENTITY healthReportDesc.label "Raport o zdrowiu Firefoksa ułatwia zrozumienie wydajności przeglądarki i udostępnia dane o jej stanie organizacji &vendorShortName;.">
+<!ENTITY enableHealthReport.label "Raport o zdrowiu programu &brandShortName;">
+<!ENTITY enableHealthReport.accesskey "F">
+<!ENTITY healthReportLearnMore.label "Więcej informacji">
 
-<!ENTITY healthReportSection.label       "&brandShortName; Health Report">
-<!ENTITY healthReportDesc.label          "Pozwala ci zrozumieć wydajność przeglądarki i udostępnia dane o jej stanie organizacji &vendorShortName;">
-<!ENTITY enableHealthReport.label        "Włącz funkcję &brandShortName; Health Report">
-<!ENTITY enableHealthReport.accesskey    "R">
-<!ENTITY healthReportLearnMore.label     "Więcej informacji">
+<!ENTITY telemetryDesc.label "Udostępnianie organizacji &vendorShortName; danych o wydajności, wykorzystaniu, modyfikacjach przeglądarki oraz o sprzęcie, na którym działa, ułatwia ulepszanie programu &brandShortName;.">
+<!ENTITY enableTelemetryData.label "Udostępnianie dodatkowych danych (np. Telemetrii)">
+<!ENTITY enableTelemetryData.accesskey "U">
+<!ENTITY telemetryLearnMore.label "Więcej informacji">
 
-<!ENTITY telemetrySection.label          "Telemetria">
-<!ENTITY telemetryDesc.label             "Udostępnia organizacji &vendorShortName; dane o wydajności, wykorzystaniu, modyfikacjach przeglądarki oraz o sprzęcie na którym działa, aby pomóc nam w ulepszeniu programu &brandShortName;">
-<!ENTITY enableTelemetry.label           "Włącz telemetrię">
-<!ENTITY enableTelemetry.accesskey       "t">
-<!ENTITY telemetryLearnMore.label        "Więcej informacji">
-
-<!ENTITY crashReporterSection.label      "Zgłaszanie awarii">
-<!ENTITY crashReporterDesc.label         "&brandShortName; przesyła zgłoszenia awarii, aby organizacja &vendorShortName; mogła poprawić stabilność i bezpieczeństwo przeglądarki">
-<!ENTITY enableCrashReporter.label       "Włącz zgłaszanie awarii">
-<!ENTITY enableCrashReporter.accesskey   "c">
-<!ENTITY crashReporterLearnMore.label    "Więcej informacji">
+<!ENTITY crashReporterDesc2.label "Zgłoszenia awarii pomagają organizacji &vendorShortName; poprawiać stabilność, bezpieczeństwo i naprawiać problemy z przeglądarką.">
+<!ENTITY alwaysSubmitCrashReports.label "Przesyłanie zgromadzonych zgłoszeń awarii programu &brandShortName;">
+<!ENTITY alwaysSubmitCrashReports.accesskey "e">
+<!ENTITY crashReporterLearnMore.label "Więcej informacji">
 
 <!ENTITY networkTab.label                "Sieć">
 
 <!ENTITY connection.label                "Połączenie">
 
-<!ENTITY connectionDesc.label            "Określ, w jaki sposób &brandShortName; ma się łączyć z Internetem">
+<!ENTITY connectionDesc.label            "Określ, w jaki sposób &brandShortName; ma się łączyć z Internetem">
 <!ENTITY connectionSettings.label        "Ustawienia…">
 <!ENTITY connectionSettings.accesskey    "U">
 
-<!ENTITY httpCache.label                 "Treści w pamięci podręcznej">
-<!ENTITY offlineStorage2.label           "Treści dla trybu offline i dane użytkownika">
-    
-<!-- LOCALIZATION NOTE:
-  The entities limitCacheSizeBefore.label and limitCacheSizeAfter.label appear on a single
-  line in preferences as follows:
+<!ENTITY httpCache.label                 "Treści w pamięci podręcznej">
+<!ENTITY offlineStorage2.label           "Treści dla trybu offline i dane użytkownika">
+<!ENTITY siteData.label "Dane stron">
+<!ENTITY clearSiteData.label "Wyczyść wszystkie dane">
+<!ENTITY clearSiteData.accesskey "d">
+<!ENTITY siteDataSettings.label "Ustawienia…">
+<!ENTITY siteDataSettings.accesskey "U">
+<!ENTITY siteDataLearnMoreLink.label "Więcej informacji">
 
-  &limitCacheSizeBefore.label [textbox for cache size in MB] &limitCacheSizeAfter.label;
--->
 <!ENTITY limitCacheSizeBefore.label      "Ogranicz pamięć podręczną do ">
 <!ENTITY limitCacheSizeBefore.accesskey  "z">
 <!ENTITY limitCacheSizeAfter.label       "MB">
@@ -81,33 +71,26 @@
 <!ENTITY overrideSmartCacheSize.accesskey "m">
 
 <!ENTITY updateTab.label                 "Aktualizacja">
-
-<!ENTITY updateApp.label                 "Aktualizacje programu &brandShortName;:">
-<!ENTITY updateAuto.label                "Instaluj aktualizacje automatycznie (zalecane: większe bezpieczeństwo)">
-<!ENTITY updateAuto.accesskey            "n">
-<!ENTITY updateCheck.label               "Sprawdzaj dostępność aktualizacji, ale wymagaj potwierdzenia ich instalacji">
-<!ENTITY updateCheck.accesskey           "S">
+<!ENTITY updateApplication.label "Aktualizacje programu &brandShortName;">
+<!ENTITY updateAuto1.label               "Instaluj aktualizacje automatycznie (zalecane: większe bezpieczeństwo)">
+<!ENTITY updateAuto1.accesskey "I">
+<!ENTITY updateCheckChoose.label "Sprawdzaj dostępność aktualizacji, ale wymagaj potwierdzenia ich instalacji">
+<!ENTITY updateCheckChoose.accesskey "S">
 <!ENTITY updateManual.label              "Nie sprawdzaj dostępności aktualizacji (niezalecane: zagrożenie bezpieczeństwa)">
 <!ENTITY updateManual.accesskey          "N">
-
-<!ENTITY updateAutoAddonWarn.label       "Ostrzeż, jeśli spowoduje to wyłączenie któregoś z dodatków">
-<!ENTITY updateAutoAddonWarn.accesskey   "O">
-
 <!ENTITY updateHistory.label             "Wyświetl historię aktualizacji">
 <!ENTITY updateHistory.accesskey         "W">
+<!ENTITY useService.label                "Używaj usługi instalowania aktualizacji działającej w tle">
+<!ENTITY useService.accesskey "U">
 
-<!ENTITY useService.label                "Używaj usługi instalowania aktualizacji działającej w tle">
-<!ENTITY useService.accesskey            "g">
+<!ENTITY autoUpdateOthers.label "Aktualizacje automatyczne">
+<!ENTITY enableSearchUpdate.label "Wyszukiwarki">
+<!ENTITY enableSearchUpdate.accesskey "z">
 
-<!ENTITY updateOthers.label              "Aktualizuj automatycznie:">
-<!ENTITY enableSearchUpdate.label        "wyszukiwarki">
-<!ENTITY enableSearchUpdate.accesskey    "s">
-
-<!-- FIXME (offlineNotify.label) skrócić -->
-<!ENTITY offlineNotify.label             "Powiadamiaj, kiedy witryna poprosi o możliwość przechowywania danych dla trybu offline">
-<!ENTITY offlineNotify.accesskey         "o">
-<!ENTITY offlineNotifyExceptions.label   "Wyjątki…">
-<!ENTITY offlineNotifyExceptions.accesskey "W">
+<!ENTITY offlineStorageNotify.label "Pytaj, kiedy witryna prosi o możliwość przechowywania danych dla trybu offline">
+<!ENTITY offlineStorageNotify.accesskey "o">
+<!ENTITY offlineStorageNotifyExceptions.label "Wyjątki…">
+<!ENTITY offlineStorageNotifyExceptions.accesskey "W">
 
 <!ENTITY offlineAppsList2.label          "Następujące witryny mogą przechowywać dane dla trybu offline:">
 <!ENTITY offlineAppsList.height          "7em">
@@ -115,25 +98,16 @@
 <!ENTITY offlineAppsListRemove.accesskey "s">
 <!ENTITY offlineAppRemove.confirm        "Usuń dane trybu offline">
 
-<!ENTITY encryptionTab.label             "Szyfrowanie">
-
-<!ENTITY protocols.label                 "Protokoły">
-<!ENTITY useSSL3.label                   "Włącz obsługę SSL 3.0">
-<!ENTITY useSSL3.accesskey               "3">
-<!ENTITY useTLS1.label                   "Włącz obsługę TLS 1.0">
-<!ENTITY useTLS1.accesskey               "1">
-<!ENTITY certificates.label              "Certyfikaty">
-<!ENTITY certSelection.description       "Kiedy serwer żąda osobistego certyfikatu użytkownika:">
-<!ENTITY certs.auto                      "wybierz certyfikat automatycznie">
-<!ENTITY certs.auto.accesskey            "c">
-<!ENTITY certs.ask                       "pytaj za każdym razem">
-<!ENTITY certs.ask.accesskey             "t">
+<!ENTITY certificateTab.label            "Certyfikaty">
+<!ENTITY certPersonal.label "Żądania certyfikatów">
+<!ENTITY certPersonal.description "Kiedy serwer żąda osobistego certyfikatu użytkownika:">
+<!ENTITY selectCerts.auto "wybierz certyfikat automatycznie">
+<!ENTITY selectCerts.auto.accesskey "a">
+<!ENTITY selectCerts.ask "pytaj za każdym razem">
+<!ENTITY selectCerts.ask.accesskey "r">
+<!ENTITY enableOCSP.label "Odpytywanie serwerów OCSP w celu potwierdzenia wiarygodności certyfikatów">
+<!ENTITY enableOCSP.accesskey "O">
 <!ENTITY viewCerts.label                 "Wyświetl certyfikaty">
-<!ENTITY viewCerts.accesskey             "e">
-<!ENTITY viewCRLs.label                  "Listy odwołania">
-<!ENTITY viewCRLs.accesskey              "L">
-<!ENTITY verify2.label                   "Weryfikacja">
-<!ENTITY verify2.accesskey               "j">
+<!ENTITY viewCerts.accesskey "W">
 <!ENTITY viewSecurityDevices.label       "Urządzenia zabezpieczające">
-<!ENTITY viewSecurityDevices.accesskey   "d">
-
+<!ENTITY viewSecurityDevices.accesskey "U">

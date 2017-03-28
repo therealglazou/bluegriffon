@@ -1,13 +1,27 @@
-<!ENTITY networkPanel.requestURL                  "URL zahtevka">
-<!ENTITY networkPanel.requestMethod               "Metoda zahtevka">
-<!ENTITY networkPanel.statusCode                  "Številka stanja">
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<!-- LOCALIZATION NOTE : FILE The correct localization of this file might be to
+  - keep it in English, or another language commonly spoken among web developers.
+  - You want to make that choice consistent across the developer tools.
+  - A good criteria is the language in which you'd find the best
+  - documentation on web development on the web. -->
+
+<!ENTITY window.title "Spletna konzola">
+<!ENTITY browserConsole.title "Konzola brskalnika">
+
+<!ENTITY networkPanel.requestURLColon                  "URL zahtevka:">
+<!ENTITY networkPanel.requestMethodColon               "Metoda zahtevka:">
+<!ENTITY networkPanel.statusCodeColon                  "Številka stanja:">
 
 <!ENTITY networkPanel.requestHeaders              "Glava zahtevka">
-<!ENTITY networkPanel.requestCookie               "Poslani piškot">
+<!ENTITY networkPanel.requestCookie               "Poslani piškotek">
 <!ENTITY networkPanel.requestBody                 "Telo zahtevka">
 <!ENTITY networkPanel.requestFormData             "Poslani podatki obrazca">
 
 <!ENTITY networkPanel.responseHeaders             "Glava odgovora">
+<!ENTITY networkPanel.responseCookie              "Prejeti piškotek">
 <!ENTITY networkPanel.responseBody                "Telo odgovora">
 <!ENTITY networkPanel.responseBodyCached          "Predpomnjeni podatki">
 <!ENTITY networkPanel.responseBodyUnknownType     "Neznana vrsta vsebine">
@@ -15,38 +29,56 @@
 <!ENTITY networkPanel.responseImage               "Prejeta slika">
 <!ENTITY networkPanel.responseImageCached         "Predpomnjena slika">
 
-<!ENTITY browserConsole.title "Browser Console">
-<!ENTITY btnClear.label        "Clear">
-<!ENTITY btnClear.tooltip      "Clear the Web Console output">
-<!ENTITY btnConsoleErrors       "Errors">
-<!ENTITY btnConsoleInfo         "Info">
-<!ENTITY btnConsoleLog          "Log">
-<!ENTITY btnConsoleWarnings     "Warnings">
-<!ENTITY btnPageCSS.label   "CSS">
-<!ENTITY btnPageCSS.tooltip "Log CSS parsing errors">
-<!ENTITY btnPageJS.label    "JS">
-<!ENTITY btnPageJS.tooltip  "Log JavaScript exceptions">
+<!-- LOCALIZATION NOTE (saveBodies.label): You can see this string in the Web
+   - Console context menu. -->
+<!ENTITY saveBodies.label     "Beleži telo zahtevka in odgovora">
+<!ENTITY saveBodies.accesskey "L">
 
-<!-- LOCALIZATION NOTE (btnPageLogging): This is used as the text of the
-  -  the toolbar. It shows or hides messages that the web developer inserted on
-  -  the page for debugging purposes, using calls such console.log() and
-  -  console.error(). -->
-<!ENTITY btnPageLogging.label   "Logging">
-<!ENTITY btnPageLogging.tooltip "Log messages sent to the window.console object">
+<!-- LOCALIZATION NOTE (openURL.label): You can see this string in the Web
+   - Console context menu. -->
+<!ENTITY openURL.label     "Odpri URL v novem zavihku">
+<!ENTITY openURL.accesskey "z">
 
 <!-- LOCALIZATION NOTE (btnPageNet.label): This string is used for the menu
   -  button that allows users to toggle the network logging output.
   -  This string and the following strings toggle various kinds of output
   -  filters. -->
-<!ENTITY btnPageNet.label   "Net">
-<!ENTITY btnPageNet.tooltip "Log network access">
+<!ENTITY btnPageNet.label   "Mreža">
+<!ENTITY btnPageNet.tooltip "Beleži omrežni dostop">
+<!ENTITY btnPageNet.accesskey "M">
+<!-- LOCALIZATION NOTE (btnPageNet.accesskeyMacOSX): This string is used as
+  -  access key for the menu button that allows users to toggle the network
+  -  logging output. On MacOSX accesskeys are available with Ctrl-*. Please make
+  -  sure you do not use the following letters: A, E, N and P. These are used
+  -  for editing commands in text inputs. -->
+<!ENTITY btnPageNet.accesskeyMacOSX "M">
+<!ENTITY btnPageCSS.label   "CSS">
+<!ENTITY btnPageCSS.tooltip2 "Beleži napake in opozorila CSS">
+<!ENTITY btnPageCSS.accesskey "C">
+<!ENTITY btnPageJS.label    "JS">
+<!ENTITY btnPageJS.tooltip  "Beleži izjeme JavaScripta">
+<!ENTITY btnPageJS.accesskey  "J">
+<!ENTITY btnPageSecurity.label "Varnost">
+<!ENTITY btnPageSecurity.tooltip "Beleži varnostne napake in opozorila">
+<!ENTITY btnPageSecurity.accesskey "S">
 
-<!ENTITY closeCmd.key  "W">
-<!ENTITY copyURLCmd.accesskey "a">
+<!-- LOCALIZATION NOTE (btnPageLogging): This is used as the text of the
+  -  the toolbar. It shows or hides messages that the web developer inserted on
+  -  the page for debugging purposes, using calls such console.log() and
+  -  console.error(). -->
+<!ENTITY btnPageLogging.label   "Beleženje">
+<!ENTITY btnPageLogging.tooltip "Beleži sporočila, poslana objektu window.console">
+<!ENTITY btnPageLogging.accesskey3 "L">
+<!ENTITY btnConsoleErrors       "Napake">
+<!ENTITY btnConsoleInfo         "Podatki">
+<!ENTITY btnConsoleWarnings     "Opozorila">
+<!ENTITY btnConsoleLog          "Beležke">
+<!ENTITY btnConsoleReflows      "Prerazporeditve">
 
-<!ENTITY copyURLCmd.label     "Copy Link Location">
-
-<!ENTITY filterOutput.placeholder "Filter output">
+<!ENTITY filterOutput.placeholder "Išči po izpisu">
+<!ENTITY btnClear.label        "Počisti">
+<!ENTITY btnClear.tooltip      "Počisti sporočila spletne konzole">
+<!ENTITY btnClear.accesskey    "P">
 
 <!ENTITY fullZoomEnlargeCmd.commandkey  "+">
 <!ENTITY fullZoomEnlargeCmd.commandkey2 "="> <!-- + is above this key on many keyboards -->
@@ -57,27 +89,12 @@
 
 <!ENTITY fullZoomResetCmd.commandkey    "0">
 <!ENTITY fullZoomResetCmd.commandkey2   "">
-<!ENTITY networkPanel.requestMethodColon          "Request Method:">
 
-<!ENTITY networkPanel.requestURLColon             "Request URL:">
-<!ENTITY networkPanel.responseCookie              "Received Cookie">
-<!ENTITY networkPanel.statusCodeColon             "Status Code:">
-<!ENTITY openURL.accesskey "T">
+<!ENTITY copyURLCmd.label     "Kopiraj mesto povezave">
+<!ENTITY copyURLCmd.accesskey "a">
 
-<!-- LOCALIZATION NOTE (openURL.label): You can see this string in the Web
-   - Console context menu. -->
-<!ENTITY openURL.label     "Open URL in New Tab">
-<!ENTITY saveBodies.accesskey "L">
+<!ENTITY closeCmd.key         "W">
+<!ENTITY findCmd.key          "F">
+<!ENTITY clearOutputCtrl.key  "L">
 
-<!-- LOCALIZATION NOTE (saveBodies.label): You can see this string in the Web
-   - Console context menu. -->
-<!ENTITY saveBodies.label     "Log Request and Response Bodies">
-
-
-<!-- LOCALIZATION NOTE : FILE The correct localization of this file might be to
-  - keep it in English, or another language commonly spoken among web developers.
-  - You want to make that choice consistent across the developer tools.
-  - A good criteria is the language in which you'd find the best
-  - documentation on web development on the web. -->
-
-<!ENTITY window.title "Web Console">
+<!ENTITY btnConsoleXhr          "XHR">

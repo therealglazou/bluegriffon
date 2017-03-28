@@ -1,5 +1,5 @@
-Components.utils.import("resource://app/modules/urlHelper.jsm");
-Components.utils.import("resource://app/modules/l10nHelper.jsm");
+Components.utils.import("resource://gre/modules/urlHelper.jsm");
+Components.utils.import("resource://gre/modules/l10nHelper.jsm");
 
 const kFONT_FEATURES = [
   "aalt",
@@ -111,6 +111,7 @@ function FontsInit()
 
     var h1 = document.createElement("hbox");
     h1.setAttribute("align", "center");
+    h1.setAttribute("style", "-moz-margin-start: 4px");
     row.appendChild(h1);
 
     var i1 = document.createElement("image");
@@ -137,6 +138,7 @@ function FontsInit()
 	
 	    var h2 = document.createElement("hbox");
 	    h2.setAttribute("align", "center");
+      h2.setAttribute("style", "-moz-margin-start: 4px");
 	    row.appendChild(h2);
 	
 	    var i2 = document.createElement("image");

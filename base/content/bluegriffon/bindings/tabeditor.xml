@@ -40,6 +40,8 @@
 <!DOCTYPE bindings [
   <!ENTITY % tabEditorDTD SYSTEM "chrome://bluegriffon/locale/tabeditor.dtd" >
   %tabEditorDTD;
+  <!ENTITY % bluegriffonDTD  SYSTEM "chrome://bluegriffon/locale/bluegriffon.dtd" >
+  %bluegriffonDTD;
 ]>
 
 <bindings id="tabEditorBindings"
@@ -57,10 +59,21 @@
 
     <content>
       <xul:tabbox anonid="EditorTabbox" flex="1" onselect="">
-        <xul:hbox class="tabeditor-strip" >
+        <xul:hbox style="min-height: 24px">
           <xul:tabs flex="1" anonid="EditorTabs" closebutton="true"
-                    class="tabeditor-tabs"
                     setfocus="false" onselect="onTabSelected(event, this.parentNode.parentNode)"/>
+          <xul:vbox style="width: 24px" id="newDocumentButton">
+            <xul:spacer flex="1"/>
+            <xul:hbox>
+              <xul:spacer flex="1"/>
+              <xul:toolbarbutton image="chrome://bluegriffon/skin/plus.png"
+                                 id="newDocumentWithOptionsButton"
+                                 tooltiptext="&newToolbarCmd.tooltip;"
+                                 oncommand="NewDocumentWithOptions(event);"/>
+              <xul:spacer flex="1"/>
+            </xul:hbox>
+            <xul:spacer flex="1"/>
+          </xul:vbox>
         </xul:hbox>
         <xul:grid flex="1">
           <xul:columns><xul:column /><xul:column flex="1"/></xul:columns>
@@ -69,9 +82,21 @@
               <xul:spacer/>
               <xul:hruler anonid="hruler" disabled="true"/>
             </xul:row>
-            <xul:row flex="1">
+            <xul:row flex="1" style="background-image: url('chrome://bluegriffon/content/logo.png'); background-repeat: no-repeat; background-position: center center">
               <xul:vruler anonid="vruler" disabled="true" />
-              <xul:tabpanels anonid="EditorTabpanels" selectedIndex="0" flex="1" style="margin:0px; padding:0px"/>
+              <xul:hbox flex="1">
+                <xul:tabpanels anonid="EditorTabpanels" id="EditorTabpanels" selectedIndex="0" flex="1" style="margin:0px; padding:0px;"/>
+                <xul:splitter id="responsiveSplitter"
+                              anonid="responsiveSplitter"
+                              collapse="after"
+                              hidden="true"
+                              tooltiptext="to resize your editing viewport"/>
+                <xul:box anonid="viewportSplitterBox" flex="1" collapsed="true" hidden="true"/>
+              </xul:hbox>
+            </xul:row>
+            <xul:row id="helperButtons" align="center">
+              <xul:spacer flex="1"/>
+              <children/>
             </xul:row>
           </xul:rows>
         </xul:grid>
@@ -81,10 +106,17 @@
 
     <implementation>
 
+      <method name="getChild">
+        <parameter name="aChildName"/>
+        <body><![CDATA[
+          return document.getAnonymousElementByAttribute(this, "anonid", aChildName);
+        ]]></body>
+      </method>
+
       <property name="mHruler">
         <getter>
         <![CDATA[
-          return document.getAnonymousElementByAttribute(this, "anonid", "hruler");
+          return this.getChild("hruler");
         ]]>
         </getter>
       </property>
@@ -92,7 +124,7 @@
       <property name="mVruler">
         <getter>
         <![CDATA[
-          return document.getAnonymousElementByAttribute(this, "anonid", "vruler");
+          return this.getChild("vruler");
         ]]>
         </getter>
       </property>
@@ -100,7 +132,7 @@
       <property name="mTabbox">
         <getter>
         <![CDATA[
-          return document.getAnonymousElementByAttribute(this, "anonid", "EditorTabbox");
+          return this.getChild("EditorTabbox");
         ]]>
         </getter>
       </property>
@@ -108,7 +140,7 @@
       <property name="mTabs">
         <getter>
         <![CDATA[
-          return document.getAnonymousElementByAttribute(this, "anonid", "EditorTabs");
+          return this.getChild("EditorTabs");
         ]]>
         </getter>
       </property>
@@ -116,7 +148,7 @@
       <property name="mTabpanels">
         <getter>
         <![CDATA[
-          return document.getAnonymousElementByAttribute(this, "anonid", "EditorTabpanels");
+          return this.getChild("EditorTabpanels");
         ]]>
         </getter>
       </property>
@@ -129,10 +161,12 @@
 
       <destructor>
         <![CDATA[
-          const editors = this.mTabPanels.childNodes;
-          for (var i = 0; i < editors.length; i++)
-          {
-            editors[i].lastChild.removeEventListener("DOMTitleChanged", this.changeTabTitle, false);
+          if (this.mTabPanels) {
+            const editors = this.mTabPanels.childNodes;
+            for (var i = 0; i < editors.length; i++)
+            {
+              editors[i].lastChild.removeEventListener("DOMTitleChanged", this.changeTabTitle, false);
+            }
           }
         ]]>
       </destructor>
@@ -248,8 +282,9 @@
                       var scheme = thisURI.scheme;
                       if (scheme == "resource")
                         this.mTab.setAttribute("image", "chrome://mozapps/skin/places/defaultFavicon.png");
-                      else
+                      else {
                         this.mTab.setAttribute("image", thisURI.prePath + "/favicon.ico");
+                      }
                     }
                     catch(e) {}
 
@@ -278,7 +313,7 @@
                         var rel = l.getAttribute("rel").toLowerCase();
                         if (rel == "shortcut icon"
                             || rel == "icon") {
-                          this.mTab.setAttribute("image", l.getAttribute("href"));
+                          this.mTab.setAttribute("image", l.href);
                         }
                       }
                       if (UrlUtils.isUrlOfBlankDocument(editor.document.QueryInterface(Components.interfaces.nsIDOMHTMLDocument).URL)) {
@@ -309,10 +344,16 @@
                       this.mEditorSheets = true;
                       editor instanceof Components.interfaces.nsIPlaintextEditor;
                       editor instanceof Components.interfaces.nsIHTMLEditor;
+                      editor instanceof Components.interfaces.nsIEditor;
                       editor instanceof Components.interfaces.nsIEditorStyleSheets;
 
                       editor.addOverrideStyleSheet("chrome://bluegriffon/content/EditorAllTags.css");
                       editor.enableStyleSheet("chrome://bluegriffon/content/EditorAllTags.css", false);
+                      editor.addOverrideStyleSheet("chrome://bluegriffon/content/EditorContentAnchors.css");
+                      if (Services.prefs.getBoolPref("bluegriffon.display.anchors")) {
+                        if (editor.document) // sanity case
+                          editor.document.documentElement.setAttribute("_moz_showanchors", "true");
+                      }
                       editor.addOverrideStyleSheet("chrome://bluegriffon/content/EditorContent.css");
                       editor.addOverrideStyleSheet("chrome://bluegriffon/content/EditorOverride.css");
 
@@ -320,12 +361,16 @@
                         .addSelectionListener(ComposerCommands.selectionListener);
                       editor.addEditorObserver(ComposerCommands.selectionListener);
                       editor.addEditorMouseObserver(ComposerCommands.selectionListener);
+                      editor.transactionManager
+                        .AddListener(ComposerCommands.selectionListener);
+                      editor.transactionManager
+                        .AddListener(liveViewTransactionListener);
                     }
                     if (editor &&
-                        "ActiveSourceTree" in window)
+                        "ActiveViewManager" in window &&
+                        aStateFlags & nsIWebProgressListener.STATE_IS_WINDOW)
                     {
-                      var source = new ActiveSourceTree(this.mEditor);
-                      var sourceElt = source.mSourceTreeXULElement;
+                      ActiveViewManager.newDocument(this.mEditor);
                     }
                   }
                   if (editor && editor.document) {
@@ -388,6 +433,7 @@
                             isXML = true;
                             break;
                           case "":
+                          case "about:legacy-compat":
                             isXML = (editor.document.documentElement.getAttribute("xmlns") == "http://www.w3.org/1999/xhtml");
                             break;
                           case null:
@@ -397,8 +443,6 @@
                         meta.setAttribute("content", (isXML ? "application/xhtml+xml" : "text/html") + "; charset=" + charset);
                         head.insertBefore(meta, head.firstChild);
                       }
-
-                      UpdateTabHTMLDialect(this.mEditor);
 
                       editor.resetModificationCount();
                       editor.transactionManager.clear();
@@ -474,19 +518,20 @@
             newTab.setAttribute("flex", 100);
             newTab.setAttribute("crop", "end");
             newTab.setAttribute("busy", "true");
+            newTab.setAttribute("tooltip", "tab-tooltip");
 
             this.mTabpanels.appendChild(newBox);
 
             newEditorElement.makeEditable("html", true);
 
-            var docShell = newEditorElement.boxObject.QueryInterface(Components.interfaces.nsIEditorBoxObject).docShell;
+            var docShell = newEditorElement.docShell;
             var progress = docShell.QueryInterface(Components.interfaces.nsIInterfaceRequestor).getInterface(Components.interfaces.nsIWebProgress);
             var progressListener = new EditorContentListener(this, newEditorElement, aURL, newTab);
             progress.addProgressListener(progressListener, Components.interfaces.nsIWebProgress.NOTIFY_ALL);
 
             var _self = this;
             newEditorElement.addEventListener("load", function(evt) { 
-                if (evt.originalTarget == content.document){ _self.finishInstall(progressListener); } }, true);
+                if (evt.originalTarget == GetWindowContent().document){ _self.finishInstall(progressListener); } }, true);
             newEditorElement.addEventListener("DOMTitleChanged", this.changeTabTitle, false);
 
             newEditorElement.addEventListener("dblclick", function(evt) { OnDoubleClick(evt) }, true);
@@ -540,7 +585,7 @@
           if (!e)
             return;
 
-          var tabeditor = this.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
+          var tabeditor = gDialog.tabeditor;
           var tabs      = tabeditor.mTabs.childNodes;
           var editors   = tabeditor.mTabpanels.childNodes;
           var l = editors.length;
@@ -591,21 +636,27 @@
               editors.item(i).lastChild.removeAttribute("type");
 
             var newBox = document.createElement("deck");
+            newBox.setAttribute("anonid", "editorDeck");
 
             var iframe = document.createElement("iframe");
             var _self = this;
             gDialog.sourceModeButton.setAttribute("busy", "true");
             iframe.addEventListener("load", function() {_self._installBespin(iframe);}, true);
             iframe.setAttribute("type", "chrome");
-            iframe.setAttribute("src", "resource://app/res/cm2.html");
-            iframe.setAttribute("onclick", "onBespinFocus(this)");
+            iframe.setAttribute("src", "resource://gre/res/cm2.html");
             newBox.appendChild(iframe);
+
+            var splitter = document.createElement("splitter");
+            splitter.className = "liveViewSplitter";
+            newBox.appendChild(splitter);
 
             var newEditorElement = document.createElement("editor");
             newEditorElement.setAttribute("context", "editorContextMenu");
             newEditorElement.setAttribute("type", "content-primary");
             newBox.appendChild(newEditorElement);
 
+            newEditorElement.addEventListener("focus", function() { WysiwygEditorFocused(false); },  true);
+            iframe.addEventListener("focus", function() { SourceEditorFocused(); },  true);
             return newBox;
         ]]>
         </body>
@@ -655,31 +706,71 @@
              editors.item(i).lastChild.removeAttribute("type");
 
            this.getCurrentEditorElement().setAttribute("type", "content-primary");
-           window.content.focus();
+           GetWindowContent().focus();
 
            window.UpdateWindowTitle();
 
            NotifierUtils.notify("tabSelected");
            var deck = this.getCurrentEditorElement().parentNode;
-           var mode = deck.getAttribute("previousMode");
+           var mode = deck.getAttribute("previousMode") || "wysiwyg";
            deck.selectedIndex = (mode == "source") ? 0 : 1;
            gDialog.bespinToolbox1.hidden = true;
            gDialog.bespinToolbox2.hidden = true;
            if (mode == "source") {
-             gDialog.sourceModeButton.setAttribute("selected", "true");
+             gDialog.liveViewModeButton.removeAttribute("selected");
              gDialog.wysiwygModeButton.removeAttribute("selected");
+             gDialog.sourceModeButton.setAttribute("selected", "true");
+             gDialog.printPreviewModeButton.removeAttribute("selected");
              gDialog.structurebar.style.visibility = "hidden";
+             HandlersManager.hideAllHandlers();
+             gDialog.tabeditor.enableRulers(false);
              deck.firstChild.focus();
            }
+           else if (mode == "liveview") {
+             gDialog.liveViewModeButton.setAttribute("selected", "true");
+             gDialog.wysiwygModeButton.removeAttribute("selected");
+             gDialog.sourceModeButton.removeAttribute("selected");
+             gDialog.printPreviewModeButton.removeAttribute("selected");
+
+             HandlersManager.hideAllHandlers();
+             gDialog.tabeditor.enableRulers(false);
+
+             var liveviewmode = deck.getAttribute("liveviewmode") || "wysiwyg";
+             if (liveviewmode == "source") {
+               gDialog.structurebar.style.visibility = "hidden";
+             }
+             else {
+               gDialog.structurebar.style.visibility = "";
+               deck.lastElementChild.focus();
+               var selcon = EditorUtils.getSelectionContainer();
+               if (selcon) {
+                 NotifierUtils.notify("selection", selcon.node, true)
+                 gDialog.structurebar.selectionChanged(null, selcon.node,
+                                                       selcon.oneElementSelected);
+               }
+             }
+           }
            else {
-             gDialog.wysiwygModeButton.setAttribute("selected", "true");
+             gDialog.tabeditor.enableRulers(true);
+             gDialog.liveViewModeButton.removeAttribute("selected");
+             var wysiwygmedium = deck.getAttribute("wysiwygmedium");
+             if (wysiwygmedium == "print") {
+               gDialog.printPreviewModeButton.setAttribute("selected", "true");
+               gDialog.wysiwygModeButton.removeAttribute("selected");
+             }
+             else {
+               gDialog.wysiwygModeButton.setAttribute("selected", "true");
+               gDialog.printPreviewModeButton.removeAttribute("selected");
+             }
              gDialog.sourceModeButton.removeAttribute("selected");
              gDialog.structurebar.style.visibility = "";
              deck.lastChild.focus();
              var selcon = EditorUtils.getSelectionContainer();
-             if (selcon)
+             if (selcon) {
+               NotifierUtils.notify("selection", selcon.node, true)
                gDialog.structurebar.selectionChanged(null, selcon.node,
                                                      selcon.oneElementSelected);
+             }
            }
            window.updateCommands("navigation");
            window.updateCommands("style");

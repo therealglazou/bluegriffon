@@ -22,7 +22,7 @@
            extends="chrome://global/content/bindings/richlistbox.xml#richlistitem">
 
     <content>
-      <xul:grid oncommand="ReapplyTextShadows()" oninput="ReapplyTextShadows()">
+      <xul:grid>
         <xul:columns><xul:column/><xul:column/><xul:column/><xul:column/></xul:columns>
         <xul:rows>
           <xul:row align="center">
@@ -38,37 +38,34 @@
             <xul:label value="&blurRadiusTextShadow.label;"/>
             <xul:hbox>
               <xul:menulist editable="true" anonid="blurRadius"
-                            oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', false)"
-                            oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', false)">
+                            bgtype="csslength" units='% px pt cm in mm pc em ex rem ch' unsigned="true"
+                            oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', true); ReapplyTextShadows()"
+                            oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', true); ReapplyTextShadows()">
                 <xul:menupopup
                            onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')"/>
               </xul:menulist>
-              <xul:spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
-                               ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', false)"/>
             </xul:hbox>
           </xul:row>
           <xul:row align="center">
             <xul:label value="&offsetXTextShadow.label;"/>
             <xul:hbox>
               <xul:menulist editable="true" anonid="offsetX"
-                            oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', true)"
-                            oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', true)">
+                            bgtype="csslength" units='% px pt cm in mm pc em ex rem ch'
+                            oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', false); ReapplyTextShadows()"
+                            oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', false); ReapplyTextShadows()">
                 <xul:menupopup
                            onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')"/>
               </xul:menulist>
-              <xul:spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
-                               ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true)"/>
             </xul:hbox>
             <xul:label value="&offsetYTextShadow.label;"/>
             <xul:hbox>
               <xul:menulist editable="true" anonid="offsetY"
-                            oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', true)"
-                            oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', true)">
+                            bgtype="csslength" units='% px pt cm in mm pc em ex rem ch'
+                            oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', false); ReapplyTextShadows()"
+                            oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', false); ReapplyTextShadows()">
                 <xul:menupopup
                            onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')"/>
               </xul:menulist>
-              <xul:spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
-                               ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true)"/>
             </xul:hbox>
           </xul:row>
         </xul:rows>

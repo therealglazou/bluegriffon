@@ -47,46 +47,26 @@
 
   <script type="application/x-javascript"  src="chrome://domexplorer/content/domexplorerOverlay.js"/>
 
-  <toolbarpalette id="ComposerToolbarPalette">
-    <toolbarbutton id="domexplorerButton" class="toolbarbutton-1"
-                   label="&domexplorer.label;" command="cmd_domexplorer"
-                   tooltiptext="&domexplorer.tooltip;"/>
-  
-  </toolbarpalette>
-
   <menupopup id="panelsMenuPopup">
     <menuitem id="panel-domexplorer-menuitem"
               panel="panel-domexplorer"
               windowType="BlueGriffon:DOMExplorer"
+              decked="true"
               url="chrome://domexplorer/content/domexplorer.xul"
               label="&domexplorer.label;"
               type="checkbox"/>
   </menupopup>
 
-#ifdef XP_MACOSX
   <panelset id="panels">
     <panel id="panel-domexplorer"
            floating="true"
            width="300"
            height="600"
+           decked="true"
            label="&domexplorer.label;">
       <iframe type="chrome"
               flex="1"/>
     </panel>
   </panelset>
-#else
-#ifndef XP_UNIX
-  <panelset id="panels">
-    <panel id="panel-domexplorer"
-           width="300"
-           height="600"
-           floating="true"
-           label="&domexplorer.label;">
-      <iframe type="chrome"
-              flex="1"/>
-    </panel>
-  </panelset>
-#endif
-#endif
 </overlay>         
 

@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<!DOCTYPE page [
+  <!ENTITY % dtd1 SYSTEM "chrome://inspector/locale/inspector.dtd"> %dtd1;
+  <!ENTITY % dtd2 SYSTEM "chrome://inspector/locale/viewers/computedStyle.dtd"> %dtd2;
+]>
+
+<?xul-overlay href="chrome://inspector/content/editingOverlay.xul"?>
+
+<?xml-stylesheet href="chrome://inspector/skin/"?>
+
+<page id="winComputedStyle"
+      orient="vertical"
+      xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/javascript"
+          src="chrome://inspector/content/utils.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/jsutil/xul/inBaseTreeView.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/viewers/computedStyle/computedStyle.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/jsutil/xpcom/XPCU.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/jsutil/events/ObserverManager.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/jsutil/commands/baseCommands.js"/>
+  <script type="application/javascript"
+          src="chrome://inspector/content/jsutil/system/clipboardFlavors.js"/>
+
+  <commandset id="cmdsEditing"/>
+
+  <popupset id="psPopups">
+    <menupopup id="ppComputedStyleContext">
+      <menuitem id="mnEditCopy"/>
+    </menupopup>
+  </popupset>
+
+  <tree id="olStyles" flex="1" onselect="viewer.onItemSelected()"
+        class="plain" contextmenu="ppComputedStyleContext">
+    <treecols>
+      <treecol id="olcStyleName" label="&propertyName.label;" flex="1"/>
+      <splitter class="tree-splitter"/>
+      <treecol id="olcStyleValue" label="&propertyValue.label;" flex="1"/>
+    </treecols>
+    <treechildren id="olbStyles" alternatingbackground="true"/>
+  </tree>
+</page>

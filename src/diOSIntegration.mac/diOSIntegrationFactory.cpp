@@ -36,22 +36,26 @@
 #define MOZILLA_INTERNAL_API 1
 
 #include "mozilla/ModuleUtils.h"
+#include "nsIClassInfoImpl.h"
 #include "nsIServiceManager.h"
 #include "diOSIntegration.h"
 #include "diOSIntegrationCIID.h"
 #include "nsXPIDLString.h"
 
-// Define the constructor function for the objects
+namespace mozilla
+{
+// Factory defined in mozilla::, defines mozilla::diOSIntegrationConstructor
 NS_GENERIC_FACTORY_CONSTRUCTOR(diOSIntegration)
+}
 
 NS_DEFINE_NAMED_CID(DI_OS_INTEGRATION_CID);
 
-static const mozilla::Module::CIDEntry kPermissionsCIDs[] = {
-  { &kDI_OS_INTEGRATION_CID, false, NULL, diOSIntegrationConstructor },
+static const mozilla::Module::CIDEntry kCIDs[] = {
+  { &kDI_OS_INTEGRATION_CID, false, nullptr, mozilla::diOSIntegrationConstructor },
   { NULL }
 };
 
-static const mozilla::Module::ContractIDEntry kPermissionsContracts[] = {
+static const mozilla::Module::ContractIDEntry kContracts[] = {
   { DI_OS_INTEGRATION_CONTRACTID, &kDI_OS_INTEGRATION_CID },
   { NULL }
 };
@@ -61,11 +65,10 @@ static const mozilla::Module::CategoryEntry kPermissionsCategories[] = {
   { NULL }
 };
 
-static const mozilla::Module kPermissionsModule = {
+static const mozilla::Module kModule = {
   mozilla::Module::kVersion,
-  kPermissionsCIDs,
-  kPermissionsContracts,
-  kPermissionsCategories
+  kCIDs,
+  kContracts
 };
 
-NSMODULE_DEFN(nsPermissionsModule) = &kPermissionsModule;
+NSMODULE_DEFN(diosintegration) = &kModule;

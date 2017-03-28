@@ -1,6 +1,6 @@
 
-Components.utils.import("resource://app/modules/editorHelper.jsm");
-Components.utils.import("resource://app/modules/unicodeHelper.jsm");
+Components.utils.import("resource://gre/modules/editorHelper.jsm");
+Components.utils.import("resource://gre/modules/unicodeHelper.jsm");
 
 var currentChar = -1;
 
@@ -42,6 +42,10 @@ function Startup()
 
   UpdateChars(0);
   document.addEventListener("DOMAttrModified", OnMutationEventOnScrollbar, false);
+
+#ifndef XP_MACOSX
+  CenterDialogOnOpener();
+#endif
 }
 
 function ToHex4(n)
@@ -126,8 +130,7 @@ function onAccept()
 {
   var char = gDialog.charPreview.getAttribute("value");
   try {
-    var w = EditorUtils.getCurrentEditorWindow();
-    if (w.GetCurrentViewMode() == "wysiwyg")
+    if (EditorUtils.isWysiwygMode())
       EditorUtils.getCurrentEditor().insertText(char);
     else {
       var editorElement = EditorUtils.getCurrentEditorElement();

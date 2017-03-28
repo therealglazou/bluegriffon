@@ -10,24 +10,26 @@
 a replacement for the standard security certificate errors produced
 by NSS/PSM via netError.xhtml. -->
 
-<!ENTITY certerror.pagetitle  "חיבור לא בטוח">
-<!ENTITY certerror.longpagetitle "חיבור זה אינו בטוח">
+<!ENTITY certerror.pagetitle1  "חיבור לא מאובטח">
+<!ENTITY certerror.longpagetitle1 "החיבור שלך אינו מאובטח">
 
-<!-- Localization note (certerror.introPara1) - The string "#1" will
-be replaced at runtime with the name of the server to which the user
+<!-- Localization note (certerror.introPara) - The text content of the span tag
+will be replaced at runtime with the name of the server to which the user
 was trying to connect. -->
-<!ENTITY certerror.introPara1 "ביקשת מ־&brandShortName; להתחבר בצורה מאובטחת אל <b>#1</b>, אבל אנחנו לא יכולים לאמת שהחיבור שלך אכן מאובטח.">
-<!ENTITY certerror.introPara2 "בדרך־כלל, כאשר אתה מנסה להתחבר בצורה מאובטחת, אתרים מציגים הזדהות מוסמכת כדי להוכיח שאתה אכן מגיע למקום הנכון. למרות זאת, ההזדהות של אתר זה לא ניתנת לווידוא.">
+<!ENTITY certerror.introPara "הבעלים של <span class='hostname'/> הגדירו שלא כשורה את האתר שלהם. כדי להגן על המידע שלך מפני גנבה, &brandShortName; לא התחבר אל אתר זה.">
+<!ENTITY certerror.returnToPreviousPage.label "חזרה">
+<!ENTITY certerror.learnMore "מידע נוסף…">
+<!ENTITY certerror.advanced.label "מתקדם">
 
-<!ENTITY certerror.whatShouldIDo.heading "מה ברצונך לעשות?">
-<!ENTITY certerror.whatShouldIDo.content "אם אתה בדרך־כלל מתחבר לאתר זה ללא בעיות, ייתכן שמישהו מנסה להזדהות בשם האתר, ורצוי שלא תמשיך הלאה לאתר.">
-<!ENTITY certerror.getMeOutOfHere.label "קח אותי מפה!">
+<!ENTITY certerror.whatShouldIDo.badStsCertExplanation "אתר זה משתמש ב־HTTP Strict Transport Security (HSTS) כדי לציין ש־&brandShortName; יתחבר אליו רק בצורה מאובטחת. כתוצאה מכך, לא ניתן להוסיף חריגה לאישור אבטחה זה.">
 
-<!ENTITY certerror.expert.heading "אני מבין את הסיכונים">
 <!ENTITY certerror.expert.content "אם אתה מבין מה קורה, אתה יכול להורות ל־&brandShortName; להתחיל לסמוך על ההזדהות של אתר זה. 
 <b>אפילו אם אתה סומך על האתר, ייתכן ומשמעות השגיאה היא שמישהו מחבל בקישוריות שלך.</b>">
 <!ENTITY certerror.expert.contentPara2 "אל תוסיף חריגות אלא אם יש סיבה טובה לכך שהאתר לא משתמש בהזדהות נסמכת.">
 <!ENTITY certerror.addException.label "הוסף חריגה…">
+<!ENTITY certerror.copyToClipboard.label "העתקת מלל">
 
-<!ENTITY certerror.technical.heading "פרטים טכניים">
-
+<!ENTITY errorReporting.automatic "דיווח על תקלות מסוג זה מסייע ל־Mozilla לזהות אתרים שלא הוגדרו כראוי">
+<!ENTITY errorReporting.sending "שליחת דיווח">
+<!ENTITY errorReporting.sent "שליחת הדיווח הושלמה">
+<!ENTITY errorReporting.tryAgain "לנסות שוב">

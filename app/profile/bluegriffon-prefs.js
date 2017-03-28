@@ -16,15 +16,22 @@ pref("toolbar.customization.usesheet", true); // true for Mac
 pref("toolbar.customization.usesheet", false); // false otherwise
 #endif
 
+/* disable telemetry */
+pref("toolkit.telemetry.enabled", false);
+pref("toolkit.telemetry.archive.enabled", false);
+
+/* main theme */
+pref("bluegriffon.wysiwyg.theme", "black");
+
 /* debugging prefs */
 pref("browser.dom.window.dump.enabled", false);
 pref("javascript.options.showInConsole", false);
 pref("javascript.options.strict", false);
+pref("bluegriffon.console.showInvalidVariables", false);
 pref("nglayout.debug.disable_xul_cache", true);
 pref("nglayout.debug.disable_xul_fastload", true);
 
-pref("general.useragent.extra.mybrowser", "@MOZ_APP_NAME@/@MOZ_APP_VERSION@");
-pref("intl.locale.matchOS", true);
+pref("general.useragent.extra.mybrowser", "bluegriffon/1.8");
 pref("intl.accept_charsets", "iso-8859-1,*,utf-8");
 pref("browser.display.use_document_fonts", 1);
 
@@ -61,6 +68,7 @@ pref("bluegriffon.spellCheck.suggestions", 10);
 pref("bluegriffon.display.comments", true);
 pref("bluegriffon.display.php", true);
 pref("bluegriffon.display.pi", true);
+pref("bluegriffon.display.anchors", true);
 
 // document preferences
 pref("bluegriffon.author", "");
@@ -85,10 +93,12 @@ pref("bluegriffon.defaults.extension.text-html", "html");
 pref("editor.use_css", true);
 pref("bluegriffon.css.policy", "manual");
 pref("bluegriffon.css.prefix", "BG_");
+pref("bluegriffon.css.support.blink", true);
 pref("bluegriffon.css.support.gecko", true);
+pref("bluegriffon.css.support.servo", true);
 pref("bluegriffon.css.support.webkit", true);
-pref("bluegriffon.css.support.presto", true);
-pref("bluegriffon.css.support.trident", true);
+pref("bluegriffon.css.support.vivliostyle", true);
+pref("bluegriffon.css.support.weasyprint", true);
 
 pref("bluegriffon.prettyprint", true);
 pref("bluegriffon.encode_entity", "html");
@@ -136,45 +146,27 @@ pref("media.autoplay.enabled", false);
 pref("bluegriffon.defaults.forceLF", false);
 pref("bluegriffon.defaults.backups", true);
 
-pref("bluegriffon.source.theme", "light");
+pref("bluegriffon.source.theme", "eclipse");
 pref("bluegriffon.source.entities", "basic");
 pref("bluegriffon.source.auto-indent", true);
 pref("bluegriffon.source.wrap", true);
 pref("bluegriffon.source.wrap.maxColumn", 80);
 pref("bluegriffon.source.wrap.exclude-languages", true);
 pref("bluegriffon.source.wrap.language-exclusions", "");
+pref("bluegriffon.source.zoom.default", "1");
 
+pref("bluegriffon.toolbar.enabled", true);
+pref("bluegriffon.toolbar.icons", "medium");
 pref("bluegriffon.tabs.position", "center");
 
 pref("bluegriffon.osx.dock-integration", true);
 pref("extensions.getAddons.cache.enabled", false);
 
-// +------------------------------------+
-// | Disabled for now, too late for 1.4 |
-// +------------------------------------+
-//
-// pref("app.update.enabled", true);
-// pref("app.update.auto", true);
-// pref("app.update.mode", 2);
-// pref("app.update.silent", false);
-// pref("app.update.url", "http://bluegriffon.org/update.php/%PRODUCT%/%VERSION%/%BUILD_TARGET%/update.xml");
-// pref("app.update.url.manual", "http://bluegriffon.org/pages/Download");
-// pref("app.update.url.details", "http://bluegriffon.org/pages/Download");
-// pref("app.update.interval", 86400);
-// pref("app.update.nagTimer.download", 86400);
-// pref("app.update.nagTimer.restart", 1800);
-// pref("app.update.timer", 600000);
-// pref("app.update.showInstalledUI", false);
-// pref("app.update.incompatible.mode", 0);
-// pref("app.update.log", false);
-
 pref("bluegriffon.css.colors.names.enabled", true);
 pref("bluegriffon.css.colors.type", "hex");
 
-pref("tipoftheday.openAtStartup", true);
-
 // make links absolute when copied
-pref("clipboard.absoluteLinks", true);
+pref("clipboard.absoluteLinks", false);
 
 pref("extensions.venkman.enableChromeFilter", false);
 
@@ -229,3 +221,19 @@ pref("print.print_edge_right", 0);
 pref("print.print_edge_bottom", 0);
 
 pref("layout.css.flexbox.enabled", true);
+
+pref("general.useragent.locale", "en-US");
+pref("intl.locale.matchOS", true);
+
+pref("app.support.baseURL", "http://bluegriffon.org/");
+
+pref("bluegriffon.responsive.default", "min"); // min, max, minmax
+
+// Blocklist preferences
+pref("extensions.blocklist.enabled", false);
+
+// ARIA
+pref("bluegriffon.aria.epub-type", false);
+
+// File URI Origin policy
+pref("security.fileuri.strict_origin_policy", false);

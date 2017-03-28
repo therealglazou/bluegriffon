@@ -36,8 +36,8 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-Components.utils.import("resource://app/modules/editorHelper.jsm");
-Components.utils.import("resource://app/modules/urlHelper.jsm");
+Components.utils.import("resource://gre/modules/editorHelper.jsm");
+Components.utils.import("resource://gre/modules/urlHelper.jsm");
 
 const kBASE_COMMAND_CONTROLLER_CID = "@mozilla.org/embedcomp/base-command-controller;1";
 
@@ -59,7 +59,7 @@ var ComposerCommands = {
     if (this.mComposerJSCommandControllerID)
     {
       try { 
-        controller = window.content.controllers.getControllerById(this.mComposerJSCommandControllerID);
+        controller = GetWindowContent().controllers.getControllerById(this.mComposerJSCommandControllerID);
       } catch (e) {}
     }
     if (!controller)
@@ -96,7 +96,7 @@ var ComposerCommands = {
            EditorUtils.isDocumentEditable() &&
            EditorUtils.isEditingRenderedHTML() &&
            !EditorUtils.activeViewActive  &&
-           (commandID == "cmd_viewModeEnabler" || GetCurrentViewMode() == "wysiwyg"))
+           (commandID == "cmd_viewModeEnabler" || EditorUtils.isWysiwygMode()))
           commandNode.removeAttribute("disabled");
         else
           commandNode.setAttribute("disabled", "true");
@@ -178,14 +178,6 @@ var ComposerCommands = {
           this.pokeMultiStateUI(command, params);
           break;
 
-        case "cmd_fontColor":
-          this.pokeFontColorState(command);
-          break;
-
-        case "cmd_backgroundColor":
-          this.pokeBackgroundColorState(command, params);
-          break;
-
         case "cmd_indent":
         case "cmd_outdent":
           break;
@@ -194,40 +186,6 @@ var ComposerCommands = {
       }
     }
     catch (e) {  }
-  },
-
-  pokeFontColorState: function pokeFontColorState(uiID)
-  {
-    try {
-    var commandNode = top.document.getElementById(uiID);
-    if (!commandNode)
-      return;
-    
-    var editor = EditorUtils.getCurrentEditor();
-    var isMixed = {value: false};
-    var uiState = editor.getFontColorState(isMixed);
-    commandNode.setAttribute("state", uiState);
-    var button = document.getElementById("TextColorColorpicker");
-    if (button)
-      button.color = uiState;
-    } catch(e) {  }
-  },
-
-  pokeBackgroundColorState: function pokeBackgroundColorState(uiID)
-  {
-    try {
-    var commandNode = top.document.getElementById(uiID);
-    if (!commandNode)
-      return;
-    
-    var editor = EditorUtils.getCurrentEditor();
-    var isMixed = {value: false};
-    var uiState = editor.getBackgroundColorState(isMixed);
-    commandNode.setAttribute("state", uiState);
-    var button = document.getElementById("BackgroundColorColorpicker");
-    if (button)
-      button.color = uiState;
-    } catch(e) {  }
   },
 
   pokeStyleUI: function pokeStyleUI(uiID, aDesiredState)
@@ -383,10 +341,12 @@ var ComposerCommands = {
     commandTable.registerCommand("cmd_print",       cmdPrint);
     commandTable.registerCommand("cmd_printSettings", cmdPrintSetup);
     commandTable.registerCommand("cmd_saveAs",      cmdSaveAs);
+    commandTable.registerCommand("cmd_closeEbook",  cmdCloseEbook);
     commandTable.registerCommand("cmd_closeTab",    cmdCloseTab);
     commandTable.registerCommand("cmd_toggleView",  cmdToggleView);
     commandTable.registerCommand("cmd_fullScreen",  cmdFullScreen);
     commandTable.registerCommand("cmd_new",         cmdNew);
+    commandTable.registerCommand("cmd_newEbook",    cmdNewEbook);
     commandTable.registerCommand("cmd_newWindow",   cmdNewWindow);
     commandTable.registerCommand("cmd_newWizard",   cmdNewWizard);
     commandTable.registerCommand("cmd_renderedHTMLEnabler",    cmdDummyHTML);
@@ -442,6 +402,7 @@ var ComposerCommands = {
     commandTable.registerCommand("cmd_progress",    cmdInsertProgressCommand);
     commandTable.registerCommand("cmd_meter",       cmdInsertMeterCommand);
     commandTable.registerCommand("cmd_datalist",    cmdInsertDatalistCommand);
+    commandTable.registerCommand("cmd_rebuildTOC",  cmdRebuildTOCCommand);
 
     commandTable.registerCommand("cmd_formInputHidden",  cmdInsertFormInputCommand);
     commandTable.registerCommand("cmd_formInputHidden",  cmdInsertFormInputCommand);
@@ -583,6 +544,26 @@ var ComposerCommands = {
   },
 
   selectionListener: {
+    //Interfaces this component implements.
+    interfaces: [Components.interfaces.nsIEditorObserver,
+                 Components.interfaces.nsIEditorMouseObserver,
+                 Components.interfaces.nsISelectionListener,
+                 Components.interfaces.nsITransactionListener,
+                 Components.interfaces.nsISupports],
+  
+    // nsISupports
+  
+    QueryInterface: function(iid) {
+      if (!this.interfaces.some( function(v) { return iid.equals(v) } ))
+        throw Components.results.NS_ERROR_NO_INTERFACE;
+  
+      return this;
+    },
+  
+    getInterface: function(iid) {
+      return this.QueryInterface(iid);
+    },
+
     notifySelectionChanged: function(doc, sel, reason)
     {
       ComposerCommands.updateSelectionBased(false);
@@ -603,8 +584,28 @@ var ComposerCommands = {
 
     MouseUp: function(aClientX, aClientY, aTarget, aIsShiftKey) {
       return TableResizer.MouseUp(aClientX, aClientY, aTarget, aIsShiftKey);
-    }
+    },
 
+    willDo: function(aManager, aTransaction) { return false; },
+    didDo: function(aManager, aTransaction, aDoResult) { },
+    willUndo: function(aManager, aTransaction) { return false; },
+    didUndo: function(aManager, aTransaction, aDoResult) {
+      ComposerCommands.updateSelectionBased(false);
+      if ("ResponsiveRulerHelper" in window)
+        setTimeout(function() { ResponsiveRulerHelper.refresh() }, 100);
+    },
+    willRedo: function(aManager, aTransaction) { return false; },
+    didRedo: function(aManager, aTransaction, aDoResult) {
+      ComposerCommands.updateSelectionBased(false);
+      if ("ResponsiveRulerHelper" in window)
+        setTimeout(function() { ResponsiveRulerHelper.refresh() }, 100);
+    },
+    willBeginBatch: function(aManager) { return false; },
+    didBeginBatch: function(aManager, aResult) {},
+    willEndBatch: function(aManager) { return false; },
+    didEndBatch: function(aManager, aResult) {},
+    willMerge: function(aManager, aTopTransaction, aTransactionToMerge) { return false; },
+    didMerge: function(aManager, aTopTransaction, aTransactionToMerge, aDidMerge, aMergeResult) {}
   }
 };
 

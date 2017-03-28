@@ -3,8 +3,55 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="UTF-8"/>
+  <link rel="stylesheet" href="codemirror/lib/codemirror.css"/>
+
+  <link rel="stylesheet" href="codemirror/theme/3024-day.css"/>
+  <link rel="stylesheet" href="codemirror/theme/3024-night.css"/>
+  <link rel="stylesheet" href="codemirror/theme/ambiance-mobile.css"/>
+  <link rel="stylesheet" href="codemirror/theme/ambiance.css"/>
+  <link rel="stylesheet" href="codemirror/theme/base16-dark.css"/>
+  <link rel="stylesheet" href="codemirror/theme/base16-light.css"/>
+  <link rel="stylesheet" href="codemirror/theme/blackboard.css"/>
+  <link rel="stylesheet" href="codemirror/theme/cobalt.css"/>
+  <link rel="stylesheet" href="codemirror/theme/colorforth.css"/>
+  <link rel="stylesheet" href="codemirror/theme/eclipse.css"/>
+  <link rel="stylesheet" href="codemirror/theme/elegant.css"/>
+  <link rel="stylesheet" href="codemirror/theme/erlang-dark.css"/>
+  <link rel="stylesheet" href="codemirror/theme/lesser-dark.css"/>
+  <link rel="stylesheet" href="codemirror/theme/mbo.css"/>
+  <link rel="stylesheet" href="codemirror/theme/mdn-like.css"/>
+  <link rel="stylesheet" href="codemirror/theme/midnight.css"/>
+  <link rel="stylesheet" href="codemirror/theme/monokai.css"/>
+  <link rel="stylesheet" href="codemirror/theme/neat.css"/>
+  <link rel="stylesheet" href="codemirror/theme/neo.css"/>
+  <link rel="stylesheet" href="codemirror/theme/night.css"/>
+  <link rel="stylesheet" href="codemirror/theme/paraiso-dark.css"/>
+  <link rel="stylesheet" href="codemirror/theme/paraiso-light.css"/>
+  <link rel="stylesheet" href="codemirror/theme/pastel-on-dark.css"/>
+  <link rel="stylesheet" href="codemirror/theme/rubyblue.css"/>
+  <link rel="stylesheet" href="codemirror/theme/solarized.css"/>
+  <link rel="stylesheet" href="codemirror/theme/the-matrix.css"/>
+  <link rel="stylesheet" href="codemirror/theme/tomorrow-night-bright.css"/>
+  <link rel="stylesheet" href="codemirror/theme/tomorrow-night-eighties.css"/>
+  <link rel="stylesheet" href="codemirror/theme/twilight.css"/>
+  <link rel="stylesheet" href="codemirror/theme/vibrant-ink.css"/>
+  <link rel="stylesheet" href="codemirror/theme/xq-dark.css"/>
+  <link rel="stylesheet" href="codemirror/theme/xq-light.css"/>
+  <link rel="stylesheet" href="codemirror/theme/zenburn.css"/>
+
+  <link rel="stylesheet" href="codemirror/addon/hint/show-hint.css"/>
+
+  <script src="codemirror/lib/codemirror.js"></script>
+  <script src="codemirror/addon/selection/active-line.js"></script>
+  <script src="codemirror/addon/fold/xml-fold.js"></script>
+  <script src="codemirror/addon/edit/matchtags.js"></script>
+  <script src="codemirror/addon/hint/show-hint.js"></script>
+  <script src="codemirror/addon/hint/javascript-hint.js"></script>
+  <script src="codemirror/addon/search/searchcursor.js"></script>
+  <script src="codemirror/mode/javascript/javascript.js"></script>
   <style type="text/css" media="screen">
     .CodeMirror { 
+        height: 100%;
         margin: 0;
         position: absolute;
         top: 0;
@@ -16,23 +63,6 @@
     .CodeMirror-scroll {height: 100% ! important}
     .CodeMirror-gutter {cursor: pointer;}
   </style>
-  <link rel="stylesheet" href="cm2/codemirror.css" />
-  <link rel="stylesheet" href="cm2/foldtag.css" />
-
-  <script src="cm2/codemirror.js" type="text/javascript" ></script>
-  <script src="cm2/searchcursor.js" type="text/javascript" ></script>
-  <script src="cm2/foldcode.js" type="text/javascript" ></script>
-  <script src="cm2/javascript.js" type="text/javascript" ></script>
-
-  <link rel="stylesheet" id="theme" type="text/css" href="cm2/cobalt.css" />
-  <link rel="stylesheet" id="theme" type="text/css" href="cm2/eclipse.css" />
-  <link rel="stylesheet" id="theme" type="text/css" href="cm2/elegant.css" />
-  <link rel="stylesheet" id="theme" type="text/css" href="cm2/light.css" />
-  <link rel="stylesheet" id="theme" type="text/css" href="cm2/monokai.css" />
-  <link rel="stylesheet" id="theme" type="text/css" href="cm2/neat.css" />
-  <link rel="stylesheet" id="theme" type="text/css" href="cm2/night.css" />
-  <link rel="stylesheet" id="theme" type="text/css" href="cm2/rubyblue.css" />
-  <link rel="stylesheet"            type="text/css" href="cm2/code-completion.css">  
 </head>
 <body>
 
@@ -47,45 +77,36 @@
   var gInitialValue = "";
 
   window.onload = function(){
-     var foldFunc = CodeMirror.newFoldFunction(CodeMirror.braceRangeFinder);
-      function keyEvent(cm, e) {
-        if (e.keyCode == 81 && e.ctrlKey) {
-          if (e.type == "keydown") {
-            e.stop();
-            setTimeout(function() {foldFunc(cm, cm.getCursor().line);}, 50);
-          }
-          return true;
-        }
-      }
 
      function changeFunc() {
-       if (gChangeTimer)
+       if (gChangeTimer) {
          clearTimeout(gChangeTimer);
+         gChangeTimer = null;
+       }
        if (gChangeCallback)
-         gChangeTimer = setTimeout(gChangeCallback, 500, gEditor.getValue());
+         gChangeTimer = setTimeout(gChangeCallback, 100, gEditor.getValue());
      }
 
      gEditor = CodeMirror.fromTextArea(document.getElementById("code"), {
+        mode: "javascript",
+        extraKeys: {"Shift-Space": "autocomplete"},
         lineNumbers: true,
+        lineWrapping: false,
+        value: "",
+        styleActiveLine: true,
+        matchTags: {bothTags: true},
+
         tabSize: 2,
         fixedGutter: true,
         extraGutterSize: 4,
         indentUnit: 2,
         indentWithTabs: false,
         matchBrackets: true,
-        onGutterClick: foldFunc,
         onChange: changeFunc,
-        theme: gTheme,
-        onCursorActivity: function() {
-          gEditor.setLineClass(hlLine, null);
-          hlLine = gEditor.setLineClass(gEditor.getCursor().line, "activeline");
-        }
       });
-    var hlLine = gEditor.setLineClass(0, "activeline");
     getEditableElement().addEventListener("keypress", gKeyPressCallback, true);
     gEditor.setValue(gInitialValue);
     gEditor.clearHistory();
-    gEditor.ResetModificationCount();
     gEditor.focus();
    };
 

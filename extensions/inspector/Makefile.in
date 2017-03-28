@@ -1,0 +1,24 @@
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+
+DEPTH = ../../..
+topsrcdir = @top_srcdir@
+srcdir = @srcdir@
+VPATH = @srcdir@
+
+include $(DEPTH)/config/autoconf.mk
+
+DOMi_VERSION = 2.0.17pre
+
+DEFINES += -DDOMi_VERSION=$(DOMi_VERSION)
+
+include $(topsrcdir)/config/rules.mk
+
+#export::
+#	$(NSINSTALL) -D $(FINAL_TARGET)/chrome/icons/default
+#	$(INSTALL) $(srcdir)/resources/content/res/Linux/winInspectorMain.xpm $(FINAL_TARGET)/chrome/icons/default
+#	$(INSTALL) $(srcdir)/resources/content/res/Linux/winInspectorMain16.xpm $(FINAL_TARGET)/chrome/icons/default
+#	$(INSTALL) $(srcdir)/resources/content/res/WINNT/winInspectorMain.ico $(FINAL_TARGET)/chrome/icons/default

@@ -6,26 +6,35 @@
 %brandDTD;
 <!ENTITY % syncBrandDTD SYSTEM "chrome://browser/locale/syncBrand.dtd">
 %syncBrandDTD;
-
 <!-- These strings are used in the about:home page -->
 
-<!ENTITY abouthome.pageTitle "&brandFullName; startsida">
 
-<!ENTITY abouthome.searchEngineButton.label "Sök">
-
+<!ENTITY abouthome.pageTitle "&brandFullName; startsida ">
 <!-- LOCALIZATION NOTE (abouthome.defaultSnippet1.v1):
      text in <a/> will be linked to the Firefox features page on mozilla.com
 -->
+
 <!ENTITY abouthome.defaultSnippet1.v1 "Tack för att du valt Firefox! För att få ut det mesta av din webbläsare, läs mer om de <a>senaste funktionerna</a>.">
 <!-- LOCALIZATION NOTE (abouthome.defaultSnippet2.v1):
      text in <a/> will be linked to the featured add-ons on addons.mozilla.org
 -->
-<!ENTITY abouthome.defaultSnippet2.v1 "Det är enkelt att anpassa Firefox exakt som du vill ha det. <a>Välj bland tusentals tillägg</a>.">
+<!ENTITY abouthome.defaultSnippet2.v1 "Det är lätt att anpassa Firefox precis som du vill ha det. <a>Välj bland tusentals tillägg</a>.">
+<!-- LOCALIZATION NOTE (abouthome.rightsSnippet): text in <a/> will be linked to about:rights -->
+<!ENTITY abouthome.rightsSnippet "&brandFullName; är fri programvara med öppen källkod från den ideella organisationen Mozilla Foundation. <a>Läs om dina rättigheter …</a>">
 
 <!ENTITY abouthome.bookmarksButton.label "Bokmärken">
-<!ENTITY abouthome.historyButton.label   "Historiken">
-<!ENTITY abouthome.settingsButton.label  "Inställningar">
+<!ENTITY abouthome.historyButton.label   "Historik">
+<!-- LOCALIZATION NOTE (abouthome.preferencesButtonWin.label): The label for the
+     preferences/options item on about:home on Windows -->
+<!ENTITY abouthome.preferencesButtonWin.label  "Alternativ">
+<!-- LOCALIZATION NOTE (abouthome.preferencesButtonUnix.label): The label for the
+     preferences/options item on about:home on Linux and OS X -->
+<!ENTITY abouthome.preferencesButtonUnix.label  "Inställningar">
 <!ENTITY abouthome.addonsButton.label    "Tillägg">
-<!ENTITY abouthome.appsButton.label      "Marketplace">
 <!ENTITY abouthome.downloadsButton.label "Filhämtningar">
 <!ENTITY abouthome.syncButton.label      "&syncBrand.shortName.label;">
+<!-- LOCALIZATION NOTE (abouthome.aboutMozilla.label): The (invisible) label for
+     the mozilla wordmark in the top-right corner that links to Mozilla's main
+     about page. -->
+
+<!ENTITY abouthome.aboutMozilla.label    "Om Mozilla">

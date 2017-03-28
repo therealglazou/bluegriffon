@@ -7,7 +7,12 @@
 <Description>Wyszukiwanie w ofercie Merlin.pl</Description>
 <InputEncoding>ISO-8859-2</InputEncoding>
 <Image width="16" height="16">data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAABqhu8AW3rtAD5h6gAvVekAcIrwAHmS8QAgSecA////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIVVWIVVWIVVVWZYhWZYhWZVZliFZliFZlVmWIVmWIVmVWZYhWZYhWZVZliFZliFZlVmGIBmWINmVWZgVmZlBmZFZmZmZmZmYoVmhWYog2YYiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIj//wAA//8AAP//AAAMMAAADDAAAAwwAAAMMAAADDAAAAwwAAAMMAAAAAAAAAABAAAQwwAA//8AAP//AAD//wAA</Image>
-<Url type="text/html" method="GET" template="http://www.merlin.com.pl/frontend/search?sourceid=Mozilla-search&amp;fraza={searchTerms}&amp;skad=crhhxmkohb">
-</Url>
-<SearchForm>http://www.merlin.com.pl/</SearchForm>
+ <SearchForm>http://merlin.pl</SearchForm>
+ <Url method="GET"
+      template="http://merlin.pl/search"
+      type="text/html">
+  <Param name="sourceid" value="Mozilla-search" />
+  <Param name="fraza" value="{searchTerms}" />
+  <Param name="skad" value="crhhxmkohb" />
+ </Url>
 </SearchPlugin>
