@@ -160,6 +160,7 @@ pref("bluegriffon.toolbar.icons", "medium");
 pref("bluegriffon.tabs.position", "center");
 
 pref("bluegriffon.osx.dock-integration", true);
+pref("bluegriffon.osx.clipboard.rtf.enabled", true);
 pref("extensions.getAddons.cache.enabled", false);
 
 pref("bluegriffon.css.colors.names.enabled", true);

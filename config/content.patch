@@ -2788,7 +2788,7 @@ diff --git a/editor/libeditor/HTMLEditor.h b/editor/libeditor/HTMLEditor.h
 diff --git a/editor/libeditor/HTMLEditorDataTransfer.cpp b/editor/libeditor/HTMLEditorDataTransfer.cpp
 --- a/editor/libeditor/HTMLEditorDataTransfer.cpp
 +++ b/editor/libeditor/HTMLEditorDataTransfer.cpp
-@@ -795,16 +795,17 @@ HTMLEditor::PrepareHTMLTransferable(nsIT
+@@ -795,16 +795,18 @@ HTMLEditor::PrepareHTMLTransferable(nsIT
  
      // Create the desired DataFlavor for the type of data
      // we want to get out of the transferable
@@ -2797,7 +2797,8 @@ diff --git a/editor/libeditor/HTMLEditorDataTransfer.cpp b/editor/libeditor/HTML
        (*aTransferable)->AddDataFlavor(kNativeHTMLMime);
        (*aTransferable)->AddDataFlavor(kHTMLMime);
        (*aTransferable)->AddDataFlavor(kFileMime);
-+      (*aTransferable)->AddDataFlavor(kRTFMime);
++      if (Preferences::GetBool("bluegriffon.osx.clipboard.rtf.enabled"))
++        (*aTransferable)->AddDataFlavor(kRTFMime);
  
        switch (Preferences::GetInt("clipboard.paste_image_type", 1)) {
          case 0:  // prefer JPEG over PNG over GIF encoding
@@ -2806,7 +2807,7 @@ diff --git a/editor/libeditor/HTMLEditorDataTransfer.cpp b/editor/libeditor/HTML
            (*aTransferable)->AddDataFlavor(kPNGImageMime);
            (*aTransferable)->AddDataFlavor(kGIFImageMime);
            break;
-@@ -1204,16 +1205,20 @@ HTMLEditor::InsertFromTransferable(nsITr
+@@ -1204,16 +1206,21 @@ HTMLEditor::InsertFromTransferable(nsITr
            // application/x-moz-nativehtml).  In this case, treat the data
            // to be pasted as mere HTML to get the best chance of pasting it
            // correctly.
@@ -2815,7 +2816,8 @@ diff --git a/editor/libeditor/HTMLEditorDataTransfer.cpp b/editor/libeditor/HTML
          }
        }
      }
-+    else if (bestFlavor.EqualsLiteral(kRTFMime)) {
++    else if (Preferences::GetBool("bluegriffon.osx.clipboard.rtf.enabled") &&
++             bestFlavor.EqualsLiteral(kRTFMime)) {
 +      bestFlavor.AssignLiteral(kHTMLMime);
 +      // Fall through the next case
 +    }
@@ -2827,8 +2829,7 @@ diff --git a/editor/libeditor/HTMLEditorDataTransfer.cpp b/editor/libeditor/HTML
          nsAutoString text;
          textDataObj->GetData(text);
          NS_ASSERTION(text.Length() <= (len/2), "Invalid length!");
-@@ -1223,25 +1228,54 @@ HTMLEditor::InsertFromTransferable(nsITr
-         if (textDataObj && len > 0) {
+@@ -1224,24 +1231,50 @@ HTMLEditor::InsertFromTransferable(nsITr
            nsAutoCString text;
            textDataObj->GetData(text);
            NS_ASSERTION(text.Length() <= len, "Invalid length!");
@@ -2836,9 +2837,6 @@ diff --git a/editor/libeditor/HTMLEditorDataTransfer.cpp b/editor/libeditor/HTML
          }
        }
  
-+      if (bestFlavor.EqualsLiteral(kRTFMime))
-+        bestFlavor.AssignLiteral(kHTMLMime);
-+
        if (!stuffToPaste.IsEmpty()) {
 +
 +        // Find where the <body> tag starts.
@@ -4623,7 +4621,25 @@ diff --git a/widget/PuppetWidget.cpp b/widget/PuppetWidget.cpp
 diff --git a/widget/cocoa/nsClipboard.mm b/widget/cocoa/nsClipboard.mm
 --- a/widget/cocoa/nsClipboard.mm
 +++ b/widget/cocoa/nsClipboard.mm
-@@ -170,17 +170,43 @@ nsClipboard::TransferableFromPasteboard(
+@@ -19,16 +19,17 @@
+ #include "nsIFile.h"
+ #include "nsStringStream.h"
+ #include "nsDragService.h"
+ #include "nsEscape.h"
+ #include "nsPrintfCString.h"
+ #include "nsObjCExceptions.h"
+ #include "imgIContainer.h"
+ #include "nsCocoaUtils.h"
++#include "mozilla/Preferences.h"
+ 
+ using mozilla::gfx::DataSourceSurface;
+ using mozilla::gfx::SourceSurface;
+ using mozilla::LogLevel;
+ 
+ #define IMAGE_PASTEBOARD_TYPES NSPasteboardTypeTIFF, \
+                                NSPasteboardTypePNG, \
+                                nil
+@@ -170,17 +171,45 @@ nsClipboard::TransferableFromPasteboard(
      NSString *pboardType = nil;
      if (nsClipboard::IsStringType(flavorStr, &pboardType)) {
        NSString* pString = [cocoaPasteboard stringForType:pboardType];
@@ -4635,30 +4651,32 @@ diff --git a/widget/cocoa/nsClipboard.mm b/widget/cocoa/nsClipboard.mm
 +        // get a NSAttributedString for RTF data
 +        NSDictionary *docAttributes;
          stringData = [pString dataUsingEncoding:NSASCIIStringEncoding];
-+        NSAttributedString *attrString = [[NSAttributedString alloc]
-+                       initWithRTF: stringData
-+                documentAttributes: &docAttributes];
++        if (mozilla::Preferences::GetBool("bluegriffon.osx.clipboard.rtf.enabled")) {
++          NSAttributedString *attrString = [[NSAttributedString alloc]
++                         initWithRTF: stringData
++                  documentAttributes: &docAttributes];
 +
-+        // then convert it to HTML excluding the document's outermost elements
-+        // and the ones we can't deal with ; but don't exclude <body> because
-+        // the editor relies on it to paste a html-based transferable
-+        NSArray * exclude = [NSArray arrayWithObjects:@"doctype",
-+                             @"html",
-+                             @"head",
-+                             @"xml",
-+                             nil
-+                             ];
-+        NSDictionary * htmlAtt = [NSDictionary
-+                                  dictionaryWithObjectsAndKeys:NSHTMLTextDocumentType,
-+                                  NSDocumentTypeDocumentAttribute,
-+                                  exclude,
-+                                  NSExcludedElementsDocumentAttribute,
-+                                  nil
-+                                  ];
-+        NSError * error;
-+        stringData = [attrString dataFromRange:NSMakeRange(0, [attrString length])
-+                                   documentAttributes:htmlAtt error:&error
-+                             ];
++          // then convert it to HTML excluding the document's outermost elements
++          // and the ones we can't deal with ; but don't exclude <body> because
++          // the editor relies on it to paste a html-based transferable
++          NSArray * exclude = [NSArray arrayWithObjects:@"doctype",
++                               @"html",
++                               @"head",
++                               @"xml",
++                               nil
++                               ];
++          NSDictionary * htmlAtt = [NSDictionary
++                                    dictionaryWithObjectsAndKeys:NSHTMLTextDocumentType,
++                                    NSDocumentTypeDocumentAttribute,
++                                    exclude,
++                                    NSExcludedElementsDocumentAttribute,
++                                    nil
++                                    ];
++          NSError * error;
++          stringData = [attrString dataFromRange:NSMakeRange(0, [attrString length])
++                                     documentAttributes:htmlAtt error:&error
++                               ];
++        }
        } else {
          stringData = [pString dataUsingEncoding:NSUnicodeStringEncoding];
        }

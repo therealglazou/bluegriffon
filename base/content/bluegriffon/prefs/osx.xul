@@ -12,12 +12,16 @@
   <prefpane id="osxPrefPane">
     <preferences>
       <preference id="pref-osxdockintegration" name="bluegriffon.osx.dock-integration" type="bool"/>
+      <preference id="pref-osxRTFPasteSupport" name="bluegriffon.osx.clipboard.rtf.enabled" type="bool"/>
     </preferences>
-    <hbox align="center">
+    <vbox>
       <checkbox id="osxDockIntegrationCheckbox"
                 label="&showInDock.label;"
                 preference="pref-osxdockintegration"/>
-    </hbox>
+      <checkbox id="osxRTFPasteSupport"
+                label="&osxRTFPasteSupport.label;"
+                preference="pref-osxRTFPasteSupport"/>
+    </vbox>
   </prefpane>
 
 </overlay>
