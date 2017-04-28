@@ -14,9 +14,6 @@ function GridsSectionIniter(aElt, aRuleset)
   CheckToggle(gDialog.inlineGridDisplayCheckbox,   v == "inline-grid");
   CheckToggle(gDialog.subgridDisplayCheckbox,      v == "subgrid");
 
-  var bog = CssInspector.getCascadedValue(aRuleset, "order");
-  gDialog.orderTextbox.value = bog;
-  
   var ggg = CssInspector.getCascadedValue(aRuleset, "grid-template-columns");
 }
 
