@@ -222,8 +222,9 @@ function AboutComposer()
 
 function OpenConsole()
 {
-  window.open("chrome://global/content/console.xul","_blank",
-              "chrome,extrachrome,menubar,resizable,scrollbars,status,toolbar");
+   let { require } = Components.utils.import("resource://devtools/shared/Loader.jsm", {});
+   let HUDService = require("devtools/client/webconsole/hudservice");
+   HUDService.openBrowserConsoleOrFocus();
 }
 
 function OpenExtensionsManager()
