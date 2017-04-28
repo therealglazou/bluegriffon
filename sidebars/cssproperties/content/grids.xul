@@ -32,27 +32,42 @@
                   hidden="true"
                   oncommand="ToggleDisplayGrid(this)"
                   label="&displaySubgrid.label;"/>
-        <cssproperty property="grid-row-gap"
-                     grammar="ulength('')">
-          <l10n>
-            grid-row-gap=&gridRowGap.label;
-            url=https://developer.mozilla.org/en-US/docs/Web/CSS/grid-row-gap
-          </l10n>
-        </cssproperty>
-        <cssproperty property="grid-column-gap"
-                     grammar="ulength('')">
-          <l10n>
-            grid-column-gap=&gridColumnGap.label;
-            url=https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column-gap
-          </l10n>
-        </cssproperty>
-        <hbox align="center">
-          <label value="&boxOrdinalGroup.label;"/>
-          <textbox id="orderTextbox" type="number"
-                   property="order"
-                   oninput="ToggleProperty(this)"
-                   oncommand="ToggleProperty(this)"/>
-        </hbox>
+        <grid>
+          <columns><column/><column/></columns>
+          <rows>
+            <cssproperty property="grid-row-gap"
+                         grammar="ulength('')">
+              <l10n>
+                grid-row-gap=&gridRowGap.label;
+                url=https://developer.mozilla.org/en-US/docs/Web/CSS/grid-row-gap
+              </l10n>
+            </cssproperty>
+
+            <cssproperty property="grid-column-gap"
+                         grammar="ulength('')">
+              <l10n>
+                grid-column-gap=&gridColumnGap.label;
+                url=https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column-gap
+              </l10n>
+            </cssproperty>
+
+            <cssproperty property="grid-auto-flow"
+                         grammar="( row | column ) | dense">
+              <l10n>
+                grid-auto-flow=Automatic placement:
+                url=https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-flow
+              </l10n>
+            </cssproperty>
+
+            <row align="center">
+              <label value="&boxOrdinalGroup.label;"/>
+              <textbox id="orderTextbox" type="number"
+                       property="order"
+                       oninput="ToggleProperty(this)"
+                       oncommand="ToggleProperty(this)"/>
+            </row>
+          </rows>
+        </grid>
       </vbox>
   </vbox>
 </overlay>
