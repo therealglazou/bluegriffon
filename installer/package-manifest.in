@@ -137,6 +137,13 @@
 #endif
 
 ; [Components]
+; DevTools
+@RESPATH@/chrome/devtools@JAREXT@
+@RESPATH@/chrome/devtools.manifest
+@RESPATH@/@PREF_DIR@/devtools.js
+@RESPATH@/components/devtools-startup.manifest
+@RESPATH@/components/devtools-startup.js
+
 #ifdef MOZ_ARTIFACT_BUILDS
 @RESPATH@/components/prebuilt-interfaces.manifest
 @RESPATH@/components/interfaces.xpt

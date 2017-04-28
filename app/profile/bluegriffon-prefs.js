@@ -238,3 +238,8 @@ pref("bluegriffon.aria.epub-type", false);
 
 // File URI Origin policy
 pref("security.fileuri.strict_origin_policy", false);
+
+// Developer Tools related preferences
+pref("devtools.debugger.log", false);
+pref("devtools.chrome.enabled", true);
+pref("devtools.selfxss.count", 5);
