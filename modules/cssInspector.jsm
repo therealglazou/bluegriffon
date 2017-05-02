@@ -1096,8 +1096,228 @@ var CssInspector = {
         return null;
     }
     return m;
-  }
+  },
 
+  parseGridAutoTrackList: function(parser, token)
+  {
+    // [ <line-names>? [ <fixed-size> | <fixed-repeat> ] ]* <line-names>? <auto-repeat>
+    // [ <line-names>? [ <fixed-size> | <fixed-repeat> ] ]* <line-names>?
+    if (!token.isNotNull())
+      return null;
+
+    var rv = { type: "auto-track-list",
+               startEntries: [],
+               startLineNames: null,
+               autoRepeat: null,
+               endEntries: [],
+               endLineNames: null };
+
+    var lineNames = null;
+    while (token.isNotNull()) {
+      lineNames = this.parseGridLineNames(parser, token);
+      if (null == lineNames)
+        return null;
+
+      if (lineNames) {
+        token = parser.getToken(true, true);
+        if (!token.isNotNull())
+          return null;
+      }
+
+      var argument = this.parseGridFixedSize(parser, token);
+      
+    }
+  },
+
+  parseGridTrackSize: function(parser, token)
+  {
+    //  <track-breadth> | minmax( <inflexible-breadth> , <track-breadth> ) | fit-content( <length-percentage> )
+    if (!token.isNotNull())
+      return null;
+
+    var trackBreadth = this.parseGridTrackBreadth(parser, token);
+    if (null == trackBreadth)
+      return null;
+
+    if ("" == trackBreadth) {
+      if (token.isFunction("minmax(")) {
+        token = parser.getToken(true, true);
+        var firstArgument = this.parseGridInflexibleBreadth(parser, token);
+        if (!firstArgument)
+          return firstArgument;
+
+        token = parser.getToken(true, true);
+        if (!token.isSymbol(","))
+          return null;
+
+        var secondArgument = this.parseGridTrackBreadth(parser, token);
+        if (!secondArgument)
+          return null;
+
+        token = parser.getToken(true, true);
+        if (!token.isSymbol(")"))
+          return null;
+
+        // make a struct and return it
+        return {type: "minmax-inflexible-track", value: [firstArgment, secondArgument] };
+      }
+
+      else if (token.isFunction("fit-content(")) {
+        token = parser.getToken(true, true);
+        var firstArgument = this.parseGridFixedBreadth(parser, token);
+        if (!firstArgument)
+          return firstArgument;
+
+        token = parser.getToken(true, true);
+        if (!token.isSymbol(")"))
+          return null;
+
+        // make a struct and return it
+        return {type: "fit-content", value: firstArgument };
+      }
+
+      return "";
+    }
+
+    return {type: "track-breadth", value: trackBreadth };
+  },
+
+  parseGridFixedSize: function(parser, token)
+  {
+    // <fixed-breadth> | minmax( <fixed-breadth> , <track-breadth> ) | minmax( <inflexible-breadth> , <fixed-breadth> )
+    if (!token.isNotNull())
+      return null;
+
+    var fixedBreadth = this.parseGridFixedBreadth(parser, token);
+    if (null == fixedBreadth)
+      return null;
+
+    if ("" == fixedBreadth) {
+      if (!token.isFunction("minmax("))
+        return "";
+
+      token = parser.getToken(true, true);
+      var firstArgument = this.parseGridFixedBreadth(parser, token);
+      if (null == firstArgument)
+        return null;
+
+      if ("" == firstArgument) {
+        firstArgument = this.parseGridInflexibleBreadth(parser, token);
+        if (!firstArgument)
+          return firstArgument;
+
+        token = parser.getToken(true, true);
+        if (!token.isSymbol(","))
+          return null;
+
+        token = parser.getToken(true, true);
+        var secondArgument = this.parseGridFixedBreadth(parser, token);
+        if (!secondArgument)
+          return null;
+
+        token = parser.getToken(true, true);
+        if (!token.isSymbol(")"))
+          return null;
+
+        // make a struct and return it
+        return {type: "minmax-inflexible-fixed", value: [firstArgment, secondArgument] };
+      }
+
+      token = parser.getToken(true, true);
+      if (!token.isSymbol(","))
+        return null;
+
+      token = parser.getToken(true, true);
+      var secondArgument = this.parseGridTrackBreadth(parser, token);
+      if (!secondArgument)
+        return null;
+
+      token = parser.getToken(true, true);
+      if (!token.isSymbol(")"))
+        return null;
+
+      // make a struct and return it
+      return {type: "minmax-fixed-track", value: [firstArgment, secondArgument] };
+    }
+    return {type: "fixed-breadth", value: fixedBreadth };
+  },
+
+  parseGridTrackBreadth: function(parser, token)
+  {
+    // A non-negative length or percentage, as defined by CSS3 Values.
+    if (!token.isNotNull())
+      return null;
+
+    if (!(token.isLength() && parseFloat(token.value) < 0) &&
+        !(token.isDimensionOfUnit("fr") && parseFloat(token.value) < 0) &&
+        !token.isIdent("min-content") &&
+        !token.isIdent("max-content") &&
+        !token.isIdent("auto"))
+      return "";
+
+    return token;
+  },
+
+  parseGridInflexibleBreadth: function(parser, token)
+  {
+    // A non-negative length or percentage, as defined by CSS3 Values.
+    if (!token.isNotNull())
+      return null;
+
+    if (!(token.isLength() && parseFloat(token.value) < 0) &&
+        !token.isIdent("min-content") &&
+        !token.isIdent("max-content") &&
+        !token.isIdent("auto"))
+      return "";
+
+    return token;
+  },
+
+  parseGridFixedBreadth: function(parser, token)
+  {
+    // A non-negative length or percentage, as defined by CSS3 Values.
+    if (!token.isNotNull())
+      return null;
+
+    if (!token.isLength())
+      return "";
+
+    if (parseFloat(token.value) < 0)
+      return "";
+
+    return token;
+  },
+
+  parseGridLineNames: function(parser, token)
+  {
+    if (!token.isNotNull())
+      return null;
+
+    if (!token.isSymbol("["))
+      return "";
+
+    token = parser.getToken(true, true);
+    var rv = [];
+    while (token.isNotNull()) {
+      if (token.isIdent() && !token.isIdent("span"))
+        rv.push(token.value);
+      else if (token.isStymbol("]"))
+        return rv;
+
+      token = parser.getToken(true, true);
+    }
+    return null;
+  },
+
+  parseGridTemplateRowsOrColumns: function(aString)
+  {
+    var parser = new CSSParser();
+    parser._init();
+    parser.mPreserveWS       = false;
+    parser.mPreserveComments = false;
+    parser.mPreservedTokens = [];
+    parser.mScanner.init(aString);
+  }
 };
 
 
@@ -4359,13 +4579,23 @@ jscsspToken.prototype = {
   isLength: function()
   {
     return (this.isPercentage() ||
+            this.isDimensionOfUnit("em") ||
+            this.isDimensionOfUnit("ex") ||
+            this.isDimensionOfUnit("ch") ||
+
+            this.isDimensionOfUnit("px") ||
+
+            this.isDimensionOfUnit("vh") ||
+            this.isDimensionOfUnit("vw") ||
+            this.isDimensionOfUnit("vmin") ||
+            this.isDimensionOfUnit("vmax") ||
+
+            this.isDimensionOfUnit("rem") ||
+
             this.isDimensionOfUnit("cm") ||
             this.isDimensionOfUnit("mm") ||
             this.isDimensionOfUnit("in") ||
             this.isDimensionOfUnit("pc") ||
-            this.isDimensionOfUnit("px") ||
-            this.isDimensionOfUnit("em") ||
-            this.isDimensionOfUnit("ex") ||
             this.isDimensionOfUnit("pt"));
   },
 
