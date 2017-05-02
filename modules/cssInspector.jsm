@@ -1105,7 +1105,77 @@ var CssInspector = {
 
   parseGridAutoRepeat: function(parser, token)
   {
-    
+    // repeat( [ <positive-integer> ] , [ <line-names>? <fixed-size> ]+ <line-names>? )
+    if (!token.isNotNull())
+      return null;
+
+    if (!token.isFunction("repeat("))
+      return "";
+
+    token = parser.getToken(true, true);
+    if (!token.isNotNull())
+      return null;
+
+    if (token.isNumber()) {
+      var positiveInteger = parseFloat(token.value);
+      if (positiveInteger > 0 && positiveInteger == Math.floor(positiveInteger)) {
+        rv = { type: "auto-repeat", count: positiveInteger, fixedSizingFunctions: [], endLineNames: null }
+
+        token = parser.getToken(true, true);
+        if (!token.isNotNull())
+          return null;
+
+        if (!token.isSymbol(","))
+          return "";
+
+        token = parser.getToken(true, true);
+        if (!token.isNotNull())
+          return null;
+
+        var lineNames = null;
+        while (token.isNotNull()) {
+          lineNames = this.parseGridLineNames(parser, token);
+          if (null == lineNames)
+            return null;
+
+          if (lineNames) {
+            token = parser.getToken(true, true);
+            if (!token.isNotNull())
+              return null;
+          }
+
+          var argument = this.parseGridFixedSize(parser, token);
+          if (null == argument)
+            return null;
+          else if (!argument)
+            break;
+
+          rv.fixedSizingFunctions.push( { lineNames: Array.from(lineNames), fixedSize: argument } );
+          lineNames = null;
+
+          token = parser.getToken(true, true);
+          if (!token.isNotNull())
+            return null;
+        }
+
+        if (rv.fixedSizingFunctions.length < 1)
+          return "";
+
+        if (lineNames) {
+          rv.endLineNames = Array.from(lineNames);
+          token = parser.getToken(true, true);
+          if (!token.isNotNull())
+            return null;
+        }
+
+        if (!token.isSymbol(")"))
+          return "";
+
+        return rv;
+      }
+    }
+
+    return "";
   },
 
   parseGridAutoTrackList: function(parser, token)
@@ -1148,21 +1218,15 @@ var CssInspector = {
         break;
 
       rv.startEntries.push( { type:"auto-track", lineNames: Array.from(lineNames), size: argument });
+      lineNames = null;
 
       token = parser.getToken(true, true);
       if (!token.isNotNull())
         return null;
     }
 
-    lineNames = this.parseGridLineNames(parser, token);
-    if (null == lineNames)
-      return null;
-
     if (lineNames) {
       rv.startLineNames = Array.from(lineNames);
-      token = parser.getToken(true, true);
-      if (!token.isNotNull())
-        return null;
     }
 
     var autoRepeat = this.parseGridAutoRepeat(parser, token);
@@ -1198,15 +1262,12 @@ var CssInspector = {
         break;
 
       rv.endEntries.push( { type:"auto-track", lineNames: Array.from(lineNames), size: argument });
+      lineNames = null;
 
       token = parser.getToken(true, true);
       if (!token.isNotNull())
         return null;
     }
-
-    lineNames = this.parseGridLineNames(parser, token);
-    if (null == lineNames)
-      return null;
 
     if (lineNames) {
       rv.endLineNames = Array.from(lineNames);
