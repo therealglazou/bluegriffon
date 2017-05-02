@@ -1459,11 +1459,8 @@ var CssInspector = {
     if (null == trackBreadth)
       return null;
 
-    var c =     Components.classes['@mozilla.org/consoleservice;1']
-          .getService(Components.interfaces.nsIConsoleService);
     if ("" == trackBreadth) {
       if (token.isFunction("minmax(")) {
-        c.logStringMessage("FOUND TRACK-SIZE");
         token = parser.getToken(true, true);
         var firstArgument = this.parseGridInflexibleBreadth(parser, token);
         if (!firstArgument)
@@ -1518,13 +1515,10 @@ var CssInspector = {
     if (null == fixedBreadth)
       return null;
 
-    var c =     Components.classes['@mozilla.org/consoleservice;1']
-          .getService(Components.interfaces.nsIConsoleService);
     if ("" == fixedBreadth) {
       if (!token.isFunction("minmax("))
         return "";
 
-      c.logStringMessage("FOUND FIXED-SIZE");
       token = parser.getToken(true, true);
       var firstArgument = this.parseGridFixedBreadth(parser, token);
       if (null == firstArgument)
@@ -2439,10 +2433,6 @@ CSSParser.prototype = {
            ((aSkipWS && this.mToken.isWhiteSpace()) ||
             (aSkipComment && this.mToken.isComment())))
       this.mToken = this.mScanner.nextToken();
-
-    var c =     Components.classes['@mozilla.org/consoleservice;1']
-          .getService(Components.interfaces.nsIConsoleService);
-    c.logStringMessage("*** TOKEN " + this.mToken.toSource());
 
     return this.mToken;
   },
