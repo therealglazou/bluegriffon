@@ -1114,7 +1114,7 @@ var CssInspector = {
       return null;
 
     if (token.isIdent("auto-fill") || token.isIdent("auto-fit")) {
-      rv = { type: "auto-repeat", count: token.value, fixedSizingFunctions: [], endLineNames: null }
+      rv = new gridAutoRepeat(token.value);
 
       token = parser.getToken(true, true);
       if (!token.isNotNull())
@@ -1129,23 +1129,28 @@ var CssInspector = {
 
       var lineNames = null;
       while (token.isNotNull()) {
+        parser.preserveState();
         lineNames = this.parseGridLineNames(parser, token);
-        if (null == lineNames)
-          return null;
 
         if (lineNames) {
+          parser.forgetState();
           token = parser.getToken(true, true);
           if (!token.isNotNull())
             return null;
         }
+        else
+          parser.restoreState();
 
         var argument = this.parseGridFixedSize(parser, token);
-        if (null == argument)
+        if (null == argument) {
           return null;
-        else if (!argument)
+        }
+        if (!argument) {
           break;
+        }
 
-        rv.fixedSizingFunctions.push( { lineNames: lineNames ? Array.from(lineNames) : null, fixedSize: argument } );
+        var track = new gridTrack(lineNames ? Array.from(lineNames) : null, argument);
+        rv.fixedSizingFunctions.push(track);
         lineNames = null;
 
         token = parser.getToken(true, true);
@@ -1156,12 +1161,11 @@ var CssInspector = {
 
       if (lineNames) {
         rv.endLineNames = Array.from(lineNames);
-        token = parser.getToken(true, true);
-        if (!token.isNotNull())
+        if (!parser.currentToken().isNotNull())
           return null;
       }
 
-      if (!token.isSymbol(")"))
+      if (!parser.currentToken().isSymbol(")"))
         return "";
 
       return rv;
@@ -1186,7 +1190,7 @@ var CssInspector = {
     if (token.isNumber()) {
       var positiveInteger = parseFloat(token.value);
       if (positiveInteger > 0 && positiveInteger == Math.floor(positiveInteger)) {
-        rv = { type: "fixed-repeat", count: positiveInteger, fixedSizingFunctions: [], endLineNames: null }
+        rv = new gridFixedRepeat(positiveInteger);
 
         token = parser.getToken(true, true);
         if (!token.isNotNull())
@@ -1201,23 +1205,29 @@ var CssInspector = {
 
         var lineNames = null;
         while (token.isNotNull()) {
+          parser.preserveState();
           lineNames = this.parseGridLineNames(parser, token);
-          if (null == lineNames)
-            return null;
 
           if (lineNames) {
+            parser.forgetState();
             token = parser.getToken(true, true);
             if (!token.isNotNull())
               return null;
           }
+          else
+            parser.restoreState();
 
           var argument = this.parseGridFixedSize(parser, token);
-          if (null == argument)
+          if (null == argument) {
             return null;
-          else if (!argument)
+          }
+          if (!argument) {
             break;
+          }
 
-          rv.fixedSizingFunctions.push( { lineNames: lineNames ? Array.from(lineNames) : null, fixedSize: argument } );
+          parser.forgetState();
+          var track = new gridTrack(lineNames ? Array.from(lineNames) : null, argument);
+          rv.fixedSizingFunctions.push(track);
           lineNames = null;
 
           token = parser.getToken(true, true);
@@ -1228,12 +1238,11 @@ var CssInspector = {
 
         if (lineNames) {
           rv.endLineNames = Array.from(lineNames);
-          token = parser.getToken(true, true);
-          if (!token.isNotNull())
+          if (!parser.currentToken().isNotNull())
             return null;
         }
 
-        if (!token.isSymbol(")"))
+        if (!parser.currentToken().isSymbol(")"))
           return "";
 
         return rv;
@@ -1259,7 +1268,7 @@ var CssInspector = {
     if (token.isNumber()) {
       var positiveInteger = parseFloat(token.value);
       if (positiveInteger > 0 && positiveInteger == Math.floor(positiveInteger)) {
-        rv = { type: "fixed-repeat", count: positiveInteger, trackSizingFunctions: [], endLineNames: null }
+        rv = new gridTrackRepeat(positiveInteger);
 
         token = parser.getToken(true, true);
         if (!token.isNotNull())
@@ -1274,23 +1283,28 @@ var CssInspector = {
 
         var lineNames = null;
         while (token.isNotNull()) {
+          parser.preserveState();
           lineNames = this.parseGridLineNames(parser, token);
-          if (null == lineNames)
-            return null;
 
           if (lineNames) {
+            parser.forgetState();
             token = parser.getToken(true, true);
             if (!token.isNotNull())
               return null;
           }
+          else
+            parser.restoreState();
 
           var argument = this.parseGridTrackSize(parser, token);
-          if (null == argument)
+          if (null == argument) {
             return null;
-          else if (!argument)
+          }
+          if (!argument) {
             break;
+          }
 
-          rv.trackSizingFunctions.push( { lineNames: lineNames ? Array.from(lineNames) : null, trackSize: argument } );
+          var track = new gridTrack(lineNames ? Array.from(lineNames) : null, argument);
+          rv.trackSizingFunctions.push(track);
           lineNames = null;
 
           token = parser.getToken(true, true);
@@ -1301,12 +1315,11 @@ var CssInspector = {
 
         if (lineNames) {
           rv.endLineNames = Array.from(lineNames);
-          token = parser.getToken(true, true);
-          if (!token.isNotNull())
+          if (!parser.currentToken().isNotNull())
             return null;
         }
 
-        if (!token.isSymbol(")"))
+        if (!parser.currentToken().isSymbol(")"))
           return "";
 
         return rv;
@@ -1323,35 +1336,43 @@ var CssInspector = {
     if (!token.isNotNull())
       return null;
 
-    var rv = { type: "auto-track-list",
-               startEntries: [],
-               startLineNames: null,
-               autoRepeat: null,
-               endEntries: [],
-               endLineNames: null };
+    var rv = new gridAutoTrackList();
 
     var lineNames = null;
     while (token.isNotNull()) {
+      parser.preserveState();
       lineNames = this.parseGridLineNames(parser, token);
 
       if (lineNames) {
+        parser.forgetState();
         token = parser.getToken(true, true);
       }
+      else
+        parser.restoreState();
 
+      parser.preserveState();
       var argument = this.parseGridFixedSize(parser, token);
-      if (null == argument)
+      if (null == argument) {
+        parser.forgetState();
         return null;
+      }
 
       if (!argument) {
         argument = this.parseGridFixedRepeat(parser, token);
+        if (null == argument) {
+          parser.forgetState();
+          return null;
+        }
+        if (!argument) {
+          parser.restoreState();
+          break;
+        }
       }
+      else
+        parser.forgetState();
 
-      if (null == argument)
-        return null;
-      else if (!argument)
-        break;
-
-      rv.startEntries.push( { type:"auto-track", lineNames: lineNames ? Array.from(lineNames) : null, size: argument });
+      var track = new gridTrack(lineNames ? Array.from(lineNames) : null, argument);
+      rv.startEntries.push(track);
       lineNames = null;
 
       token = parser.getToken(true, true);
@@ -1369,26 +1390,40 @@ var CssInspector = {
 
     lineNames = null;
     while (token.isNotNull()) {
+      parser.preserveState();
       lineNames = this.parseGridLineNames(parser, token);
 
       if (lineNames) {
+        parser.forgetState();
         token = parser.getToken(true, true);
       }
+      else
+        parser.restoreState();
 
+      parser.preserveState();
       var argument = this.parseGridFixedSize(parser, token);
-      if (null == argument)
+      if (null == argument) {
+        parser.forgetState();
         return null;
+      }
 
       if (!argument) {
         argument = this.parseGridFixedRepeat(parser, token);
+        if (null == argument) {
+          parser.forgetState();
+          return null;
+        }
+        if (!argument) {
+          parser.restoreState();
+          break;
+        }
       }
+      else
+        parser.forgetState();
 
-      if (null == argument)
-        return null;
-      else if (!argument)
-        break;
 
-      rv.endEntries.push( { type:"auto-track", lineNames: lineNames ? Array.from(lineNames) : null, size: argument });
+      var track = new gridTrack(lineNames ? Array.from(lineNames) : null, argument);
+      rv.endEntries.push(track);
       lineNames = null;
 
       token = parser.getToken(true, true);
@@ -1407,33 +1442,47 @@ var CssInspector = {
     if (!token.isNotNull())
       return null;
 
-    var rv = { type: "track-list",
-               entries: [],
-               lineNames: null };
+    var rv = new gridTrackList();
 
     var lineNames = null;
     while (token.isNotNull()) {
+      parser.preserveState();
       lineNames = this.parseGridLineNames(parser, token);
 
       if (lineNames) {
+        parser.forgetState();
         token = parser.getToken(true, true);
+        if (!token.isNotNull())
+          break;
       }
+      else
+        parser.restoreState();
 
+      parser.preserveState();
       var argument = this.parseGridTrackSize(parser, token);
 
-      if (null == argument)
+      if (null == argument) {
+        parser.forgetState();
         return null;
-
-      if (!argument) {
-        argument = this.parseGridTrackRepeat(parser, token);
       }
 
-      if (null == argument)
-        return null;
-      else if (!argument)
-        break;
+      if (!argument) {
+        parser.restoreState();
+        argument = this.parseGridTrackRepeat(parser, token);
+        if (null == argument) {
+          parser.forgetState();
+          return null;
+        }
+        if (!argument) {
+          parser.restoreState();
+          break;
+        }
+      }
+      else
+        parser.forgetState();
 
-      rv.entries.push( { type:"track", lineNames: lineNames ? Array.from(lineNames) : null, size: argument });
+      var track = new gridTrack(lineNames ? Array.from(lineNames) : null, argument);
+      rv.entries.push(track);
       lineNames = null;
 
       token = parser.getToken(true, true);
@@ -1482,7 +1531,7 @@ var CssInspector = {
           return null;
 
         // make a struct and return it
-        return {type: "minmax-inflexible-track", value: [firstArgument, secondArgument] };
+        return new gridTrackSize("minmax", firstArgument, secondArgument);
       }
 
       else if (token.isFunction("fit-content(")) {
@@ -1496,13 +1545,13 @@ var CssInspector = {
           return null;
 
         // make a struct and return it
-        return {type: "fit-content", value: firstArgument };
+        return new gridTrackSize("fit-content", firstArgument, secondArgument);
       }
 
       return "";
     }
 
-    return {type: "track-breadth", value: trackBreadth };
+    return new gridTrackSize("track-breadth", trackBreadth);
   },
 
   parseGridFixedSize: function(parser, token)
@@ -1543,7 +1592,7 @@ var CssInspector = {
           return null;
 
         // make a struct and return it
-        return {type: "minmax-inflexible-fixed", value: [firstArgment, secondArgument] };
+        return new gridFixedSize("minmax", firstArgument, secondArgument);
       }
 
       token = parser.getToken(true, true);
@@ -1560,9 +1609,9 @@ var CssInspector = {
         return null;
 
       // make a struct and return it
-      return {type: "minmax-fixed-track", value: [firstArgment, secondArgument] };
+      return new gridFixedSize("minmax", firstArgument, secondArgument);
     }
-    return {type: "fixed-breadth", value: fixedBreadth };
+    return new gridFixedSize("fixed-breadth", fixedBreadth);
   },
 
   parseGridTrackBreadth: function(parser, token)
@@ -1648,7 +1697,7 @@ var CssInspector = {
       return null;
 
     if  (token.isIdent("none"))
-      return { type: "none" };
+      return new gridNone();
 
     parser.preserveState();
     var rv = this.parseGridTrackList(parser, token);
@@ -6042,3 +6091,232 @@ function FilterRadialGradient(aValue, aEngine)
   }
   return str;
 }
+
+/************************** GRID-TEMPLATE-ROWS/COLUMNS **************************/
+
+function gridAutoRepeat(aCount)
+{
+  this.count = aCount;
+  this.fixedSizingFunctions = [];
+  this.endLineNames = null;
+}
+
+gridAutoRepeat.prototype = {
+  type: "auto-repeat",
+  count: 0,
+  fixedSizingFunctions: [],
+  endLineNames: null,
+
+  toString: function() {
+    var rv = "repeat(" + this.count + ",";
+    for (var i = 0; i < this.fixedSizingFunctions.length; i++) {
+      rv += " " + this.fixedSizingFunctions[i].toString();
+    }
+    if (this.endLineNames && this.endLineNames.length)
+      rv += " [" + this.endLineNames.join(" ") + "]";
+    rv += ")";
+    return rv;
+  }
+}
+
+function gridFixedRepeat(aCount)
+{
+  this.count = aCount;
+  this.fixedSizingFunctions = [];
+  this.endLineNames = null;
+}
+
+gridFixedRepeat.prototype = {
+  type: "fixed-repeat",
+  count: 0,
+  fixedSizingFunctions: [],
+  endLineNames: null,
+
+  toString: function() {
+    var rv = "repeat(" + this.count + ",";
+    for (var i = 0; i < this.fixedSizingFunctions.length; i++) {
+      rv += " " + this.fixedSizingFunctions[i].toString();
+    }
+    if (this.endLineNames && this.endLineNames.length)
+      rv += " [" + this.endLineNames.join(" ") + "]";
+    rv += ")";
+    return rv;
+  }
+}
+
+function gridTrackRepeat(aCount)
+{
+  this.count = aCount;
+  this.trackSizingFunctions = [];
+  this.endLineNames = null;
+}
+
+gridTrackRepeat.prototype = {
+  type: "track-repeat",
+  count: 0,
+  trackSizingFunctions: [],
+  endLineNames: null,
+
+  toString: function() {
+    var rv = "repeat(" + this.count + ",";
+    for (var i = 0; i < this.trackSizingFunctions.length; i++) {
+      rv += " " + this.trackSizingFunctions[i].toString();
+    }
+    if (this.endLineNames && this.endLineNames.length)
+      rv += " [" + this.endLineNames.join(" ") + "]";
+    rv += ")";
+    return rv;
+  }
+}
+
+function gridAutoTrackList()
+{
+  this.startEntries = [];
+  this.startLineNames = null;
+  this.autoRepeat = null;
+  this.endEntries = [];
+  this.endLineNames = null;
+}
+
+gridAutoTrackList.prototype = {
+  type: "auto-track-list",
+  startEntries: [],
+  startLineNames: null,
+  autoRepeat: null,
+  endEntries: [],
+  endLineNames: null,
+
+  toString: function() {
+    var rv = "";
+    for (var i = 0; i < this.startEntries.length; i++) {
+      if (i)
+        rv += " ";
+      rv += this.startEntries.toString();
+    }
+
+    if (this.startLineNames && this.startLineNames.length) {
+      rv += " ";
+      rv += " [" + this.startLineNames.join(" ") + "]";
+    }
+
+    rv += " " + this.autoRepeat.toString();
+
+    for (var i = 0; i < this.endEntries.length; i++) {
+      rv += " " + this.endEntries.toString();
+    }
+
+    if (this.endLineNames && this.endLineNames.length) {
+      rv += " ";
+      rv += " [" + this.endLineNames.join(" ") + "]";
+    }
+
+    return rv;
+  }
+}
+
+function gridTrackList()
+{
+  this.entries = [];
+  this.lineNames = null;
+}
+
+gridTrackList.prototype = {
+  type: "track-list",
+  entries: [],
+  lineNames: null,
+
+  toString: function() {
+    var rv = "";
+    for (var i = 0; i < this.entries.length; i++) {
+      if (i)
+        rv += " ";
+      rv += this.entries[i].toString();
+    }
+    if (this.lineNames && this.lineNames.length)
+      rv += " [" + this.lineNames.join(" ") + "]";
+    rv += ")";
+    return rv;
+  }
+}
+
+function gridTrackSize(aType, aFirstArgument, aSecondArgument)
+{
+  this.valueType = aType;
+  if (aSecondArgument)
+    this.value = [aFirstArgument, aSecondArgument];
+  else
+    this.value = aFirstArgument;
+}
+
+gridTrackSize.prototype = {
+  type: "track-size",
+  valueType: "",
+  value: null,
+
+  toString: function() {
+    switch (this.valueType) {
+      case "track-breadth": return this.value.value;
+      default: return this.valueType + "("
+                        + this.value[0].value
+                        + ", "
+                        + this.value[1].value
+                        + ")";
+    }
+  }
+}
+
+function gridNone() {}
+gridNone.prototype = {
+  type: "none",
+
+  toString: function() {
+    return "none";
+  }
+}
+
+function gridFixedSize(aType, aFirstArgument, aSecondArgument)
+{
+  this.valueType = aType;
+  if (aSecondArgument)
+    this.value = [aFirstArgument, aSecondArgument];
+  else
+    this.value = aFirstArgument;
+}
+
+gridFixedSize.prototype = {
+  type: "fixed-size",
+  valueType: "",
+  value: null,
+
+  toString: function() {
+    switch (this.valueType) {
+      case "fixed-breadth": return this.value.value;
+      default: return this.valueType + "("
+                        + this.value[0].value
+                        + ", "
+                        + this.value[1].value
+                        + ")";
+    }
+  }
+}
+
+function gridTrack(aLineNames, aSize)
+{
+  this.lineNames = aLineNames;
+  this.size = aSize;
+}
+
+gridTrack.prototype = {
+  type: "track",
+  lineNames: null,
+  size: null,
+
+  toString: function() {
+    var rv = "";
+    if (this.lineNames && this.lineNames.length)
+      rv += "[" + this.lineNames.join(" ") + "] ";
+    rv += this.size.toString();
+    return rv;
+  }
+}
+
