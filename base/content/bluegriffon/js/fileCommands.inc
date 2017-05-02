@@ -305,8 +305,8 @@ function StoreUrlInLocationDB(url)
     var statement = dbConn.createStatement(
       "INSERT INTO 'bgLocations' ('query','querydate') VALUES(?1,?2)");
   
-    statement.bindUTF8StringParameter(0, url);
-    statement.bindInt64Parameter(1, Date.parse(new Date()));
+    statement.bindUTF8StringByIndex(0, url);
+    statement.bindInt64ByIndex(1, Date.parse(new Date()));
   
     statement.execute();
     statement.finalize();

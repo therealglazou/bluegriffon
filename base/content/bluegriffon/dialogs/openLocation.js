@@ -169,8 +169,8 @@ function InsertLocationInDB(aLocation)
     var statement = mDBConn.createStatement(
       "INSERT INTO 'bgLocations' ('query','querydate') VALUES(?1,?2)");
   
-    statement.bindUTF8StringParameter(0, aLocation);
-    statement.bindInt64Parameter(1, Date.parse(new Date()));
+    statement.bindUTF8StringByIndex(0, aLocation);
+    statement.bindInt64ByIndex(1, Date.parse(new Date()));
   
     statement.execute();
     statement.finalize();
