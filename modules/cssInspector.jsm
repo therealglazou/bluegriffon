@@ -1145,12 +1145,10 @@ var CssInspector = {
         else if (!argument)
           break;
 
-        rv.fixedSizingFunctions.push( { lineNames: Array.from(lineNames), fixedSize: argument } );
+        rv.fixedSizingFunctions.push( { lineNames: lineNames ? Array.from(lineNames) : null, fixedSize: argument } );
         lineNames = null;
 
         token = parser.getToken(true, true);
-        if (!token.isNotNull())
-          return null;
       }
 
       if (rv.fixedSizingFunctions.length < 1)
@@ -1219,12 +1217,10 @@ var CssInspector = {
           else if (!argument)
             break;
 
-          rv.fixedSizingFunctions.push( { lineNames: Array.from(lineNames), fixedSize: argument } );
+          rv.fixedSizingFunctions.push( { lineNames: lineNames ? Array.from(lineNames) : null, fixedSize: argument } );
           lineNames = null;
 
           token = parser.getToken(true, true);
-          if (!token.isNotNull())
-            return null;
         }
 
         if (rv.fixedSizingFunctions.length < 1)
@@ -1294,12 +1290,10 @@ var CssInspector = {
           else if (!argument)
             break;
 
-          rv.trackSizingFunctions.push( { lineNames: Array.from(lineNames), trackSize: argument } );
+          rv.trackSizingFunctions.push( { lineNames: lineNames ? Array.from(lineNames) : null, trackSize: argument } );
           lineNames = null;
 
           token = parser.getToken(true, true);
-          if (!token.isNotNull())
-            return null;
         }
 
         if (rv.trackSizingFunctions.length < 1)
@@ -1339,13 +1333,9 @@ var CssInspector = {
     var lineNames = null;
     while (token.isNotNull()) {
       lineNames = this.parseGridLineNames(parser, token);
-      if (null == lineNames)
-        return null;
 
       if (lineNames) {
         token = parser.getToken(true, true);
-        if (!token.isNotNull())
-          return null;
       }
 
       var argument = this.parseGridFixedSize(parser, token);
@@ -1361,12 +1351,10 @@ var CssInspector = {
       else if (!argument)
         break;
 
-      rv.startEntries.push( { type:"auto-track", lineNames: Array.from(lineNames), size: argument });
+      rv.startEntries.push( { type:"auto-track", lineNames: lineNames ? Array.from(lineNames) : null, size: argument });
       lineNames = null;
 
       token = parser.getToken(true, true);
-      if (!token.isNotNull())
-        return null;
     }
 
     if (lineNames) {
@@ -1378,18 +1366,13 @@ var CssInspector = {
       return autoRepeat;
     rv.autoRepeat = autoRepeat;
     token = parser.getToken(true, true);
-    if (!token.isNotNull())
-      return null;
 
+    lineNames = null;
     while (token.isNotNull()) {
       lineNames = this.parseGridLineNames(parser, token);
-      if (null == lineNames)
-        return null;
 
       if (lineNames) {
         token = parser.getToken(true, true);
-        if (!token.isNotNull())
-          return null;
       }
 
       var argument = this.parseGridFixedSize(parser, token);
@@ -1405,12 +1388,10 @@ var CssInspector = {
       else if (!argument)
         break;
 
-      rv.endEntries.push( { type:"auto-track", lineNames: Array.from(lineNames), size: argument });
+      rv.endEntries.push( { type:"auto-track", lineNames: lineNames ? Array.from(lineNames) : null, size: argument });
       lineNames = null;
 
       token = parser.getToken(true, true);
-      if (!token.isNotNull())
-        return null;
     }
 
     if (lineNames) {
@@ -1433,16 +1414,13 @@ var CssInspector = {
     var lineNames = null;
     while (token.isNotNull()) {
       lineNames = this.parseGridLineNames(parser, token);
-      if (null == lineNames)
-        return null;
 
       if (lineNames) {
         token = parser.getToken(true, true);
-        if (!token.isNotNull())
-          return null;
       }
 
       var argument = this.parseGridTrackSize(parser, token);
+
       if (null == argument)
         return null;
 
@@ -1455,12 +1433,10 @@ var CssInspector = {
       else if (!argument)
         break;
 
-      rv.entries.push( { type:"track", lineNames: Array.from(lineNames), size: argument });
+      rv.entries.push( { type:"track", lineNames: lineNames ? Array.from(lineNames) : null, size: argument });
       lineNames = null;
 
       token = parser.getToken(true, true);
-      if (!token.isNotNull())
-        return null;
     }
 
     if (rv.entries.length < 1)
@@ -1483,8 +1459,11 @@ var CssInspector = {
     if (null == trackBreadth)
       return null;
 
+    var c =     Components.classes['@mozilla.org/consoleservice;1']
+          .getService(Components.interfaces.nsIConsoleService);
     if ("" == trackBreadth) {
       if (token.isFunction("minmax(")) {
+        c.logStringMessage("FOUND TRACK-SIZE");
         token = parser.getToken(true, true);
         var firstArgument = this.parseGridInflexibleBreadth(parser, token);
         if (!firstArgument)
@@ -1494,6 +1473,9 @@ var CssInspector = {
         if (!token.isSymbol(","))
           return null;
 
+        token = parser.getToken(true, true);
+        if (!token.isNotNull())
+          return null;
         var secondArgument = this.parseGridTrackBreadth(parser, token);
         if (!secondArgument)
           return null;
@@ -1503,7 +1485,7 @@ var CssInspector = {
           return null;
 
         // make a struct and return it
-        return {type: "minmax-inflexible-track", value: [firstArgment, secondArgument] };
+        return {type: "minmax-inflexible-track", value: [firstArgument, secondArgument] };
       }
 
       else if (token.isFunction("fit-content(")) {
@@ -1536,10 +1518,13 @@ var CssInspector = {
     if (null == fixedBreadth)
       return null;
 
+    var c =     Components.classes['@mozilla.org/consoleservice;1']
+          .getService(Components.interfaces.nsIConsoleService);
     if ("" == fixedBreadth) {
       if (!token.isFunction("minmax("))
         return "";
 
+      c.logStringMessage("FOUND FIXED-SIZE");
       token = parser.getToken(true, true);
       var firstArgument = this.parseGridFixedBreadth(parser, token);
       if (null == firstArgument)
@@ -1592,8 +1577,8 @@ var CssInspector = {
     if (!token.isNotNull())
       return null;
 
-    if (!(token.isLength() && parseFloat(token.value) < 0) &&
-        !(token.isDimensionOfUnit("fr") && parseFloat(token.value) < 0) &&
+    if (!(token.isLength() && parseFloat(token.value) > 0) &&
+        !(token.isDimensionOfUnit("fr") && parseFloat(token.value) > 0) &&
         !token.isIdent("min-content") &&
         !token.isIdent("max-content") &&
         !token.isIdent("auto"))
@@ -1608,7 +1593,7 @@ var CssInspector = {
     if (!token.isNotNull())
       return null;
 
-    if (!(token.isLength() && parseFloat(token.value) < 0) &&
+    if (!(token.isLength() && parseFloat(token.value) > 0) &&
         !token.isIdent("min-content") &&
         !token.isIdent("max-content") &&
         !token.isIdent("auto"))
@@ -1645,7 +1630,7 @@ var CssInspector = {
     while (token.isNotNull()) {
       if (token.isIdent() && !token.isIdent("span"))
         rv.push(token.value);
-      else if (token.isStymbol("]"))
+      else if (token.isSymbol("]"))
         return rv;
       else
         return "";
@@ -1663,6 +1648,22 @@ var CssInspector = {
     parser.mPreserveComments = false;
     parser.mPreservedTokens = [];
     parser.mScanner.init(aString);
+
+    token = parser.getToken(true, true);
+    if (!token.isNotNull())
+      return null;
+
+    if  (token.isIdent("none"))
+      return { type: "none" };
+
+    parser.preserveState();
+    var rv = this.parseGridTrackList(parser, token);
+    if (rv)
+      return rv;
+
+    parser.restoreState();
+    rv = this.parseGridAutoTrackList(parser, token);
+    return rv;
   }
 };
 
@@ -2438,6 +2439,11 @@ CSSParser.prototype = {
            ((aSkipWS && this.mToken.isWhiteSpace()) ||
             (aSkipComment && this.mToken.isComment())))
       this.mToken = this.mScanner.nextToken();
+
+    var c =     Components.classes['@mozilla.org/consoleservice;1']
+          .getService(Components.interfaces.nsIConsoleService);
+    c.logStringMessage("*** TOKEN " + this.mToken.toSource());
+
     return this.mToken;
   },
 
