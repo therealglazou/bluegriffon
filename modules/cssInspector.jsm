@@ -1098,6 +1098,8 @@ var CssInspector = {
     return m;
   },
 
+  /************************** GRID-TEMPLATE-ROWS/COLUMNS **************************/
+
   parseGridAutoRepeat: function(parser, token)
   {
     // repeat( [ auto-fill | auto-fit ] , [ <line-names>? <fixed-size> ]+ <line-names>? )
@@ -1226,6 +1228,81 @@ var CssInspector = {
         }
 
         if (rv.fixedSizingFunctions.length < 1)
+          return "";
+
+        if (lineNames) {
+          rv.endLineNames = Array.from(lineNames);
+          token = parser.getToken(true, true);
+          if (!token.isNotNull())
+            return null;
+        }
+
+        if (!token.isSymbol(")"))
+          return "";
+
+        return rv;
+      }
+    }
+
+    return "";
+  },
+
+  parseGridTrackRepeat: function(parser, token)
+  {
+    // repeat( [ <positive-integer> ] , [ <line-names>? <track-size> ]+ <line-names>? )
+    if (!token.isNotNull())
+      return null;
+
+    if (!token.isFunction("repeat("))
+      return "";
+
+    token = parser.getToken(true, true);
+    if (!token.isNotNull())
+      return null;
+
+    if (token.isNumber()) {
+      var positiveInteger = parseFloat(token.value);
+      if (positiveInteger > 0 && positiveInteger == Math.floor(positiveInteger)) {
+        rv = { type: "fixed-repeat", count: positiveInteger, trackSizingFunctions: [], endLineNames: null }
+
+        token = parser.getToken(true, true);
+        if (!token.isNotNull())
+          return null;
+
+        if (!token.isSymbol(","))
+          return "";
+
+        token = parser.getToken(true, true);
+        if (!token.isNotNull())
+          return null;
+
+        var lineNames = null;
+        while (token.isNotNull()) {
+          lineNames = this.parseGridLineNames(parser, token);
+          if (null == lineNames)
+            return null;
+
+          if (lineNames) {
+            token = parser.getToken(true, true);
+            if (!token.isNotNull())
+              return null;
+          }
+
+          var argument = this.parseGridTrackSize(parser, token);
+          if (null == argument)
+            return null;
+          else if (!argument)
+            break;
+
+          rv.trackSizingFunctions.push( { lineNames: Array.from(lineNames), trackSize: argument } );
+          lineNames = null;
+
+          token = parser.getToken(true, true);
+          if (!token.isNotNull())
+            return null;
+        }
+
+        if (rv.trackSizingFunctions.length < 1)
           return "";
 
         if (lineNames) {
