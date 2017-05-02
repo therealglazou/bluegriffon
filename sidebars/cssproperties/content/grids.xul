@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE overlay [
+  <!ENTITY % csspropertiesDTD SYSTEM "chrome://cssproperties/locale/cssproperties.dtd">
+  %csspropertiesDTD;
+]>
+
+<overlay id="gridsOverlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/x-javascript"  src="chrome://cssproperties/content/grids.js" />
+
+  <vbox id="propertiesBox">
+      <hbox align="center"
+            class="csspropertiesHeader"
+            context="sectionHeaderContext"
+            id="gridsSectionHeader"
+            onclick="ToggleSection(event, this)"
+            position="13">
+        <image />
+        <label value="&gridLayoutSection.label;"/>
+      </hbox>
+
+      <vbox class="section" id="gridsSection" position="14">
+        <description id="gridItemPositionWarning">&gridItemPositionWarning.label;</description>
+        <checkbox id="gridDisplayCheckbox"
+                  oncommand="ToggleDisplayGrid(this)"
+                  label="&displayGrid.label;"/>
+        <checkbox id="inlineGridDisplayCheckbox" class="indent"
+                  oncommand="ToggleDisplayGrid(this)"
+                  label="&displayInlineGrid.label;"/>
+        <checkbox id="subgridDisplayCheckbox" class="indent"
+                  hidden="true"
+                  oncommand="ToggleDisplayGrid(this)"
+                  label="&displaySubgrid.label;"/>
+        <grid>
+          <columns><column/><column/></columns>
+          <rows>
+            <cssproperty property="grid-row-gap"
+                         grammar="ulength('')">
+              <l10n>
+                grid-row-gap=&gridRowGap.label;
+                url=https://developer.mozilla.org/en-US/docs/Web/CSS/grid-row-gap
+              </l10n>
+            </cssproperty>
+
+            <cssproperty property="grid-column-gap"
+                         grammar="ulength('')">
+              <l10n>
+                grid-column-gap=&gridColumnGap.label;
+                url=https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column-gap
+              </l10n>
+            </cssproperty>
+
+            <cssproperty property="grid-auto-flow"
+                         grammar="( row | column ) | dense">
+              <l10n>
+                grid-auto-flow=&gridAutoFlow.label;
+                url=https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-flow
+              </l10n>
+            </cssproperty>
+          </rows>
+        </grid>
+      </vbox>
+  </vbox>
+</overlay>

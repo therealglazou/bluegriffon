@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE overlay [
+  <!ENTITY % csspropertiesDTD SYSTEM "chrome://cssproperties/locale/cssproperties.dtd">
+  %csspropertiesDTD;
+]>
+
+<overlay id="griditemsOverlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/x-javascript"  src="chrome://cssproperties/content/griditems.js" />
+
+  <vbox id="propertiesBox">
+      <hbox align="center"
+            class="csspropertiesHeader"
+            context="sectionHeaderContext"
+            id="griditemsSectionHeader"
+            onclick="ToggleSection(event, this)"
+            position="15">
+        <image />
+        <label value="&gridItemsSection.label;"/>
+      </hbox>
+
+      <vbox class="section" id="griditemsSection" position="16">
+        <description id="gridLayoutWarning">&gridLayoutWarning.label;</description>
+        <grid>
+          <columns><column/><column/></columns>
+          <rows>
+            <row align="center">
+              <label value="&gridOrder.label;"/>
+              <textbox id="orderTextbox" type="number"
+                       property="order"
+                       oninput="ToggleProperty(this)"
+                       oncommand="ToggleProperty(this)"/>
+            </row>
+          </rows>
+        </grid>
+      </vbox>
+  </vbox>
+</overlay>
