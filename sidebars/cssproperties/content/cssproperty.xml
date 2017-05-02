@@ -162,7 +162,12 @@
               groupId++;
               currentHost = this.createHostIfNeeded(null, groupId);
             }
-            else if (token.isSymbol("]")) {
+            else if (token.isSymbol("(")) {
+              inGroup = true;
+              groupId++;
+              currentHost = this.createHostIfNeeded(null, groupId, true);
+            }
+            else if (token.isSymbol("]") || token.isSymbol(")")) {
               inGroup = false;
               currentHost = null;
             }
@@ -206,7 +211,7 @@
                 button.setAttribute("type", "checkbox");
                 button.setAttribute("id", token.value.replace(/\-/g, "") + this._propertyClean + "Button");
                 button.setAttribute("group", currentHost.getAttribute("group"));
-                if (inGroup)
+                if (inGroup && currentHost && currentHost.getAttribute("mode") != "radio")
                   button.setAttribute("agregator", currentHost.getAttribute("group"));
                 currentHost.appendChild(button);
                 button.init(this);
@@ -237,12 +242,15 @@
       <method name="createHostIfNeeded">
         <parameter name="aCurrentHost"/>
         <parameter name="groupId"/>
+        <parameter name="aIsRadioMode"/>
         <body><![CDATA[
           var currentHost = aCurrentHost;
           if(!currentHost) {
             currentHost = document.createElement("hbox");
             currentHost.setAttribute("align", "center");
             currentHost.setAttribute("group", this._propertyClean + groupId);
+            if (aIsRadioMode)
+              currentHost.setAttribute("mode", "radio");
             this.getChild("valueBox").appendChild(currentHost);
           }
           return currentHost;
@@ -371,18 +379,27 @@
           var property  = this.getAttribute("property");
           var group     = this.getAttribute("group");
           var agregator = this.getAttribute("agregator");
-        
+
+          var radioMode = this.parentNode.hasAttribute("mode")
+                            ? (this.parentNode.getAttribute("mode") == "radio")
+                            : false;
+
           for (var i = 0; i < this.propertyElement.elements.length; i++) {
             var e = this.propertyElement.elements[i];
             if (e != this) {
-              if (agregator
-                  && e.getAttribute("agregator") == agregator
-                  && e.hasAttribute("checked")) {
+              if (e.parentNode == this.parentNode && radioMode) {
+                e.removeAttribute("checked");
+              }
+              else if (agregator
+                       && e.getAttribute("agregator") == agregator
+                       && e.hasAttribute("checked")) {
                 value = value + (value ? " " : "") + (e.hasAttribute("value") ? e.getAttribute("value") : e.value);
               }
               else {
-                if (e.getAttribute("group") != group || !agregator)
+                if (e.parentNode.getAttribute("mode") != "radio" && ! radioMode && (e.getAttribute("group") != group || !agregator))
                   e.removeAttribute("checked");
+                else if (e.hasAttribute("checked"))
+                  value = value + (value ? " " : "") + (e.hasAttribute("value") ? e.getAttribute("value") : e.value);
               }
             }
           }
