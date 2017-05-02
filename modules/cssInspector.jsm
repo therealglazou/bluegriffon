@@ -1420,6 +1420,59 @@ var CssInspector = {
     return rv;
   },
 
+  parseGridTrackList: function(parser, token)
+  {
+    // [ <line-names>? [ <track-size> | <track-repeat> ] ]+ <line-names>?
+    if (!token.isNotNull())
+      return null;
+
+    var rv = { type: "track-list",
+               entries: [],
+               lineNames: null };
+
+    var lineNames = null;
+    while (token.isNotNull()) {
+      lineNames = this.parseGridLineNames(parser, token);
+      if (null == lineNames)
+        return null;
+
+      if (lineNames) {
+        token = parser.getToken(true, true);
+        if (!token.isNotNull())
+          return null;
+      }
+
+      var argument = this.parseGridTrackSize(parser, token);
+      if (null == argument)
+        return null;
+
+      if (!argument) {
+        argument = this.parseGridTrackRepeat(parser, token);
+      }
+
+      if (null == argument)
+        return null;
+      else if (!argument)
+        break;
+
+      rv.entries.push( { type:"track", lineNames: Array.from(lineNames), size: argument });
+      lineNames = null;
+
+      token = parser.getToken(true, true);
+      if (!token.isNotNull())
+        return null;
+    }
+
+    if (rv.entries.length < 1)
+      return "";
+
+    if (lineNames) {
+      rv.lineNames = Array.from(lineNames);
+    }
+
+    return rv;
+  },
+
   parseGridTrackSize: function(parser, token)
   {
     //  <track-breadth> | minmax( <inflexible-breadth> , <track-breadth> ) | fit-content( <length-percentage> )
