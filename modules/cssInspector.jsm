@@ -1098,6 +1098,16 @@ var CssInspector = {
     return m;
   },
 
+  parseGridFixedRepeat: function(parser, token)
+  {
+    
+  },
+
+  parseGridAutoRepeat: function(parser, token)
+  {
+    
+  },
+
   parseGridAutoTrackList: function(parser, token)
   {
     // [ <line-names>? [ <fixed-size> | <fixed-repeat> ] ]* <line-names>? <auto-repeat>
@@ -1125,8 +1135,84 @@ var CssInspector = {
       }
 
       var argument = this.parseGridFixedSize(parser, token);
-      
+      if (null == argument)
+        return null;
+
+      if (!argument) {
+        argument = this.parseGridFixedRepeat(parser, token);
+      }
+
+      if (null == argument)
+        return null;
+      else if (!argument)
+        break;
+
+      rv.startEntries.push( { type:"auto-track", lineNames: Array.from(lineNames), size: argument });
+
+      token = parser.getToken(true, true);
+      if (!token.isNotNull())
+        return null;
     }
+
+    lineNames = this.parseGridLineNames(parser, token);
+    if (null == lineNames)
+      return null;
+
+    if (lineNames) {
+      rv.startLineNames = Array.from(lineNames);
+      token = parser.getToken(true, true);
+      if (!token.isNotNull())
+        return null;
+    }
+
+    var autoRepeat = this.parseGridAutoRepeat(parser, token);
+    if (!autoRepeat)
+      return autoRepeat;
+    rv.autoRepeat = autoRepeat;
+    token = parser.getToken(true, true);
+    if (!token.isNotNull())
+      return null;
+
+    while (token.isNotNull()) {
+      lineNames = this.parseGridLineNames(parser, token);
+      if (null == lineNames)
+        return null;
+
+      if (lineNames) {
+        token = parser.getToken(true, true);
+        if (!token.isNotNull())
+          return null;
+      }
+
+      var argument = this.parseGridFixedSize(parser, token);
+      if (null == argument)
+        return null;
+
+      if (!argument) {
+        argument = this.parseGridFixedRepeat(parser, token);
+      }
+
+      if (null == argument)
+        return null;
+      else if (!argument)
+        break;
+
+      rv.endEntries.push( { type:"auto-track", lineNames: Array.from(lineNames), size: argument });
+
+      token = parser.getToken(true, true);
+      if (!token.isNotNull())
+        return null;
+    }
+
+    lineNames = this.parseGridLineNames(parser, token);
+    if (null == lineNames)
+      return null;
+
+    if (lineNames) {
+      rv.endLineNames = Array.from(lineNames);
+    }
+
+    return rv;
   },
 
   parseGridTrackSize: function(parser, token)
@@ -1303,6 +1389,8 @@ var CssInspector = {
         rv.push(token.value);
       else if (token.isStymbol("]"))
         return rv;
+      else
+        return "";
 
       token = parser.getToken(true, true);
     }
