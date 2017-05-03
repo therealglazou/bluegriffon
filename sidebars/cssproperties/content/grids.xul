@@ -87,10 +87,11 @@
                              disabled="true"
                              oncommand="DeleteGridTemplateEntry(gDialog.addGridTemplateColumnButton, gDialog.gridTemplateColumnsTree, gDialog.errorGridTemplateColumnsImage)"/>
               <spacer flex="1"/>
-              <image src="chrome://cssproperties/skin/error.png"
-                     id="errorGridTemplateColumnsImage"
-                     tooltiptext="Results in a invalid value for the property"
-                     hidden="true"/>
+              <toolbarbutton image="chrome://cssproperties/skin/error.png"
+                             id="errorGridTemplateColumnsImage"
+                             tooltiptext="&invalidGridTemplateRowsOrColumns.label;"
+                             hidden="true"
+                             oncommand="UndoDeleteGridTemplateEntry(gDialog.addGridTemplateColumnButton, gDialog.gridTemplateColumnsTree, this)"/>
             </hbox>
           </vbox>
           <vbox flex="1">
@@ -118,10 +119,11 @@
                              disabled="true"
                              oncommand="DeleteGridTemplateEntry(gDialog.addGridTemplateRowButton, gDialog.gridTemplateRowsTree, gDialog.errorGridTemplateRowsImage)"/>
               <spacer flex="1"/>
-              <image src="chrome://cssproperties/skin/error.png"
-                     id="errorGridTemplateRowsImage"
-                     tooltiptext="Results in a invalid value for the property"
-                     hidden="true"/>
+              <toolbarbutton image="chrome://cssproperties/skin/error.png"
+                             id="errorGridTemplateRowsImage"
+                             tooltiptext="&invalidGridTemplateRowsOrColumns.label;"
+                             hidden="true"
+                             oncommand="UndoDeleteGridTemplateEntry(gDialog.addGridTemplateRowButton, gDialog.gridTemplateRowsTree, this)"/>
             </hbox>
           </vbox>
         </hbox>
