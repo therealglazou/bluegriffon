@@ -74,12 +74,20 @@ function RefreshGridTemplateListbox(aButton, aTree)
   aButton.disabled = false;
 }
 
+var gUndoStack = {
+  gridTemplateColumnsTree: {},
+  gridTemplateRowsTree   : {}
+};
+
 function DeleteGridTemplateEntry(aButton, aTree, aErrorElt)
 {
   var index = aTree.view.selection.currentIndex;
   var item  = aTree.contentView.getItemAtIndex(index);
   var parent = item.parentNode;
-  parent.removeChild(item);
+
+  var id = aTree.getAttribute("id");
+  gUndoStack[id].before = item.nextElementSibling;
+  gUndoStack[id].item = parent.removeChild(item);
 
   RefreshGridTemplateListbox(aButton, aTree);
 
@@ -120,4 +128,13 @@ function SerializeGridTemplateRowsOrColumns(aTreechildren)
   }
 
   return rv;
+}
+
+function UndoDeleteGridTemplateEntry(aButton, aTree, aErrorElt)
+{
+  var id = aTree.getAttribute("id");
+  var parent = gUndoStack[id].before.parentNode;
+  parent.insertBefore(gUndoStack[id].item, gUndoStack[id].before);
+
+  aErrorElt.setAttribute("hidden", "true");
 }
