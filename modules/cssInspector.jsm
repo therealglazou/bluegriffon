@@ -1468,6 +1468,8 @@ var CssInspector = {
 
       if (!argument) {
         parser.restoreState();
+
+        parser.preserveState();
         argument = this.parseGridTrackRepeat(parser, token);
         if (null == argument) {
           parser.forgetState();
@@ -1477,6 +1479,7 @@ var CssInspector = {
           parser.restoreState();
           break;
         }
+        parser.forgetState();
       }
       else
         parser.forgetState();
@@ -1488,7 +1491,7 @@ var CssInspector = {
       token = parser.getToken(true, true);
     }
 
-    if (rv.entries.length < 1)
+    if (rv.entries.length < 1 || token.isNotNull())
       return "";
 
     if (lineNames) {
@@ -6094,6 +6097,27 @@ function FilterRadialGradient(aValue, aEngine)
 
 /************************** GRID-TEMPLATE-ROWS/COLUMNS **************************/
 
+function gridAddToTreechildren(aElt, aLabel, aValue, aIsContainer)
+{
+  var doc = aElt.ownerDocument;
+  var item = doc.createElement("treeitem");
+  var row  = doc.createElement("treerow");
+  var cell = doc.createElement("treecell");
+  cell.setAttribute("label", aLabel);
+  row.appendChild(cell);
+  item.appendChild(row);
+  item.setAttribute("value", aValue);
+  aElt.appendChild(item);
+  if (aIsContainer) {
+    item.setAttribute("container", "true");
+    item.setAttribute("open", "true");
+    var children = doc.createElement("treechildren");
+    item.appendChild(children);
+    return children;
+  }
+  return aElt;
+}
+
 function gridAutoRepeat(aCount)
 {
   this.count = aCount;
@@ -6106,6 +6130,19 @@ gridAutoRepeat.prototype = {
   count: 0,
   fixedSizingFunctions: [],
   endLineNames: null,
+
+  display: function(aElt, aClass) {
+    var v = "repeat(" + this.count + ")";
+    var item = gridAddToTreechildren(aElt, v, this.count, true);
+
+    for (var i = 0; i < this.fixedSizingFunctions.length; i++) {
+      this.fixedSizingFunctions[i].display(item);
+    }
+    if (this.endLineNames && this.endLineNames.length) {
+      var v = "[" + this.endLineNames.join(" ") + "]";
+      gridAddToTreechildren(item, v, v);
+    }
+  },
 
   toString: function() {
     var rv = "repeat(" + this.count + ",";
@@ -6132,6 +6169,19 @@ gridFixedRepeat.prototype = {
   fixedSizingFunctions: [],
   endLineNames: null,
 
+  display: function(aElt) {
+    var v = "repeat(" + this.count + ")";
+    var item = gridAddToTreechildren(aElt, v, this.count, true);
+
+    for (var i = 0; i < this.fixedSizingFunctions.length; i++) {
+      this.fixedSizingFunctions[i].display(item);
+    }
+    if (this.endLineNames && this.endLineNames.length) {
+      var v = "[" + this.endLineNames.join(" ") + "]";
+      gridAddToTreechildren(item, v, v);
+    }
+  },
+
   toString: function() {
     var rv = "repeat(" + this.count + ",";
     for (var i = 0; i < this.fixedSizingFunctions.length; i++) {
@@ -6156,6 +6206,19 @@ gridTrackRepeat.prototype = {
   count: 0,
   trackSizingFunctions: [],
   endLineNames: null,
+
+  display: function(aElt) {
+    var v = "repeat(" + this.count + ")";
+    var item = gridAddToTreechildren(aElt, v, this.count, true);
+
+    for (var i = 0; i < this.trackSizingFunctions.length; i++) {
+      this.trackSizingFunctions[i].display(item);
+    }
+    if (this.endLineNames && this.endLineNames.length) {
+      var v = "[" + this.endLineNames.join(" ") + "]";
+      gridAddToTreechildren(item, v, v);
+    }
+  },
 
   toString: function() {
     var rv = "repeat(" + this.count + ",";
@@ -6185,6 +6248,28 @@ gridAutoTrackList.prototype = {
   autoRepeat: null,
   endEntries: [],
   endLineNames: null,
+
+  display: function(aElt) {
+    for (var i = 0; i < this.startEntries.length; i++) {
+      this.startEntries.display(aElt);
+    }
+
+    if (this.startLineNames && this.startLineNames.length) {
+      var v = "[" + this.startLineNames.join(" ") + "]";
+      gridAddToTreechildren(aElt, v, v);
+    }
+
+    this.autoRepeat.display(aElt);
+
+    for (var i = 0; i < this.endEntries.length; i++) {
+      this.endEntries.display(aEl);
+    }
+
+    if (this.endLineNames && this.endLineNames.length) {
+      var v = "[" + this.endLineNames.join(" ") + "]";
+      gridAddToTreechildren(aElt, v, v);
+    }
+  },
 
   toString: function() {
     var rv = "";
@@ -6225,6 +6310,17 @@ gridTrackList.prototype = {
   entries: [],
   lineNames: null,
 
+  display: function(aElt) {
+    for (var i = 0; i < this.entries.length; i++) {
+      this.entries[i].display(aElt);
+    }
+
+    if (this.lineNames && this.lineNames.length) {
+      var v = "[" + this.lineNames.join(" ") + "]";
+      gridAddToTreechildren(aElt, v, v);
+    }
+  },
+
   toString: function() {
     var rv = "";
     for (var i = 0; i < this.entries.length; i++) {
@@ -6253,6 +6349,11 @@ gridTrackSize.prototype = {
   valueType: "",
   value: null,
 
+  display: function(aElt) {
+    var v = this.toString();
+    gridAddToTreechildren(aElt, v, v);
+  },
+
   toString: function() {
     switch (this.valueType) {
       case "track-breadth": return this.value.value;
@@ -6268,6 +6369,10 @@ gridTrackSize.prototype = {
 function gridNone() {}
 gridNone.prototype = {
   type: "none",
+
+  display: function(aElt) {
+    gridAddToTreechildren(aElt, "none", "none");
+  },
 
   toString: function() {
     return "none";
@@ -6287,6 +6392,11 @@ gridFixedSize.prototype = {
   type: "fixed-size",
   valueType: "",
   value: null,
+
+  display: function(aElt) {
+    var v = this.toString();
+    gridAddToTreechildren(aElt, v, v);
+  },
 
   toString: function() {
     switch (this.valueType) {
@@ -6310,6 +6420,14 @@ gridTrack.prototype = {
   type: "track",
   lineNames: null,
   size: null,
+
+  display: function(aElt) {
+    if (this.lineNames && this.lineNames.length) {
+      var v = "[" + this.lineNames.join(" ") + "]";
+      gridAddToTreechildren(aElt, v, v);
+    }
+    this.size.display(aElt);
+  },
 
   toString: function() {
     var rv = "";
