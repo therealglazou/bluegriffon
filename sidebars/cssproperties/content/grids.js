@@ -2,8 +2,18 @@ Components.utils.import("resource://gre/modules/Services.jsm");
 
 RegisterIniter(GridsSectionIniter);
 
+var gUndoStack = {
+  gridTemplateColumnsTree: {},
+  gridTemplateRowsTree   : {}
+};
+
 function GridsSectionIniter(aElt, aRuleset)
 {
+  gUndoStack = {
+    gridTemplateColumnsTree: {},
+    gridTemplateRowsTree   : {}
+  };
+
   var v = CssInspector.getCascadedValue(aRuleset, "display");
   var isGrid = (v == "grid" || v == "inline-grid" || v == "subgrid");
   CheckToggle(gDialog.gridDisplayCheckbox,             isGrid);
@@ -34,6 +44,7 @@ function GridsSectionIniter(aElt, aRuleset)
     }
   }
   catch(e) {}
+  RefreshGridTemplateListbox(gDialog.addGridTemplateRowButton, gDialog.gridTemplateRowsTree);
 }
 
 function ToggleDisplayGrid(aElt)
@@ -73,11 +84,6 @@ function RefreshGridTemplateListbox(aButton, aTree)
 
   aButton.disabled = false;
 }
-
-var gUndoStack = {
-  gridTemplateColumnsTree: {},
-  gridTemplateRowsTree   : {}
-};
 
 function DeleteGridTemplateEntry(aButton, aTree, aErrorElt)
 {
