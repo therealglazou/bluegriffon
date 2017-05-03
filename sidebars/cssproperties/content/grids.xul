@@ -59,33 +59,72 @@
                 url=https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-flow
               </l10n>
             </cssproperty>
-
-            <row align="center">
-              <label value="grid-template-columns"/>
-              <vbox>
-                <listbox id="gridTemplateColumnsListbox"  class="listboxBg"
-                         onselect="onGridTemplateColumnSelected(this)"
-                         rows="6"/>
-
-                <hbox class="listboxBg">
-                  <toolbarbutton id="addGridTemplateColumnButton"
-                                 class="listboxBgPlusButton">
-                    <menupopup onpopupshowing="">
-                      <menuitem id="noneGridTemplateColumnMenuitem" label="None" value="none"/>
-                      <menuseparator/>
-                      <menuitem id="trackGridTemplateColumnMenuitem" label="Track list" value="track"/>
-                      <menuitem id="autoGridTemplateColumnMenuitem" label="Auto track list" value="auto-track"/>
-                    </menupopup>
-                  </toolbarbutton>
-                  <toolbarbutton id="removeGridTemplateColumnButton"
-                                 class="listboxBgMinusButton"
-                                 disabled="true"
-                                 oncommand=""/>
-                </hbox>
-              </vbox>
-            </row>
            </rows>
         </grid>
+        <hbox>
+          <vbox flex="1">
+            <tree id="gridTemplateColumnsTree"
+                  property="grid-template-columns"
+                  hidecolumnpicker="true"
+                  seltype="single"
+                  class="listboxBg" flex="1"
+                  style="margin: 0px; min-width: 100px; height: 150px"
+                  onselect="RefreshGridTemplateListbox(gDialog.addGridTemplateColumnButton, this)"
+                  treelines="true">
+              <treecols id="gridTemplateColumnsTreecols">
+                <treecol id="gridTemplateColumnsTreecol"
+                         primary="true"
+                         flex="1"
+                         label="&gridTemplateColumns.label;"/>
+              </treecols>
+              <treechildren id="gridTemplateColumnsTreechildren"/>
+            </tree>
+            <hbox class="listboxBg" align="center">
+              <toolbarbutton id="addGridTemplateColumnButton"
+                             class="listboxBgPlusButton"/>
+              <toolbarbutton id="removeGridTemplateColumnButton"
+                             class="listboxBgMinusButton"
+                             disabled="true"
+                             oncommand="DeleteGridTemplateEntry(gDialog.addGridTemplateColumnButton, gDialog.gridTemplateColumnsTree, gDialog.errorGridTemplateColumnsImage)"/>
+              <spacer flex="1"/>
+              <image src="chrome://cssproperties/skin/error.png"
+                     id="errorGridTemplateColumnsImage"
+                     tooltiptext="Results in a invalid value for the property"
+                     hidden="true"/>
+            </hbox>
+          </vbox>
+          <vbox flex="1">
+            <tree id="gridTemplateRowsTree"
+                  property="grid-template-rows"
+                  hidecolumnpicker="true"
+                  seltype="single"
+                  class="listboxBg" flex="1"
+                  style="margin: 0px; min-width: 100px; height: 150px"
+                  onselect="RefreshGridTemplateListbox(gDialog.addGridTemplateRowButton, this)"
+                  treelines="true">
+              <treecols id="gridTemplateRowsTreecols">
+                <treecol id="gridTemplateRowsTreecol"
+                         primary="true"
+                         flex="1"
+                         label="&gridTemplateRows.label;"/>
+              </treecols>
+              <treechildren id="gridTemplateRowsTreechildren"/>
+            </tree>
+            <hbox class="listboxBg" align="center">
+              <toolbarbutton id="addGridTemplateRowButton"
+                             class="listboxBgPlusButton"/>
+              <toolbarbutton id="removeGridTemplateRowButton"
+                             class="listboxBgMinusButton"
+                             disabled="true"
+                             oncommand="DeleteGridTemplateEntry(gDialog.addGridTemplateRowButton, gDialog.gridTemplateRowsTree, gDialog.errorGridTemplateRowsImage)"/>
+              <spacer flex="1"/>
+              <image src="chrome://cssproperties/skin/error.png"
+                     id="errorGridTemplateRowsImage"
+                     tooltiptext="Results in a invalid value for the property"
+                     hidden="true"/>
+            </hbox>
+          </vbox>
+        </hbox>
       </vbox>
   </vbox>
 </overlay>
