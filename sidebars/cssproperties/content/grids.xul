@@ -81,7 +81,8 @@
             </tree>
             <hbox class="listboxBg" align="center">
               <toolbarbutton id="addGridTemplateColumnButton"
-                             class="listboxBgPlusButton"/>
+                             class="listboxBgPlusButton"
+                             oncommand="AddGridTemplate(gDialog.addGridTemplateColumnButton, gDialog.gridTemplateColumnsTree, gDialog.errorGridTemplateColumnsImage)"/>
               <toolbarbutton id="removeGridTemplateColumnButton"
                              class="listboxBgMinusButton"
                              disabled="true"
@@ -113,7 +114,8 @@
             </tree>
             <hbox class="listboxBg" align="center">
               <toolbarbutton id="addGridTemplateRowButton"
-                             class="listboxBgPlusButton"/>
+                             class="listboxBgPlusButton"
+                             oncommand="AddGridTemplate(gDialog.addGridTemplateRowButton, gDialog.gridTemplateRowsTree, gDialog.errorGridTemplateRowsImage)"/>
               <toolbarbutton id="removeGridTemplateRowButton"
                              class="listboxBgMinusButton"
                              disabled="true"

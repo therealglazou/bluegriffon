@@ -45,6 +45,9 @@ function GridsSectionIniter(aElt, aRuleset)
   }
   catch(e) {}
   RefreshGridTemplateListbox(gDialog.addGridTemplateRowButton, gDialog.gridTemplateRowsTree);
+
+  gDialog.errorGridTemplateColumnsImage.setAttribute("hidden", "true");
+  gDialog.errorGridTemplateRowsImage.setAttribute("hidden", "true");
 }
 
 function ToggleDisplayGrid(aElt)
@@ -71,9 +74,10 @@ function RefreshGridTemplateListbox(aButton, aTree)
   var selectedCount = aTree.view.selection.count;
 
   aButton.nextElementSibling.disabled = (0 == selectedCount);
-  gDialog.errorGridTemplateColumnsImage.setAttribute("hidden", "true");
-  gDialog.errorGridTemplateRowsImage.setAttribute("hidden", "true");
 
+  var c = Components.classes['@mozilla.org/consoleservice;1']
+              .getService(Components.interfaces.nsIConsoleService);
+  c.logStringMessage("***** COUNT " + count);
   if (count == 1) {
     var item = aTree.contentView.getItemAtIndex(0);
     if (item.getAttribute("value") == "none") {
@@ -97,23 +101,28 @@ function DeleteGridTemplateEntry(aButton, aTree, aErrorElt)
 
   RefreshGridTemplateListbox(aButton, aTree);
 
-  var v = SerializeGridTemplateRowsOrColumns(aTree.lastElementChild);
+  var v = SerializeGridTemplateRowsOrColumns(aTree.lastElementChild).trim();
   var parsed = null;
   try {
-    parsed = CssInspector.parseGridTemplateRowsOrColumns(v);
+    if (v)
+      parsed = CssInspector.parseGridTemplateRowsOrColumns(v);
   }
   catch(e) {}
 
-  if (parsed) {
+  if (parsed || !v) {
     aErrorElt.setAttribute("hidden", "true");
     ApplyStyles( [ {
               property: aTree.getAttribute("property"),
-              value: v.trim()
+              value: v
             } ]);
   }
   else {
     aErrorElt.removeAttribute("hidden");
   }
+  var treeSelection = aTree.view.selection;
+  treeSelection.clearSelection();
+  if (index < aTree.view.rowCount)
+    treeSelection.select(index);
 }
 
 function SerializeGridTemplateRowsOrColumns(aTreechildren)
@@ -143,4 +152,62 @@ function UndoDeleteGridTemplateEntry(aButton, aTree, aErrorElt)
   parent.insertBefore(gUndoStack[id].item, gUndoStack[id].before);
 
   aErrorElt.setAttribute("hidden", "true");
+}
+
+function AddGridTemplate(aButton, aTree, aErrorElt)
+{
+  var reference = null;
+  var referenceParent = aTree.lastElementChild;
+
+  var count = aTree.view.rowCount;
+  var treeSelection = aTree.view.selection;
+  var selectedCount = treeSelection.count;
+  if (count > 0 && selectedCount > 0) {
+    var item = aTree.contentView.getItemAtIndex(treeSelection.currentIndex);
+    referenceParent = item.parentNode;
+    reference = item.nextElementSibling;
+  }
+
+  var rv = {cancelled: true};
+  window.openDialog("chrome://cssproperties/content/editGridTemplateEntry.xul",
+                    "_blank",
+                    "chrome,modal,titlebar,resizable=yes,dialog=no",
+                    aTree, referenceParent, reference, rv);
+ 
+  if (rv.cancelled)
+    return;
+
+  var treeitem = document.createElement("treeitem");
+  var treerow  = document.createElement("treerow");
+  var treecell = document.createElement("treecell");
+  treecell.setAttribute("label", rv.value);
+  treeitem.setAttribute("value", rv.value);
+
+  treerow.appendChild(treecell);
+  treeitem.appendChild(treerow);
+  referenceParent.insertBefore(treeitem, reference);
+  
+  RefreshGridTemplateListbox(aButton, aTree);
+
+  var v = SerializeGridTemplateRowsOrColumns(aTree.lastElementChild);
+  var parsed = null;
+  try {
+    parsed = CssInspector.parseGridTemplateRowsOrColumns(v);
+  }
+  catch(e) {}
+
+  index = aTree.contentView.getIndexOfItem(item);
+  if (parsed) {
+    aErrorElt.setAttribute("hidden", "true");
+    ApplyStyles( [ {
+              property: aTree.getAttribute("property"),
+              value: v.trim()
+            } ]);
+  }
+  else {
+    aErrorElt.removeAttribute("hidden");
+  }
+
+  treeSelection.clearSelection();
+  treeSelection.select(index);
 }
