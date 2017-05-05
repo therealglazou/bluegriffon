@@ -96,6 +96,7 @@ function DeleteGridTemplateEntry(aButton, aTree, aErrorElt)
   var parent = item.parentNode;
 
   var id = aTree.getAttribute("id");
+  gUndoStack[id].type = "removed";
   gUndoStack[id].before = item.nextElementSibling;
   gUndoStack[id].item = parent.removeChild(item);
 
@@ -148,8 +149,20 @@ function SerializeGridTemplateRowsOrColumns(aTreechildren)
 function UndoDeleteGridTemplateEntry(aButton, aTree, aErrorElt)
 {
   var id = aTree.getAttribute("id");
-  var parent = gUndoStack[id].before.parentNode;
-  parent.insertBefore(gUndoStack[id].item, gUndoStack[id].before);
+  if (!gUndoStack[id].item) // sanity case
+    return;
+
+  if (gUndoStack[id] == "removed") {
+    var parent = gUndoStack[id].before.parentNode;
+    parent.insertBefore(gUndoStack[id].item, gUndoStack[id].before);
+  }
+  else {
+    var parent = gUndoStack[id].item.parentNode;
+    parent.removeChild(gUndoStack[id].item);
+  }
+
+  gUndoStack[id].before = null;
+  gUndoStack[id].item   = null;
 
   aErrorElt.setAttribute("hidden", "true");
 }
@@ -206,8 +219,12 @@ function AddGridTemplate(aButton, aTree, aErrorElt)
   }
   else {
     aErrorElt.removeAttribute("hidden");
-  }
+    var id = aTree.getAttribute("id");
+    gUndoStack[id].type = "added";
+    gUndoStack[id].before = null;
+    gUndoStack[id].item = treeitem;
 
-  treeSelection.clearSelection();
-  treeSelection.select(index);
+    treeSelection.clearSelection();
+    treeSelection.select(index);
+  }
 }
