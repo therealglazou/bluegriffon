@@ -48,6 +48,16 @@ function GridsSectionIniter(aElt, aRuleset)
 
   gDialog.errorGridTemplateColumnsImage.setAttribute("hidden", "true");
   gDialog.errorGridTemplateRowsImage.setAttribute("hidden", "true");
+
+  var gta = CssInspector.getCascadedValue(aRuleset, "grid-template-areas");
+  var parsedGta = null;
+  try {
+    parsedGta = CssInspector.parseGridTemplateAreas(gta);
+  }
+  catch(e) {}
+  var v = parsedGta ? parsedGta.join("\n") : "";
+  gDialog.gridTemplateAreaTextbox.value = v;
+  gDialog.gridTemplateAreaTextbox.setAttribute("current", v);
 }
 
 function ToggleDisplayGrid(aElt)
@@ -75,9 +85,6 @@ function RefreshGridTemplateListbox(aButton, aTree)
 
   aButton.nextElementSibling.disabled = (0 == selectedCount);
 
-  var c = Components.classes['@mozilla.org/consoleservice;1']
-              .getService(Components.interfaces.nsIConsoleService);
-  c.logStringMessage("***** COUNT " + count);
   if (count == 1) {
     var item = aTree.contentView.getItemAtIndex(0);
     if (item.getAttribute("value") == "none") {
@@ -226,5 +233,24 @@ function AddGridTemplate(aButton, aTree, aErrorElt)
 
     treeSelection.clearSelection();
     treeSelection.select(index);
+  }
+}
+
+function ApplyGridTemplateAreas(aElt)
+{
+  var v = aElt.value;
+  var parsedGta = null;
+  try {
+    parsedGta = CssInspector.parseGridTemplateAreas(v);
+  }
+  catch(e) {}
+
+  if (!v || parsedGta) {
+    v = parsedGta ? parsedGta.join("\n") : "";
+    if ((!v || parsedGta) && aElt.getAttribute("current") != v)
+      ApplyStyles( [ {
+                property: "grid-template-areas",
+                value: v
+              } ]);
   }
 }
