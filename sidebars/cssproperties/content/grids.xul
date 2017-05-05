@@ -22,7 +22,7 @@
       </hbox>
 
       <vbox class="section" id="gridsSection" position="14">
-        <description id="gridItemPositionWarning">&gridItemPositionWarning.label;</description>
+        <!--description id="gridItemPositionWarning">&gridItemPositionWarning.label;</description-->
         <checkbox id="gridDisplayCheckbox"
                   oncommand="ToggleDisplayGrid(this)"
                   label="&displayGrid.label;"/>
@@ -59,8 +59,17 @@
                 url=https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-flow
               </l10n>
             </cssproperty>
+
+            <row align="center">
+              <label value="&gridTemplateArea.label;"/>
+              <textbox id="gridTemplateAreaTextbox"
+                       rows="6" multiline="true" newlines="pasteintact"
+                       property="grid-template-areas"
+                       oninput="ApplyGridTemplateAreas(this)"/>
+            </row>
            </rows>
         </grid>
+
         <hbox>
           <vbox flex="1">
             <tree id="gridTemplateColumnsTree"

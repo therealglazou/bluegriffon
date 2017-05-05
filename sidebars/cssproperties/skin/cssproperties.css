@@ -46,6 +46,14 @@ page {
   color: var(--bg-main-foreground-color);
 }
 
+:root {
+  --bg-panel-lighter-background: #606060;
+}
+
+:root[cleartheme="true"], panel, popup {
+  --bg-panel-lighter-background: #E0E0E0;
+}
+
 #mainBox {
   margin: 0px;
   padding: 0px;
@@ -115,7 +123,8 @@ hbox.csspropertiesHeader:-moz-locale-dir(rtl) > image {
 }
 
 hbox.csspropertiesHeader[open="true"] {
-  color: #00abff;
+  /*color: #00abff;*/
+  background-color: var(--bg-panel-lighter-background) ! important;
 }
 
 hbox.csspropertiesHeader[open="true"] > image {
@@ -129,6 +138,8 @@ hbox.csspropertiesHeader[open="true"] > image {
   opacity: 0;
   overflow: hidden;
   padding: 1em;
+  -moz-padding-start: 2em;
+  background-color: var(--bg-panel-lighter-background) ! important;
 }
 
 hbox.csspropertiesHeader[open="true"] + .section {

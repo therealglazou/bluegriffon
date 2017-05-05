@@ -1695,7 +1695,7 @@ var CssInspector = {
     parser.mPreservedTokens = [];
     parser.mScanner.init(aString);
 
-    token = parser.getToken(true, true);
+    var token = parser.getToken(true, true);
     if (!token.isNotNull())
       return null;
 
@@ -1709,6 +1709,39 @@ var CssInspector = {
 
     parser.restoreState();
     rv = this.parseGridAutoTrackList(parser, token);
+    return rv;
+  },
+
+  parseGridTemplateAreas: function(aString)
+  {
+    var parser = new CSSParser();
+    parser._init();
+    parser.mPreserveWS       = false;
+    parser.mPreserveComments = false;
+    parser.mPreservedTokens = [];
+    parser.mScanner.init(aString);
+
+    var token = parser.getToken(true, true);
+    if (!token.isNotNull())
+      return null;
+
+    var rv = [];
+    if  (token.isIdent("none")) {
+      rv.push(token.value);
+      return rv;
+    }
+
+    while (token.isNotNull()) {
+      if (token.isString())
+        rv.push(token.value);
+      else
+        return null;
+
+      token = parser.getToken(true, true);
+    }
+
+    if (token.isNotNull())
+      return null;
     return rv;
   }
 };
@@ -2019,6 +2052,8 @@ CSSScanner.prototype = {
 
       previousChar = c;
     }
+    if (c != aStop)
+      return new jscsspToken(jscsspToken.INCOMPLETE_STRING_TYPE, null);
     return new jscsspToken(jscsspToken.STRING_TYPE, s);
   },
 
@@ -4867,6 +4902,7 @@ jscsspToken.SYMBOL_TYPE = 13;
 jscsspToken.DIMENSION_TYPE = 14;
 jscsspToken.PERCENTAGE_TYPE = 15;
 jscsspToken.HEX_TYPE = 16;
+jscsspToken.INCOMPLETE_STRING_TYPE = 17;
 
 jscsspToken.prototype = {
 
