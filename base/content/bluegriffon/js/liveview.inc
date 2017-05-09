@@ -232,9 +232,8 @@ function MarkSelectionInSourceEditor()
   else {
     var lastGtIndex = source.lastIndexOf("<", index);
     if (lastGtIndex != -1) {
-      var lastGtTag = source.substr(lastGtIndex, 6).toLowerCase();
-      if (lastGtTag == "</body" || lastGtTag == "</html" ||
-          source[lastGtIndex + 1] == "!" || source[lastGtIndex + 1] == "?")
+      var lastGtTag = source.substring(lastGtIndex, index);
+      if (lastGtTag.indexOf(">") == -1) // yep, in a tag
         return source;
     }
     // no, not inside a tag...
