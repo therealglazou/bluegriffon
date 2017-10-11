@@ -27,7 +27,7 @@ The Open Source next-generation Web Editor based on the rendering engine of Fire
 
 ## My own builds
 
-* OS X: OS X 10.12.3 with Xcode version 8.2.1 (8C1002)
+* OS X: OS X 10.12.6 with Xcode version 9.0 (9A235)
 * Windows: Windows 10 Pro with Visual Studio Community 2015
 * Linux: Ubuntu 16.04.1 LTS
 
