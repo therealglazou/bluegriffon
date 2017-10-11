@@ -655,8 +655,8 @@
             newEditorElement.setAttribute("type", "content-primary");
             newBox.appendChild(newEditorElement);
 
-            newEditorElement.addEventListener("focus", function() { WysiwygEditorFocused(false); },  true);
-            iframe.addEventListener("focus", function() { SourceEditorFocused(); },  true);
+            newEditorElement.addEventListener("focus", function() { WysiwygLiveViewEditorFocused(false); },  true);
+            iframe.addEventListener("focus", function() { SourceLiveViewEditorFocused(); },  true);
             return newBox;
         ]]>
         </body>

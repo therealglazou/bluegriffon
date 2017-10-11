@@ -105,7 +105,8 @@
          gLiveViewTimer = null;
        }
        if (gChangeCallback)
-         gChangeTimer = setTimeout(gChangeCallback, 100, gEditor.getValue());
+         gChangeCallback();
+         // gChangeTimer = setTimeout(gChangeCallback, 100, gEditor.getValue());
        if (gLiveViewCallback)
          gLiveViewTimer = setTimeout(gLiveViewCallback, 1000, true);
        if (gActivityCallback)

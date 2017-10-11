@@ -1003,7 +1003,7 @@ function ToggleViewMode(aElement)
     sourceIframe.contentWindow.wrappedJSObject.installCodeMirror(BespinKeyPressCallback,
                                                  BespinChangeCallback,
                                                  BespinActivityCallback,
-                                                 WysiwygEditorFocused,
+                                                 UpdateWysiwygLiveView,
                                                  theme,
                                                  zoomFactor);
 

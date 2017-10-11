@@ -69,7 +69,7 @@ function Startup()
   BlueGriffonQuitHelper.init();
 
   NotifierUtils.addNotifierCallback("selection_strict", BlueGriffon_lookForFileChanges, this);
-  NotifierUtils.addNotifierCallback("selection",        UpdateLiveView, this);
+  NotifierUtils.addNotifierCallback("selection",        UpdateSourceLiveView, this);
 
   window.addEventListener("sizemodechange", onSizeModeChange, false);
 
