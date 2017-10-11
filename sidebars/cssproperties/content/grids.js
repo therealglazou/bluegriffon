@@ -236,8 +236,21 @@ function AddGridTemplate(aButton, aTree, aErrorElt)
   }
 }
 
+var gGridTemplateAreaTimer = null;
+
 function ApplyGridTemplateAreas(aElt)
 {
+  if (gGridTemplateAreaTimer) {
+    clearTimeout(gGridTemplateAreaTimer);
+  }
+
+  gGridTemplateAreaTimer = setTimeout(_ApplyGridTemplateAreas, 500, aElt);
+}
+
+function _ApplyGridTemplateAreas(aElt)
+{
+  gGridTemplateAreaTimer = null;
+
   var v = aElt.value;
   var parsedGta = null;
   try {
