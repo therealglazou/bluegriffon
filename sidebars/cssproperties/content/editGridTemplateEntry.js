@@ -28,7 +28,10 @@ function Shutdown()
 
 function Accept()
 {
-  gRv.value = gDialog.textEntryTextbox.value;
+  if (gDialog.valueRadiogroup.selectedItem == gDialog.noneRadio)
+    gRv.value = "none";
+  else
+    gRv.value = gDialog.textEntryTextbox.value;
   gRv.cancelled = false;
 }
 
