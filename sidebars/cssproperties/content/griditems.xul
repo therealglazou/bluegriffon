@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE overlay [
+  <!ENTITY % csspropertiesDTD SYSTEM "chrome://cssproperties/locale/cssproperties.dtd">
+  %csspropertiesDTD;
+]>
+
+<overlay id="griditemsOverlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/x-javascript"  src="chrome://cssproperties/content/griditems.js" />
+
+  <vbox id="propertiesBox">
+      <hbox align="center"
+            class="csspropertiesHeader"
+            context="sectionHeaderContext"
+            id="griditemsSectionHeader"
+            onclick="ToggleSection(event, this)"
+            position="15">
+        <image />
+        <label value="&gridItemsSection.label;"/>
+      </hbox>
+
+      <vbox class="section" id="griditemsSection" position="16">
+        <!--description id="gridLayoutWarning">&gridLayoutWarning.label;</description-->
+        <grid>
+          <columns><column/><column/></columns>
+          <rows>
+            <row align="center">
+              <label value="&gridOrder.label;"
+                     class="text-link"
+                     href="https://developer.mozilla.org/en-US/docs/Web/CSS/order"
+                     tooltiptext="order"/>
+              <textbox id="orderTextbox" type="number"
+                       property="order"
+                       oninput="ToggleProperty(this)"
+                       oncommand="ToggleProperty(this)"/>
+            </row>
+            <row align="center">
+              <label value="&gridRowStart.label;"
+                     class="text-link"
+                     href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-row-start"
+                     property="grid-row-start"/>
+              <griditemposition id="gridRowStartBinding" property="grid-row-start"/>
+            </row>
+            <row align="center">
+              <label value="&gridRowEnd.label;"
+                     class="text-link"
+                     href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-row-end"
+                     property="grid-row-start"/>
+              <griditemposition id="gridRowEndBinding" property="grid-row-end"/>
+            </row>
+            <row align="center">
+              <label value="&gridColumnStart.label;"
+                     class="text-link"
+                     href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column-start"
+                     property="grid-row-start"/>
+              <griditemposition id="gridColumnStartBinding" property="grid-column-start"/>
+            </row>
+            <row align="center">
+              <label value="&gridColumnEnd.label;"
+                     class="text-link"
+                     href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column-end"
+                     property="grid-row-start"/>
+              <griditemposition id="gridColumnEndBinding" property="grid-column-end"/>
+            </row>
+          </rows>
+        </grid>
+      </vbox>
+  </vbox>
+</overlay>

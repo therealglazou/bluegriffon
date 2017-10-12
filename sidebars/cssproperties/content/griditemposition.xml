@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE bindings [
+  <!ENTITY % griditempositionDTD SYSTEM "chrome://cssproperties/locale/griditemposition.dtd" >
+  %griditempositionDTD;
+]>
+
+<bindings id="griditempositionBindings"
+   xmlns="http://www.mozilla.org/xbl"
+   xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+   xmlns:xbl="http://www.mozilla.org/xbl">
+
+  <binding id="griditemposition">
+
+    <content orient="vertical">
+      <xul:radiogroup anonid="gridItemPositionRadiogroup" orient="horizontal"
+                      oncommand="this.parentNode.OnGridItemPositionTypeSelected(this)">
+        <xul:radio id="noneGridItemPosition"   value="auto" label="&autoGridItemPosition.label;"/>
+        <xul:radio id="customGridItemPosition" value="custom" label="&customGridItemPosition.label;"/>
+      </xul:radiogroup>
+      <xul:hbox anonid="customBox" hidden="true">
+        <xul:textbox anonid="gridLineName" oninput="this.parentNode.parentNode.ApplyGridItemPosition()"
+                     tooltiptext="&gridLineName.tooltiptext;"/>
+        <xul:textbox anonid="gridLineIndex" oninput="this.parentNode.parentNode.ApplyGridItemPosition()"
+                     onchange="this.parentNode.parentNode.ApplyGridItemPosition()"
+                     tooltiptext="&gridLineIndex.tooltiptext;" type="number" min="-1000" size="2"/>
+        <xul:checkbox anonid="gridItemSpanning" oncommand="this.parentNode.parentNode.ApplyGridItemPosition()"
+                      tooltiptext= "&spanning.tooltiptext;" label="Spanning"/>
+      </xul:hbox>
+    </content>
+
+    <implementation>
+      <method name="getChild">
+        <parameter name="aChildName"/>
+        <body><![CDATA[
+          return document.getAnonymousElementByAttribute(this, "anonid", aChildName);
+        ]]></body>
+      </method>
+
+      <property name="value">
+        <getter>
+        <![CDATA[
+          var type = this.getChild("gridItemPositionRadiogroup").value;
+          if (type == "auto")
+            return type;
+          var gridLine      = this.getChild("gridLineName").value;
+          var gridLineIndex = this.getChild("gridLineIndex").value;
+          var spanning      = this.getChild("gridItemSpanning").checked;
+          if (gridLine == "span")
+            return "";
+          var value = "";
+          if (gridLine)
+            value += (value ? " " : "") + gridLine;
+          if (parseInt(gridLineIndex))
+            value += (value ? " " : "") + gridLineIndex;
+          if (spanning)
+            value += (value ? " span" : "span");
+          return value;
+        ]]>
+        </getter>
+        <setter>
+        <![CDATA[
+          var box = this.getChild("customBox");
+          if (!val || val == "auto") {
+            this.getChild("gridItemPositionRadiogroup").value = "auto";
+            box.setAttribute("hidden", "true");
+            return;
+          }
+
+          this.getChild("gridItemPositionRadiogroup").value = "custom";
+          box.removeAttribute("hidden");
+          var valueArray = val.split(" ");
+
+          var gridLineName = "";
+          var gridLineIndex = 0;
+          var gridItemSpanning = false;
+
+          for (var i = 0; i < valueArray.length; i++) {
+            var v = valueArray[i];
+            if (v == "span")
+              gridItemSpanning = true;
+            else if (v[0] == "-" || v[0] == "+" ||
+                (v[0] >= "0" && v[0] <= "9"))
+              gridLineIndex = parseInt(v);
+            else
+              gridLineName = v;
+
+            this.getChild("gridLineName").value = gridLineName;
+            this.getChild("gridLineIndex").value = gridLineIndex;
+            this.getChild("gridItemSpanning").checked = gridItemSpanning;
+          }
+        ]]>
+        </setter>
+      </property>
+
+      <method name="OnGridItemPositionTypeSelected">
+        <parameter name="aElt"/>
+        <body><![CDATA[
+          var visible = (aElt.value == "custom");
+          var box = this.getChild("customBox");
+          if (visible) {
+            box.removeAttribute("hidden");
+            this.getChild("gridLineName").value = "";
+            this.getChild("gridLineIndex").value = 0;
+            this.getChild("gridItemSpanning").checked = false;
+          }
+          else
+            box.setAttribute("hidden", "true");
+
+          this.ApplyGridItemPosition();
+        ]]></body>
+      </method>
+
+      <method name="ApplyGridItemPosition">
+        <body><![CDATA[
+          var v = this.value;
+          if (v)
+            ApplyStyles([
+                          {
+                            property: this.getAttribute("property"),
+                            value: v
+                          }
+                        ]);
+        ]]></body>
+      </method>
+    </implementation>
+
+  </binding>
+</bindings>
+
