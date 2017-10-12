@@ -138,8 +138,8 @@
 
 ; [Components]
 ; DevTools
-@RESPATH@/chrome/devtools@JAREXT@
-@RESPATH@/chrome/devtools.manifest
+; @RESPATH@/chrome/devtools@JAREXT@
+; @RESPATH@/chrome/devtools.manifest
 @RESPATH@/@PREF_DIR@/devtools.js
 @RESPATH@/components/devtools-startup.manifest
 @RESPATH@/components/devtools-startup.js
@@ -349,8 +349,6 @@
 @RESPATH@/components/BrowserPageThumbs.manifest
 @RESPATH@/components/crashmonitor.manifest
 @RESPATH@/components/nsCrashMonitor.js
-@RESPATH@/components/SiteSpecificUserAgent.js
-@RESPATH@/components/SiteSpecificUserAgent.manifest
 @RESPATH@/components/toolkitsearch.manifest
 @RESPATH@/components/nsSearchService.js
 @RESPATH@/components/nsSearchSuggestions.js
@@ -619,7 +617,7 @@
 @RESPATH@/res/html/*
 #if defined(XP_MACOSX) || defined(XP_WIN)
 ; For SafariProfileMigrator.js.
-@RESPATH@/res/langGroups.properties
+; @RESPATH@/res/langGroups.properties
 #endif
 @RESPATH@/res/language.properties
 @RESPATH@/res/entityTables/*
