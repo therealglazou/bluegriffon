@@ -425,6 +425,10 @@
       </menupopup>
     </menu>
 
+#ifdef XP_MACOSX
+#include macWindowMenu.inc
+#endif
+
     <menu id="helpMenu" label="&helpMenu.label;" accesskey="&helpMenu.accesskey;">
       <menupopup id="helpMenuPopup">
         <menuitem label="&aboutComposer.label;"
