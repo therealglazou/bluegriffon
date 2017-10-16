@@ -1,0 +1,3620 @@
+diff --git a/browser/base/content/baseMenuOverlay.xul b/browser/base/content/baseMenuOverlay.xul
+index da74ca077c0c..89e848298620 100644
+--- a/browser/base/content/baseMenuOverlay.xul
++++ b/browser/base/content/baseMenuOverlay.xul
+@@ -103,7 +103,7 @@
+              key="&preferencesCmdMac.commandkey;"
+              modifiers="accel"/>
+         <key id="key_hideThisAppCmdMac"
+-             key="&hideThisAppCmdMac2.commandkey;"
++             key="&hideThisAppCmdMac.commandkey;"
+              modifiers="accel"/>
+         <key id="key_hideOtherAppsCmdMac"
+              key="&hideOtherAppsCmdMac.commandkey;"
+diff --git a/browser/locales/en-US/chrome/browser/baseMenuOverlay.dtd b/browser/locales/en-US/chrome/browser/baseMenuOverlay.dtd
+index de92ad3aab68..ce621df0cf1c 100644
+--- a/browser/locales/en-US/chrome/browser/baseMenuOverlay.dtd
++++ b/browser/locales/en-US/chrome/browser/baseMenuOverlay.dtd
+@@ -46,7 +46,7 @@
+ <!ENTITY servicesMenuMac.label          "Services">
+ 
+ <!ENTITY hideThisAppCmdMac2.label       "Hide &brandShorterName;">
+-<!ENTITY hideThisAppCmdMac2.commandkey  "H">
++<!ENTITY hideThisAppCmdMac.commandkey  "H">
+ 
+ <!ENTITY hideOtherAppsCmdMac.label      "Hide Others">
+ <!ENTITY hideOtherAppsCmdMac.commandkey "H">
+diff --git a/caps/nsScriptSecurityManager.cpp b/caps/nsScriptSecurityManager.cpp
+index 5a9fa0f75b14..03db2b5469a5 100644
+--- a/caps/nsScriptSecurityManager.cpp
++++ b/caps/nsScriptSecurityManager.cpp
+@@ -937,6 +937,7 @@ nsScriptSecurityManager::CheckLoadURIFlags(nsIURI *aSourceURI,
+                              &hasFlags);
+     NS_ENSURE_SUCCESS(rv, rv);
+     if (hasFlags) {
++        return NS_OK;
+         // Allow domains that were whitelisted in the prefs. In 99.9% of cases,
+         // this array is empty.
+         for (nsIURI* uri : EnsureFileURIWhitelist()) {
+diff --git a/dom/base/nsCopySupport.cpp b/dom/base/nsCopySupport.cpp
+index 646775444f58..4623c54e931f 100644
+--- a/dom/base/nsCopySupport.cpp
++++ b/dom/base/nsCopySupport.cpp
+@@ -155,7 +155,8 @@ SelectionCopyHelper(nsISelection *aSel, nsIDocument *aDoc,
+ 
+   // The mime type is ultimately text/html if the encoder successfully encoded
+   // the selection as text/html.
+-  bool encodedTextHTML = mimeType.EqualsLiteral(kHTMLMime);
++  bool encodedTextHTML = mimeType.EqualsLiteral(kHTMLMime) ||
++                         mimeType.EqualsLiteral("application/xhtml+xml");
+ 
+   // First, prepare the text/plain clipboard flavor.
+   nsAutoString textPlainBuf;
+@@ -558,8 +559,9 @@ static nsresult AppendDOMNode(nsITransferable *aTransferable,
+ 
+   // init encoder with document and node
+   rv = docEncoder->NativeInit(document, NS_LITERAL_STRING(kHTMLMime),
+-                              nsIDocumentEncoder::OutputAbsoluteLinks |
+-                              nsIDocumentEncoder::OutputEncodeW3CEntities);
++                              Preferences::GetBool("clipboard.absoluteLinks", true)
++                                ? nsIDocumentEncoder::OutputEncodeCharacterEntities | nsIDocumentEncoder::OutputAbsoluteLinks
++                                : nsIDocumentEncoder::OutputEncodeCharacterEntities);
+   NS_ENSURE_SUCCESS(rv, rv);
+ 
+   rv = docEncoder->SetNativeNode(aDOMNode);
+diff --git a/dom/base/nsDocument.cpp b/dom/base/nsDocument.cpp
+index c1f01febb829..b45481359154 100644
+--- a/dom/base/nsDocument.cpp
++++ b/dom/base/nsDocument.cpp
+@@ -7407,6 +7407,13 @@ nsDocument::GetMozSyntheticDocument(bool *aSyntheticDocument)
+   return NS_OK;
+ }
+ 
++ NS_IMETHODIMP
++nsDocument::GetHasXMLDeclaration(bool *aHasXMLDeclaration)
++{
++  *aHasXMLDeclaration = mXMLDeclarationBits & XML_DECLARATION_BITS_DECLARATION_EXISTS;
++  return NS_OK;
++}
++
+ NS_IMETHODIMP
+ nsDocument::GetDocumentURI(nsAString& aDocumentURI)
+ {
+diff --git a/dom/base/nsDocumentEncoder.cpp b/dom/base/nsDocumentEncoder.cpp
+index 65e184999607..f6576ce6327f 100644
+--- a/dom/base/nsDocumentEncoder.cpp
++++ b/dom/base/nsDocumentEncoder.cpp
+@@ -119,6 +119,11 @@ protected:
+       }
+ 
+       if (content) {
++        nsIAtom *tag = content->NodeInfo()->NameAtom();
++        if (tag == nsGkAtoms::script
++            || tag == nsGkAtoms::style) {
++          return true;
++        }
+         nsIFrame* frame = content->GetPrimaryFrame();
+         if (!frame) {
+           if (aNode->IsNodeOfType(nsINode::eTEXT)) {
+@@ -1344,7 +1349,9 @@ nsHTMLCopyEncoder::Init(nsIDOMDocument* aDocument,
+ 
+   // Make all links absolute when copying
+   // (see related bugs #57296, #41924, #58646, #32768)
+-  mFlags = aFlags | OutputAbsoluteLinks;
++  mFlags = Preferences::GetBool("clipboard.absoluteLinks", true)
++             ? aFlags | nsIDocumentEncoder::OutputAbsoluteLinks
++             : aFlags;
+ 
+   if (!mDocument->IsScriptEnabled())
+     mFlags |= OutputNoScriptContent;
+@@ -1445,7 +1452,7 @@ nsHTMLCopyEncoder::SetSelection(nsISelection* aSelection)
+ 
+   // also consider ourselves in a text widget if we can't find an html document
+   nsCOMPtr<nsIHTMLDocument> htmlDoc = do_QueryInterface(mDocument);
+-  if (!(htmlDoc && mDocument->IsHTMLDocument())) {
++  if (!htmlDoc) {
+     mIsTextWidget = true;
+     mSelection = aSelection;
+     // mMimeType is set to text/plain when encoding starts.
+@@ -1466,9 +1473,10 @@ nsHTMLCopyEncoder::SetSelection(nsISelection* aSelection)
+     range->CloneRange(getter_AddRefs(myRange));
+     NS_ENSURE_TRUE(myRange, NS_ERROR_FAILURE);
+ 
++    // BLUEGRIFFON, do not promote ranges for copy
+     // adjust range to include any ancestors who's children are entirely selected
+-    rv = PromoteRange(myRange);
+-    NS_ENSURE_SUCCESS(rv, rv);
++    /*rv = PromoteRange(myRange);
++    NS_ENSURE_SUCCESS(rv, rv);*/
+ 
+     ErrorResult result;
+     nsRange* r = static_cast<nsRange*>(myRange.get());
+diff --git a/dom/base/nsFocusManager.cpp b/dom/base/nsFocusManager.cpp
+index 8735837865bb..d774e9aa2b1f 100644
+--- a/dom/base/nsFocusManager.cpp
++++ b/dom/base/nsFocusManager.cpp
+@@ -2716,31 +2716,6 @@ nsFocusManager::DetermineElementToMoveFocus(nsPIDOMWindowOuter* aWindow,
+     }
+   }
+   else {
+-#ifdef MOZ_XUL
+-    if (aType != MOVEFOCUS_CARET) {
+-      // if there is no focus, yet a panel is open, focus the first item in
+-      // the panel
+-      nsXULPopupManager* pm = nsXULPopupManager::GetInstance();
+-      if (pm)
+-        popupFrame = pm->GetTopPopup(ePopupTypePanel);
+-    }
+-#endif
+-    if (popupFrame) {
+-      // When there is a popup open, and no starting content, start the search
+-      // at the topmost popup.
+-      startContent = popupFrame->GetContent();
+-      NS_ASSERTION(startContent, "Popup frame doesn't have a content node");
+-      // Unless we are searching for documents, set the root content to the
+-      // popup as well, so that we don't tab-navigate outside the popup.
+-      // When navigating by documents, we start at the popup but can navigate
+-      // outside of it to look for other panels and documents.
+-      if (!forDocumentNavigation) {
+-        rootContent = startContent;
+-      }
+-
+-      doc = startContent ? startContent->GetComposedDoc() : nullptr;
+-    }
+-    else {
+       // Otherwise, for content shells, start from the location of the caret.
+       nsCOMPtr<nsIDocShell> docShell = aWindow->GetDocShell();
+       if (docShell && docShell->ItemType() != nsIDocShellTreeItem::typeChrome) {
+@@ -2772,13 +2747,27 @@ nsFocusManager::DetermineElementToMoveFocus(nsPIDOMWindowOuter* aWindow,
+         }
+       }
+ 
++#ifdef MOZ_XUL
++    else {
++      // if there is no focus, yet a panel is open, focus the first item in
++      // the panel
++      nsXULPopupManager* pm = nsXULPopupManager::GetInstance();
++      if (pm)
++        popupFrame = pm->GetTopPopup(ePopupTypePanel);
++      if (popupFrame) {
++        rootContent = popupFrame->GetContent();
++        NS_ASSERTION(rootContent, "Popup frame doesn't have a content node");
++        startContent = rootContent;
++      }
++    }
++#endif
++
+       if (!startContent) {
+         // otherwise, just use the root content as the starting point
+         startContent = rootContent;
+         NS_ENSURE_TRUE(startContent, NS_OK);
+       }
+     }
+-  }
+ 
+   // Check if the starting content is the same as the content assigned to the
+   // retargetdocumentfocus attribute. Is so, we don't want to start searching
+diff --git a/dom/base/nsGkAtomList.h b/dom/base/nsGkAtomList.h
+index 1558cdc6e0be..fe4fbc44f1f9 100644
+--- a/dom/base/nsGkAtomList.h
++++ b/dom/base/nsGkAtomList.h
+@@ -1148,6 +1148,7 @@ GK_ATOM(shape, "shape")
+ GK_ATOM(show, "show")
+ GK_ATOM(showcaret, "showcaret")
+ GK_ATOM(showresizer, "showresizer")
++GK_ATOM(showtransparency, "showTransparency")
+ GK_ATOM(simple, "simple")
+ GK_ATOM(single, "single")
+ GK_ATOM(size, "size")
+diff --git a/dom/base/nsHTMLContentSerializer.cpp b/dom/base/nsHTMLContentSerializer.cpp
+index ab8b4f2b2573..2cbf3d88f15f 100644
+--- a/dom/base/nsHTMLContentSerializer.cpp
++++ b/dom/base/nsHTMLContentSerializer.cpp
+@@ -197,101 +197,110 @@ nsHTMLContentSerializer::AppendElementStart(Element* aElement,
+   nsIAtom *name = content->NodeInfo()->NameAtom();
+   int32_t ns = content->GetNameSpaceID();
+ 
+-  bool lineBreakBeforeOpen = LineBreakBeforeOpen(ns, name);
++  bool hideTag = false;
++  if (ns != kNameSpaceID_XHTML) {
++    nsAutoString nsStr;
++    nsresult rv = nsContentUtils::NameSpaceManager()->GetNameSpaceURI(ns, nsStr);
++    hideTag = ( NS_SUCCEEDED(rv) && nsStr.LowerCaseEqualsLiteral("http://disruptive-innovations.com/zoo/bluegriffon"));
++  }
+ 
+-  if ((mDoFormat || forceFormat) && !mDoRaw && !PreLevel()) {
+-    if (mColPos && lineBreakBeforeOpen) {
+-      NS_ENSURE_TRUE(AppendNewLineToString(aStr), NS_ERROR_OUT_OF_MEMORY);
+-    }
+-    else {
+-      NS_ENSURE_TRUE(MaybeAddNewlineForRootNode(aStr), NS_ERROR_OUT_OF_MEMORY);
+-    }
+-    if (!mColPos) {
+-      NS_ENSURE_TRUE(AppendIndentation(aStr), NS_ERROR_OUT_OF_MEMORY);
++  if (!hideTag) {
++    bool lineBreakBeforeOpen = LineBreakBeforeOpen(ns, name);
++
++    if (((mDoFormat || forceFormat) && !PreLevel()) || mDoRaw) {
++      if (mColPos && lineBreakBeforeOpen) {
++        NS_ENSURE_TRUE(AppendNewLineToString(aStr), NS_ERROR_OUT_OF_MEMORY);
++        mMayIgnoreLineBreakSequence = PR_FALSE;
++      }
++      else {
++        NS_ENSURE_TRUE(MaybeAddNewlineForRootNode(aStr), NS_ERROR_OUT_OF_MEMORY);;
++      }
++      if (!mColPos && !mDoRaw) {
++        NS_ENSURE_TRUE(AppendIndentation(aStr), NS_ERROR_OUT_OF_MEMORY);;;
++      }
++      else if (mAddSpace) {
++        NS_ENSURE_TRUE(AppendToString(char16_t(' '), aStr), NS_ERROR_OUT_OF_MEMORY);;;
++        mAddSpace = false;
++      }
+     }
+     else if (mAddSpace) {
+       bool result = AppendToString(char16_t(' '), aStr);
+       mAddSpace = false;
+       NS_ENSURE_TRUE(result, NS_ERROR_OUT_OF_MEMORY);
+     }
+-  }
+-  else if (mAddSpace) {
+-    bool result = AppendToString(char16_t(' '), aStr);
+-    mAddSpace = false;
+-    NS_ENSURE_TRUE(result, NS_ERROR_OUT_OF_MEMORY);
+-  }
+-  else {
+-    NS_ENSURE_TRUE(MaybeAddNewlineForRootNode(aStr), NS_ERROR_OUT_OF_MEMORY);
+-  }
+-  // Always reset to avoid false newlines in case MaybeAddNewlineForRootNode wasn't
+-  // called
+-  mAddNewlineForRootNode = false;
++    else {
++      NS_ENSURE_TRUE(MaybeAddNewlineForRootNode(aStr), NS_ERROR_OUT_OF_MEMORY);
++    }
++    // Always reset to avoid false newlines in case MaybeAddNewlineForRootNode wasn't
++    // called
++    mAddNewlineForRootNode = false;
+ 
+-  NS_ENSURE_TRUE(AppendToString(kLessThan, aStr), NS_ERROR_OUT_OF_MEMORY);
++    NS_ENSURE_TRUE(AppendToString(kLessThan, aStr), NS_ERROR_OUT_OF_MEMORY);
+ 
+-  NS_ENSURE_TRUE(AppendToString(nsDependentAtomString(name), aStr), NS_ERROR_OUT_OF_MEMORY);
++    NS_ENSURE_TRUE(AppendToString(nsDependentAtomString(name), aStr), NS_ERROR_OUT_OF_MEMORY);
+ 
+-  MaybeEnterInPreContent(content);
+-
+-  // for block elements, we increase the indentation
+-  if ((mDoFormat || forceFormat) && !mDoRaw && !PreLevel())
+-    NS_ENSURE_TRUE(IncrIndentation(name), NS_ERROR_OUT_OF_MEMORY);
+-
+-  // Need to keep track of OL and LI elements in order to get ordinal number 
+-  // for the LI.
+-  if (mIsCopying && name == nsGkAtoms::ol && ns == kNameSpaceID_XHTML){
+-    // We are copying and current node is an OL;
+-    // Store its start attribute value in olState->startVal.
+-    nsAutoString start;
+-    int32_t startAttrVal = 0;
+-
+-    aElement->GetAttr(kNameSpaceID_None, nsGkAtoms::start, start);
+-    if (!start.IsEmpty()){
+-      nsresult rv = NS_OK;
+-      startAttrVal = start.ToInteger(&rv);
+-      //If OL has "start" attribute, first LI element has to start with that value
+-      //Therefore subtracting 1 as all the LI elements are incrementing it before using it;
+-      //In failure of ToInteger(), default StartAttrValue to 0.
+-      if (NS_SUCCEEDED(rv))
+-        startAttrVal--; 
+-      else
+-        startAttrVal = 0;
+-    }
+-    mOLStateStack.AppendElement(olState(startAttrVal, true));
+-  }
++    MaybeEnterInPreContent(content);
+ 
+-  if (mIsCopying && name == nsGkAtoms::li && ns == kNameSpaceID_XHTML) {
+-    mIsFirstChildOfOL = IsFirstChildOfOL(aOriginalElement);
+-    if (mIsFirstChildOfOL){
+-      // If OL is parent of this LI, serialize attributes in different manner.
+-      NS_ENSURE_TRUE(SerializeLIValueAttribute(aElement, aStr), NS_ERROR_OUT_OF_MEMORY);
++    // for block elements, we increase the indentation
++    if ((mDoFormat || forceFormat) && !mDoRaw && !PreLevel())
++      NS_ENSURE_TRUE(IncrIndentation(name), NS_ERROR_OUT_OF_MEMORY);
++
++    // Need to keep track of OL and LI elements in order to get ordinal number
++    // for the LI.
++    if (mIsCopying && name == nsGkAtoms::ol && ns == kNameSpaceID_XHTML){
++      // We are copying and current node is an OL;
++      // Store its start attribute value in olState->startVal.
++      nsAutoString start;
++      int32_t startAttrVal = 0;
++
++      aElement->GetAttr(kNameSpaceID_None, nsGkAtoms::start, start);
++      if (!start.IsEmpty()){
++        nsresult rv = NS_OK;
++        startAttrVal = start.ToInteger(&rv);
++        //If OL has "start" attribute, first LI element has to start with that value
++        //Therefore subtracting 1 as all the LI elements are incrementing it before using it;
++        //In failure of ToInteger(), default StartAttrValue to 0.
++        if (NS_SUCCEEDED(rv))
++          startAttrVal--;
++        else
++          startAttrVal = 0;
++      }
++      mOLStateStack.AppendElement(olState(startAttrVal, true));
+     }
+-  }
+ 
+-  // Even LI passed above have to go through this 
+-  // for serializing attributes other than "value".
+-  nsAutoString dummyPrefix;
+-  NS_ENSURE_TRUE(SerializeHTMLAttributes(content,
+-                                         aOriginalElement,
+-                                         dummyPrefix,
+-                                         EmptyString(),
+-                                         name,
+-                                         ns,
+-                                         aStr), NS_ERROR_OUT_OF_MEMORY);
+-
+-  NS_ENSURE_TRUE(AppendToString(kGreaterThan, aStr), NS_ERROR_OUT_OF_MEMORY);
++    if (mIsCopying && name == nsGkAtoms::li && ns == kNameSpaceID_XHTML) {
++      mIsFirstChildOfOL = IsFirstChildOfOL(aOriginalElement);
++      if (mIsFirstChildOfOL){
++        // If OL is parent of this LI, serialize attributes in different manner.
++        NS_ENSURE_TRUE(SerializeLIValueAttribute(aElement, aStr), NS_ERROR_OUT_OF_MEMORY);
++      }
++    }
+ 
+-  if (ns == kNameSpaceID_XHTML &&
+-      (name == nsGkAtoms::script ||
+-       name == nsGkAtoms::style ||
+-       name == nsGkAtoms::noscript ||
+-       name == nsGkAtoms::noframes)) {
+-    ++mDisableEntityEncoding;
+-  }
++    // Even LI passed above have to go through this
++    // for serializing attributes other than "value".
++    nsAutoString dummyPrefix;
++    NS_ENSURE_TRUE(SerializeHTMLAttributes(content,
++                                           aOriginalElement,
++                                           dummyPrefix,
++                                           EmptyString(),
++                                           name,
++                                           ns,
++                                           aStr), NS_ERROR_OUT_OF_MEMORY);
++
++    NS_ENSURE_TRUE(AppendToString(kGreaterThan, aStr), NS_ERROR_OUT_OF_MEMORY);
++
++    if (ns == kNameSpaceID_XHTML &&
++        (name == nsGkAtoms::script ||
++         name == nsGkAtoms::style ||
++         name == nsGkAtoms::noscript ||
++         name == nsGkAtoms::noframes)) {
++      ++mDisableEntityEncoding;
++    }
+ 
+-  if ((mDoFormat || forceFormat) && !mDoRaw && !PreLevel() &&
+-    LineBreakAfterOpen(ns, name)) {
+-    NS_ENSURE_TRUE(AppendNewLineToString(aStr), NS_ERROR_OUT_OF_MEMORY);
++    if ((mDoFormat || forceFormat) && !PreLevel() &&
++      !mDoRaw && LineBreakAfterOpen(ns, name)) {
++      NS_ENSURE_TRUE(AppendNewLineToString(aStr), NS_ERROR_OUT_OF_MEMORY);
++    }
+   }
+ 
+   NS_ENSURE_TRUE(AfterElementStart(content, aOriginalElement, aStr), NS_ERROR_OUT_OF_MEMORY);
+@@ -310,6 +319,13 @@ nsHTMLContentSerializer::AppendElementEnd(Element* aElement,
+   nsIAtom *name = content->NodeInfo()->NameAtom();
+   int32_t ns = content->GetNameSpaceID();
+ 
++  if (ns != kNameSpaceID_XHTML) {
++    nsAutoString nsStr;
++    nsresult rv = nsContentUtils::NameSpaceManager()->GetNameSpaceURI(ns, nsStr);
++    if (NS_SUCCEEDED(rv) && nsStr.LowerCaseEqualsLiteral("http://disruptive-innovations.com/zoo/bluegriffon"))
++      return NS_OK;
++  }
++
+   if (ns == kNameSpaceID_XHTML &&
+       (name == nsGkAtoms::script ||
+        name == nsGkAtoms::style ||
+@@ -497,7 +513,8 @@ nsHTMLContentSerializer::AppendAndTranslateEntities(const nsAString& aStr,
+   bool nonBasicEntities =
+     !!(mFlags & (nsIDocumentEncoder::OutputEncodeLatin1Entities |
+                  nsIDocumentEncoder::OutputEncodeHTMLEntities   |
+-                 nsIDocumentEncoder::OutputEncodeW3CEntities));
++                 nsIDocumentEncoder::OutputEncodeW3CEntities    |
++                 nsIDocumentEncoder::OutputEncodeCharacterEntities));
+ 
+   if (!nonBasicEntities &&
+       (mFlags & (nsIDocumentEncoder::OutputEncodeBasicEntities))) {
+@@ -554,7 +571,13 @@ nsHTMLContentSerializer::AppendAndTranslateEntities(const nsAString& aStr,
+       // needs to be replaced
+       for (; c < fragmentEnd; c++, advanceLength++) {
+         char16_t val = *c;
+-        if (val <= kValNBSP && entityTable[val]) {
++        if ((val == kValNBSP || val > 127) &&
++            (mFlags & nsIDocumentEncoder::OutputEncodeCharacterEntities)) {
++          nsAutoString entityValue(char16_t('#'));
++          entityValue.AppendInt(val);
++          entityText = ToNewCString(entityValue);
++          break;
++        } else if (val <= kValNBSP && entityTable[val]) {
+           fullConstEntityText = kEntityStrings[entityTable[val]];
+           break;
+         } else if (val > 127 &&
+diff --git a/dom/base/nsIDocumentEncoder.idl b/dom/base/nsIDocumentEncoder.idl
+index cf1f56f494bb..abf9f4a82a4e 100644
+--- a/dom/base/nsIDocumentEncoder.idl
++++ b/dom/base/nsIDocumentEncoder.idl
+@@ -18,7 +18,7 @@ class nsIDocument;
+ [ptr] native nsINodePtr(nsINode);
+ [ptr] native nsIDocumentPtr(nsIDocument);
+ 
+-[scriptable, uuid(3d9371d8-a2ad-403e-8b0e-8885ad3562e3)]
++[scriptable, uuid(30a3161c-09e0-425e-84e6-ff952c0fd859)]
+ interface nsIDocumentEncoderNodeFixup : nsISupports
+ {
+   /**
+@@ -254,6 +254,11 @@ interface nsIDocumentEncoder : nsISupports
+    */
+   const unsigned long RequiresReinitAfterOutput = (1 << 28);
+ 
++  /**
++    * Output all non-ascii characters as numeric entities
++    */                                                                                                                                         
++   const unsigned long OutputEncodeCharacterEntities = (1 << 29);
++ 
+   /**
+    * Initialize with a pointer to the document and the mime type.
+    * @param aDocument Document to encode.
+diff --git a/dom/base/nsXHTMLContentSerializer.cpp b/dom/base/nsXHTMLContentSerializer.cpp
+index ef87b8168611..c213b2b494d5 100644
+--- a/dom/base/nsXHTMLContentSerializer.cpp
++++ b/dom/base/nsXHTMLContentSerializer.cpp
+@@ -63,13 +63,6 @@ nsXHTMLContentSerializer::Init(uint32_t aFlags, uint32_t aWrapColumn,
+                               const char* aCharSet, bool aIsCopying,
+                               bool aRewriteEncodingDeclaration)
+ {
+-  // The previous version of the HTML serializer did implicit wrapping
+-  // when there is no flags, so we keep wrapping in order to keep
+-  // compatibility with the existing calling code
+-  // XXXLJ perhaps should we remove this default settings later ?
+-  if (aFlags & nsIDocumentEncoder::OutputFormatted ) {
+-      aFlags = aFlags | nsIDocumentEncoder::OutputWrap;
+-  }
+ 
+   nsresult rv;
+   rv = nsXMLContentSerializer::Init(aFlags, aWrapColumn, aCharSet, aIsCopying, aRewriteEncodingDeclaration);
+@@ -662,7 +655,16 @@ nsXHTMLContentSerializer::LineBreakBeforeOpen(int32_t aNamespaceID, nsIAtom* aNa
+       aName == nsGkAtoms::select ||
+       aName == nsGkAtoms::option ||
+       aName == nsGkAtoms::script ||
+-      aName == nsGkAtoms::html) {
++      aName == nsGkAtoms::html ||
++      aName == nsGkAtoms::head ||
++      //aName == nsGkAtoms::body ||
++      aName == nsGkAtoms::table ||
++      aName == nsGkAtoms::caption ||
++      aName == nsGkAtoms::tbody ||
++      aName == nsGkAtoms::thead ||
++      aName == nsGkAtoms::tfoot ||
++      aName == nsGkAtoms::tr ||
++      aName == nsGkAtoms::td) {
+     return true;
+   }
+   else {
+@@ -689,12 +691,14 @@ nsXHTMLContentSerializer::LineBreakAfterOpen(int32_t aNamespaceID, nsIAtom* aNam
+ 
+   if ((aName == nsGkAtoms::html) ||
+       (aName == nsGkAtoms::head) ||
+-      (aName == nsGkAtoms::body) ||
++      // (aName == nsGkAtoms::body) ||
+       (aName == nsGkAtoms::ul) ||
+       (aName == nsGkAtoms::ol) ||
+       (aName == nsGkAtoms::dl) ||
+       (aName == nsGkAtoms::table) ||
+       (aName == nsGkAtoms::tbody) ||
++      (aName == nsGkAtoms::thead) ||
++      (aName == nsGkAtoms::tfoot) ||
+       (aName == nsGkAtoms::tr) ||
+       (aName == nsGkAtoms::br) ||
+       (aName == nsGkAtoms::meta) ||
+@@ -782,12 +786,15 @@ nsXHTMLContentSerializer::MaybeEnterInPreContent(nsIContent* aNode)
+     return;
+   }
+ 
+-  if (IsElementPreformatted(aNode) ||
++  PRBool disableEntityEncoding =
+       aNode->IsAnyOfHTMLElements(nsGkAtoms::script,
+                                  nsGkAtoms::style,
+                                  nsGkAtoms::noscript,
+-                                 nsGkAtoms::noframes)) {
++                                 nsGkAtoms::noframes);
++  if (IsElementPreformatted(aNode) || disableEntityEncoding) {
+     PreLevel()++;
++    if (disableEntityEncoding)
++      ++mDisableEntityEncoding;
+   }
+ }
+ 
+@@ -799,12 +806,15 @@ nsXHTMLContentSerializer::MaybeLeaveFromPreContent(nsIContent* aNode)
+     return;
+   }
+ 
+-  if (IsElementPreformatted(aNode) ||
++  PRBool disableEntityEncoding =
+       aNode->IsAnyOfHTMLElements(nsGkAtoms::script,
+                                  nsGkAtoms::style,
+                                  nsGkAtoms::noscript,
+-                                 nsGkAtoms::noframes)) {
++                                 nsGkAtoms::noframes);
++  if (IsElementPreformatted(aNode) || disableEntityEncoding) {
+     --PreLevel();
++    if (disableEntityEncoding)
++      --mDisableEntityEncoding;
+   }
+ }
+ 
+diff --git a/dom/base/nsXMLContentSerializer.cpp b/dom/base/nsXMLContentSerializer.cpp
+index 54fadaa94ac8..a10b05e0f3e9 100644
+--- a/dom/base/nsXMLContentSerializer.cpp
++++ b/dom/base/nsXMLContentSerializer.cpp
+@@ -625,7 +625,26 @@ nsXMLContentSerializer::SerializeAttr(const nsAString& aPrefix,
+   bool rawAppend = mDoRaw && aDoEscapeEntities;
+   nsAString& attrString = (rawAppend) ? aStr : attrString_;
+ 
+-  NS_ENSURE_TRUE(attrString.Append(char16_t(' '), mozilla::fallible), false);
++  //NS_ENSURE_TRUE(attrString.Append(char16_t(' '), mozilla::fallible), false);
++  if (mColPos + 1 >= mMaxColumn && !mDoRaw) {
++    if (PreLevel() > 0) {
++      AppendToStringConvertLF(mLineBreak, aStr);
++    }
++    else if (mDoFormat) {
++      AppendToStringFormatedWrapped(mLineBreak, aStr);
++      AppendIndentation(aStr);
++    }
++    else if (mDoWrap) {
++      AppendToStringWrapped(mLineBreak, aStr);
++      AppendIndentation(aStr);
++    }
++    else {
++      AppendToStringConvertLF(mLineBreak, aStr);
++    }
++  }
++  else
++    attrString.Append(char16_t(' '));
++
+   if (!aPrefix.IsEmpty()) {
+     NS_ENSURE_TRUE(attrString.Append(aPrefix, mozilla::fallible), false);
+     NS_ENSURE_TRUE(attrString.Append(char16_t(':'), mozilla::fallible), false);
+@@ -694,6 +713,8 @@ nsXMLContentSerializer::SerializeAttr(const nsAString& aPrefix,
+     NS_ENSURE_TRUE(attrString.Append(sValue, mozilla::fallible), false);
+     NS_ENSURE_TRUE(attrString.Append(cDelimiter, mozilla::fallible), false);
+   }
++  AppendToStringConvertLF(attrString, aStr);
++  /* XXX
+   if (mDoRaw || PreLevel() > 0) {
+     NS_ENSURE_TRUE(AppendToStringConvertLF(attrString, aStr), false);
+   }
+@@ -707,6 +728,7 @@ nsXMLContentSerializer::SerializeAttr(const nsAString& aPrefix,
+     NS_ENSURE_TRUE(AppendToStringConvertLF(attrString, aStr), false);
+   }
+ 
++  */
+   return true;
+ }
+ 
+@@ -906,67 +928,73 @@ nsXMLContentSerializer::AppendElementStart(Element* aElement,
+   aElement->NodeInfo()->GetName(tagLocalName);
+   aElement->NodeInfo()->GetNamespaceURI(tagNamespaceURI);
+ 
+-  uint32_t skipAttr = ScanNamespaceDeclarations(content,
+-                          aOriginalElement, tagNamespaceURI);
+-
+-  nsIAtom *name = content->NodeInfo()->NameAtom();
+-  bool lineBreakBeforeOpen = LineBreakBeforeOpen(content->GetNameSpaceID(), name);
++  bool hideTag = tagNamespaceURI.LowerCaseEqualsLiteral("http://disruptive-innovations.com/zoo/bluegriffon");
++  if (!hideTag) {
++    uint32_t skipAttr = ScanNamespaceDeclarations(content,
++                            aOriginalElement, tagNamespaceURI);
++    nsIAtom *name = content->NodeInfo()->NameAtom();
++    bool lineBreakBeforeOpen = LineBreakBeforeOpen(content->GetNameSpaceID(), name);
+ 
+-  if ((mDoFormat || forceFormat) && !mDoRaw && !PreLevel()) {
+-    if (mColPos && lineBreakBeforeOpen) {
+-      NS_ENSURE_TRUE(AppendNewLineToString(aStr), NS_ERROR_OUT_OF_MEMORY);
+-    }
+-    else {
+-      NS_ENSURE_TRUE(MaybeAddNewlineForRootNode(aStr), NS_ERROR_OUT_OF_MEMORY);
+-    }
+-    if (!mColPos) {
+-      NS_ENSURE_TRUE(AppendIndentation(aStr), NS_ERROR_OUT_OF_MEMORY);
++    if (((mDoFormat || forceFormat) && !PreLevel()) || mDoRaw) {
++      if (mColPos && lineBreakBeforeOpen) {
++        AppendNewLineToString(aStr);
++      }
++      else {
++        MaybeAddNewlineForRootNode(aStr);
++      }
++      if (!mColPos) {
++        AppendIndentation(aStr);
++      }
++      else if (mAddSpace) {
++        AppendToString(char16_t(' '), aStr);
++        mAddSpace = false;
++      }
+     }
+     else if (mAddSpace) {
+       NS_ENSURE_TRUE(AppendToString(char16_t(' '), aStr), NS_ERROR_OUT_OF_MEMORY);
+       mAddSpace = false;
+     }
+-  }
+-  else if (mAddSpace) {
+-    NS_ENSURE_TRUE(AppendToString(char16_t(' '), aStr), NS_ERROR_OUT_OF_MEMORY);
+-    mAddSpace = false;
+-  }
+-  else {
+-    NS_ENSURE_TRUE(MaybeAddNewlineForRootNode(aStr), NS_ERROR_OUT_OF_MEMORY);
+-  }
++    else {
++      MaybeAddNewlineForRootNode(aStr);
++    }
+ 
+-  // Always reset to avoid false newlines in case MaybeAddNewlineForRootNode wasn't
+-  // called
+-  mAddNewlineForRootNode = false;
++    // Always reset to avoid false newlines in case MaybeAddNewlineForRootNode wasn't
++    // called
++    mAddNewlineForRootNode = false;
+ 
+-  bool addNSAttr;
+-  addNSAttr = ConfirmPrefix(tagPrefix, tagNamespaceURI, aOriginalElement,
+-                            false);
++    bool addNSAttr;
++    addNSAttr = ConfirmPrefix(tagPrefix, tagNamespaceURI, aOriginalElement,
++                              false);
+ 
+-  // Serialize the qualified name of the element
+-  NS_ENSURE_TRUE(AppendToString(kLessThan, aStr), NS_ERROR_OUT_OF_MEMORY);
+-  if (!tagPrefix.IsEmpty()) {
+-    NS_ENSURE_TRUE(AppendToString(tagPrefix, aStr), NS_ERROR_OUT_OF_MEMORY);
+-    NS_ENSURE_TRUE(AppendToString(NS_LITERAL_STRING(":"), aStr), NS_ERROR_OUT_OF_MEMORY);
+-  }
+-  NS_ENSURE_TRUE(AppendToString(tagLocalName, aStr), NS_ERROR_OUT_OF_MEMORY);
++    if (!mNameSpaceStack.Length()
++        && tagNamespaceURI.EqualsLiteral("http://www.w3.org/1999/xhtml")
++        && !tagLocalName.EqualsLiteral("html"))
++      addNSAttr = false;
+ 
+-  MaybeEnterInPreContent(content);
++    // Serialize the qualified name of the element
++    AppendToString(kLessThan, aStr);
++    if (!tagPrefix.IsEmpty()) {
++      AppendToString(tagPrefix, aStr);
++      AppendToString(NS_LITERAL_STRING(":"), aStr);
++    }
++    AppendToString(tagLocalName, aStr);
+ 
+-  if ((mDoFormat || forceFormat) && !mDoRaw && !PreLevel()) {
+-    NS_ENSURE_TRUE(IncrIndentation(name), NS_ERROR_OUT_OF_MEMORY);
+-  }
++    MaybeEnterInPreContent(content);
++
++    if ((mDoFormat || forceFormat) && !PreLevel() && !mDoRaw) {
++      IncrIndentation(name);
++    }
+ 
+-  NS_ENSURE_TRUE(SerializeAttributes(content, aOriginalElement, tagPrefix, tagNamespaceURI,
+-                                     name, aStr, skipAttr, addNSAttr),
+-                 NS_ERROR_OUT_OF_MEMORY);
++    SerializeAttributes(content, aOriginalElement, tagPrefix, tagNamespaceURI,
++                        name, aStr, skipAttr, addNSAttr);
+ 
+-  NS_ENSURE_TRUE(AppendEndOfElementStart(aElement, aOriginalElement, aStr),
+-                 NS_ERROR_OUT_OF_MEMORY);
++    AppendEndOfElementStart(aElement, aOriginalElement,
++                            aStr);
+ 
+-  if ((mDoFormat || forceFormat) && !mDoRaw && !PreLevel()
+-    && LineBreakAfterOpen(content->GetNameSpaceID(), name)) {
+-    NS_ENSURE_TRUE(AppendNewLineToString(aStr), NS_ERROR_OUT_OF_MEMORY);
++    if ((mDoFormat || forceFormat) && !PreLevel()
++      && !mDoRaw && LineBreakAfterOpen(content->GetNameSpaceID(), name)) {
++      AppendNewLineToString(aStr);
++    }
+   }
+ 
+   NS_ENSURE_TRUE(AfterElementStart(content, aOriginalElement, aStr), NS_ERROR_OUT_OF_MEMORY);
+@@ -1034,75 +1062,72 @@ nsXMLContentSerializer::AppendElementEnd(Element* aElement,
+ 
+   nsIContent* content = aElement;
+ 
+-  bool forceFormat = false, outputElementEnd;
+-  outputElementEnd = CheckElementEnd(aElement, forceFormat, aStr);
+-
+-  nsIAtom *name = content->NodeInfo()->NameAtom();
+-
+-  if ((mDoFormat || forceFormat) && !mDoRaw && !PreLevel()) {
+-    DecrIndentation(name);
+-  }
+-
+-  if (!outputElementEnd) {
+-    // Keep this in sync with the cleanup at the end of this method.
+-    PopNameSpaceDeclsFor(aElement);
+-    MaybeLeaveFromPreContent(content);
+-    MaybeFlagNewlineForRootNode(aElement);
+-    AfterElementEnd(content, aStr);
+-    return NS_OK;
+-  }
+-
+   nsAutoString tagPrefix, tagLocalName, tagNamespaceURI;
+-
+   aElement->NodeInfo()->GetPrefix(tagPrefix);
+   aElement->NodeInfo()->GetName(tagLocalName);
+   aElement->NodeInfo()->GetNamespaceURI(tagNamespaceURI);
+ 
++  bool hideTag = tagNamespaceURI.LowerCaseEqualsLiteral("http://disruptive-innovations.com/zoo/bluegriffon");
++  if (!hideTag) {
++    bool forceFormat = false, outputElementEnd;
++    outputElementEnd = CheckElementEnd(aElement, forceFormat, aStr);
++
++    nsIAtom *name = content->NodeInfo()->NameAtom();
++
++    if ((mDoFormat || forceFormat) && !PreLevel() && !mDoRaw) {
++      DecrIndentation(name);
++    }
++
++    if (!outputElementEnd) {
++      PopNameSpaceDeclsFor(aElement);
++      MaybeFlagNewlineForRootNode(aElement);
++      return NS_OK;
++    }
++
+ #ifdef DEBUG
+-  bool debugNeedToPushNamespace =
++    bool debugNeedToPushNamespace =
+ #endif
+-  ConfirmPrefix(tagPrefix, tagNamespaceURI, aElement, false);
+-  NS_ASSERTION(!debugNeedToPushNamespace, "Can't push namespaces in closing tag!");
++    ConfirmPrefix(tagPrefix, tagNamespaceURI, aElement, false);
++    NS_ASSERTION(!debugNeedToPushNamespace, "Can't push namespaces in closing tag!");
+ 
+-  if ((mDoFormat || forceFormat) && !mDoRaw && !PreLevel()) {
++    if ((mDoFormat || forceFormat) && !mDoRaw && !PreLevel()) {
+ 
+-    bool lineBreakBeforeClose = LineBreakBeforeClose(content->GetNameSpaceID(), name);
++      bool lineBreakBeforeClose = LineBreakBeforeClose(content->GetNameSpaceID(), name);
+ 
+-    if (mColPos && lineBreakBeforeClose) {
+-      NS_ENSURE_TRUE(AppendNewLineToString(aStr), NS_ERROR_OUT_OF_MEMORY);
+-    }
+-    if (!mColPos) {
+-      NS_ENSURE_TRUE(AppendIndentation(aStr), NS_ERROR_OUT_OF_MEMORY);
++      if (mColPos && lineBreakBeforeClose) {
++        AppendNewLineToString(aStr);
++      }
++      if (!mColPos) {
++        AppendIndentation(aStr);
++      }
++      else if (mAddSpace) {
++        AppendToString(char16_t(' '), aStr);
++        mAddSpace = false;
++      }
+     }
+     else if (mAddSpace) {
+       NS_ENSURE_TRUE(AppendToString(char16_t(' '), aStr), NS_ERROR_OUT_OF_MEMORY);
+       mAddSpace = false;
+     }
+-  }
+-  else if (mAddSpace) {
+-    NS_ENSURE_TRUE(AppendToString(char16_t(' '), aStr), NS_ERROR_OUT_OF_MEMORY);
+-    mAddSpace = false;
+-  }
+-
+-  NS_ENSURE_TRUE(AppendToString(kEndTag, aStr), NS_ERROR_OUT_OF_MEMORY);
+-  if (!tagPrefix.IsEmpty()) {
+-    NS_ENSURE_TRUE(AppendToString(tagPrefix, aStr), NS_ERROR_OUT_OF_MEMORY);
+-    NS_ENSURE_TRUE(AppendToString(NS_LITERAL_STRING(":"), aStr), NS_ERROR_OUT_OF_MEMORY);
+-  }
+-  NS_ENSURE_TRUE(AppendToString(tagLocalName, aStr), NS_ERROR_OUT_OF_MEMORY);
+-  NS_ENSURE_TRUE(AppendToString(kGreaterThan, aStr), NS_ERROR_OUT_OF_MEMORY);
++    AppendToString(kEndTag, aStr);
++    if (!tagPrefix.IsEmpty()) {
++      AppendToString(tagPrefix, aStr);
++      AppendToString(NS_LITERAL_STRING(":"), aStr);
++    }
++    AppendToString(tagLocalName, aStr);
++    AppendToString(kGreaterThan, aStr);
+ 
+-  // Keep what follows in sync with the cleanup in the !outputElementEnd case.
+-  PopNameSpaceDeclsFor(aElement);
++    PopNameSpaceDeclsFor(aElement);
+ 
+-  MaybeLeaveFromPreContent(content);
++    MaybeLeaveFromPreContent(content);
+ 
+-  if ((mDoFormat || forceFormat) && !mDoRaw && !PreLevel()
+-      && LineBreakAfterClose(content->GetNameSpaceID(), name)) {
+-    NS_ENSURE_TRUE(AppendNewLineToString(aStr), NS_ERROR_OUT_OF_MEMORY);
+-  }
+-  else {
+-    MaybeFlagNewlineForRootNode(aElement);
++    if ((mDoFormat || forceFormat) && !mDoRaw && !PreLevel()
++        && LineBreakAfterClose(content->GetNameSpaceID(), name)) {
++      AppendNewLineToString(aStr);
++    }
++    else {
++      MaybeFlagNewlineForRootNode(aElement);
++    }
+   }
+ 
+   AfterElementEnd(content, aStr);
+@@ -1192,6 +1217,23 @@ nsXMLContentSerializer::AppendToString(const nsAString& aStr,
+     return true;
+   }
+   mColPos += aStr.Length();
++  nsASingleFragmentString::const_char_iterator pos, end, sequenceStart;
++
++  aStr.BeginReading(pos);
++  aStr.EndReading(end);
++  bool foundCR = PR_FALSE;
++  bool foundOtherThanCROrBlank = PR_FALSE;
++  while (pos < end) {
++    if (*pos == '\n' || *pos == '\r')
++      foundCR = PR_TRUE;
++    else if (*pos != ' ' && *pos != '\t')
++      foundOtherThanCROrBlank = PR_TRUE;
++    pos++;
++  }
++
++  if (foundCR && !foundOtherThanCROrBlank) {
++    mMayIgnoreLineBreakSequence = PR_TRUE;
++  }
+   return aOutputStr.Append(aStr, mozilla::fallible);
+ }
+ 
+@@ -1323,6 +1365,10 @@ nsXMLContentSerializer::MaybeLeaveFromPreContent(nsIContent* aNode)
+ bool
+ nsXMLContentSerializer::AppendNewLineToString(nsAString& aStr)
+ {
++  if (!PreLevel() && mMayIgnoreLineBreakSequence) {
++    mMayIgnoreLineBreakSequence = PR_FALSE;
++    return true;
++  }
+   bool result = AppendToString(mLineBreak, aStr);
+   mMayIgnoreLineBreakSequence = true;
+   mColPos = 0;
+@@ -1631,9 +1677,29 @@ nsXMLContentSerializer::AppendWrapped_NonWhitespaceSequence(
+             mAddSpace = false;
+             NS_ENSURE_TRUE(result, false);
+           }
++          bool CRDone = PR_FALSE;
++          if (wrapPosition) {
++            CRDone = (*(aSequenceStart + wrapPosition - 1) == '\n');
++          }
+           NS_ENSURE_TRUE(aOutputStr.Append(aSequenceStart, wrapPosition, mozilla::fallible), false);
+ 
+-          NS_ENSURE_TRUE(AppendNewLineToString(aOutputStr), false);
++          if (CRDone) {
++            // we found a wrapping spot but there is a newline
++            // char right before that point... So we don't need another CR.
++            mMayIgnoreLineBreakSequence = PR_TRUE;
++            mColPos = 0;
++            mAddSpace = PR_FALSE;
++            mIsIndentationAddedOnCurrentLine = PR_FALSE;
++          }
++          else {
++            AppendNewLineToString(aOutputStr);
++          }
++
++          if (mDoFormat) {
++            AppendIndentation(aOutputStr);
++          }
++
++          mMayIgnoreLineBreakSequence = PR_TRUE;
+           aPos = aSequenceStart + wrapPosition;
+           aMayIgnoreStartOfLineWhitespaceSequence = true;
+         }
+diff --git a/dom/html/HTMLInputElement.cpp b/dom/html/HTMLInputElement.cpp
+index d03bd840ae7c..f9e49d3ed476 100644
+--- a/dom/html/HTMLInputElement.cpp
++++ b/dom/html/HTMLInputElement.cpp
+@@ -123,6 +123,8 @@
+ // input type=date
+ #include "js/Date.h"
+ 
++#include "nsCSSParser.h"
++
+ NS_IMPL_NS_NEW_HTML_ELEMENT_CHECK_PARSER(Input)
+ 
+ // XXX align=left, hspace, vspace, border? other nav4 attrs
+@@ -873,9 +875,13 @@ HTMLInputElement::InitColorPicker()
+     return NS_ERROR_FAILURE;
+   }
+ 
++  nsAutoString showtransparency;
++  GetAttr(kNameSpaceID_None, nsGkAtoms::showtransparency, showtransparency);
++  PRBool showAlpha = showtransparency.EqualsLiteral("true");
++
+   nsAutoString initialValue;
+   GetNonFileValueInternal(initialValue);
+-  nsresult rv = colorPicker->Init(win, title, initialValue);
++  nsresult rv = colorPicker->Init(win, title, initialValue, showAlpha);
+   NS_ENSURE_SUCCESS(rv, rv);
+ 
+   nsCOMPtr<nsIColorPickerShownCallback> callback =
+@@ -5463,17 +5469,17 @@ HTMLInputElement::SanitizeValue(nsAString& aValue)
+ 
+ bool HTMLInputElement::IsValidSimpleColor(const nsAString& aValue) const
+ {
+-  if (aValue.Length() != 7 || aValue.First() != '#') {
++  nsCSSValue value;
++  nsCSSParser parser;
++  if (!parser.ParseColorString(aValue, nullptr, 0, value)) {
+     return false;
+   }
+ 
+-  for (int i = 1; i < 7; ++i) {
+-    if (!nsCRT::IsAsciiDigit(aValue[i]) &&
+-        !(aValue[i] >= 'a' && aValue[i] <= 'f') &&
+-        !(aValue[i] >= 'A' && aValue[i] <= 'F')) {
+-      return false;
+-    }
++  nscolor color;
++  if (!nsRuleNode::ComputeColor(value, nullptr, nullptr, color)) {
++    return false;
+   }
++
+   return true;
+ }
+ 
+diff --git a/dom/html/HTMLInputElement.h b/dom/html/HTMLInputElement.h
+index c085b119aa99..9eead122914c 100644
+--- a/dom/html/HTMLInputElement.h
++++ b/dom/html/HTMLInputElement.h
+@@ -901,6 +901,7 @@ protected:
+     VALUE_MODE_FILENAME
+   };
+ 
++public:
+   /**
+    * This helper method returns true if aValue is a valid email address.
+    * This is following the HTML5 specification:
+@@ -911,6 +912,7 @@ protected:
+    */
+   static bool IsValidEmailAddress(const nsAString& aValue);
+ 
++protected:
+   /**
+    * This helper method returns true if aValue is a valid email address list.
+    * Email address list is a list of email address separated by comas (,) which
+diff --git a/dom/interfaces/core/nsIDOMDocument.idl b/dom/interfaces/core/nsIDOMDocument.idl
+index efa4c851ca5e..08f7908cdc1f 100644
+--- a/dom/interfaces/core/nsIDOMDocument.idl
++++ b/dom/interfaces/core/nsIDOMDocument.idl
+@@ -33,7 +33,7 @@ interface nsIDOMLocation;
+  * http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html
+  */
+ 
+-[uuid(b15fa0f4-97c1-4388-af62-2ceff7a89bdf)]
++[uuid(D792B34B-8419-4729-9E09-43C61DC2FACE)]
+ interface nsIDOMDocument : nsIDOMNode
+ {
+   readonly attribute nsIDOMDocumentType         doctype;
+@@ -80,6 +80,9 @@ interface nsIDOMDocument : nsIDOMNode
+   nsIDOMNode         adoptNode(in nsIDOMNode source)
+                                         raises(DOMException);
+ 
++  // BLUEGRIFFON
++  readonly attribute boolean hasXMLDeclaration;
++
+   /**
+    * Create a range
+    *
+diff --git a/dom/ipc/ColorPickerParent.cpp b/dom/ipc/ColorPickerParent.cpp
+index a84cb29867bd..b130ebd7574d 100644
+--- a/dom/ipc/ColorPickerParent.cpp
++++ b/dom/ipc/ColorPickerParent.cpp
+@@ -61,7 +61,7 @@ ColorPickerParent::CreateColorPicker()
+     return false;
+   }
+ 
+-  return NS_SUCCEEDED(mPicker->Init(window, mTitle, mInitialColor));
++  return NS_SUCCEEDED(mPicker->Init(window, mTitle, mInitialColor, mShowsAlpha));
+ }
+ 
+ mozilla::ipc::IPCResult
+diff --git a/dom/ipc/ColorPickerParent.h b/dom/ipc/ColorPickerParent.h
+index 76c39f3db207..d43e06760617 100644
+--- a/dom/ipc/ColorPickerParent.h
++++ b/dom/ipc/ColorPickerParent.h
+@@ -17,9 +17,11 @@ class ColorPickerParent : public PColorPickerParent
+ {
+  public:
+   ColorPickerParent(const nsString& aTitle,
+-                    const nsString& aInitialColor)
++                    const nsString& aInitialColor,
++                    bool aShowsAlpha)
+   : mTitle(aTitle)
+   , mInitialColor(aInitialColor)
++  , mShowsAlpha(aShowsAlpha)
+   {}
+ 
+   virtual mozilla::ipc::IPCResult RecvOpen() override;
+@@ -53,6 +55,7 @@ class ColorPickerParent : public PColorPickerParent
+ 
+   nsString mTitle;
+   nsString mInitialColor;
++  bool     mShowsAlpha;
+ };
+ 
+ } // namespace dom
+diff --git a/dom/ipc/PBrowser.ipdl b/dom/ipc/PBrowser.ipdl
+index a7b096d16b8d..84d85c1f38b8 100644
+--- a/dom/ipc/PBrowser.ipdl
++++ b/dom/ipc/PBrowser.ipdl
+@@ -446,7 +446,7 @@ parent:
+      * Create an asynchronous color picker on the parent side,
+      * but don't open it yet.
+      */
+-    async PColorPicker(nsString title, nsString initialColor);
++    async PColorPicker(nsString title, nsString initialColor, bool showsAlpha);
+ 
+     async PFilePicker(nsString aTitle, int16_t aMode);
+ 
+diff --git a/dom/ipc/TabChild.cpp b/dom/ipc/TabChild.cpp
+index 538880452f1f..cd2ca1259166 100644
+--- a/dom/ipc/TabChild.cpp
++++ b/dom/ipc/TabChild.cpp
+@@ -2131,7 +2131,7 @@ TabChild::RecvPDocumentRendererConstructor(PDocumentRendererChild* actor,
+ }
+ 
+ PColorPickerChild*
+-TabChild::AllocPColorPickerChild(const nsString&, const nsString&)
++TabChild::AllocPColorPickerChild(const nsString&, const nsString&, const bool &)
+ {
+   MOZ_CRASH("unused");
+   return nullptr;
+diff --git a/dom/ipc/TabChild.h b/dom/ipc/TabChild.h
+index 54be8255ec49..420ff365636c 100644
+--- a/dom/ipc/TabChild.h
++++ b/dom/ipc/TabChild.h
+@@ -472,7 +472,8 @@ public:
+ 
+   virtual PColorPickerChild*
+   AllocPColorPickerChild(const nsString& aTitle,
+-                         const nsString& aInitialColor) override;
++                         const nsString& aInitialColor,
++                         const bool &showsAlpha) override;
+ 
+   virtual bool DeallocPColorPickerChild(PColorPickerChild* aActor) override;
+ 
+diff --git a/dom/ipc/TabParent.cpp b/dom/ipc/TabParent.cpp
+index d0a20bcd0d55..a017fbb300f9 100644
+--- a/dom/ipc/TabParent.cpp
++++ b/dom/ipc/TabParent.cpp
+@@ -2438,9 +2438,10 @@ TabParent::GetAuthPrompt(uint32_t aPromptReason, const nsIID& iid,
+ 
+ PColorPickerParent*
+ TabParent::AllocPColorPickerParent(const nsString& aTitle,
+-                                   const nsString& aInitialColor)
++                                   const nsString& aInitialColor,
++                                   const bool &aShowsAlpha)
+ {
+-  return new ColorPickerParent(aTitle, aInitialColor);
++  return new ColorPickerParent(aTitle, aInitialColor, aShowsAlpha);
+ }
+ 
+ bool
+diff --git a/dom/ipc/TabParent.h b/dom/ipc/TabParent.h
+index c3b82953e38a..196a5b9d9a63 100644
+--- a/dom/ipc/TabParent.h
++++ b/dom/ipc/TabParent.h
+@@ -334,7 +334,8 @@ public:
+ 
+   virtual PColorPickerParent*
+   AllocPColorPickerParent(const nsString& aTitle,
+-                          const nsString& aInitialColor) override;
++                          const nsString& aInitialColor,
++                          const bool &aShowsAlpha) override;
+ 
+   virtual bool
+   DeallocPColorPickerParent(PColorPickerParent* aColorPicker) override;
+diff --git a/dom/xbl/nsXBLContentSink.cpp b/dom/xbl/nsXBLContentSink.cpp
+index 4d5c9fb74fcf..7fed7ce73efc 100644
+--- a/dom/xbl/nsXBLContentSink.cpp
++++ b/dom/xbl/nsXBLContentSink.cpp
+@@ -169,6 +169,8 @@ NS_IMETHODIMP
+ nsXBLContentSink::ReportError(const char16_t* aErrorText, 
+                               const char16_t* aSourceText,
+                               nsIScriptError *aError,
++                              uint32_t aLineNumber,
++                              uint32_t aColNumber,
+                               bool *_retval)
+ {
+   NS_PRECONDITION(aError && aSourceText && aErrorText, "Check arguments!!!");
+@@ -194,6 +196,8 @@ nsXBLContentSink::ReportError(const char16_t* aErrorText,
+   return nsXMLContentSink::ReportError(aErrorText, 
+                                        aSourceText, 
+                                        aError,
++                                       aLineNumber,
++                                       aColNumber,
+                                        _retval);
+ }
+ 
+diff --git a/dom/xbl/nsXBLContentSink.h b/dom/xbl/nsXBLContentSink.h
+index cfd1cf1c236c..d5c757f2cdd6 100644
+--- a/dom/xbl/nsXBLContentSink.h
++++ b/dom/xbl/nsXBLContentSink.h
+@@ -119,6 +119,8 @@ protected:
+   NS_IMETHOD ReportError(const char16_t* aErrorText,
+                          const char16_t* aSourceText,
+                          nsIScriptError *aError,
++                         uint32_t aLineNumber,
++                         uint32_t aColNumber,
+                          bool *_retval) override;
+ 
+ protected:
+diff --git a/dom/xml/nsXMLContentSink.cpp b/dom/xml/nsXMLContentSink.cpp
+index cbf13c914b11..ff80ad808f56 100644
+--- a/dom/xml/nsXMLContentSink.cpp
++++ b/dom/xml/nsXMLContentSink.cpp
+@@ -1307,6 +1307,8 @@ NS_IMETHODIMP
+ nsXMLContentSink::ReportError(const char16_t* aErrorText,
+                               const char16_t* aSourceText,
+                               nsIScriptError *aError,
++                              uint32_t aLineNumber,
++                              uint32_t aColNumber,
+                               bool *_retval)
+ {
+   NS_PRECONDITION(aError && aSourceText && aErrorText, "Check arguments!!!");
+@@ -1363,7 +1365,13 @@ nsXMLContentSink::ReportError(const char16_t* aErrorText,
+                                    u"href=\"chrome://global/locale/intl.css\" type=\"text/css\"");
+   NS_ENSURE_SUCCESS(rv, rv);
+ 
+-  const char16_t* noAtts[] = { 0, 0 };
++  nsAutoString lineString, colString;
++  lineString.AppendInt(aLineNumber);
++  colString.AppendInt(aColNumber);
++  const char16_t* noAtts[] = {  lineString.get(),
++                                colString.get(),
++                                0,
++                                0 };
+ 
+   NS_NAMED_LITERAL_STRING(errorNs,
+                           "http://www.mozilla.org/newlayout/xml/parsererror.xml");
+@@ -1372,7 +1380,7 @@ nsXMLContentSink::ReportError(const char16_t* aErrorText,
+   parsererror.Append((char16_t)0xFFFF);
+   parsererror.AppendLiteral("parsererror");
+ 
+-  rv = HandleStartElement(parsererror.get(), noAtts, 0, (uint32_t)-1,
++  rv = HandleStartElement(parsererror.get(), noAtts, 2, (uint32_t)-1,
+                           false);
+   NS_ENSURE_SUCCESS(rv, rv);
+ 
+diff --git a/dom/xml/nsXMLFragmentContentSink.cpp b/dom/xml/nsXMLFragmentContentSink.cpp
+index 16f03160a845..626319ef86d5 100644
+--- a/dom/xml/nsXMLFragmentContentSink.cpp
++++ b/dom/xml/nsXMLFragmentContentSink.cpp
+@@ -57,6 +57,8 @@ public:
+   NS_IMETHOD ReportError(const char16_t* aErrorText,
+                          const char16_t* aSourceText,
+                          nsIScriptError* aError,
++                         uint32_t aLineNumber,
++                         uint32_t aColNumber,
+                          bool* aRetval) override;
+ 
+   // nsIContentSink
+@@ -286,6 +288,8 @@ NS_IMETHODIMP
+ nsXMLFragmentContentSink::ReportError(const char16_t* aErrorText, 
+                                       const char16_t* aSourceText,
+                                       nsIScriptError *aError,
++                                      uint32_t aLineNumber,
++                                      uint32_t aColNumber,
+                                       bool *_retval)
+ {
+   NS_PRECONDITION(aError && aSourceText && aErrorText, "Check arguments!!!");
+diff --git a/dom/xslt/xslt/txMozillaStylesheetCompiler.cpp b/dom/xslt/xslt/txMozillaStylesheetCompiler.cpp
+index a996be501634..84747a4d47af 100644
+--- a/dom/xslt/xslt/txMozillaStylesheetCompiler.cpp
++++ b/dom/xslt/xslt/txMozillaStylesheetCompiler.cpp
+@@ -205,6 +205,8 @@ NS_IMETHODIMP
+ txStylesheetSink::ReportError(const char16_t *aErrorText,
+                               const char16_t *aSourceText,
+                               nsIScriptError *aError,
++                              uint32_t aLineNumber,
++                              uint32_t aColNumber,
+                               bool *_retval)
+ {
+     NS_PRECONDITION(aError && aSourceText && aErrorText, "Check arguments!!!");
+diff --git a/dom/xul/nsXULContentSink.cpp b/dom/xul/nsXULContentSink.cpp
+index 7103be758d91..1c1bea0056b1 100644
+--- a/dom/xul/nsXULContentSink.cpp
++++ b/dom/xul/nsXULContentSink.cpp
+@@ -652,6 +652,8 @@ NS_IMETHODIMP
+ XULContentSinkImpl::ReportError(const char16_t* aErrorText,
+                                 const char16_t* aSourceText,
+                                 nsIScriptError *aError,
++                                uint32_t aLineNumber,
++                                uint32_t aColNumber,
+                                 bool *_retval)
+ {
+   NS_PRECONDITION(aError && aSourceText && aErrorText, "Check arguments!!!");
+diff --git a/editor/composer/nsComposerCommands.cpp b/editor/composer/nsComposerCommands.cpp
+index 3853604e4b9b..2da560f96f74 100644
+--- a/editor/composer/nsComposerCommands.cpp
++++ b/editor/composer/nsComposerCommands.cpp
+@@ -211,6 +211,13 @@ nsStyleUpdatingCommand::ToggleState(nsIEditor *aEditor)
+   if (NS_FAILED(rv) || !params)
+     return rv;
+ 
++  bool isCSS;
++  htmlEditor->GetIsCSSEnabled(&isCSS);
++  if (isCSS
++      && (mTagName == nsGkAtoms::b
++          || mTagName == nsGkAtoms::i
++          || mTagName == nsGkAtoms::u))
++    htmlEditor->SetIsCSSEnabled(false);
+   // tags "href" and "name" are special cases in the core editor
+   // they are used to remove named anchor/link and shouldn't be used for insertion
+   bool doTagRemoval;
+@@ -252,6 +259,7 @@ nsStyleUpdatingCommand::ToggleState(nsIEditor *aEditor)
+     aEditor->EndTransaction();
+   }
+ 
++  htmlEditor->SetIsCSSEnabled(isCSS);
+   return rv;
+ }
+ 
+@@ -463,7 +471,15 @@ nsIndentCommand::DoCommand(const char *aCommandName, nsISupports *refCon)
+ 
+   nsresult rv = NS_OK;
+   if (editor) {
++    bool isCssEnabled;
++    nsresult rv = editor->GetIsCSSEnabled(&isCssEnabled);
++    NS_ENSURE_SUCCESS(rv, rv);
++    rv = editor->SetIsCSSEnabled(true);
++    NS_ENSURE_SUCCESS(rv, rv);
++
+     rv = editor->Indent(NS_LITERAL_STRING("indent"));
++    NS_ENSURE_SUCCESS(rv, rv);
++    rv = editor->SetIsCSSEnabled(isCssEnabled);
+   }
+ 
+   return rv;
+@@ -512,7 +528,17 @@ nsOutdentCommand::DoCommand(const char *aCommandName, nsISupports *refCon)
+ {
+   nsCOMPtr<nsIHTMLEditor> htmlEditor = do_QueryInterface(refCon);
+   if (htmlEditor)
+-    return htmlEditor->Indent(NS_LITERAL_STRING("outdent"));
++  {
++    bool isCssEnabled;
++    nsresult rv = htmlEditor->GetIsCSSEnabled(&isCssEnabled);
++    NS_ENSURE_SUCCESS(rv, rv);
++    rv = htmlEditor->SetIsCSSEnabled(true);
++    NS_ENSURE_SUCCESS(rv, rv);
++
++    rv = htmlEditor->Indent(NS_LITERAL_STRING("outdent"));
++    NS_ENSURE_SUCCESS(rv, rv);
++    rv = htmlEditor->SetIsCSSEnabled(isCssEnabled);
++  }
+ 
+   return NS_OK;
+ }
+@@ -919,10 +945,19 @@ nsAlignCommand::GetCurrentState(nsIEditor *aEditor, nsICommandParams *aParams)
+   nsCOMPtr<nsIHTMLEditor> htmlEditor = do_QueryInterface(aEditor);
+   NS_ENSURE_TRUE(htmlEditor, NS_ERROR_FAILURE);
+ 
++  bool isCssEnabled;
++  nsresult rv = htmlEditor->GetIsCSSEnabled(&isCssEnabled);
++  NS_ENSURE_SUCCESS(rv, rv);
++  rv = htmlEditor->SetIsCSSEnabled(true);
++  NS_ENSURE_SUCCESS(rv, rv);
++
+   nsIHTMLEditor::EAlignment firstAlign;
+   bool outMixed;
+-  nsresult rv = htmlEditor->GetAlignment(&outMixed, &firstAlign);
++  rv = htmlEditor->GetAlignment(&outMixed, &firstAlign);
++
++  NS_ENSURE_SUCCESS(rv, rv);
+ 
++  rv = htmlEditor->SetIsCSSEnabled(isCssEnabled);
+   NS_ENSURE_SUCCESS(rv, rv);
+ 
+   nsAutoString outStateString;
+@@ -959,7 +994,14 @@ nsAlignCommand::SetState(nsIEditor *aEditor, nsString& newState)
+   nsCOMPtr<nsIHTMLEditor> htmlEditor = do_QueryInterface(aEditor);
+   NS_ENSURE_TRUE(htmlEditor, NS_ERROR_FAILURE);
+ 
+-  return htmlEditor->Align(newState);
++  bool isCssEnabled;
++  nsresult rv = htmlEditor->GetIsCSSEnabled(&isCssEnabled);
++  NS_ENSURE_SUCCESS(rv, rv);
++  rv = htmlEditor->SetIsCSSEnabled(true);
++  NS_ENSURE_SUCCESS(rv, rv);
++  rv = htmlEditor->Align(newState);
++  NS_ENSURE_SUCCESS(rv, rv);
++  return htmlEditor->SetIsCSSEnabled(isCssEnabled);
+ }
+ 
+ nsAbsolutePositioningCommand::nsAbsolutePositioningCommand()
+diff --git a/editor/libeditor/CSSEditUtils.cpp b/editor/libeditor/CSSEditUtils.cpp
+index 8d8ecc5c62c0..b783a89a3d58 100644
+--- a/editor/libeditor/CSSEditUtils.cpp
++++ b/editor/libeditor/CSSEditUtils.cpp
+@@ -339,11 +339,12 @@ CSSEditUtils::IsCSSEditableProperty(nsINode* aNode,
+   }
+ 
+   // html inline styles B I TT U STRIKE and COLOR/FACE on FONT
+-  if (nsGkAtoms::b == aProperty ||
+-      nsGkAtoms::i == aProperty ||
++  if (//nsGkAtoms::b == aProperty ||
++      //nsGkAtoms::i == aProperty ||
+       nsGkAtoms::tt == aProperty ||
+-      nsGkAtoms::u == aProperty ||
++      //nsGkAtoms::u == aProperty ||
+       nsGkAtoms::strike == aProperty ||
++      nsGkAtoms::nobr == aProperty ||
+       (nsGkAtoms::font == aProperty && aAttribute &&
+        (aAttribute == nsGkAtoms::color || aAttribute == nsGkAtoms::face))) {
+     return true;
+@@ -836,6 +837,8 @@ CSSEditUtils::GenerateCSSDeclarationsFromHTMLStyle(
+     equivTable = underlineEquivTable;
+   } else if (nsGkAtoms::strike == aHTMLProperty) {
+     equivTable = strikeEquivTable;
++  } else if (nsGkAtoms::nobr == aHTMLProperty) {
++    equivTable = nowrapEquivTable;
+   } else if (nsGkAtoms::tt == aHTMLProperty) {
+     equivTable = ttEquivTable;
+   } else if (aAttribute) {
+diff --git a/editor/libeditor/EditorBase.cpp b/editor/libeditor/EditorBase.cpp
+index a845b69aabd2..a7b278c9ed3f 100644
+--- a/editor/libeditor/EditorBase.cpp
++++ b/editor/libeditor/EditorBase.cpp
+@@ -104,6 +104,7 @@
+ #include "nsThreadUtils.h"              // for nsRunnable
+ #include "nsTransactionManager.h"       // for nsTransactionManager
+ #include "prtime.h"                     // for PR_Now
++#include "nsIEditorMouseObserver.h"
+ 
+ class nsIOutputStream;
+ class nsIParserService;
+@@ -173,6 +174,7 @@ NS_IMPL_CYCLE_COLLECTION_UNLINK_BEGIN(EditorBase)
+  NS_IMPL_CYCLE_COLLECTION_UNLINK(mIMETextNode)
+  NS_IMPL_CYCLE_COLLECTION_UNLINK(mActionListeners)
+  NS_IMPL_CYCLE_COLLECTION_UNLINK(mEditorObservers)
++ NS_IMPL_CYCLE_COLLECTION_UNLINK(mEditorMouseObservers)
+  NS_IMPL_CYCLE_COLLECTION_UNLINK(mDocStateListeners)
+  NS_IMPL_CYCLE_COLLECTION_UNLINK(mEventTarget)
+  NS_IMPL_CYCLE_COLLECTION_UNLINK(mEventListener)
+@@ -193,6 +195,7 @@ NS_IMPL_CYCLE_COLLECTION_TRAVERSE_BEGIN(EditorBase)
+  NS_IMPL_CYCLE_COLLECTION_TRAVERSE(mIMETextNode)
+  NS_IMPL_CYCLE_COLLECTION_TRAVERSE(mActionListeners)
+  NS_IMPL_CYCLE_COLLECTION_TRAVERSE(mEditorObservers)
++ NS_IMPL_CYCLE_COLLECTION_TRAVERSE(mEditorMouseObservers)
+  NS_IMPL_CYCLE_COLLECTION_TRAVERSE(mDocStateListeners)
+  NS_IMPL_CYCLE_COLLECTION_TRAVERSE(mEventTarget)
+  NS_IMPL_CYCLE_COLLECTION_TRAVERSE(mEventListener)
+@@ -461,6 +464,7 @@ EditorBase::PreDestroy(bool aDestroyingFrames)
+   HideCaret(false);
+   mActionListeners.Clear();
+   mEditorObservers.Clear();
++  mEditorMouseObservers.Clear();
+   mDocStateListeners.Clear();
+   mInlineSpellChecker = nullptr;
+   mSpellcheckCheckboxState = eTriUnset;
+@@ -1825,6 +1829,36 @@ EditorBase::RemoveEditorObserver(nsIEditorObserver* aObserver)
+   return NS_OK;
+ }
+ 
++NS_IMETHODIMP
++EditorBase::AddEditorMouseObserver(nsIEditorMouseObserver *aObserver)
++{
++  // we don't keep ownership of the observers.  They must
++  // remove themselves as observers before they are destroyed.
++
++  NS_ENSURE_TRUE(aObserver, NS_ERROR_NULL_POINTER);
++
++  // Make sure the listener isn't already on the list
++  if (mEditorMouseObservers.IndexOf(aObserver) == -1)
++  {
++    if (!mEditorMouseObservers.AppendObject(aObserver))
++      return NS_ERROR_FAILURE;
++  }
++
++  return NS_OK;
++}
++
++
++NS_IMETHODIMP
++EditorBase::RemoveEditorMouseObserver(nsIEditorMouseObserver *aObserver)
++{
++  NS_ENSURE_TRUE(aObserver, NS_ERROR_FAILURE);
++
++  if (!mEditorMouseObservers.RemoveObject(aObserver))
++    return NS_ERROR_FAILURE;
++
++  return NS_OK;
++}
++
+ class EditorInputEventDispatcher final : public Runnable
+ {
+ public:
+@@ -1931,6 +1965,27 @@ EditorBase::FireInputEvent()
+     new EditorInputEventDispatcher(this, target, !!GetComposition()));
+ }
+ 
++bool
++EditorBase::NotifyEditorMouseObservers(MouseEventType aMouseEventType,
++                                       int32_t aClientX,
++                                       int32_t aClientY,
++                                       nsIDOMNode* aTarget,
++                                       bool aIsShiftKey)
++{
++  bool rv = false;
++  for (int32_t i = 0; i < mEditorMouseObservers.Count(); i++) {
++    bool oneRv = false;
++    switch (aMouseEventType) {
++    case EditorBase::kMouseDown: mEditorMouseObservers[i]->MouseDown(aClientX, aClientY, aTarget, aIsShiftKey, &rv); break;
++    case EditorBase::kMouseUp:   mEditorMouseObservers[i]->MouseUp(aClientX, aClientY, aTarget, aIsShiftKey, &rv); break;
++    case EditorBase::kMouseMove: mEditorMouseObservers[i]->MouseMove(aClientX, aClientY, aTarget, aIsShiftKey, &rv); break;
++    }
++    rv |= oneRv;
++  }
++
++  return rv;
++}
++
+ NS_IMETHODIMP
+ EditorBase::AddEditActionListener(nsIEditActionListener* aListener)
+ {
+@@ -2300,7 +2355,11 @@ EditorBase::CloneAttributes(Element* aDest,
+ 
+   // Clear existing attributes
+   RefPtr<nsDOMAttributeMap> destAttributes = aDest->Attributes();
+-  while (RefPtr<Attr> attr = destAttributes->Item(0)) {
++  uint32_t destCount = destAttributes->Length();
++  for (int32_t i = destCount - 1; i >= 0; i--) {
++    RefPtr<Attr> attr = destAttributes->Item(i);
++    nsAutoString value;
++    attr->GetValue(value);
+     if (destInBody) {
+       RemoveAttribute(aDest, attr->NodeInfo()->NameAtom());
+     } else {
+@@ -2780,6 +2839,35 @@ struct SavedRange final
+   int32_t mEndOffset;
+ };
+ 
++nsresult
++EditorBase::RemoveNonCopyableAttributes(nsIDOMElement * aElement)
++{
++  NS_ENSURE_TRUE(aElement, NS_ERROR_NULL_POINTER);
++  nsresult res = NS_OK;
++
++  nsCOMPtr<nsIDOMMozNamedAttrMap> attributes;
++  aElement->GetAttributes(getter_AddRefs(attributes));
++  NS_ENSURE_TRUE(attributes, NS_ERROR_FAILURE);
++  uint32_t attrCount;
++  attributes->GetLength(&attrCount);
++  nsCOMPtr<nsIDOMAttr> attr;
++  for (int32_t i = attrCount - 1; i >= 0; i--)   {
++    if (NS_SUCCEEDED(attributes->Item(i, getter_AddRefs(attr))) && attr) {
++      nsString attrName;
++      if (NS_SUCCEEDED(attr->GetName(attrName))) {
++        ToLowerCase(attrName);
++          if (StringBeginsWith(attrName, NS_LITERAL_STRING("its-")) ||
++              attrName.EqualsLiteral("translate") ||
++              attrName.EqualsLiteral("id")) {
++            res = RemoveAttribute(aElement, attrName);
++            NS_ENSURE_SUCCESS(res, res);
++        }
++      }
++    }
++  }
++  return res;
++}
++
+ nsresult
+ EditorBase::SplitNodeImpl(nsIContent& aExistingRightNode,
+                           int32_t aOffset,
+@@ -3870,6 +3958,11 @@ EditorBase::SplitNodeDeep(nsIContent& aNode,
+       nsCOMPtr<nsIContent> newLeftNode = SplitNode(nodeToSplit, offset, rv);
+       NS_ENSURE_TRUE(!NS_FAILED(rv.StealNSResult()), -1);
+ 
++      nsCOMPtr<nsIDOMElement> elt = do_QueryInterface(nodeToSplit);
++      if (elt) {
++        RemoveNonCopyableAttributes(elt);
++      }
++
+       rightNode = nodeToSplit;
+       leftNode = newLeftNode;
+     }
+diff --git a/editor/libeditor/EditorBase.h b/editor/libeditor/EditorBase.h
+index aabf83b123a6..c47c177dcea5 100644
+--- a/editor/libeditor/EditorBase.h
++++ b/editor/libeditor/EditorBase.h
+@@ -160,6 +160,13 @@ public:
+     kIterBackward
+   };
+ 
++  enum MouseEventType
++  {
++    kMouseDown,
++    kMouseUp,
++    kMouseMove
++  };
++
+   /**
+    * The default constructor. This should suffice. the setting of the
+    * interfaces is done after the construction of the editor class.
+@@ -193,6 +200,11 @@ public:
+     eNotifyEditorObserversOfCancel
+   };
+   void NotifyEditorObservers(NotificationForEditorObservers aNotification);
++  bool NotifyEditorMouseObservers(MouseEventType aMouseEventType,
++                                  int32_t aClientX,
++                                  int32_t aClientY,
++                                  nsIDOMNode* aTarget,
++                                  bool aIsShiftKey);
+ 
+   // nsIEditor methods
+   NS_DECL_NSIEDITOR
+@@ -961,6 +973,8 @@ public:
+ 
+   virtual nsresult InsertFromDrop(nsIDOMEvent* aDropEvent) = 0;
+ 
++  nsresult RemoveNonCopyableAttributes(nsIDOMElement * aElement);
++
+   /**
+    * GetIMESelectionStartOffsetIn() returns the start offset of IME selection in
+    * the aTextNode.  If there is no IME selection, returns -1.
+@@ -1027,6 +1041,8 @@ protected:
+   typedef AutoTArray<OwningNonNull<nsIEditorObserver>, 3>
+             AutoEditorObserverArray;
+   AutoEditorObserverArray mEditorObservers;
++  // Listen to mouse events
++  nsCOMArray<nsIEditorMouseObserver> mEditorMouseObservers;
+   // Listen to overall doc state (dirty or not, just created, etc.).
+   typedef AutoTArray<OwningNonNull<nsIDocumentStateListener>, 1>
+             AutoDocumentStateListenerArray;
+diff --git a/editor/libeditor/EditorEventListener.cpp b/editor/libeditor/EditorEventListener.cpp
+index 3f882fe3d058..0be12542903f 100644
+--- a/editor/libeditor/EditorEventListener.cpp
++++ b/editor/libeditor/EditorEventListener.cpp
+@@ -186,6 +186,9 @@ EditorEventListener::InstallToEditor()
+   elmP->AddEventListenerByType(this,
+                                NS_LITERAL_STRING("mouseup"),
+                                TrustedEventsAtCapture());
++  elmP->AddEventListenerByType(this,
++                               NS_LITERAL_STRING("mousemove"),
++                               TrustedEventsAtCapture());
+   elmP->AddEventListenerByType(this,
+                                NS_LITERAL_STRING("click"),
+                                TrustedEventsAtCapture());
+@@ -280,6 +283,9 @@ EditorEventListener::UninstallFromEditor()
+   elmP->RemoveEventListenerByType(this,
+                                   NS_LITERAL_STRING("mouseup"),
+                                   TrustedEventsAtCapture());
++  elmP->RemoveEventListenerByType(this,
++                                  NS_LITERAL_STRING("mousemove"),
++                                  TrustedEventsAtCapture());
+   elmP->RemoveEventListenerByType(this,
+                                   NS_LITERAL_STRING("click"),
+                                   TrustedEventsAtCapture());
+@@ -455,6 +461,12 @@ EditorEventListener::HandleEvent(nsIDOMEvent* aEvent)
+       nsCOMPtr<nsIDOMMouseEvent> mouseEvent = do_QueryInterface(aEvent);
+       return NS_WARN_IF(!mouseEvent) ? NS_OK : MouseUp(mouseEvent);
+     }
++    // mousemove:
++    case eMouseMove: {
++      nsCOMPtr<nsIDOMMouseEvent> mouseEvent = do_QueryInterface(aEvent);
++      NS_ENSURE_TRUE(mouseEvent, NS_OK);
++      return NS_OK;
++    }
+     // click
+     case eMouseClick: {
+       nsCOMPtr<nsIDOMMouseEvent> mouseEvent = do_QueryInterface(aEvent);
+diff --git a/editor/libeditor/EditorEventListener.h b/editor/libeditor/EditorEventListener.h
+index f911cdeb475c..7370f0c15579 100644
+--- a/editor/libeditor/EditorEventListener.h
++++ b/editor/libeditor/EditorEventListener.h
+@@ -67,6 +67,7 @@ protected:
+   void HandleEndComposition(WidgetCompositionEvent* aCompositionEvent);
+   virtual nsresult MouseDown(nsIDOMMouseEvent* aMouseEvent);
+   virtual nsresult MouseUp(nsIDOMMouseEvent* aMouseEvent) { return NS_OK; }
++  virtual nsresult MouseMove(nsIDOMMouseEvent* aMouseEvent) { return NS_OK; }
+   virtual nsresult MouseClick(nsIDOMMouseEvent* aMouseEvent);
+   nsresult Focus(InternalFocusEvent* aFocusEvent);
+   nsresult Blur(InternalFocusEvent* aBlurEvent);
+diff --git a/editor/libeditor/HTMLEditRules.cpp b/editor/libeditor/HTMLEditRules.cpp
+index 40bef2b30b0c..f6f4c86e93a6 100644
+--- a/editor/libeditor/HTMLEditRules.cpp
++++ b/editor/libeditor/HTMLEditRules.cpp
+@@ -471,6 +471,8 @@ HTMLEditRules::AfterEditInner(EditAction action,
+       bDamagedRange = true;
+   }
+ 
++  nsresult rv;
++
+   if (bDamagedRange && !((action == EditAction::undo) ||
+                          (action == EditAction::redo))) {
+     // don't let any txns in here move the selection around behind our back.
+@@ -503,7 +505,10 @@ HTMLEditRules::AfterEditInner(EditAction action,
+     }
+ 
+     // clean up any empty nodes in the selection
+-    nsresult rv = RemoveEmptyNodes();
++    if ((action != EditAction::insertNode) &&
++        (action != EditAction::htmlPaste) &&
++        (action != EditAction::loadHTML))
++      rv = RemoveEmptyNodes();
+     NS_ENSURE_SUCCESS(rv, rv);
+ 
+     // attempt to transform any unneeded nbsp's into spaces after doing various operations
+@@ -563,12 +568,11 @@ HTMLEditRules::AfterEditInner(EditAction action,
+ 
+   NS_ENSURE_STATE(mHTMLEditor);
+ 
+-  nsresult rv =
+-    mHTMLEditor->HandleInlineSpellCheck(action, selection,
+-                                        GetAsDOMNode(mRangeItem->startNode),
+-                                        mRangeItem->startOffset,
+-                                        rangeStartParent, rangeStartOffset,
+-                                        rangeEndParent, rangeEndOffset);
++  rv = mHTMLEditor->HandleInlineSpellCheck(action, selection,
++                                           GetAsDOMNode(mRangeItem->startNode),
++                                           mRangeItem->startOffset,
++                                           rangeStartParent, rangeStartOffset,
++                                           rangeEndParent, rangeEndOffset);
+   NS_ENSURE_SUCCESS(rv, rv);
+ 
+   // detect empty doc
+@@ -1359,40 +1363,8 @@ HTMLEditRules::WillInsertText(EditAction aAction,
+       // its a lot cheaper to search the input string for only newlines than
+       // it is to search for both tabs and newlines.
+       if (isPRE || IsPlaintextEditor()) {
+-        while (unicodeBuf && pos != -1 &&
+-               pos < static_cast<int32_t>(inString->Length())) {
+-          int32_t oldPos = pos;
+-          int32_t subStrLen;
+-          pos = tString.FindChar(nsCRT::LF, oldPos);
+-
+-          if (pos != -1) {
+-            subStrLen = pos - oldPos;
+-            // if first char is newline, then use just it
+-            if (!subStrLen) {
+-              subStrLen = 1;
+-            }
+-          } else {
+-            subStrLen = tString.Length() - oldPos;
+-            pos = tString.Length();
+-          }
+-
+-          nsDependentSubstring subStr(tString, oldPos, subStrLen);
+-
+-          // is it a return?
+-          if (subStr.Equals(newlineStr)) {
+-            NS_ENSURE_STATE(mHTMLEditor);
+-            nsCOMPtr<Element> br =
+-              mHTMLEditor->CreateBRImpl(address_of(curNode), &curOffset,
+-                                        nsIEditor::eNone);
+-            NS_ENSURE_STATE(br);
+-            pos++;
+-          } else {
+-            NS_ENSURE_STATE(mHTMLEditor);
+-            rv = mHTMLEditor->InsertTextImpl(subStr, address_of(curNode),
+-                                             &curOffset, doc);
+-            NS_ENSURE_SUCCESS(rv, rv);
+-          }
+-        }
++        rv = mHTMLEditor->InsertTextImpl(tString, address_of(curNode), &curOffset, doc);
++        NS_ENSURE_SUCCESS(rv, rv);
+       } else {
+         NS_NAMED_LITERAL_STRING(tabStr, "\t");
+         NS_NAMED_LITERAL_STRING(spacesStr, "    ");
+@@ -4627,7 +4599,7 @@ HTMLEditRules::CreateStyleForInsertText(Selection& aSelection,
+       NS_ENSURE_STATE(mHTMLEditor);
+       rv = mHTMLEditor->SetInlinePropertyOnNode(*node->AsContent(),
+                                                 *item->tag, &item->attr,
+-                                                item->value);
++                                                item->value, false);
+       NS_ENSURE_SUCCESS(rv, rv);
+       item = mHTMLEditor->mTypeInState->TakeSetProperty();
+     }
+@@ -6608,6 +6580,7 @@ HTMLEditRules::SplitParagraph(nsIDOMNode *aPara,
+     nsCOMPtr<nsIDOMNode> parent = EditorBase::GetNodeLocation(child, &offset);
+     aSelection->Collapse(parent,offset);
+   }
++  ClearCachedStyles();
+   return NS_OK;
+ }
+ 
+@@ -6662,6 +6635,9 @@ HTMLEditRules::ReturnInListItem(Selection& aSelection,
+       rv = htmlEditor->DeleteNode(&aListItem);
+       NS_ENSURE_SUCCESS(rv, rv);
+ 
++      ClearCachedStyles();
++      htmlEditor->mTypeInState->ClearAllProps();
++
+       // Time to insert a paragraph
+       nsIAtom& paraAtom = DefaultParagraphSeparator();
+       // We want a wrapper even if we separate with <br>
+@@ -6714,6 +6690,8 @@ HTMLEditRules::ReturnInListItem(Selection& aSelection,
+ 
+           nsIAtom* listAtom = nodeAtom == nsGkAtoms::dt ? nsGkAtoms::dd
+                                                         : nsGkAtoms::dt;
++          ClearCachedStyles();
++          htmlEditor->mTypeInState->ClearAllProps();
+           nsCOMPtr<Element> newListItem =
+             htmlEditor->CreateNode(listAtom, list, itemOffset + 1);
+           NS_ENSURE_STATE(newListItem);
+diff --git a/editor/libeditor/HTMLEditUtils.cpp b/editor/libeditor/HTMLEditUtils.cpp
+index 4fb21d8258db..a0191cfe09ea 100644
+--- a/editor/libeditor/HTMLEditUtils.cpp
++++ b/editor/libeditor/HTMLEditUtils.cpp
+@@ -684,7 +684,7 @@ static const ElementInfo kElements[eHTMLTag_userdefined] = {
+   ELEM(meter, true, false, GROUP_SPECIAL, GROUP_FLOW_ELEMENT),
+   ELEM(multicol, false, false, GROUP_NONE, GROUP_NONE),
+   ELEM(nav, true, true, GROUP_BLOCK, GROUP_FLOW_ELEMENT),
+-  ELEM(nobr, false, false, GROUP_NONE, GROUP_NONE),
++  ELEM(nobr, false, false, GROUP_PHRASE, GROUP_INLINE_ELEMENT),
+   ELEM(noembed, false, false, GROUP_NONE, GROUP_NONE),
+   ELEM(noframes, true, true, GROUP_BLOCK, GROUP_FLOW_ELEMENT),
+   ELEM(noscript, true, true, GROUP_BLOCK, GROUP_FLOW_ELEMENT),
+diff --git a/editor/libeditor/HTMLEditor.cpp b/editor/libeditor/HTMLEditor.cpp
+index c20ca255e82a..58a6266c7f55 100644
+--- a/editor/libeditor/HTMLEditor.cpp
++++ b/editor/libeditor/HTMLEditor.cpp
+@@ -300,7 +300,8 @@ HTMLEditor::Init(nsIDOMDocument* aDoc,
+ 
+     if (!IsInteractionAllowed()) {
+       // ignore any errors from this in case the file is missing
+-      AddOverrideStyleSheet(NS_LITERAL_STRING("resource://gre/res/EditorOverride.css"));
++      // BlueGriffon uses its own EditorOverride.css
++      //AddOverrideStyleSheet(NS_LITERAL_STRING("resource://gre/res/EditorOverride.css"));
+     }
+ 
+     RefPtr<Selection> selection = GetSelection();
+@@ -2623,11 +2624,6 @@ HTMLEditor::CreateElementWithDefaults(const nsAString& aTagName)
+       rv.SuppressException();
+       return nullptr;
+     }
+-  } else if (tagName.EqualsLiteral("td")) {
+-    nsresult rv =
+-      SetAttributeOrEquivalent(
+-        newElement, nsGkAtoms::valign, NS_LITERAL_STRING("top"), true);
+-    NS_ENSURE_SUCCESS(rv, nullptr);
+   }
+   // ADD OTHER TAGS HERE
+ 
+@@ -3664,7 +3660,7 @@ HTMLEditor::IsTextPropertySetByContent(nsIDOMNode* aNode,
+     if (element) {
+       nsAutoString tag, value;
+       element->GetTagName(tag);
+-      if (propName.Equals(tag, nsCaseInsensitiveStringComparator())) {
++      if (propName.IsEmpty() || propName.Equals(tag, nsCaseInsensitiveStringComparator())) {
+         bool found = false;
+         if (aAttribute && !aAttribute->IsEmpty()) {
+           element->GetAttribute(*aAttribute, value);
+@@ -5280,4 +5276,35 @@ HTMLEditor::GetEditorRoot()
+   return GetActiveEditingHost();
+ }
+ 
++NS_IMETHODIMP
++HTMLEditor::GetMedium(nsAString & outValue)
++{
++  nsCOMPtr<nsIPresShell> ps = GetPresShell();
++
++  if (ps && ps->GetPresContext())
++  {
++    nsIAtom* medium = ps->GetPresContext()->Medium();
++    if (medium == nsGkAtoms::screen)
++      outValue.AssignLiteral("screen");
++    else
++      outValue.AssignLiteral("print");
++    return NS_OK;
++  }
++  return NS_ERROR_FAILURE;
++}
++
++NS_IMETHODIMP
++HTMLEditor::SetMedium(const nsAString& aMedium)
++{
++  nsCOMPtr<nsIPresShell> ps = GetPresShell();
++
++  if (ps && ps->GetPresContext())
++  {
++    ps->GetPresContext()->SetMedium(aMedium);
++    return NS_OK;
++  }
++  return NS_ERROR_FAILURE;
++}
++
+ } // namespace mozilla
++
+diff --git a/editor/libeditor/HTMLEditor.h b/editor/libeditor/HTMLEditor.h
+index a19d812206bf..e318fae75718 100644
+--- a/editor/libeditor/HTMLEditor.h
++++ b/editor/libeditor/HTMLEditor.h
+@@ -716,7 +716,8 @@ protected:
+   nsresult SetInlinePropertyOnNode(nsIContent& aNode,
+                                    nsIAtom& aProperty,
+                                    const nsAString* aAttribute,
+-                                   const nsAString& aValue);
++                                   const nsAString& aValue,
++                                   bool aAvoidNestingForCSS);
+ 
+   nsresult PromoteInlineRange(nsRange& aRange);
+   nsresult PromoteRangeIfStartsOrEndsInNamedAnchor(nsRange& aRange);
+@@ -1030,7 +1031,8 @@ private:
+   nsresult SetInlinePropertyOnNodeImpl(nsIContent& aNode,
+                                        nsIAtom& aProperty,
+                                        const nsAString* aAttribute,
+-                                       const nsAString& aValue);
++                                       const nsAString& aValue,
++                                       bool aAvoidNestingForCSS);
+   typedef enum { eInserted, eAppended } InsertedOrAppended;
+   void DoContentInserted(nsIDocument* aDocument, nsIContent* aContainer,
+                          nsIContent* aChild, int32_t aIndexInContainer,
+diff --git a/editor/libeditor/HTMLEditorDataTransfer.cpp b/editor/libeditor/HTMLEditorDataTransfer.cpp
+index 1664cde6ecdf..286d1a5764ff 100644
+--- a/editor/libeditor/HTMLEditorDataTransfer.cpp
++++ b/editor/libeditor/HTMLEditorDataTransfer.cpp
+@@ -800,6 +800,8 @@ HTMLEditor::PrepareHTMLTransferable(nsITransferable** aTransferable)
+       (*aTransferable)->AddDataFlavor(kNativeHTMLMime);
+       (*aTransferable)->AddDataFlavor(kHTMLMime);
+       (*aTransferable)->AddDataFlavor(kFileMime);
++      if (Preferences::GetBool("bluegriffon.osx.clipboard.rtf.enabled"))
++        (*aTransferable)->AddDataFlavor(kRTFMime);
+ 
+       switch (Preferences::GetInt("clipboard.paste_image_type", 1)) {
+         case 0:  // prefer JPEG over PNG over GIF encoding
+@@ -1209,6 +1211,11 @@ HTMLEditor::InsertFromTransferable(nsITransferable* transferable,
+         }
+       }
+     }
++    else if (Preferences::GetBool("bluegriffon.osx.clipboard.rtf.enabled") &&
++             bestFlavor.EqualsLiteral(kRTFMime)) {
++      bestFlavor.AssignLiteral(kHTMLMime);
++      // Fall through the next case
++    }
+     if (bestFlavor.EqualsLiteral(kHTMLMime) ||
+         bestFlavor.EqualsLiteral(kUnicodeMime) ||
+         bestFlavor.EqualsLiteral(kMozTextInternal)) {
+@@ -1229,14 +1236,40 @@ HTMLEditor::InsertFromTransferable(nsITransferable* transferable,
+       }
+ 
+       if (!stuffToPaste.IsEmpty()) {
++
++        // Find where the <body> tag starts.
++        nsAString::const_iterator beginbody, endbody;
++        stuffToPaste.BeginReading(beginbody);
++        stuffToPaste.EndReading(endbody);
++        bool foundbody = CaseInsensitiveFindInReadable(NS_LITERAL_STRING("<body"),
++                                                         beginbody, endbody);
++        nsAutoString realStuffToPaste;
++        if (foundbody) {
++          nsAString::const_iterator endstartbody;
++          stuffToPaste.EndReading(endstartbody);
++         bool foundstartbody = CaseInsensitiveFindInReadable(NS_LITERAL_STRING(">"),
++                                                              endbody, endstartbody);
++          if (!foundstartbody)
++            return NS_ERROR_FAILURE;
++
++          nsAString::const_iterator beginclosebody, endclosebody;
++          stuffToPaste.BeginReading(beginclosebody);
++          stuffToPaste.EndReading(endclosebody);
++
++          // Find the index before "</body>"
++          CaseInsensitiveFindInReadable(NS_LITERAL_STRING("</body>"), beginclosebody, endclosebody);
++          realStuffToPaste.Assign(Substring(endstartbody, beginclosebody));
++        }
++        else
++          realStuffToPaste.Assign(stuffToPaste);
+         AutoEditBatch beginBatching(this);
+         if (bestFlavor.EqualsLiteral(kHTMLMime)) {
+-          rv = DoInsertHTMLWithContext(stuffToPaste,
++          rv = DoInsertHTMLWithContext(realStuffToPaste,
+                                        aContextStr, aInfoStr, flavor,
+                                        aSourceDoc,
+                                        aDestinationNode, aDestOffset,
+                                        aDoDeleteSelection,
+-                                       isSafe);
++                                       true);
+         } else {
+           rv = InsertTextAt(stuffToPaste, aDestinationNode, aDestOffset, aDoDeleteSelection);
+         }
+diff --git a/editor/libeditor/HTMLEditorEventListener.cpp b/editor/libeditor/HTMLEditorEventListener.cpp
+index 091c0bd9c50f..f319f63d9519 100644
+--- a/editor/libeditor/HTMLEditorEventListener.cpp
++++ b/editor/libeditor/HTMLEditorEventListener.cpp
+@@ -67,9 +67,56 @@ HTMLEditorEventListener::MouseUp(nsIDOMMouseEvent* aMouseEvent)
+   aMouseEvent->GetClientY(&clientY);
+   htmlEditor->MouseUp(clientX, clientY, element);
+ 
++  bool isShiftKey;
++  rv = aMouseEvent->GetShiftKey(&isShiftKey);
++  NS_ENSURE_SUCCESS(rv, rv);
++  if (htmlEditor->NotifyEditorMouseObservers(EditorBase::kMouseUp,
++                                             clientX, clientY,
++                                             element, isShiftKey)) {
++    nsCOMPtr<nsIDOMEvent> event = do_QueryInterface(aMouseEvent);
++    event->PreventDefault();
++    return NS_OK;
++  }
++
+   return EditorEventListener::MouseUp(aMouseEvent);
+ }
+ 
++nsresult
++HTMLEditorEventListener::MouseMove(nsIDOMMouseEvent* aMouseEvent)
++{
++  NS_ENSURE_TRUE(mEditorBase, NS_ERROR_NOT_AVAILABLE);
++
++  if (!aMouseEvent) {
++    //non-ui event passed in.  bad things.
++    return NS_OK;
++  }
++
++  HTMLEditor* htmlEditor = mEditorBase->AsHTMLEditor();
++
++  nsCOMPtr<nsIDOMEventTarget> target;
++  nsCOMPtr<nsIDOMEvent> event = do_QueryInterface(aMouseEvent);
++  nsresult res = event->GetExplicitOriginalTarget(getter_AddRefs(target));
++  NS_ENSURE_SUCCESS(res, res);
++  NS_ENSURE_TRUE(target, NS_ERROR_NULL_POINTER);
++  nsCOMPtr<nsIDOMElement> element = do_QueryInterface(target);
++
++  int32_t clientX, clientY;
++  aMouseEvent->GetClientX(&clientX);
++  aMouseEvent->GetClientY(&clientY);
++
++  bool isShiftKey;
++  res = aMouseEvent->GetShiftKey(&isShiftKey);
++  NS_ENSURE_SUCCESS(res, res);
++  if (htmlEditor->NotifyEditorMouseObservers(EditorBase::kMouseMove,
++                                             clientX, clientY,
++                                             element, isShiftKey)) {
++    event->PreventDefault();
++    return NS_OK;
++  }
++
++  return EditorEventListener::MouseMove(aMouseEvent);
++}
++
+ nsresult
+ HTMLEditorEventListener::MouseDown(nsIDOMMouseEvent* aMouseEvent)
+ {
+@@ -97,6 +144,10 @@ HTMLEditorEventListener::MouseDown(nsIDOMMouseEvent* aMouseEvent)
+     return EditorEventListener::MouseDown(aMouseEvent);
+   }
+ 
++  int32_t clientX, clientY;
++  aMouseEvent->GetClientX(&clientX);
++  aMouseEvent->GetClientY(&clientY);
++
+   // Detect only "context menu" click
+   // XXX This should be easier to do!
+   // But eDOMEvents_contextmenu and eContextMenu is not exposed in any event
+@@ -196,12 +247,21 @@ HTMLEditorEventListener::MouseDown(nsIDOMMouseEvent* aMouseEvent)
+     }
+   } else if (!isContextClick && buttonNumber == 0 && clickCount == 1) {
+     // if the target element is an image, we have to display resizers
+-    int32_t clientX, clientY;
+-    aMouseEvent->GetClientX(&clientX);
+-    aMouseEvent->GetClientY(&clientY);
+     htmlEditor->MouseDown(clientX, clientY, element, aMouseEvent->AsEvent());
+   }
+ 
++  nsCOMPtr<nsIDOMNode> targetNode = do_QueryInterface(target);
++  bool isShiftKey;
++  rv = aMouseEvent->GetShiftKey(&isShiftKey);
++  NS_ENSURE_SUCCESS(rv, rv);
++  if (htmlEditor->NotifyEditorMouseObservers(EditorBase::kMouseDown,
++                                             clientX, clientY,
++                                             element, isShiftKey)) {
++    nsCOMPtr<nsIDOMEvent> event = do_QueryInterface(aMouseEvent);
++    event->PreventDefault();
++    return NS_OK;
++  }
++
+   return EditorEventListener::MouseDown(aMouseEvent);
+ }
+ 
+diff --git a/editor/libeditor/HTMLEditorEventListener.h b/editor/libeditor/HTMLEditorEventListener.h
+index b5083aa45b0a..11916756ff61 100644
+--- a/editor/libeditor/HTMLEditorEventListener.h
++++ b/editor/libeditor/HTMLEditorEventListener.h
+@@ -34,6 +34,7 @@ protected:
+   virtual nsresult MouseDown(nsIDOMMouseEvent* aMouseEvent) override;
+   virtual nsresult MouseUp(nsIDOMMouseEvent* aMouseEvent) override;
+   virtual nsresult MouseClick(nsIDOMMouseEvent* aMouseEvent) override;
++  virtual nsresult MouseMove(nsIDOMMouseEvent* aMouseEvent) override;
+ };
+ 
+ } // namespace mozilla
+diff --git a/editor/libeditor/HTMLStyleEditor.cpp b/editor/libeditor/HTMLStyleEditor.cpp
+index 6d0e957cdcfd..605a122d6f07 100644
+--- a/editor/libeditor/HTMLStyleEditor.cpp
++++ b/editor/libeditor/HTMLStyleEditor.cpp
+@@ -198,8 +198,10 @@ HTMLEditor::SetInlineProperty(nsIAtom* aProperty,
+       }
+ 
+       // Then loop through the list, set the property on each node
++      int32_t listCount = arrayOfNodes.Length();
+       for (auto& node : arrayOfNodes) {
+-        rv = SetInlinePropertyOnNode(*node, *aProperty, &aAttribute, aValue);
++        rv = SetInlinePropertyOnNode(*node, *aProperty, &aAttribute, aValue,
++                                     (1 == listCount));
+         NS_ENSURE_SUCCESS(rv, rv);
+       }
+ 
+@@ -238,14 +240,17 @@ HTMLEditor::IsSimpleModifiableNode(nsIContent* aContent,
+     return false;
+   }
+ 
++  uint32_t attrCount = aContent->GetAttrCount();
++  bool noAttr = !attrCount
++                || (attrCount == 1 && aContent->GetAttrNameAt(0)->Equals(nsGkAtoms::mozdirty));
+   // First check for <b>, <i>, etc.
+-  if (element->IsHTMLElement(aProperty) && !element->GetAttrCount() &&
++  if (element->IsHTMLElement(aProperty) && noAttr &&
+       (!aAttribute || aAttribute->IsEmpty())) {
+     return true;
+   }
+ 
+   // Special cases for various equivalencies: <strong>, <em>, <s>
+-  if (!element->GetAttrCount() &&
++  if (noAttr &&
+       ((aProperty == nsGkAtoms::b &&
+         element->IsHTMLElement(nsGkAtoms::strong)) ||
+        (aProperty == nsGkAtoms::i &&
+@@ -277,7 +282,8 @@ HTMLEditor::IsSimpleModifiableNode(nsIContent* aContent,
+   // style supports it
+   if (!mCSSEditUtils->IsCSSEditableProperty(element, aProperty, aAttribute) ||
+       !element->IsHTMLElement(nsGkAtoms::span) ||
+-      element->GetAttrCount() != 1 ||
++      !(attrCount == 1 || (attrCount == 2 && (element->GetAttrNameAt(0)->Equals(nsGkAtoms::mozdirty) ||
++                                              element->GetAttrNameAt(1)->Equals(nsGkAtoms::mozdirty)))) ||
+       !element->HasAttr(kNameSpaceID_None, nsGkAtoms::style)) {
+     return false;
+   }
+@@ -357,14 +363,15 @@ HTMLEditor::SetInlinePropertyOnTextNode(Text& aText,
+   }
+ 
+   // Reparent the node inside inline node with appropriate {attribute,value}
+-  return SetInlinePropertyOnNode(*text, aProperty, aAttribute, aValue);
++  return SetInlinePropertyOnNode(*text, aProperty, aAttribute, aValue, false);
+ }
+ 
+ nsresult
+ HTMLEditor::SetInlinePropertyOnNodeImpl(nsIContent& aNode,
+                                         nsIAtom& aProperty,
+                                         const nsAString* aAttribute,
+-                                        const nsAString& aValue)
++                                          const nsAString& aValue,
++                                          bool aAvoidNestingForCSS)
+ {
+   nsCOMPtr<nsIAtom> attrAtom = aAttribute ? NS_Atomize(*aAttribute) : nullptr;
+ 
+@@ -386,7 +393,7 @@ HTMLEditor::SetInlinePropertyOnNodeImpl(nsIContent& aNode,
+       // Then loop through the list, set the property on each node.
+       for (auto& node : arrayOfNodes) {
+         nsresult rv = SetInlinePropertyOnNode(node, aProperty, aAttribute,
+-                                              aValue);
++                                              aValue, false);
+         NS_ENSURE_SUCCESS(rv, rv);
+       }
+     }
+@@ -432,8 +439,9 @@ HTMLEditor::SetInlinePropertyOnNodeImpl(nsIContent& aNode,
+     nsCOMPtr<dom::Element> tmp;
+     // We only add style="" to <span>s with no attributes (bug 746515).  If we
+     // don't have one, we need to make one.
+-    if (aNode.IsHTMLElement(nsGkAtoms::span) &&
+-        !aNode.AsElement()->GetAttrCount()) {
++    if (aNode.IsElement() &&
++        (aAvoidNestingForCSS ||
++         (aNode.AsElement()->IsHTMLElement(nsGkAtoms::span) && !aNode.AsElement()->GetAttrCount()))) {
+       tmp = aNode.AsElement();
+     } else {
+       tmp = InsertContainerAbove(&aNode, nsGkAtoms::span);
+@@ -466,7 +474,8 @@ nsresult
+ HTMLEditor::SetInlinePropertyOnNode(nsIContent& aNode,
+                                     nsIAtom& aProperty,
+                                     const nsAString* aAttribute,
+-                                    const nsAString& aValue)
++                                      const nsAString& aValue,
++                                      bool aAvoidNestingForCSS)
+ {
+   nsCOMPtr<nsIContent> previousSibling = aNode.GetPreviousSibling(),
+                        nextSibling = aNode.GetNextSibling();
+@@ -479,7 +488,7 @@ HTMLEditor::SetInlinePropertyOnNode(nsIContent& aNode,
+   if (aNode.GetParentNode()) {
+     // The node is still where it was
+     return SetInlinePropertyOnNodeImpl(aNode, aProperty,
+-                                       aAttribute, aValue);
++                                       aAttribute, aValue, aAvoidNestingForCSS);
+   }
+ 
+   // It's vanished.  Use the old siblings for reference to construct a
+@@ -499,7 +508,7 @@ HTMLEditor::SetInlinePropertyOnNode(nsIContent& aNode,
+   }
+ 
+   for (auto& node : nodesToSet) {
+-    rv = SetInlinePropertyOnNodeImpl(node, aProperty, aAttribute, aValue);
++    rv = SetInlinePropertyOnNodeImpl(node, aProperty, aAttribute, aValue, false);
+     NS_ENSURE_SUCCESS(rv, rv);
+   }
+ 
+@@ -1317,7 +1326,7 @@ HTMLEditor::RemoveInlinePropertyImpl(nsIAtom* aProperty,
+               // "inverting" the style
+               mCSSEditUtils->IsCSSInvertible(*aProperty, aAttribute)) {
+             NS_NAMED_LITERAL_STRING(value, "-moz-editor-invert-value");
+-            SetInlinePropertyOnNode(node, *aProperty, aAttribute, value);
++            SetInlinePropertyOnNode(node, *aProperty, aAttribute, value, false);
+           }
+         }
+       }
+diff --git a/editor/libeditor/HTMLTableEditor.cpp b/editor/libeditor/HTMLTableEditor.cpp
+index d0863ffde028..b037dc04e947 100644
+--- a/editor/libeditor/HTMLTableEditor.cpp
++++ b/editor/libeditor/HTMLTableEditor.cpp
+@@ -2316,6 +2316,7 @@ HTMLEditor::MergeCells(nsCOMPtr<nsIDOMElement> aTargetCell,
+   AutoRules beginRulesSniffing(this, EditAction::deleteNode, nsIEditor::eNext);
+ 
+   // Don't need to merge if cell is empty
++  nsresult res;
+   if (!IsEmptyCell(cellToMerge)) {
+     // Get index of last child in target cell
+     // If we fail or don't have children,
+@@ -2324,7 +2325,8 @@ HTMLEditor::MergeCells(nsCOMPtr<nsIDOMElement> aTargetCell,
+ 
+     // Start inserting just after last child
+     uint32_t len = targetCell->GetChildCount();
+-    if (len == 1 && IsEmptyCell(targetCell)) {
++    bool isTargetCellEmpty = IsEmptyCell(targetCell);
++    if (len == 1 && isTargetCellEmpty) {
+       // Delete the empty node
+       nsIContent* cellChild = targetCell->GetFirstChild();
+       nsresult rv = DeleteNode(cellChild->AsDOMNode());
+@@ -2332,16 +2334,62 @@ HTMLEditor::MergeCells(nsCOMPtr<nsIDOMElement> aTargetCell,
+       insertIndex = 0;
+     } else {
+       insertIndex = (int32_t)len;
++      // Insert a break at the beginning of source cell if we need it.
++      // We need it if both cells are non-empty from a content point of view.
++      if (!isTargetCellEmpty) {
++        // Let's look for the last child of the target cell that is not
++        // an empty text node
++        nsIContent* targetCellChild = targetCell->GetLastChild();
++        nsCOMPtr<nsIDOMNode> targetCellChildNode = targetCellChild->AsDOMNode();
++        bool isEmptyTextNode = false;
++        while (targetCellChildNode
++               && EditorBase::IsTextNode(targetCellChildNode)
++               && (NS_SUCCEEDED(IsEmptyNode(targetCellChildNode, &isEmptyTextNode)) && isEmptyTextNode)) {
++          res = targetCellChildNode->GetPreviousSibling(getter_AddRefs(targetCellChildNode));
++          NS_ENSURE_SUCCESS(res, res);
++        }
++        // we know targetCellChildNode cannot be null at this point because
++        // we tested isTargetCellEmpty above...
++        bool isBlock = false;
++        NodeIsBlock(targetCellChildNode, &isBlock);
++        // Lets check if targetCellChildNode is a block or a break
++        if (!isBlock && !TextEditUtils::IsBreak(targetCellChildNode)) {
++          // It's not, we may have to insert a break...
++          // Let's look for the first child of the source cell that is not
++          // an empty text node
++          nsCOMPtr<nsIDOMNode> cellChildNode = cellToMerge->GetFirstChild()->AsDOMNode();
++          while (cellChildNode
++                 && EditorBase::IsTextNode(cellChildNode)
++                 && (NS_SUCCEEDED(IsEmptyNode(cellChildNode, &isEmptyTextNode)) && isEmptyTextNode)) {
++            res = cellChildNode->GetPreviousSibling(getter_AddRefs(cellChildNode));
++            NS_ENSURE_SUCCESS(res, res);
++          }
++          // we also know cellChildNode cannot be null at this point because
++          // we tested IsEmptyCell(cellToMerge) above...
++          isBlock = false;
++          NodeIsBlock(cellChildNode, &isBlock);
++          // Lets check if targetCellChildNode is a block or a break
++          if (!isBlock && !TextEditUtils::IsBreak(cellChildNode)) {
++            // so both last visible node of target cell and first visible node of
++            // source cell are not blocks or breaks. We need to insert
++            // a break as first child of source cell so the merged contents
++            // are separated by that break.
++            nsCOMPtr<nsIDOMNode> brNode;
++            res = CreateBR(aCellToMerge, 0, address_of(brNode));
++            NS_ENSURE_SUCCESS(res, res);
++          }
++        }
++      }
+     }
+ 
+     // Move the contents
+     while (cellToMerge->HasChildren()) {
+       nsCOMPtr<nsIDOMNode> cellChild = cellToMerge->GetLastChild()->AsDOMNode();
+-      nsresult rv = DeleteNode(cellChild);
+-      NS_ENSURE_SUCCESS(rv, rv);
++      res = DeleteNode(cellChild);
++      NS_ENSURE_SUCCESS(res, res);
+ 
+-      rv = InsertNode(cellChild, aTargetCell, insertIndex);
+-      NS_ENSURE_SUCCESS(rv, rv);
++      res = InsertNode(cellChild, aTargetCell, insertIndex);
++      NS_ENSURE_SUCCESS(res, res);
+     }
+   }
+ 
+@@ -2722,7 +2770,7 @@ HTMLEditor::GetCellDataAt(nsIDOMElement* aTable,
+   nsTableCellFrame* cellFrame =
+     tableFrame->GetCellFrameAt(aRowIndex, aColIndex);
+   if (!cellFrame) {
+-    return NS_ERROR_FAILURE;
++    return NS_SUCCESS_EDITOR_ELEMENT_NOT_FOUND;
+   }
+ 
+   *aIsSelected = cellFrame->IsSelected();
+diff --git a/editor/libeditor/TextEditorDataTransfer.cpp b/editor/libeditor/TextEditorDataTransfer.cpp
+index e6ea71c8a960..6c214f29c2de 100644
+--- a/editor/libeditor/TextEditorDataTransfer.cpp
++++ b/editor/libeditor/TextEditorDataTransfer.cpp
+@@ -441,10 +441,7 @@ TextEditor::IsSafeToInsertData(nsIDOMDocument* aSourceDoc)
+     dsti->GetRootTreeItem(getter_AddRefs(root));
+   }
+   nsCOMPtr<nsIDocShell> docShell = do_QueryInterface(root);
+-  uint32_t appType;
+-  if (docShell && NS_SUCCEEDED(docShell->GetAppType(&appType))) {
+-    isSafe = appType == nsIDocShell::APP_TYPE_EDITOR;
+-  }
++
+   if (!isSafe && aSourceDoc) {
+     nsCOMPtr<nsIDocument> srcdoc = do_QueryInterface(aSourceDoc);
+     NS_ASSERTION(srcdoc, "Where is our source doc?");
+diff --git a/editor/libeditor/WSRunObject.cpp b/editor/libeditor/WSRunObject.cpp
+index 6299b56ce567..e246216c2aa0 100644
+--- a/editor/libeditor/WSRunObject.cpp
++++ b/editor/libeditor/WSRunObject.cpp
+@@ -479,7 +479,7 @@ WSRunObject::PriorVisibleNode(nsINode* aNode,
+ 
+   // Is there a visible run there or earlier?
+   for (; run; run = run->mLeft) {
+-    if (run->mType == WSType::normalWS) {
++    if (run->mType == WSType::normalWS || run->mType == WSType::trailingWS) {
+       WSPoint point = GetCharBefore(aNode, aOffset);
+       // When it's a non-empty text node, return it.
+       if (point.mTextNode && point.mTextNode->Length()) {
+diff --git a/editor/moz.build b/editor/moz.build
+index 35185341b907..da96f7510d15 100644
+--- a/editor/moz.build
++++ b/editor/moz.build
+@@ -18,6 +18,7 @@ XPIDL_SOURCES += [
+     'nsIEditor.idl',
+     'nsIEditorIMESupport.idl',
+     'nsIEditorMailSupport.idl',
++    'nsIEditorMouseObserver.idl',
+     'nsIEditorObserver.idl',
+     'nsIEditorSpellCheck.idl',
+     'nsIEditorStyleSheets.idl',
+@@ -42,5 +43,5 @@ TESTING_JS_MODULES += [
+     'AsyncSpellCheckTestHelper.jsm',
+ ]
+ 
+-with Files('**'):
+-    BUG_COMPONENT = ('Core', 'Editor')
++with Files('**'):
++    BUG_COMPONENT = ('Core', 'Editor')
+diff --git a/editor/nsIEditor.idl b/editor/nsIEditor.idl
+index d05f4a1decf1..c821ba4c5cdd 100644
+--- a/editor/nsIEditor.idl
++++ b/editor/nsIEditor.idl
+@@ -20,6 +20,7 @@ interface nsIEditorObserver;
+ interface nsIEditActionListener;
+ interface nsIInlineSpellChecker;
+ interface nsITransferable;
++interface nsIEditorMouseObserver;
+ 
+ %{C++
+ namespace mozilla {
+@@ -31,7 +32,7 @@ struct IMEState;
+ 
+ native IMEState(mozilla::widget::IMEState);
+ 
+-[scriptable, uuid(094be624-f0bf-400f-89e2-6a84baab9474)]
++[scriptable, uuid(EE1D66E6-1F4E-4A70-AEA9-23E1EFC17E92)]
+ interface nsIEditor  : nsISupports
+ {
+ %{C++
+@@ -536,6 +537,9 @@ interface nsIEditor  : nsISupports
+   /** Remove an EditorObserver from the editor's list of observers. */
+   void removeEditorObserver(in nsIEditorObserver observer);
+ 
++  void addEditorMouseObserver(in nsIEditorMouseObserver observer);
++  void removeEditorMouseObserver(in nsIEditorMouseObserver observer);
++
+   /** add an EditActionListener to the editors list of listeners. */
+   void addEditActionListener(in nsIEditActionListener listener);
+ 
+diff --git a/editor/nsIHTMLEditor.idl b/editor/nsIHTMLEditor.idl
+index 3d2af68c82cb..b9d96232d751 100644
+--- a/editor/nsIHTMLEditor.idl
++++ b/editor/nsIHTMLEditor.idl
+@@ -22,7 +22,7 @@ class Element;
+ 
+ [ptr] native Element (mozilla::dom::Element);
+ 
+-[scriptable, uuid(87ee993e-985f-4a43-a974-0d9512da2fb0)]
++[scriptable, uuid(BFA533D9-358C-47CC-92FF-E89D5263D264)]
+ interface nsIHTMLEditor : nsISupports
+ {
+ %{C++
+@@ -492,6 +492,9 @@ interface nsIHTMLEditor : nsISupports
+    */
+   attribute boolean isCSSEnabled;
+ 
++  AString getMedium();
++  void setMedium(in AString aMedium);
++
+   /**
+    * Add listener for insertion override
+    * @param inFilter  function which callers want called during insertion
+diff --git a/extensions/moz.build b/extensions/moz.build
+index 2d002650fe58..43d1c00c2ffe 100644
+--- a/extensions/moz.build
++++ b/extensions/moz.build
+@@ -4,7 +4,13 @@
+ # License, v. 2.0. If a copy of the MPL was not distributed with this
+ # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ 
+-DIRS += CONFIG['MOZ_EXTENSIONS']
+++DIRS += [
+++    'svg-edit',
+++    'gfd',
+++    'fs',
+++    'markdown',
+++    'op1'
+++]
+ 
+ with Files('**'):
+     BUG_COMPONENT = ('Core', 'General')
+diff --git a/gfx/src/nsColor.cpp b/gfx/src/nsColor.cpp
+index 359f9fde47dd..a7cef29d4069 100644
+--- a/gfx/src/nsColor.cpp
++++ b/gfx/src/nsColor.cpp
+@@ -215,6 +215,27 @@ bool NS_ColorNameToRGB(const nsAString& aColorName, nscolor* aResult)
+   return false;
+ }
+ 
++bool NS_RGBToColorName(nscolor aColor, nsAString& aResult)
++{
++  uint8_t a = NS_GET_A(aColor);
++  if (a < 255)
++    return false;
++  uint8_t r = NS_GET_R(aColor);
++  uint8_t g = NS_GET_G(aColor);
++  uint8_t b = NS_GET_B(aColor);
++  uint32_t colorIndex;
++  for (colorIndex = 0; colorIndex < eColorName_COUNT; colorIndex++) {
++    nscolor matchingColor = kColors[colorIndex];
++    if (NS_GET_R(matchingColor) == r
++        && NS_GET_G(matchingColor) == g
++        && NS_GET_B(matchingColor) == b) {
++      aResult.AppendASCII(kColorNames[colorIndex]);
++      return true;
++    }
++  }
++  return false;
++}
++
+ // Returns kColorNames, an array of all possible color names, and sets
+ // *aSizeArray to the size of that array. Do NOT call free() on this array.
+ const char * const * NS_AllColorNames(size_t *aSizeArray)
+diff --git a/gfx/src/nsColor.h b/gfx/src/nsColor.h
+index 2f21c91bf2a8..977498646879 100644
+--- a/gfx/src/nsColor.h
++++ b/gfx/src/nsColor.h
+@@ -105,6 +105,10 @@ bool NS_LooseHexToRGB(const nsString& aBuf, nscolor* aResult);
+ // otherwise return false.
+ bool NS_ColorNameToRGB(const nsAString& aBuf, nscolor* aResult);
+ 
++// Translate a color to a color name. Return true if it parses ok,
++// otherwise return false.
++bool NS_RGBToColorName(nscolor aColor, nsAString& aResult);
++
+ // Returns an array of all possible color names, and sets
+ // *aSizeArray to the size of that array. Do NOT call |free()| on this array.
+ const char * const * NS_AllColorNames(size_t *aSizeArray);
+diff --git a/gfx/webrender_bindings/src/bindings.rs b/gfx/webrender_bindings/src/bindings.rs
+index d3c44d69a150..b0b178fbb5bf 100644
+--- a/gfx/webrender_bindings/src/bindings.rs
++++ b/gfx/webrender_bindings/src/bindings.rs
+@@ -709,7 +709,7 @@ pub unsafe extern "C" fn wr_renderer_readback(renderer: &mut WrRenderer,
+ 
+     renderer.gl().flush();
+ 
+-    let mut slice = slice::from_raw_parts_mut(dst_buffer, buffer_size);
++    let slice = slice::from_raw_parts_mut(dst_buffer, buffer_size);
+     renderer.gl().read_pixels_into_buffer(0,
+                                           0,
+                                           width as gl::GLsizei,
+diff --git a/image/imgICache.idl b/image/imgICache.idl
+index e67691399065..7ab4a458c422 100644
+--- a/image/imgICache.idl
++++ b/image/imgICache.idl
+@@ -19,7 +19,7 @@ interface nsIURI;
+  * @version 0.1
+  * @see imagelib2
+  */
+-[scriptable, builtinclass, uuid(bfdf23ff-378e-402e-8a6c-840f0c82b6c3)]
++[scriptable, builtinclass, uuid(862388D5-EB14-4E0D-931C-F4FAD05FB5F2)]
+ interface imgICache : nsISupports
+ {
+   /**
+@@ -38,7 +38,7 @@ interface imgICache : nsISupports
+    * @throws NS_ERROR_NOT_AVAILABLE if \a uri was unable to be removed from
+    * the cache.
+    */
+-  [noscript] void removeEntry(in nsIURI uri, [optional] in nsIDOMDocument doc);
++  void removeEntry(in nsIURI uri, [optional] in nsIDOMDocument doc);
+ 
+   /**
+    * Find Properties
+diff --git a/layout/base/nsPresContext.cpp b/layout/base/nsPresContext.cpp
+index 74a2934431a0..53bfe8d35816 100644
+--- a/layout/base/nsPresContext.cpp
++++ b/layout/base/nsPresContext.cpp
+@@ -2168,6 +2168,20 @@ nsPresContext::SetPrintSettings(nsIPrintSettings *aPrintSettings)
+     mPrintSettings = aPrintSettings;
+ }
+ 
++void
++nsPresContext::SetMedium(const nsAString& aMedium)
++{
++  if (aMedium.EqualsLiteral("screen")) {
++    mMedium = nsGkAtoms::screen;
++    mType =  eContext_Galley;
++  } else {
++    mMedium = nsGkAtoms::print;
++    mType =  eContext_PageLayout;
++    mPaginated = true;
++  }
++  MediaFeatureValuesChanged(eRestyle_ForceDescendants, NS_STYLE_HINT_REFLOW);
++}
++
+ bool
+ nsPresContext::EnsureVisible()
+ {
+diff --git a/layout/base/nsPresContext.h b/layout/base/nsPresContext.h
+index 90005bf9e3f4..9537a3276b75 100644
+--- a/layout/base/nsPresContext.h
++++ b/layout/base/nsPresContext.h
+@@ -333,6 +333,7 @@ public:
+       return mMedium;
+     return mMediaEmulated;
+   }
++  void SetMedium(const nsAString& aMedium);
+ 
+   /*
+    * Render the document as if being viewed on a device with the specified
+diff --git a/layout/forms/nsColorControlFrame.cpp b/layout/forms/nsColorControlFrame.cpp
+index d29ae9fe2b78..288489f51f94 100644
+--- a/layout/forms/nsColorControlFrame.cpp
++++ b/layout/forms/nsColorControlFrame.cpp
+@@ -101,6 +101,8 @@ nsColorControlFrame::UpdateColor()
+   nsAutoString color;
+   HTMLInputElement* elt = HTMLInputElement::FromContent(mContent);
+   elt->GetValue(color, CallerType::System);
++  if (color.IsEmpty())
++    return NS_OK;
+   MOZ_ASSERT(!color.IsEmpty(),
+              "Content node's GetValue() should return a valid color string "
+              "(the default color, in case no valid color is set)");
+diff --git a/layout/style/Loader.cpp b/layout/style/Loader.cpp
+index 16ab5429facb..4f29dc1537dc 100644
+--- a/layout/style/Loader.cpp
++++ b/layout/style/Loader.cpp
+@@ -1129,7 +1129,8 @@ Loader::CreateSheet(nsIURI* aURI,
+ #endif
+ 
+     bool fromCompleteSheets = false;
+-    if (!sheet) {
++    //XXX BlueGriffon forces reload of stylesheets each time we need them
++    if (false /*!sheet*/) {
+       // Then our per-document complete sheets.
+       URIPrincipalReferrerPolicyAndCORSModeHashKey key(aURI, aLoaderPrincipal, aCORSMode, aReferrerPolicy);
+ 
+diff --git a/layout/style/nsCSSParser.cpp b/layout/style/nsCSSParser.cpp
+index 73b94dff9ce2..48eb879ac7fd 100644
+--- a/layout/style/nsCSSParser.cpp
++++ b/layout/style/nsCSSParser.cpp
+@@ -63,6 +63,8 @@
+ #include "mozilla/dom/URL.h"
+ #include "gfxFontFamilyList.h"
+ 
++#define BG_CONSOLE_SHOW_INVALID_VARIABLES "bluegriffon.console.showInvalidVariables"
++
+ using namespace mozilla;
+ using namespace mozilla::css;
+ 
+@@ -2983,7 +2985,7 @@ CSSParserImpl::ParsePropertyWithVariableReferences(
+     nsCSSTokenSerializationType firstToken, lastToken;
+     valid = ResolveValueWithVariableReferences(aVariables, expandedValue,
+                                                firstToken, lastToken);
+-    if (!valid) {
++    if (!valid && Preferences::GetBool(BG_CONSOLE_SHOW_INVALID_VARIABLES)) {
+       NS_ConvertASCIItoUTF16 propName(nsCSSProps::GetStringValue(aPropertyID));
+       REPORT_UNEXPECTED(PEInvalidVariableReference);
+       REPORT_UNEXPECTED_P(PEValueParsingError, propName);
+diff --git a/layout/style/nsCSSValue.cpp b/layout/style/nsCSSValue.cpp
+index 01988185438c..4e86eec920f9 100644
+--- a/layout/style/nsCSSValue.cpp
++++ b/layout/style/nsCSSValue.cpp
+@@ -1668,6 +1668,17 @@ nsCSSValue::AppendToString(nsCSSPropertyID aProperty, nsAString& aResult,
+     }
+   }
+   else if (IsNumericColorUnit(unit)) {
++    bool outputCssNames = false;
++    nsXPIDLCString colorOutputType;
++    nsresult rv;
++    nsCOMPtr<nsIPrefBranch> prefBranch = do_GetService(NS_PREFSERVICE_CONTRACTID, &rv);
++    if (NS_SUCCEEDED(rv) && prefBranch) {
++      prefBranch->GetBoolPref("bluegriffon.css.colors.names.enabled", &outputCssNames);
++      prefBranch->GetCharPref("bluegriffon.css.colors.type", getter_Copies(colorOutputType));
++    }
++    bool serializeName = false;
++    bool forceHexSerialization = false;
++
+     if (aSerialization == eNormalized ||
+         unit == eCSSUnit_RGBColor ||
+         unit == eCSSUnit_RGBAColor) {
+@@ -1686,21 +1697,52 @@ nsCSSValue::AppendToString(nsCSSPropertyID aProperty, nsAString& aResult,
+       if (showAlpha) {
+         aResult.AppendLiteral("rgba(");
+       } else {
+-        aResult.AppendLiteral("rgb(");
++        if (outputCssNames) {
++          nsAutoString nameToSerialize;
++          serializeName = NS_RGBToColorName(color, nameToSerialize);
++          if (serializeName) {
++            aResult.Append(nameToSerialize);
++          }
++          else {
++            if (!PL_strcmp(colorOutputType, "hex")) {
++              forceHexSerialization = true;
++            }
++            else
++              aResult.AppendLiteral("rgb(");
++          }
++        }
++        else {
++          if (!PL_strcmp(colorOutputType, "hex")) {
++            forceHexSerialization = true;
++          }
++          else
++            aResult.AppendLiteral("rgb(");
++        }
+       }
+ 
+-      NS_NAMED_LITERAL_STRING(comma, ", ");
+-
+-      aResult.AppendInt(NS_GET_R(color), 10);
+-      aResult.Append(comma);
+-      aResult.AppendInt(NS_GET_G(color), 10);
+-      aResult.Append(comma);
+-      aResult.AppendInt(NS_GET_B(color), 10);
+-      if (showAlpha) {
+-        aResult.Append(comma);
+-        aResult.AppendFloat(nsStyleUtil::ColorComponentToFloat(a));
++      if (!serializeName) {
++        if (forceHexSerialization) {
++          nscolor color = GetColorValue();
++          aResult.Append('#');
++          aResult.AppendPrintf("%02x", NS_GET_R(color));
++          aResult.AppendPrintf("%02x", NS_GET_G(color));
++          aResult.AppendPrintf("%02x", NS_GET_B(color));
++        }
++        else {
++          NS_NAMED_LITERAL_STRING(comma, ", ");
++
++          aResult.AppendInt(NS_GET_R(color), 10);
++          aResult.Append(comma);
++          aResult.AppendInt(NS_GET_G(color), 10);
++          aResult.Append(comma);
++          aResult.AppendInt(NS_GET_B(color), 10);
++          if (showAlpha) {
++            aResult.Append(comma);
++            aResult.AppendFloat(nsStyleUtil::ColorComponentToFloat(a));
++          }
++          aResult.Append(char16_t(')'));
++        }
+       }
+-      aResult.Append(char16_t(')'));
+     } else if (eCSSUnit_HexColor == unit ||
+                eCSSUnit_HexColorAlpha == unit) {
+       nscolor color = GetColorValue();
+diff --git a/netwerk/protocol/res/nsResProtocolHandler.cpp b/netwerk/protocol/res/nsResProtocolHandler.cpp
+index 265bab9ec9dc..af16e6194d18 100644
+--- a/netwerk/protocol/res/nsResProtocolHandler.cpp
++++ b/netwerk/protocol/res/nsResProtocolHandler.cpp
+@@ -93,8 +93,8 @@ nsResProtocolHandler::ResolveSpecialCases(const nsACString& aHost,
+ nsresult
+ nsResProtocolHandler::SetSubstitution(const nsACString& aRoot, nsIURI* aBaseURI)
+ {
+-    MOZ_ASSERT(!aRoot.Equals(""));
++    /*MOZ_ASSERT(!aRoot.Equals(""));
+     MOZ_ASSERT(!aRoot.Equals(kAPP));
+-    MOZ_ASSERT(!aRoot.Equals(kGRE));
++    MOZ_ASSERT(!aRoot.Equals(kGRE));*/
+     return SubstitutingProtocolHandler::SetSubstitution(aRoot, aBaseURI);
+ }
+diff --git a/parser/htmlparser/nsExpatDriver.cpp b/parser/htmlparser/nsExpatDriver.cpp
+index eb3e16ce83ec..766aefd32b36 100644
+--- a/parser/htmlparser/nsExpatDriver.cpp
++++ b/parser/htmlparser/nsExpatDriver.cpp
+@@ -962,7 +962,9 @@ nsExpatDriver::HandleError()
+   if (mSink && shouldReportError) {
+     rv = mSink->ReportError(errorText.get(), 
+                             sourceText.get(), 
+-                            serr, 
++                            serr,
++                            lineNumber,
++                            colNumber,
+                             &shouldReportError);
+     if (NS_FAILED(rv)) {
+       shouldReportError = true;
+@@ -980,7 +982,7 @@ nsExpatDriver::HandleError()
+     nsCOMPtr<nsIConsoleService> cs
+       (do_GetService(NS_CONSOLESERVICE_CONTRACTID));  
+     if (cs) {
+-      cs->LogMessage(serr);
++      //cs->LogMessage(serr);
+     }
+   }
+ 
+diff --git a/parser/htmlparser/nsIExpatSink.idl b/parser/htmlparser/nsIExpatSink.idl
+index df0b2d869f3d..55e3926b7776 100644
+--- a/parser/htmlparser/nsIExpatSink.idl
++++ b/parser/htmlparser/nsIExpatSink.idl
+@@ -12,7 +12,7 @@ interface nsIScriptError;
+  * by any sink that handles some sort of XML dialect.
+  */
+ 
+-[scriptable, uuid(01f681af-0f22-4725-a914-0d396114daf0)]
++[scriptable, uuid(685473DA-41AA-4B20-BC9E-00828B592F76)]
+ interface nsIExpatSink : nsISupports 
+ {
+   /**
+@@ -105,5 +105,7 @@ interface nsIExpatSink : nsISupports
+    */
+   boolean ReportError(in wstring aErrorText,
+                       in wstring aSourceText,
+-                      in nsIScriptError aError);
++                      in nsIScriptError aError,
++                      in unsigned long aLineNumber,
++                      in unsigned long aColNumber);
+ }; 
+diff --git a/parser/xml/nsSAXXMLReader.cpp b/parser/xml/nsSAXXMLReader.cpp
+index 363f7bfea2e2..413b28c374f6 100644
+--- a/parser/xml/nsSAXXMLReader.cpp
++++ b/parser/xml/nsSAXXMLReader.cpp
+@@ -306,6 +306,8 @@ NS_IMETHODIMP
+ nsSAXXMLReader::ReportError(const char16_t* aErrorText,
+                             const char16_t* aSourceText,
+                             nsIScriptError *aError,
++                            PRUint32 aLineNumber,
++                            PRUint32 aColNumber,
+                             bool *_retval)
+ {
+   NS_PRECONDITION(aError && aSourceText && aErrorText, "Check arguments!!!");
+diff --git a/rdf/base/nsRDFContentSink.cpp b/rdf/base/nsRDFContentSink.cpp
+index df52b738c744..00a54b111156 100644
+--- a/rdf/base/nsRDFContentSink.cpp
++++ b/rdf/base/nsRDFContentSink.cpp
+@@ -527,6 +527,8 @@ NS_IMETHODIMP
+ RDFContentSinkImpl::ReportError(const char16_t* aErrorText, 
+                                 const char16_t* aSourceText,
+                                 nsIScriptError *aError,
++                                PRUint32 aLineNumber,
++                                PRUint32 aColNumber,
+                                 bool *_retval)
+ {
+   NS_PRECONDITION(aError && aSourceText && aErrorText, "Check arguments!!!");
+diff --git a/toolkit/components/passwordmgr/nsLoginManagerPrompter.js b/toolkit/components/passwordmgr/nsLoginManagerPrompter.js
+index 8ed4e58f19c1..a2691227d3d4 100644
+--- a/toolkit/components/passwordmgr/nsLoginManagerPrompter.js
++++ b/toolkit/components/passwordmgr/nsLoginManagerPrompter.js
+@@ -1420,10 +1420,11 @@ LoginManagerPrompter.prototype = {
+    * Given a content DOM window, returns the chrome window and browser it's in.
+    */
+   _getChromeWindow(aWindow) {
+-    let windows = Services.wm.getEnumerator(null);
++    let windows = Services.wm.getEnumerator("bluegriffon");
+     while (windows.hasMoreElements()) {
+       let win = windows.getNext();
+-      let browser = win.gBrowser.getBrowserForContentWindow(aWindow);
++      // let browser = win.gBrowser.getBrowserForContentWindow(aWindow);
++      let browser = win.EditorUtils.getCurrentTabEditor();
+       if (browser) {
+         return { win, browser };
+       }
+diff --git a/toolkit/components/telemetry/TelemetryStartup.js b/toolkit/components/telemetry/TelemetryStartup.js
+index f5e4eba453d6..9021ab3c8655 100644
+--- a/toolkit/components/telemetry/TelemetryStartup.js
++++ b/toolkit/components/telemetry/TelemetryStartup.js
+@@ -37,6 +37,8 @@ TelemetryStartup.prototype.observe = function(aSubject, aTopic, aData) {
+ 
+ function annotateEnvironment() {
+   try {
++    if (!("@mozilla.org/toolkit/crash-reporter;1" in Cc))
++      return;
+     let cr = Cc["@mozilla.org/toolkit/crash-reporter;1"];
+     if (cr) {
+       let env = JSON.stringify(TelemetryEnvironment.currentEnvironment);
+diff --git a/toolkit/content/widgets/menu.xml b/toolkit/content/widgets/menu.xml
+index 26dcad454b16..06471c90d867 100644
+--- a/toolkit/content/widgets/menu.xml
++++ b/toolkit/content/widgets/menu.xml
+@@ -224,6 +224,15 @@
+     </content>
+   </binding>
+ 
++  <binding id="menuitem-non-iconic-accel" extends="chrome://global/content/bindings/menu.xml#menuitem">
++    <content>
++      <xul:label class="menu-iconic-text" flex="1" xbl:inherits="value=label,accesskey,crop" crop="right"/>
++      <xul:hbox class="menu-accel-container" anonid="accel">
++        <xul:label class="menu-iconic-accel" xbl:inherits="value=acceltext"/>
++      </xul:hbox>
++    </content>
++  </binding>
++
+   <binding id="menuitem-iconic-noaccel" extends="chrome://global/content/bindings/menu.xml#menuitem">
+     <content>
+       <xul:hbox class="menu-iconic-left" align="center" pack="center"
+diff --git a/toolkit/content/widgets/menulist.xml b/toolkit/content/widgets/menulist.xml
+index 092e9d260fa5..4a2fad057dc7 100644
+--- a/toolkit/content/widgets/menulist.xml
++++ b/toolkit/content/widgets/menulist.xml
+@@ -545,6 +545,13 @@
+           this.inputField.select();
+         </body>
+       </method>
++
++      <method name="getChild">
++        <parameter name="aChildName"/>
++        <body><![CDATA[
++          return document.getAnonymousElementByAttribute(this, "anonid", aChildName);
++        ]]></body>
++      </method>
+     </implementation>
+ 
+     <handlers>
+@@ -579,14 +586,30 @@
+ 
+       <handler event="keypress">
+         <![CDATA[
+-          // open popup if key is up arrow, down arrow, or F4
+-          if (!event.ctrlKey && !event.shiftKey) {
+-            if (event.keyCode == KeyEvent.DOM_VK_UP ||
+-                event.keyCode == KeyEvent.DOM_VK_DOWN ||
+-                (event.keyCode == KeyEvent.DOM_VK_F4 && !event.altKey)) {
++          if (event.ctrlKey && event.shiftKey)
++            return;
++
++          if (this.getAttribute("bgtype") == "csslength") {
++            var _self = this;
++            if (event.keyCode == KeyEvent.DOM_VK_UP) {
++              IncreaseLength(this, this.getAttribute("units"));
++              if (this.oninput)
++                this.oninput.call(_self);
+               event.preventDefault();
+-              this.open = true;
+             }
++            else if (event.keyCode == KeyEvent.DOM_VK_DOWN) {
++              DecreaseLength(this, this.getAttribute("units"), !(this.getAttribute("unsigned") == "true"));
++              if (this.oninput)
++                this.oninput.call(_self);
++              event.preventDefault();
++            }
++          }
++          // open popup if key is up arrow, down arrow, or F4
++          else if (event.keyCode == KeyEvent.DOM_VK_UP ||
++                   event.keyCode == KeyEvent.DOM_VK_DOWN ||
++                   (event.keyCode == KeyEvent.DOM_VK_F4 && !event.altKey)) {
++            event.preventDefault();
++            this.open = true;
+           }
+         ]]>
+       </handler>
+diff --git a/toolkit/content/widgets/tree.xml b/toolkit/content/widgets/tree.xml
+index 20e31cb0fd8b..f63c4e39a442 100644
+--- a/toolkit/content/widgets/tree.xml
++++ b/toolkit/content/widgets/tree.xml
+@@ -752,7 +752,8 @@
+           // Only handle swipe gestures up and down
+           switch (event.direction) {
+             case event.DIRECTION_DOWN:
+-              targetRow = this.view.rowCount - 1;
++              if (this.view)
++                targetRow = this.view.rowCount - 1;
+               // Fall through for actual action
+             case event.DIRECTION_UP:
+               this.treeBoxObject.ensureRowIsVisible(targetRow);
+@@ -1502,25 +1503,26 @@
+             var refChild = aPopup.firstChild;
+ 
+             var tree = this.parentNode.parentNode;
+-            for (var currCol = tree.columns.getFirstColumn(); currCol;
+-                 currCol = currCol.getNext()) {
+-              // Construct an entry for each column in the row, unless
+-              // it is not being shown.
+-              var currElement = currCol.element;
+-              if (!currElement.hasAttribute("ignoreincolumnpicker")) {
+-                var popupChild = document.createElement("menuitem");
+-                popupChild.setAttribute("type", "checkbox");
+-                var columnName = currElement.getAttribute("display") ||
+-                                 currElement.getAttribute("label");
+-                popupChild.setAttribute("label", columnName);
+-                popupChild.setAttribute("colindex", currCol.index);
+-                if (currElement.getAttribute("hidden") != "true")
+-                  popupChild.setAttribute("checked", "true");
+-                if (currCol.primary)
+-                  popupChild.setAttribute("disabled", "true");
+-                aPopup.insertBefore(popupChild, refChild);
++            if (tree.columns) // sanity case
++              for (var currCol = tree.columns.getFirstColumn(); currCol;
++                   currCol = currCol.getNext()) {
++                // Construct an entry for each column in the row, unless
++                // it is not being shown.
++                var currElement = currCol.element;
++                if (!currElement.hasAttribute("ignoreincolumnpicker")) {
++                  var popupChild = document.createElement("menuitem");
++                  popupChild.setAttribute("type", "checkbox");
++                  var columnName = currElement.getAttribute("display") ||
++                                   currElement.getAttribute("label");
++                  popupChild.setAttribute("label", columnName);
++                  popupChild.setAttribute("colindex", currCol.index);
++                  if (currElement.getAttribute("hidden") != "true")
++                    popupChild.setAttribute("checked", "true");
++                  if (currCol.primary)
++                    popupChild.setAttribute("disabled", "true");
++                  aPopup.insertBefore(popupChild, refChild);
++                }
+               }
+-            }
+ 
+             var hidden = !tree.enableColumnDrag;
+             const anonids = ["menuseparator", "menuitem"];
+diff --git a/toolkit/content/xul.css b/toolkit/content/xul.css
+index 981390b591f3..ab2c2eee0702 100644
+--- a/toolkit/content/xul.css
++++ b/toolkit/content/xul.css
+@@ -384,6 +384,10 @@ menuitem.menuitem-iconic {
+   -moz-binding: url("chrome://global/content/bindings/menu.xml#menuitem-iconic");
+ }
+ 
++menuitem.menuitem-non-iconic-accel {
++  -moz-binding: url("chrome://global/content/bindings/menu.xml#menuitem-non-iconic-accel");
++}
++
+ menuitem[description] {
+   -moz-binding: url("chrome://global/content/bindings/menu.xml#menuitem-iconic-desc-noaccel");
+ }
+diff --git a/toolkit/mozapps/extensions/content/extensions.js b/toolkit/mozapps/extensions/content/extensions.js
+index 40635b1ebd16..89c967559490 100644
+--- a/toolkit/mozapps/extensions/content/extensions.js
++++ b/toolkit/mozapps/extensions/content/extensions.js
+@@ -56,6 +56,7 @@ const PREF_GETADDONS_CACHE_ENABLED = "extensions.getAddons.cache.enabled";
+ const PREF_GETADDONS_CACHE_ID_ENABLED = "extensions.%ID%.getAddons.cache.enabled";
+ const PREF_UI_TYPE_HIDDEN = "extensions.ui.%TYPE%.hidden";
+ const PREF_UI_LASTCATEGORY = "extensions.ui.lastCategory";
++const PREF_CLOSE_ADDONS_MANAGER_ON_ESCAPE = "extensions.closeOnEscape";
+ 
+ const LOADING_MSG_DELAY = 100;
+ 
+@@ -201,6 +202,17 @@ function initialize(event) {
+   }
+   document.removeEventListener("load", initialize, true);
+ 
++  // should we allow the window to close when the user hits the ESC key?
++  let closeOnEscape = false; // default for Firefox 4+
++  try {
++    closeOnEscape = Services.prefs.getBoolPref(PREF_CLOSE_ADDONS_MANAGER_ON_ESCAPE);
++  } catch(e) { }
++  if (!closeOnEscape) {
++    let escapeKeyElt = document.getElementById("escapeKey");
++    if (escapeKeyElt)
++      escapeKeyElt.setAttribute("disabled", "true");
++  }
++
+   let globalCommandSet = document.getElementById("globalCommandSet");
+   globalCommandSet.addEventListener("command", function(event) {
+     gViewController.doCommand(event.target.id);
+@@ -2998,7 +3010,7 @@ var gListView = {
+     let prop = aIsInstall ? "mInstall" : "mAddon";
+ 
+     for (let item of this._listBox.childNodes) {
+-      if (item[prop] == aObj) {
++      if (prop in item && item[prop] == aObj) {
+         this._listBox.removeChild(item);
+         this.showEmptyNotice(this._listBox.itemCount == 0);
+         return;
+diff --git a/toolkit/mozapps/extensions/content/extensions.xul b/toolkit/mozapps/extensions/content/extensions.xul
+index 4596206b8ea2..1910a1a3ef5d 100644
+--- a/toolkit/mozapps/extensions/content/extensions.xul
++++ b/toolkit/mozapps/extensions/content/extensions.xul
+@@ -28,6 +28,10 @@
+   <script type="application/javascript"
+           src="chrome://global/content/contentAreaUtils.js"/>
+ 
++  <keyset>
++    <key id="escapeKey" keycode="VK_ESCAPE" oncommand="window.close()"/>
++  </keyset>
++
+   <popupset>
+     <!-- menu for an addon item -->
+     <menupopup id="addonitem-popup">
+diff --git a/toolkit/mozapps/extensions/internal/XPIProvider.jsm b/toolkit/mozapps/extensions/internal/XPIProvider.jsm
+index 772fc2dae105..162f11acc095 100644
+--- a/toolkit/mozapps/extensions/internal/XPIProvider.jsm
++++ b/toolkit/mozapps/extensions/internal/XPIProvider.jsm
+@@ -1376,6 +1376,12 @@ let loadManifestFromRDF = Task.async(function*(aUri, aStream) {
+ });
+ 
+ function defineSyncGUID(aAddon) {
++  try {
++    // BLUEGRIFFON BMO bug 1277295
++    let storage = Services.storage;
++  }
++  catch(e) {}
++
+   // Define .syncGUID as a lazy property which is also settable
+   Object.defineProperty(aAddon, "syncGUID", {
+     get: () => {
+diff --git a/toolkit/mozapps/handling/nsContentDispatchChooser.js b/toolkit/mozapps/handling/nsContentDispatchChooser.js
+index 21a78080535b..87e1a51133c2 100644
+--- a/toolkit/mozapps/handling/nsContentDispatchChooser.js
++++ b/toolkit/mozapps/handling/nsContentDispatchChooser.js
+@@ -62,12 +62,44 @@ nsContentDispatchChooser.prototype =
+     params.appendElement(aURI);
+     params.appendElement(aWindowContext);
+ 
++    // if a modal window is already shown, we need to open the app chooser
++    // as a modal window otherwise it will be unresponsive; bug 687423
++    var wm = Cc["@mozilla.org/appshell/window-mediator;1"].
++               getService(Ci.nsIWindowMediator);
++    var enumerator = wm.getXULWindowEnumerator(null);
++    var inModalState = false;
++    while (!inModalState && enumerator.hasMoreElements()) {
++      var win = enumerator.getNext();
++      var windowDocShell = win.QueryInterface(Ci.nsIXULWindow).docShell;
++  
++      var containedDocShells = windowDocShell.getDocShellEnumerator(
++                                        Ci.nsIDocShellTreeItem.typeChrome,
++                                        Ci.nsIDocShell.ENUMERATE_FORWARDS);
++
++      while (!inModalState && containedDocShells.hasMoreElements()) {
++        // Get the corresponding document for this docshell
++        var childDocShell = containedDocShells.getNext();
++
++        // We don't want it if it's not done loading.
++        if (childDocShell.busyFlags != Ci.nsIDocShell.BUSY_FLAGS_NONE)
++          continue;
++
++        // Ensure that we are only returning true if it is indeed modal
++        var chrome = win.QueryInterface(Ci.nsIInterfaceRequestor).
++                         getInterface(Ci.nsIWebBrowserChrome);
++        if (chrome.isWindowModal()) {
++          inModalState = true;
++        }
++      }
++    }
++
+     var ww = Cc["@mozilla.org/embedcomp/window-watcher;1"].
+              getService(Ci.nsIWindowWatcher);
+     ww.openWindow(window,
+                   CONTENT_HANDLING_URL,
+                   null,
+-                  "chrome,dialog=yes,resizable,centerscreen",
++                  "chrome,dialog=yes,resizable,centerscreen"
++                    + (inModalState ? ",modal" : ""),
+                   params);
+   },
+ 
+diff --git a/toolkit/mozapps/installer/packager.mk b/toolkit/mozapps/installer/packager.mk
+index a6d01bcd2ec6..cd86be08a3d4 100644
+--- a/toolkit/mozapps/installer/packager.mk
++++ b/toolkit/mozapps/installer/packager.mk
+@@ -51,7 +51,7 @@ stage-package: $(MOZ_PKG_MANIFEST) $(MOZ_PKG_MANIFEST_DEPS)
+ 		$(if $(DISABLE_JAR_COMPRESSION),--disable-compression) \
+ 		$(MOZ_PKG_MANIFEST) $(DIST) $(DIST)/$(MOZ_PKG_DIR)$(if $(MOZ_PKG_MANIFEST),,$(_BINPATH)) \
+ 		$(if $(filter omni,$(MOZ_PACKAGER_FORMAT)),$(if $(NON_OMNIJAR_FILES),--non-resource $(NON_OMNIJAR_FILES)))
+-	$(PYTHON) $(MOZILLA_DIR)/toolkit/mozapps/installer/find-dupes.py $(DEFINES) $(ACDEFINES) $(MOZ_PKG_DUPEFLAGS) $(DIST)/$(MOZ_PKG_DIR)
++#	$(PYTHON) $(MOZILLA_DIR)/toolkit/mozapps/installer/find-dupes.py $(DEFINES) $(ACDEFINES) $(MOZ_PKG_DUPEFLAGS) $(DIST)/$(MOZ_PKG_DIR)
+ ifndef MOZ_THUNDERBIRD
+ 	# Package mozharness
+ 	$(call py_action,test_archive, \
+diff --git a/widget/PuppetWidget.cpp b/widget/PuppetWidget.cpp
+index 4634b328d076..691771e87edf 100644
+--- a/widget/PuppetWidget.cpp
++++ b/widget/PuppetWidget.cpp
+@@ -1394,6 +1394,13 @@ PuppetScreenManager::GetPrimaryScreen(nsIScreen** outScreen)
+   return NS_OK;
+ }
+ 
++NS_IMETHODIMP
++PuppetScreenManager::ScreenForIndex(uint32_t aIndex, nsIScreen**outScreen)
++{
++  NS_IF_ADDREF(*outScreen = mOneScreen.get());
++  return NS_OK;
++}
++
+ NS_IMETHODIMP
+ PuppetScreenManager::ScreenForRect(int32_t inLeft,
+                                    int32_t inTop,
+diff --git a/widget/ScreenManager.cpp b/widget/ScreenManager.cpp
+index 42ba27819dec..cc9baf0c4d67 100644
+--- a/widget/ScreenManager.cpp
++++ b/widget/ScreenManager.cpp
+@@ -166,6 +166,33 @@ ScreenManager::ScreenForRect(int32_t aX, int32_t aY,
+   return NS_OK;
+ }
+ 
++NS_IMETHODIMP
++ScreenManager::ScreenForIndex(uint32_t aIndex, nsIScreen**aOutScreen)
++{
++  if (mScreenList.IsEmpty()) {
++    MOZ_LOG(sScreenLog, LogLevel::Warning,
++            ("No screen available. This can happen in xpcshell."));
++    RefPtr<Screen> ret = new Screen(LayoutDeviceIntRect(), LayoutDeviceIntRect(),
++                                    0, 0,
++                                    DesktopToLayoutDeviceScale(),
++                                    CSSToLayoutDeviceScale());
++    ret.forget(aOutScreen);
++    return NS_OK;
++  }
++  // Optimize for the common case. If the number of screens is only
++  // one then just return the primary screen.
++  if (mScreenList.Length() == 1) {
++    return GetPrimaryScreen(aOutScreen);
++  }
++
++  // which screen should we return?
++  Screen* which = mScreenList[aIndex].get();
++
++  RefPtr<Screen> ret = which;
++  ret.forget(aOutScreen);
++  return NS_OK;
++}
++
+ // The screen with the menubar/taskbar. This shouldn't be needed very
+ // often.
+ //
+diff --git a/widget/cocoa/nsClipboard.mm b/widget/cocoa/nsClipboard.mm
+index 61858ba306db..f249341cd273 100644
+--- a/widget/cocoa/nsClipboard.mm
++++ b/widget/cocoa/nsClipboard.mm
+@@ -24,6 +24,7 @@
+ #include "nsObjCExceptions.h"
+ #include "imgIContainer.h"
+ #include "nsCocoaUtils.h"
++#include "mozilla/Preferences.h"
+ 
+ using mozilla::gfx::DataSourceSurface;
+ using mozilla::gfx::SourceSurface;
+@@ -175,7 +176,35 @@ nsClipboard::TransferableFromPasteboard(nsITransferable *aTransferable, NSPasteb
+ 
+       NSData* stringData;
+       if ([pboardType isEqualToString:NSPasteboardTypeRTF]) {
++        // get a NSAttributedString for RTF data
++        NSDictionary *docAttributes;
+         stringData = [pString dataUsingEncoding:NSASCIIStringEncoding];
++        if (mozilla::Preferences::GetBool("bluegriffon.osx.clipboard.rtf.enabled")) {
++          NSAttributedString *attrString = [[NSAttributedString alloc]
++                         initWithRTF: stringData
++                  documentAttributes: &docAttributes];
++
++          // then convert it to HTML excluding the document's outermost elements
++          // and the ones we can't deal with ; but don't exclude <body> because
++          // the editor relies on it to paste a html-based transferable
++          NSArray * exclude = [NSArray arrayWithObjects:@"doctype",
++                               @"html",
++                               @"head",
++                               @"xml",
++                               nil
++                               ];
++          NSDictionary * htmlAtt = [NSDictionary
++                                    dictionaryWithObjectsAndKeys:NSHTMLTextDocumentType,
++                                    NSDocumentTypeDocumentAttribute,
++                                    exclude,
++                                    NSExcludedElementsDocumentAttribute,
++                                    nil
++                                    ];
++          NSError * error;
++          stringData = [attrString dataFromRange:NSMakeRange(0, [attrString length])
++                                     documentAttributes:htmlAtt error:&error
++                               ];
++        }
+       } else {
+         stringData = [pString dataUsingEncoding:NSUnicodeStringEncoding];
+       }
+diff --git a/widget/cocoa/nsCocoaUtils.mm b/widget/cocoa/nsCocoaUtils.mm
+index 8972c530c389..20afdf997ed7 100644
+--- a/widget/cocoa/nsCocoaUtils.mm
++++ b/widget/cocoa/nsCocoaUtils.mm
+@@ -306,8 +306,12 @@ void nsCocoaUtils::PrepareForNativeAppModalDialog()
+   if (!hiddenWindowMenuBar)
+     return;
+ 
++  // XXX BLUEGRIFFON ; do NOT paint the hidden menubar because otherwise, that's
++  // what's show when you close a filepicker... And in that case, menus are mostly
++  // disabled and inable to operate even on a visible window...
++   // First put up the hidden window menu bar so that app menu event handling is correct.
+   // First put up the hidden window menu bar so that app menu event handling is correct.
+-  hiddenWindowMenuBar->Paint();
++  //hiddenWindowMenuBar->Paint();
+ 
+   NSMenu* mainMenu = [NSApp mainMenu];
+   NS_ASSERTION([mainMenu numberOfItems] > 0, "Main menu does not have any items, something is terribly wrong!");
+diff --git a/widget/cocoa/nsColorPicker.h b/widget/cocoa/nsColorPicker.h
+index 4b3e262188b7..9c6db95e2b1d 100644
+--- a/widget/cocoa/nsColorPicker.h
++++ b/widget/cocoa/nsColorPicker.h
+@@ -22,7 +22,7 @@ public:
+   NS_DECL_ISUPPORTS
+ 
+   NS_IMETHOD Init(mozIDOMWindowProxy* aParent, const nsAString& aTitle,
+-                  const nsAString& aInitialColor) override;
++                  const nsAString& aInitialColor, bool aShowAlpha) override;
+   NS_IMETHOD Open(nsIColorPickerShownCallback* aCallback) override;
+ 
+   // For NSColorPanelWrapper.
+@@ -44,6 +44,7 @@ private:
+ 
+   nsString             mTitle;
+   nsString             mColor;
++  bool               mShowsAlpha;
+   nsCOMPtr<nsIColorPickerShownCallback> mCallback;
+ };
+ 
+diff --git a/widget/cocoa/nsColorPicker.mm b/widget/cocoa/nsColorPicker.mm
+index 1fdaa03a29fb..7bb57283dffb 100644
+--- a/widget/cocoa/nsColorPicker.mm
++++ b/widget/cocoa/nsColorPicker.mm
+@@ -9,6 +9,10 @@
+ #include "nsCocoaUtils.h"
+ #include "nsThreadUtils.h"
+ 
++#include "nsCSSValue.h"
++#include "nsCSSParser.h"
++#include "nsRuleNode.h"
++
+ using namespace mozilla;
+ 
+ static unsigned int
+@@ -37,7 +41,7 @@ HexStrToInt(NSString* str)
+   nsColorPicker* mColorPicker;
+ }
+ - (id)initWithPicker:(nsColorPicker*)aPicker;
+-- (void)open:(NSColor*)aInitialColor title:(NSString*)aTitle;
++- (void)open:(NSColor*)aInitialColor title:(NSString*)aTitle showsAlpha:(BOOL)aShowsAlpha;
+ - (void)retarget:(nsColorPicker*)aPicker;
+ - (void)colorChanged:(NSColorPanel*)aPanel;
+ @end
+@@ -52,14 +56,15 @@ HexStrToInt(NSString* str)
+   return self;
+ }
+ 
+-- (void)open:(NSColor*)aInitialColor title:(NSString*)aTitle
++- (void)open:(NSColor*)aInitialColor title:(NSString*)aTitle showsAlpha:(BOOL)aShowsAlpha
+ {
+   [mColorPanel setTitle:aTitle];
+   [mColorPanel setColor:aInitialColor];
+   [mColorPanel setTarget:self];
++  [mColorPanel setShowsAlpha:aShowsAlpha];
+   [mColorPanel setAction:@selector(colorChanged:)];
+   [mColorPanel setDelegate:self];
+-  [mColorPanel makeKeyAndOrderFront:nil];
++  [mColorPanel orderFront:nil];
+ }
+ 
+ - (void)colorChanged:(NSColorPanel*)aPanel
+@@ -103,12 +108,13 @@ nsColorPicker::~nsColorPicker()
+ 
+ NS_IMETHODIMP
+ nsColorPicker::Init(mozIDOMWindowProxy* aParent, const nsAString& aTitle,
+-                    const nsAString& aInitialColor)
++                    const nsAString& aInitialColor, bool aShowAlpha)
+ {
+   MOZ_ASSERT(NS_IsMainThread(),
+       "Color pickers can only be opened from main thread currently");
+   mTitle = aTitle;
+   mColor = aInitialColor;
++  mShowsAlpha = aShowAlpha;
+ 
+   if (sColorPanelWrapper) {
+     // Update current wrapper to target the new input instead
+@@ -123,33 +129,43 @@ nsColorPicker::Init(mozIDOMWindowProxy* aParent, const nsAString& aTitle,
+ /* static */ NSColor*
+ nsColorPicker::GetNSColorFromHexString(const nsAString& aColor)
+ {
+-  NSString* str = nsCocoaUtils::ToNSString(aColor);
++  nsCSSValue value;
++  nsCSSParser parser;
++  if (!parser.ParseColorString(aColor, nullptr, 0, value)) {
++    return [NSColor colorWithDeviceRed: 0 green: 0 blue: 0 alpha: 1];
++  }
+ 
+-  double red = HexStrToInt([str substringWithRange:NSMakeRange(1, 2)]) / 255.0;
+-  double green = HexStrToInt([str substringWithRange:NSMakeRange(3, 2)]) / 255.0;
+-  double blue = HexStrToInt([str substringWithRange:NSMakeRange(5, 2)]) / 255.0;
++  nscolor color;
++  if (!nsRuleNode::ComputeColor(value, nullptr, nullptr, color)) {
++    return [NSColor colorWithDeviceRed: 0 green: 0 blue: 0 alpha: 1];
++  }
+ 
+-  return [NSColor colorWithDeviceRed: red green: green blue: blue alpha: 1.0];
++  return [NSColor colorWithRed: ((float)NS_GET_R(color))/255.0
++                         green: ((float)NS_GET_G(color))/255.0
++                          blue: ((float)NS_GET_B(color))/255.0
++                         alpha: ((float)NS_GET_A(color))/255.0];
+ }
+ 
+ /* static */ void
+ nsColorPicker::GetHexStringFromNSColor(NSColor* aColor, nsAString& aResult)
+ {
+-  CGFloat redFloat, greenFloat, blueFloat;
+-
+-  NSColor* color = aColor;
+-  @try {
+-    [color getRed:&redFloat green:&greenFloat blue:&blueFloat alpha: nil];
+-  } @catch (NSException* e) {
+-    color = [color colorUsingColorSpace:[NSColorSpace genericRGBColorSpace]];
+-    [color getRed:&redFloat green:&greenFloat blue:&blueFloat alpha: nil];
++  CGFloat redFloat, greenFloat, blueFloat, alphaFloat;
++  [aColor getRed: &redFloat green: &greenFloat blue: &blueFloat alpha: &alphaFloat];
++  if (alphaFloat < 1.0f) {
++    nsCocoaUtils::GetStringForNSString([NSString stringWithFormat:@"rgba(%d, %d, %d, %1.2f)",
++                                         (int)(redFloat * 255 + 0.5f),
++                                         (int)(greenFloat * 255 + 0.5f),
++                                         (int)(blueFloat * 255 + 0.5f),
++                                         (float) alphaFloat],
++                                       aResult);
++  }
++  else {
++    nsCocoaUtils::GetStringForNSString([NSString stringWithFormat:@"#%02x%02x%02x",
++                                         (int)(redFloat * 255 + 0.5f),
++                                         (int)(greenFloat * 255 + 0.5f),
++                                         (int)(blueFloat * 255 + 0.5f)],
++                                       aResult);
+   }
+-
+-  nsCocoaUtils::GetStringForNSString([NSString stringWithFormat:@"#%02x%02x%02x",
+-                                       (int)(redFloat * 255),
+-                                       (int)(greenFloat * 255),
+-                                       (int)(blueFloat * 255)],
+-                                     aResult);
+ }
+ 
+ NS_IMETHODIMP
+@@ -159,7 +175,8 @@ nsColorPicker::Open(nsIColorPickerShownCallback* aCallback)
+   mCallback = aCallback;
+ 
+   [sColorPanelWrapper open:GetNSColorFromHexString(mColor)
+-              title:nsCocoaUtils::ToNSString(mTitle)];
++              title:nsCocoaUtils::ToNSString(mTitle)
++              showsAlpha:mShowsAlpha];
+ 
+   NS_ADDREF_THIS();
+ 
+@@ -169,7 +186,12 @@ nsColorPicker::Open(nsIColorPickerShownCallback* aCallback)
+ void
+ nsColorPicker::Update(NSColor* aColor)
+ {
+-  GetHexStringFromNSColor(aColor, mColor);
++  NSColor *color = aColor;
++  if ([[aColor colorSpaceName] isEqualToString:NSNamedColorSpace])        {
++    color = [aColor colorUsingColorSpace:[NSColorSpace genericRGBColorSpace]];
++  }
++
++  GetHexStringFromNSColor(color, mColor);
+   mCallback->Update(mColor);
+ }
+ 
+diff --git a/widget/cocoa/nsMenuItemX.mm b/widget/cocoa/nsMenuItemX.mm
+index 114b69f43010..7acb8e15f2ad 100644
+--- a/widget/cocoa/nsMenuItemX.mm
++++ b/widget/cocoa/nsMenuItemX.mm
+@@ -259,6 +259,29 @@ void nsMenuItemX::SetKeyEquiv()
+       uint8_t modifiers = nsMenuUtilsX::GeckoModifiersForNodeAttribute(modifiersStr);
+ 
+       unsigned int macModifiers = nsMenuUtilsX::MacModifiersForGeckoModifiers(modifiers);
++      // If we're empty, try the keyCode instead.
++      if (keyChar.Equals(NS_LITERAL_STRING(" ")) || keyChar.IsEmpty()) {
++
++        keyContent->GetAttr(kNameSpaceID_None, nsGkAtoms::keycode, keyChar);
++
++        if (keyChar.Equals(NS_LITERAL_STRING("VK_F2"))) {
++          unichar ch[1];
++          ch[0] = NSF2FunctionKey;
++          macModifiers |= NSFunctionKeyMask;
++          [mNativeMenuItem setKeyEquivalentModifierMask:macModifiers];
++          [mNativeMenuItem setKeyEquivalent:[NSString stringWithCharacters:ch length:1]];
++          return;
++        }
++        else if (keyChar.Equals(NS_LITERAL_STRING("VK_F4"))) {
++          unichar ch[1];
++          ch[0] = NSF4FunctionKey;
++          macModifiers |= NSFunctionKeyMask;
++          [mNativeMenuItem setKeyEquivalentModifierMask:macModifiers];
++          [mNativeMenuItem setKeyEquivalent:[NSString stringWithCharacters:ch length:1]];
++          return;
++        }
++      }
++
+       [mNativeMenuItem setKeyEquivalentModifierMask:macModifiers];
+ 
+       NSString *keyEquivalent = [[NSString stringWithCharacters:(unichar*)keyChar.get()
+diff --git a/widget/cocoa/nsNativeThemeCocoa.mm b/widget/cocoa/nsNativeThemeCocoa.mm
+index 8f999eba2e3b..8d2605bde77b 100644
+--- a/widget/cocoa/nsNativeThemeCocoa.mm
++++ b/widget/cocoa/nsNativeThemeCocoa.mm
+@@ -2599,7 +2599,7 @@ nsNativeThemeCocoa::DrawWidgetBackground(nsRenderingContext* aContext,
+       BOOL isMain = [win isMainWindow];
+       float unifiedToolbarHeight = [win isKindOfClass:[ToolbarWindow class]] ?
+         [(ToolbarWindow*)win unifiedToolbarHeight] : macRect.size.height;
+-      DrawNativeTitlebar(cgContext, macRect, unifiedToolbarHeight, isMain, YES);
++      // DrawNativeTitlebar(cgContext, macRect, unifiedToolbarHeight, isMain, YES);
+     }
+       break;
+ 
+diff --git a/widget/gtk/mozgtk/mozgtk.c b/widget/gtk/mozgtk/mozgtk.c
+index 8b629434e631..09f70ea480ab 100644
+--- a/widget/gtk/mozgtk/mozgtk.c
++++ b/widget/gtk/mozgtk/mozgtk.c
+@@ -164,9 +164,11 @@ STUB(gtk_clipboard_store)
+ STUB(gtk_color_selection_dialog_get_color_selection)
+ STUB(gtk_color_selection_dialog_get_type)
+ STUB(gtk_color_selection_dialog_new)
++STUB(gtk_color_selection_get_current_alpha)
+ STUB(gtk_color_selection_get_current_color)
+ STUB(gtk_color_selection_get_type)
+ STUB(gtk_color_selection_set_current_color)
++STUB(gtk_color_selection_set_has_opacity_control)
+ STUB(gtk_combo_box_get_active)
+ STUB(gtk_combo_box_get_type)
+ STUB(gtk_combo_box_new)
+diff --git a/widget/gtk/nsColorPicker.cpp b/widget/gtk/nsColorPicker.cpp
+index 93ab8bb9ada4..918ce280d3f9 100644
+--- a/widget/gtk/nsColorPicker.cpp
++++ b/widget/gtk/nsColorPicker.cpp
+@@ -12,6 +12,8 @@
+ #include "WidgetUtils.h"
+ #include "nsPIDOMWindow.h"
+ 
++#include "nsCSSParser.h"
++
+ NS_IMPL_ISUPPORTS(nsColorPicker, nsIColorPicker)
+ 
+ #if defined(ACTIVATE_GTK3_COLOR_PICKER) && GTK_CHECK_VERSION(3,4,0)
+@@ -60,12 +62,14 @@ GtkColorSelection* nsColorPicker::WidgetGetColorSelection(GtkWidget* widget)
+ 
+ NS_IMETHODIMP nsColorPicker::Init(mozIDOMWindowProxy *aParent,
+                                   const nsAString& title,
+-                                  const nsAString& initialColor)
++                                  const nsAString& initialColor,
++                                  bool aShowsAlpha)
+ {
+   auto* parent = nsPIDOMWindowOuter::From(aParent);
+   mParentWidget = mozilla::widget::WidgetUtils::DOMWindowToWidget(parent);
+   mTitle = title;
+   mInitialColor = initialColor;
++  mShowsAlpha = aShowsAlpha;
+ 
+   return NS_OK;
+ }
+@@ -73,15 +77,14 @@ NS_IMETHODIMP nsColorPicker::Init(mozIDOMWindowProxy *aParent,
+ NS_IMETHODIMP nsColorPicker::Open(nsIColorPickerShownCallback *aColorPickerShownCallback)
+ {
+ 
+-  // Input color string should be 7 length (i.e. a string representing a valid
+-  // simple color)
+-  if (mInitialColor.Length() != 7) {
++  nsCSSValue value;
++  nsCSSParser parser;
++  if (!parser.ParseColorString(mInitialColor, nullptr, 0, value)) {
+     return NS_ERROR_FAILURE;
+   }
+ 
+-  const nsAString& withoutHash  = StringTail(mInitialColor, 6);
+   nscolor color;
+-  if (!NS_HexToRGBA(withoutHash, nsHexColorType::NoAlpha, &color)) {
++  if (!nsRuleNode::ComputeColor(value, nullptr, nullptr, color)) {
+     return NS_ERROR_FAILURE;
+   }
+ 
+@@ -103,7 +106,7 @@ NS_IMETHODIMP nsColorPicker::Open(nsIColorPickerShownCallback *aColorPickerShown
+       gtk_window_set_destroy_with_parent(GTK_WINDOW(color_chooser), TRUE);
+   }
+   
+-  gtk_color_chooser_set_use_alpha(GTK_COLOR_CHOOSER(color_chooser), FALSE);
++  gtk_color_chooser_set_use_alpha(GTK_COLOR_CHOOSER(color_chooser), mShowsAlpha);
+   GdkRGBA color_rgba = convertToRgbaColor(color);    
+   gtk_color_chooser_set_rgba(GTK_COLOR_CHOOSER(color_chooser),
+                              &color_rgba);
+@@ -119,6 +122,8 @@ NS_IMETHODIMP nsColorPicker::Open(nsIColorPickerShownCallback *aColorPickerShown
+     gtk_window_set_destroy_with_parent(window, TRUE);
+   }
+ 
++  gtk_color_selection_set_has_opacity_control(WidgetGetColorSelection(color_chooser),
++                                              mShowsAlpha);
+   GdkColor color_gdk = convertToGdkColor(color);
+   gtk_color_selection_set_current_color(WidgetGetColorSelection(color_chooser),
+                                         &color_gdk);
+@@ -182,10 +187,28 @@ void nsColorPicker::ReadValueFromColorSelection(GtkColorSelection* colorselectio
+   GdkColor rgba;
+   gtk_color_selection_get_current_color(colorselection, &rgba);
+ 
+-  mColor.Assign('#');
+-  mColor += ToHexString(convertGdkColorComponent(rgba.red));
+-  mColor += ToHexString(convertGdkColorComponent(rgba.green));
+-  mColor += ToHexString(convertGdkColorComponent(rgba.blue));
++  guint16 alphaValue = 65535;
++  if (mShowsAlpha) {
++    alphaValue = gtk_color_selection_get_current_alpha(colorselection);
++  }
++
++  if (alphaValue == 65535) {
++    mColor.Assign('#');
++    mColor += ToHexString(convertGdkColorComponent(rgba.red));
++    mColor += ToHexString(convertGdkColorComponent(rgba.green));
++    mColor += ToHexString(convertGdkColorComponent(rgba.blue));
++  }
++  else {
++    mColor.AssignWithConversion("rgba(");
++    mColor.AppendInt(convertGdkColorComponent(rgba.red), 10);
++    mColor.AppendLiteral(", ");
++    mColor.AppendInt(convertGdkColorComponent(rgba.green), 10);
++    mColor.AppendLiteral(", ");
++    mColor.AppendInt(convertGdkColorComponent(rgba.blue), 10);
++    mColor.AppendLiteral(", ");
++    mColor.AppendFloat(((float)alphaValue / 65535));
++    mColor.AppendLiteral(")");
++  }
+ }
+ #endif
+ 
+diff --git a/widget/gtk/nsColorPicker.h b/widget/gtk/nsColorPicker.h
+index 107e6f058f61..12a6ac691cc4 100644
+--- a/widget/gtk/nsColorPicker.h
++++ b/widget/gtk/nsColorPicker.h
+@@ -68,6 +68,7 @@ private:
+   nsString mTitle;
+   nsString mColor;
+   nsString mInitialColor;
++  bool mShowsAlpha;
+ };
+ 
+ #endif // nsColorPicker_h__
+diff --git a/widget/nsColorPickerProxy.cpp b/widget/nsColorPickerProxy.cpp
+index 6c70cfcd6ab0..ad0cfbaa10af 100644
+--- a/widget/nsColorPickerProxy.cpp
++++ b/widget/nsColorPickerProxy.cpp
+@@ -14,7 +14,7 @@ NS_IMPL_ISUPPORTS(nsColorPickerProxy, nsIColorPicker)
+ 
+ NS_IMETHODIMP
+ nsColorPickerProxy::Init(mozIDOMWindowProxy* aParent, const nsAString& aTitle,
+-                         const nsAString& aInitialColor)
++                         const nsAString& aInitialColor, bool aShowsAlpha)
+ {
+   TabChild* tabChild = TabChild::GetFrom(aParent);
+   if (!tabChild) {
+@@ -23,7 +23,8 @@ nsColorPickerProxy::Init(mozIDOMWindowProxy* aParent, const nsAString& aTitle,
+ 
+   tabChild->SendPColorPickerConstructor(this,
+                                         nsString(aTitle),
+-                                        nsString(aInitialColor));
++                                        nsString(aInitialColor),
++                                        aShowsAlpha);
+   NS_ADDREF_THIS();
+   return NS_OK;
+ }
+diff --git a/widget/nsIColorPicker.idl b/widget/nsIColorPicker.idl
+index 24b128e1b161..0e4c948898d8 100644
+--- a/widget/nsIColorPicker.idl
++++ b/widget/nsIColorPicker.idl
+@@ -16,7 +16,7 @@ interface mozIDOMWindowProxy;
+  * specifications.
+  */
+ 
+-[scriptable, uuid(d2ce78d1-40b5-49d1-b66d-5801fcb9a385)]
++[scriptable, uuid(645FAD1F-2B55-42E1-AC15-DB4A9DF27209)]
+ interface nsIColorPickerShownCallback : nsISupports
+ {
+  /**
+@@ -62,7 +62,8 @@ interface nsIColorPicker : nsISupports
+   *                          parameter has to follow the format specified on top
+   *                          of this file.
+   */
+-  void init(in mozIDOMWindowProxy parent, in AString title, in AString initialColor);
++  void init(in mozIDOMWindowProxy parent, in AString title, in AString initialColor,
++            in boolean aShowAlpha);
+ 
+  /**
+   * Opens the color dialog asynchrounously.
+diff --git a/widget/nsIScreenManager.idl b/widget/nsIScreenManager.idl
+index bba7ee6b24fe..3994478325f8 100644
+--- a/widget/nsIScreenManager.idl
++++ b/widget/nsIScreenManager.idl
+@@ -18,6 +18,8 @@ interface nsIScreenManager : nsISupports
+     //
+   nsIScreen screenForRect ( in long left, in long top, in long width, in long height ) ;
+ 
++  nsIScreen screenForIndex ( in unsigned long index);
++
+     // The screen with the menubar/taskbar. This shouldn't be needed very
+     // often.
+   readonly attribute nsIScreen primaryScreen;
+diff --git a/widget/uikit/nsScreenManager.mm b/widget/uikit/nsScreenManager.mm
+index fa00e23451b8..c4cb4d02b4e9 100644
+--- a/widget/uikit/nsScreenManager.mm
++++ b/widget/uikit/nsScreenManager.mm
+@@ -116,3 +116,23 @@ UIKitScreenManager::ScreenForRect(int32_t inLeft,
+ {
+   return GetPrimaryScreen(outScreen);
+ }
++
++NS_IMETHODIMP
++UIKitScreenManager::ScreenForIndex(uint32_t aIndex, nsIScreen**outScreen)
++{
++    NS_OBJC_BEGIN_TRY_ABORT_BLOCK_NSRESULT;
++
++    NSArray *ss = [NSScreen screens];
++    uint32_t numberOfScreens = [ss count];
++    if (aIndex >= numberOfScreens)
++        return NS_ERROR_FAILURE;
++  
++    NSScreen *sc = [[NSScreen screens] objectAtIndex: aIndex];
++  
++    *outScreen = ScreenForCocoaScreen(sc);
++    NS_ADDREF(*outScreen);
++  
++    return NS_OK;
++  
++    NS_OBJC_END_TRY_ABORT_BLOCK_NSRESULT;
++}
+diff --git a/widget/windows/nsColorPicker.cpp b/widget/windows/nsColorPicker.cpp
+index 777169f9783d..8643b226b546 100644
+--- a/widget/windows/nsColorPicker.cpp
++++ b/widget/windows/nsColorPicker.cpp
+@@ -192,12 +192,14 @@ NS_IMPL_ISUPPORTS(nsColorPicker, nsIColorPicker)
+ NS_IMETHODIMP
+ nsColorPicker::Init(mozIDOMWindowProxy* parent,
+                     const nsAString& title,
+-                    const nsAString& aInitialColor)
++                    const nsAString& aInitialColor,
++                    bool aShowsAlpha)
+ {
+   NS_PRECONDITION(parent,
+       "Null parent passed to colorpicker, no color picker for you!");
+   mParentWidget =  WidgetUtils::DOMWindowToWidget(nsPIDOMWindowOuter::From(parent));
+   mInitialColor = ColorStringToRGB(aInitialColor);
++  mShowsAlpha = aShowsAlpha;
+   return NS_OK;
+ }
+ 
+diff --git a/widget/windows/nsColorPicker.h b/widget/windows/nsColorPicker.h
+index 2227ba604a22..5772089abce5 100644
+--- a/widget/windows/nsColorPicker.h
++++ b/widget/windows/nsColorPicker.h
+@@ -48,12 +48,14 @@ public:
+   NS_DECL_ISUPPORTS
+ 
+   NS_IMETHOD Init(mozIDOMWindowProxy* parent, const nsAString& title,
+-                  const nsAString& aInitialColor);
++                  const nsAString& aInitialColor,
++                  bool aShowsAlpha);
+   NS_IMETHOD Open(nsIColorPickerShownCallback* aCallback);
+ 
+ private:
+   COLORREF mInitialColor;
+   nsCOMPtr<nsIWidget> mParentWidget;
++  bool mShowsAlpha;
+ };
+ 
+ #endif // nsColorPicker_h__
