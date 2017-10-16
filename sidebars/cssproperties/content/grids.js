@@ -58,6 +58,23 @@ function GridsSectionIniter(aElt, aRuleset)
   var v = parsedGta ? parsedGta.join("\n") : "";
   gDialog.gridTemplateAreaTextbox.value = v;
   gDialog.gridTemplateAreaTextbox.setAttribute("current", v);
+
+  /*
+  var gac = CssInspector.getCascadedValue(aRuleset, "grid-auto-columns");
+  deleteAllChildren(gDialog.gridAutoColumnsTreechildren);
+  if (gac)
+    Services.prompt.alert(null, "gac", gac);
+  try {
+    var parsedGac = CssInspector.parseGridAutoRowsOrColumns(gac);
+    if (parsedGac) {
+      for (var i = 0; i < parsedGac.length; i++) {
+        parsedGac[i].display(gDialog.gridAutoColumnsTreechildren);
+      }
+    }
+  }
+  catch(e) { Services.prompt.alert(null, "erreur parsing gac", e);}
+  RefreshGridTemplateListbox(gDialog.addGridAutoColumnButton, gDialog.gridAutoColumnsTree);
+  */
 }
 
 function ToggleDisplayGrid(aElt)
@@ -96,7 +113,7 @@ function RefreshGridTemplateListbox(aButton, aTree)
   aButton.disabled = false;
 }
 
-function DeleteGridTemplateEntry(aButton, aTree, aErrorElt)
+function DeleteGridTemplateEntry(aButton, aTree, aErrorElt, aAuto)
 {
   var index = aTree.view.selection.currentIndex;
   var item  = aTree.contentView.getItemAtIndex(index);
@@ -112,8 +129,12 @@ function DeleteGridTemplateEntry(aButton, aTree, aErrorElt)
   var v = SerializeGridTemplateRowsOrColumns(aTree.lastElementChild).trim();
   var parsed = null;
   try {
-    if (v)
-      parsed = CssInspector.parseGridTemplateRowsOrColumns(v);
+    if (v) {
+      if (aAuto)
+        parsed = CssInspector.parseGridAutoRowsOrColumns(v);
+      else
+        parsed = CssInspector.parseGridTemplateRowsOrColumns(v);
+    }
   }
   catch(e) {}
 
@@ -174,7 +195,7 @@ function UndoDeleteGridTemplateEntry(aButton, aTree, aErrorElt)
   aErrorElt.setAttribute("hidden", "true");
 }
 
-function AddGridTemplate(aButton, aTree, aErrorElt)
+function AddGridTemplate(aButton, aTree, aErrorElt, aAuto)
 {
   var reference = null;
   var referenceParent = aTree.lastElementChild;
@@ -212,7 +233,10 @@ function AddGridTemplate(aButton, aTree, aErrorElt)
   var v = SerializeGridTemplateRowsOrColumns(aTree.lastElementChild);
   var parsed = null;
   try {
-    parsed = CssInspector.parseGridTemplateRowsOrColumns(v);
+    if (aAuto)
+      parsed = CssInspector.parseGridAutoRowsOrColumns(v);
+    else
+      parsed = CssInspector.parseGridTemplateRowsOrColumns(v);
   }
   catch(e) {}
 

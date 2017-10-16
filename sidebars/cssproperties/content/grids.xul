@@ -76,6 +76,42 @@
            </rows>
         </grid>
 
+        <!--hbox>
+          <vbox flex="1">
+            <tree id="gridAutoColumnsTree"
+                  property="grid-auto-columns"
+                  hidecolumnpicker="true"
+                  seltype="single"
+                  class="listboxBg" flex="1"
+                  style="margin: 0px; min-width: 100px; height: 150px"
+                  onselect="RefreshGridTemplateListbox(gDialog.addGridAutoColumnButton, this)"
+                  treelines="true">
+              <treecols id="gridAutoColumnsTreecols">
+                <treecol id="gridAutoColumnsTreecol"
+                         primary="true"
+                         flex="1"
+                         label="Implicit column sizing"/>
+              </treecols>
+              <treechildren id="gridAutoColumnsTreechildren"/>
+            </tree>
+            <hbox class="listboxBg" align="center">
+              <toolbarbutton id="addGridAutoColumnButton"
+                             class="listboxBgPlusButton"
+                             oncommand="AddGridTemplate(gDialog.addGridAutoColumnButton, gDialog.gridAutoColumnsTree, gDialog.errorGridAutoColumnsImage, true)"/>
+              <toolbarbutton id="removeGridAutoColumnButton"
+                             class="listboxBgMinusButton"
+                             disabled="true"
+                             oncommand="DeleteGridTemplateEntry(gDialog.addGridAutoColumnButton, gDialog.GridAutoColumnsTree, gDialog.errorGridAutoColumnsImage, true)"/>
+              <spacer flex="1"/>
+              <toolbarbutton image="chrome://cssproperties/skin/error.png"
+                             id="errorGridAutoColumnsImage"
+                             tooltiptext="&invalidGridTemplateRowsOrColumns.label;"
+                             hidden="true"
+                             oncommand="UndoDeleteGridTemplateEntry(gDialog.addGridAutoColumnButton, gDialog.GridAutoColumnsTree, this)"/>
+            </hbox>
+          </vbox>
+        </hbox-->
+
         <hbox>
           <vbox flex="1">
             <tree id="gridTemplateColumnsTree"

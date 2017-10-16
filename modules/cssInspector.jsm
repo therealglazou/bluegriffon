@@ -1743,9 +1743,35 @@ var CssInspector = {
     if (token.isNotNull())
       return null;
     return rv;
+  },
+
+  parseGridAutoRowsOrColumns: function(aString)
+  {
+    var parser = new CSSParser();
+    parser._init();
+    parser.mPreserveWS       = false;
+    parser.mPreserveComments = false;
+    parser.mPreservedTokens = [];
+    parser.mScanner.init(aString);
+
+    var token = parser.getToken(true, true);
+    if (!token.isNotNull())
+      return null;
+
+    var rv = [];
+
+    while (token.isNotNull()) {
+      var trackSize = this.parseGridTrackSize(parser, token);
+      if (trackSize)
+        rv.push(trackSize);
+      else
+        return null;
+
+      token = parser.getToken(true, true);
+    }
+    return rv;
   }
 };
-
 
 /************************************************************/
 /************************** JSCSSP **************************/
