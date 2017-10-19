@@ -19,7 +19,7 @@ The Open Source next-generation Web Editor based on the rendering engine of Fire
 
 * update the mozilla tree
 
-  ```hg update -r `cat bluegriffon/config/mozilla_central_revision.txt```
+  ```hg update -r `cat bluegriffon/config/mozilla_central_revision.txt` ```
 
   `patch -p 1 < bluegriffon/config/content.patch`
 
@@ -42,7 +42,7 @@ The Open Source next-generation Web Editor based on the rendering engine of Fire
 
 * update the mozilla tree
 
-  ```git reset --hard `cat bluegriffon/config/gecko_dev_revision.txt```
+  ```git reset --hard `cat bluegriffon/config/gecko_dev_revision.txt` ```
 
   `patch -p 1 < bluegriffon/config/gecko_dev_content.patch`
 
