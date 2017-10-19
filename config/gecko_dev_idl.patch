@@ -1,0 +1,22 @@
+diff --git a/editor/nsIEditorMouseObserver.idl b/editor/nsIEditorMouseObserver.idl
+new file mode 100644
+--- /dev/null
++++ b/editor/nsIEditorMouseObserver.idl
+@@ -0,0 +1,17 @@
++/* -*- Mode: C++; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
++/* This Source Code Form is subject to the terms of the Mozilla Public
++ * License, v. 2.0. If a copy of the MPL was not distributed with this
++ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
++
++#include "nsISupports.idl"
++#include "domstubs.idl"
++
++
++[scriptable, uuid(7A76F573-7512-4051-BB20-E6E279F26F55)]
++
++interface nsIEditorMouseObserver : nsISupports {
++
++  bool MouseDown(in int32_t aClientX, in int32_t aClientY, in nsIDOMNode aTarget, in boolean aShiftKey);
++  bool MouseUp(in int32_t aClientX, in int32_t aClientY, in nsIDOMNode aTarget, in boolean aShiftKey);
++  bool MouseMove(in int32_t aClientX, in int32_t aClientY, in nsIDOMNode aTarget, in boolean aShiftKey);
++};
