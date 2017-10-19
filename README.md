@@ -46,6 +46,8 @@ The Open Source next-generation Web Editor based on the rendering engine of Fire
 
   `patch -p 1 < bluegriffon/config/gecko_dev_content.patch`
 
+  `patch -p 1 < bluegriffon/config/gecko_dev_idl.patch`
+
 * create a `.mozconfig` file inside your `bluegriffon-source` directory. The  settings I am using on a daily basis on OS X (Sierra) can be found in `bluegriffon/config/mozconfig.macosx`
 
 ## My own builds
