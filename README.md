@@ -21,7 +21,7 @@ The Open Source next-generation Web Editor based on the rendering engine of Fire
 
   ```hg update -r `cat bluegriffon/config/mozilla_central_revision.txt` ```
 
-  `patch -p 1 < bluegriffon/config/content.patch`
+  `patch -p 1 < bluegriffon/config/mozilla_central_content.patch`
 
 * create a `.mozconfig` file inside your `bluegriffon-source` directory. The  settings I am using on a daily basis on OS X (Sierra) can be found in `bluegriffon/config/mozconfig.macosx`
 
