@@ -1638,7 +1638,7 @@ diff --git a/dom/xml/nsXMLContentSink.cpp b/dom/xml/nsXMLContentSink.cpp
    // The expat driver should report the error.  We're just cleaning up the mess.
    *_retval = true;
  
-@@ -1358,26 +1360,34 @@ nsXMLContentSink::ReportError(const char
+@@ -1358,26 +1360,32 @@ nsXMLContentSink::ReportError(const char
      return NS_OK;
    }
  
@@ -1651,9 +1651,7 @@ diff --git a/dom/xml/nsXMLContentSink.cpp b/dom/xml/nsXMLContentSink.cpp
 +  nsAutoString lineString, colString;
 +  lineString.AppendInt(aLineNumber);
 +  colString.AppendInt(aColNumber);
-+  const char16_t* noAtts[] = { NS_LITERAL_STRING("line").get(),
-+                                lineString.get(),
-+                                NS_LITERAL_STRING("col").get(),
++  const char16_t* noAtts[] = {  lineString.get(),
 +                                colString.get(),
 +                                0,
 +                                0 };
@@ -3221,125 +3219,6 @@ diff --git a/editor/libeditor/HTMLStyleEditor.cpp b/editor/libeditor/HTMLStyleEd
    if (!cancel) {
      // Post-process
      rv = rules->DidDoAction(selection, &ruleInfo, rv);
-diff --git a/editor/libeditor/HTMLTableEditor.cpp b/editor/libeditor/HTMLTableEditor.cpp
---- a/editor/libeditor/HTMLTableEditor.cpp
-+++ b/editor/libeditor/HTMLTableEditor.cpp
-@@ -2311,42 +2311,90 @@ HTMLEditor::MergeCells(nsCOMPtr<nsIDOMEl
-   nsCOMPtr<dom::Element> targetCell = do_QueryInterface(aTargetCell);
-   nsCOMPtr<dom::Element> cellToMerge = do_QueryInterface(aCellToMerge);
-   NS_ENSURE_TRUE(targetCell && cellToMerge, NS_ERROR_NULL_POINTER);
- 
-   // Prevent rules testing until we're done
-   AutoRules beginRulesSniffing(this, EditAction::deleteNode, nsIEditor::eNext);
- 
-   // Don't need to merge if cell is empty
-+  nsresult res;
-   if (!IsEmptyCell(cellToMerge)) {
-     // Get index of last child in target cell
-     // If we fail or don't have children,
-     //  we insert at index 0
-     int32_t insertIndex = 0;
- 
-     // Start inserting just after last child
-     uint32_t len = targetCell->GetChildCount();
--    if (len == 1 && IsEmptyCell(targetCell)) {
-+    bool isTargetCellEmpty = IsEmptyCell(targetCell);
-+    if (len == 1 && isTargetCellEmpty) {
-       // Delete the empty node
-       nsIContent* cellChild = targetCell->GetFirstChild();
-       nsresult rv = DeleteNode(cellChild->AsDOMNode());
-       NS_ENSURE_SUCCESS(rv, rv);
-       insertIndex = 0;
-     } else {
-       insertIndex = (int32_t)len;
-+      // Insert a break at the beginning of source cell if we need it.
-+      // We need it if both cells are non-empty from a content point of view.
-+      if (!isTargetCellEmpty) {
-+        // Let's look for the last child of the target cell that is not
-+        // an empty text node
-+        nsIContent* targetCellChild = targetCell->GetLastChild();
-+        nsCOMPtr<nsIDOMNode> targetCellChildNode = targetCellChild->AsDOMNode();
-+        bool isEmptyTextNode = false;
-+        while (targetCellChildNode
-+               && EditorBase::IsTextNode(targetCellChildNode)
-+               && (NS_SUCCEEDED(IsEmptyNode(targetCellChildNode, &isEmptyTextNode)) && isEmptyTextNode)) {
-+          res = targetCellChildNode->GetPreviousSibling(getter_AddRefs(targetCellChildNode));
-+          NS_ENSURE_SUCCESS(res, res);
-+        }
-+        // we know targetCellChildNode cannot be null at this point because
-+        // we tested isTargetCellEmpty above...
-+        bool isBlock = false;
-+        NodeIsBlock(targetCellChildNode, &isBlock);
-+        // Lets check if targetCellChildNode is a block or a break
-+        if (!isBlock && !TextEditUtils::IsBreak(targetCellChildNode)) {
-+          // It's not, we may have to insert a break...
-+          // Let's look for the first child of the source cell that is not
-+          // an empty text node
-+          nsCOMPtr<nsIDOMNode> cellChildNode = cellToMerge->GetFirstChild()->AsDOMNode();
-+          while (cellChildNode
-+                 && EditorBase::IsTextNode(cellChildNode)
-+                 && (NS_SUCCEEDED(IsEmptyNode(cellChildNode, &isEmptyTextNode)) && isEmptyTextNode)) {
-+            res = cellChildNode->GetPreviousSibling(getter_AddRefs(cellChildNode));
-+            NS_ENSURE_SUCCESS(res, res);
-+          }
-+          // we also know cellChildNode cannot be null at this point because
-+          // we tested IsEmptyCell(cellToMerge) above...
-+          isBlock = false;
-+          NodeIsBlock(cellChildNode, &isBlock);
-+          // Lets check if targetCellChildNode is a block or a break
-+          if (!isBlock && !TextEditUtils::IsBreak(cellChildNode)) {
-+            // so both last visible node of target cell and first visible node of
-+            // source cell are not blocks or breaks. We need to insert
-+            // a break as first child of source cell so the merged contents
-+            // are separated by that break.
-+            nsCOMPtr<nsIDOMNode> brNode;
-+            res = CreateBR(aCellToMerge, 0, address_of(brNode));
-+            NS_ENSURE_SUCCESS(res, res);
-+          }
-+        }
-+      }
-     }
- 
-     // Move the contents
-     while (cellToMerge->HasChildren()) {
-       nsCOMPtr<nsIDOMNode> cellChild = cellToMerge->GetLastChild()->AsDOMNode();
--      nsresult rv = DeleteNode(cellChild);
--      NS_ENSURE_SUCCESS(rv, rv);
--
--      rv = InsertNode(cellChild, aTargetCell, insertIndex);
--      NS_ENSURE_SUCCESS(rv, rv);
-+      res = DeleteNode(cellChild);
-+      NS_ENSURE_SUCCESS(res, res);
-+
-+      res = InsertNode(cellChild, aTargetCell, insertIndex);
-+      NS_ENSURE_SUCCESS(res, res);
-     }
-   }
- 
-   // Delete cells whose contents were moved
-   if (aDeleteCellToMerge) {
-     return DeleteNode(aCellToMerge);
-   }
- 
-@@ -2717,17 +2765,17 @@ HTMLEditor::GetCellDataAt(nsIDOMElement*
-   }
- 
-   nsTableWrapperFrame* tableFrame = GetTableFrame(aTable);
-   NS_ENSURE_TRUE(tableFrame, NS_ERROR_FAILURE);
- 
-   nsTableCellFrame* cellFrame =
-     tableFrame->GetCellFrameAt(aRowIndex, aColIndex);
-   if (!cellFrame) {
--    return NS_ERROR_FAILURE;
-+    return NS_SUCCESS_EDITOR_ELEMENT_NOT_FOUND;
-   }
- 
-   *aIsSelected = cellFrame->IsSelected();
-   cellFrame->GetRowIndex(*aStartRowIndex);
-   cellFrame->GetColIndex(*aStartColIndex);
-   *aRowSpan = cellFrame->GetRowSpan();
-   *aColSpan = cellFrame->GetColSpan();
-   *aActualRowSpan = tableFrame->GetEffectiveRowSpanAt(aRowIndex, aColIndex);
 diff --git a/editor/libeditor/TextEditorDataTransfer.cpp b/editor/libeditor/TextEditorDataTransfer.cpp
 --- a/editor/libeditor/TextEditorDataTransfer.cpp
 +++ b/editor/libeditor/TextEditorDataTransfer.cpp
@@ -3612,6 +3491,28 @@ diff --git a/gfx/src/nsColor.h b/gfx/src/nsColor.h
  // the float parameters are all expected to be in the range 0-1
  nscolor NS_HSL2RGB(float h, float s, float l);
  
+diff --git a/gfx/webrender_bindings/src/bindings.rs b/gfx/webrender_bindings/src/bindings.rs
+--- a/gfx/webrender_bindings/src/bindings.rs
++++ b/gfx/webrender_bindings/src/bindings.rs
+@@ -704,17 +704,17 @@ pub unsafe extern "C" fn wr_renderer_rea
+                                               width: u32,
+                                               height: u32,
+                                               dst_buffer: *mut u8,
+                                               buffer_size: usize) {
+     assert!(is_in_render_thread());
+ 
+     renderer.gl().flush();
+ 
+-    let mut slice = slice::from_raw_parts_mut(dst_buffer, buffer_size);
++    let slice = slice::from_raw_parts_mut(dst_buffer, buffer_size);
+     renderer.gl().read_pixels_into_buffer(0,
+                                           0,
+                                           width as gl::GLsizei,
+                                           height as gl::GLsizei,
+                                           get_gl_format_bgra(renderer.gl()),
+                                           gl::UNSIGNED_BYTE,
+                                           slice);
+ }
 diff --git a/image/imgICache.idl b/image/imgICache.idl
 --- a/image/imgICache.idl
 +++ b/image/imgICache.idl
@@ -4664,6 +4565,266 @@ diff --git a/widget/cocoa/nsCocoaUtils.mm b/widget/cocoa/nsCocoaUtils.mm
    NSMenu* newMenuBar = [[NSMenu alloc] initWithTitle:@""];
    
    // Swap in our app menu. Note that the event target is whatever window is up when
+diff --git a/widget/cocoa/nsCocoaWindow.mm b/widget/cocoa/nsCocoaWindow.mm
+--- a/widget/cocoa/nsCocoaWindow.mm
++++ b/widget/cocoa/nsCocoaWindow.mm
+@@ -62,16 +62,44 @@ int32_t gXULModalLevel = 0;
+ nsCocoaWindowList *gGeckoAppModalWindowList = NULL;
+ 
+ // defined in nsMenuBarX.mm
+ extern NSMenu* sApplicationMenu; // Application menu shared by all menubars
+ 
+ // defined in nsChildView.mm
+ extern BOOL                gSomeMenuBarPainted;
+ 
++#if !defined(MAC_OS_X_VERSION_10_9) || \
++    MAC_OS_X_VERSION_MAX_ALLOWED < MAC_OS_X_VERSION_10_9
++
++enum NSWindowOcclusionState {
++  NSWindowOcclusionStateVisible = 0x1 << 1
++};
++
++@interface NSWindow(OcclusionState)
++- (NSWindowOcclusionState) occlusionState;
++@end
++
++#endif
++
++#if !defined(MAC_OS_X_VERSION_10_10) || \
++    MAC_OS_X_VERSION_MAX_ALLOWED < MAC_OS_X_VERSION_10_10
++
++enum NSWindowTitleVisibility {
++  NSWindowTitleVisible = 0,
++  NSWindowTitleHidden  = 1
++};
++
++@interface NSWindow(TitleVisibility)
++- (void)setTitleVisibility:(NSWindowTitleVisibility)visibility;
++- (void)setTitlebarAppearsTransparent:(BOOL)isTitlebarTransparent;
++@end
++
++#endif
++
+ #if !defined(MAC_OS_X_VERSION_10_12) || \
+     MAC_OS_X_VERSION_MAX_ALLOWED < MAC_OS_X_VERSION_10_12
+ 
+ @interface NSWindow(AutomaticWindowTabbing)
+ + (void)setAllowsAutomaticWindowTabbing:(BOOL)allow;
+ @end
+ 
+ #endif
+@@ -450,16 +478,25 @@ nsresult nsCocoaWindow::CreateNativeWind
+   // BorderlessWindow class.
+   else if (features == NSBorderlessWindowMask)
+     windowClass = [BorderlessWindow class];
+ 
+   // Create the window
+   mWindow = [[windowClass alloc] initWithContentRect:contentRect styleMask:features 
+                                  backing:NSBackingStoreBuffered defer:YES];
+ 
++  if ([mWindow respondsToSelector:@selector(setTitleVisibility:)]) {
++    // By default, hide window titles.
++    [mWindow setTitleVisibility:NSWindowTitleHidden];
++  }
++  if ([mWindow respondsToSelector:@selector(setTitlebarAppearsTransparent:)]) {
++    // By default, hide window titlebars.
++    [mWindow setTitlebarAppearsTransparent:YES];
++  }
++
+   // setup our notification delegate. Note that setDelegate: does NOT retain.
+   mDelegate = [[WindowDelegate alloc] initWithGeckoWindow:this];
+   [mWindow setDelegate:mDelegate];
+ 
+   // Make sure that the content rect we gave has been honored.
+   NSRect wantedFrame = [mWindow frameRectForContentRect:contentRect];
+   if (!NSEqualRects([mWindow frame], wantedFrame)) {
+     // This can happen when the window is not on the primary screen.
+@@ -848,19 +885,21 @@ nsCocoaWindow::Show(bool bState)
+                         object:@"org.mozilla.gecko.PopupWindow"];
+       }
+ 
+       // If a parent window was supplied and this is a popup at the parent
+       // level, set its child window. This will cause the child window to
+       // appear above the parent and move when the parent does. Setting this
+       // needs to happen after the _setWindowNumber calls above, otherwise the
+       // window doesn't focus properly.
+-      if (nativeParentWindow && mPopupLevel == ePopupLevelParent)
++      if (nativeParentWindow && mPopupLevel == ePopupLevelParent) {
+         [nativeParentWindow addChildWindow:mWindow
+                             ordered:NSWindowAbove];
++        [mWindow setLevel:NSPopUpMenuWindowLevel];
++      }
+     }
+     else {
+       NS_OBJC_BEGIN_TRY_ABORT_BLOCK;
+       if (mWindowType == eWindowType_toplevel &&
+           [mWindow respondsToSelector:@selector(setAnimationBehavior:)]) {
+         NSWindowAnimationBehavior behavior;
+         if (mIsAnimationSuppressed) {
+           behavior = NSWindowAnimationBehaviorNone;
+@@ -1325,16 +1364,17 @@ nsCocoaWindow::HideWindowChrome(bool aSh
+   // Reparent the content view.
+   [mWindow setContentView:contentView];
+   [contentView release];
+ 
+   // Reparent child windows.
+   enumerator = [childWindows objectEnumerator];
+   while ((child = [enumerator nextObject])) {
+     [mWindow addChildWindow:child ordered:NSWindowAbove];
++    [mWindow setLevel:NSPopUpMenuWindowLevel];
+   }
+ 
+   // Show the new window.
+   if (isVisible) {
+     bool wasAnimationSuppressed = mIsAnimationSuppressed;
+     mIsAnimationSuppressed = true;
+     Show(true);
+     mIsAnimationSuppressed = wasAnimationSuppressed;
+@@ -2208,17 +2248,23 @@ void nsCocoaWindow::SetWindowAnimationTy
+   mAnimationType = aType;
+ }
+ 
+ void
+ nsCocoaWindow::SetDrawsTitle(bool aDrawTitle)
+ {
+   NS_OBJC_BEGIN_TRY_ABORT_BLOCK;
+ 
+-  [mWindow setWantsTitleDrawn:aDrawTitle];
++  if (![mWindow drawsContentsIntoWindowFrame]) {
++    // If we don't draw into the window frame, we always want to display window
++    // titles.
++    [mWindow setWantsTitleDrawn:YES];
++  } else {
++    [mWindow setWantsTitleDrawn:aDrawTitle];
++  }
+ 
+   NS_OBJC_END_TRY_ABORT_BLOCK;
+ }
+ 
+ void
+ nsCocoaWindow::SetUseBrightTitlebarForeground(bool aBrightForeground)
+ {
+   NS_OBJC_BEGIN_TRY_ABORT_BLOCK;
+@@ -2751,16 +2797,17 @@ GetDPI(NSWindow* aWindow)
+   CGFloat backingScale = GetBackingScaleFactor(aWindow);
+ 
+   return dpi * backingScale;
+ }
+ 
+ @interface NSView(FrameViewMethodSwizzling)
+ - (NSPoint)FrameView__closeButtonOrigin;
+ - (NSPoint)FrameView__fullScreenButtonOrigin;
++- (BOOL)FrameView__wantsFloatingTitlebar;
+ @end
+ 
+ @implementation NSView(FrameViewMethodSwizzling)
+ 
+ - (NSPoint)FrameView__closeButtonOrigin
+ {
+   NSPoint defaultPosition = [self FrameView__closeButtonOrigin];
+   if ([[self window] isKindOfClass:[ToolbarWindow class]]) {
+@@ -2773,16 +2820,21 @@ GetDPI(NSWindow* aWindow)
+ {
+   NSPoint defaultPosition = [self FrameView__fullScreenButtonOrigin];
+   if ([[self window] isKindOfClass:[ToolbarWindow class]]) {
+     return [(ToolbarWindow*)[self window] fullScreenButtonPositionWithDefaultPosition:defaultPosition];
+   }
+   return defaultPosition;
+ }
+ 
++- (BOOL)FrameView__wantsFloatingTitlebar
++{
++  return NO;
++}
++
+ @end
+ 
+ static NSMutableSet *gSwizzledFrameViewClasses = nil;
+ 
+ @interface NSWindow(PrivateSetNeedsDisplayInRectMethod)
+  - (void)_setNeedsDisplayInRect:(NSRect)aRect;
+ @end
+ 
+@@ -2865,16 +2917,19 @@ static NSMutableSet *gSwizzledFrameViewC
+   }
+ 
+   static IMP our_closeButtonOrigin =
+     class_getMethodImplementation([NSView class],
+                                   @selector(FrameView__closeButtonOrigin));
+   static IMP our_fullScreenButtonOrigin =
+     class_getMethodImplementation([NSView class],
+                                   @selector(FrameView__fullScreenButtonOrigin));
++  static IMP our_wantsFloatingTitlebar =
++    class_getMethodImplementation([NSView class],
++                                  @selector(FrameView__wantsFloatingTitlebar));
+ 
+   if (![gSwizzledFrameViewClasses containsObject:frameViewClass]) {
+     // Either of these methods might be implemented in both a subclass of
+     // NSFrameView and one of its own subclasses.  Which means that if we
+     // aren't careful we might end up swizzling the same method twice.
+     // Since method swizzling involves swapping pointers, this would break
+     // things.
+     IMP _closeButtonOrigin =
+@@ -2887,16 +2942,24 @@ static NSMutableSet *gSwizzledFrameViewC
+     IMP _fullScreenButtonOrigin =
+       class_getMethodImplementation(frameViewClass,
+                                     @selector(_fullScreenButtonOrigin));
+     if (_fullScreenButtonOrigin &&
+         _fullScreenButtonOrigin != our_fullScreenButtonOrigin) {
+       nsToolkit::SwizzleMethods(frameViewClass, @selector(_fullScreenButtonOrigin),
+                                 @selector(FrameView__fullScreenButtonOrigin));
+     }
++    IMP _wantsFloatingTitlebar =
++      class_getMethodImplementation(frameViewClass,
++                                    @selector(_wantsFloatingTitlebar));
++    if (_wantsFloatingTitlebar &&
++        _wantsFloatingTitlebar != our_wantsFloatingTitlebar) {
++      nsToolkit::SwizzleMethods(frameViewClass, @selector(_wantsFloatingTitlebar),
++                                @selector(FrameView__wantsFloatingTitlebar));
++    }
+     [gSwizzledFrameViewClasses addObject:frameViewClass];
+   }
+ 
+   return frameViewClass;
+ }
+ 
+ - (id)initWithContentRect:(NSRect)aContentRect styleMask:(NSUInteger)aStyle backing:(NSBackingStoreType)aBufferingType defer:(BOOL)aFlag
+ {
+@@ -3003,27 +3066,34 @@ static const NSString* kStateCollectionB
+ 
+ - (void)setDrawsContentsIntoWindowFrame:(BOOL)aState
+ {
+   bool changed = (aState != mDrawsIntoWindowFrame);
+   mDrawsIntoWindowFrame = aState;
+   if (changed) {
+     [self updateContentViewSize];
+     [self reflowTitlebarElements];
++    if ([self respondsToSelector:@selector(setTitlebarAppearsTransparent:)]) {
++      [self setTitlebarAppearsTransparent:mDrawsIntoWindowFrame];
++    }
+   }
+ }
+ 
+ - (BOOL)drawsContentsIntoWindowFrame
+ {
+   return mDrawsIntoWindowFrame;
+ }
+ 
+ - (void)setWantsTitleDrawn:(BOOL)aDrawTitle
+ {
+   mDrawTitle = aDrawTitle;
++  if ([self respondsToSelector:@selector(setTitleVisibility:)]) {
++    [self setTitleVisibility:mDrawTitle ? NSWindowTitleVisible :
++                                          NSWindowTitleHidden];
++  }
+ }
+ 
+ - (BOOL)wantsTitleDrawn
+ {
+   return mDrawTitle;
+ }
+ 
+ - (void)setUseBrightTitlebarForeground:(BOOL)aBrightForeground
 diff --git a/widget/cocoa/nsColorPicker.h b/widget/cocoa/nsColorPicker.h
 --- a/widget/cocoa/nsColorPicker.h
 +++ b/widget/cocoa/nsColorPicker.h
