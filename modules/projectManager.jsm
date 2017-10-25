@@ -120,7 +120,7 @@ var ProjectManager = {
       var dbConn = this.getDBConn();
       var statement = dbConn.createStatement("DELETE FROM 'projects' WHERE name=?1");
     
-      statement.bindUTF8StringByIndex(0, aName);
+      statement.bindUTF8StringParameter(0, aName);
        
       statement.execute();
       statement.finalize();
@@ -146,17 +146,17 @@ var ProjectManager = {
     if (!(name in this.projects)) { // sanity check
       var dbConn = this.getDBConn();
       var statement = dbConn.createStatement("INSERT INTO 'projects' ('name', 'storageChoice', 'hostname', 'rootpath', 'user', 'passiveMode', 'ipv6Mode', 'port', 'localStoreHome', 'exclusions', 'timeShift') VALUES(?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11)");
-      statement.bindUTF8StringByIndex(0, name);
-      statement.bindUTF8StringByIndex(1, storageChoice);
-      statement.bindUTF8StringByIndex(2, hostname);
-      statement.bindUTF8StringByIndex(3, rootpath);
-      statement.bindUTF8StringByIndex(4, user);
-      statement.bindUTF8StringByIndex(5, passiveMode);
-      statement.bindUTF8StringByIndex(6, ipv6Mode);
-      statement.bindUTF8StringByIndex(7, port);
-      statement.bindUTF8StringByIndex(8, localStoreHome);
-      statement.bindUTF8StringByIndex(9, exclusions);
-      statement.bindUTF8StringByIndex(10, timeShift);
+      statement.bindUTF8StringParameter(0, name);
+      statement.bindUTF8StringParameter(1, storageChoice);
+      statement.bindUTF8StringParameter(2, hostname);
+      statement.bindUTF8StringParameter(3, rootpath);
+      statement.bindUTF8StringParameter(4, user);
+      statement.bindUTF8StringParameter(5, passiveMode);
+      statement.bindUTF8StringParameter(6, ipv6Mode);
+      statement.bindUTF8StringParameter(7, port);
+      statement.bindUTF8StringParameter(8, localStoreHome);
+      statement.bindUTF8StringParameter(9, exclusions);
+      statement.bindUTF8StringParameter(10, timeShift);
 
       statement.execute();
       statement.finalize();
@@ -202,17 +202,17 @@ port=?8,\
 localStoreHome=?9,\
 exclusions=?10,\
 timeShift=?11 WHERE name=?1");
-      statement.bindUTF8StringByIndex(0, name);
-      statement.bindUTF8StringByIndex(1, storageChoice);
-      statement.bindUTF8StringByIndex(2, hostname);
-      statement.bindUTF8StringByIndex(3, rootpath);
-      statement.bindUTF8StringByIndex(4, user);
-      statement.bindUTF8StringByIndex(5, passiveMode);
-      statement.bindUTF8StringByIndex(6, ipv6Mode);
-      statement.bindUTF8StringByIndex(7, port);
-      statement.bindUTF8StringByIndex(8, localStoreHome);
-      statement.bindUTF8StringByIndex(9, exclusions);
-      statement.bindUTF8StringByIndex(10, timeShift);
+      statement.bindUTF8StringParameter(0, name);
+      statement.bindUTF8StringParameter(1, storageChoice);
+      statement.bindUTF8StringParameter(2, hostname);
+      statement.bindUTF8StringParameter(3, rootpath);
+      statement.bindUTF8StringParameter(4, user);
+      statement.bindUTF8StringParameter(5, passiveMode);
+      statement.bindUTF8StringParameter(6, ipv6Mode);
+      statement.bindUTF8StringParameter(7, port);
+      statement.bindUTF8StringParameter(8, localStoreHome);
+      statement.bindUTF8StringParameter(9, exclusions);
+      statement.bindUTF8StringParameter(10, timeShift);
     
       statement.execute();
       statement.finalize();

@@ -518,9 +518,9 @@ function StoreAllShortcuts()
     var statement = mDBConn.createStatement(
       "INSERT INTO 'shortcuts' ('selector','modifiers','key') VALUES(?1, ?2, ?3)");
 
-    statement.bindStringByIndex(0, selector);
-    statement.bindStringByIndex(1, modifiers);
-    statement.bindStringByIndex(2, kbdkey);
+    statement.bindStringParameter(0, selector);
+    statement.bindStringParameter(1, modifiers);
+    statement.bindStringParameter(2, kbdkey);
     statement.execute();
     statement.finalize();
   }
