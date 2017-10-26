@@ -133,7 +133,7 @@ var cmdSave =
         var mode = EditorUtils.isWysiwygMode();
         if (!mode) {
           var editorElement = EditorUtils.getCurrentEditorElement();
-          var sourceIframe = editorElement.parentNode.firstElementChild;
+          var sourceIframe = EditorUtils.getCurrentSourceEditorElement();
           var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
           var source = sourceEditor.getValue();
 
@@ -186,7 +186,7 @@ var cmdSaveAs =
         var mode = EditorUtils.isWysiwygMode();
         if (!mode) {
           var editorElement = EditorUtils.getCurrentEditorElement();
-          var sourceIframe = editorElement.parentNode.firstElementChild;
+          var sourceIframe = EditorUtils.getCurrentSourceEditorElement();
           var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
           var source = sourceEditor.getValue();
 
