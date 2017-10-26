@@ -165,7 +165,7 @@
             const editors = this.mTabPanels.childNodes;
             for (var i = 0; i < editors.length; i++)
             {
-              editors[i].lastChild.removeEventListener("DOMTitleChanged", this.changeTabTitle, false);
+              editors[i].firstChild.removeEventListener("DOMTitleChanged", this.changeTabTitle, false);
             }
           }
         ]]>
@@ -505,7 +505,7 @@
             this.mVruler.removeAttribute("disabled");
 
             var newBox = this._newEditor();
-            var newEditorElement = newBox.lastChild;
+            var newEditorElement = newBox.firstChild;
 
             var newTab = this.mTabs.appendItem(aTitle,
                            UrlUtils.stripUsernamePassword(aURL, null, null));
@@ -591,7 +591,7 @@
           var l = editors.length;
           for (var i = 0; i < l; i++)
           {
-            if (editors.item(i).lastChild == e)
+            if (editors.item(i).firstChild == e)
             {
               var tab = tabs.item(i);
               var title = UpdateWindowTitle(e);
@@ -633,10 +633,19 @@
         <![CDATA[
             var editors = this.mTabpanels.childNodes;
             for (var i = 0; i < editors.length; i++)
-              editors.item(i).lastChild.removeAttribute("type");
+              editors.item(i).firstChild.removeAttribute("type");
 
             var newBox = document.createElement("deck");
             newBox.setAttribute("anonid", "editorDeck");
+
+            var newEditorElement = document.createElement("editor");
+            newEditorElement.setAttribute("context", "editorContextMenu");
+            newEditorElement.setAttribute("type", "content-primary");
+            newBox.appendChild(newEditorElement);
+
+            var splitter = document.createElement("splitter");
+            splitter.className = "liveViewSplitter";
+            newBox.appendChild(splitter);
 
             var iframe = document.createElement("iframe");
             var _self = this;
@@ -646,14 +655,7 @@
             iframe.setAttribute("src", "resource://gre/res/cm2.html");
             newBox.appendChild(iframe);
 
-            var splitter = document.createElement("splitter");
-            splitter.className = "liveViewSplitter";
-            newBox.appendChild(splitter);
-
-            var newEditorElement = document.createElement("editor");
-            newEditorElement.setAttribute("context", "editorContextMenu");
-            newEditorElement.setAttribute("type", "content-primary");
-            newBox.appendChild(newEditorElement);
+            newBox.setAttribute("selectedIndex", "1");
 
             newEditorElement.addEventListener("focus", function() { WysiwygLiveViewEditorFocused(false); },  true);
             iframe.addEventListener("focus", function() { SourceLiveViewEditorFocused(); },  true);
@@ -668,7 +670,7 @@
             if (this.mTabpanels.childNodes
                 && this.mTabpanels.childNodes.length
                 && this.mTabpanels.selectedPanel)
-              return this.mTabpanels.selectedPanel.lastChild;
+              return this.mTabpanels.selectedPanel.firstChild;
             return null;
         ]]>
         </body>
@@ -681,7 +683,7 @@
             var editors = this.mTabpanels.childNodes;
             for (var i = 0; i < editors.length; i++)
             {
-              var editorElt = editors.item(i).lastChild;
+              var editorElt = editors.item(i).firstChild;
               var editor = editorElt.getEditor(editorElt.contentWindow);
               if (editor.document.URL == aURL)
                 return editorElt;
@@ -703,7 +705,7 @@
 
            var editors = this.mTabpanels.childNodes;
            for (var i = 0; i < editors.length; i++)
-             editors.item(i).lastChild.removeAttribute("type");
+             editors.item(i).firstChild.removeAttribute("type");
 
            this.getCurrentEditorElement().setAttribute("type", "content-primary");
            GetWindowContent().focus();
@@ -713,7 +715,7 @@
            NotifierUtils.notify("tabSelected");
            var deck = this.getCurrentEditorElement().parentNode;
            var mode = deck.getAttribute("previousMode") || "wysiwyg";
-           deck.selectedIndex = (mode == "source") ? 0 : 1;
+           deck.selectedIndex = (mode == "source") ? 1 : 0;
            gDialog.bespinToolbox1.hidden = true;
            gDialog.bespinToolbox2.hidden = true;
            if (mode == "source") {
@@ -724,7 +726,7 @@
              gDialog.structurebar.style.visibility = "hidden";
              HandlersManager.hideAllHandlers();
              gDialog.tabeditor.enableRulers(false);
-             deck.firstChild.focus();
+             deck.lastElementChild.focus();
            }
            else if (mode == "liveview") {
              gDialog.liveViewModeButton.setAttribute("selected", "true");
@@ -741,7 +743,7 @@
              }
              else {
                gDialog.structurebar.style.visibility = "";
-               deck.lastElementChild.focus();
+               deck.firstElementChild.focus();
                var selcon = EditorUtils.getSelectionContainer();
                if (selcon) {
                  NotifierUtils.notify("selection", selcon.node, true)
@@ -764,7 +766,7 @@
              }
              gDialog.sourceModeButton.removeAttribute("selected");
              gDialog.structurebar.style.visibility = "";
-             deck.lastChild.focus();
+             deck.firstChild.focus();
              var selcon = EditorUtils.getSelectionContainer();
              if (selcon) {
                NotifierUtils.notify("selection", selcon.node, true)
@@ -803,7 +805,7 @@
           var i, l = editors.length;
           for (i=0; i< l; i++)
           {
-            var e = editors[i].lastChild;
+            var e = editors[i].firstChild;
             var elt = e.getEditor(e.contentWindow);
             if (elt &&
                 this._trimTrailingSlash(elt.document.URL) == this._trimTrailingSlash(aURL))

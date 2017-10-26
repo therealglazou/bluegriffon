@@ -147,7 +147,7 @@ var FileChangeUtils = {
     var tabeditor = aWindow.document.getElementById("tabeditor");
     var decks = tabeditor.mTabpanels.childNodes;
     for (var i = 0; i < decks.length; i++) {
-      this.lookForChangesForEditor(decks[i].lastChild);
+      this.lookForChangesForEditor(decks[i].firstChild);
     }
   },
 

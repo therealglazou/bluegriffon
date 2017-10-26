@@ -173,7 +173,7 @@ var BlueGriffonPrefsObserver = {
         var editors = w.gDialog.tabeditor.mTabpanels.childNodes;
         for (var i = 0; i < editors.length; i++) {
           try {
-            var e = editors[i].lastChild;
+            var e = editors[i].firstChild;
             var innerEditor = e.getEditor(e.contentWindow);
             innerEditor.returnInParagraphCreatesNewParagraph = value;
           }
@@ -190,7 +190,7 @@ var BlueGriffonPrefsObserver = {
         var editors = w.gDialog.tabeditor.mTabpanels.childNodes;
         for (var i = 0; i < editors.length; i++) {
           try {
-            var e = editors[i].lastChild;
+            var e = editors[i].firstChild;
             var innerEditor = e.getEditor(e.contentWindow);
             innerEditor.setSpellcheckUserOverride(value);
           }
@@ -294,7 +294,7 @@ var BlueGriffonPrefsObserver = {
         var editors = w.gDialog.tabeditor.mTabpanels.childNodes;
         for (var i = 0; i < editors.length; i++) {
           try {
-            var e = editors[i].lastChild;
+            var e = editors[i].firstChild;
             var innerEditor = e.getEditor(e.contentWindow);
             innerEditor.document.documentElement.setAttribute("_moz_hide", value);
           }
@@ -310,7 +310,7 @@ var BlueGriffonPrefsObserver = {
         var editors = w.gDialog.tabeditor.mTabpanels.childNodes;
         for (var i = 0; i < editors.length; i++) {
           try {
-            var e = editors[i].lastChild;
+            var e = editors[i].firstChild;
             var innerEditor = e.getEditor(e.contentWindow);
             if (value)
               innerEditor.document.documentElement.setAttribute("_moz_showanchors", "true");

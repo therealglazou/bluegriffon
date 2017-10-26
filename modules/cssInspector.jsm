@@ -330,6 +330,55 @@ var CssInspector = {
     return null;
   },
 
+  findAllRulesForProperty: function(aRuleSet, aProperty)
+  {
+    function filterByProperty(element, index, array) {
+      return (element.rule.style.getPropertyValue(aProperty) != "");
+    }
+
+    var rulesetForProperty = aRuleSet;
+
+    function CascadeRules(aRule1, aRule2) {
+      var s1 = aRule1.specificity;
+      var s2 = aRule2.specificity;
+      var order1       = aRule1.order;
+      var order2       = aRule2.order;
+      var priority1    = aRule1.rule.style.getPropertyPriority(aProperty);
+      var priority2    = aRule2.rule.style.getPropertyPriority(aProperty);
+      if (priority1 < priority2)
+        return -1;
+      if (priority1 > priority2)
+        return +1;
+
+      // at this point, priorities are the same
+      if (s1.a > s2.a ||
+          (s1.a == s2.a && s1.b > s2.b) ||
+          (s1.a == s2.a && s1.b == s2.b && s1.c > s2.c) ||
+          (s1.a == s2.a && s1.b == s2.b && s1.c == s2.c && s1.d > s2.d))
+        return +1;
+      if (s2.a > s2.a ||
+          (s2.a == s1.a && s2.b > s1.b) ||
+          (s2.a == s1.a && s2.b == s1.b && s2.c > s1.c) ||
+          (s2.a == s1.a && s2.b == s1.b && s2.c == s1.c && s2.d > s1.d))
+        return -1;
+
+      // at this point, same priority and same specificity
+      if (order1 < order2)
+        return -1;
+      if (order1 > order2)
+        return +1;
+      return 0; // should never happen
+    }
+
+    if (rulesetForProperty.length) {
+      rulesetForProperty.sort(CascadeRules);
+      rulesetForProperty[rulesetForProperty.length - 1].priority =
+         rulesetForProperty[rulesetForProperty.length - 1].rule.style.getPropertyPriority(aProperty);
+      return rulesetForProperty;
+    }
+    return null;
+  },
+
   getCascadedValue: function(aRuleSet, aProperty)
   {
     var r = this.findRuleForProperty(aRuleSet, aProperty);
@@ -5616,6 +5665,7 @@ function jscsspMediaRule()
 
 jscsspMediaRule.prototype = {
   cssText: function() {
+    Services.prompt.alert(null, "jscsspMediaRule", "serializing");
     var rv = gTABS + "@media " + this.media.join(", ") + " {\n";
     var preservedGTABS = gTABS;
     gTABS += "  ";

@@ -287,7 +287,7 @@ var CssUtils = {
     this.reserializeEmbeddedStylesheet(stylesheet, aEditor, aDocument);
   },
 
-  reserializeEmbeddedStylesheet: function(aSheet, editor, aDocument)
+  _reserializeEmbeddedStylesheet: function(aSheet, aTabs)
   {
     var cssRules = aSheet.cssRules;
     var str = "";
@@ -297,15 +297,35 @@ var CssUtils = {
       switch (rule.type)
       {
         case CssUtils.kCSSRule.STYLE_RULE:
-          str += (i ? "\n" : "") + rule.selectorText + " {\n " +
-                 rule.style.cssText.replace( /;/g , ";\n");
-          str += "}\n";
+          str += (i ? "\n" : "") + aTabs + rule.selectorText + " {\n";
+          for (var j = 0; j < rule.style.length; j++) {
+            var property = rule.style.item(j);
+            var value    = rule.style.getPropertyValue(property);
+            var priority = rule.style.getPropertyPriority(property);
+
+            str += aTabs + "  " + property + ": " + value
+                     + (priority ? " !important" : "")
+                     + ";\n";
+          }
+          str += aTabs + "}\n";
+          break;
+        case CssUtils.kCSSRule.MEDIA_RULE:
+          str += (i ? "\n" : "") + aTabs + "@media " + rule.media.mediaText + " {\n";
+          str += this._reserializeEmbeddedStylesheet(rule, aTabs + "  ");
+          str += aTabs + "}\n";
           break;
         default:
           str += (i ? "\n" : "") + rule.cssText;
           break;
       }
     }
+    return str;
+  },
+
+  reserializeEmbeddedStylesheet: function(aSheet, editor, aDocument)
+  {
+    var str = this._reserializeEmbeddedStylesheet(aSheet, "");
+
     var styleEltForSheet = aSheet.ownerNode;
     var child = styleEltForSheet.firstChild;
     while (child)
