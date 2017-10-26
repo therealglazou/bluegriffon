@@ -969,6 +969,8 @@ function ToggleViewMode(aElement)
       gDialog.tabeditor.enableRulers(false);
     }
 
+    if ("ResponsiveRulerHelper" in window)
+      ResponsiveRulerHelper.unselectAllMQs();
     EditorUtils.cleanup();
 
     var mimeType = EditorUtils.getCurrentDocumentMimeType();
