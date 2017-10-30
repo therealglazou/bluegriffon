@@ -128,7 +128,8 @@ function RestoreShortcuts()
                             .getService(Components.interfaces.mozIStorageService);
     var dbConn = storageService.openDatabase(file);
 
-    var statement = dbConn.createStatement("SELECT * from shortcuts");
+    if (!dbConn.tableExists("shortcuts"))
+      return;
 
     // remove all existing shortcuts...
     var elts = document.querySelectorAll("#composer-main-menubar *[key], toolbar *[key]");
@@ -140,12 +141,10 @@ function RestoreShortcuts()
       if (keyElt) { //sanity check
         var keyset = keyElt.parentNode;
         keyset.removeChild(keyElt);
-        var parent = keyset.parentNode;
-        var nextSibling = parent.nextSibling;
-        parent.removeChild(keyset);
-        parent.insertBefore(keyset, nextSibling);
        }
     }
+
+    var statement = dbConn.createStatement("SELECT * from 'shortcuts'");
 
     while (statement.executeStep()) {
       var selector = statement.getUTF8String(1);
