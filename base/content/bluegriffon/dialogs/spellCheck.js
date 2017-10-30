@@ -62,6 +62,8 @@ function Startup()
   GetUIElements();
 
   // Get the spellChecker shell
+  var hunspell = Components.classes["@mozilla.org/spellchecker/engine;1"]
+                   .getService(Components.interfaces.mozISpellCheckingEngine);
   gSpellChecker = Cc['@mozilla.org/editor/editorspellchecker;1']
                     .createInstance(Ci.nsIEditorSpellCheck);
   if (!gSpellChecker)
@@ -90,15 +92,14 @@ function Startup()
 
   // Fill in the language menulist and sync it up
   // with the spellchecker's current language.
-
   var curLang;
-
   try {
-    curLang = gSpellChecker.GetCurrentDictionary();
+    curLang = hunspell.dictionary;
   } catch(ex) {
     curLang = "";
   }
 
+  gSpellChecker.SetCurrentDictionary(curLang);
   InitLanguageMenu(curLang)
 
   // Get the first misspelled word and setup all UI
@@ -107,7 +108,8 @@ function Startup()
   // Normal spell checking - hide the "Stop" button
   // (Note that this button is the "Cancel" button for
   //  Esc keybinding and related window close actions)
-  gDialog.StopButton.hidden = true;
+  if (gDialog.StopButton)
+    gDialog.StopButton.hidden = true;
 
   // Clear flag that determines message when
   //  no misspelled word is found
@@ -122,12 +124,13 @@ function Startup()
 function SetElementEnabledById(aId, aEnabled)
 {
   var elt = document.getElementById(aId);
-  if (aId) {
-    if (aEnabled)
-      elt.removeAttribute("disabled");
-    else
-      elt.setAttribute("disabled", "true");
-  }
+  if (elt)
+    if (aId) {
+      if (aEnabled)
+        elt.removeAttribute("disabled");
+      else
+        elt.setAttribute("disabled", "true");
+    }
 }
 
 function InitLanguageMenu(aCurLang)
