@@ -36,6 +36,7 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
+Components.utils.import("resource://gre/modules/Services.jsm");
 Components.utils.import("resource://gre/modules/editorHelper.jsm");
 Components.utils.import("resource://gre/modules/urlHelper.jsm");
 
@@ -384,6 +385,7 @@ var ComposerCommands = {
     commandTable.registerCommand("cmd_SplitTableCell",       bgSplitTableCellCommand);
     commandTable.registerCommand("cmd_NormalizeTable",       bgNormalizeTableCommand);
     commandTable.registerCommand("cmd_ConvertToTable",       bgConvertToTable);
+    commandTable.registerCommand("cmd_ConvertClipboardToTable", bgConvertClipboardToTable);
 
     commandTable.registerCommand("cmd_image",       cmdInsertImageCommand);
     commandTable.registerCommand("cmd_anchor",      cmdInsertAnchorCommand);

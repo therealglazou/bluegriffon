@@ -389,6 +389,7 @@
         <menuitem id="menu_JoinTableCells"   label="&tableJoinCells.label;"   accesskey="&tablejoincells.accesskey;"   command="cmd_JoinTableCells"/>
         <menuitem id="menu_SplitTableCell"   label="&tableSplitCell.label;"   accesskey="&tablesplitcell.accesskey;"   command="cmd_SplitTableCell"/>
         <menuitem id="menu_ConvertToTable"   label="&convertToTable.label;"   accesskey="&converttotable.accesskey;"   command="cmd_ConvertToTable"/>
+        <menuitem id="menu_ConvertClipboardToTable"   label="&convertClipboardToTable.label;" command="cmd_ConvertClipboardToTable"/>
         <menuseparator />
         <menuitem id="menu_tableProperties"  label="&tableProperties.label;"  accesskey="&tableProperties.accesskey;"  command="cmd_editTable"/>
 

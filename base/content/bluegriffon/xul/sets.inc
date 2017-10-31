@@ -280,6 +280,7 @@
   <command id="cmd_JoinTableCells"      oncommand="goDoCommand('cmd_JoinTableCells')"/>
   <command id="cmd_SplitTableCell"      oncommand="goDoCommand('cmd_SplitTableCell')"/>
   <command id="cmd_ConvertToTable"      oncommand="goDoCommand('cmd_ConvertToTable')"/>
+  <command id="cmd_ConvertClipboardToTable" oncommand="goDoCommand('cmd_ConvertClipboardToTable')"/>
   <command id="cmd_TableOrCellColor"    oncommand="goDoCommand('cmd_TableOrCellColor')"/>
   <command id="cmd_editTable"           oncommand="goDoCommand('cmd_editTable')"/>
 </commandset>
