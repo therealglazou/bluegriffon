@@ -836,6 +836,48 @@ var bgConvertToTable =
   }
 };
 
+var bgConvertClipboardToTable =
+{
+  isCommandEnabled: function(aCommand, dummy)
+  {
+      if (EditorUtils.getCurrentEditorElement()
+          && EditorUtils.isDocumentEditable()
+          && EditorUtils.isEditingRenderedHTML()) {
+        var flavors = ["text/unicode"];
+        var hasData =
+          Services.clipboard.hasDataMatchingFlavors(flavors, flavors.length, Services.clipboard.kGlobalClipboard);
+        if (hasData) {
+          let trans = Components.classes["@mozilla.org/widget/transferable;1"].
+                        createInstance(Components.interfaces.nsITransferable);
+          trans.init(null);
+          flavors.forEach(trans.addDataFlavor);
+
+          Services.clipboard.getData(trans, Services.clipboard.kGlobalClipboard);
+          var data = {};
+          var dataLen = {};
+          trans.getTransferData(flavors[0], data, dataLen);
+
+          if (data) {
+            data = data.value.QueryInterface(Components.interfaces.nsISupportsString);
+            str = data.data.substring(0, dataLen.value / 2);
+            if (str && str.replace( /\s/g, ""))
+              return true;
+          }
+        }
+      }
+      return false;
+  },
+
+  getCommandStateParams: function(aCommand, aParams, aRefCon) {},
+  doCommandParams: function(aCommand, aParams, aRefCon) {},
+
+  doCommand: function(aCommand)
+  {
+    window.openDialog("chrome://bluegriffon/content/dialogs/convertClipboardToTable.xul","_blank", "chrome,close,titlebar,modal")
+    GetWindowContent().focus();
+  }
+};
+
 var bgSelectTableColumnCommand =
 {
   isCommandEnabled: function(aCommand, dummy)
