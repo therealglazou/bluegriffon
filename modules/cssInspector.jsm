@@ -5665,7 +5665,6 @@ function jscsspMediaRule()
 
 jscsspMediaRule.prototype = {
   cssText: function() {
-    Services.prompt.alert(null, "jscsspMediaRule", "serializing");
     var rv = gTABS + "@media " + this.media.join(", ") + " {\n";
     var preservedGTABS = gTABS;
     gTABS += "  ";
