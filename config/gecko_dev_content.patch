@@ -3338,7 +3338,7 @@ index 4b3e262188b7..9c6db95e2b1d 100644
  };
  
 diff --git a/widget/cocoa/nsColorPicker.mm b/widget/cocoa/nsColorPicker.mm
-index 1fdaa03a29fb..be2e141052c5 100644
+index 1fdaa03a29fb..b1fb7332e430 100644
 --- a/widget/cocoa/nsColorPicker.mm
 +++ b/widget/cocoa/nsColorPicker.mm
 @@ -9,6 +9,10 @@
@@ -3361,7 +3361,7 @@ index 1fdaa03a29fb..be2e141052c5 100644
  - (void)retarget:(nsColorPicker*)aPicker;
  - (void)colorChanged:(NSColorPanel*)aPanel;
  @end
-@@ -52,14 +56,15 @@ HexStrToInt(NSString* str)
+@@ -52,14 +56,16 @@ HexStrToInt(NSString* str)
    return self;
  }
  
@@ -3371,16 +3371,18 @@ index 1fdaa03a29fb..be2e141052c5 100644
    [mColorPanel setTitle:aTitle];
 -  [mColorPanel setColor:aInitialColor];
    [mColorPanel setTarget:self];
+-  [mColorPanel setAction:@selector(colorChanged:)];
 +  [mColorPanel setShowsAlpha:aShowsAlpha];
-   [mColorPanel setAction:@selector(colorChanged:)];
    [mColorPanel setDelegate:self];
 -  [mColorPanel makeKeyAndOrderFront:nil];
 +  [mColorPanel orderFront:nil];
++  [mColorPanel setAction:nil];
 +  [mColorPanel setColor:aInitialColor];
++  [mColorPanel setAction:@selector(colorChanged:)];
  }
  
  - (void)colorChanged:(NSColorPanel*)aPanel
-@@ -103,12 +108,13 @@ nsColorPicker::~nsColorPicker()
+@@ -103,12 +109,13 @@ nsColorPicker::~nsColorPicker()
  
  NS_IMETHODIMP
  nsColorPicker::Init(mozIDOMWindowProxy* aParent, const nsAString& aTitle,
@@ -3395,7 +3397,7 @@ index 1fdaa03a29fb..be2e141052c5 100644
  
    if (sColorPanelWrapper) {
      // Update current wrapper to target the new input instead
-@@ -123,33 +129,43 @@ nsColorPicker::Init(mozIDOMWindowProxy* aParent, const nsAString& aTitle,
+@@ -123,33 +130,43 @@ nsColorPicker::Init(mozIDOMWindowProxy* aParent, const nsAString& aTitle,
  /* static */ NSColor*
  nsColorPicker::GetNSColorFromHexString(const nsAString& aColor)
  {
@@ -3458,7 +3460,7 @@ index 1fdaa03a29fb..be2e141052c5 100644
  }
  
  NS_IMETHODIMP
-@@ -159,7 +175,8 @@ nsColorPicker::Open(nsIColorPickerShownCallback* aCallback)
+@@ -159,7 +176,8 @@ nsColorPicker::Open(nsIColorPickerShownCallback* aCallback)
    mCallback = aCallback;
  
    [sColorPanelWrapper open:GetNSColorFromHexString(mColor)
@@ -3468,7 +3470,7 @@ index 1fdaa03a29fb..be2e141052c5 100644
  
    NS_ADDREF_THIS();
  
-@@ -169,7 +186,12 @@ nsColorPicker::Open(nsIColorPickerShownCallback* aCallback)
+@@ -169,7 +187,12 @@ nsColorPicker::Open(nsIColorPickerShownCallback* aCallback)
  void
  nsColorPicker::Update(NSColor* aColor)
  {
