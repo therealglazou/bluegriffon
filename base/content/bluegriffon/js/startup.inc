@@ -65,7 +65,14 @@ function Startup()
       setTimeout(OpenFile, 100, url, true);
   }
 
-  setTimeout(LoadLastTabs, 1000);
+  var windowEnumerator = Services.wm.getEnumerator( "bluegriffon" );
+  var numBlueGriffonWindows = 0;
+  while (numBlueGriffonWindows < 2 && windowEnumerator.hasMoreElements()) {
+    numBlueGriffonWindows++;
+    var w = windowEnumerator.getNext();
+  }
+  if (numBlueGriffonWindows < 2)
+    setTimeout(LoadLastTabs, 1000);
   BlueGriffonQuitHelper.init();
 
   NotifierUtils.addNotifierCallback("selection_strict", BlueGriffon_lookForFileChanges, this);
