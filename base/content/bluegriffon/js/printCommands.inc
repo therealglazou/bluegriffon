@@ -32,7 +32,7 @@ var cmdPrint =
     else {
 	    var editorElement = EditorUtils.getCurrentEditorElement();
 	    if (editorElement) {
-	      var sourceIframe = editorElement.parentNode.firstElementChild;
+	      var sourceIframe = EditorUtils.getCurrentSourceEditorElement();
 	      var sourceWindow = sourceIframe.contentWindow;
 
         PrintHelper.print(sourceWindow);

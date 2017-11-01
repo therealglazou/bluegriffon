@@ -69,7 +69,7 @@ var BGZoomManager = {
     }
     else {
       var editorElement = EditorUtils.getCurrentEditorElement();
-      var sourceIframe =  editorElement.parentNode.firstElementChild;
+      var sourceIframe = EditorUtils.getCurrentSourceEditorElement();
       var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.getEditableElement();
 
       var value = sourceEditor.style.fontSize;
@@ -88,7 +88,7 @@ var BGZoomManager = {
       var value = Math.round(aZoom * 100) + "%";
 
       var editorElement = EditorUtils.getCurrentEditorElement();
-      var sourceIframe =  editorElement.parentNode.firstElementChild;
+      var sourceIframe = EditorUtils.getCurrentSourceEditorElement();
       var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.getEditableElement();
   
       sourceEditor.style.fontSize = value;
@@ -135,7 +135,7 @@ var BGZoomManager = {
 
   addToSourceViewFontSize: function(aIncrement) {
     var editorElement = EditorUtils.getCurrentEditorElement();
-    var sourceIframe =  editorElement.parentNode.firstElementChild;
+    var sourceIframe = EditorUtils.getCurrentSourceEditorElement();
     var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.getEditableElement();
 
     var fontSize = sourceEditor.ownerDocument
@@ -215,7 +215,7 @@ var BGZoomManager = {
       EditorUtils.getCurrentEditorElement().contentWindow.focus();
     else {
       var editorElement = EditorUtils.getCurrentEditorElement();
-      var sourceIframe =  editorElement.parentNode.firstElementChild;
+      var sourceIframe = EditorUtils.getCurrentSourceEditorElement();
       var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.getEditableElement();
 
       sourceIframe.focus();

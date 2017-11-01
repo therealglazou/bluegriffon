@@ -114,7 +114,7 @@ var EditorUtils = {
   {
     var editorElement = this.getCurrentEditorElement();
     if (editorElement) {
-      return editorElement.parentNode.firstElementChild;
+      return editorElement.parentNode.lastElementChild;
     }
     return null;
   },
@@ -123,7 +123,7 @@ var EditorUtils = {
   {
     var editorElement = this.getCurrentEditorElement();
     if (editorElement) {
-      var bespinIframe = editorElement.parentNode.firstElementChild;
+      var bespinIframe = editorElement.parentNode.lastElementChild;
       var bespinWindow = bespinIframe.contentWindow.wrappedJSObject;
       return bespinWindow;
     }
@@ -134,7 +134,7 @@ var EditorUtils = {
   {
     var editorElement = this.getCurrentEditorElement();
     if (editorElement) {
-      var bespinIframe = editorElement.parentNode.firstElementChild;
+      var bespinIframe = editorElement.parentNode.lastElementChild;
       var bespinEditor = bespinIframe.contentWindow.wrappedJSObject.gEditor;
       return bespinEditor;
     }
@@ -301,14 +301,32 @@ var EditorUtils = {
   setDocumentTitle: function setDocumentTitle(title)
   {
     try {
-      this.getCurrentEditor().setDocumentTitle(title);
+      var doc = this.getCurrentDocument();
+      if (doc.title == title) // early way out if we can
+        return;
 
+      var titleNode = doc.querySelector("head > title");
+      var editor = this.getCurrentEditor();
+      var t = doc.createTextNode(title);
+      if (titleNode) {
+        var child = titleNode.firstChild;
+        editor.insertNode(t, titleNode, 0);
+        if (child)
+          editor.deleteNode(child);
+      }
+      else {
+        titleNode = doc.createElement("title");
+        titleNode.appendChild(t);
+        editor.insertNode(titleNode, doc.querySelector("head"), 0);
+      }
+
+      var w = this.getCurrentEditorWindow();
       // Update window title (doesn't work if called from a dialog)
-      if ("UpdateWindowTitle" in window)
-        window.UpdateWindowTitle();
-      else if ("UpdateWindowTitle" in window.opener)
-        window.opener.UpdateWindowTitle();
-    } catch (e) { }
+      if ("UpdateWindowTitle" in w)
+        w.UpdateWindowTitle();
+      else if ("UpdateWindowTitle" in w.opener)
+        w.opener.UpdateWindowTitle();
+    } catch (e) { Services.prompt.alert(null, "EditorUtils.setDocumentTitle", e); }
   },
 
   getSelectionContainer: function getSelectionContainer()

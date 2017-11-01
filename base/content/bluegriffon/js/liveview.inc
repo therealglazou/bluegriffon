@@ -13,7 +13,7 @@ function _UpdateSourceLiveView()
       var editor = EditorUtils.getCurrentEditor();
       var editorElement = EditorUtils.getCurrentEditorElement();
       var deck = editorElement.parentNode;
-      var sourceIframe = editorElement.parentNode.firstElementChild;
+      var sourceIframe = EditorUtils.getCurrentSourceEditorElement();
       var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
 
       var doctype = EditorUtils.getCurrentDocument().doctype;
@@ -86,7 +86,7 @@ function _UpdateWysiwygLiveView()
         var editor = EditorUtils.getCurrentEditor();
         var editorElement = EditorUtils.getCurrentEditorElement();
         var deck = editorElement.parentNode;
-        var sourceIframe = editorElement.parentNode.firstElementChild;
+        var sourceIframe = EditorUtils.getCurrentSourceEditorElement();
         var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
 
         var doctype = EditorUtils.getCurrentDocument().doctype;
@@ -211,7 +211,7 @@ function MarkSelectionInSourceEditor()
   var editor = EditorUtils.getCurrentEditor();
   var editorElement = EditorUtils.getCurrentEditorElement();
   var deck = editorElement.parentNode;
-  var sourceIframe = editorElement.parentNode.firstElementChild;
+  var sourceIframe = EditorUtils.getCurrentSourceEditorElement();
   var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
 
   var cursor = sourceEditor.getCursor("from");

@@ -257,6 +257,7 @@ function UpdateWindowTitle(aEditorElement)
 
   try {
     var doc = aEditorElement.contentDocument;
+    doc instanceof Components.interfaces.nsIDOMDocument;
     var windowTitle = doc.title;
     if (!windowTitle)
       windowTitle = L10NUtils.getString("untitled");
@@ -866,7 +867,7 @@ function ToggleViewMode(aElement)
   if (mode == previousmode)
     return true;
 
-  var sourceIframe = editorElement.parentNode.firstElementChild;
+  var sourceIframe = EditorUtils.getCurrentSourceEditorElement();
   var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
 
   // special case, from liveview/source to source
@@ -881,7 +882,7 @@ function ToggleViewMode(aElement)
     editorElement.parentNode.setAttribute("currentmode", mode);
 
     deck.removeAttribute("class");
-    editorElement.parentNode.selectedIndex = 0;
+    editorElement.parentNode.selectedIndex = 1;
     sourceIframe.focus();
     //sourceEditor.refresh();
     sourceEditor.focus();
@@ -926,7 +927,7 @@ function ToggleViewMode(aElement)
     editorElement.parentNode.setAttribute("currentmode", mode);
 
     deck.removeAttribute("class");
-    editorElement.parentNode.selectedIndex = 1;
+    editorElement.parentNode.selectedIndex = 0;
     GetWindowContent().focus();
     NotifierUtils.notify("modeSwitch");
 
@@ -968,6 +969,8 @@ function ToggleViewMode(aElement)
       gDialog.tabeditor.enableRulers(false);
     }
 
+    if ("ResponsiveRulerHelper" in window)
+      ResponsiveRulerHelper.unselectAllMQs();
     EditorUtils.cleanup();
 
     var mimeType = EditorUtils.getCurrentDocumentMimeType();
@@ -1031,7 +1034,7 @@ function ToggleViewMode(aElement)
     }
     else {
       deck.removeAttribute("class");
-      editorElement.parentNode.selectedIndex = 0;
+      editorElement.parentNode.selectedIndex = 1;
       sourceIframe.focus();
       sourceEditor.refresh();
       sourceEditor.focus();
@@ -1056,7 +1059,7 @@ function ToggleViewMode(aElement)
 
     if (sourceEditor)
     {
-      NotifierUtils.notify("beforeLeavingSourceMode");
+      NotifierUtils.notify("beforeEnteringWysiwygMode");
       source = sourceEditor.getValue();
       var spellchecking = Services.prefs.getBoolPref("bluegriffon.spellCheck.enabled");
       Services.prefs.setBoolPref("bluegriffon.spellCheck.enabled", false);
@@ -1104,7 +1107,7 @@ function ToggleViewMode(aElement)
       }
       else {
         deck.removeAttribute("class");
-        editorElement.parentNode.selectedIndex = 1;
+        editorElement.parentNode.selectedIndex = 0;
         gDialog.structurebar.style.visibility = "";
         GetWindowContent().focus();
       }
@@ -1224,7 +1227,7 @@ function RebuildFromSource(aDoc, isXML, aNoReflect)
       }
     }
     if (!aNoReflect)
-      EditorUtils.getCurrentEditorElement().parentNode.selectedIndex = 1;
+      EditorUtils.getCurrentEditorElement().parentNode.selectedIndex = 0;
     var editor = EditorUtils.getCurrentEditor();
 
     // make sure everything is aggregated under one single txn
@@ -1709,7 +1712,7 @@ function UpdateTabTooltip(aElement)
   {
     if (tabs.item(i) == aElement)
     {
-      var editorElement = editors.item(i).lastChild;
+      var editorElement = editors.item(i).firstChild;
       editor = editorElement.getEditor(editorElement.contentWindow);
   
       // Do QIs now so editor users won't have to figure out which interface to use
