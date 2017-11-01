@@ -120,15 +120,6 @@ function _UpdateWysiwygLiveView()
           var parser = new DOMParser();
           var doc = parser.parseFromString(source, isXML ? "text/xml" : "text/html");
           if (doc.documentElement.nodeName == "parsererror") {
-            if (!aNoFocus) {
-              var message = doc.documentElement.firstChild.data
-                               .replace( /Location\: chrome\:\/\/bluegriffon\/content\/xul\/bluegriffon.xul/g ,
-                                         ", ");
-              var error = doc.documentElement.lastChild.textContent;
-              window.openDialog("chrome://bluegriffon/content/dialogs/parsingError.xul", "_blank",
-                                "chrome,modal,titlebar", message, error);
-              sourceEditor.focus();
-            }
             return;
           }
           sourceIframe.setUserData("oldSource", source, null);
