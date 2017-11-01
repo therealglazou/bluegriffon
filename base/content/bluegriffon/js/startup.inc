@@ -128,6 +128,7 @@ function RestoreShortcuts()
                             .getService(Components.interfaces.mozIStorageService);
     var dbConn = storageService.openDatabase(file);
 
+    // no table, no chocolate
     if (!dbConn.tableExists("shortcuts"))
       return;
 
@@ -144,9 +145,13 @@ function RestoreShortcuts()
        }
     }
 
+    // get all shortcuts, pre-defined or user-defined
     var statement = dbConn.createStatement("SELECT * from 'shortcuts'");
+    var stepExecuted = false;
 
+    // for each entry in the shortcuts db
     while (statement.executeStep()) {
+      stepExecuted = true;
       var selector = statement.getUTF8String(1);
       var modifiers = statement.getUTF8String(2);
       var key = statement.getUTF8String(3);
@@ -182,6 +187,25 @@ function RestoreShortcuts()
       parent.insertBefore(keyset, nextSibling);
     }
     dbConn.close();
+
+    // Wait !!!! Did we execute any step here? If we didn't, indicating there is not a
+    // a single shortcut in BlueGriffon, it's most probably because of the shortcuts bug
+    // in 2.4.x...
+    if (!stepExecuted) {
+      var fixForShortcutsBug = Services.prefs.getBoolPref("bluegriffon.kungfudeathgrip.shortcuts2017");
+      if (!fixForShortcutsBug) {
+        // There Can Be Only One
+        Services.prefs.setBoolPref("bluegriffon.kungfudeathgrip.shortcuts2017", true);
+        // we need to delete the erroneously empty shortcuts.sqlite file
+        file.remove(false);
+        // and then restart :-(
+        var appStartup = Components.classes["@mozilla.org/toolkit/app-startup;1"]
+                         .getService(Components.interfaces.nsIAppStartup);
+
+        appStartup.quit(Components.interfaces.nsIAppStartup.eRestart |
+                        Components.interfaces.nsIAppStartup.eAttemptQuit);
+      }
+    }
   }
   catch(e) {
     // no shortcut DB yet, do nothing

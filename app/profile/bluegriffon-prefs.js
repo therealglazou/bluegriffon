@@ -243,3 +243,6 @@ pref("security.fileuri.strict_origin_policy", false);
 pref("devtools.debugger.log", false);
 pref("devtools.chrome.enabled", true);
 pref("devtools.selfxss.count", 5);
+
+// kung fu death grips
+pref("bluegriffon.kungfudeathgrip.shortcuts2017", false);
