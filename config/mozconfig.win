@@ -3,20 +3,47 @@
 #
 # See http://developer.mozilla.org/en/Configuring_Build_Options for build options.
 #
+###############################
+# TESTED ON WINDOWS 10 X86_64 WITH VS 2015 COMMUNITY
+###############################
 
-ac_add_options  --enable-application=bluegriffon
 
-# Comment out and adapt the following lines for an optimized build
-mk_add_options MOZ_OBJDIR=../../bin/opt/trunk
+###############################
+# WARNING, the directory must exist in the filestem
+###############################
+mk_add_options MOZ_OBJDIR=./opt
+
+###############################
+# here, -j8 means I am building on a computer with
+# 8 logical cores; adapt to your configuration
+###############################
+mk_add_options MOZ_MAKE_FLAGS="-j8"
+
+###############################
+# uncomment the following lines for an optimized build
+# comment them out for a debug build
+###############################
 ac_add_options --enable-optimize
 ac_add_options --disable-debug
-#ac_add_options --enable-strip
+ac_add_options --enable-strip
 
-# Comment out and adapt the following lines for a debug build
+###############################
+# uncomment the following lines for an optimized build
+# comment them out for a debug build
+###############################
 #mk_add_options MOZ_OBJDIR=../../bin/debug/trunk
 #ac_add_options --disable-optimize
 #ac_add_options --enable-debug
 
+###############################
+# touch the two following lines only if you know what you're doing
+###############################
+ac_add_options --target=x86_64-pc-mingw32
+ac_add_options --host=x86_64-pc-mingw32
+
+###############################
+# you should not need to tweak the following lines
+###############################
 ac_add_options --disable-tests
 ac_add_options --disable-crashreporter
 ac_add_options --enable-jemalloc
@@ -25,9 +52,8 @@ ac_add_options --disable-dbm
 ac_add_options --disable-updater
 ac_add_options --disable-sandbox
 
+###############################
+# DO NOT MODIFY BELOW THIS LINE
+###############################
+ac_add_options  --enable-application=bluegriffon
 ac_add_options --enable-chrome-format=jar
-
-mk_add_options MOZ_MAKE_FLAGS="-j8"
-
-#ac_add_options --enable-media-navigator
-mk_add_options MOZ_MEDIA_NAVIGATOR=1
