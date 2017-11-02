@@ -30,7 +30,6 @@ function Shutdown()
 
 function onClose()
 {
-  SaveTabs();
   if (doSaveTabsBeforeQuit()) {
     Shutdown();
     return true;

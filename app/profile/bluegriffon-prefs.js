@@ -106,7 +106,6 @@ pref("bluegriffon.encode_entity", "html");
 pref("bluegriffon.zoom.default", "1");
 
 pref("bluegriffon.history.url_maximum", 10);
-pref("bluegriffon.defaults.restorePreviousSession", true);
 
 pref("signon.rememberSignons", true);
 pref("signon.expireMasterPassword", false);

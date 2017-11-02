@@ -65,14 +65,6 @@ function Startup()
       setTimeout(OpenFile, 100, url, true);
   }
 
-  var windowEnumerator = Services.wm.getEnumerator( "bluegriffon" );
-  var numBlueGriffonWindows = 0;
-  while (numBlueGriffonWindows < 2 && windowEnumerator.hasMoreElements()) {
-    numBlueGriffonWindows++;
-    var w = windowEnumerator.getNext();
-  }
-  if (numBlueGriffonWindows < 2)
-    setTimeout(LoadLastTabs, 1000);
   BlueGriffonQuitHelper.init();
 
   NotifierUtils.addNotifierCallback("selection_strict", BlueGriffon_lookForFileChanges, this);
@@ -91,36 +83,6 @@ function BlueGriffon_lookForFileChanges() {
     clearTimeout(gLookingForFileChangesTimeout);
 
   gLookingForFileChangesTimeout = setTimeout(function() { FileChangeUtils.lookForChanges(); }, 500);
-}
-
-var gLastTabsArray;
-function LoadLastTabs()
-{
-  var lastTabs = "";
-  gLastTabsArray = [];
-  try {
-    lastTabs = Services.prefs.getCharPref("bluegriffon.defaults.lastTabs");
-    Services.prefs.setCharPref("bluegriffon.defaults.lastTabs", "");
-  }
-  catch(e) {}
-  if (lastTabs) {
-    gLastTabsArray = lastTabs.split("|");
-    //gLastTabsArray.reverse();
-    NotifierUtils.addNotifierCallback("tabCreated", OpenTabFromPreviousSession);
-    var url = gLastTabsArray.pop();
-    OpenFile(url, true);
-  }
-}
-
-function OpenTabFromPreviousSession(aReason, aContext)
-{
-  if (gLastTabsArray.length) {
-    var url = gLastTabsArray.pop();
-    OpenFile(url, true);
-  }
-  else {
-    NotifierUtils.removeNotifierCallback("tabCreated", OpenTabFromPreviousSession);
-  }
 }
 
 function RestoreShortcuts()

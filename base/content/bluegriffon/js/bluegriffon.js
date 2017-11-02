@@ -2166,40 +2166,6 @@ function ResetBadge()
 }
 #endif
 
-function SaveCurrentTabLocation()
-{
-  try {
-    if (!Services.prefs.getBoolPref("bluegriffon.defaults.restorePreviousSession"))
-      return;
-  }
-  catch(e) {}
-
-  var URL = EditorUtils.getDocumentUrl();
-
-  var ebmAvailable = ("EBookManager" in window);
-  if (ebmAvailable  && EBookManager.isUrlSpecInBook(URL))
-    return;
-
-  var lastTabs = "";
-  try {
-    lastTabs = Services.prefs.getCharPref("bluegriffon.defaults.lastTabs");
-  }
-  catch(e) {}
-  lastTabs += (lastTabs ? "|" : "") + URL;
-  try {
-    Services.prefs.setCharPref("bluegriffon.defaults.lastTabs", lastTabs);
-  }
-  catch(e) {}
-}
-
-function SaveTabs()
-{
-  try {
-    Services.prefs.setCharPref("bluegriffon.defaults.lastTabs", "");
-  }
-  catch(e) {}
-}
-
 function CreateOrUpdateTableOfContents()
 {
   window.openDialog("chrome://bluegriffon/content/dialogs/insertTOC.xul","_blank",
