@@ -844,6 +844,8 @@ function ToggleViewMode(aElement)
 
   var deck = editorElement.parentNode;
   var editor = EditorUtils.getCurrentEditor();
+
+  var previousWysiwygMedium = deck.getAttribute("wysiwygmedium");
   if (aElement.id == "wysiwygModeButton" || aElement.id == "liveViewModeButton") {
     editor.setMedium("screen");
     deck.removeAttribute("wysiwygmedium");
@@ -864,8 +866,11 @@ function ToggleViewMode(aElement)
 
   var mode =  aElement.getAttribute("mode");
   var previousmode = EditorUtils.getCurrentViewMode();
-  if (mode == previousmode)
+  if (mode == previousmode) {
+    if (mode == "wysiwyg" && previousWysiwygMedium != deck.getAttribute("wysiwygmedium"))
+      NotifierUtils.notify("modeSwitch");
     return true;
+  }
 
   var sourceIframe = EditorUtils.getCurrentSourceEditorElement();
   var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
