@@ -1,48 +1,59 @@
 # sh
-# Build configuration script for Ubuntu 16.04, 64bits
+# Build configuration script for Ubuntu 16.04 LTS ***64bits***
 #
 # See http://www.mozilla.org/build/unix.html for build instructions.
 #
 
 ##############################
-# tweak the following line according to your wishes
-# warning, the directory must exist in the filesystem
+# Ubuntu 32bits builds are not supported any more for bluegriffon >= 2.4
 ##############################
-mk_add_options MOZ_OBJDIR=/home/glazou/bin/opt/trunk
-#mk_add_options MOZ_OBJDIR=/Users/glazou/bin/debug/trunk
 
 ##############################
-# tweak the following according to your wishes
+# Tweak the following line according to your wishes
+# Warning, the directory must exist in the filesystem
 ##############################
-ac_add_options --disable-debug
+mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/opt
+
+###############################
+# here, -j8 means I am building on a computer with
+# 8 logical cores; adapt to your configuration
+###############################
+mk_add_options MOZ_MAKE_FLAGS="-j8"
+
+###############################
+# uncomment the following lines for a optimized build
+# comment them out for a debug build
+###############################
 ac_add_options --enable-optimize
+ac_add_options --disable-debug
 ac_add_options --enable-strip
-#ac_add_options --enable-debug
+
+###############################
+# uncomment the following lines for a debug build
+# comment them out for a optimized build
+###############################
 #ac_add_options --disable-optimize
+#ac_add_options --enable-debug
 
-ac_add_options --enable-elf-hack
-export LDFLAGS="-static-libstdc++"
-export HOST_LDFLAGS="-static-libstdc++"
+###############################
+# touch the two following lines only if you know what you're doing
+###############################
+ac_add_options --enable-stdcxx-compat
 
-##############################
-# I build on a 8-cpu machine ; comment out or adapt to your own case
-##############################
-mk_add_options MOZ_MAKE_FLAGS="-s -j8"
-
-##############################
-# DO NOT MODIFY BELOW THIS LINE
-##############################
-ac_add_options --enable-application=bluegriffon
-mk_add_options MOZ_TOOLKIT_SEARCH=
-
-
+###############################
+# you should not need to tweak the following lines
+###############################
 ac_add_options --disable-tests
-ac_add_options --enable-default-toolkit=cairo-gtk2
 ac_add_options --disable-crashreporter
-ac_add_options --disable-updater
-ac_add_options --disable-update-packaging
+ac_add_options --enable-jemalloc
 ac_add_options --disable-webrtc
+ac_add_options --disable-dbm
+ac_add_options --disable-updater
+ac_add_options --disable-sandbox
 
-ac_add_options --enable-media-navigator
-mk_add_options MOZ_MEDIA_NAVIGATOR=1
-
+###############################
+# DO NOT MODIFY BELOW THIS LINE
+###############################
+ac_add_options --enable-application=bluegriffon
+ac_add_options --enable-chrome-format=jar
+ac_add_options --enable-default-toolkit=cairo-gtk3
