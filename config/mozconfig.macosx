@@ -3,70 +3,67 @@
 #
 # See http://www.mozilla.org/build/unix.html for build instructions.
 #
+##############################
+# TESTED ON OS X 10.13 with XCODE 9.0.1 (9A1004)
+##############################
 
-# Mandatory if you use VC7 (see Windows build instructions
-# in http://mozilla.org/build/win32.html
-# you may have to edit the lines according to your directory settings
-
-#CC=clang
-#CXX=clang++
+CC=clang
+CXX=clang++
 
 ##############################
-# uncomment if you want a universal build
+# universal 32bits/64bits builds are not available any more for bluegriffon >= 2.4
 ##############################
-. $topsrcdir/build/macosx/universal/mozconfig
 
-DARWIN_VERSION=12.0.0
-ac_add_app_options i386 --target=i386-apple-darwin$DARWIN_VERSION
-ac_add_app_options x86_64 --target=x86_64-apple-darwin$DARWIN_VERSION
+###############################
+# Tweak according to your wishes.
+# WARNING, the directory must exist in the filestem.
+###############################
+mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/opt/
 
-ac_add_options --with-macos-sdk=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk
-ac_add_options --enable-macos-target=10.8
-#ac_add_options --target=x86_64-apple-darwin10.7.0
-
-##############################
-# tweak the following line according to your wishes
-# warning, the directory must exist in the filesystem
-##############################
-mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/../../bin/opt/trunk
-#mk_add_options MOZ_OBJDIR=/Users/glazou/bin/debug/trunk
-
-#mk_add_options AUTOCONF=/opt/local/bin/autoconf213
-#mk_add_options MOZ_UPDATER=1
+###############################
+# here, -j8 means I am building on a computer with
+# 8 logical cores; adapt to your configuration
+###############################
+mk_add_options MOZ_MAKE_FLAGS="-j8"
 
 ##############################
-# tweak the following according to your wishes
+# BlueGriffon is currently built against 10.10 SDK.
+# See https://github.com/phracker/MacOSX-SDKs/ if you miss a given SDK
 ##############################
-ac_add_options --disable-debug
+ac_add_options --with-macos-sdk=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk
+ac_add_options --enable-macos-target=10.10
+
+###############################
+# Uncomment the following lines for an optimized build.
+# Comment them out for a debug build.
+###############################
 ac_add_options --enable-optimize
+ac_add_options --disable-debug
 ac_add_options --enable-strip
-#ac_add_options --enable-debug
+
+###############################
+# Uncomment the following lines for an debug build.
+# Comment them out for a optimized build.
+# Last two lines needed only if you hit a link error on _res_9_init.
+###############################
 #ac_add_options --disable-optimize
+#ac_add_options --enable-debug
+#mk_add_options LDFLAGS=-lresolv
+#export LDFLAGS
 
-export FORCE_STATIC_LIB=1
-export BUILD_STATIC_LIBS=1
-mk_add_options FORCE_STATIC_LIB=1
-mk_add_options BUILD_STATIC_LIBS=1
-
-ac_add_options --without-ccache
-
-ac_add_options --disable-jemalloc
-
-##############################
-# I build on a 8-core machine ; comment out or adapt to your own case
-##############################
-mk_add_options MOZ_MAKE_FLAGS="-s -j8"
+###############################
+# you should not need to tweak the following lines
+###############################
+ac_add_options --disable-tests
+ac_add_options --disable-crashreporter
+ac_add_options --disable-webrtc
+ac_add_options --disable-dbm
+ac_add_options --disable-updater
+ac_add_options --disable-sandbox
 
 ##############################
 # DO NOT MODIFY BELOW THIS LINE
 ##############################
 ac_add_options --enable-application=bluegriffon
-ac_add_options --enable-media-navigator
-mk_add_options MOZ_MEDIA_NAVIGATOR=1
-
-ac_add_options --disable-tests
-ac_add_options --disable-crashreporter
-
 ac_add_options --enable-chrome-format=jar
 
-ac_add_options --disable-webrtc
