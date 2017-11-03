@@ -203,7 +203,7 @@ var BlueGriffonPrefsObserver = {
     else if (prefName == "bluegriffon.toolbar.icons") {
       var value = Services.prefs.getCharPref("bluegriffon.toolbar.icons");
       document.documentElement.setAttribute("iconsize", value);
-      document.persist(w.document.documentElement.id, "iconsize");
+      document.persist(document.documentElement.id, "iconsize");
     }
 
     else if (prefName == "bluegriffon.tabs.position") {
