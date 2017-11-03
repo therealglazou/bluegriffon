@@ -167,100 +167,71 @@ var BlueGriffonPrefsObserver = {
 
     if (prefName == "bluegriffon.returnKey.createsParagraph") {
       var value = Services.prefs.getBoolPref("bluegriffon.returnKey.createsParagraph");
-      var windowEnumerator = Services.wm.getEnumerator("bluegriffon");
-      while (windowEnumerator.hasMoreElements()) {
-        var w = windowEnumerator.getNext();
-        var editors = w.gDialog.tabeditor.mTabpanels.childNodes;
-        for (var i = 0; i < editors.length; i++) {
-          try {
-            var e = editors[i].firstChild;
-            var innerEditor = e.getEditor(e.contentWindow);
-            innerEditor.returnInParagraphCreatesNewParagraph = value;
-          }
-          catch(e) {}
+      var editors = gDialog.tabeditor.mTabpanels.childNodes;
+      for (var i = 0; i < editors.length; i++) {
+        try {
+          var e = editors[i].firstChild;
+          var innerEditor = e.getEditor(e.contentWindow);
+          innerEditor.returnInParagraphCreatesNewParagraph = value;
         }
+        catch(e) {}
       }
     }
 
     else if (prefName == "bluegriffon.spellCheck.enabled") {
       var value = Services.prefs.getBoolPref("bluegriffon.spellCheck.enabled");
-      var windowEnumerator = Services.wm.getEnumerator("bluegriffon");
-      while (windowEnumerator.hasMoreElements()) {
-        var w = windowEnumerator.getNext();
-        var editors = w.gDialog.tabeditor.mTabpanels.childNodes;
-        for (var i = 0; i < editors.length; i++) {
-          try {
-            var e = editors[i].firstChild;
-            var innerEditor = e.getEditor(e.contentWindow);
-            innerEditor.setSpellcheckUserOverride(value);
-          }
-          catch(e) {}
+      var editors = gDialog.tabeditor.mTabpanels.childNodes;
+      for (var i = 0; i < editors.length; i++) {
+        try {
+          var e = editors[i].firstChild;
+          var innerEditor = e.getEditor(e.contentWindow);
+          innerEditor.setSpellcheckUserOverride(value);
         }
+        catch(e) {}
       }
     }
 
     else if (prefName == "bluegriffon.toolbar.enabled") {
       var value = Services.prefs.getBoolPref("bluegriffon.toolbar.enabled");
-      var windowEnumerator = Services.wm.getEnumerator("bluegriffon");
-      while (windowEnumerator.hasMoreElements()) {
-        var w = windowEnumerator.getNext();
-        var mainToolbar = w.gDialog.MainToolbar;
-        if (value)
-          mainToolbar.removeAttribute("hidden");
-        else
-          mainToolbar.setAttribute("hidden", "true");
-      }
+      var mainToolbar = gDialog.MainToolbar;
+      if (value)
+        mainToolbar.removeAttribute("hidden");
+      else
+        mainToolbar.setAttribute("hidden", "true");
     }
 
     else if (prefName == "bluegriffon.toolbar.icons") {
       var value = Services.prefs.getCharPref("bluegriffon.toolbar.icons");
-      var windowEnumerator = Services.wm.getEnumerator("bluegriffon");
-      while (windowEnumerator.hasMoreElements()) {
-        var w = windowEnumerator.getNext();
-        w.document.documentElement.setAttribute("iconsize", value);
-        w.document.persist(w.document.documentElement.id, "iconsize");
-      }
+      document.documentElement.setAttribute("iconsize", value);
+      document.persist(w.document.documentElement.id, "iconsize");
     }
 
     else if (prefName == "bluegriffon.tabs.position") {
       var value = Services.prefs.getCharPref("bluegriffon.tabs.position");
-      var windowEnumerator = Services.wm.getEnumerator("bluegriffon");
-      while (windowEnumerator.hasMoreElements()) {
-        var w = windowEnumerator.getNext();
-        var tabeditor = w.gDialog.tabeditor;
-        tabeditor.setAttribute("tabmode", value);
-      }
+      gDialog.tabeditor.setAttribute("tabmode", value);
     }
 
     else if (prefName == "bluegriffon.wysiwyg.theme") {
       var value = Services.prefs.getCharPref("bluegriffon.wysiwyg.theme");
-      var windowEnumerator = Services.wm.getEnumerator(null);
-      while (windowEnumerator.hasMoreElements()) {
-        var w = windowEnumerator.getNext();
-        var root = w.document.documentElement;
-        if (value == "black" &&
-            root.getAttribute("forcecleartheme") != "true")
-          root.removeAttribute("cleartheme");
-        else
-          root.setAttribute("cleartheme", "true");
-        if (root.id)
-          w.document.persist(root.id, "cleartheme");
+      var root = document.documentElement;
+      if (value == "black" &&
+          root.getAttribute("forcecleartheme") != "true")
+        root.removeAttribute("cleartheme");
+      else
+        root.setAttribute("cleartheme", "true");
+      if (root.id)
+        document.persist(root.id, "cleartheme");
 
-        ApplyWysiwygThemeChange(w.document, value);
-      }
+      ApplyWysiwygThemeChange(document, value);
     }
 
     else if (prefName == "bluegriffon.source.theme") {
       var value = Services.prefs.getCharPref("bluegriffon.source.theme");
-      var windowEnumerator = Services.wm.getEnumerator("bluegriffon");
-      while (windowEnumerator.hasMoreElements()) {
-        var w = windowEnumerator.getNext();
-        var tabeditor = w.gDialog.tabeditor;
-        var panels = tabeditor.mTabpanels;
-        var decks = panels.childNodes;
-        for (var i = 0; i < decks.length; i++) {
-          decks[i].firstChild.contentWindow.useTheme(value);
-        }
+      var tabeditor = gDialog.tabeditor;
+      var panels = tabeditor.mTabpanels;
+      var decks = panels.childNodes;
+      for (var i = 0; i < decks.length; i++) {
+        decks[i].lastElementChild.contentWindow.wrappedJSObject.useTheme(value);
       }
     }
     else if (prefName == "bluegriffon.osx.dock-integration") {
@@ -288,37 +259,29 @@ var BlueGriffonPrefsObserver = {
         valueArray.push("pi");
       var value = valueArray.join(" ");
 
-      var windowEnumerator = Services.wm.getEnumerator("bluegriffon");
-      while (windowEnumerator.hasMoreElements()) {
-        var w = windowEnumerator.getNext();
-        var editors = w.gDialog.tabeditor.mTabpanels.childNodes;
-        for (var i = 0; i < editors.length; i++) {
-          try {
-            var e = editors[i].firstChild;
-            var innerEditor = e.getEditor(e.contentWindow);
-            innerEditor.document.documentElement.setAttribute("_moz_hide", value);
-          }
-          catch(e) {}
+      var editors = gDialog.tabeditor.mTabpanels.childNodes;
+      for (var i = 0; i < editors.length; i++) {
+        try {
+          var e = editors[i].firstChild;
+          var innerEditor = e.getEditor(e.contentWindow);
+          innerEditor.document.documentElement.setAttribute("_moz_hide", value);
         }
+        catch(e) {}
       }
     }
     else if (prefName == "bluegriffon.display.anchors") {
       var value = Services.prefs.getBoolPref("bluegriffon.display.anchors");
-      var windowEnumerator = Services.wm.getEnumerator("bluegriffon");
-      while (windowEnumerator.hasMoreElements()) {
-        var w = windowEnumerator.getNext();
-        var editors = w.gDialog.tabeditor.mTabpanels.childNodes;
-        for (var i = 0; i < editors.length; i++) {
-          try {
-            var e = editors[i].firstChild;
-            var innerEditor = e.getEditor(e.contentWindow);
-            if (value)
-              innerEditor.document.documentElement.setAttribute("_moz_showanchors", "true");
-            else
-              innerEditor.document.documentElement.removeAttribute("_moz_showanchors");
-          }
-          catch(e) {}
+      var editors = gDialog.tabeditor.mTabpanels.childNodes;
+      for (var i = 0; i < editors.length; i++) {
+        try {
+          var e = editors[i].firstChild;
+          var innerEditor = e.getEditor(e.contentWindow);
+          if (value)
+            innerEditor.document.documentElement.setAttribute("_moz_showanchors", "true");
+          else
+            innerEditor.document.documentElement.removeAttribute("_moz_showanchors");
         }
+        catch(e) {}
       }
     }
   }
