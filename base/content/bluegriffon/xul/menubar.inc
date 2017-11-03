@@ -126,7 +126,7 @@
                       type="checkbox"
                       oncommand="ToggleToolbar('vertical_toolbar')"/>
             <menuseparator/>
-            <menuitem label="Structure bar"
+            <menuitem label="&structureBar.caption;"
                       id="viewStructurebarMenuitem"
                       type="checkbox"
                       oncommand="ToggleToolbar('structurebar')"/>
