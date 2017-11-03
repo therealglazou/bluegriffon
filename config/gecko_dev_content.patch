@@ -1827,10 +1827,23 @@ index 4fb21d8258db..a0191cfe09ea 100644
    ELEM(noframes, true, true, GROUP_BLOCK, GROUP_FLOW_ELEMENT),
    ELEM(noscript, true, true, GROUP_BLOCK, GROUP_FLOW_ELEMENT),
 diff --git a/editor/libeditor/HTMLEditor.cpp b/editor/libeditor/HTMLEditor.cpp
-index c20ca255e82a..58a6266c7f55 100644
+index c20ca255e82a..23c74adf7ebf 100644
 --- a/editor/libeditor/HTMLEditor.cpp
 +++ b/editor/libeditor/HTMLEditor.cpp
-@@ -300,7 +300,8 @@ HTMLEditor::Init(nsIDOMDocument* aDoc,
+@@ -130,8 +130,10 @@ HTMLEditor::HTMLEditor()
+   , mPositionedObjectBorderTop(0)
+   , mGridSize(0)
+   , mDefaultParagraphSeparator(
+-      Preferences::GetBool("editor.use_div_for_default_newlines", true)
+-      ? ParagraphSeparator::div : ParagraphSeparator::br)
++      Preferences::GetBool("bluegriffon.returnKey.createsParagraph", true)
++      ? ParagraphSeparator::p
++      : (Preferences::GetBool("editor.use_div_for_default_newlines", true)
++         ? ParagraphSeparator::div : ParagraphSeparator::br))
+ {
+ }
+ 
+@@ -300,7 +302,8 @@ HTMLEditor::Init(nsIDOMDocument* aDoc,
  
      if (!IsInteractionAllowed()) {
        // ignore any errors from this in case the file is missing
@@ -1840,7 +1853,7 @@ index c20ca255e82a..58a6266c7f55 100644
      }
  
      RefPtr<Selection> selection = GetSelection();
-@@ -2623,11 +2624,6 @@ HTMLEditor::CreateElementWithDefaults(const nsAString& aTagName)
+@@ -2623,11 +2626,6 @@ HTMLEditor::CreateElementWithDefaults(const nsAString& aTagName)
        rv.SuppressException();
        return nullptr;
      }
@@ -1852,7 +1865,7 @@ index c20ca255e82a..58a6266c7f55 100644
    }
    // ADD OTHER TAGS HERE
  
-@@ -3664,7 +3660,7 @@ HTMLEditor::IsTextPropertySetByContent(nsIDOMNode* aNode,
+@@ -3664,7 +3662,7 @@ HTMLEditor::IsTextPropertySetByContent(nsIDOMNode* aNode,
      if (element) {
        nsAutoString tag, value;
        element->GetTagName(tag);
@@ -1861,7 +1874,7 @@ index c20ca255e82a..58a6266c7f55 100644
          bool found = false;
          if (aAttribute && !aAttribute->IsEmpty()) {
            element->GetAttribute(*aAttribute, value);
-@@ -5280,4 +5276,35 @@ HTMLEditor::GetEditorRoot()
+@@ -5280,4 +5278,35 @@ HTMLEditor::GetEditorRoot()
    return GetActiveEditingHost();
  }
  
