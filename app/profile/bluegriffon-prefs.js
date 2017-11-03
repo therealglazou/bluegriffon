@@ -133,6 +133,12 @@ pref("bluegriffon.structurebar.class.show", true);
 pref("bluegriffon.structurebar.lang.show", false);
 pref("bluegriffon.structurebar.role.show", true);
 
+// UI visibility
+pref("bluegriffon.ui.structurebar.show", true);
+pref("bluegriffon.ui.statusbar.show", true);
+pref("bluegriffon.ui.vertical_toolbar.show", true);
+pref("bluegriffon.ui.horizontal_toolbars.show", true);
+
 // updates
 pref("bluegriffon.updates.check.enabled", true);
 pref("bluegriffon.updates.frequency", "launch");

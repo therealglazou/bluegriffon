@@ -2368,3 +2368,23 @@ function onTitlebarMaxClick() {
   else
     window.maximize();
 }
+
+function onViewToolbarsPopupShowing()
+{
+  var structurebar = Services.prefs.getBoolPref("bluegriffon.ui.structurebar.show");
+  var statusbar = Services.prefs.getBoolPref("bluegriffon.ui.statusbar.show");
+  var vertical_toolbar = Services.prefs.getBoolPref("bluegriffon.ui.vertical_toolbar.show");
+  var horizontal_toolbars = Services.prefs.getBoolPref("bluegriffon.ui.horizontal_toolbars.show");
+
+  gDialog.viewStructurebarMenuitem.setAttribute("checked", structurebar);
+  gDialog.viewStatusbarMenuitem.setAttribute("checked", statusbar);
+  gDialog.viewFormatToolbarMenuitem.setAttribute("checked", horizontal_toolbars);
+  gDialog.viewFormatToolbar2Menuitem.setAttribute("checked", vertical_toolbar);
+}
+
+function ToggleToolbar(aPrefInfix)
+{
+  var prefName = "bluegriffon.ui." + aPrefInfix + ".show";
+  var value = Services.prefs.getBoolPref(prefName);
+  Services.prefs.setBoolPref(prefName, !value);
+}

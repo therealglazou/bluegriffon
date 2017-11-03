@@ -115,12 +115,28 @@
                   observes="cmd_renderedHTMLEnabler"
                   oncommand="ToggleAllTagsMode()"/>
         <menuseparator/>
-        <!--menu label="&viewToolbars.label;">
-          <menupopup id="viewToolbarsPopup"
-                     onpopupshowing="BGToolbarManager.listToolbars(this)"/>
+        <menu label="&viewToolbars.label;">
+          <menupopup id="viewToolbarsPopup" onpopupshowing="onViewToolbarsPopupShowing()">
+            <menuitem label="&formatToolbar.name;"
+                      id="viewFormatToolbarMenuitem"
+                      type="checkbox"
+                      oncommand="ToggleToolbar('horizontal_toolbars')"/>
+            <menuitem label="&formatToolbar2.name;"
+                      id="viewFormatToolbar2Menuitem"
+                      type="checkbox"
+                      oncommand="ToggleToolbar('vertical_toolbar')"/>
+            <menuseparator/>
+            <menuitem label="Structure bar"
+                      id="viewStructurebarMenuitem"
+                      type="checkbox"
+                      oncommand="ToggleToolbar('structurebar')"/>
+            <menuseparator/>
+            <menuitem label="&viewStatusbar.label;"
+                      id="viewStatusbarMenuitem"
+                      type="checkbox"
+                      oncommand="ToggleToolbar('statusbar')"/>
+          </menupopup>
         </menu>
-        <menuitem label="&viewStatusbar.label;"
-                  oncommand="BGToolbarManager.goToggleToolbar('statusbar')" /-->
         <menu label="&source.label;" observes="cmd_renderedSourceEnabler">
           <menupopup>
             <menu label="&theme.label;">

@@ -164,6 +164,7 @@ var BlueGriffonPrefsObserver = {
       return;
 
     const kSTRUCTUREBAR_PREFS = "bluegriffon.structurebar";
+    const kUI_PREFS           = "bluegriffon.ui";
 
     if (prefName == "bluegriffon.returnKey.createsParagraph") {
       var value = Services.prefs.getBoolPref("bluegriffon.returnKey.createsParagraph");
@@ -234,6 +235,7 @@ var BlueGriffonPrefsObserver = {
         decks[i].lastElementChild.contentWindow.wrappedJSObject.useTheme(value);
       }
     }
+
     else if (prefName == "bluegriffon.osx.dock-integration") {
       var value = Services.prefs.getBoolPref("bluegriffon.osx.dock-integration");
       if (value)
@@ -241,12 +243,14 @@ var BlueGriffonPrefsObserver = {
       else
         ResetBadge();
     }
+
     else if (prefName.substr(0, kSTRUCTUREBAR_PREFS.length) == kSTRUCTUREBAR_PREFS
              && gDialog.structurebar.mLastNode)
       gDialog.structurebar.selectionChanged(
                 null,
                 gDialog.structurebar.mLastNode,
                 gDialog.structurebar.mOneElementSelected);
+
     else if (prefName == "bluegriffon.display.comments"
              || prefName == "bluegriffon.display.php"
              || prefName == "bluegriffon.display.pi") {
@@ -269,6 +273,48 @@ var BlueGriffonPrefsObserver = {
         catch(e) {}
       }
     }
+
+    else if (prefName.substr(0, kUI_PREFS.length) == kUI_PREFS) {
+      var xulElements = [];
+      /*Services.prompt.alert(null, "foo",
+        gDialog.structurebar + " "+ gDialog.statusbar + " " +
+        gDialog.FormatToolbox + " "+ gDialog.MainToolbox + " " +
+        gDialog.FormatMenulistsToolbox)*/
+      switch (prefName) {
+        case "bluegriffon.ui.structurebar.show":
+          xulElements = [ gDialog.structurebar ];
+          break
+        case "bluegriffon.ui.statusbar.show":
+          xulElements = [ gDialog.statusbar ];
+          break;
+        case "bluegriffon.ui.vertical_toolbar.show":
+          xulElements = [ gDialog.FormatToolbox ];
+          break;
+        case "bluegriffon.ui.horizontal_toolbars.show":
+          xulElements = [ gDialog.MainToolbox, gDialog.FormatMenulistsToolbox ];
+          break;
+        default: break;
+      }
+      var prefValue = Services.prefs.getBoolPref(prefName);
+      for (var i = 0; i < xulElements.length; i++) {
+        var elt = xulElements[i];
+        if (elt == gDialog.MainToolbox) {
+          // special case for the main toolbar otherwise modal dialogs (sheets)
+          // appear at bottom of the window on OS X...
+          if (prefValue)
+            elt.removeAttribute("height");
+          else
+            elt.setAttribute("height", "1");
+        }
+        else if (prefValue)
+          elt.removeAttribute("hidden");
+        else
+          elt.setAttribute("hidden", "true");
+        document.persist(elt.id, "hidden");
+        document.persist(elt.id, "height");
+      }
+    }
+
     else if (prefName == "bluegriffon.display.anchors") {
       var value = Services.prefs.getBoolPref("bluegriffon.display.anchors");
       var editors = gDialog.tabeditor.mTabpanels.childNodes;
