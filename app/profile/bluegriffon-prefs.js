@@ -243,5 +243,8 @@ pref("devtools.debugger.log", false);
 pref("devtools.chrome.enabled", true);
 pref("devtools.selfxss.count", 5);
 
+// paste dropped images as normal relative URLs instead of data URLs
+pref("bluegriffon.drag_n_drop.images.as_url", true);
+
 // kung fu death grips
 pref("bluegriffon.kungfudeathgrip.shortcuts2017", false);

@@ -1933,10 +1933,19 @@ index a19d812206bf..e318fae75718 100644
    void DoContentInserted(nsIDocument* aDocument, nsIContent* aContainer,
                           nsIContent* aChild, int32_t aIndexInContainer,
 diff --git a/editor/libeditor/HTMLEditorDataTransfer.cpp b/editor/libeditor/HTMLEditorDataTransfer.cpp
-index 1664cde6ecdf..286d1a5764ff 100644
+index 1664cde6ecdf..ecf14fb76bbf 100644
 --- a/editor/libeditor/HTMLEditorDataTransfer.cpp
 +++ b/editor/libeditor/HTMLEditorDataTransfer.cpp
-@@ -800,6 +800,8 @@ HTMLEditor::PrepareHTMLTransferable(nsITransferable** aTransferable)
+@@ -81,6 +81,8 @@
+ #include "nsXPCOM.h"
+ #include "nscore.h"
+ #include "nsContentUtils.h"
++#include "nsIIOService.h"
++#include "nsIURL.h"
+ 
+ class nsIAtom;
+ class nsILoadContext;
+@@ -800,6 +802,8 @@ HTMLEditor::PrepareHTMLTransferable(nsITransferable** aTransferable)
        (*aTransferable)->AddDataFlavor(kNativeHTMLMime);
        (*aTransferable)->AddDataFlavor(kHTMLMime);
        (*aTransferable)->AddDataFlavor(kFileMime);
@@ -1945,7 +1954,71 @@ index 1664cde6ecdf..286d1a5764ff 100644
  
        switch (Preferences::GetInt("clipboard.paste_image_type", 1)) {
          case 0:  // prefer JPEG over PNG over GIF encoding
-@@ -1209,6 +1211,11 @@ HTMLEditor::InsertFromTransferable(nsITransferable* transferable,
+@@ -1106,25 +1110,50 @@ HTMLEditor::InsertObject(const nsACString& aType,
+       type.EqualsLiteral(kPNGImageMime) ||
+       type.EqualsLiteral(kGIFImageMime) ||
+       insertAsImage) {
+-    nsCString imageData;
+-    if (insertAsImage) {
+-      rv = nsContentUtils::SlurpFileToString(fileObj, imageData);
+-      NS_ENSURE_SUCCESS(rv, rv);
+-    } else {
+-      nsCOMPtr<nsIInputStream> imageStream = do_QueryInterface(aObject);
+-      NS_ENSURE_TRUE(imageStream, NS_ERROR_FAILURE);
++    nsAutoString stuffToPaste;
++    if (Preferences::GetBool("bluegriffon.drag_n_drop.images.as_url", true)) {
++      nsAutoString path;
+ 
+-      rv = NS_ConsumeStream(imageStream, UINT32_MAX, imageData);
++      nsCOMPtr<nsIIOService> ioService(do_GetService(NS_IOSERVICE_CONTRACTID, &rv));
+       NS_ENSURE_SUCCESS(rv, rv);
++      nsCOMPtr<nsIURI> fileObjURI;
++      rv = ioService->NewFileURI(fileObj, getter_AddRefs(fileObjURI));
++      fileObj->GetPath(path);
++
++      nsCOMPtr<nsIDocument> doc = GetDocument();
++      nsIURI *docUri = doc->GetDocumentURI();
++      NS_ENSURE_TRUE(docUri, NS_ERROR_FAILURE);
++
++      nsCOMPtr<nsIURL> docUrl = do_QueryInterface(docUri);
++      nsCOMPtr<nsIURL> fileObjUrl = do_QueryInterface(fileObjURI);
++      nsAutoCString relativeSpec;
++      rv = docUrl->GetRelativeSpec(fileObjUrl, relativeSpec);
++      if (NS_FAILED(rv)) return rv;
++
++      stuffToPaste.AssignLiteral("<IMG src=\"");
++      AppendUTF8toUTF16(relativeSpec, stuffToPaste);
++      stuffToPaste.AppendLiteral("\" alt=\"\" >");
++    }
++    else {
++      nsCString imageData;
++      if (insertAsImage) {
++        rv = nsContentUtils::SlurpFileToString(fileObj, imageData);
++        NS_ENSURE_SUCCESS(rv, rv);
++      } else {
++        nsCOMPtr<nsIInputStream> imageStream = do_QueryInterface(aObject);
++        NS_ENSURE_TRUE(imageStream, NS_ERROR_FAILURE);
++
++        rv = NS_ConsumeStream(imageStream, UINT32_MAX, imageData);
++        NS_ENSURE_SUCCESS(rv, rv);
+ 
+-      rv = imageStream->Close();
++        rv = imageStream->Close();
++        NS_ENSURE_SUCCESS(rv, rv);
++      }
++
++      rv = ImgFromData(type, imageData, stuffToPaste);
+       NS_ENSURE_SUCCESS(rv, rv);
+     }
+ 
+-    nsAutoString stuffToPaste;
+-    rv = ImgFromData(type, imageData, stuffToPaste);
+-    NS_ENSURE_SUCCESS(rv, rv);
+-
+     AutoEditBatch beginBatching(this);
+     rv = DoInsertHTMLWithContext(stuffToPaste, EmptyString(), EmptyString(),
+                                  NS_LITERAL_STRING(kFileMime),
+@@ -1209,6 +1238,11 @@ HTMLEditor::InsertFromTransferable(nsITransferable* transferable,
          }
        }
      }
@@ -1957,7 +2030,7 @@ index 1664cde6ecdf..286d1a5764ff 100644
      if (bestFlavor.EqualsLiteral(kHTMLMime) ||
          bestFlavor.EqualsLiteral(kUnicodeMime) ||
          bestFlavor.EqualsLiteral(kMozTextInternal)) {
-@@ -1229,14 +1236,40 @@ HTMLEditor::InsertFromTransferable(nsITransferable* transferable,
+@@ -1229,14 +1263,40 @@ HTMLEditor::InsertFromTransferable(nsITransferable* transferable,
        }
  
        if (!stuffToPaste.IsEmpty()) {
