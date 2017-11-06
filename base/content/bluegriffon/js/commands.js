@@ -176,6 +176,8 @@ var ComposerCommands = {
         case "cmd_class":
         case "cmd_id":
         case "cmd_ariaRole":
+        case "cmd_bgFontColor":
+        case "cmd_bgBackgroundColor":
           this.pokeMultiStateUI(command, params);
           break;
 
@@ -439,6 +441,9 @@ var ComposerCommands = {
     commandTable.registerCommand("cmd_class",       cmdClass);
     commandTable.registerCommand("cmd_id",          cmdId);
     commandTable.registerCommand("cmd_ariaRole",    cmdAriaRole);
+
+    commandTable.registerCommand("cmd_bgFontColor",       cmdBgFontColorCommand);
+    commandTable.registerCommand("cmd_bgBackgroundColor", cmdBgBackgroundColorCommand);
 
     commandTable.registerCommand("cmd_bgfind",      cmdBgFindCommand);
     commandTable.registerCommand("cmd_bgfindagain", cmdBgFindAgainCommand);

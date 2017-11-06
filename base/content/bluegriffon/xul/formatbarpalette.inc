@@ -36,6 +36,33 @@
         <observes element="cmd_code" type="checkbox" attribute="state" onbroadcast="onButtonUpdate(this.parentNode, 'cmd_code')"/>
       </toolbarbutton>
 
+      <toolbarbutton id="rotateButton" command="cmd_renderedHTMLEnabler" label="Rotate" tooltiptext="Rotate"
+                     type="checkbox" oncommand="CSSRotationsHandler.toggle(this)"/>
+
+    <toolbaritem id="ColorsBox">
+      <stack>
+        <ecolorpicker id="BackgroundColorColorpicker" left="11" top="11"
+                      colorObjectId="BackgroundColor"
+                      tooltiptext="&bgColor.label;"
+                      windowTitle="Background color"
+                      oncommand="ApplyDirectBackgroundColorChange(this.color)"
+                      showTransparency="true">
+          <observes element="cmd_renderedHTMLEnabler" attribute="disabled" onbroadcast="onColorDisableChange(this.parentNode, 'cmd_renderedHTMLEnabler')"/>
+          <observes element="cmd_bgBackgroundColor"   attribute="state"    onbroadcast="onColorChange(this.parentNode, 'cmd_bgBackgroundColor')"/>
+        </ecolorpicker>
+        <ecolorpicker id="TextColorColorpicker" left="1" top="1"
+                      color="transparent"
+                      tooltiptext="&color.label;"
+                      colorObjectId="TextColor"
+                      windowTitle="Text color"
+                      oncommand="ApplyDirectTextColorChange(this.color)"
+                      showTransparency="true">
+          <observes element="cmd_renderedHTMLEnabler" attribute="disabled" onbroadcast="onColorDisableChange(this.parentNode, 'cmd_renderedHTMLEnabler')"/>
+          <observes element="cmd_bgFontColor"         attribute="state"    onbroadcast="onColorChange(this.parentNode, 'cmd_bgFontColor')"/>
+        </ecolorpicker>
+      </stack>
+    </toolbaritem>
+
     <toolbarbutton id="ulButton" type="radio" group="lists" autoCheck="false" command="cmd_ul"
                        observes="cmd_renderedHTMLEnabler"
                    tooltiptext="&unorderedList.tooltip;" label="&unorderedList.label;">

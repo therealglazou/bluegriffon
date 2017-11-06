@@ -307,3 +307,127 @@ var cmdEditListCommand =
                       "chrome,modal,titlebar,resizable=no,dialog=yes");
    }
 };
+
+//-----------------------------------------------------------------------------------
+
+var cmdBgFontColorCommand =
+{
+  isCommandEnabled: function(aCommand, dummy)
+  {
+    return (EditorUtils.getCurrentEditorElement() &&
+            EditorUtils.isDocumentEditable() &&
+            EditorUtils.isEditingRenderedHTML() &&
+            EditorUtils.isWysiwygMode());
+  },
+
+  getCommandStateParams: function (aCommandName, aParams, aRefcon)
+  {
+    var selContainer = EditorUtils.getSelectionContainer();
+    var isCommandEnabled = this.isCommandEnabled(aCommandName);
+    if (selContainer && isCommandEnabled)
+    {
+      var node = selContainer.node;
+      var doc = EditorUtils.getCurrentDocument();
+      var color = doc.defaultView.getComputedStyle(node, "").getPropertyValue("color");
+      if (color)
+      {
+        aParams.setCStringValue("state_attribute", color);
+        document.getElementById("cmd_bgFontColor").setAttribute("state", color);
+        return;
+      }
+    }
+
+    aParams.setCStringValue("state_attribute", "");
+    document.getElementById("cmd_bgFontColor").setAttribute("state", "");
+  },
+
+  doCommandParams: function(aCommandName, aParams, aRefCon)
+  {
+    var color = aParams.getCStringValue("state_attribute");
+  
+    function functor(aNode) {
+      var editor = arguments[1][1];
+      var c = arguments[1][2];
+
+      editor.beginTransaction();
+      editor.isCSSEnabled = true;
+      editor.setInlineProperty('font', 'color', c)
+      editor.isCSSEnabled = isCSSEnabled;
+      editor.endTransaction();
+    }
+  
+    var nodes = ApplyToNodesArray(functor,
+                                  EditorUtils.getCurrentEditor(),
+                                  color);
+  
+    // be kind with the rest of the world
+    NotifierUtils.notify("selection_strict", nodes[0], false);
+  
+  }
+};
+
+var cmdBgBackgroundColorCommand =
+{
+  isCommandEnabled: function(aCommand, dummy)
+  {
+    return (EditorUtils.getCurrentEditorElement() &&
+            EditorUtils.isDocumentEditable() &&
+            EditorUtils.isEditingRenderedHTML() &&
+            EditorUtils.isWysiwygMode());
+  },
+
+  getCommandStateParams: function (aCommandName, aParams, aRefcon)
+  {
+    var selContainer = EditorUtils.getSelectionContainer();
+    var isCommandEnabled = this.isCommandEnabled(aCommandName);
+    if (selContainer && isCommandEnabled)
+    {
+      var node = selContainer.node;
+      var doc = EditorUtils.getCurrentDocument();
+      var color = "";
+      while (node && 
+             node.nodeType == Node.ELEMENT_NODE &&
+             (color == "transparent" ||
+              color == "rgba(0, 0, 0, 0)" ||
+              !color)) {
+        color = doc.defaultView.getComputedStyle(node, "").getPropertyValue("background-color");
+        node = node.parentNode;
+      }
+      if (node && node.nodeType == Node.ELEMENT_NODE && color)
+      {
+        aParams.setCStringValue("state_attribute", color);
+        document.getElementById("cmd_bgBackgroundColor").setAttribute("state", color);
+        return;
+      }
+    }
+
+    // we default to Gecko's default
+    color = Services.prefs.getCharPref("browser.display.background_color");
+    aParams.setCStringValue("state_attribute", color);
+    document.getElementById("cmd_bgBackgroundColor").setAttribute("state", color);
+  },
+
+  doCommandParams: function(aCommandName, aParams, aRefCon)
+  {
+    var color = aParams.getCStringValue("state_attribute");
+  
+    function functor(aNode) {
+      var editor = arguments[1][1];
+      var c = arguments[1][2];
+
+      editor.beginTransaction();
+      editor.isCSSEnabled = true;
+      editor.setBackgroundColor(c);
+      editor.isCSSEnabled = isCSSEnabled;
+      editor.endTransaction();
+    }
+  
+    var nodes = ApplyToNodesArray(functor,
+                                  EditorUtils.getCurrentEditor(),
+                                  color);
+  
+    // be kind with the rest of the world
+    NotifierUtils.notify("selection_strict", nodes[0], false);
+  
+  }
+};

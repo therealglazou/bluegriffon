@@ -187,8 +187,8 @@
   <command id="cmd_outdent"                        oncommand="goDoCommand('cmd_outdent')"/>
   <command id="cmd_blockquote"                     oncommand="goDoNoCSSCommand('cmd_blockquote')"/>
 
-  <command id="cmd_fontColor"       state=""/>
-  <command id="cmd_backgroundColor" state="transparent"/>
+  <command id="cmd_bgFontColor"       state=""            oncommand="ComposerCommands.doStatefulCommand('cmd_bgFontColor', event.target.value)"/>
+  <command id="cmd_bgBackgroundColor" state="transparent" oncommand="ComposerCommands.doStatefulCommand('cmd_bgBackgroundColor', event.target.value)"/>
 </commandset>
 
 <commandset id="selectionBasedCommands"

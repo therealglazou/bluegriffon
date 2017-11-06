@@ -346,7 +346,26 @@ function onARIARoleChangeStructureBar(commandID)
   }
 }
 
-/************* GLOBAL VARS *************/
+function onColorChange(aElt, commandID)
+{
+  var commandNode = document.getElementById(commandID);
+  var state = commandNode.getAttribute("state");
+  aElt.color = state;
+}
+
+function onColorDisableChange(aElt, commandID)
+{
+  var commandNode = document.getElementById(commandID);
+  var state = commandNode.getAttribute("disabled");
+  if (state) {
+    aElt.setAttribute("disabled", true);
+    aElt.mColorBox.setAttribute("disabled", true);
+  }
+  else {
+    aElt.removeAttribute("disabled");
+    aElt.mColorBox.removeAttribute("disabled");
+  }
+}
 
 /************* Encapsulation menu ******/
 
@@ -2257,7 +2276,7 @@ function CheckForUpdates(aPopup)
 
 function onFontColorChange()
 {
-  var commandNode = document.getElementById("cmd_fontColor");
+  var commandNode = document.getElementById("cmd_bgFontColor");
   if (commandNode)
   {
     var color = commandNode.getAttribute("state");
@@ -2388,3 +2407,24 @@ function ToggleToolbar(aPrefInfix)
   var value = Services.prefs.getBoolPref(prefName);
   Services.prefs.setBoolPref(prefName, !value);
 }
+
+/***** COLOR BUTTONS (sigh...) *****/
+
+function ApplyDirectTextColorChange(aColor)
+{
+    var editor = EditorUtils.getCurrentEditor();
+    var isCSSEnabled = editor.isCSSEnabled;
+    editor.isCSSEnabled = true;
+    editor.setInlineProperty('font', 'color', aColor)
+    editor.isCSSEnabled = isCSSEnabled;
+}
+
+function ApplyDirectBackgroundColorChange(aColor)
+{
+    var editor = EditorUtils.getCurrentEditor();
+    var isCSSEnabled = editor.isCSSEnabled;
+    editor.isCSSEnabled = true;
+    editor.setBackgroundColor(aColor)
+    editor.isCSSEnabled = isCSSEnabled;
+}
+
