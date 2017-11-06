@@ -176,11 +176,23 @@ window:root, dialog:root {
   -moz-appearance: none;
   padding-left: 3px;
   padding-right: 3px;
-  background-color: var(--bg-dark-background);
   padding-left: 3px;
+%ifdef XP_UNIX
+  border: none 0px;
+%else
   border: thin solid var(--bg-dark-border);
+%endif
   color: var(--bg-main-foreground-color);
 }
+
+%ifdef XP_UNIX
+:root:not([cleartheme="true"]) menulist .menulist-label-box,
+:root:not([cleartheme="true"]) menulist[editable="true"] .menulist-editable-box {
+  -moz-appearance: none;
+  border: thin solid var(--bg-dark-border);
+  background-color: var(--bg-dark-background);
+}
+
 
 :root:not([cleartheme="true"]) menulist[disabled="true"],
 :root:not([cleartheme="true"]) textbox[type="number"][disabled="true"] {
