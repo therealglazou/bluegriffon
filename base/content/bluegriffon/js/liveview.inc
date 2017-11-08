@@ -129,7 +129,7 @@ function _UpdateWysiwygLiveView()
       }
     }
   }
-  catch(e) {Services.prompt.alert(null, "_UpdateWysiwygLiveView", e);}
+  catch(e) {}
 }
 
 function WysiwygLiveViewEditorFocused()
