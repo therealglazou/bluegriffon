@@ -642,11 +642,8 @@ function ApplyStyleChangesToStylesheets(editor,           // the current editor
   var whereToInsert;
   switch (query) {
     case "":
-      if ("ResponsiveRulerHelper" in gMain) {
-        if (gMain.ResponsiveRulerHelper.hasSelectedMediaQuery())
+      if (("ResponsiveRulerHelper" in gMain) && gMain.ResponsiveRulerHelper.hasSelectedMediaQuery()) {
           whereToInsert = gMain.ResponsiveInsertionHelper.findWhereToInsertRuleForSelectedMQ(ruleset, property, value, aDelimitor, aRegExpDelimitor, aIdent);
-        else
-          whereToInsert = FindWhereToInsertRuleForScreen(ruleset, property, value, aDelimitor, aRegExpDelimitor, aIdent);
       }
       else
         whereToInsert = FindWhereToInsertRuleForScreen(ruleset, property, value, aDelimitor, aRegExpDelimitor, aIdent);
@@ -657,8 +654,15 @@ function ApplyStyleChangesToStylesheets(editor,           // the current editor
           }
           else
             whereToInsert.rule.style.removeProperty(property);
-          if (!whereToInsert.rule.style.length)
-            whereToInsert.sheet.deleteRule(whereToInsert.rule);
+          if (!whereToInsert.rule.style.length) {
+            for (var i = 0 ; i < whereToInsert.sheet.cssRules.length; i++) {
+              var rule = whereToInsert.sheet.cssRules.item(i);
+              if (rule == whereToInsert.rule) {
+                whereToInsert.sheet.deleteRule(i);
+                break;
+              }
+            }
+          }
         }
         else { // we don't have a rule host so we need to append a new rule
           whereToInsert.sheet.insertRule(aDelimitor + aIdent + "{" +
@@ -701,8 +705,15 @@ function ApplyStyleChangesToStylesheets(editor,           // the current editor
             }
             else 
               whereToInsert.rule.style.removeProperty(property);
-            if (!whereToInsert.rule.style.length) 
-              whereToInsert.sheet.deleteRule(whereToInsert.rule);
+            if (!whereToInsert.rule.style.length) { 
+              for (var i = 0 ; i < whereToInsert.sheet.cssRules.length; i++) {
+                var rule = whereToInsert.sheet.cssRules.item(i);
+                if (rule == whereToInsert.rule) {
+                  whereToInsert.sheet.deleteRule(i);
+                  break;
+                }
+              }
+            }
           }
         }
         else { // we don't have a rule host so we need to append a new rule
@@ -743,7 +754,7 @@ function FindWhereToInsertRuleForScreen(ruleset, property, value, aDelimitor, aR
              priority: "",
              impossible: false };
 
-  var inspectedRule = CssInspector.findRuleForProperty(ruleset, property);
+  var inspectedRule = CssInspector.findRuleForProperty(ruleset, property, gMain.ResponsiveRulerHelper);
   if (inspectedRule && inspectedRule.rule) {
     // ok, that property is already applied through a CSS rule
 
@@ -825,7 +836,7 @@ function FindWhereToInsertRuleForScreen(ruleset, property, value, aDelimitor, aR
   // oh, the property is not applied yet, let's just create a rule
   // with the ID selector for that property
   var sheet;
-  var existingRule = CssInspector.findLastRuleInRulesetForSelector(ruleset, aDelimitor + aIdent);
+  var existingRule = CssInspector.findLastRuleInRulesetForSelector(ruleset, aDelimitor + aIdent, gMain.ResponsiveRulerHelper);
   if (existingRule &&
         (!existingRule.parentStyleSheet.href || existingRule.parentStyleSheet.href.substr(0, 4) != "http")) {
     rv.sheet = existingRule.parentStyleSheet;

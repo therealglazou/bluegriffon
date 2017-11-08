@@ -274,14 +274,26 @@ var CssInspector = {
     return ruleset;
   },
 
-  findLastRuleInRulesetForSelector: function(aRuleset, aSelectorText) {
+  findLastRuleInRulesetForSelector: function(aRuleset, aSelectorText, aResponsiveRulerHelper) {
     for (var i = aRuleset.length - 1 ; i >= 0; i--)
-      if (aRuleset[i].rule.selectorText == aSelectorText)
-        return aRuleset[i].rule;
+      if (aRuleset[i].rule.selectorText == aSelectorText) {
+        var isGenericScreenMQ = true;
+        if (aResponsiveRulerHelper) {
+          var constraints = aResponsiveRulerHelper.getConstraintsForCSSRule(aRuleset[i].rule);
+          if (constraints && constraints.length) {
+            var lastConstraint = constraints[constraints.length - 1];
+            if (lastConstraint)
+              isGenericScreenMQ = (lastConstraint.minWidth == undefined && lastConstraint.maxWidth == undefined);
+          }
+        }
+        if (isGenericScreenMQ)
+          return aRuleset[i].rule;
+        return null;
+      }
     return null;
   },
 
-  findRuleForProperty: function(aRuleSet, aProperty)
+  findRuleForProperty: function(aRuleSet, aProperty, aResponsiveRulerHelper)
   {
     function filterByProperty(element, index, array) {
       return (element.rule.style.getPropertyValue(aProperty) != "");
@@ -325,7 +337,20 @@ var CssInspector = {
       rulesetForProperty.sort(CascadeRules);
       rulesetForProperty[rulesetForProperty.length - 1].priority =
          rulesetForProperty[rulesetForProperty.length - 1].rule.style.getPropertyPriority(aProperty);
-      return rulesetForProperty[rulesetForProperty.length - 1];
+      var rv = rulesetForProperty[rulesetForProperty.length - 1];
+
+      var isGenericScreenMQ = true;
+      if (aResponsiveRulerHelper) {
+        var constraints = aResponsiveRulerHelper.getConstraintsForCSSRule(rv.rule);
+          if (constraints && constraints.length) {
+          var lastConstraint = constraints[constraints.length - 1];
+          if (lastConstraint)
+            isGenericScreenMQ = (lastConstraint.minWidth == undefined && lastConstraint.maxWidth == undefined);
+        }
+      }
+
+      if (isGenericScreenMQ)
+        return rv;
     }
     return null;
   },
