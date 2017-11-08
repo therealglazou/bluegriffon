@@ -3121,6 +3121,19 @@ index a6d01bcd2ec6..cd86be08a3d4 100644
  ifndef MOZ_THUNDERBIRD
  	# Package mozharness
  	$(call py_action,test_archive, \
+diff --git a/toolkit/toolkit.mozbuild b/toolkit/toolkit.mozbuild
+index 9215afc6dd2d..b9ba56781980 100644
+--- a/toolkit/toolkit.mozbuild
++++ b/toolkit/toolkit.mozbuild
+@@ -153,7 +153,7 @@ DIRS += [
+ if 'gtk' in CONFIG['MOZ_WIDGET_TOOLKIT']:
+     DIRS += ['/toolkit/system/gnome']
+ 
+-DIRS += ['/addon-sdk']
++# DIRS += ['/addon-sdk']
+ 
+ if CONFIG['ENABLE_MARIONETTE']:
+     DIRS += [
 diff --git a/widget/PuppetWidget.cpp b/widget/PuppetWidget.cpp
 index 4634b328d076..691771e87edf 100644
 --- a/widget/PuppetWidget.cpp
