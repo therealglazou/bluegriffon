@@ -99,6 +99,9 @@ function Startup()
   gMain.NotifierUtils.addNotifierCallback("afterLeavingSourceMode",
                                           Inspect,
                                           window);
+  gMain.NotifierUtils.addNotifierCallback("resizeEvent",
+                                          Inspect,
+                                          window);
 
   gMain.NotifierUtils.addNotifierCallback("redrawPanel",
                                           RedrawAll,
@@ -135,6 +138,8 @@ function Shutdown()
     gMain.NotifierUtils.removeNotifierCallback("afterEnteringSourceMode",
                                                Inspect);
     gMain.NotifierUtils.removeNotifierCallback("afterLeavingSourceMode",
+                                               Inspect);
+    gMain.NotifierUtils.removeNotifierCallback("resizeEvent",
                                                Inspect);
     gMain.NotifierUtils.removeNotifierCallback("redrawPanel",
                                                 RedrawAll,

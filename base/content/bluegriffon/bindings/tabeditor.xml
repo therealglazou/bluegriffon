@@ -88,6 +88,7 @@
               <xul:hbox flex="1">
                 <xul:tabpanels anonid="EditorTabpanels" id="EditorTabpanels" selectedIndex="0" flex="1" style="margin:0px; padding:0px;"/>
                 <xul:splitter id="responsiveSplitter"
+                              oncommmand="ResizeEventNotifier.doNotify()"
                               anonid="responsiveSplitter"
                               collapse="after"
                               hidden="true"
