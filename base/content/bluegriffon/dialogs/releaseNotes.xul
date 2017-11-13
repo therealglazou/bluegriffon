@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+
+#filter substitution
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+
+<dialog title="Release Notes"
+        id="releaseNotesWindow"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        forcecleartheme = "true"
+        buttons="accept"
+        style="height: auto; width: 300px"
+        persist="screenX screenY">
+
+  <hbox align="top">
+    <image src="chrome://bluegriffon/skin/about-logo.png"
+           imagetheming="never"
+           style="border-radius: 15px; width: 150px; height: 90px"/>
+    <vbox class="indent" style="max-width: 450px">
+      <html:p style="font-weight: bold; font-size: larger; margin-bottom: 1em;">BlueGriffon @APP_VERSION@ ("@CODE_NAME@")</html:p>
+      <html:p>New features:</html:p>
+          <html:ul>
+            <html:li>Responsive Design (for Basic and EPUB licenses)</html:li>
+            <html:li>Color buttons are back, per user request</html:li>
+            <html:li>it's now possible to hide/show most toolbars</html:li>
+          </html:ul>
+      <html:p>Other important changes:</html:p>
+        <html:ul>
+          <html:li>Drag-and-drop of an image from Finder/File Explorer now links to the image instead of creating a data URL</html:li>
+          <html:li>"Restore previous session" feature dropped</html:li>
+        </html:ul>
+      <html:p>Major bug fixes:</html:p>
+        <html:ul>
+          <html:li>Fix for crasher in OS X colorpicker</html:li>
+          <html:li>Fix for broken shortcuts</html:li>
+          <html:li>Fix for undesired markup appearing in liveview (source part)</html:li>
+          <html:li>Fix for broken command line handler</html:li>
+          <html:li>Fix for broken spellchecker dialog</html:li>
+          <html:li>Because of a change in Mozilla Gecko, a CR at the end of for instance a H1 was not creating a P any more; this is fixed.</html:li>
+        </html:ul>
+    </vbox>
+  </hbox>
+</dialog>
