@@ -760,7 +760,8 @@ function FindWhereToInsertRuleForScreen(ruleset, property, value, aDelimitor, aR
              impossible: false };
 
   var inspectedRule = CssInspector.findRuleForProperty(ruleset, property, gMain.ResponsiveRulerHelper);
-  if (inspectedRule && inspectedRule.rule) {
+  if (inspectedRule && inspectedRule.rule &&
+      (gMain.ResponsiveRulerHelper || !inspectedRule.rule.parentRule)) {
     // ok, that property is already applied through a CSS rule
 
     // is that rule dependent on the ID selector for that ID?
@@ -841,13 +842,16 @@ function FindWhereToInsertRuleForScreen(ruleset, property, value, aDelimitor, aR
   // oh, the property is not applied yet, let's just create a rule
   // with the ID selector for that property
   var sheet;
-  var existingRule = CssInspector.findLastRuleInRulesetForSelector(ruleset, aDelimitor + aIdent, gMain.ResponsiveRulerHelper);
-  if (existingRule &&
+  var existingRule = CssInspector.findLastRuleInRulesetForSelector(ruleset, aDelimitor + aIdent, gMain.ResponsiveRulerHelper, property);
+  if (existingRule && existingRule.parentStyleSheet &&
         (!existingRule.parentStyleSheet.href || existingRule.parentStyleSheet.href.substr(0, 4) != "http")) {
     rv.sheet = existingRule.parentStyleSheet;
     rv.rule = existingRule;
   }
   else {
+    if (existingRule) {
+      rv.priority = (existingRule.priority ? "important" : "");
+    }
     rv.sheet = FindLastEditableStyleSheet();
   }
   return rv;

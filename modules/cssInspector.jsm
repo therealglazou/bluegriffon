@@ -274,21 +274,38 @@ var CssInspector = {
     return ruleset;
   },
 
-  findLastRuleInRulesetForSelector: function(aRuleset, aSelectorText, aResponsiveRulerHelper) {
+  findLastRuleInRulesetForSelector: function(aRuleset, aSelectorText, aResponsiveRulerHelper, aProperty) {
     for (var i = aRuleset.length - 1 ; i >= 0; i--)
       if (aRuleset[i].rule.selectorText == aSelectorText) {
         var isGenericScreenMQ = true;
+        var hasProperty = false;
+        var hasPriority = "";
         if (aResponsiveRulerHelper) {
           var constraints = aResponsiveRulerHelper.getConstraintsForCSSRule(aRuleset[i].rule);
           if (constraints && constraints.length) {
             var lastConstraint = constraints[constraints.length - 1];
             if (lastConstraint)
               isGenericScreenMQ = (lastConstraint.minWidth == undefined && lastConstraint.maxWidth == undefined);
+            hasProperty = (aRuleset[i].rule.style.getPropertyValue(aProperty) != "");
+            hasPriority = aRuleset[i].rule.style.getPropertyPriority(aProperty);
           }
         }
+        else {
+          // Responsive Design not enabled, we deal only with rules that don't have a parent rule...
+          if (aRuleset[i].rule.parentRule) {
+            isGenericScreenMQ = false;
+            hasProperty = (aRuleset[i].rule.style.getPropertyValue(aProperty) != "");
+            hasPriority = aRuleset[i].rule.style.getPropertyPriority(aProperty);
+          }
+        }
+
         if (isGenericScreenMQ)
           return aRuleset[i].rule;
-        return null;
+        if (hasProperty || !aResponsiveRulerHelper || aResponsiveRulerHelper.hasSelectedMediaQuery()) {
+          if (hasProperty)
+            return { priority: hasPriority };
+          return null;
+        }
       }
     return null;
   },
