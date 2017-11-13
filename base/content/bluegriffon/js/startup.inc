@@ -74,6 +74,8 @@ function Startup()
 
   if ("ActiveViewManager" in window)
     ActiveViewManager.init();
+
+  ShowReleaseNotes();
 }
 
 var gLookingForFileChangesTimeout = null;
@@ -212,5 +214,25 @@ function RestorePanels()
         }
       }
     }
+  }
+}
+
+function ShowReleaseNotes(aForce)
+{
+  const kRELEASE_NOTES_PREF = "bluegriffon.release_notes.last";
+
+  var gApp = Services.appinfo;
+  var appVersion = gApp.version;
+  var lastReleaseNotes = Services.prefs.getCharPref(kRELEASE_NOTES_PREF);
+
+  if (aForce || Services.vc.compare(lastReleaseNotes, appVersion) < 0) {
+    if (!aForce) {
+      // Services.prefs.setCharPref(kRELEASE_NOTES_PREF, appVersion);
+    }
+
+    var _window = window;
+    setTimeout(_window.openDialog, aForce ? 0 : 1000,
+               "chrome://bluegriffon/content/dialogs/releaseNotes.xul", "_blank",
+               "chrome,modal,titlebar,resizable=yes,dialog=no");
   }
 }

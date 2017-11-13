@@ -254,3 +254,6 @@ pref("bluegriffon.drag_n_drop.images.as_url", true);
 
 // kung fu death grips
 pref("bluegriffon.kungfudeathgrip.shortcuts2017", false);
+
+// last message
+pref("bluegriffon.release_notes.last", "");

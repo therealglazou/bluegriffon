@@ -454,6 +454,9 @@
         <menuitem label="&homePage.label;"
                   oncommand="loadExternalURL('http://bluegriffon.org')"/>
         <menuseparator/>
+        <menuitem label="&cmd.showReleaseNotes.label;"
+                  oncommand="ShowReleaseNotes(true)"/>
+        <menuseparator/>
         <menuitem label="BlueGriffon @ Twitter"
                   oncommand="loadExternalURL('http://twitter.com/BlueGriffonApp')"/>
         <menuseparator/>
