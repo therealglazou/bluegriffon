@@ -227,7 +227,7 @@ function ShowReleaseNotes(aForce)
 
   if (aForce || Services.vc.compare(lastReleaseNotes, appVersion) < 0) {
     if (!aForce) {
-      // Services.prefs.setCharPref(kRELEASE_NOTES_PREF, appVersion);
+      Services.prefs.setCharPref(kRELEASE_NOTES_PREF, appVersion);
     }
 
     var _window = window;
