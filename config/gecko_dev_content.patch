@@ -2825,6 +2825,35 @@ index 8ed4e58f19c1..a2691227d3d4 100644
        if (browser) {
          return { win, browser };
        }
+diff --git a/toolkit/components/satchel/FormHistory.jsm b/toolkit/components/satchel/FormHistory.jsm
+index 405af3324cdd..2839bf9a6dde 100644
+--- a/toolkit/components/satchel/FormHistory.jsm
++++ b/toolkit/components/satchel/FormHistory.jsm
+@@ -374,13 +374,13 @@ XPCOMUtils.defineLazyGetter(this, "dbConnection", function() {
+     dbFile.append("formhistory.sqlite");
+     log("Opening database at " + dbFile.path);
+ 
+-    _dbConnection = Services.storage.openUnsharedDatabase(dbFile);
++    _dbConnection = Cc["@mozilla.org/storage/service;1"].getService(Ci.mozIStorageService).openUnsharedDatabase(dbFile);
+     dbInit();
+   } catch (e) {
+     if (e.result != Cr.NS_ERROR_FILE_CORRUPTED)
+       throw e;
+     dbCleanup(dbFile);
+-    _dbConnection = Services.storage.openUnsharedDatabase(dbFile);
++    _dbConnection = Cc["@mozilla.org/storage/service;1"].getService(Ci.mozIStorageService).openUnsharedDatabase(dbFile);
+     dbInit();
+   }
+ 
+@@ -568,7 +568,7 @@ function dbCleanup(dbFile) {
+ 
+   // Create backup file
+   let backupFile = dbFile.leafName + ".corrupt";
+-  Services.storage.backupDatabaseFile(dbFile, backupFile);
++  Cc["@mozilla.org/storage/service;1"].getService(Ci.mozIStorageService).backupDatabaseFile(dbFile, backupFile);
+ 
+   dbClose(false);
+   dbFile.remove(false);
 diff --git a/toolkit/components/telemetry/TelemetryStartup.js b/toolkit/components/telemetry/TelemetryStartup.js
 index f5e4eba453d6..9021ab3c8655 100644
 --- a/toolkit/components/telemetry/TelemetryStartup.js
