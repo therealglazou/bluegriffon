@@ -506,7 +506,9 @@ toolbarseparator {
   padding-right: 3px;
   background-color: var(--bg-dark-background);
   padding-left: 3px;
+%ifndef XP_UNIX
   border: thin solid var(--bg-dark-border);
+%endif
   color: var(--bg-main-foreground-color);
 }
 
