@@ -1,17 +1,18 @@
 
 var gContentWindow = null;
+var gURL = null;
+var gBoundDelayedStartup = null;
 
 function Startup()
 {
   SetLocationDB();
-  var url = null;
   // do we have a URL to open ?
   try {
     if (window.arguments && window.arguments[0]) {
       var cl = window.arguments[0];
       if (cl && cl instanceof Components.interfaces.nsIMutableArray) {
-        url = cl.GetElementAt(0).QueryInterface(Components.interfaces.nsISupportsString).data;
-        var localFile = UrlUtils.newLocalFile(url);
+        gURL = cl.GetElementAt(0).QueryInterface(Components.interfaces.nsISupportsString).data;
+        var localFile = UrlUtils.newLocalFile(gURL);
         if (localFile) { // if localFile is null, then consider it's a remote URL
           var ioService =
             Components.classes["@mozilla.org/network/io-service;1"]
@@ -19,15 +20,15 @@ function Startup()
           var fileHandler =
             ioService.getProtocolHandler("file")
                      .QueryInterface(Components.interfaces.nsIFileProtocolHandler);
-          url = fileHandler.getURLSpecFromFile(localFile);
+          gURL = fileHandler.getURLSpecFromFile(localFile);
         }
       }
     }
     else if (window.arguments.length >= 2 &&
              window.arguments[1])
-      url = window.arguments[1];
+      gURL = window.arguments[1];
   }
-  catch(e) { url = null; }
+  catch(e) { gURL = null; }
 
   GetUIElements();
 
@@ -55,16 +56,6 @@ function Startup()
   } catch(ex) {
   }
 
-  // let's finish with the url
-  if (url) {
-    var ebmAvailable = ("EBookManager" in window);
-    if (ebmAvailable && url.toLowerCase().endsWith(".epub")) {
-      setTimeout(EBookManager.showEbook, 100, UrlUtils.newLocalFile(url), url);
-    }
-    else
-      setTimeout(OpenFile, 100, url, true);
-  }
-
   BlueGriffonQuitHelper.init();
 
   NotifierUtils.addNotifierCallback("selection_strict", BlueGriffon_lookForFileChanges, this);
@@ -76,6 +67,32 @@ function Startup()
     ActiveViewManager.init();
 
   ShowReleaseNotes();
+
+  // Wait until chrome is painted before executing code not critical to making the window visible
+  gBoundDelayedStartup = _delayedStartup.bind(window);
+  window.addEventListener("MozAfterPaint", gBoundDelayedStartup);
+}
+
+function _cancelDelayedStartup() {
+  window.removeEventListener("MozAfterPaint", gBoundDelayedStartup);
+  gBoundDelayedStartup = null;
+}
+
+function _delayedStartup() {
+  _cancelDelayedStartup();
+  // let's finish with the url
+  try {
+    if (gURL) {
+      var ebmAvailable = ("EBookManager" in window);
+      if (ebmAvailable && gURL.toLowerCase().endsWith(".epub")) {
+        EBookManager.showEbook(UrlUtils.newLocalFile(gURL), gURL);
+      }
+      else {
+        OpenFile(gURL, true);
+      }
+    }
+  }
+  catch(e) {}
 }
 
 var gLookingForFileChangesTimeout = null;
