@@ -1,33 +1,37 @@
 
 var gContentWindow = null;
+var gURLArray = [];
+var gBoundDelayedStartup = null;
 
 function Startup()
 {
   SetLocationDB();
-  var url = null;
   // do we have a URL to open ?
   try {
     if (window.arguments && window.arguments[0]) {
       var cl = window.arguments[0];
       if (cl && cl instanceof Components.interfaces.nsIMutableArray) {
-        url = cl.GetElementAt(0).QueryInterface(Components.interfaces.nsISupportsString).data;
-        var localFile = UrlUtils.newLocalFile(url);
-        if (localFile) { // if localFile is null, then consider it's a remote URL
-          var ioService =
-            Components.classes["@mozilla.org/network/io-service;1"]
-                      .getService(Components.interfaces.nsIIOService);
-          var fileHandler =
-            ioService.getProtocolHandler("file")
-                     .QueryInterface(Components.interfaces.nsIFileProtocolHandler);
-          url = fileHandler.getURLSpecFromFile(localFile);
+        for (var i = 0; i < cl.Count(); i++) {
+          var url = cl.GetElementAt(i).QueryInterface(Components.interfaces.nsISupportsString).data;
+          var localFile = UrlUtils.newLocalFile(url);
+          if (localFile) { // if localFile is null, then consider it's a remote URL
+            var ioService =
+              Components.classes["@mozilla.org/network/io-service;1"]
+                        .getService(Components.interfaces.nsIIOService);
+            var fileHandler =
+              ioService.getProtocolHandler("file")
+                      .QueryInterface(Components.interfaces.nsIFileProtocolHandler);
+            url = fileHandler.getURLSpecFromFile(localFile);
+          }
+          gURLArray.push(url);
         }
       }
     }
     else if (window.arguments.length >= 2 &&
              window.arguments[1])
-      url = window.arguments[1];
+      gURLArray = [ window.arguments[1] ];
   }
-  catch(e) { url = null; }
+  catch(e) { gURLArray = []; }
 
   GetUIElements();
 
@@ -55,16 +59,6 @@ function Startup()
   } catch(ex) {
   }
 
-  // let's finish with the url
-  if (url) {
-    var ebmAvailable = ("EBookManager" in window);
-    if (ebmAvailable && url.toLowerCase().endsWith(".epub")) {
-      setTimeout(EBookManager.showEbook, 100, UrlUtils.newLocalFile(url), url);
-    }
-    else
-      setTimeout(OpenFile, 100, url, true);
-  }
-
   BlueGriffonQuitHelper.init();
 
   NotifierUtils.addNotifierCallback("selection_strict", BlueGriffon_lookForFileChanges, this);
@@ -76,6 +70,35 @@ function Startup()
     ActiveViewManager.init();
 
   ShowReleaseNotes();
+
+  // Wait until chrome is painted before executing code not critical to making the window visible
+  gBoundDelayedStartup = _delayedStartup.bind(window);
+  window.addEventListener("MozAfterPaint", gBoundDelayedStartup);
+}
+
+function _cancelDelayedStartup() {
+  window.removeEventListener("MozAfterPaint", gBoundDelayedStartup);
+  gBoundDelayedStartup = null;
+}
+
+function _delayedStartup() {
+  _cancelDelayedStartup();
+  // let's finish with the url
+  try {
+    for (var i = 0; i < gURLArray.length; i++) {
+      var url = gURLArray[i];
+      if (url) {
+        var ebmAvailable = ("EBookManager" in window);
+        if (ebmAvailable && url.toLowerCase().endsWith(".epub")) {
+          EBookManager.showEbook(UrlUtils.newLocalFile(url), url);
+        }
+        else {
+          OpenFile(url, true);
+        }
+      }
+    }
+  }
+  catch(e) {}
 }
 
 var gLookingForFileChangesTimeout = null;

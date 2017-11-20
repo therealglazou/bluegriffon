@@ -188,6 +188,12 @@ function OpenFile(aURL, aInTab)
     OpenNewWindow(aURL);
 }
 
+function OpenFiles(aURLArray, aInTab)
+{
+  for (var i = 0; i < aURLArray.length; i++)
+    OpenFile(aURLArray[i], aInTab);
+}
+
 function EditorLoadUrl(aElt, aURL)
 {
   try {
