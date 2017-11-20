@@ -1,6 +1,6 @@
 
 var gContentWindow = null;
-var gURL = null;
+var gURLArray = [];
 var gBoundDelayedStartup = null;
 
 function Startup()
@@ -11,24 +11,27 @@ function Startup()
     if (window.arguments && window.arguments[0]) {
       var cl = window.arguments[0];
       if (cl && cl instanceof Components.interfaces.nsIMutableArray) {
-        gURL = cl.GetElementAt(0).QueryInterface(Components.interfaces.nsISupportsString).data;
-        var localFile = UrlUtils.newLocalFile(gURL);
-        if (localFile) { // if localFile is null, then consider it's a remote URL
-          var ioService =
-            Components.classes["@mozilla.org/network/io-service;1"]
-                      .getService(Components.interfaces.nsIIOService);
-          var fileHandler =
-            ioService.getProtocolHandler("file")
-                     .QueryInterface(Components.interfaces.nsIFileProtocolHandler);
-          gURL = fileHandler.getURLSpecFromFile(localFile);
+        for (var i = 0; i < cl.Count(); i++) {
+          var url = cl.GetElementAt(i).QueryInterface(Components.interfaces.nsISupportsString).data;
+          var localFile = UrlUtils.newLocalFile(url);
+          if (localFile) { // if localFile is null, then consider it's a remote URL
+            var ioService =
+              Components.classes["@mozilla.org/network/io-service;1"]
+                        .getService(Components.interfaces.nsIIOService);
+            var fileHandler =
+              ioService.getProtocolHandler("file")
+                      .QueryInterface(Components.interfaces.nsIFileProtocolHandler);
+            url = fileHandler.getURLSpecFromFile(localFile);
+          }
+          gURLArray.push(url);
         }
       }
     }
     else if (window.arguments.length >= 2 &&
              window.arguments[1])
-      gURL = window.arguments[1];
+      gURLArray = [ window.arguments[1] ];
   }
-  catch(e) { gURL = null; }
+  catch(e) { gURLArray = []; }
 
   GetUIElements();
 
@@ -82,13 +85,16 @@ function _delayedStartup() {
   _cancelDelayedStartup();
   // let's finish with the url
   try {
-    if (gURL) {
-      var ebmAvailable = ("EBookManager" in window);
-      if (ebmAvailable && gURL.toLowerCase().endsWith(".epub")) {
-        EBookManager.showEbook(UrlUtils.newLocalFile(gURL), gURL);
-      }
-      else {
-        OpenFile(gURL, true);
+    for (var i = 0; i < gURLArray.length; i++) {
+      var url = gURLArray[i];
+      if (url) {
+        var ebmAvailable = ("EBookManager" in window);
+        if (ebmAvailable && url.toLowerCase().endsWith(".epub")) {
+          EBookManager.showEbook(UrlUtils.newLocalFile(url), url);
+        }
+        else {
+          OpenFile(url, true);
+        }
       }
     }
   }
