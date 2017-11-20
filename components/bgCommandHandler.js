@@ -175,22 +175,30 @@ nsBlueGriffonContentHandler.prototype = {
         openWindow(null, gBlueGriffonContentHandler.chromeURL, "_blank", "chrome,dialog=no,all", ar || url);
     }
 
-    url = cmdLine.handleFlagWithParam("url", false);
-    if (url) {
+    var urlArray = [];
+    url = "";
+    do {
+      url = cmdLine.handleFlagWithParam("url", false);
+      if (url)
+        urlArray.push(url);
+    }
+    while(url);
+
+    if (urlArray && urlArray.length) {
       cmdLine.preventDefault = true;
       if (mostRecent) {
         var navNav = mostRecent.QueryInterface(nsIInterfaceRequestor)
-                           .getInterface(nsIWebNavigation);
+                          .getInterface(nsIWebNavigation);
         var rootItem = navNav.QueryInterface(nsIDocShellTreeItem).rootTreeItem;
         var rootWin = rootItem.QueryInterface(nsIInterfaceRequestor)
                               .getInterface(nsIDOMWindow);
-        rootWin.OpenFile(url, true);
+        rootWin.OpenFiles(urlArray, true);
         return;
       }
       return openWindow(null, "chrome://bluegriffon/content/xul/bluegriffon.xul",
-                               "_blank",
-                               "chrome,dialog=no,all",
-                               url);
+                              "_blank",
+                              "chrome,dialog=no,all",
+                              urlArray);
     }
   },
 
@@ -276,23 +284,33 @@ nsDefaultCommandLineHandler.prototype = {
                                ar || url);
 #endif
     }
-    url = cmdLine.handleFlagWithParam("url", false);
-    if (url) {
-    	cmdLine.preventDefault = true;
+
+    var urlArray = [];
+    url = "";
+    do {
+      url = cmdLine.handleFlagWithParam("url", false);
+      if (url)
+        urlArray.push(url);
+    }
+    while(url);
+
+    if (urlArray && urlArray.length) {
+      cmdLine.preventDefault = true;
       if (mostRecent) {
         var navNav = mostRecent.QueryInterface(nsIInterfaceRequestor)
-                           .getInterface(nsIWebNavigation);
+                          .getInterface(nsIWebNavigation);
         var rootItem = navNav.QueryInterface(nsIDocShellTreeItem).rootTreeItem;
         var rootWin = rootItem.QueryInterface(nsIInterfaceRequestor)
                               .getInterface(nsIDOMWindow);
-        rootWin.OpenFile(url, true);
+        rootWin.OpenFiles(urlArray, true);
         return;
       }
       return openWindow(null, "chrome://bluegriffon/content/xul/bluegriffon.xul",
-                               "_blank",
-                               "chrome,dialog=no,all",
-                               url);
+                              "_blank",
+                              "chrome,dialog=no,all",
+                              urlArray);
     }
+
     if (mostRecent) {
       mostRecent.focus();
       return mostRecent;
