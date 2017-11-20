@@ -38,6 +38,17 @@ const URI_INHERITS_SECURITY_CONTEXT = nsIHttpProtocolHandler
 // Flag used to indicate that the arguments to openWindow can be passed directly.
 const NO_EXTERNAL_URIS = 1;
 
+function CL_LOG(c)
+{
+  var str = "command-line\n";
+  str +=    "  number of arguments: " + c.length + "\n";
+  str +=    "  reserialization: ";
+  for (var i = 0; i < c.length; i++)
+    str += c.getArgument(i) + " ";
+
+  Services.prompt.alert(null, "Command line", str);
+}
+
 function openWindow(parent, url, target, features, args, noExternalArgs) {
   var wwatch = Components.classes["@mozilla.org/embedcomp/window-watcher;1"]
                          .getService(nsIWindowWatcher);
@@ -121,6 +132,8 @@ nsBlueGriffonContentHandler.prototype = {
   handle : function bch_handle(cmdLine) {
     if (!cmdLine.length)
       return;
+
+    CL_LOG(cmdLine);
 
     var url = null;
 #ifndef XP_MACOSX
@@ -213,6 +226,8 @@ nsDefaultCommandLineHandler.prototype = {
 
   /* nsICommandLineHandler */
   handle : function dch_handle(cmdLine) {
+
+    CL_LOG(cmdLine);
 
     var url = null;
 #ifndef XP_MACOSX
