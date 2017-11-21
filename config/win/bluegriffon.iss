@@ -7,8 +7,8 @@
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{A9015334-10BE-4D64-A776-203336EFE806}
 AppName=BlueGriffon
-AppVersion=0.7
-;AppVerName=BlueGriffon 0.7
+AppVersion=3.0.1
+AppCopyright=Copyright (C) 1998-2017 Disruptive Innovations
 AppPublisher=Disruptive Innovations SAS
 AppPublisherURL=http://bluegriffon.org
 AppSupportURL=http://bluegriffon.org
@@ -16,50 +16,41 @@ AppUpdatesURL=http://bluegriffon.org
 DefaultDirName={pf}\BlueGriffon
 DefaultGroupName=BlueGriffon
 AllowNoIcons=yes
-OutputBaseFilename=setup-bluegriffon
-SetupIconFile=C:\bluegriffon.ico
-WizardImageFile=C:\innoBG.bmp
+OutputDir=c:\Users\glazou\ISS
+OutputBaseFilename= bluegriffon-3.0.1.win-x86_64
+DisableWelcomePage=no
+SourceDir=c:\trees\build
+SetupIconFile=bluegriffon.ico
+WizardSmallImageFile=smallwizardimage.bmp
+WizardImageFile=wizWatermark.bmp
 Compression=lzma
 SolidCompression=yes
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
-Name: "basque"; MessagesFile: "compiler:Languages\Basque.isl"
-Name: "brazilianportuguese"; MessagesFile: "compiler:Languages\BrazilianPortuguese.isl"
-Name: "catalan"; MessagesFile: "compiler:Languages\Catalan.isl"
-Name: "czech"; MessagesFile: "compiler:Languages\Czech.isl"
-Name: "danish"; MessagesFile: "compiler:Languages\Danish.isl"
-Name: "dutch"; MessagesFile: "compiler:Languages\Dutch.isl"
-Name: "finnish"; MessagesFile: "compiler:Languages\Finnish.isl"
 Name: "french"; MessagesFile: "compiler:Languages\French.isl"
-Name: "german"; MessagesFile: "compiler:Languages\German.isl"
-Name: "hebrew"; MessagesFile: "compiler:Languages\Hebrew.isl"
-Name: "hungarian"; MessagesFile: "compiler:Languages\Hungarian.isl"
-Name: "italian"; MessagesFile: "compiler:Languages\Italian.isl"
-Name: "japanese"; MessagesFile: "compiler:Languages\Japanese.isl"
-Name: "norwegian"; MessagesFile: "compiler:Languages\Norwegian.isl"
-Name: "polish"; MessagesFile: "compiler:Languages\Polish.isl"
-Name: "portuguese"; MessagesFile: "compiler:Languages\Portuguese.isl"
-Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
-Name: "slovak"; MessagesFile: "compiler:Languages\Slovak.isl"
-Name: "slovenian"; MessagesFile: "compiler:Languages\Slovenian.isl"
-Name: "spanish"; MessagesFile: "compiler:Languages\Spanish.isl"
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; OnlyBelowVersion: 0,6.1
 
 [Files]
-Source: "C:\bin\opt\bg-central\dist\bin\bluegriffon-bin.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\bin\opt\bg-central\dist\bin\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Users\glazou\bluegriffon\bluegriffon.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\trees\build\boxcutter\*"; DestDir: "{app}\editor"; Flags: ignoreversion
+Source: "C:\Users\glazou\bluegriffon\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
+Source: "c:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Remote Debugger\x64\api-*.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "c:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Remote Debugger\x64\vcruntime140.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "c:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Remote Debugger\x64\msvcp140.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "c:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Remote Debugger\x64\ucrtbase.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
-Name: "{group}\BlueGriffon"; Filename: "{app}\bluegriffon-bin.exe"
+Name: "{group}\BlueGriffon"; Filename: "{app}\bluegriffon.exe"
 Name: "{group}\{cm:UninstallProgram,BlueGriffon}"; Filename: "{uninstallexe}"
-Name: "{commondesktop}\BlueGriffon"; Filename: "{app}\bluegriffon-bin.exe"; Tasks: desktopicon
-Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\BlueGriffon"; Filename: "{app}\bluegriffon-bin.exe"; Tasks: quicklaunchicon
+Name: "{commondesktop}\BlueGriffon"; Filename: "{app}\bluegriffon.exe"; Tasks: desktopicon
+Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\BlueGriffon"; Filename: "{app}\bluegriffon.exe"; Tasks: quicklaunchicon
+
 
 [Run]
-Filename: "{app}\bluegriffon-bin.exe"; Description: "{cm:LaunchProgram,BlueGriffon}"; Flags: nowait postinstall skipifsilent
+Filename: "{app}\bluegriffon.exe"; Description: "{cm:LaunchProgram,BlueGriffon}"; Flags: nowait postinstall skipifsilent
 
