@@ -294,30 +294,7 @@ var CssUtils = {
     for (var i = 0; i < cssRules.length; i++)
     {
       var rule = cssRules[i];
-      switch (rule.type)
-      {
-        case CssUtils.kCSSRule.STYLE_RULE:
-          str += (i ? "\n" : "") + aTabs + rule.selectorText + " {\n";
-          for (var j = 0; j < rule.style.length; j++) {
-            var property = rule.style.item(j);
-            var value    = rule.style.getPropertyValue(property);
-            var priority = rule.style.getPropertyPriority(property);
-
-            str += aTabs + "  " + property + ": " + value
-                     + (priority ? " !important" : "")
-                     + ";\n";
-          }
-          str += aTabs + "}\n";
-          break;
-        case CssUtils.kCSSRule.MEDIA_RULE:
-          str += (i ? "\n" : "") + aTabs + "@media " + rule.media.mediaText + " {\n";
-          str += this._reserializeEmbeddedStylesheet(rule, aTabs + "  ");
-          str += aTabs + "}\n";
-          break;
-        default:
-          str += (i ? "\n" : "") + rule.cssText;
-          break;
-      }
+      str += (i ? "\n" : "") + rule.cssText + "\n";
     }
     return str;
   },
@@ -337,7 +314,7 @@ var CssUtils = {
         styleEltForSheet.removeChild(child);
       child = tmp;
     }
-    var cssParser = new CSSParser(str);
+    var cssParser = new CSSParser(str, false);
     if (str) {
       var parsedSheet = cssParser.parse(str, false, false);
       str = parsedSheet.cssText();

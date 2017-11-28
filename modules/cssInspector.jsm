@@ -122,7 +122,7 @@ var CssInspector = {
       try {
         var prefs = Components.classes["@mozilla.org/preferences-service;1"]
                        .getService(Components.interfaces.nsIPrefBranch);
-      
+
         useBlink   = prefs.getBoolPref("bluegriffon.css.support.blink");
         useGecko   = prefs.getBoolPref("bluegriffon.css.support.gecko");
         useServo   = prefs.getBoolPref("bluegriffon.css.support.servo");
@@ -166,22 +166,10 @@ var CssInspector = {
     for (var i = 0; i < cssRules.length; i++)
     {
       var rule = cssRules[i];
-      switch (rule.type)
-      {
-        case Components.interfaces.nsIDOMCSSRule.STYLE_RULE:
-          {
-            str += (i ? "\n" : "") + rule.selectorText + " {\n " +
-                   rule.style.cssText.replace( /;/g , ";\n");
-            str += "}\n";
-          }
-          break;
-        default:
-          str += (i ? "\n" : "") + rule.cssText;
-          break;
-      }
+      str += (i ? "\n" : "") + rule.cssText + "\n";
     }
 
-    var cssParser = new CSSParser(str);
+    var cssParser = new CSSParser(str, false);
     if (str) {
       var parsedSheet = cssParser.parse(str, false, false);
       str = parsedSheet.cssText();
@@ -2266,11 +2254,13 @@ CSSScanner.prototype = {
   }
 };
 
-function CSSParser(aString)
+function CSSParser(aString, aExpandShorthands)
 {
   this.mToken = null;
   this.mLookAhead = null;
   this.mScanner = new CSSScanner(aString);
+
+  this.expandShorthands = aExpandShorthands ? true : false;
 
   this.mPreserveWS = true;
   this.mPreserveComments = true;
@@ -2997,7 +2987,7 @@ CSSParser.prototype = {
             valid = true;
             break;
           } else {
-            var d = this.parseDeclaration(token, declarations, true, true, aSheet);
+            var d = this.parseDeclaration(token, declarations, true, this.expandShorthands, aSheet);
             s += ((d && declarations.length) ? " " : "") + d;
           }
           token = this.getToken(true, false);
@@ -4429,7 +4419,7 @@ CSSParser.prototype = {
             valid = true;
             break;
           } else {
-            var d = this.parseDeclaration(token, declarations, true, true, aOwner);
+            var d = this.parseDeclaration(token, declarations, true, this.expandShorthands, aOwner);
             s += ((d && declarations.length) ? " " : "") + d;
           }
           token = this.getToken(true, false);
@@ -4464,34 +4454,25 @@ CSSParser.prototype = {
     mediaRule.currentLine = currentLine;
     this.preserveState();
     var token = this.getToken(true, true);
-    var foundMedia = false;
+
+    // parse media list
+    var mediaText = "";
     while (token.isNotNull()) {
-      if (token.isIdent()) {
-        foundMedia = true;
-        s += " " + token.value;
-        mediaRule.media.push(token.value);
-        token = this.getToken(true, true);
-        if (token.isSymbol(",")) {
-          s += ",";
-        } else {
-          if (token.isSymbol("{"))
-            this.ungetToken();
-          else {
-            // error...
-            token.type = jscsspToken.NULL_TYPE;
-            break;
-          }
-        }
-      }
-      else if (token.isSymbol("{"))
-        break;
-      else if (foundMedia) {
-        token.type = jscsspToken.NULL_TYPE;
-        // not a media list
-        break;
-      }
+      s += " " + token.value;
+      mediaText += (mediaText ? " " : "") + token.value;
       token = this.getToken(true, true);
+
+      if (token.isSymbol(",")) {
+        mediaRule.media.push(mediaText);
+        mediaText = "";
+        s += ",";
+      }
+      else if (token.isSymbol("{")) {
+        mediaRule.media.push(mediaText);
+        break;
+      }
     }
+
     if (token.isSymbol("{") && mediaRule.media.length) {
       // ok let's parse style rules now...
       s += " { ";
@@ -4561,7 +4542,7 @@ CSSParser.prototype = {
             valid = true;
             break;
           } else {
-            var d = this.parseDeclaration(token, declarations, true, true, aOwner);
+            var d = this.parseDeclaration(token, declarations, true, this.expandShorthands, aOwner);
             s += ((d && declarations.length) ? " " : "") + d;
           }
           token = this.getToken(true, false);

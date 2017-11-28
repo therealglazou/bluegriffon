@@ -2550,129 +2550,182 @@ index d29ae9fe2b78..288489f51f94 100644
    MOZ_ASSERT(!color.IsEmpty(),
               "Content node's GetValue() should return a valid color string "
               "(the default color, in case no valid color is set)");
-diff --git a/layout/style/Loader.cpp b/layout/style/Loader.cpp
-index 16ab5429facb..4f29dc1537dc 100644
---- a/layout/style/Loader.cpp
-+++ b/layout/style/Loader.cpp
-@@ -1129,7 +1129,8 @@ Loader::CreateSheet(nsIURI* aURI,
- #endif
+diff --git a/layout/style/Declaration.cpp b/layout/style/Declaration.cpp
+index f08ab15f4e5a..96dd9ae4f29f 100644
+--- a/layout/style/Declaration.cpp
++++ b/layout/style/Declaration.cpp
+@@ -662,10 +662,7 @@ Declaration::GetPropertyValueInternal(
+   nsCSSCompressedDataBlock *data = importantCount ? mImportantData : mData;
+   switch (aProperty) {
+     case eCSSProperty_margin:
+-    case eCSSProperty_padding:
+-    case eCSSProperty_border_color:
+-    case eCSSProperty_border_style:
+-    case eCSSProperty_border_width: {
++    case eCSSProperty_padding: {
+       const nsCSSPropertyID* subprops =
+         nsCSSProps::SubpropertyEntryFor(aProperty);
+       MOZ_ASSERT(nsCSSProps::GetStringValue(subprops[0]).Find("-top") !=
+@@ -743,6 +740,9 @@ Declaration::GetPropertyValueInternal(
+       // If we have a non-default value for any of the properties that
+       // this shorthand sets but cannot specify, we have to return the
+       // empty string.
++      /* BLUEGRIFFON: 'border' should not reset 'border-image'
++       * Cf. https://lists.w3.org/Archives/Public/www-style/2017Nov/0018.html
++
+       if (data->ValueFor(eCSSProperty_border_image_source)->GetUnit() !=
+             eCSSUnit_None ||
+           !data->HasDefaultBorderImageSlice() ||
+@@ -759,6 +759,7 @@ Declaration::GetPropertyValueInternal(
+             eCSSUnit_None) {
+         break;
+       }
++      */
  
-     bool fromCompleteSheets = false;
--    if (!sheet) {
-+    //XXX BlueGriffon forces reload of stylesheets each time we need them
-+    if (false /*!sheet*/) {
-       // Then our per-document complete sheets.
-       URIPrincipalReferrerPolicyAndCORSModeHashKey key(aURI, aLoaderPrincipal, aCORSMode, aReferrerPolicy);
- 
+       const nsCSSPropertyID* subproptables[3] = {
+         nsCSSProps::SubpropertyEntryFor(eCSSProperty_border_color),
+@@ -783,7 +784,57 @@ Declaration::GetPropertyValueInternal(
+       }
+       // tweak aProperty and fall through
+       aProperty = eCSSProperty_border_top;
+-      MOZ_FALLTHROUGH;
++      const nsCSSPropertyID* subprops =
++        nsCSSProps::SubpropertyEntryFor(aProperty);
++      MOZ_ASSERT(StringEndsWith(nsCSSProps::GetStringValue(subprops[2]),
++                                NS_LITERAL_CSTRING("-color")),
++                 "third subprop must be the color property");
++
++      bool ok = AppendValueToString(subprops[0], aValue, aSerialization);
++      if (ok) {
++        aValue.Append(u' ');
++        ok = AppendValueToString(subprops[1], aValue, aSerialization);
++        if (ok) {
++          const nsCSSValue *colorValue = data->ValueFor(subprops[2]);
++          bool isCurrentColor =
++            colorValue->GetUnit() == eCSSUnit_EnumColor &&
++            colorValue->GetIntValue() == NS_COLOR_CURRENTCOLOR;
++
++          // Don't output a third value when it's currentcolor.
++          if (!isCurrentColor) {
++            aValue.Append(u' ');
++            ok = AppendValueToString(subprops[2], aValue, aSerialization);
++          }
++        }
++      }
++
++      if (!ok) {
++        aValue.Truncate();
++      }
++      break;
++    }
++    case eCSSProperty_border_color:
++    case eCSSProperty_border_style:
++    case eCSSProperty_border_width: {
++      const nsCSSPropertyID* subprops =
++        nsCSSProps::SubpropertyEntryFor(aProperty);
++      MOZ_ASSERT(nsCSSProps::GetStringValue(subprops[0]).Find("-top") !=
++                 kNotFound, "first subprop must be top");
++      MOZ_ASSERT(nsCSSProps::GetStringValue(subprops[1]).Find("-right") !=
++                 kNotFound, "second subprop must be right");
++      MOZ_ASSERT(nsCSSProps::GetStringValue(subprops[2]).Find("-bottom") !=
++                 kNotFound, "third subprop must be bottom");
++      MOZ_ASSERT(nsCSSProps::GetStringValue(subprops[3]).Find("-left") !=
++                 kNotFound, "fourth subprop must be left");
++      const nsCSSValue* vals[4] = {
++        data->ValueFor(subprops[0]),
++        data->ValueFor(subprops[1]),
++        data->ValueFor(subprops[2]),
++        data->ValueFor(subprops[3])
++      };
++      nsCSSValue::AppendSidesShorthandToString(subprops, vals, aValue,
++                                               aSerialization);
++      break;
+     }
+     case eCSSProperty_border_top:
+     case eCSSProperty_border_right:
 diff --git a/layout/style/nsCSSParser.cpp b/layout/style/nsCSSParser.cpp
-index 73b94dff9ce2..48eb879ac7fd 100644
+index 73b94dff9ce2..7c4dba950471 100644
 --- a/layout/style/nsCSSParser.cpp
 +++ b/layout/style/nsCSSParser.cpp
-@@ -63,6 +63,8 @@
- #include "mozilla/dom/URL.h"
- #include "gfxFontFamilyList.h"
+@@ -13452,6 +13452,9 @@ CSSParserImpl::ParseBorderSide(const nsCSSPropertyID aPropIDs[],
+       AppendValue(kBorderColorIDs[index], values[2]);
+     }
  
-+#define BG_CONSOLE_SHOW_INVALID_VARIABLES "bluegriffon.console.showInvalidVariables"
++    /* BLUEGRIFFON: 'border' should not reset 'border-image'
++     * Cf. https://lists.w3.org/Archives/Public/www-style/2017Nov/0018.html
 +
- using namespace mozilla;
- using namespace mozilla::css;
+     static const nsCSSPropertyID kBorderColorsProps[] = {
+       eCSSProperty__moz_border_top_colors,
+       eCSSProperty__moz_border_right_colors,
+@@ -13482,6 +13485,7 @@ CSSParserImpl::ParseBorderSide(const nsCSSPropertyID aPropIDs[],
+     NS_FOR_CSS_SIDES(side) {
+       AppendValue(kBorderColorsProps[side], extraValue);
+     }
++    */
+   }
+   else {
+     // Just set our one side
+diff --git a/layout/style/nsCSSProps.cpp b/layout/style/nsCSSProps.cpp
+index cd182af443a5..7ad249ad1b2a 100644
+--- a/layout/style/nsCSSProps.cpp
++++ b/layout/style/nsCSSProps.cpp
+@@ -2694,6 +2694,10 @@ static const nsCSSPropertyID gBorderSubpropTable[] = {
+   eCSSProperty_border_right_color,
+   eCSSProperty_border_bottom_color,
+   eCSSProperty_border_left_color,
++
++  /* BLUEGRIFFON: 'border' should not reset 'border-image'
++   * Cf. https://lists.w3.org/Archives/Public/www-style/2017Nov/0018.html
++
+   eCSSProperty__moz_border_top_colors,
+   eCSSProperty__moz_border_right_colors,
+   eCSSProperty__moz_border_bottom_colors,
+@@ -2703,6 +2707,7 @@ static const nsCSSPropertyID gBorderSubpropTable[] = {
+   eCSSProperty_border_image_width,
+   eCSSProperty_border_image_outset,
+   eCSSProperty_border_image_repeat,
++  */
+   eCSSProperty_UNKNOWN
+ };
  
-@@ -2983,7 +2985,7 @@ CSSParserImpl::ParsePropertyWithVariableReferences(
-     nsCSSTokenSerializationType firstToken, lastToken;
-     valid = ResolveValueWithVariableReferences(aVariables, expandedValue,
-                                                firstToken, lastToken);
--    if (!valid) {
-+    if (!valid && Preferences::GetBool(BG_CONSOLE_SHOW_INVALID_VARIABLES)) {
-       NS_ConvertASCIItoUTF16 propName(nsCSSProps::GetStringValue(aPropertyID));
-       REPORT_UNEXPECTED(PEInvalidVariableReference);
-       REPORT_UNEXPECTED_P(PEValueParsingError, propName);
 diff --git a/layout/style/nsCSSValue.cpp b/layout/style/nsCSSValue.cpp
-index 01988185438c..4e86eec920f9 100644
+index 01988185438c..7511126f886b 100644
 --- a/layout/style/nsCSSValue.cpp
 +++ b/layout/style/nsCSSValue.cpp
-@@ -1668,6 +1668,17 @@ nsCSSValue::AppendToString(nsCSSPropertyID aProperty, nsAString& aResult,
+@@ -1182,20 +1182,26 @@ nsCSSValue::AppendSidesShorthandToString(const nsCSSPropertyID aProperties[],
+   const nsCSSValue& value3 = *aValues[2];
+   const nsCSSValue& value4 = *aValues[3];
+ 
++  nsAutoString valueString1, valueString2, valueString3, valueString4;
++  value1.AppendToString(aProperties[0], valueString1, aSerialization);
++  value2.AppendToString(aProperties[1], valueString2, aSerialization);
++  value3.AppendToString(aProperties[2], valueString3, aSerialization);
++  value4.AppendToString(aProperties[3], valueString4, aSerialization);
++
+   MOZ_ASSERT(value1.GetUnit() != eCSSUnit_Null, "null value 1");
+-  value1.AppendToString(aProperties[0], aString, aSerialization);
+-  if (value1 != value2 || value1 != value3 || value1 != value4) {
++  aString.Append(valueString1);
++  if (valueString1 != valueString2 || valueString1 != valueString3 || valueString1 != valueString4) {
+     aString.Append(char16_t(' '));
+     MOZ_ASSERT(value2.GetUnit() != eCSSUnit_Null, "null value 2");
+-    value2.AppendToString(aProperties[1], aString, aSerialization);
+-    if (value1 != value3 || value2 != value4) {
++    aString.Append(valueString2);
++    if (valueString1 != valueString3 || valueString2 != valueString4) {
+       aString.Append(char16_t(' '));
+       MOZ_ASSERT(value3.GetUnit() != eCSSUnit_Null, "null value 3");
+-      value3.AppendToString(aProperties[2], aString, aSerialization);
+-      if (value2 != value4) {
++      aString.Append(valueString3);
++      if (valueString2 != valueString4) {
+         aString.Append(char16_t(' '));
+         MOZ_ASSERT(value4.GetUnit() != eCSSUnit_Null, "null value 4");
+-        value4.AppendToString(aProperties[3], aString, aSerialization);
++        aString.Append(valueString4);
+       }
      }
    }
-   else if (IsNumericColorUnit(unit)) {
-+    bool outputCssNames = false;
-+    nsXPIDLCString colorOutputType;
-+    nsresult rv;
-+    nsCOMPtr<nsIPrefBranch> prefBranch = do_GetService(NS_PREFSERVICE_CONTRACTID, &rv);
-+    if (NS_SUCCEEDED(rv) && prefBranch) {
-+      prefBranch->GetBoolPref("bluegriffon.css.colors.names.enabled", &outputCssNames);
-+      prefBranch->GetCharPref("bluegriffon.css.colors.type", getter_Copies(colorOutputType));
-+    }
-+    bool serializeName = false;
-+    bool forceHexSerialization = false;
-+
-     if (aSerialization == eNormalized ||
-         unit == eCSSUnit_RGBColor ||
-         unit == eCSSUnit_RGBAColor) {
-@@ -1686,21 +1697,52 @@ nsCSSValue::AppendToString(nsCSSPropertyID aProperty, nsAString& aResult,
-       if (showAlpha) {
-         aResult.AppendLiteral("rgba(");
-       } else {
--        aResult.AppendLiteral("rgb(");
-+        if (outputCssNames) {
-+          nsAutoString nameToSerialize;
-+          serializeName = NS_RGBToColorName(color, nameToSerialize);
-+          if (serializeName) {
-+            aResult.Append(nameToSerialize);
-+          }
-+          else {
-+            if (!PL_strcmp(colorOutputType, "hex")) {
-+              forceHexSerialization = true;
-+            }
-+            else
-+              aResult.AppendLiteral("rgb(");
-+          }
-+        }
-+        else {
-+          if (!PL_strcmp(colorOutputType, "hex")) {
-+            forceHexSerialization = true;
-+          }
-+          else
-+            aResult.AppendLiteral("rgb(");
-+        }
-       }
- 
--      NS_NAMED_LITERAL_STRING(comma, ", ");
--
--      aResult.AppendInt(NS_GET_R(color), 10);
--      aResult.Append(comma);
--      aResult.AppendInt(NS_GET_G(color), 10);
--      aResult.Append(comma);
--      aResult.AppendInt(NS_GET_B(color), 10);
--      if (showAlpha) {
--        aResult.Append(comma);
--        aResult.AppendFloat(nsStyleUtil::ColorComponentToFloat(a));
-+      if (!serializeName) {
-+        if (forceHexSerialization) {
-+          nscolor color = GetColorValue();
-+          aResult.Append('#');
-+          aResult.AppendPrintf("%02x", NS_GET_R(color));
-+          aResult.AppendPrintf("%02x", NS_GET_G(color));
-+          aResult.AppendPrintf("%02x", NS_GET_B(color));
-+        }
-+        else {
-+          NS_NAMED_LITERAL_STRING(comma, ", ");
-+
-+          aResult.AppendInt(NS_GET_R(color), 10);
-+          aResult.Append(comma);
-+          aResult.AppendInt(NS_GET_G(color), 10);
-+          aResult.Append(comma);
-+          aResult.AppendInt(NS_GET_B(color), 10);
-+          if (showAlpha) {
-+            aResult.Append(comma);
-+            aResult.AppendFloat(nsStyleUtil::ColorComponentToFloat(a));
-+          }
-+          aResult.Append(char16_t(')'));
-+        }
-       }
--      aResult.Append(char16_t(')'));
-     } else if (eCSSUnit_HexColor == unit ||
-                eCSSUnit_HexColorAlpha == unit) {
-       nscolor color = GetColorValue();
 diff --git a/netwerk/protocol/res/nsResProtocolHandler.cpp b/netwerk/protocol/res/nsResProtocolHandler.cpp
 index 265bab9ec9dc..af16e6194d18 100644
 --- a/netwerk/protocol/res/nsResProtocolHandler.cpp
