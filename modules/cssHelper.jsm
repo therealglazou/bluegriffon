@@ -314,7 +314,10 @@ var CssUtils = {
         styleEltForSheet.removeChild(child);
       child = tmp;
     }
-    var cssParser = new CSSParser(str, false);
+
+    var prefs = Components.classes["@mozilla.org/preferences-service;1"]
+                   .getService(Components.interfaces.nsIPrefBranch);
+    var cssParser = new CSSParser(str, (prefs.getCharPref("bluegriffon.css.serialization") != "shorthands"));
     if (str) {
       var parsedSheet = cssParser.parse(str, false, false);
       str = parsedSheet.cssText();

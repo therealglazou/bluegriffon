@@ -14,6 +14,8 @@
       <preference id="pref-csspolicy"        name="bluegriffon.css.policy" type="string"/>
       <preference id="pref-cssprefix"        name="bluegriffon.css.prefix" type="string"/>
 
+      <preference id="pref-serialization"    name="bluegriffon.css.serialization" type="string"/>
+
       <preference id="pref-css-output-names" name="bluegriffon.css.colors.names.enabled" type="bool"/>
       <preference id="pref-css-output-type"  name="bluegriffon.css.colors.type" type="string"/>
 
@@ -44,6 +46,14 @@
                id="manualRadio"
                value="manual"
                tooltiptext="&iDecide.desc;"/>
+      </radiogroup>
+    </groupbox>
+    <groupbox>
+      <caption label="&serialization.label;"/>
+      <radiogroup orient="horizontal" preference="pref-serialization"
+                  id="cssSerializationRadiogroup">
+        <radio label="&shorthands.label;" value="shorthands"/>
+        <radio label="&longhands.label;" value="longhands"/>
       </radiogroup>
     </groupbox>
     <groupbox>

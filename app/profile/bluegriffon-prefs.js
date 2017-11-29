@@ -93,6 +93,7 @@ pref("bluegriffon.defaults.extension.text-html", "html");
 pref("editor.use_css", true);
 pref("bluegriffon.css.policy", "manual");
 pref("bluegriffon.css.prefix", "BG_");
+pref("bluegriffon.css.serialization", "shorthands");
 pref("bluegriffon.css.support.blink", true);
 pref("bluegriffon.css.support.gecko", true);
 pref("bluegriffon.css.support.servo", true);
