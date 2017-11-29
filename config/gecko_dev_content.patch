@@ -1433,7 +1433,7 @@ index 8d8ecc5c62c0..b783a89a3d58 100644
      equivTable = ttEquivTable;
    } else if (aAttribute) {
 diff --git a/editor/libeditor/EditorBase.cpp b/editor/libeditor/EditorBase.cpp
-index a845b69aabd2..a7b278c9ed3f 100644
+index a845b69aabd2..4c120782e3f1 100644
 --- a/editor/libeditor/EditorBase.cpp
 +++ b/editor/libeditor/EditorBase.cpp
 @@ -104,6 +104,7 @@
@@ -1546,7 +1546,27 @@ index a845b69aabd2..a7b278c9ed3f 100644
      if (destInBody) {
        RemoveAttribute(aDest, attr->NodeInfo()->NameAtom());
      } else {
-@@ -2780,6 +2839,35 @@ struct SavedRange final
+@@ -2313,8 +2372,18 @@ EditorBase::CloneAttributes(Element* aDest,
+   uint32_t sourceCount = sourceAttributes->Length();
+   for (uint32_t i = 0; i < sourceCount; i++) {
+     RefPtr<Attr> attr = sourceAttributes->Item(i);
+-    nsAutoString value;
++    nsAutoString name, value;
++    attr->NodeInfo()->NameAtom()->ToString(name);
+     attr->GetValue(value);
++    if (name.EqualsLiteral("xmlns")) {
++      // BLUEGRIFFON: make sure we don't copy a xmlns attribute we don't need because
++      // already there... This is needed because BlueGriffon deals with xhtml while
++      // Gecko deals only with html
++      nsAutoString namespaceURI;
++      aDest->GetNamespaceURI(namespaceURI);
++      if (value.Equals(namespaceURI))
++        continue;
++    }
+     if (destInBody) {
+       SetAttributeOrEquivalent(aDest, attr->NodeInfo()->NameAtom(), value,
+                                false);
+@@ -2780,6 +2849,35 @@ struct SavedRange final
    int32_t mEndOffset;
  };
  
@@ -1582,7 +1602,7 @@ index a845b69aabd2..a7b278c9ed3f 100644
  nsresult
  EditorBase::SplitNodeImpl(nsIContent& aExistingRightNode,
                            int32_t aOffset,
-@@ -3870,6 +3958,11 @@ EditorBase::SplitNodeDeep(nsIContent& aNode,
+@@ -3870,6 +3968,11 @@ EditorBase::SplitNodeDeep(nsIContent& aNode,
        nsCOMPtr<nsIContent> newLeftNode = SplitNode(nodeToSplit, offset, rv);
        NS_ENSURE_TRUE(!NS_FAILED(rv.StealNSResult()), -1);
  
