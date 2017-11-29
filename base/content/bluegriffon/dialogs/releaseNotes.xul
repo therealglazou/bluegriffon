@@ -19,33 +19,12 @@
            imagetheming="never"
            style="border-radius: 15px; width: 150px; height: 90px"/>
     <vbox class="indent" style="max-width: 450px">
-      <html:p style="font-weight: bold; font-size: larger; margin-bottom: 1em;">BlueGriffon 3.0.1 ("@CODE_NAME@")</html:p>
+      <html:p style="font-weight: bold; font-size: larger; margin-bottom: 1em;">BlueGriffon @APP_VERSION@ ("@CODE_NAME@")</html:p>
           <html:ul>
-            <html:li>"Open With..." works again. On OS X and Linux, it can now open multiple files at once.</html:li>
-            <html:li>Fixed issue in Project Manager</html:li>
-            <html:li>Thumbnails were inverted in the Templates Manager</html:li>
+            <html:li>New preference in Preferences > Styles to select a CSS serialization based on shorthand (default) or longhand properties</html:li>
+            <html:li>Fix for bug in CSS Media Query serialization</html:li>
+            <html:li>In xhtml5, the xmlns attributes could appear twice, breaking the validity of the document</html:li>
           </html:ul>
-      <html:p style="font-weight: bold; font-size: larger; margin-bottom: 1em;">BlueGriffon 3.0 ("@CODE_NAME@")</html:p>
-      <html:p>New features:</html:p>
-          <html:ul>
-            <html:li>Responsive Design (for Basic and EPUB licenses)</html:li>
-            <html:li>Color buttons are back, per user request</html:li>
-            <html:li>it's now possible to hide/show most toolbars</html:li>
-          </html:ul>
-      <html:p>Other important changes:</html:p>
-        <html:ul>
-          <html:li>Drag-and-drop of an image from Finder/File Explorer now links to the image instead of creating a data URL</html:li>
-          <html:li>"Restore previous session" feature dropped</html:li>
-        </html:ul>
-      <html:p>Major bug fixes:</html:p>
-        <html:ul>
-          <html:li>Fix for crasher in OS X colorpicker</html:li>
-          <html:li>Fix for broken shortcuts</html:li>
-          <html:li>Fix for undesired markup appearing in liveview (source part)</html:li>
-          <html:li>Fix for broken command line handler</html:li>
-          <html:li>Fix for broken spellchecker dialog</html:li>
-          <html:li>Because of a change in Mozilla Gecko, a CR at the end of for instance a H1 was not creating a P any more; this is fixed.</html:li>
-        </html:ul>
     </vbox>
   </hbox>
 </dialog>

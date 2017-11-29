@@ -7,7 +7,7 @@
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{A9015334-10BE-4D64-A776-203336EFE806}
 AppName=BlueGriffon
-AppVersion=3.0.1
+AppVersion=3.1
 AppCopyright=Copyright (C) 1998-2017 Disruptive Innovations
 AppPublisher=Disruptive Innovations SAS
 AppPublisherURL=http://bluegriffon.org
@@ -17,7 +17,7 @@ DefaultDirName={pf}\BlueGriffon
 DefaultGroupName=BlueGriffon
 AllowNoIcons=yes
 OutputDir=c:\Users\glazou\ISS
-OutputBaseFilename= bluegriffon-3.0.1.win-x86_64
+OutputBaseFilename= bluegriffon-3.1.win-x86_64
 DisableWelcomePage=no
 SourceDir=c:\trees\build
 SetupIconFile=bluegriffon.ico
@@ -25,6 +25,7 @@ WizardSmallImageFile=smallwizardimage.bmp
 WizardImageFile=wizWatermark.bmp
 Compression=lzma
 SolidCompression=yes
+ArchitecturesInstallIn64BitMode=x64
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
