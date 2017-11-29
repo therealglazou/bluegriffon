@@ -24,6 +24,7 @@
       </toolbarbutton>
 
       <toolbarbutton id="saveButton" class="toolbarbutton-1" command="cmd_save"
+                     label="&saveCmd.label;"
                      tooltiptext="&saveToolbarCmd.tooltip;"/>
 
       <toolbarbutton id="stopButton"
