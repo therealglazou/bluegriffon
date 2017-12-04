@@ -1404,7 +1404,7 @@ index c6d12666914d..83006ba3a954 100644
      });
  }
 diff --git a/editor/libeditor/CSSEditUtils.cpp b/editor/libeditor/CSSEditUtils.cpp
-index 8d8ecc5c62c0..b783a89a3d58 100644
+index 8d8ecc5c62c0..f59e98b60b17 100644
 --- a/editor/libeditor/CSSEditUtils.cpp
 +++ b/editor/libeditor/CSSEditUtils.cpp
 @@ -339,11 +339,12 @@ CSSEditUtils::IsCSSEditableProperty(nsINode* aNode,
@@ -1423,7 +1423,23 @@ index 8d8ecc5c62c0..b783a89a3d58 100644
        (nsGkAtoms::font == aProperty && aAttribute &&
         (aAttribute == nsGkAtoms::color || aAttribute == nsGkAtoms::face))) {
      return true;
-@@ -836,6 +837,8 @@ CSSEditUtils::GenerateCSSDeclarationsFromHTMLStyle(
+@@ -466,12 +467,13 @@ CSSEditUtils::SetCSSProperty(Element& aElement,
+ nsresult
+ CSSEditUtils::SetCSSPropertyPixels(Element& aElement,
+                                    nsIAtom& aProperty,
+-                                   int32_t aIntValue)
++                                   int32_t aIntValue,
++                                   bool aSuppressTxn)
+ {
+   nsAutoString s;
+   s.AppendInt(aIntValue);
+   return SetCSSProperty(aElement, aProperty, s + NS_LITERAL_STRING("px"),
+-                        /* suppress txn */ false);
++                        /* suppress txn */ aSuppressTxn);
+ }
+ 
+ // The lowest level above the transaction; removes the value aValue from the
+@@ -836,6 +838,8 @@ CSSEditUtils::GenerateCSSDeclarationsFromHTMLStyle(
      equivTable = underlineEquivTable;
    } else if (nsGkAtoms::strike == aHTMLProperty) {
      equivTable = strikeEquivTable;
@@ -1432,6 +1448,20 @@ index 8d8ecc5c62c0..b783a89a3d58 100644
    } else if (nsGkAtoms::tt == aHTMLProperty) {
      equivTable = ttEquivTable;
    } else if (aAttribute) {
+diff --git a/editor/libeditor/CSSEditUtils.h b/editor/libeditor/CSSEditUtils.h
+index 445c4cef71c0..46819400228a 100644
+--- a/editor/libeditor/CSSEditUtils.h
++++ b/editor/libeditor/CSSEditUtils.h
+@@ -107,7 +107,8 @@ public:
+   nsresult SetCSSProperty(dom::Element& aElement, nsIAtom& aProperty,
+                           const nsAString& aValue, bool aSuppressTxn = false);
+   nsresult SetCSSPropertyPixels(dom::Element& aElement,
+-                                nsIAtom& aProperty, int32_t aIntValue);
++                                nsIAtom& aProperty, int32_t aIntValue,
++                                bool aSuppressTxn = false);
+   nsresult RemoveCSSProperty(dom::Element& aElement,
+                              nsIAtom& aProperty,
+                              const nsAString& aPropertyValue,
 diff --git a/editor/libeditor/EditorBase.cpp b/editor/libeditor/EditorBase.cpp
 index a845b69aabd2..4c120782e3f1 100644
 --- a/editor/libeditor/EditorBase.cpp
@@ -1711,6 +1741,37 @@ index f911cdeb475c..7370f0c15579 100644
    virtual nsresult MouseClick(nsIDOMMouseEvent* aMouseEvent);
    nsresult Focus(InternalFocusEvent* aFocusEvent);
    nsresult Blur(InternalFocusEvent* aBlurEvent);
+diff --git a/editor/libeditor/HTMLAbsPositionEditor.cpp b/editor/libeditor/HTMLAbsPositionEditor.cpp
+index 2e0dde10bb03..e30fff8246cc 100644
+--- a/editor/libeditor/HTMLAbsPositionEditor.cpp
++++ b/editor/libeditor/HTMLAbsPositionEditor.cpp
+@@ -350,9 +350,9 @@ HTMLEditor::StartMoving(nsIDOMElement* aHandle)
+ 
+   // position it
+   mCSSEditUtils->SetCSSPropertyPixels(*mPositioningShadow, *nsGkAtoms::width,
+-                                      mPositionedObjectWidth);
++                                      mPositionedObjectWidth, true);
+   mCSSEditUtils->SetCSSPropertyPixels(*mPositioningShadow, *nsGkAtoms::height,
+-                                      mPositionedObjectHeight);
++                                      mPositionedObjectHeight, true);
+ 
+   mIsMoving = true;
+   return NS_OK; // XXX Looks like nobody refers this result
+diff --git a/editor/libeditor/HTMLAnonymousNodeEditor.cpp b/editor/libeditor/HTMLAnonymousNodeEditor.cpp
+index 8519700294f6..fb2f2d6cb0ff 100644
+--- a/editor/libeditor/HTMLAnonymousNodeEditor.cpp
++++ b/editor/libeditor/HTMLAnonymousNodeEditor.cpp
+@@ -544,8 +544,8 @@ HTMLEditor::SetAnonymousElementPosition(int32_t aX,
+                                         int32_t aY,
+                                         Element* aElement)
+ {
+-  mCSSEditUtils->SetCSSPropertyPixels(*aElement, *nsGkAtoms::left, aX);
+-  mCSSEditUtils->SetCSSPropertyPixels(*aElement, *nsGkAtoms::top, aY);
++  mCSSEditUtils->SetCSSPropertyPixels(*aElement, *nsGkAtoms::left, aX, true);
++  mCSSEditUtils->SetCSSPropertyPixels(*aElement, *nsGkAtoms::top, aY, true);
+ }
+ 
+ } // namespace mozilla
 diff --git a/editor/libeditor/HTMLEditRules.cpp b/editor/libeditor/HTMLEditRules.cpp
 index 40bef2b30b0c..f6f4c86e93a6 100644
 --- a/editor/libeditor/HTMLEditRules.cpp
@@ -2202,6 +2263,64 @@ index b5083aa45b0a..11916756ff61 100644
  };
  
  } // namespace mozilla
+diff --git a/editor/libeditor/HTMLEditorObjectResizer.cpp b/editor/libeditor/HTMLEditorObjectResizer.cpp
+index cd74fcff5dbb..5c74093489b1 100644
+--- a/editor/libeditor/HTMLEditorObjectResizer.cpp
++++ b/editor/libeditor/HTMLEditorObjectResizer.cpp
+@@ -527,9 +527,9 @@ HTMLEditor::StartResizing(nsIDOMElement* aHandle)
+ 
+   // position it
+   mCSSEditUtils->SetCSSPropertyPixels(*mResizingShadow, *nsGkAtoms::width,
+-                                      mResizedObjectWidth);
++                                      mResizedObjectWidth, true);
+   mCSSEditUtils->SetCSSPropertyPixels(*mResizingShadow, *nsGkAtoms::height,
+-                                      mResizedObjectHeight);
++                                      mResizedObjectHeight, true);
+ 
+   // add a mouse move listener to the editor
+   nsresult result = NS_OK;
+@@ -665,9 +665,9 @@ HTMLEditor::SetResizingInfoPosition(int32_t aX,
+   // Offset info box by 20 so it's not directly under the mouse cursor.
+   const int mouseCursorOffset = 20;
+   mCSSEditUtils->SetCSSPropertyPixels(*mResizingInfo, *nsGkAtoms::left,
+-                                      infoXPosition + mouseCursorOffset);
++                                      infoXPosition + mouseCursorOffset, true);
+   mCSSEditUtils->SetCSSPropertyPixels(*mResizingInfo, *nsGkAtoms::top,
+-                                      infoYPosition + mouseCursorOffset);
++                                      infoYPosition + mouseCursorOffset, true);
+ 
+   nsCOMPtr<nsIContent> textInfo = mResizingInfo->GetFirstChild();
+   ErrorResult erv;
+@@ -826,13 +826,13 @@ HTMLEditor::MouseMove(nsIDOMEvent* aMouseEvent)
+     int32_t newHeight = GetNewResizingHeight(clientX, clientY);
+ 
+     mCSSEditUtils->SetCSSPropertyPixels(*mResizingShadow, *nsGkAtoms::left,
+-                                        newX);
++                                        newX, true);
+     mCSSEditUtils->SetCSSPropertyPixels(*mResizingShadow, *nsGkAtoms::top,
+-                                        newY);
++                                        newY, true);
+     mCSSEditUtils->SetCSSPropertyPixels(*mResizingShadow, *nsGkAtoms::width,
+-                                        newWidth);
++                                        newWidth, true);
+     mCSSEditUtils->SetCSSPropertyPixels(*mResizingShadow, *nsGkAtoms::height,
+-                                        newHeight);
++                                        newHeight, true);
+ 
+     return SetResizingInfoPosition(newX, newY, newWidth, newHeight);
+   }
+@@ -866,9 +866,9 @@ HTMLEditor::MouseMove(nsIDOMEvent* aMouseEvent)
+     SnapToGrid(newX, newY);
+ 
+     mCSSEditUtils->SetCSSPropertyPixels(*mPositioningShadow, *nsGkAtoms::left,
+-                                        newX);
++                                        newX, true);
+     mCSSEditUtils->SetCSSPropertyPixels(*mPositioningShadow, *nsGkAtoms::top,
+-                                        newY);
++                                        newY, true);
+   }
+   return NS_OK;
+ }
 diff --git a/editor/libeditor/HTMLStyleEditor.cpp b/editor/libeditor/HTMLStyleEditor.cpp
 index 6d0e957cdcfd..605a122d6f07 100644
 --- a/editor/libeditor/HTMLStyleEditor.cpp
