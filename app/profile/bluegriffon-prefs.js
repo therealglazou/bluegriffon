@@ -258,3 +258,6 @@ pref("bluegriffon.kungfudeathgrip.shortcuts2017", false);
 
 // last message
 pref("bluegriffon.release_notes.last", "");
+
+pref("browser.preferences.defaultPerformanceSettings.enabled", "false");
+pref("layers.acceleration.disabled", "true");
