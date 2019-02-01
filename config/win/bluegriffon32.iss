@@ -8,7 +8,7 @@
 AppId={{A9015334-10BE-4D64-A776-203336EFE806}
 AppName=BlueGriffon
 AppVersion=3.1
-AppCopyright=Copyright (C) 1998-2017 Disruptive Innovations
+AppCopyright=Copyright (C) 1998-2019 Disruptive Innovations
 AppPublisher=Disruptive Innovations SAS
 AppPublisherURL=http://bluegriffon.org
 AppSupportURL=http://bluegriffon.org
