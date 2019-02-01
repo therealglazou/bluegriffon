@@ -13,7 +13,7 @@
             <!-- menuitems appended at runtime -->
         </menu>
         <menuseparator/>
-        <menuitem id="saveMenuitem"   key="savekb" command="cmd_save"/>
+        <menuitem id="saveMenuitem"   key="savekb" command="cmd_save" label="&saveCmd.label;"/>
         <menuitem id="saveAsMenuitem" key="saveaskb" command="cmd_saveAs"/>
 
         <menuseparator/>
