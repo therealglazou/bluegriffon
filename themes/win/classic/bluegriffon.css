@@ -498,48 +498,6 @@ toolbarseparator {
   border-bottom: thin dotted #494949;
 }
 
-/* MENULISTS */
-
-:root:not([cleartheme="true"]) menulist {
-  -moz-appearance: none;
-  padding-left: 3px;
-  padding-right: 3px;
-  background-color: var(--bg-dark-background);
-  padding-left: 3px;
-%ifndef XP_UNIX
-  border: thin solid var(--bg-dark-border);
-%endif
-  color: var(--bg-main-foreground-color);
-}
-
-:root:not([cleartheme="true"]) menulist .menulist-dropmarker {
-%ifndef XP_UNIX
-  -moz-appearance: none;
-%endif
-  display: -moz-box;
-  background: transparent;
-  border: none 0px;
-}
-
-:root:not([cleartheme="true"]) menulist html|*.menulist-editable-input {
-  color: var(--bg-main-foreground-color);
-}
-
-menulist[disabled="true"],
-menulist[disabled="true"] html|*.menulist-editable-input,
-menulist html|*.menulist-editable-input::-moz-placeholder  {
-  color: graytext;
-}
-
-menulist html|*.menulist-editable-input::-moz-placeholder  {
-  font-style: italic;
-}
-
-menulist[editable="true"] {
-  margin-top: 5px;
-  margin-bottom: 3px
-}
-
 #status {
   color: silver;
   text-shadow: none;

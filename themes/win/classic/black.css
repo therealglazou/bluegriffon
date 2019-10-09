@@ -55,6 +55,8 @@
   --bg-main-foreground-color: white;
   --bg-main-foreground-color-inactive: #A0A0A0;
   --bg-disabled-foreground-color: #808080;
+
+  --bg-dark-box-background: #363d3f;
 }
 
 :root[cleartheme="true"], panel, popup {
@@ -69,6 +71,8 @@
   --bg-main-foreground-color: black;
   --bg-main-foreground-color-inactive: #505050;
   --bg-disabled-foreground-color: #808080;
+
+  --bg-dark-box-background: white;
 }
 
 :root[cleartheme="true"] image:not(.checkbox-check):not(.radio-check):not(.titlebar-button) {
@@ -171,106 +175,105 @@ window:root, dialog:root {
 }
 %endif
 
-:root:not([cleartheme="true"]) menulist,
-:root:not([cleartheme="true"]) textbox[type="number"] {
+menulist,
+textbox[type="number"] {
   -moz-appearance: none;
-  padding-left: 3px;
-  padding-right: 3px;
-  padding-left: 3px;
-%ifdef XP_UNIX
-  border: none 0px;
-%else
   border: thin solid var(--bg-dark-border);
-%endif
   color: var(--bg-main-foreground-color);
 }
 
 %ifdef XP_UNIX
-:root:not([cleartheme="true"]) menulist .menulist-label-box,
-:root:not([cleartheme="true"]) menulist[editable="true"] .menulist-editable-box {
+.menulist-label-box,
+.menulist-editable-box {
   -moz-appearance: none;
-  border: thin solid var(--bg-dark-border);
-  background-color: var(--bg-dark-background);
+  background-color: var(--bg-dark-box-background);
 }
 
 
-:root:not([cleartheme="true"]) menulist[disabled="true"],
-:root:not([cleartheme="true"]) textbox[type="number"][disabled="true"] {
+menulist[disabled="true"],
+textbox[type="number"][disabled="true"] {
   color: var(--bg-disabled-foreground-color);
 }
 
-:root:not([cleartheme="true"]) textbox[type="number"] .numberbox-input-box {
+.numberbox-input-box {
   -moz-appearance: none;
   border: none 0px;
   background-color: transparent;
 }
 
-:root:not([cleartheme="true"]) textbox:not([type="number"]) {
+textbox:not([type="number"]) {
   -moz-appearance: none;
   color: var(--bg-main-foreground-color);
   margin: 4px 0px;
   padding: 2px;
-  background-color: var(--bg-dark-background);
+  background-color: var(--bg-dark-box-background);
   border: thin solid var(--bg-dark-border);
 }
 
-:root:not([cleartheme="true"]) menulist .menulist-dropmarker {
-%ifndef XP_UNIX
+.menulist-dropmarker {
   -moz-appearance: none;
-%endif
   display: -moz-box;
-  background: transparent;
+  background: var(--bg-dark-box-background);
   border: none 0px;
+  min-width: 24px;
 }
 
-:root:not([cleartheme="true"]) menulist html|*.menulist-editable-input {
-  color: whitevar(--bg-main-foreground-color);
+.dropmarker-icon {
+  width: 16px;
+  height: 16px;
+  list-style-image: url("chrome://global/skin/icons/menubutton-dropmarker.svg");
+  filter: url("chrome://global/skin/filters.svg#fill");
+  fill: currentColor;
 }
 
-:root:not([cleartheme="true"]) menulist[disabled="true"],
-:root:not([cleartheme="true"]) menulist[disabled="true"] html|*.menulist-editable-input,
-:root:not([cleartheme="true"]) menulist html|*.menulist-editable-input::-moz-placeholder  {
+html|*.menulist-editable-input {
+  color: var(--bg-main-foreground-color);
+}
+
+menulist[disabled="true"],
+menulist[disabled="true"] html|*.menulist-editable-input,
+menulist html|*.menulist-editable-input::-moz-placeholder  {
   color: graytext;
 }
 
-:root:not([cleartheme="true"]) menulist html|*.menulist-editable-input::-moz-placeholder  {
+menulist html|*.menulist-editable-input::-moz-placeholder  {
   font-style: italic;
 }
 
-:root:not([cleartheme="true"]) menulist[editable="true"] {
+menulist[editable="true"] {
   margin-top: 5px;
   margin-bottom: 3px
 }
 
-:root:not([cleartheme="true"]) menulist menupopup,
-:root:not([cleartheme="true"]) toolbarbutton menupopup {
+menulist menupopup,
+toolbarbutton menupopup {
   -moz-appearance: none;
   color: var(--bg-main-foreground-color);
   background-color: var(--bg-dark-background);
 }
 
-:root:not([cleartheme="true"]) menulist menuitem,
-:root:not([cleartheme="true"]) menulist menu,
-:root:not([cleartheme="true"]) toolbarbutton menuitem {
+menulist menuitem,
+menulist menu,
+toolbarbutton menuitem {
   -moz-appearance: none;
   color: var(--bg-main-foreground-color);
 }
 
-:root:not([cleartheme="true"]) menulist menuitem[disabled="true"],
-:root:not([cleartheme="true"]) menulist menu[disabled="true"],
-:root:not([cleartheme="true"]) toolbarbutton menuitem[disabled="true"] {
+menulist menuitem[disabled="true"],
+menulist menu[disabled="true"],
+toolbarbutton menuitem[disabled="true"] {
   background-color: transparent ! important;
 }
 
-:root:not([cleartheme="true"]) menu[disabled="true"],
-:root:not([cleartheme="true"]) menuitem[disabled="true"],
-:root:not([cleartheme="true"]) menu[_moz-menuactive="true"][disabled="true"],
-:root:not([cleartheme="true"]) menuitem[_moz-menuactive="true"][disabled="true"] {
+menu[disabled="true"],
+menuitem[disabled="true"],
+menu[_moz-menuactive="true"][disabled="true"],
+menuitem[_moz-menuactive="true"][disabled="true"] {
   color: GrayText ! important;
 }
 
-:root:not([cleartheme="true"]) html|*.menulist-editable-input {
-  color: white;
+html|*.menulist-editable-input {
+  color: var(--bg-main-foreground-color);
 }
 
 :root:not([cleartheme="true"]) tree, treechildren {
