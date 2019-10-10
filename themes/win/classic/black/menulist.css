@@ -1,0 +1,65 @@
+%ifdef XP_UNIX
+
+:root:not([cleartheme="true"]) .menulist-editable-box {
+  -moz-appearance: none;
+}
+
+
+menulist {
+  -moz-appearance: none;
+  border: thin solid var(--bg-dark-border);
+  color: var(--bg-main-foreground-color);
+  background-color: var(--bg-dark-box-background);
+}
+
+.menulist-label-box,
+.menulist-editable-box {
+  -moz-appearance: none;
+  background-color: var(--bg-dark-box-background);
+}
+
+menulist[disabled="true"] {
+  color: var(--bg-disabled-foreground-color);
+}
+
+.menulist-dropmarker {
+  -moz-appearance: none;
+  /*display: -moz-box;*/
+  background: var(--bg-dark-box-background);
+  border: none 0px;
+  min-width: 24px;
+  height: 100%;
+}
+
+.dropmarker-icon {
+  min-width: 16px;
+  /*height: 16px;*/
+  list-style-image: url("chrome://global/skin/icons/menubutton-dropmarker.svg");
+  filter: url("chrome://global/skin/filters.svg#fill");
+  fill: currentColor;
+}
+
+%endif
+
+html|*.menulist-editable-input {
+  color: var(--bg-main-foreground-color);
+}
+
+menulist[disabled="true"],
+menulist[disabled="true"] html|*.menulist-editable-input,
+menulist html|*.menulist-editable-input::-moz-placeholder  {
+  color: graytext;
+}
+
+menulist html|*.menulist-editable-input::-moz-placeholder  {
+  font-style: italic;
+}
+
+menulist[editable="true"] {
+  margin-top: 5px;
+  margin-bottom: 3px
+}
+
+html|*.menulist-editable-input {
+  color: var(--bg-main-foreground-color);
+}

@@ -169,28 +169,15 @@ window:root, dialog:root {
   margin: 4px 8px;
 }
 
-%ifdef XP_UNIX
-:root:not([cleartheme="true"]) .menulist-editable-box {
-  -moz-appearance: none;
-}
-%endif
+%include black/menulist.css
 
-menulist,
 textbox[type="number"] {
   -moz-appearance: none;
   border: thin solid var(--bg-dark-border);
   color: var(--bg-main-foreground-color);
-}
-
-%ifdef XP_UNIX
-.menulist-label-box,
-.menulist-editable-box {
-  -moz-appearance: none;
   background-color: var(--bg-dark-box-background);
 }
 
-
-menulist[disabled="true"],
 textbox[type="number"][disabled="true"] {
   color: var(--bg-disabled-foreground-color);
 }
@@ -208,41 +195,6 @@ textbox:not([type="number"]) {
   padding: 2px;
   background-color: var(--bg-dark-box-background);
   border: thin solid var(--bg-dark-border);
-}
-
-.menulist-dropmarker {
-  -moz-appearance: none;
-  display: -moz-box;
-  background: var(--bg-dark-box-background);
-  border: none 0px;
-  min-width: 24px;
-}
-
-.dropmarker-icon {
-  width: 16px;
-  height: 16px;
-  list-style-image: url("chrome://global/skin/icons/menubutton-dropmarker.svg");
-  filter: url("chrome://global/skin/filters.svg#fill");
-  fill: currentColor;
-}
-
-html|*.menulist-editable-input {
-  color: var(--bg-main-foreground-color);
-}
-
-menulist[disabled="true"],
-menulist[disabled="true"] html|*.menulist-editable-input,
-menulist html|*.menulist-editable-input::-moz-placeholder  {
-  color: graytext;
-}
-
-menulist html|*.menulist-editable-input::-moz-placeholder  {
-  font-style: italic;
-}
-
-menulist[editable="true"] {
-  margin-top: 5px;
-  margin-bottom: 3px
 }
 
 menulist menupopup,
@@ -270,10 +222,6 @@ menuitem[disabled="true"],
 menu[_moz-menuactive="true"][disabled="true"],
 menuitem[_moz-menuactive="true"][disabled="true"] {
   color: GrayText ! important;
-}
-
-html|*.menulist-editable-input {
-  color: var(--bg-main-foreground-color);
 }
 
 :root:not([cleartheme="true"]) tree, treechildren {
@@ -356,4 +304,12 @@ tree {
 :root:not([cleartheme="true"]) listhead {
   border-bottom: black solid thin;
   padding: 2px;
+}
+
+listbox listitem {
+  color: var(--bg-main-foreground-color);;
+}
+
+listbox listitem[selected="true"] {
+  color: black;
 }
