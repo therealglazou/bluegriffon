@@ -11,15 +11,6 @@ index da74ca077c0c..89e848298620 100644
               modifiers="accel"/>
          <key id="key_hideOtherAppsCmdMac"
               key="&hideOtherAppsCmdMac.commandkey;"
-diff --git a/browser/branding/unofficial/background.png b/browser/branding/unofficial/background.png
-index 3fa4a0ec730b..ee1ce0b8d9b9 100644
-Binary files a/browser/branding/unofficial/background.png and b/browser/branding/unofficial/background.png differ
-diff --git a/browser/branding/unofficial/disk.icns b/browser/branding/unofficial/disk.icns
-index 718f1a3d3c6a..e5550f81d61a 100644
-Binary files a/browser/branding/unofficial/disk.icns and b/browser/branding/unofficial/disk.icns differ
-diff --git a/browser/branding/unofficial/dsstore b/browser/branding/unofficial/dsstore
-index 2d11482a7504..a05ee7a1b417 100644
-Binary files a/browser/branding/unofficial/dsstore and b/browser/branding/unofficial/dsstore differ
 diff --git a/browser/locales/en-US/chrome/browser/baseMenuOverlay.dtd b/browser/locales/en-US/chrome/browser/baseMenuOverlay.dtd
 index de92ad3aab68..ce621df0cf1c 100644
 --- a/browser/locales/en-US/chrome/browser/baseMenuOverlay.dtd
@@ -2023,7 +2014,7 @@ index a19d812206bf..e318fae75718 100644
    void DoContentInserted(nsIDocument* aDocument, nsIContent* aContainer,
                           nsIContent* aChild, int32_t aIndexInContainer,
 diff --git a/editor/libeditor/HTMLEditorDataTransfer.cpp b/editor/libeditor/HTMLEditorDataTransfer.cpp
-index 1664cde6ecdf..ecf14fb76bbf 100644
+index 1664cde6ecdf..ace2ec6964b6 100644
 --- a/editor/libeditor/HTMLEditorDataTransfer.cpp
 +++ b/editor/libeditor/HTMLEditorDataTransfer.cpp
 @@ -81,6 +81,8 @@
@@ -2044,7 +2035,7 @@ index 1664cde6ecdf..ecf14fb76bbf 100644
  
        switch (Preferences::GetInt("clipboard.paste_image_type", 1)) {
          case 0:  // prefer JPEG over PNG over GIF encoding
-@@ -1106,25 +1110,50 @@ HTMLEditor::InsertObject(const nsACString& aType,
+@@ -1106,24 +1110,50 @@ HTMLEditor::InsertObject(const nsACString& aType,
        type.EqualsLiteral(kPNGImageMime) ||
        type.EqualsLiteral(kGIFImageMime) ||
        insertAsImage) {
@@ -2056,7 +2047,7 @@ index 1664cde6ecdf..ecf14fb76bbf 100644
 -      nsCOMPtr<nsIInputStream> imageStream = do_QueryInterface(aObject);
 -      NS_ENSURE_TRUE(imageStream, NS_ERROR_FAILURE);
 +    nsAutoString stuffToPaste;
-+    if (Preferences::GetBool("bluegriffon.drag_n_drop.images.as_url", true)) {
++    if (insertAsImage && Preferences::GetBool("bluegriffon.drag_n_drop.images.as_url", true)) {
 +      nsAutoString path;
  
 -      rv = NS_ConsumeStream(imageStream, UINT32_MAX, imageData);
@@ -2064,6 +2055,9 @@ index 1664cde6ecdf..ecf14fb76bbf 100644
        NS_ENSURE_SUCCESS(rv, rv);
 +      nsCOMPtr<nsIURI> fileObjURI;
 +      rv = ioService->NewFileURI(fileObj, getter_AddRefs(fileObjURI));
+ 
+-      rv = imageStream->Close();
+-      NS_ENSURE_SUCCESS(rv, rv);
 +      fileObj->GetPath(path);
 +
 +      nsCOMPtr<nsIDocument> doc = GetDocument();
@@ -2079,7 +2073,7 @@ index 1664cde6ecdf..ecf14fb76bbf 100644
 +      stuffToPaste.AssignLiteral("<IMG src=\"");
 +      AppendUTF8toUTF16(relativeSpec, stuffToPaste);
 +      stuffToPaste.AppendLiteral("\" alt=\"\" >");
-+    }
+     }
 +    else {
 +      nsCString imageData;
 +      if (insertAsImage) {
@@ -2088,27 +2082,24 @@ index 1664cde6ecdf..ecf14fb76bbf 100644
 +      } else {
 +        nsCOMPtr<nsIInputStream> imageStream = do_QueryInterface(aObject);
 +        NS_ENSURE_TRUE(imageStream, NS_ERROR_FAILURE);
-+
+ 
+-    nsAutoString stuffToPaste;
+-    rv = ImgFromData(type, imageData, stuffToPaste);
+-    NS_ENSURE_SUCCESS(rv, rv);
 +        rv = NS_ConsumeStream(imageStream, UINT32_MAX, imageData);
 +        NS_ENSURE_SUCCESS(rv, rv);
- 
--      rv = imageStream->Close();
++
 +        rv = imageStream->Close();
 +        NS_ENSURE_SUCCESS(rv, rv);
 +      }
 +
 +      rv = ImgFromData(type, imageData, stuffToPaste);
-       NS_ENSURE_SUCCESS(rv, rv);
-     }
++      NS_ENSURE_SUCCESS(rv, rv);
++    }
  
--    nsAutoString stuffToPaste;
--    rv = ImgFromData(type, imageData, stuffToPaste);
--    NS_ENSURE_SUCCESS(rv, rv);
--
      AutoEditBatch beginBatching(this);
      rv = DoInsertHTMLWithContext(stuffToPaste, EmptyString(), EmptyString(),
-                                  NS_LITERAL_STRING(kFileMime),
-@@ -1209,6 +1238,11 @@ HTMLEditor::InsertFromTransferable(nsITransferable* transferable,
+@@ -1209,6 +1239,11 @@ HTMLEditor::InsertFromTransferable(nsITransferable* transferable,
          }
        }
      }
@@ -2120,7 +2111,7 @@ index 1664cde6ecdf..ecf14fb76bbf 100644
      if (bestFlavor.EqualsLiteral(kHTMLMime) ||
          bestFlavor.EqualsLiteral(kUnicodeMime) ||
          bestFlavor.EqualsLiteral(kMozTextInternal)) {
-@@ -1229,14 +1263,40 @@ HTMLEditor::InsertFromTransferable(nsITransferable* transferable,
+@@ -1229,14 +1264,40 @@ HTMLEditor::InsertFromTransferable(nsITransferable* transferable,
        }
  
        if (!stuffToPaste.IsEmpty()) {
@@ -3434,19 +3425,6 @@ index a6d01bcd2ec6..cd86be08a3d4 100644
  ifndef MOZ_THUNDERBIRD
  	# Package mozharness
  	$(call py_action,test_archive, \
-diff --git a/toolkit/toolkit.mozbuild b/toolkit/toolkit.mozbuild
-index 9215afc6dd2d..b9ba56781980 100644
---- a/toolkit/toolkit.mozbuild
-+++ b/toolkit/toolkit.mozbuild
-@@ -153,7 +153,7 @@ DIRS += [
- if 'gtk' in CONFIG['MOZ_WIDGET_TOOLKIT']:
-     DIRS += ['/toolkit/system/gnome']
- 
--DIRS += ['/addon-sdk']
-+# DIRS += ['/addon-sdk']
- 
- if CONFIG['ENABLE_MARIONETTE']:
-     DIRS += [
 diff --git a/widget/PuppetWidget.cpp b/widget/PuppetWidget.cpp
 index 4634b328d076..691771e87edf 100644
 --- a/widget/PuppetWidget.cpp
@@ -3503,41 +3481,6 @@ index 42ba27819dec..cc9baf0c4d67 100644
  // The screen with the menubar/taskbar. This shouldn't be needed very
  // often.
  //
-diff --git a/widget/cocoa/nsChildView.mm b/widget/cocoa/nsChildView.mm
-index de23c23871a1..1cefcf1e09ff 100644
---- a/widget/cocoa/nsChildView.mm
-+++ b/widget/cocoa/nsChildView.mm
-@@ -3716,6 +3716,16 @@ NSEvent* gLastDragMouseDownEvent = nil;
- // gecko to paint it
- - (void)drawRect:(NSRect)aRect
- {
-+  if (!NS_IsMainThread()) {
-+    // In the presence of CoreAnimation, this method can sometimes be called on
-+    // a non-main thread. Ignore those calls because Gecko can only react to
-+    // them on the main thread.
-+    return;
-+  }
-+
-+  if (!mGeckoChild || !mGeckoChild->IsVisible())
-+    return;
-+
-   CGContextRef cgContext = (CGContextRef)[[NSGraphicsContext currentContext] graphicsPort];
-   [self drawRect:aRect inContext:cgContext];
- 
-@@ -3993,6 +4003,13 @@ NSEvent* gLastDragMouseDownEvent = nil;
- 
- - (void)viewWillDraw
- {
-+  if (!NS_IsMainThread()) {
-+    // In the presence of CoreAnimation, this method can sometimes be called on
-+    // a non-main thread. Ignore those calls because Gecko can only react to
-+    // them on the main thread.
-+    return;
-+  }
-+
-   nsAutoRetainCocoaObject kungFuDeathGrip(self);
- 
-   if (mGeckoChild) {
 diff --git a/widget/cocoa/nsClipboard.mm b/widget/cocoa/nsClipboard.mm
 index 61858ba306db..f249341cd273 100644
 --- a/widget/cocoa/nsClipboard.mm
@@ -3586,24 +3529,6 @@ index 61858ba306db..f249341cd273 100644
        } else {
          stringData = [pString dataUsingEncoding:NSUnicodeStringEncoding];
        }
-diff --git a/widget/cocoa/nsCocoaUtils.h b/widget/cocoa/nsCocoaUtils.h
-index 70fa279085c0..8b14d244f162 100644
---- a/widget/cocoa/nsCocoaUtils.h
-+++ b/widget/cocoa/nsCocoaUtils.h
-@@ -76,13 +76,6 @@ private:
- - (BOOL)_isRunningModal;
- - (BOOL)_isRunningAppModal;
- 
--// It's sometimes necessary to explicitly remove a window from the "window
--// cache" in order to deactivate it.  The "window cache" is an undocumented
--// subsystem, all of whose methods are included in the NSWindowCache category
--// of the NSApplication class (in header files generated using class-dump).
--// Present in all versions of OS X from (at least) 10.2.8 through 10.5.
--- (void)_removeWindowFromCache:(NSWindow *)aWindow;
--
- // Send an event to the current Cocoa app-modal session.  Present in all
- // versions of OS X from (at least) 10.2.8 through 10.5.
- - (void)_modalSession:(NSModalSession)aSession sendEvent:(NSEvent *)theEvent;
 diff --git a/widget/cocoa/nsCocoaUtils.mm b/widget/cocoa/nsCocoaUtils.mm
 index 8972c530c389..20afdf997ed7 100644
 --- a/widget/cocoa/nsCocoaUtils.mm
@@ -3623,7 +3548,7 @@ index 8972c530c389..20afdf997ed7 100644
    NSMenu* mainMenu = [NSApp mainMenu];
    NS_ASSERTION([mainMenu numberOfItems] > 0, "Main menu does not have any items, something is terribly wrong!");
 diff --git a/widget/cocoa/nsCocoaWindow.mm b/widget/cocoa/nsCocoaWindow.mm
-index efe8b3c79190..8fae27e3ba59 100644
+index efe8b3c79190..d9240c7b8a26 100644
 --- a/widget/cocoa/nsCocoaWindow.mm
 +++ b/widget/cocoa/nsCocoaWindow.mm
 @@ -67,6 +67,34 @@ extern NSMenu* sApplicationMenu; // Application menu shared by all menubars
@@ -3677,23 +3602,7 @@ index efe8b3c79190..8fae27e3ba59 100644
    // setup our notification delegate. Note that setDelegate: does NOT retain.
    mDelegate = [[WindowDelegate alloc] initWithGeckoWindow:this];
    [mWindow setDelegate:mDelegate];
-@@ -817,15 +854,6 @@ nsCocoaWindow::Show(bool bState)
-       }
-     }
-     else if (mWindowType == eWindowType_popup) {
--      // If a popup window is shown after being hidden, it needs to be "reset"
--      // for it to receive any mouse events aside from mouse-moved events
--      // (because it was removed from the "window cache" when it was hidden
--      // -- see below).  Setting the window number to -1 and then back to its
--      // original value seems to accomplish this.  The idea was "borrowed"
--      // from the Java Embedding Plugin.
--      NSInteger windowNumber = [mWindow windowNumber];
--      [mWindow _setWindowNumber:-1];
--      [mWindow _setWindowNumber:windowNumber];
-       // For reasons that aren't yet clear, calls to [NSWindow orderFront:] or
-       // [NSWindow makeKeyAndOrderFront:] can sometimes trigger "Error (1000)
-       // creating CGSWindow", which in turn triggers an internal inconsistency
-@@ -853,9 +881,11 @@ nsCocoaWindow::Show(bool bState)
+@@ -853,9 +890,11 @@ nsCocoaWindow::Show(bool bState)
        // appear above the parent and move when the parent does. Setting this
        // needs to happen after the _setWindowNumber calls above, otherwise the
        // window doesn't focus properly.
@@ -3706,25 +3615,7 @@ index efe8b3c79190..8fae27e3ba59 100644
      }
      else {
        NS_OBJC_BEGIN_TRY_ABORT_BLOCK;
-@@ -958,17 +988,6 @@ nsCocoaWindow::Show(bool bState)
-         [nativeParentWindow removeChildWindow:mWindow];
- 
-       [mWindow orderOut:nil];
--      // Unless it's explicitly removed from NSApp's "window cache", a popup
--      // window will keep receiving mouse-moved events even after it's been
--      // "ordered out" (instead of the browser window that was underneath it,
--      // until you click on that window).  This is bmo bug 378645, but it's
--      // surely an Apple bug.  The "window cache" is an undocumented subsystem,
--      // all of whose methods are included in the NSWindowCache category of
--      // the NSApplication class (in header files generated using class-dump).
--      // This workaround was "borrowed" from the Java Embedding Plugin (which
--      // uses it for a different purpose).
--      if (mWindowType == eWindowType_popup)
--        [NSApp _removeWindowFromCache:mWindow];
- 
-       // If our popup window is a non-native context menu, tell the OS (and
-       // other programs) that a menu has closed.
-@@ -1330,6 +1349,7 @@ nsCocoaWindow::HideWindowChrome(bool aShouldHide)
+@@ -1330,6 +1369,7 @@ nsCocoaWindow::HideWindowChrome(bool aShouldHide)
    enumerator = [childWindows objectEnumerator];
    while ((child = [enumerator nextObject])) {
      [mWindow addChildWindow:child ordered:NSWindowAbove];
@@ -3732,7 +3623,7 @@ index efe8b3c79190..8fae27e3ba59 100644
    }
  
    // Show the new window.
-@@ -2213,7 +2233,13 @@ nsCocoaWindow::SetDrawsTitle(bool aDrawTitle)
+@@ -2213,7 +2253,13 @@ nsCocoaWindow::SetDrawsTitle(bool aDrawTitle)
  {
    NS_OBJC_BEGIN_TRY_ABORT_BLOCK;
  
@@ -3747,7 +3638,7 @@ index efe8b3c79190..8fae27e3ba59 100644
  
    NS_OBJC_END_TRY_ABORT_BLOCK;
  }
-@@ -2756,6 +2782,7 @@ GetDPI(NSWindow* aWindow)
+@@ -2756,6 +2802,7 @@ GetDPI(NSWindow* aWindow)
  @interface NSView(FrameViewMethodSwizzling)
  - (NSPoint)FrameView__closeButtonOrigin;
  - (NSPoint)FrameView__fullScreenButtonOrigin;
@@ -3755,7 +3646,7 @@ index efe8b3c79190..8fae27e3ba59 100644
  @end
  
  @implementation NSView(FrameViewMethodSwizzling)
-@@ -2778,6 +2805,11 @@ GetDPI(NSWindow* aWindow)
+@@ -2778,6 +2825,11 @@ GetDPI(NSWindow* aWindow)
    return defaultPosition;
  }
  
@@ -3767,7 +3658,7 @@ index efe8b3c79190..8fae27e3ba59 100644
  @end
  
  static NSMutableSet *gSwizzledFrameViewClasses = nil;
-@@ -2870,6 +2902,9 @@ static NSMutableSet *gSwizzledFrameViewClasses = nil;
+@@ -2870,6 +2922,9 @@ static NSMutableSet *gSwizzledFrameViewClasses = nil;
    static IMP our_fullScreenButtonOrigin =
      class_getMethodImplementation([NSView class],
                                    @selector(FrameView__fullScreenButtonOrigin));
@@ -3777,7 +3668,7 @@ index efe8b3c79190..8fae27e3ba59 100644
  
    if (![gSwizzledFrameViewClasses containsObject:frameViewClass]) {
      // Either of these methods might be implemented in both a subclass of
-@@ -2892,6 +2927,14 @@ static NSMutableSet *gSwizzledFrameViewClasses = nil;
+@@ -2892,6 +2947,14 @@ static NSMutableSet *gSwizzledFrameViewClasses = nil;
        nsToolkit::SwizzleMethods(frameViewClass, @selector(_fullScreenButtonOrigin),
                                  @selector(FrameView__fullScreenButtonOrigin));
      }
@@ -3792,7 +3683,7 @@ index efe8b3c79190..8fae27e3ba59 100644
      [gSwizzledFrameViewClasses addObject:frameViewClass];
    }
  
-@@ -3008,6 +3051,9 @@ static const NSString* kStateCollectionBehavior = @"collectionBehavior";
+@@ -3008,6 +3071,9 @@ static const NSString* kStateCollectionBehavior = @"collectionBehavior";
    if (changed) {
      [self updateContentViewSize];
      [self reflowTitlebarElements];
@@ -3802,7 +3693,7 @@ index efe8b3c79190..8fae27e3ba59 100644
    }
  }
  
-@@ -3019,6 +3065,10 @@ static const NSString* kStateCollectionBehavior = @"collectionBehavior";
+@@ -3019,6 +3085,10 @@ static const NSString* kStateCollectionBehavior = @"collectionBehavior";
  - (void)setWantsTitleDrawn:(BOOL)aDrawTitle
  {
    mDrawTitle = aDrawTitle;
