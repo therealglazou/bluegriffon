@@ -75,4 +75,4 @@ The Open Source next-generation Web Editor based on the rendering engine of Fire
 There are two ways to contribute:
 
 1. Contribute code. That's just another OSS project, we're waiting for your Pull Requests!
-2. Contribute L10N. All happens only in the 'locales' directory. You can review the existing locales and proposed changes/fixes or submit a new locale in a Pull Request. In that case, you need to translate everything from en-US into a new locale beforeI can accept the PR.
+2. Contribute L10N. All happens only in the 'locales' directory. You can review the existing locales and proposed changes/fixes or submit a new locale in a Pull Request. In that case, you need to translate everything from en-US into a new locale before I can accept the PR.
